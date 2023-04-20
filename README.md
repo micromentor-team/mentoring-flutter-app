@@ -1,16 +1,20 @@
-# mm_flutter_app
+# MicroMentor Flutter App
 
-A new Flutter project.
+This is MicroMentor's main Flutter application. 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Connecting To The Backend
 
-A few resources to get you started if this is your first Flutter project:
+Create the file `assets/.env` with this content:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    APP_GRAPHQL_URL="<url>"
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Use the URL that was given to you. Or, in case you are running the
+backend locally, use `http://127.0.0.1:3000/mmdata`.
+
+### Setting Up Local Backend
+
+To set up a local backend you need access to `https://github.com/micromentor-team/mmdata`. 
+Follow the ["Getting Started" instructions](https://github.com/micromentor-team/mmdata/blob/main/docs/getting-started.md).
+
