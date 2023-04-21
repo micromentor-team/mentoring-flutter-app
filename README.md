@@ -11,7 +11,7 @@ Create the file `assets/.env` with this content:
     APP_GRAPHQL_URL="<url>"
 
 Use the URL that was given to you. Or, in case you are running the
-backend locally, use `http://127.0.0.1:3000/mmdata`.
+backend locally, use `http://127.0.0.1:3000/mmdata/api/graphql`.
 
 ### Setting Up Local Backend
 
