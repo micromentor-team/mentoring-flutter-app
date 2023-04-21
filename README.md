@@ -18,3 +18,7 @@ backend locally, use `http://127.0.0.1:3000/mmdata/api/graphql`.
 To set up a local backend you need access to `https://github.com/micromentor-team/mmdata`. 
 Follow the ["Getting Started" instructions](https://github.com/micromentor-team/mmdata/blob/main/docs/getting-started.md).
 
+### Starting the app
+
+Do a `pub get` in the app to install the dependencies.
+Run the app.  
