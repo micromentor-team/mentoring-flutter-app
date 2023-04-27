@@ -8,7 +8,8 @@ This is MicroMentor's main Flutter application.
 
 Create the file `assets/.env` with this content:
 
-    APP_GRAPHQL_URL="<url>"
+    APP_GRAPHQL_URL=http://127.0.0.1:3000/mmdata/api/graphql
+    APP_SUBSCRIPTION_URL=ws://127.0.0.1:3000/mmdata/api/graphql
 
 Use the URL that was given to you. Or, in case you are running the
 backend locally, use `http://127.0.0.1:3000/mmdata/api/graphql`.
