@@ -4,35 +4,51 @@ This is MicroMentor's main Flutter application.
 
 ## Getting Started
 
-### Setting Up Local Backend
+### Set up the local backend
 
 To set up a local backend you need access to `https://github.com/micromentor-team/mmdata`. 
 Follow the ["Getting Started" instructions](https://github.com/micromentor-team/mmdata/blob/main/docs/getting-started.md).
 
-## How to setup the flutter app :
+### Install the Flutter development tools:
+
  - Install the Flutter SDK
  - Install Android Studio
  - Install the Android Emulator
  - Install Xcode and command-line tools
 
-Heres a link for official guidelines for mac setup: https://docs.flutter.dev/get-started/install/macos, 
-includes all the links for SDK, Android studio, Xcode. For windows: https://flutter.dev/docs/get-started/install/windows
+References:
 
-Note: To run the app on ios simulator or an Iphone, a mac is required due to apple code signing
+* [Official setup guidelines for MacOS](https://docs.flutter.dev/get-started/install/macos) 
+* [Official setup guidelines for Windows](https://flutter.dev/docs/get-started/install/windows)
 
-### Clone the repo : https://github.com/micromentor-team/mm-flutter-app
+Note: Running the app in an iOS simulator requires MacOS
 
-#### Install dependencies
- - If using android studio, go to pubspec.yaml and click on pub get on top right to install all the dependencies 
- - Other way is to go to the terminal and to the root of the project and run `flutter pub get` manually.
+### Clone mm-flutter-app
 
-#### Setup env
- - In the assets folder of your root of the project, create a .env file (assets/.env) and fill in the following values:  
+The sources to the Flutter app are located at: https://github.com/micromentor-team/mm-flutter-app
 
-`APP_GRAPHQL_URL=http://192.168.1.1:3000/mmdata/api/graphql`
-`APP_SUBSCRIPTION_URL=ws://192.168.1.1:3000/mmdata/api/graphql`
+    git clone git@github.com:micromentor-team/mm-flutter-app.git
 
-Replace the Ip address with your local device IP address
+#### Install the dependencies
+ 
+If you are using the Android Studio, open `pubspec.yaml` and click on `pub get` on top right to 
+install all the dependencies.
+
+Or run this in the terminal:
+
+   `flutter pub get`
+
+#### Set up the environment
+
+Create the file `/assets/.env`. If you are connecting to a local backend, add these lines to the file:
+
+    APP_GRAPHQL_URL="http://localhost:3000/mmdata/api/graphql"
+    APP_SUBSCRIPTION_URL="ws://localhost:3000/mmdata/api/graphql"
+
+But if you want to connect to a backend in the cloud please ask a co-worker for a valid `.env`.
 
 ### Build and run the app
-- On android studio, click on the preferred platform (Chrome web browser, android simulator etc) and then click on Run `main.dart` button to build and the run the app on that platform. Shortcut : ^ + R or Control + R for mac.
+
+In Android Studio, select a target platform (Chrome web browser, Android Simulator, etc.) 
+and then click on the `Run main.dart` button to build and the run the app on that platform.
+Shortcut : `^ + R` (Windows) or `Control + R` (MacOS).
