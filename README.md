@@ -19,7 +19,23 @@ backend locally, use `http://127.0.0.1:3000/mmdata/api/graphql`.
 To set up a local backend you need access to `https://github.com/micromentor-team/mmdata`. 
 Follow the ["Getting Started" instructions](https://github.com/micromentor-team/mmdata/blob/main/docs/getting-started.md).
 
-### Starting the app
+### Install Flutter
 
-Do a `pub get` in the app to install the dependencies.
-Run the app.  
+Follow ["Flutter installation guide"](https://docs.flutter.dev/get-started/install).
+
+Ensure flutter is installed correctly by running `flutter doctor`
+
+
+### Build and run the app
+
+Clone this repo.
+
+#### Install Dependencies
+`cd mm-flutter-app`\
+`flutter pub get`
+
+#### Build and run the app
+
+On a Mac by default `flutter run` will install and run the app on an iOS simulator.\
+Or open the app in Android Studio or Visual Studio and run it from there.\
+`open . -a Android\ Studio`
