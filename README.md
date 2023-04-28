@@ -64,6 +64,6 @@ Or to run from terminal, execute `flutter run -t widgetbook/main.dart`.
 
 ### Run Tests
 
-In Android Studio, Open the test.dart file
-Select the Run menu
-Click the Run 'tests in counter_test.dart' option
+In Android Studio, Open the test.dart file.
+Select the Run menu.
+Click the Run 'tests in counter_test.dart' option.
