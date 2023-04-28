@@ -51,4 +51,19 @@ But if you want to connect to a backend in the cloud please ask a co-worker for 
 
 In Android Studio, select a target platform (Chrome web browser, Android Simulator, etc.) 
 and then click on the `Run main.dart` button to build and the run the app on that platform.
-Shortcut : `^ + R` (Windows) or `Control + R` (MacOS).
+Shortcut : `Control + R` (MacOS).
+
+### Run Widgetbook
+
+In Android Studio, select `Edit Configurations` in the Run menu.
+Copy configurations of main.dart and edit name as `widgetbook`.
+Edit `Dart entrypoint` to the path of your Widgetbook’s main.dart.
+For eg `mm_flutter_app/widgetbook/main.dart` at the place of `mm_flutter_app/lib/main.dart`.
+
+Or to run from terminal, execute `flutter run -t widgetbook/main.dart`.
+
+### Run Tests
+
+In Android Studio, Open the test.dart file
+Select the Run menu
+Click the Run 'tests in counter_test.dart' option
