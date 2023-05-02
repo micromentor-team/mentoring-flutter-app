@@ -4,38 +4,66 @@ This is MicroMentor's main Flutter application.
 
 ## Getting Started
 
-### Connecting To The Backend
-
-Create the file `assets/.env` with this content:
-
-    APP_GRAPHQL_URL=http://127.0.0.1:3000/mmdata/api/graphql
-    APP_SUBSCRIPTION_URL=ws://127.0.0.1:3000/mmdata/api/graphql
-
-Use the URL that was given to you. Or, in case you are running the
-backend locally, use `http://127.0.0.1:3000/mmdata/api/graphql`.
-
-### Setting Up Local Backend
+### Set up the local backend
 
 To set up a local backend you need access to `https://github.com/micromentor-team/mmdata`. 
 Follow the ["Getting Started" instructions](https://github.com/micromentor-team/mmdata/blob/main/docs/getting-started.md).
 
-### Install Flutter
+### Install the Flutter development tools:
 
-Follow ["Flutter installation guide"](https://docs.flutter.dev/get-started/install).
+ - Install the Flutter SDK
+ - Install Android Studio
+ - Install the Android Emulator
+ - Install Xcode and command-line tools
 
-Ensure flutter is installed correctly by running `flutter doctor`
+References:
 
+* [Official setup guidelines for MacOS](https://docs.flutter.dev/get-started/install/macos) 
+* [Official setup guidelines for Windows](https://flutter.dev/docs/get-started/install/windows)
+
+Note: Running the app in an iOS simulator requires MacOS
+
+### Clone mm-flutter-app
+
+The sources to the Flutter app are located at: https://github.com/micromentor-team/mm-flutter-app
+
+    git clone git@github.com:micromentor-team/mm-flutter-app.git
+
+#### Install the dependencies
+ 
+If you are using the Android Studio, open `pubspec.yaml` and click on `pub get` on top right to 
+install all the dependencies.
+
+Or run this in the terminal:
+
+   `flutter pub get`
+
+#### Set up the environment
+
+Create the file `/assets/.env`. If you are connecting to a local backend, add these lines to the file:
+
+    APP_GRAPHQL_URL="http://localhost:3000/mmdata/api/graphql"
+    APP_SUBSCRIPTION_URL="ws://localhost:3000/mmdata/api/graphql"
+
+But if you want to connect to a backend in the cloud please ask a co-worker for a valid `.env`.
 
 ### Build and run the app
 
-Clone this repo.
+In Android Studio, select a target platform (Chrome web browser, Android Simulator, etc.) 
+and then click on the `Run main.dart` button to build and the run the app on that platform.
+Shortcut : `Control + R` (MacOS).
 
-#### Install Dependencies
-`cd mm-flutter-app`\
-`flutter pub get`
+### Run Widgetbook
 
-#### Build and run the app
+In Android Studio, select `Edit Configurations` in the Run menu.
+Copy configurations of main.dart and edit name as `widgetbook`.
+Edit `Dart entrypoint` to the path of your Widgetbook’s main.dart.
+For eg `mm_flutter_app/widgetbook/main.dart` at the place of `mm_flutter_app/lib/main.dart`.
 
-On a Mac by default `flutter run` will install and run the app on an iOS simulator.\
-Or open the app in Android Studio or Visual Studio and run it from there.\
-`open . -a Android\ Studio`
+Or to run from terminal, execute `flutter run -t widgetbook/main.dart`.
+
+### Run Tests
+
+In Android Studio, Open the test.dart file.
+Select the Run menu.
+Click the Run 'tests in counter_test.dart' option.
