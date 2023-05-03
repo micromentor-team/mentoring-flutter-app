@@ -139,12 +139,12 @@ class MessageBubble extends StatelessWidget {
                                       ? (message.statuses!.isEmpty
                                           ? const Icon(
                                               Icons.check,
-                                              size: 9,
+                                              size: 10,
                                               color: Colors.white,
                                             )
                                           : const Icon(
-                                              FontAwesomeIcons.checkDouble,
-                                              size: 9,
+                                              Icons.done_all,
+                                              size: 10,
                                               color: Colors.white,
                                             ))
                                       : const SizedBox(),

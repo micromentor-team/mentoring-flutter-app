@@ -180,10 +180,10 @@ class _ChannelChatState extends State<ChannelChat>
     if (listScrollController.hasClients) {
       listScrollController.animateTo(
           listScrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.linear);
     } else {
-      Timer(Duration(milliseconds: 500), () => _scrollDown());
+      Timer(const Duration(milliseconds: 500), () => _scrollDown());
     }
   }
 
@@ -227,16 +227,12 @@ class _ChannelChatState extends State<ChannelChat>
 
   @override
   Widget build(BuildContext context) {
+    _scrollDown();
     return Column(
       children: [
         chatMessages.isNotEmpty
             ? Expanded(
-                child: Stack(
-                  children: [
-                    buildMessageBubbles(),
-                    // buildScrollButton(),
-                  ],
-                ),
+                child: buildMessageBubbles(),
               )
             : Expanded(
                 child: Center(
@@ -252,7 +248,9 @@ class _ChannelChatState extends State<ChannelChat>
                   ),
                 ),
               ),
-        buildMessageInput(),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: buildMessageInput()),
       ],
     );
   }

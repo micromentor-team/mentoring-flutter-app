@@ -50,6 +50,7 @@ dependencies:
   url_launcher: ^6.1.7
   grouped_list: ^5.1.2
   local_auth: ^2.1.6
+  emoji_picker_flutter: ^1.5.4
 #  conversation_screen:
 #    path: packages/conversation_screen
 

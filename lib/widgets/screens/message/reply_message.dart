@@ -37,19 +37,17 @@ class ReplyMessage extends StatelessWidget {
                           width: 5.0,
                           height: double.infinity,
                         ),
-                        Flexible(
-                          fit: FlexFit.loose,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              replyMessage!.messageText,
-                              maxLines: onClose != null ? 1 : 2,
-                              style: const TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            replyMessage!.messageText,
+                            maxLines: onClose != null ? 1 : 2,
+                            style: const TextStyle(
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),
+
                       ],
                     ),
                   ),

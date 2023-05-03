@@ -27,6 +27,7 @@ const String kGetAuthenticatedUser = """
   query getAuthenticatedUser {
     getAuthenticatedUser {
       id
+      email
       fullName
       avatarUrl
       userHandle
@@ -47,6 +48,7 @@ const String kGetAllUsers ="""
 query FindUsers(\$filter: UserListFilter) {
   findUsers(filter: \$filter){
     id
+    email
     fullName
     avatarUrl
     userHandle
@@ -57,6 +59,7 @@ query FindUsers(\$filter: UserListFilter) {
 const String kGetUserById ="""
 query FindUserById(\$findUserByIdId: String!) {
   findUserById(id: \$findUserByIdId) {
+    email
     fullName
     avatarUrl
   }
@@ -74,7 +77,7 @@ mutation CreateMultiStepAction(\$input: SidMultiStepActionInput!) {
   createMultiStepAction(input: \$input) {
     id
     userId
-    authToken    
+    authToken
   }
 }
 """;

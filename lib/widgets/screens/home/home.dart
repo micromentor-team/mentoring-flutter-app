@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-import '../../../data/models/channels/channels_provider.dart';
 import '../../../data/models/user/user.dart';
 import '../../../data/models/user/user_provider.dart';
 import '../../molecules/search_container.dart';
 import '../../organisms/user_expanded_card.dart';
 import '../homeMenu/homeMenu.dart';
-import '../message/conversationScreen.dart';
 import '../../organisms/user_card.dart';
-import 'package:mm_flutter_app/widgets/screens/home/dialog_and_rating.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,24 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
     final userProvider = Provider.of<UserProvider>(context);
     usersList = await userProvider.getAllUsers();
     final user = userProvider.user;
-    usersList.removeWhere((element) => element!.id == user!.id);
+    usersList.removeWhere((element) => element.id == user!.id);
     usersList = usersList.where((i) => i.fullName != '').toList();
-    // userProvider.notifyListeners();
     users = usersList
         .where((element) =>
             element.fullName.toLowerCase().contains(value.toLowerCase()))
         .toList();
     return users;
-  }
-
-  _openChatScreen(user, channelId) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ConversationScreen(
-              userId: user.id.toString(),
-              title: user.fullName.toString(),
-              image: user.avatarUrl.toString(),
-              channelId: channelId.toString(),
-            )));
   }
 
   @override
@@ -193,10 +178,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         rethrow;
                       }
                     }),
-
-                // const SizedBox(
-                //   height: 15,
-                // ),
               ],
             ),
           ),

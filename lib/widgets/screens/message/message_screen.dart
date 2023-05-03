@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
-import 'package:mm_flutter_app/widgets/screens/inbox/inbox_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/message/conversationScreen.dart';
 import 'package:provider/provider.dart';
 import '../../../data/models/channels/channel.dart';
@@ -50,23 +49,6 @@ class _MessageScreenState extends State<MessageScreen> {
                 setState(() {});
               },
               child: const Icon(Icons.refresh)),
-          const SizedBox(
-            width: 10,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => InboxScreen(
-                        unseenMessages: unseenMessages.toList(),
-                      )));
-            },
-            child: Badge(
-                label: Text('${unseenMessages.length}'),
-                child: const Icon(
-                  Icons.notifications,
-                  color: Colors.deepPurpleAccent,
-                )),
-          ),
           const SizedBox(
             width: 15,
           )

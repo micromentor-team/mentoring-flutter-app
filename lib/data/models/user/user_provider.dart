@@ -39,6 +39,7 @@ class UserProvider extends ChangeNotifier {
   Widget queryUser({required onData, onLoading, onError}) {
     return Query(
       options: QueryOptions(
+        fetchPolicy: FetchPolicy.networkOnly,
         document: gql(kGetAuthenticatedUser),
       ),
       builder: (result, {refetch, fetchMore}) {
@@ -63,7 +64,6 @@ class UserProvider extends ChangeNotifier {
         } else {
           _resetUser();
         }
-
         return onData(result.data!['getAuthenticatedUser']);
       },
     );
@@ -173,7 +173,7 @@ class UserProvider extends ChangeNotifier {
     return [];
   }
 
-  Future<void> updateUser({required currentPass, required newPass}) async {
+  Future<void> updateUserPassword({required currentPass, required newPass}) async {
     final QueryResult result = await client.query(
       QueryOptions(
         document: gql(kUpdateUser),
@@ -188,20 +188,46 @@ class UserProvider extends ChangeNotifier {
     }
 
   }
-  // Future<String> getUserByEmail(email) async{
-  //   final QueryResult result = await client.query(
-  //     QueryOptions(
-  //       document: gql(getSingleUserByEmail),
-  //       variables: {
-  //         "match": {
-  //           "email": email
-  //         }
-  //       },
-  //     ),
-  //   );
-  //   print('finding user through email $result');
-  //   return '';
-  // }
+  Future<void> updateUserData({ name, email,adminNotes}) async {
+    final variables = {
+      'input': {
+        "id": user!.id
+      }
+    };
+    if (name != null) {
+      variables['input']!['fullName'] = name;
+    }
+    if (email != null) {
+      variables['input']!['email'] = email;
+    }
+    if (adminNotes != null) {
+      variables['input']!['adminNotes'] = adminNotes;
+    }
+
+    final QueryResult result = await client.query(
+      QueryOptions(
+        document: gql(kUpdateUser),
+        variables: variables,
+      ),
+    );
+    print(result);
+   notifyListeners();
+  }
+  Future<User>getUserData()async{
+    final QueryResult updatedResult = await client.query(
+      QueryOptions(
+        document: gql(kGetAuthenticatedUser),
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+    );
+    if (updatedResult.data != null){
+      _setUser(updatedResult);
+      var updatedData = updatedResult.data!['getAuthenticatedUser'];
+      print('User updated $updatedData');
+    }
+    _user = User.fromJson(updatedResult.data!['getAuthenticatedUser']);
+    return _user!;
+  }
 
   Future<void> resetPassword({email})async{
     // await getUserByEmail(email);
