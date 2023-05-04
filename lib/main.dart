@@ -12,19 +12,19 @@ import 'data/models/user/user_provider.dart';
 void main() async {
   await dotenv.load(fileName: "assets/.env");
   final serverUrl = dotenv.env['APP_GRAPHQL_URL'];
-  // final subscriptionUrl = dotenv.env['APP_SUBSCRIPTION_URL'];
+  final subscriptionUrl = dotenv.env['APP_SUBSCRIPTION_URL'];
 
   debugPrint('Server: $serverUrl');
   // debugPrint('Subscriptions: $subscriptionUrl');
 
-  // if (serverUrl == null || subscriptionUrl == null) {
-  if (serverUrl == null) {
+  if (serverUrl == null || subscriptionUrl == null) {
     debugPrint('Set your server and websockets URLs in .env file');
     return;
   }
 
   final graphql = GraphqlService(
     serverUrl: serverUrl,
+    subscriptionUrl: subscriptionUrl,
   );
   graphql.connect();
 

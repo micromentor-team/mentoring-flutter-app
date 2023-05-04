@@ -67,6 +67,23 @@ class MessagesProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> subscribeToChannel({required channelId, required onChannelUpdated}) async {
+    final subscription = client.subscribe(
+      SubscriptionOptions(
+        document: gql(kChannelUpdatedSubscription),
+        variables: {
+          'objectId': channelId,
+        },
+      ),
+    );
+
+    subscription.listen(
+          (event) {
+        debugPrint('Subscription: Channel Updated: ${event.data}');
+        onChannelUpdated();
+      },
+    );
+  }
   // Mutations
   void createMessage(
       {required channelId, required messageText, replyToMessageId}) async {

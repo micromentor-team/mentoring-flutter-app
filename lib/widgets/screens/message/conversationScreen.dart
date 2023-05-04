@@ -55,6 +55,18 @@ class _ConversationScreenState extends State<ConversationScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    final messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
+    messagesProvider.subscribeToChannel(
+      channelId: widget.channelId,
+      onChannelUpdated: () {
+        setState(() {});
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
