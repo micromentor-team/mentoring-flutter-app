@@ -54,17 +54,19 @@ class _ConversationScreenState extends State<ConversationScreen> {
     return chatMess;
   }
 
-  @override
-  void initState() {
-    super.initState();
-    final messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
-    messagesProvider.subscribeToChannel(
-      channelId: widget.channelId,
-      onChannelUpdated: () {
-        setState(() {});
-      },
-    );
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   final messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
+  //   messagesProvider.subscribeToChannel(
+  //     channelId: widget.channelId,
+  //     onChannelUpdated: () {
+  //       setState(() {
+  //
+  //       });
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +178,28 @@ class _ChannelChatState extends State<ChannelChat>
 
   @override
   void didChangeDependencies() {
+    final messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context);
+    final channelProvider = Provider.of<ChannelsProvider>(context);
+    messagesProvider.subscribeToChannel(
+      channelId: widget.channelId,
+      onChannelUpdated: () async{
+        await messagesProvider.getMessages(
+            channelId: widget.channelId, userId: userProvider.user!.id);
+        List<String> notSeenMessages = messagesProvider.notSeenMessages;
+        if (notSeenMessages.isNotEmpty) {
+          await channelProvider.addChannelMessageEvent(
+              channelId: widget.channelId,
+              messageIds: notSeenMessages,
+              userId: userProvider.user!.id);
+        setState(() {
+          chatMessages = messagesProvider.messages;
+        });
+      }},
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) => {_scrollDown()});
+    \
+    
     super.didChangeDependencies();
   }
 
