@@ -15,13 +15,12 @@ import 'message_details.dart';
 import 'package:grouped_list/grouped_list.dart';
 
 class ConversationScreen extends StatefulWidget {
-  const ConversationScreen(
-      {Key? key,
-      required this.title,
-      required this.image,
-      required this.channelId,
-      this.channelMessages,
-      required this.userId})
+  const ConversationScreen({Key? key,
+    required this.title,
+    required this.image,
+    required this.channelId,
+    this.channelMessages,
+    required this.userId})
       : super(key: key);
   final String title;
   final String image;
@@ -39,7 +38,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
 
   _getMessages() async {
     final messageProvider =
-        Provider.of<MessagesProvider>(context, listen: false);
+    Provider.of<MessagesProvider>(context, listen: false);
     final channelProvider = Provider.of<ChannelsProvider>(context);
     await messageProvider.getMessages(
         channelId: widget.channelId, userId: widget.userId);
@@ -89,8 +88,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   child: ClipOval(
                     child: widget.image.isNotEmpty
                         ? Image(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(widget.image))
+                        fit: BoxFit.cover,
+                        image: NetworkImage(widget.image))
                         : const Icon(Icons.account_circle),
                   )),
               const SizedBox(
@@ -178,12 +177,13 @@ class _ChannelChatState extends State<ChannelChat>
 
   @override
   void didChangeDependencies() {
-    final messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
+    final messagesProvider = Provider.of<MessagesProvider>(
+        context, listen: false);
     final userProvider = Provider.of<UserProvider>(context);
     final channelProvider = Provider.of<ChannelsProvider>(context);
     messagesProvider.subscribeToChannel(
       channelId: widget.channelId,
-      onChannelUpdated: () async{
+      onChannelUpdated: () async {
         await messagesProvider.getMessages(
             channelId: widget.channelId, userId: userProvider.user!.id);
         List<String> notSeenMessages = messagesProvider.notSeenMessages;
@@ -192,14 +192,13 @@ class _ChannelChatState extends State<ChannelChat>
               channelId: widget.channelId,
               messageIds: notSeenMessages,
               userId: userProvider.user!.id);
-        setState(() {
-          chatMessages = messagesProvider.messages;
-        });
-      }},
+          setState(() {
+            chatMessages = messagesProvider.messages;
+          });
+        }
+      },
     );
     WidgetsBinding.instance.addPostFrameCallback((_) => {_scrollDown()});
-    \
-    
     super.didChangeDependencies();
   }
 
@@ -222,8 +221,8 @@ class _ChannelChatState extends State<ChannelChat>
     }
   }
 
-  Future<dynamic> _openMessageDetailsModal(
-      BuildContext context, Message message) async {
+  Future<dynamic> _openMessageDetailsModal(BuildContext context,
+      Message message) async {
     setState(() {
       if (_focusedMessage != null) _focusedMessage = null;
     });
@@ -251,7 +250,7 @@ class _ChannelChatState extends State<ChannelChat>
         } else if (reply == Message) {
           // print(_reply);
           int messageIndex =
-              chatMessages.indexWhere((element) => element.id == message.id);
+          chatMessages.indexWhere((element) => element.id == message.id);
           setState(() {
             chatMessages.replaceRange(messageIndex, messageIndex + 1, [reply]);
           });
@@ -265,24 +264,10 @@ class _ChannelChatState extends State<ChannelChat>
     _scrollDown();
     return Column(
       children: [
-        chatMessages.isNotEmpty
-            ? Expanded(
-                child: buildMessageBubbles(),
-              )
-            : Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('No message here yet'),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text('Send a message'),
-                    ],
-                  ),
-                ),
-              ),
+        Expanded(
+          child: buildMessageBubbles(),
+        ),
+
         Align(
             alignment: Alignment.bottomCenter,
             child: buildMessageInput()),
@@ -301,11 +286,15 @@ class _ChannelChatState extends State<ChannelChat>
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: Theme
+                  .of(context)
+                  .scaffoldBackgroundColor,
               mini: true,
               child: Icon(
                 Icons.keyboard_arrow_down_rounded,
-                color: Theme.of(context).primaryColor,
+                color: Theme
+                    .of(context)
+                    .primaryColor,
               ),
               onPressed: () {
                 _scrollDown();
@@ -326,13 +315,14 @@ class _ChannelChatState extends State<ChannelChat>
 
     return Row(
       mainAxisAlignment:
-          chatMessage.isLocal ? MainAxisAlignment.end : MainAxisAlignment.start,
+      chatMessage.isLocal ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         MessagePeeker(
-          onSwipeLeft: () => _openMessageDetailsModal(
-            context,
-            chatMessage,
-          ),
+          onSwipeLeft: () =>
+              _openMessageDetailsModal(
+                context,
+                chatMessage,
+              ),
           onSwipeRight: () => replyTo(chatMessage),
           child: MessageBubble(
             message: chatMessage,
@@ -346,62 +336,72 @@ class _ChannelChatState extends State<ChannelChat>
     final todayDate = DateTime.now();
     return chatMessages.isNotEmpty
         ? GroupedListView<Message, String>(
-            elements: chatMessages,
-            useStickyGroupSeparators: true,
-            stickyHeaderBackgroundColor: Colors.transparent,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            groupBy: (Message message) {
-              return DateFormat('yyyy-MM-dd')
-                  .format(message.createdAt!)
-                  .toString();
-            },
-            itemBuilder: (context, Message message) {
-              // This  function is used for creating ReplyMessage Widget..
-              if (message.replyToMessageId != null) {
-                Message replyMessage = chatMessages
-                    .where((element) => element.id == message.replyToMessageId)
-                    .first;
-                message.replyContext = ReplyMessage(replyMessage: replyMessage);
-              }
-              return buildMessageBubble(message);
-            },
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            controller: listScrollController,
-            groupHeaderBuilder: (Message message) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 30.0,
-                child: Chip(
-                  side: BorderSide.none,
-                  backgroundColor: Colors.grey.shade200,
-                  label: DateTime(
-                              message.createdAt!.year,
-                              message.createdAt!.month,
-                              message.createdAt!.day) ==
-                          DateTime(
-                              todayDate.year, todayDate.month, todayDate.day)
-                      ?  Text('Today',style: TextStyle(color: Colors.grey.shade600,fontSize: 11),)
-                      : DateTime(
-                                  message.createdAt!.year,
-                                  message.createdAt!.month,
-                                  message.createdAt!.day) ==
-                              DateTime(todayDate.year, todayDate.month,
-                                  todayDate.day - 1)
-                          ?  Text('Yesterday',style: TextStyle(color: Colors.grey.shade600,fontSize: 11))
-                          : Text(
-                              DateFormat('MMM d, yyyy')
-                                  .format(message.createdAt!),
-                              style: TextStyle(color: Colors.grey.shade600,fontSize: 11),
-                            ),
+      elements: chatMessages,
+      useStickyGroupSeparators: true,
+      stickyHeaderBackgroundColor: Colors.transparent,
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      groupBy: (Message message) {
+        return DateFormat('yyyy-MM-dd')
+            .format(message.createdAt!)
+            .toString();
+      },
+      itemBuilder: (context, Message message) {
+        // This  function is used for creating ReplyMessage Widget..
+        if (message.replyToMessageId != null) {
+          Message replyMessage = chatMessages
+              .where((element) => element.id == message.replyToMessageId)
+              .first;
+          message.replyContext = ReplyMessage(replyMessage: replyMessage);
+        }
+        return buildMessageBubble(message);
+      },
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      controller: listScrollController,
+      groupHeaderBuilder: (Message message) =>
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 30.0,
+              child: Chip(
+                side: BorderSide.none,
+                backgroundColor: Colors.grey.shade200,
+                label: DateTime(
+                    message.createdAt!.year,
+                    message.createdAt!.month,
+                    message.createdAt!.day) ==
+                    DateTime(
+                        todayDate.year, todayDate.month, todayDate.day)
+                    ? Text('Today',
+                  style: TextStyle(color: Colors.grey.shade600, fontSize: 11),)
+                    : DateTime(
+                    message.createdAt!.year,
+                    message.createdAt!.month,
+                    message.createdAt!.day) ==
+                    DateTime(todayDate.year, todayDate.month,
+                        todayDate.day - 1)
+                    ? Text('Yesterday',
+                    style: TextStyle(color: Colors.grey.shade600, fontSize: 11))
+                    : Text(
+                  DateFormat('MMM d, yyyy')
+                      .format(message.createdAt!),
+                  style: TextStyle(color: Colors.grey.shade600, fontSize: 11),
                 ),
               ),
             ),
-          )
-        : const Center(
-            child: CircularProgressIndicator(
-              color: Colors.amber,
-            ),
-          );
+          ),
+    )
+        : Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text('No message here yet'),
+          SizedBox(
+            height: 15,
+          ),
+          Text('Send a message'),
+        ],
+      ),
+    );
   }
 
   Widget buildMessageInput() {
