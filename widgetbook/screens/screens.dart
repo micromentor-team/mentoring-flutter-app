@@ -4,7 +4,9 @@ import './signup/sign_up_component.dart';
 import './home/home_component.dart';
 import './home_menu/home_menu_component.dart';
 import './welcome/welcome_component.dart';
-import './find_mentor/find_mentor_component.dart';
+import 'chat_screen/chat_component.dart';
+import 'message_screen/message_component.dart';
+import 'tabscreen/tabs_component.dart';
 
 WidgetbookCategory screensCategory() {
   return WidgetbookCategory(
@@ -12,10 +14,12 @@ WidgetbookCategory screensCategory() {
     widgets: [
       signInComponent(),
       signUpComponent(),
+      tabsComponent(),
       homeComponent(),
       homeMenuComponent(),
       welcomeComponent(),
-      findMentorcomponent()
+      messageComponent(),
+      chatComponent(),
     ],
   );
 }

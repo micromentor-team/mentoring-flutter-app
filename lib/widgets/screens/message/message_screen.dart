@@ -4,12 +4,12 @@ import 'package:mm_flutter_app/widgets/screens/message/conversationScreen.dart';
 import 'package:provider/provider.dart';
 import '../../../data/models/channels/channel.dart';
 import '../../../data/models/channels/channels_provider.dart';
+import '../../../data/models/message/message.dart';
 import '../../../data/models/message/messages_provider.dart';
 import '../../../data/models/unseen_messages/unseen_messages.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({Key? key}) : super(key: key);
-
   @override
   State<MessageScreen> createState() => _MessageScreenState();
 }
@@ -70,6 +70,7 @@ class _MessageScreenState extends State<MessageScreen> {
                 return ListView.builder(
                     itemCount: channels.length,
                     itemBuilder: (BuildContext context, int index) {
+                      Message lastMessage = channels[index].messages.last;
                       String? _channelName = channels[index]
                           .participants
                           ?.where((element) => element.id != user.id)
@@ -114,7 +115,7 @@ class _MessageScreenState extends State<MessageScreen> {
                               style: const TextStyle(fontSize: 18)),
                           subtitle: channels[index].messages.isNotEmpty
                               ? Text(
-                                  channels[index].messages.last['messageText'],
+                                  lastMessage.messageText,
                                   style: const TextStyle(color: Colors.grey),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../unseen_messages/unseen_messages.dart';
 import 'message.dart';
 import 'messages_api.dart';
-import 'package:collection/collection.dart';
 class MessagesProvider extends ChangeNotifier {
   GraphQLClient client;
   List<Message> _chatMessages = [];
