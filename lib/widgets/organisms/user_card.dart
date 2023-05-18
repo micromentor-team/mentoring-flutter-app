@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:mm_flutter_app/widgets/screens/message/conversationScreen.dart';
-import '../screens/home/dialog_and_rating.dart';
 
 Widget userCard(users, index) {
   return Padding(
@@ -19,7 +16,8 @@ Widget userCard(users, index) {
                   child: FadeInImage(
                       fit: BoxFit.cover,
                       image: NetworkImage(users[index].avatarUrl),
-                  placeholder: const NetworkImage('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')),
+                      placeholder: const NetworkImage(
+                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')),
                 )),
             const SizedBox(
               width: 15,
@@ -27,7 +25,8 @@ Widget userCard(users, index) {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${users[index]!.fullName[0].toUpperCase() + users[index]!.fullName.substring(1)}',
+                Text(
+                    '${users[index]!.fullName[0].toUpperCase() + users[index]!.fullName.substring(1)}',
                     style: const TextStyle(fontSize: 20)),
                 const SizedBox(
                   height: 5,

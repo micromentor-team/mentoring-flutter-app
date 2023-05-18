@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/data/settings/settings.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import '../../atoms/text_form_field_widget.dart';
 
 class UserSettings extends StatefulWidget {
@@ -22,7 +22,7 @@ class _UserSettingsState extends State<UserSettings> {
       ),
       body: SafeArea(
           child: Column(
-        children:  [
+        children: [
           ListTile(
             leading: const SizedBox(
               width: 40.0,
@@ -31,19 +31,26 @@ class _UserSettingsState extends State<UserSettings> {
                 Icons.fingerprint,
               ),
             ),
-            title:  const Text(
+            title: const Text(
               'Biometrics',
               style: TextStyle(
                 fontSize: 14.0,
               ),
             ),
             trailing: ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: biometrics?Colors.blue:Colors.white),
-                onPressed: (){
-              setState(() {
-                biometrics = !biometrics;
-              });
-            }, child: biometrics ? const Text('On',style: TextStyle(color: Colors.white),):const Text('Off')),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: biometrics ? Colors.blue : Colors.white),
+                onPressed: () {
+                  setState(() {
+                    biometrics = !biometrics;
+                  });
+                },
+                child: biometrics
+                    ? const Text(
+                        'On',
+                        style: TextStyle(color: Colors.white),
+                      )
+                    : const Text('Off')),
           ),
           ListTile(
               leading: const SizedBox(
@@ -66,32 +73,38 @@ class _UserSettingsState extends State<UserSettings> {
               onTap: () => showDialog<void>(
                   barrierDismissible: false,
                   context: context,
-                  builder: (BuildContext context){
-                    String? currPass,newPass;
+                  builder: (BuildContext context) {
+                    String? currPass, newPass;
                     return WillPopScope(
-                      onWillPop:  () async => false,
-                      child: AlertDialog(alignment: Alignment.center,
-                        title: const Text('Change Password',),
+                      onWillPop: () async => false,
+                      child: AlertDialog(
+                        alignment: Alignment.center,
+                        title: const Text(
+                          'Change Password',
+                        ),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextFormFieldWidget(
                                 textController: TextEditingController(),
-                                onPressed: (value){
+                                onPressed: (value) {
                                   currPass = value;
                                 },
                                 label: 'Current Password',
                                 obscureText: true),
-                            const SizedBox(height: 15,),
+                            const SizedBox(
+                              height: 15,
+                            ),
                             TextFormFieldWidget(
                                 textController: TextEditingController(),
-                                onPressed: (value){
+                                onPressed: (value) {
                                   newPass = value;
                                 },
                                 label: 'New Password',
                                 obscureText: true)
                           ],
-                        ),actions: [
+                        ),
+                        actions: [
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(),
                             child: const Text('Cancel'),
@@ -100,10 +113,11 @@ class _UserSettingsState extends State<UserSettings> {
                             onPressed: () async {
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(content: Text(
-                                  'Your current password is changed.'
-                              ),));
-                              await userProvider.updateUserPassword(currentPass: currPass, newPass: newPass);
+                                  .showSnackBar(const SnackBar(
+                                content:
+                                    Text('Your current password is changed.'),
+                              ));
+                              // await userProvider.updateUserPassword(currentPass: currPass, newPass: newPass);
                             },
                             child: const Text('Save '),
                           ),

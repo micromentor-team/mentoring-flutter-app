@@ -1,8 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
 // import 'package:provider/provider.dart';
-// import '../../../data/models/unseen_messages/unseen_messages.dart';
-// import '../../../data/models/user/user_provider.dart';
+// import 'package:mm_flutter_app/data/models/unseen_messages/unseen_messages.dart';
+// import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 // import '../message/conversationScreen.dart';
 //
 // class InboxScreen extends StatelessWidget {
@@ -39,7 +39,7 @@
 //                     subtitle: Text(unseenMessages[index].messageText),
 //                     onTap: () async {
 //                       Navigator.of(context).push(MaterialPageRoute(
-//                           builder: (context) => ConversationScreen(
+//                           builder: (context) => ChannelMessagesScreen(
 //                                 userId: user!.id.toString(),
 //                                 title:
 //                                     unseenMessages[index].senderFullName,

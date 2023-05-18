@@ -1,30 +1,43 @@
 const String kSignUpUser = """
-  mutation SignUpUser(\$input: UserSignUpInput!) {
+  mutation M (\$input: UserSignUpInput!) {
     signUpUser(input: \$input) {
       userId
       deviceId
       authToken
     }
-  }""";
-
-const String kCreateUsers = """
-  mutation SignUpUser(\$input: UserSignUpInput!) {
-    signUpUser(input: \$input) {
-      userId
-    }
-  }""";
+  }
+""";
 
 const String kSignInUser = """
-  mutation SignInUser(\$input: UserSignInInput!) {
+  mutation M (\$input: UserSignInInput!) {
     signInUser(input: \$input) {
       userId
       deviceId
       authToken
     }
-  }""";
+  }
+""";
+
+const String kSignOutUser = """
+  mutation M {
+    signMeOut
+  }
+""";
+
+const String kDeleteUser = """
+  mutation M (\$userId: String!, \$deletePhysically: Boolean!) {
+    deleteUser(userId: \$userId, deletePhysically: \$deletePhysically)
+  }
+""";
+
+const String kUpdateUser = """
+  mutation M (\$input: UserInput!) {
+    updateUser(input: \$input)
+  }
+""";
 
 const String kGetAuthenticatedUser = """
-  query getAuthenticatedUser {
+  query Q {
     getAuthenticatedUser {
       id
       email
@@ -32,60 +45,17 @@ const String kGetAuthenticatedUser = """
       avatarUrl
       userHandle
     }
-  }""";
-
-const String kSignOutUser = """
-  mutation Mutation {
-  signOutUser
-}""";
-
-const String kDeleteUser = """
-  mutation DeleteUser(\$userId: String!, \$deletePhysically: Boolean!) {
-    deleteUser(userId: \$userId, deletePhysically: \$deletePhysically)
-  }""";
-
-const String kGetAllUsers ="""
-query FindUsers(\$filter: UserListFilter) {
-  findUsers(filter: \$filter){
-    id
-    email
-    fullName
-    avatarUrl
-    userHandle
   }
-}
 """;
 
-const String kGetUserById ="""
-query FindUserById(\$findUserByIdId: String!) {
-  findUserById(id: \$findUserByIdId) {
-    email
-    fullName
-    avatarUrl
+const String kGetAllUsers = """
+  query Q(\$filter: UserListFilter) {
+    findUsers(filter: \$filter){
+      id
+      email
+      fullName
+      avatarUrl
+      userHandle
+    }
   }
-}
-""";
-
-const String kUpdateUser = """
-mutation UpdateUser(\$input: UserInput!) {
-  updateUser(input: \$input)
-}
-""";
-
-const String kMultiStepAction = """
-mutation CreateMultiStepAction(\$input: SidMultiStepActionInput!) {
-  createMultiStepAction(input: \$input) {
-    id
-    userId
-    authToken
-  }
-}
-""";
-const String getSingleUserByEmail = """
-query FindUsers(\$match: UserInput) {
-  findUsers(match: \$match) {
-    id
-  }
-}
-
 """;

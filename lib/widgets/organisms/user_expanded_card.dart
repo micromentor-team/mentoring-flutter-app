@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mm_flutter_app/widgets/organisms/user_card.dart';
-import 'package:provider/provider.dart';
-import '../../../data/models/channels/channels_provider.dart';
-import '../../data/models/user/user_provider.dart';
+
 import '../screens/home/dialog_and_rating.dart';
-import '../screens/message/conversationScreen.dart';
 
-Widget userExpandedCard({required context, required users, required index}) {
-  final userProvider = Provider.of<UserProvider>(context);
-  final localUser = userProvider.user;
-  final channelProvider = Provider.of<ChannelsProvider>(context);
-  _openChatScreen(user, channelId) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ConversationScreen(
-              userId: localUser!.id.toString(),
-              title: user.fullName.toString(),
-              image: user.avatarUrl.toString(),
-              channelId: channelId.toString(),
-            )));
-  }
-
+Widget userExpandedCard(
+    {required context,
+    required users,
+    required index,
+    required onOpenMessage}) {
   return Container(
     decoration: BoxDecoration(border: Border.all()),
     child: Column(
@@ -53,19 +41,13 @@ Widget userExpandedCard({required context, required users, required index}) {
                     onRatingUpdate: (rating) {},
                   ),
                   ElevatedButton(
-                      onPressed: () async {
-                        await channelProvider.createChannel(
-                           createdBy: localUser?.id,
-                            userIds: [
-                              localUser?.id.toString(),
-                              users[index].id.toString()
-                            ]).then((value) => _openChatScreen(
-                            users[index], value));
-                        },
-                      child: Row(
+                      onPressed: () {
+                        onOpenMessage();
+                      },
+                      child: const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Icon(
                             Icons.message,
                             size: 20,

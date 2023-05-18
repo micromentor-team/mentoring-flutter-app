@@ -1,21 +1,18 @@
-import '../message/message.dart';
 import '../user/user.dart';
 
 class Channel {
   final String id, createdAt, createdBy;
   final List userIds;
-  final List<User>? participants;
-  final List  messages;
+  final List participants;
   final String? name;
 
   Channel({
     required this.id,
-    this.name,
     required this.createdAt,
     required this.userIds,
     required this.createdBy,
-    required this.messages,
-    this.participants,
+    required this.participants,
+    this.name,
   });
   // this a named constructor to build a class from Json
   // used to extract the class from a graphQL response for example
@@ -24,8 +21,9 @@ class Channel {
         name = json['name'],
         userIds = json['userIds'],
         createdAt = json['createdAt'],
-        messages = json['messages'],
-        participants = [User.fromJson(json['participants'][0]['user']) ,User.fromJson(json['participants'][1]['user'])],
+        participants = json['participants']
+            .map((item) => User.fromJson(item['user']))
+            .toList(),
         createdBy = json['createdBy'].toString();
 
   Map<String, dynamic> toJson() => {
@@ -34,6 +32,6 @@ class Channel {
         'createdAt': createdAt,
         'createdBy': createdBy,
         'userIds': userIds,
-        'participants':participants,
+        'participants': participants,
       };
 }

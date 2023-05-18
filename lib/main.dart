@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
-import 'package:mm_flutter_app/data/models/message/messages_provider.dart';
+import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
-import 'package:mm_flutter_app/widgets/screens/signIn/signInScreen.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/tabs/tab_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'data/models/user/user_provider.dart';
 
 void main() async {
@@ -41,7 +42,7 @@ void main() async {
               ChangeNotifierProvider(
                   create: (context) => ChannelsProvider(client: client)),
               ChangeNotifierProvider(
-                  create: (context) =>MessagesProvider(client: client)),
+                  create: (context) => MessagesProvider(client: client)),
             ],
             child: const App(),
           );
@@ -67,7 +68,6 @@ class App extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const StartScreen(),
-
     );
   }
 }

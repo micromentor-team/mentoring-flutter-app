@@ -32,16 +32,15 @@ class GraphqlService {
     final WebSocketLink wsLink = WebSocketLink(
       subscriptionUrl,
       subProtocol: GraphQLProtocol.graphqlTransportWs,
-      config: const SocketClientConfig(
-          inactivityTimeout: null,
-          autoReconnect: true,
-        // initialPayload: () async {
-        //   final token = await _getToken();
-        //
-        //   return {
-        //     'authorization': token,
-        //   };
-        // },
+      config: SocketClientConfig(
+        inactivityTimeout: null,
+        initialPayload: () async {
+          final token = await _getToken();
+
+          return {
+            'authorization': token,
+          };
+        },
       ),
     );
 
