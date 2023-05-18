@@ -78,3 +78,14 @@ mutation DeleteChannelMessage(\$deletePhysically: Boolean!, \$channelMessageId: 
   deleteChannelMessage(deletePhysically: \$deletePhysically, channelMessageId: \$channelMessageId)
 }
 """;
+
+const String kChannelUpdatedSubscription = """
+   subscription ObjectChanged(\$objectId: ID!) {
+    objectChanged(objectId: \$objectId) {
+      objectId
+      messageType
+      modelType
+      ownerUserId
+    }
+   }
+""";

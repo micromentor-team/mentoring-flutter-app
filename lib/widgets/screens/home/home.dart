@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:expandable/expandable.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:mm_flutter_app/data/models/user/user.dart';
+import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/widgets/screens/home/users_list.dart';
 import 'package:provider/provider.dart';
-import '../../../data/models/channels/channels_provider.dart';
-import '../../../data/models/user/user.dart';
-import '../../../data/models/user/user_provider.dart';
+
 import '../../molecules/search_container.dart';
-import '../../organisms/user_expanded_card.dart';
-import '../homeMenu/homeMenu.dart';
-import '../message/conversationScreen.dart';
-import '../../organisms/user_card.dart';
-import 'package:mm_flutter_app/widgets/screens/home/dialog_and_rating.dart';
+import '../home_menu/home_menu.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,36 +15,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<User> usersList = [];
-  List<User> users = [];
   String searchValue = '';
 
-  _getAllExpertise(context, value) async {
-    final userProvider = Provider.of<UserProvider>(context);
-    usersList = await userProvider.getAllUsers();
-    final user = userProvider.user;
-    usersList.removeWhere((element) => element!.id == user!.id);
-    usersList = usersList.where((i) => i.fullName != '').toList();
-    // userProvider.notifyListeners();
-    users = usersList
-        .where((element) =>
-            element.fullName.toLowerCase().contains(value.toLowerCase()))
-        .toList();
-    return users;
-  }
-
-  _openChatScreen(user, channelId) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ConversationScreen(
-              userId: user.id.toString(),
-              title: user.fullName.toString(),
-              image: user.avatarUrl.toString(),
-              channelId: channelId.toString(),
-            )));
+  List<User> searchNames(users) {
+    return users.where((user) =>
+        user.fullName.toLowerCase().contains(searchValue.toLowerCase()));
   }
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final currentUser = userProvider.user;
+
     return Scaffold(
       drawer: const HomeMenu(),
       appBar: AppBar(elevation: 0.5, actions: [
@@ -95,110 +72,67 @@ class _HomeScreenState extends State<HomeScreen> {
           right: 15.0,
           left: 15.0,
         ),
-        child: RefreshIndicator(
-          onRefresh: () async {
-            setState(() {});
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Start a Conversation',
-                              style: TextStyle(
-                                  fontSize: 27, color: Colors.deepPurple),
-                            ),
-                            Row(
-                              children: [
-                                const Text(
-                                  'For tips on getting started, ',
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                GestureDetector(
-                                    child: const Text('click here.',
-                                        style: TextStyle(
-                                            fontSize: 15, color: Colors.blue))),
-                              ],
-                            )
-                          ],
-                        ),
-                        const Icon(
-                          Icons.edit_document,
-                          size: 30,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SearchContainer(
-                  onChanged: (value) {
-                    setState(() {
-                      searchValue = value;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                FutureBuilder(
-                    future: _getAllExpertise(context, searchValue),
-                    builder: (context, snapshot) {
-                      try {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return Column(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Start a Conversation',
+                            style: TextStyle(
+                                fontSize: 27, color: Colors.deepPurple),
+                          ),
+                          Row(
                             children: [
-                              ListView.builder(
-                                  physics: const ScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: users.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return ExpandableNotifier(
-                                      child: Expandable(
-                                        collapsed: ExpandableButton(
-                                          child: Card(
-                                              child: userCard(users, index)),
-                                        ),
-                                        expanded: ExpandableButton(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: userExpandedCard(
-                                                users: users,
-                                                context: context,
-                                                index: index),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
+                              const Text(
+                                'For tips on getting started, ',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              GestureDetector(
+                                  child: const Text('click here.',
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.blue))),
                             ],
-                          );
-                        } else {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-                      } catch (error) {
-                        rethrow;
-                      }
-                    }),
-
-                // const SizedBox(
-                //   height: 15,
-                // ),
-              ],
-            ),
+                          )
+                        ],
+                      ),
+                      const Icon(
+                        Icons.edit_document,
+                        size: 30,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SearchContainer(
+                onChanged: (value) {
+                  setState(() {
+                    searchValue = value;
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Column(
+                children: [
+                  Users(
+                    search: searchValue,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       )),
