@@ -1,10 +1,10 @@
 import 'package:widgetbook/widgetbook.dart';
-import './use_cases/basic.dart';
+import 'use_cases/basic.dart';
 
 WidgetbookFolder serverErrorFolder() {
-  return WidgetbookFolder(name: 'server error', widgets: [
+  return WidgetbookFolder(name: 'Server Error', widgets: [
     WidgetbookComponent(
-      name: 'server error',
+      name: 'Server Error',
       useCases: [
         basic(),
       ],

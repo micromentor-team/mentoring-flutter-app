@@ -21,6 +21,15 @@ class User {
         email = json['email'] ?? '',
         adminNotes = json['adminNotes'] ?? '';
 
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'userHandle': userHandle,
+    'fullName': fullName,
+    'avatarUrl': avatarUrl,
+    'email': email,
+    'adminNotes': adminNotes,
+  };
+
   String get initials {
     return fullName
         .trim()

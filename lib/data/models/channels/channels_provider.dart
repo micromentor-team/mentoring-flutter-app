@@ -33,14 +33,13 @@ class ChannelsProvider extends ChangeNotifier {
           }
           return ServerError(error: error);
         }
-
         if (result.isLoading) {
           if (onLoading != null) {
             return onLoading();
           }
           return const SizedBox.shrink();
         }
-        // print(result);
+        print(result.data!['findChannelsForUser']);
         return onData(result.data!['findChannelsForUser']);
       },
     );
