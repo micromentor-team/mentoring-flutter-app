@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -46,7 +46,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   expandable: ^5.0.1
   dio: ^5.0.1
-  flutter_linkify: ^5.0.2
+  flutter_linkify: ^6.0.0
   url_launcher: ^6.1.7
   grouped_list: ^5.1.2
   local_auth: ^2.1.6

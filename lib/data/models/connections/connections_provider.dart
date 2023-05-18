@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/connections/connections_api.dart';
+
 import '../../../widgets/atoms/server_error.dart';
-import 'package:mocktail/mocktail.dart';
 
 class ConnectionsProvider extends ChangeNotifier {
   GraphQLClient client;
