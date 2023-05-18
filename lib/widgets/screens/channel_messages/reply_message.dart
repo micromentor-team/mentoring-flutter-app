@@ -22,9 +22,8 @@ class ReplyMessage extends StatelessWidget {
 
   String _participantName({userId}) {
     final User participant = participants
-        .firstWhere((item) => item.id == userId, orElse: () => null as User);
+        .firstWhere((item) => item.id == userId, orElse: () => null);
     return participant.fullName.trim().split(RegExp(' +')).take(1).join();
-    return '';
   }
 
   @override

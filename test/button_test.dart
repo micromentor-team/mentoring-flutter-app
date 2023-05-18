@@ -7,9 +7,9 @@ void main() {
     await tester.pumpWidget( const  MaterialApp(
       home: Scaffold(body: CustomizedButton(icon: Icons.message,text: 'message',),),
     ));
-    final tune_icon = find.byIcon(Icons.message);
+    final tuneIcon = find.byIcon(Icons.message);
     final text = find.byType(Text);
-    expect(tune_icon, findsOneWidget);
+    expect(tuneIcon, findsOneWidget);
     expect(text, findsOneWidget);
       });
 }

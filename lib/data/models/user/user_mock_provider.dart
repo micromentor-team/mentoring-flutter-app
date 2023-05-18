@@ -14,6 +14,7 @@ class UserMockProvider extends Mock implements UserProvider {
     pref.setString('userId', userId);
     pref.setString('deviceId', deviceId);
     pref.setString('authToken', authToken);
+    return null;
   }
 
   @override

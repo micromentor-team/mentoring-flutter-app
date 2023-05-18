@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 
 class TuneIcon extends StatelessWidget {
   const TuneIcon({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    void _showDialog() {
+    void showOptions() {
       showDialog(
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) => SimpleDialog(
             alignment: Alignment.topRight,
             insetPadding: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20),
@@ -36,23 +35,23 @@ class TuneIcon extends StatelessWidget {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [Text('Sort'), Text('Relevance')],
+                          children: [Text('Sort'), Text('Relevance')],
                         ),
-                        const Icon(Icons.arrow_forward_ios)
+                        Icon(Icons.arrow_forward_ios)
                       ],
                     ),
                     const Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text('Language'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -61,9 +60,9 @@ class TuneIcon extends StatelessWidget {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text('Home Country'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -72,9 +71,9 @@ class TuneIcon extends StatelessWidget {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children:  [
                         Text('Industry'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -83,9 +82,9 @@ class TuneIcon extends StatelessWidget {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text('Expertise'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -94,9 +93,9 @@ class TuneIcon extends StatelessWidget {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text('Country Experience'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -110,13 +109,13 @@ class TuneIcon extends StatelessWidget {
                       children: [
                         Expanded(
                             child: ElevatedButton(
-                                onPressed: () {}, child: Text('RESET'))),
+                                onPressed: () {}, child: const Text('RESET'))),
                         const SizedBox(
                           width: 5,
                         ),
                         Expanded(
                             child: ElevatedButton(
-                                onPressed: () {}, child: Text('UPDATE'))),
+                                onPressed: () {}, child: const Text('UPDATE'))),
                       ],
                     ),
                     const SizedBox(
@@ -130,7 +129,7 @@ class TuneIcon extends StatelessWidget {
     }
     return  Center(
       child: GestureDetector(
-          onTap: _showDialog,
+          onTap: showOptions,
           child: const Icon(Icons.tune)),
     );
   }

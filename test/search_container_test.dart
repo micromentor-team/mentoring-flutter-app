@@ -5,13 +5,13 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('Search container', (WidgetTester tester) async {
     await tester.pumpWidget( MaterialApp(
-      home: Scaffold(body: SearchContainer(onChanged: (String ) {  },),),
+      home: Scaffold(body: SearchContainer(onChanged: (str) {  },),),
     ));
-    final tune_icon = find.byIcon(Icons.tune_sharp);
-    final account_icon = find.byIcon(Icons.account_circle);
+    final tuneIcon = find.byIcon(Icons.tune_sharp);
+    final accountIcon = find.byIcon(Icons.account_circle);
     final text = find.byType(TextField);
-    expect(tune_icon, findsOneWidget);
-    expect(account_icon,findsOneWidget);
+    expect(tuneIcon, findsOneWidget);
+    expect(accountIcon,findsOneWidget);
     expect(text, findsOneWidget);
 
   });

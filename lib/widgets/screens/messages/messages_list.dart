@@ -48,8 +48,6 @@ class MessagesList extends StatelessWidget {
       onData: (data) {
         List unseenMessages =
             data.map((item) => UnseenMessages.fromJson(item)).toList();
-        print('Channel unseen messages: ${unseenMessages.length}');
-
         return ListView.separated(
           physics: const ScrollPhysics(),
           shrinkWrap: true,
@@ -60,7 +58,6 @@ class MessagesList extends StatelessWidget {
           itemBuilder: (context, index) {
             Channel channel = channels[index];
             debugPrint('show channel');
-            print(channel.toJson());
             if (channel.participants.length > 1) {
               for (var item in channel.participants) {
                 debugPrint('participant name ${item.fullName} id: ${item.id}');
@@ -123,6 +120,8 @@ class MessagesList extends StatelessWidget {
                   },
                 ),
               );
+            }else{
+              return const Center(child: Text('You have not any messages'),);
             }
           },
         );

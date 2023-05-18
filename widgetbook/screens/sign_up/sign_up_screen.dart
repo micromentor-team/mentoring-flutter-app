@@ -13,6 +13,6 @@ Widget signUpScreen({authToken, userId, deviceId}) {
             authToken: authToken, userId: userId, deviceId: deviceId),
       ),
     ],
-    child: SignUpScreen(),
+    child: const SignUpScreen(),
   );
 }

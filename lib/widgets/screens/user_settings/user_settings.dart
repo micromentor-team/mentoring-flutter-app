@@ -74,7 +74,7 @@ class _UserSettingsState extends State<UserSettings> {
                   barrierDismissible: false,
                   context: context,
                   builder: (BuildContext context) {
-                    String? currPass, newPass;
+                    // String? currPass, newPass;
                     return WillPopScope(
                       onWillPop: () async => false,
                       child: AlertDialog(
@@ -88,7 +88,7 @@ class _UserSettingsState extends State<UserSettings> {
                             TextFormFieldWidget(
                                 textController: TextEditingController(),
                                 onPressed: (value) {
-                                  currPass = value;
+                                  // currPass = value;
                                 },
                                 label: 'Current Password',
                                 obscureText: true),
@@ -98,7 +98,7 @@ class _UserSettingsState extends State<UserSettings> {
                             TextFormFieldWidget(
                                 textController: TextEditingController(),
                                 onPressed: (value) {
-                                  newPass = value;
+                                  // newPass = value;
                                 },
                                 label: 'New Password',
                                 obscureText: true)

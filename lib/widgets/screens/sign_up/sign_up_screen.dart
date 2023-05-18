@@ -69,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                    child: Container(
+                    child: SizedBox(
                       width: 360,
                       child: Column(
                         mainAxisSize: MainAxisSize.max,

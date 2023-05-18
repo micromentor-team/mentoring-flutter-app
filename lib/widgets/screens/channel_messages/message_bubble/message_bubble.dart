@@ -23,8 +23,8 @@ class MessageBubble extends StatelessWidget {
 
   Future<void> _onOpenLink(LinkableElement link) async {
     try {
-      if (await canLaunch(link.url)) {
-        await launch(link.url);
+      if (await canLaunchUrl(link.url as Uri)) {
+        await launchUrl(link.url as Uri);
       } else {
         throw 'Could not launch $link';
       }
@@ -39,7 +39,7 @@ class MessageBubble extends StatelessWidget {
 
   String _participantName({userId}) {
     final User? participant = participants
-        .firstWhere((item) => item.id == userId, orElse: () => null as User);
+        .firstWhere((item) => item.id == userId, orElse: () => null);
     if (participant != null) {
       return participant.fullName.trim().split(RegExp(' +')).take(1).join();
     }
@@ -110,7 +110,7 @@ class MessageBubble extends StatelessWidget {
         child: SelectableLinkify(
           //  If the message is only emojis, we don't need the invisible character
           text:
-              isEmoji ? message.messageText : message.messageText + '         ',
+              isEmoji ? message.messageText : '${message.messageText}         ',
           //  Concatenating white space and an invisible character saves us from having to use a LayoutBuilder.
           //  The Text sees the invisible character, so it does not trim the extra whitespace we want to use for layout.
           //  When the Stack sees our addition, it paints our positioned sentAt widget (8 in this case) whitespaces

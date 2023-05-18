@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../screens/home/dialog_and_rating.dart';
 
 class SearchContainer extends StatelessWidget {
-  Function(String)? onChanged;
-  SearchContainer({Key? key,required this.onChanged}) : super(key: key);
+  final Function(String)? onChanged;
+  const SearchContainer({Key? key,required this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

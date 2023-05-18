@@ -152,7 +152,6 @@ class ChannelMessages extends StatelessWidget {
       onData: (data) {
         if (data != null) {
           // List messages = data.toList();
-          print('Query messages messages ############');
           final List<Message> messages =
               List<Message>.from(data.map((item) => Message.fromJson(item)));
           return ChannelChat(
@@ -258,7 +257,7 @@ class _ChannelChatState extends State<ChannelChat> {
     setState(() {
       if (_focusedMessage != null) _focusedMessage = null;
     });
-    final _reply = await Navigator.of(context).push(
+    final reply = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
         pageBuilder: ((context, animation, secondaryAnimation) {
@@ -276,9 +275,9 @@ class _ChannelChatState extends State<ChannelChat> {
       ),
     );
 
-    if (_reply != null) {
+    if (reply != null) {
       setState(() {
-        if (_reply == true) {
+        if (reply == true) {
           _focusedMessage = message;
         }
         // else if (_reply == Message) {
@@ -367,10 +366,10 @@ class BuildMessageBubbles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Message> _messages = chatMessages.reversed.toList();
+    List<Message> messages = chatMessages.reversed.toList();
     return chatMessages.isNotEmpty
         ? GroupedListView<Message, int>(
-            elements: _messages,
+            elements: messages,
             clipBehavior: Clip.none,
             // We do not want the builder to sort again...
             sort: false,
@@ -389,7 +388,7 @@ class BuildMessageBubbles extends StatelessWidget {
             groupBy: (message) => DateTime.parse(message.createdAt).day,
             indexedItemBuilder: (context, Message message, i) {
               // return buildMessageBubble(_messages[i]);
-              final message = _messages[i];
+              final message = messages[i];
 
               return BuildMessageBubble(
                 key: ObjectKey(message.id),
@@ -474,19 +473,19 @@ class BuildMessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Message? _replyingTo;
+    Message? replyingTo;
     if (message.replyToMessageId != null) {
       try {
-        _replyingTo = chatMessages
+        replyingTo = chatMessages
             .firstWhere((item) => item.id == message.replyToMessageId);
       } catch (e) {
-        _replyingTo = null;
+        replyingTo = null;
       }
     }
 
-    final _bubble = MessageBubble(
+    final bubble = MessageBubble(
       message: message,
-      replyingTo: _replyingTo,
+      replyingTo: replyingTo,
       participants: participants,
     );
     return Row(
@@ -497,14 +496,14 @@ class BuildMessageBubble extends StatelessWidget {
       children: [
         kIsWeb || Platform.isMacOS
             ? MessageHoverover(
-                message: _bubble,
+                message: bubble,
                 onButtonOne: onSwipeRight,
                 onButtonTwo: onSwipeLeft,
               )
             : MessagePeeker(
                 onSwipeLeft: onSwipeLeft,
                 onSwipeRight: onSwipeRight,
-                child: _bubble,
+                child: bubble,
               ),
       ],
     );
@@ -535,15 +534,15 @@ class BuildMessageInput extends StatelessWidget {
       builder: (context, constraints) {
         // 📌  This is where we're determining our scroll padding, for the cool transparent stuff.
         // 1. Get the height of the input section as we have declared it; omitting any system padding
-        final double _inputWidgetHeight =
+        final double inputWidgetHeight =
             MediaQuery.of(context).size.height - constraints.maxHeight;
         // 2. Get what the ~device~ understands the actual viewport to be; before any of our implementations
-        final EdgeInsets viewInsets = EdgeInsets.fromWindowPadding(
-          WidgetsBinding.instance.window.viewInsets,
-          WidgetsBinding.instance.window.devicePixelRatio,
+        final EdgeInsets viewInsets = EdgeInsets.fromViewPadding(
+          View.of(context).viewInsets,
+          View.of(context).devicePixelRatio,
         );
         // 3. Get the difference between our widget height and the current device bottom (inclusive of any system element)
-        final double _inputHeight = _inputWidgetHeight - viewInsets.bottom;
+        final double inputHeight = inputWidgetHeight - viewInsets.bottom;
         // ---------------------------------------------------------------------------------
         // 🕵️‍♀️  If the ~device~ understands it has a system element impeding the viewport bottom,
         // it prefers the element constraints, nullifying our implemented `SafeArea`...
@@ -551,9 +550,9 @@ class BuildMessageInput extends StatelessWidget {
         // 4. Finally, add a callback to the end of the paint and update our double for the keyboard/system element
         WidgetsBinding.instance.addPostFrameCallback((_) {
           // Given the value is different...
-          if (bottomViewInset != _inputWidgetHeight &&
-              bottomViewInset != _inputHeight) {
-            onSetBottomInset(_inputHeight);
+          if (bottomViewInset != inputWidgetHeight &&
+              bottomViewInset != inputHeight) {
+            onSetBottomInset(inputHeight);
           }
         });
 

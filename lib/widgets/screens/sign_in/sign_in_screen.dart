@@ -38,10 +38,10 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  _openHomeScreen(context) {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-  }
+  // _openHomeScreen(context) {
+  //   Navigator.of(context)
+  //       .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+  // }
 
   void _openSignUpScreen(context) {
     Navigator.of(context).push(
@@ -144,6 +144,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your password.';
                                 }
+                                return null;
                               },
                               onPressed: (value) {
                                 setState(() {

@@ -102,7 +102,7 @@ class Profile extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text(
+              title: const Text(
                 "Email",
               ),
               leading: const Icon(
@@ -113,7 +113,7 @@ class Profile extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => YourEmail(),
+                    builder: (context) => const YourEmail(),
                   ),
                 );
               },

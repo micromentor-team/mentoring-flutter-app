@@ -73,9 +73,6 @@ class UsersList extends StatelessWidget {
           Provider.of<ChannelsProvider>(context, listen: false);
       final userIds = [user?.id, userId];
 
-      print('Create a new channel with userIDS');
-      print(userIds);
-
       channelId = await channelsProvider.createChannel(
           createdBy: user?.id, userIds: userIds);
     }
@@ -91,7 +88,6 @@ class UsersList extends StatelessWidget {
 
   List<User> searchNames(users) {
     if (search != null && search != '') {
-      print('SEARCH VALUE $search');
     }
     return users;
   }

@@ -7,8 +7,8 @@ void main() {
     await tester.pumpWidget( const  MaterialApp(
       home: Scaffold(body: TuneIcon(),),
     ));
-    final tune_icon = find.byIcon(Icons.tune);
-    expect(tune_icon, findsOneWidget);
+    final tuneIcon = find.byIcon(Icons.tune);
+    expect(tuneIcon, findsOneWidget);
 
     // await tester.tap(tune_icon);
     // await Future.delayed(Duration(seconds: 3));
