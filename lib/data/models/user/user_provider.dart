@@ -103,7 +103,6 @@ class UserProvider extends ChangeNotifier {
           }
           return const SizedBox.shrink();
         }
-        print(result.data!['findUsers']);
         return onData(result.data!['findUsers']);
       },
     );

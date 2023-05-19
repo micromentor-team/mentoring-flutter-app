@@ -39,7 +39,6 @@ class ChannelsProvider extends ChangeNotifier {
           }
           return const SizedBox.shrink();
         }
-        print(result.data!['findChannelsForUser']);
         return onData(result.data!['findChannelsForUser']);
       },
     );

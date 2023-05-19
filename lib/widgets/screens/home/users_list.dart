@@ -86,11 +86,13 @@ class UsersList extends StatelessWidget {
     // if not found create a new channel
   }
 
-  List<User> searchNames(users) {
-    if (search != null && search != '') {
-    }
-    return users;
-  }
+  // List<User> searchNames(users) {
+  //   if (search != null && search != '') {
+  //     print('$search');
+  //     return users;
+  //   }
+  //   return users;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +115,10 @@ class UsersList extends StatelessWidget {
         List users = data.reversed
             .where((item) => item['id'] != currentUser?.id)
             .toList();
-
         users = users.map((item) => User.fromJson(item)).toList();
-
-        users = searchNames(users);
+        users = users.where((element) =>
+            element.fullName.toLowerCase().contains(search?.toLowerCase()))
+            .toList();
 
         return ListView.separated(
           physics: const ScrollPhysics(),

@@ -27,6 +27,7 @@ class ChannelsScreen extends StatelessWidget {
 class ChannelsList extends StatelessWidget {
   const ChannelsList({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     final channelsProvider = Provider.of<ChannelsProvider>(context);
@@ -38,7 +39,6 @@ class ChannelsList extends StatelessWidget {
       onData: (data) {
         List channels =
             data.reversed.map((item) => Channel.fromJson(item)).toList();
-
         return MessagesList(user: user!, channels: channels);
       },
     );

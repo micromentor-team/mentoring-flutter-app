@@ -152,6 +152,7 @@ class ChannelMessages extends StatelessWidget {
       onData: (data) {
         if (data != null) {
           // List messages = data.toList();
+          messagesProvider.markMessageRead(channel.id);
           final List<Message> messages =
               List<Message>.from(data.map((item) => Message.fromJson(item)));
           return ChannelChat(
@@ -368,7 +369,7 @@ class BuildMessageBubbles extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Message> messages = chatMessages.reversed.toList();
     return chatMessages.isNotEmpty
-        ? GroupedListView<Message, int>(
+        ? GroupedListView<Message, String>(
             elements: messages,
             clipBehavior: Clip.none,
             // We do not want the builder to sort again...
@@ -385,7 +386,9 @@ class BuildMessageBubbles extends StatelessWidget {
                   ? bottomViewInset + 10.0
                   : bottomViewInset,
             ),
-            groupBy: (message) => DateTime.parse(message.createdAt).day,
+            groupBy: (message) => DateFormat('yyyy-MM-dd')
+                .format(DateTime.parse(message.createdAt))
+                .toString(),
             indexedItemBuilder: (context, Message message, i) {
               // return buildMessageBubble(_messages[i]);
               final message = messages[i];
@@ -407,15 +410,16 @@ class BuildMessageBubbles extends StatelessWidget {
                 height: 30.0,
                 child: Center(
                   child: Chip(
-                    backgroundColor: Colors.transparent,
+                    side: BorderSide.none,
+                    backgroundColor: Colors.grey.shade200,
                     label: Text(
                       // 🚨 TODO: Currently looks broken because the sentAt is not localized
                       DateTime.now().day ==
                               DateTime.parse(message.createdAt).day
                           ? 'Today'
-                          : DateFormat.MMMEd()
+                          : DateFormat('MMM d, yyyy')
                               .format(DateTime.parse(message.createdAt)),
-                      style: TextStyle(color: Colors.grey.shade600),
+                      style: TextStyle(color: Colors.grey.shade600,fontSize: 11),
                     ),
                   ),
                 ),

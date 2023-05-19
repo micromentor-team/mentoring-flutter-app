@@ -241,13 +241,13 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
             ? const Text('undo')
             : const Text('delete'),
         onPressed: () {
-          if (_message.deletedAt != null) {
-            // Provider.of<MessagesProvider>(context, listen: false)
-            //     .updateMessage(messageId: _message.id, deleted: false);
-          } else {
-            // Provider.of<MessagesProvider>(context, listen: false)
-            //     .updateMessage(messageId: _message.id, deleted: true);
-          }
+          // if (_message.deletedAt != null) {
+          //   // Provider.of<MessagesProvider>(context, listen: false)
+          //   //     .updateMessage(messageId: _message.id, deleted: false);
+          // } else {
+            Provider.of<MessagesProvider>(context, listen: false)
+                .deleteMessage(messageId: _message.id, deletePhysically: true);
+          // }
 
           _onClose();
         },
