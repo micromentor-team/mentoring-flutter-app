@@ -110,6 +110,7 @@ class HomeMenu extends StatelessWidget {
                       child: const Text('Cancel'),
                     ),
                     TextButton(
+                      key: const Key('yesSignOut'),
                       onPressed: () async {
                         await userProvider.signOutUser();
 
