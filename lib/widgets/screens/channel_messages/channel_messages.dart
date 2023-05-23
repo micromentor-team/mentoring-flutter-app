@@ -152,7 +152,6 @@ class ChannelMessages extends StatelessWidget {
       onData: (data) {
         if (data != null) {
           // List messages = data.toList();
-          messagesProvider.markMessageRead(channel.id);
           final List<Message> messages =
               List<Message>.from(data.map((item) => Message.fromJson(item)));
           return ChannelChat(
@@ -223,10 +222,18 @@ class _ChannelChatState extends State<ChannelChat> {
     super.initState();
   }
 
+  _markMessageRead() {
+    Provider.of<MessagesProvider>(context, listen: false)
+        .markMessageRead(widget.channel.id);
+  }
+
   @override
   void didUpdateWidget(covariant ChannelChat oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.chatMessages.length < widget.chatMessages.length) {
+      debugPrint(
+          'didUpdateWidget: old length: ${oldWidget.chatMessages.length} new: ${widget.chatMessages.length}');
+      _markMessageRead();
       if (_isCurrentUser(
           userId: widget.chatMessages.last.createdBy, context: context)) {
         _scrollDown();
@@ -419,7 +426,8 @@ class BuildMessageBubbles extends StatelessWidget {
                           ? 'Today'
                           : DateFormat('MMM d, yyyy')
                               .format(DateTime.parse(message.createdAt)),
-                      style: TextStyle(color: Colors.grey.shade600,fontSize: 11),
+                      style:
+                          TextStyle(color: Colors.grey.shade600, fontSize: 11),
                     ),
                   ),
                 ),

@@ -174,7 +174,7 @@ class MessagesProvider extends ChangeNotifier {
   }
 
   Future<void> markMessageRead(channelId) async {
-await client.mutate(
+    await client.mutate(
       MutationOptions(
         document: gql(kMarkMessagesAsSeenByMe),
         variables: {
@@ -190,11 +190,25 @@ await client.mutate(
   Future<void> updateMessage({
     required channelId,
     required messageId,
-    required messageText,
-    bool? deleted,
+    String? messageText,
+    bool? undelete,
   }) async {
     // print('Update Message with input');
     // print(input);
+    final variables = {
+      'input': {
+        'id': messageId,
+      },
+    };
+
+    if (messageText != null) {
+      variables['input']!['messageText'] = messageText;
+    }
+
+    if (undelete != true) {
+      variables['input']!['deletedAt'] = null;
+    }
+
     await client.mutate(
       MutationOptions(
         document: gql(kUpdateChannelMessage),

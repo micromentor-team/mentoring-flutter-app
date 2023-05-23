@@ -7,9 +7,9 @@ import 'package:mm_flutter_app/data/models/messages/message.dart';
 import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/themes/palette.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mm_flutter_app/themes/palette.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_input.dart';
 
@@ -241,13 +241,16 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
             ? const Text('undo')
             : const Text('delete'),
         onPressed: () {
-          // if (_message.deletedAt != null) {
-          //   // Provider.of<MessagesProvider>(context, listen: false)
-          //   //     .updateMessage(messageId: _message.id, deleted: false);
-          // } else {
+          // TODO: need to support undelete
+          if (_message.deletedAt != null) {
+            Provider.of<MessagesProvider>(context, listen: false).updateMessage(
+                channelId: widget.channel.id,
+                messageId: _message.id,
+                undelete: true);
+          } else {
             Provider.of<MessagesProvider>(context, listen: false)
-                .deleteMessage(messageId: _message.id, deletePhysically: true);
-          // }
+                .deleteMessage(messageId: _message.id, deletePhysically: false);
+          }
 
           _onClose();
         },
