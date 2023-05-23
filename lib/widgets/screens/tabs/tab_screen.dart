@@ -28,13 +28,13 @@ class _TabsScreenState extends State<TabsScreen> {
     }
   }
 
-  static Future<List<BiometricType>> getBiometrics() async {
-    try {
-      return await _auth.getAvailableBiometrics();
-    } on PlatformException catch (_) {
-      return <BiometricType>[];
-    }
-  }
+  // static Future<List<BiometricType>> getBiometrics() async {
+  //   try {
+  //     return await _auth.getAvailableBiometrics();
+  //   } on PlatformException catch (_) {
+  //     return <BiometricType>[];
+  //   }
+  // }
 
   static Future<bool> authenticate() async {
     final isAvailable = await hasBiometrics();

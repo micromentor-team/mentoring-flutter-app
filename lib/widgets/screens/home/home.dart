@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/screens/home/users_list.dart';
-import 'package:provider/provider.dart';
 
 import '../../molecules/search_container.dart';
 import '../home_menu/home_menu.dart';
@@ -24,9 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    final currentUser = userProvider.user;
-
     return Scaffold(
       drawer: const HomeMenu(),
       appBar: AppBar(elevation: 0.5, actions: [

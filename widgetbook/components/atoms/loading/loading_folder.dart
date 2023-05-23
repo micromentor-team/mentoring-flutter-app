@@ -3,9 +3,9 @@ import 'use_cases/basic.dart';
 
 
 WidgetbookFolder loadingFolder() {
-  return WidgetbookFolder(name: 'loading', widgets: [
+  return WidgetbookFolder(name: 'Loading', widgets: [
     WidgetbookComponent(
-      name: 'loading',
+      name: 'Loading',
       useCases: [
       basic(),
       ],

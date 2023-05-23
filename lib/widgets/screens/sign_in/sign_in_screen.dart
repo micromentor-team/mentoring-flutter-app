@@ -38,10 +38,10 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  _openHomeScreen(context) {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-  }
+  // _openHomeScreen(context) {
+  //   Navigator.of(context)
+  //       .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+  // }
 
   void _openSignUpScreen(context) {
     Navigator.of(context).push(
@@ -118,7 +118,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          TextFormFieldWidget(
+                          TextFormFieldWidget(key: const Key('emailTextField'),
                               textController: emailController,
                               label: "Email Address",
                               validator: (value) {
@@ -138,12 +138,14 @@ class _SignInScreenState extends State<SignInScreen> {
                             height: mediaQuery.height * 0.01,
                           ),
                           TextFormFieldWidget(
+                            key: const Key('passwordTextField'),
                               textController: passwordController,
                               label: "Password",
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your password.';
                                 }
+                                return null;
                               },
                               onPressed: (value) {
                                 setState(() {
@@ -155,6 +157,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0, 20, 0, 0),
                             child: ElevatedButton(
+                              key: const Key('btnSignIn'),
                               onPressed: () async {
                                 final navigator = Navigator.of(context);
                                 final scaffoldManager =
@@ -291,6 +294,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       height: 30,
                     ),
                     TextButton(
+                      key: const Key('registerButton'),
                       onPressed: () {
                         _openSignUpScreen(context);
                       },

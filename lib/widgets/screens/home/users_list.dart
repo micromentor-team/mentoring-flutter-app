@@ -73,9 +73,6 @@ class UsersList extends StatelessWidget {
           Provider.of<ChannelsProvider>(context, listen: false);
       final userIds = [user?.id, userId];
 
-      print('Create a new channel with userIDS');
-      print(userIds);
-
       channelId = await channelsProvider.createChannel(
           createdBy: user?.id, userIds: userIds);
     }
@@ -89,12 +86,13 @@ class UsersList extends StatelessWidget {
     // if not found create a new channel
   }
 
-  List<User> searchNames(users) {
-    if (search != null && search != '') {
-      print('SEARCH VALUE $search');
-    }
-    return users;
-  }
+  // List<User> searchNames(users) {
+  //   if (search != null && search != '') {
+  //     print('$search');
+  //     return users;
+  //   }
+  //   return users;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -117,10 +115,10 @@ class UsersList extends StatelessWidget {
         List users = data.reversed
             .where((item) => item['id'] != currentUser?.id)
             .toList();
-
         users = users.map((item) => User.fromJson(item)).toList();
-
-        users = searchNames(users);
+        users = users.where((element) =>
+            element.fullName.toLowerCase().contains(search?.toLowerCase()))
+            .toList();
 
         return ListView.separated(
           physics: const ScrollPhysics(),

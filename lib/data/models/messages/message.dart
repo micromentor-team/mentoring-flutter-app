@@ -23,10 +23,10 @@ class Message {
         createdBy = json['createdBy'],
         channelId = json['channelId'],
         messageText = json['messageText'],
-        createdAt = json['createdAt'],
+        createdAt = DateTime.parse(json['createdAt']).toLocal().toString(),
         editedAt = json['editedAt'],
         updatedAt = json['updatedAt'],
         deletedAt = json['deletedAt'],
         replyToMessageId = json['replyToMessageId'],
-        statuses = json['statuses'];
+        statuses = json['statuses']??[];
 }
