@@ -10,7 +10,7 @@ void main() {
       app.main();
       Finder drawerFinder = find.byType(Drawer);
       await tester.pumpAndSettle();
-     final Finder signInBtn = find.byKey(const Key('btnSignIn'));
+      final Finder signInBtn = find.byKey(const Key('btnSignIn'));
       await tester.enterText(
           find.byKey(const Key('emailTextField')), 'raghav@gmail.com');
       await Future.delayed(const Duration(seconds: 2));
@@ -34,7 +34,6 @@ void main() {
       await tester.tap(find.byKey(const Key('yesSignOut')));
       await tester.pumpAndSettle();
       await Future.delayed(const Duration(seconds: 5));
-
     });
   });
 }
