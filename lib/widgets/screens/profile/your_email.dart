@@ -87,7 +87,6 @@ class _YourEmailState extends State<YourEmail> {
                             Navigator.of(context).pop();
                             await userProvider.updateUserData(
                                 email: emailController.text);
-
                           }
                         },
                         child: const Text('Save'))),

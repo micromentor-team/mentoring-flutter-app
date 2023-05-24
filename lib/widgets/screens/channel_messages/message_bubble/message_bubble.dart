@@ -49,7 +49,6 @@ class MessageBubble extends StatelessWidget {
   Widget _buildMessageStatus(isUser) {
     String? status;
     if (message.deletedAt != null) {
-
       if (isUser) {
         status = 'deleted';
       }
@@ -110,8 +109,9 @@ class MessageBubble extends StatelessWidget {
             : EdgeInsets.zero,
         child: SelectableLinkify(
           //  If the message is only emojis, we don't need the invisible character
-          text:
-              isEmoji ? message.messageText : '${message.messageText}                ',
+          text: isEmoji
+              ? message.messageText
+              : '${message.messageText}                ',
           //  Concatenating white space and an invisible character saves us from having to use a LayoutBuilder.
           //  The Text sees the invisible character, so it does not trim the extra whitespace we want to use for layout.
           //  When the Stack sees our addition, it paints our positioned sentAt widget (8 in this case) whitespaces
@@ -188,16 +188,17 @@ class MessageBubble extends StatelessWidget {
                             : Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  if(participants.length>2)
-                                  Text(
-                                    _participantName(userId: message.createdBy),
-                                    style: const TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 10.0,
-                                      color: Colors.grey,
+                                  if (participants.length > 2)
+                                    Text(
+                                      _participantName(
+                                          userId: message.createdBy),
+                                      style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10.0,
+                                        color: Colors.grey,
+                                      ),
                                     ),
-                                  ),
                                   _buildMessageStatus(isUser)
                                 ],
                               ),
@@ -239,16 +240,16 @@ class MessageBubble extends StatelessWidget {
                                   ),
                                   isUser
                                       ? (message.statuses!.isEmpty
-                                      ? const Icon(
-                                    Icons.check,
-                                    size: 10,
-                                    color: Colors.white,
-                                  )
-                                      : const Icon(
-                                    Icons.done_all,
-                                    size: 10,
-                                    color: Colors.white,
-                                  ))
+                                          ? const Icon(
+                                              Icons.check,
+                                              size: 10,
+                                              color: Colors.white,
+                                            )
+                                          : const Icon(
+                                              Icons.done_all,
+                                              size: 10,
+                                              color: Colors.white,
+                                            ))
                                       : const SizedBox(),
                                 ],
                               ),

@@ -6,6 +6,8 @@ WidgetbookUseCase basic() {
   return WidgetbookUseCase(
       name: 'Basic',
       builder: (context) {
-        return Center(child: messageButtonWidget(),);
+        return Center(
+          child: messageButtonWidget(),
+        );
       });
 }

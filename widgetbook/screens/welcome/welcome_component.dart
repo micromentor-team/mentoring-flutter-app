@@ -1,7 +1,7 @@
 import 'package:widgetbook/widgetbook.dart';
 import 'use_cases/welcome.dart';
 
-WidgetbookComponent welcomeComponent(){
+WidgetbookComponent welcomeComponent() {
   return WidgetbookComponent(name: 'Welcome', useCases: [
     welcome(),
   ]);

@@ -30,7 +30,7 @@ class Participant {
         invitedByUserHandle = json['invitedByUserHandle'] ?? '',
         userHandle = json['userHandle'],
         avtarUrl = json['photo'] ?? '',
-        participants = [User.fromJson(json['participants'])] ,
+        participants = [User.fromJson(json['participants'])],
         meetMe = json['meetMe'] ?? '';
 
   String get initials {

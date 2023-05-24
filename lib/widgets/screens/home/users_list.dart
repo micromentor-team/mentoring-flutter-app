@@ -116,8 +116,9 @@ class UsersList extends StatelessWidget {
             .where((item) => item['id'] != currentUser?.id)
             .toList();
         users = users.map((item) => User.fromJson(item)).toList();
-        users = users.where((element) =>
-            element.fullName.toLowerCase().contains(search?.toLowerCase()))
+        users = users
+            .where((element) =>
+                element.fullName.toLowerCase().contains(search?.toLowerCase()))
             .toList();
 
         return ListView.separated(

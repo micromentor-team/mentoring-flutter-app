@@ -5,9 +5,6 @@ import 'mentor_card/mentor_card_folder.dart';
 WidgetbookCategory organismsCategory() {
   return WidgetbookCategory(
     name: 'Organisms',
-    folders: [
-    searchContainerFolder(),
-      mentorCardFolder()
-    ],
+    folders: [searchContainerFolder(), mentorCardFolder()],
   );
 }
