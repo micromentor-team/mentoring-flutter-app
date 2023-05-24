@@ -24,5 +24,5 @@ in {
 
   name = "mm-flutter-app";
 
-  packages = with pkgs; [ act android-sdk ];
+  packages = with pkgs; [ act android-sdk pandoc ];
 }
