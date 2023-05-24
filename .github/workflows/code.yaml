@@ -1,0 +1,14 @@
+name: Tests and formatters
+on:
+- pull_request
+- push
+jobs:
+  dart-formatting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+    - name: See if formatting changes anything
+      run: dart format --set-exit-if-changed .
