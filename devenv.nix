@@ -8,6 +8,10 @@ let
   android-sdk      = android-comp.androidsdk;
   android-sdk-root = "${android-sdk}/libexec/android-sdk";
 in {
+  enterShell = ''
+    flutter config --android-sdk "${android-sdk-root}"
+  '';
+
   env = {
     ANDROID_HOME     = "${android-sdk-root}";
     ANDROID_SDK_ROOT = "${android-sdk-root}";
