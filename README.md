@@ -52,6 +52,12 @@ You may want to connect to the live backend:
     APP_GRAPHQL_URL="https://mm3-api.micromentor.org/mmdata/api/graphql"
     APP_SUBSCRIPTION_URL="wss://mm3-api.micromentor.org/mmdata/api/graphql"
 
+#### Enable git hooks
+
+Link contents of `.git-hooks` directory to `.git/hooks`:
+
+    `cd .git/hooks/ && ln -sfn ../../.git-hooks/* .`
+
 ### Build and run the app
 
 In Android Studio, select a target platform (Chrome web browser, Android Simulator, etc.) 
