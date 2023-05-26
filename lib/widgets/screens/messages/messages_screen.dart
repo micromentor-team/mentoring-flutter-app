@@ -27,7 +27,6 @@ class ChannelsScreen extends StatelessWidget {
 class ChannelsList extends StatelessWidget {
   const ChannelsList({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final channelsProvider = Provider.of<ChannelsProvider>(context);

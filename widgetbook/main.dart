@@ -11,6 +11,7 @@ import 'screens/screens.dart';
 import 'components/atoms/atoms.dart';
 import 'components/molecules/molecules.dart';
 import 'components/organisms/organisms.dart';
+
 void main() async {
   runApp(const HotreloadWidgetbook());
 }
@@ -22,9 +23,10 @@ class HotreloadWidgetbook extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ChannelsProvider>(create: (context)=>MockChannelProviders()),
-        ChangeNotifierProvider<MessagesProvider>(create: (context)=>MessagesMockProvider()),
-
+        ChangeNotifierProvider<ChannelsProvider>(
+            create: (context) => MockChannelProviders()),
+        ChangeNotifierProvider<MessagesProvider>(
+            create: (context) => MessagesMockProvider()),
         ChangeNotifierProvider<UserProvider>(
           create: (context) => UserMockProvider(),
         ),

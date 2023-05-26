@@ -120,8 +120,10 @@ class MessagesList extends StatelessWidget {
                   },
                 ),
               );
-            }else{
-              return const Center(child: Text('You have not any messages'),);
+            } else {
+              return const Center(
+                child: Text('You have not any messages'),
+              );
             }
           },
         );

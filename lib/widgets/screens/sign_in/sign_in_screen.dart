@@ -118,7 +118,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          TextFormFieldWidget(key: const Key('emailTextField'),
+                          TextFormFieldWidget(
+                              key: const Key('emailTextField'),
                               textController: emailController,
                               label: "Email Address",
                               validator: (value) {
@@ -138,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             height: mediaQuery.height * 0.01,
                           ),
                           TextFormFieldWidget(
-                            key: const Key('passwordTextField'),
+                              key: const Key('passwordTextField'),
                               textController: passwordController,
                               label: "Password",
                               validator: (value) {

@@ -28,5 +28,5 @@ class Message {
         updatedAt = json['updatedAt'],
         deletedAt = json['deletedAt'],
         replyToMessageId = json['replyToMessageId'],
-        statuses = json['statuses']??[];
+        statuses = json['statuses'] ?? [];
 }

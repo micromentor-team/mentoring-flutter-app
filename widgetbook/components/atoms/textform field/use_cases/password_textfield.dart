@@ -6,6 +6,9 @@ WidgetbookUseCase passwordTextField() {
   return WidgetbookUseCase(
       name: 'Password TextField',
       builder: (context) {
-        return Center(child: textFormFieldWidget(obscureText: true,label: 'Password Field'),);
+        return Center(
+          child:
+              textFormFieldWidget(obscureText: true, label: 'Password Field'),
+        );
       });
 }

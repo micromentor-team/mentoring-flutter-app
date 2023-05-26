@@ -5,12 +5,13 @@ import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mocktail/mocktail.dart';
 
-
 class UserMockProvider extends Mock implements UserProvider {
-
   @override
   User? get user {
-    return User(id: '640abd97587f51d992676942',fullName: "raghav yadav",userHandle: "raghav");
+    return User(
+        id: '640abd97587f51d992676942',
+        fullName: "raghav yadav",
+        userHandle: "raghav");
   }
 
   // Query builders
