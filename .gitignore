@@ -50,3 +50,5 @@ app.*.map.json
 devenv.local.nix
 .flutter/
 
+# Dependency directories
+node_modules/

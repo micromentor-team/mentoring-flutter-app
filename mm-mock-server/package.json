@@ -1,0 +1,22 @@
+{
+  "name": "mm-mock-server",
+  "version": "1.0.0",
+  "description": "Runs a GraphQL server that serves mock values using the MM backend schema.",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "ts-node src/server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@apollo/server": "^4.7.1",
+    "@faker-js/faker": "^8.0.1",
+    "@graphql-tools/mock": "^9.0.0",
+    "@graphql-tools/schema": "^10.0.0",
+    "apollo-server-core": "^3.12.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
