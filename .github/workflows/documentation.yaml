@@ -1,0 +1,19 @@
+name: Tests and formatters
+on:
+- pull_request
+jobs:
+  readme-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: docker://pandoc/core:2.17
+      with:
+        args: >-
+          --columns=80
+          --standalone
+          --from=gfm
+          --to=gfm
+          --output=README.pan.md
+          README.md
+    - name: Compare README.md with its regenerated version
+      run: diff README.md README.pan.md

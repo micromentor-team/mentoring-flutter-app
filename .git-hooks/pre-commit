@@ -6,3 +6,16 @@ if ! [ -x "$(command -v flutter)" ] &>/dev/null; then
 fi
 
 dart format .
+
+if ! [ -x "$(command -v pandoc)" ] &>/dev/null; then
+    echo "Please install pandoc at version 2.19"
+    exit 1
+fi
+
+pandoc \
+    --columns=80 \
+    --standalone \
+    --from=gfm \
+    --to=gfm \
+    --output=README.md \
+    README.md
