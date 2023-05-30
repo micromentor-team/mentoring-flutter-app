@@ -1,26 +1,34 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { addMocksToSchema, MockStore } from "@graphql-tools/mock";
+import { addMocksToSchema } from "@graphql-tools/mock";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { readFileSync } from "fs"
 import { join } from "path";
-import { mocks } from "./mocks"
-import { resolvers } from "./resolvers";
-
+import { MockServerState } from "./mocks/util/state";
+import { mockTypes } from "./mocks/types"
+import { mockQueries } from "./mocks/queries"
+import { mockMutations } from "./mocks/mutations"
 
 async function startApolloServer() {
+    // Obtain type definitions from the schema file.
     const typeDefs = readFileSync(join(__dirname, '../schema.graphql'), 'utf-8');
 
+    // The mock server state is used to simulate a stateful backend.
+    const serverState = new MockServerState();
+
+    // Add custom resolvers for selected queries and mutations.
     const schemaWithResolvers = makeExecutableSchema({
         typeDefs: typeDefs,
-        resolvers: resolvers,
+        resolvers: {
+            Query: mockQueries(serverState),
+            Mutation: mockMutations(serverState),
+        },
     });
 
-    const mockStore = new MockStore({ schema: schemaWithResolvers, mocks: mocks });    
-
+    // Add mocks for types not caught by the custom resolvers.
     const schemaWithResolversAndMocks = addMocksToSchema({
         schema: schemaWithResolvers,
-        store: mockStore,
+        mocks: mockTypes(serverState),
         preserveResolvers: true
     });
 
