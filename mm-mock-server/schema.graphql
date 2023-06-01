@@ -1,0 +1,1743 @@
+  type UserMetadata implements BaseModelMetadata {
+    totalTimeOnPlatform: Int!
+    updatedAt: DateTime
+    channelsMetadata: ChannelsUserMetadata!
+    groupsMetadata: GroupsUserMetadata!
+  }
+  
+  interface BaseModelMetadata {
+    updatedAt: DateTime
+  }
+  
+  """
+  The javascript 'Date' as string. Type represents date and time as the ISO Date string.
+  """
+  scalar DateTime
+  
+  type ChannelsUserMetadata {
+    mentoringSessionCount: Int!
+  }
+  
+  type GroupsUserMetadata {
+    groupCount: Int!
+    updatedAt: DateTime
+  }
+  
+  type GroupMembership implements IGroupMembership {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    groupId: ID!
+    groupIdent: String!
+    userId: ID!
+    roles: [GroupMembershipRole!]!
+  }
+  
+  interface IGroupMembership {
+    groupId: ID!
+    groupIdent: String!
+    userId: ID!
+    roles: [GroupMembershipRole!]!
+  }
+  
+  enum GroupMembershipRole {
+    admin
+    coordinator
+    moderator
+    owner
+  }
+  
+  type ModelEvent {
+    time: DateTime!
+    modelEventType: ModelEventType!
+    message: String!
+  }
+  
+  enum ModelEventType {
+    error
+    warning
+    info
+  }
+  
+  type MenteesGroupMembership implements IGroupMembership {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    groupId: ID!
+    groupIdent: String!
+    userId: ID!
+    roles: [GroupMembershipRole!]!
+    soughtExpertises: [String!]!
+    industry: String
+  }
+  
+  type MentorsGroupMembership implements IGroupMembership {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    groupId: ID!
+    groupIdent: String!
+    userId: ID!
+    roles: [GroupMembershipRole!]!
+    expertises: [String!]!
+    industries: [String!]!
+  }
+  
+  type Query {
+    myInbox(refresh: Boolean): UserInbox!
+    findUserById(id: String!): User!
+    findUserByIdent(options: FindUserByIdentOptions, identType: UserIdentType, ident: String!): User!
+    findUsers(options: FindObjectsOptions, match: UserInput, filter: UserListFilter): [User!]!
+    getAvailableUserHandleField(startValue: String!): User!
+    getAuthenticatedUser: User!
+    findUserDeviceById(id: String!): UserDevice!
+    findUserDevices(options: FindObjectsOptions, match: UserDeviceInput, filter: SidUserDeviceListFilter): [UserDevice!]!
+    findChannelInvitationById(id: String!): ChannelInvitation!
+    findChannelInvitationsForUser(options: FindObjectsOptions, userId: String!): [ChannelInvitation!]!
+    findPendingChannelInvitationsForUser(options: FindObjectsOptions, userId: String!): [ChannelInvitation!]!
+    findChannelById(id: String!): Channel!
+    findChannels(options: FindObjectsOptions, match: ChannelInput, filter: ChannelListFilter): [Channel!]!
+    findChannelsForUser(options: FindObjectsOptions, userId: String!): [Channel!]!
+    findChannelMessageById(id: String!): ChannelMessage!
+    findChannelMessages(options: FindObjectsOptions, match: ChannelMessageInput, filter: ChannelMessageListFilter): [ChannelMessage!]!
+    findChannelParticipantById(id: String!): ChannelParticipant!
+    findOptions(parentTextId: String, optionType: OptionType): [Option!]!
+    findOptionValues(language: Language, parentTextId: String, optionType: OptionType): [String!]!
+    apiVersion: String!
+    healthReport: SystemHealthReport!
+    findGroupMembershipById(id: String!): GroupMembership!
+    myGroupMemberships: [IGroupMembership!]!
+    findGroupMemberships(options: FindObjectsOptions, match: GroupMembershipInput, filter: GroupMembershipListFilter): [IGroupMembership!]!
+    findGroupById(id: String!): Group!
+    findGroups(options: FindObjectsOptions, match: GroupInput, filter: GroupListFilter): [Group!]!
+    getMm2Integration: Mm2Integration!
+    findMyActiveMultiStepAction: [SidMultiStepAction!]!
+    getMultiStepActionProgress(
+      """
+      The result will only contain the authToken, if you specify a valid confirmToken
+      """
+      confirmToken: String
+      actionId: String!
+    ): SidMultiStepActionProgress!
+  }
+  
+  type UserInbox {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    userId: ID!
+    channels: ChannelInbox
+  }
+  
+  type ChannelInbox {
+    userId: ID!
+    unseenMessages: [ChannelInboxItemMessage!]
+    pendingInvitations: [ChannelInboxItemInvitation!]
+    updatedAt: DateTime
+    updatedBy: ID
+  }
+  
+  type ChannelInboxItemMessage {
+    id: ID!
+    channelId: ID!
+    replyToMessageId: ID
+    channelMessageType: ChannelMessageType
+    messageText: String
+    senderUserHandle: String
+    senderFirstName: String
+    senderLastName: String
+    senderFullName: String
+    senderAvatarUrl: String
+    createdAt: DateTime!
+    createdBy: ID
+  }
+  
+  enum ChannelMessageType {
+    unset
+  }
+  
+  type ChannelInboxItemInvitation {
+    id: ID!
+    channelId: ID
+    messageText: String
+    status: ChannelInvitationStatus!
+    createdAt: DateTime!
+    createdBy: ID
+  }
+  
+  enum ChannelInvitationStatus {
+    created
+    accepted
+    declined
+    unset
+  }
+  
+  type User {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: UserMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    firstName: String
+    lastName: String
+    fullName: String
+    userHandle: String!
+    phoneNumber: String
+    phoneNumberUpdatedAt: DateTime
+    isPhoneNumberVerified: Boolean!
+    email: String
+    emailUpdatedAt: DateTime
+    isEmailVerified: Boolean!
+    gender: String
+    countryOfResidence: String
+    regionOfResidence: String
+    cityOfResidence: String
+    avatarUrl: String
+    authType: AuthType
+    tfaBackupCodes: String
+    passwordUpdatedAt: DateTime
+    preferredLanguage: String!
+    uiLanguage: String!
+    spokenLanguages: [String!]!
+    roles: [UserRole!]!
+    appFeatures: [AppFeature!]
+    source: String
+    timezone: String
+    preferences: UserPreferences
+    trustLevel: Int!
+    signedInAt: DateTime
+    signedOutAt: DateTime
+    latestActivityAt: DateTime
+    userDevices: [UserDevice!]!
+    companyId: ID!
+    groupIds: [ID!]!
+    parentGroupIds: [ID!]!
+    externalGroupIds: [ID!]!
+    groupMemberships: [IGroupMembership!]!
+    seeksHelp: Boolean!
+    offersHelp: Boolean!
+    mm2Id: String
+    syncedWithMm2At: DateTime
+    mm2PasswordHash: String
+    user: User!
+    latestUserDevice: UserDevice!
+    unreadInAppMessages: [Notification!]!
+    channels: [Channel!]!
+    channelInvitations: [ChannelInvitation!]!
+    channelParticipants: [ChannelParticipant!]!
+    groupMembers: [GroupMembership!]!
+    groups: [Group!]!
+    inbox: [UserInbox!]!
+  }
+  
+  enum AuthType {
+    none
+    oauth
+    token
+    hmac
+    saml
+  }
+  
+  enum UserRole {
+    admin
+    qa
+    test
+  }
+  
+  enum AppFeature {
+    testFeatures1
+    testFeatures2
+  }
+  
+  type UserPreferences {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    shareEmail: Boolean
+    sharePhoneNumber: Boolean
+    showWelcomeMessage: Boolean
+  }
+  
+  type UserDevice {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    userId: ID!
+    deviceUuid: String!
+    deviceType: String!
+    trusted: Boolean!
+    phoneNumber: String!
+    phoneNumberUpdatedAt: DateTime
+    isPhoneNumberVerified: Boolean!
+    brand: String!
+    model: String!
+    isTablet: Boolean!
+    screenWidth: Int!
+    screenHeight: Int!
+    os: String!
+    osVersion: String!
+    timezone: String!
+    ipAddress: String!
+    locale: String!
+    countryCode: String!
+    appVersion: String!
+    signedInAt: DateTime
+    signedOutAt: DateTime
+    sessionStartedAt: DateTime
+    sessionEndedAt: DateTime
+    authToken: String!
+    authTokenCreatedAt: DateTime
+    authTokenExpiresAt: DateTime
+    oAuthToken: String!
+    oAuthTokenExpiresAt: DateTime
+    oAuthProvider: String!
+    oAuthRefreshToken: String!
+    pushNotificationToken: String!
+    trustedAt: DateTime
+    uiLanguage: String!
+  }
+  
+  type Notification {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    templateId: ID!
+    toUserId: ID!
+    multiStepActionId: ID!
+    initiatorId: ID!
+    replyingToId: ID!
+    title: String!
+    messageText: String!
+    shortMessageText: String!
+    htmlMessage: String!
+    language: String!
+    appLink: String!
+    action0: AppAction
+    action1: AppAction
+    action2: AppAction
+    actionTaken: AppAction
+    sendEmail: Boolean!
+    sendInAppMessage: Boolean!
+    sendPushNotification: Boolean!
+    sendSms: Boolean!
+    emailSentAt: DateTime
+    inAppMessageSentAt: DateTime
+    inAppMessageReceivedAt: DateTime
+    pushNotificationSentAt: DateTime
+    smsSentAt: DateTime
+    emailSendReport: String!
+    pushNotificationSendReport: String!
+    smsSendReport: String!
+    sentMessagesCount: Int!
+    recipientInfo: NonMemberInfo
+    context: NotificationContext
+  }
+  
+  enum AppAction {
+    editProfile
+    updateApp
+    unset
+  }
+  
+  type NonMemberInfo {
+    firstName: String
+    lastName: String
+    email: String
+    phoneNumber: String
+  }
+  
+  type NotificationContext {
+    fromUserId: String
+    fromUserFirstName: String
+    fromUserLastName: String
+    fromUserFullName: String
+    fromUserEmail: String
+    fromUserPhoneNumber: String
+    toUserId: String
+    toUserFirstName: String
+    toUserLastName: String
+    toUserFullName: String
+    toUserEmail: String
+    toUserPhoneNumber: String
+    appLink: String
+    confirmToken: String
+  }
+  
+  type Channel {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    name: String
+    topic: String
+    description: String
+    tags: [String!]
+    channelType: ChannelType!
+    channelStatus: ChannelStatus!
+    userIds: [ID!]
+    pausedAt: DateTime
+    pausedBy: ID
+    archivedAt: DateTime
+    archivedBy: ID
+    assumedMentorId: ID
+    mm2Id: String
+    syncedWithMm2At: DateTime
+    creator: User!
+    invitations: [ChannelInvitation!]!
+    messages: [ChannelMessage!]!
+    participants: [ChannelParticipant!]!
+    pendingInvitations: [ChannelInvitation!]!
+  }
+  
+  enum ChannelType {
+    unset
+    mentoring
+  }
+  
+  enum ChannelStatus {
+    unset
+    active
+    paused
+    archived
+  }
+  
+  type ChannelInvitation {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    channelId: ID!
+    senderId: ID!
+    recipientId: ID!
+    channelName: String
+    channelTopic: String
+    messageText: String
+    status: ChannelInvitationStatus!
+    channel: Channel!
+    recipient: User!
+    sender: User!
+  }
+  
+  type ChannelMessage {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: ChannelMessageMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    channelId: ID!
+    replyToMessageId: ID
+    channelMessageType: ChannelMessageType
+    messageText: String
+    statuses: [ChannelMessageStatus!]
+    editedAt: DateTime
+    mm2Id: String
+    syncedWithMm2At: DateTime
+    channel: Channel!
+    sender: User!
+  }
+  
+  type ChannelMessageMetadata {
+    senderUserHandle: String
+    senderFirstName: String
+    senderLastName: String
+    senderFullName: String
+    senderAvatarUrl: String
+  }
+  
+  type ChannelMessageStatus {
+    userId: ID!
+    receivedAt: DateTime
+    seenAt: DateTime
+  }
+  
+  type ChannelParticipant {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    channelId: ID!
+    userId: ID!
+    invitedBy: ID!
+    channelName: String
+    role: ChannelParticipantRole
+    channel: Channel!
+    user: User!
+  }
+  
+  enum ChannelParticipantRole {
+    owner
+    admin
+    moderator
+    unset
+  }
+  
+  type Group {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    parentGroupId: ID
+    mm2Id: String
+    matchingEngineId: ID
+    name: String!
+    shortName: String!
+    ident: String!
+    slug: String
+    description: String
+    planType: String
+    isMm2Organization: Boolean
+    embedded: Boolean!
+    syncedWithMm2At: DateTime
+  }
+  
+  input FindUserByIdentOptions {
+    includeDeleted: Boolean
+    includeGroupProfiles: [String!]
+  }
+  
+  enum UserIdentType {
+    any
+    authToken
+    email
+    id
+    phoneNumber
+    userHandle
+  }
+  
+  input FindObjectsOptions {
+    limit: Int
+    sort: String
+    skip: Int
+    timeout: Boolean
+    tailable: Boolean
+    awaitData: Boolean
+    batchSize: Int
+    returnKey: Boolean
+    maxTimeMS: Int
+    maxAwaitTimeMS: Int
+    noCursorTimeout: Boolean
+    singleBatch: Boolean
+    allowPartialResults: Boolean
+    showRecordId: Boolean
+    includeDeleted: Boolean
+  }
+  
+  input UserInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    firstName: String
+    lastName: String
+    fullName: String
+    userHandle: String
+    phoneNumber: String
+    phoneNumberUpdatedAt: String
+    isPhoneNumberVerified: Boolean! = false
+    email: String
+    emailUpdatedAt: String
+    isEmailVerified: Boolean! = false
+    gender: String
+    countryOfResidence: String
+    regionOfResidence: String
+    cityOfResidence: String
+    avatarUrl: String
+    authType: AuthType
+    currentPassword: String
+    newPassword: String
+    tfaBackupCodes: String
+    passwordUpdatedAt: String
+    preferredLanguage: String
+    uiLanguage: String
+    spokenLanguages: [String!]! = []
+    roles: [UserRole!]! = []
+    appFeatures: [AppFeature!]
+    source: String
+    timezone: String
+    preferences: UserPreferencesInput
+    trustLevel: Int! = 1
+    signedInAt: String
+    signedOutAt: String
+    latestActivityAt: String
+    addToGroupIds: [String!]
+    removeFromGroupIds: [String!]
+    companyId: ID
+    seeksHelp: Boolean
+    offersHelp: Boolean
+    mm2Id: String
+    syncedWithMm2At: String
+    mm2PasswordHash: String
+  }
+  
+  input ModelEventInput {
+    time: DateTime! = "2023-05-18T08:02:33.143Z"
+    modelEventType: ModelEventType! = info
+    message: String! = ""
+  }
+  
+  input BaseModelMetadataInput {
+    updatedAt: DateTime
+  }
+  
+  input UserPreferencesInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    shareEmail: Boolean
+    sharePhoneNumber: Boolean
+    showWelcomeMessage: Boolean
+  }
+  
+  input UserListFilter {
+    ids: [String!]
+    searchText: String
+    caseSensitive: Boolean
+    textSearchFields: [String!]
+    createdAtFrom: String
+    createdAtUntil: String
+    updatedAtFrom: String
+    updatedAtUntil: String
+    roles: [UserRole!]
+    syncedWithMm2: Boolean
+  }
+  
+  input UserDeviceInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    userId: ID
+    deviceUuid: String
+    deviceType: String
+    trusted: Boolean
+    phoneNumber: String
+    phoneNumberUpdatedAt: String
+    isPhoneNumberVerified: Boolean
+    brand: String
+    model: String
+    isTablet: Boolean
+    screenWidth: Int
+    screenHeight: Int
+    os: String
+    osVersion: String
+    timezone: String
+    ipAddress: String
+    locale: String
+    countryCode: String
+    appVersion: String
+    signedInAt: String
+    signedOutAt: String
+    sessionStartedAt: String
+    sessionEndedAt: String
+    authToken: String
+    authTokenCreatedAt: String
+    authTokenExperiesAt: String
+    oAuthToken: String
+    oAuthTokenExpiresAt: String
+    oAuthProvider: String
+    oAuthRefreshToken: String
+    pushNotificationToken: String
+    trustedAt: String
+    uiLanguage: String
+  }
+  
+  input SidUserDeviceListFilter {
+    ids: [String!]
+    searchText: String
+    caseSensitive: Boolean
+    textSearchFields: [String!]
+    createdAtFrom: String
+    createdAtUntil: String
+    updatedAtFrom: String
+    updatedAtUntil: String
+  }
+  
+  input ChannelInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    name: String
+    topic: String
+    description: String
+    tags: [String!]
+    channelType: ChannelType
+    channelStatus: ChannelStatus
+    userIds: [ID!]
+    inviteUserIds: [ID!]
+    pausedAt: String
+    pausedBy: ID
+    archivedAt: String
+    archivedBy: ID
+    assumedMentorId: ID
+    mm2Id: String
+    syncedWithMm2At: String
+  }
+  
+  input ChannelListFilter {
+    ids: [String!]
+    searchText: String
+    caseSensitive: Boolean
+    textSearchFields: [String!]
+    createdAtFrom: String
+    createdAtUntil: String
+    updatedAtFrom: String
+    updatedAtUntil: String
+  }
+  
+  input ChannelMessageInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    channelId: ID
+    replyToMessageId: ID
+    channelMessageType: ChannelMessageType
+    messageText: String
+    statuses: [ChannelMessageStatusInput!]
+    editedAt: String
+    mm2Id: String
+    syncedWithMm2At: DateTime
+  }
+  
+  input ChannelMessageStatusInput {
+    userId: ID
+    receivedAt: String
+    seenAt: String
+  }
+  
+  input ChannelMessageListFilter {
+    ids: [String!]
+    searchText: String
+    caseSensitive: Boolean
+    textSearchFields: [String!]
+    createdAtFrom: String
+    createdAtUntil: String
+    updatedAtFrom: String
+    updatedAtUntil: String
+    channelId: ID
+    receiverUserId: ID
+    replyToMessageId: ID
+    includeChannelMessageType: [ChannelMessageType!]
+    received: Boolean
+    seen: Boolean
+  }
+  
+  type Option {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    textId: String!
+    parentTextId: String
+    isParent: Boolean
+    optionType: OptionType!
+    value: String!
+    translatedValue: String
+    mm2Id: String
+    childOptions: [Option!]!
+  }
+  
+  enum OptionType {
+    expertise
+    industry
+    gender
+    unset
+  }
+  
+  enum Language {
+    en
+    es
+    id
+  }
+  
+  """Server health report"""
+  type SystemHealthReport {
+    environment: String!
+    ok: Boolean!
+    db: Boolean!
+    email: Boolean!
+    redis: Boolean!
+    pushNotifications: Boolean!
+    sms: Boolean!
+    messageBus: Boolean!
+  }
+  
+  input GroupMembershipInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    groupId: ID
+    userId: ID
+    roles: [GroupMembershipRole!]! = []
+  }
+  
+  input GroupMembershipListFilter {
+    ids: [String!]
+    searchText: String
+    caseSensitive: Boolean
+    textSearchFields: [String!]
+    createdAtFrom: String
+    createdAtUntil: String
+    updatedAtFrom: String
+    updatedAtUntil: String
+    userId: ID
+    embedded: Boolean
+    roles: [GroupMembershipRole!]
+  }
+  
+  input GroupInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    parentGroupId: ID
+    mm2Id: String
+    matchingEngineId: ID
+    name: String
+    shortName: String
+    ident: String
+    slug: String
+    description: String
+    planType: String
+    isMm2Organization: Boolean
+    embedded: Boolean! = false
+    syncedWithMm2At: String
+  }
+  
+  input GroupListFilter {
+    ids: [String!]
+    searchText: String
+    caseSensitive: Boolean
+    textSearchFields: [String!]
+    createdAtFrom: String
+    createdAtUntil: String
+    updatedAtFrom: String
+    updatedAtUntil: String
+    embedded: Boolean
+    syncedWithMm2: Boolean
+  }
+  
+  type Mm2Integration {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    fullSyncAt: DateTime
+  }
+  
+  type SidMultiStepAction {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    userId: ID!
+    userIdent: String
+    userHandle: String
+    email: String
+    phoneNumber: String
+    deviceUuid: String
+    actionType: MultiStepActionType!
+    actionStatus: MultiStepActionStatus!
+    notificationMethod: NotificationMethod!
+    result: MultiStepActionResult!
+    confirmToken: String
+    attemptCount: Int!
+    notificationSentAt: DateTime
+    notificationResult: String
+    notificationId: String
+    textData: String
+    report: String
+    authToken: String
+    authTokenExpiresAt: DateTime
+    emailPassed: Boolean
+    emailUpdatedAt: DateTime
+    emailVerifiedAt: DateTime
+    errors: [MultiStepActionError!]
+    password: String
+    passwordPassed: Boolean
+    passwordResettedAt: DateTime
+    passwordUpdatedAt: DateTime
+    phoneNumberPassed: Boolean
+    phoneNumberUpdatedAt: DateTime
+    phoneNumberVerifiedAt: DateTime
+    signedInAt: DateTime
+    tfaBackupCodes: String
+    expiresAt: DateTime
+  }
+  
+  enum MultiStepActionType {
+    resetPassword
+    tokenSignIn
+    unset
+    updateEmail
+    updatePassword
+    updatePhoneNumber
+    verifyEmail
+    verifyPhoneNumber
+    verifyPhoneSignupOnSignup
+    welcome
+  }
+  
+  enum MultiStepActionStatus {
+    created
+    started
+    notificationSent
+    notificationFailed
+    finished
+    expired
+  }
+  
+  enum NotificationMethod {
+    off
+    auto
+    email
+    sms
+    pushNotification
+    inAppNotification
+  }
+  
+  enum MultiStepActionResult {
+    ok
+    confirmTokenMismatch
+    dataValidationFailed
+    deviceNotFound
+    error
+    emailMismatch
+    emailNotVerified
+    invalidEmail
+    invalidPhoneNumber
+    missingEmail
+    missingPhoneNumber
+    notFound
+    phoneNumberMismatch
+    phoneNumberNotVerified
+    passed
+    systemError
+    userNotFound
+    userFailedValidation
+    userNotSignedIn
+    passwordUpdated
+    passwordMismatch
+    unset
+  }
+  
+  type MultiStepActionError {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    key: String!
+    messageId: String!
+    message: String!
+  }
+  
+  type SidMultiStepActionProgress {
+    actionId: ID!
+    userId: ID!
+    actionType: MultiStepActionType!
+    actionStatus: MultiStepActionStatus
+    notificationMethod: NotificationMethod
+    result: MultiStepActionResult!
+    attemptCount: Int!
+    notificationSentAt: DateTime
+    notificationResult: String!
+    notificationId: String!
+    textData: String
+    report: String
+    emailPassed: Boolean
+    emailUpdatedAt: DateTime
+    emailVerifiedAt: DateTime
+    errors: [MultiStepActionError!]
+    authToken: String
+    authTokenExpiresAt: DateTime
+    passwordPassed: Boolean
+    passwordResettedAt: DateTime
+    passwordUpdatedAt: DateTime
+    phoneNumberPassed: Boolean
+    phoneNumberUpdatedAt: DateTime
+    phoneNumberVerifiedAt: DateTime
+    signedInAt: DateTime
+    expiresAt: DateTime
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+  }
+  
+  type Mutation {
+    signInUser(input: UserSignInInput!): UserAuthResponse!
+    signMeOut: String!
+    signUpUser(input: UserSignUpInput!): UserAuthResponse!
+    deleteUser(deletePhysically: Boolean!, userId: String!): String!
+    updateUser(input: UserInput!): String!
+    createUserDevice(input: UserDeviceInput!): UserDevice!
+    updateUserDevice(input: UserDeviceInput!): String!
+    createChannelInvitation(input: ChannelInvitationInput!): ChannelInvitation!
+    deleteChannelInvitation(deletePhysically: Boolean!, channelInvitationId: String!): String!
+    updateChannelInvitation(input: ChannelInvitationInput!): String!
+    createChannel(input: ChannelInput!): Channel!
+    deleteChannel(deletePhysically: Boolean!, channelId: String!): String!
+    markChannelMessagesAsSeenByMe(channelId: String!): String!
+    updateChannel(input: ChannelInput!): String!
+    addChannelMessageEvent(input: BgAddChannelMessageEventInput!): String!
+    createChannelMessage(input: ChannelMessageInput!): ChannelMessage!
+    deleteChannelMessage(deletePhysically: Boolean!, channelMessageId: String!): String!
+    updateChannelMessage(input: ChannelMessageInput!): String!
+    createChannelParticipant(input: ChannelParticipantInput!): ChannelParticipant!
+    deleteChannelParticipant(deletePhysically: Boolean!, channelParticipantId: String!): String!
+    updateChannelParticipant(input: ChannelParticipantInput!): String!
+    createGroupMembership(input: GroupMembershipInput!): ServiceRequest!
+    createMenteesGroupMembership(input: MenteesGroupMembershipInput!): ServiceRequest!
+    createMentorsGroupMembership(input: MentorsGroupMembershipInput!): ServiceRequest!
+    deleteGroupMembership(deletePhysically: Boolean!, groupMembershipId: String!): String!
+    updateGroupMembership(input: GroupMembershipInput!): ServiceRequest!
+    addUserToGroup(roles: [GroupMembershipRole!]!, groupId: String!, userId: String!): ServiceRequest!
+    createGroup(input: GroupInput!): Group!
+    deleteGroup(deletePhysically: Boolean!, groupId: String!): ServiceRequest!
+    removeUserFromGroup(force: Boolean!, groupId: String!, userId: String!): String!
+    updateGroup(input: GroupInput!): ServiceRequest!
+    createNotification(notificationInput: NotificationInput!): Notification!
+    deleteNotification(deletePhysically: Boolean!, notificationId: String!): String!
+    markInAppMessageReceived(actionTaken: AppAction!, notificationId: String!): String!
+    sendMultiStepActionNotification(input: SendMultiStepActionNotificationInput!): String!
+    updateNotification(notificationInput: NotificationInput!): String!
+    createNotificationTemplate(notificationTemplateInput: NotificationTemplateInput!): NotificationTemplate!
+    deleteNotificationTemplate(deletePhysically: Boolean!, notificationTemplateId: String!): String!
+    updateNotificationTemplate(notificationTemplateInput: NotificationTemplateInput!): String!
+    clearAllSyncInfo(includeMm3: Boolean!, includeMm2: Boolean!): Mm2Synchronization!
+    createMm2Synchronization(input: Mm2SynchronizationInput!): Mm2Synchronization!
+    runMm2Synchronization(id: String!): Mm2Synchronization!
+    createMultiStepAction(input: SidMultiStepActionInput!): SidMultiStepActionProgress!
+    startResetPassword(deviceUuid: String!, input: UserIdentInput!): SidMultiStepActionProgress!
+    startVerifyEmail(email: String!): SidMultiStepActionProgress!
+    startVerifyPhoneNumber(phoneNumber: String): SidMultiStepActionProgress!
+    verifyMultiStepActionToken(input: VerifyMultiStepActionTokenInput!): SidMultiStepActionProgress!
+  }
+  
+  """API response to userSignIn/userSignOut"""
+  type UserAuthResponse {
+    userId: String!
+    deviceId: String!
+    deviceUuid: String!
+    authToken: String!
+    authTokenExpiresAt: DateTime
+  }
+  
+  """User sign in input data"""
+  input UserSignInInput {
+    ident: String
+    identType: UserIdentType
+    deviceUuid: String
+    password: String
+  }
+  
+  """User sign up input data"""
+  input UserSignUpInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    firstName: String
+    lastName: String
+    fullName: String
+    userHandle: String
+    email: String
+    phoneNumber: String
+    password: String
+    source: String
+    deviceUuid: String! = ""
+    timezone: String
+    pushNotificationToken: String
+    checkAvailable: Boolean! = true
+  }
+  
+  input ChannelInvitationInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    channelId: ID
+    senderId: ID
+    recipientId: ID
+    channelName: String
+    channelTopic: String
+    messageText: String
+    status: ChannelInvitationStatus
+  }
+  
+  input BgAddChannelMessageEventInput {
+    channelId: ID! = ""
+    messageIds: [ID!]! = []
+    recipientId: ID! = ""
+    event: ChannelMessageEvent! = unset
+  }
+  
+  enum ChannelMessageEvent {
+    received
+    seen
+    unset
+  }
+  
+  input ChannelParticipantInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    channelId: ID
+    userId: ID
+    invitedBy: ID
+    channelName: String
+    role: ChannelParticipantRole
+  }
+  
+  type ServiceRequest {
+    id: ID!
+    serviceRequestType: ServiceRequestType!
+    userId: ID
+    userRoles: [UserRole!]
+    objectIds: [ID!]
+    modelTypes: [ModelType!]
+    result: ServiceRequestResult!
+    messageIds: [ServiceRequestMessageId!]
+    message: String
+    errorCode: ErrorCode
+    events: [ModelEvent!]
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    expiresAt: DateTime
+  }
+  
+  enum ServiceRequestType {
+    createGroup
+    createGroupMembership
+    deleteGroup
+    deleteGroupMembership
+    removeUserFromAllGroups
+    updateGroup
+    updateGroupMembership
+    unset
+  }
+  
+  enum ModelType {
+    Company
+    MentorBoard
+    MentoringSession
+    UserInbox
+    UserMetadata
+    UserPreferences
+    BackgroundTask
+    Channel
+    ChannelInbox
+    ChannelInvitation
+    ChannelMessage
+    ChannelParticipant
+    Option
+    AppliedGroupRule
+    Group
+    GroupMembership
+    GroupRule
+    Match
+    MatchProfile
+    MatchingEngine
+    Notification
+    NotificationTemplate
+    Mm2Integration
+    Mm2Synchronization
+    MultiStepAction
+    ServiceRequest
+    User
+    UserDevice
+  }
+  
+  enum ServiceRequestResult {
+    ok
+    error
+    unset
+  }
+  
+  enum ServiceRequestMessageId {
+    systemError
+    invalidInput
+    groupRuleFailed
+    unknown
+  }
+  
+  enum ErrorCode {
+    companyNameMissing
+    companyNameTaken
+    alreadyGroupMember
+    groupLevelTooDeep
+    groupNameMissing
+    groupNameTaken
+    groupNotActive
+    groupRuleFailed
+    groupSlugMissing
+    groupSlugTaken
+    notAGroupMember
+    parentGroupNotFound
+    matchingEngineNameMissing
+    matchingEngineNameTaken
+    alreadyExists
+    alreadyInitialized
+    dataValidationFailed
+    exceedsLimit
+    invalidInput
+    noLiveWebsocketConnectionAvailable
+    noNotificationMethodAvailable
+    notFound
+    notImplemented
+    notInitialized
+    notSupported
+    serviceNotAvailable
+    systemError
+    timeout
+    tooManyRequests
+    unknown
+    unauthorized
+    userAlreadyExists
+    userDeviceNotFound
+    userNotActive
+    userNotFound
+    passwordNoMatch
+    phoneNumberNotSupported
+    currentPasswordIncorrect
+    currentPasswordMissing
+    invalidPhoneNumber
+    invalidPushNotificationToken
+    authTokenNoMatch
+  }
+  
+  input MenteesGroupMembershipInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    groupId: ID
+    userId: ID
+    roles: [GroupMembershipRole!]! = []
+    soughtExpertises: [String!]! = []
+    industry: String
+  }
+  
+  input MentorsGroupMembershipInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    groupId: ID
+    userId: ID
+    roles: [GroupMembershipRole!]! = []
+    expertises: [String!]! = []
+    industries: [String!]! = []
+  }
+  
+  input NotificationInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    templateId: ID
+    templateName: ID
+    toUserId: ID
+    multiStepActionId: ID
+    initiatorId: ID
+    replyingToId: ID
+    title: String
+    messageText: String
+    shortMessageText: String
+    htmlMessage: String
+    language: String
+    appLink: String
+    action0: AppAction
+    action1: AppAction
+    action2: AppAction
+    actionTaken: AppAction
+    sendEmail: Boolean
+    sendInAppMessage: Boolean
+    sendPushNotification: Boolean
+    sendSms: Boolean
+    emailSentAt: String
+    inAppMessageSentAt: String
+    inAppMessageReceivedAt: String
+    pushNotificationSentAt: String
+    smsSentAt: String
+    emailSendReport: String
+    pushNotificationSendReport: String
+    smsSendReport: String
+    sentMessagesCount: Int
+    recipientInfo: NonMemberInfoInput
+    context: NotificationInput
+  }
+  
+  input NonMemberInfoInput {
+    firstName: String
+    lastName: String
+    email: String
+    phoneNumber: String
+  }
+  
+  input SendMultiStepActionNotificationInput {
+    actionId: String! = ""
+    notificationMethod: NotificationMethod
+  }
+  
+  type NotificationTemplate {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    name: NotificationTemplateName!
+    description: String!
+    titleEn: String!
+    messageTextEn: String!
+    shortMessageTextEn: String!
+    htmlMessageEn: String!
+    version: String!
+    senderName: String
+    senderEmail: String
+    action0: AppAction
+    action1: AppAction
+    action2: AppAction
+    sendEmail: Boolean!
+    sendInAppMessage: Boolean!
+    sendPushNotification: Boolean!
+    sendSms: Boolean!
+    isCore: Boolean!
+  }
+  
+  enum NotificationTemplateName {
+    unset
+    tfa
+    welcome
+  }
+  
+  input NotificationTemplateInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    templateId: ID
+    name: NotificationTemplateName
+    description: String
+    titleEn: String
+    messageTextEn: String
+    shortMessageTextEn: String
+    htmlMessageEn: String
+    version: String
+    senderName: String
+    senderEmail: String
+    action0: AppAction
+    action1: AppAction
+    action2: AppAction
+    sendEmail: Boolean
+    sendInAppMessage: Boolean
+    sendPushNotification: Boolean
+    sendSms: Boolean
+    isCore: Boolean
+  }
+  
+  type Mm2Synchronization {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    direction: Mm2SyncDirection!
+    objectId: String
+    mm2ModelType: Mm2ModelType
+    syncMode: Mm2SynchronizationMode!
+    autorun: Boolean!
+    progress: Int!
+    totalItemCount: Int!
+    skip: Int
+    limit: Int
+    result: Mm2SynchronizationResult
+    usersSinceUpdatedAt: String
+    previousSyncAt: DateTime
+    startedAt: DateTime
+    finishedAt: DateTime
+  }
+  
+  enum Mm2SyncDirection {
+    mm2ToMm3
+    mm3ToMm2
+  }
+  
+  enum Mm2ModelType {
+    Community
+    Organization
+    Conversation
+    Message
+    User
+  }
+  
+  enum Mm2SynchronizationMode {
+    full
+    incremental
+    updated
+  }
+  
+  type Mm2SynchronizationResult {
+    items: [Mm2SynchronizationResultItem!]!
+    error: String
+  }
+  
+  type Mm2SynchronizationResultItem {
+    modelType: ModelType
+    mm2ModelType: Mm2ModelType
+    objectId: String!
+    mm2ObjectId: String!
+    name: String
+    operation: SyncActionTaken!
+    error: String
+  }
+  
+  enum SyncActionTaken {
+    created
+    updated
+    deleted
+    skipped
+    unset
+  }
+  
+  input Mm2SynchronizationInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    direction: Mm2SyncDirection! = mm2ToMm3
+    objectId: String
+    mm2ModelType: Mm2ModelType
+    syncMode: Mm2SynchronizationMode! = full
+    skip: Int
+    limit: Int
+    autorun: Boolean! = true
+    usersSinceUpdatedAt: String
+  }
+  
+  input SidMultiStepActionInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    userId: ID
+    userIdent: String
+    userHandle: String
+    email: String
+    phoneNumber: String
+    deviceUuid: String
+    actionType: MultiStepActionType
+    actionStatus: MultiStepActionStatus
+    notificationMethod: NotificationMethod
+    result: MultiStepActionResult
+    confirmToken: String
+    attemptCount: Int
+    notificationSentAt: String
+    notificationResult: String
+    notificationId: String
+    textData: String
+    report: String
+    authToken: String
+    emailPassed: Boolean
+    emailUpdatedAt: String
+    emailVerifiedAt: String
+    errors: [MultiStepActionErrorInput!]
+    password: String
+    passwordPassed: Boolean
+    passwordResettedAt: String
+    passwordUpdatedAt: String
+    phoneNumberPassed: Boolean
+    phoneNumberUpdatedAt: String
+    phoneNumberVerifiedAt: String
+    signedInAt: String
+    tfaBackupCodes: String
+    expiresAt: String
+  }
+  
+  input MultiStepActionErrorInput {
+    id: ID
+    adminNotes: String
+    events: [ModelEventInput!]
+    metadata: BaseModelMetadataInput
+    createdAt: DateTime
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+    key: String
+    messageId: String
+    message: String
+  }
+  
+  input UserIdentInput {
+    userId: String
+    userIdent: String
+    userHandle: String
+    email: String
+    phoneNumber: String
+  }
+  
+  input VerifyMultiStepActionTokenInput {
+    actionId: String! = ""
+    token: String! = ""
+    newPassword: String
+  }
+  
+  type Subscription {
+    objectChanged(objectId: ID! = "", ownerUserId: ID): ObjectChangedEvent!
+  }
+  
+  type ObjectChangedEvent {
+    serviceRequest: ServiceRequest!
+    objectId: ID!
+    modelType: ModelType!
+    ownerUserId: ID
+    messageType: ObjectChangedEventType!
+    requestId: String
+    object: BaseModel
+  }
+  
+  enum ObjectChangedEventType {
+    created
+    updated
+    deleted
+  }
+  
+  type BaseModel {
+    id: ID!
+    adminNotes: String
+    events: [ModelEvent!]
+    metadata: BaseModelMetadata
+    createdAt: DateTime!
+    createdBy: ID
+    updatedAt: DateTime
+    updatedBy: ID
+    deletedAt: DateTime
+    deletedBy: ID
+  }
