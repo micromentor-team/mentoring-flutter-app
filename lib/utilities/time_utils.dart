@@ -1,5 +1,3 @@
-import '../dart_extensions/date_time_extensions.dart';
-
 class TimeUtils {
   static DateTime nearestTimeIteration(DateTime time, int iterationInMinutes) {
     int hour = time.hour;
@@ -18,7 +16,7 @@ class TimeUtils {
       minutes = 0;
     }
 
-    return time.clone(
+    return time.copyWith(
       hour: hour,
       minute: minutes,
       second: 0,
