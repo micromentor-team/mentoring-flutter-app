@@ -70,16 +70,6 @@ class Profile extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            SizedBox(
-              height: 35,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Edit photo'),
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
             ListTile(
               title: const Text(
                 "Name",
