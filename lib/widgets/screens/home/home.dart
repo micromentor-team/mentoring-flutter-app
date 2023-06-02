@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
+              const Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,29 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Start a Conversation',
                             style: TextStyle(
                                 fontSize: 27, color: Colors.deepPurple),
                           ),
-                          Row(
-                            children: [
-                              const Text(
-                                'For tips on getting started, ',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              GestureDetector(
-                                  child: const Text('click here.',
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.blue))),
-                            ],
-                          )
                         ],
                       ),
-                      const Icon(
-                        Icons.edit_document,
-                        size: 30,
-                      )
                     ],
                   ),
                 ],
@@ -79,9 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Column(
                 children: [
-                  Users(
-                    search: searchValue,
-                  ),
+                  Users(searchValue),
                 ],
               ),
             ],
