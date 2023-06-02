@@ -8,10 +8,11 @@ import '../../../data/models/user/user.dart';
 import '../channel_messages/channel_messages.dart';
 
 class MessagesList extends StatelessWidget {
-  const MessagesList({Key? key, required this.user, required this.channels})
-      : super(key: key);
   final User user;
   final List channels;
+
+  const MessagesList({Key? key, required this.user, required this.channels})
+      : super(key: key);
 
   String _channelName(Channel channel) {
     final participant =
@@ -59,66 +60,38 @@ class MessagesList extends StatelessWidget {
             Channel channel = channels[index];
             debugPrint('show channel');
             if (channel.participants.length > 1) {
-              for (var item in channel.participants) {
-                debugPrint('participant name ${item.fullName} id: ${item.id}');
-              }
-              // final participant = channel.participants
-              //     .firstWhere((item) => item.id != user?.id);
-              // final channelName = participant.fullName;
-
               final channelName = _channelName(channel);
               final channelAvatarUrl = _channelAvatarUrl(channel);
               final channelUnseenMessages =
                   _channelUnseenMessage(unseenMessages, channel);
 
-              return Dismissible(
-                background: Container(
-                  color: Colors.red,
-                ),
-                onDismissed: (direction) async {
-                  // ScaffoldMessenger.of(context)
-                  //     .showSnackBar(SnackBar(content: Text(channelName)));
-                  // await channelProvider.deleteChannel(channel: channels[index]);
-                  // setState(() {});
+              return ListTile(
+                dense: true,
+                leading: CircleAvatar(
+                    radius: 45,
+                    child: ClipOval(
+                      child: channelAvatarUrl.isNotEmpty
+                          ? Image(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(channelAvatarUrl))
+                          : const Icon(Icons.account_circle),
+                    )),
+                title: Text(channelName, style: const TextStyle(fontSize: 18)),
+                trailing: channelUnseenMessages.isNotEmpty
+                    ? Badge(
+                        label: Center(
+                            child:
+                                Text(channelUnseenMessages.length.toString())),
+                        backgroundColor: Colors.green,
+                        alignment: AlignmentDirectional.center,
+                      )
+                    : const SizedBox(),
+                onTap: () {
+                  _openChannelMessages(
+                    context: context,
+                    channelId: channel.id,
+                  );
                 },
-                key: Key(channel.id),
-                child: ListTile(
-                  dense: true,
-                  leading: CircleAvatar(
-                      radius: 45,
-                      child: ClipOval(
-                        child: channelAvatarUrl.isNotEmpty
-                            ? Image(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(channelAvatarUrl))
-                            : const Icon(Icons.account_circle),
-                      )),
-                  title:
-                      Text(channelName, style: const TextStyle(fontSize: 18)),
-                  // subtitle: channel.messages.isNotEmpty
-                  //     ? Text(
-                  //         channels[index].messages.last['messageText'],
-                  //         style: const TextStyle(color: Colors.grey),
-                  //         maxLines: 1,
-                  //         overflow: TextOverflow.ellipsis,
-                  //       )
-                  //     : const SizedBox(),
-                  trailing: channelUnseenMessages.isNotEmpty
-                      ? Badge(
-                          label: Center(
-                              child: Text(
-                                  channelUnseenMessages.length.toString())),
-                          backgroundColor: Colors.green,
-                          alignment: AlignmentDirectional.center,
-                        )
-                      : const SizedBox(),
-                  onTap: () {
-                    _openChannelMessages(
-                      context: context,
-                      channelId: channel.id,
-                    );
-                  },
-                ),
               );
             } else {
               return const Center(

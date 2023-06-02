@@ -7,7 +7,7 @@ import '../../../data/models/user/user_provider.dart';
 import 'messages_list.dart';
 
 class ChannelsScreen extends StatelessWidget {
-  const ChannelsScreen({Key? key}) : super(key: key);
+  const ChannelsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ChannelsScreen extends StatelessWidget {
 }
 
 class ChannelsList extends StatelessWidget {
-  const ChannelsList({Key? key}) : super(key: key);
+  const ChannelsList({super.key});
 
   @override
   Widget build(BuildContext context) {
