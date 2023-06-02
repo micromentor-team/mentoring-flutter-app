@@ -33,23 +33,23 @@ void filterDialog(context) {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [Text('Sort'), Text('Relevance')],
+                          children: const [Text('Sort'), Text('Relevance')],
                         ),
-                        Icon(Icons.arrow_forward_ios)
+                        const Icon(Icons.arrow_forward_ios)
                       ],
                     ),
                     const Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text('Language'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -58,9 +58,9 @@ void filterDialog(context) {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text('Home Country'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -69,9 +69,9 @@ void filterDialog(context) {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text('Industry'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -80,9 +80,9 @@ void filterDialog(context) {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text('Expertise'),
                         Icon(Icons.arrow_forward_ios)
                       ],
@@ -91,9 +91,9 @@ void filterDialog(context) {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text('Country Experience'),
                         Icon(Icons.arrow_forward_ios)
                       ],

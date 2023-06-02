@@ -44,10 +44,10 @@ Widget userExpandedCard(
                       onPressed: () {
                         onOpenMessage();
                       },
-                      child: const Row(
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Icon(
                             Icons.message,
                             size: 20,

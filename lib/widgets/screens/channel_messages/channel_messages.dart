@@ -444,11 +444,11 @@ class BuildMessageBubbles extends StatelessWidget {
                 // ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: const Padding(
-                    padding: EdgeInsets.only(top: 8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Icon(
                           Icons.messenger_outline_rounded,
                           size: 12.0,
@@ -549,12 +549,12 @@ class BuildMessageInput extends StatelessWidget {
         final double inputWidgetHeight =
             MediaQuery.of(context).size.height - constraints.maxHeight;
         // 2. Get what the ~device~ understands the actual viewport to be; before any of our implementations
-        final EdgeInsets viewInsets = EdgeInsets.fromViewPadding(
-          View.of(context).viewInsets,
-          View.of(context).devicePixelRatio,
-        );
+        // final EdgeInsets viewInsets = EdgeInsets.fromViewPadding(
+        //   View.of(context).viewInsets,
+        //   View.of(context).devicePixelRatio,
+        // );
         // 3. Get the difference between our widget height and the current device bottom (inclusive of any system element)
-        final double inputHeight = inputWidgetHeight - viewInsets.bottom;
+        final double inputHeight = inputWidgetHeight; // - viewInsets.bottom;
         // ---------------------------------------------------------------------------------
         // 🕵️‍♀️  If the ~device~ understands it has a system element impeding the viewport bottom,
         // it prefers the element constraints, nullifying our implemented `SafeArea`...
