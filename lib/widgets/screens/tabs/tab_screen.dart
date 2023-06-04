@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:mm_flutter_app/widgets/screens/home/home.dart';
+import 'package:mm_flutter_app/widgets/screens/dashboard/dashboard.dart';
 import 'package:mm_flutter_app/widgets/screens/messages/messages_screen.dart';
 
+import '../home_menu/home_menu.dart';
 import '../../../data/settings/settings.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -61,7 +62,7 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   static const List<Widget> _pages = <Widget>[
-    HomeScreen(),
+    DashboardScreen(),
     ChannelsScreen(),
   ];
 
@@ -112,6 +113,8 @@ class _TabsScreenState extends State<TabsScreen> {
       _checkAuth();
     }
     return Scaffold(
+      appBar: AppBar(elevation: 0.5),
+      drawer: const HomeMenu(),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,
