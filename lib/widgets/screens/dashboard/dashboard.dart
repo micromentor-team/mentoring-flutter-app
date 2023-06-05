@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mm_flutter_app/data/models/user/user.dart';
-import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
-import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
+import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
+import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -19,11 +20,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     int hour = DateTime.now().hour;
     String timeOfDayGreeting;
     if(hour <= 5 && hour < 12){
-      timeOfDayGreeting = "Good\nmorning,";
+      timeOfDayGreeting = 'Good\nmorning,';
     } else if(hour <= 12 && hour < 18){
-      timeOfDayGreeting = "Good\nafternoon,";
+      timeOfDayGreeting = 'Good\nafternoon,';
     } else {
-      timeOfDayGreeting = "Good\nevening,";
+      timeOfDayGreeting = 'Good\nevening,';
     }
     return '$timeOfDayGreeting\n${user.fullName}';
   }
@@ -44,13 +45,34 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: ListView(
                 children: const [
                   Divider(thickness: 8.0),
-                  SectionTile(title: "Upcoming sessions"),
+                  UpcomingSection(),
                   Divider(thickness: 8.0),
-                  SectionTile(title: "Things to do"),
+                  SectionTile(
+                    title: 'Things to do',
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 80.0,
+                      child: Placeholder(color: Colors.grey),
+                    ),
+                  ),
                   Divider(thickness: 8.0),
-                  SectionTile(title: "Find a mentor"),
+                  SectionTile(
+                    title: 'Find a mentor',
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 80.0,
+                      child: Placeholder(color: Colors.grey),
+                    ),
+                  ),
                   Divider(thickness: 8.0),
-                  SectionTile(title: "For you"),
+                  SectionTile(
+                    title: 'For you',
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 80.0,
+                      child: Placeholder(color: Colors.grey),
+                    ),
+                  ),
                   Divider(thickness: 8.0),
                 ],
               ),
