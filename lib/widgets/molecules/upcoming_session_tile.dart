@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:mm_flutter_app/themes/styles.dart';
 import 'package:mm_flutter_app/widgets/atoms/rectangle_button.dart';
 
 class UpcomingSessionTile extends StatelessWidget {
@@ -59,17 +60,11 @@ class UpcomingSessionTile extends StatelessWidget {
               children: [
                 Text(
                   mentorName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 14.0,
-                  ),
+                  style: Styles.cardTitle,
                 ),
                 Text(
                   dateFormat.format(dateTime),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.0,
-                  ),
+                  style: Styles.cardSubtitle,
                 ),
                 const SizedBox(width: 0, height: 8.0,),
                 Row(
