@@ -4,7 +4,7 @@ import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_session_tile.dart';
 
 class UpcomingSection extends StatefulWidget {
-  static const  maxSessionsDisplayed = 3;
+  static const  maxDaysDisplayed = 7;
   const UpcomingSection({Key? key}) : super(key: key);
 
   @override
@@ -12,6 +12,7 @@ class UpcomingSection extends StatefulWidget {
 }
 
 class _UpcomingSectionState extends State<UpcomingSection> {
+  List<Widget> _upcomingSessionTiles = [];
 
   List<UpcomingSessionTile> _createUpcomingSessionTiles() {
     List<UpcomingSessionTile> sessionTiles = [];
@@ -20,18 +21,18 @@ class _UpcomingSectionState extends State<UpcomingSection> {
       return sessionTiles;
     }
 
+    // Only show sessions within the given number calendar days.
     for(int i = 0; i < sessions.length; i++) {
-      if(i == UpcomingSection.maxSessionsDisplayed){
-        break;
-      }
-      sessionTiles.add(
-        UpcomingSessionTile(
+      if(sessions[i].dateTime.isBefore(
+          DateTime.now().add(
+              const Duration(days:UpcomingSection.maxDaysDisplayed)))){
+        sessionTiles.add(
+          UpcomingSessionTile(
             dateTime: sessions[i].dateTime,
-            mentorAvatarUrl: sessions[i].mentorAvatarUrl,
             mentorName: sessions[i].mentorName,
-            sessionName: sessions[i].sessionName,
-        ),
-      );
+          ),
+        );
+      }
     }
     return sessionTiles;
   }
@@ -39,13 +40,11 @@ class _UpcomingSectionState extends State<UpcomingSection> {
   List<_UpcomingSession> _getUpcomingSessions() {
     List<_UpcomingSession> upcomingSessions = [];
     // TODO(m-rosario): Fetch sessions from backend instead of using mock data.
-    for(int i = 1; i <= 10; i++){
+    for(int i = 0; i < 20; i++){
       upcomingSessions.add(
           _UpcomingSession(
-            mentorAvatarUrl: null,
-            mentorName: 'Mentor $i',
-            dateTime: DateTime.now().add(Duration(days: i, hours: i*7, minutes: i*13)),
-            sessionName: 'Introduction',
+            mentorName: 'Mentor ${i+1}',
+            dateTime: DateTime.now().add(Duration(days: i, hours: i*7, minutes: i*13+4)),
           ),
       );
     }
@@ -56,25 +55,25 @@ class _UpcomingSectionState extends State<UpcomingSection> {
 
   @override
   Widget build(BuildContext context) {
+    _upcomingSessionTiles = _createUpcomingSessionTiles();
     return SectionTile(
-      title: 'Upcoming sessions',
-      child: Column(
-        children: _createUpcomingSessionTiles(),
+      title: 'You have ${_upcomingSessionTiles.length} upcoming sessions',
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: _upcomingSessionTiles,
+        ),
       ),
     );
   }
 }
 
 class _UpcomingSession {
-  final String? mentorAvatarUrl;
   final String mentorName;
   final DateTime dateTime;
-  final String sessionName;
 
   const _UpcomingSession({
-    this.mentorAvatarUrl,
     required this.mentorName,
     required this.dateTime,
-    required this.sessionName,
   });
 }

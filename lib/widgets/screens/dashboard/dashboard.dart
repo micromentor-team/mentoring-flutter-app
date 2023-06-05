@@ -5,7 +5,6 @@ import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
-import 'package:mm_flutter_app/widgets/molecules/find_mentor_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -47,9 +46,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 children: const [
                   Divider(thickness: 8.0),
                   UpcomingSection(),
-                  Divider(thickness: 8.0),
-                  FindMentorSection(),
-                  Divider(thickness: 8.0),
                   SectionTile(
                     title: 'Things to do',
                     child: SizedBox(
@@ -58,7 +54,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: Placeholder(color: Colors.grey),
                     ),
                   ),
-                  Divider(thickness: 8.0),
                   SectionTile(
                     title: 'For you',
                     child: SizedBox(
