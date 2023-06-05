@@ -91,3 +91,37 @@ export function generateChannelInboxItemMessage(channelId: string, sender: any) 
         createdBy: sender.id,
     }
 }
+
+export function generateChannelInvitation(channelParticipants: any[], declined?: boolean, accepted?: boolean) {
+    var status: object | null;
+    if (declined || accepted) {
+        var statusText: string;
+        if (accepted)
+            statusText = "accepted";
+        else if (declined)
+            statusText = "declined";
+        else
+            statusText = "created";
+        status = {
+                __typename: "ChannelInvitationStatus",
+                status: statusText,
+            }
+    } else {
+        status = null;
+    }
+    return {
+        __typename: "ChannelInvitation",
+        id: faker.string.alphanumeric({length: 24}),
+        channelName: faker.lorem.words(2),
+        channel: generateChannel(channelParticipants),
+        channelTopic: faker.lorem.sentence(),
+        messageText: faker.lorem.sentence(),
+        createdBy: channelParticipants[0].id,
+        createdAt: faker.date.recent(),
+        recipientId: channelParticipants[0].id,
+        recipient: channelParticipants[0],
+        senderId: channelParticipants[1].id,
+        sender: channelParticipants[1],
+        status: status,
+    }
+}
