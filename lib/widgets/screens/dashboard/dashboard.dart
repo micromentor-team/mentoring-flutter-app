@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
+import 'package:mm_flutter_app/widgets/atoms/user_search_bar.dart';
 import 'package:mm_flutter_app/widgets/molecules/match_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/mentors_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
@@ -40,19 +41,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Expanded(
             child: ListView(
               children: [
-                const Divider(thickness: 4.0, height: 0),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 16.0, 0, 0),
-                  child: ProfileHeader(
-                    avatarUrl: user.avatarUrl,
-                    profileMessage: _getGreeting(user),
+                const Divider(thickness: 4.0, height: 4.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: UserSearchBar(
+                    hintText: 'Search for a mentor',
                   ),
+                ),
+                ProfileHeader(
+                  avatarUrl: user.avatarUrl,
+                  profileMessage: _getGreeting(user),
                 ),
                 const UpcomingSection(),
                 const MatchSection(),
                 const MentorsSection(),
                 const ResourcesSection(),
-                const Divider(thickness: 4.0, height: 0),
+                const Divider(thickness: 4.0, height: 4.0),
               ],
             ),
           ),
