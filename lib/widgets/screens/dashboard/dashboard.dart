@@ -6,6 +6,7 @@ import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/molecules/match_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/mentors_section.dart';
+import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Expanded(
             child: ListView(
               children: [
-                const Divider(thickness: 4.0),
+                const Divider(thickness: 4.0, height: 0),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 16.0, 0, 0),
                   child: ProfileHeader(
@@ -50,7 +51,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 const UpcomingSection(),
                 const MatchSection(),
                 const MentorsSection(),
-                const Divider(thickness: 4.0),
+                const ResourcesSection(),
+                const Divider(thickness: 4.0, height: 0),
               ],
             ),
           ),
