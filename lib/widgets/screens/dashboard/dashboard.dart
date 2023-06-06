@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
-import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/match_section.dart';
+import 'package:mm_flutter_app/widgets/molecules/mentors_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -34,42 +34,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     User user = Provider.of<UserProvider>(context, listen: false).user!;
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 16.0, 0, 0),
-        child: Column(
-          children: [
-            ProfileHeader(
-              avatarUrl: user.avatarUrl,
-              profileMessage: _getGreeting(user),
-            ),
-            Expanded(
-              child: ListView(
-                children: const [
-                  Divider(thickness: 8.0),
-                  UpcomingSection(),
-                  MatchSection(),
-                  SectionTile(
-                    title: 'Things to do',
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 80.0,
-                      child: Placeholder(color: Colors.grey),
-                    ),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              children: [
+                const Divider(thickness: 4.0),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 16.0, 0, 0),
+                  child: ProfileHeader(
+                    avatarUrl: user.avatarUrl,
+                    profileMessage: _getGreeting(user),
                   ),
-                  SectionTile(
-                    title: 'For you',
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 80.0,
-                      child: Placeholder(color: Colors.grey),
-                    ),
-                  ),
-                  Divider(thickness: 8.0),
-                ],
-              ),
+                ),
+                const UpcomingSection(),
+                const MatchSection(),
+                const MentorsSection(),
+                const Divider(thickness: 4.0),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

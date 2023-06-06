@@ -39,7 +39,7 @@ class _UpcomingSectionState extends State<UpcomingSection> {
 
   List<_UpcomingSession> _getUpcomingSessions() {
     List<_UpcomingSession> upcomingSessions = [];
-    // TODO(m-rosario): Fetch sessions from backend instead of using mock data.
+    //TODO(m-rosario): Fetch sessions from backend instead of using mock data.
     for(int i = 0; i < 20; i++){
       upcomingSessions.add(
           _UpcomingSession(
