@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:mm_flutter_app/themes/styles.dart';
+
 class SectionTile extends StatelessWidget {
   final String title;
   final Widget child;
@@ -8,7 +10,7 @@ class SectionTile extends StatelessWidget {
     Key? key,
     required this.title,
     required this.child,
-  }): super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,7 @@ class SectionTile extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Text(
             title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0
-            ),
+            style: Styles.sectionHeader,
           ),
         ),
         Padding(

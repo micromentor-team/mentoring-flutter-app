@@ -9,7 +9,7 @@ class MatchTile extends StatelessWidget {
   final String userLocation;
   final String? avatarUrl;
   final String buttonText;
-  final Function() buttonOnPressed;
+  final void Function() buttonOnPressed;
 
   const MatchTile({
     Key? key,
@@ -19,8 +19,7 @@ class MatchTile extends StatelessWidget {
     this.avatarUrl,
     required this.buttonText,
     required this.buttonOnPressed,
-  })
-      : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +58,6 @@ class MatchTile extends StatelessWidget {
               trailing: RectangleButton(
                 onPressed: buttonOnPressed,
                 text: buttonText,
-                fontSize: 12.0,
-                padding: const EdgeInsets.all(8.0),
               ),
             ),
           ],

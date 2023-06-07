@@ -16,6 +16,9 @@ class Palette {
   static const Color kSuccessColor = Color(0xFF59fd00);
   static const Color kTertiaryColor = Color(0xFF00fda4);
   static const Color kDangerColor = kErrorColor;
+  static const Color kTextHighEmphasis = Color(0xDD000000);
+  static const Color kTextMediumEmphasis = Color(0x99000000);
+  static const Color kTextDisabled = Color(0x62000000);
 
   const Palette();
 }

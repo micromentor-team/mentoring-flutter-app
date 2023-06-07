@@ -3,16 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_session_tile.dart';
 
-class UpcomingSection extends StatefulWidget {
+class UpcomingSection extends StatelessWidget {
   static const  maxDaysDisplayed = 7;
   const UpcomingSection({Key? key}) : super(key: key);
-
-  @override
-  State<UpcomingSection> createState() => _UpcomingSectionState();
-}
-
-class _UpcomingSectionState extends State<UpcomingSection> {
-  List<Widget> _upcomingSessionTiles = [];
 
   List<UpcomingSessionTile> _createUpcomingSessionTiles() {
     List<UpcomingSessionTile> sessionTiles = [];
@@ -20,12 +13,11 @@ class _UpcomingSectionState extends State<UpcomingSection> {
     if(sessions.isEmpty) {
       return sessionTiles;
     }
-
     // Only show sessions within the given number calendar days.
     for(int i = 0; i < sessions.length; i++) {
       if(sessions[i].dateTime.isBefore(
           DateTime.now().add(
-              const Duration(days:UpcomingSection.maxDaysDisplayed)))){
+              const Duration(days:maxDaysDisplayed)))){
         sessionTiles.add(
           UpcomingSessionTile(
             dateTime: sessions[i].dateTime,
@@ -48,20 +40,18 @@ class _UpcomingSectionState extends State<UpcomingSection> {
           ),
       );
     }
-
-    //
     return upcomingSessions;
   }
 
   @override
   Widget build(BuildContext context) {
-    _upcomingSessionTiles = _createUpcomingSessionTiles();
+    List<Widget> upcomingSessionTiles = _createUpcomingSessionTiles();
     return SectionTile(
-      title: 'You have ${_upcomingSessionTiles.length} upcoming sessions',
+      title: 'You have ${upcomingSessionTiles.length} upcoming sessions',
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: _upcomingSessionTiles,
+          children: upcomingSessionTiles,
         ),
       ),
     );

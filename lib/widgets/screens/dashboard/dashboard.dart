@@ -10,14 +10,8 @@ import 'package:mm_flutter_app/widgets/molecules/mentors_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
-
-  @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
 
   String _getGreeting(User user) {
     int hour = DateTime.now().hour;

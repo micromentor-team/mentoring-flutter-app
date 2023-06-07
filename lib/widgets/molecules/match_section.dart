@@ -3,15 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/widgets/atoms/match_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 
-class MatchSection extends StatefulWidget {
+class MatchSection extends StatelessWidget {
   const MatchSection({Key? key}) : super(key: key);
-
-  @override
-  State<MatchSection> createState() => _MatchSectionState();
-}
-
-class _MatchSectionState extends State<MatchSection> {
-  List<Widget> _matchTiles = [];
 
   List<Widget> _createMatchTiles() {
     //TODO(m-rosario): Call backend instead of using hardcoded mock data.
@@ -48,11 +41,11 @@ class _MatchSectionState extends State<MatchSection> {
 
   @override
   Widget build(BuildContext context) {
-    _matchTiles = _createMatchTiles();
+    List<Widget> matchTiles = _createMatchTiles();
     return SectionTile(
-      title: 'You have ${_matchTiles.length} new matches and requests',
+      title: 'You have ${matchTiles.length} new matches and requests',
       child: Column(
-        children: _matchTiles,
+        children: matchTiles,
       ),
     );
   }

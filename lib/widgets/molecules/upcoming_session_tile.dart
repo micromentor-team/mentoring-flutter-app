@@ -25,8 +25,6 @@ class UpcomingSessionTile extends StatelessWidget {
             child: RectangleButton(
               onPressed: () => {},
               text: "JOIN",
-              fontSize: 12.0,
-              padding: const EdgeInsets.all(8.0),
             ),
           )
       );
@@ -35,8 +33,6 @@ class UpcomingSessionTile extends StatelessWidget {
         RectangleButton(
           onPressed: () => {},
           text: "RESCHEDULE",
-          fontSize: 12.0,
-          padding: const EdgeInsets.all(8.0),
         )
     );
     return buttons;
