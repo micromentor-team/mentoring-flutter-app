@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
 class CustomizedBottomNavigationBar extends StatefulWidget {
-  const CustomizedBottomNavigationBar({Key? key, required this.child}) : super(key: key);
+  const CustomizedBottomNavigationBar({Key? key, required this.child})
+      : super(key: key);
   final Widget child;
 
   @override
@@ -13,7 +13,6 @@ class CustomizedBottomNavigationBar extends StatefulWidget {
 
 class _CustomizedBottomNavigationBarState
     extends State<CustomizedBottomNavigationBar> {
-
   void _onItemTapped(int index) {
     switch (index) {
       case 0:
@@ -30,7 +29,7 @@ class _CustomizedBottomNavigationBarState
         return context.go('/');
     }
   }
-  
+
   int _calculateSelectedIndex(BuildContext context) {
     final GoRouter route = GoRouter.of(context);
     final String location = route.location;
@@ -55,6 +54,24 @@ class _CustomizedBottomNavigationBarState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/images/MicroMentor.png",
+                fit: BoxFit.contain,
+                height: 32,
+              ),
+            ],
+          )
+          // backgroundColor: Color.fromARGB(0, 255, 255, 255),
+          // title: Image.asset("assets/images/MicroMentor.png"),
+          // leading: Image.asset(
+          //   "assets/images/MicroMentor.png",
+          // ),
+          ),
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
