@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class UserSearchBar extends StatelessWidget {
   final String? hintText;
+
   const UserSearchBar({Key? key, this.hintText}) : super(key: key);
 
   @override
@@ -19,8 +20,7 @@ class UserSearchBar extends StatelessWidget {
   }
 }
 
-class UserSearchDelegate extends SearchDelegate{
-
+class UserSearchDelegate extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -40,11 +40,11 @@ class UserSearchDelegate extends SearchDelegate{
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-        onPressed: (){
-          // Return to previous page.
-          close(context, null);
-        },
-        icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        // Return to previous page.
+        close(context, null);
+      },
+      icon: const Icon(Icons.arrow_back),
     );
   }
 

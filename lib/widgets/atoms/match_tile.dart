@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mm_flutter_app/themes/styles.dart';
 import 'package:mm_flutter_app/widgets/atoms/rectangle_button.dart';
 
@@ -40,7 +39,8 @@ class MatchTile extends StatelessWidget {
             ListTile(
               leading: CircleAvatar(
                 radius: 20,
-                backgroundImage: avatarUrl != null ? NetworkImage(avatarUrl!) : null,
+                backgroundImage:
+                    avatarUrl != null ? NetworkImage(avatarUrl!) : null,
                 backgroundColor: Colors.grey,
               ),
               title: Text(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mm_flutter_app/themes/palette.dart';
 
 class RectangleButton extends StatelessWidget {

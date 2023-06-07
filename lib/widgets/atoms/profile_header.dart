@@ -20,7 +20,8 @@ class ProfileHeader extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 48,
-              backgroundImage: avatarUrl != null ? NetworkImage(avatarUrl.toString()) : null,
+              backgroundImage:
+                  avatarUrl != null ? NetworkImage(avatarUrl.toString()) : null,
               backgroundColor: Colors.grey,
             ),
             Flexible(

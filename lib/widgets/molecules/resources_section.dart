@@ -36,13 +36,13 @@ class ResourcesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionTile(
-        title: 'Recommended Tools & Resources',
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: _createResourceTiles(),
-          ),
+      title: 'Recommended Tools & Resources',
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          children: _createResourceTiles(),
         ),
+      ),
     );
   }
 }

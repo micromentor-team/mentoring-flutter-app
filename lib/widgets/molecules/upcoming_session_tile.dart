@@ -18,23 +18,19 @@ class UpcomingSessionTile extends StatelessWidget {
   List<Widget> _createSessionButtons() {
     List<Widget> buttons = [];
     // Add JOIN button only if session is coming up soon.
-    if(DateTime.now().isAfter(dateTime.subtract(joinMinimumTime))){
-      buttons.add(
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 8.0, 0),
-            child: RectangleButton(
-              onPressed: () => {},
-              text: "JOIN",
-            ),
-          )
-      );
-    }
-    buttons.add(
-        RectangleButton(
+    if (DateTime.now().isAfter(dateTime.subtract(joinMinimumTime))) {
+      buttons.add(Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 8.0, 0),
+        child: RectangleButton(
           onPressed: () => {},
-          text: "RESCHEDULE",
-        )
-    );
+          text: "JOIN",
+        ),
+      ));
+    }
+    buttons.add(RectangleButton(
+      onPressed: () => {},
+      text: "RESCHEDULE",
+    ));
     return buttons;
   }
 
@@ -62,7 +58,10 @@ class UpcomingSessionTile extends StatelessWidget {
                   dateFormat.format(dateTime),
                   style: Styles.cardSubtitle,
                 ),
-                const SizedBox(width: 0, height: 8.0,),
+                const SizedBox(
+                  width: 0,
+                  height: 8.0,
+                ),
                 Row(
                   children: _createSessionButtons(),
                 )

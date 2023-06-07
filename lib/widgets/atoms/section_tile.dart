@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mm_flutter_app/themes/styles.dart';
 
 class SectionTile extends StatelessWidget {
@@ -27,7 +26,7 @@ class SectionTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
           child: Center(
-              child: child,
+            child: child,
           ),
         ),
       ],
