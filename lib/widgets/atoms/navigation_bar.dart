@@ -65,13 +65,7 @@ class _CustomizedBottomNavigationBarState
                 height: 32,
               ),
             ],
-          )
-          // backgroundColor: Color.fromARGB(0, 255, 255, 255),
-          // title: Image.asset("assets/images/MicroMentor.png"),
-          // leading: Image.asset(
-          //   "assets/images/MicroMentor.png",
-          // ),
-          ),
+          )),
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

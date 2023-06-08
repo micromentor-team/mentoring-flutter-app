@@ -12,93 +12,68 @@ import 'package:provider/provider.dart';
 
 import 'data/models/user/user_provider.dart';
 
+class TestApp extends StatelessWidget {
+  const TestApp({super.key});
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
-final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
-
-
-class TestApp extends StatefulWidget {
-  TestApp({super.key});
-  var userState = "error";
-
-  @override
-  State<TestApp> createState() => _TestAppState();
-}
-
-class _TestAppState extends State<TestApp> {
   @override
   Widget build(BuildContext context) {
-    
-    final GoRouter router = GoRouter(
-        initialLocation: '/',
-        navigatorKey: _rootNavigatorKey,
-        routes: [
+    final GoRouter router = GoRouter(initialLocation: '/', routes: [
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return const StartScreen();
+        },
+      ),
+      GoRoute(
+        path: '/signin',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SignInScreen();
+        },
+      ),
+      GoRoute(
+        path: '/loading',
+        builder: (BuildContext context, GoRouterState state) {
+          return const LoadingScreen();
+        },
+      ),
+      ShellRoute(
+        builder: (context, state, child) {
+          return CustomizedBottomNavigationBar(child: child);
+        },
+        routes: <RouteBase>[
           GoRoute(
-            parentNavigatorKey: _rootNavigatorKey,
-            path: '/',
+            path: '/home',
             builder: (BuildContext context, GoRouterState state) {
-              return const StartScreen();
+              return const Center(child: HomeScreen());
             },
           ),
           GoRoute(
-            parentNavigatorKey: _rootNavigatorKey,
-            path: '/signin',
+            path: '/explore',
             builder: (BuildContext context, GoRouterState state) {
-              return const SignInScreen();
+              return const Center(child: Text('Explore'));
             },
           ),
           GoRoute(
-            parentNavigatorKey: _rootNavigatorKey,
-            path: '/loading',
+            path: '/journey',
             builder: (BuildContext context, GoRouterState state) {
-              return const LoadingScreen();
+              return const Center(child: Text('Journey'));
             },
           ),
-          ShellRoute(
-            
-            navigatorKey: _shellNavigatorKey,
-            builder: (context, state, child) {
-              return CustomizedBottomNavigationBar(child: child);
+          GoRoute(
+            path: '/inbox',
+            builder: (BuildContext context, GoRouterState state) {
+              return const Center(child: Text('Inbox'));
             },
-            routes: <RouteBase>[
-              GoRoute(
-                // parentNavigatorKey: _shellNavigatorKey,
-                path: '/home',
-                builder: (BuildContext context, GoRouterState state) {
-                  return const Center(child: HomeScreen());
-                },
-              ),
-              GoRoute(
-                // parentNavigatorKey: _shellNavigatorKey,
-                path: '/explore',
-                builder: (BuildContext context, GoRouterState state) {
-                  return const Center(child: Text('Explore'));
-                },
-              ),
-              GoRoute(
-                // parentNavigatorKey: _shellNavigatorKey,
-                path: '/journey',
-                builder: (BuildContext context, GoRouterState state) {
-                  return const Center(child: Text('Journey'));
-                },
-              ),
-              GoRoute(
-                // parentNavigatorKey: _shellNavigatorKey,
-                path: '/inbox',
-                builder: (BuildContext context, GoRouterState state) {
-                  return const Center(child: Text('Inbox'));
-                },
-              ),
-              GoRoute(
-                // parentNavigatorKey: _shellNavigatorKey,
-                path: '/profile',
-                builder: (BuildContext context, GoRouterState state) {
-                  return const Center(child: Text('Profile'));
-                },
-              ),
-            ],
-          )
-        ]);
+          ),
+          GoRoute(
+            path: '/profile',
+            builder: (BuildContext context, GoRouterState state) {
+              return const Center(child: Text('Profile'));
+            },
+          ),
+        ],
+      )
+    ]);
 
     return MaterialApp.router(
       routerConfig: router,
@@ -155,7 +130,6 @@ void main() async {
   final subscriptionUrl = dotenv.env['APP_SUBSCRIPTION_URL'];
 
   debugPrint('Server: $serverUrl');
-  // debugPrint('Subscriptions: $subscriptionUrl');
 
   if (serverUrl == null || subscriptionUrl == null) {
     debugPrint('Set your server and websockets URLs in .env file');
@@ -183,7 +157,7 @@ void main() async {
               ChangeNotifierProvider(
                   create: (context) => MessagesProvider(client: client)),
             ],
-            child: TestApp(),
+            child: const TestApp(),
           );
         },
       ),
