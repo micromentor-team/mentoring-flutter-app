@@ -16,7 +16,7 @@ class _CustomizedBottomNavigationBarState
   void _onItemTapped(int index) {
     switch (index) {
       case 0:
-        return context.go('/');
+        return context.go('/home');
       case 1:
         return context.go('/explore');
       case 2:
@@ -45,7 +45,7 @@ class _CustomizedBottomNavigationBarState
     if (location.startsWith('/profile')) {
       return 4;
     }
-    if (location.startsWith('/')) {
+    if (location.startsWith('/home')) {
       return 0;
     }
     return 0;
