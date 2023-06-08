@@ -16,9 +16,9 @@ class DashboardScreen extends StatelessWidget {
   String _getGreeting(User user) {
     int hour = DateTime.now().hour;
     String timeOfDayGreeting;
-    if (hour <= 5 && hour < 12) {
+    if (hour >= 5 && hour < 12) {
       timeOfDayGreeting = 'Good\nmorning,';
-    } else if (hour <= 12 && hour < 18) {
+    } else if (hour >= 12 && hour < 18) {
       timeOfDayGreeting = 'Good\nafternoon,';
     } else {
       timeOfDayGreeting = 'Good\nevening,';
