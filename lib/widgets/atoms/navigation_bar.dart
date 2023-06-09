@@ -55,7 +55,7 @@ class _CustomizedBottomNavigationBarState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
