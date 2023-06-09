@@ -1,27 +1,23 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../atoms/text_form_field_widget.dart';
 import '../sign_up/sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  const SignInScreen({super.key});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  TextEditingController? emailController;
-  TextEditingController? passwordController;
   final _unfocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
-
-  String? email;
-  String? password;
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
 
   @override
   void initState() {
@@ -33,15 +29,10 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void dispose() {
     _unfocusNode.dispose();
-    emailController?.dispose();
-    passwordController?.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
-
-  // _openHomeScreen(context) {
-  //   Navigator.of(context)
-  //       .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-  // }
 
   void _openSignUpScreen(context) {
     Navigator.of(context).push(
@@ -54,10 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   bool _validateEmail(String value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern.toString());
-    return (!regex.hasMatch(value)) ? false : true;
+    return EmailValidator.validate(value);
   }
 
   String? data;
@@ -66,6 +54,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final mediaQuery = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SafeArea(
         child: GestureDetector(
@@ -118,10 +107,11 @@ class _SignInScreenState extends State<SignInScreen> {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          TextFormFieldWidget(
+                          TextFormField(
                               key: const Key('emailTextField'),
-                              textController: emailController,
-                              label: "Email Address",
+                              controller: emailController,
+                              decoration: const InputDecoration(
+                                  labelText: "Email Address"),
                               validator: (value) {
                                 bool validEmail = _validateEmail(value!);
                                 if (validEmail != true) {
@@ -129,29 +119,20 @@ class _SignInScreenState extends State<SignInScreen> {
                                 }
                                 return null;
                               },
-                              onPressed: (value) {
-                                setState(() {
-                                  email = value;
-                                });
-                              },
                               obscureText: false),
                           SizedBox(
                             height: mediaQuery.height * 0.01,
                           ),
-                          TextFormFieldWidget(
+                          TextFormField(
                               key: const Key('passwordTextField'),
-                              textController: passwordController,
-                              label: "Password",
+                              controller: passwordController,
+                              decoration:
+                                  const InputDecoration(labelText: "Passsword"),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your password.';
                                 }
                                 return null;
-                              },
-                              onPressed: (value) {
-                                setState(() {
-                                  password = value;
-                                });
                               },
                               obscureText: true),
                           Padding(
@@ -167,8 +148,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 if (_formKey.currentState!.validate()) {
                                   final signInError =
                                       await userProvider.signInUser(
-                                    email: email,
-                                    password: password,
+                                    email: emailController.text,
+                                    password: passwordController.text,
                                   );
                                   if (signInError != null) {
                                     if (signInError == 'notFound') {
@@ -179,8 +160,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                         ),
                                       );
                                       if (context.mounted) {
-                                        emailController!.text = '';
-                                        passwordController!.text = '';
+                                        emailController.text = '';
+                                        passwordController.text = '';
                                       }
                                     } else if (signInError ==
                                         'passwordNoMatch') {
@@ -189,9 +170,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                         content: Text(
                                             'Please enter you correct password'),
                                       ));
-                                      passwordController!.text = '';
+                                      passwordController.text = '';
                                     }
-                                    // showDialog(context: context, builder: );
                                   } else {
                                     navigator.pushNamedAndRemoveUntil(
                                         '/', (Route<dynamic> route) => false);
@@ -209,84 +189,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 10, 0, 10),
-                            child: TextButton(
-                              onPressed: () {
-                                //  forgot password
-                                //   userProvider.resetPassword(email: email);
-                              },
-                              child: Text(
-                                'Forgot password?',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 160,
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 0, 0, 8),
-                            child: Text(
-                              'Or sign in using...',
-                              style: GoogleFonts.poppins(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Row(
-                            // mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    5, 0, 5, 0),
-                                child: SizedBox(
-                                  width: 100,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      debugPrint('Button pressed ...');
-                                    },
-                                    child: const FaIcon(
-                                      FontAwesomeIcons.facebookF,
-                                      size: 13,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    5, 0, 5, 0),
-                                child: SizedBox(
-                                  width: 100,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      debugPrint('Button pressed ...');
-                                    },
-                                    child: const FaIcon(
-                                      FontAwesomeIcons.google,
-                                      size: 13,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                         ],
                       ),

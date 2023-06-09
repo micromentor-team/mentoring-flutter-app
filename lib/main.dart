@@ -16,8 +16,6 @@ void main() async {
   final subscriptionUrl = dotenv.env['APP_SUBSCRIPTION_URL'];
 
   debugPrint('Server: $serverUrl');
-  // debugPrint('Subscriptions: $subscriptionUrl');
-
   if (serverUrl == null || subscriptionUrl == null) {
     debugPrint('Set your server and websockets URLs in .env file');
     return;
@@ -52,9 +50,6 @@ void main() async {
   );
 }
 
-//
-// https://master-api.flutter.dev/flutter/widgets/Navigator-class.html
-//
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 

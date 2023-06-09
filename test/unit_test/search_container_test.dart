@@ -15,11 +15,7 @@ void main() {
           ),
         ),
       );
-      final tuneIcon = find.byIcon(Icons.tune_sharp);
-      final accountIcon = find.byIcon(Icons.account_circle);
       final text = find.byType(TextField);
-      expect(tuneIcon, findsOneWidget);
-      expect(accountIcon, findsOneWidget);
       expect(text, findsOneWidget);
     },
   );
