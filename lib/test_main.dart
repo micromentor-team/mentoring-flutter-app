@@ -5,7 +5,7 @@ import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
 import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/atoms/navigation_bar.dart';
+import 'package:mm_flutter_app/widgets/atoms/app_wrapper.dart';
 import 'package:mm_flutter_app/widgets/screens/home/home.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +38,7 @@ class TestApp extends StatelessWidget {
       ),
       ShellRoute(
         builder: (context, state, child) {
-          return CustomizedBottomNavigationBar(child: child);
+          return AppWrapper(child: child);
         },
         routes: <RouteBase>[
           GoRoute(
@@ -97,7 +97,7 @@ class StartScreen extends StatelessWidget {
       },
       onData: (data) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          GoRouter.of(context).go('/home');
+          context.go('/home');
         });
 
         return const LoadingScreen();

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class CustomizedBottomNavigationBar extends StatefulWidget {
-  const CustomizedBottomNavigationBar({Key? key, required this.child})
-      : super(key: key);
+/*
+ * Contains bottom navigation bar and app bar
+ */
+class AppWrapper extends StatefulWidget {
+  const AppWrapper({super.key, required this.child});
   final Widget child;
 
   @override
-  State<CustomizedBottomNavigationBar> createState() =>
-      _CustomizedBottomNavigationBarState();
+  State<AppWrapper> createState() => _AppWrapperState();
 }
 
-class _CustomizedBottomNavigationBarState
-    extends State<CustomizedBottomNavigationBar> {
+class _AppWrapperState extends State<AppWrapper> {
   void _onItemTapped(int index) {
     switch (index) {
       case 0:
@@ -55,7 +55,7 @@ class _CustomizedBottomNavigationBarState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Colors.white,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
