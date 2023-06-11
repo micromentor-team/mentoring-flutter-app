@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/themes/palette.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String? avatarUrl;
   final String profileMessage;
+  final double? profileCompletionPercentage;
 
-  const ProfileHeader({Key? key, this.avatarUrl, required this.profileMessage})
-      : super(key: key);
+  const ProfileHeader({
+    Key? key,
+    this.avatarUrl,
+    required this.profileMessage,
+    this.profileCompletionPercentage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +24,26 @@ class ProfileHeader extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
-              radius: 48,
-              backgroundImage:
-                  avatarUrl != null ? NetworkImage(avatarUrl.toString()) : null,
-              backgroundColor: Colors.grey,
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                if (profileCompletionPercentage != null)
+                  SizedBox(
+                    width: 96.0,
+                    height: 96.0,
+                    child: CircularProgressIndicator(
+                      value: profileCompletionPercentage,
+                      color: Palette.kBlueColor,
+                    ),
+                  ),
+                CircleAvatar(
+                  radius: 48,
+                  backgroundImage: avatarUrl != null
+                      ? NetworkImage(avatarUrl.toString())
+                      : null,
+                  backgroundColor: Colors.grey,
+                ),
+              ],
             ),
             Flexible(
               child: Padding(

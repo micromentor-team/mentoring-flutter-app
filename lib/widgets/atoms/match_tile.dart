@@ -38,7 +38,7 @@ class MatchTile extends StatelessWidget {
             ),
             ListTile(
               leading: CircleAvatar(
-                radius: 20,
+                radius: 24,
                 backgroundImage:
                     avatarUrl != null ? NetworkImage(avatarUrl!) : null,
                 backgroundColor: Colors.grey,
@@ -54,7 +54,7 @@ class MatchTile extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              subtitleTextStyle: Styles.cardSubtitle,
+              subtitleTextStyle: Styles.mentorCardSubtitle,
               trailing: RectangleButton(
                 onPressed: buttonOnPressed,
                 text: buttonText,

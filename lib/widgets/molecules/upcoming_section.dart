@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_session_tile.dart';
 
@@ -31,15 +30,36 @@ class UpcomingSection extends StatelessWidget {
   List<_UpcomingSession> _getUpcomingSessions() {
     List<_UpcomingSession> upcomingSessions = [];
     //TODO(m-rosario): Fetch sessions from backend instead of using mock data.
-    for (int i = 0; i < 20; i++) {
-      upcomingSessions.add(
-        _UpcomingSession(
-          mentorName: 'Mentor ${i + 1}',
-          dateTime: DateTime.now()
-              .add(Duration(days: i, hours: i * 7, minutes: i * 13 + 4)),
-        ),
-      );
-    }
+    upcomingSessions.addAll([
+      _UpcomingSession(
+        mentorName: 'Marina Larissa',
+        dateTime: DateTime.now().copyWith(hour: 8, minute: 0, second: 0),
+      ),
+      _UpcomingSession(
+        mentorName: 'Hodan Clemens',
+        dateTime: DateTime.now()
+            .copyWith(hour: 13, minute: 30, second: 0)
+            .add(const Duration(days: 1)),
+      ),
+      _UpcomingSession(
+        mentorName: 'Julius Helier',
+        dateTime: DateTime.now()
+            .copyWith(hour: 8, minute: 0, second: 0)
+            .add(const Duration(days: 2)),
+      ),
+      _UpcomingSession(
+        mentorName: 'Rosanne Alesha',
+        dateTime: DateTime.now()
+            .copyWith(hour: 16, minute: 0, second: 0)
+            .add(const Duration(days: 3)),
+      ),
+      _UpcomingSession(
+        mentorName: 'Junaid Maqsood',
+        dateTime: DateTime.now()
+            .copyWith(hour: 15, minute: 45, second: 0)
+            .add(const Duration(days: 4)),
+      ),
+    ]);
     return upcomingSessions;
   }
 
@@ -50,8 +70,11 @@ class UpcomingSection extends StatelessWidget {
       title: 'You have ${upcomingSessionTiles.length} upcoming sessions',
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Row(
-          children: upcomingSessionTiles,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            children: upcomingSessionTiles,
+          ),
         ),
       ),
     );

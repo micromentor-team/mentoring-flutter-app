@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mm_flutter_app/themes/palette.dart';
 
 class Styles {
@@ -17,5 +16,15 @@ class Styles {
     color: Palette.kTextMediumEmphasis,
     fontWeight: FontWeight.w500,
     fontSize: 14.0,
+  );
+  static const TextStyle mentorCardTitle = TextStyle(
+    color: Palette.kTextHighEmphasis,
+    fontWeight: FontWeight.w900,
+    fontSize: 12.0,
+  );
+  static const TextStyle mentorCardSubtitle = TextStyle(
+    color: Palette.kTextMediumEmphasis,
+    fontWeight: FontWeight.w500,
+    fontSize: 12.0,
   );
 }

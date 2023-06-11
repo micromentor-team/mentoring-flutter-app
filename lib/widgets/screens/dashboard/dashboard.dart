@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
@@ -9,6 +7,7 @@ import 'package:mm_flutter_app/widgets/molecules/match_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/mentors_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
+import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -45,6 +44,7 @@ class DashboardScreen extends StatelessWidget {
                 ProfileHeader(
                   avatarUrl: user.avatarUrl,
                   profileMessage: _getGreeting(user),
+                  profileCompletionPercentage: 1.00,
                 ),
                 const UpcomingSection(),
                 const MatchSection(),

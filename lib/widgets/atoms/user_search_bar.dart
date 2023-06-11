@@ -41,6 +41,8 @@ class UserSearchDelegate extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     return IconButton(
       onPressed: () {
+        // Hide onscreen keyboard.
+        FocusScope.of(context).unfocus();
         // Return to previous page.
         close(context, null);
       },
