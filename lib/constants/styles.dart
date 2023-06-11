@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/palette.dart';
+part of 'constants.dart';
 
 class Styles {
+  const Styles._private();
   static const TextStyle sectionHeader = TextStyle(
     color: Palette.kTextHighEmphasis,
     fontWeight: FontWeight.bold,
@@ -26,5 +26,14 @@ class Styles {
     color: Palette.kTextMediumEmphasis,
     fontWeight: FontWeight.w500,
     fontSize: 12.0,
+  );
+  static const TextStyle profileHeader = TextStyle(
+    color: Palette.kTextHighEmphasis,
+    fontSize: 24.0,
+    overflow: TextOverflow.ellipsis,
+  );
+  static const TextStyle smallTextButton = TextStyle(
+    fontSize: 12.0,
+    color: Colors.white,
   );
 }

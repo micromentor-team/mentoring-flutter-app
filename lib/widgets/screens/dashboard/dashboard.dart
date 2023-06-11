@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
@@ -36,7 +37,7 @@ class DashboardScreen extends StatelessWidget {
               children: [
                 const Divider(thickness: 4.0, height: 4.0),
                 const Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(Insets.appEdgeInsetCompact),
                   child: UserSearchBar(
                     hintText: 'Search for a mentor',
                   ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/palette.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String? avatarUrl;
@@ -20,7 +20,7 @@ class ProfileHeader extends StatelessWidget {
         maxHeight: 200,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(Insets.widgetLargeInset),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,7 +37,7 @@ class ProfileHeader extends StatelessWidget {
                     ),
                   ),
                 CircleAvatar(
-                  radius: 48,
+                  radius: Corners.avatarRadiusLarge,
                   backgroundImage: avatarUrl != null
                       ? NetworkImage(avatarUrl.toString())
                       : null,
@@ -47,16 +47,14 @@ class ProfileHeader extends StatelessWidget {
             ),
             Flexible(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(24.0, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(
+                    Insets.widgetMediumLargeInset, 0, 0, 0),
                 child: Text(
                   profileMessage,
                   textAlign: TextAlign.start,
                   maxLines: 3,
                   softWrap: true,
-                  style: const TextStyle(
-                    fontSize: 24.0,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  style: Styles.profileHeader,
                 ),
               ),
             )

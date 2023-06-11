@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_session_tile.dart';
 
@@ -71,7 +72,8 @@ class UpcomingSection extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding:
+              const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
           child: Row(
             children: upcomingSessionTiles,
           ),

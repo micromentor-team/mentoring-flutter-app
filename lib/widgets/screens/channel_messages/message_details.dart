@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 import 'package:mm_flutter_app/data/models/channels/channel.dart';
 import 'package:mm_flutter_app/data/models/messages/message.dart';
 import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
-import 'package:mm_flutter_app/themes/palette.dart';
 import 'package:provider/provider.dart';
 
 import 'message_bubble/message_bubble.dart';

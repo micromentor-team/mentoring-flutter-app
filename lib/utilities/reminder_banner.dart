@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-
-import 'package:mm_flutter_app/themes/palette.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 class ReminderBanner {
   static void showReminderBanner(
       BuildContext context, Icon? icon, String text, Function() onOpenPressed) {
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(Insets.widgetMediumInset),
         content: Text(text),
         leading: icon,
-        backgroundColor: Colors.white70,
         actions: [
           TextButton(
             onPressed: onOpenPressed,

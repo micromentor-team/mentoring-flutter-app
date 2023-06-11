@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 
@@ -48,7 +49,8 @@ class MentorsSection extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding:
+              const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
           child: Row(
             children: _createMentorTiles(),
           ),

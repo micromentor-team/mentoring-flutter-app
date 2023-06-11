@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/styles.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 class SectionTile extends StatelessWidget {
   final String title;
@@ -17,14 +17,14 @@ class SectionTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(Insets.widgetMediumInset),
           child: Text(
             title,
             style: Styles.sectionHeader,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, Insets.widgetMediumInset),
           child: Center(
             child: child,
           ),

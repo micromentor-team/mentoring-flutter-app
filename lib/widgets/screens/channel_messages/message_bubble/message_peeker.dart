@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/palette.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 // 🚨 IF YOU ARE PROVIDING THE CONTROLLER YOU MUST DISPOSE MANUALLY
 

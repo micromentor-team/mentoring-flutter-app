@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/styles.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 class ResourceTile extends StatelessWidget {
   final Widget icon;

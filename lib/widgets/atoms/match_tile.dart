@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/styles.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/rectangle_button.dart';
 
 class MatchTile extends StatelessWidget {
@@ -23,14 +23,17 @@ class MatchTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(
+          horizontal: Insets.widgetMediumInset,
+          vertical: Insets.widgetSmallInset / 2),
       child: Card(
         elevation: 4.0,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 8.0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(
+                  Insets.widgetMediumInset, Insets.widgetSmallInset, 0, 0),
               child: Text(
                 header,
                 style: Styles.cardTitle,
@@ -38,10 +41,10 @@ class MatchTile extends StatelessWidget {
             ),
             ListTile(
               leading: CircleAvatar(
-                radius: 24,
+                radius: Corners.avatarRadiusSmall,
                 backgroundImage:
                     avatarUrl != null ? NetworkImage(avatarUrl!) : null,
-                backgroundColor: Colors.grey,
+                backgroundColor: Palette.kEmptyElement,
               ),
               title: Text(
                 userName,

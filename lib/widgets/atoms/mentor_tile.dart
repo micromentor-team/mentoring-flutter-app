@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:mm_flutter_app/themes/styles.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 class MentorTile extends StatelessWidget {
   final String avatarUrl;
@@ -17,7 +16,7 @@ class MentorTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(Insets.widgetSmallInset),
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           minWidth: 112,
@@ -27,9 +26,9 @@ class MentorTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircleAvatar(
-              radius: 40,
+              radius: Corners.avatarRadiusMedium,
               backgroundImage: NetworkImage(avatarUrl.toString()),
-              backgroundColor: Colors.white60,
+              backgroundColor: Palette.kEmptyElement,
             ),
             Text(
               mentorName,

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'dart:math';
+part of 'constants.dart';
 
 // https://materialpalettes.com/
 // https://maketintsandshades.com/#fda500
@@ -8,6 +7,7 @@ import 'dart:math';
 @immutable
 // 🎨  Defines our global common ChannelTime colors
 class Palette {
+  const Palette._private();
   static const Color kLogoColor = Color(0xFF048CFF);
   static const Color kDarkAppBarColor = Color(0xFF404040);
   static const Color kBlueColor = Color(0xFF048CFF);
@@ -19,8 +19,7 @@ class Palette {
   static const Color kTextHighEmphasis = Color(0xDD000000);
   static const Color kTextMediumEmphasis = Color(0x99000000);
   static const Color kTextDisabled = Color(0x62000000);
-
-  const Palette();
+  static const Color kEmptyElement = Colors.grey;
 }
 
 //  ✨ 🪄  Where a MaterialColor is required, create an accurate swatch of shades

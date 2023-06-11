@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import 'package:mm_flutter_app/themes/styles.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/rectangle_button.dart';
 
 class UpcomingSessionTile extends StatelessWidget {
@@ -20,7 +19,7 @@ class UpcomingSessionTile extends StatelessWidget {
     // Add JOIN button only if session is coming up soon.
     if (DateTime.now().isAfter(dateTime.subtract(joinMinimumTime))) {
       buttons.add(Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 8.0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 0, Insets.widgetSmallInset, 0),
         child: RectangleButton(
           onPressed: () => {},
           text: "JOIN",
@@ -39,11 +38,11 @@ class UpcomingSessionTile extends StatelessWidget {
     // TODO(m-rosario): Support different date formats according to locale.
     DateFormat dateFormat = DateFormat('MMMM d, ').add_jm();
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(Insets.widgetSmallInset),
       child: Card(
         elevation: 4.0,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(Insets.widgetSmallInset),
           child: SizedBox(
             width: 184,
             height: 96,
@@ -60,7 +59,7 @@ class UpcomingSessionTile extends StatelessWidget {
                 ),
                 const SizedBox(
                   width: 0,
-                  height: 8.0,
+                  height: Insets.widgetSmallInset,
                 ),
                 Row(
                   children: _createSessionButtons(),

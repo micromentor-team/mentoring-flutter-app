@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/palette.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 import '../sign_up/sign_up_screen.dart';
 

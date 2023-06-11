@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:mm_flutter_app/constants/constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/resource_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 
@@ -38,7 +38,8 @@ class ResourcesSection extends StatelessWidget {
     return SectionTile(
       title: 'Recommended Tools & Resources',
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding:
+            const EdgeInsets.symmetric(horizontal: Insets.widgetMediumInset),
         child: Column(
           children: _createResourceTiles(),
         ),

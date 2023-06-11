@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/palette.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 class RectangleButton extends StatelessWidget {
   final void Function() onPressed;
@@ -17,19 +17,16 @@ class RectangleButton extends StatelessWidget {
       onPressed: onPressed,
       style: TextButton.styleFrom(
         backgroundColor: Palette.kLogoColor,
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(Insets.widgetSmallInset),
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.all(Radius.circular(Corners.buttonRadius)),
         ),
       ),
       child: Text(
         text,
         maxLines: 1,
         overflow: TextOverflow.fade,
-        style: const TextStyle(
-          fontSize: 12.0,
-          color: Colors.white,
-        ),
+        style: Styles.smallTextButton,
       ),
     );
   }
