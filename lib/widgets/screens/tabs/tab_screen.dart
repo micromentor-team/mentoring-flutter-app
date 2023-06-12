@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/widgets/screens/dashboard/dashboard.dart';
+import 'package:mm_flutter_app/widgets/screens/home_menu/home_menu.dart';
 import 'package:mm_flutter_app/widgets/screens/messages/messages_screen.dart';
-
-import '../home_menu/home_menu.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
