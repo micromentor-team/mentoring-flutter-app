@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../screens/home/dialog_and_rating.dart';
 
 class SearchContainer extends StatelessWidget {
   final Function(String)? onChanged;
@@ -13,22 +12,6 @@ class SearchContainer extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Row(
-              children: [
-                const Icon(Icons.account_circle),
-                const SizedBox(
-                  width: 5,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      filterDialog(context);
-                    },
-                    child: const Icon(Icons.tune_sharp)),
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
             SizedBox(
                 height: 35,
                 child: TextField(
