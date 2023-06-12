@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/atoms/app_wrapper.dart';
 import 'package:mm_flutter_app/widgets/screens/home/home.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'data/models/user/user_provider.dart';
@@ -30,6 +31,11 @@ class TestApp extends StatelessWidget {
           return const SignInScreen();
         },
       ),
+      GoRoute(
+          path: '/signup',
+          builder: (BuildContext context, GoRouterState state) {
+            return const SignUpScreen();
+          }),
       GoRoute(
         path: '/loading',
         builder: (BuildContext context, GoRouterState state) {
