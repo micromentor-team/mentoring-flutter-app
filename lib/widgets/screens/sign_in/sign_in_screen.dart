@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -141,7 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: ElevatedButton(
                               key: const Key('btnSignIn'),
                               onPressed: () async {
-                                final navigator = Navigator.of(context);
+                                final router = GoRouter.of(context);
                                 final scaffoldManager =
                                     ScaffoldMessenger.of(context);
 
@@ -173,8 +174,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                       passwordController.text = '';
                                     }
                                   } else {
-                                    navigator.pushNamedAndRemoveUntil(
-                                        '/', (Route<dynamic> route) => false);
+                                    router.push('/');
                                   }
                                 }
                               },
