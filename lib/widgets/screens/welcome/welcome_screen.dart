@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/themes/palette.dart';
 
-import '../sign_up/sign_up_screen.dart';
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
@@ -21,23 +19,11 @@ class SignInSignUp extends StatelessWidget {
   const SignInSignUp({super.key});
 
   void _openSignUpScreen(context) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return const SignUpScreen();
-        },
-      ),
-    );
+    context.go('/signup');
   }
 
   void _openSignInScreen(context) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return const SignUpScreen();
-        },
-      ),
-    );
+    context.go('/signin');
   }
 
   @override
