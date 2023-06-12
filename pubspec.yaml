@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   graphql_flutter: ^5.1.2
   shared_preferences: ^2.0.17
-  intl: ^0.18.0
+  intl: any
   flutter_dotenv: ^5.0.2
   provider: ^6.0.5
   uuid: ^3.0.7
@@ -55,6 +55,8 @@ dependencies:
   mocktail: ^0.3.0
   email_validator: ^2.1.17
   go_router: ^7.1.1
+  flutter_localizations:
+    sdk: flutter
 
 
 dev_dependencies:
@@ -98,7 +100,8 @@ flutter_icons:
     image_path: "assets/icon/iconcircle.png"
 # The following section is specific to Flutter packages.
 flutter:
-
+  # Ensures that the translated files are generated
+  generate: true 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
