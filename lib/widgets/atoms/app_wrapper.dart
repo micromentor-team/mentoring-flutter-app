@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /*
  * Contains bottom navigation bar and app bar
@@ -68,26 +69,26 @@ class _AppWrapperState extends State<AppWrapper> {
           )),
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.home),
+            label: AppLocalizations.of(context)!.navHomeText,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
+            icon: const Icon(Icons.explore),
+            label: AppLocalizations.of(context)!.navExploreText,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.auto_graph),
-            label: 'Journey',
+            icon: const Icon(Icons.auto_graph),
+            label: AppLocalizations.of(context)!.navJourneyText,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.inbox),
-            label: 'Inbox',
+            icon: const Icon(Icons.inbox),
+            label: AppLocalizations.of(context)!.navInboxText,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: const Icon(Icons.person),
+            label: AppLocalizations.of(context)!.navProfileText,
           ),
         ],
         currentIndex: _calculateSelectedIndex(context),

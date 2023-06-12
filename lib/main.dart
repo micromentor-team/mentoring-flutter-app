@@ -10,11 +10,12 @@ import 'package:mm_flutter_app/widgets/screens/home/home.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'data/models/user/user_provider.dart';
 
-class TestApp extends StatelessWidget {
-  const TestApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,25 +57,29 @@ class TestApp extends StatelessWidget {
           GoRoute(
             path: '/explore',
             builder: (BuildContext context, GoRouterState state) {
-              return const Center(child: Text('Explore'));
+              return Center(
+                  child: Text(AppLocalizations.of(context)!.navExploreText));
             },
           ),
           GoRoute(
             path: '/journey',
             builder: (BuildContext context, GoRouterState state) {
-              return const Center(child: Text('Journey'));
+              return Center(
+                  child: Text(AppLocalizations.of(context)!.navJourneyText));
             },
           ),
           GoRoute(
             path: '/inbox',
             builder: (BuildContext context, GoRouterState state) {
-              return const Center(child: Text('Inbox'));
+              return Center(
+                  child: Text(AppLocalizations.of(context)!.navInboxText));
             },
           ),
           GoRoute(
             path: '/profile',
             builder: (BuildContext context, GoRouterState state) {
-              return const Center(child: Text('Profile'));
+              return Center(
+                  child: Text(AppLocalizations.of(context)!.navProfileText));
             },
           ),
         ],
@@ -84,6 +89,9 @@ class TestApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       title: "MicroMentor",
+      locale: const Locale('en'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
@@ -162,7 +170,7 @@ void main() async {
               ChangeNotifierProvider(
                   create: (context) => MessagesProvider(client: client)),
             ],
-            child: const TestApp(),
+            child: const MainApp(),
           );
         },
       ),
