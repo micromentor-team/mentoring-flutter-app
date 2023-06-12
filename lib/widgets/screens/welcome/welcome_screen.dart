@@ -23,7 +23,7 @@ class SignInSignUp extends StatelessWidget {
   }
 
   void _openSignInScreen(context) {
-    context.go('/signup');
+    context.go('/signin');
   }
 
   @override
