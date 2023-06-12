@@ -3,29 +3,29 @@ import 'package:mm_flutter_app/constants/constants.dart';
 
 class ReminderBanner {
   static void showReminderBanner(
-      BuildContext context, Icon? icon, String text, Function() onOpenPressed) {
+    BuildContext context,
+    Icon? icon,
+    String text,
+    void Function() onOpenPressed,
+    void Function() onDismissPressed,
+  ) {
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
-        padding: const EdgeInsets.all(Insets.widgetMediumInset),
         content: Text(text),
         leading: icon,
         actions: [
           TextButton(
             onPressed: onOpenPressed,
-            child: const Text(
+            child: Text(
               'OPEN',
-              style: TextStyle(
-                color: Palette.kTextMediumEmphasis,
-              ),
+              style: TextStyles.bannerAction(context),
             ),
           ),
           TextButton(
-            onPressed: () => ReminderBanner.hideReminderBanner(context),
-            child: const Text(
+            onPressed: () => onDismissPressed,
+            child: Text(
               'DISMISS',
-              style: TextStyle(
-                color: Palette.kTextMediumEmphasis,
-              ),
+              style: TextStyles.bannerAction(context),
             ),
           ),
         ],

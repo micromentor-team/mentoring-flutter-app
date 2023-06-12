@@ -1,10 +1,9 @@
 library constants;
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-part 'insets.dart';
-part 'palette.dart';
-part 'shapes.dart';
+part 'components.dart';
+part 'dimensions.dart';
+part 'schemes.dart';
 part 'styles.dart';
+part 'themes.dart';

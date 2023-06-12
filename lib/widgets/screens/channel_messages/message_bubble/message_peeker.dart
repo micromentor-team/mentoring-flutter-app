@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/constants.dart';
 
 // 🚨 IF YOU ARE PROVIDING THE CONTROLLER YOU MUST DISPOSE MANUALLY
 
@@ -126,7 +125,8 @@ class _MessagePeekerState extends State<MessagePeeker>
                 child: Icon(
                   Icons.reply,
                   size: widget.iconSize ?? 24,
-                  color: widget.iconColor ?? Palette.kLogoColor,
+                  color:
+                      widget.iconColor ?? Theme.of(context).colorScheme.primary,
                 ),
               ),
             ],

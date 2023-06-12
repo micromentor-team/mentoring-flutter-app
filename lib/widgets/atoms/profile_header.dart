@@ -15,51 +15,45 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxHeight: 200,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(Insets.widgetLargeInset),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                if (profileCompletionPercentage != null)
-                  SizedBox(
-                    width: 96.0,
-                    height: 96.0,
-                    child: CircularProgressIndicator(
-                      value: profileCompletionPercentage,
-                      color: Palette.kBlueColor,
-                    ),
+    return Padding(
+      padding: const EdgeInsets.all(Insets.widgetLargeInset),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              if (profileCompletionPercentage != null)
+                SizedBox(
+                  width: Radii.avatarRadiusLarge * 2,
+                  height: Radii.avatarRadiusLarge * 2,
+                  child: CircularProgressIndicator(
+                    value: profileCompletionPercentage,
                   ),
-                CircleAvatar(
-                  radius: Corners.avatarRadiusLarge,
-                  backgroundImage: avatarUrl != null
-                      ? NetworkImage(avatarUrl.toString())
-                      : null,
-                  backgroundColor: Colors.grey,
                 ),
-              ],
-            ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                    Insets.widgetMediumLargeInset, 0, 0, 0),
-                child: Text(
-                  profileMessage,
-                  textAlign: TextAlign.start,
-                  maxLines: 3,
-                  softWrap: true,
-                  style: Styles.profileHeader,
-                ),
+              CircleAvatar(
+                radius: Radii.avatarRadiusLarge,
+                backgroundImage: avatarUrl != null
+                    ? NetworkImage(avatarUrl.toString())
+                    : null,
               ),
-            )
-          ],
-        ),
+            ],
+          ),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                  Insets.widgetMediumLargeInset, 0, 0, 0),
+              child: Text(
+                profileMessage,
+                textAlign: TextAlign.start,
+                maxLines: 3,
+                softWrap: true,
+                style: TextStyles.profileHeader(context),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

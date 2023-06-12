@@ -15,18 +15,11 @@ class RectangleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      style: TextButton.styleFrom(
-        backgroundColor: Palette.kLogoColor,
-        padding: const EdgeInsets.all(Insets.widgetSmallInset),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(Corners.buttonRadius)),
-        ),
-      ),
       child: Text(
         text,
         maxLines: 1,
         overflow: TextOverflow.fade,
-        style: Styles.smallTextButton,
+        style: TextStyles.smallTextButton(context),
       ),
     );
   }

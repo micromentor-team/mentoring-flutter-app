@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
 import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
@@ -85,7 +86,8 @@ class TestApp extends StatelessWidget {
       routerConfig: router,
       title: "MicroMentor",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: true),
+      theme: AppThemes.light(),
+      darkTheme: AppThemes.dark(),
     );
   }
 }

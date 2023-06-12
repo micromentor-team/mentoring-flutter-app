@@ -19,7 +19,7 @@ class ResourceTile extends StatelessWidget {
       leading: icon,
       title: Text(
         text,
-        style: Styles.cardSubtitle,
+        style: TextStyles.resourceTitle(context),
       ),
       onTap: onPress,
     );

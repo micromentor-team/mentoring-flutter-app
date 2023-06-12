@@ -35,7 +35,6 @@ class DashboardScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                const Divider(thickness: 4.0, height: 4.0),
                 const Padding(
                   padding: EdgeInsets.all(Insets.appEdgeInsetCompact),
                   child: UserSearchBar(
@@ -51,7 +50,6 @@ class DashboardScreen extends StatelessWidget {
                 const MatchSection(),
                 const MentorsSection(),
                 const ResourcesSection(),
-                const Divider(thickness: 4.0, height: 4.0),
               ],
             ),
           ),

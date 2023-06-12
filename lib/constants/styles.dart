@@ -1,39 +1,49 @@
 part of 'constants.dart';
 
-class Styles {
-  const Styles._private();
-  static const TextStyle sectionHeader = TextStyle(
-    color: Palette.kTextHighEmphasis,
-    fontWeight: FontWeight.bold,
-    fontSize: 16.0,
-  );
-  static const TextStyle cardTitle = TextStyle(
-    color: Palette.kTextHighEmphasis,
-    fontWeight: FontWeight.w900,
-    fontSize: 14.0,
-  );
-  static const TextStyle cardSubtitle = TextStyle(
-    color: Palette.kTextMediumEmphasis,
-    fontWeight: FontWeight.w500,
-    fontSize: 14.0,
-  );
-  static const TextStyle mentorCardTitle = TextStyle(
-    color: Palette.kTextHighEmphasis,
-    fontWeight: FontWeight.w900,
-    fontSize: 12.0,
-  );
-  static const TextStyle mentorCardSubtitle = TextStyle(
-    color: Palette.kTextMediumEmphasis,
-    fontWeight: FontWeight.w500,
-    fontSize: 12.0,
-  );
-  static const TextStyle profileHeader = TextStyle(
-    color: Palette.kTextHighEmphasis,
-    fontSize: 24.0,
-    overflow: TextOverflow.ellipsis,
-  );
-  static const TextStyle smallTextButton = TextStyle(
-    fontSize: 12.0,
-    color: Colors.white,
-  );
+class TextStyles {
+  const TextStyles._private();
+
+  static TextStyle? sectionHeader(BuildContext context) {
+    return Theme.of(context).textTheme.titleSmall;
+  }
+
+  static TextStyle? cardTitle(BuildContext context) {
+    return Theme.of(context)
+        .textTheme
+        .labelLarge!
+        .copyWith(fontWeight: FontWeight.w800);
+  }
+
+  static TextStyle? cardSubtitle(BuildContext context) {
+    return Theme.of(context).textTheme.labelMedium;
+  }
+
+  static TextStyle? resourceTitle(BuildContext context) {
+    return Theme.of(context).textTheme.titleSmall;
+  }
+
+  static TextStyle? mentorCardTitle(BuildContext context) {
+    return Theme.of(context)
+        .textTheme
+        .labelMedium!
+        .copyWith(fontWeight: FontWeight.w800);
+  }
+
+  static TextStyle? mentorCardSubtitle(BuildContext context) {
+    return Theme.of(context).textTheme.labelMedium;
+  }
+
+  static TextStyle? profileHeader(BuildContext context) {
+    return Theme.of(context).textTheme.headlineSmall;
+  }
+
+  static TextStyle? smallTextButton(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.labelMedium!
+        .copyWith(color: theme.colorScheme.onPrimary);
+  }
+
+  static TextStyle? bannerAction(BuildContext context) {
+    return Theme.of(context).textTheme.labelMedium;
+  }
 }

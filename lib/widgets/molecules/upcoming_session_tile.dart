@@ -40,31 +40,31 @@ class UpcomingSessionTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(Insets.widgetSmallInset),
       child: Card(
-        elevation: 4.0,
         child: Padding(
           padding: const EdgeInsets.all(Insets.widgetSmallInset),
-          child: SizedBox(
-            width: 184,
-            height: 96,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  mentorName,
-                  style: Styles.cardTitle,
-                ),
-                Text(
-                  dateFormat.format(dateTime),
-                  style: Styles.cardSubtitle,
-                ),
-                const SizedBox(
-                  width: 0,
-                  height: Insets.widgetSmallInset,
-                ),
-                Row(
-                  children: _createSessionButtons(),
-                )
-              ],
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: SizedBox(
+              width: Dimensions.upcomingSessionTile.width,
+              height: Dimensions.upcomingSessionTile.height,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    mentorName,
+                    style: TextStyles.cardTitle(context),
+                  ),
+                  const SizedBox(height: Insets.widgetSmallestInset),
+                  Text(
+                    dateFormat.format(dateTime),
+                    style: TextStyles.cardSubtitle(context),
+                  ),
+                  const Expanded(child: SizedBox()),
+                  Row(
+                    children: _createSessionButtons(),
+                  )
+                ],
+              ),
             ),
           ),
         ),

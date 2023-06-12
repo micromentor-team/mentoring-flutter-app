@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/constants.dart';
 
 class UserSearchBar extends StatelessWidget {
   final String? hintText;
@@ -25,7 +26,7 @@ class UserSearchDelegate extends SearchDelegate {
   List<Widget>? buildActions(BuildContext context) {
     return [
       Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 8.0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 0, Insets.widgetSmallInset, 0),
         child: IconButton(
           onPressed: () {
             // Clear the search box.

@@ -24,10 +24,10 @@ class MatchTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: Insets.widgetMediumInset,
-          vertical: Insets.widgetSmallInset / 2),
+        horizontal: Insets.widgetMediumInset,
+        vertical: Insets.widgetSmallestInset,
+      ),
       child: Card(
-        elevation: 4.0,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,28 +36,27 @@ class MatchTile extends StatelessWidget {
                   Insets.widgetMediumInset, Insets.widgetSmallInset, 0, 0),
               child: Text(
                 header,
-                style: Styles.cardTitle,
+                style: TextStyles.cardTitle(context),
               ),
             ),
             ListTile(
               leading: CircleAvatar(
-                radius: Corners.avatarRadiusSmall,
+                radius: Radii.avatarRadiusSmall,
                 backgroundImage:
                     avatarUrl != null ? NetworkImage(avatarUrl!) : null,
-                backgroundColor: Palette.kEmptyElement,
               ),
               title: Text(
                 userName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              titleTextStyle: Styles.cardTitle,
+              titleTextStyle: TextStyles.cardTitle(context),
               subtitle: Text(
                 userLocation,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              subtitleTextStyle: Styles.mentorCardSubtitle,
+              subtitleTextStyle: TextStyles.mentorCardSubtitle(context),
               trailing: RectangleButton(
                 onPressed: buttonOnPressed,
                 text: buttonText,

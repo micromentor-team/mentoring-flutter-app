@@ -17,26 +17,26 @@ class MentorTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(Insets.widgetSmallInset),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          minWidth: 112,
-          maxWidth: 112,
-        ),
+      child: SizedBox(
+        width: Dimensions.recommendedMentorTileWidth,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
-              radius: Corners.avatarRadiusMedium,
-              backgroundImage: NetworkImage(avatarUrl.toString()),
-              backgroundColor: Palette.kEmptyElement,
+            Padding(
+              padding:
+                  const EdgeInsets.fromLTRB(0, 0, 0, Insets.widgetSmallInset),
+              child: CircleAvatar(
+                radius: Radii.avatarRadiusMedium,
+                backgroundImage: NetworkImage(avatarUrl.toString()),
+              ),
             ),
             Text(
               mentorName,
-              style: Styles.mentorCardTitle,
+              style: TextStyles.mentorCardTitle(context),
             ),
             Text(
               mentorLocation,
-              style: Styles.mentorCardSubtitle,
+              style: TextStyles.mentorCardSubtitle(context),
             ),
           ],
         ),

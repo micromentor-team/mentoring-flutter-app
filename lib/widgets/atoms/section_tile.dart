@@ -20,7 +20,7 @@ class SectionTile extends StatelessWidget {
           padding: const EdgeInsets.all(Insets.widgetMediumInset),
           child: Text(
             title,
-            style: Styles.sectionHeader,
+            style: TextStyles.sectionHeader(context),
           ),
         ),
         Padding(
