@@ -14,15 +14,6 @@ class AppThemes {
       cardTheme: const CardTheme(
         elevation: Elevations.level2,
       ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          backgroundColor: colorScheme.primary,
-          padding: const EdgeInsets.all(Insets.widgetSmallInset),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(Radii.buttonRadius)),
-          ),
-        ),
-      ),
     );
   }
 
