@@ -13,6 +13,7 @@ import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'data/models/user/user_provider.dart';
+import 'widgets/screens/explore/explore.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -57,8 +58,7 @@ class MainApp extends StatelessWidget {
           GoRoute(
             path: '/explore',
             builder: (BuildContext context, GoRouterState state) {
-              return Center(
-                  child: Text(AppLocalizations.of(context)!.navExploreText));
+              return const Explore();
             },
           ),
           GoRoute(
