@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
@@ -44,8 +45,9 @@ class MentorsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return SectionTile(
-      title: 'Recommended Mentors',
+      title: l10n.homeMentorsSectionTitle,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
