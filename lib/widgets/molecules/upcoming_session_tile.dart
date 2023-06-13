@@ -41,7 +41,10 @@ class UpcomingSessionTile extends StatelessWidget {
       padding: const EdgeInsets.all(Insets.widgetSmallInset),
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.all(Insets.widgetSmallInset),
+          padding: const EdgeInsets.symmetric(
+            vertical: Insets.widgetSmallInset,
+            horizontal: Insets.widgetMediumInset,
+          ),
           child: Align(
             alignment: Alignment.topLeft,
             child: SizedBox(
