@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/constants.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/rectangle_button.dart';
 
 class MatchTile extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/constants/constants.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/rectangle_button.dart';
 
 class UpcomingSessionTile extends StatelessWidget {

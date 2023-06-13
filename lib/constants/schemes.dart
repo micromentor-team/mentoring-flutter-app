@@ -1,4 +1,4 @@
-part of 'constants.dart';
+part of 'app_constants.dart';
 
 class ColorSchemes {
   const ColorSchemes._private();

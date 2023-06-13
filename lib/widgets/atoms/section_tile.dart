@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/constants.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class SectionTile extends StatelessWidget {
   final String title;

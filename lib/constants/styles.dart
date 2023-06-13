@@ -1,4 +1,4 @@
-part of 'constants.dart';
+part of 'app_constants.dart';
 
 class TextStyles {
   const TextStyles._private();

@@ -1,4 +1,4 @@
-part of 'constants.dart';
+part of 'app_constants.dart';
 
 class AppThemes {
   AppThemes._private();
