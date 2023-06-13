@@ -130,7 +130,7 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Loading();
+    return const Scaffold(body: Loading());
   }
 }
 
