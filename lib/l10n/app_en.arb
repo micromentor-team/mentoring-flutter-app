@@ -3,5 +3,14 @@
     "navExploreText": "Explore",
     "navJourneyText": "Journey",
     "navInboxText": "Inbox",
-    "navProfileText": "Profile"
+    "navProfileText": "Profile",
+    "mentors": "Mentors",
+    "entrepeneurs": "Entrepeneurs",
+    "india": "India",
+    "marketing": "Marketing",
+    "online": "Online",
+    "filters": "Show filters",
+    "searchHint": "Search by name or keyword",
+    "quickMatchDesc": "Find a mentor",
+    "quickMatch": "Quick match"
 }
