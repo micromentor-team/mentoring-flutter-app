@@ -23,8 +23,7 @@ class MentorTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.fromLTRB(0, 0, 0, Insets.widgetSmallInset),
+              padding: const EdgeInsets.only(bottom: Insets.widgetSmallInset),
               child: CircleAvatar(
                 radius: Radii.avatarRadiusMedium,
                 backgroundImage: NetworkImage(avatarUrl.toString()),

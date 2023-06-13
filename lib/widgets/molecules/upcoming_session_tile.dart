@@ -20,7 +20,9 @@ class UpcomingSessionTile extends StatelessWidget {
     // Add JOIN button only if session is coming up soon.
     if (DateTime.now().isAfter(dateTime.subtract(joinMinimumTime))) {
       buttons.add(Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, Insets.widgetSmallInset, 0),
+        padding: const EdgeInsets.only(
+          right: Insets.widgetSmallInset,
+        ),
         child: RectangleButton(
           onPressed: () => {},
           text: l10n.homeUpcomingSessionJoin,

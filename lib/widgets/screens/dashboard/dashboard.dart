@@ -38,7 +38,9 @@ class DashboardScreen extends StatelessWidget {
             child: ListView(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(Insets.appEdgeInsetCompact),
+                  padding: const EdgeInsets.all(
+                    Insets.appEdgeInsetCompact,
+                  ),
                   child: UserSearchBar(
                     hintText: l10n.homeSearchHint,
                   ),

@@ -40,8 +40,9 @@ class ResourcesSection extends StatelessWidget {
     return SectionTile(
       title: l10n.homeResourcesSectionTitle,
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: Insets.widgetMediumInset),
+        padding: const EdgeInsets.symmetric(
+          horizontal: Insets.widgetMediumInset,
+        ),
         child: Column(
           children: _createResourceTiles(l10n),
         ),

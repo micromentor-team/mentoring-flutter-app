@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 /*
  * Contains bottom navigation bar and app bar
@@ -60,9 +61,9 @@ class _AppWrapperState extends State<AppWrapper> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              "assets/images/MicroMentor.png",
+              Assets.brandLogo,
               fit: BoxFit.contain,
-              height: 32,
+              height: Dimensions.appBarHeight,
             ),
           ],
         ),

@@ -51,8 +51,9 @@ class MentorsSection extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
+          padding: const EdgeInsets.symmetric(
+            horizontal: Insets.widgetSmallInset,
+          ),
           child: Row(
             children: _createMentorTiles(),
           ),

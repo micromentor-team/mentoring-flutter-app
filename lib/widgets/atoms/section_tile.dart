@@ -24,7 +24,7 @@ class SectionTile extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, Insets.widgetMediumInset),
+          padding: const EdgeInsets.only(bottom: Insets.widgetMediumInset),
           child: Center(
             child: child,
           ),
