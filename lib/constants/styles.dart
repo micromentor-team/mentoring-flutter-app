@@ -47,3 +47,16 @@ class TextStyles {
     return Theme.of(context).textTheme.labelMedium;
   }
 }
+
+class ButtonStyles {
+  ButtonStyles._private();
+  static ButtonStyle filledButton(BuildContext context) {
+    return TextButton.styleFrom(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(Radii.buttonRadius)),
+      ),
+    );
+  }
+}

@@ -15,6 +15,7 @@ class RectangleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
+      style: ButtonStyles.filledButton(context),
       child: Text(
         text,
         maxLines: 1,
