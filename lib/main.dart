@@ -6,12 +6,12 @@ import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/atoms/app_wrapper.dart';
+import 'package:mm_flutter_app/widgets/atoms/loading.dart';
 import 'package:mm_flutter_app/widgets/screens/home/home.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'data/models/user/user_provider.dart';
 
 class MainApp extends StatelessWidget {
@@ -125,16 +125,7 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Channels'),
-      ),
-      body: const Center(
-        child: CircularProgressIndicator(
-          strokeWidth: 4.0,
-        ),
-      ),
-    );
+    return const Loading();
   }
 }
 
