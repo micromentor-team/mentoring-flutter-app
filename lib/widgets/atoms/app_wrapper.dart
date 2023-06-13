@@ -17,17 +17,17 @@ class _AppWrapperState extends State<AppWrapper> {
   void _onItemTapped(int index) {
     switch (index) {
       case 0:
-        return context.go('/home');
+        context.push('/home');
       case 1:
-        return context.go('/explore');
+        context.push('/explore');
       case 2:
-        return context.go('/journey');
+        context.push('/journey');
       case 3:
-        return context.go('/inbox');
+        context.push('/inbox');
       case 4:
-        return context.go('/profile');
+        context.push('/profile');
       default:
-        return context.go('/');
+        context.push('/');
     }
   }
 
