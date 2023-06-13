@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mm_flutter_app/themes/palette.dart';
 import 'message_bubble.dart';
 
 class MessageHoverover extends StatefulWidget {
@@ -70,7 +69,7 @@ class _MessageHoveroverState extends State<MessageHoverover> {
               splashRadius: 20.0,
               icon: const Icon(Icons.reply),
               iconSize: widget.iconSize ?? 24,
-              color: widget.iconColor ?? Palette.kLogoColor,
+              color: widget.iconColor ?? Theme.of(context).colorScheme.primary,
               onPressed: _onButtonOne,
             ),
           ),
@@ -78,7 +77,7 @@ class _MessageHoveroverState extends State<MessageHoverover> {
             icon: const Icon(Icons.more_horiz),
             splashRadius: 20.0,
             iconSize: widget.iconSize ?? 24,
-            color: widget.iconColor ?? Palette.kLogoColor,
+            color: widget.iconColor ?? Theme.of(context).colorScheme.primary,
             onPressed: _onButtonTwo,
           ),
         ],

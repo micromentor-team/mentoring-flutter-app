@@ -56,17 +56,17 @@ class _AppWrapperState extends State<AppWrapper> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/MicroMentor.png",
-                fit: BoxFit.contain,
-                height: 32,
-              ),
-            ],
-          )),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/MicroMentor.png",
+              fit: BoxFit.contain,
+              height: 32,
+            ),
+          ],
+        ),
+      ),
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[

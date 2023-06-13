@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
 import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/atoms/app_wrapper.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
-import 'package:mm_flutter_app/widgets/screens/home/home.dart';
+import 'package:mm_flutter_app/widgets/screens/dashboard/dashboard.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'data/models/user/user_provider.dart';
 import 'widgets/screens/explore/explore.dart';
 
@@ -52,7 +54,7 @@ class MainApp extends StatelessWidget {
           GoRoute(
             path: '/home',
             builder: (BuildContext context, GoRouterState state) {
-              return const Center(child: HomeScreen());
+              return const Center(child: DashboardScreen());
             },
           ),
           GoRoute(
@@ -89,6 +91,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       title: "MicroMentor",
+      debugShowCheckedModeBanner: false,
+      theme: AppThemes.light(),
+      darkTheme: AppThemes.dark(),
       locale: const Locale('en'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

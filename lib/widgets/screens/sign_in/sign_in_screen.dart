@@ -205,7 +205,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         'Register for a new account',
                         style: GoogleFonts.poppins(
                           fontSize: 16,
-                          color: Colors.blue,
+                          color: Theme.of(context).colorScheme.onPrimary,
                           fontWeight: FontWeight.w400,
                         ),
                       ),

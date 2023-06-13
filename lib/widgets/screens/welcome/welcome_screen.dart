@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/themes/palette.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -41,30 +40,30 @@ class SignInSignUp extends StatelessWidget {
             const SizedBox(height: 30),
             ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Palette.kLogoColor)),
+                  backgroundColor: MaterialStateProperty.all(
+                      Theme.of(context).colorScheme.primary)),
               onPressed: () {
                 _openSignUpScreen(context);
               },
-              child: const Text(
+              child: Text(
                 "Sign Up",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
             ),
             const SizedBox(height: 30),
             ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Palette.kLogoColor)),
+                  backgroundColor: MaterialStateProperty.all(
+                      Theme.of(context).colorScheme.primary)),
               onPressed: () async {
                 _openSignInScreen(context);
               },
-              child: const Text(
+              child: Text(
                 "Sign In",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
             ),
