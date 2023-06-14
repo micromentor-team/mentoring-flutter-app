@@ -41,8 +41,10 @@ const String kGetAuthenticatedUser = """
     getAuthenticatedUser {
       id
       email
+      firstName
       fullName
       avatarUrl
+      cityOfResidence
       userHandle
     }
   }
@@ -53,9 +55,11 @@ const String kGetAllUsers = """
     findUsers(filter: \$filter){
       id
       email
+      firstName
       fullName
       avatarUrl
       userHandle
+      cityOfResidence
     }
   }
 """;

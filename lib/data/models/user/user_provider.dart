@@ -212,7 +212,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUserData({name, email, adminNotes}) async {
+  Future<void> updateUserData({name, email, firstName, adminNotes}) async {
     final variables = {
       'input': {"id": user!.id}
     };
@@ -222,6 +222,9 @@ class UserProvider extends ChangeNotifier {
     if (email != null) {
       variables['input']!['email'] = email;
     }
+    // if (firstName != null) {
+    //   variables['input']!['firstName'] = firstName;
+    // }
     if (adminNotes != null) {
       variables['input']!['adminNotes'] = adminNotes;
     }

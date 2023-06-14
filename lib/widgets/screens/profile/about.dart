@@ -180,7 +180,7 @@ class _AboutState extends State<About> {
           categoryIcons: const CategoryIcons(),
           buttonMode: ButtonMode.MATERIAL,
           checkPlatformCompatibility: true,
-          showRecentsTab: false,
+          // showRecentsTab: false,
         ),
       ),
     );
