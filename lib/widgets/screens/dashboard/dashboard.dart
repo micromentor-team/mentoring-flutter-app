@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
@@ -13,37 +14,40 @@ import 'package:provider/provider.dart';
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
-  String _getGreeting(User user) {
+  String _getGreeting(AppLocalizations l10n, User user) {
     int hour = DateTime.now().hour;
     String timeOfDayGreeting;
     if (hour >= 5 && hour < 12) {
-      timeOfDayGreeting = 'Good\nmorning,';
+      timeOfDayGreeting = l10n.homeGreetingMorning;
     } else if (hour >= 12 && hour < 18) {
-      timeOfDayGreeting = 'Good\nafternoon,';
+      timeOfDayGreeting = l10n.homeGreetingAfternoon;
     } else {
-      timeOfDayGreeting = 'Good\nevening,';
+      timeOfDayGreeting = l10n.homeGreetingEvening;
     }
-    return '$timeOfDayGreeting\n${user.fullName}';
+    return '${timeOfDayGreeting.replaceAll(" ", "\n")}\n${user.fullName}';
   }
 
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<UserProvider>(context, listen: false).user!;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final User user = Provider.of<UserProvider>(context, listen: false).user!;
     return SafeArea(
       child: Column(
         children: [
           Expanded(
             child: ListView(
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(Insets.appEdgeInsetCompact),
+                Padding(
+                  padding: const EdgeInsets.all(
+                    Insets.appEdgeInsetCompact,
+                  ),
                   child: UserSearchBar(
-                    hintText: 'Search for a mentor',
+                    hintText: l10n.homeSearchHint,
                   ),
                 ),
                 ProfileHeader(
                   avatarUrl: user.avatarUrl,
-                  profileMessage: _getGreeting(user),
+                  profileMessage: _getGreeting(l10n, user),
                   profileCompletionPercentage: 1.00,
                 ),
                 const UpcomingSection(),

@@ -32,8 +32,10 @@ class MatchTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  Insets.widgetMediumInset, Insets.widgetSmallInset, 0, 0),
+              padding: const EdgeInsets.only(
+                left: Insets.widgetMediumInset,
+                top: Insets.widgetSmallInset,
+              ),
               child: Text(
                 header,
                 style: TextStyles.cardTitle(context),

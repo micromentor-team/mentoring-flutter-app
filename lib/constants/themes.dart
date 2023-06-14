@@ -8,12 +8,6 @@ class AppThemes {
     return baseTheme.copyWith(
       useMaterial3: true,
       colorScheme: colorScheme,
-      bannerTheme: const MaterialBannerThemeData(
-        padding: EdgeInsets.all(Insets.widgetMediumInset),
-      ),
-      cardTheme: const CardTheme(
-        elevation: Elevations.level2,
-      ),
     );
   }
 

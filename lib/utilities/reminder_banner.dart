@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ReminderBanner {
@@ -9,6 +10,7 @@ class ReminderBanner {
     void Function() onOpenPressed,
     void Function() onDismissPressed,
   ) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
         content: Text(text),
@@ -17,14 +19,14 @@ class ReminderBanner {
           TextButton(
             onPressed: onOpenPressed,
             child: Text(
-              'OPEN',
+              l10n.bannerActionOpen,
               style: TextStyles.bannerAction(context),
             ),
           ),
           TextButton(
             onPressed: () => onDismissPressed,
             child: Text(
-              'DISMISS',
+              l10n.bannerActionDismiss,
               style: TextStyles.bannerAction(context),
             ),
           ),

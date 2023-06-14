@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/home/users_list.dart';
 
 class Mentors extends StatefulWidget {
@@ -62,7 +63,7 @@ class _Mentors extends State<Mentors> {
               },
               style: OutlinedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(Radii.buttonRadius),
                 ),
               ),
               child: Text(locale.filters, textScaleFactor: 1.4),
@@ -77,7 +78,7 @@ class _Mentors extends State<Mentors> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              contentPadding: const EdgeInsets.all(5),
+              contentPadding: const EdgeInsets.all(Insets.widgetSmallInset),
               hintText: locale.searchHint,
             ),
           ),
@@ -98,7 +99,10 @@ class _Mentors extends State<Mentors> {
                 const Spacer(),
               ]),
               Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
+                padding: const EdgeInsets.only(
+                  left: Insets.widgetSmallInset,
+                  right: Insets.widgetSmallInset,
+                ),
                 child: OutlinedButton(
                   onPressed: () {
                     // TODO: Implement quick match functionality
@@ -106,7 +110,7 @@ class _Mentors extends State<Mentors> {
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size.fromHeight(40),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(Radii.buttonRadius),
                     ),
                   ),
                   child: Text(locale.quickMatch, textScaleFactor: 1.4),

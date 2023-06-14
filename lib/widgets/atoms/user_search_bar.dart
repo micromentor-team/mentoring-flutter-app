@@ -26,7 +26,9 @@ class UserSearchDelegate extends SearchDelegate {
   List<Widget>? buildActions(BuildContext context) {
     return [
       Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, Insets.widgetSmallInset, 0),
+        padding: const EdgeInsets.only(
+          right: Insets.widgetSmallInset,
+        ),
         child: IconButton(
           onPressed: () {
             // Clear the search box.

@@ -42,8 +42,9 @@ class ProfileHeader extends StatelessWidget {
           ),
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  Insets.widgetMediumLargeInset, 0, 0, 0),
+              padding: const EdgeInsets.only(
+                left: Insets.widgetMediumLargeInset,
+              ),
               child: Text(
                 profileMessage,
                 textAlign: TextAlign.start,
