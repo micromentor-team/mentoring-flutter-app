@@ -10,6 +10,7 @@ import 'package:mm_flutter_app/widgets/molecules/mentors_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
+import 'package:mm_flutter_app/widgets/screens/profile/profile_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -45,10 +46,19 @@ class DashboardScreen extends StatelessWidget {
                     hintText: l10n.homeSearchHint,
                   ),
                 ),
-                ProfileHeader(
-                  avatarUrl: user.avatarUrl,
-                  profileMessage: _getGreeting(l10n, user),
-                  profileCompletionPercentage: 1.00,
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ProfileScreen(),
+                      ),
+                    );
+                  },
+                  child: ProfileHeader(
+                    avatarUrl: user.avatarUrl,
+                    profileMessage: _getGreeting(l10n, user),
+                    profileCompletionPercentage: 1.00,
+                  ),
                 ),
                 const UpcomingSection(),
                 const MatchSection(),
