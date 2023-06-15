@@ -82,7 +82,22 @@ class Profile extends StatelessWidget {
                         scale: 2.75),
                     placeholder: NetworkImage(placeholderImage),
                   ),
+<<<<<<< HEAD
                 ),
+=======
+                )),
+            const SizedBox(
+              height: 15,
+            ),
+            ListTile(
+              title: const Text(
+                "Name",
+              ),
+              leading: const Icon(
+                Icons.account_circle_rounded,
+                size: 40,
+                color: Colors.black,
+>>>>>>> 44d07a4ac7936cf9a8b8c6d2c583058e4996485b
               ),
               onTap: () {
                 Navigator.of(context).push(
@@ -157,6 +172,7 @@ class Profile extends StatelessWidget {
                 ),
               ),
             ),
+<<<<<<< HEAD
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
@@ -173,6 +189,30 @@ class Profile extends StatelessWidget {
                   style: TextStyle(color: Colors.black),
                 ),
               ),
+=======
+            ListTile(
+              title: const Text(
+                "Email",
+              ),
+              leading: const Icon(
+                Icons.email_outlined,
+                size: 40,
+                color: Colors.black,
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const YourEmail(),
+                  ),
+                );
+              },
+              subtitle: user.email != null
+                  ? Text(
+                      user.email!,
+                      style: const TextStyle(color: Colors.grey),
+                    )
+                  : null,
+>>>>>>> 44d07a4ac7936cf9a8b8c6d2c583058e4996485b
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

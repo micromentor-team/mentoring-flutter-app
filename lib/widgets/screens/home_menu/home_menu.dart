@@ -6,9 +6,7 @@ import 'package:provider/provider.dart';
 import '../profile/profile_screen.dart';
 
 class HomeMenu extends StatelessWidget {
-  const HomeMenu({
-    Key? key,
-  }) : super(key: key);
+  const HomeMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,23 +42,6 @@ class HomeMenu extends StatelessWidget {
                   ),
                 );
               },
-            ),
-            ListTile(
-              leading: const SizedBox(
-                width: 40.0,
-                height: 40.0,
-                child: Icon(
-                  Icons.people,
-                ),
-              ),
-              title: const Text(
-                'Contacts',
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
             ),
             ListTile(
               leading: const SizedBox(
@@ -110,6 +91,7 @@ class HomeMenu extends StatelessWidget {
                       child: const Text('Cancel'),
                     ),
                     TextButton(
+                      key: const Key('yesSignOut'),
                       onPressed: () async {
                         await userProvider.signOutUser();
 
@@ -119,7 +101,7 @@ class HomeMenu extends StatelessWidget {
                               '/', (Route<dynamic> route) => false);
                         }
                       },
-                      child: const Text('Sign out '),
+                      child: const Text('Sign out'),
                     ),
                   ],
                 ),

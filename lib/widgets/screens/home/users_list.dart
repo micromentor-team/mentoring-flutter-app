@@ -11,20 +11,20 @@ import '../../organisms/user_expanded_card.dart';
 import '../channel_messages/channel_messages.dart';
 
 class Users extends StatelessWidget {
-  const Users({Key? key, this.search}) : super(key: key);
-  final String? search;
+  final String search;
+
+  const Users(this.search, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return UserChannels(
-      search: search,
-    );
+    return UserChannels(search);
   }
 }
 
 class UserChannels extends StatelessWidget {
-  const UserChannels({Key? key, this.search}) : super(key: key);
-  final String? search;
+  final String search;
+
+  const UserChannels(this.search, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +46,11 @@ class UserChannels extends StatelessWidget {
 }
 
 class UsersList extends StatelessWidget {
-  const UsersList({Key? key, required this.channels, this.search})
-      : super(key: key);
-  final String? search;
-
+  final String search;
   final List channels;
+
+  const UsersList({Key? key, required this.channels, required this.search})
+      : super(key: key);
 
   _openChannelChatWithUser(context, String userId) async {
     // find the channel with this user
@@ -73,9 +73,6 @@ class UsersList extends StatelessWidget {
           Provider.of<ChannelsProvider>(context, listen: false);
       final userIds = [user?.id, userId];
 
-      print('Create a new channel with userIDS');
-      print(userIds);
-
       channelId = await channelsProvider.createChannel(
           createdBy: user?.id, userIds: userIds);
     }
@@ -89,22 +86,10 @@ class UsersList extends StatelessWidget {
     // if not found create a new channel
   }
 
-  List<User> searchNames(users) {
-    if (search != null && search != '') {
-      print('SEARCH VALUE $search');
-    }
-    return users;
-  }
-
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final currentUser = userProvider.user;
-
-    // final channelsNotByUser =
-    //     channels.where((item) => item.createdBy != currentUser?.id);
-    // debugPrint('channels not created by this user: $channelsNotByUser.length');
-    // print(channelsNotByUser);
 
     return userProvider.queryAllUsers(
       onLoading: () {
@@ -117,10 +102,11 @@ class UsersList extends StatelessWidget {
         List users = data.reversed
             .where((item) => item['id'] != currentUser?.id)
             .toList();
-
         users = users.map((item) => User.fromJson(item)).toList();
-
-        users = searchNames(users);
+        users = users
+            .where((element) =>
+                element.fullName.toLowerCase().contains(search.toLowerCase()))
+            .toList();
 
         return ListView.separated(
           physics: const ScrollPhysics(),

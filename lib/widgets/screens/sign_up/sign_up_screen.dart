@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -45,15 +46,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  _openHomeScreen(context) {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+  _openHomeScreen(BuildContext context) {
+    context.go('/home');
   }
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-
     final mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       key: scaffoldKey,
@@ -69,7 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                    child: Container(
+                    child: SizedBox(
                       width: 360,
                       child: Column(
                         mainAxisSize: MainAxisSize.max,

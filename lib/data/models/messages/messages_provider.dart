@@ -158,7 +158,6 @@ class MessagesProvider extends ChangeNotifier {
         variables: variables,
         update: (cache, result) {
           debugPrint('createMessage result');
-          print(result);
           _addMessageToCache(
               cache: cache,
               channelId: channelId,
@@ -175,7 +174,7 @@ class MessagesProvider extends ChangeNotifier {
   }
 
   Future<void> markMessageRead(channelId) async {
-    final QueryResult queryResult = await client.mutate(
+    await client.mutate(
       MutationOptions(
         document: gql(kMarkMessagesAsSeenByMe),
         variables: {
@@ -191,11 +190,25 @@ class MessagesProvider extends ChangeNotifier {
   Future<void> updateMessage({
     required channelId,
     required messageId,
-    required messageText,
-    bool? deleted,
+    String? messageText,
+    bool? undelete,
   }) async {
     // print('Update Message with input');
     // print(input);
+    final variables = {
+      'input': {
+        'id': messageId,
+      },
+    };
+
+    if (messageText != null) {
+      variables['input']!['messageText'] = messageText;
+    }
+
+    if (undelete != true) {
+      variables['input']!['deletedAt'] = null;
+    }
+
     await client.mutate(
       MutationOptions(
         document: gql(kUpdateChannelMessage),
@@ -244,7 +257,7 @@ class MessagesProvider extends ChangeNotifier {
   }
 
   Future<void> deleteMessage({required messageId, deletePhysically}) async {
-    final QueryResult result = await client.query(
+    await client.query(
       QueryOptions(
         document: gql(kDeleteChannelMessage),
         fetchPolicy: FetchPolicy.networkOnly,
@@ -254,6 +267,5 @@ class MessagesProvider extends ChangeNotifier {
         },
       ),
     );
-    print('updated message $result');
   }
 }

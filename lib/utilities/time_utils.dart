@@ -1,5 +1,3 @@
-import '../dart_extensions/date_time_extensions.dart';
-
 class TimeUtils {
   static DateTime nearestTimeIteration(DateTime time, int iterationInMinutes) {
     int hour = time.hour;
@@ -18,7 +16,7 @@ class TimeUtils {
       minutes = 0;
     }
 
-    return time.clone(
+    return time.copyWith(
       hour: hour,
       minute: minutes,
       second: 0,
@@ -37,7 +35,8 @@ class TimeUtils {
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
     DateTime startTime = now.subtract(Duration(days: date.weekday - 1));
-    DateTime startDate = DateTime(startTime.year, startTime.month, startTime.day);
+    DateTime startDate =
+        DateTime(startTime.year, startTime.month, startTime.day);
     DateTime endTime = now.add(const Duration(days: 5));
     DateTime endDate = DateTime(endTime.year, endTime.month, endTime.day);
     return [startDate, endDate];

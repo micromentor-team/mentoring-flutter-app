@@ -1,0 +1,52 @@
+name: Tests and formatters
+on:
+- pull_request
+jobs:
+  dart-formatting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.10.1'
+    - name: See if formatting changes anything
+      run: dart format --set-exit-if-changed .
+  flutter-analyze:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.10.1'
+    - name: Add assets/.env
+      run: touch assets/.env
+    - name: Fix subosito/flutter-action \#197
+      run: git config --global --add safe.directory /opt/hostedtoolcache/flutter/stable-3.10.1-x64
+    - name: See if flutter linter passes
+      run: flutter analyze
+  flutter-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.10.1'
+    - name: Add assets/.env
+      run: touch assets/.env
+    - name: Fix subosito/flutter-action \#197
+      run: git config --global --add safe.directory /opt/hostedtoolcache/flutter/stable-3.10.1-x64
+    - name: See if tests are failing
+      run: flutter test
+  flutter-translations:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.10.1'
+    - name: Add assets/.env
+      run: touch assets/.env
+    - name: Fix subosito/flutter-action \#197
+      run: git config --global --add safe.directory /opt/hostedtoolcache/flutter/stable-3.10.1-x64
+    - name: See if translations can be generated
+      run: flutter gen-l10n

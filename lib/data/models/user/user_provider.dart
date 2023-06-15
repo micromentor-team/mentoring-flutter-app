@@ -103,7 +103,6 @@ class UserProvider extends ChangeNotifier {
           }
           return const SizedBox.shrink();
         }
-        // print(result);
         return onData(result.data!['findUsers']);
       },
     );
@@ -225,14 +224,12 @@ class UserProvider extends ChangeNotifier {
     if (adminNotes != null) {
       variables['input']!['adminNotes'] = adminNotes;
     }
-
-    final QueryResult result = await client.query(
+    await client.query(
       QueryOptions(
         document: gql(kUpdateUser),
         variables: variables,
       ),
     );
-    print(result);
     notifyListeners();
   }
 

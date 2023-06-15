@@ -69,7 +69,8 @@ const String kUnseenMessage = """query MyInbox{
   }
 }""";
 
-const String kMarkMessagesRead ="""mutation MarkChannelMessagesAsSeenByMe(\$channelId: String!) {
+const String kMarkMessagesRead =
+    """mutation MarkChannelMessagesAsSeenByMe(\$channelId: String!) {
   markChannelMessagesAsSeenByMe(channelId: \$channelId)
 }""";
 

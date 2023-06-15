@@ -7,9 +7,7 @@ Future<void> deleteChannelMutation({client, channelId}) async {
   await client.mutate(
     MutationOptions(
       document: gql(kDeleteChannel),
-      variables: {  "deletePhysically": true,
-        "channelId": channelId
-      },
+      variables: {"deletePhysically": true, "channelId": channelId},
       update: (cache, result) {
         final req = QueryOptions(
           document: gql(kGetChannelsList),

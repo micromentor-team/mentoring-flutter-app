@@ -9,7 +9,6 @@ import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mm_flutter_app/themes/palette.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_input.dart';
 
@@ -51,7 +50,7 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
     super.initState();
   }
 
-  Widget _buildCard() {
+  Widget _buildCard(BuildContext context) {
     final isUser = _isCurrentUser(
       userId: _message.createdBy,
       context: context,
@@ -94,10 +93,10 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildReplyButton(),
+              _buildReplyButton(context),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: _buildEditButton(),
+                child: _buildEditButton(context),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
@@ -116,9 +115,8 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
 
   String _participantName({userId}) {
     final User participant = widget.channel.participants
-        .firstWhere((item) => item.id == userId, orElse: () => null as User);
+        .firstWhere((item) => item.id == userId, orElse: () => null);
     return participant.fullName.trim().split(RegExp(' +')).take(1).join();
-    return '';
   }
 
   Widget _buildAuthor() {
@@ -168,7 +166,7 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
     );
   }
 
-  Widget _buildEditButton() {
+  Widget _buildEditButton(BuildContext context) {
     final isUser = _isCurrentUser(
       userId: _message.createdBy,
       context: context,
@@ -178,9 +176,9 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
       return InputChip(
         avatar: CircleAvatar(
           backgroundColor: Colors.grey.shade200,
-          child: const Icon(
+          child: Icon(
             Icons.edit,
-            color: Palette.kLogoColor,
+            color: Theme.of(context).colorScheme.primary,
             size: 20.0,
           ),
         ),
@@ -197,14 +195,14 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
     }
   }
 
-  Widget _buildReplyButton() {
+  Widget _buildReplyButton(BuildContext context) {
     if (!_isEditing) {
       return InputChip(
         avatar: CircleAvatar(
           backgroundColor: Colors.grey.shade200,
-          child: const Icon(
+          child: Icon(
             Icons.reply,
-            color: Palette.kLogoColor,
+            color: Theme.of(context).colorScheme.primary,
             size: 20.0,
           ),
         ),
@@ -242,12 +240,15 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
             ? const Text('undo')
             : const Text('delete'),
         onPressed: () {
+          // TODO: need to support undelete
           if (_message.deletedAt != null) {
-            // Provider.of<MessagesProvider>(context, listen: false)
-            //     .updateMessage(messageId: _message.id, deleted: false);
+            Provider.of<MessagesProvider>(context, listen: false).updateMessage(
+                channelId: widget.channel.id,
+                messageId: _message.id,
+                undelete: true);
           } else {
-            // Provider.of<MessagesProvider>(context, listen: false)
-            //     .updateMessage(messageId: _message.id, deleted: true);
+            Provider.of<MessagesProvider>(context, listen: false)
+                .deleteMessage(messageId: _message.id, deletePhysically: false);
           }
 
           _onClose();
@@ -335,7 +336,7 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
                         ScrollViewKeyboardDismissBehavior.onDrag,
                     reverse: true,
                     children: [
-                      _buildCard(),
+                      _buildCard(context),
                     ],
                   ),
                 ),

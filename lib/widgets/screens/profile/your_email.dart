@@ -68,6 +68,7 @@ class _YourEmailState extends State<YourEmail> {
                         emailController.text = user.email!;
                         return '''Email can't be empty''';
                       }
+                      return null;
                     },
                     obscureText: false),
                 const SizedBox(
@@ -79,13 +80,13 @@ class _YourEmailState extends State<YourEmail> {
                     child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            await userProvider.updateUserData(
-                                email: emailController.text);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content: Text('Your email is updated.'),
                             ));
                             Navigator.of(context).pop();
+                            await userProvider.updateUserData(
+                                email: emailController.text);
                           }
                         },
                         child: const Text('Save'))),

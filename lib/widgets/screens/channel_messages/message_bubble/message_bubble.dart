@@ -23,8 +23,8 @@ class MessageBubble extends StatelessWidget {
 
   Future<void> _onOpenLink(LinkableElement link) async {
     try {
-      if (await canLaunch(link.url)) {
-        await launch(link.url);
+      if (await canLaunchUrl(link.url as Uri)) {
+        await launchUrl(link.url as Uri);
       } else {
         throw 'Could not launch $link';
       }
@@ -39,7 +39,7 @@ class MessageBubble extends StatelessWidget {
 
   String _participantName({userId}) {
     final User? participant = participants
-        .firstWhere((item) => item.id == userId, orElse: () => null as User);
+        .firstWhere((item) => item.id == userId, orElse: () => null);
     if (participant != null) {
       return participant.fullName.trim().split(RegExp(' +')).take(1).join();
     }
@@ -52,7 +52,7 @@ class MessageBubble extends StatelessWidget {
       if (isUser) {
         status = 'deleted';
       }
-    } else if (message.updatedAt != null) {
+    } else if (message.editedAt != null) {
       status = ' (edited)';
     }
 
@@ -109,8 +109,9 @@ class MessageBubble extends StatelessWidget {
             : EdgeInsets.zero,
         child: SelectableLinkify(
           //  If the message is only emojis, we don't need the invisible character
-          text:
-              isEmoji ? message.messageText : message.messageText + '         ',
+          text: isEmoji
+              ? message.messageText
+              : '${message.messageText}                ',
           //  Concatenating white space and an invisible character saves us from having to use a LayoutBuilder.
           //  The Text sees the invisible character, so it does not trim the extra whitespace we want to use for layout.
           //  When the Stack sees our addition, it paints our positioned sentAt widget (8 in this case) whitespaces
@@ -134,7 +135,7 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sentAt = DateFormat.Hm().format(DateTime.parse(message.createdAt));
+    final sentAt = DateFormat.jm().format(DateTime.parse(message.createdAt));
     final isUser = _isCurrentUser(
       userId: message.createdBy,
       context: context,
@@ -167,7 +168,7 @@ class MessageBubble extends StatelessWidget {
                   color: isEmoji
                       ? Colors.transparent
                       : isUser
-                          ? Colors.lightBlue.shade300
+                          ? Colors.lightBlue
                           : Colors.grey.shade200,
                   child: Padding(
                     // Message content padding
@@ -187,15 +188,17 @@ class MessageBubble extends StatelessWidget {
                             : Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    _participantName(userId: message.createdBy),
-                                    style: const TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 10.0,
-                                      color: Colors.grey,
+                                  if (participants.length > 2)
+                                    Text(
+                                      _participantName(
+                                          userId: message.createdBy),
+                                      style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10.0,
+                                        color: Colors.grey,
+                                      ),
                                     ),
-                                  ),
                                   _buildMessageStatus(isUser)
                                 ],
                               ),
@@ -216,19 +219,39 @@ class MessageBubble extends StatelessWidget {
                             Positioned(
                               bottom: 0,
                               right: 0,
-                              child: Text(
-                                sentAt,
-                                style: TextStyle(
-                                  fontSize: 10.0,
-                                  color:
-                                      // If the message is only emojis, we need grey
-                                      EmojiUtils.strictlyEmojis(
-                                              message.messageText)
-                                          ? Colors.grey
-                                          : isUser
-                                              ? Colors.white
-                                              : Colors.grey,
-                                ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    sentAt,
+                                    style: TextStyle(
+                                      fontSize: 10.0,
+                                      color:
+                                          // If the message is only emojis, we need grey
+                                          EmojiUtils.strictlyEmojis(
+                                                  message.messageText)
+                                              ? Colors.grey
+                                              : isUser
+                                                  ? Colors.white
+                                                  : Colors.grey,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  isUser
+                                      ? (message.statuses!.isEmpty
+                                          ? const Icon(
+                                              Icons.check,
+                                              size: 10,
+                                              color: Colors.white,
+                                            )
+                                          : const Icon(
+                                              Icons.done_all,
+                                              size: 10,
+                                              color: Colors.white,
+                                            ))
+                                      : const SizedBox(),
+                                ],
                               ),
                             ),
                           ],

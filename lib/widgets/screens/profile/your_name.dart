@@ -36,21 +36,24 @@ class YourName extends StatelessWidget {
                     nameController.text = user.fullName;
                     return '''Name can't be empty''';
                   }
+                  return null;
                 },
               ),
-              Expanded(child: SizedBox()),
+              const Expanded(child: SizedBox()),
               Align(
                   alignment: Alignment.bottomRight,
                   child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          await userProvider.updateUserData(
-                              name: nameController.text);
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text('Your name is updated.'),
-                          ));
-                          Navigator.of(context).pop();
+                          await userProvider
+                              .updateUserData(name: nameController.text)
+                              .then((value) => {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text('Your name is updated.'),
+                                    )),
+                                    Navigator.of(context).pop()
+                                  });
                         }
                       },
                       child: const Text('Save'))),

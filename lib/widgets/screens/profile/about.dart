@@ -13,12 +13,11 @@ class About extends StatefulWidget {
 
 class _AboutState extends State<About> {
   final aboutController = TextEditingController();
-  var _selectedEmoji;
+  dynamic _selectedEmoji;
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    final user = userProvider.user;
     return Scaffold(
       appBar: AppBar(
         title: const Text('About'),
@@ -43,7 +42,7 @@ class _AboutState extends State<About> {
                     child: _selectedEmoji != null
                         ? Text(
                             '$_selectedEmoji',
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                           )
                         : const Icon(Icons.add_reaction_outlined)),
                 const SizedBox(
@@ -127,14 +126,13 @@ class _AboutState extends State<About> {
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                     onPressed: () async {
-                      print('$_selectedEmoji' + " " + aboutController.text);
-                      await userProvider.updateUserData(
-                          adminNotes:
-                              '$_selectedEmoji' + " " + aboutController.text);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Your about is updated.'),
                       ));
                       Navigator.of(context).pop();
+                      await userProvider.updateUserData(
+                          adminNotes:
+                              '$_selectedEmoji ${aboutController.text}');
                     },
                     child: const Text('Save'))),
             const SizedBox(
