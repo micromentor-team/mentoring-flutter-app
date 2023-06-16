@@ -56,18 +56,6 @@ class _AppWrapperState extends State<AppWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              Assets.brandLogo,
-              fit: BoxFit.contain,
-              height: Dimensions.appBarHeight,
-            ),
-          ],
-        ),
-      ),
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
