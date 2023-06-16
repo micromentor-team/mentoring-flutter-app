@@ -52,9 +52,8 @@ class DashboardScreen extends StatelessWidget {
                   profileCompletionPercentage: 1.00,
                 ),
                 MaybeReminderBanner(
-                  profileCompletionPercentage: 30,
-                  lastUpdateTime: DateTime.parse('2021-05-20 20:18:04Z')
-                ),
+                    profileCompletionPercentage: 30,
+                    lastUpdateTime: DateTime.parse('2021-05-20 20:18:04Z')),
                 const UpcomingSection(),
                 const MatchSection(),
                 const MentorsSection(),
