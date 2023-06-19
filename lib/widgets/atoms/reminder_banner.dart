@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ReminderBanner extends StatelessWidget {
@@ -41,12 +42,13 @@ class ReminderBanner extends StatelessWidget {
           children: <Widget>[
             const SizedBox(
                 child: Image(
-              image: AssetImage("assets/images/StockImage1.png"),
+              image: AssetImage(Assets.reminderBannerStockImage),
               height: Dimensions.reminderBannerImageHeight,
             )),
             InkWell(
                 onTap: () => {debugPrint("hi")},
-                child: Row(children: [
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   const Icon(Icons.arrow_forward),
                   Text(ctaText, style: TextStyles.cardTitle(context)),
                 ]))
@@ -63,9 +65,7 @@ class ReminderBanner extends StatelessWidget {
         ),
         child: Card(
             child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Insets.widgetMediumInset,
-                    vertical: Insets.widgetMediumInset),
+                padding: const EdgeInsets.all(Insets.widgetMediumInset),
                 child: Row(children: <Widget>[
                   _buildTextColumn(context),
                   _buildImageAndButtonColumn(context)
@@ -85,19 +85,19 @@ class MaybeReminderBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (profileCompletionPercentage < 50) {
       return ReminderBanner(
-        titleText: "Profile $profileCompletionPercentage% complete",
-        subtitleText: "Complete your profile for more mentor matches",
-        ctaText: "Complete profile",
+        titleText: l10n
+            .reminderBannerProfileCompleteTitle(profileCompletionPercentage),
+        subtitleText: l10n.reminderBannerProfileCompleteSubtitle,
+        ctaText: l10n.reminderBannerProfileCompleteCta,
       );
     } else if (DateTime.now().difference(lastUpdateTime).inDays > 30 * 6) {
-      return const ReminderBanner(
-        titleText: "Update your profile",
-        subtitleText:
-            "Make sure your profile is updated so you get the best matches",
-        ctaText: "Update profile",
-      );
+      return ReminderBanner(
+          titleText: l10n.reminderBannerProfileUpdateTitle,
+          subtitleText: l10n.reminderBannerProfileUpdateSubtitle,
+          ctaText: l10n.reminderBannerProfileUpdateCta);
     } else {
       return const SizedBox(width: 0.0, height: 0.0);
     }

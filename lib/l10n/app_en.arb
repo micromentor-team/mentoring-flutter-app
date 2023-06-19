@@ -31,5 +31,11 @@
     "filters": "Show filters",
     "searchHint": "Search by name or keyword",
     "quickMatchDesc": "Find a mentor",
-    "quickMatch": "Quick match"
+    "quickMatch": "Quick match",
+    "reminderBannerProfileCompleteTitle": "Profile {profileCompletionPercentage}% complete",
+    "reminderBannerProfileCompleteSubtitle": "Complete your profile for more mentor matches",
+    "reminderBannerProfileCompleteCta": "Complete profile",
+    "reminderBannerProfileUpdateTitle": "Update your profile",
+    "reminderBannerProfileUpdateSubtitle": "Make sure your profile is updated so you get the best matches",
+    "reminderBannerProfileUpdateCta": "Update profile"
 }

@@ -4,7 +4,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 class ProfileHeader extends StatelessWidget {
   final String? avatarUrl;
   final String profileMessage;
-  final double? profileCompletionPercentage;
+  final int? profileCompletionPercentage;
 
   const ProfileHeader({
     Key? key,
@@ -29,7 +29,7 @@ class ProfileHeader extends StatelessWidget {
                   width: Radii.avatarRadiusLarge * 2,
                   height: Radii.avatarRadiusLarge * 2,
                   child: CircularProgressIndicator(
-                    value: profileCompletionPercentage,
+                    value: profileCompletionPercentage! / 100,
                   ),
                 ),
               CircleAvatar(

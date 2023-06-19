@@ -49,7 +49,7 @@ class DashboardScreen extends StatelessWidget {
                 ProfileHeader(
                   avatarUrl: user.avatarUrl,
                   profileMessage: _getGreeting(l10n, user),
-                  profileCompletionPercentage: 1.00,
+                  profileCompletionPercentage: 30,
                 ),
                 MaybeReminderBanner(
                     profileCompletionPercentage: 30,
