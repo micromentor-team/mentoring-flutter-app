@@ -71,7 +71,14 @@ class CrashHandler {
   }
 
   bool handleUncaughtPlatformError(Object error, StackTrace trace) {
-    logCrashReport('Fatal error caught by the PlatformDispatcher handler.');
+    logCrashReport('Error caught by the PlatformDispatcher handler.');
+    if (error is RetryException) {
+      // RetryExceptions are handled here only when thrown from retry function,
+      // meaning that the operation exhausted the max number of attempts.
+      logCrashReport(
+          'Maximum number of retry attempts reached: ${error.message}');
+      return true;
+    }
     FirebaseCrashlytics.instance.recordError(error, trace, fatal: true);
     // Return false to allow error propagation to the next handler.
     return false;
