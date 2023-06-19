@@ -27,20 +27,31 @@ class CrashHandler {
     );
   }
 
-  static Future<T> retryOnException<T>(
+  static FutureOr<T> retryOnException<T>(
     FutureOr<T> Function() operation, {
     int maxAttempts = 4,
-  }) {
+    FutureOr<T> Function()? onFailOperation,
+  }) async {
     final RetryOptions retryOptions = RetryOptions(
       maxAttempts: maxAttempts,
     );
-    return retryOptions.retry<T>(
-      operation,
-      retryIf: (e) => e is RetryException,
-      onRetry: (e) => logCrashReport(
-        'Retrying after exception: ${(e as RetryException).message}.',
-      ),
-    );
+    try {
+      return await retryOptions.retry<T>(
+        operation,
+        retryIf: (e) => e is RetryException,
+        onRetry: (e) => logCrashReport(
+          'Retrying after exception: ${(e as RetryException).message}.',
+        ),
+      );
+    } catch (e) {
+      if (e is RetryException && onFailOperation != null) {
+        logCrashReport('Maximum number of retry attempts reached: ${e.message}'
+            '\nExecuting onFailOperation callback.');
+        FirebaseCrashlytics.instance.recordError(e, null, fatal: false);
+        return onFailOperation();
+      }
+      rethrow;
+    }
   }
 
   void handleUncaughtFlutterError(FlutterErrorDetails details) async {
