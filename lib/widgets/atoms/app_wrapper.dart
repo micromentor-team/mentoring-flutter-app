@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 
 /*
  * Contains bottom navigation bar and app bar
@@ -56,18 +55,6 @@ class _AppWrapperState extends State<AppWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              Assets.brandLogo,
-              fit: BoxFit.contain,
-              height: Dimensions.appBarHeight,
-            ),
-          ],
-        ),
-      ),
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[

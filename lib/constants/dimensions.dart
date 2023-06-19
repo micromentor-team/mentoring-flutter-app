@@ -36,4 +36,5 @@ class Dimensions {
   static const double minimumInteractionWidgetLength = 48.0;
   static const double recommendedMentorTileWidth = 112.0;
   static const Size upcomingSessionTile = Size(184.0, 96.0);
+  static const double reminderBannerImageHeight = 80.0;
 }
