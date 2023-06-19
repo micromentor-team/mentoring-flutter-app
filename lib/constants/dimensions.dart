@@ -33,6 +33,7 @@ class Elevations {
 class Dimensions {
   Dimensions._private();
   static const double appBarHeight = 32.0;
+  static const double minimumInteractionWidgetLength = 48.0;
   static const double recommendedMentorTileWidth = 112.0;
   static const Size upcomingSessionTile = Size(184.0, 96.0);
 }
