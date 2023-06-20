@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:mm-flutter-app/lib/constants/styles.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ProfileTextSection extends StatelessWidget {
   const ProfileTextSection({Key? key}) : super(key: key);
 
-  List<Widget> _ProfileSections() {
+  List<Widget> profileSections() {
     //TODO(guptarupal): Call backend instead of using hardcoded mock data.
     return [
       _createProfileSection('Bio',
@@ -21,23 +21,24 @@ class ProfileTextSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(36.0, 0, 36.0, 0),
+          padding:
+              const EdgeInsets.symmetric(horizontal: Insets.widgetLargeInset),
           child: Text(
             title,
-            // style: Styles.sectionHeader,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 0, 30.0, 30.0),
+          padding: const EdgeInsets.fromLTRB(Insets.widgetLargeInset, 0,
+              Insets.widgetLargeInset, Insets.widgetLargeInset),
           child: Center(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
+              borderRadius: BorderRadius.circular(Radii.buttonRadius * 3),
               child: SizedBox(
                 width: double.infinity,
                 child: ColoredBox(
-                  color: Colors.grey,
+                  color: ColorSchemes.light.tertiaryContainer,
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(Insets.widgetLargeInset),
                     child: Text(description),
                   ),
                 ),
@@ -51,7 +52,7 @@ class ProfileTextSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> profileSection = _ProfileSections();
+    List<Widget> profileSection = profileSections();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: profileSection,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:mm_flutter_app/themes/styles.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class SocialChip extends StatelessWidget {
   final String socialApp;
@@ -24,7 +24,8 @@ class SocialChip extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             shape: const CircleBorder(),
             padding: const EdgeInsets.all(20),
-            backgroundColor: const Color(0x99000000), // <-- Button color
+            backgroundColor: ColorSchemes.light.secondary, // <-- Button color
+            //TODO(gupta-rupal): make this color dependent on the light/dark scheme
           ),
           child: socialAppIcon,
         ),

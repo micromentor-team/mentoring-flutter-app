@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ProfilePageHeader extends StatelessWidget {
   final String? avatarUrl;
@@ -14,15 +15,12 @@ class ProfilePageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String placeholderImage =
-        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
-
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxHeight: 200,
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
+        padding: const EdgeInsets.all(Insets.widgetLargeInset),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -38,32 +36,25 @@ class ProfilePageHeader extends StatelessWidget {
               children: [
                 Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24.0, 12.0, 0, 0),
+                    padding: const EdgeInsets.all(Insets.widgetSmallInset),
                     child: Text(
                       profileMessage,
                       textAlign: TextAlign.start,
                       maxLines: 3,
                       softWrap: true,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      style: TextStyles.profileHeader(context),
                     ),
                   ),
                 ),
                 Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24.0, 0, 0, 0),
+                    padding: const EdgeInsets.all(Insets.widgetSmallInset),
                     child: Text(
                       userLocation,
                       textAlign: TextAlign.start,
                       maxLines: 3,
                       softWrap: true,
-                      style: const TextStyle(
-                        fontSize: 20.0,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      style: TextStyles.profileHeader(context),
                     ),
                   ),
                 ),
