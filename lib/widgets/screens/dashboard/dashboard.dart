@@ -57,7 +57,7 @@ class DashboardScreen extends StatelessWidget {
                   child: ProfileHeader(
                     avatarUrl: user.avatarUrl,
                     profileMessage: _getGreeting(l10n, user),
-                    profileCompletionPercentage: 1.00,
+                    profileCompletionPercentage: 30,
                   ),
                 ),
                 const UpcomingSection(),
