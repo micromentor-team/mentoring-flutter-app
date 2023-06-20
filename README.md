@@ -57,6 +57,67 @@ You may want to connect to the live backend:
     APP_GRAPHQL_URL="https://mm3-api.micromentor.org/mmdata/api/graphql"
     APP_SUBSCRIPTION_URL="wss://mm3-api.micromentor.org/mmdata/api/graphql"
 
+#### Connect Firebase account
+
+This app uses Firebase services, and therefore requires setting up an active account with the
+following services enabled:
+
+* Crashlytics
+* Analytics
+
+The Android and iOS projects already contain the necessary configuration for using Firebase, but the
+files that contain the API key are not included in the repository (added to gitignore).
+The following procedure allows to log into your Firebase account and regenerate these files
+in your environment:
+
+1. Install [Firebase CLI](https://firebase.google.com/docs/cli?authuser=0#install_the_firebase_cli).
+2. Run the `firebase login` command to authenticate to your Firebase account.
+3. Install the **FlutterFire CLI** by running the following command: 
+`dart pub global activate flutterfire_cli`
+4. Run the following command from the **root** directory of the Flutter project:
+`flutterfire configure --project=micromentor-d72ff`
+5. In the FlutterFire configuration prompt, make sure to select: **Android, iOS, and Web**.
+6. Once the command completes, ensure the following files were generated in your environment:
+   * /ios/firebase_app_id_file.json
+   * /lib/firebase_options.dart
+   * /android/app/google-services.json
+   * /ios/Runner/GoogleService-Info.plist
+7. Run the app and confirm that there are no errors.
+
+#### Connect Firebase account
+
+This app uses Firebase services, and therefore requires setting up an active account with the
+following services enabled:
+
+* Crashlytics
+* Analytics
+
+The Android and iOS projects already contain the necessary configuration for using Firebase, but the
+files that contain the API key are not included in the repository (added to gitignore). The
+following procedure allows you to log into your Firebase account and regenerate these files in your
+environment:
+
+1. Install [Firebase CLI](https://firebase.google.com/docs/cli?authuser=0#install_the_firebase_cli).
+2. Run the `firebase login` command to authenticate to your Firebase account. Ensure there are no
+errors before moving to the next step.
+3. Install the FlutterFire CLI by running the following command:
+`dart pub global activate flutterfire_cli`
+4. Run the following command from the root directory of the Flutter project:
+`flutterfire configure --project=micromentor-d72ff`. This command will connect your Firebase project
+to your local development environment by generating necessary files. Your Firebase project ID
+(micromentor-d72ff) can be found in the Firebase console.
+5. In the FlutterFire configuration prompt, make sure to select: **Android**, **iOS**, and **Web**.
+6. Once the command completes, ensure the following files were generated in your environment:
+   * /ios/firebase_app_id_file.json
+   * /lib/firebase_options.dart
+   * /android/app/google-services.json
+   * /ios/Runner/GoogleService-Info.plist
+7. Run the app and confirm that there are no errors.
+
+If you encounter any problems during these steps, refer to the Firebase and FlutterFire
+documentation.
+
+
 #### Enable git hooks
 
 Link contents of `.git-hooks` directory to `.git/hooks`:
