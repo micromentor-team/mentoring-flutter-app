@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/user_search_bar.dart';
 import 'package:mm_flutter_app/widgets/molecules/match_section.dart';
@@ -48,8 +49,11 @@ class DashboardScreen extends StatelessWidget {
                 ProfileHeader(
                   avatarUrl: user.avatarUrl,
                   profileMessage: _getGreeting(l10n, user),
-                  profileCompletionPercentage: 1.00,
+                  profileCompletionPercentage: 30,
                 ),
+                MaybeReminderBanner(
+                    profileCompletionPercentage: 30,
+                    lastUpdateTime: DateTime.parse('2021-05-20 20:18:04Z')),
                 const UpcomingSection(),
                 const MatchSection(),
                 const MentorsSection(),
