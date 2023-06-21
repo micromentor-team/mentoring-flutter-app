@@ -52,3 +52,9 @@ devenv.local.nix
 
 # Dependency directories
 node_modules/
+
+# Firebase account configuration
+/ios/firebase_app_id_file.json
+/lib/firebase_options.dart
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
