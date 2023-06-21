@@ -4,7 +4,10 @@ class TextStyles {
   const TextStyles._private();
 
   static TextStyle? sectionHeader(BuildContext context) {
-    return Theme.of(context).textTheme.titleSmall;
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleLarge!.copyWith(
+      color: theme.colorScheme.primary,
+    );
   }
 
   static TextStyle? cardTitle(BuildContext context) {
