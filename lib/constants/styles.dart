@@ -10,6 +10,13 @@ class TextStyles {
     );
   }
 
+  static TextStyle? sectionSubHeader(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleMedium!.copyWith(
+      color: theme.colorScheme.primary,
+    );
+  }
+
   static TextStyle? cardTitle(BuildContext context) {
     return Theme.of(context)
         .textTheme
