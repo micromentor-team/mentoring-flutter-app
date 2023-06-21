@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mm_flutter_app/firebase_options.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:mm_flutter_app/utilities/errors/errors.dart';
@@ -21,7 +22,9 @@ class CrashHandler {
   }
 
   void _initialize() async {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
       _isReleaseMode && _isCollectionEnabled,
     );
