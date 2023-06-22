@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
-import 'package:mm_flutter_app/widgets/screens/profile/about.dart';
-import 'package:mm_flutter_app/widgets/screens/profile/your_email.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/your_name.dart';
 import 'package:provider/provider.dart';
 
@@ -180,7 +178,7 @@ class Profile extends StatelessWidget {
                 children: [
                   ListTile(
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 2),
+                      side: const BorderSide(width: 2),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     title: const Text(
