@@ -36,4 +36,8 @@ class Dimensions {
   static const double recommendedMentorTileWidth = 112.0;
   static const Size upcomingSessionTile = Size(184.0, 96.0);
   static const double reminderBannerImageHeight = 80.0;
+  static const double mentorCardHeight = 170;
+  static const double mentorCardWidth = 260;
+  static const double chipVisualDensity = -4;
+  static const double chipMaxWidth = 100;
 }

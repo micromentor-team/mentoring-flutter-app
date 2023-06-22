@@ -60,3 +60,11 @@ class ButtonStyles {
     );
   }
 }
+
+// class ChipStyles{
+//   ChipStyles._private();
+//   static ChipStyles filledChip(BuildContext context) {
+//     return Chip.backgroundColor: Theme.of(context).colorScheme.primary,;
+//   }
+//
+// }
