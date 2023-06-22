@@ -151,7 +151,6 @@ class MentorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
     Column avatarColumn = _getAvatar();
     Column mentorInfoColumn = _getMentorInfo(context);
     return Card(
