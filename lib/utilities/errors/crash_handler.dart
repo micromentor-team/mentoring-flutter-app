@@ -26,7 +26,7 @@ class CrashHandler {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    if(!kIsWeb){
+    if (!kIsWeb) {
       FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
         _isReleaseMode && _isCollectionEnabled,
       );
