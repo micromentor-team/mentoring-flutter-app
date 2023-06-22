@@ -14,7 +14,7 @@
     "homeResourcesMentorTraining": "Mentor Training",
     "homeResourcesSectionTitle": "Recommended Tools & Resources",
     "homeResourcesVideos": "Videos and Webinars",
-    "homeSearchHint": "Search for a mentor",
+    "homeSearchHint": "Find More Mentors",
     "homeUpcomingSectionTitle": "You have {numUpcomingSessions} upcoming sessions",
     "homeUpcomingSessionJoin": "JOIN",
     "homeUpcomingSessionReschedule": "RESCHEDULE",
@@ -37,5 +37,6 @@
     "reminderBannerProfileCompleteCta": "Complete profile",
     "reminderBannerProfileUpdateTitle": "Update your profile",
     "reminderBannerProfileUpdateSubtitle": "Make sure your profile is updated so you get the best matches",
-    "reminderBannerProfileUpdateCta": "Update profile"
+    "reminderBannerProfileUpdateCta": "Update profile",
+    "recommendedMentorCardScrollable": "Recommended"
 }
