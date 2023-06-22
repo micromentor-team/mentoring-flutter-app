@@ -22,7 +22,7 @@ export function mockMutations(serverState: MockServerState) {
             return channel;
         },
         createChannelInvitation: () => {
-            const invitation = generators.generateChannelInvitation([serverState.loggedInUser, serverState.otherUsers[1]])
+            const invitation = generators.generateChannelInvitation(serverState.loggedInUser, serverState.otherUsers[1])
             serverState.channelInvitations.push(invitation);
             return invitation;
         },
