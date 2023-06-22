@@ -18,14 +18,16 @@ export function mockQueries(serverState: MockServerState) {
                 generators.generateChannel([serverState.loggedInUser, serverState.otherUsers[0]]),
             ]
         },
-        findUsers: () => {
+        findChannelInvitationsForUser: () => {
             return [
-                serverState.loggedInUser,
-                serverState.otherUsers[0],
-                serverState.otherUsers[1],
-                serverState.otherUsers[2],
-                serverState.otherUsers[3],
+                generators.generateChannelInvitation(serverState.loggedInUser, serverState.otherUsers[0], false, false),
+                generators.generateChannelInvitation(serverState.loggedInUser, serverState.otherUsers[0], false, true),
+                generators.generateChannelInvitation(serverState.otherUsers[0], serverState.loggedInUser, false, false),
+                generators.generateChannelInvitation(serverState.otherUsers[0], serverState.loggedInUser, false, true),
             ]
+        },
+        findUsers: () => {
+            return serverState.otherUsers.concat([serverState.loggedInUser]);
         },
         getAuthenticatedUser: () => {
             if (!serverState.loggedIn) {
@@ -63,6 +65,6 @@ export function mockQueries(serverState: MockServerState) {
                     ],
                 }
             }
-        }
+        },
     }
 }
