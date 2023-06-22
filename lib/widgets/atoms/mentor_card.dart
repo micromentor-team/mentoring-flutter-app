@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class MentorCard extends StatelessWidget {
   final String avatarUrl;
@@ -71,14 +71,12 @@ class MentorCard extends StatelessWidget {
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: Dimensions.mentorCardWidth / 2,
-            child: Expanded(
-              child: Text(
-                mentorName,
-                style: TextStyles.cardTitle(context),
-                softWrap: false,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
+            child: Text(
+              mentorName,
+              style: TextStyles.cardTitle(context),
+              softWrap: false,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
@@ -89,14 +87,12 @@ class MentorCard extends StatelessWidget {
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: Dimensions.mentorCardWidth / 2,
-            child: Expanded(
-              child: Text(
-                mentorBio,
-                style: TextStyles.cardSubtitle(context),
-                softWrap: false,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
+            child: Text(
+              mentorBio,
+              style: TextStyles.cardSubtitle(context),
+              softWrap: false,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
