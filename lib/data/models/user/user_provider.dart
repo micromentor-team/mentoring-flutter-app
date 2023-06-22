@@ -108,6 +108,33 @@ class UserProvider extends ChangeNotifier {
     );
   }
 
+  Widget queryUserProfileInfo({required onData, onLoading, onError}) {
+    return Query(
+      options: QueryOptions(
+        document: gql(kGetUserProfileInfo),
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+      builder: (result, {refetch, fetchMore}) {
+        if (result.hasException) {
+          final error = result.exception.toString();
+
+          if (onError != null) {
+            return onError(error);
+          }
+          return ServerError(error: error);
+        }
+
+        if (result.isLoading) {
+          if (onLoading != null) {
+            return onLoading();
+          }
+          return const SizedBox.shrink();
+        }
+        return onData(result.data!['getUserProfileInfo']);
+      },
+    );
+  }
+
   // Mutations
   Future<void> signUpUser(
       {required name, required email, required password}) async {

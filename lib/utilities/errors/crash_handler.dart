@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mm_flutter_app/firebase_options.dart';
@@ -25,9 +26,11 @@ class CrashHandler {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
-      _isReleaseMode && _isCollectionEnabled,
-    );
+    if(!kIsWeb){
+      FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+        _isReleaseMode && _isCollectionEnabled,
+      );
+    }
   }
 
   static FutureOr<T> retryOnException<T>(

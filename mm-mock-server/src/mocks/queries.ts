@@ -30,6 +30,13 @@ export function mockQueries(serverState: MockServerState) {
             }
             return serverState.loggedInUser;
         },
+        getUserProfileInfo: () => {
+            return {
+                __typename: "User",
+                profileCompletionPercentage: generators.generateUserProfileCompletionPercentage(),
+                lastUpdateTime: generators.generateUserLastUpdateTime(),
+            };
+        },
         myInbox: () => {
             var mockChannelId = faker.string.alphanumeric({length: 24});
             return {

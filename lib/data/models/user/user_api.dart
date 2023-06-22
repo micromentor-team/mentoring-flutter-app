@@ -59,3 +59,12 @@ const String kGetAllUsers = """
     }
   }
 """;
+
+const String kGetUserProfileInfo = """
+  query Q {
+    getUserProfileInfo(){
+      profileCompletionPercentage
+      lastUpdateTime
+    }
+  }
+""";
