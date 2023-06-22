@@ -129,12 +129,15 @@ export function generateUserLastUpdateTime() {
 }
 
 
-export function generateChannelInvitation(channelParticipants: any[], declined?: boolean, accepted?: boolean) {
+export function generateChannelInvitation(sender: any, recipient: any, declined?: boolean, accepted?: boolean) {
     var status: object | null;
+    var channel: object | null = null;
     if (declined || accepted) {
         var statusText: string;
-        if (accepted)
+        if (accepted) {
             statusText = "accepted";
+            channel = generateChannel([sender, recipient])
+        }
         else if (declined)
             statusText = "declined";
         else
@@ -150,15 +153,15 @@ export function generateChannelInvitation(channelParticipants: any[], declined?:
         __typename: "ChannelInvitation",
         id: faker.string.alphanumeric({length: 24}),
         channelName: faker.lorem.words(2),
-        channel: generateChannel(channelParticipants),
+        channel: channel,
         channelTopic: faker.lorem.sentence(),
         messageText: faker.lorem.sentence(),
-        createdBy: channelParticipants[0].id,
+        createdBy: sender.id,
         createdAt: faker.date.recent(),
-        recipientId: channelParticipants[0].id,
-        recipient: channelParticipants[0],
-        senderId: channelParticipants[1].id,
-        sender: channelParticipants[1],
+        recipientId: recipient.id,
+        recipient: recipient,
+        senderId: sender.id,
+        sender: sender,
         status: status,
     }
 }
