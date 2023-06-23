@@ -100,9 +100,7 @@ export function generateUserProfileCompletionPercentage() {
 
 export function generateUserLastUpdateTime() {
     // Returns a random date time from one year before to now
-    var startDate = (new Date(new Date().setFullYear(new Date().getFullYear() - 1))).valueOf(); 
-    var endDate = (new Date()).valueOf();
-    return new Date(startDate + Math.random() * (endDate - startDate)); 
+    return faker.date.past(); 
 }
 
 
