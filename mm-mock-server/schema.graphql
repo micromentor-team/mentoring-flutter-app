@@ -103,7 +103,7 @@
     expertises: [String!]!
     industries: [String!]!
   }
-  
+
   type Query {
     myInbox(refresh: Boolean): UserInbox!
     findUserById(id: String!): User!
@@ -111,6 +111,7 @@
     findUsers(options: FindObjectsOptions, match: UserInput, filter: UserListFilter): [User!]!
     getAvailableUserHandleField(startValue: String!): User!
     getAuthenticatedUser: User!
+    getUserProfileInfo: User!
     findUserDeviceById(id: String!): UserDevice!
     findUserDevices(options: FindObjectsOptions, match: UserDeviceInput, filter: SidUserDeviceListFilter): [UserDevice!]!
     findChannelInvitationById(id: String!): ChannelInvitation!
@@ -261,6 +262,8 @@
     groupMembers: [GroupMembership!]!
     groups: [Group!]!
     inbox: [UserInbox!]!
+    profileCompletionPercentage: Int
+    lastUpdateTime: DateTime
   }
   
   enum AuthType {
