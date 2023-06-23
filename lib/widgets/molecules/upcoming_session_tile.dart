@@ -6,11 +6,13 @@ import 'package:mm_flutter_app/widgets/atoms/rectangle_button.dart';
 
 class UpcomingSessionTile extends StatelessWidget {
   static const Duration joinMinimumTime = Duration(minutes: 5);
+  final String avatarUrl;
   final DateTime dateTime;
   final String mentorName;
 
   const UpcomingSessionTile({
     Key? key,
+    required this.avatarUrl,
     required this.dateTime,
     required this.mentorName,
   }) : super(key: key);
@@ -40,7 +42,7 @@ class UpcomingSessionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     // TODO(m-rosario): Support different date formats according to locale.
-    DateFormat dateFormat = DateFormat('MMMM d, ').add_jm();
+    DateFormat dateFormat = DateFormat('MMMM d\ny\n').add_jm();
     return Padding(
       padding: const EdgeInsets.all(Insets.widgetSmallInset),
       child: Card(
@@ -50,25 +52,37 @@ class UpcomingSessionTile extends StatelessWidget {
             horizontal: Insets.widgetMediumInset,
           ),
           child: Align(
-            alignment: Alignment.topLeft,
+            alignment: Alignment.center,
             child: SizedBox(
               width: Dimensions.upcomingSessionTile.width,
               height: Dimensions.upcomingSessionTile.height,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Padding(
+                      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                      child: CircleAvatar(
+                          radius: Radii.avatarRadiusSmall,
+                          child: CircleAvatar(
+                            radius: Radii.avatarRadiusSmall,
+                            backgroundImage: NetworkImage(avatarUrl.toString()),
+                          ))),
                   Text(
                     mentorName,
-                    style: TextStyles.cardTitle(context),
+                    style: TextStyles.mentorCardTitle(context),
+                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: Insets.widgetSmallestInset),
-                  Text(
-                    dateFormat.format(dateTime),
-                    style: TextStyles.cardSubtitle(context),
-                  ),
-                  const Expanded(child: SizedBox()),
-                  Row(
-                    children: _createSessionButtons(l10n),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: Insets.widgetSmallestInset,
+                        bottom: Insets.widgetSmallInset),
+                    child: Text(
+                      dateFormat.format(dateTime),
+                      style: TextStyles.mentorCardSubtitle(context),
+                      textAlign: TextAlign.center,
+                    ),
                   )
                 ],
               ),

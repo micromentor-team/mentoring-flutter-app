@@ -19,41 +19,37 @@ class ProfileHeader extends StatelessWidget {
       padding: const EdgeInsets.all(Insets.widgetLargeInset),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.all(Insets.widgetSmallestInset),
+              child: Text(
+                profileMessage,
+                textAlign: TextAlign.start,
+                softWrap: true,
+                style: TextStyles.profileHeader(context),
+              ),
+            ),
+          ),
           Stack(
-            alignment: Alignment.center,
             children: [
               if (profileCompletionPercentage != null)
                 SizedBox(
-                  width: Radii.avatarRadiusLarge * 2,
-                  height: Radii.avatarRadiusLarge * 2,
+                  width: Radii.avatarRadiusSmall * 2,
+                  height: Radii.avatarRadiusSmall * 2,
                   child: CircularProgressIndicator(
                     value: profileCompletionPercentage! / 100,
                   ),
                 ),
               CircleAvatar(
-                radius: Radii.avatarRadiusLarge,
+                radius: Radii.avatarRadiusSmall,
                 backgroundImage: avatarUrl != null
                     ? NetworkImage(avatarUrl.toString())
                     : null,
               ),
             ],
           ),
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: Insets.widgetMediumLargeInset,
-              ),
-              child: Text(
-                profileMessage,
-                textAlign: TextAlign.start,
-                maxLines: 3,
-                softWrap: true,
-                style: TextStyles.profileHeader(context),
-              ),
-            ),
-          )
         ],
       ),
     );

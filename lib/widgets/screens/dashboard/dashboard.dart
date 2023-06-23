@@ -26,7 +26,7 @@ class DashboardScreen extends StatelessWidget {
     } else {
       timeOfDayGreeting = l10n.homeGreetingEvening;
     }
-    return '${timeOfDayGreeting.replaceAll(" ", "\n")}\n${user.fullName}';
+    return '$timeOfDayGreeting ${user.fullName}';
   }
 
   @override
@@ -45,18 +45,9 @@ class DashboardScreen extends StatelessWidget {
                   profileCompletionPercentage: 30,
                 ),
                 const MaybeReminderBanner(),
-                const RecommendedMentorsScroll(),
-                Padding(
-                  padding: const EdgeInsets.all(
-                    Insets.appEdgeInsetCompact,
-                  ),
-                  child: UserSearchBar(
-                    hintText: l10n.homeSearchHint,
-                  ),
-                ),
+                const RecommendedSection(),
                 const UpcomingSection(),
                 const InvitationSection(),
-                const MentorsSection(),
                 const ResourcesSection(),
               ],
             ),
