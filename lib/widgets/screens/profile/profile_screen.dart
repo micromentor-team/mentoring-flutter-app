@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
-import 'package:mm_flutter_app/widgets/screens/profile/about.dart';
-import 'package:mm_flutter_app/widgets/screens/profile/your_email.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/your_name.dart';
 import 'package:provider/provider.dart';
 
@@ -57,27 +55,32 @@ class Profile extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            CircleAvatar(
+            ListTile(
+              title: Text(
+                user.fullName,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),
+              ),
+              subtitle: const Text(
+                "Jaipur, India",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              ),
+              leading: CircleAvatar(
                 radius: 50,
+                // height: 100,
                 child: ClipOval(
                   child: FadeInImage(
                     fit: BoxFit.fill,
                     image: NetworkImage(user.avatarUrl ?? placeholderImage,
-                        scale: 0.75),
+                        scale: 2.75),
                     placeholder: NetworkImage(placeholderImage),
                   ),
-                )),
-            const SizedBox(
-              height: 15,
-            ),
-            ListTile(
-              title: const Text(
-                "Name",
-              ),
-              leading: const Icon(
-                Icons.account_circle_rounded,
-                size: 40,
-                color: Colors.black,
+                ),
               ),
               onTap: () {
                 Navigator.of(context).push(
@@ -86,67 +89,189 @@ class Profile extends StatelessWidget {
                   ),
                 );
               },
-              subtitle: Text(
-                user.fullName,
-                style: const TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 35,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Wrap(
+                      children: [
+                        Icon(
+                          Icons.language,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('English'),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                SizedBox(
+                  height: 35,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Wrap(
+                      children: [
+                        Icon(
+                          Icons.thumb_up,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('LinkedIn'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                title: const Text(
+                  "Bio",
+                  style: TextStyle(color: Colors.black38),
+                ),
+                subtitle: const Text(
+                  "Hi, I'm Rupal,  is the founder and CEO of Rupal's Kitchen, a home-grown food delivery service in Mumbai, India.",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
-            ListTile(
-              title: const Text(
-                "Email",
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                title: const Text(
+                  "Venture",
+                  style: TextStyle(color: Colors.black38),
+                ),
+                subtitle: const Text(
+                  "I started my company, Rupal's Kitchen, in 2015 with a mission to provide fresh, healthy, and affordable meals to busy professionals and families. Today, Rupal's Kitchen is one of the most popular food delivery services in Jaipur, with over 10,000 customers.",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
-              leading: const Icon(
-                Icons.email_outlined,
-                size: 40,
-                color: Colors.black,
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const YourEmail(),
-                  ),
-                );
-              },
-              subtitle: user.email != null
-                  ? Text(
-                      user.email!,
-                      style: const TextStyle(color: Colors.grey),
-                    )
-                  : null,
             ),
-            ListTile(
-              title: const Text(
-                'About',
-              ),
-              leading: const Icon(
-                Icons.edit_outlined,
-                size: 40,
-                color: Colors.black,
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const About(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  ListTile(
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    title: const Text(
+                      'Mentorship Preferences',
+                      style: TextStyle(color: Colors.black38),
+                    ),
+                    subtitle: const Text(
+                      "My biggest challenges are building my business up such that I can grow sustainably over the next year.",
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
-                );
-              },
-              subtitle: Text(
-                user.adminNotes != null
-                    ? user.adminNotes!
-                    : 'Write a few words about yourself',
-                style: const TextStyle(color: Colors.grey),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Chip(
+                          avatar: CircleAvatar(
+                            backgroundColor: Colors.grey.shade800,
+                            child: const Text('M'),
+                          ),
+                          label: const Text('Marketing'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Chip(
+                          avatar: CircleAvatar(
+                            backgroundColor: Colors.grey.shade800,
+                            child: const Text('S'),
+                          ),
+                          label: const Text('Sales'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Chip(
+                          avatar: CircleAvatar(
+                            backgroundColor: Colors.grey.shade800,
+                            child: const Text('H'),
+                          ),
+                          label: const Text('Hiring'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                'Your profile and changes to it will be visible to people you message and contacts.',
-                style: TextStyle(color: Colors.grey),
-              ),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 35,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Wrap(
+                      children: [
+                        Icon(
+                          Icons.edit,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('Edit Profile'),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                SizedBox(
+                  height: 35,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Wrap(
+                      children: [
+                        Icon(
+                          Icons.delete,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('Delete Profile'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

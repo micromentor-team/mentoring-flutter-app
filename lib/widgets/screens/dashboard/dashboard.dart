@@ -11,6 +11,7 @@ import 'package:mm_flutter_app/widgets/molecules/mentors_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
+import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_scroll.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -38,6 +39,13 @@ class DashboardScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
+                ProfileHeader(
+                  avatarUrl: user.avatarUrl,
+                  profileMessage: _getGreeting(l10n, user),
+                  profileCompletionPercentage: 30,
+                ),
+                const MaybeReminderBanner(),
+                const RecommendedMentorsScroll(),
                 Padding(
                   padding: const EdgeInsets.all(
                     Insets.appEdgeInsetCompact,
@@ -46,14 +54,6 @@ class DashboardScreen extends StatelessWidget {
                     hintText: l10n.homeSearchHint,
                   ),
                 ),
-                ProfileHeader(
-                  avatarUrl: user.avatarUrl,
-                  profileMessage: _getGreeting(l10n, user),
-                  profileCompletionPercentage: 30,
-                ),
-                MaybeReminderBanner(
-                    profileCompletionPercentage: 30,
-                    lastUpdateTime: DateTime.parse('2021-05-20 20:18:04Z')),
                 const UpcomingSection(),
                 const InvitationSection(),
                 const MentorsSection(),
