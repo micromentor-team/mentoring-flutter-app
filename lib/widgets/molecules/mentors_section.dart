@@ -48,6 +48,7 @@ class MentorsSection extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return SectionTile(
       title: l10n.homeMentorsSectionTitle,
+      addTopDivider: true,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
