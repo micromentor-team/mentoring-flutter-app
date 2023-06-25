@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/data/models/user/queries/get_user_profile_info.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/user/user_provider.dart';
@@ -89,9 +90,9 @@ class MaybeReminderBanner extends StatelessWidget {
     }, onError: (error) {
       debugPrint(error);
       return const SizedBox(width: 0.0, height: 0.0);
-    }, onData: (data) {
-      int profileCompletionPercentage = data['profileCompletionPercentage'];
-      DateTime lastUpdateTime = DateTime.parse(data['lastUpdateTime']);
+    }, onData: (GetUserProfileInfoResult? data) {
+      int profileCompletionPercentage = data!.profileCompletionPercentage;
+      DateTime lastUpdateTime = data.lastUpdateTime;
       if (profileCompletionPercentage < 50) {
         return ReminderBanner(
           titleText: l10n

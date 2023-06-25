@@ -1,10 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/data/models/user/queries/find_users.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/models/channels/channel.dart';
 import '../../../data/models/channels/channels_provider.dart';
-import '../../../data/models/user/user.dart';
 import '../../../data/models/user/user_provider.dart';
 import '../../organisms/user_card.dart';
 import '../../organisms/user_expanded_card.dart';
@@ -98,11 +98,10 @@ class UsersList extends StatelessWidget {
       onError: (error) {
         return Text('Error: $error');
       },
-      onData: (data) {
-        List users = data.reversed
-            .where((item) => item['id'] != currentUser?.id)
+      onData: (FindUsersResult? data) {
+        List users = data!.list.reversed
+            .where((element) => element.id != currentUser?.id)
             .toList();
-        users = users.map((item) => User.fromJson(item)).toList();
         users = users
             .where((element) =>
                 element.fullName.toLowerCase().contains(search.toLowerCase()))

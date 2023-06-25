@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/data/models/user/queries/get_authenticated_user.dart';
+import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mm_flutter_app/data/models/user/user.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import '../../atoms/text_form_field_widget.dart';
 
 class EmailScreen extends StatelessWidget {
@@ -49,8 +49,7 @@ class _YourEmailState extends State<YourEmail> {
       onError: (error) {
         return Text('Error: $error');
       },
-      onData: (data) {
-        User user = User.fromJson(data);
+      onData: (GetAuthenticatedUserResult? data) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Your email'),
@@ -65,7 +64,7 @@ class _YourEmailState extends State<YourEmail> {
                     label: 'Email',
                     validator: (value) {
                       if (value!.isEmpty) {
-                        emailController.text = user.email!;
+                        emailController.text = data!.email!;
                         return '''Email can't be empty''';
                       }
                       return null;

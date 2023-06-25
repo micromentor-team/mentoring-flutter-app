@@ -35,36 +35,3 @@ const String kUpdateUser = """
     updateUser(input: \$input)
   }
 """;
-
-const String kGetAuthenticatedUser = """
-  query Q {
-    getAuthenticatedUser {
-      id
-      email
-      fullName
-      avatarUrl
-      userHandle
-    }
-  }
-""";
-
-const String kGetAllUsers = """
-  query Q(\$filter: UserListFilter) {
-    findUsers(filter: \$filter){
-      id
-      email
-      fullName
-      avatarUrl
-      userHandle
-    }
-  }
-""";
-
-const String kGetUserProfileInfo = """
-  query Q {
-    getUserProfileInfo(){
-      profileCompletionPercentage
-      lastUpdateTime
-    }
-  }
-""";
