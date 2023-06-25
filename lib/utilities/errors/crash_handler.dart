@@ -35,12 +35,11 @@ class CrashHandler {
 
   static FutureOr<T> retryOnException<T>(
     FutureOr<T> Function() operation, {
-    int maxAttempts = 4,
     FutureOr<T> Function()? onFailOperation,
+    RetryOptions retryOptions = const RetryOptions(
+      maxAttempts: 4,
+    ),
   }) async {
-    final RetryOptions retryOptions = RetryOptions(
-      maxAttempts: maxAttempts,
-    );
     try {
       return await retryOptions.retry<T>(
         operation,

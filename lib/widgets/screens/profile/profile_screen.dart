@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/data/models/user/queries/get_authenticated_user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/your_name.dart';
 import 'package:provider/provider.dart';
@@ -33,10 +32,10 @@ class UserProfile extends StatelessWidget {
       onLoading: () {
         return const SizedBox.shrink();
       },
-      onError: (error) {
+      onError: (error, refetch) {
         return Text('Error: $error');
       },
-      onData: (GetAuthenticatedUserResult? data) {
+      onData: (data, refetch) {
         return Profile(
           userFullName: data?.fullName,
           userAvatarUrl: data?.avatarUrl,

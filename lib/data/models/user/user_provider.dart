@@ -46,19 +46,21 @@ class UserProvider extends BaseProvider {
   }
 
   Widget queryUser({
-    required Widget Function(GetAuthenticatedUserResult?) onData,
+    required Widget Function(
+            GetAuthenticatedUserResult? data, void Function()? refetch)
+        onData,
     Widget Function()? onLoading,
-    Widget Function(String)? onError,
+    Widget Function(String error, void Function()? refetch)? onError,
   }) {
     return runQuery<GetAuthenticatedUserResult>(
       operation: GetAuthenticatedUser(),
-      onData: (GetAuthenticatedUserResult? data) {
+      onData: (data, refetch) {
         if (data != null) {
           _setUser(data.toJson());
         } else {
           _resetUser();
         }
-        return onData(data);
+        return onData(data, refetch);
       },
       onLoading: onLoading,
       onError: onError,
@@ -66,9 +68,10 @@ class UserProvider extends BaseProvider {
   }
 
   Widget queryAllUsers({
-    required Widget Function(FindUsersResult?) onData,
+    required Widget Function(FindUsersResult? data, void Function()? refetch)
+        onData,
     Widget Function()? onLoading,
-    Widget Function(String)? onError,
+    Widget Function(String error, void Function()? refetch)? onError,
   }) {
     return runQuery<FindUsersResult>(
       operation: FindUsers(),
@@ -79,9 +82,11 @@ class UserProvider extends BaseProvider {
   }
 
   Widget queryUserProfileInfo({
-    required Widget Function(GetUserProfileInfoResult?) onData,
+    required Widget Function(
+            GetUserProfileInfoResult? data, void Function()? refetch)
+        onData,
     Widget Function()? onLoading,
-    Widget Function(String)? onError,
+    Widget Function(String error, void Function()? refetch)? onError,
   }) {
     return runQuery<GetUserProfileInfoResult>(
       operation: GetUserProfileInfo(),

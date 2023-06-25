@@ -1,6 +1,5 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/data/models/user/queries/find_users.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/models/channels/channel.dart';
@@ -95,10 +94,10 @@ class UsersList extends StatelessWidget {
       onLoading: () {
         return const SizedBox.shrink();
       },
-      onError: (error) {
+      onError: (error, refetch) {
         return Text('Error: $error');
       },
-      onData: (FindUsersResult? data) {
+      onData: (data, refetch) {
         List users = data!.list.reversed
             .where((element) => element.id != currentUser?.id)
             .toList();
