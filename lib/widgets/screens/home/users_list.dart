@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../../data/models/channels/channel.dart';
 import '../../../data/models/channels/channels_provider.dart';
-import '../../../data/models/user/user.dart';
 import '../../../data/models/user/user_provider.dart';
 import '../../organisms/user_card.dart';
 import '../../organisms/user_expanded_card.dart';
@@ -95,14 +94,13 @@ class UsersList extends StatelessWidget {
       onLoading: () {
         return const SizedBox.shrink();
       },
-      onError: (error) {
+      onError: (error, {refetch}) {
         return Text('Error: $error');
       },
-      onData: (data) {
-        List users = data.reversed
-            .where((item) => item['id'] != currentUser?.id)
+      onData: (data, {refetch, fetchMore}) {
+        List users = data!.list.reversed
+            .where((element) => element.id != currentUser?.id)
             .toList();
-        users = users.map((item) => User.fromJson(item)).toList();
         users = users
             .where((element) =>
                 element.fullName.toLowerCase().contains(search.toLowerCase()))

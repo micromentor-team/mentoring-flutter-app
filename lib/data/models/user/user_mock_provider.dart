@@ -17,7 +17,7 @@ class UserMockProvider extends Mock implements UserProvider {
   // Query builders
   @override
   Widget queryUser({required onData, onLoading, onError}) {
-    return onData();
+    return onData(null);
   }
 
   // Query builders
