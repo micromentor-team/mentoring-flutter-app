@@ -32,10 +32,10 @@ class UserProfile extends StatelessWidget {
       onLoading: () {
         return const SizedBox.shrink();
       },
-      onError: (error, refetch) {
+      onError: (error, {refetch}) {
         return Text('Error: $error');
       },
-      onData: (data, refetch) {
+      onData: (data, {refetch, fetchMore}) {
         return Profile(
           userFullName: data?.fullName,
           userAvatarUrl: data?.avatarUrl,

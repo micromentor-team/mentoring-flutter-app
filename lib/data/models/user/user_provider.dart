@@ -47,20 +47,22 @@ class UserProvider extends BaseProvider {
 
   Widget queryUser({
     required Widget Function(
-            GetAuthenticatedUserResult? data, void Function()? refetch)
-        onData,
+      GetAuthenticatedUserResult? data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
     Widget Function()? onLoading,
-    Widget Function(String error, void Function()? refetch)? onError,
+    Widget Function(String error, {void Function()? refetch})? onError,
   }) {
     return runQuery<GetAuthenticatedUserResult>(
       operation: GetAuthenticatedUser(),
-      onData: (data, refetch) {
+      onData: (data, {refetch, fetchMore}) {
         if (data != null) {
           _setUser(data.toJson());
         } else {
           _resetUser();
         }
-        return onData(data, refetch);
+        return onData(data, refetch: refetch, fetchMore: fetchMore);
       },
       onLoading: onLoading,
       onError: onError,
@@ -68,10 +70,13 @@ class UserProvider extends BaseProvider {
   }
 
   Widget queryAllUsers({
-    required Widget Function(FindUsersResult? data, void Function()? refetch)
-        onData,
+    required Widget Function(
+      FindUsersResult? data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
     Widget Function()? onLoading,
-    Widget Function(String error, void Function()? refetch)? onError,
+    Widget Function(String error, {void Function()? refetch})? onError,
   }) {
     return runQuery<FindUsersResult>(
       operation: FindUsers(),
@@ -83,10 +88,12 @@ class UserProvider extends BaseProvider {
 
   Widget queryUserProfileInfo({
     required Widget Function(
-            GetUserProfileInfoResult? data, void Function()? refetch)
-        onData,
+      GetUserProfileInfoResult? data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
     Widget Function()? onLoading,
-    Widget Function(String error, void Function()? refetch)? onError,
+    Widget Function(String error, {void Function()? refetch})? onError,
   }) {
     return runQuery<GetUserProfileInfoResult>(
       operation: GetUserProfileInfo(),

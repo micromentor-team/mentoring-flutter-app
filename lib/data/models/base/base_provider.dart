@@ -11,9 +11,13 @@ import '../../../widgets/atoms/server_error.dart';
 abstract class BaseProvider extends ChangeNotifier {
   Widget runQuery<T extends BaseResult>({
     required BaseOperation operation,
-    required Widget Function(T? data, void Function()? refetch) onData,
+    required Widget Function(
+      T? data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
     Widget Function()? onLoading,
-    Widget Function(String error, void Function()? refetch)? onError,
+    Widget Function(String error, {void Function()? refetch})? onError,
   }) {
     const RetryOptions retryOptions = RetryOptions(
       maxAttempts: 2,
@@ -32,7 +36,10 @@ abstract class BaseProvider extends ChangeNotifier {
           if (isFailed) {
             final String error = result.exception.toString();
             if (onError != null) {
-              return onError(error, refetch != null ? () => refetch() : null);
+              return onError(
+                error,
+                refetch: refetch,
+              );
             }
             return ServerError(error: error);
           }
@@ -65,12 +72,13 @@ abstract class BaseProvider extends ChangeNotifier {
         }
 
         if (result.data == null) {
-          return onData(null, null);
+          return onData(null);
         }
 
         return onData(
           operation.resultFromResponseData(result.data!) as T,
-          refetch != null ? () => refetch() : null,
+          refetch: refetch,
+          fetchMore: fetchMore,
         );
       },
     );

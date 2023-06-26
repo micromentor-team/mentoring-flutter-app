@@ -94,10 +94,10 @@ class UsersList extends StatelessWidget {
       onLoading: () {
         return const SizedBox.shrink();
       },
-      onError: (error, refetch) {
+      onError: (error, {refetch}) {
         return Text('Error: $error');
       },
-      onData: (data, refetch) {
+      onData: (data, {refetch, fetchMore}) {
         List users = data!.list.reversed
             .where((element) => element.id != currentUser?.id)
             .toList();

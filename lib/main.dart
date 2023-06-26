@@ -115,10 +115,10 @@ class StartScreen extends StatelessWidget {
       onLoading: () {
         return const LoadingScreen();
       },
-      onError: (error, refetch) {
+      onError: (error, {refetch}) {
         return const SignInScreen();
       },
-      onData: (data, refetch) {
+      onData: (data, {refetch, fetchMore}) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           context.go('/home');
         });

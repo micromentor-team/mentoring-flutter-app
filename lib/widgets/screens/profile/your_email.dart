@@ -45,10 +45,10 @@ class _YourEmailState extends State<YourEmail> {
       onLoading: () {
         return const SizedBox.shrink();
       },
-      onError: (error, refetch) {
+      onError: (error, {refetch}) {
         return Text('Error: $error');
       },
-      onData: (data, refetch) {
+      onData: (data, {refetch, fetchMore}) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Your email'),

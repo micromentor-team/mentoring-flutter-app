@@ -86,10 +86,10 @@ class MaybeReminderBanner extends StatelessWidget {
 
     return userProvider.queryUserProfileInfo(onLoading: () {
       return const SizedBox(width: 0.0, height: 0.0);
-    }, onError: (error, refetch) {
+    }, onError: (error, {refetch}) {
       debugPrint(error);
       return const SizedBox(width: 0.0, height: 0.0);
-    }, onData: (data, refetch) {
+    }, onData: (data, {refetch, fetchMore}) {
       int profileCompletionPercentage = data!.profileCompletionPercentage;
       DateTime lastUpdateTime = data.lastUpdateTime;
       if (profileCompletionPercentage < 50) {
