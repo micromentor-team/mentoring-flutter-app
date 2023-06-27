@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/atoms/rectangle_button.dart';
 
 class UpcomingSessionTile extends StatelessWidget {
   static const Duration joinMinimumTime = Duration(minutes: 5);
@@ -17,30 +15,29 @@ class UpcomingSessionTile extends StatelessWidget {
     required this.mentorName,
   }) : super(key: key);
 
-  List<Widget> _createSessionButtons(AppLocalizations l10n) {
-    List<Widget> buttons = [];
-    // Add JOIN button only if session is coming up soon.
-    if (DateTime.now().isAfter(dateTime.subtract(joinMinimumTime))) {
-      buttons.add(Padding(
-        padding: const EdgeInsets.only(
-          right: Insets.widgetSmallInset,
-        ),
-        child: RectangleButton(
-          onPressed: () => {},
-          text: l10n.homeUpcomingSessionJoin,
-        ),
-      ));
-    }
-    buttons.add(RectangleButton(
-      onPressed: () => {},
-      text: l10n.homeUpcomingSessionReschedule,
-    ));
-    return buttons;
-  }
+  // List<Widget> _createSessionButtons(AppLocalizations l10n) {
+  //   List<Widget> buttons = [];
+  //   // Add JOIN button only if session is coming up soon.
+  //   if (DateTime.now().isAfter(dateTime.subtract(joinMinimumTime))) {
+  //     buttons.add(Padding(
+  //       padding: const EdgeInsets.only(
+  //         right: Insets.widgetSmallInset,
+  //       ),
+  //       child: RectangleButton(
+  //         onPressed: () => {},
+  //         text: l10n.homeUpcomingSessionJoin,
+  //       ),
+  //     ));
+  //   }
+  //   buttons.add(RectangleButton(
+  //     onPressed: () => {},
+  //     text: l10n.homeUpcomingSessionReschedule,
+  //   ));
+  //   return buttons;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
     // TODO(m-rosario): Support different date formats according to locale.
     DateFormat dateFormat = DateFormat('MMMM d\ny\n').add_jm();
     return Padding(

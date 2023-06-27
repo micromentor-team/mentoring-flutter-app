@@ -26,7 +26,7 @@ class _Explore extends State<Explore> {
       child: Column(
         children: [
           UserSearchBar(
-            hintText: l10n.homeSearchHint,
+            hintText: l10n.exploreSearchHint,
           ),
           Row(
             children: [

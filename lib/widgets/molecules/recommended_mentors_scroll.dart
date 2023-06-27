@@ -3,8 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_card.dart';
 
-import '../atoms/rectangle_button.dart';
-
 class RecommendedMentorsScroll extends StatelessWidget {
   const RecommendedMentorsScroll({Key? key}) : super(key: key);
 
