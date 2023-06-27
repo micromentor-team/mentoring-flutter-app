@@ -37,8 +37,8 @@ class UserProfile extends StatelessWidget {
       },
       onData: (data, {refetch, fetchMore}) {
         return Profile(
-          userFullName: data.dataModel?.fullName,
-          userAvatarUrl: data.dataModel?.avatarUrl,
+          userFullName: data.model?.fullName,
+          userAvatarUrl: data.model?.avatarUrl,
         );
       },
     );

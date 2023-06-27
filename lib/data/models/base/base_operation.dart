@@ -10,7 +10,7 @@ abstract class BaseOperation<T extends BaseModel> {
 abstract class BaseModel {}
 
 class OperationResult<T extends BaseModel> {
-  T? dataModel;
+  T? model;
   QueryResult gqlQueryResult;
-  OperationResult({this.dataModel, required this.gqlQueryResult});
+  OperationResult({this.model, required this.gqlQueryResult});
 }

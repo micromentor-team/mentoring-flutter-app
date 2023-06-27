@@ -25,7 +25,7 @@ class GetAuthenticatedUser implements BaseOperation<GetAuthenticatedUserModel> {
   OperationResult<GetAuthenticatedUserModel> transformQueryResult(
       QueryResult queryResult) {
     return OperationResult(
-      dataModel: queryResult.data != null
+      model: queryResult.data != null
           ? GetAuthenticatedUserModel._fromJson(queryResult.data![operation])
           : null,
       gqlQueryResult: queryResult,

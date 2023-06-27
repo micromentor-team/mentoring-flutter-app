@@ -7,7 +7,7 @@ class FindUsers implements BaseOperation<FindUsersModel> {
 
   @override
   String get gql => """
-  query Q(\$filter: UserListFilter) {
+  query Q (\$filter: UserListFilter) {
     findUsers(filter: \$filter){
       id
       email
@@ -27,7 +27,7 @@ class FindUsers implements BaseOperation<FindUsersModel> {
   OperationResult<FindUsersModel> transformQueryResult(
       QueryResult queryResult) {
     return OperationResult(
-      dataModel: queryResult.data != null
+      model: queryResult.data != null
           ? FindUsersModel._fromJson(queryResult.data![operation])
           : null,
       gqlQueryResult: queryResult,

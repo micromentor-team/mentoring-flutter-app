@@ -31,7 +31,7 @@ class SignInUser implements BaseOperation<SignInUserModel> {
   OperationResult<SignInUserModel> transformQueryResult(
       QueryResult queryResult) {
     return OperationResult(
-      dataModel: queryResult.data != null
+      model: queryResult.data != null
           ? SignInUserModel._fromJson(queryResult.data![operation])
           : null,
       gqlQueryResult: queryResult,

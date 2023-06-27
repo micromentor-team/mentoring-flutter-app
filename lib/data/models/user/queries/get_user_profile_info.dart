@@ -22,7 +22,7 @@ class GetUserProfileInfo implements BaseOperation<GetUserProfileInfoModel> {
   OperationResult<GetUserProfileInfoModel> transformQueryResult(
       QueryResult queryResult) {
     return OperationResult(
-      dataModel: queryResult.data != null
+      model: queryResult.data != null
           ? GetUserProfileInfoModel._fromJson(queryResult.data![operation])
           : null,
       gqlQueryResult: queryResult,

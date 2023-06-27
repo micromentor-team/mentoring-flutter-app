@@ -58,8 +58,8 @@ class UserProvider extends BaseProvider {
     return runQuery<GetAuthenticatedUserModel>(
       operation: GetAuthenticatedUser(),
       onData: (data, {refetch, fetchMore}) {
-        if (data.dataModel != null) {
-          _setUser(data.dataModel!.toJson());
+        if (data.model != null) {
+          _setUser(data.model!.toJson());
         } else {
           _resetUser();
         }
@@ -147,8 +147,51 @@ class UserProvider extends BaseProvider {
     }
   }
 
+  Future<void> signUpUserNew(
+      {required name, required email, required password}) async {
+    debugPrint('UserProvider: signUpUser: $name');
+
+    await _resetUser();
+    String deviceUuid = await _setDeviceUuid();
+
+    final QueryResult result = await client.mutate(
+      MutationOptions(
+        document: gql(kSignUpUser),
+        variables: {
+          'input': {
+            'fullName': name,
+            'email': email,
+            'password': password,
+            'deviceUuid': deviceUuid,
+          }
+        },
+        onError: (error) {
+          debugPrint('error: $error');
+        },
+      ),
+    );
+
+    // debugPrint('createUser result: $result');
+
+    if (result.data != null) {
+      String authToken = result.data!['signUpUser']['authToken'];
+      String userId = result.data!['signUpUser']['userId'];
+      String deviceId = result.data!['signUpUser']['deviceId'];
+      //
+      final pref = await SharedPreferences.getInstance();
+      pref.setString('userId', userId);
+      pref.setString('deviceId', deviceId);
+      pref.setString('authToken', authToken);
+
+      debugPrint('userId: $userId');
+      debugPrint('deviceId: $deviceId');
+      debugPrint('authToken: $authToken');
+    }
+  }
+
   Future<OperationResult<SignInUserModel>> signInUser(
-      SignInUserInput input) async {
+    SignInUserInput input,
+  ) async {
     debugPrint('UserProvider: signInUser: ${input.ident}');
 
     await _resetUser();
@@ -159,15 +202,15 @@ class UserProvider extends BaseProvider {
       operation: SignInUser(input: input),
     );
 
-    if (result.dataModel != null) {
+    if (result.model != null) {
       final pref = await SharedPreferences.getInstance();
-      pref.setString('userId', result.dataModel!.userId);
-      pref.setString('deviceId', result.dataModel!.deviceId);
-      pref.setString('authToken', result.dataModel!.authToken);
+      pref.setString('userId', result.model!.userId);
+      pref.setString('deviceId', result.model!.deviceId);
+      pref.setString('authToken', result.model!.authToken);
 
-      debugPrint('userId: ${result.dataModel!.userId}');
-      debugPrint('deviceId: ${result.dataModel!.deviceId}');
-      debugPrint('authToken: ${result.dataModel!.authToken}');
+      debugPrint('userId: ${result.model!.userId}');
+      debugPrint('deviceId: ${result.model!.deviceId}');
+      debugPrint('authToken: ${result.model!.authToken}');
     }
 
     return result;
