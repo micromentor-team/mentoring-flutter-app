@@ -15,7 +15,8 @@ Widget userCard(users, index) {
                 child: ClipOval(
                   child: FadeInImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(users[index].avatarUrl),
+                      image: NetworkImage(users[index].avatarUrl ??
+                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'),
                       placeholder: const NetworkImage(
                           'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')),
                 )),

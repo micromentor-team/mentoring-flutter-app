@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/data/models/base/base_provider.dart';
+import 'package:mm_flutter_app/data/models/user/queries/find_users.dart';
+import 'package:mm_flutter_app/data/models/user/queries/get_authenticated_user.dart';
+import 'package:mm_flutter_app/data/models/user/queries/get_user_profile_info.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../widgets/atoms/server_error.dart';
-
-class UserProvider extends ChangeNotifier {
+class UserProvider extends BaseProvider {
   GraphQLClient client;
 
   User? _user;
 
   UserProvider({required this.client});
 
-  void _setUser(QueryResult result) {
-    if (result.data != null && _user == null) {
-      _user = User.fromJson(result.data!['getAuthenticatedUser']);
+  void _setUser(Map<String, dynamic>? data) {
+    if (data != null && _user == null) {
+      _user = User.fromJson(data);
       debugPrint('Got this user from the server userId: ${_user!.id}');
     }
   }
@@ -43,95 +45,61 @@ class UserProvider extends ChangeNotifier {
     return _user;
   }
 
-  // Query builders
-  Widget queryUser({required onData, onLoading, onError}) {
-    return Query(
-      options: QueryOptions(
-        document: gql(kGetAuthenticatedUser),
-      ),
-      builder: (result, {refetch, fetchMore}) {
-        if (result.hasException) {
-          final error = result.exception.toString();
-
-          if (onError != null) {
-            return onError(error);
-          }
-          return ServerError(error: error);
-        }
-
-        if (result.isLoading) {
-          if (onLoading != null) {
-            return onLoading();
-          }
-          return const SizedBox.shrink();
-        }
-
-        if (result.data != null) {
-          _setUser(result);
+  Widget queryUser({
+    required Widget Function(
+      GetAuthenticatedUserResult? data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery<GetAuthenticatedUserResult>(
+      operation: GetAuthenticatedUser(),
+      onData: (data, {refetch, fetchMore}) {
+        if (data != null) {
+          _setUser(data.toJson());
         } else {
           _resetUser();
         }
-
-        return onData(result.data!['getAuthenticatedUser']);
+        return onData(data, refetch: refetch, fetchMore: fetchMore);
       },
+      onLoading: onLoading,
+      onError: onError,
     );
   }
 
-  // Query builders
-  Widget queryAllUsers({required onData, onLoading, onError}) {
-    return Query(
-      options: QueryOptions(
-        document: gql(kGetAllUsers),
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: const {
-          "filter": {"searchText": ''}
-        },
-      ),
-      builder: (result, {refetch, fetchMore}) {
-        if (result.hasException) {
-          final error = result.exception.toString();
-
-          if (onError != null) {
-            return onError(error);
-          }
-          return ServerError(error: error);
-        }
-
-        if (result.isLoading) {
-          if (onLoading != null) {
-            return onLoading();
-          }
-          return const SizedBox.shrink();
-        }
-        return onData(result.data!['findUsers']);
-      },
+  Widget queryAllUsers({
+    required Widget Function(
+      FindUsersResult? data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery<FindUsersResult>(
+      operation: FindUsers(),
+      onData: onData,
+      onLoading: onLoading,
+      onError: onError,
     );
   }
 
-  Widget queryUserProfileInfo({required onData, onLoading, onError}) {
-    return Query(
-      options: QueryOptions(
-        document: gql(kGetUserProfileInfo),
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-      builder: (result, {refetch, fetchMore}) {
-        if (result.hasException) {
-          final error = result.exception.toString();
-
-          if (onError != null) {
-            return onError(error);
-          }
-          return ServerError(error: error);
-        }
-
-        if (result.isLoading) {
-          if (onLoading != null) {
-            return onLoading();
-          }
-          return const SizedBox.shrink();
-        }
-        return onData(result.data!['getUserProfileInfo']);
-      },
+  Widget queryUserProfileInfo({
+    required Widget Function(
+      GetUserProfileInfoResult? data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery<GetUserProfileInfoResult>(
+      operation: GetUserProfileInfo(),
+      onData: onData,
+      onLoading: onLoading,
+      onError: onError,
     );
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/your_name.dart';
 import 'package:provider/provider.dart';
@@ -33,20 +32,24 @@ class UserProfile extends StatelessWidget {
       onLoading: () {
         return const SizedBox.shrink();
       },
-      onError: (error) {
+      onError: (error, {refetch}) {
         return Text('Error: $error');
       },
-      onData: (data) {
-        User user = User.fromJson(data);
-        return Profile(user: user);
+      onData: (data, {refetch, fetchMore}) {
+        return Profile(
+          userFullName: data?.fullName,
+          userAvatarUrl: data?.avatarUrl,
+        );
       },
     );
   }
 }
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key, required this.user}) : super(key: key);
-  final User user;
+  const Profile({Key? key, this.userFullName, this.userAvatarUrl})
+      : super(key: key);
+  final String? userFullName;
+  final String? userAvatarUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,7 @@ class Profile extends StatelessWidget {
           children: [
             ListTile(
               title: Text(
-                user.fullName,
+                userFullName!,
                 style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -76,7 +79,7 @@ class Profile extends StatelessWidget {
                 child: ClipOval(
                   child: FadeInImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage(user.avatarUrl ?? placeholderImage,
+                    image: NetworkImage(userAvatarUrl ?? placeholderImage,
                         scale: 2.75),
                     placeholder: NetworkImage(placeholderImage),
                   ),
