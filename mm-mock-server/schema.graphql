@@ -162,6 +162,7 @@
     userId: ID!
     unseenMessages: [ChannelInboxItemMessage!]
     pendingInvitations: [ChannelInboxItemInvitation!]
+    invitations: [ChannelInboxItemInvitation!]
     updatedAt: DateTime
     updatedBy: ID
   }
