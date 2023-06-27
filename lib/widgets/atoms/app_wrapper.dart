@@ -59,23 +59,23 @@ class _AppWrapperState extends State<AppWrapper> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
+            icon: const Icon(Icons.home_outlined),
             label: AppLocalizations.of(context)!.navHomeText,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.explore),
+            icon: const Icon(Icons.search_outlined),
             label: AppLocalizations.of(context)!.navExploreText,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.auto_graph),
+            icon: const Icon(Icons.incomplete_circle),
             label: AppLocalizations.of(context)!.navJourneyText,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.inbox),
+            icon: const Icon(Icons.mail_outline),
             label: AppLocalizations.of(context)!.navInboxText,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
+            icon: const Icon(Icons.person_outlined),
             label: AppLocalizations.of(context)!.navProfileText,
           ),
         ],
