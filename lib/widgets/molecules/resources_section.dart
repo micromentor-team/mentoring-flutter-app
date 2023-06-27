@@ -39,6 +39,7 @@ class ResourcesSection extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return SectionTile(
       title: l10n.homeResourcesSectionTitle,
+      addTopDivider: true,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Insets.widgetMediumInset,

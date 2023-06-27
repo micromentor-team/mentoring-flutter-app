@@ -4,7 +4,17 @@ class TextStyles {
   const TextStyles._private();
 
   static TextStyle? sectionHeader(BuildContext context) {
-    return Theme.of(context).textTheme.titleSmall;
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleLarge!.copyWith(
+      color: theme.colorScheme.primary,
+    );
+  }
+
+  static TextStyle? sectionSubHeader(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleMedium!.copyWith(
+      color: theme.colorScheme.primary,
+    );
   }
 
   static TextStyle? cardTitle(BuildContext context) {
@@ -60,3 +70,11 @@ class ButtonStyles {
     );
   }
 }
+
+// class ChipStyles{
+//   ChipStyles._private();
+//   static ChipStyles filledChip(BuildContext context) {
+//     return Chip.backgroundColor: Theme.of(context).colorScheme.primary,;
+//   }
+//
+// }

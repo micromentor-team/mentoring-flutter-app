@@ -92,6 +92,18 @@ export function generateChannelInboxItemMessage(channelId: string, sender: any) 
     }
 }
 
+export function generateUserProfileCompletionPercentage() {
+    // Returns a random integer between 0 and 100
+    return  Math.floor(Math.random() * 100); 
+}
+
+
+export function generateUserLastUpdateTime() {
+    // Returns a random date time from one year before to now
+    return faker.date.past(); 
+}
+
+
 export function generateChannelInvitation(channelParticipants: any[], declined?: boolean, accepted?: boolean) {
     var status: object | null;
     if (declined || accepted) {
