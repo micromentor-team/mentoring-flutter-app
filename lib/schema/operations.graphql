@@ -5,13 +5,8 @@ query GetAuthenticatedUser {
         fullName
         avatarUrl
         userHandle
-    }
-}
-
-query GetUserProfileInfo {
-    getUserProfileInfo(){
         profileCompletionPercentage
-        lastUpdateTime
+        updatedAt
     }
 }
 
