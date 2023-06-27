@@ -130,25 +130,17 @@ export function generateUserLastUpdateTime() {
 
 
 export function generateChannelInvitation(sender: any, recipient: any, declined?: boolean, accepted?: boolean) {
-    var status: object | null;
+    var status: string;
     var channel: object | null = null;
-    if (declined || accepted) {
-        var statusText: string;
-        if (accepted) {
-            statusText = "accepted";
-            channel = generateChannel([sender, recipient])
-        }
-        else if (declined)
-            statusText = "declined";
-        else
-            statusText = "created";
-        status = {
-                __typename: "ChannelInvitationStatus",
-                status: statusText,
-            }
-    } else {
-        status = null;
+    if (accepted) {
+        status = "accepted";
+        channel = generateChannel([sender, recipient])
     }
+    else if (declined)
+        status = "declined";
+    else
+        status = "created";
+
     return {
         __typename: "ChannelInvitation",
         id: faker.string.alphanumeric({length: 24}),
