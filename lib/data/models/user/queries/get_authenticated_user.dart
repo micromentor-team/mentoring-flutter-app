@@ -1,6 +1,7 @@
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/base/base_operation.dart';
 
-class GetAuthenticatedUser implements BaseOperation {
+class GetAuthenticatedUser implements BaseOperation<GetAuthenticatedUserModel> {
   @override
   String get operation => 'getAuthenticatedUser';
 
@@ -21,27 +22,25 @@ class GetAuthenticatedUser implements BaseOperation {
   Map<String, dynamic>? get variables => null;
 
   @override
-  GetAuthenticatedUserResult resultFromResponseData(Map<String, dynamic> data) {
-    return GetAuthenticatedUserResult.fromJson(data[operation]);
+  OperationResult<GetAuthenticatedUserModel> transformQueryResult(
+      QueryResult queryResult) {
+    return OperationResult(
+      dataModel: queryResult.data != null
+          ? GetAuthenticatedUserModel._fromJson(queryResult.data![operation])
+          : null,
+      gqlQueryResult: queryResult,
+    );
   }
 }
 
-class GetAuthenticatedUserResult extends BaseResult {
+class GetAuthenticatedUserModel extends BaseModel {
   String id;
   String? email;
   String? fullName;
   String? avatarUrl;
   String userHandle;
 
-  GetAuthenticatedUserResult({
-    required this.id,
-    this.email,
-    this.fullName,
-    this.avatarUrl,
-    required this.userHandle,
-  });
-
-  GetAuthenticatedUserResult.fromJson(Map<String, dynamic> json)
+  GetAuthenticatedUserModel._fromJson(Map<String, dynamic> json)
       : id = json['id'],
         email = json['email'],
         fullName = json['fullName'],

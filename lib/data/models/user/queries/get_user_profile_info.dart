@@ -1,6 +1,7 @@
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/base/base_operation.dart';
 
-class GetUserProfileInfo implements BaseOperation {
+class GetUserProfileInfo implements BaseOperation<GetUserProfileInfoModel> {
   @override
   String get operation => 'getUserProfileInfo';
 
@@ -18,21 +19,22 @@ class GetUserProfileInfo implements BaseOperation {
   Map<String, dynamic>? get variables => null;
 
   @override
-  GetUserProfileInfoResult resultFromResponseData(Map<String, dynamic> data) {
-    return GetUserProfileInfoResult.fromJson(data[operation]);
+  OperationResult<GetUserProfileInfoModel> transformQueryResult(
+      QueryResult queryResult) {
+    return OperationResult(
+      dataModel: queryResult.data != null
+          ? GetUserProfileInfoModel._fromJson(queryResult.data![operation])
+          : null,
+      gqlQueryResult: queryResult,
+    );
   }
 }
 
-class GetUserProfileInfoResult extends BaseResult {
+class GetUserProfileInfoModel extends BaseModel {
   int profileCompletionPercentage;
   DateTime lastUpdateTime;
 
-  GetUserProfileInfoResult({
-    required this.profileCompletionPercentage,
-    required this.lastUpdateTime,
-  });
-
-  GetUserProfileInfoResult.fromJson(Map<String, dynamic> json)
+  GetUserProfileInfoModel._fromJson(Map<String, dynamic> json)
       : profileCompletionPercentage = json['profileCompletionPercentage'],
         lastUpdateTime = DateTime.parse(json['lastUpdateTime']);
 

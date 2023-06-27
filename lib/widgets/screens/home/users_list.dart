@@ -98,9 +98,11 @@ class UsersList extends StatelessWidget {
         return Text('Error: $error');
       },
       onData: (data, {refetch, fetchMore}) {
-        List users = data!.list.reversed
-            .where((element) => element.id != currentUser?.id)
-            .toList();
+        List users = data.dataModel != null
+            ? data.dataModel!.list.reversed
+                .where((element) => element.id != currentUser?.id)
+                .toList()
+            : [];
         users = users
             .where((element) =>
                 element.fullName.toLowerCase().contains(search.toLowerCase()))

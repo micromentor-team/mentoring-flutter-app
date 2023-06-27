@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/data/models/base/base_operation.dart';
+import 'package:mm_flutter_app/data/models/user/mutations/sign_in_user.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mocktail/mocktail.dart';
@@ -17,7 +20,13 @@ class UserMockProvider extends Mock implements UserProvider {
   // Query builders
   @override
   Widget queryUser({required onData, onLoading, onError}) {
-    return onData(null);
+    return onData(
+      OperationResult(
+        gqlQueryResult: QueryResult(
+            options: QueryOptions(document: gql('')),
+            source: QueryResultSource.cache),
+      ),
+    );
   }
 
   // Query builders
@@ -33,8 +42,13 @@ class UserMockProvider extends Mock implements UserProvider {
       {required name, required email, required password}) async {}
 
   @override
-  Future<String?> signInUser({required email, required password}) async {
-    return null;
+  Future<OperationResult<SignInUserModel>> signInUser(
+      SignInUserInput input) async {
+    return OperationResult(
+      gqlQueryResult: QueryResult(
+          options: QueryOptions(document: gql('')),
+          source: QueryResultSource.cache),
+    );
   }
 
   @override

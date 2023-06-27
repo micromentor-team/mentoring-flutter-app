@@ -1,6 +1,7 @@
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/base/base_operation.dart';
 
-class FindUsers implements BaseOperation {
+class FindUsers implements BaseOperation<FindUsersModel> {
   @override
   String get operation => 'findUsers';
 
@@ -23,40 +24,36 @@ class FindUsers implements BaseOperation {
       };
 
   @override
-  FindUsersResult resultFromResponseData(Map<String, dynamic> data) {
-    return FindUsersResult.fromJson(data[operation]);
+  OperationResult<FindUsersModel> transformQueryResult(
+      QueryResult queryResult) {
+    return OperationResult(
+      dataModel: queryResult.data != null
+          ? FindUsersModel._fromJson(queryResult.data![operation])
+          : null,
+      gqlQueryResult: queryResult,
+    );
   }
 }
 
-class FindUsersResult extends BaseResult {
-  List<FindUsersResultElement> list;
+class FindUsersModel extends BaseModel {
+  List<FindUsersModelElement> list;
 
-  FindUsersResult({required this.list});
+  FindUsersModel._fromJson(List jsonList)
+      : list = jsonList.map((e) => FindUsersModelElement.fromJson(e)).toList();
 
-  FindUsersResult.fromJson(List jsonList)
-      : list = jsonList.map((e) => FindUsersResultElement.fromJson(e)).toList();
-
-  List<Map<String, dynamic>> toJson() {
+  List<Map<String, dynamic>>? toJson() {
     return list.map((e) => e.toJson()).toList();
   }
 }
 
-class FindUsersResultElement extends BaseResult {
+class FindUsersModelElement {
   String id;
   String? email;
   String? fullName;
   String? avatarUrl;
   String userHandle;
 
-  FindUsersResultElement({
-    required this.id,
-    this.email,
-    this.fullName,
-    this.avatarUrl,
-    required this.userHandle,
-  });
-
-  FindUsersResultElement.fromJson(Map<String, dynamic> json)
+  FindUsersModelElement.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         email = json['email'],
         fullName = json['fullName'],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/base/base_provider.dart';
+import 'package:mm_flutter_app/data/models/user/mutations/sign_in_user.dart';
 import 'package:mm_flutter_app/data/models/user/queries/find_users.dart';
 import 'package:mm_flutter_app/data/models/user/queries/get_authenticated_user.dart';
 import 'package:mm_flutter_app/data/models/user/queries/get_user_profile_info.dart';
@@ -9,12 +10,12 @@ import 'package:mm_flutter_app/data/models/user/user_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
-class UserProvider extends BaseProvider {
-  GraphQLClient client;
+import '../base/base_operation.dart';
 
+class UserProvider extends BaseProvider {
   User? _user;
 
-  UserProvider({required this.client});
+  UserProvider({required super.client});
 
   void _setUser(Map<String, dynamic>? data) {
     if (data != null && _user == null) {
@@ -47,18 +48,18 @@ class UserProvider extends BaseProvider {
 
   Widget queryUser({
     required Widget Function(
-      GetAuthenticatedUserResult? data, {
+      OperationResult<GetAuthenticatedUserModel> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery<GetAuthenticatedUserResult>(
+    return runQuery<GetAuthenticatedUserModel>(
       operation: GetAuthenticatedUser(),
       onData: (data, {refetch, fetchMore}) {
-        if (data != null) {
-          _setUser(data.toJson());
+        if (data.dataModel != null) {
+          _setUser(data.dataModel!.toJson());
         } else {
           _resetUser();
         }
@@ -71,14 +72,14 @@ class UserProvider extends BaseProvider {
 
   Widget queryAllUsers({
     required Widget Function(
-      FindUsersResult? data, {
+      OperationResult<FindUsersModel> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery<FindUsersResult>(
+    return runQuery<FindUsersModel>(
       operation: FindUsers(),
       onData: onData,
       onLoading: onLoading,
@@ -88,14 +89,14 @@ class UserProvider extends BaseProvider {
 
   Widget queryUserProfileInfo({
     required Widget Function(
-      GetUserProfileInfoResult? data, {
+      OperationResult<GetUserProfileInfoModel> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery<GetUserProfileInfoResult>(
+    return runQuery<GetUserProfileInfoModel>(
       operation: GetUserProfileInfo(),
       onData: onData,
       onLoading: onLoading,
@@ -146,49 +147,30 @@ class UserProvider extends BaseProvider {
     }
   }
 
-  Future<String?> signInUser({required email, required password}) async {
-    debugPrint('UserProvider: signInUser: $email');
+  Future<OperationResult<SignInUserModel>> signInUser(
+      SignInUserInput input) async {
+    debugPrint('UserProvider: signInUser: ${input.ident}');
 
     await _resetUser();
-    String deviceUuid = await _setDeviceUuid();
+    await _setDeviceUuid();
 
-    debugPrint('deviceUuid: $deviceUuid');
-
-    final QueryResult result = await client.mutate(
-      MutationOptions(
-        document: gql(kSignInUser),
-        variables: {
-          'input': {
-            'ident': email,
-            'identType': 'email',
-            'deviceUuid': deviceUuid,
-            'password': password,
-          }
-        },
-        onError: (error) {
-          debugPrint('signInUser error: $error');
-        },
-      ),
+    OperationResult<SignInUserModel> result =
+        await runMutation<SignInUserModel>(
+      operation: SignInUser(input: input),
     );
 
-    // debugPrint('signInUser result: $result');
-
-    if (result.data != null) {
-      String authToken = result.data!['signInUser']['authToken'];
-      String userId = result.data!['signInUser']['userId'];
-      String deviceId = result.data!['signInUser']['deviceId'];
-      //
+    if (result.dataModel != null) {
       final pref = await SharedPreferences.getInstance();
-      pref.setString('userId', userId);
-      pref.setString('deviceId', deviceId);
-      pref.setString('authToken', authToken);
+      pref.setString('userId', result.dataModel!.userId);
+      pref.setString('deviceId', result.dataModel!.deviceId);
+      pref.setString('authToken', result.dataModel!.authToken);
 
-      debugPrint('userId: $userId');
-      debugPrint('deviceId: $deviceId');
-      debugPrint('authToken: $authToken');
+      debugPrint('userId: ${result.dataModel!.userId}');
+      debugPrint('deviceId: ${result.dataModel!.deviceId}');
+      debugPrint('authToken: ${result.dataModel!.authToken}');
     }
 
-    return result.exception?.graphqlErrors.first.message;
+    return result;
   }
 
   Future<void> signOutUser() async {
