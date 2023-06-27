@@ -15,27 +15,6 @@ class UpcomingSessionTile extends StatelessWidget {
     required this.mentorName,
   }) : super(key: key);
 
-  // List<Widget> _createSessionButtons(AppLocalizations l10n) {
-  //   List<Widget> buttons = [];
-  //   // Add JOIN button only if session is coming up soon.
-  //   if (DateTime.now().isAfter(dateTime.subtract(joinMinimumTime))) {
-  //     buttons.add(Padding(
-  //       padding: const EdgeInsets.only(
-  //         right: Insets.widgetSmallInset,
-  //       ),
-  //       child: RectangleButton(
-  //         onPressed: () => {},
-  //         text: l10n.homeUpcomingSessionJoin,
-  //       ),
-  //     ));
-  //   }
-  //   buttons.add(RectangleButton(
-  //     onPressed: () => {},
-  //     text: l10n.homeUpcomingSessionReschedule,
-  //   ));
-  //   return buttons;
-  // }
-
   @override
   Widget build(BuildContext context) {
     // TODO(m-rosario): Support different date formats according to locale.
