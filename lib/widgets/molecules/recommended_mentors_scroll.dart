@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_card.dart';
 
@@ -58,5 +59,27 @@ class RecommendedMentorsScroll extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class RecommendedSection extends StatelessWidget {
+  const RecommendedSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    return Column(children: [
+      const RecommendedMentorsScroll(),
+      Padding(
+          padding: const EdgeInsets.all(Insets.widgetMediumInset),
+          child: Container(
+              width: 200,
+              alignment: Alignment.center,
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.search),
+                onPressed: () => {debugPrint("hi")},
+                label: Text(l10n.homeFindMoreMentors),
+              )))
+    ]);
   }
 }

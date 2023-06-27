@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
-import 'package:mm_flutter_app/widgets/atoms/user_search_bar.dart';
 import 'package:mm_flutter_app/widgets/molecules/invitation_section.dart';
-import 'package:mm_flutter_app/widgets/molecules/mentors_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +23,7 @@ class DashboardScreen extends StatelessWidget {
     } else {
       timeOfDayGreeting = l10n.homeGreetingEvening;
     }
-    return '${timeOfDayGreeting.replaceAll(" ", "\n")}\n${user.fullName}';
+    return '$timeOfDayGreeting ${user.fullName}';
   }
 
   @override
@@ -45,18 +42,9 @@ class DashboardScreen extends StatelessWidget {
                   profileCompletionPercentage: 30,
                 ),
                 const MaybeReminderBanner(),
-                const RecommendedMentorsScroll(),
-                Padding(
-                  padding: const EdgeInsets.all(
-                    Insets.appEdgeInsetCompact,
-                  ),
-                  child: UserSearchBar(
-                    hintText: l10n.homeSearchHint,
-                  ),
-                ),
+                const RecommendedSection(),
                 const UpcomingSection(),
                 const InvitationSection(),
-                const MentorsSection(),
                 const ResourcesSection(),
               ],
             ),
