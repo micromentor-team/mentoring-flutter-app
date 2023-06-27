@@ -84,15 +84,15 @@ class MaybeReminderBanner extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    return userProvider.queryUserProfileInfo(onLoading: () {
+    return userProvider.queryUser(onLoading: () {
       return const SizedBox(width: 0.0, height: 0.0);
     }, onError: (error, {refetch}) {
       debugPrint(error);
       return const SizedBox(width: 0.0, height: 0.0);
     }, onData: (data, {refetch, fetchMore}) {
       int profileCompletionPercentage =
-          data.response!.profileCompletionPercentage!;
-      DateTime lastUpdateTime = data.response!.lastUpdateTime!;
+          data.response!.profileCompletionPercentage;
+      DateTime updatedAt = data.response!.updatedAt!;
       if (profileCompletionPercentage < 50) {
         return ReminderBanner(
           titleText: l10n
@@ -100,7 +100,7 @@ class MaybeReminderBanner extends StatelessWidget {
           subtitleText: l10n.reminderBannerProfileCompleteSubtitle,
           ctaText: l10n.reminderBannerProfileCompleteCta,
         );
-      } else if (DateTime.now().difference(lastUpdateTime).inDays > 30 * 6) {
+      } else if (DateTime.now().difference(updatedAt).inDays > 30 * 6) {
         return ReminderBanner(
             titleText: l10n.reminderBannerProfileUpdateTitle,
             subtitleText: l10n.reminderBannerProfileUpdateSubtitle,

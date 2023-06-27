@@ -7,7 +7,6 @@ export function generateUser() {
     var mockUserHandle = mockFirstName.toLowerCase().charAt(0) + mockLastName.toLowerCase();
     var mockEmail = `${mockUserHandle}@${faker.internet.domainName()}`;
     var mockProfileCompletionPercentage = generateUserProfileCompletionPercentage();
-    var mockLastUpdateTime = faker.date.past(); 
     return {
         __typename: "User",
         id: faker.string.alphanumeric({length: 24}),
@@ -19,7 +18,7 @@ export function generateUser() {
         avatarUrl: faker.image.urlPicsumPhotos(),
         jobTitle: faker.person.jobTitle(),
         profileCompletionPercentage: mockProfileCompletionPercentage,
-        lastUpdateTime: mockLastUpdateTime,
+        updatedAt: faker.date.recent(),
     }
 }
 
@@ -54,7 +53,7 @@ export function generateChannel(channelParticipants: any[]) {
                 __typename: "ChannelParticipant",
                 user: channelParticipants[1],
             },
-        ]
+        ],
     }
 }
 
@@ -121,13 +120,6 @@ export function generateUserProfileCompletionPercentage() {
     // Returns a random integer between 0 and 100
     return  Math.floor(Math.random() * 100); 
 }
-
-
-export function generateUserLastUpdateTime() {
-    // Returns a random date time from one year before to now
-    return faker.date.past(); 
-}
-
 
 export function generateChannelInvitation(sender: any, recipient: any, declined?: boolean, accepted?: boolean) {
     var status: string;
