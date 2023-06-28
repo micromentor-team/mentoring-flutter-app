@@ -133,15 +133,17 @@ In Android Studio, Open the test.dart file. Select the Run menu. Click the Run
 
 ### GraphQL Codegen
 
-The [GraphQL Codegen](https://pub.dev/documentation/graphql_codegen) package is used to generate
-model classes from the GraphQL schema and operations. The `lib/schema` directory contains a file
-with all operations to be used from the app (queries and mutations), and another file with the
-full schema (enum, type definitions, etc.).
+The [GraphQL Codegen](https://pub.dev/documentation/graphql_codegen) package is
+used to generate model classes from the GraphQL schema and operations. The
+`lib/schema` directory contains a file with all operations to be used from the
+app (queries and mutations), and another file with the full schema (enum, type
+definitions, etc.).
 
-Running the command `dart run build_runner build` from the root of the project generates Dart
-classes inside the `lib/__generated/schema` directory. Import and use these classes normally to
-represent input and output of the operations defined. These model classes will already contain the
-correct fields, types, and other useful functions to transform to/from JSON.
+Running the command `dart run build_runner build` from the root of the project
+generates Dart classes inside the `lib/__generated/schema` directory. Import and
+use these classes normally to represent input and output of the operations
+defined. These model classes will already contain the correct fields, types, and
+other useful functions to transform to/from JSON.
 
-Rerun the code generation command every time the schema and operations change to ensure that the
-model classes are up to date.
+Rerun the code generation command every time the schema and operations change to
+ensure that the model classes are up to date.
