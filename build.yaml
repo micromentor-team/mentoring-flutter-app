@@ -10,5 +10,5 @@ targets:
               type: DateTime
             JSON:
               type: Map<String, dynamic>
-          outputDirectory: generated
-          generatedFileHeader: "// GENERATED FILE\n// DO NOT MODIFY\n"
+          outputDirectory: /lib/__generated/
+          generatedFileHeader: "// GENERATED WITH GRAPHQL_CODEGEN\n// DO NOT MODIFY\n"

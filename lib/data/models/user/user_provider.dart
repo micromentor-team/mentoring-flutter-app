@@ -3,13 +3,11 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_api.dart';
-import 'package:mm_flutter_app/schema/generated/operations.graphql.dart'
-    as gql_ops;
-import 'package:mm_flutter_app/schema/generated/schema.graphql.dart'
-    as gql_schema;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../__generated/schema/operations.graphql.dart';
+import '../../../__generated/schema/schema.graphql.dart';
 import '../base/operation_result.dart';
 
 class UserProvider extends BaseProvider {
@@ -48,8 +46,7 @@ class UserProvider extends BaseProvider {
 
   Widget queryUser({
     required Widget Function(
-      OperationResult<gql_ops.Query$GetAuthenticatedUser$getAuthenticatedUser>
-          data, {
+      OperationResult<Query$GetAuthenticatedUser$getAuthenticatedUser> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
@@ -57,13 +54,13 @@ class UserProvider extends BaseProvider {
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
     return runQuery(
-      document: gql_ops.documentNodeQueryGetAuthenticatedUser,
+      document: documentNodeQueryGetAuthenticatedUser,
       onData: (queryResult, {refetch, fetchMore}) {
-        OperationResult<gql_ops.Query$GetAuthenticatedUser$getAuthenticatedUser>
+        OperationResult<Query$GetAuthenticatedUser$getAuthenticatedUser>
             result = OperationResult(
           gqlQueryResult: queryResult,
           response: queryResult.data != null
-              ? gql_ops.Query$GetAuthenticatedUser.fromJson(
+              ? Query$GetAuthenticatedUser.fromJson(
                   queryResult.data!,
                 ).getAuthenticatedUser
               : null,
@@ -82,7 +79,7 @@ class UserProvider extends BaseProvider {
 
   Widget queryAllUsers({
     required Widget Function(
-      OperationResult<List<gql_ops.Query$FindUsers$findUsers>> data, {
+      OperationResult<List<Query$FindUsers$findUsers>> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
@@ -90,13 +87,13 @@ class UserProvider extends BaseProvider {
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
     return runQuery(
-      document: gql_ops.documentNodeQueryFindUsers,
+      document: documentNodeQueryFindUsers,
       onData: (queryResult, {refetch, fetchMore}) {
         return onData(
           OperationResult(
             gqlQueryResult: queryResult,
             response: queryResult.data != null
-                ? gql_ops.Query$FindUsers.fromJson(
+                ? Query$FindUsers.fromJson(
                     queryResult.data!,
                   ).findUsers
                 : null,
@@ -112,8 +109,7 @@ class UserProvider extends BaseProvider {
 
   Widget queryUserProfileInfo({
     required Widget Function(
-      OperationResult<gql_ops.Query$GetUserProfileInfo$getUserProfileInfo>
-          data, {
+      OperationResult<Query$GetUserProfileInfo$getUserProfileInfo> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
@@ -121,13 +117,13 @@ class UserProvider extends BaseProvider {
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
     return runQuery(
-      document: gql_ops.documentNodeQueryGetUserProfileInfo,
+      document: documentNodeQueryGetUserProfileInfo,
       onData: (queryResult, {refetch, fetchMore}) {
         return onData(
           OperationResult(
             gqlQueryResult: queryResult,
             response: queryResult.data != null
-                ? gql_ops.Query$GetUserProfileInfo.fromJson(
+                ? Query$GetUserProfileInfo.fromJson(
                     queryResult.data!,
                   ).getUserProfileInfo
                 : null,
@@ -226,8 +222,8 @@ class UserProvider extends BaseProvider {
     }
   }
 
-  Future<OperationResult<gql_ops.Mutation$SignInUser$signInUser>> signInUser(
-    gql_schema.Input$UserSignInInput input,
+  Future<OperationResult<Mutation$SignInUser$signInUser>> signInUser(
+    Input$UserSignInInput input,
   ) async {
     debugPrint('UserProvider: signInUser: ${input.ident}');
 
@@ -235,15 +231,14 @@ class UserProvider extends BaseProvider {
     await _setDeviceUuid();
 
     QueryResult queryResult = await runMutation(
-      document: gql_ops.documentNodeMutationSignInUser,
-      variables: gql_ops.Variables$Mutation$SignInUser(input: input).toJson(),
+      document: documentNodeMutationSignInUser,
+      variables: Variables$Mutation$SignInUser(input: input).toJson(),
     );
 
-    OperationResult<gql_ops.Mutation$SignInUser$signInUser> result =
-        OperationResult(
+    OperationResult<Mutation$SignInUser$signInUser> result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
-          ? gql_ops.Mutation$SignInUser.fromJson(
+          ? Mutation$SignInUser.fromJson(
               queryResult.data!,
             ).signInUser
           : null,

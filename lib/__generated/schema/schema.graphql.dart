@@ -1,4 +1,4 @@
-// GENERATED FILE
+// GENERATED WITH GRAPHQL_CODEGEN
 // DO NOT MODIFY
 class Input$FindUserByIdentOptions {
   factory Input$FindUserByIdentOptions({
@@ -651,11 +651,11 @@ class Input$UserInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? firstName,
     String? lastName,
@@ -668,10 +668,13 @@ class Input$UserInput {
     String? emailUpdatedAt,
     bool? isEmailVerified,
     String? gender,
-    String? countryOfResidence,
-    String? regionOfResidence,
     String? cityOfResidence,
+    String? regionOfResidence,
+    String? countryOfResidence,
+    String? postalCode,
     String? avatarUrl,
+    String? jobTitle,
+    List<Input$LabeledStringValueInput>? websites,
     Enum$AuthType? authType,
     String? currentPassword,
     String? newPassword,
@@ -689,14 +692,21 @@ class Input$UserInput {
     String? signedInAt,
     String? signedOutAt,
     String? latestActivityAt,
+    String? inactivatedAt,
+    String? inactivatedBy,
     List<String>? addToGroupIds,
     List<String>? removeFromGroupIds,
-    String? companyId,
+    List<String>? companyIds,
     bool? seeksHelp,
     bool? offersHelp,
-    String? mm2Id,
-    String? syncedWithMm2At,
-    String? mm2PasswordHash,
+    int? birthYear,
+    String? genderSelfDescribed,
+    String? ethnicity,
+    Enum$EducationLevel? educationLevel,
+    String? professionalBackground,
+    int? yearsManagementExperience,
+    int? yearsOwnershipExperience,
+    String? ssoIdp,
   }) =>
       Input$UserInput._({
         if (id != null) r'id': id,
@@ -722,11 +732,14 @@ class Input$UserInput {
         if (emailUpdatedAt != null) r'emailUpdatedAt': emailUpdatedAt,
         if (isEmailVerified != null) r'isEmailVerified': isEmailVerified,
         if (gender != null) r'gender': gender,
+        if (cityOfResidence != null) r'cityOfResidence': cityOfResidence,
+        if (regionOfResidence != null) r'regionOfResidence': regionOfResidence,
         if (countryOfResidence != null)
           r'countryOfResidence': countryOfResidence,
-        if (regionOfResidence != null) r'regionOfResidence': regionOfResidence,
-        if (cityOfResidence != null) r'cityOfResidence': cityOfResidence,
+        if (postalCode != null) r'postalCode': postalCode,
         if (avatarUrl != null) r'avatarUrl': avatarUrl,
+        if (jobTitle != null) r'jobTitle': jobTitle,
+        if (websites != null) r'websites': websites,
         if (authType != null) r'authType': authType,
         if (currentPassword != null) r'currentPassword': currentPassword,
         if (newPassword != null) r'newPassword': newPassword,
@@ -744,15 +757,26 @@ class Input$UserInput {
         if (signedInAt != null) r'signedInAt': signedInAt,
         if (signedOutAt != null) r'signedOutAt': signedOutAt,
         if (latestActivityAt != null) r'latestActivityAt': latestActivityAt,
+        if (inactivatedAt != null) r'inactivatedAt': inactivatedAt,
+        if (inactivatedBy != null) r'inactivatedBy': inactivatedBy,
         if (addToGroupIds != null) r'addToGroupIds': addToGroupIds,
         if (removeFromGroupIds != null)
           r'removeFromGroupIds': removeFromGroupIds,
-        if (companyId != null) r'companyId': companyId,
+        if (companyIds != null) r'companyIds': companyIds,
         if (seeksHelp != null) r'seeksHelp': seeksHelp,
         if (offersHelp != null) r'offersHelp': offersHelp,
-        if (mm2Id != null) r'mm2Id': mm2Id,
-        if (syncedWithMm2At != null) r'syncedWithMm2At': syncedWithMm2At,
-        if (mm2PasswordHash != null) r'mm2PasswordHash': mm2PasswordHash,
+        if (birthYear != null) r'birthYear': birthYear,
+        if (genderSelfDescribed != null)
+          r'genderSelfDescribed': genderSelfDescribed,
+        if (ethnicity != null) r'ethnicity': ethnicity,
+        if (educationLevel != null) r'educationLevel': educationLevel,
+        if (professionalBackground != null)
+          r'professionalBackground': professionalBackground,
+        if (yearsManagementExperience != null)
+          r'yearsManagementExperience': yearsManagementExperience,
+        if (yearsOwnershipExperience != null)
+          r'yearsOwnershipExperience': yearsOwnershipExperience,
+        if (ssoIdp != null) r'ssoIdp': ssoIdp,
       });
 
   Input$UserInput._(this._$data);
@@ -783,8 +807,7 @@ class Input$UserInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -792,8 +815,7 @@ class Input$UserInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -801,8 +823,7 @@ class Input$UserInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -852,21 +873,36 @@ class Input$UserInput {
       final l$gender = data['gender'];
       result$data['gender'] = (l$gender as String?);
     }
-    if (data.containsKey('countryOfResidence')) {
-      final l$countryOfResidence = data['countryOfResidence'];
-      result$data['countryOfResidence'] = (l$countryOfResidence as String?);
+    if (data.containsKey('cityOfResidence')) {
+      final l$cityOfResidence = data['cityOfResidence'];
+      result$data['cityOfResidence'] = (l$cityOfResidence as String?);
     }
     if (data.containsKey('regionOfResidence')) {
       final l$regionOfResidence = data['regionOfResidence'];
       result$data['regionOfResidence'] = (l$regionOfResidence as String?);
     }
-    if (data.containsKey('cityOfResidence')) {
-      final l$cityOfResidence = data['cityOfResidence'];
-      result$data['cityOfResidence'] = (l$cityOfResidence as String?);
+    if (data.containsKey('countryOfResidence')) {
+      final l$countryOfResidence = data['countryOfResidence'];
+      result$data['countryOfResidence'] = (l$countryOfResidence as String?);
+    }
+    if (data.containsKey('postalCode')) {
+      final l$postalCode = data['postalCode'];
+      result$data['postalCode'] = (l$postalCode as String?);
     }
     if (data.containsKey('avatarUrl')) {
       final l$avatarUrl = data['avatarUrl'];
       result$data['avatarUrl'] = (l$avatarUrl as String?);
+    }
+    if (data.containsKey('jobTitle')) {
+      final l$jobTitle = data['jobTitle'];
+      result$data['jobTitle'] = (l$jobTitle as String?);
+    }
+    if (data.containsKey('websites')) {
+      final l$websites = data['websites'];
+      result$data['websites'] = (l$websites as List<dynamic>?)
+          ?.map((e) => Input$LabeledStringValueInput.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
     }
     if (data.containsKey('authType')) {
       final l$authType = data['authType'];
@@ -947,6 +983,14 @@ class Input$UserInput {
       final l$latestActivityAt = data['latestActivityAt'];
       result$data['latestActivityAt'] = (l$latestActivityAt as String?);
     }
+    if (data.containsKey('inactivatedAt')) {
+      final l$inactivatedAt = data['inactivatedAt'];
+      result$data['inactivatedAt'] = (l$inactivatedAt as String?);
+    }
+    if (data.containsKey('inactivatedBy')) {
+      final l$inactivatedBy = data['inactivatedBy'];
+      result$data['inactivatedBy'] = (l$inactivatedBy as String?);
+    }
     if (data.containsKey('addToGroupIds')) {
       final l$addToGroupIds = data['addToGroupIds'];
       result$data['addToGroupIds'] = (l$addToGroupIds as List<dynamic>?)
@@ -960,9 +1004,10 @@ class Input$UserInput {
               ?.map((e) => (e as String))
               .toList();
     }
-    if (data.containsKey('companyId')) {
-      final l$companyId = data['companyId'];
-      result$data['companyId'] = (l$companyId as String?);
+    if (data.containsKey('companyIds')) {
+      final l$companyIds = data['companyIds'];
+      result$data['companyIds'] =
+          (l$companyIds as List<dynamic>?)?.map((e) => (e as String)).toList();
     }
     if (data.containsKey('seeksHelp')) {
       final l$seeksHelp = data['seeksHelp'];
@@ -972,17 +1017,42 @@ class Input$UserInput {
       final l$offersHelp = data['offersHelp'];
       result$data['offersHelp'] = (l$offersHelp as bool?);
     }
-    if (data.containsKey('mm2Id')) {
-      final l$mm2Id = data['mm2Id'];
-      result$data['mm2Id'] = (l$mm2Id as String?);
+    if (data.containsKey('birthYear')) {
+      final l$birthYear = data['birthYear'];
+      result$data['birthYear'] = (l$birthYear as int?);
     }
-    if (data.containsKey('syncedWithMm2At')) {
-      final l$syncedWithMm2At = data['syncedWithMm2At'];
-      result$data['syncedWithMm2At'] = (l$syncedWithMm2At as String?);
+    if (data.containsKey('genderSelfDescribed')) {
+      final l$genderSelfDescribed = data['genderSelfDescribed'];
+      result$data['genderSelfDescribed'] = (l$genderSelfDescribed as String?);
     }
-    if (data.containsKey('mm2PasswordHash')) {
-      final l$mm2PasswordHash = data['mm2PasswordHash'];
-      result$data['mm2PasswordHash'] = (l$mm2PasswordHash as String?);
+    if (data.containsKey('ethnicity')) {
+      final l$ethnicity = data['ethnicity'];
+      result$data['ethnicity'] = (l$ethnicity as String?);
+    }
+    if (data.containsKey('educationLevel')) {
+      final l$educationLevel = data['educationLevel'];
+      result$data['educationLevel'] = l$educationLevel == null
+          ? null
+          : fromJson$Enum$EducationLevel((l$educationLevel as String));
+    }
+    if (data.containsKey('professionalBackground')) {
+      final l$professionalBackground = data['professionalBackground'];
+      result$data['professionalBackground'] =
+          (l$professionalBackground as String?);
+    }
+    if (data.containsKey('yearsManagementExperience')) {
+      final l$yearsManagementExperience = data['yearsManagementExperience'];
+      result$data['yearsManagementExperience'] =
+          (l$yearsManagementExperience as int?);
+    }
+    if (data.containsKey('yearsOwnershipExperience')) {
+      final l$yearsOwnershipExperience = data['yearsOwnershipExperience'];
+      result$data['yearsOwnershipExperience'] =
+          (l$yearsOwnershipExperience as int?);
+    }
+    if (data.containsKey('ssoIdp')) {
+      final l$ssoIdp = data['ssoIdp'];
+      result$data['ssoIdp'] = (l$ssoIdp as String?);
     }
     return Input$UserInput._(result$data);
   }
@@ -995,11 +1065,11 @@ class Input$UserInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get firstName => (_$data['firstName'] as String?);
   String? get lastName => (_$data['lastName'] as String?);
@@ -1013,10 +1083,14 @@ class Input$UserInput {
   String? get emailUpdatedAt => (_$data['emailUpdatedAt'] as String?);
   bool? get isEmailVerified => (_$data['isEmailVerified'] as bool?);
   String? get gender => (_$data['gender'] as String?);
-  String? get countryOfResidence => (_$data['countryOfResidence'] as String?);
-  String? get regionOfResidence => (_$data['regionOfResidence'] as String?);
   String? get cityOfResidence => (_$data['cityOfResidence'] as String?);
+  String? get regionOfResidence => (_$data['regionOfResidence'] as String?);
+  String? get countryOfResidence => (_$data['countryOfResidence'] as String?);
+  String? get postalCode => (_$data['postalCode'] as String?);
   String? get avatarUrl => (_$data['avatarUrl'] as String?);
+  String? get jobTitle => (_$data['jobTitle'] as String?);
+  List<Input$LabeledStringValueInput>? get websites =>
+      (_$data['websites'] as List<Input$LabeledStringValueInput>?);
   Enum$AuthType? get authType => (_$data['authType'] as Enum$AuthType?);
   String? get currentPassword => (_$data['currentPassword'] as String?);
   String? get newPassword => (_$data['newPassword'] as String?);
@@ -1037,15 +1111,26 @@ class Input$UserInput {
   String? get signedInAt => (_$data['signedInAt'] as String?);
   String? get signedOutAt => (_$data['signedOutAt'] as String?);
   String? get latestActivityAt => (_$data['latestActivityAt'] as String?);
+  String? get inactivatedAt => (_$data['inactivatedAt'] as String?);
+  String? get inactivatedBy => (_$data['inactivatedBy'] as String?);
   List<String>? get addToGroupIds => (_$data['addToGroupIds'] as List<String>?);
   List<String>? get removeFromGroupIds =>
       (_$data['removeFromGroupIds'] as List<String>?);
-  String? get companyId => (_$data['companyId'] as String?);
+  List<String>? get companyIds => (_$data['companyIds'] as List<String>?);
   bool? get seeksHelp => (_$data['seeksHelp'] as bool?);
   bool? get offersHelp => (_$data['offersHelp'] as bool?);
-  String? get mm2Id => (_$data['mm2Id'] as String?);
-  String? get syncedWithMm2At => (_$data['syncedWithMm2At'] as String?);
-  String? get mm2PasswordHash => (_$data['mm2PasswordHash'] as String?);
+  int? get birthYear => (_$data['birthYear'] as int?);
+  String? get genderSelfDescribed => (_$data['genderSelfDescribed'] as String?);
+  String? get ethnicity => (_$data['ethnicity'] as String?);
+  Enum$EducationLevel? get educationLevel =>
+      (_$data['educationLevel'] as Enum$EducationLevel?);
+  String? get professionalBackground =>
+      (_$data['professionalBackground'] as String?);
+  int? get yearsManagementExperience =>
+      (_$data['yearsManagementExperience'] as int?);
+  int? get yearsOwnershipExperience =>
+      (_$data['yearsOwnershipExperience'] as int?);
+  String? get ssoIdp => (_$data['ssoIdp'] as String?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -1066,7 +1151,7 @@ class Input$UserInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -1074,7 +1159,7 @@ class Input$UserInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -1082,7 +1167,7 @@ class Input$UserInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -1132,21 +1217,33 @@ class Input$UserInput {
       final l$gender = gender;
       result$data['gender'] = l$gender;
     }
-    if (_$data.containsKey('countryOfResidence')) {
-      final l$countryOfResidence = countryOfResidence;
-      result$data['countryOfResidence'] = l$countryOfResidence;
+    if (_$data.containsKey('cityOfResidence')) {
+      final l$cityOfResidence = cityOfResidence;
+      result$data['cityOfResidence'] = l$cityOfResidence;
     }
     if (_$data.containsKey('regionOfResidence')) {
       final l$regionOfResidence = regionOfResidence;
       result$data['regionOfResidence'] = l$regionOfResidence;
     }
-    if (_$data.containsKey('cityOfResidence')) {
-      final l$cityOfResidence = cityOfResidence;
-      result$data['cityOfResidence'] = l$cityOfResidence;
+    if (_$data.containsKey('countryOfResidence')) {
+      final l$countryOfResidence = countryOfResidence;
+      result$data['countryOfResidence'] = l$countryOfResidence;
+    }
+    if (_$data.containsKey('postalCode')) {
+      final l$postalCode = postalCode;
+      result$data['postalCode'] = l$postalCode;
     }
     if (_$data.containsKey('avatarUrl')) {
       final l$avatarUrl = avatarUrl;
       result$data['avatarUrl'] = l$avatarUrl;
+    }
+    if (_$data.containsKey('jobTitle')) {
+      final l$jobTitle = jobTitle;
+      result$data['jobTitle'] = l$jobTitle;
+    }
+    if (_$data.containsKey('websites')) {
+      final l$websites = websites;
+      result$data['websites'] = l$websites?.map((e) => e.toJson()).toList();
     }
     if (_$data.containsKey('authType')) {
       final l$authType = authType;
@@ -1221,6 +1318,14 @@ class Input$UserInput {
       final l$latestActivityAt = latestActivityAt;
       result$data['latestActivityAt'] = l$latestActivityAt;
     }
+    if (_$data.containsKey('inactivatedAt')) {
+      final l$inactivatedAt = inactivatedAt;
+      result$data['inactivatedAt'] = l$inactivatedAt;
+    }
+    if (_$data.containsKey('inactivatedBy')) {
+      final l$inactivatedBy = inactivatedBy;
+      result$data['inactivatedBy'] = l$inactivatedBy;
+    }
     if (_$data.containsKey('addToGroupIds')) {
       final l$addToGroupIds = addToGroupIds;
       result$data['addToGroupIds'] = l$addToGroupIds?.map((e) => e).toList();
@@ -1230,9 +1335,9 @@ class Input$UserInput {
       result$data['removeFromGroupIds'] =
           l$removeFromGroupIds?.map((e) => e).toList();
     }
-    if (_$data.containsKey('companyId')) {
-      final l$companyId = companyId;
-      result$data['companyId'] = l$companyId;
+    if (_$data.containsKey('companyIds')) {
+      final l$companyIds = companyIds;
+      result$data['companyIds'] = l$companyIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('seeksHelp')) {
       final l$seeksHelp = seeksHelp;
@@ -1242,17 +1347,39 @@ class Input$UserInput {
       final l$offersHelp = offersHelp;
       result$data['offersHelp'] = l$offersHelp;
     }
-    if (_$data.containsKey('mm2Id')) {
-      final l$mm2Id = mm2Id;
-      result$data['mm2Id'] = l$mm2Id;
+    if (_$data.containsKey('birthYear')) {
+      final l$birthYear = birthYear;
+      result$data['birthYear'] = l$birthYear;
     }
-    if (_$data.containsKey('syncedWithMm2At')) {
-      final l$syncedWithMm2At = syncedWithMm2At;
-      result$data['syncedWithMm2At'] = l$syncedWithMm2At;
+    if (_$data.containsKey('genderSelfDescribed')) {
+      final l$genderSelfDescribed = genderSelfDescribed;
+      result$data['genderSelfDescribed'] = l$genderSelfDescribed;
     }
-    if (_$data.containsKey('mm2PasswordHash')) {
-      final l$mm2PasswordHash = mm2PasswordHash;
-      result$data['mm2PasswordHash'] = l$mm2PasswordHash;
+    if (_$data.containsKey('ethnicity')) {
+      final l$ethnicity = ethnicity;
+      result$data['ethnicity'] = l$ethnicity;
+    }
+    if (_$data.containsKey('educationLevel')) {
+      final l$educationLevel = educationLevel;
+      result$data['educationLevel'] = l$educationLevel == null
+          ? null
+          : toJson$Enum$EducationLevel(l$educationLevel);
+    }
+    if (_$data.containsKey('professionalBackground')) {
+      final l$professionalBackground = professionalBackground;
+      result$data['professionalBackground'] = l$professionalBackground;
+    }
+    if (_$data.containsKey('yearsManagementExperience')) {
+      final l$yearsManagementExperience = yearsManagementExperience;
+      result$data['yearsManagementExperience'] = l$yearsManagementExperience;
+    }
+    if (_$data.containsKey('yearsOwnershipExperience')) {
+      final l$yearsOwnershipExperience = yearsOwnershipExperience;
+      result$data['yearsOwnershipExperience'] = l$yearsOwnershipExperience;
+    }
+    if (_$data.containsKey('ssoIdp')) {
+      final l$ssoIdp = ssoIdp;
+      result$data['ssoIdp'] = l$ssoIdp;
     }
     return result$data;
   }
@@ -1466,13 +1593,13 @@ class Input$UserInput {
     if (l$gender != lOther$gender) {
       return false;
     }
-    final l$countryOfResidence = countryOfResidence;
-    final lOther$countryOfResidence = other.countryOfResidence;
-    if (_$data.containsKey('countryOfResidence') !=
-        other._$data.containsKey('countryOfResidence')) {
+    final l$cityOfResidence = cityOfResidence;
+    final lOther$cityOfResidence = other.cityOfResidence;
+    if (_$data.containsKey('cityOfResidence') !=
+        other._$data.containsKey('cityOfResidence')) {
       return false;
     }
-    if (l$countryOfResidence != lOther$countryOfResidence) {
+    if (l$cityOfResidence != lOther$cityOfResidence) {
       return false;
     }
     final l$regionOfResidence = regionOfResidence;
@@ -1484,13 +1611,22 @@ class Input$UserInput {
     if (l$regionOfResidence != lOther$regionOfResidence) {
       return false;
     }
-    final l$cityOfResidence = cityOfResidence;
-    final lOther$cityOfResidence = other.cityOfResidence;
-    if (_$data.containsKey('cityOfResidence') !=
-        other._$data.containsKey('cityOfResidence')) {
+    final l$countryOfResidence = countryOfResidence;
+    final lOther$countryOfResidence = other.countryOfResidence;
+    if (_$data.containsKey('countryOfResidence') !=
+        other._$data.containsKey('countryOfResidence')) {
       return false;
     }
-    if (l$cityOfResidence != lOther$cityOfResidence) {
+    if (l$countryOfResidence != lOther$countryOfResidence) {
+      return false;
+    }
+    final l$postalCode = postalCode;
+    final lOther$postalCode = other.postalCode;
+    if (_$data.containsKey('postalCode') !=
+        other._$data.containsKey('postalCode')) {
+      return false;
+    }
+    if (l$postalCode != lOther$postalCode) {
       return false;
     }
     final l$avatarUrl = avatarUrl;
@@ -1500,6 +1636,35 @@ class Input$UserInput {
       return false;
     }
     if (l$avatarUrl != lOther$avatarUrl) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (_$data.containsKey('jobTitle') !=
+        other._$data.containsKey('jobTitle')) {
+      return false;
+    }
+    if (l$jobTitle != lOther$jobTitle) {
+      return false;
+    }
+    final l$websites = websites;
+    final lOther$websites = other.websites;
+    if (_$data.containsKey('websites') !=
+        other._$data.containsKey('websites')) {
+      return false;
+    }
+    if (l$websites != null && lOther$websites != null) {
+      if (l$websites.length != lOther$websites.length) {
+        return false;
+      }
+      for (int i = 0; i < l$websites.length; i++) {
+        final l$websites$entry = l$websites[i];
+        final lOther$websites$entry = lOther$websites[i];
+        if (l$websites$entry != lOther$websites$entry) {
+          return false;
+        }
+      }
+    } else if (l$websites != lOther$websites) {
       return false;
     }
     final l$authType = authType;
@@ -1686,6 +1851,24 @@ class Input$UserInput {
     if (l$latestActivityAt != lOther$latestActivityAt) {
       return false;
     }
+    final l$inactivatedAt = inactivatedAt;
+    final lOther$inactivatedAt = other.inactivatedAt;
+    if (_$data.containsKey('inactivatedAt') !=
+        other._$data.containsKey('inactivatedAt')) {
+      return false;
+    }
+    if (l$inactivatedAt != lOther$inactivatedAt) {
+      return false;
+    }
+    final l$inactivatedBy = inactivatedBy;
+    final lOther$inactivatedBy = other.inactivatedBy;
+    if (_$data.containsKey('inactivatedBy') !=
+        other._$data.containsKey('inactivatedBy')) {
+      return false;
+    }
+    if (l$inactivatedBy != lOther$inactivatedBy) {
+      return false;
+    }
     final l$addToGroupIds = addToGroupIds;
     final lOther$addToGroupIds = other.addToGroupIds;
     if (_$data.containsKey('addToGroupIds') !=
@@ -1726,13 +1909,24 @@ class Input$UserInput {
     } else if (l$removeFromGroupIds != lOther$removeFromGroupIds) {
       return false;
     }
-    final l$companyId = companyId;
-    final lOther$companyId = other.companyId;
-    if (_$data.containsKey('companyId') !=
-        other._$data.containsKey('companyId')) {
+    final l$companyIds = companyIds;
+    final lOther$companyIds = other.companyIds;
+    if (_$data.containsKey('companyIds') !=
+        other._$data.containsKey('companyIds')) {
       return false;
     }
-    if (l$companyId != lOther$companyId) {
+    if (l$companyIds != null && lOther$companyIds != null) {
+      if (l$companyIds.length != lOther$companyIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$companyIds.length; i++) {
+        final l$companyIds$entry = l$companyIds[i];
+        final lOther$companyIds$entry = lOther$companyIds[i];
+        if (l$companyIds$entry != lOther$companyIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$companyIds != lOther$companyIds) {
       return false;
     }
     final l$seeksHelp = seeksHelp;
@@ -1753,30 +1947,75 @@ class Input$UserInput {
     if (l$offersHelp != lOther$offersHelp) {
       return false;
     }
-    final l$mm2Id = mm2Id;
-    final lOther$mm2Id = other.mm2Id;
-    if (_$data.containsKey('mm2Id') != other._$data.containsKey('mm2Id')) {
+    final l$birthYear = birthYear;
+    final lOther$birthYear = other.birthYear;
+    if (_$data.containsKey('birthYear') !=
+        other._$data.containsKey('birthYear')) {
       return false;
     }
-    if (l$mm2Id != lOther$mm2Id) {
+    if (l$birthYear != lOther$birthYear) {
       return false;
     }
-    final l$syncedWithMm2At = syncedWithMm2At;
-    final lOther$syncedWithMm2At = other.syncedWithMm2At;
-    if (_$data.containsKey('syncedWithMm2At') !=
-        other._$data.containsKey('syncedWithMm2At')) {
+    final l$genderSelfDescribed = genderSelfDescribed;
+    final lOther$genderSelfDescribed = other.genderSelfDescribed;
+    if (_$data.containsKey('genderSelfDescribed') !=
+        other._$data.containsKey('genderSelfDescribed')) {
       return false;
     }
-    if (l$syncedWithMm2At != lOther$syncedWithMm2At) {
+    if (l$genderSelfDescribed != lOther$genderSelfDescribed) {
       return false;
     }
-    final l$mm2PasswordHash = mm2PasswordHash;
-    final lOther$mm2PasswordHash = other.mm2PasswordHash;
-    if (_$data.containsKey('mm2PasswordHash') !=
-        other._$data.containsKey('mm2PasswordHash')) {
+    final l$ethnicity = ethnicity;
+    final lOther$ethnicity = other.ethnicity;
+    if (_$data.containsKey('ethnicity') !=
+        other._$data.containsKey('ethnicity')) {
       return false;
     }
-    if (l$mm2PasswordHash != lOther$mm2PasswordHash) {
+    if (l$ethnicity != lOther$ethnicity) {
+      return false;
+    }
+    final l$educationLevel = educationLevel;
+    final lOther$educationLevel = other.educationLevel;
+    if (_$data.containsKey('educationLevel') !=
+        other._$data.containsKey('educationLevel')) {
+      return false;
+    }
+    if (l$educationLevel != lOther$educationLevel) {
+      return false;
+    }
+    final l$professionalBackground = professionalBackground;
+    final lOther$professionalBackground = other.professionalBackground;
+    if (_$data.containsKey('professionalBackground') !=
+        other._$data.containsKey('professionalBackground')) {
+      return false;
+    }
+    if (l$professionalBackground != lOther$professionalBackground) {
+      return false;
+    }
+    final l$yearsManagementExperience = yearsManagementExperience;
+    final lOther$yearsManagementExperience = other.yearsManagementExperience;
+    if (_$data.containsKey('yearsManagementExperience') !=
+        other._$data.containsKey('yearsManagementExperience')) {
+      return false;
+    }
+    if (l$yearsManagementExperience != lOther$yearsManagementExperience) {
+      return false;
+    }
+    final l$yearsOwnershipExperience = yearsOwnershipExperience;
+    final lOther$yearsOwnershipExperience = other.yearsOwnershipExperience;
+    if (_$data.containsKey('yearsOwnershipExperience') !=
+        other._$data.containsKey('yearsOwnershipExperience')) {
+      return false;
+    }
+    if (l$yearsOwnershipExperience != lOther$yearsOwnershipExperience) {
+      return false;
+    }
+    final l$ssoIdp = ssoIdp;
+    final lOther$ssoIdp = other.ssoIdp;
+    if (_$data.containsKey('ssoIdp') != other._$data.containsKey('ssoIdp')) {
+      return false;
+    }
+    if (l$ssoIdp != lOther$ssoIdp) {
       return false;
     }
     return true;
@@ -1805,10 +2044,13 @@ class Input$UserInput {
     final l$emailUpdatedAt = emailUpdatedAt;
     final l$isEmailVerified = isEmailVerified;
     final l$gender = gender;
-    final l$countryOfResidence = countryOfResidence;
-    final l$regionOfResidence = regionOfResidence;
     final l$cityOfResidence = cityOfResidence;
+    final l$regionOfResidence = regionOfResidence;
+    final l$countryOfResidence = countryOfResidence;
+    final l$postalCode = postalCode;
     final l$avatarUrl = avatarUrl;
+    final l$jobTitle = jobTitle;
+    final l$websites = websites;
     final l$authType = authType;
     final l$currentPassword = currentPassword;
     final l$newPassword = newPassword;
@@ -1826,14 +2068,21 @@ class Input$UserInput {
     final l$signedInAt = signedInAt;
     final l$signedOutAt = signedOutAt;
     final l$latestActivityAt = latestActivityAt;
+    final l$inactivatedAt = inactivatedAt;
+    final l$inactivatedBy = inactivatedBy;
     final l$addToGroupIds = addToGroupIds;
     final l$removeFromGroupIds = removeFromGroupIds;
-    final l$companyId = companyId;
+    final l$companyIds = companyIds;
     final l$seeksHelp = seeksHelp;
     final l$offersHelp = offersHelp;
-    final l$mm2Id = mm2Id;
-    final l$syncedWithMm2At = syncedWithMm2At;
-    final l$mm2PasswordHash = mm2PasswordHash;
+    final l$birthYear = birthYear;
+    final l$genderSelfDescribed = genderSelfDescribed;
+    final l$ethnicity = ethnicity;
+    final l$educationLevel = educationLevel;
+    final l$professionalBackground = professionalBackground;
+    final l$yearsManagementExperience = yearsManagementExperience;
+    final l$yearsOwnershipExperience = yearsOwnershipExperience;
+    final l$ssoIdp = ssoIdp;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -1864,12 +2113,19 @@ class Input$UserInput {
       _$data.containsKey('emailUpdatedAt') ? l$emailUpdatedAt : const {},
       _$data.containsKey('isEmailVerified') ? l$isEmailVerified : const {},
       _$data.containsKey('gender') ? l$gender : const {},
+      _$data.containsKey('cityOfResidence') ? l$cityOfResidence : const {},
+      _$data.containsKey('regionOfResidence') ? l$regionOfResidence : const {},
       _$data.containsKey('countryOfResidence')
           ? l$countryOfResidence
           : const {},
-      _$data.containsKey('regionOfResidence') ? l$regionOfResidence : const {},
-      _$data.containsKey('cityOfResidence') ? l$cityOfResidence : const {},
+      _$data.containsKey('postalCode') ? l$postalCode : const {},
       _$data.containsKey('avatarUrl') ? l$avatarUrl : const {},
+      _$data.containsKey('jobTitle') ? l$jobTitle : const {},
+      _$data.containsKey('websites')
+          ? l$websites == null
+              ? null
+              : Object.hashAll(l$websites.map((v) => v))
+          : const {},
       _$data.containsKey('authType') ? l$authType : const {},
       _$data.containsKey('currentPassword') ? l$currentPassword : const {},
       _$data.containsKey('newPassword') ? l$newPassword : const {},
@@ -1899,6 +2155,8 @@ class Input$UserInput {
       _$data.containsKey('signedInAt') ? l$signedInAt : const {},
       _$data.containsKey('signedOutAt') ? l$signedOutAt : const {},
       _$data.containsKey('latestActivityAt') ? l$latestActivityAt : const {},
+      _$data.containsKey('inactivatedAt') ? l$inactivatedAt : const {},
+      _$data.containsKey('inactivatedBy') ? l$inactivatedBy : const {},
       _$data.containsKey('addToGroupIds')
           ? l$addToGroupIds == null
               ? null
@@ -1909,12 +2167,29 @@ class Input$UserInput {
               ? null
               : Object.hashAll(l$removeFromGroupIds.map((v) => v))
           : const {},
-      _$data.containsKey('companyId') ? l$companyId : const {},
+      _$data.containsKey('companyIds')
+          ? l$companyIds == null
+              ? null
+              : Object.hashAll(l$companyIds.map((v) => v))
+          : const {},
       _$data.containsKey('seeksHelp') ? l$seeksHelp : const {},
       _$data.containsKey('offersHelp') ? l$offersHelp : const {},
-      _$data.containsKey('mm2Id') ? l$mm2Id : const {},
-      _$data.containsKey('syncedWithMm2At') ? l$syncedWithMm2At : const {},
-      _$data.containsKey('mm2PasswordHash') ? l$mm2PasswordHash : const {},
+      _$data.containsKey('birthYear') ? l$birthYear : const {},
+      _$data.containsKey('genderSelfDescribed')
+          ? l$genderSelfDescribed
+          : const {},
+      _$data.containsKey('ethnicity') ? l$ethnicity : const {},
+      _$data.containsKey('educationLevel') ? l$educationLevel : const {},
+      _$data.containsKey('professionalBackground')
+          ? l$professionalBackground
+          : const {},
+      _$data.containsKey('yearsManagementExperience')
+          ? l$yearsManagementExperience
+          : const {},
+      _$data.containsKey('yearsOwnershipExperience')
+          ? l$yearsOwnershipExperience
+          : const {},
+      _$data.containsKey('ssoIdp') ? l$ssoIdp : const {},
     ]);
   }
 }
@@ -1933,11 +2208,11 @@ abstract class CopyWith$Input$UserInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? firstName,
     String? lastName,
@@ -1950,10 +2225,13 @@ abstract class CopyWith$Input$UserInput<TRes> {
     String? emailUpdatedAt,
     bool? isEmailVerified,
     String? gender,
-    String? countryOfResidence,
-    String? regionOfResidence,
     String? cityOfResidence,
+    String? regionOfResidence,
+    String? countryOfResidence,
+    String? postalCode,
     String? avatarUrl,
+    String? jobTitle,
+    List<Input$LabeledStringValueInput>? websites,
     Enum$AuthType? authType,
     String? currentPassword,
     String? newPassword,
@@ -1971,20 +2249,33 @@ abstract class CopyWith$Input$UserInput<TRes> {
     String? signedInAt,
     String? signedOutAt,
     String? latestActivityAt,
+    String? inactivatedAt,
+    String? inactivatedBy,
     List<String>? addToGroupIds,
     List<String>? removeFromGroupIds,
-    String? companyId,
+    List<String>? companyIds,
     bool? seeksHelp,
     bool? offersHelp,
-    String? mm2Id,
-    String? syncedWithMm2At,
-    String? mm2PasswordHash,
+    int? birthYear,
+    String? genderSelfDescribed,
+    String? ethnicity,
+    Enum$EducationLevel? educationLevel,
+    String? professionalBackground,
+    int? yearsManagementExperience,
+    int? yearsOwnershipExperience,
+    String? ssoIdp,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
               Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
           _fn);
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  TRes websites(
+      Iterable<Input$LabeledStringValueInput>? Function(
+              Iterable<
+                  CopyWith$Input$LabeledStringValueInput<
+                      Input$LabeledStringValueInput>>?)
+          _fn);
   CopyWith$Input$UserPreferencesInput<TRes> get preferences;
 }
 
@@ -2023,10 +2314,13 @@ class _CopyWithImpl$Input$UserInput<TRes>
     Object? emailUpdatedAt = _undefined,
     Object? isEmailVerified = _undefined,
     Object? gender = _undefined,
-    Object? countryOfResidence = _undefined,
-    Object? regionOfResidence = _undefined,
     Object? cityOfResidence = _undefined,
+    Object? regionOfResidence = _undefined,
+    Object? countryOfResidence = _undefined,
+    Object? postalCode = _undefined,
     Object? avatarUrl = _undefined,
+    Object? jobTitle = _undefined,
+    Object? websites = _undefined,
     Object? authType = _undefined,
     Object? currentPassword = _undefined,
     Object? newPassword = _undefined,
@@ -2044,14 +2338,21 @@ class _CopyWithImpl$Input$UserInput<TRes>
     Object? signedInAt = _undefined,
     Object? signedOutAt = _undefined,
     Object? latestActivityAt = _undefined,
+    Object? inactivatedAt = _undefined,
+    Object? inactivatedBy = _undefined,
     Object? addToGroupIds = _undefined,
     Object? removeFromGroupIds = _undefined,
-    Object? companyId = _undefined,
+    Object? companyIds = _undefined,
     Object? seeksHelp = _undefined,
     Object? offersHelp = _undefined,
-    Object? mm2Id = _undefined,
-    Object? syncedWithMm2At = _undefined,
-    Object? mm2PasswordHash = _undefined,
+    Object? birthYear = _undefined,
+    Object? genderSelfDescribed = _undefined,
+    Object? ethnicity = _undefined,
+    Object? educationLevel = _undefined,
+    Object? professionalBackground = _undefined,
+    Object? yearsManagementExperience = _undefined,
+    Object? yearsOwnershipExperience = _undefined,
+    Object? ssoIdp = _undefined,
   }) =>
       _then(Input$UserInput._({
         ..._instance._$data,
@@ -2061,11 +2362,11 @@ class _CopyWithImpl$Input$UserInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (firstName != _undefined) 'firstName': (firstName as String?),
         if (lastName != _undefined) 'lastName': (lastName as String?),
@@ -2083,13 +2384,17 @@ class _CopyWithImpl$Input$UserInput<TRes>
         if (isEmailVerified != _undefined && isEmailVerified != null)
           'isEmailVerified': (isEmailVerified as bool),
         if (gender != _undefined) 'gender': (gender as String?),
-        if (countryOfResidence != _undefined)
-          'countryOfResidence': (countryOfResidence as String?),
-        if (regionOfResidence != _undefined)
-          'regionOfResidence': (regionOfResidence as String?),
         if (cityOfResidence != _undefined)
           'cityOfResidence': (cityOfResidence as String?),
+        if (regionOfResidence != _undefined)
+          'regionOfResidence': (regionOfResidence as String?),
+        if (countryOfResidence != _undefined)
+          'countryOfResidence': (countryOfResidence as String?),
+        if (postalCode != _undefined) 'postalCode': (postalCode as String?),
         if (avatarUrl != _undefined) 'avatarUrl': (avatarUrl as String?),
+        if (jobTitle != _undefined) 'jobTitle': (jobTitle as String?),
+        if (websites != _undefined)
+          'websites': (websites as List<Input$LabeledStringValueInput>?),
         if (authType != _undefined) 'authType': (authType as Enum$AuthType?),
         if (currentPassword != _undefined)
           'currentPassword': (currentPassword as String?),
@@ -2117,18 +2422,31 @@ class _CopyWithImpl$Input$UserInput<TRes>
         if (signedOutAt != _undefined) 'signedOutAt': (signedOutAt as String?),
         if (latestActivityAt != _undefined)
           'latestActivityAt': (latestActivityAt as String?),
+        if (inactivatedAt != _undefined)
+          'inactivatedAt': (inactivatedAt as String?),
+        if (inactivatedBy != _undefined)
+          'inactivatedBy': (inactivatedBy as String?),
         if (addToGroupIds != _undefined)
           'addToGroupIds': (addToGroupIds as List<String>?),
         if (removeFromGroupIds != _undefined)
           'removeFromGroupIds': (removeFromGroupIds as List<String>?),
-        if (companyId != _undefined) 'companyId': (companyId as String?),
+        if (companyIds != _undefined)
+          'companyIds': (companyIds as List<String>?),
         if (seeksHelp != _undefined) 'seeksHelp': (seeksHelp as bool?),
         if (offersHelp != _undefined) 'offersHelp': (offersHelp as bool?),
-        if (mm2Id != _undefined) 'mm2Id': (mm2Id as String?),
-        if (syncedWithMm2At != _undefined)
-          'syncedWithMm2At': (syncedWithMm2At as String?),
-        if (mm2PasswordHash != _undefined)
-          'mm2PasswordHash': (mm2PasswordHash as String?),
+        if (birthYear != _undefined) 'birthYear': (birthYear as int?),
+        if (genderSelfDescribed != _undefined)
+          'genderSelfDescribed': (genderSelfDescribed as String?),
+        if (ethnicity != _undefined) 'ethnicity': (ethnicity as String?),
+        if (educationLevel != _undefined)
+          'educationLevel': (educationLevel as Enum$EducationLevel?),
+        if (professionalBackground != _undefined)
+          'professionalBackground': (professionalBackground as String?),
+        if (yearsManagementExperience != _undefined)
+          'yearsManagementExperience': (yearsManagementExperience as int?),
+        if (yearsOwnershipExperience != _undefined)
+          'yearsOwnershipExperience': (yearsOwnershipExperience as int?),
+        if (ssoIdp != _undefined) 'ssoIdp': (ssoIdp as String?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -2149,6 +2467,18 @@ class _CopyWithImpl$Input$UserInput<TRes>
             local$metadata, (e) => call(metadata: e));
   }
 
+  TRes websites(
+          Iterable<Input$LabeledStringValueInput>? Function(
+                  Iterable<
+                      CopyWith$Input$LabeledStringValueInput<
+                          Input$LabeledStringValueInput>>?)
+              _fn) =>
+      call(
+          websites: _fn(_instance.websites
+              ?.map((e) => CopyWith$Input$LabeledStringValueInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
   CopyWith$Input$UserPreferencesInput<TRes> get preferences {
     final local$preferences = _instance.preferences;
     return local$preferences == null
@@ -2169,11 +2499,11 @@ class _CopyWithStubImpl$Input$UserInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? firstName,
     String? lastName,
@@ -2186,10 +2516,13 @@ class _CopyWithStubImpl$Input$UserInput<TRes>
     String? emailUpdatedAt,
     bool? isEmailVerified,
     String? gender,
-    String? countryOfResidence,
-    String? regionOfResidence,
     String? cityOfResidence,
+    String? regionOfResidence,
+    String? countryOfResidence,
+    String? postalCode,
     String? avatarUrl,
+    String? jobTitle,
+    List<Input$LabeledStringValueInput>? websites,
     Enum$AuthType? authType,
     String? currentPassword,
     String? newPassword,
@@ -2207,19 +2540,27 @@ class _CopyWithStubImpl$Input$UserInput<TRes>
     String? signedInAt,
     String? signedOutAt,
     String? latestActivityAt,
+    String? inactivatedAt,
+    String? inactivatedBy,
     List<String>? addToGroupIds,
     List<String>? removeFromGroupIds,
-    String? companyId,
+    List<String>? companyIds,
     bool? seeksHelp,
     bool? offersHelp,
-    String? mm2Id,
-    String? syncedWithMm2At,
-    String? mm2PasswordHash,
+    int? birthYear,
+    String? genderSelfDescribed,
+    String? ethnicity,
+    Enum$EducationLevel? educationLevel,
+    String? professionalBackground,
+    int? yearsManagementExperience,
+    int? yearsOwnershipExperience,
+    String? ssoIdp,
   }) =>
       _res;
   events(_fn) => _res;
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  websites(_fn) => _res;
   CopyWith$Input$UserPreferencesInput<TRes> get preferences =>
       CopyWith$Input$UserPreferencesInput.stub(_res);
 }
@@ -2393,7 +2734,7 @@ class _CopyWithStubImpl$Input$ModelEventInput<TRes>
 }
 
 class Input$BaseModelMetadataInput {
-  factory Input$BaseModelMetadataInput({DateTime? updatedAt}) =>
+  factory Input$BaseModelMetadataInput({String? updatedAt}) =>
       Input$BaseModelMetadataInput._({
         if (updatedAt != null) r'updatedAt': updatedAt,
       });
@@ -2404,20 +2745,19 @@ class Input$BaseModelMetadataInput {
     final result$data = <String, dynamic>{};
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     return Input$BaseModelMetadataInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     return result$data;
   }
@@ -2465,7 +2805,7 @@ abstract class CopyWith$Input$BaseModelMetadataInput<TRes> {
   factory CopyWith$Input$BaseModelMetadataInput.stub(TRes res) =
       _CopyWithStubImpl$Input$BaseModelMetadataInput;
 
-  TRes call({DateTime? updatedAt});
+  TRes call({String? updatedAt});
 }
 
 class _CopyWithImpl$Input$BaseModelMetadataInput<TRes>
@@ -2484,7 +2824,7 @@ class _CopyWithImpl$Input$BaseModelMetadataInput<TRes>
   TRes call({Object? updatedAt = _undefined}) =>
       _then(Input$BaseModelMetadataInput._({
         ..._instance._$data,
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
       }));
 }
 
@@ -2494,7 +2834,145 @@ class _CopyWithStubImpl$Input$BaseModelMetadataInput<TRes>
 
   TRes _res;
 
-  call({DateTime? updatedAt}) => _res;
+  call({String? updatedAt}) => _res;
+}
+
+class Input$LabeledStringValueInput {
+  factory Input$LabeledStringValueInput({
+    String? label,
+    String? value,
+  }) =>
+      Input$LabeledStringValueInput._({
+        if (label != null) r'label': label,
+        if (value != null) r'value': value,
+      });
+
+  Input$LabeledStringValueInput._(this._$data);
+
+  factory Input$LabeledStringValueInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('label')) {
+      final l$label = data['label'];
+      result$data['label'] = (l$label as String?);
+    }
+    if (data.containsKey('value')) {
+      final l$value = data['value'];
+      result$data['value'] = (l$value as String?);
+    }
+    return Input$LabeledStringValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get label => (_$data['label'] as String?);
+  String? get value => (_$data['value'] as String?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('label')) {
+      final l$label = label;
+      result$data['label'] = l$label;
+    }
+    if (_$data.containsKey('value')) {
+      final l$value = value;
+      result$data['value'] = l$value;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$LabeledStringValueInput<Input$LabeledStringValueInput>
+      get copyWith => CopyWith$Input$LabeledStringValueInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$LabeledStringValueInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
+      return false;
+    }
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$value = value;
+    final lOther$value = other.value;
+    if (_$data.containsKey('value') != other._$data.containsKey('value')) {
+      return false;
+    }
+    if (l$value != lOther$value) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$label = label;
+    final l$value = value;
+    return Object.hashAll([
+      _$data.containsKey('label') ? l$label : const {},
+      _$data.containsKey('value') ? l$value : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$LabeledStringValueInput<TRes> {
+  factory CopyWith$Input$LabeledStringValueInput(
+    Input$LabeledStringValueInput instance,
+    TRes Function(Input$LabeledStringValueInput) then,
+  ) = _CopyWithImpl$Input$LabeledStringValueInput;
+
+  factory CopyWith$Input$LabeledStringValueInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$LabeledStringValueInput;
+
+  TRes call({
+    String? label,
+    String? value,
+  });
+}
+
+class _CopyWithImpl$Input$LabeledStringValueInput<TRes>
+    implements CopyWith$Input$LabeledStringValueInput<TRes> {
+  _CopyWithImpl$Input$LabeledStringValueInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$LabeledStringValueInput _instance;
+
+  final TRes Function(Input$LabeledStringValueInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? label = _undefined,
+    Object? value = _undefined,
+  }) =>
+      _then(Input$LabeledStringValueInput._({
+        ..._instance._$data,
+        if (label != _undefined) 'label': (label as String?),
+        if (value != _undefined) 'value': (value as String?),
+      }));
+}
+
+class _CopyWithStubImpl$Input$LabeledStringValueInput<TRes>
+    implements CopyWith$Input$LabeledStringValueInput<TRes> {
+  _CopyWithStubImpl$Input$LabeledStringValueInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? label,
+    String? value,
+  }) =>
+      _res;
 }
 
 class Input$UserPreferencesInput {
@@ -2503,11 +2981,11 @@ class Input$UserPreferencesInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     bool? shareEmail,
     bool? sharePhoneNumber,
@@ -2558,8 +3036,7 @@ class Input$UserPreferencesInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -2567,8 +3044,7 @@ class Input$UserPreferencesInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -2576,8 +3052,7 @@ class Input$UserPreferencesInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -2606,11 +3081,11 @@ class Input$UserPreferencesInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   bool? get shareEmail => (_$data['shareEmail'] as bool?);
   bool? get sharePhoneNumber => (_$data['sharePhoneNumber'] as bool?);
@@ -2635,7 +3110,7 @@ class Input$UserPreferencesInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -2643,7 +3118,7 @@ class Input$UserPreferencesInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -2651,7 +3126,7 @@ class Input$UserPreferencesInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -2868,11 +3343,11 @@ abstract class CopyWith$Input$UserPreferencesInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     bool? shareEmail,
     bool? sharePhoneNumber,
@@ -2921,11 +3396,11 @@ class _CopyWithImpl$Input$UserPreferencesInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (shareEmail != _undefined) 'shareEmail': (shareEmail as bool?),
         if (sharePhoneNumber != _undefined)
@@ -2964,11 +3439,11 @@ class _CopyWithStubImpl$Input$UserPreferencesInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     bool? shareEmail,
     bool? sharePhoneNumber,
@@ -2991,6 +3466,7 @@ class Input$UserListFilter {
     String? updatedAtFrom,
     String? updatedAtUntil,
     List<Enum$UserRole>? roles,
+    String? companyId,
     bool? syncedWithMm2,
   }) =>
       Input$UserListFilter._({
@@ -3003,6 +3479,7 @@ class Input$UserListFilter {
         if (updatedAtFrom != null) r'updatedAtFrom': updatedAtFrom,
         if (updatedAtUntil != null) r'updatedAtUntil': updatedAtUntil,
         if (roles != null) r'roles': roles,
+        if (companyId != null) r'companyId': companyId,
         if (syncedWithMm2 != null) r'syncedWithMm2': syncedWithMm2,
       });
 
@@ -3051,6 +3528,10 @@ class Input$UserListFilter {
           ?.map((e) => fromJson$Enum$UserRole((e as String)))
           .toList();
     }
+    if (data.containsKey('companyId')) {
+      final l$companyId = data['companyId'];
+      result$data['companyId'] = (l$companyId as String?);
+    }
     if (data.containsKey('syncedWithMm2')) {
       final l$syncedWithMm2 = data['syncedWithMm2'];
       result$data['syncedWithMm2'] = (l$syncedWithMm2 as bool?);
@@ -3070,6 +3551,7 @@ class Input$UserListFilter {
   String? get updatedAtFrom => (_$data['updatedAtFrom'] as String?);
   String? get updatedAtUntil => (_$data['updatedAtUntil'] as String?);
   List<Enum$UserRole>? get roles => (_$data['roles'] as List<Enum$UserRole>?);
+  String? get companyId => (_$data['companyId'] as String?);
   bool? get syncedWithMm2 => (_$data['syncedWithMm2'] as bool?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -3110,6 +3592,10 @@ class Input$UserListFilter {
       final l$roles = roles;
       result$data['roles'] =
           l$roles?.map((e) => toJson$Enum$UserRole(e)).toList();
+    }
+    if (_$data.containsKey('companyId')) {
+      final l$companyId = companyId;
+      result$data['companyId'] = l$companyId;
     }
     if (_$data.containsKey('syncedWithMm2')) {
       final l$syncedWithMm2 = syncedWithMm2;
@@ -3243,6 +3729,15 @@ class Input$UserListFilter {
     } else if (l$roles != lOther$roles) {
       return false;
     }
+    final l$companyId = companyId;
+    final lOther$companyId = other.companyId;
+    if (_$data.containsKey('companyId') !=
+        other._$data.containsKey('companyId')) {
+      return false;
+    }
+    if (l$companyId != lOther$companyId) {
+      return false;
+    }
     final l$syncedWithMm2 = syncedWithMm2;
     final lOther$syncedWithMm2 = other.syncedWithMm2;
     if (_$data.containsKey('syncedWithMm2') !=
@@ -3266,6 +3761,7 @@ class Input$UserListFilter {
     final l$updatedAtFrom = updatedAtFrom;
     final l$updatedAtUntil = updatedAtUntil;
     final l$roles = roles;
+    final l$companyId = companyId;
     final l$syncedWithMm2 = syncedWithMm2;
     return Object.hashAll([
       _$data.containsKey('ids')
@@ -3289,6 +3785,7 @@ class Input$UserListFilter {
               ? null
               : Object.hashAll(l$roles.map((v) => v))
           : const {},
+      _$data.containsKey('companyId') ? l$companyId : const {},
       _$data.containsKey('syncedWithMm2') ? l$syncedWithMm2 : const {},
     ]);
   }
@@ -3313,6 +3810,7 @@ abstract class CopyWith$Input$UserListFilter<TRes> {
     String? updatedAtFrom,
     String? updatedAtUntil,
     List<Enum$UserRole>? roles,
+    String? companyId,
     bool? syncedWithMm2,
   });
 }
@@ -3340,6 +3838,7 @@ class _CopyWithImpl$Input$UserListFilter<TRes>
     Object? updatedAtFrom = _undefined,
     Object? updatedAtUntil = _undefined,
     Object? roles = _undefined,
+    Object? companyId = _undefined,
     Object? syncedWithMm2 = _undefined,
   }) =>
       _then(Input$UserListFilter._({
@@ -3359,6 +3858,7 @@ class _CopyWithImpl$Input$UserListFilter<TRes>
         if (updatedAtUntil != _undefined)
           'updatedAtUntil': (updatedAtUntil as String?),
         if (roles != _undefined) 'roles': (roles as List<Enum$UserRole>?),
+        if (companyId != _undefined) 'companyId': (companyId as String?),
         if (syncedWithMm2 != _undefined)
           'syncedWithMm2': (syncedWithMm2 as bool?),
       }));
@@ -3380,6 +3880,7 @@ class _CopyWithStubImpl$Input$UserListFilter<TRes>
     String? updatedAtFrom,
     String? updatedAtUntil,
     List<Enum$UserRole>? roles,
+    String? companyId,
     bool? syncedWithMm2,
   }) =>
       _res;
@@ -3391,11 +3892,11 @@ class Input$UserDeviceInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? userId,
     String? deviceUuid,
@@ -3511,8 +4012,7 @@ class Input$UserDeviceInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -3520,8 +4020,7 @@ class Input$UserDeviceInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -3529,8 +4028,7 @@ class Input$UserDeviceInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -3680,11 +4178,11 @@ class Input$UserDeviceInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get userId => (_$data['userId'] as String?);
   String? get deviceUuid => (_$data['deviceUuid'] as String?);
@@ -3741,7 +4239,7 @@ class Input$UserDeviceInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -3749,7 +4247,7 @@ class Input$UserDeviceInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -3757,7 +4255,7 @@ class Input$UserDeviceInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -4427,11 +4925,11 @@ abstract class CopyWith$Input$UserDeviceInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? userId,
     String? deviceUuid,
@@ -4540,11 +5038,11 @@ class _CopyWithImpl$Input$UserDeviceInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (userId != _undefined) 'userId': (userId as String?),
         if (deviceUuid != _undefined) 'deviceUuid': (deviceUuid as String?),
@@ -4621,11 +5119,11 @@ class _CopyWithStubImpl$Input$UserDeviceInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? userId,
     String? deviceUuid,
@@ -5009,11 +5507,11 @@ class Input$ChannelInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? name,
     String? topic,
@@ -5028,8 +5526,6 @@ class Input$ChannelInput {
     String? archivedAt,
     String? archivedBy,
     String? assumedMentorId,
-    String? mm2Id,
-    String? syncedWithMm2At,
   }) =>
       Input$ChannelInput._({
         if (id != null) r'id': id,
@@ -5055,8 +5551,6 @@ class Input$ChannelInput {
         if (archivedAt != null) r'archivedAt': archivedAt,
         if (archivedBy != null) r'archivedBy': archivedBy,
         if (assumedMentorId != null) r'assumedMentorId': assumedMentorId,
-        if (mm2Id != null) r'mm2Id': mm2Id,
-        if (syncedWithMm2At != null) r'syncedWithMm2At': syncedWithMm2At,
       });
 
   Input$ChannelInput._(this._$data);
@@ -5087,8 +5581,7 @@ class Input$ChannelInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -5096,8 +5589,7 @@ class Input$ChannelInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -5105,8 +5597,7 @@ class Input$ChannelInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -5172,14 +5663,6 @@ class Input$ChannelInput {
       final l$assumedMentorId = data['assumedMentorId'];
       result$data['assumedMentorId'] = (l$assumedMentorId as String?);
     }
-    if (data.containsKey('mm2Id')) {
-      final l$mm2Id = data['mm2Id'];
-      result$data['mm2Id'] = (l$mm2Id as String?);
-    }
-    if (data.containsKey('syncedWithMm2At')) {
-      final l$syncedWithMm2At = data['syncedWithMm2At'];
-      result$data['syncedWithMm2At'] = (l$syncedWithMm2At as String?);
-    }
     return Input$ChannelInput._(result$data);
   }
 
@@ -5191,11 +5674,11 @@ class Input$ChannelInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get name => (_$data['name'] as String?);
   String? get topic => (_$data['topic'] as String?);
@@ -5212,8 +5695,6 @@ class Input$ChannelInput {
   String? get archivedAt => (_$data['archivedAt'] as String?);
   String? get archivedBy => (_$data['archivedBy'] as String?);
   String? get assumedMentorId => (_$data['assumedMentorId'] as String?);
-  String? get mm2Id => (_$data['mm2Id'] as String?);
-  String? get syncedWithMm2At => (_$data['syncedWithMm2At'] as String?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -5234,7 +5715,7 @@ class Input$ChannelInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -5242,7 +5723,7 @@ class Input$ChannelInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -5250,7 +5731,7 @@ class Input$ChannelInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -5310,14 +5791,6 @@ class Input$ChannelInput {
     if (_$data.containsKey('assumedMentorId')) {
       final l$assumedMentorId = assumedMentorId;
       result$data['assumedMentorId'] = l$assumedMentorId;
-    }
-    if (_$data.containsKey('mm2Id')) {
-      final l$mm2Id = mm2Id;
-      result$data['mm2Id'] = l$mm2Id;
-    }
-    if (_$data.containsKey('syncedWithMm2At')) {
-      final l$syncedWithMm2At = syncedWithMm2At;
-      result$data['syncedWithMm2At'] = l$syncedWithMm2At;
     }
     return result$data;
   }
@@ -5580,23 +6053,6 @@ class Input$ChannelInput {
     if (l$assumedMentorId != lOther$assumedMentorId) {
       return false;
     }
-    final l$mm2Id = mm2Id;
-    final lOther$mm2Id = other.mm2Id;
-    if (_$data.containsKey('mm2Id') != other._$data.containsKey('mm2Id')) {
-      return false;
-    }
-    if (l$mm2Id != lOther$mm2Id) {
-      return false;
-    }
-    final l$syncedWithMm2At = syncedWithMm2At;
-    final lOther$syncedWithMm2At = other.syncedWithMm2At;
-    if (_$data.containsKey('syncedWithMm2At') !=
-        other._$data.containsKey('syncedWithMm2At')) {
-      return false;
-    }
-    if (l$syncedWithMm2At != lOther$syncedWithMm2At) {
-      return false;
-    }
     return true;
   }
 
@@ -5625,8 +6081,6 @@ class Input$ChannelInput {
     final l$archivedAt = archivedAt;
     final l$archivedBy = archivedBy;
     final l$assumedMentorId = assumedMentorId;
-    final l$mm2Id = mm2Id;
-    final l$syncedWithMm2At = syncedWithMm2At;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -5667,8 +6121,6 @@ class Input$ChannelInput {
       _$data.containsKey('archivedAt') ? l$archivedAt : const {},
       _$data.containsKey('archivedBy') ? l$archivedBy : const {},
       _$data.containsKey('assumedMentorId') ? l$assumedMentorId : const {},
-      _$data.containsKey('mm2Id') ? l$mm2Id : const {},
-      _$data.containsKey('syncedWithMm2At') ? l$syncedWithMm2At : const {},
     ]);
   }
 }
@@ -5687,11 +6139,11 @@ abstract class CopyWith$Input$ChannelInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? name,
     String? topic,
@@ -5706,8 +6158,6 @@ abstract class CopyWith$Input$ChannelInput<TRes> {
     String? archivedAt,
     String? archivedBy,
     String? assumedMentorId,
-    String? mm2Id,
-    String? syncedWithMm2At,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
@@ -5753,8 +6203,6 @@ class _CopyWithImpl$Input$ChannelInput<TRes>
     Object? archivedAt = _undefined,
     Object? archivedBy = _undefined,
     Object? assumedMentorId = _undefined,
-    Object? mm2Id = _undefined,
-    Object? syncedWithMm2At = _undefined,
   }) =>
       _then(Input$ChannelInput._({
         ..._instance._$data,
@@ -5764,11 +6212,11 @@ class _CopyWithImpl$Input$ChannelInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (name != _undefined) 'name': (name as String?),
         if (topic != _undefined) 'topic': (topic as String?),
@@ -5787,9 +6235,6 @@ class _CopyWithImpl$Input$ChannelInput<TRes>
         if (archivedBy != _undefined) 'archivedBy': (archivedBy as String?),
         if (assumedMentorId != _undefined)
           'assumedMentorId': (assumedMentorId as String?),
-        if (mm2Id != _undefined) 'mm2Id': (mm2Id as String?),
-        if (syncedWithMm2At != _undefined)
-          'syncedWithMm2At': (syncedWithMm2At as String?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -5822,11 +6267,11 @@ class _CopyWithStubImpl$Input$ChannelInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? name,
     String? topic,
@@ -5841,8 +6286,6 @@ class _CopyWithStubImpl$Input$ChannelInput<TRes>
     String? archivedAt,
     String? archivedBy,
     String? assumedMentorId,
-    String? mm2Id,
-    String? syncedWithMm2At,
   }) =>
       _res;
   events(_fn) => _res;
@@ -6192,11 +6635,11 @@ class Input$ChannelMessageInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? replyToMessageId,
@@ -6257,8 +6700,7 @@ class Input$ChannelMessageInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -6266,8 +6708,7 @@ class Input$ChannelMessageInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -6275,8 +6716,7 @@ class Input$ChannelMessageInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -6332,11 +6772,11 @@ class Input$ChannelMessageInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get channelId => (_$data['channelId'] as String?);
   String? get replyToMessageId => (_$data['replyToMessageId'] as String?);
@@ -6368,7 +6808,7 @@ class Input$ChannelMessageInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -6376,7 +6816,7 @@ class Input$ChannelMessageInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -6384,7 +6824,7 @@ class Input$ChannelMessageInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -6692,11 +7132,11 @@ abstract class CopyWith$Input$ChannelMessageInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? replyToMessageId,
@@ -6761,11 +7201,11 @@ class _CopyWithImpl$Input$ChannelMessageInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (channelId != _undefined) 'channelId': (channelId as String?),
         if (replyToMessageId != _undefined)
@@ -6825,11 +7265,11 @@ class _CopyWithStubImpl$Input$ChannelMessageInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? replyToMessageId,
@@ -7540,11 +7980,11 @@ class Input$GroupMembershipInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
@@ -7594,8 +8034,7 @@ class Input$GroupMembershipInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -7603,8 +8042,7 @@ class Input$GroupMembershipInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -7612,8 +8050,7 @@ class Input$GroupMembershipInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -7644,11 +8081,11 @@ class Input$GroupMembershipInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get groupId => (_$data['groupId'] as String?);
   String? get userId => (_$data['userId'] as String?);
@@ -7674,7 +8111,7 @@ class Input$GroupMembershipInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -7682,7 +8119,7 @@ class Input$GroupMembershipInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -7690,7 +8127,7 @@ class Input$GroupMembershipInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -7919,11 +8356,11 @@ abstract class CopyWith$Input$GroupMembershipInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
@@ -7972,11 +8409,11 @@ class _CopyWithImpl$Input$GroupMembershipInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (groupId != _undefined) 'groupId': (groupId as String?),
         if (userId != _undefined) 'userId': (userId as String?),
@@ -8014,11 +8451,11 @@ class _CopyWithStubImpl$Input$GroupMembershipInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
@@ -8468,14 +8905,13 @@ class Input$GroupInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? parentGroupId,
-    String? mm2Id,
     String? matchingEngineId,
     String? name,
     String? shortName,
@@ -8483,9 +8919,8 @@ class Input$GroupInput {
     String? slug,
     String? description,
     String? planType,
-    bool? isMm2Organization,
     bool? embedded,
-    String? syncedWithMm2At,
+    List<Input$AppliedGroupRuleInput>? appliedGroupRules,
   }) =>
       Input$GroupInput._({
         if (id != null) r'id': id,
@@ -8499,7 +8934,6 @@ class Input$GroupInput {
         if (deletedAt != null) r'deletedAt': deletedAt,
         if (deletedBy != null) r'deletedBy': deletedBy,
         if (parentGroupId != null) r'parentGroupId': parentGroupId,
-        if (mm2Id != null) r'mm2Id': mm2Id,
         if (matchingEngineId != null) r'matchingEngineId': matchingEngineId,
         if (name != null) r'name': name,
         if (shortName != null) r'shortName': shortName,
@@ -8507,9 +8941,8 @@ class Input$GroupInput {
         if (slug != null) r'slug': slug,
         if (description != null) r'description': description,
         if (planType != null) r'planType': planType,
-        if (isMm2Organization != null) r'isMm2Organization': isMm2Organization,
         if (embedded != null) r'embedded': embedded,
-        if (syncedWithMm2At != null) r'syncedWithMm2At': syncedWithMm2At,
+        if (appliedGroupRules != null) r'appliedGroupRules': appliedGroupRules,
       });
 
   Input$GroupInput._(this._$data);
@@ -8540,8 +8973,7 @@ class Input$GroupInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -8549,8 +8981,7 @@ class Input$GroupInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -8558,8 +8989,7 @@ class Input$GroupInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -8568,10 +8998,6 @@ class Input$GroupInput {
     if (data.containsKey('parentGroupId')) {
       final l$parentGroupId = data['parentGroupId'];
       result$data['parentGroupId'] = (l$parentGroupId as String?);
-    }
-    if (data.containsKey('mm2Id')) {
-      final l$mm2Id = data['mm2Id'];
-      result$data['mm2Id'] = (l$mm2Id as String?);
     }
     if (data.containsKey('matchingEngineId')) {
       final l$matchingEngineId = data['matchingEngineId'];
@@ -8601,17 +9027,16 @@ class Input$GroupInput {
       final l$planType = data['planType'];
       result$data['planType'] = (l$planType as String?);
     }
-    if (data.containsKey('isMm2Organization')) {
-      final l$isMm2Organization = data['isMm2Organization'];
-      result$data['isMm2Organization'] = (l$isMm2Organization as bool?);
-    }
     if (data.containsKey('embedded')) {
       final l$embedded = data['embedded'];
       result$data['embedded'] = (l$embedded as bool);
     }
-    if (data.containsKey('syncedWithMm2At')) {
-      final l$syncedWithMm2At = data['syncedWithMm2At'];
-      result$data['syncedWithMm2At'] = (l$syncedWithMm2At as String?);
+    if (data.containsKey('appliedGroupRules')) {
+      final l$appliedGroupRules = data['appliedGroupRules'];
+      result$data['appliedGroupRules'] = (l$appliedGroupRules as List<dynamic>?)
+          ?.map((e) =>
+              Input$AppliedGroupRuleInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
     }
     return Input$GroupInput._(result$data);
   }
@@ -8624,14 +9049,13 @@ class Input$GroupInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get parentGroupId => (_$data['parentGroupId'] as String?);
-  String? get mm2Id => (_$data['mm2Id'] as String?);
   String? get matchingEngineId => (_$data['matchingEngineId'] as String?);
   String? get name => (_$data['name'] as String?);
   String? get shortName => (_$data['shortName'] as String?);
@@ -8639,9 +9063,9 @@ class Input$GroupInput {
   String? get slug => (_$data['slug'] as String?);
   String? get description => (_$data['description'] as String?);
   String? get planType => (_$data['planType'] as String?);
-  bool? get isMm2Organization => (_$data['isMm2Organization'] as bool?);
   bool? get embedded => (_$data['embedded'] as bool?);
-  String? get syncedWithMm2At => (_$data['syncedWithMm2At'] as String?);
+  List<Input$AppliedGroupRuleInput>? get appliedGroupRules =>
+      (_$data['appliedGroupRules'] as List<Input$AppliedGroupRuleInput>?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -8662,7 +9086,7 @@ class Input$GroupInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -8670,7 +9094,7 @@ class Input$GroupInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -8678,7 +9102,7 @@ class Input$GroupInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -8687,10 +9111,6 @@ class Input$GroupInput {
     if (_$data.containsKey('parentGroupId')) {
       final l$parentGroupId = parentGroupId;
       result$data['parentGroupId'] = l$parentGroupId;
-    }
-    if (_$data.containsKey('mm2Id')) {
-      final l$mm2Id = mm2Id;
-      result$data['mm2Id'] = l$mm2Id;
     }
     if (_$data.containsKey('matchingEngineId')) {
       final l$matchingEngineId = matchingEngineId;
@@ -8720,17 +9140,14 @@ class Input$GroupInput {
       final l$planType = planType;
       result$data['planType'] = l$planType;
     }
-    if (_$data.containsKey('isMm2Organization')) {
-      final l$isMm2Organization = isMm2Organization;
-      result$data['isMm2Organization'] = l$isMm2Organization;
-    }
     if (_$data.containsKey('embedded')) {
       final l$embedded = embedded;
       result$data['embedded'] = (l$embedded as bool);
     }
-    if (_$data.containsKey('syncedWithMm2At')) {
-      final l$syncedWithMm2At = syncedWithMm2At;
-      result$data['syncedWithMm2At'] = l$syncedWithMm2At;
+    if (_$data.containsKey('appliedGroupRules')) {
+      final l$appliedGroupRules = appliedGroupRules;
+      result$data['appliedGroupRules'] =
+          l$appliedGroupRules?.map((e) => e.toJson()).toList();
     }
     return result$data;
   }
@@ -8856,14 +9273,6 @@ class Input$GroupInput {
     if (l$parentGroupId != lOther$parentGroupId) {
       return false;
     }
-    final l$mm2Id = mm2Id;
-    final lOther$mm2Id = other.mm2Id;
-    if (_$data.containsKey('mm2Id') != other._$data.containsKey('mm2Id')) {
-      return false;
-    }
-    if (l$mm2Id != lOther$mm2Id) {
-      return false;
-    }
     final l$matchingEngineId = matchingEngineId;
     final lOther$matchingEngineId = other.matchingEngineId;
     if (_$data.containsKey('matchingEngineId') !=
@@ -8924,15 +9333,6 @@ class Input$GroupInput {
     if (l$planType != lOther$planType) {
       return false;
     }
-    final l$isMm2Organization = isMm2Organization;
-    final lOther$isMm2Organization = other.isMm2Organization;
-    if (_$data.containsKey('isMm2Organization') !=
-        other._$data.containsKey('isMm2Organization')) {
-      return false;
-    }
-    if (l$isMm2Organization != lOther$isMm2Organization) {
-      return false;
-    }
     final l$embedded = embedded;
     final lOther$embedded = other.embedded;
     if (_$data.containsKey('embedded') !=
@@ -8942,13 +9342,24 @@ class Input$GroupInput {
     if (l$embedded != lOther$embedded) {
       return false;
     }
-    final l$syncedWithMm2At = syncedWithMm2At;
-    final lOther$syncedWithMm2At = other.syncedWithMm2At;
-    if (_$data.containsKey('syncedWithMm2At') !=
-        other._$data.containsKey('syncedWithMm2At')) {
+    final l$appliedGroupRules = appliedGroupRules;
+    final lOther$appliedGroupRules = other.appliedGroupRules;
+    if (_$data.containsKey('appliedGroupRules') !=
+        other._$data.containsKey('appliedGroupRules')) {
       return false;
     }
-    if (l$syncedWithMm2At != lOther$syncedWithMm2At) {
+    if (l$appliedGroupRules != null && lOther$appliedGroupRules != null) {
+      if (l$appliedGroupRules.length != lOther$appliedGroupRules.length) {
+        return false;
+      }
+      for (int i = 0; i < l$appliedGroupRules.length; i++) {
+        final l$appliedGroupRules$entry = l$appliedGroupRules[i];
+        final lOther$appliedGroupRules$entry = lOther$appliedGroupRules[i];
+        if (l$appliedGroupRules$entry != lOther$appliedGroupRules$entry) {
+          return false;
+        }
+      }
+    } else if (l$appliedGroupRules != lOther$appliedGroupRules) {
       return false;
     }
     return true;
@@ -8967,7 +9378,6 @@ class Input$GroupInput {
     final l$deletedAt = deletedAt;
     final l$deletedBy = deletedBy;
     final l$parentGroupId = parentGroupId;
-    final l$mm2Id = mm2Id;
     final l$matchingEngineId = matchingEngineId;
     final l$name = name;
     final l$shortName = shortName;
@@ -8975,9 +9385,8 @@ class Input$GroupInput {
     final l$slug = slug;
     final l$description = description;
     final l$planType = planType;
-    final l$isMm2Organization = isMm2Organization;
     final l$embedded = embedded;
-    final l$syncedWithMm2At = syncedWithMm2At;
+    final l$appliedGroupRules = appliedGroupRules;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -8994,7 +9403,6 @@ class Input$GroupInput {
       _$data.containsKey('deletedAt') ? l$deletedAt : const {},
       _$data.containsKey('deletedBy') ? l$deletedBy : const {},
       _$data.containsKey('parentGroupId') ? l$parentGroupId : const {},
-      _$data.containsKey('mm2Id') ? l$mm2Id : const {},
       _$data.containsKey('matchingEngineId') ? l$matchingEngineId : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('shortName') ? l$shortName : const {},
@@ -9002,9 +9410,12 @@ class Input$GroupInput {
       _$data.containsKey('slug') ? l$slug : const {},
       _$data.containsKey('description') ? l$description : const {},
       _$data.containsKey('planType') ? l$planType : const {},
-      _$data.containsKey('isMm2Organization') ? l$isMm2Organization : const {},
       _$data.containsKey('embedded') ? l$embedded : const {},
-      _$data.containsKey('syncedWithMm2At') ? l$syncedWithMm2At : const {},
+      _$data.containsKey('appliedGroupRules')
+          ? l$appliedGroupRules == null
+              ? null
+              : Object.hashAll(l$appliedGroupRules.map((v) => v))
+          : const {},
     ]);
   }
 }
@@ -9023,14 +9434,13 @@ abstract class CopyWith$Input$GroupInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? parentGroupId,
-    String? mm2Id,
     String? matchingEngineId,
     String? name,
     String? shortName,
@@ -9038,15 +9448,20 @@ abstract class CopyWith$Input$GroupInput<TRes> {
     String? slug,
     String? description,
     String? planType,
-    bool? isMm2Organization,
     bool? embedded,
-    String? syncedWithMm2At,
+    List<Input$AppliedGroupRuleInput>? appliedGroupRules,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
               Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
           _fn);
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  TRes appliedGroupRules(
+      Iterable<Input$AppliedGroupRuleInput>? Function(
+              Iterable<
+                  CopyWith$Input$AppliedGroupRuleInput<
+                      Input$AppliedGroupRuleInput>>?)
+          _fn);
 }
 
 class _CopyWithImpl$Input$GroupInput<TRes>
@@ -9074,7 +9489,6 @@ class _CopyWithImpl$Input$GroupInput<TRes>
     Object? deletedAt = _undefined,
     Object? deletedBy = _undefined,
     Object? parentGroupId = _undefined,
-    Object? mm2Id = _undefined,
     Object? matchingEngineId = _undefined,
     Object? name = _undefined,
     Object? shortName = _undefined,
@@ -9082,9 +9496,8 @@ class _CopyWithImpl$Input$GroupInput<TRes>
     Object? slug = _undefined,
     Object? description = _undefined,
     Object? planType = _undefined,
-    Object? isMm2Organization = _undefined,
     Object? embedded = _undefined,
-    Object? syncedWithMm2At = _undefined,
+    Object? appliedGroupRules = _undefined,
   }) =>
       _then(Input$GroupInput._({
         ..._instance._$data,
@@ -9094,15 +9507,14 @@ class _CopyWithImpl$Input$GroupInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (parentGroupId != _undefined)
           'parentGroupId': (parentGroupId as String?),
-        if (mm2Id != _undefined) 'mm2Id': (mm2Id as String?),
         if (matchingEngineId != _undefined)
           'matchingEngineId': (matchingEngineId as String?),
         if (name != _undefined) 'name': (name as String?),
@@ -9111,12 +9523,11 @@ class _CopyWithImpl$Input$GroupInput<TRes>
         if (slug != _undefined) 'slug': (slug as String?),
         if (description != _undefined) 'description': (description as String?),
         if (planType != _undefined) 'planType': (planType as String?),
-        if (isMm2Organization != _undefined)
-          'isMm2Organization': (isMm2Organization as bool?),
         if (embedded != _undefined && embedded != null)
           'embedded': (embedded as bool),
-        if (syncedWithMm2At != _undefined)
-          'syncedWithMm2At': (syncedWithMm2At as String?),
+        if (appliedGroupRules != _undefined)
+          'appliedGroupRules':
+              (appliedGroupRules as List<Input$AppliedGroupRuleInput>?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -9136,6 +9547,19 @@ class _CopyWithImpl$Input$GroupInput<TRes>
         : CopyWith$Input$BaseModelMetadataInput(
             local$metadata, (e) => call(metadata: e));
   }
+
+  TRes appliedGroupRules(
+          Iterable<Input$AppliedGroupRuleInput>? Function(
+                  Iterable<
+                      CopyWith$Input$AppliedGroupRuleInput<
+                          Input$AppliedGroupRuleInput>>?)
+              _fn) =>
+      call(
+          appliedGroupRules: _fn(_instance.appliedGroupRules
+              ?.map((e) => CopyWith$Input$AppliedGroupRuleInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
 }
 
 class _CopyWithStubImpl$Input$GroupInput<TRes>
@@ -9149,14 +9573,13 @@ class _CopyWithStubImpl$Input$GroupInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? parentGroupId,
-    String? mm2Id,
     String? matchingEngineId,
     String? name,
     String? shortName,
@@ -9164,14 +9587,658 @@ class _CopyWithStubImpl$Input$GroupInput<TRes>
     String? slug,
     String? description,
     String? planType,
-    bool? isMm2Organization,
     bool? embedded,
-    String? syncedWithMm2At,
+    List<Input$AppliedGroupRuleInput>? appliedGroupRules,
   }) =>
       _res;
   events(_fn) => _res;
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  appliedGroupRules(_fn) => _res;
+}
+
+class Input$AppliedGroupRuleInput {
+  factory Input$AppliedGroupRuleInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? groupRuleId,
+    String? groupId,
+    List<Enum$GroupRuleEventType>? subscribedToEvents,
+    Input$GroupRuleBaseConfigInput? config,
+  }) =>
+      Input$AppliedGroupRuleInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (groupRuleId != null) r'groupRuleId': groupRuleId,
+        if (groupId != null) r'groupId': groupId,
+        if (subscribedToEvents != null)
+          r'subscribedToEvents': subscribedToEvents,
+        if (config != null) r'config': config,
+      });
+
+  Input$AppliedGroupRuleInput._(this._$data);
+
+  factory Input$AppliedGroupRuleInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('groupRuleId')) {
+      final l$groupRuleId = data['groupRuleId'];
+      result$data['groupRuleId'] = (l$groupRuleId as String);
+    }
+    if (data.containsKey('groupId')) {
+      final l$groupId = data['groupId'];
+      result$data['groupId'] = (l$groupId as String);
+    }
+    if (data.containsKey('subscribedToEvents')) {
+      final l$subscribedToEvents = data['subscribedToEvents'];
+      result$data['subscribedToEvents'] =
+          (l$subscribedToEvents as List<dynamic>)
+              .map((e) => fromJson$Enum$GroupRuleEventType((e as String)))
+              .toList();
+    }
+    if (data.containsKey('config')) {
+      final l$config = data['config'];
+      result$data['config'] = l$config == null
+          ? null
+          : Input$GroupRuleBaseConfigInput.fromJson(
+              (l$config as Map<String, dynamic>));
+    }
+    return Input$AppliedGroupRuleInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  String? get groupRuleId => (_$data['groupRuleId'] as String?);
+  String? get groupId => (_$data['groupId'] as String?);
+  List<Enum$GroupRuleEventType>? get subscribedToEvents =>
+      (_$data['subscribedToEvents'] as List<Enum$GroupRuleEventType>?);
+  Input$GroupRuleBaseConfigInput? get config =>
+      (_$data['config'] as Input$GroupRuleBaseConfigInput?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('groupRuleId')) {
+      final l$groupRuleId = groupRuleId;
+      result$data['groupRuleId'] = (l$groupRuleId as String);
+    }
+    if (_$data.containsKey('groupId')) {
+      final l$groupId = groupId;
+      result$data['groupId'] = (l$groupId as String);
+    }
+    if (_$data.containsKey('subscribedToEvents')) {
+      final l$subscribedToEvents = subscribedToEvents;
+      result$data['subscribedToEvents'] =
+          (l$subscribedToEvents as List<Enum$GroupRuleEventType>)
+              .map((e) => toJson$Enum$GroupRuleEventType(e))
+              .toList();
+    }
+    if (_$data.containsKey('config')) {
+      final l$config = config;
+      result$data['config'] = l$config?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$AppliedGroupRuleInput<Input$AppliedGroupRuleInput>
+      get copyWith => CopyWith$Input$AppliedGroupRuleInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$AppliedGroupRuleInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$groupRuleId = groupRuleId;
+    final lOther$groupRuleId = other.groupRuleId;
+    if (_$data.containsKey('groupRuleId') !=
+        other._$data.containsKey('groupRuleId')) {
+      return false;
+    }
+    if (l$groupRuleId != lOther$groupRuleId) {
+      return false;
+    }
+    final l$groupId = groupId;
+    final lOther$groupId = other.groupId;
+    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+      return false;
+    }
+    if (l$groupId != lOther$groupId) {
+      return false;
+    }
+    final l$subscribedToEvents = subscribedToEvents;
+    final lOther$subscribedToEvents = other.subscribedToEvents;
+    if (_$data.containsKey('subscribedToEvents') !=
+        other._$data.containsKey('subscribedToEvents')) {
+      return false;
+    }
+    if (l$subscribedToEvents != null && lOther$subscribedToEvents != null) {
+      if (l$subscribedToEvents.length != lOther$subscribedToEvents.length) {
+        return false;
+      }
+      for (int i = 0; i < l$subscribedToEvents.length; i++) {
+        final l$subscribedToEvents$entry = l$subscribedToEvents[i];
+        final lOther$subscribedToEvents$entry = lOther$subscribedToEvents[i];
+        if (l$subscribedToEvents$entry != lOther$subscribedToEvents$entry) {
+          return false;
+        }
+      }
+    } else if (l$subscribedToEvents != lOther$subscribedToEvents) {
+      return false;
+    }
+    final l$config = config;
+    final lOther$config = other.config;
+    if (_$data.containsKey('config') != other._$data.containsKey('config')) {
+      return false;
+    }
+    if (l$config != lOther$config) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$groupRuleId = groupRuleId;
+    final l$groupId = groupId;
+    final l$subscribedToEvents = subscribedToEvents;
+    final l$config = config;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('groupRuleId') ? l$groupRuleId : const {},
+      _$data.containsKey('groupId') ? l$groupId : const {},
+      _$data.containsKey('subscribedToEvents')
+          ? l$subscribedToEvents == null
+              ? null
+              : Object.hashAll(l$subscribedToEvents.map((v) => v))
+          : const {},
+      _$data.containsKey('config') ? l$config : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$AppliedGroupRuleInput<TRes> {
+  factory CopyWith$Input$AppliedGroupRuleInput(
+    Input$AppliedGroupRuleInput instance,
+    TRes Function(Input$AppliedGroupRuleInput) then,
+  ) = _CopyWithImpl$Input$AppliedGroupRuleInput;
+
+  factory CopyWith$Input$AppliedGroupRuleInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$AppliedGroupRuleInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? groupRuleId,
+    String? groupId,
+    List<Enum$GroupRuleEventType>? subscribedToEvents,
+    Input$GroupRuleBaseConfigInput? config,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  CopyWith$Input$GroupRuleBaseConfigInput<TRes> get config;
+}
+
+class _CopyWithImpl$Input$AppliedGroupRuleInput<TRes>
+    implements CopyWith$Input$AppliedGroupRuleInput<TRes> {
+  _CopyWithImpl$Input$AppliedGroupRuleInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$AppliedGroupRuleInput _instance;
+
+  final TRes Function(Input$AppliedGroupRuleInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? groupRuleId = _undefined,
+    Object? groupId = _undefined,
+    Object? subscribedToEvents = _undefined,
+    Object? config = _undefined,
+  }) =>
+      _then(Input$AppliedGroupRuleInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (groupRuleId != _undefined && groupRuleId != null)
+          'groupRuleId': (groupRuleId as String),
+        if (groupId != _undefined && groupId != null)
+          'groupId': (groupId as String),
+        if (subscribedToEvents != _undefined && subscribedToEvents != null)
+          'subscribedToEvents':
+              (subscribedToEvents as List<Enum$GroupRuleEventType>),
+        if (config != _undefined)
+          'config': (config as Input$GroupRuleBaseConfigInput?),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  CopyWith$Input$GroupRuleBaseConfigInput<TRes> get config {
+    final local$config = _instance.config;
+    return local$config == null
+        ? CopyWith$Input$GroupRuleBaseConfigInput.stub(_then(_instance))
+        : CopyWith$Input$GroupRuleBaseConfigInput(
+            local$config, (e) => call(config: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$AppliedGroupRuleInput<TRes>
+    implements CopyWith$Input$AppliedGroupRuleInput<TRes> {
+  _CopyWithStubImpl$Input$AppliedGroupRuleInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? groupRuleId,
+    String? groupId,
+    List<Enum$GroupRuleEventType>? subscribedToEvents,
+    Input$GroupRuleBaseConfigInput? config,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  CopyWith$Input$GroupRuleBaseConfigInput<TRes> get config =>
+      CopyWith$Input$GroupRuleBaseConfigInput.stub(_res);
+}
+
+class Input$GroupRuleBaseConfigInput {
+  factory Input$GroupRuleBaseConfigInput({String? value}) =>
+      Input$GroupRuleBaseConfigInput._({
+        if (value != null) r'value': value,
+      });
+
+  Input$GroupRuleBaseConfigInput._(this._$data);
+
+  factory Input$GroupRuleBaseConfigInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('value')) {
+      final l$value = data['value'];
+      result$data['value'] = (l$value as String);
+    }
+    return Input$GroupRuleBaseConfigInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get value => (_$data['value'] as String?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('value')) {
+      final l$value = value;
+      result$data['value'] = (l$value as String);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GroupRuleBaseConfigInput<Input$GroupRuleBaseConfigInput>
+      get copyWith => CopyWith$Input$GroupRuleBaseConfigInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GroupRuleBaseConfigInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$value = value;
+    final lOther$value = other.value;
+    if (_$data.containsKey('value') != other._$data.containsKey('value')) {
+      return false;
+    }
+    if (l$value != lOther$value) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$value = value;
+    return Object.hashAll([_$data.containsKey('value') ? l$value : const {}]);
+  }
+}
+
+abstract class CopyWith$Input$GroupRuleBaseConfigInput<TRes> {
+  factory CopyWith$Input$GroupRuleBaseConfigInput(
+    Input$GroupRuleBaseConfigInput instance,
+    TRes Function(Input$GroupRuleBaseConfigInput) then,
+  ) = _CopyWithImpl$Input$GroupRuleBaseConfigInput;
+
+  factory CopyWith$Input$GroupRuleBaseConfigInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GroupRuleBaseConfigInput;
+
+  TRes call({String? value});
+}
+
+class _CopyWithImpl$Input$GroupRuleBaseConfigInput<TRes>
+    implements CopyWith$Input$GroupRuleBaseConfigInput<TRes> {
+  _CopyWithImpl$Input$GroupRuleBaseConfigInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GroupRuleBaseConfigInput _instance;
+
+  final TRes Function(Input$GroupRuleBaseConfigInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? value = _undefined}) =>
+      _then(Input$GroupRuleBaseConfigInput._({
+        ..._instance._$data,
+        if (value != _undefined && value != null) 'value': (value as String),
+      }));
+}
+
+class _CopyWithStubImpl$Input$GroupRuleBaseConfigInput<TRes>
+    implements CopyWith$Input$GroupRuleBaseConfigInput<TRes> {
+  _CopyWithStubImpl$Input$GroupRuleBaseConfigInput(this._res);
+
+  TRes _res;
+
+  call({String? value}) => _res;
 }
 
 class Input$GroupListFilter {
@@ -9562,6 +10629,1108 @@ class _CopyWithStubImpl$Input$GroupListFilter<TRes>
       _res;
 }
 
+class Input$UserSearchInput {
+  factory Input$UserSearchInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? userId,
+    String? matchingEngineId,
+    String? name,
+    Enum$ProfileType? profileType,
+    Enum$ProfileType? viewerProfileType,
+    String? searchText,
+    Enum$UserSearchFieldPreference? seeksHelp,
+    Enum$UserSearchFieldPreference? offersHelp,
+    int? maxResultCount,
+    Enum$UserSearchSubscriptionType? subscription,
+    String? expiresAt,
+    String? resultExpiresAt,
+    bool? startSearch,
+  }) =>
+      Input$UserSearchInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (userId != null) r'userId': userId,
+        if (matchingEngineId != null) r'matchingEngineId': matchingEngineId,
+        if (name != null) r'name': name,
+        if (profileType != null) r'profileType': profileType,
+        if (viewerProfileType != null) r'viewerProfileType': viewerProfileType,
+        if (searchText != null) r'searchText': searchText,
+        if (seeksHelp != null) r'seeksHelp': seeksHelp,
+        if (offersHelp != null) r'offersHelp': offersHelp,
+        if (maxResultCount != null) r'maxResultCount': maxResultCount,
+        if (subscription != null) r'subscription': subscription,
+        if (expiresAt != null) r'expiresAt': expiresAt,
+        if (resultExpiresAt != null) r'resultExpiresAt': resultExpiresAt,
+        if (startSearch != null) r'startSearch': startSearch,
+      });
+
+  Input$UserSearchInput._(this._$data);
+
+  factory Input$UserSearchInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('userId')) {
+      final l$userId = data['userId'];
+      result$data['userId'] = (l$userId as String?);
+    }
+    if (data.containsKey('matchingEngineId')) {
+      final l$matchingEngineId = data['matchingEngineId'];
+      result$data['matchingEngineId'] = (l$matchingEngineId as String?);
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('profileType')) {
+      final l$profileType = data['profileType'];
+      result$data['profileType'] = l$profileType == null
+          ? null
+          : fromJson$Enum$ProfileType((l$profileType as String));
+    }
+    if (data.containsKey('viewerProfileType')) {
+      final l$viewerProfileType = data['viewerProfileType'];
+      result$data['viewerProfileType'] = l$viewerProfileType == null
+          ? null
+          : fromJson$Enum$ProfileType((l$viewerProfileType as String));
+    }
+    if (data.containsKey('searchText')) {
+      final l$searchText = data['searchText'];
+      result$data['searchText'] = (l$searchText as String?);
+    }
+    if (data.containsKey('seeksHelp')) {
+      final l$seeksHelp = data['seeksHelp'];
+      result$data['seeksHelp'] = l$seeksHelp == null
+          ? null
+          : fromJson$Enum$UserSearchFieldPreference((l$seeksHelp as String));
+    }
+    if (data.containsKey('offersHelp')) {
+      final l$offersHelp = data['offersHelp'];
+      result$data['offersHelp'] = l$offersHelp == null
+          ? null
+          : fromJson$Enum$UserSearchFieldPreference((l$offersHelp as String));
+    }
+    if (data.containsKey('maxResultCount')) {
+      final l$maxResultCount = data['maxResultCount'];
+      result$data['maxResultCount'] = (l$maxResultCount as int);
+    }
+    if (data.containsKey('subscription')) {
+      final l$subscription = data['subscription'];
+      result$data['subscription'] = l$subscription == null
+          ? null
+          : fromJson$Enum$UserSearchSubscriptionType(
+              (l$subscription as String));
+    }
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] = (l$expiresAt as String?);
+    }
+    if (data.containsKey('resultExpiresAt')) {
+      final l$resultExpiresAt = data['resultExpiresAt'];
+      result$data['resultExpiresAt'] = (l$resultExpiresAt as String?);
+    }
+    if (data.containsKey('startSearch')) {
+      final l$startSearch = data['startSearch'];
+      result$data['startSearch'] = (l$startSearch as bool);
+    }
+    return Input$UserSearchInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  String? get userId => (_$data['userId'] as String?);
+  String? get matchingEngineId => (_$data['matchingEngineId'] as String?);
+  String? get name => (_$data['name'] as String?);
+  Enum$ProfileType? get profileType =>
+      (_$data['profileType'] as Enum$ProfileType?);
+  Enum$ProfileType? get viewerProfileType =>
+      (_$data['viewerProfileType'] as Enum$ProfileType?);
+  String? get searchText => (_$data['searchText'] as String?);
+  Enum$UserSearchFieldPreference? get seeksHelp =>
+      (_$data['seeksHelp'] as Enum$UserSearchFieldPreference?);
+  Enum$UserSearchFieldPreference? get offersHelp =>
+      (_$data['offersHelp'] as Enum$UserSearchFieldPreference?);
+  int? get maxResultCount => (_$data['maxResultCount'] as int?);
+  Enum$UserSearchSubscriptionType? get subscription =>
+      (_$data['subscription'] as Enum$UserSearchSubscriptionType?);
+  String? get expiresAt => (_$data['expiresAt'] as String?);
+  String? get resultExpiresAt => (_$data['resultExpiresAt'] as String?);
+  bool? get startSearch => (_$data['startSearch'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('userId')) {
+      final l$userId = userId;
+      result$data['userId'] = l$userId;
+    }
+    if (_$data.containsKey('matchingEngineId')) {
+      final l$matchingEngineId = matchingEngineId;
+      result$data['matchingEngineId'] = l$matchingEngineId;
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('profileType')) {
+      final l$profileType = profileType;
+      result$data['profileType'] =
+          l$profileType == null ? null : toJson$Enum$ProfileType(l$profileType);
+    }
+    if (_$data.containsKey('viewerProfileType')) {
+      final l$viewerProfileType = viewerProfileType;
+      result$data['viewerProfileType'] = l$viewerProfileType == null
+          ? null
+          : toJson$Enum$ProfileType(l$viewerProfileType);
+    }
+    if (_$data.containsKey('searchText')) {
+      final l$searchText = searchText;
+      result$data['searchText'] = l$searchText;
+    }
+    if (_$data.containsKey('seeksHelp')) {
+      final l$seeksHelp = seeksHelp;
+      result$data['seeksHelp'] = l$seeksHelp == null
+          ? null
+          : toJson$Enum$UserSearchFieldPreference(l$seeksHelp);
+    }
+    if (_$data.containsKey('offersHelp')) {
+      final l$offersHelp = offersHelp;
+      result$data['offersHelp'] = l$offersHelp == null
+          ? null
+          : toJson$Enum$UserSearchFieldPreference(l$offersHelp);
+    }
+    if (_$data.containsKey('maxResultCount')) {
+      final l$maxResultCount = maxResultCount;
+      result$data['maxResultCount'] = (l$maxResultCount as int);
+    }
+    if (_$data.containsKey('subscription')) {
+      final l$subscription = subscription;
+      result$data['subscription'] = l$subscription == null
+          ? null
+          : toJson$Enum$UserSearchSubscriptionType(l$subscription);
+    }
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt;
+    }
+    if (_$data.containsKey('resultExpiresAt')) {
+      final l$resultExpiresAt = resultExpiresAt;
+      result$data['resultExpiresAt'] = l$resultExpiresAt;
+    }
+    if (_$data.containsKey('startSearch')) {
+      final l$startSearch = startSearch;
+      result$data['startSearch'] = (l$startSearch as bool);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$UserSearchInput<Input$UserSearchInput> get copyWith =>
+      CopyWith$Input$UserSearchInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$UserSearchInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (_$data.containsKey('userId') != other._$data.containsKey('userId')) {
+      return false;
+    }
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$matchingEngineId = matchingEngineId;
+    final lOther$matchingEngineId = other.matchingEngineId;
+    if (_$data.containsKey('matchingEngineId') !=
+        other._$data.containsKey('matchingEngineId')) {
+      return false;
+    }
+    if (l$matchingEngineId != lOther$matchingEngineId) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$profileType = profileType;
+    final lOther$profileType = other.profileType;
+    if (_$data.containsKey('profileType') !=
+        other._$data.containsKey('profileType')) {
+      return false;
+    }
+    if (l$profileType != lOther$profileType) {
+      return false;
+    }
+    final l$viewerProfileType = viewerProfileType;
+    final lOther$viewerProfileType = other.viewerProfileType;
+    if (_$data.containsKey('viewerProfileType') !=
+        other._$data.containsKey('viewerProfileType')) {
+      return false;
+    }
+    if (l$viewerProfileType != lOther$viewerProfileType) {
+      return false;
+    }
+    final l$searchText = searchText;
+    final lOther$searchText = other.searchText;
+    if (_$data.containsKey('searchText') !=
+        other._$data.containsKey('searchText')) {
+      return false;
+    }
+    if (l$searchText != lOther$searchText) {
+      return false;
+    }
+    final l$seeksHelp = seeksHelp;
+    final lOther$seeksHelp = other.seeksHelp;
+    if (_$data.containsKey('seeksHelp') !=
+        other._$data.containsKey('seeksHelp')) {
+      return false;
+    }
+    if (l$seeksHelp != lOther$seeksHelp) {
+      return false;
+    }
+    final l$offersHelp = offersHelp;
+    final lOther$offersHelp = other.offersHelp;
+    if (_$data.containsKey('offersHelp') !=
+        other._$data.containsKey('offersHelp')) {
+      return false;
+    }
+    if (l$offersHelp != lOther$offersHelp) {
+      return false;
+    }
+    final l$maxResultCount = maxResultCount;
+    final lOther$maxResultCount = other.maxResultCount;
+    if (_$data.containsKey('maxResultCount') !=
+        other._$data.containsKey('maxResultCount')) {
+      return false;
+    }
+    if (l$maxResultCount != lOther$maxResultCount) {
+      return false;
+    }
+    final l$subscription = subscription;
+    final lOther$subscription = other.subscription;
+    if (_$data.containsKey('subscription') !=
+        other._$data.containsKey('subscription')) {
+      return false;
+    }
+    if (l$subscription != lOther$subscription) {
+      return false;
+    }
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
+      return false;
+    }
+    final l$resultExpiresAt = resultExpiresAt;
+    final lOther$resultExpiresAt = other.resultExpiresAt;
+    if (_$data.containsKey('resultExpiresAt') !=
+        other._$data.containsKey('resultExpiresAt')) {
+      return false;
+    }
+    if (l$resultExpiresAt != lOther$resultExpiresAt) {
+      return false;
+    }
+    final l$startSearch = startSearch;
+    final lOther$startSearch = other.startSearch;
+    if (_$data.containsKey('startSearch') !=
+        other._$data.containsKey('startSearch')) {
+      return false;
+    }
+    if (l$startSearch != lOther$startSearch) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$userId = userId;
+    final l$matchingEngineId = matchingEngineId;
+    final l$name = name;
+    final l$profileType = profileType;
+    final l$viewerProfileType = viewerProfileType;
+    final l$searchText = searchText;
+    final l$seeksHelp = seeksHelp;
+    final l$offersHelp = offersHelp;
+    final l$maxResultCount = maxResultCount;
+    final l$subscription = subscription;
+    final l$expiresAt = expiresAt;
+    final l$resultExpiresAt = resultExpiresAt;
+    final l$startSearch = startSearch;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('userId') ? l$userId : const {},
+      _$data.containsKey('matchingEngineId') ? l$matchingEngineId : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('profileType') ? l$profileType : const {},
+      _$data.containsKey('viewerProfileType') ? l$viewerProfileType : const {},
+      _$data.containsKey('searchText') ? l$searchText : const {},
+      _$data.containsKey('seeksHelp') ? l$seeksHelp : const {},
+      _$data.containsKey('offersHelp') ? l$offersHelp : const {},
+      _$data.containsKey('maxResultCount') ? l$maxResultCount : const {},
+      _$data.containsKey('subscription') ? l$subscription : const {},
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
+      _$data.containsKey('resultExpiresAt') ? l$resultExpiresAt : const {},
+      _$data.containsKey('startSearch') ? l$startSearch : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$UserSearchInput<TRes> {
+  factory CopyWith$Input$UserSearchInput(
+    Input$UserSearchInput instance,
+    TRes Function(Input$UserSearchInput) then,
+  ) = _CopyWithImpl$Input$UserSearchInput;
+
+  factory CopyWith$Input$UserSearchInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$UserSearchInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? userId,
+    String? matchingEngineId,
+    String? name,
+    Enum$ProfileType? profileType,
+    Enum$ProfileType? viewerProfileType,
+    String? searchText,
+    Enum$UserSearchFieldPreference? seeksHelp,
+    Enum$UserSearchFieldPreference? offersHelp,
+    int? maxResultCount,
+    Enum$UserSearchSubscriptionType? subscription,
+    String? expiresAt,
+    String? resultExpiresAt,
+    bool? startSearch,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$UserSearchInput<TRes>
+    implements CopyWith$Input$UserSearchInput<TRes> {
+  _CopyWithImpl$Input$UserSearchInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$UserSearchInput _instance;
+
+  final TRes Function(Input$UserSearchInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? userId = _undefined,
+    Object? matchingEngineId = _undefined,
+    Object? name = _undefined,
+    Object? profileType = _undefined,
+    Object? viewerProfileType = _undefined,
+    Object? searchText = _undefined,
+    Object? seeksHelp = _undefined,
+    Object? offersHelp = _undefined,
+    Object? maxResultCount = _undefined,
+    Object? subscription = _undefined,
+    Object? expiresAt = _undefined,
+    Object? resultExpiresAt = _undefined,
+    Object? startSearch = _undefined,
+  }) =>
+      _then(Input$UserSearchInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (userId != _undefined) 'userId': (userId as String?),
+        if (matchingEngineId != _undefined)
+          'matchingEngineId': (matchingEngineId as String?),
+        if (name != _undefined) 'name': (name as String?),
+        if (profileType != _undefined)
+          'profileType': (profileType as Enum$ProfileType?),
+        if (viewerProfileType != _undefined)
+          'viewerProfileType': (viewerProfileType as Enum$ProfileType?),
+        if (searchText != _undefined) 'searchText': (searchText as String?),
+        if (seeksHelp != _undefined)
+          'seeksHelp': (seeksHelp as Enum$UserSearchFieldPreference?),
+        if (offersHelp != _undefined)
+          'offersHelp': (offersHelp as Enum$UserSearchFieldPreference?),
+        if (maxResultCount != _undefined && maxResultCount != null)
+          'maxResultCount': (maxResultCount as int),
+        if (subscription != _undefined)
+          'subscription': (subscription as Enum$UserSearchSubscriptionType?),
+        if (expiresAt != _undefined) 'expiresAt': (expiresAt as String?),
+        if (resultExpiresAt != _undefined)
+          'resultExpiresAt': (resultExpiresAt as String?),
+        if (startSearch != _undefined && startSearch != null)
+          'startSearch': (startSearch as bool),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$UserSearchInput<TRes>
+    implements CopyWith$Input$UserSearchInput<TRes> {
+  _CopyWithStubImpl$Input$UserSearchInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? userId,
+    String? matchingEngineId,
+    String? name,
+    Enum$ProfileType? profileType,
+    Enum$ProfileType? viewerProfileType,
+    String? searchText,
+    Enum$UserSearchFieldPreference? seeksHelp,
+    Enum$UserSearchFieldPreference? offersHelp,
+    int? maxResultCount,
+    Enum$UserSearchSubscriptionType? subscription,
+    String? expiresAt,
+    String? resultExpiresAt,
+    bool? startSearch,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
+class Input$UserSearchListFilter {
+  factory Input$UserSearchListFilter({
+    List<String>? ids,
+    String? searchText,
+    bool? caseSensitive,
+    List<String>? textSearchFields,
+    String? createdAtFrom,
+    String? createdAtUntil,
+    String? updatedAtFrom,
+    String? updatedAtUntil,
+  }) =>
+      Input$UserSearchListFilter._({
+        if (ids != null) r'ids': ids,
+        if (searchText != null) r'searchText': searchText,
+        if (caseSensitive != null) r'caseSensitive': caseSensitive,
+        if (textSearchFields != null) r'textSearchFields': textSearchFields,
+        if (createdAtFrom != null) r'createdAtFrom': createdAtFrom,
+        if (createdAtUntil != null) r'createdAtUntil': createdAtUntil,
+        if (updatedAtFrom != null) r'updatedAtFrom': updatedAtFrom,
+        if (updatedAtUntil != null) r'updatedAtUntil': updatedAtUntil,
+      });
+
+  Input$UserSearchListFilter._(this._$data);
+
+  factory Input$UserSearchListFilter.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('ids')) {
+      final l$ids = data['ids'];
+      result$data['ids'] =
+          (l$ids as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('searchText')) {
+      final l$searchText = data['searchText'];
+      result$data['searchText'] = (l$searchText as String?);
+    }
+    if (data.containsKey('caseSensitive')) {
+      final l$caseSensitive = data['caseSensitive'];
+      result$data['caseSensitive'] = (l$caseSensitive as bool?);
+    }
+    if (data.containsKey('textSearchFields')) {
+      final l$textSearchFields = data['textSearchFields'];
+      result$data['textSearchFields'] = (l$textSearchFields as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('createdAtFrom')) {
+      final l$createdAtFrom = data['createdAtFrom'];
+      result$data['createdAtFrom'] = (l$createdAtFrom as String?);
+    }
+    if (data.containsKey('createdAtUntil')) {
+      final l$createdAtUntil = data['createdAtUntil'];
+      result$data['createdAtUntil'] = (l$createdAtUntil as String?);
+    }
+    if (data.containsKey('updatedAtFrom')) {
+      final l$updatedAtFrom = data['updatedAtFrom'];
+      result$data['updatedAtFrom'] = (l$updatedAtFrom as String?);
+    }
+    if (data.containsKey('updatedAtUntil')) {
+      final l$updatedAtUntil = data['updatedAtUntil'];
+      result$data['updatedAtUntil'] = (l$updatedAtUntil as String?);
+    }
+    return Input$UserSearchListFilter._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<String>? get ids => (_$data['ids'] as List<String>?);
+  String? get searchText => (_$data['searchText'] as String?);
+  bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
+  List<String>? get textSearchFields =>
+      (_$data['textSearchFields'] as List<String>?);
+  String? get createdAtFrom => (_$data['createdAtFrom'] as String?);
+  String? get createdAtUntil => (_$data['createdAtUntil'] as String?);
+  String? get updatedAtFrom => (_$data['updatedAtFrom'] as String?);
+  String? get updatedAtUntil => (_$data['updatedAtUntil'] as String?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('ids')) {
+      final l$ids = ids;
+      result$data['ids'] = l$ids?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('searchText')) {
+      final l$searchText = searchText;
+      result$data['searchText'] = l$searchText;
+    }
+    if (_$data.containsKey('caseSensitive')) {
+      final l$caseSensitive = caseSensitive;
+      result$data['caseSensitive'] = l$caseSensitive;
+    }
+    if (_$data.containsKey('textSearchFields')) {
+      final l$textSearchFields = textSearchFields;
+      result$data['textSearchFields'] =
+          l$textSearchFields?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('createdAtFrom')) {
+      final l$createdAtFrom = createdAtFrom;
+      result$data['createdAtFrom'] = l$createdAtFrom;
+    }
+    if (_$data.containsKey('createdAtUntil')) {
+      final l$createdAtUntil = createdAtUntil;
+      result$data['createdAtUntil'] = l$createdAtUntil;
+    }
+    if (_$data.containsKey('updatedAtFrom')) {
+      final l$updatedAtFrom = updatedAtFrom;
+      result$data['updatedAtFrom'] = l$updatedAtFrom;
+    }
+    if (_$data.containsKey('updatedAtUntil')) {
+      final l$updatedAtUntil = updatedAtUntil;
+      result$data['updatedAtUntil'] = l$updatedAtUntil;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$UserSearchListFilter<Input$UserSearchListFilter>
+      get copyWith => CopyWith$Input$UserSearchListFilter(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$UserSearchListFilter) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$ids = ids;
+    final lOther$ids = other.ids;
+    if (_$data.containsKey('ids') != other._$data.containsKey('ids')) {
+      return false;
+    }
+    if (l$ids != null && lOther$ids != null) {
+      if (l$ids.length != lOther$ids.length) {
+        return false;
+      }
+      for (int i = 0; i < l$ids.length; i++) {
+        final l$ids$entry = l$ids[i];
+        final lOther$ids$entry = lOther$ids[i];
+        if (l$ids$entry != lOther$ids$entry) {
+          return false;
+        }
+      }
+    } else if (l$ids != lOther$ids) {
+      return false;
+    }
+    final l$searchText = searchText;
+    final lOther$searchText = other.searchText;
+    if (_$data.containsKey('searchText') !=
+        other._$data.containsKey('searchText')) {
+      return false;
+    }
+    if (l$searchText != lOther$searchText) {
+      return false;
+    }
+    final l$caseSensitive = caseSensitive;
+    final lOther$caseSensitive = other.caseSensitive;
+    if (_$data.containsKey('caseSensitive') !=
+        other._$data.containsKey('caseSensitive')) {
+      return false;
+    }
+    if (l$caseSensitive != lOther$caseSensitive) {
+      return false;
+    }
+    final l$textSearchFields = textSearchFields;
+    final lOther$textSearchFields = other.textSearchFields;
+    if (_$data.containsKey('textSearchFields') !=
+        other._$data.containsKey('textSearchFields')) {
+      return false;
+    }
+    if (l$textSearchFields != null && lOther$textSearchFields != null) {
+      if (l$textSearchFields.length != lOther$textSearchFields.length) {
+        return false;
+      }
+      for (int i = 0; i < l$textSearchFields.length; i++) {
+        final l$textSearchFields$entry = l$textSearchFields[i];
+        final lOther$textSearchFields$entry = lOther$textSearchFields[i];
+        if (l$textSearchFields$entry != lOther$textSearchFields$entry) {
+          return false;
+        }
+      }
+    } else if (l$textSearchFields != lOther$textSearchFields) {
+      return false;
+    }
+    final l$createdAtFrom = createdAtFrom;
+    final lOther$createdAtFrom = other.createdAtFrom;
+    if (_$data.containsKey('createdAtFrom') !=
+        other._$data.containsKey('createdAtFrom')) {
+      return false;
+    }
+    if (l$createdAtFrom != lOther$createdAtFrom) {
+      return false;
+    }
+    final l$createdAtUntil = createdAtUntil;
+    final lOther$createdAtUntil = other.createdAtUntil;
+    if (_$data.containsKey('createdAtUntil') !=
+        other._$data.containsKey('createdAtUntil')) {
+      return false;
+    }
+    if (l$createdAtUntil != lOther$createdAtUntil) {
+      return false;
+    }
+    final l$updatedAtFrom = updatedAtFrom;
+    final lOther$updatedAtFrom = other.updatedAtFrom;
+    if (_$data.containsKey('updatedAtFrom') !=
+        other._$data.containsKey('updatedAtFrom')) {
+      return false;
+    }
+    if (l$updatedAtFrom != lOther$updatedAtFrom) {
+      return false;
+    }
+    final l$updatedAtUntil = updatedAtUntil;
+    final lOther$updatedAtUntil = other.updatedAtUntil;
+    if (_$data.containsKey('updatedAtUntil') !=
+        other._$data.containsKey('updatedAtUntil')) {
+      return false;
+    }
+    if (l$updatedAtUntil != lOther$updatedAtUntil) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$ids = ids;
+    final l$searchText = searchText;
+    final l$caseSensitive = caseSensitive;
+    final l$textSearchFields = textSearchFields;
+    final l$createdAtFrom = createdAtFrom;
+    final l$createdAtUntil = createdAtUntil;
+    final l$updatedAtFrom = updatedAtFrom;
+    final l$updatedAtUntil = updatedAtUntil;
+    return Object.hashAll([
+      _$data.containsKey('ids')
+          ? l$ids == null
+              ? null
+              : Object.hashAll(l$ids.map((v) => v))
+          : const {},
+      _$data.containsKey('searchText') ? l$searchText : const {},
+      _$data.containsKey('caseSensitive') ? l$caseSensitive : const {},
+      _$data.containsKey('textSearchFields')
+          ? l$textSearchFields == null
+              ? null
+              : Object.hashAll(l$textSearchFields.map((v) => v))
+          : const {},
+      _$data.containsKey('createdAtFrom') ? l$createdAtFrom : const {},
+      _$data.containsKey('createdAtUntil') ? l$createdAtUntil : const {},
+      _$data.containsKey('updatedAtFrom') ? l$updatedAtFrom : const {},
+      _$data.containsKey('updatedAtUntil') ? l$updatedAtUntil : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$UserSearchListFilter<TRes> {
+  factory CopyWith$Input$UserSearchListFilter(
+    Input$UserSearchListFilter instance,
+    TRes Function(Input$UserSearchListFilter) then,
+  ) = _CopyWithImpl$Input$UserSearchListFilter;
+
+  factory CopyWith$Input$UserSearchListFilter.stub(TRes res) =
+      _CopyWithStubImpl$Input$UserSearchListFilter;
+
+  TRes call({
+    List<String>? ids,
+    String? searchText,
+    bool? caseSensitive,
+    List<String>? textSearchFields,
+    String? createdAtFrom,
+    String? createdAtUntil,
+    String? updatedAtFrom,
+    String? updatedAtUntil,
+  });
+}
+
+class _CopyWithImpl$Input$UserSearchListFilter<TRes>
+    implements CopyWith$Input$UserSearchListFilter<TRes> {
+  _CopyWithImpl$Input$UserSearchListFilter(
+    this._instance,
+    this._then,
+  );
+
+  final Input$UserSearchListFilter _instance;
+
+  final TRes Function(Input$UserSearchListFilter) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? ids = _undefined,
+    Object? searchText = _undefined,
+    Object? caseSensitive = _undefined,
+    Object? textSearchFields = _undefined,
+    Object? createdAtFrom = _undefined,
+    Object? createdAtUntil = _undefined,
+    Object? updatedAtFrom = _undefined,
+    Object? updatedAtUntil = _undefined,
+  }) =>
+      _then(Input$UserSearchListFilter._({
+        ..._instance._$data,
+        if (ids != _undefined) 'ids': (ids as List<String>?),
+        if (searchText != _undefined) 'searchText': (searchText as String?),
+        if (caseSensitive != _undefined)
+          'caseSensitive': (caseSensitive as bool?),
+        if (textSearchFields != _undefined)
+          'textSearchFields': (textSearchFields as List<String>?),
+        if (createdAtFrom != _undefined)
+          'createdAtFrom': (createdAtFrom as String?),
+        if (createdAtUntil != _undefined)
+          'createdAtUntil': (createdAtUntil as String?),
+        if (updatedAtFrom != _undefined)
+          'updatedAtFrom': (updatedAtFrom as String?),
+        if (updatedAtUntil != _undefined)
+          'updatedAtUntil': (updatedAtUntil as String?),
+      }));
+}
+
+class _CopyWithStubImpl$Input$UserSearchListFilter<TRes>
+    implements CopyWith$Input$UserSearchListFilter<TRes> {
+  _CopyWithStubImpl$Input$UserSearchListFilter(this._res);
+
+  TRes _res;
+
+  call({
+    List<String>? ids,
+    String? searchText,
+    bool? caseSensitive,
+    List<String>? textSearchFields,
+    String? createdAtFrom,
+    String? createdAtUntil,
+    String? updatedAtFrom,
+    String? updatedAtUntil,
+  }) =>
+      _res;
+}
+
 class Input$UserSignInInput {
   factory Input$UserSignInInput({
     String? ident,
@@ -9763,11 +11932,11 @@ class Input$UserSignUpInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? firstName,
     String? lastName,
@@ -9836,8 +12005,7 @@ class Input$UserSignUpInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -9845,8 +12013,7 @@ class Input$UserSignUpInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -9854,8 +12021,7 @@ class Input$UserSignUpInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -9921,11 +12087,11 @@ class Input$UserSignUpInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get firstName => (_$data['firstName'] as String?);
   String? get lastName => (_$data['lastName'] as String?);
@@ -9960,7 +12126,7 @@ class Input$UserSignUpInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -9968,7 +12134,7 @@ class Input$UserSignUpInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -9976,7 +12142,7 @@ class Input$UserSignUpInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -10325,11 +12491,11 @@ abstract class CopyWith$Input$UserSignUpInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? firstName,
     String? lastName,
@@ -10396,11 +12562,11 @@ class _CopyWithImpl$Input$UserSignUpInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (firstName != _undefined) 'firstName': (firstName as String?),
         if (lastName != _undefined) 'lastName': (lastName as String?),
@@ -10449,11 +12615,11 @@ class _CopyWithStubImpl$Input$UserSignUpInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? firstName,
     String? lastName,
@@ -10480,11 +12646,11 @@ class Input$ChannelInvitationInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? senderId,
@@ -10492,6 +12658,8 @@ class Input$ChannelInvitationInput {
     String? channelName,
     String? channelTopic,
     String? messageText,
+    String? dismissedFromInboxBySenderAt,
+    String? dismissedFromInboxByRecipientAt,
     Enum$ChannelInvitationStatus? status,
   }) =>
       Input$ChannelInvitationInput._({
@@ -10511,6 +12679,10 @@ class Input$ChannelInvitationInput {
         if (channelName != null) r'channelName': channelName,
         if (channelTopic != null) r'channelTopic': channelTopic,
         if (messageText != null) r'messageText': messageText,
+        if (dismissedFromInboxBySenderAt != null)
+          r'dismissedFromInboxBySenderAt': dismissedFromInboxBySenderAt,
+        if (dismissedFromInboxByRecipientAt != null)
+          r'dismissedFromInboxByRecipientAt': dismissedFromInboxByRecipientAt,
         if (status != null) r'status': status,
       });
 
@@ -10542,8 +12714,7 @@ class Input$ChannelInvitationInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -10551,8 +12722,7 @@ class Input$ChannelInvitationInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -10560,8 +12730,7 @@ class Input$ChannelInvitationInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -10591,6 +12760,18 @@ class Input$ChannelInvitationInput {
       final l$messageText = data['messageText'];
       result$data['messageText'] = (l$messageText as String?);
     }
+    if (data.containsKey('dismissedFromInboxBySenderAt')) {
+      final l$dismissedFromInboxBySenderAt =
+          data['dismissedFromInboxBySenderAt'];
+      result$data['dismissedFromInboxBySenderAt'] =
+          (l$dismissedFromInboxBySenderAt as String?);
+    }
+    if (data.containsKey('dismissedFromInboxByRecipientAt')) {
+      final l$dismissedFromInboxByRecipientAt =
+          data['dismissedFromInboxByRecipientAt'];
+      result$data['dismissedFromInboxByRecipientAt'] =
+          (l$dismissedFromInboxByRecipientAt as String?);
+    }
     if (data.containsKey('status')) {
       final l$status = data['status'];
       result$data['status'] = l$status == null
@@ -10608,11 +12789,11 @@ class Input$ChannelInvitationInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get channelId => (_$data['channelId'] as String?);
   String? get senderId => (_$data['senderId'] as String?);
@@ -10620,6 +12801,10 @@ class Input$ChannelInvitationInput {
   String? get channelName => (_$data['channelName'] as String?);
   String? get channelTopic => (_$data['channelTopic'] as String?);
   String? get messageText => (_$data['messageText'] as String?);
+  String? get dismissedFromInboxBySenderAt =>
+      (_$data['dismissedFromInboxBySenderAt'] as String?);
+  String? get dismissedFromInboxByRecipientAt =>
+      (_$data['dismissedFromInboxByRecipientAt'] as String?);
   Enum$ChannelInvitationStatus? get status =>
       (_$data['status'] as Enum$ChannelInvitationStatus?);
   Map<String, dynamic> toJson() {
@@ -10642,7 +12827,7 @@ class Input$ChannelInvitationInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -10650,7 +12835,7 @@ class Input$ChannelInvitationInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -10658,7 +12843,7 @@ class Input$ChannelInvitationInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -10687,6 +12872,16 @@ class Input$ChannelInvitationInput {
     if (_$data.containsKey('messageText')) {
       final l$messageText = messageText;
       result$data['messageText'] = l$messageText;
+    }
+    if (_$data.containsKey('dismissedFromInboxBySenderAt')) {
+      final l$dismissedFromInboxBySenderAt = dismissedFromInboxBySenderAt;
+      result$data['dismissedFromInboxBySenderAt'] =
+          l$dismissedFromInboxBySenderAt;
+    }
+    if (_$data.containsKey('dismissedFromInboxByRecipientAt')) {
+      final l$dismissedFromInboxByRecipientAt = dismissedFromInboxByRecipientAt;
+      result$data['dismissedFromInboxByRecipientAt'] =
+          l$dismissedFromInboxByRecipientAt;
     }
     if (_$data.containsKey('status')) {
       final l$status = status;
@@ -10864,6 +13059,27 @@ class Input$ChannelInvitationInput {
     if (l$messageText != lOther$messageText) {
       return false;
     }
+    final l$dismissedFromInboxBySenderAt = dismissedFromInboxBySenderAt;
+    final lOther$dismissedFromInboxBySenderAt =
+        other.dismissedFromInboxBySenderAt;
+    if (_$data.containsKey('dismissedFromInboxBySenderAt') !=
+        other._$data.containsKey('dismissedFromInboxBySenderAt')) {
+      return false;
+    }
+    if (l$dismissedFromInboxBySenderAt != lOther$dismissedFromInboxBySenderAt) {
+      return false;
+    }
+    final l$dismissedFromInboxByRecipientAt = dismissedFromInboxByRecipientAt;
+    final lOther$dismissedFromInboxByRecipientAt =
+        other.dismissedFromInboxByRecipientAt;
+    if (_$data.containsKey('dismissedFromInboxByRecipientAt') !=
+        other._$data.containsKey('dismissedFromInboxByRecipientAt')) {
+      return false;
+    }
+    if (l$dismissedFromInboxByRecipientAt !=
+        lOther$dismissedFromInboxByRecipientAt) {
+      return false;
+    }
     final l$status = status;
     final lOther$status = other.status;
     if (_$data.containsKey('status') != other._$data.containsKey('status')) {
@@ -10893,6 +13109,8 @@ class Input$ChannelInvitationInput {
     final l$channelName = channelName;
     final l$channelTopic = channelTopic;
     final l$messageText = messageText;
+    final l$dismissedFromInboxBySenderAt = dismissedFromInboxBySenderAt;
+    final l$dismissedFromInboxByRecipientAt = dismissedFromInboxByRecipientAt;
     final l$status = status;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
@@ -10915,6 +13133,12 @@ class Input$ChannelInvitationInput {
       _$data.containsKey('channelName') ? l$channelName : const {},
       _$data.containsKey('channelTopic') ? l$channelTopic : const {},
       _$data.containsKey('messageText') ? l$messageText : const {},
+      _$data.containsKey('dismissedFromInboxBySenderAt')
+          ? l$dismissedFromInboxBySenderAt
+          : const {},
+      _$data.containsKey('dismissedFromInboxByRecipientAt')
+          ? l$dismissedFromInboxByRecipientAt
+          : const {},
       _$data.containsKey('status') ? l$status : const {},
     ]);
   }
@@ -10934,11 +13158,11 @@ abstract class CopyWith$Input$ChannelInvitationInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? senderId,
@@ -10946,6 +13170,8 @@ abstract class CopyWith$Input$ChannelInvitationInput<TRes> {
     String? channelName,
     String? channelTopic,
     String? messageText,
+    String? dismissedFromInboxBySenderAt,
+    String? dismissedFromInboxByRecipientAt,
     Enum$ChannelInvitationStatus? status,
   });
   TRes events(
@@ -10985,6 +13211,8 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
     Object? channelName = _undefined,
     Object? channelTopic = _undefined,
     Object? messageText = _undefined,
+    Object? dismissedFromInboxBySenderAt = _undefined,
+    Object? dismissedFromInboxByRecipientAt = _undefined,
     Object? status = _undefined,
   }) =>
       _then(Input$ChannelInvitationInput._({
@@ -10995,11 +13223,11 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (channelId != _undefined) 'channelId': (channelId as String?),
         if (senderId != _undefined) 'senderId': (senderId as String?),
@@ -11008,6 +13236,12 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
         if (channelTopic != _undefined)
           'channelTopic': (channelTopic as String?),
         if (messageText != _undefined) 'messageText': (messageText as String?),
+        if (dismissedFromInboxBySenderAt != _undefined)
+          'dismissedFromInboxBySenderAt':
+              (dismissedFromInboxBySenderAt as String?),
+        if (dismissedFromInboxByRecipientAt != _undefined)
+          'dismissedFromInboxByRecipientAt':
+              (dismissedFromInboxByRecipientAt as String?),
         if (status != _undefined)
           'status': (status as Enum$ChannelInvitationStatus?),
       }));
@@ -11042,11 +13276,11 @@ class _CopyWithStubImpl$Input$ChannelInvitationInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? senderId,
@@ -11054,6 +13288,8 @@ class _CopyWithStubImpl$Input$ChannelInvitationInput<TRes>
     String? channelName,
     String? channelTopic,
     String? messageText,
+    String? dismissedFromInboxBySenderAt,
+    String? dismissedFromInboxByRecipientAt,
     Enum$ChannelInvitationStatus? status,
   }) =>
       _res;
@@ -11285,11 +13521,11 @@ class Input$ChannelParticipantInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? userId,
@@ -11343,8 +13579,7 @@ class Input$ChannelParticipantInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -11352,8 +13587,7 @@ class Input$ChannelParticipantInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -11361,8 +13595,7 @@ class Input$ChannelParticipantInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -11401,11 +13634,11 @@ class Input$ChannelParticipantInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get channelId => (_$data['channelId'] as String?);
   String? get userId => (_$data['userId'] as String?);
@@ -11433,7 +13666,7 @@ class Input$ChannelParticipantInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -11441,7 +13674,7 @@ class Input$ChannelParticipantInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -11449,7 +13682,7 @@ class Input$ChannelParticipantInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -11693,11 +13926,11 @@ abstract class CopyWith$Input$ChannelParticipantInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? userId,
@@ -11750,11 +13983,11 @@ class _CopyWithImpl$Input$ChannelParticipantInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (channelId != _undefined) 'channelId': (channelId as String?),
         if (userId != _undefined) 'userId': (userId as String?),
@@ -11793,11 +14026,11 @@ class _CopyWithStubImpl$Input$ChannelParticipantInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? channelId,
     String? userId,
@@ -11811,23 +14044,3164 @@ class _CopyWithStubImpl$Input$ChannelParticipantInput<TRes>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
 
+class Input$GenRequest {
+  factory Input$GenRequest({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? clearDb,
+    int? conversationCount,
+    int? messageCount,
+    Input$GenUserInput? users,
+    Input$GenGroupsInput? groups,
+    bool? publishAppEvents,
+  }) =>
+      Input$GenRequest._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (clearDb != null) r'clearDb': clearDb,
+        if (conversationCount != null) r'conversationCount': conversationCount,
+        if (messageCount != null) r'messageCount': messageCount,
+        if (users != null) r'users': users,
+        if (groups != null) r'groups': groups,
+        if (publishAppEvents != null) r'publishAppEvents': publishAppEvents,
+      });
+
+  Input$GenRequest._(this._$data);
+
+  factory Input$GenRequest.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('clearDb')) {
+      final l$clearDb = data['clearDb'];
+      result$data['clearDb'] = (l$clearDb as bool);
+    }
+    if (data.containsKey('conversationCount')) {
+      final l$conversationCount = data['conversationCount'];
+      result$data['conversationCount'] = (l$conversationCount as int);
+    }
+    if (data.containsKey('messageCount')) {
+      final l$messageCount = data['messageCount'];
+      result$data['messageCount'] = (l$messageCount as int);
+    }
+    if (data.containsKey('users')) {
+      final l$users = data['users'];
+      result$data['users'] =
+          Input$GenUserInput.fromJson((l$users as Map<String, dynamic>));
+    }
+    if (data.containsKey('groups')) {
+      final l$groups = data['groups'];
+      result$data['groups'] =
+          Input$GenGroupsInput.fromJson((l$groups as Map<String, dynamic>));
+    }
+    if (data.containsKey('publishAppEvents')) {
+      final l$publishAppEvents = data['publishAppEvents'];
+      result$data['publishAppEvents'] = (l$publishAppEvents as bool);
+    }
+    return Input$GenRequest._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  bool? get clearDb => (_$data['clearDb'] as bool?);
+  int? get conversationCount => (_$data['conversationCount'] as int?);
+  int? get messageCount => (_$data['messageCount'] as int?);
+  Input$GenUserInput? get users => (_$data['users'] as Input$GenUserInput?);
+  Input$GenGroupsInput? get groups =>
+      (_$data['groups'] as Input$GenGroupsInput?);
+  bool? get publishAppEvents => (_$data['publishAppEvents'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('clearDb')) {
+      final l$clearDb = clearDb;
+      result$data['clearDb'] = (l$clearDb as bool);
+    }
+    if (_$data.containsKey('conversationCount')) {
+      final l$conversationCount = conversationCount;
+      result$data['conversationCount'] = (l$conversationCount as int);
+    }
+    if (_$data.containsKey('messageCount')) {
+      final l$messageCount = messageCount;
+      result$data['messageCount'] = (l$messageCount as int);
+    }
+    if (_$data.containsKey('users')) {
+      final l$users = users;
+      result$data['users'] = (l$users as Input$GenUserInput).toJson();
+    }
+    if (_$data.containsKey('groups')) {
+      final l$groups = groups;
+      result$data['groups'] = (l$groups as Input$GenGroupsInput).toJson();
+    }
+    if (_$data.containsKey('publishAppEvents')) {
+      final l$publishAppEvents = publishAppEvents;
+      result$data['publishAppEvents'] = (l$publishAppEvents as bool);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenRequest<Input$GenRequest> get copyWith =>
+      CopyWith$Input$GenRequest(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenRequest) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$clearDb = clearDb;
+    final lOther$clearDb = other.clearDb;
+    if (_$data.containsKey('clearDb') != other._$data.containsKey('clearDb')) {
+      return false;
+    }
+    if (l$clearDb != lOther$clearDb) {
+      return false;
+    }
+    final l$conversationCount = conversationCount;
+    final lOther$conversationCount = other.conversationCount;
+    if (_$data.containsKey('conversationCount') !=
+        other._$data.containsKey('conversationCount')) {
+      return false;
+    }
+    if (l$conversationCount != lOther$conversationCount) {
+      return false;
+    }
+    final l$messageCount = messageCount;
+    final lOther$messageCount = other.messageCount;
+    if (_$data.containsKey('messageCount') !=
+        other._$data.containsKey('messageCount')) {
+      return false;
+    }
+    if (l$messageCount != lOther$messageCount) {
+      return false;
+    }
+    final l$users = users;
+    final lOther$users = other.users;
+    if (_$data.containsKey('users') != other._$data.containsKey('users')) {
+      return false;
+    }
+    if (l$users != lOther$users) {
+      return false;
+    }
+    final l$groups = groups;
+    final lOther$groups = other.groups;
+    if (_$data.containsKey('groups') != other._$data.containsKey('groups')) {
+      return false;
+    }
+    if (l$groups != lOther$groups) {
+      return false;
+    }
+    final l$publishAppEvents = publishAppEvents;
+    final lOther$publishAppEvents = other.publishAppEvents;
+    if (_$data.containsKey('publishAppEvents') !=
+        other._$data.containsKey('publishAppEvents')) {
+      return false;
+    }
+    if (l$publishAppEvents != lOther$publishAppEvents) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$clearDb = clearDb;
+    final l$conversationCount = conversationCount;
+    final l$messageCount = messageCount;
+    final l$users = users;
+    final l$groups = groups;
+    final l$publishAppEvents = publishAppEvents;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('clearDb') ? l$clearDb : const {},
+      _$data.containsKey('conversationCount') ? l$conversationCount : const {},
+      _$data.containsKey('messageCount') ? l$messageCount : const {},
+      _$data.containsKey('users') ? l$users : const {},
+      _$data.containsKey('groups') ? l$groups : const {},
+      _$data.containsKey('publishAppEvents') ? l$publishAppEvents : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenRequest<TRes> {
+  factory CopyWith$Input$GenRequest(
+    Input$GenRequest instance,
+    TRes Function(Input$GenRequest) then,
+  ) = _CopyWithImpl$Input$GenRequest;
+
+  factory CopyWith$Input$GenRequest.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenRequest;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? clearDb,
+    int? conversationCount,
+    int? messageCount,
+    Input$GenUserInput? users,
+    Input$GenGroupsInput? groups,
+    bool? publishAppEvents,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  CopyWith$Input$GenUserInput<TRes> get users;
+  CopyWith$Input$GenGroupsInput<TRes> get groups;
+}
+
+class _CopyWithImpl$Input$GenRequest<TRes>
+    implements CopyWith$Input$GenRequest<TRes> {
+  _CopyWithImpl$Input$GenRequest(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenRequest _instance;
+
+  final TRes Function(Input$GenRequest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? clearDb = _undefined,
+    Object? conversationCount = _undefined,
+    Object? messageCount = _undefined,
+    Object? users = _undefined,
+    Object? groups = _undefined,
+    Object? publishAppEvents = _undefined,
+  }) =>
+      _then(Input$GenRequest._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (clearDb != _undefined && clearDb != null)
+          'clearDb': (clearDb as bool),
+        if (conversationCount != _undefined && conversationCount != null)
+          'conversationCount': (conversationCount as int),
+        if (messageCount != _undefined && messageCount != null)
+          'messageCount': (messageCount as int),
+        if (users != _undefined && users != null)
+          'users': (users as Input$GenUserInput),
+        if (groups != _undefined && groups != null)
+          'groups': (groups as Input$GenGroupsInput),
+        if (publishAppEvents != _undefined && publishAppEvents != null)
+          'publishAppEvents': (publishAppEvents as bool),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  CopyWith$Input$GenUserInput<TRes> get users {
+    final local$users = _instance.users;
+    return local$users == null
+        ? CopyWith$Input$GenUserInput.stub(_then(_instance))
+        : CopyWith$Input$GenUserInput(local$users, (e) => call(users: e));
+  }
+
+  CopyWith$Input$GenGroupsInput<TRes> get groups {
+    final local$groups = _instance.groups;
+    return local$groups == null
+        ? CopyWith$Input$GenGroupsInput.stub(_then(_instance))
+        : CopyWith$Input$GenGroupsInput(local$groups, (e) => call(groups: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenRequest<TRes>
+    implements CopyWith$Input$GenRequest<TRes> {
+  _CopyWithStubImpl$Input$GenRequest(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? clearDb,
+    int? conversationCount,
+    int? messageCount,
+    Input$GenUserInput? users,
+    Input$GenGroupsInput? groups,
+    bool? publishAppEvents,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  CopyWith$Input$GenUserInput<TRes> get users =>
+      CopyWith$Input$GenUserInput.stub(_res);
+  CopyWith$Input$GenGroupsInput<TRes> get groups =>
+      CopyWith$Input$GenGroupsInput.stub(_res);
+}
+
+class Input$GenUserInput {
+  factory Input$GenUserInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    int? count,
+    int? dualRoleCount,
+    String? emailDomain,
+    String? emailPrefix,
+    int? mentorCount,
+    int? menteeCount,
+    double? mentorRatio,
+  }) =>
+      Input$GenUserInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (count != null) r'count': count,
+        if (dualRoleCount != null) r'dualRoleCount': dualRoleCount,
+        if (emailDomain != null) r'emailDomain': emailDomain,
+        if (emailPrefix != null) r'emailPrefix': emailPrefix,
+        if (mentorCount != null) r'mentorCount': mentorCount,
+        if (menteeCount != null) r'menteeCount': menteeCount,
+        if (mentorRatio != null) r'mentorRatio': mentorRatio,
+      });
+
+  Input$GenUserInput._(this._$data);
+
+  factory Input$GenUserInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = (l$count as int);
+    }
+    if (data.containsKey('dualRoleCount')) {
+      final l$dualRoleCount = data['dualRoleCount'];
+      result$data['dualRoleCount'] = (l$dualRoleCount as int?);
+    }
+    if (data.containsKey('emailDomain')) {
+      final l$emailDomain = data['emailDomain'];
+      result$data['emailDomain'] = (l$emailDomain as String);
+    }
+    if (data.containsKey('emailPrefix')) {
+      final l$emailPrefix = data['emailPrefix'];
+      result$data['emailPrefix'] = (l$emailPrefix as String?);
+    }
+    if (data.containsKey('mentorCount')) {
+      final l$mentorCount = data['mentorCount'];
+      result$data['mentorCount'] = (l$mentorCount as int?);
+    }
+    if (data.containsKey('menteeCount')) {
+      final l$menteeCount = data['menteeCount'];
+      result$data['menteeCount'] = (l$menteeCount as int?);
+    }
+    if (data.containsKey('mentorRatio')) {
+      final l$mentorRatio = data['mentorRatio'];
+      result$data['mentorRatio'] = (l$mentorRatio as num?)?.toDouble();
+    }
+    return Input$GenUserInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  int? get count => (_$data['count'] as int?);
+  int? get dualRoleCount => (_$data['dualRoleCount'] as int?);
+  String? get emailDomain => (_$data['emailDomain'] as String?);
+  String? get emailPrefix => (_$data['emailPrefix'] as String?);
+  int? get mentorCount => (_$data['mentorCount'] as int?);
+  int? get menteeCount => (_$data['menteeCount'] as int?);
+  double? get mentorRatio => (_$data['mentorRatio'] as double?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = (l$count as int);
+    }
+    if (_$data.containsKey('dualRoleCount')) {
+      final l$dualRoleCount = dualRoleCount;
+      result$data['dualRoleCount'] = l$dualRoleCount;
+    }
+    if (_$data.containsKey('emailDomain')) {
+      final l$emailDomain = emailDomain;
+      result$data['emailDomain'] = (l$emailDomain as String);
+    }
+    if (_$data.containsKey('emailPrefix')) {
+      final l$emailPrefix = emailPrefix;
+      result$data['emailPrefix'] = l$emailPrefix;
+    }
+    if (_$data.containsKey('mentorCount')) {
+      final l$mentorCount = mentorCount;
+      result$data['mentorCount'] = l$mentorCount;
+    }
+    if (_$data.containsKey('menteeCount')) {
+      final l$menteeCount = menteeCount;
+      result$data['menteeCount'] = l$menteeCount;
+    }
+    if (_$data.containsKey('mentorRatio')) {
+      final l$mentorRatio = mentorRatio;
+      result$data['mentorRatio'] = l$mentorRatio;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenUserInput<Input$GenUserInput> get copyWith =>
+      CopyWith$Input$GenUserInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenUserInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$dualRoleCount = dualRoleCount;
+    final lOther$dualRoleCount = other.dualRoleCount;
+    if (_$data.containsKey('dualRoleCount') !=
+        other._$data.containsKey('dualRoleCount')) {
+      return false;
+    }
+    if (l$dualRoleCount != lOther$dualRoleCount) {
+      return false;
+    }
+    final l$emailDomain = emailDomain;
+    final lOther$emailDomain = other.emailDomain;
+    if (_$data.containsKey('emailDomain') !=
+        other._$data.containsKey('emailDomain')) {
+      return false;
+    }
+    if (l$emailDomain != lOther$emailDomain) {
+      return false;
+    }
+    final l$emailPrefix = emailPrefix;
+    final lOther$emailPrefix = other.emailPrefix;
+    if (_$data.containsKey('emailPrefix') !=
+        other._$data.containsKey('emailPrefix')) {
+      return false;
+    }
+    if (l$emailPrefix != lOther$emailPrefix) {
+      return false;
+    }
+    final l$mentorCount = mentorCount;
+    final lOther$mentorCount = other.mentorCount;
+    if (_$data.containsKey('mentorCount') !=
+        other._$data.containsKey('mentorCount')) {
+      return false;
+    }
+    if (l$mentorCount != lOther$mentorCount) {
+      return false;
+    }
+    final l$menteeCount = menteeCount;
+    final lOther$menteeCount = other.menteeCount;
+    if (_$data.containsKey('menteeCount') !=
+        other._$data.containsKey('menteeCount')) {
+      return false;
+    }
+    if (l$menteeCount != lOther$menteeCount) {
+      return false;
+    }
+    final l$mentorRatio = mentorRatio;
+    final lOther$mentorRatio = other.mentorRatio;
+    if (_$data.containsKey('mentorRatio') !=
+        other._$data.containsKey('mentorRatio')) {
+      return false;
+    }
+    if (l$mentorRatio != lOther$mentorRatio) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$count = count;
+    final l$dualRoleCount = dualRoleCount;
+    final l$emailDomain = emailDomain;
+    final l$emailPrefix = emailPrefix;
+    final l$mentorCount = mentorCount;
+    final l$menteeCount = menteeCount;
+    final l$mentorRatio = mentorRatio;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('count') ? l$count : const {},
+      _$data.containsKey('dualRoleCount') ? l$dualRoleCount : const {},
+      _$data.containsKey('emailDomain') ? l$emailDomain : const {},
+      _$data.containsKey('emailPrefix') ? l$emailPrefix : const {},
+      _$data.containsKey('mentorCount') ? l$mentorCount : const {},
+      _$data.containsKey('menteeCount') ? l$menteeCount : const {},
+      _$data.containsKey('mentorRatio') ? l$mentorRatio : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenUserInput<TRes> {
+  factory CopyWith$Input$GenUserInput(
+    Input$GenUserInput instance,
+    TRes Function(Input$GenUserInput) then,
+  ) = _CopyWithImpl$Input$GenUserInput;
+
+  factory CopyWith$Input$GenUserInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenUserInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    int? count,
+    int? dualRoleCount,
+    String? emailDomain,
+    String? emailPrefix,
+    int? mentorCount,
+    int? menteeCount,
+    double? mentorRatio,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$GenUserInput<TRes>
+    implements CopyWith$Input$GenUserInput<TRes> {
+  _CopyWithImpl$Input$GenUserInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenUserInput _instance;
+
+  final TRes Function(Input$GenUserInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? count = _undefined,
+    Object? dualRoleCount = _undefined,
+    Object? emailDomain = _undefined,
+    Object? emailPrefix = _undefined,
+    Object? mentorCount = _undefined,
+    Object? menteeCount = _undefined,
+    Object? mentorRatio = _undefined,
+  }) =>
+      _then(Input$GenUserInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (count != _undefined && count != null) 'count': (count as int),
+        if (dualRoleCount != _undefined)
+          'dualRoleCount': (dualRoleCount as int?),
+        if (emailDomain != _undefined && emailDomain != null)
+          'emailDomain': (emailDomain as String),
+        if (emailPrefix != _undefined) 'emailPrefix': (emailPrefix as String?),
+        if (mentorCount != _undefined) 'mentorCount': (mentorCount as int?),
+        if (menteeCount != _undefined) 'menteeCount': (menteeCount as int?),
+        if (mentorRatio != _undefined) 'mentorRatio': (mentorRatio as double?),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenUserInput<TRes>
+    implements CopyWith$Input$GenUserInput<TRes> {
+  _CopyWithStubImpl$Input$GenUserInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    int? count,
+    int? dualRoleCount,
+    String? emailDomain,
+    String? emailPrefix,
+    int? mentorCount,
+    int? menteeCount,
+    double? mentorRatio,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
+class Input$GenGroupsInput {
+  factory Input$GenGroupsInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    int? count,
+    List<Input$GenSpecificGroupInput>? specificGroups,
+  }) =>
+      Input$GenGroupsInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (count != null) r'count': count,
+        if (specificGroups != null) r'specificGroups': specificGroups,
+      });
+
+  Input$GenGroupsInput._(this._$data);
+
+  factory Input$GenGroupsInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = (l$count as int);
+    }
+    if (data.containsKey('specificGroups')) {
+      final l$specificGroups = data['specificGroups'];
+      result$data['specificGroups'] = (l$specificGroups as List<dynamic>)
+          .map((e) =>
+              Input$GenSpecificGroupInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Input$GenGroupsInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  int? get count => (_$data['count'] as int?);
+  List<Input$GenSpecificGroupInput>? get specificGroups =>
+      (_$data['specificGroups'] as List<Input$GenSpecificGroupInput>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = (l$count as int);
+    }
+    if (_$data.containsKey('specificGroups')) {
+      final l$specificGroups = specificGroups;
+      result$data['specificGroups'] =
+          (l$specificGroups as List<Input$GenSpecificGroupInput>)
+              .map((e) => e.toJson())
+              .toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenGroupsInput<Input$GenGroupsInput> get copyWith =>
+      CopyWith$Input$GenGroupsInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenGroupsInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$specificGroups = specificGroups;
+    final lOther$specificGroups = other.specificGroups;
+    if (_$data.containsKey('specificGroups') !=
+        other._$data.containsKey('specificGroups')) {
+      return false;
+    }
+    if (l$specificGroups != null && lOther$specificGroups != null) {
+      if (l$specificGroups.length != lOther$specificGroups.length) {
+        return false;
+      }
+      for (int i = 0; i < l$specificGroups.length; i++) {
+        final l$specificGroups$entry = l$specificGroups[i];
+        final lOther$specificGroups$entry = lOther$specificGroups[i];
+        if (l$specificGroups$entry != lOther$specificGroups$entry) {
+          return false;
+        }
+      }
+    } else if (l$specificGroups != lOther$specificGroups) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$count = count;
+    final l$specificGroups = specificGroups;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('count') ? l$count : const {},
+      _$data.containsKey('specificGroups')
+          ? l$specificGroups == null
+              ? null
+              : Object.hashAll(l$specificGroups.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenGroupsInput<TRes> {
+  factory CopyWith$Input$GenGroupsInput(
+    Input$GenGroupsInput instance,
+    TRes Function(Input$GenGroupsInput) then,
+  ) = _CopyWithImpl$Input$GenGroupsInput;
+
+  factory CopyWith$Input$GenGroupsInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenGroupsInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    int? count,
+    List<Input$GenSpecificGroupInput>? specificGroups,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  TRes specificGroups(
+      Iterable<Input$GenSpecificGroupInput> Function(
+              Iterable<
+                  CopyWith$Input$GenSpecificGroupInput<
+                      Input$GenSpecificGroupInput>>)
+          _fn);
+}
+
+class _CopyWithImpl$Input$GenGroupsInput<TRes>
+    implements CopyWith$Input$GenGroupsInput<TRes> {
+  _CopyWithImpl$Input$GenGroupsInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenGroupsInput _instance;
+
+  final TRes Function(Input$GenGroupsInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? count = _undefined,
+    Object? specificGroups = _undefined,
+  }) =>
+      _then(Input$GenGroupsInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (count != _undefined && count != null) 'count': (count as int),
+        if (specificGroups != _undefined && specificGroups != null)
+          'specificGroups':
+              (specificGroups as List<Input$GenSpecificGroupInput>),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  TRes specificGroups(
+          Iterable<Input$GenSpecificGroupInput> Function(
+                  Iterable<
+                      CopyWith$Input$GenSpecificGroupInput<
+                          Input$GenSpecificGroupInput>>)
+              _fn) =>
+      call(
+          specificGroups: _fn(_instance.specificGroups!
+              .map((e) => CopyWith$Input$GenSpecificGroupInput(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Input$GenGroupsInput<TRes>
+    implements CopyWith$Input$GenGroupsInput<TRes> {
+  _CopyWithStubImpl$Input$GenGroupsInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    int? count,
+    List<Input$GenSpecificGroupInput>? specificGroups,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  specificGroups(_fn) => _res;
+}
+
+class Input$GenSpecificGroupInput {
+  factory Input$GenSpecificGroupInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? name,
+    int? mentorCount,
+    int? menteeCount,
+    List<Input$GenGroupRuleInput>? groupRules,
+    Input$GenMatchingEngineInput? matchingEngine,
+  }) =>
+      Input$GenSpecificGroupInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (name != null) r'name': name,
+        if (mentorCount != null) r'mentorCount': mentorCount,
+        if (menteeCount != null) r'menteeCount': menteeCount,
+        if (groupRules != null) r'groupRules': groupRules,
+        if (matchingEngine != null) r'matchingEngine': matchingEngine,
+      });
+
+  Input$GenSpecificGroupInput._(this._$data);
+
+  factory Input$GenSpecificGroupInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String);
+    }
+    if (data.containsKey('mentorCount')) {
+      final l$mentorCount = data['mentorCount'];
+      result$data['mentorCount'] = (l$mentorCount as int?);
+    }
+    if (data.containsKey('menteeCount')) {
+      final l$menteeCount = data['menteeCount'];
+      result$data['menteeCount'] = (l$menteeCount as int?);
+    }
+    if (data.containsKey('groupRules')) {
+      final l$groupRules = data['groupRules'];
+      result$data['groupRules'] = (l$groupRules as List<dynamic>?)
+          ?.map((e) =>
+              Input$GenGroupRuleInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('matchingEngine')) {
+      final l$matchingEngine = data['matchingEngine'];
+      result$data['matchingEngine'] = l$matchingEngine == null
+          ? null
+          : Input$GenMatchingEngineInput.fromJson(
+              (l$matchingEngine as Map<String, dynamic>));
+    }
+    return Input$GenSpecificGroupInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  String? get name => (_$data['name'] as String?);
+  int? get mentorCount => (_$data['mentorCount'] as int?);
+  int? get menteeCount => (_$data['menteeCount'] as int?);
+  List<Input$GenGroupRuleInput>? get groupRules =>
+      (_$data['groupRules'] as List<Input$GenGroupRuleInput>?);
+  Input$GenMatchingEngineInput? get matchingEngine =>
+      (_$data['matchingEngine'] as Input$GenMatchingEngineInput?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = (l$name as String);
+    }
+    if (_$data.containsKey('mentorCount')) {
+      final l$mentorCount = mentorCount;
+      result$data['mentorCount'] = l$mentorCount;
+    }
+    if (_$data.containsKey('menteeCount')) {
+      final l$menteeCount = menteeCount;
+      result$data['menteeCount'] = l$menteeCount;
+    }
+    if (_$data.containsKey('groupRules')) {
+      final l$groupRules = groupRules;
+      result$data['groupRules'] = l$groupRules?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('matchingEngine')) {
+      final l$matchingEngine = matchingEngine;
+      result$data['matchingEngine'] = l$matchingEngine?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenSpecificGroupInput<Input$GenSpecificGroupInput>
+      get copyWith => CopyWith$Input$GenSpecificGroupInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenSpecificGroupInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$mentorCount = mentorCount;
+    final lOther$mentorCount = other.mentorCount;
+    if (_$data.containsKey('mentorCount') !=
+        other._$data.containsKey('mentorCount')) {
+      return false;
+    }
+    if (l$mentorCount != lOther$mentorCount) {
+      return false;
+    }
+    final l$menteeCount = menteeCount;
+    final lOther$menteeCount = other.menteeCount;
+    if (_$data.containsKey('menteeCount') !=
+        other._$data.containsKey('menteeCount')) {
+      return false;
+    }
+    if (l$menteeCount != lOther$menteeCount) {
+      return false;
+    }
+    final l$groupRules = groupRules;
+    final lOther$groupRules = other.groupRules;
+    if (_$data.containsKey('groupRules') !=
+        other._$data.containsKey('groupRules')) {
+      return false;
+    }
+    if (l$groupRules != null && lOther$groupRules != null) {
+      if (l$groupRules.length != lOther$groupRules.length) {
+        return false;
+      }
+      for (int i = 0; i < l$groupRules.length; i++) {
+        final l$groupRules$entry = l$groupRules[i];
+        final lOther$groupRules$entry = lOther$groupRules[i];
+        if (l$groupRules$entry != lOther$groupRules$entry) {
+          return false;
+        }
+      }
+    } else if (l$groupRules != lOther$groupRules) {
+      return false;
+    }
+    final l$matchingEngine = matchingEngine;
+    final lOther$matchingEngine = other.matchingEngine;
+    if (_$data.containsKey('matchingEngine') !=
+        other._$data.containsKey('matchingEngine')) {
+      return false;
+    }
+    if (l$matchingEngine != lOther$matchingEngine) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$name = name;
+    final l$mentorCount = mentorCount;
+    final l$menteeCount = menteeCount;
+    final l$groupRules = groupRules;
+    final l$matchingEngine = matchingEngine;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('mentorCount') ? l$mentorCount : const {},
+      _$data.containsKey('menteeCount') ? l$menteeCount : const {},
+      _$data.containsKey('groupRules')
+          ? l$groupRules == null
+              ? null
+              : Object.hashAll(l$groupRules.map((v) => v))
+          : const {},
+      _$data.containsKey('matchingEngine') ? l$matchingEngine : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenSpecificGroupInput<TRes> {
+  factory CopyWith$Input$GenSpecificGroupInput(
+    Input$GenSpecificGroupInput instance,
+    TRes Function(Input$GenSpecificGroupInput) then,
+  ) = _CopyWithImpl$Input$GenSpecificGroupInput;
+
+  factory CopyWith$Input$GenSpecificGroupInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenSpecificGroupInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? name,
+    int? mentorCount,
+    int? menteeCount,
+    List<Input$GenGroupRuleInput>? groupRules,
+    Input$GenMatchingEngineInput? matchingEngine,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  TRes groupRules(
+      Iterable<Input$GenGroupRuleInput>? Function(
+              Iterable<
+                  CopyWith$Input$GenGroupRuleInput<Input$GenGroupRuleInput>>?)
+          _fn);
+  CopyWith$Input$GenMatchingEngineInput<TRes> get matchingEngine;
+}
+
+class _CopyWithImpl$Input$GenSpecificGroupInput<TRes>
+    implements CopyWith$Input$GenSpecificGroupInput<TRes> {
+  _CopyWithImpl$Input$GenSpecificGroupInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenSpecificGroupInput _instance;
+
+  final TRes Function(Input$GenSpecificGroupInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? name = _undefined,
+    Object? mentorCount = _undefined,
+    Object? menteeCount = _undefined,
+    Object? groupRules = _undefined,
+    Object? matchingEngine = _undefined,
+  }) =>
+      _then(Input$GenSpecificGroupInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (name != _undefined && name != null) 'name': (name as String),
+        if (mentorCount != _undefined) 'mentorCount': (mentorCount as int?),
+        if (menteeCount != _undefined) 'menteeCount': (menteeCount as int?),
+        if (groupRules != _undefined)
+          'groupRules': (groupRules as List<Input$GenGroupRuleInput>?),
+        if (matchingEngine != _undefined)
+          'matchingEngine': (matchingEngine as Input$GenMatchingEngineInput?),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  TRes groupRules(
+          Iterable<Input$GenGroupRuleInput>? Function(
+                  Iterable<
+                      CopyWith$Input$GenGroupRuleInput<
+                          Input$GenGroupRuleInput>>?)
+              _fn) =>
+      call(
+          groupRules: _fn(
+              _instance.groupRules?.map((e) => CopyWith$Input$GenGroupRuleInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$GenMatchingEngineInput<TRes> get matchingEngine {
+    final local$matchingEngine = _instance.matchingEngine;
+    return local$matchingEngine == null
+        ? CopyWith$Input$GenMatchingEngineInput.stub(_then(_instance))
+        : CopyWith$Input$GenMatchingEngineInput(
+            local$matchingEngine, (e) => call(matchingEngine: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenSpecificGroupInput<TRes>
+    implements CopyWith$Input$GenSpecificGroupInput<TRes> {
+  _CopyWithStubImpl$Input$GenSpecificGroupInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? name,
+    int? mentorCount,
+    int? menteeCount,
+    List<Input$GenGroupRuleInput>? groupRules,
+    Input$GenMatchingEngineInput? matchingEngine,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  groupRules(_fn) => _res;
+  CopyWith$Input$GenMatchingEngineInput<TRes> get matchingEngine =>
+      CopyWith$Input$GenMatchingEngineInput.stub(_res);
+}
+
+class Input$GenGroupRuleInput {
+  factory Input$GenGroupRuleInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? someGroupRule,
+    bool? someOtherGroupRule,
+  }) =>
+      Input$GenGroupRuleInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (someGroupRule != null) r'someGroupRule': someGroupRule,
+        if (someOtherGroupRule != null)
+          r'someOtherGroupRule': someOtherGroupRule,
+      });
+
+  Input$GenGroupRuleInput._(this._$data);
+
+  factory Input$GenGroupRuleInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('someGroupRule')) {
+      final l$someGroupRule = data['someGroupRule'];
+      result$data['someGroupRule'] = (l$someGroupRule as bool);
+    }
+    if (data.containsKey('someOtherGroupRule')) {
+      final l$someOtherGroupRule = data['someOtherGroupRule'];
+      result$data['someOtherGroupRule'] = (l$someOtherGroupRule as bool);
+    }
+    return Input$GenGroupRuleInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  bool? get someGroupRule => (_$data['someGroupRule'] as bool?);
+  bool? get someOtherGroupRule => (_$data['someOtherGroupRule'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('someGroupRule')) {
+      final l$someGroupRule = someGroupRule;
+      result$data['someGroupRule'] = (l$someGroupRule as bool);
+    }
+    if (_$data.containsKey('someOtherGroupRule')) {
+      final l$someOtherGroupRule = someOtherGroupRule;
+      result$data['someOtherGroupRule'] = (l$someOtherGroupRule as bool);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenGroupRuleInput<Input$GenGroupRuleInput> get copyWith =>
+      CopyWith$Input$GenGroupRuleInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenGroupRuleInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$someGroupRule = someGroupRule;
+    final lOther$someGroupRule = other.someGroupRule;
+    if (_$data.containsKey('someGroupRule') !=
+        other._$data.containsKey('someGroupRule')) {
+      return false;
+    }
+    if (l$someGroupRule != lOther$someGroupRule) {
+      return false;
+    }
+    final l$someOtherGroupRule = someOtherGroupRule;
+    final lOther$someOtherGroupRule = other.someOtherGroupRule;
+    if (_$data.containsKey('someOtherGroupRule') !=
+        other._$data.containsKey('someOtherGroupRule')) {
+      return false;
+    }
+    if (l$someOtherGroupRule != lOther$someOtherGroupRule) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$someGroupRule = someGroupRule;
+    final l$someOtherGroupRule = someOtherGroupRule;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('someGroupRule') ? l$someGroupRule : const {},
+      _$data.containsKey('someOtherGroupRule')
+          ? l$someOtherGroupRule
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenGroupRuleInput<TRes> {
+  factory CopyWith$Input$GenGroupRuleInput(
+    Input$GenGroupRuleInput instance,
+    TRes Function(Input$GenGroupRuleInput) then,
+  ) = _CopyWithImpl$Input$GenGroupRuleInput;
+
+  factory CopyWith$Input$GenGroupRuleInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenGroupRuleInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? someGroupRule,
+    bool? someOtherGroupRule,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$GenGroupRuleInput<TRes>
+    implements CopyWith$Input$GenGroupRuleInput<TRes> {
+  _CopyWithImpl$Input$GenGroupRuleInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenGroupRuleInput _instance;
+
+  final TRes Function(Input$GenGroupRuleInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? someGroupRule = _undefined,
+    Object? someOtherGroupRule = _undefined,
+  }) =>
+      _then(Input$GenGroupRuleInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (someGroupRule != _undefined && someGroupRule != null)
+          'someGroupRule': (someGroupRule as bool),
+        if (someOtherGroupRule != _undefined && someOtherGroupRule != null)
+          'someOtherGroupRule': (someOtherGroupRule as bool),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenGroupRuleInput<TRes>
+    implements CopyWith$Input$GenGroupRuleInput<TRes> {
+  _CopyWithStubImpl$Input$GenGroupRuleInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? someGroupRule,
+    bool? someOtherGroupRule,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
+class Input$GenMatchingEngineInput {
+  factory Input$GenMatchingEngineInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? someMatchingRule,
+    bool? someOtherMatchingRule,
+  }) =>
+      Input$GenMatchingEngineInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (someMatchingRule != null) r'someMatchingRule': someMatchingRule,
+        if (someOtherMatchingRule != null)
+          r'someOtherMatchingRule': someOtherMatchingRule,
+      });
+
+  Input$GenMatchingEngineInput._(this._$data);
+
+  factory Input$GenMatchingEngineInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('someMatchingRule')) {
+      final l$someMatchingRule = data['someMatchingRule'];
+      result$data['someMatchingRule'] = (l$someMatchingRule as bool);
+    }
+    if (data.containsKey('someOtherMatchingRule')) {
+      final l$someOtherMatchingRule = data['someOtherMatchingRule'];
+      result$data['someOtherMatchingRule'] = (l$someOtherMatchingRule as bool);
+    }
+    return Input$GenMatchingEngineInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  bool? get someMatchingRule => (_$data['someMatchingRule'] as bool?);
+  bool? get someOtherMatchingRule => (_$data['someOtherMatchingRule'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('someMatchingRule')) {
+      final l$someMatchingRule = someMatchingRule;
+      result$data['someMatchingRule'] = (l$someMatchingRule as bool);
+    }
+    if (_$data.containsKey('someOtherMatchingRule')) {
+      final l$someOtherMatchingRule = someOtherMatchingRule;
+      result$data['someOtherMatchingRule'] = (l$someOtherMatchingRule as bool);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenMatchingEngineInput<Input$GenMatchingEngineInput>
+      get copyWith => CopyWith$Input$GenMatchingEngineInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenMatchingEngineInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$someMatchingRule = someMatchingRule;
+    final lOther$someMatchingRule = other.someMatchingRule;
+    if (_$data.containsKey('someMatchingRule') !=
+        other._$data.containsKey('someMatchingRule')) {
+      return false;
+    }
+    if (l$someMatchingRule != lOther$someMatchingRule) {
+      return false;
+    }
+    final l$someOtherMatchingRule = someOtherMatchingRule;
+    final lOther$someOtherMatchingRule = other.someOtherMatchingRule;
+    if (_$data.containsKey('someOtherMatchingRule') !=
+        other._$data.containsKey('someOtherMatchingRule')) {
+      return false;
+    }
+    if (l$someOtherMatchingRule != lOther$someOtherMatchingRule) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$someMatchingRule = someMatchingRule;
+    final l$someOtherMatchingRule = someOtherMatchingRule;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('someMatchingRule') ? l$someMatchingRule : const {},
+      _$data.containsKey('someOtherMatchingRule')
+          ? l$someOtherMatchingRule
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenMatchingEngineInput<TRes> {
+  factory CopyWith$Input$GenMatchingEngineInput(
+    Input$GenMatchingEngineInput instance,
+    TRes Function(Input$GenMatchingEngineInput) then,
+  ) = _CopyWithImpl$Input$GenMatchingEngineInput;
+
+  factory CopyWith$Input$GenMatchingEngineInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenMatchingEngineInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? someMatchingRule,
+    bool? someOtherMatchingRule,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$GenMatchingEngineInput<TRes>
+    implements CopyWith$Input$GenMatchingEngineInput<TRes> {
+  _CopyWithImpl$Input$GenMatchingEngineInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenMatchingEngineInput _instance;
+
+  final TRes Function(Input$GenMatchingEngineInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? someMatchingRule = _undefined,
+    Object? someOtherMatchingRule = _undefined,
+  }) =>
+      _then(Input$GenMatchingEngineInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (someMatchingRule != _undefined && someMatchingRule != null)
+          'someMatchingRule': (someMatchingRule as bool),
+        if (someOtherMatchingRule != _undefined &&
+            someOtherMatchingRule != null)
+          'someOtherMatchingRule': (someOtherMatchingRule as bool),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenMatchingEngineInput<TRes>
+    implements CopyWith$Input$GenMatchingEngineInput<TRes> {
+  _CopyWithStubImpl$Input$GenMatchingEngineInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    bool? someMatchingRule,
+    bool? someOtherMatchingRule,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
 class Input$MenteesGroupMembershipInput {
   factory Input$MenteesGroupMembershipInput({
     String? id,
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
     List<Enum$GroupMembershipRole>? roles,
     List<String>? soughtExpertises,
     String? industry,
+    String? actionsTaken,
+    String? currentChallenges,
+    String? futureGoals,
+    String? motivationsForMentorship,
   }) =>
       Input$MenteesGroupMembershipInput._({
         if (id != null) r'id': id,
@@ -11845,6 +17219,11 @@ class Input$MenteesGroupMembershipInput {
         if (roles != null) r'roles': roles,
         if (soughtExpertises != null) r'soughtExpertises': soughtExpertises,
         if (industry != null) r'industry': industry,
+        if (actionsTaken != null) r'actionsTaken': actionsTaken,
+        if (currentChallenges != null) r'currentChallenges': currentChallenges,
+        if (futureGoals != null) r'futureGoals': futureGoals,
+        if (motivationsForMentorship != null)
+          r'motivationsForMentorship': motivationsForMentorship,
       });
 
   Input$MenteesGroupMembershipInput._(this._$data);
@@ -11876,8 +17255,7 @@ class Input$MenteesGroupMembershipInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -11885,8 +17263,7 @@ class Input$MenteesGroupMembershipInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -11894,8 +17271,7 @@ class Input$MenteesGroupMembershipInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -11925,6 +17301,23 @@ class Input$MenteesGroupMembershipInput {
       final l$industry = data['industry'];
       result$data['industry'] = (l$industry as String?);
     }
+    if (data.containsKey('actionsTaken')) {
+      final l$actionsTaken = data['actionsTaken'];
+      result$data['actionsTaken'] = (l$actionsTaken as String?);
+    }
+    if (data.containsKey('currentChallenges')) {
+      final l$currentChallenges = data['currentChallenges'];
+      result$data['currentChallenges'] = (l$currentChallenges as String?);
+    }
+    if (data.containsKey('futureGoals')) {
+      final l$futureGoals = data['futureGoals'];
+      result$data['futureGoals'] = (l$futureGoals as String?);
+    }
+    if (data.containsKey('motivationsForMentorship')) {
+      final l$motivationsForMentorship = data['motivationsForMentorship'];
+      result$data['motivationsForMentorship'] =
+          (l$motivationsForMentorship as String?);
+    }
     return Input$MenteesGroupMembershipInput._(result$data);
   }
 
@@ -11936,11 +17329,11 @@ class Input$MenteesGroupMembershipInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get groupId => (_$data['groupId'] as String?);
   String? get userId => (_$data['userId'] as String?);
@@ -11949,6 +17342,11 @@ class Input$MenteesGroupMembershipInput {
   List<String>? get soughtExpertises =>
       (_$data['soughtExpertises'] as List<String>?);
   String? get industry => (_$data['industry'] as String?);
+  String? get actionsTaken => (_$data['actionsTaken'] as String?);
+  String? get currentChallenges => (_$data['currentChallenges'] as String?);
+  String? get futureGoals => (_$data['futureGoals'] as String?);
+  String? get motivationsForMentorship =>
+      (_$data['motivationsForMentorship'] as String?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -11969,7 +17367,7 @@ class Input$MenteesGroupMembershipInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -11977,7 +17375,7 @@ class Input$MenteesGroupMembershipInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -11985,7 +17383,7 @@ class Input$MenteesGroupMembershipInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -12013,6 +17411,22 @@ class Input$MenteesGroupMembershipInput {
     if (_$data.containsKey('industry')) {
       final l$industry = industry;
       result$data['industry'] = l$industry;
+    }
+    if (_$data.containsKey('actionsTaken')) {
+      final l$actionsTaken = actionsTaken;
+      result$data['actionsTaken'] = l$actionsTaken;
+    }
+    if (_$data.containsKey('currentChallenges')) {
+      final l$currentChallenges = currentChallenges;
+      result$data['currentChallenges'] = l$currentChallenges;
+    }
+    if (_$data.containsKey('futureGoals')) {
+      final l$futureGoals = futureGoals;
+      result$data['futureGoals'] = l$futureGoals;
+    }
+    if (_$data.containsKey('motivationsForMentorship')) {
+      final l$motivationsForMentorship = motivationsForMentorship;
+      result$data['motivationsForMentorship'] = l$motivationsForMentorship;
     }
     return result$data;
   }
@@ -12194,6 +17608,42 @@ class Input$MenteesGroupMembershipInput {
     if (l$industry != lOther$industry) {
       return false;
     }
+    final l$actionsTaken = actionsTaken;
+    final lOther$actionsTaken = other.actionsTaken;
+    if (_$data.containsKey('actionsTaken') !=
+        other._$data.containsKey('actionsTaken')) {
+      return false;
+    }
+    if (l$actionsTaken != lOther$actionsTaken) {
+      return false;
+    }
+    final l$currentChallenges = currentChallenges;
+    final lOther$currentChallenges = other.currentChallenges;
+    if (_$data.containsKey('currentChallenges') !=
+        other._$data.containsKey('currentChallenges')) {
+      return false;
+    }
+    if (l$currentChallenges != lOther$currentChallenges) {
+      return false;
+    }
+    final l$futureGoals = futureGoals;
+    final lOther$futureGoals = other.futureGoals;
+    if (_$data.containsKey('futureGoals') !=
+        other._$data.containsKey('futureGoals')) {
+      return false;
+    }
+    if (l$futureGoals != lOther$futureGoals) {
+      return false;
+    }
+    final l$motivationsForMentorship = motivationsForMentorship;
+    final lOther$motivationsForMentorship = other.motivationsForMentorship;
+    if (_$data.containsKey('motivationsForMentorship') !=
+        other._$data.containsKey('motivationsForMentorship')) {
+      return false;
+    }
+    if (l$motivationsForMentorship != lOther$motivationsForMentorship) {
+      return false;
+    }
     return true;
   }
 
@@ -12214,6 +17664,10 @@ class Input$MenteesGroupMembershipInput {
     final l$roles = roles;
     final l$soughtExpertises = soughtExpertises;
     final l$industry = industry;
+    final l$actionsTaken = actionsTaken;
+    final l$currentChallenges = currentChallenges;
+    final l$futureGoals = futureGoals;
+    final l$motivationsForMentorship = motivationsForMentorship;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -12242,6 +17696,12 @@ class Input$MenteesGroupMembershipInput {
               : Object.hashAll(l$soughtExpertises.map((v) => v))
           : const {},
       _$data.containsKey('industry') ? l$industry : const {},
+      _$data.containsKey('actionsTaken') ? l$actionsTaken : const {},
+      _$data.containsKey('currentChallenges') ? l$currentChallenges : const {},
+      _$data.containsKey('futureGoals') ? l$futureGoals : const {},
+      _$data.containsKey('motivationsForMentorship')
+          ? l$motivationsForMentorship
+          : const {},
     ]);
   }
 }
@@ -12260,17 +17720,21 @@ abstract class CopyWith$Input$MenteesGroupMembershipInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
     List<Enum$GroupMembershipRole>? roles,
     List<String>? soughtExpertises,
     String? industry,
+    String? actionsTaken,
+    String? currentChallenges,
+    String? futureGoals,
+    String? motivationsForMentorship,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
@@ -12308,6 +17772,10 @@ class _CopyWithImpl$Input$MenteesGroupMembershipInput<TRes>
     Object? roles = _undefined,
     Object? soughtExpertises = _undefined,
     Object? industry = _undefined,
+    Object? actionsTaken = _undefined,
+    Object? currentChallenges = _undefined,
+    Object? futureGoals = _undefined,
+    Object? motivationsForMentorship = _undefined,
   }) =>
       _then(Input$MenteesGroupMembershipInput._({
         ..._instance._$data,
@@ -12317,11 +17785,11 @@ class _CopyWithImpl$Input$MenteesGroupMembershipInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (groupId != _undefined) 'groupId': (groupId as String?),
         if (userId != _undefined) 'userId': (userId as String?),
@@ -12330,6 +17798,13 @@ class _CopyWithImpl$Input$MenteesGroupMembershipInput<TRes>
         if (soughtExpertises != _undefined && soughtExpertises != null)
           'soughtExpertises': (soughtExpertises as List<String>),
         if (industry != _undefined) 'industry': (industry as String?),
+        if (actionsTaken != _undefined)
+          'actionsTaken': (actionsTaken as String?),
+        if (currentChallenges != _undefined)
+          'currentChallenges': (currentChallenges as String?),
+        if (futureGoals != _undefined) 'futureGoals': (futureGoals as String?),
+        if (motivationsForMentorship != _undefined)
+          'motivationsForMentorship': (motivationsForMentorship as String?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -12362,17 +17837,21 @@ class _CopyWithStubImpl$Input$MenteesGroupMembershipInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
     List<Enum$GroupMembershipRole>? roles,
     List<String>? soughtExpertises,
     String? industry,
+    String? actionsTaken,
+    String? currentChallenges,
+    String? futureGoals,
+    String? motivationsForMentorship,
   }) =>
       _res;
   events(_fn) => _res;
@@ -12386,17 +17865,21 @@ class Input$MentorsGroupMembershipInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
     List<Enum$GroupMembershipRole>? roles,
     List<String>? expertises,
     List<String>? industries,
+    String? website,
+    String? helpICanOffer,
+    String? expectationsForMentees,
+    String? menteePreparationInstructions,
   }) =>
       Input$MentorsGroupMembershipInput._({
         if (id != null) r'id': id,
@@ -12414,6 +17897,12 @@ class Input$MentorsGroupMembershipInput {
         if (roles != null) r'roles': roles,
         if (expertises != null) r'expertises': expertises,
         if (industries != null) r'industries': industries,
+        if (website != null) r'website': website,
+        if (helpICanOffer != null) r'helpICanOffer': helpICanOffer,
+        if (expectationsForMentees != null)
+          r'expectationsForMentees': expectationsForMentees,
+        if (menteePreparationInstructions != null)
+          r'menteePreparationInstructions': menteePreparationInstructions,
       });
 
   Input$MentorsGroupMembershipInput._(this._$data);
@@ -12445,8 +17934,7 @@ class Input$MentorsGroupMembershipInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -12454,8 +17942,7 @@ class Input$MentorsGroupMembershipInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -12463,8 +17950,7 @@ class Input$MentorsGroupMembershipInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -12494,6 +17980,25 @@ class Input$MentorsGroupMembershipInput {
       result$data['industries'] =
           (l$industries as List<dynamic>).map((e) => (e as String)).toList();
     }
+    if (data.containsKey('website')) {
+      final l$website = data['website'];
+      result$data['website'] = (l$website as String?);
+    }
+    if (data.containsKey('helpICanOffer')) {
+      final l$helpICanOffer = data['helpICanOffer'];
+      result$data['helpICanOffer'] = (l$helpICanOffer as String?);
+    }
+    if (data.containsKey('expectationsForMentees')) {
+      final l$expectationsForMentees = data['expectationsForMentees'];
+      result$data['expectationsForMentees'] =
+          (l$expectationsForMentees as String?);
+    }
+    if (data.containsKey('menteePreparationInstructions')) {
+      final l$menteePreparationInstructions =
+          data['menteePreparationInstructions'];
+      result$data['menteePreparationInstructions'] =
+          (l$menteePreparationInstructions as String?);
+    }
     return Input$MentorsGroupMembershipInput._(result$data);
   }
 
@@ -12505,11 +18010,11 @@ class Input$MentorsGroupMembershipInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get groupId => (_$data['groupId'] as String?);
   String? get userId => (_$data['userId'] as String?);
@@ -12517,6 +18022,12 @@ class Input$MentorsGroupMembershipInput {
       (_$data['roles'] as List<Enum$GroupMembershipRole>?);
   List<String>? get expertises => (_$data['expertises'] as List<String>?);
   List<String>? get industries => (_$data['industries'] as List<String>?);
+  String? get website => (_$data['website'] as String?);
+  String? get helpICanOffer => (_$data['helpICanOffer'] as String?);
+  String? get expectationsForMentees =>
+      (_$data['expectationsForMentees'] as String?);
+  String? get menteePreparationInstructions =>
+      (_$data['menteePreparationInstructions'] as String?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -12537,7 +18048,7 @@ class Input$MentorsGroupMembershipInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -12545,7 +18056,7 @@ class Input$MentorsGroupMembershipInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -12553,7 +18064,7 @@ class Input$MentorsGroupMembershipInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -12582,6 +18093,23 @@ class Input$MentorsGroupMembershipInput {
       final l$industries = industries;
       result$data['industries'] =
           (l$industries as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('website')) {
+      final l$website = website;
+      result$data['website'] = l$website;
+    }
+    if (_$data.containsKey('helpICanOffer')) {
+      final l$helpICanOffer = helpICanOffer;
+      result$data['helpICanOffer'] = l$helpICanOffer;
+    }
+    if (_$data.containsKey('expectationsForMentees')) {
+      final l$expectationsForMentees = expectationsForMentees;
+      result$data['expectationsForMentees'] = l$expectationsForMentees;
+    }
+    if (_$data.containsKey('menteePreparationInstructions')) {
+      final l$menteePreparationInstructions = menteePreparationInstructions;
+      result$data['menteePreparationInstructions'] =
+          l$menteePreparationInstructions;
     }
     return result$data;
   }
@@ -12774,6 +18302,43 @@ class Input$MentorsGroupMembershipInput {
     } else if (l$industries != lOther$industries) {
       return false;
     }
+    final l$website = website;
+    final lOther$website = other.website;
+    if (_$data.containsKey('website') != other._$data.containsKey('website')) {
+      return false;
+    }
+    if (l$website != lOther$website) {
+      return false;
+    }
+    final l$helpICanOffer = helpICanOffer;
+    final lOther$helpICanOffer = other.helpICanOffer;
+    if (_$data.containsKey('helpICanOffer') !=
+        other._$data.containsKey('helpICanOffer')) {
+      return false;
+    }
+    if (l$helpICanOffer != lOther$helpICanOffer) {
+      return false;
+    }
+    final l$expectationsForMentees = expectationsForMentees;
+    final lOther$expectationsForMentees = other.expectationsForMentees;
+    if (_$data.containsKey('expectationsForMentees') !=
+        other._$data.containsKey('expectationsForMentees')) {
+      return false;
+    }
+    if (l$expectationsForMentees != lOther$expectationsForMentees) {
+      return false;
+    }
+    final l$menteePreparationInstructions = menteePreparationInstructions;
+    final lOther$menteePreparationInstructions =
+        other.menteePreparationInstructions;
+    if (_$data.containsKey('menteePreparationInstructions') !=
+        other._$data.containsKey('menteePreparationInstructions')) {
+      return false;
+    }
+    if (l$menteePreparationInstructions !=
+        lOther$menteePreparationInstructions) {
+      return false;
+    }
     return true;
   }
 
@@ -12794,6 +18359,10 @@ class Input$MentorsGroupMembershipInput {
     final l$roles = roles;
     final l$expertises = expertises;
     final l$industries = industries;
+    final l$website = website;
+    final l$helpICanOffer = helpICanOffer;
+    final l$expectationsForMentees = expectationsForMentees;
+    final l$menteePreparationInstructions = menteePreparationInstructions;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -12826,6 +18395,14 @@ class Input$MentorsGroupMembershipInput {
               ? null
               : Object.hashAll(l$industries.map((v) => v))
           : const {},
+      _$data.containsKey('website') ? l$website : const {},
+      _$data.containsKey('helpICanOffer') ? l$helpICanOffer : const {},
+      _$data.containsKey('expectationsForMentees')
+          ? l$expectationsForMentees
+          : const {},
+      _$data.containsKey('menteePreparationInstructions')
+          ? l$menteePreparationInstructions
+          : const {},
     ]);
   }
 }
@@ -12844,17 +18421,21 @@ abstract class CopyWith$Input$MentorsGroupMembershipInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
     List<Enum$GroupMembershipRole>? roles,
     List<String>? expertises,
     List<String>? industries,
+    String? website,
+    String? helpICanOffer,
+    String? expectationsForMentees,
+    String? menteePreparationInstructions,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
@@ -12892,6 +18473,10 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
     Object? roles = _undefined,
     Object? expertises = _undefined,
     Object? industries = _undefined,
+    Object? website = _undefined,
+    Object? helpICanOffer = _undefined,
+    Object? expectationsForMentees = _undefined,
+    Object? menteePreparationInstructions = _undefined,
   }) =>
       _then(Input$MentorsGroupMembershipInput._({
         ..._instance._$data,
@@ -12901,11 +18486,11 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (groupId != _undefined) 'groupId': (groupId as String?),
         if (userId != _undefined) 'userId': (userId as String?),
@@ -12915,6 +18500,14 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
           'expertises': (expertises as List<String>),
         if (industries != _undefined && industries != null)
           'industries': (industries as List<String>),
+        if (website != _undefined) 'website': (website as String?),
+        if (helpICanOffer != _undefined)
+          'helpICanOffer': (helpICanOffer as String?),
+        if (expectationsForMentees != _undefined)
+          'expectationsForMentees': (expectationsForMentees as String?),
+        if (menteePreparationInstructions != _undefined)
+          'menteePreparationInstructions':
+              (menteePreparationInstructions as String?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -12947,17 +18540,21 @@ class _CopyWithStubImpl$Input$MentorsGroupMembershipInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? groupId,
     String? userId,
     List<Enum$GroupMembershipRole>? roles,
     List<String>? expertises,
     List<String>? industries,
+    String? website,
+    String? helpICanOffer,
+    String? expectationsForMentees,
+    String? menteePreparationInstructions,
   }) =>
       _res;
   events(_fn) => _res;
@@ -12971,11 +18568,11 @@ class Input$NotificationInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? templateId,
     String? templateName,
@@ -13086,8 +18683,7 @@ class Input$NotificationInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -13095,8 +18691,7 @@ class Input$NotificationInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -13104,8 +18699,7 @@ class Input$NotificationInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -13263,11 +18857,11 @@ class Input$NotificationInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get templateId => (_$data['templateId'] as String?);
   String? get templateName => (_$data['templateName'] as String?);
@@ -13325,7 +18919,7 @@ class Input$NotificationInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -13333,7 +18927,7 @@ class Input$NotificationInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -13341,7 +18935,7 @@ class Input$NotificationInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -13983,11 +19577,11 @@ abstract class CopyWith$Input$NotificationInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? templateId,
     String? templateName,
@@ -14094,11 +19688,11 @@ class _CopyWithImpl$Input$NotificationInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (templateId != _undefined) 'templateId': (templateId as String?),
         if (templateName != _undefined)
@@ -14195,11 +19789,11 @@ class _CopyWithStubImpl$Input$NotificationInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? templateId,
     String? templateName,
@@ -14593,11 +20187,11 @@ class Input$NotificationTemplateInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? templateId,
     Enum$NotificationTemplateName? name,
@@ -14679,8 +20273,7 @@ class Input$NotificationTemplateInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -14688,8 +20281,7 @@ class Input$NotificationTemplateInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -14697,8 +20289,7 @@ class Input$NotificationTemplateInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -14795,11 +20386,11 @@ class Input$NotificationTemplateInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get templateId => (_$data['templateId'] as String?);
   Enum$NotificationTemplateName? get name =>
@@ -14840,7 +20431,7 @@ class Input$NotificationTemplateInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -14848,7 +20439,7 @@ class Input$NotificationTemplateInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -14856,7 +20447,7 @@ class Input$NotificationTemplateInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -15296,11 +20887,11 @@ abstract class CopyWith$Input$NotificationTemplateInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? templateId,
     Enum$NotificationTemplateName? name,
@@ -15379,11 +20970,11 @@ class _CopyWithImpl$Input$NotificationTemplateInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (templateId != _undefined) 'templateId': (templateId as String?),
         if (name != _undefined)
@@ -15441,11 +21032,11 @@ class _CopyWithStubImpl$Input$NotificationTemplateInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? templateId,
     Enum$NotificationTemplateName? name,
@@ -15478,20 +21069,21 @@ class Input$Mm2SynchronizationInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     Enum$Mm2SyncDirection? direction,
     String? objectId,
     Enum$Mm2ModelType? mm2ModelType,
     Enum$Mm2SynchronizationMode? syncMode,
-    int? skip,
     int? limit,
     bool? autorun,
     String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    String? expiresAt,
   }) =>
       Input$Mm2SynchronizationInput._({
         if (id != null) r'id': id,
@@ -15508,11 +21100,12 @@ class Input$Mm2SynchronizationInput {
         if (objectId != null) r'objectId': objectId,
         if (mm2ModelType != null) r'mm2ModelType': mm2ModelType,
         if (syncMode != null) r'syncMode': syncMode,
-        if (skip != null) r'skip': skip,
         if (limit != null) r'limit': limit,
         if (autorun != null) r'autorun': autorun,
         if (usersSinceUpdatedAt != null)
           r'usersSinceUpdatedAt': usersSinceUpdatedAt,
+        if (logLevel != null) r'logLevel': logLevel,
+        if (expiresAt != null) r'expiresAt': expiresAt,
       });
 
   Input$Mm2SynchronizationInput._(this._$data);
@@ -15543,8 +21136,7 @@ class Input$Mm2SynchronizationInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -15552,8 +21144,7 @@ class Input$Mm2SynchronizationInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -15561,8 +21152,7 @@ class Input$Mm2SynchronizationInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -15588,10 +21178,6 @@ class Input$Mm2SynchronizationInput {
       result$data['syncMode'] =
           fromJson$Enum$Mm2SynchronizationMode((l$syncMode as String));
     }
-    if (data.containsKey('skip')) {
-      final l$skip = data['skip'];
-      result$data['skip'] = (l$skip as int?);
-    }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
@@ -15604,6 +21190,16 @@ class Input$Mm2SynchronizationInput {
       final l$usersSinceUpdatedAt = data['usersSinceUpdatedAt'];
       result$data['usersSinceUpdatedAt'] = (l$usersSinceUpdatedAt as String?);
     }
+    if (data.containsKey('logLevel')) {
+      final l$logLevel = data['logLevel'];
+      result$data['logLevel'] = l$logLevel == null
+          ? null
+          : fromJson$Enum$Mm2SynchronizerLogLevel((l$logLevel as String));
+    }
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] = (l$expiresAt as String?);
+    }
     return Input$Mm2SynchronizationInput._(result$data);
   }
 
@@ -15615,11 +21211,11 @@ class Input$Mm2SynchronizationInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   Enum$Mm2SyncDirection? get direction =>
       (_$data['direction'] as Enum$Mm2SyncDirection?);
@@ -15628,10 +21224,12 @@ class Input$Mm2SynchronizationInput {
       (_$data['mm2ModelType'] as Enum$Mm2ModelType?);
   Enum$Mm2SynchronizationMode? get syncMode =>
       (_$data['syncMode'] as Enum$Mm2SynchronizationMode?);
-  int? get skip => (_$data['skip'] as int?);
   int? get limit => (_$data['limit'] as int?);
   bool? get autorun => (_$data['autorun'] as bool?);
   String? get usersSinceUpdatedAt => (_$data['usersSinceUpdatedAt'] as String?);
+  Enum$Mm2SynchronizerLogLevel? get logLevel =>
+      (_$data['logLevel'] as Enum$Mm2SynchronizerLogLevel?);
+  String? get expiresAt => (_$data['expiresAt'] as String?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -15652,7 +21250,7 @@ class Input$Mm2SynchronizationInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -15660,7 +21258,7 @@ class Input$Mm2SynchronizationInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -15668,7 +21266,7 @@ class Input$Mm2SynchronizationInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -15694,10 +21292,6 @@ class Input$Mm2SynchronizationInput {
       result$data['syncMode'] = toJson$Enum$Mm2SynchronizationMode(
           (l$syncMode as Enum$Mm2SynchronizationMode));
     }
-    if (_$data.containsKey('skip')) {
-      final l$skip = skip;
-      result$data['skip'] = l$skip;
-    }
     if (_$data.containsKey('limit')) {
       final l$limit = limit;
       result$data['limit'] = l$limit;
@@ -15709,6 +21303,16 @@ class Input$Mm2SynchronizationInput {
     if (_$data.containsKey('usersSinceUpdatedAt')) {
       final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
       result$data['usersSinceUpdatedAt'] = l$usersSinceUpdatedAt;
+    }
+    if (_$data.containsKey('logLevel')) {
+      final l$logLevel = logLevel;
+      result$data['logLevel'] = l$logLevel == null
+          ? null
+          : toJson$Enum$Mm2SynchronizerLogLevel(l$logLevel);
+    }
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt;
     }
     return result$data;
   }
@@ -15862,14 +21466,6 @@ class Input$Mm2SynchronizationInput {
     if (l$syncMode != lOther$syncMode) {
       return false;
     }
-    final l$skip = skip;
-    final lOther$skip = other.skip;
-    if (_$data.containsKey('skip') != other._$data.containsKey('skip')) {
-      return false;
-    }
-    if (l$skip != lOther$skip) {
-      return false;
-    }
     final l$limit = limit;
     final lOther$limit = other.limit;
     if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
@@ -15895,6 +21491,24 @@ class Input$Mm2SynchronizationInput {
     if (l$usersSinceUpdatedAt != lOther$usersSinceUpdatedAt) {
       return false;
     }
+    final l$logLevel = logLevel;
+    final lOther$logLevel = other.logLevel;
+    if (_$data.containsKey('logLevel') !=
+        other._$data.containsKey('logLevel')) {
+      return false;
+    }
+    if (l$logLevel != lOther$logLevel) {
+      return false;
+    }
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
+      return false;
+    }
     return true;
   }
 
@@ -15914,10 +21528,11 @@ class Input$Mm2SynchronizationInput {
     final l$objectId = objectId;
     final l$mm2ModelType = mm2ModelType;
     final l$syncMode = syncMode;
-    final l$skip = skip;
     final l$limit = limit;
     final l$autorun = autorun;
     final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
+    final l$logLevel = logLevel;
+    final l$expiresAt = expiresAt;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -15937,12 +21552,13 @@ class Input$Mm2SynchronizationInput {
       _$data.containsKey('objectId') ? l$objectId : const {},
       _$data.containsKey('mm2ModelType') ? l$mm2ModelType : const {},
       _$data.containsKey('syncMode') ? l$syncMode : const {},
-      _$data.containsKey('skip') ? l$skip : const {},
       _$data.containsKey('limit') ? l$limit : const {},
       _$data.containsKey('autorun') ? l$autorun : const {},
       _$data.containsKey('usersSinceUpdatedAt')
           ? l$usersSinceUpdatedAt
           : const {},
+      _$data.containsKey('logLevel') ? l$logLevel : const {},
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
     ]);
   }
 }
@@ -15961,20 +21577,21 @@ abstract class CopyWith$Input$Mm2SynchronizationInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     Enum$Mm2SyncDirection? direction,
     String? objectId,
     Enum$Mm2ModelType? mm2ModelType,
     Enum$Mm2SynchronizationMode? syncMode,
-    int? skip,
     int? limit,
     bool? autorun,
     String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    String? expiresAt,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
@@ -16011,10 +21628,11 @@ class _CopyWithImpl$Input$Mm2SynchronizationInput<TRes>
     Object? objectId = _undefined,
     Object? mm2ModelType = _undefined,
     Object? syncMode = _undefined,
-    Object? skip = _undefined,
     Object? limit = _undefined,
     Object? autorun = _undefined,
     Object? usersSinceUpdatedAt = _undefined,
+    Object? logLevel = _undefined,
+    Object? expiresAt = _undefined,
   }) =>
       _then(Input$Mm2SynchronizationInput._({
         ..._instance._$data,
@@ -16024,11 +21642,11 @@ class _CopyWithImpl$Input$Mm2SynchronizationInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (direction != _undefined && direction != null)
           'direction': (direction as Enum$Mm2SyncDirection),
@@ -16037,12 +21655,14 @@ class _CopyWithImpl$Input$Mm2SynchronizationInput<TRes>
           'mm2ModelType': (mm2ModelType as Enum$Mm2ModelType?),
         if (syncMode != _undefined && syncMode != null)
           'syncMode': (syncMode as Enum$Mm2SynchronizationMode),
-        if (skip != _undefined) 'skip': (skip as int?),
         if (limit != _undefined) 'limit': (limit as int?),
         if (autorun != _undefined && autorun != null)
           'autorun': (autorun as bool),
         if (usersSinceUpdatedAt != _undefined)
           'usersSinceUpdatedAt': (usersSinceUpdatedAt as String?),
+        if (logLevel != _undefined)
+          'logLevel': (logLevel as Enum$Mm2SynchronizerLogLevel?),
+        if (expiresAt != _undefined) 'expiresAt': (expiresAt as String?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -16075,20 +21695,21 @@ class _CopyWithStubImpl$Input$Mm2SynchronizationInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     Enum$Mm2SyncDirection? direction,
     String? objectId,
     Enum$Mm2ModelType? mm2ModelType,
     Enum$Mm2SynchronizationMode? syncMode,
-    int? skip,
     int? limit,
     bool? autorun,
     String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    String? expiresAt,
   }) =>
       _res;
   events(_fn) => _res;
@@ -16102,11 +21723,11 @@ class Input$SidMultiStepActionInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? userId,
     String? userIdent,
@@ -16220,8 +21841,7 @@ class Input$SidMultiStepActionInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -16229,8 +21849,7 @@ class Input$SidMultiStepActionInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -16238,8 +21857,7 @@ class Input$SidMultiStepActionInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -16396,11 +22014,11 @@ class Input$SidMultiStepActionInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get userId => (_$data['userId'] as String?);
   String? get userIdent => (_$data['userIdent'] as String?);
@@ -16461,7 +22079,7 @@ class Input$SidMultiStepActionInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -16469,7 +22087,7 @@ class Input$SidMultiStepActionInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -16477,7 +22095,7 @@ class Input$SidMultiStepActionInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -17156,11 +22774,11 @@ abstract class CopyWith$Input$SidMultiStepActionInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? userId,
     String? userIdent,
@@ -17273,11 +22891,11 @@ class _CopyWithImpl$Input$SidMultiStepActionInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (userId != _undefined) 'userId': (userId as String?),
         if (userIdent != _undefined) 'userIdent': (userIdent as String?),
@@ -17375,11 +22993,11 @@ class _CopyWithStubImpl$Input$SidMultiStepActionInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? userId,
     String? userIdent,
@@ -17427,11 +23045,11 @@ class Input$MultiStepActionErrorInput {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? key,
     String? messageId,
@@ -17481,8 +23099,7 @@ class Input$MultiStepActionErrorInput {
     }
     if (data.containsKey('createdAt')) {
       final l$createdAt = data['createdAt'];
-      result$data['createdAt'] =
-          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+      result$data['createdAt'] = (l$createdAt as String?);
     }
     if (data.containsKey('createdBy')) {
       final l$createdBy = data['createdBy'];
@@ -17490,8 +23107,7 @@ class Input$MultiStepActionErrorInput {
     }
     if (data.containsKey('updatedAt')) {
       final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] =
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+      result$data['updatedAt'] = (l$updatedAt as String?);
     }
     if (data.containsKey('updatedBy')) {
       final l$updatedBy = data['updatedBy'];
@@ -17499,8 +23115,7 @@ class Input$MultiStepActionErrorInput {
     }
     if (data.containsKey('deletedAt')) {
       final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] =
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+      result$data['deletedAt'] = (l$deletedAt as String?);
     }
     if (data.containsKey('deletedBy')) {
       final l$deletedBy = data['deletedBy'];
@@ -17529,11 +23144,11 @@ class Input$MultiStepActionErrorInput {
       (_$data['events'] as List<Input$ModelEventInput>?);
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdAt => (_$data['createdAt'] as String?);
   String? get createdBy => (_$data['createdBy'] as String?);
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
   String? get updatedBy => (_$data['updatedBy'] as String?);
-  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get key => (_$data['key'] as String?);
   String? get messageId => (_$data['messageId'] as String?);
@@ -17558,7 +23173,7 @@ class Input$MultiStepActionErrorInput {
     }
     if (_$data.containsKey('createdAt')) {
       final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toIso8601String();
+      result$data['createdAt'] = l$createdAt;
     }
     if (_$data.containsKey('createdBy')) {
       final l$createdBy = createdBy;
@@ -17566,7 +23181,7 @@ class Input$MultiStepActionErrorInput {
     }
     if (_$data.containsKey('updatedAt')) {
       final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+      result$data['updatedAt'] = l$updatedAt;
     }
     if (_$data.containsKey('updatedBy')) {
       final l$updatedBy = updatedBy;
@@ -17574,7 +23189,7 @@ class Input$MultiStepActionErrorInput {
     }
     if (_$data.containsKey('deletedAt')) {
       final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+      result$data['deletedAt'] = l$deletedAt;
     }
     if (_$data.containsKey('deletedBy')) {
       final l$deletedBy = deletedBy;
@@ -17787,11 +23402,11 @@ abstract class CopyWith$Input$MultiStepActionErrorInput<TRes> {
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? key,
     String? messageId,
@@ -17840,11 +23455,11 @@ class _CopyWithImpl$Input$MultiStepActionErrorInput<TRes>
           'events': (events as List<Input$ModelEventInput>?),
         if (metadata != _undefined)
           'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
         if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
         if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
         if (key != _undefined) 'key': (key as String?),
         if (messageId != _undefined) 'messageId': (messageId as String?),
@@ -17881,11 +23496,11 @@ class _CopyWithStubImpl$Input$MultiStepActionErrorInput<TRes>
     String? adminNotes,
     List<Input$ModelEventInput>? events,
     Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
+    String? createdAt,
     String? createdBy,
-    DateTime? updatedAt,
+    String? updatedAt,
     String? updatedBy,
-    DateTime? deletedAt,
+    String? deletedAt,
     String? deletedBy,
     String? key,
     String? messageId,
@@ -18340,12 +23955,14 @@ Enum$ModelEventType fromJson$Enum$ModelEventType(String value) {
   }
 }
 
-enum Enum$ChannelMessageType { unset, $unknown }
+enum Enum$ChannelMessageType { unset, invitation, $unknown }
 
 String toJson$Enum$ChannelMessageType(Enum$ChannelMessageType e) {
   switch (e) {
     case Enum$ChannelMessageType.unset:
       return r'unset';
+    case Enum$ChannelMessageType.invitation:
+      return r'invitation';
     case Enum$ChannelMessageType.$unknown:
       return r'$unknown';
   }
@@ -18355,6 +23972,8 @@ Enum$ChannelMessageType fromJson$Enum$ChannelMessageType(String value) {
   switch (value) {
     case r'unset':
       return Enum$ChannelMessageType.unset;
+    case r'invitation':
+      return Enum$ChannelMessageType.invitation;
     default:
       return Enum$ChannelMessageType.$unknown;
   }
@@ -18435,12 +24054,16 @@ Enum$AuthType fromJson$Enum$AuthType(String value) {
   }
 }
 
-enum Enum$UserRole { admin, qa, test, $unknown }
+enum Enum$UserRole { admin, support, staff, qa, test, $unknown }
 
 String toJson$Enum$UserRole(Enum$UserRole e) {
   switch (e) {
     case Enum$UserRole.admin:
       return r'admin';
+    case Enum$UserRole.support:
+      return r'support';
+    case Enum$UserRole.staff:
+      return r'staff';
     case Enum$UserRole.qa:
       return r'qa';
     case Enum$UserRole.test:
@@ -18454,6 +24077,10 @@ Enum$UserRole fromJson$Enum$UserRole(String value) {
   switch (value) {
     case r'admin':
       return Enum$UserRole.admin;
+    case r'support':
+      return Enum$UserRole.support;
+    case r'staff':
+      return Enum$UserRole.staff;
     case r'qa':
       return Enum$UserRole.qa;
     case r'test':
@@ -18484,6 +24111,44 @@ Enum$AppFeature fromJson$Enum$AppFeature(String value) {
       return Enum$AppFeature.testFeatures2;
     default:
       return Enum$AppFeature.$unknown;
+  }
+}
+
+enum Enum$EducationLevel {
+  doctorate,
+  undergraduate,
+  secondary,
+  primary,
+  $unknown
+}
+
+String toJson$Enum$EducationLevel(Enum$EducationLevel e) {
+  switch (e) {
+    case Enum$EducationLevel.doctorate:
+      return r'doctorate';
+    case Enum$EducationLevel.undergraduate:
+      return r'undergraduate';
+    case Enum$EducationLevel.secondary:
+      return r'secondary';
+    case Enum$EducationLevel.primary:
+      return r'primary';
+    case Enum$EducationLevel.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$EducationLevel fromJson$Enum$EducationLevel(String value) {
+  switch (value) {
+    case r'doctorate':
+      return Enum$EducationLevel.doctorate;
+    case r'undergraduate':
+      return Enum$EducationLevel.undergraduate;
+    case r'secondary':
+      return Enum$EducationLevel.secondary;
+    case r'primary':
+      return Enum$EducationLevel.primary;
+    default:
+      return Enum$EducationLevel.$unknown;
   }
 }
 
@@ -18600,6 +24265,224 @@ Enum$ChannelParticipantRole fromJson$Enum$ChannelParticipantRole(String value) {
       return Enum$ChannelParticipantRole.unset;
     default:
       return Enum$ChannelParticipantRole.$unknown;
+  }
+}
+
+enum Enum$CompanyType {
+  forProfit,
+  nonProfit,
+  socialEnterprise,
+  unsure,
+  $unknown
+}
+
+String toJson$Enum$CompanyType(Enum$CompanyType e) {
+  switch (e) {
+    case Enum$CompanyType.forProfit:
+      return r'forProfit';
+    case Enum$CompanyType.nonProfit:
+      return r'nonProfit';
+    case Enum$CompanyType.socialEnterprise:
+      return r'socialEnterprise';
+    case Enum$CompanyType.unsure:
+      return r'unsure';
+    case Enum$CompanyType.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$CompanyType fromJson$Enum$CompanyType(String value) {
+  switch (value) {
+    case r'forProfit':
+      return Enum$CompanyType.forProfit;
+    case r'nonProfit':
+      return Enum$CompanyType.nonProfit;
+    case r'socialEnterprise':
+      return Enum$CompanyType.socialEnterprise;
+    case r'unsure':
+      return Enum$CompanyType.unsure;
+    default:
+      return Enum$CompanyType.$unknown;
+  }
+}
+
+enum Enum$CompanyStage { idea, operational, earning, profitable, $unknown }
+
+String toJson$Enum$CompanyStage(Enum$CompanyStage e) {
+  switch (e) {
+    case Enum$CompanyStage.idea:
+      return r'idea';
+    case Enum$CompanyStage.operational:
+      return r'operational';
+    case Enum$CompanyStage.earning:
+      return r'earning';
+    case Enum$CompanyStage.profitable:
+      return r'profitable';
+    case Enum$CompanyStage.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$CompanyStage fromJson$Enum$CompanyStage(String value) {
+  switch (value) {
+    case r'idea':
+      return Enum$CompanyStage.idea;
+    case r'operational':
+      return Enum$CompanyStage.operational;
+    case r'earning':
+      return Enum$CompanyStage.earning;
+    case r'profitable':
+      return Enum$CompanyStage.profitable;
+    default:
+      return Enum$CompanyStage.$unknown;
+  }
+}
+
+enum Enum$GroupRuleEventType {
+  enterGroup,
+  exitGroup,
+  signUp,
+  sendMessage,
+  userSearch,
+  updateUser,
+  unknown,
+  $unknown
+}
+
+String toJson$Enum$GroupRuleEventType(Enum$GroupRuleEventType e) {
+  switch (e) {
+    case Enum$GroupRuleEventType.enterGroup:
+      return r'enterGroup';
+    case Enum$GroupRuleEventType.exitGroup:
+      return r'exitGroup';
+    case Enum$GroupRuleEventType.signUp:
+      return r'signUp';
+    case Enum$GroupRuleEventType.sendMessage:
+      return r'sendMessage';
+    case Enum$GroupRuleEventType.userSearch:
+      return r'userSearch';
+    case Enum$GroupRuleEventType.updateUser:
+      return r'updateUser';
+    case Enum$GroupRuleEventType.unknown:
+      return r'unknown';
+    case Enum$GroupRuleEventType.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$GroupRuleEventType fromJson$Enum$GroupRuleEventType(String value) {
+  switch (value) {
+    case r'enterGroup':
+      return Enum$GroupRuleEventType.enterGroup;
+    case r'exitGroup':
+      return Enum$GroupRuleEventType.exitGroup;
+    case r'signUp':
+      return Enum$GroupRuleEventType.signUp;
+    case r'sendMessage':
+      return Enum$GroupRuleEventType.sendMessage;
+    case r'userSearch':
+      return Enum$GroupRuleEventType.userSearch;
+    case r'updateUser':
+      return Enum$GroupRuleEventType.updateUser;
+    case r'unknown':
+      return Enum$GroupRuleEventType.unknown;
+    default:
+      return Enum$GroupRuleEventType.$unknown;
+  }
+}
+
+enum Enum$ProfileType { mentee, mentor, both, none, $unknown }
+
+String toJson$Enum$ProfileType(Enum$ProfileType e) {
+  switch (e) {
+    case Enum$ProfileType.mentee:
+      return r'mentee';
+    case Enum$ProfileType.mentor:
+      return r'mentor';
+    case Enum$ProfileType.both:
+      return r'both';
+    case Enum$ProfileType.none:
+      return r'none';
+    case Enum$ProfileType.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$ProfileType fromJson$Enum$ProfileType(String value) {
+  switch (value) {
+    case r'mentee':
+      return Enum$ProfileType.mentee;
+    case r'mentor':
+      return Enum$ProfileType.mentor;
+    case r'both':
+      return Enum$ProfileType.both;
+    case r'none':
+      return Enum$ProfileType.none;
+    default:
+      return Enum$ProfileType.$unknown;
+  }
+}
+
+enum Enum$UserSearchFieldPreference { mustMatch, match, mustNotMatch, $unknown }
+
+String toJson$Enum$UserSearchFieldPreference(Enum$UserSearchFieldPreference e) {
+  switch (e) {
+    case Enum$UserSearchFieldPreference.mustMatch:
+      return r'mustMatch';
+    case Enum$UserSearchFieldPreference.match:
+      return r'match';
+    case Enum$UserSearchFieldPreference.mustNotMatch:
+      return r'mustNotMatch';
+    case Enum$UserSearchFieldPreference.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$UserSearchFieldPreference fromJson$Enum$UserSearchFieldPreference(
+    String value) {
+  switch (value) {
+    case r'mustMatch':
+      return Enum$UserSearchFieldPreference.mustMatch;
+    case r'match':
+      return Enum$UserSearchFieldPreference.match;
+    case r'mustNotMatch':
+      return Enum$UserSearchFieldPreference.mustNotMatch;
+    default:
+      return Enum$UserSearchFieldPreference.$unknown;
+  }
+}
+
+enum Enum$UserSearchSubscriptionType { none, daily, weekly, monthly, $unknown }
+
+String toJson$Enum$UserSearchSubscriptionType(
+    Enum$UserSearchSubscriptionType e) {
+  switch (e) {
+    case Enum$UserSearchSubscriptionType.none:
+      return r'none';
+    case Enum$UserSearchSubscriptionType.daily:
+      return r'daily';
+    case Enum$UserSearchSubscriptionType.weekly:
+      return r'weekly';
+    case Enum$UserSearchSubscriptionType.monthly:
+      return r'monthly';
+    case Enum$UserSearchSubscriptionType.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$UserSearchSubscriptionType fromJson$Enum$UserSearchSubscriptionType(
+    String value) {
+  switch (value) {
+    case r'none':
+      return Enum$UserSearchSubscriptionType.none;
+    case r'daily':
+      return Enum$UserSearchSubscriptionType.daily;
+    case r'weekly':
+      return Enum$UserSearchSubscriptionType.weekly;
+    case r'monthly':
+      return Enum$UserSearchSubscriptionType.monthly;
+    default:
+      return Enum$UserSearchSubscriptionType.$unknown;
   }
 }
 
@@ -19032,33 +24915,292 @@ Enum$ChannelMessageEvent fromJson$Enum$ChannelMessageEvent(String value) {
 }
 
 enum Enum$ServiceRequestType {
-  createGroup,
-  createGroupMembership,
-  deleteGroup,
-  deleteGroupMembership,
-  removeUserFromAllGroups,
-  updateGroup,
-  updateGroupMembership,
+  graphQlQueryUserInbox,
+  graphQlQueryUserUserSearches,
+  graphQlMutationAddChannelMessageEvent,
+  graphQlMutationCreateChannel,
+  graphQlMutationCreateChannelInvitation,
+  graphQlMutationCreateChannelMessage,
+  graphQlMutationCreateChannelParticipant,
+  graphQlMutationDeleteChannel,
+  graphQlMutationDeleteChannelInvitation,
+  graphQlMutationDeleteChannelMessage,
+  graphQlMutationDeleteChannelParticipant,
+  graphQlMutationDeleteGroup,
+  graphQlMutationDeleteGroupMembership,
+  graphQlMutationMarkChannelMessagesAsSeenByMe,
+  graphQlMutationUpdateChannel,
+  graphQlMutationUpdateChannelInvitation,
+  graphQlMutationUpdateChannelMessage,
+  graphQlMutationUpdateChannelParticipant,
+  graphQlQueryChannelInvitations,
+  graphQlQueryChannelParticipants,
+  graphQlQueryFindChannelInvitationById,
+  graphQlQueryFindChannelInvitationsForUser,
+  graphQlQueryFindChannelMessageById,
+  graphQlQueryFindChannelMessages,
+  graphQlQueryFindChannelParticipantById,
+  graphQlQueryFindPendingChannelInvitationsForUser,
+  graphQlQueryMyInbox,
+  graphQlQueryUserChannels,
+  graphQlQueryUserCompanies,
+  graphQlQueryUserGroupMembers,
+  graphQlQueryUserGroups,
+  graphQlMutationRunDataGenerator,
+  graphQlMutationExecuteAdminTask,
+  graphQlMutationSignUpOAuthUser,
+  graphQlMutationUpsertBackgroundTask,
+  graphQlQueryAvailableUserHandle,
+  graphQlQueryBackgroundTask,
+  graphQlQueryFindChannelById,
+  graphQlQueryFindChannels,
+  graphQlQueryfindChannelsForUser,
+  graphQlQueryNotification,
+  graphQlQueryNotificationTemplate,
+  graphQlQueryUnreadInAppMessages,
+  graphQlQueryUser,
+  graphQlQueryUserInboxUser,
+  graphQlMutationAddUserToGroup,
+  graphQlMutationCreateGroup,
+  graphQlMutationCreateGroupMembership,
+  graphQlMutationRemoveUserFromAllGroups,
+  graphQlMutationRemoveUserFromGroup,
+  graphQlMutationUpdateGroup,
+  graphQlMutationUpdateGroupMembership,
+  graphQlQueryFindGroupById,
+  graphQlQueryFindGroupMembershipByIdField,
+  graphQlQueryFindGroupMemberships,
+  graphQlQueryMyGroupMemberships,
+  graphQlMutationCreateUserSearch,
+  graphQlMutationDeleteUserSearch,
+  graphQlMutationUpdateUserSearch,
+  graphQlQueryFindUserSearchById,
+  graphQlQueryUserSearchFoundUsers,
+  graphQlMutationCreateNotification,
+  graphQlMutationCreateNotificationTemplate,
+  graphQlMutationDeleteNotification,
+  graphQlMutationDeleteNotificationTemplate,
+  graphQlMutationMarkInAppMessageReceived,
+  graphQlMutationSendMultiStepActionNotification,
+  graphQlMutationUpdateNotification,
+  graphQlMutationUpdateNotificationTemplate,
+  graphQlMutationClearAllSyncInfo,
+  graphQlMutationCreateMm2Synchronization,
+  graphQlMutationDeleteAllMm2DataInMm3,
+  graphQlMutationDeleteMm2Synchronization,
+  graphQlMutationRunMm2Synchronization,
+  graphQlQueryFindMm2SynchronizationById,
+  graphQlQueryGetMm2Integration,
+  graphQlMutationCreateMultiStepAction,
+  graphQlMutationCreateUserDevice,
+  graphQlMutationDeleteUser,
+  graphQlMutationSignInUser,
+  graphQlMutationSignMeOut,
+  graphQlMutationSignUpUser,
+  graphQlMutationUpdateUser,
+  graphQlMutationUpdateUserDevice,
+  graphQlMutationVerifyMultiStepActionToken,
+  graphQlQueryFindUserById,
+  graphQlQueryFindUserByIdent,
+  graphQlQueryFindUserDeviceById,
+  graphQlQueryFindUsers,
+  graphQlQueryGetAuthenticatedUser,
+  graphQlQueryGetMultiStepActionProgress,
+  graphQlQueryLatestUserDevice,
+  graphQlQueryUserUserDevices,
   unset,
   $unknown
 }
 
 String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
   switch (e) {
-    case Enum$ServiceRequestType.createGroup:
-      return r'createGroup';
-    case Enum$ServiceRequestType.createGroupMembership:
-      return r'createGroupMembership';
-    case Enum$ServiceRequestType.deleteGroup:
-      return r'deleteGroup';
-    case Enum$ServiceRequestType.deleteGroupMembership:
-      return r'deleteGroupMembership';
-    case Enum$ServiceRequestType.removeUserFromAllGroups:
-      return r'removeUserFromAllGroups';
-    case Enum$ServiceRequestType.updateGroup:
-      return r'updateGroup';
-    case Enum$ServiceRequestType.updateGroupMembership:
-      return r'updateGroupMembership';
+    case Enum$ServiceRequestType.graphQlQueryUserInbox:
+      return r'graphQlQueryUserInbox';
+    case Enum$ServiceRequestType.graphQlQueryUserUserSearches:
+      return r'graphQlQueryUserUserSearches';
+    case Enum$ServiceRequestType.graphQlMutationAddChannelMessageEvent:
+      return r'graphQlMutationAddChannelMessageEvent';
+    case Enum$ServiceRequestType.graphQlMutationCreateChannel:
+      return r'graphQlMutationCreateChannel';
+    case Enum$ServiceRequestType.graphQlMutationCreateChannelInvitation:
+      return r'graphQlMutationCreateChannelInvitation';
+    case Enum$ServiceRequestType.graphQlMutationCreateChannelMessage:
+      return r'graphQlMutationCreateChannelMessage';
+    case Enum$ServiceRequestType.graphQlMutationCreateChannelParticipant:
+      return r'graphQlMutationCreateChannelParticipant';
+    case Enum$ServiceRequestType.graphQlMutationDeleteChannel:
+      return r'graphQlMutationDeleteChannel';
+    case Enum$ServiceRequestType.graphQlMutationDeleteChannelInvitation:
+      return r'graphQlMutationDeleteChannelInvitation';
+    case Enum$ServiceRequestType.graphQlMutationDeleteChannelMessage:
+      return r'graphQlMutationDeleteChannelMessage';
+    case Enum$ServiceRequestType.graphQlMutationDeleteChannelParticipant:
+      return r'graphQlMutationDeleteChannelParticipant';
+    case Enum$ServiceRequestType.graphQlMutationDeleteGroup:
+      return r'graphQlMutationDeleteGroup';
+    case Enum$ServiceRequestType.graphQlMutationDeleteGroupMembership:
+      return r'graphQlMutationDeleteGroupMembership';
+    case Enum$ServiceRequestType.graphQlMutationMarkChannelMessagesAsSeenByMe:
+      return r'graphQlMutationMarkChannelMessagesAsSeenByMe';
+    case Enum$ServiceRequestType.graphQlMutationUpdateChannel:
+      return r'graphQlMutationUpdateChannel';
+    case Enum$ServiceRequestType.graphQlMutationUpdateChannelInvitation:
+      return r'graphQlMutationUpdateChannelInvitation';
+    case Enum$ServiceRequestType.graphQlMutationUpdateChannelMessage:
+      return r'graphQlMutationUpdateChannelMessage';
+    case Enum$ServiceRequestType.graphQlMutationUpdateChannelParticipant:
+      return r'graphQlMutationUpdateChannelParticipant';
+    case Enum$ServiceRequestType.graphQlQueryChannelInvitations:
+      return r'graphQlQueryChannelInvitations';
+    case Enum$ServiceRequestType.graphQlQueryChannelParticipants:
+      return r'graphQlQueryChannelParticipants';
+    case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationById:
+      return r'graphQlQueryFindChannelInvitationById';
+    case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsForUser:
+      return r'graphQlQueryFindChannelInvitationsForUser';
+    case Enum$ServiceRequestType.graphQlQueryFindChannelMessageById:
+      return r'graphQlQueryFindChannelMessageById';
+    case Enum$ServiceRequestType.graphQlQueryFindChannelMessages:
+      return r'graphQlQueryFindChannelMessages';
+    case Enum$ServiceRequestType.graphQlQueryFindChannelParticipantById:
+      return r'graphQlQueryFindChannelParticipantById';
+    case Enum$ServiceRequestType
+        .graphQlQueryFindPendingChannelInvitationsForUser:
+      return r'graphQlQueryFindPendingChannelInvitationsForUser';
+    case Enum$ServiceRequestType.graphQlQueryMyInbox:
+      return r'graphQlQueryMyInbox';
+    case Enum$ServiceRequestType.graphQlQueryUserChannels:
+      return r'graphQlQueryUserChannels';
+    case Enum$ServiceRequestType.graphQlQueryUserCompanies:
+      return r'graphQlQueryUserCompanies';
+    case Enum$ServiceRequestType.graphQlQueryUserGroupMembers:
+      return r'graphQlQueryUserGroupMembers';
+    case Enum$ServiceRequestType.graphQlQueryUserGroups:
+      return r'graphQlQueryUserGroups';
+    case Enum$ServiceRequestType.graphQlMutationRunDataGenerator:
+      return r'graphQlMutationRunDataGenerator';
+    case Enum$ServiceRequestType.graphQlMutationExecuteAdminTask:
+      return r'graphQlMutationExecuteAdminTask';
+    case Enum$ServiceRequestType.graphQlMutationSignUpOAuthUser:
+      return r'graphQlMutationSignUpOAuthUser';
+    case Enum$ServiceRequestType.graphQlMutationUpsertBackgroundTask:
+      return r'graphQlMutationUpsertBackgroundTask';
+    case Enum$ServiceRequestType.graphQlQueryAvailableUserHandle:
+      return r'graphQlQueryAvailableUserHandle';
+    case Enum$ServiceRequestType.graphQlQueryBackgroundTask:
+      return r'graphQlQueryBackgroundTask';
+    case Enum$ServiceRequestType.graphQlQueryFindChannelById:
+      return r'graphQlQueryFindChannelById';
+    case Enum$ServiceRequestType.graphQlQueryFindChannels:
+      return r'graphQlQueryFindChannels';
+    case Enum$ServiceRequestType.graphQlQueryfindChannelsForUser:
+      return r'graphQlQueryfindChannelsForUser';
+    case Enum$ServiceRequestType.graphQlQueryNotification:
+      return r'graphQlQueryNotification';
+    case Enum$ServiceRequestType.graphQlQueryNotificationTemplate:
+      return r'graphQlQueryNotificationTemplate';
+    case Enum$ServiceRequestType.graphQlQueryUnreadInAppMessages:
+      return r'graphQlQueryUnreadInAppMessages';
+    case Enum$ServiceRequestType.graphQlQueryUser:
+      return r'graphQlQueryUser';
+    case Enum$ServiceRequestType.graphQlQueryUserInboxUser:
+      return r'graphQlQueryUserInboxUser';
+    case Enum$ServiceRequestType.graphQlMutationAddUserToGroup:
+      return r'graphQlMutationAddUserToGroup';
+    case Enum$ServiceRequestType.graphQlMutationCreateGroup:
+      return r'graphQlMutationCreateGroup';
+    case Enum$ServiceRequestType.graphQlMutationCreateGroupMembership:
+      return r'graphQlMutationCreateGroupMembership';
+    case Enum$ServiceRequestType.graphQlMutationRemoveUserFromAllGroups:
+      return r'graphQlMutationRemoveUserFromAllGroups';
+    case Enum$ServiceRequestType.graphQlMutationRemoveUserFromGroup:
+      return r'graphQlMutationRemoveUserFromGroup';
+    case Enum$ServiceRequestType.graphQlMutationUpdateGroup:
+      return r'graphQlMutationUpdateGroup';
+    case Enum$ServiceRequestType.graphQlMutationUpdateGroupMembership:
+      return r'graphQlMutationUpdateGroupMembership';
+    case Enum$ServiceRequestType.graphQlQueryFindGroupById:
+      return r'graphQlQueryFindGroupById';
+    case Enum$ServiceRequestType.graphQlQueryFindGroupMembershipByIdField:
+      return r'graphQlQueryFindGroupMembershipByIdField';
+    case Enum$ServiceRequestType.graphQlQueryFindGroupMemberships:
+      return r'graphQlQueryFindGroupMemberships';
+    case Enum$ServiceRequestType.graphQlQueryMyGroupMemberships:
+      return r'graphQlQueryMyGroupMemberships';
+    case Enum$ServiceRequestType.graphQlMutationCreateUserSearch:
+      return r'graphQlMutationCreateUserSearch';
+    case Enum$ServiceRequestType.graphQlMutationDeleteUserSearch:
+      return r'graphQlMutationDeleteUserSearch';
+    case Enum$ServiceRequestType.graphQlMutationUpdateUserSearch:
+      return r'graphQlMutationUpdateUserSearch';
+    case Enum$ServiceRequestType.graphQlQueryFindUserSearchById:
+      return r'graphQlQueryFindUserSearchById';
+    case Enum$ServiceRequestType.graphQlQueryUserSearchFoundUsers:
+      return r'graphQlQueryUserSearchFoundUsers';
+    case Enum$ServiceRequestType.graphQlMutationCreateNotification:
+      return r'graphQlMutationCreateNotification';
+    case Enum$ServiceRequestType.graphQlMutationCreateNotificationTemplate:
+      return r'graphQlMutationCreateNotificationTemplate';
+    case Enum$ServiceRequestType.graphQlMutationDeleteNotification:
+      return r'graphQlMutationDeleteNotification';
+    case Enum$ServiceRequestType.graphQlMutationDeleteNotificationTemplate:
+      return r'graphQlMutationDeleteNotificationTemplate';
+    case Enum$ServiceRequestType.graphQlMutationMarkInAppMessageReceived:
+      return r'graphQlMutationMarkInAppMessageReceived';
+    case Enum$ServiceRequestType.graphQlMutationSendMultiStepActionNotification:
+      return r'graphQlMutationSendMultiStepActionNotification';
+    case Enum$ServiceRequestType.graphQlMutationUpdateNotification:
+      return r'graphQlMutationUpdateNotification';
+    case Enum$ServiceRequestType.graphQlMutationUpdateNotificationTemplate:
+      return r'graphQlMutationUpdateNotificationTemplate';
+    case Enum$ServiceRequestType.graphQlMutationClearAllSyncInfo:
+      return r'graphQlMutationClearAllSyncInfo';
+    case Enum$ServiceRequestType.graphQlMutationCreateMm2Synchronization:
+      return r'graphQlMutationCreateMm2Synchronization';
+    case Enum$ServiceRequestType.graphQlMutationDeleteAllMm2DataInMm3:
+      return r'graphQlMutationDeleteAllMm2DataInMm3';
+    case Enum$ServiceRequestType.graphQlMutationDeleteMm2Synchronization:
+      return r'graphQlMutationDeleteMm2Synchronization';
+    case Enum$ServiceRequestType.graphQlMutationRunMm2Synchronization:
+      return r'graphQlMutationRunMm2Synchronization';
+    case Enum$ServiceRequestType.graphQlQueryFindMm2SynchronizationById:
+      return r'graphQlQueryFindMm2SynchronizationById';
+    case Enum$ServiceRequestType.graphQlQueryGetMm2Integration:
+      return r'graphQlQueryGetMm2Integration';
+    case Enum$ServiceRequestType.graphQlMutationCreateMultiStepAction:
+      return r'graphQlMutationCreateMultiStepAction';
+    case Enum$ServiceRequestType.graphQlMutationCreateUserDevice:
+      return r'graphQlMutationCreateUserDevice';
+    case Enum$ServiceRequestType.graphQlMutationDeleteUser:
+      return r'graphQlMutationDeleteUser';
+    case Enum$ServiceRequestType.graphQlMutationSignInUser:
+      return r'graphQlMutationSignInUser';
+    case Enum$ServiceRequestType.graphQlMutationSignMeOut:
+      return r'graphQlMutationSignMeOut';
+    case Enum$ServiceRequestType.graphQlMutationSignUpUser:
+      return r'graphQlMutationSignUpUser';
+    case Enum$ServiceRequestType.graphQlMutationUpdateUser:
+      return r'graphQlMutationUpdateUser';
+    case Enum$ServiceRequestType.graphQlMutationUpdateUserDevice:
+      return r'graphQlMutationUpdateUserDevice';
+    case Enum$ServiceRequestType.graphQlMutationVerifyMultiStepActionToken:
+      return r'graphQlMutationVerifyMultiStepActionToken';
+    case Enum$ServiceRequestType.graphQlQueryFindUserById:
+      return r'graphQlQueryFindUserById';
+    case Enum$ServiceRequestType.graphQlQueryFindUserByIdent:
+      return r'graphQlQueryFindUserByIdent';
+    case Enum$ServiceRequestType.graphQlQueryFindUserDeviceById:
+      return r'graphQlQueryFindUserDeviceById';
+    case Enum$ServiceRequestType.graphQlQueryFindUsers:
+      return r'graphQlQueryFindUsers';
+    case Enum$ServiceRequestType.graphQlQueryGetAuthenticatedUser:
+      return r'graphQlQueryGetAuthenticatedUser';
+    case Enum$ServiceRequestType.graphQlQueryGetMultiStepActionProgress:
+      return r'graphQlQueryGetMultiStepActionProgress';
+    case Enum$ServiceRequestType.graphQlQueryLatestUserDevice:
+      return r'graphQlQueryLatestUserDevice';
+    case Enum$ServiceRequestType.graphQlQueryUserUserDevices:
+      return r'graphQlQueryUserUserDevices';
     case Enum$ServiceRequestType.unset:
       return r'unset';
     case Enum$ServiceRequestType.$unknown:
@@ -19068,20 +25210,195 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
 
 Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
   switch (value) {
-    case r'createGroup':
-      return Enum$ServiceRequestType.createGroup;
-    case r'createGroupMembership':
-      return Enum$ServiceRequestType.createGroupMembership;
-    case r'deleteGroup':
-      return Enum$ServiceRequestType.deleteGroup;
-    case r'deleteGroupMembership':
-      return Enum$ServiceRequestType.deleteGroupMembership;
-    case r'removeUserFromAllGroups':
-      return Enum$ServiceRequestType.removeUserFromAllGroups;
-    case r'updateGroup':
-      return Enum$ServiceRequestType.updateGroup;
-    case r'updateGroupMembership':
-      return Enum$ServiceRequestType.updateGroupMembership;
+    case r'graphQlQueryUserInbox':
+      return Enum$ServiceRequestType.graphQlQueryUserInbox;
+    case r'graphQlQueryUserUserSearches':
+      return Enum$ServiceRequestType.graphQlQueryUserUserSearches;
+    case r'graphQlMutationAddChannelMessageEvent':
+      return Enum$ServiceRequestType.graphQlMutationAddChannelMessageEvent;
+    case r'graphQlMutationCreateChannel':
+      return Enum$ServiceRequestType.graphQlMutationCreateChannel;
+    case r'graphQlMutationCreateChannelInvitation':
+      return Enum$ServiceRequestType.graphQlMutationCreateChannelInvitation;
+    case r'graphQlMutationCreateChannelMessage':
+      return Enum$ServiceRequestType.graphQlMutationCreateChannelMessage;
+    case r'graphQlMutationCreateChannelParticipant':
+      return Enum$ServiceRequestType.graphQlMutationCreateChannelParticipant;
+    case r'graphQlMutationDeleteChannel':
+      return Enum$ServiceRequestType.graphQlMutationDeleteChannel;
+    case r'graphQlMutationDeleteChannelInvitation':
+      return Enum$ServiceRequestType.graphQlMutationDeleteChannelInvitation;
+    case r'graphQlMutationDeleteChannelMessage':
+      return Enum$ServiceRequestType.graphQlMutationDeleteChannelMessage;
+    case r'graphQlMutationDeleteChannelParticipant':
+      return Enum$ServiceRequestType.graphQlMutationDeleteChannelParticipant;
+    case r'graphQlMutationDeleteGroup':
+      return Enum$ServiceRequestType.graphQlMutationDeleteGroup;
+    case r'graphQlMutationDeleteGroupMembership':
+      return Enum$ServiceRequestType.graphQlMutationDeleteGroupMembership;
+    case r'graphQlMutationMarkChannelMessagesAsSeenByMe':
+      return Enum$ServiceRequestType
+          .graphQlMutationMarkChannelMessagesAsSeenByMe;
+    case r'graphQlMutationUpdateChannel':
+      return Enum$ServiceRequestType.graphQlMutationUpdateChannel;
+    case r'graphQlMutationUpdateChannelInvitation':
+      return Enum$ServiceRequestType.graphQlMutationUpdateChannelInvitation;
+    case r'graphQlMutationUpdateChannelMessage':
+      return Enum$ServiceRequestType.graphQlMutationUpdateChannelMessage;
+    case r'graphQlMutationUpdateChannelParticipant':
+      return Enum$ServiceRequestType.graphQlMutationUpdateChannelParticipant;
+    case r'graphQlQueryChannelInvitations':
+      return Enum$ServiceRequestType.graphQlQueryChannelInvitations;
+    case r'graphQlQueryChannelParticipants':
+      return Enum$ServiceRequestType.graphQlQueryChannelParticipants;
+    case r'graphQlQueryFindChannelInvitationById':
+      return Enum$ServiceRequestType.graphQlQueryFindChannelInvitationById;
+    case r'graphQlQueryFindChannelInvitationsForUser':
+      return Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsForUser;
+    case r'graphQlQueryFindChannelMessageById':
+      return Enum$ServiceRequestType.graphQlQueryFindChannelMessageById;
+    case r'graphQlQueryFindChannelMessages':
+      return Enum$ServiceRequestType.graphQlQueryFindChannelMessages;
+    case r'graphQlQueryFindChannelParticipantById':
+      return Enum$ServiceRequestType.graphQlQueryFindChannelParticipantById;
+    case r'graphQlQueryFindPendingChannelInvitationsForUser':
+      return Enum$ServiceRequestType
+          .graphQlQueryFindPendingChannelInvitationsForUser;
+    case r'graphQlQueryMyInbox':
+      return Enum$ServiceRequestType.graphQlQueryMyInbox;
+    case r'graphQlQueryUserChannels':
+      return Enum$ServiceRequestType.graphQlQueryUserChannels;
+    case r'graphQlQueryUserCompanies':
+      return Enum$ServiceRequestType.graphQlQueryUserCompanies;
+    case r'graphQlQueryUserGroupMembers':
+      return Enum$ServiceRequestType.graphQlQueryUserGroupMembers;
+    case r'graphQlQueryUserGroups':
+      return Enum$ServiceRequestType.graphQlQueryUserGroups;
+    case r'graphQlMutationRunDataGenerator':
+      return Enum$ServiceRequestType.graphQlMutationRunDataGenerator;
+    case r'graphQlMutationExecuteAdminTask':
+      return Enum$ServiceRequestType.graphQlMutationExecuteAdminTask;
+    case r'graphQlMutationSignUpOAuthUser':
+      return Enum$ServiceRequestType.graphQlMutationSignUpOAuthUser;
+    case r'graphQlMutationUpsertBackgroundTask':
+      return Enum$ServiceRequestType.graphQlMutationUpsertBackgroundTask;
+    case r'graphQlQueryAvailableUserHandle':
+      return Enum$ServiceRequestType.graphQlQueryAvailableUserHandle;
+    case r'graphQlQueryBackgroundTask':
+      return Enum$ServiceRequestType.graphQlQueryBackgroundTask;
+    case r'graphQlQueryFindChannelById':
+      return Enum$ServiceRequestType.graphQlQueryFindChannelById;
+    case r'graphQlQueryFindChannels':
+      return Enum$ServiceRequestType.graphQlQueryFindChannels;
+    case r'graphQlQueryfindChannelsForUser':
+      return Enum$ServiceRequestType.graphQlQueryfindChannelsForUser;
+    case r'graphQlQueryNotification':
+      return Enum$ServiceRequestType.graphQlQueryNotification;
+    case r'graphQlQueryNotificationTemplate':
+      return Enum$ServiceRequestType.graphQlQueryNotificationTemplate;
+    case r'graphQlQueryUnreadInAppMessages':
+      return Enum$ServiceRequestType.graphQlQueryUnreadInAppMessages;
+    case r'graphQlQueryUser':
+      return Enum$ServiceRequestType.graphQlQueryUser;
+    case r'graphQlQueryUserInboxUser':
+      return Enum$ServiceRequestType.graphQlQueryUserInboxUser;
+    case r'graphQlMutationAddUserToGroup':
+      return Enum$ServiceRequestType.graphQlMutationAddUserToGroup;
+    case r'graphQlMutationCreateGroup':
+      return Enum$ServiceRequestType.graphQlMutationCreateGroup;
+    case r'graphQlMutationCreateGroupMembership':
+      return Enum$ServiceRequestType.graphQlMutationCreateGroupMembership;
+    case r'graphQlMutationRemoveUserFromAllGroups':
+      return Enum$ServiceRequestType.graphQlMutationRemoveUserFromAllGroups;
+    case r'graphQlMutationRemoveUserFromGroup':
+      return Enum$ServiceRequestType.graphQlMutationRemoveUserFromGroup;
+    case r'graphQlMutationUpdateGroup':
+      return Enum$ServiceRequestType.graphQlMutationUpdateGroup;
+    case r'graphQlMutationUpdateGroupMembership':
+      return Enum$ServiceRequestType.graphQlMutationUpdateGroupMembership;
+    case r'graphQlQueryFindGroupById':
+      return Enum$ServiceRequestType.graphQlQueryFindGroupById;
+    case r'graphQlQueryFindGroupMembershipByIdField':
+      return Enum$ServiceRequestType.graphQlQueryFindGroupMembershipByIdField;
+    case r'graphQlQueryFindGroupMemberships':
+      return Enum$ServiceRequestType.graphQlQueryFindGroupMemberships;
+    case r'graphQlQueryMyGroupMemberships':
+      return Enum$ServiceRequestType.graphQlQueryMyGroupMemberships;
+    case r'graphQlMutationCreateUserSearch':
+      return Enum$ServiceRequestType.graphQlMutationCreateUserSearch;
+    case r'graphQlMutationDeleteUserSearch':
+      return Enum$ServiceRequestType.graphQlMutationDeleteUserSearch;
+    case r'graphQlMutationUpdateUserSearch':
+      return Enum$ServiceRequestType.graphQlMutationUpdateUserSearch;
+    case r'graphQlQueryFindUserSearchById':
+      return Enum$ServiceRequestType.graphQlQueryFindUserSearchById;
+    case r'graphQlQueryUserSearchFoundUsers':
+      return Enum$ServiceRequestType.graphQlQueryUserSearchFoundUsers;
+    case r'graphQlMutationCreateNotification':
+      return Enum$ServiceRequestType.graphQlMutationCreateNotification;
+    case r'graphQlMutationCreateNotificationTemplate':
+      return Enum$ServiceRequestType.graphQlMutationCreateNotificationTemplate;
+    case r'graphQlMutationDeleteNotification':
+      return Enum$ServiceRequestType.graphQlMutationDeleteNotification;
+    case r'graphQlMutationDeleteNotificationTemplate':
+      return Enum$ServiceRequestType.graphQlMutationDeleteNotificationTemplate;
+    case r'graphQlMutationMarkInAppMessageReceived':
+      return Enum$ServiceRequestType.graphQlMutationMarkInAppMessageReceived;
+    case r'graphQlMutationSendMultiStepActionNotification':
+      return Enum$ServiceRequestType
+          .graphQlMutationSendMultiStepActionNotification;
+    case r'graphQlMutationUpdateNotification':
+      return Enum$ServiceRequestType.graphQlMutationUpdateNotification;
+    case r'graphQlMutationUpdateNotificationTemplate':
+      return Enum$ServiceRequestType.graphQlMutationUpdateNotificationTemplate;
+    case r'graphQlMutationClearAllSyncInfo':
+      return Enum$ServiceRequestType.graphQlMutationClearAllSyncInfo;
+    case r'graphQlMutationCreateMm2Synchronization':
+      return Enum$ServiceRequestType.graphQlMutationCreateMm2Synchronization;
+    case r'graphQlMutationDeleteAllMm2DataInMm3':
+      return Enum$ServiceRequestType.graphQlMutationDeleteAllMm2DataInMm3;
+    case r'graphQlMutationDeleteMm2Synchronization':
+      return Enum$ServiceRequestType.graphQlMutationDeleteMm2Synchronization;
+    case r'graphQlMutationRunMm2Synchronization':
+      return Enum$ServiceRequestType.graphQlMutationRunMm2Synchronization;
+    case r'graphQlQueryFindMm2SynchronizationById':
+      return Enum$ServiceRequestType.graphQlQueryFindMm2SynchronizationById;
+    case r'graphQlQueryGetMm2Integration':
+      return Enum$ServiceRequestType.graphQlQueryGetMm2Integration;
+    case r'graphQlMutationCreateMultiStepAction':
+      return Enum$ServiceRequestType.graphQlMutationCreateMultiStepAction;
+    case r'graphQlMutationCreateUserDevice':
+      return Enum$ServiceRequestType.graphQlMutationCreateUserDevice;
+    case r'graphQlMutationDeleteUser':
+      return Enum$ServiceRequestType.graphQlMutationDeleteUser;
+    case r'graphQlMutationSignInUser':
+      return Enum$ServiceRequestType.graphQlMutationSignInUser;
+    case r'graphQlMutationSignMeOut':
+      return Enum$ServiceRequestType.graphQlMutationSignMeOut;
+    case r'graphQlMutationSignUpUser':
+      return Enum$ServiceRequestType.graphQlMutationSignUpUser;
+    case r'graphQlMutationUpdateUser':
+      return Enum$ServiceRequestType.graphQlMutationUpdateUser;
+    case r'graphQlMutationUpdateUserDevice':
+      return Enum$ServiceRequestType.graphQlMutationUpdateUserDevice;
+    case r'graphQlMutationVerifyMultiStepActionToken':
+      return Enum$ServiceRequestType.graphQlMutationVerifyMultiStepActionToken;
+    case r'graphQlQueryFindUserById':
+      return Enum$ServiceRequestType.graphQlQueryFindUserById;
+    case r'graphQlQueryFindUserByIdent':
+      return Enum$ServiceRequestType.graphQlQueryFindUserByIdent;
+    case r'graphQlQueryFindUserDeviceById':
+      return Enum$ServiceRequestType.graphQlQueryFindUserDeviceById;
+    case r'graphQlQueryFindUsers':
+      return Enum$ServiceRequestType.graphQlQueryFindUsers;
+    case r'graphQlQueryGetAuthenticatedUser':
+      return Enum$ServiceRequestType.graphQlQueryGetAuthenticatedUser;
+    case r'graphQlQueryGetMultiStepActionProgress':
+      return Enum$ServiceRequestType.graphQlQueryGetMultiStepActionProgress;
+    case r'graphQlQueryLatestUserDevice':
+      return Enum$ServiceRequestType.graphQlQueryLatestUserDevice;
+    case r'graphQlQueryUserUserDevices':
+      return Enum$ServiceRequestType.graphQlQueryUserUserDevices;
     case r'unset':
       return Enum$ServiceRequestType.unset;
     default:
@@ -19107,13 +25424,16 @@ enum Enum$ModelType {
   Group,
   GroupMembership,
   GroupRule,
+  GroupRuleConfig,
   Match,
   MatchProfile,
   MatchingEngine,
+  UserSearch,
   Notification,
   NotificationTemplate,
   Mm2Integration,
   Mm2Synchronization,
+  Mm2SynchronizationResultItem,
   MultiStepAction,
   ServiceRequest,
   User,
@@ -19157,12 +25477,16 @@ String toJson$Enum$ModelType(Enum$ModelType e) {
       return r'GroupMembership';
     case Enum$ModelType.GroupRule:
       return r'GroupRule';
+    case Enum$ModelType.GroupRuleConfig:
+      return r'GroupRuleConfig';
     case Enum$ModelType.Match:
       return r'Match';
     case Enum$ModelType.MatchProfile:
       return r'MatchProfile';
     case Enum$ModelType.MatchingEngine:
       return r'MatchingEngine';
+    case Enum$ModelType.UserSearch:
+      return r'UserSearch';
     case Enum$ModelType.Notification:
       return r'Notification';
     case Enum$ModelType.NotificationTemplate:
@@ -19171,6 +25495,8 @@ String toJson$Enum$ModelType(Enum$ModelType e) {
       return r'Mm2Integration';
     case Enum$ModelType.Mm2Synchronization:
       return r'Mm2Synchronization';
+    case Enum$ModelType.Mm2SynchronizationResultItem:
+      return r'Mm2SynchronizationResultItem';
     case Enum$ModelType.MultiStepAction:
       return r'MultiStepAction';
     case Enum$ModelType.ServiceRequest:
@@ -19220,12 +25546,16 @@ Enum$ModelType fromJson$Enum$ModelType(String value) {
       return Enum$ModelType.GroupMembership;
     case r'GroupRule':
       return Enum$ModelType.GroupRule;
+    case r'GroupRuleConfig':
+      return Enum$ModelType.GroupRuleConfig;
     case r'Match':
       return Enum$ModelType.Match;
     case r'MatchProfile':
       return Enum$ModelType.MatchProfile;
     case r'MatchingEngine':
       return Enum$ModelType.MatchingEngine;
+    case r'UserSearch':
+      return Enum$ModelType.UserSearch;
     case r'Notification':
       return Enum$ModelType.Notification;
     case r'NotificationTemplate':
@@ -19234,6 +25564,8 @@ Enum$ModelType fromJson$Enum$ModelType(String value) {
       return Enum$ModelType.Mm2Integration;
     case r'Mm2Synchronization':
       return Enum$ModelType.Mm2Synchronization;
+    case r'Mm2SynchronizationResultItem':
+      return Enum$ModelType.Mm2SynchronizationResultItem;
     case r'MultiStepAction':
       return Enum$ModelType.MultiStepAction;
     case r'ServiceRequest':
@@ -19709,6 +26041,35 @@ Enum$SyncActionTaken fromJson$Enum$SyncActionTaken(String value) {
   }
 }
 
+enum Enum$Mm2SynchronizerLogLevel { none, info, error, $unknown }
+
+String toJson$Enum$Mm2SynchronizerLogLevel(Enum$Mm2SynchronizerLogLevel e) {
+  switch (e) {
+    case Enum$Mm2SynchronizerLogLevel.none:
+      return r'none';
+    case Enum$Mm2SynchronizerLogLevel.info:
+      return r'info';
+    case Enum$Mm2SynchronizerLogLevel.error:
+      return r'error';
+    case Enum$Mm2SynchronizerLogLevel.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2SynchronizerLogLevel fromJson$Enum$Mm2SynchronizerLogLevel(
+    String value) {
+  switch (value) {
+    case r'none':
+      return Enum$Mm2SynchronizerLogLevel.none;
+    case r'info':
+      return Enum$Mm2SynchronizerLogLevel.info;
+    case r'error':
+      return Enum$Mm2SynchronizerLogLevel.error;
+    default:
+      return Enum$Mm2SynchronizerLogLevel.$unknown;
+  }
+}
+
 enum Enum$ObjectChangedEventType { created, updated, deleted, $unknown }
 
 String toJson$Enum$ObjectChangedEventType(Enum$ObjectChangedEventType e) {
@@ -19909,10 +26270,10 @@ Enum$__DirectiveLocation fromJson$Enum$__DirectiveLocation(String value) {
 }
 
 const possibleTypesMap = <String, Set<String>>{
-  'BaseModelMetadata': {'UserMetadata'},
   'IGroupMembership': {
     'GroupMembership',
     'MenteesGroupMembership',
     'MentorsGroupMembership',
   },
+  'BaseModelMetadata': {'UserMetadata'},
 };

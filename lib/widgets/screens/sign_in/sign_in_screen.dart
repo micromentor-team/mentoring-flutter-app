@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
-import 'package:mm_flutter_app/schema/generated/schema.graphql.dart'
-    as gql_schema;
 import 'package:provider/provider.dart';
 
+import '../../../__generated/schema/schema.graphql.dart';
 import '../../../utilities/utility.dart';
 import '../sign_up/sign_up_screen.dart';
 
@@ -150,13 +149,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                     ScaffoldMessenger.of(context);
 
                                 if (_formKey.currentState!.validate()) {
-                                  final signInResult =
-                                      await userProvider.signInUser(
-                                          gql_schema.Input$UserSignInInput(
+                                  final signInResult = await userProvider
+                                      .signInUser(Input$UserSignInInput(
                                     deviceUuid: AppUtility.getDeviceUuid(),
                                     ident: emailController.text,
-                                    identType:
-                                        gql_schema.Enum$UserIdentType.email,
+                                    identType: Enum$UserIdentType.email,
                                     password: passwordController.text,
                                   ));
                                   final signInError = signInResult

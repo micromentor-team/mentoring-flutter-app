@@ -1,4 +1,4 @@
-// GENERATED FILE
+// GENERATED WITH GRAPHQL_CODEGEN
 // DO NOT MODIFY
 import 'package:gql/ast.dart';
 import 'schema.graphql.dart';
@@ -217,7 +217,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     this.email,
     this.fullName,
     this.avatarUrl,
-    required this.userHandle,
+    this.userHandle,
     this.$__typename = 'User',
   });
 
@@ -234,7 +234,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       email: (l$email as String?),
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
-      userHandle: (l$userHandle as String),
+      userHandle: (l$userHandle as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -247,7 +247,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
 
   final String? avatarUrl;
 
-  final String userHandle;
+  final String? userHandle;
 
   final String $__typename;
 
@@ -388,9 +388,9 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
         avatarUrl: avatarUrl == _undefined
             ? _instance.avatarUrl
             : (avatarUrl as String?),
-        userHandle: userHandle == _undefined || userHandle == null
+        userHandle: userHandle == _undefined
             ? _instance.userHandle
-            : (userHandle as String),
+            : (userHandle as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1096,7 +1096,7 @@ class Query$FindUsers$findUsers {
     this.email,
     this.fullName,
     this.avatarUrl,
-    required this.userHandle,
+    this.userHandle,
     this.$__typename = 'User',
   });
 
@@ -1112,7 +1112,7 @@ class Query$FindUsers$findUsers {
       email: (l$email as String?),
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
-      userHandle: (l$userHandle as String),
+      userHandle: (l$userHandle as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1125,7 +1125,7 @@ class Query$FindUsers$findUsers {
 
   final String? avatarUrl;
 
-  final String userHandle;
+  final String? userHandle;
 
   final String $__typename;
 
@@ -1264,9 +1264,9 @@ class _CopyWithImpl$Query$FindUsers$findUsers<TRes>
         avatarUrl: avatarUrl == _undefined
             ? _instance.avatarUrl
             : (avatarUrl as String?),
-        userHandle: userHandle == _undefined || userHandle == null
+        userHandle: userHandle == _undefined
             ? _instance.userHandle
-            : (userHandle as String),
+            : (userHandle as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),

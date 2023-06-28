@@ -77,9 +77,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  analyzer: ^5.0.0
   # widgetbook: ^2.4.1
-  widgetbook_annotation: ^2.1.0
-  widgetbook_generator: ^2.4.1
+  # widgetbook_annotation: ^2.1.0
+  # widgetbook_generator: ^2.4.1
   build_runner: ^2.3.3
   flutter_launcher_icons: ^0.13.0
 
