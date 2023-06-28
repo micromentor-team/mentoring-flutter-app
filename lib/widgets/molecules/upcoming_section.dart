@@ -5,7 +5,7 @@ import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_session_tile.dart';
 
 class UpcomingSection extends StatelessWidget {
-  static const maxDaysDisplayed = 7;
+  static const maxDaysDisplayed = 365;
   const UpcomingSection({Key? key}) : super(key: key);
 
   List<UpcomingSessionTile> _createUpcomingSessionTiles() {
@@ -20,6 +20,7 @@ class UpcomingSection extends StatelessWidget {
           DateTime.now().add(const Duration(days: maxDaysDisplayed)))) {
         sessionTiles.add(
           UpcomingSessionTile(
+            avatarUrl: sessions[i].avatarUrl,
             dateTime: sessions[i].dateTime,
             mentorName: sessions[i].mentorName,
           ),
@@ -34,32 +35,26 @@ class UpcomingSection extends StatelessWidget {
     //TODO(m-rosario): Fetch sessions from backend instead of using mock data.
     upcomingSessions.addAll([
       _UpcomingSession(
-        mentorName: 'Marina Larissa',
+        mentorName: 'Thu Tran',
         dateTime: DateTime.now().copyWith(hour: 8, minute: 0, second: 0),
+        avatarUrl:
+            "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       ),
       _UpcomingSession(
-        mentorName: 'Hodan Clemens',
+        mentorName: 'Nick Ramires',
         dateTime: DateTime.now()
             .copyWith(hour: 13, minute: 30, second: 0)
             .add(const Duration(days: 1)),
+        avatarUrl:
+            "https://images.pexels.com/photos/6000065/pexels-photo-6000065.jpeg",
       ),
       _UpcomingSession(
-        mentorName: 'Julius Helier',
+        mentorName: 'Anwar Masry',
         dateTime: DateTime.now()
-            .copyWith(hour: 8, minute: 0, second: 0)
-            .add(const Duration(days: 2)),
-      ),
-      _UpcomingSession(
-        mentorName: 'Rosanne Alesha',
-        dateTime: DateTime.now()
-            .copyWith(hour: 16, minute: 0, second: 0)
-            .add(const Duration(days: 3)),
-      ),
-      _UpcomingSession(
-        mentorName: 'Junaid Maqsood',
-        dateTime: DateTime.now()
-            .copyWith(hour: 15, minute: 45, second: 0)
-            .add(const Duration(days: 4)),
+            .copyWith(hour: 13, minute: 30, second: 0)
+            .add(const Duration(days: 100)),
+        avatarUrl:
+            "https://images.pexels.com/photos/3400560/pexels-photo-3400560.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       ),
     ]);
     return upcomingSessions;
@@ -70,7 +65,8 @@ class UpcomingSection extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     List<Widget> upcomingSessionTiles = _createUpcomingSessionTiles();
     return SectionTile(
-      title: l10n.homeUpcomingSectionTitle(upcomingSessionTiles.length),
+      title: l10n.homeUpcomingSectionTitle,
+      addTopDivider: true,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
@@ -88,9 +84,11 @@ class UpcomingSection extends StatelessWidget {
 class _UpcomingSession {
   final String mentorName;
   final DateTime dateTime;
+  final String avatarUrl;
 
   const _UpcomingSession({
     required this.mentorName,
     required this.dateTime,
+    required this.avatarUrl,
   });
 }

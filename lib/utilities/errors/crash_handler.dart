@@ -24,6 +24,7 @@ class CrashHandler {
 
   void _initialize() async {
     await Firebase.initializeApp(
+      name: "MicroMentor",
       options: DefaultFirebaseOptions.currentPlatform,
     );
     if (!kIsWeb) {
