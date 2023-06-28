@@ -1,5 +1,7 @@
 // GENERATED WITH GRAPHQL_CODEGEN
 // DO NOT MODIFY
+// ignore_for_file: type=lint
+
 import 'package:gql/ast.dart';
 import 'schema.graphql.dart';
 

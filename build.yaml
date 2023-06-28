@@ -11,4 +11,4 @@ targets:
             JSON:
               type: Map<String, dynamic>
           outputDirectory: /lib/__generated/
-          generatedFileHeader: "// GENERATED WITH GRAPHQL_CODEGEN\n// DO NOT MODIFY\n"
+          generatedFileHeader: "// GENERATED WITH GRAPHQL_CODEGEN\n// DO NOT MODIFY\n// ignore_for_file: type=lint\n\n"

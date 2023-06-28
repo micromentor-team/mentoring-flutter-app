@@ -1,5 +1,7 @@
 // GENERATED WITH GRAPHQL_CODEGEN
 // DO NOT MODIFY
+// ignore_for_file: type=lint
+
 class Input$FindUserByIdentOptions {
   factory Input$FindUserByIdentOptions({
     bool? includeDeleted,
