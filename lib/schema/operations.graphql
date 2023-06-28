@@ -34,3 +34,23 @@ mutation SignInUser ($input: UserSignInInput!) {
         authToken
     }
 }
+
+mutation SignOutUser {
+    signMeOut
+}
+
+mutation SignUpUser ($input: UserSignUpInput!) {
+    signUpUser(input: $input) {
+        userId
+        deviceId
+        authToken
+    }
+}
+
+mutation DeleteUser ($userId: String!, $deletePhysically: Boolean!) {
+    deleteUser(userId: $userId, deletePhysically: $deletePhysically)
+}
+
+mutation UpdateUser ($input: UserInput!) {
+    updateUser(input: $input)
+}

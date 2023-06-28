@@ -1755,3 +1755,1177 @@ class _CopyWithStubImpl$Mutation$SignInUser$signInUser<TRes>
   }) =>
       _res;
 }
+
+class Mutation$SignOutUser {
+  Mutation$SignOutUser({
+    required this.signMeOut,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$SignOutUser.fromJson(Map<String, dynamic> json) {
+    final l$signMeOut = json['signMeOut'];
+    final l$$__typename = json['__typename'];
+    return Mutation$SignOutUser(
+      signMeOut: (l$signMeOut as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String signMeOut;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$signMeOut = signMeOut;
+    _resultData['signMeOut'] = l$signMeOut;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$signMeOut = signMeOut;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$signMeOut,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$SignOutUser) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$signMeOut = signMeOut;
+    final lOther$signMeOut = other.signMeOut;
+    if (l$signMeOut != lOther$signMeOut) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$SignOutUser on Mutation$SignOutUser {
+  CopyWith$Mutation$SignOutUser<Mutation$SignOutUser> get copyWith =>
+      CopyWith$Mutation$SignOutUser(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$SignOutUser<TRes> {
+  factory CopyWith$Mutation$SignOutUser(
+    Mutation$SignOutUser instance,
+    TRes Function(Mutation$SignOutUser) then,
+  ) = _CopyWithImpl$Mutation$SignOutUser;
+
+  factory CopyWith$Mutation$SignOutUser.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$SignOutUser;
+
+  TRes call({
+    String? signMeOut,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$SignOutUser<TRes>
+    implements CopyWith$Mutation$SignOutUser<TRes> {
+  _CopyWithImpl$Mutation$SignOutUser(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$SignOutUser _instance;
+
+  final TRes Function(Mutation$SignOutUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? signMeOut = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$SignOutUser(
+        signMeOut: signMeOut == _undefined || signMeOut == null
+            ? _instance.signMeOut
+            : (signMeOut as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$SignOutUser<TRes>
+    implements CopyWith$Mutation$SignOutUser<TRes> {
+  _CopyWithStubImpl$Mutation$SignOutUser(this._res);
+
+  TRes _res;
+
+  call({
+    String? signMeOut,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationSignOutUser = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'SignOutUser'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'signMeOut'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Variables$Mutation$SignUpUser {
+  factory Variables$Mutation$SignUpUser(
+          {required Input$UserSignUpInput input}) =>
+      Variables$Mutation$SignUpUser._({
+        r'input': input,
+      });
+
+  Variables$Mutation$SignUpUser._(this._$data);
+
+  factory Variables$Mutation$SignUpUser.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$UserSignUpInput.fromJson((l$input as Map<String, dynamic>));
+    return Variables$Mutation$SignUpUser._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$UserSignUpInput get input => (_$data['input'] as Input$UserSignUpInput);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$SignUpUser<Variables$Mutation$SignUpUser>
+      get copyWith => CopyWith$Variables$Mutation$SignUpUser(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$SignUpUser) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$SignUpUser<TRes> {
+  factory CopyWith$Variables$Mutation$SignUpUser(
+    Variables$Mutation$SignUpUser instance,
+    TRes Function(Variables$Mutation$SignUpUser) then,
+  ) = _CopyWithImpl$Variables$Mutation$SignUpUser;
+
+  factory CopyWith$Variables$Mutation$SignUpUser.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$SignUpUser;
+
+  TRes call({Input$UserSignUpInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$SignUpUser<TRes>
+    implements CopyWith$Variables$Mutation$SignUpUser<TRes> {
+  _CopyWithImpl$Variables$Mutation$SignUpUser(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$SignUpUser _instance;
+
+  final TRes Function(Variables$Mutation$SignUpUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) =>
+      _then(Variables$Mutation$SignUpUser._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$UserSignUpInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$SignUpUser<TRes>
+    implements CopyWith$Variables$Mutation$SignUpUser<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$SignUpUser(this._res);
+
+  TRes _res;
+
+  call({Input$UserSignUpInput? input}) => _res;
+}
+
+class Mutation$SignUpUser {
+  Mutation$SignUpUser({
+    required this.signUpUser,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$SignUpUser.fromJson(Map<String, dynamic> json) {
+    final l$signUpUser = json['signUpUser'];
+    final l$$__typename = json['__typename'];
+    return Mutation$SignUpUser(
+      signUpUser: Mutation$SignUpUser$signUpUser.fromJson(
+          (l$signUpUser as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$SignUpUser$signUpUser signUpUser;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$signUpUser = signUpUser;
+    _resultData['signUpUser'] = l$signUpUser.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$signUpUser = signUpUser;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$signUpUser,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$SignUpUser) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$signUpUser = signUpUser;
+    final lOther$signUpUser = other.signUpUser;
+    if (l$signUpUser != lOther$signUpUser) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$SignUpUser on Mutation$SignUpUser {
+  CopyWith$Mutation$SignUpUser<Mutation$SignUpUser> get copyWith =>
+      CopyWith$Mutation$SignUpUser(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$SignUpUser<TRes> {
+  factory CopyWith$Mutation$SignUpUser(
+    Mutation$SignUpUser instance,
+    TRes Function(Mutation$SignUpUser) then,
+  ) = _CopyWithImpl$Mutation$SignUpUser;
+
+  factory CopyWith$Mutation$SignUpUser.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$SignUpUser;
+
+  TRes call({
+    Mutation$SignUpUser$signUpUser? signUpUser,
+    String? $__typename,
+  });
+  CopyWith$Mutation$SignUpUser$signUpUser<TRes> get signUpUser;
+}
+
+class _CopyWithImpl$Mutation$SignUpUser<TRes>
+    implements CopyWith$Mutation$SignUpUser<TRes> {
+  _CopyWithImpl$Mutation$SignUpUser(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$SignUpUser _instance;
+
+  final TRes Function(Mutation$SignUpUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? signUpUser = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$SignUpUser(
+        signUpUser: signUpUser == _undefined || signUpUser == null
+            ? _instance.signUpUser
+            : (signUpUser as Mutation$SignUpUser$signUpUser),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Mutation$SignUpUser$signUpUser<TRes> get signUpUser {
+    final local$signUpUser = _instance.signUpUser;
+    return CopyWith$Mutation$SignUpUser$signUpUser(
+        local$signUpUser, (e) => call(signUpUser: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$SignUpUser<TRes>
+    implements CopyWith$Mutation$SignUpUser<TRes> {
+  _CopyWithStubImpl$Mutation$SignUpUser(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$SignUpUser$signUpUser? signUpUser,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Mutation$SignUpUser$signUpUser<TRes> get signUpUser =>
+      CopyWith$Mutation$SignUpUser$signUpUser.stub(_res);
+}
+
+const documentNodeMutationSignUpUser = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'SignUpUser'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'UserSignUpInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'signUpUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'userId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'deviceId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'authToken'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Mutation$SignUpUser$signUpUser {
+  Mutation$SignUpUser$signUpUser({
+    required this.userId,
+    required this.deviceId,
+    required this.authToken,
+    this.$__typename = 'UserAuthResponse',
+  });
+
+  factory Mutation$SignUpUser$signUpUser.fromJson(Map<String, dynamic> json) {
+    final l$userId = json['userId'];
+    final l$deviceId = json['deviceId'];
+    final l$authToken = json['authToken'];
+    final l$$__typename = json['__typename'];
+    return Mutation$SignUpUser$signUpUser(
+      userId: (l$userId as String),
+      deviceId: (l$deviceId as String),
+      authToken: (l$authToken as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String userId;
+
+  final String deviceId;
+
+  final String authToken;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userId = userId;
+    _resultData['userId'] = l$userId;
+    final l$deviceId = deviceId;
+    _resultData['deviceId'] = l$deviceId;
+    final l$authToken = authToken;
+    _resultData['authToken'] = l$authToken;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userId = userId;
+    final l$deviceId = deviceId;
+    final l$authToken = authToken;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userId,
+      l$deviceId,
+      l$authToken,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$SignUpUser$signUpUser) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$deviceId = deviceId;
+    final lOther$deviceId = other.deviceId;
+    if (l$deviceId != lOther$deviceId) {
+      return false;
+    }
+    final l$authToken = authToken;
+    final lOther$authToken = other.authToken;
+    if (l$authToken != lOther$authToken) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$SignUpUser$signUpUser
+    on Mutation$SignUpUser$signUpUser {
+  CopyWith$Mutation$SignUpUser$signUpUser<Mutation$SignUpUser$signUpUser>
+      get copyWith => CopyWith$Mutation$SignUpUser$signUpUser(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$SignUpUser$signUpUser<TRes> {
+  factory CopyWith$Mutation$SignUpUser$signUpUser(
+    Mutation$SignUpUser$signUpUser instance,
+    TRes Function(Mutation$SignUpUser$signUpUser) then,
+  ) = _CopyWithImpl$Mutation$SignUpUser$signUpUser;
+
+  factory CopyWith$Mutation$SignUpUser$signUpUser.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$SignUpUser$signUpUser;
+
+  TRes call({
+    String? userId,
+    String? deviceId,
+    String? authToken,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$SignUpUser$signUpUser<TRes>
+    implements CopyWith$Mutation$SignUpUser$signUpUser<TRes> {
+  _CopyWithImpl$Mutation$SignUpUser$signUpUser(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$SignUpUser$signUpUser _instance;
+
+  final TRes Function(Mutation$SignUpUser$signUpUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userId = _undefined,
+    Object? deviceId = _undefined,
+    Object? authToken = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$SignUpUser$signUpUser(
+        userId: userId == _undefined || userId == null
+            ? _instance.userId
+            : (userId as String),
+        deviceId: deviceId == _undefined || deviceId == null
+            ? _instance.deviceId
+            : (deviceId as String),
+        authToken: authToken == _undefined || authToken == null
+            ? _instance.authToken
+            : (authToken as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$SignUpUser$signUpUser<TRes>
+    implements CopyWith$Mutation$SignUpUser$signUpUser<TRes> {
+  _CopyWithStubImpl$Mutation$SignUpUser$signUpUser(this._res);
+
+  TRes _res;
+
+  call({
+    String? userId,
+    String? deviceId,
+    String? authToken,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Mutation$DeleteUser {
+  factory Variables$Mutation$DeleteUser({
+    required String userId,
+    required bool deletePhysically,
+  }) =>
+      Variables$Mutation$DeleteUser._({
+        r'userId': userId,
+        r'deletePhysically': deletePhysically,
+      });
+
+  Variables$Mutation$DeleteUser._(this._$data);
+
+  factory Variables$Mutation$DeleteUser.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$userId = data['userId'];
+    result$data['userId'] = (l$userId as String);
+    final l$deletePhysically = data['deletePhysically'];
+    result$data['deletePhysically'] = (l$deletePhysically as bool);
+    return Variables$Mutation$DeleteUser._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get userId => (_$data['userId'] as String);
+  bool get deletePhysically => (_$data['deletePhysically'] as bool);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$userId = userId;
+    result$data['userId'] = l$userId;
+    final l$deletePhysically = deletePhysically;
+    result$data['deletePhysically'] = l$deletePhysically;
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$DeleteUser<Variables$Mutation$DeleteUser>
+      get copyWith => CopyWith$Variables$Mutation$DeleteUser(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$DeleteUser) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$deletePhysically = deletePhysically;
+    final lOther$deletePhysically = other.deletePhysically;
+    if (l$deletePhysically != lOther$deletePhysically) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$userId = userId;
+    final l$deletePhysically = deletePhysically;
+    return Object.hashAll([
+      l$userId,
+      l$deletePhysically,
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$DeleteUser<TRes> {
+  factory CopyWith$Variables$Mutation$DeleteUser(
+    Variables$Mutation$DeleteUser instance,
+    TRes Function(Variables$Mutation$DeleteUser) then,
+  ) = _CopyWithImpl$Variables$Mutation$DeleteUser;
+
+  factory CopyWith$Variables$Mutation$DeleteUser.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$DeleteUser;
+
+  TRes call({
+    String? userId,
+    bool? deletePhysically,
+  });
+}
+
+class _CopyWithImpl$Variables$Mutation$DeleteUser<TRes>
+    implements CopyWith$Variables$Mutation$DeleteUser<TRes> {
+  _CopyWithImpl$Variables$Mutation$DeleteUser(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$DeleteUser _instance;
+
+  final TRes Function(Variables$Mutation$DeleteUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userId = _undefined,
+    Object? deletePhysically = _undefined,
+  }) =>
+      _then(Variables$Mutation$DeleteUser._({
+        ..._instance._$data,
+        if (userId != _undefined && userId != null)
+          'userId': (userId as String),
+        if (deletePhysically != _undefined && deletePhysically != null)
+          'deletePhysically': (deletePhysically as bool),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$DeleteUser<TRes>
+    implements CopyWith$Variables$Mutation$DeleteUser<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$DeleteUser(this._res);
+
+  TRes _res;
+
+  call({
+    String? userId,
+    bool? deletePhysically,
+  }) =>
+      _res;
+}
+
+class Mutation$DeleteUser {
+  Mutation$DeleteUser({
+    required this.deleteUser,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$DeleteUser.fromJson(Map<String, dynamic> json) {
+    final l$deleteUser = json['deleteUser'];
+    final l$$__typename = json['__typename'];
+    return Mutation$DeleteUser(
+      deleteUser: (l$deleteUser as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String deleteUser;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$deleteUser = deleteUser;
+    _resultData['deleteUser'] = l$deleteUser;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$deleteUser = deleteUser;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$deleteUser,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$DeleteUser) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$deleteUser = deleteUser;
+    final lOther$deleteUser = other.deleteUser;
+    if (l$deleteUser != lOther$deleteUser) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$DeleteUser on Mutation$DeleteUser {
+  CopyWith$Mutation$DeleteUser<Mutation$DeleteUser> get copyWith =>
+      CopyWith$Mutation$DeleteUser(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$DeleteUser<TRes> {
+  factory CopyWith$Mutation$DeleteUser(
+    Mutation$DeleteUser instance,
+    TRes Function(Mutation$DeleteUser) then,
+  ) = _CopyWithImpl$Mutation$DeleteUser;
+
+  factory CopyWith$Mutation$DeleteUser.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$DeleteUser;
+
+  TRes call({
+    String? deleteUser,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$DeleteUser<TRes>
+    implements CopyWith$Mutation$DeleteUser<TRes> {
+  _CopyWithImpl$Mutation$DeleteUser(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$DeleteUser _instance;
+
+  final TRes Function(Mutation$DeleteUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? deleteUser = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$DeleteUser(
+        deleteUser: deleteUser == _undefined || deleteUser == null
+            ? _instance.deleteUser
+            : (deleteUser as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$DeleteUser<TRes>
+    implements CopyWith$Mutation$DeleteUser<TRes> {
+  _CopyWithStubImpl$Mutation$DeleteUser(this._res);
+
+  TRes _res;
+
+  call({
+    String? deleteUser,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationDeleteUser = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'DeleteUser'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'userId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'deletePhysically')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'deleteUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'userId'),
+            value: VariableNode(name: NameNode(value: 'userId')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'deletePhysically'),
+            value: VariableNode(name: NameNode(value: 'deletePhysically')),
+          ),
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Variables$Mutation$UpdateUser {
+  factory Variables$Mutation$UpdateUser({required Input$UserInput input}) =>
+      Variables$Mutation$UpdateUser._({
+        r'input': input,
+      });
+
+  Variables$Mutation$UpdateUser._(this._$data);
+
+  factory Variables$Mutation$UpdateUser.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$UserInput.fromJson((l$input as Map<String, dynamic>));
+    return Variables$Mutation$UpdateUser._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$UserInput get input => (_$data['input'] as Input$UserInput);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$UpdateUser<Variables$Mutation$UpdateUser>
+      get copyWith => CopyWith$Variables$Mutation$UpdateUser(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$UpdateUser) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$UpdateUser<TRes> {
+  factory CopyWith$Variables$Mutation$UpdateUser(
+    Variables$Mutation$UpdateUser instance,
+    TRes Function(Variables$Mutation$UpdateUser) then,
+  ) = _CopyWithImpl$Variables$Mutation$UpdateUser;
+
+  factory CopyWith$Variables$Mutation$UpdateUser.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$UpdateUser;
+
+  TRes call({Input$UserInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$UpdateUser<TRes>
+    implements CopyWith$Variables$Mutation$UpdateUser<TRes> {
+  _CopyWithImpl$Variables$Mutation$UpdateUser(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$UpdateUser _instance;
+
+  final TRes Function(Variables$Mutation$UpdateUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) =>
+      _then(Variables$Mutation$UpdateUser._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$UserInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$UpdateUser<TRes>
+    implements CopyWith$Variables$Mutation$UpdateUser<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$UpdateUser(this._res);
+
+  TRes _res;
+
+  call({Input$UserInput? input}) => _res;
+}
+
+class Mutation$UpdateUser {
+  Mutation$UpdateUser({
+    required this.updateUser,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$UpdateUser.fromJson(Map<String, dynamic> json) {
+    final l$updateUser = json['updateUser'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateUser(
+      updateUser: (l$updateUser as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String updateUser;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateUser = updateUser;
+    _resultData['updateUser'] = l$updateUser;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateUser = updateUser;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$updateUser,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateUser) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateUser = updateUser;
+    final lOther$updateUser = other.updateUser;
+    if (l$updateUser != lOther$updateUser) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateUser on Mutation$UpdateUser {
+  CopyWith$Mutation$UpdateUser<Mutation$UpdateUser> get copyWith =>
+      CopyWith$Mutation$UpdateUser(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$UpdateUser<TRes> {
+  factory CopyWith$Mutation$UpdateUser(
+    Mutation$UpdateUser instance,
+    TRes Function(Mutation$UpdateUser) then,
+  ) = _CopyWithImpl$Mutation$UpdateUser;
+
+  factory CopyWith$Mutation$UpdateUser.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateUser;
+
+  TRes call({
+    String? updateUser,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$UpdateUser<TRes>
+    implements CopyWith$Mutation$UpdateUser<TRes> {
+  _CopyWithImpl$Mutation$UpdateUser(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateUser _instance;
+
+  final TRes Function(Mutation$UpdateUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateUser = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateUser(
+        updateUser: updateUser == _undefined || updateUser == null
+            ? _instance.updateUser
+            : (updateUser as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$UpdateUser<TRes>
+    implements CopyWith$Mutation$UpdateUser<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateUser(this._res);
+
+  TRes _res;
+
+  call({
+    String? updateUser,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationUpdateUser = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'UpdateUser'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'UserInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'updateUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);

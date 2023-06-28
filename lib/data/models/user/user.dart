@@ -29,13 +29,4 @@ class User {
         'email': email,
         'adminNotes': adminNotes,
       };
-
-  String get initials {
-    return fullName
-        .trim()
-        .split(RegExp(' +'))
-        .map((name) => name[0])
-        .take(3)
-        .join();
-  }
 }

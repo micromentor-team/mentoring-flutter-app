@@ -25067,7 +25067,7 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
     case Enum$ServiceRequestType.graphQlQueryFindChannelParticipantById:
       return r'graphQlQueryFindChannelParticipantById';
     case Enum$ServiceRequestType
-        .graphQlQueryFindPendingChannelInvitationsForUser:
+          .graphQlQueryFindPendingChannelInvitationsForUser:
       return r'graphQlQueryFindPendingChannelInvitationsForUser';
     case Enum$ServiceRequestType.graphQlQueryMyInbox:
       return r'graphQlQueryMyInbox';

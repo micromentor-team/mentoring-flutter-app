@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/molecules/invitation_section.dart';
+import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_scroll.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
-import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_scroll.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
-  String _getGreeting(AppLocalizations l10n, User user) {
+  String _getGreeting(AppLocalizations l10n, String fullName) {
     int hour = DateTime.now().hour;
     String timeOfDayGreeting;
     if (hour >= 5 && hour < 12) {
@@ -23,13 +22,13 @@ class DashboardScreen extends StatelessWidget {
     } else {
       timeOfDayGreeting = l10n.homeGreetingEvening;
     }
-    return '$timeOfDayGreeting ${user.fullName}';
+    return '$timeOfDayGreeting $fullName';
   }
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final User user = Provider.of<UserProvider>(context, listen: false).user!;
+    final user = Provider.of<UserProvider>(context, listen: false).user!;
     return SafeArea(
       child: Column(
         children: [
@@ -38,7 +37,7 @@ class DashboardScreen extends StatelessWidget {
               children: [
                 ProfileHeader(
                   avatarUrl: user.avatarUrl,
-                  profileMessage: _getGreeting(l10n, user),
+                  profileMessage: _getGreeting(l10n, user.fullName ?? ''),
                   profileCompletionPercentage: 30,
                 ),
                 const MaybeReminderBanner(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_form_field_widget.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class YourName extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
-    nameController.text = user!.fullName;
+    nameController.text = user!.fullName!;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your name'),
@@ -33,7 +34,7 @@ class YourName extends StatelessWidget {
                 obscureText: false,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    nameController.text = user.fullName;
+                    nameController.text = user.fullName!;
                     return '''Name can't be empty''';
                   }
                   return null;
@@ -46,7 +47,8 @@ class YourName extends StatelessWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           await userProvider
-                              .updateUserData(name: nameController.text)
+                              .updateUserData(Input$UserInput(
+                                  fullName: nameController.text))
                               .then((value) => {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(const SnackBar(
