@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   android-comp     = pkgs.androidenv.composeAndroidPackages {
@@ -24,5 +24,7 @@ in {
 
   name = "mm-flutter-app";
 
-  packages = with pkgs; [ act android-sdk pandoc ];
+  packages = with pkgs; [ act android-sdk nodePackages.firebase-tools pandoc ]
+    # flutter is not packaged for macOS
+    ++ (lib.optional stdenv.isLinux flutter);
 }
