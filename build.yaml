@@ -1,0 +1,14 @@
+targets:
+  $default:
+    builders:
+      graphql_codegen:
+        options:
+          scalars:
+            DateTime:
+              type: DateTime
+            ISODateTime:
+              type: DateTime
+            JSON:
+              type: Map<String, dynamic>
+          outputDirectory: generated
+          generatedFileHeader: "// GENERATED FILE\n// DO NOT MODIFY\n"

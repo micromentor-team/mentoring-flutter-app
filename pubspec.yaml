@@ -38,6 +38,8 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_crashlytics: ^3.3.3
   graphql_flutter: ^5.1.2
+  graphql_codegen: ^0.13.5
+  gql: ^1.0.0
   shared_preferences: ^2.0.17
   intl: any
   flutter_dotenv: ^5.0.2

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/data/models/base/base_operation.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
@@ -13,10 +13,11 @@ abstract class BaseProvider extends ChangeNotifier {
 
   BaseProvider({required this.client});
 
-  Widget runQuery<T extends BaseModel>({
-    required BaseOperation<T> operation,
+  Widget runQuery({
+    required DocumentNode document,
+    Map<String, dynamic>? variables,
     required Widget Function(
-      OperationResult<T> operationResult, {
+      QueryResult queryResult, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
@@ -31,9 +32,9 @@ abstract class BaseProvider extends ChangeNotifier {
     bool isFailed = false;
     return Query(
       options: QueryOptions(
-        document: gql(operation.gql),
+        document: document,
         fetchPolicy: FetchPolicy.networkOnly,
-        variables: operation.variables ?? const {},
+        variables: variables ?? const {},
       ),
       builder: (result, {refetch, fetchMore}) {
         if (result.hasException) {
@@ -49,8 +50,7 @@ abstract class BaseProvider extends ChangeNotifier {
           }
           if (!isRetrying) {
             isRetrying = true;
-            CrashHandler.logCrashReport(
-                'Exception while executing Query `${operation.operation}`:'
+            CrashHandler.logCrashReport('Exception while executing Query:'
                 '\n${result.exception.toString()}\n'
                 'Retrying up to ${retryOptions.maxAttempts} additional times.');
             WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -58,8 +58,7 @@ abstract class BaseProvider extends ChangeNotifier {
                 () => _retryQuery(refetch!),
                 onFailOperation: () {
                   isFailed = true;
-                  DebugLogger.warning(
-                      'Failed to complete Query `${operation.operation}`'
+                  DebugLogger.warning('Failed to complete Query'
                       ' after ${retryOptions.maxAttempts + 1} attempts.');
                 },
                 retryOptions: retryOptions,
@@ -76,7 +75,7 @@ abstract class BaseProvider extends ChangeNotifier {
         }
 
         return onData(
-          operation.transformQueryResult(result),
+          result,
           refetch: refetch,
           fetchMore: fetchMore,
         );
@@ -94,13 +93,14 @@ abstract class BaseProvider extends ChangeNotifier {
     }
   }
 
-  Future<OperationResult<T>> runMutation<T extends BaseModel>({
-    required BaseOperation<T> operation,
+  Future<QueryResult> runMutation({
+    required DocumentNode document,
+    Map<String, dynamic>? variables,
   }) async {
     final mutation = MutationOptions(
-      document: gql(operation.gql),
+      document: document,
       fetchPolicy: FetchPolicy.networkOnly,
-      variables: operation.variables ?? const {},
+      variables: variables ?? const {},
     );
     const RetryOptions retryOptions = RetryOptions(
       maxAttempts: 2,
@@ -108,8 +108,7 @@ abstract class BaseProvider extends ChangeNotifier {
     );
     QueryResult result = await client.mutate(mutation);
     if (result.hasException) {
-      CrashHandler.logCrashReport(
-          'Exception while executing Mutation `${operation.operation}`:'
+      CrashHandler.logCrashReport('Exception while executing Mutation:'
           '\n${result.exception.toString()}\n'
           'Retrying up to ${retryOptions.maxAttempts} additional times.');
 
@@ -117,8 +116,7 @@ abstract class BaseProvider extends ChangeNotifier {
           await CrashHandler.retryOnException<QueryResult?>(
         () => _retryMutation(mutation),
         onFailOperation: () {
-          DebugLogger.warning(
-              'Failed to complete Mutation `${operation.operation}`'
+          DebugLogger.warning('Failed to complete Mutation'
               ' after ${retryOptions.maxAttempts + 1} attempts.');
           return null;
         },
@@ -129,7 +127,7 @@ abstract class BaseProvider extends ChangeNotifier {
       }
     }
 
-    return operation.transformQueryResult(result);
+    return result;
   }
 
   Future<QueryResult> _retryMutation(MutationOptions mutation) async {

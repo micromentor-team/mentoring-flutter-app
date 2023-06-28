@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/base/base_provider.dart';
-import 'package:mm_flutter_app/data/models/user/mutations/sign_in_user.dart';
-import 'package:mm_flutter_app/data/models/user/queries/find_users.dart';
-import 'package:mm_flutter_app/data/models/user/queries/get_authenticated_user.dart';
-import 'package:mm_flutter_app/data/models/user/queries/get_user_profile_info.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_api.dart';
+import 'package:mm_flutter_app/schema/generated/operations.graphql.dart'
+    as gql_ops;
+import 'package:mm_flutter_app/schema/generated/schema.graphql.dart'
+    as gql_schema;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
-import '../base/base_operation.dart';
+import '../base/operation_result.dart';
 
 class UserProvider extends BaseProvider {
   User? _user;
 
   UserProvider({required super.client});
 
-  void _setUser(Map<String, dynamic>? data) {
-    if (data != null && _user == null) {
+  void _setUser(Map<String, dynamic> data) {
+    if (_user == null) {
       _user = User.fromJson(data);
       debugPrint('Got this user from the server userId: ${_user!.id}');
     }
@@ -48,22 +48,32 @@ class UserProvider extends BaseProvider {
 
   Widget queryUser({
     required Widget Function(
-      OperationResult<GetAuthenticatedUserModel> data, {
+      OperationResult<gql_ops.Query$GetAuthenticatedUser$getAuthenticatedUser>
+          data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery<GetAuthenticatedUserModel>(
-      operation: GetAuthenticatedUser(),
-      onData: (data, {refetch, fetchMore}) {
-        if (data.model != null) {
-          _setUser(data.model!.toJson());
+    return runQuery(
+      document: gql_ops.documentNodeQueryGetAuthenticatedUser,
+      onData: (queryResult, {refetch, fetchMore}) {
+        OperationResult<gql_ops.Query$GetAuthenticatedUser$getAuthenticatedUser>
+            result = OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data != null
+              ? gql_ops.Query$GetAuthenticatedUser.fromJson(
+                  queryResult.data!,
+                ).getAuthenticatedUser
+              : null,
+        );
+        if (result.response != null) {
+          _setUser(result.response!.toJson());
         } else {
           _resetUser();
         }
-        return onData(data, refetch: refetch, fetchMore: fetchMore);
+        return onData(result, refetch: refetch, fetchMore: fetchMore);
       },
       onLoading: onLoading,
       onError: onError,
@@ -72,16 +82,29 @@ class UserProvider extends BaseProvider {
 
   Widget queryAllUsers({
     required Widget Function(
-      OperationResult<FindUsersModel> data, {
+      OperationResult<List<gql_ops.Query$FindUsers$findUsers>> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery<FindUsersModel>(
-      operation: FindUsers(),
-      onData: onData,
+    return runQuery(
+      document: gql_ops.documentNodeQueryFindUsers,
+      onData: (queryResult, {refetch, fetchMore}) {
+        return onData(
+          OperationResult(
+            gqlQueryResult: queryResult,
+            response: queryResult.data != null
+                ? gql_ops.Query$FindUsers.fromJson(
+                    queryResult.data!,
+                  ).findUsers
+                : null,
+          ),
+          refetch: refetch,
+          fetchMore: fetchMore,
+        );
+      },
       onLoading: onLoading,
       onError: onError,
     );
@@ -89,16 +112,30 @@ class UserProvider extends BaseProvider {
 
   Widget queryUserProfileInfo({
     required Widget Function(
-      OperationResult<GetUserProfileInfoModel> data, {
+      OperationResult<gql_ops.Query$GetUserProfileInfo$getUserProfileInfo>
+          data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery<GetUserProfileInfoModel>(
-      operation: GetUserProfileInfo(),
-      onData: onData,
+    return runQuery(
+      document: gql_ops.documentNodeQueryGetUserProfileInfo,
+      onData: (queryResult, {refetch, fetchMore}) {
+        return onData(
+          OperationResult(
+            gqlQueryResult: queryResult,
+            response: queryResult.data != null
+                ? gql_ops.Query$GetUserProfileInfo.fromJson(
+                    queryResult.data!,
+                  ).getUserProfileInfo
+                : null,
+          ),
+          refetch: refetch,
+          fetchMore: fetchMore,
+        );
+      },
       onLoading: onLoading,
       onError: onError,
     );
@@ -189,28 +226,38 @@ class UserProvider extends BaseProvider {
     }
   }
 
-  Future<OperationResult<SignInUserModel>> signInUser(
-    SignInUserInput input,
+  Future<OperationResult<gql_ops.Mutation$SignInUser$signInUser>> signInUser(
+    gql_schema.Input$UserSignInInput input,
   ) async {
     debugPrint('UserProvider: signInUser: ${input.ident}');
 
     await _resetUser();
     await _setDeviceUuid();
 
-    OperationResult<SignInUserModel> result =
-        await runMutation<SignInUserModel>(
-      operation: SignInUser(input: input),
+    QueryResult queryResult = await runMutation(
+      document: gql_ops.documentNodeMutationSignInUser,
+      variables: gql_ops.Variables$Mutation$SignInUser(input: input).toJson(),
     );
 
-    if (result.model != null) {
-      final pref = await SharedPreferences.getInstance();
-      pref.setString('userId', result.model!.userId);
-      pref.setString('deviceId', result.model!.deviceId);
-      pref.setString('authToken', result.model!.authToken);
+    OperationResult<gql_ops.Mutation$SignInUser$signInUser> result =
+        OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? gql_ops.Mutation$SignInUser.fromJson(
+              queryResult.data!,
+            ).signInUser
+          : null,
+    );
 
-      debugPrint('userId: ${result.model!.userId}');
-      debugPrint('deviceId: ${result.model!.deviceId}');
-      debugPrint('authToken: ${result.model!.authToken}');
+    if (result.response != null) {
+      final pref = await SharedPreferences.getInstance();
+      pref.setString('userId', result.response!.userId);
+      pref.setString('deviceId', result.response!.deviceId);
+      pref.setString('authToken', result.response!.authToken);
+
+      debugPrint('userId: ${result.response!.userId}');
+      debugPrint('deviceId: ${result.response!.deviceId}');
+      debugPrint('authToken: ${result.response!.authToken}');
     }
 
     return result;

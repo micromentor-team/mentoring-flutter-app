@@ -63,7 +63,7 @@ class _YourEmailState extends State<YourEmail> {
                     label: 'Email',
                     validator: (value) {
                       if (value!.isEmpty) {
-                        emailController.text = data.model!.email!;
+                        emailController.text = data.response!.email!;
                         return '''Email can't be empty''';
                       }
                       return null;
