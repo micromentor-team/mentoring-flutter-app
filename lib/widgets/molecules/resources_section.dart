@@ -47,6 +47,7 @@ class ResourcesSection extends StatelessWidget {
     return SectionTile(
       title: l10n.homeResourcesSectionTitle,
       addTopDivider: true,
+      seeAllOnPressed: () {},
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Insets.widgetMediumInset,
