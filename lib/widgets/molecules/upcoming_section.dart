@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_session_tile.dart';
@@ -67,6 +68,9 @@ class UpcomingSection extends StatelessWidget {
     return SectionTile(
       title: l10n.homeUpcomingSectionTitle,
       addTopDivider: true,
+      seeAllOnPressed: () {
+        context.go('/progress');
+      },
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(

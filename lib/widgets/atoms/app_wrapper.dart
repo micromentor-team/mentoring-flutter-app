@@ -21,7 +21,7 @@ class _AppWrapperState extends State<AppWrapper> {
       case 1:
         context.push('/explore');
       case 2:
-        context.push('/journey');
+        context.push('/progress');
       case 3:
         context.push('/inbox');
       case 4:
@@ -68,7 +68,7 @@ class _AppWrapperState extends State<AppWrapper> {
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.incomplete_circle),
-            label: AppLocalizations.of(context)!.navJourneyText,
+            label: AppLocalizations.of(context)!.navProgressText,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.mail_outline),

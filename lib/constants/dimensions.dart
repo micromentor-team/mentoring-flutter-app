@@ -35,7 +35,8 @@ class Dimensions {
   static const double appBarHeight = 32.0;
   static const double minimumInteractionWidgetLength = 48.0;
   static const double recommendedMentorTileWidth = 112.0;
-  static const Size upcomingSessionTile = Size(80.0, 152.0);
+  static const Size imageTile = Size(80.0, 152.0);
+  static const Size imageTileRectangularImage = Size(80.0, 64.0);
   static const double reminderBannerImageHeight = 80.0;
   static const double mentorCardHeight = 170;
   static const double mentorCardWidth = 260;

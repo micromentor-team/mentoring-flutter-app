@@ -68,10 +68,10 @@ class MainApp extends StatelessWidget {
             },
           ),
           GoRoute(
-            path: '/journey',
+            path: '/progress',
             builder: (BuildContext context, GoRouterState state) {
               return Center(
-                  child: Text(AppLocalizations.of(context)!.navJourneyText));
+                  child: Text(AppLocalizations.of(context)!.navProgressText));
             },
           ),
           GoRoute(
