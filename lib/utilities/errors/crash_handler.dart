@@ -53,7 +53,9 @@ class CrashHandler {
       if (e is RetryException && onFailOperation != null) {
         logCrashReport('Maximum number of retry attempts reached: ${e.message}'
             '\nExecuting onFailOperation callback.');
-        FirebaseCrashlytics.instance.recordError(e, null, fatal: false);
+        if (!kIsWeb) {
+          FirebaseCrashlytics.instance.recordError(e, null, fatal: false);
+        }
         return onFailOperation();
       }
       rethrow;
@@ -78,12 +80,14 @@ class CrashHandler {
       logCrashReport('Unknown error/exception: ${e.toString()}');
     }
 
-    Future<void> recording = FirebaseCrashlytics.instance
-        .recordFlutterError(details, fatal: isFatalError);
-    if (isFatalError) {
-      // Save events, reports, and other data before exiting.
-      await recording;
-      _exitApp();
+    if (!kIsWeb) {
+      Future<void> recording = FirebaseCrashlytics.instance
+          .recordFlutterError(details, fatal: isFatalError);
+      if (isFatalError) {
+        // Save events, reports, and other data before exiting.
+        await recording;
+        _exitApp();
+      }
     }
   }
 
@@ -96,7 +100,9 @@ class CrashHandler {
           'Maximum number of retry attempts reached: ${error.message}');
       return true;
     }
-    FirebaseCrashlytics.instance.recordError(error, trace, fatal: true);
+    if (!kIsWeb) {
+      FirebaseCrashlytics.instance.recordError(error, trace, fatal: true);
+    }
     // Return false to allow error propagation to the next handler.
     return false;
   }
@@ -108,7 +114,10 @@ class CrashHandler {
 
   static void logCrashReport(String message) {
     DebugLogger.error(message);
-    FirebaseCrashlytics.instance.log(message);
+
+    if (!kIsWeb) {
+      FirebaseCrashlytics.instance.log(message);
+    }
   }
 
   void _handleException(Exception e) {
