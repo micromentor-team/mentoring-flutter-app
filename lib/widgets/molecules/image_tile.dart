@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ImageTile extends StatelessWidget {
@@ -17,7 +15,7 @@ class ImageTile extends StatelessWidget {
     required this.isCircle,
   }) : super(key: key);
 
-  Widget makeImage() {
+  Widget _makeImage() {
     if (isCircle) {
       return Padding(
           padding: const EdgeInsets.all(Insets.widgetSmallInset),
@@ -47,7 +45,7 @@ class ImageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+      padding: const EdgeInsets.all(Insets.widgetSmallestInset),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -63,11 +61,11 @@ class ImageTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  makeImage(),
+                  _makeImage(),
                   const Spacer(),
                   Text(
                     title,
-                    style: TextStyles.mentorCardTitle(context),
+                    style: TextStyles.cardTitle(context),
                     textAlign: TextAlign.center,
                   ),
                   const Spacer(),
@@ -77,7 +75,7 @@ class ImageTile extends StatelessWidget {
                         bottom: Insets.widgetSmallInset),
                     child: Text(
                       subtitle,
-                      style: TextStyles.mentorCardSubtitle(context),
+                      style: TextStyles.cardSubtitle(context),
                       textAlign: TextAlign.center,
                     ),
                   )

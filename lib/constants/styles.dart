@@ -69,6 +69,14 @@ class ButtonStyles {
       ),
     );
   }
+
+  static ButtonStyle homePageButton(BuildContext context) {
+    return ButtonStyle(
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(Radii.buttonRadius),
+    )));
+  }
 }
 
 // class ChipStyles{

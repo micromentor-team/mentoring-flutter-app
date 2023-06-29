@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/atoms/resource_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 
 import 'image_tile.dart';
-
-//https://freevector-images.s3.amazonaws.com/uploads/vector/preview/40309/YOUNG_GIRL_WORKING_WITH_LAPTOP.jpg
 
 class ResourcesSection extends StatelessWidget {
   const ResourcesSection({Key? key}) : super(key: key);
@@ -47,19 +44,13 @@ class ResourcesSection extends StatelessWidget {
     return SectionTile(
       title: l10n.homeResourcesSectionTitle,
       addTopDivider: true,
-      seeAllOnPressed: () {},
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Insets.widgetMediumInset,
-        ),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
-            child: Row(
-              children: resourceTiles,
-            ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
+          child: Row(
+            children: resourceTiles,
           ),
         ),
       ),
