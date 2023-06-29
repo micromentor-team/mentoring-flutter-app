@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/__generated/schema/operations.graphql.dart';
 import 'package:mm_flutter_app/data/models/messages/unseen_messages.dart';
+import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/models/channels/channel.dart';
@@ -8,7 +8,7 @@ import '../../../data/models/messages/messages_provider.dart';
 import '../channel_messages/channel_messages.dart';
 
 class MessagesList extends StatelessWidget {
-  final Query$GetAuthenticatedUser$getAuthenticatedUser user;
+  final AuthenticatedUser user;
   final List channels;
 
   const MessagesList({Key? key, required this.user, required this.channels})

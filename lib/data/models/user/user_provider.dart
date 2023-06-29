@@ -8,13 +8,14 @@ import '../../../__generated/schema/operations.graphql.dart';
 import '../../../__generated/schema/schema.graphql.dart';
 import '../base/operation_result.dart';
 
+typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
+
 class UserProvider extends BaseProvider {
-  Query$GetAuthenticatedUser$getAuthenticatedUser? _user;
+  AuthenticatedUser? _user;
 
   UserProvider({required super.client});
 
-  void _setUser(
-      Query$GetAuthenticatedUser$getAuthenticatedUser authenticatedUser) {
+  void _setUser(AuthenticatedUser authenticatedUser) {
     if (_user == null) {
       _user = authenticatedUser;
       debugPrint('Got this user from the server userId: ${_user!.id}');
@@ -38,7 +39,7 @@ class UserProvider extends BaseProvider {
     return deviceUuid;
   }
 
-  Query$GetAuthenticatedUser$getAuthenticatedUser? get user {
+  AuthenticatedUser? get user {
     return _user;
   }
 
