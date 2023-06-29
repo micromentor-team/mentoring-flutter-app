@@ -34,7 +34,20 @@ class FindUsersResult extends BaseResult {
   FindUsersResult({required this.list});
 
   FindUsersResult.fromJson(List jsonList)
-      : list = jsonList.map((e) => FindUsersResultElement.fromJson(e)).toList();
+      : list = jsonList
+            .map((e) {
+              try {
+                var el = FindUsersResultElement.fromJson(e);
+                if (el.avatarUrl == "") {
+                  el.avatarUrl = null;
+                }
+                return el;
+              } catch (e) {
+                return null;
+              }
+            })
+            .nonNulls
+            .toList();
 
   List<Map<String, dynamic>> toJson() {
     return list.map((e) => e.toJson()).toList();
