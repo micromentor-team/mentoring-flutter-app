@@ -1,11 +1,11 @@
 class User {
-  final String id, userHandle, fullName;
-  String? avatarUrl, email, adminNotes;
+  final String id;
+  String? userHandle, fullName, avatarUrl, email, adminNotes;
 
   User(
       {required this.id,
-      required this.userHandle,
-      required this.fullName,
+      this.userHandle,
+      this.fullName,
       this.avatarUrl,
       this.email,
       this.adminNotes});

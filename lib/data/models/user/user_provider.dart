@@ -87,15 +87,22 @@ class UserProvider extends BaseProvider {
     return runQuery(
       document: documentNodeQueryFindUsers,
       onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<List<Query$FindUsers$findUsers>> result =
+            OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data == null
+              ? null
+              : Query$FindUsers.fromJson(
+                  queryResult.data!,
+                ).findUsers.map((element) {
+                  if (element.avatarUrl == "") {
+                    return element.copyWith(avatarUrl: null);
+                  }
+                  return element;
+                }).toList(),
+        );
         return onData(
-          OperationResult(
-            gqlQueryResult: queryResult,
-            response: queryResult.data != null
-                ? Query$FindUsers.fromJson(
-                    queryResult.data!,
-                  ).findUsers
-                : null,
-          ),
+          result,
           refetch: refetch,
           fetchMore: fetchMore,
         );
