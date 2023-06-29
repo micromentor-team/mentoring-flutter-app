@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
-  String _getGreeting(AppLocalizations l10n, String fullName) {
+  String _getGreeting(AppLocalizations l10n, String? fullName) {
     int hour = DateTime.now().hour;
     String timeOfDayGreeting;
     if (hour >= 5 && hour < 12) {
@@ -22,7 +22,9 @@ class DashboardScreen extends StatelessWidget {
     } else {
       timeOfDayGreeting = l10n.homeGreetingEvening;
     }
-    return '$timeOfDayGreeting $fullName';
+    return fullName != null
+        ? '$timeOfDayGreeting, $fullName'
+        : timeOfDayGreeting;
   }
 
   @override
@@ -37,7 +39,7 @@ class DashboardScreen extends StatelessWidget {
               children: [
                 ProfileHeader(
                   avatarUrl: user.avatarUrl,
-                  profileMessage: _getGreeting(l10n, user.fullName ?? ''),
+                  profileMessage: _getGreeting(l10n, user.fullName),
                   profileCompletionPercentage: 30,
                 ),
                 const MaybeReminderBanner(),

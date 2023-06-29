@@ -1,9 +1,9 @@
 {
     "bannerActionOpen": "OPEN",
     "bannerActionDismiss": "DISMISS",
-    "homeGreetingAfternoon": "Good afternoon,",
-    "homeGreetingEvening": "Good evening,",
-    "homeGreetingMorning": "Good morning,",
+    "homeGreetingAfternoon": "Good afternoon",
+    "homeGreetingEvening": "Good evening",
+    "homeGreetingMorning": "Good morning",
     "homeInvitationSectionTitle": "Invitations",
     "homeInvitationRequested": "Requested Mentorship",
     "homeInvitationAccepted": "Accepted Request",

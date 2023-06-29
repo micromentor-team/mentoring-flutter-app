@@ -2,10 +2,8 @@ import 'package:uuid/uuid.dart';
 
 class AppUtility {
   AppUtility._private();
-  static String getDeviceUuid() {
-    const uuid = Uuid();
-    String deviceUuid = uuid.v1();
-    return deviceUuid;
+  static String getUuid() {
+    return const Uuid().v1();
   }
 
   static String getUserInitials(String fullName) {

@@ -151,7 +151,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 if (_formKey.currentState!.validate()) {
                                   final signInResult = await userProvider
                                       .signInUser(Input$UserSignInInput(
-                                    deviceUuid: AppUtility.getDeviceUuid(),
+                                    deviceUuid: AppUtility.getUuid(),
                                     ident: emailController.text,
                                     identType: Enum$UserIdentType.email,
                                     password: passwordController.text,

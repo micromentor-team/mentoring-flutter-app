@@ -33,7 +33,7 @@ class UserProvider extends BaseProvider {
 
   Future<String> _setDeviceUuid() async {
     final pref = await SharedPreferences.getInstance();
-    final deviceUuid = AppUtility.getDeviceUuid();
+    final deviceUuid = AppUtility.getUuid();
     pref.setString('deviceUuid', deviceUuid);
     return deviceUuid;
   }
