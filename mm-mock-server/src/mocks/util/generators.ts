@@ -1,4 +1,4 @@
-import { Sex, faker } from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 
 export function generateUser() {
     var mockFirstName = faker.person.firstName();
