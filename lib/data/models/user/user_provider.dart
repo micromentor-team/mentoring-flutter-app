@@ -78,7 +78,7 @@ class UserProvider extends BaseProvider {
 
   Widget queryAllUsers({
     required Widget Function(
-      OperationResult<List<Query$FindUsers$findUsers>> data, {
+      OperationResult<List<Query$FindAllUsers$findUsers>> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
@@ -86,14 +86,53 @@ class UserProvider extends BaseProvider {
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
     return runQuery(
-      document: documentNodeQueryFindUsers,
+      document: documentNodeQueryFindAllUsers,
       onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<List<Query$FindUsers$findUsers>> result =
+        final OperationResult<List<Query$FindAllUsers$findUsers>> result =
             OperationResult(
           gqlQueryResult: queryResult,
           response: queryResult.data == null
               ? null
-              : Query$FindUsers.fromJson(
+              : Query$FindAllUsers.fromJson(
+                  queryResult.data!,
+                ).findUsers.map((element) {
+                  if (element.avatarUrl == "") {
+                    return element.copyWith(avatarUrl: null);
+                  }
+                  return element;
+                }).toList(),
+        );
+        return onData(
+          result,
+          refetch: refetch,
+          fetchMore: fetchMore,
+        );
+      },
+      onLoading: onLoading,
+      onError: onError,
+    );
+  }
+
+  Widget findUsersWithFilter(
+    Input$UserListFilter input, {
+    required Widget Function(
+      OperationResult<List<Query$FindUsersWithFilter$findUsers>> data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery(
+      document: documentNodeQueryFindUsersWithFilter,
+      variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<List<Query$FindUsersWithFilter$findUsers>>
+            result = OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data == null
+              ? null
+              : Query$FindUsersWithFilter.fromJson(
                   queryResult.data!,
                 ).findUsers.map((element) {
                   if (element.avatarUrl == "") {
