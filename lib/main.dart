@@ -125,6 +125,7 @@ class StartScreen extends StatelessWidget {
 
         return const LoadingScreen();
       },
+      logFailures: false, // Error is expected when user is not logged in.
     );
   }
 }
