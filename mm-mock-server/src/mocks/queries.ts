@@ -42,10 +42,21 @@ export function mockQueries(serverState: MockServerState) {
         },
         myInbox: () => {
             var mockChannelId = faker.string.alphanumeric({length: 24});
+            var mockInvitations = [
+                generators.generateChannelInboxItemInvitation(faker.string.alphanumeric({length: 24}), serverState.otherUsers[0], true, false),
+                generators.generateChannelInboxItemInvitation(faker.string.alphanumeric({length: 24}), serverState.otherUsers[1], false, false),
+                generators.generateChannelInboxItemInvitation(faker.string.alphanumeric({length: 24}), serverState.otherUsers[2], false, true),
+                generators.generateChannelInboxItemInvitation(faker.string.alphanumeric({length: 24}), serverState.otherUsers[3], false, false),
+            ];
             return {
                 __typename: "UserInbox",
                 channels: {
                     __typename: "ChannelInbox",
+                    invitations: mockInvitations,
+                    pendingInvitations: [
+                        mockInvitations[0],
+                        mockInvitations[1],
+                    ],
                     unseenMessages: [
                         generators.generateChannelInboxItemMessage(mockChannelId, serverState.loggedInUser),
                         generators.generateChannelInboxItemMessage(mockChannelId, serverState.otherUsers[0]),

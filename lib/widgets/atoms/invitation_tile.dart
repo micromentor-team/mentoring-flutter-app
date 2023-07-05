@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-
-enum InvitationTileType {
-  requested,
-  accepted,
-}
 
 class InvitationTile extends StatelessWidget {
   final String userName;
   final String userJobTitle;
-  final InvitationTileType invitationTileType;
+  final Enum$ChannelInvitationStatus invitationStatus;
   final String? avatarUrl;
   final void Function() buttonOnPressed;
 
@@ -18,7 +14,7 @@ class InvitationTile extends StatelessWidget {
     Key? key,
     required this.userName,
     required this.userJobTitle,
-    required this.invitationTileType,
+    required this.invitationStatus,
     this.avatarUrl,
     required this.buttonOnPressed,
   }) : super(key: key);
@@ -79,11 +75,13 @@ class InvitationTile extends StatelessWidget {
   }
 
   String _invitationText(AppLocalizations l10n) {
-    switch (invitationTileType) {
-      case InvitationTileType.requested:
+    switch (invitationStatus) {
+      case Enum$ChannelInvitationStatus.created:
         return l10n.homeInvitationRequested;
-      case InvitationTileType.accepted:
+      case Enum$ChannelInvitationStatus.accepted:
         return l10n.homeInvitationAccepted;
+      default:
+        return 'UNDEFINED';
     }
   }
 }
