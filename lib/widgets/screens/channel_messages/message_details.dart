@@ -2,13 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/data/models/channels/channel.dart';
 import 'package:mm_flutter_app/data/models/messages/message.dart';
 import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
-import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../data/models/channels/channels_provider.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_input.dart';
 
@@ -22,7 +21,7 @@ class MessageDetailsModal extends StatefulWidget {
 
   final Message message;
   final BuildContext context;
-  final Channel channel;
+  final ChannelById channel;
 
   @override
   State<MessageDetailsModal> createState() => _MessageDetailsModalState();
@@ -114,9 +113,9 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
   }
 
   String _participantName({userId}) {
-    final User participant = widget.channel.participants
-        .firstWhere((item) => item.id == userId, orElse: () => null);
-    return participant.fullName!.trim().split(RegExp(' +')).take(1).join();
+    final participant = widget.channel.participants
+        .firstWhere((item) => item.user.id == userId);
+    return participant.user.fullName!.trim().split(RegExp(' +')).take(1).join();
   }
 
   Widget _buildAuthor() {

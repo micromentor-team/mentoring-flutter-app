@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
 import 'package:mm_flutter_app/data/models/messages/unseen_messages.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/models/channels/channel.dart';
 import '../../../data/models/messages/messages_provider.dart';
 import '../channel_messages/channel_messages.dart';
 
 class MessagesList extends StatelessWidget {
   final AuthenticatedUser user;
-  final List channels;
+  final List<ChannelForUser> channels;
 
   const MessagesList({Key? key, required this.user, required this.channels})
       : super(key: key);
 
-  String _channelName(Channel channel) {
+  String _channelName(ChannelForUser channel) {
     final participant =
-        channel.participants.firstWhere((item) => item.id != user.id);
-    return participant.fullName;
+        channel.participants.firstWhere((item) => item.user.id != user.id);
+    return participant.user.fullName!;
   }
 
-  String _channelAvatarUrl(Channel channel) {
-    String avatarUrl = channel.participants
-        .where((element) => element.id != user.id)
+  String? _channelAvatarUrl(ChannelForUser channel) {
+    String? avatarUrl = channel.participants
+        .where((element) => element.user.id != user.id)
         .first
+        .user
         .avatarUrl;
     return avatarUrl;
   }
@@ -57,7 +58,7 @@ class MessagesList extends StatelessWidget {
           ),
           itemCount: channels.length,
           itemBuilder: (context, index) {
-            Channel channel = channels[index];
+            ChannelForUser channel = channels[index];
             debugPrint('show channel');
             if (channel.participants.length > 1) {
               final channelName = _channelName(channel);
@@ -70,7 +71,7 @@ class MessagesList extends StatelessWidget {
                 leading: CircleAvatar(
                     radius: 45,
                     child: ClipOval(
-                      child: channelAvatarUrl.isNotEmpty
+                      child: channelAvatarUrl != null
                           ? Image(
                               fit: BoxFit.cover,
                               image: NetworkImage(channelAvatarUrl))

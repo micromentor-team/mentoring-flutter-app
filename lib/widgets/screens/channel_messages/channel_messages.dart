@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/data/models/channels/channel.dart';
 import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
 import 'package:mm_flutter_app/data/models/messages/message.dart';
 import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
@@ -59,29 +58,25 @@ class ChannelMessagesScreen extends StatelessWidget {
   //   );
   // }
 
-  String _channelName({user, channel}) {
-    final participant =
-        channel.participants?.firstWhere((item) => item.id != user?.id);
-    final channelName = participant.fullName;
-    return channelName;
-  }
-
   @override
   Widget build(BuildContext context) {
     final channelsProvider = Provider.of<ChannelsProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
 
-    return channelsProvider.findChannelByChannelId(
-      channelId: channelId,
-      onData: (data) {
-        Channel channel = Channel.fromJson(data);
-        final channelName = _channelName(user: user, channel: channel);
+    return channelsProvider.findChannelById(
+      channelId!,
+      onData: (data, {refetch, fetchMore}) {
+        ChannelById channel = data.response!;
+        final String? channelName = channel.participants
+            .firstWhere((item) => item.user.id != user?.id)
+            .user
+            .fullName;
 
         return Scaffold(
           appBar: AppBar(
             title: InkWell(
-              child: Text(channelName),
+              child: Text(channelName!),
               onTap: () => {
                 FocusManager.instance.primaryFocus?.unfocus(),
                 // _openChannelDetailsScreen(context)
@@ -142,7 +137,7 @@ class ChannelMessagesScreen extends StatelessWidget {
 
 class ChannelMessages extends StatelessWidget {
   const ChannelMessages({Key? key, required this.channel}) : super(key: key);
-  final Channel channel;
+  final ChannelById channel;
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +165,7 @@ class ChannelChat extends StatefulWidget {
     required this.channel,
     required this.chatMessages,
   }) : super(key: key);
-  final Channel channel;
+  final ChannelById channel;
   final List<Message> chatMessages;
 
   @override
@@ -364,7 +359,7 @@ class BuildMessageBubbles extends StatelessWidget {
     required this.onSetReplyingTo,
   }) : super(key: key);
 
-  final Channel channel;
+  final ChannelById channel;
   final List participants;
   final List<Message> chatMessages;
   final double bottomViewInset;

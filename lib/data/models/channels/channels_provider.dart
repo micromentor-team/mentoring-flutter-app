@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/__generated/schema/operations.graphql.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 
-import '../../../widgets/atoms/server_error.dart';
+import '../../../__generated/schema/channel_operations.graphql.dart';
 import '../base/operation_result.dart';
-import 'channels_api.dart';
-import 'create_channel.dart';
+
+typedef ChannelForUser = Query$FindChannelsForUser$findChannelsForUser;
+typedef ChannelById = Query$FindChannelById$findChannelById;
 
 class ChannelsProvider extends BaseProvider {
   ChannelsProvider({required super.client}) {
@@ -14,67 +15,66 @@ class ChannelsProvider extends BaseProvider {
     // subscribeToChannels();
   }
 
-  // Query builders
+  // Queries
   Widget queryUserChannels(
-      {required userId, required onData, onLoading, onError}) {
-    return Query(
-      options: QueryOptions(
-        document: gql(kFindChannelsForUser),
-        variables: {
-          "userId": userId,
-        },
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-      builder: (result, {refetch, fetchMore}) {
-        if (result.hasException) {
-          final error = result.exception.toString();
-
-          if (onError != null) {
-            return onError(error);
-          }
-          return ServerError(error: error);
-        }
-        if (result.isLoading) {
-          if (onLoading != null) {
-            return onLoading();
-          }
-          return const SizedBox.shrink();
-        }
-        return onData(result.data!['findChannelsForUser']);
+    String userId, {
+    required Widget Function(
+      OperationResult<List<Query$FindChannelsForUser$findChannelsForUser>>
+          data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery(
+      document: documentNodeQueryFindChannelsForUser,
+      variables: Variables$Query$FindChannelsForUser(userId: userId).toJson(),
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<
+                List<Query$FindChannelsForUser$findChannelsForUser>> result =
+            OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data != null
+              ? Query$FindChannelsForUser.fromJson(
+                  queryResult.data!,
+                ).findChannelsForUser
+              : null,
+        );
+        return onData(result, refetch: refetch, fetchMore: fetchMore);
       },
+      onLoading: onLoading,
+      onError: onError,
     );
   }
 
-  // Query builders
-  Widget findChannelByChannelId(
-      {required channelId, required onData, onLoading, onError}) {
-    return Query(
-      options: QueryOptions(
-        document: gql(kFindChannelById),
-        variables: {
-          "channelId": channelId,
-        },
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-      builder: (result, {refetch, fetchMore}) {
-        if (result.hasException) {
-          final error = result.exception.toString();
-
-          if (onError != null) {
-            return onError(error);
-          }
-          return ServerError(error: error);
-        }
-
-        if (result.isLoading) {
-          if (onLoading != null) {
-            return onLoading();
-          }
-          return const SizedBox.shrink();
-        }
-        // print(result);
-        return onData(result.data!['findChannelById']);
+  Widget findChannelById(
+    String channelId, {
+    required Widget Function(
+      OperationResult<Query$FindChannelById$findChannelById> data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery(
+      document: documentNodeQueryFindChannelById,
+      variables: Variables$Query$FindChannelById(channelId: channelId).toJson(),
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<Query$FindChannelById$findChannelById> result =
+            OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data != null
+              ? Query$FindChannelById.fromJson(
+                  queryResult.data!,
+                ).findChannelById
+              : null,
+        );
+        return onData(result, refetch: refetch, fetchMore: fetchMore);
       },
+      onLoading: onLoading,
+      onError: onError,
     );
   }
 
@@ -107,8 +107,90 @@ class ChannelsProvider extends BaseProvider {
   }
 
   // Mutations
-  Future<String> createChannel({required createdBy, required userIds}) async {
-    return createChannelMutation(
-        client: client, createdBy: createdBy, userIds: userIds);
+  Future<OperationResult<Mutation$CreateChannel$createChannel>> createChannel(
+    Input$ChannelInput input,
+  ) async {
+    final QueryResult queryResult = await runMutation(
+        document: documentNodeMutationCreateChannel,
+        variables: Variables$Mutation$CreateChannel(input: input).toJson(),
+        update: (cache, result) {
+          final req = QueryOptions(
+            document: documentNodeQueryFindChannelsForUser,
+            variables:
+                Variables$Query$FindChannelsForUser(userId: input.createdBy!)
+                    .toJson(),
+          ).asRequest;
+          final response = cache.readQuery(req);
+
+          debugPrint('Channels cache response');
+          List channelsData = response?['findChannelsForUser'];
+          debugPrint('Channels in cache: ${channelsData.length}');
+          response?['findChannelsForUser'].add(result?.data?['createChannel']);
+
+          if (response != null) {
+            cache.writeQuery(
+              req,
+              broadcast: true,
+              data: response,
+            );
+          }
+        });
+
+    final OperationResult<Mutation$CreateChannel$createChannel> result =
+        OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$CreateChannel.fromJson(
+              queryResult.data!,
+            ).createChannel
+          : null,
+    );
+
+    return result;
+  }
+
+  Future<OperationResult<String>> deleteChannel(
+    bool deletePhysically,
+    String channelId,
+  ) async {
+    final QueryResult queryResult = await runMutation(
+        document: documentNodeMutationDeleteChannel,
+        variables: Variables$Mutation$DeleteChannel(
+          deletePhysically: deletePhysically,
+          channelId: channelId,
+        ).toJson(),
+        update: (cache, result) {
+          final req = QueryOptions(
+            document: documentNodeQueryGetChannelsList,
+          ).asRequest;
+
+          // read the channels cache
+          final response = cache.readQuery(req);
+
+          // debugPrint('deleteChannel result');
+          // debugPrint(result);
+
+          // remove the channel from the cache
+          response?['channels'].removeWhere((item) => item['id'] == channelId);
+
+          if (response != null) {
+            cache.writeQuery(
+              req,
+              broadcast: true,
+              data: response,
+            );
+          }
+        });
+
+    final OperationResult<String> result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$DeleteChannel.fromJson(
+              queryResult.data!,
+            ).deleteChannel
+          : null,
+    );
+
+    return result;
   }
 }

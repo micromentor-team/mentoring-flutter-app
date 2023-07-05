@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/__generated/schema/operations.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
@@ -9,6 +8,9 @@ import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/invitation_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:provider/provider.dart';
+
+import '../../__generated/schema/channel_operations.graphql.dart';
+import '../../__generated/schema/user_operations.graphql.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 2;

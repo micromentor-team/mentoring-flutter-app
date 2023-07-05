@@ -1,0 +1,95 @@
+query FindChannelsForUser ($userId: String!) {
+    findChannelsForUser(userId: $userId){
+        id
+        name
+        userIds
+        createdBy
+        createdAt
+        participants {
+            user {
+                id
+                fullName
+                avatarUrl
+                userHandle
+            }
+        }
+    }
+}
+
+query FindChannelById ($channelId: String!) {
+    findChannelById(id: $channelId) {
+        id
+        name
+        userIds
+        createdBy
+        createdAt
+        participants {
+            user {
+                id
+                fullName
+                avatarUrl
+                userHandle
+            }
+        }
+    }
+}
+
+query GetChannelsList {
+    findChannels{
+        id
+        name
+        createdBy
+        createdAt
+        description
+        updatedBy
+        updatedAt
+        participants {
+            id
+        }
+    }
+}
+
+query GetInboxInvitations {
+  myInbox {
+    channels {
+      invitations {
+        channelId
+        createdAt
+        createdBy
+        id
+        messageText
+        status
+      }
+      pendingInvitations {
+        channelId
+        createdAt
+        createdBy
+        id
+        messageText
+        status
+      }
+    }
+  }
+}
+
+mutation CreateChannel ($input: ChannelInput!) {
+    createChannel(input: $input) {
+        id
+        name
+        userIds
+        createdBy
+        createdAt
+        participants {
+            user {
+                id
+                fullName
+                avatarUrl
+                userHandle
+            }
+        }
+    }
+}
+
+mutation DeleteChannel ($deletePhysically: Boolean!, $channelId: String!) {
+    deleteChannel(deletePhysically: $deletePhysically, channelId: $channelId)
+}

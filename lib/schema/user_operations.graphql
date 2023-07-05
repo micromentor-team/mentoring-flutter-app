@@ -36,29 +36,6 @@ query FindUsersWithFilter ($filter: UserListFilter) {
     }
 }
 
-query GetInboxInvitations {
-  myInbox {
-    channels {
-      invitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
-      pendingInvitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
-    }
-  }
-}
-
 mutation SignInUser ($input: UserSignInInput!) {
     signInUser(input: $input) {
         userId

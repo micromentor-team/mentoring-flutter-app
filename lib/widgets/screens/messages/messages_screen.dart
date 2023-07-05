@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/data/models/channels/channel.dart';
 import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -34,11 +33,9 @@ class ChannelsList extends StatelessWidget {
     final user = userProvider.user;
 
     return channelsProvider.queryUserChannels(
-      userId: user?.id,
-      onData: (data) {
-        List channels =
-            data.reversed.map((item) => Channel.fromJson(item)).toList();
-        return MessagesList(user: user!, channels: channels);
+      user!.id,
+      onData: (data, {refetch, fetchMore}) {
+        return MessagesList(user: user, channels: data.response!);
       },
     );
   }

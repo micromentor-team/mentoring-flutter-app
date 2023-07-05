@@ -1,8 +1,8 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/models/channels/channel.dart';
 import '../../../data/models/channels/channels_provider.dart';
 import '../../../data/models/user/user_provider.dart';
 import '../../organisms/user_card.dart';
@@ -32,11 +32,10 @@ class UserChannels extends StatelessWidget {
     final user = userProvider.user;
 
     return channelsProvider.queryUserChannels(
-      userId: user?.id,
-      onData: (data) {
-        final channels = data.map((item) => Channel.fromJson(item)).toList();
+      user!.id,
+      onData: (data, {refetch, fetchMore}) {
         return UsersList(
-          channels: channels,
+          channels: data.response!,
           search: search,
         );
       },
@@ -46,7 +45,7 @@ class UserChannels extends StatelessWidget {
 
 class UsersList extends StatelessWidget {
   final String search;
-  final List channels;
+  final List<ChannelForUser> channels;
 
   const UsersList({Key? key, required this.channels, required this.search})
       : super(key: key);
@@ -54,9 +53,9 @@ class UsersList extends StatelessWidget {
   _openChannelChatWithUser(context, String userId) async {
     // find the channel with this user
     final channelIndex =
-        channels.indexWhere((item) => item.userIds.contains(userId));
+        channels.indexWhere((item) => item.userIds?.contains(userId) ?? false);
 
-    String channelId;
+    String? channelId;
     final navigator = Navigator.of(context);
 
     if (channelIndex >= 0) {
@@ -70,10 +69,11 @@ class UsersList extends StatelessWidget {
       final user = userProvider.user;
       final channelsProvider =
           Provider.of<ChannelsProvider>(context, listen: false);
-      final userIds = [user?.id, userId];
+      final userIds = [user!.id, userId];
 
-      channelId = await channelsProvider.createChannel(
-          createdBy: user?.id, userIds: userIds);
+      final result = await channelsProvider.createChannel(
+          Input$ChannelInput(createdBy: user.id, userIds: userIds));
+      channelId = result.response?.id;
     }
     navigator.push(
       MaterialPageRoute(
