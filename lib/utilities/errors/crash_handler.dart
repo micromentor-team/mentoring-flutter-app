@@ -40,21 +40,28 @@ class CrashHandler {
     RetryOptions retryOptions = const RetryOptions(
       maxAttempts: 4,
     ),
+    bool logFailures = true,
   }) async {
     try {
       return await retryOptions.retry<T>(
         operation,
         retryIf: (e) => e is RetryException,
-        onRetry: (e) => logCrashReport(
-          'Retrying after exception: ${(e as RetryException).message}.',
-        ),
+        onRetry: (e) {
+          if (logFailures) {
+            logCrashReport(
+                'Retrying after exception: ${(e as RetryException).message}.');
+          }
+        },
       );
     } catch (e) {
       if (e is RetryException && onFailOperation != null) {
-        logCrashReport('Maximum number of retry attempts reached: ${e.message}'
-            '\nExecuting onFailOperation callback.');
-        if (!kIsWeb) {
-          FirebaseCrashlytics.instance.recordError(e, null, fatal: false);
+        if (logFailures) {
+          logCrashReport(
+              'Maximum number of retry attempts reached: ${e.message}'
+              '\nExecuting onFailOperation callback.');
+          if (!kIsWeb) {
+            FirebaseCrashlytics.instance.recordError(e, null, fatal: false);
+          }
         }
         return onFailOperation();
       }
