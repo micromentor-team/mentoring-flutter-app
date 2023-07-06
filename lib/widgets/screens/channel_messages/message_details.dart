@@ -116,7 +116,7 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
   String _participantName({userId}) {
     final User participant = widget.channel.participants
         .firstWhere((item) => item.id == userId, orElse: () => null);
-    return participant.fullName.trim().split(RegExp(' +')).take(1).join();
+    return participant.fullName!.trim().split(RegExp(' +')).take(1).join();
   }
 
   Widget _buildAuthor() {

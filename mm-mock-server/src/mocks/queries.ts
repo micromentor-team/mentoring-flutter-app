@@ -22,6 +22,9 @@ export function mockQueries(serverState: MockServerState) {
             return [
                 serverState.loggedInUser,
                 serverState.otherUsers[0],
+                serverState.otherUsers[1],
+                serverState.otherUsers[2],
+                serverState.otherUsers[3],
             ]
         },
         getAuthenticatedUser: () => {

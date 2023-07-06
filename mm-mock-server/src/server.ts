@@ -11,7 +11,7 @@ import { mockMutations } from "./mocks/mutations"
 
 async function startApolloServer() {
     // Obtain type definitions from the schema file.
-    const typeDefs = readFileSync(join(__dirname, '../schema.graphql'), 'utf-8');
+    const typeDefs = readFileSync(join(__dirname, '../../lib/schema/schema.graphql'), 'utf-8');
 
     // The mock server state is used to simulate a stateful backend.
     const serverState = new MockServerState();

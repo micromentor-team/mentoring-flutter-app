@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -167,9 +168,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: () async {
                             debugPrint('Button pressed ...');
                             await userProvider.signUpUser(
-                              name: '$firstName $lastName',
-                              email: email,
-                              password: password,
+                              Input$UserSignUpInput(
+                                fullName: '$firstName $lastName',
+                                email: email,
+                                password: password,
+                              ),
                             );
                             if (context.mounted) {
                               _openHomeScreen(context);

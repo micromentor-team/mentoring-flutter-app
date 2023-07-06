@@ -41,7 +41,7 @@ class MessageBubble extends StatelessWidget {
     final User? participant = participants
         .firstWhere((item) => item.id == userId, orElse: () => null);
     if (participant != null) {
-      return participant.fullName.trim().split(RegExp(' +')).take(1).join();
+      return participant.fullName!.trim().split(RegExp(' +')).take(1).join();
     }
     return '';
   }
