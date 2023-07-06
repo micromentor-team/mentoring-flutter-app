@@ -265,7 +265,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           _openSignUpScreen(context);
                         },
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FlutterSocialButton(
                               onTap: () {},
@@ -287,7 +287,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           _openSignUpScreen(context);
                         },
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FlutterSocialButton(
                               onTap: () {},
@@ -309,7 +309,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           _openSignUpScreen(context);
                         },
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FlutterSocialButton(
                               onTap: () {},
@@ -331,7 +331,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           _openSignUpScreen(context);
                         },
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FlutterSocialButton(
                               onTap: () {},
