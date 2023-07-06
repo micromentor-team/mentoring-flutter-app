@@ -9,6 +9,8 @@ import 'package:retry/retry.dart';
 import '../../../widgets/atoms/server_error.dart';
 
 abstract class BaseProvider extends ChangeNotifier {
+  static const int retryAttempts = 2;
+  static const Duration retryDelayFactor = Duration(milliseconds: 500);
   final GraphQLClient client;
 
   BaseProvider({required this.client});
@@ -23,10 +25,11 @@ abstract class BaseProvider extends ChangeNotifier {
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
+    bool logFailures = true,
   }) {
     const RetryOptions retryOptions = RetryOptions(
-      maxAttempts: 2,
-      delayFactor: Duration(milliseconds: 500),
+      maxAttempts: BaseProvider.retryAttempts,
+      delayFactor: BaseProvider.retryDelayFactor,
     );
     bool isRetrying = false;
     bool isFailed = false;
@@ -50,18 +53,23 @@ abstract class BaseProvider extends ChangeNotifier {
           }
           if (!isRetrying) {
             isRetrying = true;
-            CrashHandler.logCrashReport('Exception while executing Query:'
-                '\n${result.exception.toString()}\n'
-                'Retrying up to ${retryOptions.maxAttempts} additional times.');
+            if (logFailures) {
+              CrashHandler.logCrashReport('Exception while executing Query:'
+                  '\n${result.exception.toString()}\n'
+                  'Retrying up to ${retryOptions.maxAttempts} additional times.');
+            }
             WidgetsBinding.instance.addPostFrameCallback((_) async {
               CrashHandler.retryOnException<void>(
                 () => _retryQuery(refetch!),
                 onFailOperation: () {
                   isFailed = true;
-                  DebugLogger.warning('Failed to complete Query'
-                      ' after ${retryOptions.maxAttempts + 1} attempts.');
+                  if (logFailures) {
+                    DebugLogger.warning('Failed to complete Query'
+                        ' after ${retryOptions.maxAttempts + 1} attempts.');
+                  }
                 },
                 retryOptions: retryOptions,
+                logFailures: logFailures,
               );
             });
           }
@@ -96,6 +104,7 @@ abstract class BaseProvider extends ChangeNotifier {
   Future<QueryResult> runMutation({
     required DocumentNode document,
     Map<String, dynamic>? variables,
+    bool logFailures = true,
   }) async {
     final mutation = MutationOptions(
       document: document,
@@ -103,24 +112,29 @@ abstract class BaseProvider extends ChangeNotifier {
       variables: variables ?? const {},
     );
     const RetryOptions retryOptions = RetryOptions(
-      maxAttempts: 2,
-      delayFactor: Duration(milliseconds: 500),
+      maxAttempts: BaseProvider.retryAttempts,
+      delayFactor: BaseProvider.retryDelayFactor,
     );
     QueryResult result = await client.mutate(mutation);
     if (result.hasException) {
-      CrashHandler.logCrashReport('Exception while executing Mutation:'
-          '\n${result.exception.toString()}\n'
-          'Retrying up to ${retryOptions.maxAttempts} additional times.');
+      if (logFailures) {
+        CrashHandler.logCrashReport('Exception while executing Mutation:'
+            '\n${result.exception.toString()}\n'
+            'Retrying up to ${retryOptions.maxAttempts} additional times.');
+      }
 
       QueryResult? retryResult =
           await CrashHandler.retryOnException<QueryResult?>(
         () => _retryMutation(mutation),
         onFailOperation: () {
-          DebugLogger.warning('Failed to complete Mutation'
-              ' after ${retryOptions.maxAttempts + 1} attempts.');
+          if (logFailures) {
+            DebugLogger.warning('Failed to complete Mutation'
+                ' after ${retryOptions.maxAttempts + 1} attempts.');
+          }
           return null;
         },
         retryOptions: retryOptions,
+        logFailures: logFailures,
       );
       if (retryResult != null) {
         result = retryResult;

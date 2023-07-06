@@ -51,6 +51,7 @@ class UserProvider extends BaseProvider {
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
+    bool logFailures = true,
   }) {
     return runQuery(
       document: documentNodeQueryGetAuthenticatedUser,
@@ -73,6 +74,7 @@ class UserProvider extends BaseProvider {
       },
       onLoading: onLoading,
       onError: onError,
+      logFailures: logFailures,
     );
   }
 
