@@ -16,9 +16,10 @@ export function generateUser() {
         fullName: mockFullName,
         userHandle: mockUserHandle,
         email: mockEmail,
-        avatarUrl: null,
+        avatarUrl: faker.image.urlPicsumPhotos(),
+        jobTitle: faker.person.jobTitle(),
         profileCompletionPercentage: mockProfileCompletionPercentage,
-        lastUpdateTime: mockLastUpdateTime
+        lastUpdateTime: mockLastUpdateTime,
     }
 }
 
@@ -85,11 +86,31 @@ export function generateChannelMessage(sender: any, seen: boolean) {
     }
 }
 
+export function generateChannelInboxItemInvitation(channelId: string, sender: any,  declined?: boolean, accepted?: boolean) {
+var status: string;
+    if (accepted)
+        status = "accepted";
+    else if (declined)
+        status = "declined";
+    else
+        status = "created";
+    return {
+        __typename: "ChannelInboxItemInvitation",
+        channelId: channelId,
+        createdAt: faker.date.recent(),
+        createdBy: sender.id,
+        id: faker.string.alphanumeric({length: 24}),
+        messageText: faker.lorem.sentence(),
+        status: status,
+    }
+}
+
 export function generateChannelInboxItemMessage(channelId: string, sender: any) {
+
     return {
         __typename: "ChannelInboxItemMessage",
         channelId: channelId,
-        id: sender.id,
+        id: faker.string.alphanumeric({length: 24}),
         messageText: faker.lorem.sentence(),
         senderFullName: sender.fullName,
         createdBy: sender.id,
