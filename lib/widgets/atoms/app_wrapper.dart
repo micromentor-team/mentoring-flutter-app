@@ -37,7 +37,7 @@ class _AppWrapperState extends State<AppWrapper> {
     if (location.startsWith('/explore')) {
       return 1;
     }
-    if (location.startsWith('/journey')) {
+    if (location.startsWith('/progress')) {
       return 2;
     }
     if (location.startsWith('/inbox')) {
