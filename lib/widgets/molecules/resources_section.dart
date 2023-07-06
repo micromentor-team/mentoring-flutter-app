@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/atoms/resource_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
+
+import 'image_tile.dart';
 
 class ResourcesSection extends StatelessWidget {
   const ResourcesSection({Key? key}) : super(key: key);
@@ -11,25 +12,24 @@ class ResourcesSection extends StatelessWidget {
     //TODO(m-rosario): Don't use hardcoded values.
     //TODO(m-rosario): Implement callback for each tile.
     List<Widget> resourceTiles = [
-      Components.resourceListItemDivider,
-      ResourceTile(
-        icon: const Icon(Icons.school),
-        text: l10n.homeResourcesMentorTraining,
-        onPress: () => {},
+      ImageTile(
+        image: const AssetImage(Assets.resourceWebinarStockImage),
+        title: l10n.homeResourcesWebinar,
+        subtitle: l10n.homeResourcesWebinarDescription,
+        isCircle: false,
       ),
-      Components.resourceListItemDivider,
-      ResourceTile(
-        icon: const Icon(Icons.cases_outlined),
-        text: l10n.homeResourcesEntrepreneurTraining,
-        onPress: () => {},
+      ImageTile(
+        image: const AssetImage(Assets.resourceTrainingStockImage),
+        title: l10n.homeResourcesTraining,
+        subtitle: l10n.homeResourcesTrainingDescription,
+        isCircle: false,
       ),
-      Components.resourceListItemDivider,
-      ResourceTile(
-        icon: const Icon(Icons.computer),
-        text: l10n.homeResourcesVideos,
-        onPress: () => {},
+      ImageTile(
+        image: const AssetImage(Assets.resourceBlogsStockImage),
+        title: l10n.homeResourcesBlogs,
+        subtitle: l10n.homeResourcesBlogsDescription,
+        isCircle: false,
       ),
-      Components.resourceListItemDivider,
     ];
     return resourceTiles;
   }
@@ -37,15 +37,18 @@ class ResourcesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    List<Widget> resourceTiles = _createResourceTiles(l10n);
     return SectionTile(
       title: l10n.homeResourcesSectionTitle,
       addTopDivider: true,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Insets.widgetMediumInset,
-        ),
-        child: Column(
-          children: _createResourceTiles(l10n),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
+          child: Row(
+            children: resourceTiles,
+          ),
         ),
       ),
     );

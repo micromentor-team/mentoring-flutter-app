@@ -36,8 +36,8 @@ export function mockQueries(serverState: MockServerState) {
         getUserProfileInfo: () => {
             return {
                 __typename: "User",
-                profileCompletionPercentage: generators.generateUserProfileCompletionPercentage(),
-                lastUpdateTime: generators.generateUserLastUpdateTime(),
+                profileCompletionPercentage: serverState.loggedInUser.profileCompletionPercentage,
+                lastUpdateTime: serverState.loggedInUser.lastUpdateTime,
             };
         },
         myInbox: () => {
