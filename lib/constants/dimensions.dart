@@ -41,4 +41,6 @@ class Dimensions {
   static const double mentorCardWidth = 260;
   static const double chipVisualDensity = -4;
   static const double chipMaxWidth = 100;
+  static const double loginBoxWidth = 360;
+  static const double lineHeight = 1;
 }

@@ -17,6 +17,21 @@ class TextStyles {
     );
   }
 
+  static TextStyle? sectionSubHeaderBold(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleMedium!.copyWith(
+      color: theme.colorScheme.primary,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  static TextStyle? sectionSubNote(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleMedium!.copyWith(
+      color: theme.colorScheme.inverseSurface,
+    );
+  }
+
   static TextStyle? cardTitle(BuildContext context) {
     return Theme.of(context)
         .textTheme
@@ -47,6 +62,12 @@ class TextStyles {
     return Theme.of(context).textTheme.headlineSmall;
   }
 
+  static TextStyle? largeTextButton(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.labelLarge!
+        .copyWith(color: theme.colorScheme.onPrimary);
+  }
+
   static TextStyle? smallTextButton(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return theme.textTheme.labelMedium!
@@ -66,6 +87,16 @@ class ButtonStyles {
       padding: const EdgeInsets.all(Insets.widgetSmallInset),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(Radii.buttonRadius)),
+      ),
+    );
+  }
+
+  static ButtonStyle loginButton(BuildContext context) {
+    return TextButton.styleFrom(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(Radii.buttonRadius * 2)),
       ),
     );
   }

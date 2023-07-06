@@ -39,5 +39,14 @@
     "reminderBannerProfileUpdateTitle": "Update your profile",
     "reminderBannerProfileUpdateSubtitle": "Make sure your profile is updated so you get the best matches",
     "reminderBannerProfileUpdateCta": "Update profile",
-    "recommendedMentorCardScrollable": "Recommended"
+    "recommendedMentorCardScrollable": "Recommended",
+    "welcome": "Welcome!",
+    "signInMessage": "Please sign in your account with",
+    "logIn": "Login",
+    "createNewAccount": "Create new account",
+    "or":"or",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithFacebook": "Sign in with Facebook",
+    "signInWithLinkedIn": "Sign in with LinkedIn",
+    "signInWithWhatsapp": "Sign in with Whatsapp"
 }
