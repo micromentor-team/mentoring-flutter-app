@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_message.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
-import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 
-import '../base/operation_result.dart';
+import 'base/base_provider.dart';
+import 'base/operation_result.dart';
 
 typedef ChannelMessage = Query$FindChannelMessages$findChannelMessages;
 typedef UnseenMessage

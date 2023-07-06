@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
-import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 
-import '../../../__generated/schema/operations_channel.graphql.dart';
-import '../base/operation_result.dart';
+import '../__generated/schema/operations_channel.graphql.dart';
+import 'base/base_provider.dart';
+import 'base/operation_result.dart';
 
 typedef ChannelForUser = Query$FindChannelsForUser$findChannelsForUser;
 typedef ChannelById = Query$FindChannelById$findChannelById;
+typedef ChannelParticipant = Query$FindChannelById$findChannelById$participants;
 
 class ChannelsProvider extends BaseProvider {
   ChannelsProvider({required super.client}) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/models/messages/messages_provider.dart';
+import '../../../providers/messages_provider.dart';
 import '../channel_messages/channel_messages.dart';
 
 class MessagesList extends StatelessWidget {

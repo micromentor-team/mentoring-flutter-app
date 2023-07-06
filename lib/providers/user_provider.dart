@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../__generated/schema/operations_user.graphql.dart';
-import '../../../__generated/schema/schema.graphql.dart';
-import '../base/operation_result.dart';
+import '../__generated/schema/operations_user.graphql.dart';
+import '../__generated/schema/schema.graphql.dart';
+import 'base/base_provider.dart';
+import 'base/operation_result.dart';
 
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 

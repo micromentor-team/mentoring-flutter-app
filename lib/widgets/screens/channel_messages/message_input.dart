@@ -1,8 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
 
-import '../../../data/models/messages/messages_provider.dart';
+import '../../../providers/messages_provider.dart';
 import 'reply_message.dart';
 
 class MessageInput extends StatefulWidget {
@@ -18,7 +19,7 @@ class MessageInput extends StatefulWidget {
     this.autoFocus = false,
   }) : super(key: key);
 
-  final List participants;
+  final List<ChannelParticipant> participants;
   final TextEditingController? controller;
   final VoidCallback? onTapEmptyInput;
   final Function(String messageText, String? replyingToMessageId) onSubmit;

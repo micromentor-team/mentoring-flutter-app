@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/data/models/user/user.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/emoji_utils/emoji_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../data/models/messages/messages_provider.dart';
+import '../../../../providers/messages_provider.dart';
 import '../reply_message.dart';
 
 class MessageBubble extends StatelessWidget {
@@ -17,7 +17,7 @@ class MessageBubble extends StatelessWidget {
     required this.participants,
     this.replyingTo,
   }) : super(key: key);
-  final List participants;
+  final List<ChannelParticipant> participants;
   final ChannelMessage message;
   final ChannelMessage? replyingTo;
 
@@ -38,10 +38,14 @@ class MessageBubble extends StatelessWidget {
   }
 
   String _participantName({userId}) {
-    final User? participant = participants
-        .firstWhere((item) => item.id == userId, orElse: () => null);
+    final ChannelParticipant? participant =
+        participants.where((item) => item.user.id == userId).firstOrNull;
     if (participant != null) {
-      return participant.fullName!.trim().split(RegExp(' +')).take(1).join();
+      return participant.user.fullName!
+          .trim()
+          .split(RegExp(' +'))
+          .take(1)
+          .join();
     }
     return '';
   }

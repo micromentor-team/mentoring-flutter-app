@@ -1,10 +1,11 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/models/channels/channels_provider.dart';
-import '../../../data/models/user/user_provider.dart';
+import '../../../providers/channels_provider.dart';
+import '../../../providers/user_provider.dart';
 import '../../organisms/user_card.dart';
 import '../../organisms/user_expanded_card.dart';
 import '../channel_messages/channel_messages.dart';
@@ -99,14 +100,17 @@ class UsersList extends StatelessWidget {
         return Text('Error: $error');
       },
       onData: (data, {refetch, fetchMore}) {
-        List users = data.response != null
+        List<Query$FindAllUsers$findUsers> users = data.response != null
             ? data.response!.reversed
                 .where((element) => element.id != currentUser?.id)
                 .toList()
             : [];
         users = users
             .where((element) =>
-                element.fullName.toLowerCase().contains(search.toLowerCase()))
+                element.fullName
+                    ?.toLowerCase()
+                    .contains(search.toLowerCase()) ??
+                false)
             .toList();
 
         return ListView.separated(

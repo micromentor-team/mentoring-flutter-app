@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
-import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
-import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/messages_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'message_bubble/message_bubble.dart';
@@ -355,7 +355,7 @@ class BuildMessageBubbles extends StatelessWidget {
   }) : super(key: key);
 
   final ChannelById channel;
-  final List participants;
+  final List<ChannelParticipant> participants;
   final List<ChannelMessage> chatMessages;
   final double bottomViewInset;
   final ScrollController listScrollController;
@@ -465,7 +465,7 @@ class BuildMessageBubble extends StatelessWidget {
     this.onSwipeRight,
   }) : super(key: key);
   final ChannelMessage message;
-  final List participants;
+  final List<ChannelParticipant> participants;
   final List<ChannelMessage> chatMessages;
   final VoidCallback? onSwipeLeft;
   final VoidCallback? onSwipeRight;
@@ -523,7 +523,7 @@ class BuildMessageInput extends StatelessWidget {
   final String channelId;
   final double bottomViewInset;
   final ChannelMessage? replyingTo;
-  final List participants;
+  final List<ChannelParticipant> participants;
   final Function onClearReply;
   final Function onSetBottomInset;
 
