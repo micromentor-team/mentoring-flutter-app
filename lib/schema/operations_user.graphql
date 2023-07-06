@@ -9,14 +9,14 @@ query GetAuthenticatedUser {
 }
 
 query GetUserProfileInfo {
-    getUserProfileInfo(){
+    getUserProfileInfo() {
         profileCompletionPercentage
         lastUpdateTime
     }
 }
 
 query FindAllUsers ($filter: UserListFilter) {
-    findUsers(filter: $filter){
+    findUsers(filter: $filter) {
         id
         email
         fullName
@@ -26,7 +26,7 @@ query FindAllUsers ($filter: UserListFilter) {
 }
 
 query FindUsersWithFilter ($filter: UserListFilter) {
-    findUsers(filter: $filter){
+    findUsers(filter: $filter) {
         id
         email
         fullName

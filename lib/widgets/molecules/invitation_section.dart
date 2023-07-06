@@ -9,8 +9,8 @@ import 'package:mm_flutter_app/widgets/atoms/invitation_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../../__generated/schema/channel_operations.graphql.dart';
-import '../../__generated/schema/user_operations.graphql.dart';
+import '../../__generated/schema/operations_channel.graphql.dart';
+import '../../__generated/schema/operations_user.graphql.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 2;

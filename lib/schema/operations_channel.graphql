@@ -1,5 +1,5 @@
 query FindChannelsForUser ($userId: String!) {
-    findChannelsForUser(userId: $userId){
+    findChannelsForUser(userId: $userId) {
         id
         name
         userIds
@@ -35,7 +35,7 @@ query FindChannelById ($channelId: String!) {
 }
 
 query GetChannelsList {
-    findChannels{
+    findChannels {
         id
         name
         createdBy

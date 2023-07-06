@@ -4,8 +4,8 @@ import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../__generated/schema/operations_user.graphql.dart';
 import '../../../__generated/schema/schema.graphql.dart';
-import '../../../__generated/schema/user_operations.graphql.dart';
 import '../base/operation_result.dart';
 
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;

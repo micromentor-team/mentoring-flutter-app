@@ -3,7 +3,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 
-import '../../../__generated/schema/channel_operations.graphql.dart';
+import '../../../__generated/schema/operations_channel.graphql.dart';
 import '../base/operation_result.dart';
 
 typedef ChannelForUser = Query$FindChannelsForUser$findChannelsForUser;
