@@ -1621,7 +1621,7 @@ input GenGroupsInput {
   deletedAt: String
   deletedBy: ID
   count: Int! = 0
-  specificGroups: [GenSpecificGroupInput!]! = []
+  specificGroups: [GenSpecificGroupInput!]!
 }
 
 input GenSpecificGroupInput {
