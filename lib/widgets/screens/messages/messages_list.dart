@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
-import 'package:mm_flutter_app/data/models/messages/unseen_messages.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +28,13 @@ class MessagesList extends StatelessWidget {
     return avatarUrl;
   }
 
-  List _channelUnseenMessage(unseenMessages, channel) {
+  List<UnseenMessage> _channelUnseenMessage(
+    List<UnseenMessage>? unseenMessages,
+    ChannelForUser channel,
+  ) {
+    if (unseenMessages == null) {
+      return [];
+    }
     return unseenMessages
         .where((element) =>
             element.channelId == channel.id && element.createdBy != user.id)
@@ -47,9 +52,7 @@ class MessagesList extends StatelessWidget {
   Widget build(BuildContext context) {
     final messagesProvider = Provider.of<MessagesProvider>(context);
     return messagesProvider.unseenMessages(
-      onData: (data) {
-        List unseenMessages =
-            data.map((item) => UnseenMessages.fromJson(item)).toList();
+      onData: (data, {refetch, fetchMore}) {
         return ListView.separated(
           physics: const ScrollPhysics(),
           shrinkWrap: true,
@@ -63,8 +66,8 @@ class MessagesList extends StatelessWidget {
             if (channel.participants.length > 1) {
               final channelName = _channelName(channel);
               final channelAvatarUrl = _channelAvatarUrl(channel);
-              final channelUnseenMessages =
-                  _channelUnseenMessage(unseenMessages, channel);
+              final List<UnseenMessage> channelUnseenMessages =
+                  _channelUnseenMessage(data.response, channel);
 
               return ListTile(
                 dense: true,

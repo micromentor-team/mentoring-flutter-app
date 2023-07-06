@@ -52,7 +52,7 @@ mutation DeleteChannelMessage ($deletePhysically: Boolean!, $channelMessageId: S
     deleteChannelMessage(deletePhysically: $deletePhysically, channelMessageId: $channelMessageId)
 }
 
-mutation MarkChannelMessagesAsSeenBeyMe ($channelId: String!) {
+mutation MarkChannelMessagesAsSeenByMe ($channelId: String!) {
     markChannelMessagesAsSeenByMe(channelId: $channelId)
 }
 
@@ -60,7 +60,7 @@ mutation UpdateChannelMessage ($input: ChannelMessageInput!) {
     updateChannelMessage(input: $input)
 }
 
-subscription ObjectChanged ($objectId: ID!) {
+subscription ChannelUpdated ($objectId: ID!) {
     objectChanged(objectId: $objectId) {
         objectId
         messageType

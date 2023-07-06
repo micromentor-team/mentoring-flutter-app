@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/data/models/messages/message.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,7 @@ class MessageDetailsModal extends StatefulWidget {
       required this.context})
       : super(key: key);
 
-  final Message message;
+  final ChannelMessage message;
   final BuildContext context;
   final ChannelById channel;
 
@@ -29,7 +29,7 @@ class MessageDetailsModal extends StatefulWidget {
 
 class _MessageDetailsModalState extends State<MessageDetailsModal> {
   final TextEditingController _controller = TextEditingController();
-  late Message _message;
+  late ChannelMessage _message;
   late String _sentAt;
   bool _isEditing = false;
 
@@ -44,8 +44,8 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
   @override
   void initState() {
     _message = widget.message;
-    _sentAt = DateFormat.Hm().format(DateTime.parse(_message.createdAt));
-    _controller.text = _message.messageText;
+    _sentAt = DateFormat.Hm().format(_message.createdAt);
+    _controller.text = _message.messageText!;
     super.initState();
   }
 
@@ -242,12 +242,17 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
           // TODO: need to support undelete
           if (_message.deletedAt != null) {
             Provider.of<MessagesProvider>(context, listen: false).updateMessage(
+              input: Input$ChannelMessageInput(
                 channelId: widget.channel.id,
-                messageId: _message.id,
-                undelete: true);
+                id: _message.id,
+                deletedAt: null,
+              ),
+            );
           } else {
-            Provider.of<MessagesProvider>(context, listen: false)
-                .deleteMessage(messageId: _message.id, deletePhysically: false);
+            Provider.of<MessagesProvider>(context, listen: false).deleteMessage(
+              deletePhysically: false,
+              channelMessageId: _message.id,
+            );
           }
 
           _onClose();
@@ -282,9 +287,12 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
         controller: _controller,
         onSubmit: (val, replyingToMessageId) {
           Provider.of<MessagesProvider>(context, listen: false).updateMessage(
+            input: Input$ChannelMessageInput(
               channelId: widget.channel.id,
-              messageId: _message.id,
-              messageText: val);
+              id: _message.id,
+              messageText: val,
+            ),
+          );
           _onClose();
         },
         submitIcon: Icons.check,

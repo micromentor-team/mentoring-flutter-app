@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/data/models/messages/message.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
+
+import '../../../data/models/messages/messages_provider.dart';
 
 class ReplyMessage extends StatelessWidget {
   const ReplyMessage(
@@ -12,7 +13,7 @@ class ReplyMessage extends StatelessWidget {
       this.onClose})
       : super(key: key);
   final List participants;
-  final Message replyMessage;
+  final ChannelMessage replyMessage;
   final VoidCallback? onClose;
 
   bool _isCurrentUser({userId, context}) {
@@ -66,7 +67,7 @@ class ReplyMessage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    replyMessage.messageText,
+                    replyMessage.messageText!,
                     maxLines: 1,
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,

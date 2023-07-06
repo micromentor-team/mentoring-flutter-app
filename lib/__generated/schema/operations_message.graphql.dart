@@ -2862,21 +2862,21 @@ const documentNodeMutationDeleteChannelMessage = DocumentNode(definitions: [
   ),
 ]);
 
-class Variables$Mutation$MarkChannelMessagesAsSeenBeyMe {
-  factory Variables$Mutation$MarkChannelMessagesAsSeenBeyMe(
+class Variables$Mutation$MarkChannelMessagesAsSeenByMe {
+  factory Variables$Mutation$MarkChannelMessagesAsSeenByMe(
           {required String channelId}) =>
-      Variables$Mutation$MarkChannelMessagesAsSeenBeyMe._({
+      Variables$Mutation$MarkChannelMessagesAsSeenByMe._({
         r'channelId': channelId,
       });
 
-  Variables$Mutation$MarkChannelMessagesAsSeenBeyMe._(this._$data);
+  Variables$Mutation$MarkChannelMessagesAsSeenByMe._(this._$data);
 
-  factory Variables$Mutation$MarkChannelMessagesAsSeenBeyMe.fromJson(
+  factory Variables$Mutation$MarkChannelMessagesAsSeenByMe.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$channelId = data['channelId'];
     result$data['channelId'] = (l$channelId as String);
-    return Variables$Mutation$MarkChannelMessagesAsSeenBeyMe._(result$data);
+    return Variables$Mutation$MarkChannelMessagesAsSeenByMe._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -2889,10 +2889,9 @@ class Variables$Mutation$MarkChannelMessagesAsSeenBeyMe {
     return result$data;
   }
 
-  CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe<
-          Variables$Mutation$MarkChannelMessagesAsSeenBeyMe>
-      get copyWith =>
-          CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe(
+  CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenByMe<
+          Variables$Mutation$MarkChannelMessagesAsSeenByMe>
+      get copyWith => CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenByMe(
             this,
             (i) => i,
           );
@@ -2901,7 +2900,7 @@ class Variables$Mutation$MarkChannelMessagesAsSeenBeyMe {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$MarkChannelMessagesAsSeenBeyMe) ||
+    if (!(other is Variables$Mutation$MarkChannelMessagesAsSeenByMe) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2920,65 +2919,61 @@ class Variables$Mutation$MarkChannelMessagesAsSeenBeyMe {
   }
 }
 
-abstract class CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe<
-    TRes> {
-  factory CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe(
-    Variables$Mutation$MarkChannelMessagesAsSeenBeyMe instance,
-    TRes Function(Variables$Mutation$MarkChannelMessagesAsSeenBeyMe) then,
-  ) = _CopyWithImpl$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe;
+abstract class CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenByMe<TRes> {
+  factory CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenByMe(
+    Variables$Mutation$MarkChannelMessagesAsSeenByMe instance,
+    TRes Function(Variables$Mutation$MarkChannelMessagesAsSeenByMe) then,
+  ) = _CopyWithImpl$Variables$Mutation$MarkChannelMessagesAsSeenByMe;
 
-  factory CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe.stub(
+  factory CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenByMe.stub(
           TRes res) =
-      _CopyWithStubImpl$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe;
+      _CopyWithStubImpl$Variables$Mutation$MarkChannelMessagesAsSeenByMe;
 
   TRes call({String? channelId});
 }
 
-class _CopyWithImpl$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes>
-    implements
-        CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes> {
-  _CopyWithImpl$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe(
+class _CopyWithImpl$Variables$Mutation$MarkChannelMessagesAsSeenByMe<TRes>
+    implements CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenByMe<TRes> {
+  _CopyWithImpl$Variables$Mutation$MarkChannelMessagesAsSeenByMe(
     this._instance,
     this._then,
   );
 
-  final Variables$Mutation$MarkChannelMessagesAsSeenBeyMe _instance;
+  final Variables$Mutation$MarkChannelMessagesAsSeenByMe _instance;
 
-  final TRes Function(Variables$Mutation$MarkChannelMessagesAsSeenBeyMe) _then;
+  final TRes Function(Variables$Mutation$MarkChannelMessagesAsSeenByMe) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? channelId = _undefined}) =>
-      _then(Variables$Mutation$MarkChannelMessagesAsSeenBeyMe._({
+      _then(Variables$Mutation$MarkChannelMessagesAsSeenByMe._({
         ..._instance._$data,
         if (channelId != _undefined && channelId != null)
           'channelId': (channelId as String),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes>
-    implements
-        CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes> {
-  _CopyWithStubImpl$Variables$Mutation$MarkChannelMessagesAsSeenBeyMe(
-      this._res);
+class _CopyWithStubImpl$Variables$Mutation$MarkChannelMessagesAsSeenByMe<TRes>
+    implements CopyWith$Variables$Mutation$MarkChannelMessagesAsSeenByMe<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$MarkChannelMessagesAsSeenByMe(this._res);
 
   TRes _res;
 
   call({String? channelId}) => _res;
 }
 
-class Mutation$MarkChannelMessagesAsSeenBeyMe {
-  Mutation$MarkChannelMessagesAsSeenBeyMe({
+class Mutation$MarkChannelMessagesAsSeenByMe {
+  Mutation$MarkChannelMessagesAsSeenByMe({
     required this.markChannelMessagesAsSeenByMe,
     this.$__typename = 'Mutation',
   });
 
-  factory Mutation$MarkChannelMessagesAsSeenBeyMe.fromJson(
+  factory Mutation$MarkChannelMessagesAsSeenByMe.fromJson(
       Map<String, dynamic> json) {
     final l$markChannelMessagesAsSeenByMe =
         json['markChannelMessagesAsSeenByMe'];
     final l$$__typename = json['__typename'];
-    return Mutation$MarkChannelMessagesAsSeenBeyMe(
+    return Mutation$MarkChannelMessagesAsSeenByMe(
       markChannelMessagesAsSeenByMe:
           (l$markChannelMessagesAsSeenByMe as String),
       $__typename: (l$$__typename as String),
@@ -3014,7 +3009,7 @@ class Mutation$MarkChannelMessagesAsSeenBeyMe {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$MarkChannelMessagesAsSeenBeyMe) ||
+    if (!(other is Mutation$MarkChannelMessagesAsSeenByMe) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3034,24 +3029,24 @@ class Mutation$MarkChannelMessagesAsSeenBeyMe {
   }
 }
 
-extension UtilityExtension$Mutation$MarkChannelMessagesAsSeenBeyMe
-    on Mutation$MarkChannelMessagesAsSeenBeyMe {
-  CopyWith$Mutation$MarkChannelMessagesAsSeenBeyMe<
-          Mutation$MarkChannelMessagesAsSeenBeyMe>
-      get copyWith => CopyWith$Mutation$MarkChannelMessagesAsSeenBeyMe(
+extension UtilityExtension$Mutation$MarkChannelMessagesAsSeenByMe
+    on Mutation$MarkChannelMessagesAsSeenByMe {
+  CopyWith$Mutation$MarkChannelMessagesAsSeenByMe<
+          Mutation$MarkChannelMessagesAsSeenByMe>
+      get copyWith => CopyWith$Mutation$MarkChannelMessagesAsSeenByMe(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes> {
-  factory CopyWith$Mutation$MarkChannelMessagesAsSeenBeyMe(
-    Mutation$MarkChannelMessagesAsSeenBeyMe instance,
-    TRes Function(Mutation$MarkChannelMessagesAsSeenBeyMe) then,
-  ) = _CopyWithImpl$Mutation$MarkChannelMessagesAsSeenBeyMe;
+abstract class CopyWith$Mutation$MarkChannelMessagesAsSeenByMe<TRes> {
+  factory CopyWith$Mutation$MarkChannelMessagesAsSeenByMe(
+    Mutation$MarkChannelMessagesAsSeenByMe instance,
+    TRes Function(Mutation$MarkChannelMessagesAsSeenByMe) then,
+  ) = _CopyWithImpl$Mutation$MarkChannelMessagesAsSeenByMe;
 
-  factory CopyWith$Mutation$MarkChannelMessagesAsSeenBeyMe.stub(TRes res) =
-      _CopyWithStubImpl$Mutation$MarkChannelMessagesAsSeenBeyMe;
+  factory CopyWith$Mutation$MarkChannelMessagesAsSeenByMe.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$MarkChannelMessagesAsSeenByMe;
 
   TRes call({
     String? markChannelMessagesAsSeenByMe,
@@ -3059,16 +3054,16 @@ abstract class CopyWith$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes> {
   });
 }
 
-class _CopyWithImpl$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes>
-    implements CopyWith$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes> {
-  _CopyWithImpl$Mutation$MarkChannelMessagesAsSeenBeyMe(
+class _CopyWithImpl$Mutation$MarkChannelMessagesAsSeenByMe<TRes>
+    implements CopyWith$Mutation$MarkChannelMessagesAsSeenByMe<TRes> {
+  _CopyWithImpl$Mutation$MarkChannelMessagesAsSeenByMe(
     this._instance,
     this._then,
   );
 
-  final Mutation$MarkChannelMessagesAsSeenBeyMe _instance;
+  final Mutation$MarkChannelMessagesAsSeenByMe _instance;
 
-  final TRes Function(Mutation$MarkChannelMessagesAsSeenBeyMe) _then;
+  final TRes Function(Mutation$MarkChannelMessagesAsSeenByMe) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3076,7 +3071,7 @@ class _CopyWithImpl$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes>
     Object? markChannelMessagesAsSeenByMe = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Mutation$MarkChannelMessagesAsSeenBeyMe(
+      _then(Mutation$MarkChannelMessagesAsSeenByMe(
         markChannelMessagesAsSeenByMe:
             markChannelMessagesAsSeenByMe == _undefined ||
                     markChannelMessagesAsSeenByMe == null
@@ -3088,9 +3083,9 @@ class _CopyWithImpl$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes>
-    implements CopyWith$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes> {
-  _CopyWithStubImpl$Mutation$MarkChannelMessagesAsSeenBeyMe(this._res);
+class _CopyWithStubImpl$Mutation$MarkChannelMessagesAsSeenByMe<TRes>
+    implements CopyWith$Mutation$MarkChannelMessagesAsSeenByMe<TRes> {
+  _CopyWithStubImpl$Mutation$MarkChannelMessagesAsSeenByMe(this._res);
 
   TRes _res;
 
@@ -3101,11 +3096,11 @@ class _CopyWithStubImpl$Mutation$MarkChannelMessagesAsSeenBeyMe<TRes>
       _res;
 }
 
-const documentNodeMutationMarkChannelMessagesAsSeenBeyMe =
+const documentNodeMutationMarkChannelMessagesAsSeenByMe =
     DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.mutation,
-    name: NameNode(value: 'MarkChannelMessagesAsSeenBeyMe'),
+    name: NameNode(value: 'MarkChannelMessagesAsSeenByMe'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'channelId')),
@@ -3409,20 +3404,20 @@ const documentNodeMutationUpdateChannelMessage = DocumentNode(definitions: [
   ),
 ]);
 
-class Variables$Subscription$ObjectChanged {
-  factory Variables$Subscription$ObjectChanged({required String objectId}) =>
-      Variables$Subscription$ObjectChanged._({
+class Variables$Subscription$ChannelUpdated {
+  factory Variables$Subscription$ChannelUpdated({required String objectId}) =>
+      Variables$Subscription$ChannelUpdated._({
         r'objectId': objectId,
       });
 
-  Variables$Subscription$ObjectChanged._(this._$data);
+  Variables$Subscription$ChannelUpdated._(this._$data);
 
-  factory Variables$Subscription$ObjectChanged.fromJson(
+  factory Variables$Subscription$ChannelUpdated.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$objectId = data['objectId'];
     result$data['objectId'] = (l$objectId as String);
-    return Variables$Subscription$ObjectChanged._(result$data);
+    return Variables$Subscription$ChannelUpdated._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -3435,9 +3430,9 @@ class Variables$Subscription$ObjectChanged {
     return result$data;
   }
 
-  CopyWith$Variables$Subscription$ObjectChanged<
-          Variables$Subscription$ObjectChanged>
-      get copyWith => CopyWith$Variables$Subscription$ObjectChanged(
+  CopyWith$Variables$Subscription$ChannelUpdated<
+          Variables$Subscription$ChannelUpdated>
+      get copyWith => CopyWith$Variables$Subscription$ChannelUpdated(
             this,
             (i) => i,
           );
@@ -3446,7 +3441,7 @@ class Variables$Subscription$ObjectChanged {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Subscription$ObjectChanged) ||
+    if (!(other is Variables$Subscription$ChannelUpdated) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3465,65 +3460,65 @@ class Variables$Subscription$ObjectChanged {
   }
 }
 
-abstract class CopyWith$Variables$Subscription$ObjectChanged<TRes> {
-  factory CopyWith$Variables$Subscription$ObjectChanged(
-    Variables$Subscription$ObjectChanged instance,
-    TRes Function(Variables$Subscription$ObjectChanged) then,
-  ) = _CopyWithImpl$Variables$Subscription$ObjectChanged;
+abstract class CopyWith$Variables$Subscription$ChannelUpdated<TRes> {
+  factory CopyWith$Variables$Subscription$ChannelUpdated(
+    Variables$Subscription$ChannelUpdated instance,
+    TRes Function(Variables$Subscription$ChannelUpdated) then,
+  ) = _CopyWithImpl$Variables$Subscription$ChannelUpdated;
 
-  factory CopyWith$Variables$Subscription$ObjectChanged.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$ObjectChanged;
+  factory CopyWith$Variables$Subscription$ChannelUpdated.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Subscription$ChannelUpdated;
 
   TRes call({String? objectId});
 }
 
-class _CopyWithImpl$Variables$Subscription$ObjectChanged<TRes>
-    implements CopyWith$Variables$Subscription$ObjectChanged<TRes> {
-  _CopyWithImpl$Variables$Subscription$ObjectChanged(
+class _CopyWithImpl$Variables$Subscription$ChannelUpdated<TRes>
+    implements CopyWith$Variables$Subscription$ChannelUpdated<TRes> {
+  _CopyWithImpl$Variables$Subscription$ChannelUpdated(
     this._instance,
     this._then,
   );
 
-  final Variables$Subscription$ObjectChanged _instance;
+  final Variables$Subscription$ChannelUpdated _instance;
 
-  final TRes Function(Variables$Subscription$ObjectChanged) _then;
+  final TRes Function(Variables$Subscription$ChannelUpdated) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? objectId = _undefined}) =>
-      _then(Variables$Subscription$ObjectChanged._({
+      _then(Variables$Subscription$ChannelUpdated._({
         ..._instance._$data,
         if (objectId != _undefined && objectId != null)
           'objectId': (objectId as String),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Subscription$ObjectChanged<TRes>
-    implements CopyWith$Variables$Subscription$ObjectChanged<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$ObjectChanged(this._res);
+class _CopyWithStubImpl$Variables$Subscription$ChannelUpdated<TRes>
+    implements CopyWith$Variables$Subscription$ChannelUpdated<TRes> {
+  _CopyWithStubImpl$Variables$Subscription$ChannelUpdated(this._res);
 
   TRes _res;
 
   call({String? objectId}) => _res;
 }
 
-class Subscription$ObjectChanged {
-  Subscription$ObjectChanged({
+class Subscription$ChannelUpdated {
+  Subscription$ChannelUpdated({
     required this.objectChanged,
     this.$__typename = 'Subscription',
   });
 
-  factory Subscription$ObjectChanged.fromJson(Map<String, dynamic> json) {
+  factory Subscription$ChannelUpdated.fromJson(Map<String, dynamic> json) {
     final l$objectChanged = json['objectChanged'];
     final l$$__typename = json['__typename'];
-    return Subscription$ObjectChanged(
-      objectChanged: Subscription$ObjectChanged$objectChanged.fromJson(
+    return Subscription$ChannelUpdated(
+      objectChanged: Subscription$ChannelUpdated$objectChanged.fromJson(
           (l$objectChanged as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription$ObjectChanged$objectChanged objectChanged;
+  final Subscription$ChannelUpdated$objectChanged objectChanged;
 
   final String $__typename;
 
@@ -3551,7 +3546,7 @@ class Subscription$ObjectChanged {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$ObjectChanged) ||
+    if (!(other is Subscription$ChannelUpdated) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3569,41 +3564,41 @@ class Subscription$ObjectChanged {
   }
 }
 
-extension UtilityExtension$Subscription$ObjectChanged
-    on Subscription$ObjectChanged {
-  CopyWith$Subscription$ObjectChanged<Subscription$ObjectChanged>
-      get copyWith => CopyWith$Subscription$ObjectChanged(
+extension UtilityExtension$Subscription$ChannelUpdated
+    on Subscription$ChannelUpdated {
+  CopyWith$Subscription$ChannelUpdated<Subscription$ChannelUpdated>
+      get copyWith => CopyWith$Subscription$ChannelUpdated(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$ObjectChanged<TRes> {
-  factory CopyWith$Subscription$ObjectChanged(
-    Subscription$ObjectChanged instance,
-    TRes Function(Subscription$ObjectChanged) then,
-  ) = _CopyWithImpl$Subscription$ObjectChanged;
+abstract class CopyWith$Subscription$ChannelUpdated<TRes> {
+  factory CopyWith$Subscription$ChannelUpdated(
+    Subscription$ChannelUpdated instance,
+    TRes Function(Subscription$ChannelUpdated) then,
+  ) = _CopyWithImpl$Subscription$ChannelUpdated;
 
-  factory CopyWith$Subscription$ObjectChanged.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$ObjectChanged;
+  factory CopyWith$Subscription$ChannelUpdated.stub(TRes res) =
+      _CopyWithStubImpl$Subscription$ChannelUpdated;
 
   TRes call({
-    Subscription$ObjectChanged$objectChanged? objectChanged,
+    Subscription$ChannelUpdated$objectChanged? objectChanged,
     String? $__typename,
   });
-  CopyWith$Subscription$ObjectChanged$objectChanged<TRes> get objectChanged;
+  CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> get objectChanged;
 }
 
-class _CopyWithImpl$Subscription$ObjectChanged<TRes>
-    implements CopyWith$Subscription$ObjectChanged<TRes> {
-  _CopyWithImpl$Subscription$ObjectChanged(
+class _CopyWithImpl$Subscription$ChannelUpdated<TRes>
+    implements CopyWith$Subscription$ChannelUpdated<TRes> {
+  _CopyWithImpl$Subscription$ChannelUpdated(
     this._instance,
     this._then,
   );
 
-  final Subscription$ObjectChanged _instance;
+  final Subscription$ChannelUpdated _instance;
 
-  final TRes Function(Subscription$ObjectChanged) _then;
+  final TRes Function(Subscription$ChannelUpdated) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3611,40 +3606,40 @@ class _CopyWithImpl$Subscription$ObjectChanged<TRes>
     Object? objectChanged = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$ObjectChanged(
+      _then(Subscription$ChannelUpdated(
         objectChanged: objectChanged == _undefined || objectChanged == null
             ? _instance.objectChanged
-            : (objectChanged as Subscription$ObjectChanged$objectChanged),
+            : (objectChanged as Subscription$ChannelUpdated$objectChanged),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Subscription$ObjectChanged$objectChanged<TRes> get objectChanged {
+  CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> get objectChanged {
     final local$objectChanged = _instance.objectChanged;
-    return CopyWith$Subscription$ObjectChanged$objectChanged(
+    return CopyWith$Subscription$ChannelUpdated$objectChanged(
         local$objectChanged, (e) => call(objectChanged: e));
   }
 }
 
-class _CopyWithStubImpl$Subscription$ObjectChanged<TRes>
-    implements CopyWith$Subscription$ObjectChanged<TRes> {
-  _CopyWithStubImpl$Subscription$ObjectChanged(this._res);
+class _CopyWithStubImpl$Subscription$ChannelUpdated<TRes>
+    implements CopyWith$Subscription$ChannelUpdated<TRes> {
+  _CopyWithStubImpl$Subscription$ChannelUpdated(this._res);
 
   TRes _res;
 
   call({
-    Subscription$ObjectChanged$objectChanged? objectChanged,
+    Subscription$ChannelUpdated$objectChanged? objectChanged,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Subscription$ObjectChanged$objectChanged<TRes> get objectChanged =>
-      CopyWith$Subscription$ObjectChanged$objectChanged.stub(_res);
+  CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> get objectChanged =>
+      CopyWith$Subscription$ChannelUpdated$objectChanged.stub(_res);
 }
 
-const documentNodeSubscriptionObjectChanged = DocumentNode(definitions: [
+const documentNodeSubscriptionChannelUpdated = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.subscription,
-    name: NameNode(value: 'ObjectChanged'),
+    name: NameNode(value: 'ChannelUpdated'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'objectId')),
@@ -3717,8 +3712,8 @@ const documentNodeSubscriptionObjectChanged = DocumentNode(definitions: [
   ),
 ]);
 
-class Subscription$ObjectChanged$objectChanged {
-  Subscription$ObjectChanged$objectChanged({
+class Subscription$ChannelUpdated$objectChanged {
+  Subscription$ChannelUpdated$objectChanged({
     required this.objectId,
     required this.messageType,
     required this.modelType,
@@ -3726,14 +3721,14 @@ class Subscription$ObjectChanged$objectChanged {
     this.$__typename = 'ObjectChangedEvent',
   });
 
-  factory Subscription$ObjectChanged$objectChanged.fromJson(
+  factory Subscription$ChannelUpdated$objectChanged.fromJson(
       Map<String, dynamic> json) {
     final l$objectId = json['objectId'];
     final l$messageType = json['messageType'];
     final l$modelType = json['modelType'];
     final l$ownerUserId = json['ownerUserId'];
     final l$$__typename = json['__typename'];
-    return Subscription$ObjectChanged$objectChanged(
+    return Subscription$ChannelUpdated$objectChanged(
       objectId: (l$objectId as String),
       messageType:
           fromJson$Enum$ObjectChangedEventType((l$messageType as String)),
@@ -3790,7 +3785,7 @@ class Subscription$ObjectChanged$objectChanged {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription$ObjectChanged$objectChanged) ||
+    if (!(other is Subscription$ChannelUpdated$objectChanged) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3823,24 +3818,24 @@ class Subscription$ObjectChanged$objectChanged {
   }
 }
 
-extension UtilityExtension$Subscription$ObjectChanged$objectChanged
-    on Subscription$ObjectChanged$objectChanged {
-  CopyWith$Subscription$ObjectChanged$objectChanged<
-          Subscription$ObjectChanged$objectChanged>
-      get copyWith => CopyWith$Subscription$ObjectChanged$objectChanged(
+extension UtilityExtension$Subscription$ChannelUpdated$objectChanged
+    on Subscription$ChannelUpdated$objectChanged {
+  CopyWith$Subscription$ChannelUpdated$objectChanged<
+          Subscription$ChannelUpdated$objectChanged>
+      get copyWith => CopyWith$Subscription$ChannelUpdated$objectChanged(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Subscription$ObjectChanged$objectChanged<TRes> {
-  factory CopyWith$Subscription$ObjectChanged$objectChanged(
-    Subscription$ObjectChanged$objectChanged instance,
-    TRes Function(Subscription$ObjectChanged$objectChanged) then,
-  ) = _CopyWithImpl$Subscription$ObjectChanged$objectChanged;
+abstract class CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> {
+  factory CopyWith$Subscription$ChannelUpdated$objectChanged(
+    Subscription$ChannelUpdated$objectChanged instance,
+    TRes Function(Subscription$ChannelUpdated$objectChanged) then,
+  ) = _CopyWithImpl$Subscription$ChannelUpdated$objectChanged;
 
-  factory CopyWith$Subscription$ObjectChanged$objectChanged.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$ObjectChanged$objectChanged;
+  factory CopyWith$Subscription$ChannelUpdated$objectChanged.stub(TRes res) =
+      _CopyWithStubImpl$Subscription$ChannelUpdated$objectChanged;
 
   TRes call({
     String? objectId,
@@ -3851,16 +3846,16 @@ abstract class CopyWith$Subscription$ObjectChanged$objectChanged<TRes> {
   });
 }
 
-class _CopyWithImpl$Subscription$ObjectChanged$objectChanged<TRes>
-    implements CopyWith$Subscription$ObjectChanged$objectChanged<TRes> {
-  _CopyWithImpl$Subscription$ObjectChanged$objectChanged(
+class _CopyWithImpl$Subscription$ChannelUpdated$objectChanged<TRes>
+    implements CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> {
+  _CopyWithImpl$Subscription$ChannelUpdated$objectChanged(
     this._instance,
     this._then,
   );
 
-  final Subscription$ObjectChanged$objectChanged _instance;
+  final Subscription$ChannelUpdated$objectChanged _instance;
 
-  final TRes Function(Subscription$ObjectChanged$objectChanged) _then;
+  final TRes Function(Subscription$ChannelUpdated$objectChanged) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3871,7 +3866,7 @@ class _CopyWithImpl$Subscription$ObjectChanged$objectChanged<TRes>
     Object? ownerUserId = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Subscription$ObjectChanged$objectChanged(
+      _then(Subscription$ChannelUpdated$objectChanged(
         objectId: objectId == _undefined || objectId == null
             ? _instance.objectId
             : (objectId as String),
@@ -3890,9 +3885,9 @@ class _CopyWithImpl$Subscription$ObjectChanged$objectChanged<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Subscription$ObjectChanged$objectChanged<TRes>
-    implements CopyWith$Subscription$ObjectChanged$objectChanged<TRes> {
-  _CopyWithStubImpl$Subscription$ObjectChanged$objectChanged(this._res);
+class _CopyWithStubImpl$Subscription$ChannelUpdated$objectChanged<TRes>
+    implements CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> {
+  _CopyWithStubImpl$Subscription$ChannelUpdated$objectChanged(this._res);
 
   TRes _res;
 

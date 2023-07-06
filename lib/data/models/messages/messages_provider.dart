@@ -1,120 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_message.graphql.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 
-import '../../../widgets/atoms/server_error.dart';
-import 'message.dart';
-import 'messages_api.dart';
+import '../base/operation_result.dart';
 
-class MessagesProvider extends ChangeNotifier {
-  GraphQLClient client;
+typedef ChannelMessage = Query$FindChannelMessages$findChannelMessages;
+typedef UnseenMessage
+    = Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
 
-  MessagesProvider({required this.client}) {
+class MessagesProvider extends BaseProvider {
+  MessagesProvider({required super.client}) {
     // subscribeToMessages();
   }
 
-  Widget queryMessages(
-      {required channelId, required onData, onLoading, onError}) {
-    return Query(
-      options: QueryOptions(
-        document: gql(kFindChannelMessages),
-        variables: {
-          "filter": {
-            "channelId": channelId,
-          }
-        },
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-      builder: (result, {refetch, fetchMore}) {
-        if (result.hasException) {
-          final error = result.exception.toString();
-
-          if (onError != null) {
-            return onError(error);
-          }
-          return ServerError(error: error);
-        }
-
-        if (result.isLoading) {
-          if (onLoading != null) {
-            return onLoading();
-          }
-          return const SizedBox.shrink();
-        }
-        // debugPrint('Server response data');
-        // print(result);
-
-        return onData(result.data?['findChannelMessages']);
-      },
-    );
-  }
-
-  Widget unseenMessages({required onData, onLoading, onError}) {
-    return Query(
-      options: QueryOptions(
-        document: gql(kUnseenMessages),
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-      builder: (result, {refetch, fetchMore}) {
-        if (result.hasException) {
-          final error = result.exception.toString();
-
-          if (onError != null) {
-            return onError(error);
-          }
-          return ServerError(error: error);
-        }
-
-        if (result.isLoading) {
-          if (onLoading != null) {
-            return onLoading();
-          }
-          return const SizedBox.shrink();
-        }
-        // debugPrint('Server response data');
-        // print(result);
-
-        List data = result.data!['myInbox']['channels']['unseenMessages'];
-        return onData(data);
-      },
-    );
-  }
-
-  Future<void> subscribeToChannel({required channelId}) async {
-    final subscription = client.subscribe(
-      SubscriptionOptions(
-        document: gql(kChannelUpdatedSubscription),
-        variables: {
-          'objectId': channelId,
-        },
-      ),
-    );
-
-    subscription.listen(
-      (event) {
-        debugPrint('Subscription: Channel Updated: ${event.data}');
-        client.query(
-          QueryOptions(
-            document: gql(kFindChannelMessages),
-            variables: {
-              "filter": {
-                "channelId": channelId,
-              }
-            },
-            fetchPolicy: FetchPolicy.networkOnly,
-          ),
-        );
-      },
-    );
-  }
-
-  _addMessageToCache({cache, channelId, message}) {
+  _addMessageToCache({cache, required String channelId, message}) {
     final req = QueryOptions(
-      document: gql(kFindChannelMessages),
-      variables: {
-        "filter": {
-          "channelId": channelId,
-        }
-      },
+      document: documentNodeQueryFindChannelMessages,
+      variables: Variables$Query$FindChannelMessages(
+        filter: Input$ChannelMessageListFilter(
+          channelId: channelId,
+        ),
+      ).toJson(),
     ).asRequest;
     final response = cache.readQuery(req);
 
@@ -136,136 +44,230 @@ class MessagesProvider extends ChangeNotifier {
     }
   }
 
-  // Mutations
-  Future<Message> createMessage(
-      {required channelId, required messageText, replyToMessageId}) async {
-    // print('createInvitees:');
-    // print(inviteUsers);
-    final variables = {
-      'input': {
-        'channelId': channelId,
-        'messageText': messageText,
-      }
-    };
-
-    if (replyToMessageId != null) {
-      variables['input']!['replyToMessageId'] = replyToMessageId;
-    }
-
-    final QueryResult queryResult = await client.mutate(
-      MutationOptions(
-        document: gql(kCreateChannelMessage),
-        variables: variables,
-        update: (cache, result) {
-          debugPrint('createMessage result');
-          _addMessageToCache(
-              cache: cache,
-              channelId: channelId,
-              message: result?.data?['createChannelMessage']);
-        },
-        onError: (error) {
-          debugPrint('error: $error');
-        },
-      ),
-    );
-
-    final messagesData = queryResult.data?['createChannelMessage'];
-    return Message.fromJson(messagesData);
-  }
-
-  Future<void> markMessageRead(channelId) async {
-    await client.mutate(
-      MutationOptions(
-        document: gql(kMarkMessagesAsSeenByMe),
-        variables: {
-          "channelId": channelId,
-        },
-        onError: (error) {
-          debugPrint('error: $error');
-        },
-      ),
-    );
-  }
-
-  Future<void> updateMessage({
-    required channelId,
-    required messageId,
-    String? messageText,
-    bool? undelete,
-  }) async {
-    // print('Update Message with input');
-    // print(input);
-    final variables = {
-      'input': {
-        'id': messageId,
+  // Queries
+  Widget findChannelMessages({
+    required Input$ChannelMessageListFilter input,
+    required Widget Function(
+      OperationResult<List<Query$FindChannelMessages$findChannelMessages>>
+          data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery(
+      document: documentNodeQueryFindChannelMessages,
+      variables: Variables$Query$FindChannelMessages(
+        filter: input,
+      ).toJson(),
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<
+                List<Query$FindChannelMessages$findChannelMessages>> result =
+            OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data != null
+              ? Query$FindChannelMessages.fromJson(
+                  queryResult.data!,
+                ).findChannelMessages
+              : null,
+        );
+        return onData(result, refetch: refetch, fetchMore: fetchMore);
       },
-    };
-
-    if (messageText != null) {
-      variables['input']!['messageText'] = messageText;
-    }
-
-    if (undelete != true) {
-      variables['input']!['deletedAt'] = null;
-    }
-
-    await client.mutate(
-      MutationOptions(
-        document: gql(kUpdateChannelMessage),
-        variables: {
-          'input': {
-            'id': messageId,
-            'messageText': messageText,
-          },
-        },
-        update: (cache, result) {
-          final req = QueryOptions(
-            document: gql(kFindChannelMessages),
-            variables: {
-              "filter": {
-                "channelId": channelId,
-              }
-            },
-          ).asRequest;
-
-          // read the channels cache
-          final response = cache.readQuery(req);
-
-          // debugPrint('updateMessage result');
-          // print(result);
-
-          // update the channel in the cache
-          final messagesCache = response?['findChannelMessages'];
-
-          messagesCache[
-                  messagesCache.indexWhere((item) => item['id'] == messageId)] =
-              result?.data?['updateChannelMessage'];
-
-          if (response != null) {
-            cache.writeQuery(
-              req,
-              broadcast: true,
-              data: response,
-            );
-          }
-        },
-        onError: (error) {
-          debugPrint('error: $error');
-        },
-      ),
+      onLoading: onLoading,
+      onError: onError,
     );
   }
 
-  Future<void> deleteMessage({required messageId, deletePhysically}) async {
-    await client.query(
-      QueryOptions(
-        document: gql(kDeleteChannelMessage),
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: {
-          "deletePhysically": deletePhysically ?? false,
-          "channelMessageId": messageId,
-        },
+  Widget unseenMessages({
+    required Widget Function(
+      OperationResult<
+              List<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>>
+          data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery(
+      document: documentNodeQueryInboxUnseenMessages,
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<
+                List<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>>
+            result = OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data != null
+              ? Query$InboxUnseenMessages.fromJson(
+                  queryResult.data!,
+                ).myInbox.channels?.unseenMessages
+              : null,
+        );
+        return onData(result, refetch: refetch, fetchMore: fetchMore);
+      },
+      onLoading: onLoading,
+      onError: onError,
+    );
+  }
+
+  // Mutations
+  Future<OperationResult<Mutation$CreateChannelMessage$createChannelMessage>>
+      createMessage({
+    required Input$ChannelMessageInput input,
+  }) async {
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationCreateChannelMessage,
+      variables: Variables$Mutation$CreateChannelMessage(
+        input: input,
+      ).toJson(),
+      update: (cache, result) {
+        debugPrint('createMessage result');
+        _addMessageToCache(
+          cache: cache,
+          channelId: input.channelId!,
+          message: result?.data?['createChannelMessage'],
+        );
+      },
+    );
+
+    final OperationResult<Mutation$CreateChannelMessage$createChannelMessage>
+        result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$CreateChannelMessage.fromJson(
+              queryResult.data!,
+            ).createChannelMessage
+          : null,
+    );
+
+    return result;
+  }
+
+  Future<OperationResult<String>> markMessageRead({
+    required String channelId,
+  }) async {
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationMarkChannelMessagesAsSeenByMe,
+      variables: Variables$Mutation$MarkChannelMessagesAsSeenByMe(
+        channelId: channelId,
+      ).toJson(),
+    );
+
+    final OperationResult<String> result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$MarkChannelMessagesAsSeenByMe.fromJson(
+              queryResult.data!,
+            ).markChannelMessagesAsSeenByMe
+          : null,
+    );
+
+    return result;
+  }
+
+  Future<OperationResult<String>> updateMessage({
+    required Input$ChannelMessageInput input,
+  }) async {
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationUpdateChannelMessage,
+      variables: Variables$Mutation$UpdateChannelMessage(
+        input: input,
+      ).toJson(),
+      update: (cache, result) {
+        final req = QueryOptions(
+          document: documentNodeQueryFindChannelMessages,
+          variables: Variables$Query$FindChannelMessages(
+            filter: Input$ChannelMessageListFilter(
+              channelId: input.channelId,
+            ),
+          ).toJson(),
+        ).asRequest;
+
+        // read the channels cache
+        final response = cache.readQuery(req);
+
+        // debugPrint('updateMessage result');
+        // print(result);
+
+        // update the channel in the cache
+        final messagesCache = response?['findChannelMessages'];
+
+        messagesCache[
+                messagesCache.indexWhere((item) => item['id'] == input.id)] =
+            result?.data?['updateChannelMessage'];
+
+        if (response != null) {
+          cache.writeQuery(
+            req,
+            broadcast: true,
+            data: response,
+          );
+        }
+      },
+    );
+
+    final OperationResult<String> result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$UpdateChannelMessage.fromJson(
+              queryResult.data!,
+            ).updateChannelMessage
+          : null,
+    );
+
+    return result;
+  }
+
+  Future<OperationResult<String>> deleteMessage({
+    required bool deletePhysically,
+    required String channelMessageId,
+  }) async {
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationDeleteChannelMessage,
+      variables: Variables$Mutation$DeleteChannelMessage(
+        deletePhysically: deletePhysically,
+        channelMessageId: channelMessageId,
+      ).toJson(),
+    );
+
+    final OperationResult<String> result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$DeleteChannelMessage.fromJson(
+              queryResult.data!,
+            ).deleteChannelMessage
+          : null,
+    );
+
+    return result;
+  }
+
+  // Subscriptions
+  Future<void> subscribeToChannel({required String channelId}) async {
+    final subscription = client.subscribe(
+      SubscriptionOptions(
+        document: documentNodeSubscriptionChannelUpdated,
+        variables: Variables$Subscription$ChannelUpdated(
+          objectId: channelId,
+        ).toJson(),
       ),
+    );
+
+    subscription.listen(
+      (event) {
+        debugPrint('Subscription: Channel Updated: ${event.data}');
+        client.query(
+          QueryOptions(
+            document: documentNodeQueryFindChannelMessages,
+            variables: Variables$Query$FindChannelMessages(
+              filter: Input$ChannelMessageListFilter(
+                channelId: channelId,
+              ),
+            ).toJson(),
+            fetchPolicy: FetchPolicy.networkOnly,
+          ),
+        );
+      },
     );
   }
 }

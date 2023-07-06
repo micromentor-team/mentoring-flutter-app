@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/data/models/messages/message.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:mm_flutter_app/utilities/emoji_utils/emoji_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../data/models/messages/messages_provider.dart';
 import '../reply_message.dart';
 
 class MessageBubble extends StatelessWidget {
@@ -18,8 +18,8 @@ class MessageBubble extends StatelessWidget {
     this.replyingTo,
   }) : super(key: key);
   final List participants;
-  final Message message;
-  final Message? replyingTo;
+  final ChannelMessage message;
+  final ChannelMessage? replyingTo;
 
   Future<void> _onOpenLink(LinkableElement link) async {
     try {
@@ -64,7 +64,7 @@ class MessageBubble extends StatelessWidget {
           fontStyle: FontStyle.italic,
           color:
               // If the message is only emojis, we need grey
-              EmojiUtils.strictlyEmojis(message.messageText)
+              EmojiUtils.strictlyEmojis(message.messageText!)
                   ? Colors.grey
                   : isUser
                       ? Colors.white
@@ -77,7 +77,7 @@ class MessageBubble extends StatelessWidget {
   }
 
   Widget _buildMessageText(isUser) {
-    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText);
+    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!);
 
     if (message.deletedAt != null && !isUser) {
       return Padding(
@@ -91,7 +91,7 @@ class MessageBubble extends StatelessWidget {
             fontStyle: FontStyle.italic,
             color:
                 // If the message is only emojis, we need grey
-                EmojiUtils.strictlyEmojis(message.messageText)
+                EmojiUtils.strictlyEmojis(message.messageText!)
                     ? Colors.grey
                     : isUser
                         ? Colors.white
@@ -110,7 +110,7 @@ class MessageBubble extends StatelessWidget {
         child: SelectableLinkify(
           //  If the message is only emojis, we don't need the invisible character
           text: isEmoji
-              ? message.messageText
+              ? message.messageText!
               : '${message.messageText}                ',
           //  Concatenating white space and an invisible character saves us from having to use a LayoutBuilder.
           //  The Text sees the invisible character, so it does not trim the extra whitespace we want to use for layout.
@@ -135,13 +135,13 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sentAt = DateFormat.jm().format(DateTime.parse(message.createdAt));
+    final sentAt = DateFormat.jm().format(message.createdAt);
     final isUser = _isCurrentUser(
       userId: message.createdBy,
       context: context,
     );
     // 🚨 TODO: If the message has ANY related content/attachments: maintain `false`.
-    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText);
+    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!);
 
     return Padding(
       // Bubble padding
@@ -228,7 +228,7 @@ class MessageBubble extends StatelessWidget {
                                       color:
                                           // If the message is only emojis, we need grey
                                           EmojiUtils.strictlyEmojis(
-                                                  message.messageText)
+                                                  message.messageText!)
                                               ? Colors.grey
                                               : isUser
                                                   ? Colors.white

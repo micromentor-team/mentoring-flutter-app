@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'package:mm_flutter_app/data/models/messages/message.dart';
+import '../../../data/models/messages/messages_provider.dart';
 import 'reply_message.dart';
 
 class MessageInput extends StatefulWidget {
@@ -23,7 +23,7 @@ class MessageInput extends StatefulWidget {
   final VoidCallback? onTapEmptyInput;
   final Function(String messageText, String? replyingToMessageId) onSubmit;
   final Function? onClearReply;
-  final Message? replyingTo;
+  final ChannelMessage? replyingTo;
   final IconData? submitIcon;
   final bool? autoFocus;
 
@@ -36,7 +36,7 @@ class _MessageInputState extends State<MessageInput> {
   late bool _autoFocus;
 
   String _messageText = '';
-  Message? _replyingTo;
+  ChannelMessage? _replyingTo;
   @override
   void initState() {
     _controller = widget.controller ?? TextEditingController();
