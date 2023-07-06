@@ -6,6 +6,8 @@ export function generateUser() {
     var mockFullName = `${mockFirstName} ${mockLastName}`;
     var mockUserHandle = mockFirstName.toLowerCase().charAt(0) + mockLastName.toLowerCase();
     var mockEmail = `${mockUserHandle}@${faker.internet.domainName()}`;
+    var mockProfileCompletionPercentage = generateUserProfileCompletionPercentage();
+    var mockLastUpdateTime = faker.date.past(); 
     return {
         __typename: "User",
         id: faker.string.alphanumeric({length: 24}),
@@ -15,6 +17,8 @@ export function generateUser() {
         userHandle: mockUserHandle,
         email: mockEmail,
         avatarUrl: null,
+        profileCompletionPercentage: mockProfileCompletionPercentage,
+        lastUpdateTime: mockLastUpdateTime
     }
 }
 
