@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ImageTile extends StatelessWidget {
-  final String imageUrl;
+  final ImageProvider image;
   final String title;
   final String subtitle;
   final bool isCircle;
 
   const ImageTile({
     Key? key,
-    required this.imageUrl,
+    required this.image,
     required this.title,
     required this.subtitle,
     required this.isCircle,
@@ -23,7 +23,7 @@ class ImageTile extends StatelessWidget {
               radius: Radii.avatarRadiusSmall,
               child: CircleAvatar(
                 radius: Radii.avatarRadiusSmall,
-                backgroundImage: NetworkImage(imageUrl.toString()),
+                backgroundImage: image,
               )));
     } else {
       return Padding(
@@ -34,7 +34,7 @@ class ImageTile extends StatelessWidget {
               height: Dimensions.imageTileRectangularImage.height,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(imageUrl.toString()),
+                  image: image,
                   fit: BoxFit.fill,
                   alignment: Alignment.topCenter,
                 ),

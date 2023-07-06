@@ -71,11 +71,10 @@ class ButtonStyles {
   }
 
   static ButtonStyle homePageButton(BuildContext context) {
-    return ButtonStyle(
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
+    return ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(Radii.buttonRadius),
-    )));
+    ));
   }
 }
 

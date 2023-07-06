@@ -13,22 +13,19 @@ class ResourcesSection extends StatelessWidget {
     //TODO(m-rosario): Implement callback for each tile.
     List<Widget> resourceTiles = [
       ImageTile(
-        imageUrl:
-            "https://freevector-images.s3.amazonaws.com/uploads/vector/preview/40309/YOUNG_GIRL_WORKING_WITH_LAPTOP.jpg",
+        image: const AssetImage(Assets.resourceWebinarStockImage),
         title: l10n.homeResourcesWebinar,
         subtitle: l10n.homeResourcesWebinarDescription,
         isCircle: false,
       ),
       ImageTile(
-        imageUrl:
-            "https://www.freevector.com/uploads/vector/preview/30924/static_bike_Mesa_de_trabajo_1.jpg",
+        image: const AssetImage(Assets.resourceTrainingStockImage),
         title: l10n.homeResourcesTraining,
         subtitle: l10n.homeResourcesTrainingDescription,
         isCircle: false,
       ),
       ImageTile(
-        imageUrl:
-            "https://www.freevector.com/uploads/vector/preview/30263/Book_Linear_Icon.jpg",
+        image: const AssetImage(Assets.resourceBlogsStockImage),
         title: l10n.homeResourcesBlogs,
         subtitle: l10n.homeResourcesBlogsDescription,
         isCircle: false,

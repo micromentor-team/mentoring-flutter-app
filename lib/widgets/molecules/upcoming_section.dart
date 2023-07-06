@@ -23,7 +23,7 @@ class UpcomingSection extends StatelessWidget {
           DateTime.now().add(const Duration(days: maxDaysDisplayed)))) {
         sessionTiles.add(
           ImageTile(
-            imageUrl: sessions[i].avatarUrl,
+            image: NetworkImage(sessions[i].avatarUrl),
             subtitle: dateFormat.format(sessions[i].dateTime),
             title: sessions[i].mentorName,
             isCircle: true,
