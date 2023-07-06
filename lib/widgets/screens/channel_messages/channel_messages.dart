@@ -65,7 +65,7 @@ class ChannelMessagesScreen extends StatelessWidget {
     final user = userProvider.user;
 
     return channelsProvider.findChannelById(
-      channelId!,
+      channelId: channelId!,
       onData: (data, {refetch, fetchMore}) {
         ChannelById channel = data.response!;
         final String? channelName = channel.participants

@@ -47,8 +47,11 @@ class YourName extends StatelessWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           await userProvider
-                              .updateUserData(Input$UserInput(
-                                  fullName: nameController.text))
+                              .updateUserData(
+                                input: Input$UserInput(
+                                  fullName: nameController.text,
+                                ),
+                              )
                               .then((value) => {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(const SnackBar(

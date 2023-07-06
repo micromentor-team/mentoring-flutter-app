@@ -149,13 +149,15 @@ class _SignInScreenState extends State<SignInScreen> {
                                     ScaffoldMessenger.of(context);
 
                                 if (_formKey.currentState!.validate()) {
-                                  final signInResult = await userProvider
-                                      .signInUser(Input$UserSignInInput(
-                                    deviceUuid: AppUtility.getUuid(),
-                                    ident: emailController.text,
-                                    identType: Enum$UserIdentType.email,
-                                    password: passwordController.text,
-                                  ));
+                                  final signInResult =
+                                      await userProvider.signInUser(
+                                    input: Input$UserSignInInput(
+                                      deviceUuid: AppUtility.getUuid(),
+                                      ident: emailController.text,
+                                      identType: Enum$UserIdentType.email,
+                                      password: passwordController.text,
+                                    ),
+                                  );
                                   final signInError = signInResult
                                       .gqlQueryResult
                                       .exception

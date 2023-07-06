@@ -85,7 +85,8 @@ class _YourEmailState extends State<YourEmail> {
                             ));
                             Navigator.of(context).pop();
                             await userProvider.updateUserData(
-                              Input$UserInput(email: emailController.text),
+                              input:
+                                  Input$UserInput(email: emailController.text),
                             );
                           }
                         },

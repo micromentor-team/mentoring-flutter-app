@@ -33,7 +33,7 @@ class ChannelsList extends StatelessWidget {
     final user = userProvider.user;
 
     return channelsProvider.queryUserChannels(
-      user!.id,
+      userId: user!.id,
       onData: (data, {refetch, fetchMore}) {
         return MessagesList(user: user, channels: data.response!);
       },

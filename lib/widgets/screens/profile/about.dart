@@ -131,9 +131,11 @@ class _AboutState extends State<About> {
                         content: Text('Your about is updated.'),
                       ));
                       Navigator.of(context).pop();
-                      await userProvider.updateUserData(Input$UserInput(
-                          adminNotes:
-                              '$_selectedEmoji ${aboutController.text}'));
+                      await userProvider.updateUserData(
+                        input: Input$UserInput(
+                          adminNotes: '$_selectedEmoji ${aboutController.text}',
+                        ),
+                      );
                     },
                     child: const Text('Save'))),
             const SizedBox(

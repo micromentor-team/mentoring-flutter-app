@@ -168,7 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: () async {
                             debugPrint('Button pressed ...');
                             await userProvider.signUpUser(
-                              Input$UserSignUpInput(
+                              input: Input$UserSignUpInput(
                                 fullName: '$firstName $lastName',
                                 email: email,
                                 password: password,

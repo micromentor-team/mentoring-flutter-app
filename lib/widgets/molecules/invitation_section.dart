@@ -69,27 +69,31 @@ class _InvitationSectionState extends State<InvitationSection> {
       List<String> userIds,
       List<Query$GetInboxInvitations$myInbox$channels$invitations>
           invitations) {
-    return userProvider.findUsersWithFilter(Input$UserListFilter(ids: userIds),
-        onData: (data, {refetch, fetchMore}) {
-      if (data.response == null) {
-        return const SizedBox(width: 0, height: 0);
-      }
-      List<Widget> invitationWidgets = [];
-      for (int i = 0; i < invitations.length; i++) {
-        if (i > 0) {
-          invitationWidgets.add(Components.indentedSubDivider);
+    return userProvider.findUsersWithFilter(
+      input: Input$UserListFilter(ids: userIds),
+      onData: (data, {refetch, fetchMore}) {
+        if (data.response == null) {
+          return const SizedBox(width: 0, height: 0);
         }
-        invitationWidgets.add(_createInvitationTile(
-          l10n,
-          data.response!
-              .firstWhere((element) => invitations[i].createdBy! == element.id),
-          invitations[i].status,
-        ));
-      }
-      return Column(
-        children: invitationWidgets,
-      );
-    });
+        List<Widget> invitationWidgets = [];
+        for (int i = 0; i < invitations.length; i++) {
+          if (i > 0) {
+            invitationWidgets.add(Components.indentedSubDivider);
+          }
+          invitationWidgets.add(
+            _createInvitationTile(
+              l10n,
+              data.response!.firstWhere(
+                  (element) => invitations[i].createdBy! == element.id),
+              invitations[i].status,
+            ),
+          );
+        }
+        return Column(
+          children: invitationWidgets,
+        );
+      },
+    );
   }
 
   InvitationTile _createInvitationTile(

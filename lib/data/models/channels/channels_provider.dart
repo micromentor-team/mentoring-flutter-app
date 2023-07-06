@@ -16,8 +16,8 @@ class ChannelsProvider extends BaseProvider {
   }
 
   // Queries
-  Widget queryUserChannels(
-    String userId, {
+  Widget queryUserChannels({
+    required String userId,
     required Widget Function(
       OperationResult<List<Query$FindChannelsForUser$findChannelsForUser>>
           data, {
@@ -48,8 +48,8 @@ class ChannelsProvider extends BaseProvider {
     );
   }
 
-  Widget findChannelById(
-    String channelId, {
+  Widget findChannelById({
+    required String channelId,
     required Widget Function(
       OperationResult<Query$FindChannelById$findChannelById> data, {
       void Function()? refetch,
@@ -107,9 +107,9 @@ class ChannelsProvider extends BaseProvider {
   }
 
   // Mutations
-  Future<OperationResult<Mutation$CreateChannel$createChannel>> createChannel(
-    Input$ChannelInput input,
-  ) async {
+  Future<OperationResult<Mutation$CreateChannel$createChannel>> createChannel({
+    required Input$ChannelInput input,
+  }) async {
     final QueryResult queryResult = await runMutation(
         document: documentNodeMutationCreateChannel,
         variables: Variables$Mutation$CreateChannel(input: input).toJson(),
@@ -149,10 +149,10 @@ class ChannelsProvider extends BaseProvider {
     return result;
   }
 
-  Future<OperationResult<String>> deleteChannel(
-    bool deletePhysically,
-    String channelId,
-  ) async {
+  Future<OperationResult<String>> deleteChannel({
+    required bool deletePhysically,
+    required String channelId,
+  }) async {
     final QueryResult queryResult = await runMutation(
         document: documentNodeMutationDeleteChannel,
         variables: Variables$Mutation$DeleteChannel(

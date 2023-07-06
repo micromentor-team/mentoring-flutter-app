@@ -243,7 +243,9 @@ class MessagesProvider extends BaseProvider {
   }
 
   // Subscriptions
-  Future<void> subscribeToChannel({required String channelId}) async {
+  Future<void> subscribeToChannel({
+    required String channelId,
+  }) async {
     final subscription = client.subscribe(
       SubscriptionOptions(
         document: documentNodeSubscriptionChannelUpdated,

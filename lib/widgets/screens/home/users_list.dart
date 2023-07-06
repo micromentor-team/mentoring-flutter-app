@@ -32,7 +32,7 @@ class UserChannels extends StatelessWidget {
     final user = userProvider.user;
 
     return channelsProvider.queryUserChannels(
-      user!.id,
+      userId: user!.id,
       onData: (data, {refetch, fetchMore}) {
         return UsersList(
           channels: data.response!,
@@ -72,7 +72,8 @@ class UsersList extends StatelessWidget {
       final userIds = [user!.id, userId];
 
       final result = await channelsProvider.createChannel(
-          Input$ChannelInput(createdBy: user.id, userIds: userIds));
+        input: Input$ChannelInput(createdBy: user.id, userIds: userIds),
+      );
       channelId = result.response?.id;
     }
     navigator.push(
