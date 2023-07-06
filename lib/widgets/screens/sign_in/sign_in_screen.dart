@@ -259,7 +259,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                      padding: const EdgeInsets.fromLTRB(
+                          Insets.widgetLargeInset,
+                          Insets.widgetSmallInset,
+                          Insets.widgetSmallInset,
+                          Insets.widgetSmallInset),
                       child: TextButton(
                         onPressed: () {
                           _openSignUpScreen(context);
@@ -280,7 +284,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                      padding: const EdgeInsets.fromLTRB(
+                          Insets.widgetLargeInset,
+                          Insets.widgetSmallInset,
+                          Insets.widgetSmallInset,
+                          Insets.widgetSmallInset),
                       child: TextButton(
                         onPressed: () {
                           _openSignUpScreen(context);
@@ -301,7 +309,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                      padding: const EdgeInsets.fromLTRB(
+                          Insets.widgetLargeInset,
+                          Insets.widgetSmallInset,
+                          Insets.widgetSmallInset,
+                          Insets.widgetSmallInset),
                       child: TextButton(
                         onPressed: () {
                           _openSignUpScreen(context);
@@ -322,7 +334,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                      padding: const EdgeInsets.fromLTRB(
+                          Insets.widgetLargeInset,
+                          Insets.widgetSmallInset,
+                          Insets.widgetSmallInset,
+                          Insets.widgetSmallInset),
                       child: TextButton(
                         onPressed: () {
                           _openSignUpScreen(context);
