@@ -195,6 +195,20 @@ const documentNodeQueryGetAuthenticatedUser = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'profileCompletionPercentage'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'updatedAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -221,6 +235,8 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     this.fullName,
     this.avatarUrl,
     this.userHandle,
+    required this.profileCompletionPercentage,
+    this.updatedAt,
     this.$__typename = 'User',
   });
 
@@ -231,6 +247,8 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     final l$fullName = json['fullName'];
     final l$avatarUrl = json['avatarUrl'];
     final l$userHandle = json['userHandle'];
+    final l$profileCompletionPercentage = json['profileCompletionPercentage'];
+    final l$updatedAt = json['updatedAt'];
     final l$$__typename = json['__typename'];
     return Query$GetAuthenticatedUser$getAuthenticatedUser(
       id: (l$id as String),
@@ -238,6 +256,9 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
       userHandle: (l$userHandle as String?),
+      profileCompletionPercentage: (l$profileCompletionPercentage as int),
+      updatedAt:
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -251,6 +272,10 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
   final String? avatarUrl;
 
   final String? userHandle;
+
+  final int profileCompletionPercentage;
+
+  final DateTime? updatedAt;
 
   final String $__typename;
 
@@ -266,6 +291,10 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     _resultData['avatarUrl'] = l$avatarUrl;
     final l$userHandle = userHandle;
     _resultData['userHandle'] = l$userHandle;
+    final l$profileCompletionPercentage = profileCompletionPercentage;
+    _resultData['profileCompletionPercentage'] = l$profileCompletionPercentage;
+    final l$updatedAt = updatedAt;
+    _resultData['updatedAt'] = l$updatedAt?.toIso8601String();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -278,6 +307,8 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     final l$fullName = fullName;
     final l$avatarUrl = avatarUrl;
     final l$userHandle = userHandle;
+    final l$profileCompletionPercentage = profileCompletionPercentage;
+    final l$updatedAt = updatedAt;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -285,6 +316,8 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       l$fullName,
       l$avatarUrl,
       l$userHandle,
+      l$profileCompletionPercentage,
+      l$updatedAt,
       l$$__typename,
     ]);
   }
@@ -323,6 +356,17 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     if (l$userHandle != lOther$userHandle) {
       return false;
     }
+    final l$profileCompletionPercentage = profileCompletionPercentage;
+    final lOther$profileCompletionPercentage =
+        other.profileCompletionPercentage;
+    if (l$profileCompletionPercentage != lOther$profileCompletionPercentage) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -358,6 +402,8 @@ abstract class CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes> {
     String? fullName,
     String? avatarUrl,
     String? userHandle,
+    int? profileCompletionPercentage,
+    DateTime? updatedAt,
     String? $__typename,
   });
 }
@@ -381,6 +427,8 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
     Object? fullName = _undefined,
     Object? avatarUrl = _undefined,
     Object? userHandle = _undefined,
+    Object? profileCompletionPercentage = _undefined,
+    Object? updatedAt = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetAuthenticatedUser$getAuthenticatedUser(
@@ -394,6 +442,14 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
         userHandle: userHandle == _undefined
             ? _instance.userHandle
             : (userHandle as String?),
+        profileCompletionPercentage:
+            profileCompletionPercentage == _undefined ||
+                    profileCompletionPercentage == null
+                ? _instance.profileCompletionPercentage
+                : (profileCompletionPercentage as int),
+        updatedAt: updatedAt == _undefined
+            ? _instance.updatedAt
+            : (updatedAt as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -412,342 +468,8 @@ class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
     String? fullName,
     String? avatarUrl,
     String? userHandle,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$GetUserProfileInfo {
-  Query$GetUserProfileInfo({
-    required this.getUserProfileInfo,
-    this.$__typename = 'Query',
-  });
-
-  factory Query$GetUserProfileInfo.fromJson(Map<String, dynamic> json) {
-    final l$getUserProfileInfo = json['getUserProfileInfo'];
-    final l$$__typename = json['__typename'];
-    return Query$GetUserProfileInfo(
-      getUserProfileInfo: Query$GetUserProfileInfo$getUserProfileInfo.fromJson(
-          (l$getUserProfileInfo as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final Query$GetUserProfileInfo$getUserProfileInfo getUserProfileInfo;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$getUserProfileInfo = getUserProfileInfo;
-    _resultData['getUserProfileInfo'] = l$getUserProfileInfo.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$getUserProfileInfo = getUserProfileInfo;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$getUserProfileInfo,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetUserProfileInfo) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$getUserProfileInfo = getUserProfileInfo;
-    final lOther$getUserProfileInfo = other.getUserProfileInfo;
-    if (l$getUserProfileInfo != lOther$getUserProfileInfo) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetUserProfileInfo
-    on Query$GetUserProfileInfo {
-  CopyWith$Query$GetUserProfileInfo<Query$GetUserProfileInfo> get copyWith =>
-      CopyWith$Query$GetUserProfileInfo(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith$Query$GetUserProfileInfo<TRes> {
-  factory CopyWith$Query$GetUserProfileInfo(
-    Query$GetUserProfileInfo instance,
-    TRes Function(Query$GetUserProfileInfo) then,
-  ) = _CopyWithImpl$Query$GetUserProfileInfo;
-
-  factory CopyWith$Query$GetUserProfileInfo.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetUserProfileInfo;
-
-  TRes call({
-    Query$GetUserProfileInfo$getUserProfileInfo? getUserProfileInfo,
-    String? $__typename,
-  });
-  CopyWith$Query$GetUserProfileInfo$getUserProfileInfo<TRes>
-      get getUserProfileInfo;
-}
-
-class _CopyWithImpl$Query$GetUserProfileInfo<TRes>
-    implements CopyWith$Query$GetUserProfileInfo<TRes> {
-  _CopyWithImpl$Query$GetUserProfileInfo(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetUserProfileInfo _instance;
-
-  final TRes Function(Query$GetUserProfileInfo) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? getUserProfileInfo = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetUserProfileInfo(
-        getUserProfileInfo:
-            getUserProfileInfo == _undefined || getUserProfileInfo == null
-                ? _instance.getUserProfileInfo
-                : (getUserProfileInfo
-                    as Query$GetUserProfileInfo$getUserProfileInfo),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  CopyWith$Query$GetUserProfileInfo$getUserProfileInfo<TRes>
-      get getUserProfileInfo {
-    final local$getUserProfileInfo = _instance.getUserProfileInfo;
-    return CopyWith$Query$GetUserProfileInfo$getUserProfileInfo(
-        local$getUserProfileInfo, (e) => call(getUserProfileInfo: e));
-  }
-}
-
-class _CopyWithStubImpl$Query$GetUserProfileInfo<TRes>
-    implements CopyWith$Query$GetUserProfileInfo<TRes> {
-  _CopyWithStubImpl$Query$GetUserProfileInfo(this._res);
-
-  TRes _res;
-
-  call({
-    Query$GetUserProfileInfo$getUserProfileInfo? getUserProfileInfo,
-    String? $__typename,
-  }) =>
-      _res;
-  CopyWith$Query$GetUserProfileInfo$getUserProfileInfo<TRes>
-      get getUserProfileInfo =>
-          CopyWith$Query$GetUserProfileInfo$getUserProfileInfo.stub(_res);
-}
-
-const documentNodeQueryGetUserProfileInfo = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'GetUserProfileInfo'),
-    variableDefinitions: [],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'getUserProfileInfo'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'profileCompletionPercentage'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'lastUpdateTime'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-]);
-
-class Query$GetUserProfileInfo$getUserProfileInfo {
-  Query$GetUserProfileInfo$getUserProfileInfo({
-    this.profileCompletionPercentage,
-    this.lastUpdateTime,
-    this.$__typename = 'User',
-  });
-
-  factory Query$GetUserProfileInfo$getUserProfileInfo.fromJson(
-      Map<String, dynamic> json) {
-    final l$profileCompletionPercentage = json['profileCompletionPercentage'];
-    final l$lastUpdateTime = json['lastUpdateTime'];
-    final l$$__typename = json['__typename'];
-    return Query$GetUserProfileInfo$getUserProfileInfo(
-      profileCompletionPercentage: (l$profileCompletionPercentage as int?),
-      lastUpdateTime: l$lastUpdateTime == null
-          ? null
-          : DateTime.parse((l$lastUpdateTime as String)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int? profileCompletionPercentage;
-
-  final DateTime? lastUpdateTime;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$profileCompletionPercentage = profileCompletionPercentage;
-    _resultData['profileCompletionPercentage'] = l$profileCompletionPercentage;
-    final l$lastUpdateTime = lastUpdateTime;
-    _resultData['lastUpdateTime'] = l$lastUpdateTime?.toIso8601String();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$profileCompletionPercentage = profileCompletionPercentage;
-    final l$lastUpdateTime = lastUpdateTime;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$profileCompletionPercentage,
-      l$lastUpdateTime,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetUserProfileInfo$getUserProfileInfo) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$profileCompletionPercentage = profileCompletionPercentage;
-    final lOther$profileCompletionPercentage =
-        other.profileCompletionPercentage;
-    if (l$profileCompletionPercentage != lOther$profileCompletionPercentage) {
-      return false;
-    }
-    final l$lastUpdateTime = lastUpdateTime;
-    final lOther$lastUpdateTime = other.lastUpdateTime;
-    if (l$lastUpdateTime != lOther$lastUpdateTime) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetUserProfileInfo$getUserProfileInfo
-    on Query$GetUserProfileInfo$getUserProfileInfo {
-  CopyWith$Query$GetUserProfileInfo$getUserProfileInfo<
-          Query$GetUserProfileInfo$getUserProfileInfo>
-      get copyWith => CopyWith$Query$GetUserProfileInfo$getUserProfileInfo(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetUserProfileInfo$getUserProfileInfo<TRes> {
-  factory CopyWith$Query$GetUserProfileInfo$getUserProfileInfo(
-    Query$GetUserProfileInfo$getUserProfileInfo instance,
-    TRes Function(Query$GetUserProfileInfo$getUserProfileInfo) then,
-  ) = _CopyWithImpl$Query$GetUserProfileInfo$getUserProfileInfo;
-
-  factory CopyWith$Query$GetUserProfileInfo$getUserProfileInfo.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetUserProfileInfo$getUserProfileInfo;
-
-  TRes call({
     int? profileCompletionPercentage,
-    DateTime? lastUpdateTime,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetUserProfileInfo$getUserProfileInfo<TRes>
-    implements CopyWith$Query$GetUserProfileInfo$getUserProfileInfo<TRes> {
-  _CopyWithImpl$Query$GetUserProfileInfo$getUserProfileInfo(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetUserProfileInfo$getUserProfileInfo _instance;
-
-  final TRes Function(Query$GetUserProfileInfo$getUserProfileInfo) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? profileCompletionPercentage = _undefined,
-    Object? lastUpdateTime = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetUserProfileInfo$getUserProfileInfo(
-        profileCompletionPercentage: profileCompletionPercentage == _undefined
-            ? _instance.profileCompletionPercentage
-            : (profileCompletionPercentage as int?),
-        lastUpdateTime: lastUpdateTime == _undefined
-            ? _instance.lastUpdateTime
-            : (lastUpdateTime as DateTime?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetUserProfileInfo$getUserProfileInfo<TRes>
-    implements CopyWith$Query$GetUserProfileInfo$getUserProfileInfo<TRes> {
-  _CopyWithStubImpl$Query$GetUserProfileInfo$getUserProfileInfo(this._res);
-
-  TRes _res;
-
-  call({
-    int? profileCompletionPercentage,
-    DateTime? lastUpdateTime,
+    DateTime? updatedAt,
     String? $__typename,
   }) =>
       _res;

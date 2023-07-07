@@ -19,26 +19,13 @@ export function mockQueries(serverState: MockServerState) {
             ]
         },
         findUsers: () => {
-            return [
-                serverState.loggedInUser,
-                serverState.otherUsers[0],
-                serverState.otherUsers[1],
-                serverState.otherUsers[2],
-                serverState.otherUsers[3],
-            ]
+            return serverState.otherUsers.concat([serverState.loggedInUser]);
         },
         getAuthenticatedUser: () => {
             if (!serverState.loggedIn) {
                 return null;
             }
             return serverState.loggedInUser;
-        },
-        getUserProfileInfo: () => {
-            return {
-                __typename: "User",
-                profileCompletionPercentage: serverState.loggedInUser.profileCompletionPercentage,
-                lastUpdateTime: serverState.loggedInUser.lastUpdateTime,
-            };
         },
         myInbox: () => {
             var mockChannelId = faker.string.alphanumeric({length: 24});
@@ -63,6 +50,6 @@ export function mockQueries(serverState: MockServerState) {
                     ],
                 }
             }
-        }
+        },
     }
 }

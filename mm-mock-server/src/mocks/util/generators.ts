@@ -7,7 +7,6 @@ export function generateUser() {
     var mockUserHandle = mockFirstName.toLowerCase().charAt(0) + mockLastName.toLowerCase();
     var mockEmail = `${mockUserHandle}@${faker.internet.domainName()}`;
     var mockProfileCompletionPercentage = generateUserProfileCompletionPercentage();
-    var mockLastUpdateTime = faker.date.past(); 
     return {
         __typename: "User",
         id: faker.string.alphanumeric({length: 24}),
@@ -19,7 +18,7 @@ export function generateUser() {
         avatarUrl: faker.image.urlPicsumPhotos(),
         jobTitle: faker.person.jobTitle(),
         profileCompletionPercentage: mockProfileCompletionPercentage,
-        lastUpdateTime: mockLastUpdateTime,
+        updatedAt: faker.date.recent(),
     }
 }
 
@@ -54,7 +53,7 @@ export function generateChannel(channelParticipants: any[]) {
                 __typename: "ChannelParticipant",
                 user: channelParticipants[1],
             },
-        ]
+        ],
     }
 }
 
@@ -122,43 +121,31 @@ export function generateUserProfileCompletionPercentage() {
     return  Math.floor(Math.random() * 100); 
 }
 
-
-export function generateUserLastUpdateTime() {
-    // Returns a random date time from one year before to now
-    return faker.date.past(); 
-}
-
-
-export function generateChannelInvitation(channelParticipants: any[], declined?: boolean, accepted?: boolean) {
-    var status: object | null;
-    if (declined || accepted) {
-        var statusText: string;
-        if (accepted)
-            statusText = "accepted";
-        else if (declined)
-            statusText = "declined";
-        else
-            statusText = "created";
-        status = {
-                __typename: "ChannelInvitationStatus",
-                status: statusText,
-            }
-    } else {
-        status = null;
+export function generateChannelInvitation(sender: any, recipient: any, declined?: boolean, accepted?: boolean) {
+    var status: string;
+    var channel: object | null = null;
+    if (accepted) {
+        status = "accepted";
+        channel = generateChannel([sender, recipient])
     }
+    else if (declined)
+        status = "declined";
+    else
+        status = "created";
+
     return {
         __typename: "ChannelInvitation",
         id: faker.string.alphanumeric({length: 24}),
         channelName: faker.lorem.words(2),
-        channel: generateChannel(channelParticipants),
+        channel: channel,
         channelTopic: faker.lorem.sentence(),
         messageText: faker.lorem.sentence(),
-        createdBy: channelParticipants[0].id,
+        createdBy: sender.id,
         createdAt: faker.date.recent(),
-        recipientId: channelParticipants[0].id,
-        recipient: channelParticipants[0],
-        senderId: channelParticipants[1].id,
-        sender: channelParticipants[1],
+        recipientId: recipient.id,
+        recipient: recipient,
+        senderId: sender.id,
+        sender: sender,
         status: status,
     }
 }

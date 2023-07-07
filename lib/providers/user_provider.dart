@@ -154,36 +154,6 @@ class UserProvider extends BaseProvider {
     );
   }
 
-  Widget queryUserProfileInfo({
-    required Widget Function(
-      OperationResult<Query$GetUserProfileInfo$getUserProfileInfo> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryGetUserProfileInfo,
-      onData: (queryResult, {refetch, fetchMore}) {
-        return onData(
-          OperationResult(
-            gqlQueryResult: queryResult,
-            response: queryResult.data != null
-                ? Query$GetUserProfileInfo.fromJson(
-                    queryResult.data!,
-                  ).getUserProfileInfo
-                : null,
-          ),
-          refetch: refetch,
-          fetchMore: fetchMore,
-        );
-      },
-      onLoading: onLoading,
-      onError: onError,
-    );
-  }
-
   // Mutations
   Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser({
     required Input$UserSignUpInput input,
