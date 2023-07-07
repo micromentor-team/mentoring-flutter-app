@@ -384,6 +384,13 @@ const documentNodeQueryFindChannelMessages = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'userId'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: '__typename'),
                 alias: null,
                 arguments: [],
@@ -779,20 +786,25 @@ class _CopyWithStubImpl$Query$FindChannelMessages$findChannelMessages<TRes>
 class Query$FindChannelMessages$findChannelMessages$statuses {
   Query$FindChannelMessages$findChannelMessages$statuses({
     this.seenAt,
+    required this.userId,
     this.$__typename = 'ChannelMessageStatus',
   });
 
   factory Query$FindChannelMessages$findChannelMessages$statuses.fromJson(
       Map<String, dynamic> json) {
     final l$seenAt = json['seenAt'];
+    final l$userId = json['userId'];
     final l$$__typename = json['__typename'];
     return Query$FindChannelMessages$findChannelMessages$statuses(
       seenAt: l$seenAt == null ? null : DateTime.parse((l$seenAt as String)),
+      userId: (l$userId as String),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime? seenAt;
+
+  final String userId;
 
   final String $__typename;
 
@@ -800,6 +812,8 @@ class Query$FindChannelMessages$findChannelMessages$statuses {
     final _resultData = <String, dynamic>{};
     final l$seenAt = seenAt;
     _resultData['seenAt'] = l$seenAt?.toIso8601String();
+    final l$userId = userId;
+    _resultData['userId'] = l$userId;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -808,9 +822,11 @@ class Query$FindChannelMessages$findChannelMessages$statuses {
   @override
   int get hashCode {
     final l$seenAt = seenAt;
+    final l$userId = userId;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$seenAt,
+      l$userId,
       l$$__typename,
     ]);
   }
@@ -827,6 +843,11 @@ class Query$FindChannelMessages$findChannelMessages$statuses {
     final l$seenAt = seenAt;
     final lOther$seenAt = other.seenAt;
     if (l$seenAt != lOther$seenAt) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -862,6 +883,7 @@ abstract class CopyWith$Query$FindChannelMessages$findChannelMessages$statuses<
 
   TRes call({
     DateTime? seenAt,
+    String? userId,
     String? $__typename,
   });
 }
@@ -883,10 +905,14 @@ class _CopyWithImpl$Query$FindChannelMessages$findChannelMessages$statuses<TRes>
 
   TRes call({
     Object? seenAt = _undefined,
+    Object? userId = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindChannelMessages$findChannelMessages$statuses(
         seenAt: seenAt == _undefined ? _instance.seenAt : (seenAt as DateTime?),
+        userId: userId == _undefined || userId == null
+            ? _instance.userId
+            : (userId as String),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -904,6 +930,7 @@ class _CopyWithStubImpl$Query$FindChannelMessages$findChannelMessages$statuses<
 
   call({
     DateTime? seenAt,
+    String? userId,
     String? $__typename,
   }) =>
       _res;
@@ -2019,6 +2046,13 @@ const documentNodeMutationCreateChannelMessage = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'userId'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: '__typename'),
                 alias: null,
                 arguments: [],
@@ -2420,20 +2454,25 @@ class _CopyWithStubImpl$Mutation$CreateChannelMessage$createChannelMessage<TRes>
 class Mutation$CreateChannelMessage$createChannelMessage$statuses {
   Mutation$CreateChannelMessage$createChannelMessage$statuses({
     this.seenAt,
+    required this.userId,
     this.$__typename = 'ChannelMessageStatus',
   });
 
   factory Mutation$CreateChannelMessage$createChannelMessage$statuses.fromJson(
       Map<String, dynamic> json) {
     final l$seenAt = json['seenAt'];
+    final l$userId = json['userId'];
     final l$$__typename = json['__typename'];
     return Mutation$CreateChannelMessage$createChannelMessage$statuses(
       seenAt: l$seenAt == null ? null : DateTime.parse((l$seenAt as String)),
+      userId: (l$userId as String),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime? seenAt;
+
+  final String userId;
 
   final String $__typename;
 
@@ -2441,6 +2480,8 @@ class Mutation$CreateChannelMessage$createChannelMessage$statuses {
     final _resultData = <String, dynamic>{};
     final l$seenAt = seenAt;
     _resultData['seenAt'] = l$seenAt?.toIso8601String();
+    final l$userId = userId;
+    _resultData['userId'] = l$userId;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2449,9 +2490,11 @@ class Mutation$CreateChannelMessage$createChannelMessage$statuses {
   @override
   int get hashCode {
     final l$seenAt = seenAt;
+    final l$userId = userId;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$seenAt,
+      l$userId,
       l$$__typename,
     ]);
   }
@@ -2469,6 +2512,11 @@ class Mutation$CreateChannelMessage$createChannelMessage$statuses {
     final l$seenAt = seenAt;
     final lOther$seenAt = other.seenAt;
     if (l$seenAt != lOther$seenAt) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2505,6 +2553,7 @@ abstract class CopyWith$Mutation$CreateChannelMessage$createChannelMessage$statu
 
   TRes call({
     DateTime? seenAt,
+    String? userId,
     String? $__typename,
   });
 }
@@ -2528,10 +2577,14 @@ class _CopyWithImpl$Mutation$CreateChannelMessage$createChannelMessage$statuses<
 
   TRes call({
     Object? seenAt = _undefined,
+    Object? userId = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$CreateChannelMessage$createChannelMessage$statuses(
         seenAt: seenAt == _undefined ? _instance.seenAt : (seenAt as DateTime?),
+        userId: userId == _undefined || userId == null
+            ? _instance.userId
+            : (userId as String),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2550,6 +2603,7 @@ class _CopyWithStubImpl$Mutation$CreateChannelMessage$createChannelMessage$statu
 
   call({
     DateTime? seenAt,
+    String? userId,
     String? $__typename,
   }) =>
       _res;

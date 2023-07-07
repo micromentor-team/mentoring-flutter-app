@@ -12,6 +12,7 @@ query FindChannelMessages ($filter: ChannelMessageListFilter) {
         editedAt
         statuses {
             seenAt
+            userId
         }
     }
 }
@@ -44,6 +45,7 @@ mutation CreateChannelMessage ($input: ChannelMessageInput!) {
         editedAt
         statuses {
             seenAt
+            userId
         }
     }
 }
