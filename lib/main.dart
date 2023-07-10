@@ -14,12 +14,12 @@ import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/widgets/atoms/app_wrapper.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
 import 'package:mm_flutter_app/widgets/screens/dashboard/dashboard.dart';
+import 'package:mm_flutter_app/widgets/screens/explore/explore.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'data/models/user/user_provider.dart';
-import 'widgets/screens/explore/explore.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -64,7 +64,7 @@ class MainApp extends StatelessWidget {
           GoRoute(
             path: '/explore',
             builder: (BuildContext context, GoRouterState state) {
-              return const Explore();
+              return const ExploreScreen();
             },
           ),
           GoRoute(
