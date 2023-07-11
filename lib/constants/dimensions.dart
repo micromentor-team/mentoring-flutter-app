@@ -15,6 +15,7 @@ class Insets {
 class Radii {
   Radii._private();
   static const double buttonRadius = 8.0;
+  static const double roundedRectRadius = 12.0;
   static const double avatarRadiusSmall = 24.0;
   static const double avatarRadiusMedium = 40.0;
   static const double avatarRadiusLarge = 48.0;
@@ -48,4 +49,6 @@ class Dimensions {
   static const double sizedBoxWidth = 360;
   static const double iconWidth = 20;
   static const double iconSpaceWidth = 10;
+  static const double quickViewProfileAvatarLength = 80.0;
+  static const double highlightBorderWidth = 1.5;
 }
