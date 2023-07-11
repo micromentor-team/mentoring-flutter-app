@@ -43,5 +43,5 @@ class Dimensions {
   static const double chipMaxWidth = 100;
   static const double loginBoxWidth = 360;
   static const double lineHeight = 1;
-  static const double textBoxWidth = 170;
+  static const double textBoxWidth = 200;
 }
