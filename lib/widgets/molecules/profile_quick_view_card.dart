@@ -48,7 +48,7 @@ class ProfileQuickViewCard extends StatelessWidget {
           decoration: isRecommended
               ? BoxDecoration(
                   border: Border.all(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.primaryContainer,
                     width: Dimensions.highlightBorderWidth,
                   ),
                   borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
@@ -75,7 +75,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     AppLocalizations l10n,
   ) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: Insets.widgetMediumInset),
+      padding: const EdgeInsets.only(bottom: Insets.widgetSmallInset),
       child: Row(
         children: [
           Icon(
