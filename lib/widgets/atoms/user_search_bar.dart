@@ -11,6 +11,17 @@ class UserSearchBar extends StatelessWidget {
     return SearchBar(
       leading: const Icon(Icons.search),
       hintText: hintText,
+      hintStyle: MaterialStateProperty.all(TextStyles.searchText(context)),
+      backgroundColor: MaterialStateProperty.all(
+          Theme.of(context).colorScheme.primaryContainer),
+      padding: MaterialStateProperty.all(
+        const EdgeInsets.fromLTRB(
+            Insets.widgetLargeInset,
+            Insets.widgetSmallInset,
+            Insets.widgetSmallInset,
+            Insets.widgetSmallInset),
+      ),
+      // shape: MaterialStateProperty.all({BorderSide side: BorderSide.none,}),
       onTap: () => {
         showSearch(
           context: context,

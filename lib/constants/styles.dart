@@ -56,6 +56,13 @@ class TextStyles {
   static TextStyle? bannerAction(BuildContext context) {
     return Theme.of(context).textTheme.labelMedium;
   }
+
+  static TextStyle? searchText(BuildContext context) {
+    return Theme.of(context)
+        .textTheme
+        .labelLarge!
+        .copyWith(fontWeight: FontWeight.w600);
+  }
 }
 
 class ButtonStyles {
@@ -77,11 +84,3 @@ class ButtonStyles {
     ));
   }
 }
-
-// class ChipStyles{
-//   ChipStyles._private();
-//   static ChipStyles filledChip(BuildContext context) {
-//     return Chip.backgroundColor: Theme.of(context).colorScheme.primary,;
-//   }
-//
-// }
