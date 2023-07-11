@@ -91,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0, 0, 0, Insets.widgetSmallInset),
                                 child: Text(
-                                  l10n.welcome,
+                                  l10n.welcomeBack,
                                   style: TextStyles.sectionHeader(context),
                                 ),
                               ),
@@ -258,105 +258,130 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                          Insets.widgetLargeInset,
-                          Insets.widgetSmallInset,
-                          Insets.widgetSmallInset,
-                          Insets.widgetSmallInset),
-                      child: TextButton(
-                        onPressed: () {
-                          _openSignUpScreen(context);
-                        },
-                        child: Row(
-                          children: [
-                            FlutterSocialButton(
-                              onTap: () {},
-                              buttonType: ButtonType.google,
-                              mini: true,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(
+                              Insets.widgetLargeInset,
+                              Insets.widgetSmallInset,
+                              Insets.widgetSmallInset,
+                              Insets.widgetSmallInset),
+                          child: TextButton(
+                            onPressed: () {
+                              _openSignUpScreen(context);
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FlutterSocialButton(
+                                  onTap: () {},
+                                  buttonType: ButtonType.google,
+                                  mini: true,
+                                ),
+                                SizedBox(
+                                  width: Dimensions.textBoxWidth,
+                                  child: Text(
+                                    l10n.signInWithGoogle,
+                                    style: TextStyles.sectionSubHeaderBold(
+                                        context),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              l10n.signInWithGoogle,
-                              style: TextStyles.sectionSubHeaderBold(context),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                          Insets.widgetLargeInset,
-                          Insets.widgetSmallInset,
-                          Insets.widgetSmallInset,
-                          Insets.widgetSmallInset),
-                      child: TextButton(
-                        onPressed: () {
-                          _openSignUpScreen(context);
-                        },
-                        child: Row(
-                          children: [
-                            FlutterSocialButton(
-                              onTap: () {},
-                              buttonType: ButtonType.facebook,
-                              mini: true,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(
+                              Insets.widgetLargeInset,
+                              Insets.widgetSmallInset,
+                              Insets.widgetSmallInset,
+                              Insets.widgetSmallInset),
+                          child: TextButton(
+                            onPressed: () {
+                              _openSignUpScreen(context);
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FlutterSocialButton(
+                                  onTap: () {},
+                                  buttonType: ButtonType.facebook,
+                                  mini: true,
+                                ),
+                                SizedBox(
+                                  width: Dimensions.textBoxWidth,
+                                  child: Text(
+                                    l10n.signInWithFacebook,
+                                    style: TextStyles.sectionSubHeaderBold(
+                                        context),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              l10n.signInWithFacebook,
-                              style: TextStyles.sectionSubHeaderBold(context),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                          Insets.widgetLargeInset,
-                          Insets.widgetSmallInset,
-                          Insets.widgetSmallInset,
-                          Insets.widgetSmallInset),
-                      child: TextButton(
-                        onPressed: () {
-                          _openSignUpScreen(context);
-                        },
-                        child: Row(
-                          children: [
-                            FlutterSocialButton(
-                              onTap: () {},
-                              buttonType: ButtonType.linkedin,
-                              mini: true,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(
+                              Insets.widgetLargeInset,
+                              Insets.widgetSmallInset,
+                              Insets.widgetSmallInset,
+                              Insets.widgetSmallInset),
+                          child: TextButton(
+                            onPressed: () {
+                              _openSignUpScreen(context);
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FlutterSocialButton(
+                                  onTap: () {},
+                                  buttonType: ButtonType.linkedin,
+                                  mini: true,
+                                ),
+                                SizedBox(
+                                  width: Dimensions.textBoxWidth,
+                                  child: Text(
+                                    l10n.signInWithLinkedIn,
+                                    style: TextStyles.sectionSubHeaderBold(
+                                        context),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              l10n.signInWithLinkedIn,
-                              style: TextStyles.sectionSubHeaderBold(context),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                          Insets.widgetLargeInset,
-                          Insets.widgetSmallInset,
-                          Insets.widgetSmallInset,
-                          Insets.widgetSmallInset),
-                      child: TextButton(
-                        onPressed: () {
-                          _openSignUpScreen(context);
-                        },
-                        child: Row(
-                          children: [
-                            FlutterSocialButton(
-                              onTap: () {},
-                              buttonType: ButtonType.whatsapp,
-                              mini: true,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(
+                              Insets.widgetLargeInset,
+                              Insets.widgetSmallInset,
+                              Insets.widgetSmallInset,
+                              Insets.widgetSmallInset),
+                          child: TextButton(
+                            onPressed: () {
+                              _openSignUpScreen(context);
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FlutterSocialButton(
+                                  onTap: () {},
+                                  buttonType: ButtonType.whatsapp,
+                                  mini: true,
+                                ),
+                                SizedBox(
+                                  width: Dimensions.textBoxWidth,
+                                  child: Text(
+                                    l10n.signInWithWhatsapp,
+                                    style: TextStyles.sectionSubHeaderBold(
+                                        context),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              l10n.signInWithWhatsapp,
-                              style: TextStyles.sectionSubHeaderBold(context),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
