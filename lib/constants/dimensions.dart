@@ -15,6 +15,7 @@ class Insets {
 class Radii {
   Radii._private();
   static const double buttonRadius = 8.0;
+  static const double roundedRectRadius = 12.0;
   static const double avatarRadiusSmall = 24.0;
   static const double avatarRadiusMedium = 40.0;
   static const double avatarRadiusLarge = 48.0;
@@ -42,4 +43,5 @@ class Dimensions {
   static const double mentorCardWidth = 260;
   static const double chipVisualDensity = -4;
   static const double chipMaxWidth = 100;
+  static const double quickViewProfileAvatarLength = 80.0;
 }
