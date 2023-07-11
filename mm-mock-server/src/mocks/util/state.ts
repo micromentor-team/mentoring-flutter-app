@@ -23,12 +23,12 @@ export class MockServerState {
         ]
         this.channelInvitations = [
             // accepted invitation, channel exists
-            generators.generateChannelInvitation([this.loggedInUser, this.otherUsers[0]], false, true),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[0], false, true),
             // pending invitation
-            generators.generateChannelInvitation([this.loggedInUser, this.otherUsers[1]]),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[1]),
             // declined invitation
-            generators.generateChannelInvitation([this.loggedInUser, this.otherUsers[2]], true),
-            // TODO: accepted invitation, channel doesn't exist (a.k.a "match")
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[2], true),
+            // TODO: accepted invitation, message doesn't exist yet in channel (a.k.a "match")
             // generators.generateChannelInvitation([this.loggedInUser, this.otherUsers[1]], false, true),
         ]
         this.channelMessages = [

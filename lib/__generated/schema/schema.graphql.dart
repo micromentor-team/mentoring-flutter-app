@@ -15216,7 +15216,7 @@ class Input$GenGroupsInput {
     String? deletedAt,
     String? deletedBy,
     int? count,
-    List<Input$GenSpecificGroupInput>? specificGroups,
+    required List<Input$GenSpecificGroupInput> specificGroups,
   }) =>
       Input$GenGroupsInput._({
         if (id != null) r'id': id,
@@ -15230,7 +15230,7 @@ class Input$GenGroupsInput {
         if (deletedAt != null) r'deletedAt': deletedAt,
         if (deletedBy != null) r'deletedBy': deletedBy,
         if (count != null) r'count': count,
-        if (specificGroups != null) r'specificGroups': specificGroups,
+        r'specificGroups': specificGroups,
       });
 
   Input$GenGroupsInput._(this._$data);
@@ -15287,13 +15287,11 @@ class Input$GenGroupsInput {
       final l$count = data['count'];
       result$data['count'] = (l$count as int);
     }
-    if (data.containsKey('specificGroups')) {
-      final l$specificGroups = data['specificGroups'];
-      result$data['specificGroups'] = (l$specificGroups as List<dynamic>)
-          .map((e) =>
-              Input$GenSpecificGroupInput.fromJson((e as Map<String, dynamic>)))
-          .toList();
-    }
+    final l$specificGroups = data['specificGroups'];
+    result$data['specificGroups'] = (l$specificGroups as List<dynamic>)
+        .map((e) =>
+            Input$GenSpecificGroupInput.fromJson((e as Map<String, dynamic>)))
+        .toList();
     return Input$GenGroupsInput._(result$data);
   }
 
@@ -15312,8 +15310,8 @@ class Input$GenGroupsInput {
   String? get deletedAt => (_$data['deletedAt'] as String?);
   String? get deletedBy => (_$data['deletedBy'] as String?);
   int? get count => (_$data['count'] as int?);
-  List<Input$GenSpecificGroupInput>? get specificGroups =>
-      (_$data['specificGroups'] as List<Input$GenSpecificGroupInput>?);
+  List<Input$GenSpecificGroupInput> get specificGroups =>
+      (_$data['specificGroups'] as List<Input$GenSpecificGroupInput>);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -15360,13 +15358,9 @@ class Input$GenGroupsInput {
       final l$count = count;
       result$data['count'] = (l$count as int);
     }
-    if (_$data.containsKey('specificGroups')) {
-      final l$specificGroups = specificGroups;
-      result$data['specificGroups'] =
-          (l$specificGroups as List<Input$GenSpecificGroupInput>)
-              .map((e) => e.toJson())
-              .toList();
-    }
+    final l$specificGroups = specificGroups;
+    result$data['specificGroups'] =
+        l$specificGroups.map((e) => e.toJson()).toList();
     return result$data;
   }
 
@@ -15492,23 +15486,15 @@ class Input$GenGroupsInput {
     }
     final l$specificGroups = specificGroups;
     final lOther$specificGroups = other.specificGroups;
-    if (_$data.containsKey('specificGroups') !=
-        other._$data.containsKey('specificGroups')) {
+    if (l$specificGroups.length != lOther$specificGroups.length) {
       return false;
     }
-    if (l$specificGroups != null && lOther$specificGroups != null) {
-      if (l$specificGroups.length != lOther$specificGroups.length) {
+    for (int i = 0; i < l$specificGroups.length; i++) {
+      final l$specificGroups$entry = l$specificGroups[i];
+      final lOther$specificGroups$entry = lOther$specificGroups[i];
+      if (l$specificGroups$entry != lOther$specificGroups$entry) {
         return false;
       }
-      for (int i = 0; i < l$specificGroups.length; i++) {
-        final l$specificGroups$entry = l$specificGroups[i];
-        final lOther$specificGroups$entry = lOther$specificGroups[i];
-        if (l$specificGroups$entry != lOther$specificGroups$entry) {
-          return false;
-        }
-      }
-    } else if (l$specificGroups != lOther$specificGroups) {
-      return false;
     }
     return true;
   }
@@ -15543,11 +15529,7 @@ class Input$GenGroupsInput {
       _$data.containsKey('deletedAt') ? l$deletedAt : const {},
       _$data.containsKey('deletedBy') ? l$deletedBy : const {},
       _$data.containsKey('count') ? l$count : const {},
-      _$data.containsKey('specificGroups')
-          ? l$specificGroups == null
-              ? null
-              : Object.hashAll(l$specificGroups.map((v) => v))
-          : const {},
+      Object.hashAll(l$specificGroups.map((v) => v)),
     ]);
   }
 }
@@ -15660,7 +15642,7 @@ class _CopyWithImpl$Input$GenGroupsInput<TRes>
                           Input$GenSpecificGroupInput>>)
               _fn) =>
       call(
-          specificGroups: _fn(_instance.specificGroups!
+          specificGroups: _fn(_instance.specificGroups
               .map((e) => CopyWith$Input$GenSpecificGroupInput(
                     e,
                     (i) => i,

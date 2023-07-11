@@ -5,17 +5,12 @@ query GetAuthenticatedUser {
         fullName
         avatarUrl
         userHandle
-    }
-}
-
-query GetUserProfileInfo {
-    getUserProfileInfo(){
         profileCompletionPercentage
-        lastUpdateTime
+        updatedAt
     }
 }
 
-query FindUsers ($filter: UserListFilter) {
+query FindAllUsers ($filter: UserListFilter) {
     findUsers(filter: $filter){
         id
         email
@@ -25,7 +20,39 @@ query FindUsers ($filter: UserListFilter) {
     }
 }
 
+query FindUsersWithFilter ($filter: UserListFilter) {
+    findUsers(filter: $filter){
+        id
+        email
+        fullName
+        avatarUrl
+        userHandle
+        jobTitle
+    }
+}
 
+query GetInboxInvitations {
+  myInbox {
+    channels {
+      invitations {
+        channelId
+        createdAt
+        createdBy
+        id
+        messageText
+        status
+      }
+      pendingInvitations {
+        channelId
+        createdAt
+        createdBy
+        id
+        messageText
+        status
+      }
+    }
+  }
+}
 
 mutation SignInUser ($input: UserSignInInput!) {
     signInUser(input: $input) {

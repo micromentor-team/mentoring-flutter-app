@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
-import 'package:mm_flutter_app/widgets/molecules/upcoming_session_tile.dart';
+import 'package:mm_flutter_app/widgets/molecules/image_tile.dart';
 
 class UpcomingSection extends StatelessWidget {
   static const maxDaysDisplayed = 365;
   const UpcomingSection({Key? key}) : super(key: key);
 
-  List<UpcomingSessionTile> _createUpcomingSessionTiles() {
-    List<UpcomingSessionTile> sessionTiles = [];
+  List<ImageTile> _createUpcomingSessionTiles() {
+    List<ImageTile> sessionTiles = [];
     List<_UpcomingSession> sessions = _getUpcomingSessions();
     if (sessions.isEmpty) {
       return sessionTiles;
     }
+    DateFormat dateFormat = DateFormat('MMMM d\ny\n').add_jm();
     // Only show sessions within the given number calendar days.
     for (int i = 0; i < sessions.length; i++) {
       if (sessions[i].dateTime.isBefore(
           DateTime.now().add(const Duration(days: maxDaysDisplayed)))) {
         sessionTiles.add(
-          UpcomingSessionTile(
-            avatarUrl: sessions[i].avatarUrl,
-            dateTime: sessions[i].dateTime,
-            mentorName: sessions[i].mentorName,
+          ImageTile(
+            image: NetworkImage(sessions[i].avatarUrl),
+            subtitle: dateFormat.format(sessions[i].dateTime),
+            title: sessions[i].mentorName,
+            isCircle: true,
           ),
         );
       }
@@ -67,6 +71,9 @@ class UpcomingSection extends StatelessWidget {
     return SectionTile(
       title: l10n.homeUpcomingSectionTitle,
       addTopDivider: true,
+      seeAllOnPressed: () {
+        context.go('/progress');
+      },
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(

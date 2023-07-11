@@ -91,6 +91,13 @@ class ButtonStyles {
     );
   }
 
+  static ButtonStyle homePageButton(BuildContext context) {
+    return ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(Radii.buttonRadius),
+    ));
+  }
+
   static ButtonStyle loginButton(BuildContext context) {
     return TextButton.styleFrom(
       backgroundColor: Theme.of(context).colorScheme.primary,

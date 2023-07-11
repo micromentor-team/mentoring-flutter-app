@@ -47,7 +47,8 @@ class _SectionTileState extends State<SectionTile> {
                 widget.title,
                 style: TextStyles.sectionHeader(context),
               ),
-              if (widget.seeAllOnPressed != null && !_isExpanded)
+              if (widget.seeAllOnPressed != null &&
+                  (!_isExpanded || widget.seeLessOnPressed == null))
                 _SectionExpandToggle(
                   onPressed: () => {
                     widget.seeAllOnPressed!(),
@@ -55,7 +56,8 @@ class _SectionTileState extends State<SectionTile> {
                   },
                   text: l10n.listSeeAll,
                 ),
-              if (widget.seeLessOnPressed != null && _isExpanded)
+              if (widget.seeLessOnPressed != null &&
+                  (_isExpanded || widget.seeAllOnPressed == null))
                 _SectionExpandToggle(
                   onPressed: () => {
                     widget.seeLessOnPressed!(),
