@@ -92,6 +92,13 @@ class TextStyles {
   static TextStyle? bannerAction(BuildContext context) {
     return Theme.of(context).textTheme.labelMedium;
   }
+
+  static TextStyle? searchText(BuildContext context) {
+    return Theme.of(context)
+        .textTheme
+        .labelLarge!
+        .copyWith(fontWeight: FontWeight.w600);
+  }
 }
 
 class ButtonStyles {
