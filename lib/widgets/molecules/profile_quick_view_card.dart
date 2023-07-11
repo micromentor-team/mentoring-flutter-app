@@ -43,15 +43,28 @@ class ProfileQuickViewCard extends StatelessWidget {
       color: colorScheme.surface,
       surfaceTintColor: Colors.transparent,
       elevation: Elevations.level2,
-      child: Padding(
-        padding: const EdgeInsets.all(Insets.widgetMediumInset),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (isRecommended) _createRecommendedHeader(context, l10n),
-            _createProfileView(context, l10n),
-            if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
-          ],
+      child: InkWell(
+        child: Ink(
+          decoration: isRecommended
+              ? BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: Dimensions.highlightBorderWidth,
+                  ),
+                  borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
+                )
+              : null,
+          child: Padding(
+            padding: const EdgeInsets.all(Insets.widgetMediumInset),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (isRecommended) _createRecommendedHeader(context, l10n),
+                _createProfileView(context, l10n),
+                if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
+              ],
+            ),
+          ),
         ),
       ),
     );
