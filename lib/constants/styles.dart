@@ -3,6 +3,13 @@ part of 'app_constants.dart';
 class TextStyles {
   const TextStyles._private();
 
+  static TextStyle? largeSectionHeader(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.headlineMedium!.copyWith(
+      color: theme.colorScheme.primary,
+    );
+  }
+
   static TextStyle? sectionHeader(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return theme.textTheme.titleLarge!.copyWith(
@@ -21,6 +28,14 @@ class TextStyles {
     ThemeData theme = Theme.of(context);
     return theme.textTheme.titleMedium!.copyWith(
       color: theme.colorScheme.primary,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  static TextStyle? sectionNote(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleMedium!.copyWith(
+      color: theme.colorScheme.inverseSurface,
       fontWeight: FontWeight.w500,
     );
   }

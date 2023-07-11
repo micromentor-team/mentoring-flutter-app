@@ -7,7 +7,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../__generated/schema/schema.graphql.dart';
 import '../../../utilities/utility.dart';
 import '../sign_up/sign_up_screen.dart';
-import 'package:flutter_social_button/flutter_social_button.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -78,10 +77,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0, Insets.widgetLargeInset, 0, 0),
                       child: SizedBox(
-                        width: 360,
+                        width: Dimensions.sizedBoxWidth,
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,13 +91,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                     0, 0, 0, Insets.widgetSmallInset),
                                 child: Text(
                                   l10n.welcomeBack,
-                                  style: TextStyles.sectionHeader(context),
+                                  style: TextStyles.largeSectionHeader(context),
                                 ),
                               ),
                             ),
                             const Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0, 0, 0, Insets.widgetSmallInset),
+                                  0, 0, 0, Insets.widgetLargeInset),
                             ),
                             Center(
                               child: Padding(
@@ -106,7 +105,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     0, 0, 0, Insets.widgetSmallInset),
                                 child: Text(
                                   l10n.signInMessage,
-                                  style: TextStyles.sectionSubNote(context),
+                                  style: TextStyles.sectionNote(context),
                                 ),
                               ),
                             ),
@@ -274,10 +273,15 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                FlutterSocialButton(
-                                  onTap: () {},
-                                  buttonType: ButtonType.google,
-                                  mini: true,
+                                const SizedBox(
+                                  width: Dimensions.iconWidth,
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/google.png'),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: Dimensions.iconSpaceWidth,
                                 ),
                                 SizedBox(
                                   width: Dimensions.textBoxWidth,
@@ -304,10 +308,15 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                FlutterSocialButton(
-                                  onTap: () {},
-                                  buttonType: ButtonType.facebook,
-                                  mini: true,
+                                const SizedBox(
+                                  width: Dimensions.iconWidth,
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/images/facebook.png'),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: Dimensions.iconSpaceWidth,
                                 ),
                                 SizedBox(
                                   width: Dimensions.textBoxWidth,
@@ -334,10 +343,15 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                FlutterSocialButton(
-                                  onTap: () {},
-                                  buttonType: ButtonType.linkedin,
-                                  mini: true,
+                                const SizedBox(
+                                  width: Dimensions.iconWidth,
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/images/linkedin.png'),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: Dimensions.iconSpaceWidth,
                                 ),
                                 SizedBox(
                                   width: Dimensions.textBoxWidth,
@@ -364,10 +378,15 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                FlutterSocialButton(
-                                  onTap: () {},
-                                  buttonType: ButtonType.whatsapp,
-                                  mini: true,
+                                const SizedBox(
+                                  width: Dimensions.iconWidth,
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/images/whatsapp.png'),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: Dimensions.iconSpaceWidth,
                                 ),
                                 SizedBox(
                                   width: Dimensions.textBoxWidth,

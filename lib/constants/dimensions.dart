@@ -45,4 +45,7 @@ class Dimensions {
   static const double loginBoxWidth = 360;
   static const double lineHeight = 1;
   static const double textBoxWidth = 200;
+  static const double sizedBoxWidth = 360;
+  static const double iconWidth = 20;
+  static const double iconSpaceWidth = 10;
 }
