@@ -1,0 +1,83 @@
+query GetAuthenticatedUser {
+    getAuthenticatedUser {
+        id
+        email
+        fullName
+        avatarUrl
+        userHandle
+        profileCompletionPercentage
+        updatedAt
+    }
+}
+
+query FindAllUsers ($filter: UserListFilter) {
+    findUsers(filter: $filter){
+        id
+        email
+        fullName
+        avatarUrl
+        userHandle
+    }
+}
+
+query FindUsersWithFilter ($filter: UserListFilter) {
+    findUsers(filter: $filter){
+        id
+        email
+        fullName
+        avatarUrl
+        userHandle
+        jobTitle
+    }
+}
+
+query GetInboxInvitations {
+  myInbox {
+    channels {
+      invitations {
+        channelId
+        createdAt
+        createdBy
+        id
+        messageText
+        status
+      }
+      pendingInvitations {
+        channelId
+        createdAt
+        createdBy
+        id
+        messageText
+        status
+      }
+    }
+  }
+}
+
+mutation SignInUser ($input: UserSignInInput!) {
+    signInUser(input: $input) {
+        userId
+        deviceId
+        authToken
+    }
+}
+
+mutation SignOutUser {
+    signMeOut
+}
+
+mutation SignUpUser ($input: UserSignUpInput!) {
+    signUpUser(input: $input) {
+        userId
+        deviceId
+        authToken
+    }
+}
+
+mutation DeleteUser ($userId: String!, $deletePhysically: Boolean!) {
+    deleteUser(userId: $userId, deletePhysically: $deletePhysically)
+}
+
+mutation UpdateUser ($input: UserInput!) {
+    updateUser(input: $input)
+}

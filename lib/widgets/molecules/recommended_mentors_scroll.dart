@@ -79,6 +79,7 @@ class RecommendedSection extends StatelessWidget {
                 icon: const Icon(Icons.search),
                 onPressed: () => {debugPrint("hi")},
                 label: Text(l10n.homeFindMoreMentors),
+                style: ButtonStyles.homePageButton(context),
               )))
     ]);
   }

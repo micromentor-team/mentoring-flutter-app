@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/screens/user_settings/user_settings.dart';
 import 'package:provider/provider.dart';
 
@@ -22,14 +23,14 @@ class HomeMenu extends StatelessWidget {
               leading: CircleAvatar(
                 backgroundColor: Theme.of(context).primaryColor,
                 child: Text(
-                  '${user?.initials}',
+                  AppUtility.getUserInitials(user!.fullName!),
                   style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),
               ),
               title: Text(
-                '${user?.fullName}',
+                '${user.fullName}',
                 style: const TextStyle(
                   fontSize: 16.0,
                 ),

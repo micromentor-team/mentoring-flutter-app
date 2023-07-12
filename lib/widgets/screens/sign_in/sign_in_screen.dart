@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../__generated/schema/schema.graphql.dart';
+import '../../../utilities/utility.dart';
 import '../sign_up/sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -147,11 +149,19 @@ class _SignInScreenState extends State<SignInScreen> {
                                     ScaffoldMessenger.of(context);
 
                                 if (_formKey.currentState!.validate()) {
-                                  final signInError =
-                                      await userProvider.signInUser(
-                                    email: emailController.text,
+                                  final signInResult = await userProvider
+                                      .signInUser(Input$UserSignInInput(
+                                    deviceUuid: AppUtility.getUuid(),
+                                    ident: emailController.text,
+                                    identType: Enum$UserIdentType.email,
                                     password: passwordController.text,
-                                  );
+                                  ));
+                                  final signInError = signInResult
+                                      .gqlQueryResult
+                                      .exception
+                                      ?.graphqlErrors
+                                      .first
+                                      .message;
                                   if (signInError != null) {
                                     if (signInError == 'notFound') {
                                       scaffoldManager.showSnackBar(

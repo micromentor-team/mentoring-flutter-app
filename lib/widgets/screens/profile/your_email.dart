@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +64,7 @@ class _YourEmailState extends State<YourEmail> {
                     label: 'Email',
                     validator: (value) {
                       if (value!.isEmpty) {
-                        emailController.text = data!.email!;
+                        emailController.text = data.response!.email!;
                         return '''Email can't be empty''';
                       }
                       return null;
@@ -84,7 +85,8 @@ class _YourEmailState extends State<YourEmail> {
                             ));
                             Navigator.of(context).pop();
                             await userProvider.updateUserData(
-                                email: emailController.text);
+                              Input$UserInput(email: emailController.text),
+                            );
                           }
                         },
                         child: const Text('Save'))),

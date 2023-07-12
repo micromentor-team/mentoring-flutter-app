@@ -68,10 +68,10 @@ class MainApp extends StatelessWidget {
             },
           ),
           GoRoute(
-            path: '/journey',
+            path: '/progress',
             builder: (BuildContext context, GoRouterState state) {
               return Center(
-                  child: Text(AppLocalizations.of(context)!.navJourneyText));
+                  child: Text(AppLocalizations.of(context)!.navProgressText));
             },
           ),
           GoRoute(
@@ -125,6 +125,7 @@ class StartScreen extends StatelessWidget {
 
         return const LoadingScreen();
       },
+      logFailures: false, // Error is expected when user is not logged in.
     );
   }
 }

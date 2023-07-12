@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/data/models/base/base_provider.dart';
-import 'package:mm_flutter_app/data/models/user/queries/find_users.dart';
-import 'package:mm_flutter_app/data/models/user/queries/get_authenticated_user.dart';
-import 'package:mm_flutter_app/data/models/user/queries/get_user_profile_info.dart';
-import 'package:mm_flutter_app/data/models/user/user.dart';
-import 'package:mm_flutter_app/data/models/user/user_api.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
+
+import '../../../__generated/schema/operations.graphql.dart';
+import '../../../__generated/schema/schema.graphql.dart';
+import '../base/operation_result.dart';
+
+typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 
 class UserProvider extends BaseProvider {
-  GraphQLClient client;
+  AuthenticatedUser? _user;
 
-  User? _user;
+  UserProvider({required super.client});
 
-  UserProvider({required this.client});
-
-  void _setUser(Map<String, dynamic>? data) {
-    if (data != null && _user == null) {
-      _user = User.fromJson(data);
+  void _setUser(AuthenticatedUser authenticatedUser) {
+    if (_user == null) {
+      _user = authenticatedUser;
       debugPrint('Got this user from the server userId: ${_user!.id}');
     }
   }
@@ -35,219 +34,245 @@ class UserProvider extends BaseProvider {
 
   Future<String> _setDeviceUuid() async {
     final pref = await SharedPreferences.getInstance();
-    const uuid = Uuid();
-    String deviceUuid = uuid.v1();
+    final deviceUuid = AppUtility.getUuid();
     pref.setString('deviceUuid', deviceUuid);
     return deviceUuid;
   }
 
-  User? get user {
+  AuthenticatedUser? get user {
     return _user;
   }
 
   Widget queryUser({
     required Widget Function(
-      GetAuthenticatedUserResult? data, {
+      OperationResult<Query$GetAuthenticatedUser$getAuthenticatedUser> data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+    bool logFailures = true,
+  }) {
+    return runQuery(
+      document: documentNodeQueryGetAuthenticatedUser,
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<Query$GetAuthenticatedUser$getAuthenticatedUser>
+            result = OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data != null
+              ? Query$GetAuthenticatedUser.fromJson(
+                  queryResult.data!,
+                ).getAuthenticatedUser
+              : null,
+        );
+        if (result.response != null) {
+          _setUser(result.response!);
+        } else {
+          _resetUser();
+        }
+        return onData(result, refetch: refetch, fetchMore: fetchMore);
+      },
+      onLoading: onLoading,
+      onError: onError,
+      logFailures: logFailures,
+    );
+  }
+
+  Widget queryAllUsers({
+    required Widget Function(
+      OperationResult<List<Query$FindAllUsers$findUsers>> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery<GetAuthenticatedUserResult>(
-      operation: GetAuthenticatedUser(),
-      onData: (data, {refetch, fetchMore}) {
-        if (data != null) {
-          _setUser(data.toJson());
-        } else {
-          _resetUser();
-        }
-        return onData(data, refetch: refetch, fetchMore: fetchMore);
+    return runQuery(
+      document: documentNodeQueryFindAllUsers,
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<List<Query$FindAllUsers$findUsers>> result =
+            OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data == null
+              ? null
+              : Query$FindAllUsers.fromJson(
+                  queryResult.data!,
+                ).findUsers.map((element) {
+                  if (element.avatarUrl == "") {
+                    return element.copyWith(avatarUrl: null);
+                  }
+                  return element;
+                }).toList(),
+        );
+        return onData(
+          result,
+          refetch: refetch,
+          fetchMore: fetchMore,
+        );
       },
       onLoading: onLoading,
       onError: onError,
     );
   }
 
-  Widget queryAllUsers({
+  Widget findUsersWithFilter(
+    Input$UserListFilter input, {
     required Widget Function(
-      FindUsersResult? data, {
+      OperationResult<List<Query$FindUsersWithFilter$findUsers>> data, {
       void Function()? refetch,
       void Function(FetchMoreOptions)? fetchMore,
     }) onData,
     Widget Function()? onLoading,
     Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery<FindUsersResult>(
-      operation: FindUsers(),
-      onData: onData,
-      onLoading: onLoading,
-      onError: onError,
-    );
-  }
-
-  Widget queryUserProfileInfo({
-    required Widget Function(
-      GetUserProfileInfoResult? data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery<GetUserProfileInfoResult>(
-      operation: GetUserProfileInfo(),
-      onData: onData,
+    return runQuery(
+      document: documentNodeQueryFindUsersWithFilter,
+      variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<List<Query$FindUsersWithFilter$findUsers>>
+            result = OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data == null
+              ? null
+              : Query$FindUsersWithFilter.fromJson(
+                  queryResult.data!,
+                ).findUsers.map((element) {
+                  if (element.avatarUrl == "") {
+                    return element.copyWith(avatarUrl: null);
+                  }
+                  return element;
+                }).toList(),
+        );
+        return onData(
+          result,
+          refetch: refetch,
+          fetchMore: fetchMore,
+        );
+      },
       onLoading: onLoading,
       onError: onError,
     );
   }
 
   // Mutations
-  Future<void> signUpUser(
-      {required name, required email, required password}) async {
-    debugPrint('UserProvider: signUpUser: $name');
+  Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser(
+      Input$UserSignUpInput input) async {
+    debugPrint('UserProvider: signUpUser: ${input.fullName}');
 
     await _resetUser();
-    String deviceUuid = await _setDeviceUuid();
+    await _setDeviceUuid();
 
-    final QueryResult result = await client.mutate(
-      MutationOptions(
-        document: gql(kSignUpUser),
-        variables: {
-          'input': {
-            'fullName': name,
-            'email': email,
-            'password': password,
-            'deviceUuid': deviceUuid,
-          }
-        },
-        onError: (error) {
-          debugPrint('error: $error');
-        },
-      ),
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationSignUpUser,
+      variables: Variables$Mutation$SignUpUser(input: input).toJson(),
     );
 
-    // debugPrint('createUser result: $result');
+    final OperationResult<Mutation$SignUpUser$signUpUser> result =
+        OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$SignUpUser.fromJson(
+              queryResult.data!,
+            ).signUpUser
+          : null,
+    );
 
-    if (result.data != null) {
-      String authToken = result.data!['signUpUser']['authToken'];
-      String userId = result.data!['signUpUser']['userId'];
-      String deviceId = result.data!['signUpUser']['deviceId'];
-      //
+    if (result.response != null) {
       final pref = await SharedPreferences.getInstance();
-      pref.setString('userId', userId);
-      pref.setString('deviceId', deviceId);
-      pref.setString('authToken', authToken);
+      pref.setString('userId', result.response!.userId);
+      pref.setString('deviceId', result.response!.deviceId);
+      pref.setString('authToken', result.response!.authToken);
 
-      debugPrint('userId: $userId');
-      debugPrint('deviceId: $deviceId');
-      debugPrint('authToken: $authToken');
+      debugPrint('userId: ${result.response!.userId}');
+      debugPrint('deviceId: ${result.response!.deviceId}');
+      debugPrint('authToken: ${result.response!.authToken}');
     }
+    return result;
   }
 
-  Future<String?> signInUser({required email, required password}) async {
-    debugPrint('UserProvider: signInUser: $email');
+  Future<OperationResult<Mutation$SignInUser$signInUser>> signInUser(
+    Input$UserSignInInput input,
+  ) async {
+    debugPrint('UserProvider: signInUser: ${input.ident}');
 
     await _resetUser();
-    String deviceUuid = await _setDeviceUuid();
+    await _setDeviceUuid();
 
-    debugPrint('deviceUuid: $deviceUuid');
-
-    final QueryResult result = await client.mutate(
-      MutationOptions(
-        document: gql(kSignInUser),
-        variables: {
-          'input': {
-            'ident': email,
-            'identType': 'email',
-            'deviceUuid': deviceUuid,
-            'password': password,
-          }
-        },
-        onError: (error) {
-          debugPrint('signInUser error: $error');
-        },
-      ),
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationSignInUser,
+      variables: Variables$Mutation$SignInUser(input: input).toJson(),
     );
 
-    // debugPrint('signInUser result: $result');
+    final OperationResult<Mutation$SignInUser$signInUser> result =
+        OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$SignInUser.fromJson(
+              queryResult.data!,
+            ).signInUser
+          : null,
+    );
 
-    if (result.data != null) {
-      String authToken = result.data!['signInUser']['authToken'];
-      String userId = result.data!['signInUser']['userId'];
-      String deviceId = result.data!['signInUser']['deviceId'];
-      //
+    if (result.response != null) {
       final pref = await SharedPreferences.getInstance();
-      pref.setString('userId', userId);
-      pref.setString('deviceId', deviceId);
-      pref.setString('authToken', authToken);
+      pref.setString('userId', result.response!.userId);
+      pref.setString('deviceId', result.response!.deviceId);
+      pref.setString('authToken', result.response!.authToken);
 
-      debugPrint('userId: $userId');
-      debugPrint('deviceId: $deviceId');
-      debugPrint('authToken: $authToken');
+      debugPrint('userId: ${result.response!.userId}');
+      debugPrint('deviceId: ${result.response!.deviceId}');
+      debugPrint('authToken: ${result.response!.authToken}');
     }
 
-    return result.exception?.graphqlErrors.first.message;
+    return result;
   }
 
-  Future<void> signOutUser() async {
-    // final QueryResult result = await client.mutate(
-    await client.mutate(
-      MutationOptions(
-        document: gql(kSignOutUser),
-        onError: (error) {
-          debugPrint('signOutUser error: $error');
-        },
-      ),
+  Future<OperationResult<void>> signOutUser() async {
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationSignOutUser,
     );
-    // debugPrint('signOutUser result: $result');
+
+    final OperationResult<void> result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
     _resetUser();
     notifyListeners();
+    return result;
   }
 
-  Future<void> updateUserData({name, email, adminNotes}) async {
-    final variables = {
-      'input': {"id": user!.id}
-    };
-    if (name != null) {
-      variables['input']!['fullName'] = name;
-    }
-    if (email != null) {
-      variables['input']!['email'] = email;
-    }
-    if (adminNotes != null) {
-      variables['input']!['adminNotes'] = adminNotes;
-    }
-    await client.query(
-      QueryOptions(
-        document: gql(kUpdateUser),
-        variables: variables,
-      ),
+  Future<OperationResult<void>> updateUserData(Input$UserInput input) async {
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationUpdateUser,
+      variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+    );
+
+    final OperationResult<void> result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
     );
     notifyListeners();
+    return result;
   }
 
-  Future<void> deleteUser() async {
+  Future<OperationResult<void>> deleteUser() async {
     final pref = await SharedPreferences.getInstance();
     String? userId = pref.getString('userId');
 
-    // final QueryResult result = await client.mutate(
-    await client.mutate(
-      MutationOptions(
-        document: gql(kDeleteUser),
-        variables: {
-          'userId': userId,
-          'deletePhysically': true,
-        },
-        fetchPolicy: FetchPolicy.networkOnly,
-        onError: (error) {
-          debugPrint('error: $error');
-        },
-      ),
+    final QueryResult queryResult = await runMutation(
+      document: documentNodeMutationUpdateUser,
+      variables: Variables$Mutation$DeleteUser(
+        userId: userId!,
+        deletePhysically: true,
+      ).toJson(),
     );
-    // debugPrint('deleteUser result: $result');
+
+    final OperationResult<void> result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
     _resetUser();
     notifyListeners();
+    return result;
   }
 }

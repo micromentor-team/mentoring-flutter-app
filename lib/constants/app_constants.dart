@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 part 'components.dart';
 part 'dimensions.dart';
+part 'enums.dart';
 part 'paths.dart';
 part 'schemes.dart';
 part 'styles.dart';

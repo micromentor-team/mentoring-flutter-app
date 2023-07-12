@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:mm_flutter_app/data/models/messages/message.dart';
 import 'package:mm_flutter_app/data/models/user/user.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class ReplyMessage extends StatelessWidget {
   const ReplyMessage(
@@ -23,7 +22,7 @@ class ReplyMessage extends StatelessWidget {
   String _participantName({userId}) {
     final User participant = participants
         .firstWhere((item) => item.id == userId, orElse: () => null);
-    return participant.fullName.trim().split(RegExp(' +')).take(1).join();
+    return participant.fullName!.trim().split(RegExp(' +')).take(1).join();
   }
 
   @override
