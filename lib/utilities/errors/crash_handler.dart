@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:mm_flutter_app/firebase_options.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:mm_flutter_app/utilities/errors/errors.dart';
@@ -15,19 +13,23 @@ import 'package:retry/retry.dart';
 class CrashHandler {
   bool _isReleaseMode = false;
   bool _isCollectionEnabled = false;
+  static bool _isCrashlyticsSupported = false;
 
   CrashHandler(bool isReleaseMode, bool isCollectionEnabled) {
     _isReleaseMode = isReleaseMode;
     _isCollectionEnabled = isCollectionEnabled;
-    _initialize();
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+      case TargetPlatform.iOS:
+        _isCrashlyticsSupported = true;
+      default:
+        break;
+    }
+    _initializeCrashlytics();
   }
 
-  void _initialize() async {
-    await Firebase.initializeApp(
-      name: "MicroMentor",
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    if (!kIsWeb) {
+  void _initializeCrashlytics() {
+    if (_isCrashlyticsSupported) {
       FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
         _isReleaseMode && _isCollectionEnabled,
       );
@@ -49,7 +51,8 @@ class CrashHandler {
         onRetry: (e) {
           if (logFailures) {
             logCrashReport(
-                'Retrying after exception: ${(e as RetryException).message}.');
+              'Retrying after exception: ${(e as RetryException).message}.',
+            );
           }
         },
       );
@@ -57,11 +60,10 @@ class CrashHandler {
       if (e is RetryException && onFailOperation != null) {
         if (logFailures) {
           logCrashReport(
-              'Maximum number of retry attempts reached: ${e.message}'
-              '\nExecuting onFailOperation callback.');
-          if (!kIsWeb) {
-            FirebaseCrashlytics.instance.recordError(e, null, fatal: false);
-          }
+            'Maximum number of retry attempts reached: ${e.message}'
+            '\nExecuting onFailOperation callback.',
+          );
+          sendCrashReport(exception: e);
         }
         return onFailOperation();
       }
@@ -71,31 +73,24 @@ class CrashHandler {
 
   void handleUncaughtFlutterError(FlutterErrorDetails details) async {
     logCrashReport(
-        'Application error/exception caught by FlutterError handler.');
+      'Application error/exception caught by FlutterError handler.',
+    );
     if (!_isReleaseMode) {
       FlutterError.presentError(details);
     }
 
     final Object e = details.exception;
-    bool isFatalError = false;
     if (e is Exception) {
       _handleException(e);
     } else if (e is Error) {
-      isFatalError = true;
       _handleError(e);
     } else {
-      logCrashReport('Unknown error/exception: ${e.toString()}');
+      logCrashReport(
+        'Unknown error/exception: ${e.toString()}',
+      );
     }
 
-    if (!kIsWeb) {
-      Future<void> recording = FirebaseCrashlytics.instance
-          .recordFlutterError(details, fatal: isFatalError);
-      if (isFatalError) {
-        // Save events, reports, and other data before exiting.
-        await recording;
-        _exitApp();
-      }
-    }
+    sendCrashReport(details: details, isFatal: e is Error);
   }
 
   bool handleUncaughtPlatformError(Object error, StackTrace trace) {
@@ -104,12 +99,11 @@ class CrashHandler {
       // RetryExceptions are handled here only when thrown from retry function,
       // meaning that the operation exhausted the max number of attempts.
       logCrashReport(
-          'Maximum number of retry attempts reached: ${error.message}');
+        'Maximum number of retry attempts reached: ${error.message}',
+      );
       return true;
     }
-    if (!kIsWeb) {
-      FirebaseCrashlytics.instance.recordError(error, trace, fatal: true);
-    }
+    sendCrashReport(exception: error, trace: trace, isFatal: error is Error);
     // Return false to allow error propagation to the next handler.
     return false;
   }
@@ -120,10 +114,37 @@ class CrashHandler {
   }
 
   static void logCrashReport(String message) {
-    DebugLogger.error(message);
+    try {
+      DebugLogger.error(message);
+      if (_isCrashlyticsSupported) {
+        FirebaseCrashlytics.instance.log(message);
+      }
+    } catch (_) {
+      // Do nothing if error logging fails, as we do not want the logger itself
+      // to crash the app.
+    }
+  }
 
-    if (!kIsWeb) {
-      FirebaseCrashlytics.instance.log(message);
+  static void sendCrashReport({
+    dynamic exception,
+    StackTrace? trace,
+    FlutterErrorDetails? details,
+    bool isFatal = false,
+  }) {
+    if (!_isCrashlyticsSupported) {
+      return;
+    }
+    if (details != null) {
+      FirebaseCrashlytics.instance.recordFlutterError(
+        details,
+        fatal: isFatal,
+      );
+    } else if (exception != null) {
+      FirebaseCrashlytics.instance.recordError(
+        exception,
+        trace,
+        fatal: isFatal,
+      );
     }
   }
 
@@ -141,9 +162,5 @@ class CrashHandler {
     } else {
       logCrashReport('Error: ${e.toString()}');
     }
-  }
-
-  void _exitApp() {
-    SystemNavigator.pop();
   }
 }

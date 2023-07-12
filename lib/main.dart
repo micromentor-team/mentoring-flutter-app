@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -18,6 +19,7 @@ import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
 import 'providers/user_provider.dart';
 import 'widgets/screens/explore/explore.dart';
 
@@ -141,6 +143,10 @@ class LoadingScreen extends StatelessWidget {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    name: Identifiers.appName,
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   //TODO(m-rosario): Make crash data collection opt-in.
   final CrashHandler crashHandler = CrashHandler(!kDebugMode, true);
   FlutterError.onError = crashHandler.handleUncaughtFlutterError;
