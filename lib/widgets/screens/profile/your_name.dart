@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_form_field_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -47,8 +47,11 @@ class YourName extends StatelessWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           await userProvider
-                              .updateUserData(Input$UserInput(
-                                  fullName: nameController.text))
+                              .updateUserData(
+                                input: Input$UserInput(
+                                  fullName: nameController.text,
+                                ),
+                              )
                               .then((value) => {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(const SnackBar(
