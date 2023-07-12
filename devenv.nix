@@ -1,15 +1,16 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
-  android-comp     = pkgs.androidenv.composeAndroidPackages {
+  android-comp     = android-pkgs.androidenv.composeAndroidPackages {
     buildToolsVersions = [ "30.0.3" ];
     platformVersions   = [ "29" "30" "31" "33" ];
   };
+  android-pkgs     = if pkgs.stdenv.system == "aarch64-darwin" then pkgs.pkgsx86_64Darwin else pkgs;
   android-sdk      = android-comp.androidsdk;
   android-sdk-root = "${android-sdk}/libexec/android-sdk";
 in {
   enterShell = ''
-    flutter config --android-sdk "${android-sdk-root}"
+    ${pkgs.flutter}/bin/flutter config --android-sdk "${android-sdk-root}"
   '';
 
   env = {
@@ -24,7 +25,6 @@ in {
 
   name = "mm-flutter-app";
 
-  packages = with pkgs; [ act android-sdk nodePackages.firebase-tools pandoc ]
-    # flutter is not packaged for macOS
-    ++ (lib.optional stdenv.isLinux flutter);
+  packages = with pkgs;
+    [ act android-sdk flutter nodePackages.firebase-tools pandoc ];
 }
