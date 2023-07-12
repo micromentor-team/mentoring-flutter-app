@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/molecules/invitation_section.dart';
