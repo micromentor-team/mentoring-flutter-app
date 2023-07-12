@@ -4,7 +4,6 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
-import 'package:provider/provider.dart';
 
 class _ProfileQuickViewInfo {
   final bool isRecommended;

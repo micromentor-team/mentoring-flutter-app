@@ -20,7 +20,6 @@ import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/user_provider.dart';
 
-
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 

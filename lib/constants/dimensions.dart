@@ -45,5 +45,4 @@ class Dimensions {
   static const double chipMaxWidth = 100;
   static const double quickViewProfileAvatarLength = 80.0;
   static const double highlightBorderWidth = 1.5;
-  static const double exploreCardHeight = 240;
 }
