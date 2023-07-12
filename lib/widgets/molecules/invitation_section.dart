@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/__generated/schema/operations.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/invitation_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:provider/provider.dart';
+
+import '../../__generated/schema/operations_channel.graphql.dart';
+import '../../__generated/schema/operations_user.graphql.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 2;
@@ -67,34 +69,38 @@ class _InvitationSectionState extends State<InvitationSection> {
       List<String> userIds,
       List<Query$GetInboxInvitations$myInbox$channels$invitations>
           invitations) {
-    return userProvider.findUsersWithFilter(Input$UserListFilter(ids: userIds),
-        onData: (data, {refetch, fetchMore}) {
-      if (data.response == null) {
-        return const SizedBox(width: 0, height: 0);
-      }
-      List<Widget> invitationWidgets = [];
-      for (int i = 0; i < invitations.length; i++) {
-        if (i > 0) {
+    return userProvider.findUsersWithFilter(
+      input: Input$UserListFilter(ids: userIds),
+      onData: (data, {refetch, fetchMore}) {
+        if (data.response == null) {
+          return const SizedBox(width: 0, height: 0);
+        }
+        List<Widget> invitationWidgets = [];
+        for (int i = 0; i < invitations.length; i++) {
+          if (i > 0) {
+            invitationWidgets.add(
+              const Divider(
+                thickness: 1,
+                height: 0,
+                indent: Insets.widgetMediumInset,
+                endIndent: Insets.widgetMediumInset,
+              ),
+            );
+          }
           invitationWidgets.add(
-            const Divider(
-              thickness: 1,
-              height: 0,
-              indent: Insets.widgetMediumInset,
-              endIndent: Insets.widgetMediumInset,
+            _createInvitationTile(
+              l10n,
+              data.response!.firstWhere(
+                  (element) => invitations[i].createdBy! == element.id),
+              invitations[i].status,
             ),
           );
         }
-        invitationWidgets.add(_createInvitationTile(
-          l10n,
-          data.response!
-              .firstWhere((element) => invitations[i].createdBy! == element.id),
-          invitations[i].status,
-        ));
-      }
-      return Column(
-        children: invitationWidgets,
-      );
-    });
+        return Column(
+          children: invitationWidgets,
+        );
+      },
+    );
   }
 
   InvitationTile _createInvitationTile(

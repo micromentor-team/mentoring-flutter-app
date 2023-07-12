@@ -7,8 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
-import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/widgets/atoms/app_wrapper.dart';
@@ -18,7 +18,7 @@ import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'data/models/user/user_provider.dart';
+import 'providers/user_provider.dart';
 import 'widgets/screens/explore/explore.dart';
 
 class MainApp extends StatelessWidget {

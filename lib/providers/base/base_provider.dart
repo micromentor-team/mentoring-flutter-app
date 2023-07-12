@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -101,15 +103,17 @@ abstract class BaseProvider extends ChangeNotifier {
     }
   }
 
-  Future<QueryResult> runMutation({
-    required DocumentNode document,
-    Map<String, dynamic>? variables,
-    bool logFailures = true,
-  }) async {
+  Future<QueryResult> runMutation(
+      {required DocumentNode document,
+      Map<String, dynamic>? variables,
+      bool logFailures = true,
+      FutureOr<void> Function(GraphQLDataProxy, QueryResult<Object?>?)?
+          update}) async {
     final mutation = MutationOptions(
       document: document,
       fetchPolicy: FetchPolicy.networkOnly,
       variables: variables ?? const {},
+      update: update,
     );
     const RetryOptions retryOptions = RetryOptions(
       maxAttempts: BaseProvider.retryAttempts,
