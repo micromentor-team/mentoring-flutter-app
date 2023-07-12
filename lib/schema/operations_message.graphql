@@ -1,0 +1,72 @@
+query FindChannelMessages ($filter: ChannelMessageListFilter) {
+    findChannelMessages(filter: $filter) {
+        id
+        createdBy
+        channelId
+        messageText
+        createdAt
+        replyToMessageId
+        deletedBy
+        updatedAt
+        deletedAt
+        editedAt
+        statuses {
+            seenAt
+            userId
+        }
+    }
+}
+
+query InboxUnseenMessages {
+    myInbox {
+        channels {
+            unseenMessages {
+                channelId
+                id
+                messageText
+                senderFullName
+                createdBy
+            }
+        }
+    }
+}
+
+mutation CreateChannelMessage ($input: ChannelMessageInput!) {
+    createChannelMessage(input: $input) {
+        id
+        createdBy
+        channelId
+        messageText
+        createdAt
+        replyToMessageId
+        deletedBy
+        updatedAt
+        deletedAt
+        editedAt
+        statuses {
+            seenAt
+            userId
+        }
+    }
+}
+
+mutation DeleteChannelMessage ($deletePhysically: Boolean!, $channelMessageId: String!) {
+    deleteChannelMessage(deletePhysically: $deletePhysically, channelMessageId: $channelMessageId)
+}
+
+mutation MarkChannelMessagesAsSeenByMe ($channelId: String!) {
+    markChannelMessagesAsSeenByMe(channelId: $channelId)
+}
+
+mutation UpdateChannelMessage ($input: ChannelMessageInput!) {
+    updateChannelMessage(input: $input)
+}
+
+subscription ChannelUpdated ($objectId: ID!) {
+    objectChanged(objectId: $objectId) {
+        objectId
+        messageType
+        modelType
+        ownerUserId
+    }
+}

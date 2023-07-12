@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/data/models/base/base_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../__generated/schema/operations.graphql.dart';
-import '../../../__generated/schema/schema.graphql.dart';
-import '../base/operation_result.dart';
+import '../__generated/schema/operations_user.graphql.dart';
+import '../__generated/schema/schema.graphql.dart';
+import 'base/base_provider.dart';
+import 'base/operation_result.dart';
 
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 
@@ -115,8 +115,8 @@ class UserProvider extends BaseProvider {
     );
   }
 
-  Widget findUsersWithFilter(
-    Input$UserListFilter input, {
+  Widget findUsersWithFilter({
+    required Input$UserListFilter input,
     required Widget Function(
       OperationResult<List<Query$FindUsersWithFilter$findUsers>> data, {
       void Function()? refetch,
@@ -155,8 +155,9 @@ class UserProvider extends BaseProvider {
   }
 
   // Mutations
-  Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser(
-      Input$UserSignUpInput input) async {
+  Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser({
+    required Input$UserSignUpInput input,
+  }) async {
     debugPrint('UserProvider: signUpUser: ${input.fullName}');
 
     await _resetUser();
@@ -190,9 +191,9 @@ class UserProvider extends BaseProvider {
     return result;
   }
 
-  Future<OperationResult<Mutation$SignInUser$signInUser>> signInUser(
-    Input$UserSignInInput input,
-  ) async {
+  Future<OperationResult<Mutation$SignInUser$signInUser>> signInUser({
+    required Input$UserSignInInput input,
+  }) async {
     debugPrint('UserProvider: signInUser: ${input.ident}');
 
     await _resetUser();
@@ -241,7 +242,9 @@ class UserProvider extends BaseProvider {
     return result;
   }
 
-  Future<OperationResult<void>> updateUserData(Input$UserInput input) async {
+  Future<OperationResult<void>> updateUserData({
+    required Input$UserInput input,
+  }) async {
     final QueryResult queryResult = await runMutation(
       document: documentNodeMutationUpdateUser,
       variables: Variables$Mutation$UpdateUser(input: input).toJson(),

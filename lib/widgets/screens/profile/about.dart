@@ -2,7 +2,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class About extends StatefulWidget {
@@ -131,9 +131,11 @@ class _AboutState extends State<About> {
                         content: Text('Your about is updated.'),
                       ));
                       Navigator.of(context).pop();
-                      await userProvider.updateUserData(Input$UserInput(
-                          adminNotes:
-                              '$_selectedEmoji ${aboutController.text}'));
+                      await userProvider.updateUserData(
+                        input: Input$UserInput(
+                          adminNotes: '$_selectedEmoji ${aboutController.text}',
+                        ),
+                      );
                     },
                     child: const Text('Save'))),
             const SizedBox(

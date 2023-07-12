@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/data/models/messages/message.dart';
-import 'package:mm_flutter_app/data/models/user/user.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+
+import '../../../providers/messages_provider.dart';
 
 class ReplyMessage extends StatelessWidget {
   const ReplyMessage(
@@ -11,8 +12,8 @@ class ReplyMessage extends StatelessWidget {
       required this.participants,
       this.onClose})
       : super(key: key);
-  final List participants;
-  final Message replyMessage;
+  final List<ChannelParticipant> participants;
+  final ChannelMessage replyMessage;
   final VoidCallback? onClose;
 
   bool _isCurrentUser({userId, context}) {
@@ -20,9 +21,16 @@ class ReplyMessage extends StatelessWidget {
   }
 
   String _participantName({userId}) {
-    final User participant = participants
-        .firstWhere((item) => item.id == userId, orElse: () => null);
-    return participant.fullName!.trim().split(RegExp(' +')).take(1).join();
+    final ChannelParticipant? participant =
+        participants.where((item) => item.user.id == userId).firstOrNull;
+    if (participant != null) {
+      return participant.user.fullName!
+          .trim()
+          .split(RegExp(' +'))
+          .take(1)
+          .join();
+    }
+    return '';
   }
 
   @override
@@ -66,7 +74,7 @@ class ReplyMessage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    replyMessage.messageText,
+                    replyMessage.messageText!,
                     maxLines: 1,
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
