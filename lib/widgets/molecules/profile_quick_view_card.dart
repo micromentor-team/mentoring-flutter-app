@@ -19,6 +19,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   final ProfileChip? ventureIndustry;
   final int? endorsements;
   final List<SkillChip> skills;
+  final Checkbox checkbox;
 
   const ProfileQuickViewCard({
     Key? key,
@@ -33,6 +34,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     this.ventureIndustry,
     this.endorsements,
     this.skills = const [],
+    required this.checkbox,
   }) : super(key: key);
 
   @override
@@ -56,14 +58,20 @@ class ProfileQuickViewCard extends StatelessWidget {
               : null,
           child: Padding(
             padding: const EdgeInsets.all(Insets.widgetMediumInset),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (isRecommended) _createRecommendedHeader(context, l10n),
-                _createProfileView(context, l10n),
-                if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
-              ],
-            ),
+            child: Stack(children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: checkbox,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (isRecommended) _createRecommendedHeader(context, l10n),
+                  _createProfileView(context, l10n),
+                  if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
+                ],
+              ),
+            ]),
           ),
         ),
       ),
