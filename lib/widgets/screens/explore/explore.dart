@@ -150,11 +150,10 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   List<_ProfileQuickViewInfo> cardInfo = [];
 
   void _loadMoreRecommendations() {
-    // future todo: also load the actual backend request into some structure here
+    // future todo:  load the actual backend request into cardInfo here instead
     for (int i = 0; i < requestSize; i++) {
       isSelected.add(false);
       if (cardInfo.isEmpty) {
-        // First 5 are recommended
         cardInfo.add(_createRecommendedMentorExample());
       } else if (cardInfo.length == 1) {
         cardInfo.add(_createRecommendedEntrepreneurExample());
@@ -222,6 +221,6 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: ExploreCardScroll());
+    return const ExploreCardScroll();
   }
 }
