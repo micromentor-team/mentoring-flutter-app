@@ -143,6 +143,12 @@ class TextStyles {
         .labelLarge!
         .copyWith(fontWeight: FontWeight.w600);
   }
+
+  static TextStyle? appBarTitle(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.headlineSmall
+        ?.copyWith(color: theme.colorScheme.primary);
+  }
 }
 
 class ButtonStyles {
