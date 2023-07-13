@@ -44,11 +44,15 @@ class Dimensions {
   static const double chipVisualDensity = -4;
   static const double chipMaxWidth = 100;
   static const double loginBoxWidth = 360;
+  static const double loginButtonHorizontalPadding = 80;
+  static const double loginButtonVerticalPadding = 8;
+  static const double signInWithButtonLeftPadding = 64;
+  static const double signInWithButtonOtherPadding = 8;
   static const double lineHeight = 1;
   static const double textBoxWidth = 200;
   static const double sizedBoxWidth = 360;
-  static const double iconWidth = 20;
-  static const double iconSpaceWidth = 10;
+  static const double iconWidth = 24;
+  static const double iconSpaceWidth = 8;
   static const double quickViewProfileAvatarLength = 80.0;
   static const double highlightBorderWidth = 1.5;
 }

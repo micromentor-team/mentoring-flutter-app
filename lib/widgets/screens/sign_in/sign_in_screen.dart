@@ -86,13 +86,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Center(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0, 0, 0, Insets.widgetSmallInset),
-                                child: Text(
-                                  l10n.welcomeBack,
-                                  style: TextStyles.largeSectionHeader(context),
-                                ),
+                              child: Text(
+                                l10n.welcomeBack,
+                                style: TextStyles.largeSectionHeader(context),
                               ),
                             ),
                             const Padding(
@@ -100,13 +96,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   0, 0, 0, Insets.widgetLargeInset),
                             ),
                             Center(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0, 0, 0, Insets.widgetSmallInset),
-                                child: Text(
-                                  l10n.signInMessage,
-                                  style: TextStyles.sectionNote(context),
-                                ),
+                              child: Text(
+                                l10n.signInMessage,
+                                style: TextStyles.sectionNote(context),
                               ),
                             ),
                           ],
@@ -126,14 +118,14 @@ class _SignInScreenState extends State<SignInScreen> {
                             TextFormField(
                                 key: const Key('emailTextField'),
                                 controller: emailController,
-                                decoration: const InputDecoration(
-                                  labelText: "Email or phone number",
-                                  border: OutlineInputBorder(),
+                                decoration: InputDecoration(
+                                  labelText: l10n.emailOrPhoneNumber,
+                                  border: const OutlineInputBorder(),
                                 ),
                                 validator: (value) {
                                   bool validEmail = _validateEmail(value!);
                                   if (validEmail != true) {
-                                    return 'Please enter a valid email or phone number';
+                                    return l10n.askForValidCredentials;
                                   }
                                   return null;
                                 },
@@ -144,13 +136,13 @@ class _SignInScreenState extends State<SignInScreen> {
                             TextFormField(
                                 key: const Key('passwordTextField'),
                                 controller: passwordController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Password',
-                                  border: OutlineInputBorder(),
+                                decoration: InputDecoration(
+                                  labelText: l10n.password,
+                                  border: const OutlineInputBorder(),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your password.';
+                                    return l10n.askForPassword;
                                   }
                                   return null;
                                 },
@@ -183,9 +175,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                     if (signInError != null) {
                                       if (signInError == 'notFound') {
                                         scaffoldManager.showSnackBar(
-                                          const SnackBar(
-                                            content: Text(
-                                                'Account not found. Please check your credentials and try again or create a new account'),
+                                          SnackBar(
+                                            content:
+                                                Text(l10n.accountNotFoundError),
                                           ),
                                         );
                                         if (context.mounted) {
@@ -194,10 +186,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                         }
                                       } else if (signInError ==
                                           'passwordNoMatch') {
-                                        scaffoldManager
-                                            .showSnackBar(const SnackBar(
-                                          content: Text(
-                                              'Please enter you correct password'),
+                                        scaffoldManager.showSnackBar(SnackBar(
+                                          content:
+                                              Text(l10n.incorrectPasswordError),
                                         ));
                                         passwordController.text = '';
                                       }
@@ -208,8 +199,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                    vertical: Insets.widgetSmallInset,
-                                    horizontal: Insets.widgetLargeInset * 2.5,
+                                    vertical:
+                                        Dimensions.loginButtonVerticalPadding,
+                                    horizontal:
+                                        Dimensions.loginButtonHorizontalPadding,
                                   ),
                                   child: Text(
                                     l10n.logIn,
@@ -243,7 +236,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           Container(
                             width: Dimensions.loginBoxWidth / 2,
                             height: Dimensions.lineHeight,
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                           Text(
                             l10n.or,
@@ -252,7 +245,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           Container(
                             width: Dimensions.loginBoxWidth / 2,
                             height: Dimensions.lineHeight,
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                         ],
                       ),
@@ -262,10 +255,10 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(
-                              Insets.widgetLargeInset,
-                              Insets.widgetSmallInset,
-                              Insets.widgetSmallInset,
-                              Insets.widgetSmallInset),
+                              Dimensions.signInWithButtonLeftPadding,
+                              Dimensions.signInWithButtonOtherPadding,
+                              Dimensions.signInWithButtonOtherPadding,
+                              Dimensions.signInWithButtonOtherPadding),
                           child: TextButton(
                             onPressed: () {
                               _openSignUpScreen(context);
@@ -276,8 +269,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 const SizedBox(
                                   width: Dimensions.iconWidth,
                                   child: Image(
-                                    image:
-                                        AssetImage('assets/images/google.png'),
+                                    image: AssetImage(Assets.googleIcon),
                                   ),
                                 ),
                                 const SizedBox(
@@ -297,10 +289,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(
-                              Insets.widgetLargeInset,
-                              Insets.widgetSmallInset,
-                              Insets.widgetSmallInset,
-                              Insets.widgetSmallInset),
+                              Dimensions.signInWithButtonLeftPadding,
+                              Dimensions.signInWithButtonOtherPadding,
+                              Dimensions.signInWithButtonOtherPadding,
+                              Dimensions.signInWithButtonOtherPadding),
                           child: TextButton(
                             onPressed: () {
                               _openSignUpScreen(context);
@@ -311,8 +303,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 const SizedBox(
                                   width: Dimensions.iconWidth,
                                   child: Image(
-                                    image: AssetImage(
-                                        'assets/images/facebook.png'),
+                                    image: AssetImage(Assets.facebookIcon),
                                   ),
                                 ),
                                 const SizedBox(
@@ -332,10 +323,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(
-                              Insets.widgetLargeInset,
-                              Insets.widgetSmallInset,
-                              Insets.widgetSmallInset,
-                              Insets.widgetSmallInset),
+                              Dimensions.signInWithButtonLeftPadding,
+                              Dimensions.signInWithButtonOtherPadding,
+                              Dimensions.signInWithButtonOtherPadding,
+                              Dimensions.signInWithButtonOtherPadding),
                           child: TextButton(
                             onPressed: () {
                               _openSignUpScreen(context);
@@ -346,8 +337,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 const SizedBox(
                                   width: Dimensions.iconWidth,
                                   child: Image(
-                                    image: AssetImage(
-                                        'assets/images/linkedin.png'),
+                                    image: AssetImage(Assets.linkedInIcon),
                                   ),
                                 ),
                                 const SizedBox(
@@ -367,10 +357,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(
-                              Insets.widgetLargeInset,
-                              Insets.widgetSmallInset,
-                              Insets.widgetSmallInset,
-                              Insets.widgetSmallInset),
+                              Dimensions.signInWithButtonLeftPadding,
+                              Dimensions.signInWithButtonOtherPadding,
+                              Dimensions.signInWithButtonOtherPadding,
+                              Dimensions.signInWithButtonOtherPadding),
                           child: TextButton(
                             onPressed: () {
                               _openSignUpScreen(context);
@@ -381,8 +371,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 const SizedBox(
                                   width: Dimensions.iconWidth,
                                   child: Image(
-                                    image: AssetImage(
-                                        'assets/images/whatsapp.png'),
+                                    image: AssetImage(Assets.whatsappIcon),
                                   ),
                                 ),
                                 const SizedBox(
