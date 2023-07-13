@@ -11,7 +11,7 @@ query GetAuthenticatedUser {
 }
 
 query FindAllUsers ($filter: UserListFilter) {
-    findUsers(filter: $filter){
+    findUsers(filter: $filter) {
         id
         email
         fullName
@@ -21,7 +21,7 @@ query FindAllUsers ($filter: UserListFilter) {
 }
 
 query FindUsersWithFilter ($filter: UserListFilter) {
-    findUsers(filter: $filter){
+    findUsers(filter: $filter) {
         id
         email
         fullName
@@ -29,29 +29,6 @@ query FindUsersWithFilter ($filter: UserListFilter) {
         userHandle
         jobTitle
     }
-}
-
-query GetInboxInvitations {
-  myInbox {
-    channels {
-      invitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
-      pendingInvitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
-    }
-  }
 }
 
 mutation SignInUser ($input: UserSignInInput!) {

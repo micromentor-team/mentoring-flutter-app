@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -7,19 +8,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
-import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/widgets/atoms/app_wrapper.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
 import 'package:mm_flutter_app/widgets/screens/dashboard/dashboard.dart';
+import 'package:mm_flutter_app/widgets/screens/explore/explore.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
-
-import 'data/models/user/user_provider.dart';
-import 'widgets/screens/explore/explore.dart';
+import 'firebase_options.dart';
+import 'providers/user_provider.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -64,7 +65,7 @@ class MainApp extends StatelessWidget {
           GoRoute(
             path: '/explore',
             builder: (BuildContext context, GoRouterState state) {
-              return const Explore();
+              return const ExploreScreen();
             },
           ),
           GoRoute(
@@ -141,6 +142,10 @@ class LoadingScreen extends StatelessWidget {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    name: Identifiers.appName,
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   //TODO(m-rosario): Make crash data collection opt-in.
   final CrashHandler crashHandler = CrashHandler(!kDebugMode, true);
   FlutterError.onError = crashHandler.handleUncaughtFlutterError;

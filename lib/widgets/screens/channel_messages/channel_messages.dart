@@ -5,11 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/data/models/channels/channel.dart';
-import 'package:mm_flutter_app/data/models/channels/channels_provider.dart';
-import 'package:mm_flutter_app/data/models/messages/message.dart';
-import 'package:mm_flutter_app/data/models/messages/messages_provider.dart';
-import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/messages_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'message_bubble/message_bubble.dart';
@@ -59,29 +58,25 @@ class ChannelMessagesScreen extends StatelessWidget {
   //   );
   // }
 
-  String _channelName({user, channel}) {
-    final participant =
-        channel.participants?.firstWhere((item) => item.id != user?.id);
-    final channelName = participant.fullName;
-    return channelName;
-  }
-
   @override
   Widget build(BuildContext context) {
     final channelsProvider = Provider.of<ChannelsProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
 
-    return channelsProvider.findChannelByChannelId(
-      channelId: channelId,
-      onData: (data) {
-        Channel channel = Channel.fromJson(data);
-        final channelName = _channelName(user: user, channel: channel);
+    return channelsProvider.findChannelById(
+      channelId: channelId!,
+      onData: (data, {refetch, fetchMore}) {
+        ChannelById channel = data.response!;
+        final String? channelName = channel.participants
+            .firstWhere((item) => item.user.id != user?.id)
+            .user
+            .fullName;
 
         return Scaffold(
           appBar: AppBar(
             title: InkWell(
-              child: Text(channelName),
+              child: Text(channelName!),
               onTap: () => {
                 FocusManager.instance.primaryFocus?.unfocus(),
                 // _openChannelDetailsScreen(context)
@@ -142,23 +137,18 @@ class ChannelMessagesScreen extends StatelessWidget {
 
 class ChannelMessages extends StatelessWidget {
   const ChannelMessages({Key? key, required this.channel}) : super(key: key);
-  final Channel channel;
+  final ChannelById channel;
 
   @override
   Widget build(BuildContext context) {
     final messagesProvider = Provider.of<MessagesProvider>(context);
-    return messagesProvider.queryMessages(
-      channelId: channel.id,
-      onData: (data) {
-        if (data != null) {
-          // List messages = data.toList();
-          final List<Message> messages =
-              List<Message>.from(data.map((item) => Message.fromJson(item)));
-          return ChannelChat(
-            channel: channel,
-            chatMessages: messages,
-          );
-        }
+    return messagesProvider.findChannelMessages(
+      input: Input$ChannelMessageListFilter(channelId: channel.id),
+      onData: (data, {refetch, fetchMore}) {
+        return ChannelChat(
+          channel: channel,
+          chatMessages: data.response!,
+        );
       },
     );
   }
@@ -170,8 +160,8 @@ class ChannelChat extends StatefulWidget {
     required this.channel,
     required this.chatMessages,
   }) : super(key: key);
-  final Channel channel;
-  final List<Message> chatMessages;
+  final ChannelById channel;
+  final List<ChannelMessage> chatMessages;
 
   @override
   State<ChannelChat> createState() => _ChannelChatState();
@@ -184,7 +174,7 @@ class _ChannelChatState extends State<ChannelChat> {
   double _bottomViewInset = 0; // The "safe" height of the Input
   bool _scrollButtonVisibility = false;
   bool _unreadMessages = false; // Non-local Message exists outside of viewport
-  Message? _focusedMessage; // Intended reply Message
+  ChannelMessage? _focusedMessage; // Intended reply Message
   // String newMessageText = ''; // Intended edited text body
 
   void _scrollListener() {
@@ -224,7 +214,7 @@ class _ChannelChatState extends State<ChannelChat> {
 
   _markMessageRead() {
     Provider.of<MessagesProvider>(context, listen: false)
-        .markMessageRead(widget.channel.id);
+        .markMessageRead(channelId: widget.channel.id);
   }
 
   @override
@@ -261,7 +251,7 @@ class _ChannelChatState extends State<ChannelChat> {
   }
 
   Future<dynamic> _openMessageDetailsModal(
-      BuildContext context, Message message) async {
+      BuildContext context, ChannelMessage message) async {
     setState(() {
       if (_focusedMessage != null) _focusedMessage = null;
     });
@@ -364,19 +354,19 @@ class BuildMessageBubbles extends StatelessWidget {
     required this.onSetReplyingTo,
   }) : super(key: key);
 
-  final Channel channel;
-  final List participants;
-  final List<Message> chatMessages;
+  final ChannelById channel;
+  final List<ChannelParticipant> participants;
+  final List<ChannelMessage> chatMessages;
   final double bottomViewInset;
   final ScrollController listScrollController;
-  final Function(Message message) onOpenMessageDetails;
-  final Function(Message message) onSetReplyingTo;
+  final Function(ChannelMessage message) onOpenMessageDetails;
+  final Function(ChannelMessage message) onSetReplyingTo;
 
   @override
   Widget build(BuildContext context) {
-    List<Message> messages = chatMessages.reversed.toList();
+    List<ChannelMessage> messages = chatMessages.reversed.toList();
     return chatMessages.isNotEmpty
-        ? GroupedListView<Message, String>(
+        ? GroupedListView<ChannelMessage, String>(
             elements: messages,
             clipBehavior: Clip.none,
             // We do not want the builder to sort again...
@@ -393,10 +383,9 @@ class BuildMessageBubbles extends StatelessWidget {
                   ? bottomViewInset + 10.0
                   : bottomViewInset,
             ),
-            groupBy: (message) => DateFormat('yyyy-MM-dd')
-                .format(DateTime.parse(message.createdAt))
-                .toString(),
-            indexedItemBuilder: (context, Message message, i) {
+            groupBy: (message) =>
+                DateFormat('yyyy-MM-dd').format(message.createdAt).toString(),
+            indexedItemBuilder: (context, ChannelMessage message, i) {
               // return buildMessageBubble(_messages[i]);
               final message = messages[i];
 
@@ -411,7 +400,7 @@ class BuildMessageBubbles extends StatelessWidget {
             },
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             controller: listScrollController,
-            groupHeaderBuilder: (Message message) => Padding(
+            groupHeaderBuilder: (ChannelMessage message) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
                 height: 30.0,
@@ -421,11 +410,9 @@ class BuildMessageBubbles extends StatelessWidget {
                     backgroundColor: Colors.grey.shade200,
                     label: Text(
                       // 🚨 TODO: Currently looks broken because the sentAt is not localized
-                      DateTime.now().day ==
-                              DateTime.parse(message.createdAt).day
+                      DateTime.now().day == message.createdAt.day
                           ? 'Today'
-                          : DateFormat('MMM d, yyyy')
-                              .format(DateTime.parse(message.createdAt)),
+                          : DateFormat('MMM d, yyyy').format(message.createdAt),
                       style:
                           TextStyle(color: Colors.grey.shade600, fontSize: 11),
                     ),
@@ -477,15 +464,15 @@ class BuildMessageBubble extends StatelessWidget {
     this.onSwipeLeft,
     this.onSwipeRight,
   }) : super(key: key);
-  final Message message;
-  final List participants;
-  final List<Message> chatMessages;
+  final ChannelMessage message;
+  final List<ChannelParticipant> participants;
+  final List<ChannelMessage> chatMessages;
   final VoidCallback? onSwipeLeft;
   final VoidCallback? onSwipeRight;
 
   @override
   Widget build(BuildContext context) {
-    Message? replyingTo;
+    ChannelMessage? replyingTo;
     if (message.replyToMessageId != null) {
       try {
         replyingTo = chatMessages
@@ -535,8 +522,8 @@ class BuildMessageInput extends StatelessWidget {
 
   final String channelId;
   final double bottomViewInset;
-  final Message? replyingTo;
-  final List participants;
+  final ChannelMessage? replyingTo;
+  final List<ChannelParticipant> participants;
   final Function onClearReply;
   final Function onSetBottomInset;
 
@@ -575,9 +562,12 @@ class BuildMessageInput extends StatelessWidget {
             onSubmit: (val, replyToMessageId) {
               Provider.of<MessagesProvider>(context, listen: false)
                   .createMessage(
-                      channelId: channelId,
-                      messageText: val,
-                      replyToMessageId: replyToMessageId);
+                input: Input$ChannelMessageInput(
+                  channelId: channelId,
+                  messageText: val,
+                  replyToMessageId: replyToMessageId,
+                ),
+              );
 
               onClearReply();
             },

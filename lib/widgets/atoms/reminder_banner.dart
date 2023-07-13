@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/models/user/user_provider.dart';
+import '../../providers/user_provider.dart';
 
 class ReminderBanner extends StatelessWidget {
   final String titleText;
@@ -91,7 +91,7 @@ class MaybeReminderBanner extends StatelessWidget {
       return const SizedBox(width: 0.0, height: 0.0);
     }, onData: (data, {refetch, fetchMore}) {
       int profileCompletionPercentage =
-          data.response!.profileCompletionPercentage;
+          data.response!.profileCompletionPercentage ?? 0;
       DateTime updatedAt = data.response!.updatedAt!;
       if (profileCompletionPercentage < 50) {
         return ReminderBanner(

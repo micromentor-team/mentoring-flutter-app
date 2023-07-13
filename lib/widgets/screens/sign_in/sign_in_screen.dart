@@ -2,6 +2,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/data/models/user/user_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../__generated/schema/schema.graphql.dart';
@@ -157,39 +159,32 @@ class _SignInScreenState extends State<SignInScreen> {
                                   final router = GoRouter.of(context);
                                   final scaffoldManager =
                                       ScaffoldMessenger.of(context);
-
-                                  if (_formKey.currentState!.validate()) {
-                                    final signInResult = await userProvider
-                                        .signInUser(Input$UserSignInInput(
+                                if (_formKey.currentState!.validate()) {
+                                  final signInResult =
+                                      await userProvider.signInUser(
+                                    input: Input$UserSignInInput(
                                       deviceUuid: AppUtility.getUuid(),
                                       ident: emailController.text,
                                       identType: Enum$UserIdentType.email,
                                       password: passwordController.text,
-                                    ));
-                                    final signInError = signInResult
-                                        .gqlQueryResult
-                                        .exception
-                                        ?.graphqlErrors
-                                        .first
-                                        .message;
-                                    if (signInError != null) {
-                                      if (signInError == 'notFound') {
-                                        scaffoldManager.showSnackBar(
-                                          SnackBar(
-                                            content:
-                                                Text(l10n.accountNotFoundError),
-                                          ),
-                                        );
-                                        if (context.mounted) {
-                                          emailController.text = '';
-                                          passwordController.text = '';
-                                        }
-                                      } else if (signInError ==
-                                          'passwordNoMatch') {
-                                        scaffoldManager.showSnackBar(SnackBar(
-                                          content:
-                                              Text(l10n.incorrectPasswordError),
-                                        ));
+                                    ),
+                                  );
+                                  final signInError = signInResult
+                                      .gqlQueryResult
+                                      .exception
+                                      ?.graphqlErrors
+                                      .first
+                                      .message;
+                                  if (signInError != null) {
+                                    if (signInError == 'notFound') {
+                                      scaffoldManager.showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'Account not found. Please check your credentials and try again or create a new account'),
+                                        ),
+                                      );
+                                      if (context.mounted) {
+                                        emailController.text = '';
                                         passwordController.text = '';
                                       }
                                     } else {
