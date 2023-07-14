@@ -78,7 +78,14 @@ class _InvitationSectionState extends State<InvitationSection> {
         List<Widget> invitationWidgets = [];
         for (int i = 0; i < invitations.length; i++) {
           if (i > 0) {
-            invitationWidgets.add(Components.indentedSubDivider);
+            invitationWidgets.add(
+              const Divider(
+                thickness: 1,
+                height: 0,
+                indent: Insets.widgetMediumInset,
+                endIndent: Insets.widgetMediumInset,
+              ),
+            );
           }
           invitationWidgets.add(
             _createInvitationTile(

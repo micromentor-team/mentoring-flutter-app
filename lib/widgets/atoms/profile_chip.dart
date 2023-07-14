@@ -28,7 +28,7 @@ class ProfileChip extends StatelessWidget {
         vertical: VisualDensity.minimumDensity,
       ),
       labelPadding: icon != null
-          ? const EdgeInsets.only(right: Insets.widgetSmallInset)
+          ? const EdgeInsetsDirectional.only(end: Insets.widgetSmallInset)
           : null,
       padding: EdgeInsets.zero,
     );
