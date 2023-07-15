@@ -35,8 +35,11 @@ class _AppWrapperState extends State<AppWrapper> {
         drawer: Drawer(
           child: ListView(
             children: [
-              DrawerHeader(
-                child: Text(l10n.inboxTitle),
+              SizedBox(
+                height: Dimensions.drawerHeaderHeight,
+                child: DrawerHeader(
+                  child: Text(l10n.inboxTitle),
+                ),
               ),
               ListTile(
                 leading: const Icon(Icons.chat_bubble_outline),

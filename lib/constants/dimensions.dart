@@ -33,6 +33,7 @@ class Elevations {
 
 class Dimensions {
   Dimensions._private();
+  static const double drawerHeaderHeight = 64.0;
   static const double minimumInteractionWidgetLength = 48.0;
   static const Size imageTile = Size(88.0, 160.0);
   static const Size imageTileRectangularImage = Size(88.0, 72.0);
