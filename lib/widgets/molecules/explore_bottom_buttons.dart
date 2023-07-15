@@ -4,10 +4,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExploreBottomButtons extends StatelessWidget {
   final int selectedCount;
+  final void Function() clearAction;
+  final void Function() sendInvitesAction;
 
   const ExploreBottomButtons({
     Key? key,
     required this.selectedCount,
+    required this.clearAction,
+    required this.sendInvitesAction,
   }) : super(key: key);
 
   @override
@@ -30,19 +34,16 @@ class ExploreBottomButtons extends StatelessWidget {
           if (selectedCount > 0)
             TextButton(
               style: ButtonStyles.bigTextButton(context),
-              onPressed: () {},
+              onPressed: clearAction,
               child: Text(
                 l10n.exploreClearButton,
                 style: TextStyles.bigButtonText(context),
               ),
             ),
+          // Send invites button
           ElevatedButton(
               style: ButtonStyles.bigElevatedButton(context),
-              onPressed: selectedCount == 0
-                  ? null
-                  : () {
-                      debugPrint(".....");
-                    },
+              onPressed: selectedCount == 0 ? null : sendInvitesAction,
               child: Row(
                 children: [
                   selectedCount == 0

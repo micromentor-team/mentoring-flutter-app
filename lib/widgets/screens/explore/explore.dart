@@ -214,6 +214,16 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
             ],
       )),
       ExploreBottomButtons(
+        clearAction: () {
+          setState(() {
+            for (int i = 0; i < isSelected.length; i++) {
+              isSelected[i] = false;
+            }
+          });
+        },
+        sendInvitesAction: () {
+          debugPrint("Not implemented");
+        },
         selectedCount: isSelected
             .map((e) => e ? 1 : 0)
             .reduce((value, element) => value + element),
