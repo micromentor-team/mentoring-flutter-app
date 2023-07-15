@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
+import 'package:mm_flutter_app/widgets/molecules/explore_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 
 class _ProfileQuickViewInfo {
@@ -212,6 +213,21 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                   ]))
             ],
       )),
+      ExploreBottomButtons(
+        clearAction: () {
+          setState(() {
+            for (int i = 0; i < isSelected.length; i++) {
+              isSelected[i] = false;
+            }
+          });
+        },
+        sendInvitesAction: () {
+          debugPrint("Not implemented");
+        },
+        selectedCount: isSelected
+            .map((e) => e ? 1 : 0)
+            .reduce((value, element) => value + element),
+      ),
     ]));
   }
 }
