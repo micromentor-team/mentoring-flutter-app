@@ -79,6 +79,21 @@ class TextStyles {
     );
   }
 
+  static TextStyle? dateLowEmphasis(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.labelMedium?.copyWith(
+      color: theme.colorScheme.onSurfaceVariant,
+      fontWeight: FontWeight.w400,
+    );
+  }
+
+  static TextStyle? textPreview(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.bodyMedium?.copyWith(
+      color: theme.colorScheme.onSurfaceVariant,
+    );
+  }
+
   static TextStyle? quickViewProfileCardMediumEmphasis(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return theme.textTheme.labelLarge?.copyWith(

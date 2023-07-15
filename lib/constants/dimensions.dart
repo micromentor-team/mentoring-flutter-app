@@ -16,6 +16,7 @@ class Radii {
   Radii._private();
   static const double buttonRadius = 8.0;
   static const double roundedRectRadius = 12.0;
+  static const double avatarRadiusSmallest = 14.0;
   static const double avatarRadiusSmall = 24.0;
   static const double avatarRadiusMedium = 40.0;
   static const double avatarRadiusLarge = 48.0;
@@ -56,4 +57,5 @@ class Dimensions {
   static const double highlightBorderWidth = 1.0;
   static const double exploreBottomSection = 64.0;
   static const Size bigButtonSize = Size(80.0, 48.0);
+  static const double menuNotificationBubbleHeight = 32.0;
 }
