@@ -154,7 +154,7 @@ class TextStyles {
   static TextStyle? bigButtonDisabledText(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return theme.textTheme.titleMedium?.copyWith(
-      color: theme.colorScheme.surfaceVariant,
+      color: theme.colorScheme.onSurfaceVariant,
     );
   }
 }
