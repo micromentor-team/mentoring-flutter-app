@@ -143,6 +143,20 @@ class TextStyles {
         .labelLarge!
         .copyWith(fontWeight: FontWeight.w600);
   }
+
+  static TextStyle? bigButtonText(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleMedium?.copyWith(
+      color: theme.colorScheme.primary,
+    );
+  }
+
+  static TextStyle? bigButtonDisabledText(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return theme.textTheme.titleMedium?.copyWith(
+      color: theme.colorScheme.surfaceVariant,
+    );
+  }
 }
 
 class ButtonStyles {
@@ -162,6 +176,14 @@ class ButtonStyles {
         shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(Radii.buttonRadius),
     ));
+  }
+
+  static ButtonStyle bigElevatedButton(BuildContext context) {
+    return ElevatedButton.styleFrom(minimumSize: Dimensions.bigButtonSize);
+  }
+
+  static ButtonStyle bigTextButton(BuildContext context) {
+    return TextButton.styleFrom(minimumSize: Dimensions.bigButtonSize);
   }
 
   static ButtonStyle loginButton(BuildContext context) {

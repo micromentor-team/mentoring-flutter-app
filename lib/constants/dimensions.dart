@@ -56,4 +56,5 @@ class Dimensions {
   static const double quickViewProfileAvatarLength = 80.0;
   static const double highlightBorderWidth = 1.5;
   static const double exploreBottomSection = 64.0;
+  static const Size bigButtonSize = Size(80.0, 48.0);
 }

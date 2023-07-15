@@ -214,7 +214,9 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
             ],
       )),
       ExploreBottomButtons(
-        selectedCount: 0,
+        selectedCount: isSelected
+            .map((e) => e ? 1 : 0)
+            .reduce((value, element) => value + element),
       ),
     ]));
   }
