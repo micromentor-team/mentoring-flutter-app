@@ -33,9 +33,7 @@ class Elevations {
 
 class Dimensions {
   Dimensions._private();
-  static const double appBarHeight = 32.0;
   static const double minimumInteractionWidgetLength = 48.0;
-  static const double recommendedMentorTileWidth = 112.0;
   static const Size imageTile = Size(88.0, 160.0);
   static const Size imageTileRectangularImage = Size(88.0, 72.0);
   static const double reminderBannerImageHeight = 80.0;
@@ -54,5 +52,5 @@ class Dimensions {
   static const double iconWidth = 24;
   static const double iconSpaceWidth = 8;
   static const double quickViewProfileAvatarLength = 80.0;
-  static const double highlightBorderWidth = 1.5;
+  static const double highlightBorderWidth = 1.0;
 }
