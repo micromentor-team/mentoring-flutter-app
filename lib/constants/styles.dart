@@ -161,17 +161,7 @@ class TextStyles {
 
 class ButtonStyles {
   ButtonStyles._private();
-  static ButtonStyle filledButton(BuildContext context) {
-    return TextButton.styleFrom(
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      padding: const EdgeInsets.all(Insets.widgetSmallInset),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(Radii.buttonRadius)),
-      ),
-    );
-  }
-
-  static ButtonStyle homePageButton(BuildContext context) {
+  static ButtonStyle roundedRectangleButton(BuildContext context) {
     return ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(Radii.buttonRadius),

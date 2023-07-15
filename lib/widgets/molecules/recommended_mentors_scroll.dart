@@ -18,7 +18,7 @@ class RecommendedMentorsScroll extends StatelessWidget {
             mentorSkill: ['Marketing for a startup', 'Operations']),
         const MentorCard(
             avatarUrl:
-                'https://www.blackenterprise.com/wp-content/blogs.dir/1/files/2019/06/iStock-525366712-e1571237677235.jpg',
+                'https://media.istockphoto.com/id/1160811064/photo/portrait-of-a-handsome-latin-man.jpg?s=612x612&w=0&k=20&c=MxkLwUFZ9ChfzFdB-OmmiWBnZrSioj9MmfSdlwCk4-4=',
             mentorName: 'Antoine Mousa',
             mentorBio: 'Founder, VisionForward',
             mentorSkill: ['Marketing', 'Starting Up']),
@@ -68,19 +68,23 @@ class RecommendedSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    return Column(children: [
-      const RecommendedMentorsScroll(),
-      Padding(
+    return Column(
+      children: [
+        const RecommendedMentorsScroll(),
+        Padding(
           padding: const EdgeInsets.all(Insets.widgetMediumInset),
           child: Container(
-              width: 200,
-              alignment: Alignment.center,
-              child: ElevatedButton.icon(
-                icon: const Icon(Icons.search),
-                onPressed: () => {debugPrint("hi")},
-                label: Text(l10n.homeFindMoreMentors),
-                style: ButtonStyles.homePageButton(context),
-              )))
-    ]);
+            width: 200,
+            alignment: Alignment.center,
+            child: ElevatedButton.icon(
+              icon: const Icon(Icons.search),
+              onPressed: () => {debugPrint("hi")},
+              label: Text(l10n.homeFindMoreMentors),
+              style: ButtonStyles.roundedRectangleButton(context),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

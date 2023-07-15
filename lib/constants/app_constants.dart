@@ -2,7 +2,6 @@ library app_constants;
 
 import 'package:flutter/material.dart';
 
-part 'components.dart';
 part 'dimensions.dart';
 part 'enums.dart';
 part 'identifiers.dart';

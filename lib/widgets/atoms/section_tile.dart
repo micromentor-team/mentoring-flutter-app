@@ -32,7 +32,13 @@ class _SectionTileState extends State<SectionTile> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.addTopDivider) Components.indentedDivider,
+        if (widget.addTopDivider)
+          const Divider(
+            thickness: 1,
+            height: 0,
+            indent: Insets.widgetSmallInset,
+            endIndent: Insets.widgetSmallInset,
+          ),
         Padding(
           padding: const EdgeInsets.symmetric(
             vertical: Insets.widgetMediumInset,

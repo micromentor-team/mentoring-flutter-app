@@ -56,32 +56,31 @@ class _AppWrapperState extends State<AppWrapper> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+      bottomNavigationBar: NavigationBar(
+        destinations: <Widget>[
+          NavigationDestination(
             icon: const Icon(Icons.home_outlined),
             label: AppLocalizations.of(context)!.navHomeText,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: const Icon(Icons.search_outlined),
             label: AppLocalizations.of(context)!.navExploreText,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: const Icon(Icons.incomplete_circle),
             label: AppLocalizations.of(context)!.navProgressText,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: const Icon(Icons.mail_outline),
             label: AppLocalizations.of(context)!.navInboxText,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: const Icon(Icons.person_outlined),
             label: AppLocalizations.of(context)!.navProfileText,
           ),
         ],
-        currentIndex: _calculateSelectedIndex(context),
-        type: BottomNavigationBarType.fixed,
-        onTap: _onItemTapped,
+        selectedIndex: _calculateSelectedIndex(context),
+        onDestinationSelected: _onItemTapped,
       ),
     );
   }
