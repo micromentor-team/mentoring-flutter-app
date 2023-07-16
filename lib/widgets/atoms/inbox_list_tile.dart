@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/notification_bubble.dart';
 
 class InboxListTile extends StatelessWidget {
@@ -64,7 +64,7 @@ class InboxListTile extends StatelessWidget {
                 width: Insets.widgetSmallInset,
               ),
               Text(
-                DateFormat('MMMM d').add_jm().format(date),
+                AppUtility.timestampDateFormat(context, date),
                 maxLines: 1,
                 style: TextStyles.dateLowEmphasis(context),
                 overflow: TextOverflow.ellipsis,
