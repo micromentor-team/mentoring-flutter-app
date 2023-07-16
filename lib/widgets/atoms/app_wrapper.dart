@@ -48,7 +48,6 @@ class _AppWrapperState extends State<AppWrapper> {
                     ),
                     child: NotificationBubble(
                       notifications: totalNotifications,
-                      containerLength: Dimensions.menuNotificationBubbleHeight,
                     ),
                   ),
               ],

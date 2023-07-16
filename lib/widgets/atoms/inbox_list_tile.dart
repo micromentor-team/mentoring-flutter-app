@@ -46,8 +46,6 @@ class InboxListTile extends StatelessWidget {
                   if (notifications > 0)
                     NotificationBubble(
                       notifications: notifications,
-                      containerLength: Radii.avatarRadiusSmallest * 2 +
-                          Insets.widgetSmallInset,
                     ),
                 ],
               ),
