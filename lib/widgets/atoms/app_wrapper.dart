@@ -19,7 +19,9 @@ class _AppWrapperState extends State<AppWrapper> {
   String _currentRoute = Routes.home;
 
   List<_NavBarTab> _generateNavBarTabs(
-      BuildContext context, AppLocalizations l10n) {
+    BuildContext context,
+    AppLocalizations l10n,
+  ) {
     // TODO(m-rosario): Calculate notifications from backend call
     const int chatsNotifications = 1;
     const int invitesNotifications = 0;
@@ -33,28 +35,33 @@ class _AppWrapperState extends State<AppWrapper> {
       _NavBarTab(
         route: Routes.inboxChats,
         appBar: AppBar(
-          leading: Builder(builder: (context) {
-            return Stack(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.menu),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                ),
-                if (totalNotifications > 0)
-                  const Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      top: Insets.widgetSmallInset,
-                      start: Insets.widgetSmallInset,
-                    ),
-                    child: NotificationBubble(
-                      notifications: totalNotifications,
-                    ),
+          leading: Builder(
+            builder: (context) {
+              return Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
                   ),
-              ],
-            );
-          }),
+                  if (totalNotifications > 0)
+                    const Padding(
+                      padding: EdgeInsetsDirectional.only(
+                        top: Insets.widgetSmallInset,
+                        start: Insets.widgetSmallInset,
+                      ),
+                      child: NotificationBubble(
+                        notifications: totalNotifications,
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
           title: Text(
-            _getAppBarTitle(l10n) ?? l10n.inboxTitleChats,
+            _getAppBarTitle(
+                  l10n,
+                ) ??
+                l10n.inboxTitleChats,
             style: TextStyles.appBarTitle(context),
           ),
           centerTitle: true,
@@ -205,8 +212,12 @@ class _AppWrapperState extends State<AppWrapper> {
     return 0;
   }
 
-  Scaffold _createMainScaffold(BuildContext context, AppLocalizations l10n,
-      List<_NavBarTab> navBarTabs, int currentNavBarTabIndex) {
+  Scaffold _createMainScaffold(
+    BuildContext context,
+    AppLocalizations l10n,
+    List<_NavBarTab> navBarTabs,
+    int currentNavBarTabIndex,
+  ) {
     return Scaffold(
       body: widget.child,
       appBar: navBarTabs[currentNavBarTabIndex].appBar,
@@ -250,8 +261,12 @@ class _AppWrapperState extends State<AppWrapper> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final List<_NavBarTab> navBarTabs = _generateNavBarTabs(context, l10n);
     final int navBarTabIndex = _calculateSelectedIndex(context);
-    final TabBar? navBarTabBar =
-        navBarTabs[navBarTabIndex].appBar?.bottom as TabBar?;
+    TabBar? navBarTabBar;
+    try {
+      navBarTabBar = navBarTabs[navBarTabIndex].appBar?.bottom as TabBar?;
+    } catch (_) {
+      navBarTabBar = null;
+    }
     final Scaffold mainScaffold = _createMainScaffold(
       context,
       l10n,
