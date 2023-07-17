@@ -30,6 +30,8 @@
     "homeUpcomingSessionJoin": "JOIN",
     "homeUpcomingSessionReschedule": "RESCHEDULE",
     "homeFindMoreMentors": "Find More Mentors",
+    "inboxInvitesReceived": "Received",
+    "inboxInvitesSent": "Sent",
     "inboxTitle": "Inbox",
     "inboxTitleArchivedChats": "Archived chats",
     "inboxTitleChats": "Chats",

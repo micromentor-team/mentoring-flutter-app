@@ -3,7 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_archived_chats.dart';
-import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites.dart';
+import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
+import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 
 import '../main.dart';
 import '../widgets/atoms/app_wrapper.dart';
@@ -80,8 +81,18 @@ class AppRouter {
             ),
             GoRoute(
               path: Routes.inboxInvites,
+              redirect: (_, __) => Routes.inboxInvitesReceived,
+            ),
+            GoRoute(
+              path: Routes.inboxInvitesReceived,
               builder: (BuildContext context, GoRouterState state) {
-                return const InboxInvitesScreen();
+                return const InboxInvitesReceivedScreen();
+              },
+            ),
+            GoRoute(
+              path: Routes.inboxInvitesSent,
+              builder: (BuildContext context, GoRouterState state) {
+                return const InboxInvitesSentScreen();
               },
             ),
             GoRoute(

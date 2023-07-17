@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
-class InboxInvitesScreen extends StatelessWidget {
-  const InboxInvitesScreen({super.key});
+class InboxInvitesSentScreen extends StatelessWidget {
+  const InboxInvitesSentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class InboxInvitesScreen extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: Insets.appEdgeInsetCompact),
         child: Placeholder(
-          color: Colors.red,
+          color: Colors.blue,
         ),
       ),
     );

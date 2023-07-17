@@ -16,10 +16,10 @@ class AppWrapper extends StatefulWidget {
 }
 
 class _AppWrapperState extends State<AppWrapper> {
-  int _currentTabIndex = 0;
-  String? _appBarTitle;
+  String _currentRoute = Routes.home;
 
-  List<_Tab> _generateTabs(BuildContext context, AppLocalizations l10n) {
+  List<_NavBarTab> _generateNavBarTabs(
+      BuildContext context, AppLocalizations l10n) {
     // TODO(m-rosario): Calculate notifications from backend call
     const int chatsNotifications = 1;
     const int invitesNotifications = 0;
@@ -27,10 +27,10 @@ class _AppWrapperState extends State<AppWrapper> {
     const int totalNotifications =
         chatsNotifications + invitesNotifications + archivedChatsNotifications;
     return [
-      const _Tab(route: Routes.home),
-      const _Tab(route: Routes.explore),
-      const _Tab(route: Routes.progress),
-      _Tab(
+      const _NavBarTab(route: Routes.home),
+      const _NavBarTab(route: Routes.explore),
+      const _NavBarTab(route: Routes.progress),
+      _NavBarTab(
         route: Routes.inboxChats,
         appBar: AppBar(
           leading: Builder(builder: (context) {
@@ -54,10 +54,48 @@ class _AppWrapperState extends State<AppWrapper> {
             );
           }),
           title: Text(
-            _appBarTitle ?? l10n.inboxTitleChats,
+            _getAppBarTitle(l10n) ?? l10n.inboxTitleChats,
             style: TextStyles.appBarTitle(context),
           ),
           centerTitle: true,
+          bottom: _currentRoute.startsWith(Routes.inboxInvites)
+              ? TabBar(
+                  tabs: [
+                    Tab(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.mail_outline),
+                          const SizedBox(width: Insets.widgetSmallInset),
+                          Text(l10n.inboxInvitesReceived),
+                        ],
+                      ),
+                    ),
+                    Tab(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.send_outlined),
+                          const SizedBox(width: Insets.widgetSmallInset),
+                          Text(l10n.inboxInvitesSent),
+                        ],
+                      ),
+                    ),
+                  ],
+                  onTap: (index) {
+                    String newRoute;
+                    if (index == 1) {
+                      newRoute = Routes.inboxInvitesSent;
+                    } else {
+                      newRoute = Routes.inboxInvitesReceived;
+                    }
+                    GoRouter.of(context).push(newRoute);
+                    setState(() {
+                      _currentRoute = newRoute;
+                    });
+                  },
+                )
+              : null,
         ),
         drawer: Drawer(
           child: ListView(
@@ -83,7 +121,7 @@ class _AppWrapperState extends State<AppWrapper> {
                   Navigator.of(context).pop();
                   GoRouter.of(context).push(Routes.inboxChats);
                   setState(() {
-                    _appBarTitle = l10n.inboxTitleChats;
+                    _currentRoute = Routes.inboxChats;
                   });
                 },
               ),
@@ -102,7 +140,7 @@ class _AppWrapperState extends State<AppWrapper> {
                   Navigator.of(context).pop();
                   GoRouter.of(context).push(Routes.inboxInvites);
                   setState(() {
-                    _appBarTitle = l10n.inboxTitleInvites;
+                    _currentRoute = Routes.inboxInvites;
                   });
                 },
               ),
@@ -122,7 +160,7 @@ class _AppWrapperState extends State<AppWrapper> {
                   Navigator.of(context).pop();
                   GoRouter.of(context).push(Routes.inboxArchived);
                   setState(() {
-                    _appBarTitle = l10n.inboxTitleArchivedChats;
+                    _currentRoute = Routes.inboxArchived;
                   });
                 },
               ),
@@ -130,13 +168,28 @@ class _AppWrapperState extends State<AppWrapper> {
           ),
         ),
       ),
-      const _Tab(route: Routes.profile),
+      const _NavBarTab(route: Routes.profile),
     ];
+  }
+
+  String? _getAppBarTitle(AppLocalizations l10n) {
+    if (_currentRoute.startsWith(Routes.inboxChats)) {
+      return l10n.inboxTitleChats;
+    } else if (_currentRoute.startsWith(Routes.inboxArchived)) {
+      return l10n.inboxTitleArchivedChats;
+    } else if (_currentRoute.startsWith(Routes.inboxInvites)) {
+      return l10n.inboxTitleInvites;
+    } else {
+      return null;
+    }
   }
 
   int _calculateSelectedIndex(BuildContext context) {
     final GoRouter route = GoRouter.of(context);
     final String location = route.location;
+    if (location.startsWith(Routes.home)) {
+      return 0;
+    }
     if (location.startsWith(Routes.explore)) {
       return 1;
     }
@@ -149,20 +202,15 @@ class _AppWrapperState extends State<AppWrapper> {
     if (location.startsWith(Routes.profile)) {
       return 4;
     }
-    if (location.startsWith(Routes.home)) {
-      return 0;
-    }
     return 0;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final List<_Tab> tabs = _generateTabs(context, l10n);
+  Scaffold _createMainScaffold(BuildContext context, AppLocalizations l10n,
+      List<_NavBarTab> navBarTabs, int currentNavBarTabIndex) {
     return Scaffold(
       body: widget.child,
-      appBar: tabs[_currentTabIndex].appBar,
-      drawer: tabs[_currentTabIndex].drawer,
+      appBar: navBarTabs[currentNavBarTabIndex].appBar,
+      drawer: navBarTabs[currentNavBarTabIndex].drawer,
       bottomNavigationBar: NavigationBar(
         destinations: <Widget>[
           NavigationDestination(
@@ -188,22 +236,43 @@ class _AppWrapperState extends State<AppWrapper> {
         ],
         selectedIndex: _calculateSelectedIndex(context),
         onDestinationSelected: (index) {
-          context.push(tabs[index].route);
+          context.push(navBarTabs[index].route);
           setState(() {
-            _currentTabIndex = index;
+            _currentRoute = navBarTabs[index].route;
           });
         },
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final List<_NavBarTab> navBarTabs = _generateNavBarTabs(context, l10n);
+    final int navBarTabIndex = _calculateSelectedIndex(context);
+    final TabBar? navBarTabBar =
+        navBarTabs[navBarTabIndex].appBar?.bottom as TabBar?;
+    final Scaffold mainScaffold = _createMainScaffold(
+      context,
+      l10n,
+      navBarTabs,
+      navBarTabIndex,
+    );
+    return (navBarTabBar?.tabs.length ?? 0) == 0
+        ? mainScaffold
+        : DefaultTabController(
+            length: navBarTabBar!.tabs.length,
+            child: mainScaffold,
+          );
+  }
 }
 
-class _Tab {
+class _NavBarTab {
   final String route;
   final Drawer? drawer;
   final AppBar? appBar;
 
-  const _Tab({
+  const _NavBarTab({
     required this.route,
     this.drawer,
     this.appBar,
