@@ -59,4 +59,7 @@ class Dimensions {
   static const double exploreBottomSection = 64.0;
   static const Size bigButtonSize = Size(80.0, 48.0);
   static const double notificationBubbleHeight = 16.0;
+  static const double notificationBubbleSingleCharWidth = 16.0;
+  static const double notificationBubbleDoubleCharWidth = 20.0;
+  static const double notificationBubbleTripleCharWidth = 24.0;
 }

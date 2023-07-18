@@ -16,13 +16,13 @@ class NotificationBubble extends StatelessWidget {
     double bubbleWidth;
     String notificationText;
     if (notifications > Limits.maxNotificationsDisplayed) {
-      bubbleWidth = Dimensions.notificationBubbleHeight * 1.50;
+      bubbleWidth = Dimensions.notificationBubbleTripleCharWidth;
       notificationText = Identifiers.notificationOverflow;
     } else if (notifications > 9) {
-      bubbleWidth = Dimensions.notificationBubbleHeight * 1.25;
+      bubbleWidth = Dimensions.notificationBubbleDoubleCharWidth;
       notificationText = notifications.toString();
     } else {
-      bubbleWidth = Dimensions.notificationBubbleHeight;
+      bubbleWidth = Dimensions.notificationBubbleSingleCharWidth;
       notificationText = notifications.toString();
     }
     return Align(
