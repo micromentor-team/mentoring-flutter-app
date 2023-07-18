@@ -37,7 +37,10 @@ List<Story> moleculeStories(UserMockProvider mockUserProvider) {
       description: 'main navigation buttons',
       builder: ((context) => Center(
             child: ExploreBottomButtons(
-              selectedCount: 1,
+              selectedCount: context.knobs.sliderInt(
+                label: 'count',
+                initial: 0,
+              ),
               clearAction: () {},
               sendInvitesAction: () {},
             ),
@@ -72,20 +75,21 @@ List<Story> moleculeStories(UserMockProvider mockUserProvider) {
           )),
     ),
     Story(
-      name: 'widgets/molecules/profile quick view card',
-      description: '',
-      builder: (context) => Center(
-        child: ProfileQuickViewCard(
-            userType: UserType.entrepreneur,
-            fullName: mockUserProvider.user!.fullName!,
-            location: 'Lylat System',
-            company: 'Arwing',
-            checkbox: Checkbox(
-              value: false,
-              onChanged: (value) {},
-            )),
-      ),
-    ),
+        name: 'widgets/molecules/profile quick view card',
+        description: 'profile cards for connection selection',
+        builder: (context) {
+          return Center(
+            child: ProfileQuickViewCard(
+              userType: UserType.entrepreneur,
+              fullName: mockUserProvider.user!.fullName!,
+              location: 'Lylat System',
+              company: 'Arwing',
+              checkbox: Checkbox(
+                  value: context.knobs.boolean(label: 'selected', initial: false),
+                  onChanged: (value) {}),
+            ),
+          );
+        }),
     Story(
       name: 'widgets/molecules/rating',
       description: '5 star rating scale',

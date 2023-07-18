@@ -87,15 +87,11 @@ List<Story> atomStories(UserMockProvider mockUserProvider) {
       name: 'widgets/atoms/mentor card',
       description: 'a Mentor profile card',
       builder: (context) => Center(
-        child: Column(
-          children: [
-            MentorCard(
-              mentorName: mockUserProvider.user!.fullName!,
-              avatarUrl: mockUserProvider.user!.avatarUrl!,
-              mentorBio: 'The ace pilot of the Star Fox team',
-              mentorSkill: const ['marketing', 'barrel rolls'],
-            ),
-          ],
+        child: MentorCard(
+          mentorName: mockUserProvider.user!.fullName!,
+          avatarUrl: mockUserProvider.user!.avatarUrl!,
+          mentorBio: 'The ace pilot of the Star Fox team',
+          mentorSkill: const ['marketing', 'barrel rolls'],
         ),
       ),
     ),
