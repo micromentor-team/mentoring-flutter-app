@@ -116,15 +116,6 @@ In Android Studio, select a target platform (Chrome web browser, Android
 Simulator, etc.) and then click on the `Run main.dart` button to build and the
 run the app on that platform. Shortcut : `Control + R` (macOS).
 
-### Run Widgetbook
-
-In Android Studio, select `Edit Configurations` in the Run menu. Copy
-configurations of main.dart and edit name as `widgetbook`. Edit
-`Dart entrypoint` to the path of your Widgetbook's main.dart. For e.g.
-`mm_flutter_app/widgetbook/main.dart` at the place of
-`mm_flutter_app/lib/main.dart`.
-
-Or to run from terminal, execute `flutter run -t widgetbook/main.dart`.
 
 ### Run Tests
 
