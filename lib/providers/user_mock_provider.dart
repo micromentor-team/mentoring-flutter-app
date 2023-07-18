@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/providers/base/base_provider.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
+import '../../../__generated/schema/schema.graphql.dart';
 
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 

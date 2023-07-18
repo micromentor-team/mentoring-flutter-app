@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/mock_channels_provider.dart';
+import 'package:mm_flutter_app/data/models/channels/mock_channels_provider.dart';
 import 'package:mm_flutter_app/providers/user_mock_provider.dart';
 import 'package:mm_flutter_app/storybook/stories/atom_stories.dart';
 import 'package:mm_flutter_app/storybook/stories/molecule_stories.dart';
@@ -46,7 +46,7 @@ class StorybookApp extends StatelessWidget {
       cache: GraphQLCache(store: InMemoryStore()),
     ),
   );
-  final ChannelsMockProvider mockChannelProvider = ChannelsMockProvider(
+  final MockChannelsProvider mockChannelProvider = MockChannelsProvider(
     client: GraphQLClient(
       link: link,
       cache: GraphQLCache(store: InMemoryStore()),
@@ -79,7 +79,7 @@ class StorybookApp extends StatelessWidget {
         ChangeNotifierProvider<UserMockProvider>.value(
           value: mockUserProvider,
         ),
-        ChangeNotifierProvider<ChannelsMockProvider>.value(
+        ChangeNotifierProvider<MockChannelsProvider>.value(
           value: mockChannelProvider,
         ),
       ],
