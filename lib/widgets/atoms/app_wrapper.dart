@@ -23,11 +23,9 @@ class _AppWrapperState extends State<AppWrapper> {
     AppLocalizations l10n,
   ) {
     // TODO(m-rosario): Calculate notifications from backend call
-    const int chatsNotifications = 1;
-    const int invitesNotifications = 0;
-    const int archivedChatsNotifications = 1;
-    const int totalNotifications =
-        chatsNotifications + invitesNotifications + archivedChatsNotifications;
+    const int chatsNotifications = 8;
+    const int invitesNotifications = 13;
+    const int totalNotifications = chatsNotifications + invitesNotifications;
     return [
       const _NavBarTab(route: Routes.home),
       const _NavBarTab(route: Routes.explore),
@@ -154,14 +152,6 @@ class _AppWrapperState extends State<AppWrapper> {
               ListTile(
                 leading: const Icon(Icons.folder_outlined),
                 title: Text(l10n.inboxTitleArchivedChats),
-                trailing: archivedChatsNotifications > 0
-                    ? Text(
-                        archivedChatsNotifications >
-                                Limits.maxNotificationsDisplayed
-                            ? Identifiers.notificationOverflow
-                            : archivedChatsNotifications.toString(),
-                      )
-                    : null,
                 onTap: () {
                   // Close Drawer
                   Navigator.of(context).pop();
