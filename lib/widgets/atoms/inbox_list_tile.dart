@@ -62,11 +62,19 @@ class InboxListTile extends StatelessWidget {
                     padding: const EdgeInsetsDirectional.only(
                         top: Insets.widgetSmallInset,
                         start: Insets.widgetSmallInset),
-                    child: CircleAvatar(
-                      radius: Radii.avatarRadiusSmallest,
-                      backgroundImage: const AssetImage(Assets.blankAvatar),
-                      foregroundImage:
-                          avatarUrl != null ? NetworkImage(avatarUrl!) : null,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        Radii.roundedRectRadius,
+                      ),
+                      child: Image(
+                        image: avatarUrl != null
+                            ? NetworkImage(avatarUrl!) as ImageProvider<Object>
+                            : const AssetImage(Assets.blankAvatar),
+                        width: Dimensions.avatarRoundedRectLength,
+                        height: Dimensions
+                            .avatarRoundedRectLength, // Height of the avatar
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   if (notifications > 0)
