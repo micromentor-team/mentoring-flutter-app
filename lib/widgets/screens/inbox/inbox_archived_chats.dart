@@ -32,7 +32,7 @@ class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen> {
           tiles.removeAt(tileIndexToRemove);
         });
       },
-      icon: const Icon(Icons.unarchive_outlined),
+      icon: Icons.unarchive_outlined,
       child: InboxListTile(
         avatarUrl:
             'https://media.istockphoto.com/id/1280371040/photo/confident-stylish-european-mature-middle-aged-woman-standing-at-workplace-stylish-older.jpg?s=612x612&w=0&k=20&c=AntzoG_Z1hN6tYVBXbu58Rvz4jweBYa8669bV75yWRw=',
@@ -62,8 +62,8 @@ class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen> {
       contentList.addAll([
         const Divider(
           height: 0,
-          indent: Insets.widgetSmallInset,
-          endIndent: Insets.widgetSmallInset,
+          indent: Insets.widgetMediumInset,
+          endIndent: Insets.widgetMediumInset,
         ),
         tiles[i],
       ]);
@@ -81,13 +81,8 @@ class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen> {
   Widget build(BuildContext context) {
     final List<Widget> contentList = _createContentList();
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Insets.widgetSmallInset,
-        ),
-        child: ListView(
-          children: contentList,
-        ),
+      child: ListView(
+        children: contentList,
       ),
     );
   }

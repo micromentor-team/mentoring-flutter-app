@@ -47,7 +47,6 @@ class InboxInvitesSentScreen extends StatelessWidget {
         const Divider(
           height: 0,
           indent: Insets.widgetSmallInset,
-          endIndent: Insets.widgetSmallInset,
         ),
         tiles[i],
       ]);
@@ -60,8 +59,9 @@ class InboxInvitesSentScreen extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Insets.widgetSmallInset,
+        padding: const EdgeInsetsDirectional.only(
+          start: Insets.widgetSmallInset,
+          end: Insets.widgetMediumInset,
         ),
         child: ListView(
           children: _createContentList(

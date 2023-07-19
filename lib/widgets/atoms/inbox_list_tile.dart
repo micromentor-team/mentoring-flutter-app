@@ -87,25 +87,35 @@ class InboxListTile extends StatelessWidget {
                 width: Insets.widgetSmallInset,
               ),
               Expanded(
-                child: Text(
-                  fullName,
-                  maxLines: 1,
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: theme.colorScheme.onPrimaryContainer,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: Insets.widgetSmallestInset,
                   ),
-                  overflow: TextOverflow.ellipsis,
+                  child: Text(
+                    fullName,
+                    maxLines: 1,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: theme.colorScheme.onPrimaryContainer,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
               const SizedBox(
                 width: Insets.widgetSmallInset,
               ),
-              Text(
-                _getDate(context),
-                maxLines: 1,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: Insets.widgetSmallestInset,
                 ),
-                overflow: TextOverflow.ellipsis,
+                child: Text(
+                  _getDate(context),
+                  maxLines: 1,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               const SizedBox(
                 width: Insets.widgetSmallInset,

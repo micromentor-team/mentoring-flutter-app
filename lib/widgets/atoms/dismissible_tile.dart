@@ -6,7 +6,7 @@ class DismissibleTile extends StatelessWidget {
   final String tileId;
   final Widget child;
   final void Function() onDismissed;
-  final Icon? icon;
+  final IconData? icon;
 
   const DismissibleTile({
     super.key,
@@ -31,11 +31,20 @@ class DismissibleTile extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.only(
                   end: Insets.widgetLargeInset,
                 ),
-                child: icon,
+                child: Icon(
+                  icon,
+                  color: theme.colorScheme.primary,
+                ),
               )
             : null,
       ),
-      child: child,
+      child: Padding(
+        padding: const EdgeInsetsDirectional.only(
+          start: Insets.widgetSmallInset,
+          end: Insets.widgetMediumInset,
+        ),
+        child: child,
+      ),
     );
   }
 }
