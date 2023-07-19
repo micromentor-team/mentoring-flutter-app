@@ -182,7 +182,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   }
 
   List<Widget> _createFilter(context) {
-    List<Widget> filterMenu = [ExploreFilter()];
+    List<Widget> filterMenu = [const ExploreFilter()];
     return filterMenu;
   }
 
