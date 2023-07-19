@@ -58,7 +58,8 @@ class ExploreFilter extends StatelessWidget {
       BuildContext context,
       List<String?>? countries,
       List<String?>? languages) {
-    var countryLanguageText = joinFirstThree(countries! + languages!);
+    var countryLanguageText = joinFirstThree(countries! + languages!, l10n);
+    //TO-DO(guptarupal): is there a way to optimize this. What is there are too many countries? do we not show languages then?"
 
     return Text(
       countryLanguageText,
@@ -66,13 +67,13 @@ class ExploreFilter extends StatelessWidget {
     );
   }
 
-  String joinFirstThree(List<String?>? strings) {
-    int count = strings!.length < 3 ? strings!.length : 3;
+  String joinFirstThree(List<String?>? strings, AppLocalizations l10n) {
+    int count = strings!.length < 3 ? strings.length : 3;
     List<String> firstThreeElements = [];
     for (int i = 0; i < count; i++) {
-      firstThreeElements.add(strings![i]!);
+      firstThreeElements.add(strings[i]!);
     }
-    return firstThreeElements.join(' • ');
+    return firstThreeElements.join(" • ");
   }
 
   @override
