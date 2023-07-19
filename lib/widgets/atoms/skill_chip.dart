@@ -14,14 +14,17 @@ class SkillChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Chip(
       avatar: icon,
       label: Text(
         skill,
-        style: TextStyles.quickViewProfileSkillChipLabel(context),
+        style: theme.textTheme.labelSmall?.copyWith(
+          color: theme.colorScheme.secondary,
+        ),
         overflow: TextOverflow.ellipsis,
       ),
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      backgroundColor: theme.colorScheme.onInverseSurface,
       side: BorderSide.none,
       visualDensity: const VisualDensity(
         horizontal: VisualDensity.minimumDensity,

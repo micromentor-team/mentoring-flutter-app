@@ -28,6 +28,7 @@ class _SectionTileState extends State<SectionTile> {
   bool _isExpanded = false;
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +52,9 @@ class _SectionTileState extends State<SectionTile> {
             children: [
               Text(
                 widget.title,
-                style: TextStyles.sectionHeader(context),
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.colorScheme.primary,
+                ),
               ),
               if (widget.seeAllOnPressed != null &&
                   (!_isExpanded || widget.seeLessOnPressed == null))
@@ -97,13 +100,16 @@ class _SectionExpandToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return InkWell(
       onTap: onPressed,
       child: Padding(
         padding: const EdgeInsets.all(Insets.widgetSmallestInset),
         child: Text(
           text,
-          style: TextStyles.sectionSubHeader(context),
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: theme.colorScheme.primary,
+          ),
         ),
       ),
     );

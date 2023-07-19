@@ -99,7 +99,7 @@ _ProfileQuickViewInfo _createRecommendedEntrepreneurExample() {
       company: 'St James Place',
       ventureStage: ProfileChip(
         text: 'Operational',
-        icon: Icon(Icons.lightbulb_outline),
+        icon: Icons.lightbulb_outline,
       ),
       ventureIndustry: ProfileChip(text: 'NonProfit/Social Enterprise'),
       skills: [
@@ -190,6 +190,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SafeArea(
@@ -207,9 +208,14 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                   child: Column(children: [
                     Text(
                       l10n.exploreSeeMore,
-                      style: TextStyles.sectionHeader(context),
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
                     ),
-                    const Icon(Icons.arrow_drop_down),
+                    Icon(
+                      Icons.arrow_drop_down,
+                      color: Color(theme.colorScheme.onSurfaceVariant.value),
+                    ),
                   ]))
             ],
       )),

@@ -4,7 +4,7 @@ import '../../constants/app_constants.dart';
 
 class ProfileChip extends StatelessWidget {
   final String text;
-  final Widget? icon;
+  final IconData? icon;
 
   const ProfileChip({
     super.key,
@@ -14,14 +14,22 @@ class ProfileChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Chip(
-      avatar: icon,
+      avatar: icon != null
+          ? Icon(
+              icon,
+              color: Color(theme.colorScheme.outline.value),
+            )
+          : null,
       label: Text(
         text,
-        style: TextStyles.quickViewProfileProfileChipLabel(context),
+        style: theme.textTheme.labelSmall?.copyWith(
+          color: theme.colorScheme.onSecondaryContainer,
+        ),
         overflow: TextOverflow.ellipsis,
       ),
-      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       side: BorderSide.none,
       visualDensity: const VisualDensity(
         horizontal: VisualDensity.minimumDensity,

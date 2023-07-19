@@ -1,13 +1,14 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../__generated/schema/schema.graphql.dart';
 import '../../../utilities/utility.dart';
 import '../sign_up/sign_up_screen.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -55,6 +56,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final userProvider = Provider.of<UserProvider>(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final mediaQuery = MediaQuery.of(context).size;
@@ -89,7 +91,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             Center(
                               child: Text(
                                 l10n.welcomeBack,
-                                style: TextStyles.largeSectionHeader(context),
+                                style: theme.textTheme.headlineSmall?.copyWith(
+                                  color: theme.colorScheme.primary,
+                                ),
                               ),
                             ),
                             const Padding(
@@ -99,7 +103,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             Center(
                               child: Text(
                                 l10n.signInMessage,
-                                style: TextStyles.sectionNote(context),
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
                               ),
                             ),
                           ],
@@ -152,7 +158,9 @@ class _SignInScreenState extends State<SignInScreen> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0, Insets.widgetMediumInset, 0, 0),
                               child: ElevatedButton(
-                                style: ButtonStyles.loginButton(context),
+                                style:
+                                    ButtonStyles.primaryRoundedRectangleButton(
+                                        context),
                                 key: const Key('btnSignIn'),
                                 onPressed: () async {
                                   final router = GoRouter.of(context);
@@ -209,7 +217,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   ),
                                   child: Text(
                                     l10n.logIn,
-                                    style: TextStyles.largeTextButton(context),
+                                    style: theme.textTheme.labelLarge?.copyWith(
+                                      color: theme.colorScheme.onPrimary,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -227,7 +237,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                         child: Text(
                           l10n.createNewAccount,
-                          style: TextStyles.sectionSubHeaderBold(context),
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: theme.colorScheme.primary,
+                          ),
                         ),
                       ),
                     ),
@@ -243,7 +255,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           Text(
                             l10n.or,
-                            style: TextStyles.sectionSubNote(context),
+                            style: theme.textTheme.labelMedium?.copyWith(
+                              color: theme.colorScheme.secondary,
+                            ),
                           ),
                           Container(
                             width: Dimensions.loginBoxWidth / 2,
@@ -282,8 +296,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   width: Dimensions.textBoxWidth,
                                   child: Text(
                                     l10n.signInWithGoogle,
-                                    style: TextStyles.sectionSubHeaderBold(
-                                        context),
+                                    style: theme.textTheme.labelLarge?.copyWith(
+                                      color: theme.colorScheme.primary,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -316,8 +331,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   width: Dimensions.textBoxWidth,
                                   child: Text(
                                     l10n.signInWithFacebook,
-                                    style: TextStyles.sectionSubHeaderBold(
-                                        context),
+                                    style: theme.textTheme.labelLarge?.copyWith(
+                                      color: theme.colorScheme.primary,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -350,8 +366,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   width: Dimensions.textBoxWidth,
                                   child: Text(
                                     l10n.signInWithLinkedIn,
-                                    style: TextStyles.sectionSubHeaderBold(
-                                        context),
+                                    style: theme.textTheme.labelLarge?.copyWith(
+                                      color: theme.colorScheme.primary,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -384,8 +401,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   width: Dimensions.textBoxWidth,
                                   child: Text(
                                     l10n.signInWithWhatsapp,
-                                    style: TextStyles.sectionSubHeaderBold(
-                                        context),
+                                    style: theme.textTheme.labelLarge?.copyWith(
+                                      color: theme.colorScheme.primary,
+                                    ),
                                   ),
                                 ),
                               ],

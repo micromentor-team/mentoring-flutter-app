@@ -8,6 +8,7 @@ class AppThemes {
     return baseTheme.copyWith(
       useMaterial3: true,
       colorScheme: colorScheme,
+      typography: Typography.material2021(),
     );
   }
 
