@@ -60,6 +60,7 @@ class _InboxChatsScreenState extends State<InboxChatsScreen> {
     for (int i = 1; i < tiles.length; i++) {
       contentList.addAll([
         const Divider(
+          height: 0,
           indent: Insets.widgetSmallInset,
           endIndent: Insets.widgetSmallInset,
         ),

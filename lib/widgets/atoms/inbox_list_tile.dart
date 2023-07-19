@@ -47,8 +47,8 @@ class InboxListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.only(
-        bottom: Insets.widgetSmallInset,
+      padding: const EdgeInsets.symmetric(
+        vertical: Insets.widgetSmallInset,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +90,9 @@ class InboxListTile extends StatelessWidget {
                 child: Text(
                   fullName,
                   maxLines: 1,
-                  style: TextStyles.quickViewProfileCardHighEmphasis(context),
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: theme.colorScheme.onPrimaryContainer,
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -100,7 +102,9 @@ class InboxListTile extends StatelessWidget {
               Text(
                 _getDate(context),
                 maxLines: 1,
-                style: TextStyles.dateLowEmphasis(context),
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(
@@ -108,21 +112,25 @@ class InboxListTile extends StatelessWidget {
               )
             ],
           ),
+          const SizedBox(
+            height: Insets.widgetSmallInset,
+          ),
           if (message != null)
             Padding(
-              padding: const EdgeInsets.only(
-                top: Insets.widgetSmallInset,
-                left: Insets.widgetSmallInset,
-                right: Insets.widgetSmallInset,
+              padding: const EdgeInsets.symmetric(
+                horizontal: Insets.widgetSmallInset,
               ),
               child: Text(
                 message!,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: highlightMessage
-                    ? TextStyles.textPreview(context)
-                        ?.copyWith(color: theme.colorScheme.primary)
-                    : TextStyles.textPreview(context),
+                    ? theme.textTheme.labelMedium?.copyWith(
+                        color: theme.colorScheme.primary,
+                      )
+                    : theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
               ),
             ),
         ],

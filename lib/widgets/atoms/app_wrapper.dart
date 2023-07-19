@@ -60,7 +60,9 @@ class _AppWrapperState extends State<AppWrapper> {
                   l10n,
                 ) ??
                 l10n.inboxTitleChats,
-            style: TextStyles.appBarTitle(context),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
           ),
           centerTitle: true,
           bottom: _currentRoute.startsWith(Routes.inboxInvites)
