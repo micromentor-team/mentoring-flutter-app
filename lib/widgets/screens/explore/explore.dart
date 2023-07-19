@@ -187,7 +187,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     List<Widget> filterMenu = [
       const ExploreFilter(
         userType: UserType.entrepreneur,
-        userFiltersSelected: false,
+        // userFiltersSelected: false,
         skills: ["Marketing", "Operations", "Starting Up"],
         countries: ["USA"],
         languages: ["English", "Hindi"],

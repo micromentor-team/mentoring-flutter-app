@@ -1,10 +1,12 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/app_constants.dart';
 
 class ExploreFilter extends StatelessWidget {
   final UserType userType;
-  final bool userFiltersSelected;
+  // final bool userFiltersSelected;
   final List<String?>? skills;
   final List<String?>? languages;
   final List<String?>? countries;
@@ -12,7 +14,7 @@ class ExploreFilter extends StatelessWidget {
   const ExploreFilter({
     Key? key,
     required this.userType,
-    required this.userFiltersSelected,
+    // required this.userFiltersSelected,
     this.skills,
     this.languages,
     this.countries,
@@ -58,7 +60,7 @@ class ExploreFilter extends StatelessWidget {
       BuildContext context,
       List<String?>? countries,
       List<String?>? languages) {
-    var countryLanguageText = joinFirstThree(countries! + languages!, l10n);
+    var countryLanguageText = joinFirstThree(countries! + languages!);
     //TO-DO(guptarupal): is there a way to optimize this. What is there are too many countries? do we not show languages then?"
 
     return Text(
@@ -67,7 +69,7 @@ class ExploreFilter extends StatelessWidget {
     );
   }
 
-  String joinFirstThree(List<String?>? strings, AppLocalizations l10n) {
+  String joinFirstThree(List<String?>? strings) {
     int count = strings!.length < 3 ? strings.length : 3;
     List<String> firstThreeElements = [];
     for (int i = 0; i < count; i++) {
@@ -79,6 +81,8 @@ class ExploreFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    bool userFiltersSelected =
+        (skills!.isNotEmpty || languages!.isNotEmpty || countries!.isNotEmpty);
     return Padding(
       padding: const EdgeInsets.fromLTRB(
           (Insets.widgetSmallestInset),
