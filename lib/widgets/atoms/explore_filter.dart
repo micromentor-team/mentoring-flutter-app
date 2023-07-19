@@ -3,7 +3,77 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/app_constants.dart';
 
 class ExploreFilter extends StatelessWidget {
-  const ExploreFilter({Key? key}) : super(key: key);
+  final UserType userType;
+  final bool userFiltersSelected;
+  final List<String?>? skills;
+  final List<String?>? languages;
+  final List<String?>? countries;
+
+  const ExploreFilter({
+    Key? key,
+    required this.userType,
+    required this.userFiltersSelected,
+    this.skills,
+    this.languages,
+    this.countries,
+  }) : super(key: key);
+
+  String? _helpText(AppLocalizations l10n) {
+    switch (userType) {
+      case UserType.entrepreneur:
+        return l10n.whatAreYouLookingForHelpWith;
+      case UserType.mentor:
+        return l10n.whatAreYouLookingToHelpWith;
+      default:
+        return null;
+    }
+  }
+
+  Text _createHelpTextHeader(AppLocalizations l10n, BuildContext context) {
+    return Text(
+      _helpText(l10n)!,
+      style: TextStyles.quickViewProfileCardMediumEmphasis(context),
+    );
+  }
+
+  Text _createInsertLanguageLocationSubheader(
+      AppLocalizations l10n, BuildContext context) {
+    return Text(
+      l10n.languageLocationFilter,
+      style: TextStyles.quickViewProfileCardLowEmphasis(context),
+    );
+  }
+
+  Text _createSkillsTextHeader(
+      AppLocalizations l10n, BuildContext context, List<String?>? skills) {
+    var skillsText = joinFirstThree(skills);
+    return Text(
+      skillsText,
+      style: TextStyles.quickViewProfileCardMediumEmphasis(context),
+    );
+  }
+
+  Text _createLanguageLocationSubHeader(
+      AppLocalizations l10n,
+      BuildContext context,
+      List<String?>? countries,
+      List<String?>? languages) {
+    var countryLanguageText = joinFirstThree(countries! + languages!);
+
+    return Text(
+      countryLanguageText,
+      style: TextStyles.quickViewProfileCardLowEmphasis(context),
+    );
+  }
+
+  String joinFirstThree(List<String?>? strings) {
+    int count = strings!.length < 3 ? strings!.length : 3;
+    List<String> firstThreeElements = [];
+    for (int i = 0; i < count; i++) {
+      firstThreeElements.add(strings![i]!);
+    }
+    return firstThreeElements.join(' • ');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +113,19 @@ class ExploreFilter extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          l10n.whatAreYouLookingForHelpWith,
-                          style: TextStyles.quickViewProfileCardMediumEmphasis(
-                              context),
-                        ),
+                        if (userFiltersSelected == false)
+                          _createHelpTextHeader(l10n, context),
+                        if (userFiltersSelected)
+                          _createSkillsTextHeader(l10n, context, skills),
                       ],
                     ),
                     Row(
                       children: [
-                        Text(
-                          l10n.languageLocationFilter,
-                          style: TextStyles.quickViewProfileCardLowEmphasis(
-                              context),
-                        ),
+                        if (userFiltersSelected == false)
+                          _createInsertLanguageLocationSubheader(l10n, context),
+                        if (userFiltersSelected == true)
+                          _createLanguageLocationSubHeader(
+                              l10n, context, countries, languages),
                       ],
                     ),
                   ],

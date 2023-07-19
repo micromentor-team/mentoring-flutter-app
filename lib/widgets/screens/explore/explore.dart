@@ -182,7 +182,17 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   }
 
   List<Widget> _createFilter(context) {
-    List<Widget> filterMenu = [const ExploreFilter()];
+    //TODO(guptarupal): enable this functionality without hardcoded data
+
+    List<Widget> filterMenu = [
+      const ExploreFilter(
+        userType: UserType.entrepreneur,
+        userFiltersSelected: false,
+        skills: ["Marketing", "Operations", "Starting Up"],
+        countries: ["USA"],
+        languages: ["English", "Hindi"],
+      )
+    ];
     return filterMenu;
   }
 
