@@ -98,7 +98,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             const Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0, 0, 0, Insets.widgetLargeInset),
+                                  0, 0, 0, Insets.widgetMediumInset),
                             ),
                             Center(
                               child: Text(
