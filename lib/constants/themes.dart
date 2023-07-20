@@ -8,6 +8,9 @@ class AppThemes {
     return baseTheme.copyWith(
       useMaterial3: true,
       colorScheme: colorScheme,
+      appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(color: colorScheme.primary),
+      ),
     );
   }
 
