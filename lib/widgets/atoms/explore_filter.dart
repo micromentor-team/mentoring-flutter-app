@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../constants/app_constants.dart';
 
 class ExploreFilter extends StatelessWidget {
@@ -30,15 +31,18 @@ class ExploreFilter extends StatelessWidget {
   Text _createHelpTextHeader(AppLocalizations l10n, BuildContext context) {
     return Text(
       _helpText(l10n)!,
-      style: TextStyles.quickViewProfileCardMediumEmphasis(context),
+      style: Theme.of(context).textTheme.labelMedium,
     );
   }
 
   Text _createInsertLanguageLocationSubHeader(
       AppLocalizations l10n, BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Text(
       l10n.languageLocationFilter,
-      style: TextStyles.quickViewProfileCardLowEmphasis(context),
+      style: theme.textTheme.labelSmall?.copyWith(
+        color: theme.colorScheme.secondary,
+      ),
     );
   }
 
@@ -47,12 +51,13 @@ class ExploreFilter extends StatelessWidget {
     var skillsText = joinFirstThree(skills);
     return Text(
       skillsText,
-      style: TextStyles.quickViewProfileCardMediumEmphasis(context),
+      style: Theme.of(context).textTheme.labelMedium,
     );
   }
 
   Text _createLanguageLocationSubHeader(AppLocalizations l10n,
       BuildContext context, List<String>? countries, List<String>? languages) {
+    final ThemeData theme = Theme.of(context);
     //handling scenarios where countries and languages may be null
     List<String> countryLanguageText = [];
     if (countries != null) {
@@ -66,7 +71,9 @@ class ExploreFilter extends StatelessWidget {
 
     return Text(
       joinedCountryLanguageText,
-      style: TextStyles.quickViewProfileCardLowEmphasis(context),
+      style: theme.textTheme.labelSmall?.copyWith(
+        color: theme.colorScheme.secondary,
+      ),
     );
   }
 
@@ -77,6 +84,7 @@ class ExploreFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     //logic handling the null scenarios of the lists
@@ -109,21 +117,27 @@ class ExploreFilter extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.surfaceVariant,
               width: Dimensions.highlightBorderWidth,
             ),
             borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.surfaceVariant,
           ),
           child: Row(
             children: [
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB((Insets.widgetLargeInset), 0,
-                        (Insets.widgetMediumInset), 0),
-                    child: Icon(Icons.search),
+                    padding: const EdgeInsets.fromLTRB(
+                        (Insets.widgetLargeInset),
+                        0,
+                        (Insets.widgetMediumInset),
+                        0),
+                    child: Icon(
+                      Icons.search,
+                      color: Color(theme.colorScheme.onSurfaceVariant.value),
+                    ),
                   ),
                 ],
               ),
@@ -155,13 +169,19 @@ class ExploreFilter extends StatelessWidget {
                   ],
                 ),
               ),
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB((Insets.widgetLargeInset), 0,
-                        (Insets.widgetMediumInset), 0),
-                    child: Icon(Icons.tune),
+                    padding: const EdgeInsets.fromLTRB(
+                        (Insets.widgetLargeInset),
+                        0,
+                        (Insets.widgetMediumInset),
+                        0),
+                    child: Icon(
+                      Icons.tune,
+                      color: Color(theme.colorScheme.onSurfaceVariant.value),
+                    ),
                   ),
                 ],
               ),
