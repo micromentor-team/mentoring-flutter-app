@@ -4,15 +4,13 @@ import '../../constants/app_constants.dart';
 
 class ExploreFilter extends StatelessWidget {
   final UserType userType;
-  // final bool userFiltersSelected;
-  final List<String?>? skills;
-  final List<String?>? languages;
-  final List<String?>? countries;
+  final List<String>? skills;
+  final List<String>? languages;
+  final List<String>? countries;
 
   const ExploreFilter({
     Key? key,
     required this.userType,
-    // required this.userFiltersSelected,
     this.skills,
     this.languages,
     this.countries,
@@ -36,7 +34,7 @@ class ExploreFilter extends StatelessWidget {
     );
   }
 
-  Text _createInsertLanguageLocationSubheader(
+  Text _createInsertLanguageLocationSubHeader(
       AppLocalizations l10n, BuildContext context) {
     return Text(
       l10n.languageLocationFilter,
@@ -45,7 +43,7 @@ class ExploreFilter extends StatelessWidget {
   }
 
   Text _createSkillsTextHeader(
-      AppLocalizations l10n, BuildContext context, List<String?>? skills) {
+      AppLocalizations l10n, BuildContext context, List<String>? skills) {
     var skillsText = joinFirstThree(skills);
     return Text(
       skillsText,
@@ -53,34 +51,53 @@ class ExploreFilter extends StatelessWidget {
     );
   }
 
-  Text _createLanguageLocationSubHeader(
-      AppLocalizations l10n,
-      BuildContext context,
-      List<String?>? countries,
-      List<String?>? languages) {
-    var countryLanguageText = joinFirstThree(countries! + languages!);
+  Text _createLanguageLocationSubHeader(AppLocalizations l10n,
+      BuildContext context, List<String>? countries, List<String>? languages) {
+    //handling scenarios where countries and languages may be null
+    List<String> countryLanguageText = [];
+    if (countries != null) {
+      countryLanguageText += countries;
+    }
+    if (languages != null) {
+      countryLanguageText += languages;
+    }
+    var joinedCountryLanguageText = joinFirstThree(countryLanguageText);
     //TO-DO(guptarupal): is there a way to optimize this. What is there are too many countries? do we not show languages then?"
 
     return Text(
-      countryLanguageText,
+      joinedCountryLanguageText,
       style: TextStyles.quickViewProfileCardLowEmphasis(context),
     );
   }
 
-  String joinFirstThree(List<String?>? strings) {
-    int count = strings!.length < 3 ? strings.length : 3;
-    List<String> firstThreeElements = [];
-    for (int i = 0; i < count; i++) {
-      firstThreeElements.add(strings[i]!);
-    }
+  String joinFirstThree(List<String>? strings) {
+    List<String> firstThreeElements = strings!.take(3).toList();
     return firstThreeElements.join(" • ");
   }
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    bool userFiltersSelected =
-        (skills!.isNotEmpty || languages!.isNotEmpty || countries!.isNotEmpty);
+
+    //logic handling the null scenarios of the lists
+    bool userFiltersSelected = false;
+    bool skillFilterSelected = false;
+    bool languageFilterSelected = false;
+    bool countryFilterSelected = false;
+
+    if (skills != null || languages != null || countries != null) {
+      userFiltersSelected = true;
+    }
+    if (skills != null) {
+      skillFilterSelected = true;
+    }
+    if (languages != null) {
+      languageFilterSelected = true;
+    }
+    if (countries != null) {
+      countryFilterSelected = true;
+    }
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(
           (Insets.widgetSmallestInset),
@@ -116,17 +133,21 @@ class ExploreFilter extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        if (userFiltersSelected == false)
+                        if (!userFiltersSelected ||
+                            (userFiltersSelected && !skillFilterSelected))
                           _createHelpTextHeader(l10n, context),
-                        if (userFiltersSelected)
+                        if (userFiltersSelected && skillFilterSelected)
                           _createSkillsTextHeader(l10n, context, skills),
                       ],
                     ),
                     Row(
                       children: [
-                        if (userFiltersSelected == false)
-                          _createInsertLanguageLocationSubheader(l10n, context),
-                        if (userFiltersSelected == true)
+                        if (!userFiltersSelected ||
+                            (userFiltersSelected &&
+                                !languageFilterSelected &&
+                                !countryFilterSelected))
+                          _createInsertLanguageLocationSubHeader(l10n, context),
+                        if (userFiltersSelected)
                           _createLanguageLocationSubHeader(
                               l10n, context, countries, languages),
                       ],
