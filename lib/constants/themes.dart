@@ -9,6 +9,9 @@ class AppThemes {
       useMaterial3: true,
       colorScheme: colorScheme,
       typography: Typography.material2021(),
+      appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(color: colorScheme.primary),
+      ),
     );
   }
 

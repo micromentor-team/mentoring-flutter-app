@@ -12,13 +12,11 @@ import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
-import 'package:mm_flutter_app/widgets/atoms/app_wrapper.dart';
+import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
-import 'package:mm_flutter_app/widgets/screens/dashboard/dashboard.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/explore.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_screen.dart';
 import 'package:provider/provider.dart';
+
 import 'firebase_options.dart';
 import 'providers/user_provider.dart';
 
@@ -27,75 +25,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GoRouter router = GoRouter(initialLocation: '/', routes: [
-      GoRoute(
-        path: '/',
-        builder: (BuildContext context, GoRouterState state) {
-          return const StartScreen();
-        },
-      ),
-      GoRoute(
-        path: '/signin',
-        builder: (BuildContext context, GoRouterState state) {
-          return const SignInScreen();
-        },
-      ),
-      GoRoute(
-          path: '/signup',
-          builder: (BuildContext context, GoRouterState state) {
-            return const SignUpScreen();
-          }),
-      GoRoute(
-        path: '/loading',
-        builder: (BuildContext context, GoRouterState state) {
-          return const LoadingScreen();
-        },
-      ),
-      ShellRoute(
-        builder: (context, state, child) {
-          return AppWrapper(child: child);
-        },
-        routes: <RouteBase>[
-          GoRoute(
-            path: '/home',
-            builder: (BuildContext context, GoRouterState state) {
-              return const Center(child: DashboardScreen());
-            },
-          ),
-          GoRoute(
-            path: '/explore',
-            builder: (BuildContext context, GoRouterState state) {
-              return const ExploreScreen();
-            },
-          ),
-          GoRoute(
-            path: '/progress',
-            builder: (BuildContext context, GoRouterState state) {
-              return Center(
-                  child: Text(AppLocalizations.of(context)!.navProgressText));
-            },
-          ),
-          GoRoute(
-            path: '/inbox',
-            builder: (BuildContext context, GoRouterState state) {
-              return Center(
-                  child: Text(AppLocalizations.of(context)!.navInboxText));
-            },
-          ),
-          GoRoute(
-            path: '/profile',
-            builder: (BuildContext context, GoRouterState state) {
-              return Center(
-                  child: Text(AppLocalizations.of(context)!.navProfileText));
-            },
-          ),
-        ],
-      )
-    ]);
-
     return MaterialApp.router(
-      routerConfig: router,
-      title: "MicroMentor",
+      routerConfig: AppRouter.createRouter(context),
+      title: Identifiers.appName,
       debugShowCheckedModeBanner: false,
       theme: AppThemes.light(),
       darkTheme: AppThemes.dark(),
@@ -121,7 +53,7 @@ class StartScreen extends StatelessWidget {
       },
       onData: (data, {refetch, fetchMore}) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          context.go('/home');
+          context.go(Routes.home);
         });
 
         return const LoadingScreen();
