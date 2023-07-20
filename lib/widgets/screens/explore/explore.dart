@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
+import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/explore_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 
@@ -180,6 +181,20 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     return exploreCards;
   }
 
+  List<Widget> _createFilter(context) {
+    //TODO(guptarupal): enable this functionality without hardcoded data
+
+    List<Widget> filterMenu = [
+      const ExploreFilter(
+        userType: UserType.entrepreneur,
+        skills: ["Marketing", "Operations", "Starting Up"],
+        countries: ["USA"],
+        languages: ["English", "Hindi"],
+      )
+    ];
+    return filterMenu;
+  }
+
   @override
   void initState() {
     if (isSelected.isEmpty) {
@@ -194,47 +209,49 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SafeArea(
-        child: Column(children: [
-      Expanded(
-          child: ListView(
-        children: _createCards() +
-            [
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _loadMoreRecommendations();
-                    });
-                  },
-                  child: Column(children: [
-                    Text(
-                      l10n.exploreSeeMore,
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
+      child: Column(children: [
+        Expanded(
+            child: ListView(
+          children: _createFilter(context) +
+              _createCards() +
+              [
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        _loadMoreRecommendations();
+                      });
+                    },
+                    child: Column(children: [
+                      Text(
+                        l10n.exploreSeeMore,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
                       ),
-                    ),
-                    Icon(
-                      Icons.arrow_drop_down,
-                      color: Color(theme.colorScheme.onSurfaceVariant.value),
-                    ),
-                  ]))
-            ],
-      )),
-      ExploreBottomButtons(
-        clearAction: () {
-          setState(() {
-            for (int i = 0; i < isSelected.length; i++) {
-              isSelected[i] = false;
-            }
-          });
-        },
-        sendInvitesAction: () {
-          debugPrint("Not implemented");
-        },
-        selectedCount: isSelected
-            .map((e) => e ? 1 : 0)
-            .reduce((value, element) => value + element),
-      ),
-    ]));
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: Color(theme.colorScheme.onSurfaceVariant.value),
+                      ),
+                    ]))
+              ],
+        )),
+        ExploreBottomButtons(
+          clearAction: () {
+            setState(() {
+              for (int i = 0; i < isSelected.length; i++) {
+                isSelected[i] = false;
+              }
+            });
+          },
+          sendInvitesAction: () {
+            debugPrint("Not implemented");
+          },
+          selectedCount: isSelected
+              .map((e) => e ? 1 : 0)
+              .reduce((value, element) => value + element),
+        ),
+      ]),
+    );
   }
 }
 
