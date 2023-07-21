@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
-import 'package:mm_flutter_app/widgets/atoms/inbox_list_tile.dart';
+import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 
 class InboxChatsScreen extends StatefulWidget {
   const InboxChatsScreen({super.key});
@@ -16,13 +17,14 @@ class _InboxChatsScreenState extends State<InboxChatsScreen> {
 
   DismissibleTile _createTestTile(int notifications, int tileIndex) {
     // TODO(m-rosario): Replace mock data with backend data.
+    final String mockChannelId = tileIndex.toString();
     return DismissibleTile(
-      tileId: tileIndex.toString(),
+      tileId: mockChannelId,
       onDismissed: () {
-        DebugLogger.debug('Dismissed tile #$tileIndex');
+        DebugLogger.debug('Dismissed tile #$mockChannelId');
         int tileIndexToRemove = -1;
         for (int i = 0; i < tiles.length; i++) {
-          if (tiles[i].tileId == tileIndex.toString()) {
+          if (tiles[i].tileId == mockChannelId) {
             tileIndexToRemove = i;
             break;
           }
@@ -40,6 +42,7 @@ class _InboxChatsScreenState extends State<InboxChatsScreen> {
         message:
             'Lorem ipsum dolor sit amet consectetur. Enim id interdum pulvinar eget dolor sed sit enim.',
         notifications: notifications,
+        onPressed: () => context.push('${Routes.inboxChats}/$mockChannelId'),
       ),
     );
   }

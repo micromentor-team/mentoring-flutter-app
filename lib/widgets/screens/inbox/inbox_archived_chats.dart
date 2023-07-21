@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
-import 'package:mm_flutter_app/widgets/atoms/inbox_list_tile.dart';
+import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 
 class InboxArchivedChatsScreen extends StatefulWidget {
   const InboxArchivedChatsScreen({super.key});
@@ -41,6 +41,7 @@ class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen> {
         message:
             'Lorem ipsum dolor sit amet consectetur. Enim id interdum pulvinar eget dolor sed sit enim.',
         notifications: notifications,
+        onPressed: () => DebugLogger.warning('TODO: NOT IMPLEMENTED.'),
       ),
     );
   }

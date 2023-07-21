@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/atoms/inbox_list_tile.dart';
+import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
+
+import '../../../utilities/debug_logger.dart';
 
 class InboxInvitesSentScreen extends StatelessWidget {
   const InboxInvitesSentScreen({super.key});
@@ -23,6 +25,7 @@ class InboxInvitesSentScreen extends StatelessWidget {
       date: date,
       simplifyDate: true,
       datePrefix: l10n.inboxInvitesDateSent,
+      onPressed: () => DebugLogger.warning('TODO: NOT IMPLEMENTED.'),
     );
   }
 

@@ -8,6 +8,7 @@ import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 
 import '../main.dart';
 import '../widgets/atoms/app_wrapper.dart';
+import '../widgets/screens/channel_messages/channel_messages.dart';
 import '../widgets/screens/dashboard/dashboard.dart';
 import '../widgets/screens/explore/explore.dart';
 import '../widgets/screens/inbox/inbox_chats.dart';
@@ -77,6 +78,16 @@ class AppRouter {
               path: Routes.inboxChats,
               builder: (BuildContext context, GoRouterState state) {
                 return const InboxChatsScreen();
+              },
+            ),
+            GoRoute(
+              path: Routes.inboxChats$ChannelId,
+              builder: (context, state) {
+                final String? channelId =
+                    state.pathParameters[RouteParams.channelId];
+                return ChannelMessagesScreen(
+                  channelId: channelId,
+                );
               },
             ),
             GoRoute(
