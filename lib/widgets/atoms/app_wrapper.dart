@@ -18,21 +18,28 @@ class AppWrapper extends StatefulWidget {
 class _AppWrapperState extends State<AppWrapper> {
   String _currentRoute = Routes.home;
 
-  List<_NavBarTab> _generateNavBarTabs(
-    BuildContext context,
-    AppLocalizations l10n,
-  ) {
-    // TODO(m-rosario): Calculate notifications from backend call
-    const int chatsNotifications = 8;
-    const int invitesNotifications = 13;
-    const int totalNotifications = chatsNotifications + invitesNotifications;
-    return [
-      const _NavBarTab(route: Routes.home),
-      const _NavBarTab(route: Routes.explore),
-      const _NavBarTab(route: Routes.progress),
-      _NavBarTab(
-        route: Routes.inboxChats,
-        appBar: AppBar(
+  final List<String> _navBarTabRoutes = [
+    Routes.home,
+    Routes.explore,
+    Routes.progress,
+    Routes.inboxChats,
+    Routes.profile
+  ];
+
+  _ScaffoldParams _createRouteScaffoldParams(AppLocalizations l10n) {
+    final AppBar? appBar;
+    final Drawer? drawer;
+    switch (_currentRoute) {
+      case Routes.inboxChats:
+      case Routes.inboxArchived:
+      case Routes.inboxInvitesSent:
+      case Routes.inboxInvitesReceived:
+        // TODO(m-rosario): Calculate notifications from backend call
+        const int chatsNotifications = 8;
+        const int invitesNotifications = 13;
+        const int totalNotifications =
+            chatsNotifications + invitesNotifications;
+        appBar = AppBar(
           leading: Builder(
             builder: (context) {
               return Stack(
@@ -103,8 +110,8 @@ class _AppWrapperState extends State<AppWrapper> {
                   },
                 )
               : null,
-        ),
-        drawer: Drawer(
+        );
+        drawer = Drawer(
           child: ListView(
             children: [
               SizedBox(
@@ -147,7 +154,7 @@ class _AppWrapperState extends State<AppWrapper> {
                   Navigator.of(context).pop();
                   GoRouter.of(context).push(Routes.inboxInvites);
                   setState(() {
-                    _currentRoute = Routes.inboxInvites;
+                    _currentRoute = Routes.inboxInvitesReceived;
                   });
                 },
               ),
@@ -165,22 +172,29 @@ class _AppWrapperState extends State<AppWrapper> {
               ),
             ],
           ),
-        ),
-      ),
-      const _NavBarTab(route: Routes.profile),
-    ];
+        );
+        break;
+      default:
+        appBar = null;
+        drawer = null;
+        break;
+    }
+    return _ScaffoldParams(
+      appBar: appBar,
+      drawer: drawer,
+    );
   }
 
   String? _getAppBarTitle(AppLocalizations l10n) {
-    if (_currentRoute.startsWith(Routes.inboxChats)) {
+    if (_currentRoute == Routes.inboxChats) {
       return l10n.inboxTitleChats;
-    } else if (_currentRoute.startsWith(Routes.inboxArchived)) {
+    } else if (_currentRoute == Routes.inboxArchived) {
       return l10n.inboxTitleArchivedChats;
-    } else if (_currentRoute.startsWith(Routes.inboxInvites)) {
+    } else if (_currentRoute == Routes.inboxInvitesReceived ||
+        _currentRoute == Routes.inboxInvitesSent) {
       return l10n.inboxTitleInvites;
-    } else {
-      return null;
     }
+    return null;
   }
 
   int _calculateSelectedIndex(BuildContext context) {
@@ -207,13 +221,12 @@ class _AppWrapperState extends State<AppWrapper> {
   Scaffold _createMainScaffold(
     BuildContext context,
     AppLocalizations l10n,
-    List<_NavBarTab> navBarTabs,
-    int currentNavBarTabIndex,
+    _ScaffoldParams scaffoldParams,
   ) {
     return Scaffold(
       body: widget.child,
-      appBar: navBarTabs[currentNavBarTabIndex].appBar,
-      drawer: navBarTabs[currentNavBarTabIndex].drawer,
+      appBar: scaffoldParams.appBar,
+      drawer: scaffoldParams.drawer,
       bottomNavigationBar: NavigationBar(
         destinations: <Widget>[
           NavigationDestination(
@@ -239,9 +252,9 @@ class _AppWrapperState extends State<AppWrapper> {
         ],
         selectedIndex: _calculateSelectedIndex(context),
         onDestinationSelected: (index) {
-          context.push(navBarTabs[index].route);
+          context.push(_navBarTabRoutes[index]);
           setState(() {
-            _currentRoute = navBarTabs[index].route;
+            _currentRoute = _navBarTabRoutes[index];
           });
         },
       ),
@@ -251,19 +264,17 @@ class _AppWrapperState extends State<AppWrapper> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final List<_NavBarTab> navBarTabs = _generateNavBarTabs(context, l10n);
-    final int navBarTabIndex = _calculateSelectedIndex(context);
+    final _ScaffoldParams scaffoldParams = _createRouteScaffoldParams(l10n);
     TabBar? navBarTabBar;
     try {
-      navBarTabBar = navBarTabs[navBarTabIndex].appBar?.bottom as TabBar?;
+      navBarTabBar = scaffoldParams.appBar?.bottom as TabBar?;
     } catch (_) {
       navBarTabBar = null;
     }
     final Scaffold mainScaffold = _createMainScaffold(
       context,
       l10n,
-      navBarTabs,
-      navBarTabIndex,
+      scaffoldParams,
     );
     return (navBarTabBar?.tabs.length ?? 0) == 0
         ? mainScaffold
@@ -274,13 +285,11 @@ class _AppWrapperState extends State<AppWrapper> {
   }
 }
 
-class _NavBarTab {
-  final String route;
+class _ScaffoldParams {
   final Drawer? drawer;
   final AppBar? appBar;
 
-  const _NavBarTab({
-    required this.route,
+  const _ScaffoldParams({
     this.drawer,
     this.appBar,
   });
