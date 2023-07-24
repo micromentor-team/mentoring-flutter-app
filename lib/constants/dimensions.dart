@@ -65,4 +65,5 @@ class Dimensions {
   static const double notificationBubbleSingleCharWidth = 16.0;
   static const double notificationBubbleDoubleCharWidth = 20.0;
   static const double notificationBubbleTripleCharWidth = 24.0;
+  static const double squareAvatar = 88.0;
 }

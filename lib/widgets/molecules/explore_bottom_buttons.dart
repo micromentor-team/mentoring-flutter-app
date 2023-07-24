@@ -39,7 +39,7 @@ class ExploreBottomButtons extends StatelessWidget {
               ),
               onPressed: clearAction,
               child: Text(
-                l10n.exploreClearButton,
+                l10n.clear,
                 style: theme.textTheme.labelLarge?.copyWith(
                   color: theme.colorScheme.secondary,
                 ),

@@ -18,7 +18,6 @@
     "exploreUserTypeMentor": "(MENTOR)",
     "exploreSendInviteButtonDisabled": "Select profiles to send invites",
     "exploreSendInviteButton": "Send {selectedCount} invites",
-    "exploreClearButton": "Clear",
     "homeGreetingAfternoon": "Good afternoon",
     "homeGreetingEvening": "Good evening",
     "homeGreetingMorning": "Good morning",
@@ -85,8 +84,16 @@
     "whatAreYouLookingForHelpWith": "What are you looking for help with?",
     "whatAreYouLookingToHelpWith": "What are you looking to help with?",
     "languageLocationFilter": "Any language • Any location",
+    "send":"Send",
+    "clear": "Clear",
     "signInWithGoogle": "Sign in with Google",
     "signInWithFacebook": "Sign in with Facebook",
     "signInWithLinkedIn": "Sign in with LinkedIn",
-    "signInWithWhatsapp": "Sign in with Whatsapp"
+    "signInWithWhatsapp": "Sign in with Whatsapp",
+    "inviteToConnect": "Invite to Connect",
+    "inviteMessageTips": "Message Tips:",
+    "inviteMessageTipsContent": "\u2022 Make your message specific\n\u2022 Keep it concise and simple\n\u2022 Be polite and respectful",
+    "inviteDefaultMessageToMentor": "Hi,\nI saw your profile and think you could be a great mentor for my business. Can we connect? I admire your experience and would love to learn from you.\nThanks!",
+    "inviteCustomizeMessagePrompt": "Customize your message (optional)",
+    "inviteMessagePlaceholder": "Enter invite message"
 }
