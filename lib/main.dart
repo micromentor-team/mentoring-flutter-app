@@ -8,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/firebase_notifications.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
@@ -78,6 +79,9 @@ void main() async {
     name: Identifiers.appName,
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await FirebaseNotifications().initialize();
+
   //TODO(m-rosario): Make crash data collection opt-in.
   final CrashHandler crashHandler = CrashHandler(!kDebugMode, true);
   FlutterError.onError = crashHandler.handleUncaughtFlutterError;
