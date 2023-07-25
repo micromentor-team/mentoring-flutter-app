@@ -3,13 +3,23 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/models/scaffold_model.dart';
 import '../../../utilities/debug_logger.dart';
 
-class InboxInvitesSentScreen extends StatelessWidget {
+class InboxInvitesSentScreen extends StatefulWidget {
   const InboxInvitesSentScreen({super.key});
 
+  @override
+  State<InboxInvitesSentScreen> createState() => _InboxInvitesSentScreenState();
+}
+
+class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
+    with RouteAwareMixin<InboxInvitesSentScreen> {
+  static const int tabBarIndex = 1;
   InboxListTile _createTestTile(
     BuildContext context,
     AppLocalizations l10n,
@@ -55,6 +65,29 @@ class InboxInvitesSentScreen extends StatelessWidget {
       ]);
     }
     return contentList;
+  }
+
+  void _refreshScaffold() {
+    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
+      context,
+      listen: false,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scaffoldModel.setInboxScaffold(context);
+    });
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    _refreshScaffold();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    _refreshScaffold();
+    DefaultTabController.of(context).animateTo(tabBarIndex);
   }
 
   @override

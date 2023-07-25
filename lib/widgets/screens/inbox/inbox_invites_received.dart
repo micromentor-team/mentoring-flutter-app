@@ -4,11 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
+import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
+import 'package:provider/provider.dart';
 
-class InboxInvitesReceivedScreen extends StatelessWidget {
+import '../../../providers/models/scaffold_model.dart';
+
+class InboxInvitesReceivedScreen extends StatefulWidget {
   const InboxInvitesReceivedScreen({super.key});
 
+  @override
+  State<InboxInvitesReceivedScreen> createState() =>
+      _InboxInvitesReceivedScreenState();
+}
+
+class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
+    with RouteAwareMixin<InboxInvitesReceivedScreen> {
+  static const int tabBarIndex = 0;
   InboxListTile _createTestTile(
       BuildContext context, String message, int tileIndex) {
     // TODO(m-rosario): Replace mock data with backend data.
@@ -52,6 +64,29 @@ class InboxInvitesReceivedScreen extends StatelessWidget {
       ]);
     }
     return contentList;
+  }
+
+  void _refreshScaffold() {
+    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
+      context,
+      listen: false,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scaffoldModel.setInboxScaffold(context);
+    });
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    _refreshScaffold();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    _refreshScaffold();
+    DefaultTabController.of(context).animateTo(tabBarIndex);
   }
 
   @override

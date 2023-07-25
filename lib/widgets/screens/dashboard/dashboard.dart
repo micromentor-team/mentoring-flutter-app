@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
+import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/molecules/invitation_section.dart';
@@ -9,9 +10,17 @@ import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
 
-class DashboardScreen extends StatelessWidget {
+import '../../../providers/models/scaffold_model.dart';
+
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen>
+    with RouteAwareMixin<DashboardScreen> {
   String _getGreeting(AppLocalizations l10n, String? fullName) {
     int hour = DateTime.now().hour;
     String timeOfDayGreeting;
@@ -25,6 +34,28 @@ class DashboardScreen extends StatelessWidget {
     return fullName != null
         ? '$timeOfDayGreeting, $fullName'
         : timeOfDayGreeting;
+  }
+
+  void _refreshScaffold() {
+    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
+      context,
+      listen: false,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scaffoldModel.clear();
+    });
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    _refreshScaffold();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    _refreshScaffold();
   }
 
   @override

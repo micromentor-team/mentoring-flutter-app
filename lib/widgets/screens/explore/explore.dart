@@ -6,6 +6,10 @@ import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/explore_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/models/scaffold_model.dart';
+import '../../../utilities/router.dart';
 
 class _ProfileQuickViewInfo {
   final bool isRecommended;
@@ -249,8 +253,36 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   }
 }
 
-class ExploreScreen extends StatelessWidget {
+class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ExploreScreen> createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends State<ExploreScreen>
+    with RouteAwareMixin<ExploreScreen> {
+  void _refreshScaffold() {
+    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
+      context,
+      listen: false,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scaffoldModel.clear();
+    });
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    _refreshScaffold();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    _refreshScaffold();
+  }
 
   @override
   Widget build(BuildContext context) {

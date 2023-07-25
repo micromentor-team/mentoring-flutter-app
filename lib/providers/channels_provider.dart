@@ -7,6 +7,8 @@ import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
 typedef ChannelForUser = Query$FindChannelsForUser$findChannelsForUser;
+typedef ChannelForUserParticipant
+    = Query$FindChannelsForUser$findChannelsForUser$participants;
 typedef ChannelById = Query$FindChannelById$findChannelById;
 typedef ChannelParticipant = Query$FindChannelById$findChannelById$participants;
 

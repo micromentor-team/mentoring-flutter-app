@@ -4,7 +4,7 @@ import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/screens/user_settings/user_settings.dart';
 import 'package:provider/provider.dart';
 
-import '../profile/profile_screen.dart';
+import '../profile/profile.dart';
 
 class HomeMenu extends StatelessWidget {
   const HomeMenu({super.key});
