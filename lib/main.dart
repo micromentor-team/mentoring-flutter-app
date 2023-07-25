@@ -11,6 +11,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/firebase_notifications.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
+import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
@@ -26,8 +27,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GoRouter router = AppRouter.createRouter(context);
     return MaterialApp.router(
-      routerConfig: AppRouter.createRouter(context),
+      routerConfig: router,
       title: Identifiers.appName,
       debugShowCheckedModeBanner: false,
       theme: AppThemes.light(),
@@ -116,9 +118,17 @@ void main() async {
                 create: (context) => UserProvider(client: client),
               ),
               ChangeNotifierProvider(
-                  create: (context) => ChannelsProvider(client: client)),
+                create: (context) => ChannelsProvider(client: client),
+              ),
               ChangeNotifierProvider(
-                  create: (context) => MessagesProvider(client: client)),
+                create: (context) => MessagesProvider(client: client),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => ScaffoldModel(),
+              ),
+              Provider<RouteObserver<PageRoute>>.value(
+                value: RouteObserver<PageRoute>(),
+              ),
             ],
             child: const MainApp(),
           );

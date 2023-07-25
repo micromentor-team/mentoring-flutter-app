@@ -1,13 +1,16 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_archived_chats.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
+import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
+import 'package:mm_flutter_app/widgets/screens/progress/progress.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 import '../widgets/atoms/app_wrapper.dart';
+import '../widgets/screens/channel_messages/channel_messages.dart';
 import '../widgets/screens/dashboard/dashboard.dart';
 import '../widgets/screens/explore/explore.dart';
 import '../widgets/screens/inbox/inbox_chats.dart';
@@ -23,89 +26,130 @@ class AppRouter {
       routes: [
         GoRoute(
           path: Routes.root,
-          builder: (BuildContext context, GoRouterState state) {
-            return const StartScreen();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const StartScreen(),
+            );
           },
         ),
         GoRoute(
           path: Routes.signin,
-          builder: (BuildContext context, GoRouterState state) {
-            return const SignInScreen();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const SignInScreen(),
+            );
           },
         ),
         GoRoute(
             path: Routes.signup,
-            builder: (BuildContext context, GoRouterState state) {
-              return const SignUpScreen();
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                child: const SignUpScreen(),
+              );
             }),
         GoRoute(
           path: Routes.loading,
-          builder: (BuildContext context, GoRouterState state) {
-            return const LoadingScreen();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const LoadingScreen(),
+            );
           },
         ),
         ShellRoute(
-          builder: (context, state, child) {
-            return AppWrapper(child: child);
+          observers: [Provider.of<RouteObserver<PageRoute>>(context)],
+          pageBuilder: (context, state, child) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: AppWrapper(child: child),
+            );
           },
           routes: <RouteBase>[
             GoRoute(
               path: Routes.home,
-              builder: (BuildContext context, GoRouterState state) {
-                return const DashboardScreen();
-              },
-            ),
-            GoRoute(
-              path: Routes.explore,
-              builder: (BuildContext context, GoRouterState state) {
-                return const ExploreScreen();
-              },
-            ),
-            GoRoute(
-              path: Routes.progress,
-              builder: (BuildContext context, GoRouterState state) {
-                return Center(
-                  child: Text(AppLocalizations.of(context)!.navProgressText),
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const DashboardScreen(),
                 );
               },
             ),
             GoRoute(
-              path: Routes.inbox,
-              redirect: (_, __) => Routes.inboxChats,
-            ),
-            GoRoute(
-              path: Routes.inboxChats,
-              builder: (BuildContext context, GoRouterState state) {
-                return const InboxChatsScreen();
+              path: Routes.explore,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const ExploreScreen(),
+                );
               },
             ),
             GoRoute(
-              path: Routes.inboxInvites,
-              redirect: (_, __) => Routes.inboxInvitesReceived,
+              path: Routes.progress,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const ProgressScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.inboxChats,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const InboxChatsScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.inboxChats$ChannelId,
+              pageBuilder: (context, state) {
+                final String channelId =
+                    state.pathParameters[RouteParams.channelId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: ChannelMessagesScreen(
+                    channelId: channelId,
+                  ),
+                );
+              },
             ),
             GoRoute(
               path: Routes.inboxInvitesReceived,
-              builder: (BuildContext context, GoRouterState state) {
-                return const InboxInvitesReceivedScreen();
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const InboxInvitesReceivedScreen(),
+                );
               },
             ),
             GoRoute(
               path: Routes.inboxInvitesSent,
-              builder: (BuildContext context, GoRouterState state) {
-                return const InboxInvitesSentScreen();
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const InboxInvitesSentScreen(),
+                );
               },
             ),
             GoRoute(
               path: Routes.inboxArchived,
-              builder: (BuildContext context, GoRouterState state) {
-                return const InboxArchivedChatsScreen();
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const InboxArchivedChatsScreen(),
+                );
               },
             ),
             GoRoute(
               path: Routes.profile,
-              builder: (BuildContext context, GoRouterState state) {
-                return Center(
-                  child: Text(AppLocalizations.of(context)!.navProfileText),
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const ProfileScreen(),
                 );
               },
             ),
@@ -113,5 +157,49 @@ class AppRouter {
         ),
       ],
     );
+  }
+}
+
+mixin RouteAwareMixin<T extends StatefulWidget> on State<T>
+    implements RouteAware {
+  RouteObserver<PageRoute>? _routeObserver;
+  bool _isActive = false;
+
+  bool get isRouteActive => _isActive;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _routeObserver = Provider.of<RouteObserver<PageRoute>>(
+      context,
+      listen: false,
+    );
+    _routeObserver!.subscribe(this, ModalRoute.of(context)! as PageRoute);
+  }
+
+  @override
+  void dispose() {
+    _routeObserver?.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPop() {
+    _isActive = false;
+  }
+
+  @override
+  void didPopNext() {
+    _isActive = true;
+  }
+
+  @override
+  void didPush() {
+    _isActive = true;
+  }
+
+  @override
+  void didPushNext() {
+    _isActive = false;
   }
 }

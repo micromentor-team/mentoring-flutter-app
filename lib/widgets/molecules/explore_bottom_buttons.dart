@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ExploreBottomButtons extends StatelessWidget {
   final int selectedCount;
@@ -16,13 +16,14 @@ class ExploreBottomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     Color bgColor;
     if (selectedCount > 0) {
-      bgColor = Theme.of(context).colorScheme.secondaryContainer;
+      bgColor = theme.colorScheme.secondaryContainer;
     } else {
-      bgColor = Theme.of(context).colorScheme.surfaceVariant;
+      bgColor = theme.colorScheme.surfaceVariant;
     }
 
     return Container(
@@ -33,27 +34,34 @@ class ExploreBottomButtons extends StatelessWidget {
         children: <Widget>[
           if (selectedCount > 0)
             TextButton(
-              style: ButtonStyles.bigTextButton(context),
+              style: TextButton.styleFrom(
+                minimumSize: Dimensions.bigButtonSize,
+              ),
               onPressed: clearAction,
               child: Text(
                 l10n.exploreClearButton,
-                style: TextStyles.bigButtonText(context),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: theme.colorScheme.secondary,
+                ),
               ),
             ),
           // Send invites button
           ElevatedButton(
-              style: ButtonStyles.bigElevatedButton(context),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Dimensions.bigButtonSize,
+                backgroundColor: theme.colorScheme.surface,
+                disabledBackgroundColor: theme.colorScheme.surface,
+                textStyle: theme.textTheme.labelLarge,
+              ),
               onPressed: selectedCount == 0 ? null : sendInvitesAction,
               child: Row(
                 children: [
                   selectedCount == 0
                       ? Text(
                           l10n.exploreSendInviteButtonDisabled,
-                          style: TextStyles.bigButtonDisabledText(context),
                         )
                       : Text(
                           l10n.exploreSendInviteButton(selectedCount),
-                          style: TextStyles.bigButtonText(context),
                         ),
                   const SizedBox(
                     width: Dimensions.iconSpaceWidth,

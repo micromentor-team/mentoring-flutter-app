@@ -37,7 +37,7 @@ class MentorCard extends StatelessWidget {
   Column _getMentorInfo(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     List<Chip> mentorSkills = _getMentorSkillChips(context);
-
+    final ThemeData theme = Theme.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class MentorCard extends StatelessWidget {
         Chip(
           avatar: Icon(
             Icons.star,
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: theme.colorScheme.inversePrimary,
           ),
 
           //using ConstrainedBox to prevent Text Overflow beyond the Card
@@ -56,7 +56,9 @@ class MentorCard extends StatelessWidget {
             ),
             child: Text(
               l10n.recommendedMentorCardScrollable,
-              style: TextStyles.smallTextButton(context),
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onPrimary,
+              ),
             ),
           ),
           visualDensity: const VisualDensity(
@@ -73,7 +75,9 @@ class MentorCard extends StatelessWidget {
             width: Dimensions.mentorCardWidth / 2,
             child: Text(
               mentorName,
-              style: TextStyles.cardTitle(context),
+              style: theme.textTheme.titleSmall?.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
               softWrap: false,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -89,7 +93,9 @@ class MentorCard extends StatelessWidget {
             width: Dimensions.mentorCardWidth / 2,
             child: Text(
               mentorBio,
-              style: TextStyles.cardSubtitle(context),
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.tertiary,
+              ),
               softWrap: false,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -125,6 +131,7 @@ class MentorCard extends StatelessWidget {
 
   //TODO(guptarupal): Make the chip "style" defined in styles.dart
   Chip _createSkillChip(String skill, BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Chip(
       //using ConstrainedBox to prevent Text Overflow beyond the Card
       label: ConstrainedBox(
@@ -133,14 +140,15 @@ class MentorCard extends StatelessWidget {
         ),
         child: Text(
           skill,
-          style: TextStyles.mentorCardSubtitle(context),
+          style: theme.textTheme.labelSmall
+              ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
           overflow: TextOverflow.ellipsis,
         ),
       ),
       visualDensity: const VisualDensity(
         vertical: Dimensions.chipVisualDensity,
       ),
-      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+      backgroundColor: theme.colorScheme.tertiaryContainer,
       side: BorderSide.none,
     );
   }

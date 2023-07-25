@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
+import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
-import 'package:mm_flutter_app/widgets/atoms/inbox_list_tile.dart';
+import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/models/scaffold_model.dart';
 
 class InboxArchivedChatsScreen extends StatefulWidget {
   const InboxArchivedChatsScreen({super.key});
@@ -12,7 +16,8 @@ class InboxArchivedChatsScreen extends StatefulWidget {
       _InboxArchivedChatsScreenState();
 }
 
-class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen> {
+class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen>
+    with RouteAwareMixin<InboxArchivedChatsScreen> {
   List<DismissibleTile> tiles = [];
 
   DismissibleTile _createTestTile(int notifications, int tileIndex) {
@@ -41,6 +46,7 @@ class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen> {
         message:
             'Lorem ipsum dolor sit amet consectetur. Enim id interdum pulvinar eget dolor sed sit enim.',
         notifications: notifications,
+        onPressed: () => DebugLogger.warning('TODO: NOT IMPLEMENTED.'),
       ),
     );
   }
@@ -69,6 +75,28 @@ class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen> {
       ]);
     }
     return contentList;
+  }
+
+  void _refreshScaffold() {
+    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
+      context,
+      listen: false,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scaffoldModel.setInboxScaffold(context);
+    });
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    _refreshScaffold();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    _refreshScaffold();
   }
 
   @override

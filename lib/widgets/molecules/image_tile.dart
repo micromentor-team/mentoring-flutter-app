@@ -18,32 +18,37 @@ class ImageTile extends StatelessWidget {
   Widget _makeImage() {
     if (isCircle) {
       return Padding(
-          padding: const EdgeInsets.all(Insets.widgetSmallInset),
+        padding: const EdgeInsets.all(Insets.widgetSmallInset),
+        child: CircleAvatar(
+          radius: Radii.avatarRadiusSmall,
           child: CircleAvatar(
-              radius: Radii.avatarRadiusSmall,
-              child: CircleAvatar(
-                radius: Radii.avatarRadiusSmall,
-                backgroundImage: image,
-              )));
+            radius: Radii.avatarRadiusSmall,
+            backgroundImage: image,
+          ),
+        ),
+      );
     } else {
       return Padding(
-          padding: const EdgeInsets.only(
-              top: Insets.widgetSmallInset, bottom: Insets.widgetMediumInset),
-          child: Container(
-              width: Dimensions.imageTileRectangularImage.width,
-              height: Dimensions.imageTileRectangularImage.height,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: image,
-                  fit: BoxFit.fill,
-                  alignment: Alignment.topCenter,
-                ),
-              )));
+        padding: const EdgeInsets.only(
+            top: Insets.widgetSmallInset, bottom: Insets.widgetMediumInset),
+        child: Container(
+          width: Dimensions.imageTileRectangularImage.width,
+          height: Dimensions.imageTileRectangularImage.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: image,
+              fit: BoxFit.fill,
+              alignment: Alignment.topCenter,
+            ),
+          ),
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(Insets.widgetSmallestInset),
       child: Card(
@@ -65,7 +70,9 @@ class ImageTile extends StatelessWidget {
                   const Spacer(),
                   Text(
                     title,
-                    style: TextStyles.cardTitle(context),
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      color: theme.colorScheme.secondary,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const Spacer(),
@@ -75,7 +82,9 @@ class ImageTile extends StatelessWidget {
                         bottom: Insets.widgetSmallInset),
                     child: Text(
                       subtitle,
-                      style: TextStyles.cardSubtitle(context),
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.tertiary,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   )

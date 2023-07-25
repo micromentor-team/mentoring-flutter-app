@@ -15,6 +15,7 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(Insets.widgetLargeInset),
       child: Row(
@@ -28,7 +29,9 @@ class ProfileHeader extends StatelessWidget {
                 profileMessage,
                 textAlign: TextAlign.start,
                 softWrap: true,
-                style: TextStyles.profileHeader(context),
+                style: theme.textTheme.titleLarge?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                ),
               ),
             ),
           ),
