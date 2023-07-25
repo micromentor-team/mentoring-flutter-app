@@ -21,6 +21,7 @@ class InvitationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return ListTile(
       minVerticalPadding: Insets.widgetMediumLargeInset,
@@ -33,7 +34,9 @@ class InvitationTile extends StatelessWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      titleTextStyle: TextStyles.cardTitle(context),
+      titleTextStyle: theme.textTheme.titleSmall?.copyWith(
+        color: theme.colorScheme.secondary,
+      ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -43,31 +46,38 @@ class InvitationTile extends StatelessWidget {
             ),
             child: Text(
               userJobTitle,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.tertiary,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
           ),
           Text(
             _invitationText(l10n),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
-      subtitleTextStyle: TextStyles.mentorCardSubtitle(context),
       trailing: SizedBox(
         width: Radii.avatarRadiusSmall * 2,
         height: Radii.avatarRadiusSmall * 2,
         child: ElevatedButton(
           onPressed: buttonOnPressed,
           style: ElevatedButton.styleFrom(
+            backgroundColor: theme.colorScheme.secondaryContainer,
             padding: const EdgeInsets.all(0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(Radii.avatarRadiusSmall),
             ),
           ),
-          child: const Icon(
+          child: Icon(
             Icons.navigate_next,
+            color: Color(theme.colorScheme.onSecondaryContainer.value),
           ),
         ),
       ),

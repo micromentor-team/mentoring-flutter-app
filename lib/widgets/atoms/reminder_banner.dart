@@ -18,6 +18,7 @@ class ReminderBanner extends StatelessWidget {
       : super(key: key);
 
   Widget _buildTextColumn(context) {
+    final ThemeData theme = Theme.of(context);
     return Expanded(
         flex: 1,
         child: Column(
@@ -25,12 +26,12 @@ class ReminderBanner extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(titleText,
-                style: TextStyles.cardTitle(context),
+                style: theme.textTheme.titleSmall,
                 textAlign: TextAlign.start,
                 softWrap: true),
             const SizedBox(height: Insets.widgetSmallestInset),
             Text(subtitleText,
-                style: TextStyles.cardSubtitle(context),
+                style: theme.textTheme.bodySmall,
                 textAlign: TextAlign.start,
                 softWrap: true),
           ],
@@ -38,41 +39,55 @@ class ReminderBanner extends StatelessWidget {
   }
 
   Widget _buildImageAndButtonColumn(context) {
+    final ThemeData theme = Theme.of(context);
     return Expanded(
-        flex: 1,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const SizedBox(
-                child: Image(
-              image: AssetImage(Assets.reminderBannerStockImage),
-              height: Dimensions.reminderBannerImageHeight,
-            )),
-            InkWell(
-                onTap: () => {debugPrint("hi")},
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  const Icon(Icons.arrow_forward),
-                  Text(ctaText, style: TextStyles.cardTitle(context)),
-                ]))
-          ],
-        ));
+      flex: 1,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const SizedBox(
+              child: Image(
+            image: AssetImage(Assets.reminderBannerStockImage),
+            height: Dimensions.reminderBannerImageHeight,
+          )),
+          InkWell(
+            onTap: () => {debugPrint("hi")},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.arrow_forward),
+                Text(
+                  ctaText,
+                  style: theme.textTheme.labelLarge,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Insets.widgetMediumInset,
-          vertical: Insets.widgetSmallestInset,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Insets.widgetMediumInset,
+        vertical: Insets.widgetSmallestInset,
+      ),
+      child: Card(
+        surfaceTintColor: Theme.of(context).colorScheme.inverseSurface,
+        child: Padding(
+          padding: const EdgeInsets.all(Insets.widgetMediumInset),
+          child: Row(
+            children: <Widget>[
+              _buildTextColumn(context),
+              _buildImageAndButtonColumn(context)
+            ],
+          ),
         ),
-        child: Card(
-            child: Padding(
-                padding: const EdgeInsets.all(Insets.widgetMediumInset),
-                child: Row(children: <Widget>[
-                  _buildTextColumn(context),
-                  _buildImageAndButtonColumn(context)
-                ]))));
+      ),
+    );
   }
 }
 

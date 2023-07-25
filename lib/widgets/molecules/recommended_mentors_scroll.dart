@@ -67,6 +67,7 @@ class RecommendedSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
@@ -79,8 +80,11 @@ class RecommendedSection extends StatelessWidget {
             child: ElevatedButton.icon(
               icon: const Icon(Icons.search),
               onPressed: () => {debugPrint("hi")},
-              label: Text(l10n.homeFindMoreMentors),
-              style: ButtonStyles.roundedRectangleButton(context),
+              label: Text(
+                l10n.homeFindMoreMentors,
+                style: theme.textTheme.labelLarge,
+              ),
+              style: ButtonStyles.secondaryRoundedRectangleButton(context),
             ),
           ),
         ),
