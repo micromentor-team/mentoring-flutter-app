@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
-import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/explore_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 
@@ -100,7 +100,7 @@ _ProfileQuickViewInfo _createRecommendedEntrepreneurExample() {
       company: 'St James Place',
       ventureStage: ProfileChip(
         text: 'Operational',
-        icon: Icon(Icons.lightbulb_outline),
+        icon: Icons.lightbulb_outline,
       ),
       ventureIndustry: ProfileChip(text: 'NonProfit/Social Enterprise'),
       skills: [
@@ -205,6 +205,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SafeArea(
@@ -223,9 +224,14 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                     child: Column(children: [
                       Text(
                         l10n.exploreSeeMore,
-                        style: TextStyles.sectionHeader(context),
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
                       ),
-                      const Icon(Icons.arrow_drop_down),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: Color(theme.colorScheme.onSurfaceVariant.value),
+                      ),
                     ]))
               ],
         )),

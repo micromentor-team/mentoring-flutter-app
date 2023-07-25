@@ -56,22 +56,24 @@ class ProfileQuickViewCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
                 )
               : null,
-          child: Padding(
-            padding: const EdgeInsets.all(Insets.widgetMediumInset),
-            child: Stack(children: [
+          child: Stack(
+            children: [
               Align(
                 alignment: Alignment.topRight,
                 child: checkbox,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (isRecommended) _createRecommendedHeader(context, l10n),
-                  _createProfileView(context, l10n),
-                  if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(Insets.widgetMediumInset),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (isRecommended) _createRecommendedHeader(context, l10n),
+                    _createProfileView(context, l10n),
+                    if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
+                  ],
+                ),
               ),
-            ]),
+            ],
           ),
         ),
       ),
@@ -82,6 +84,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     BuildContext context,
     AppLocalizations l10n,
   ) {
+    final ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: Insets.widgetSmallInset),
       child: Row(
@@ -93,7 +96,9 @@ class ProfileQuickViewCard extends StatelessWidget {
           const SizedBox(width: Insets.widgetSmallInset),
           Text(
             l10n.exploreRecommended,
-            style: TextStyles.sectionSubHeader(context),
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
           ),
         ],
       ),
@@ -101,6 +106,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   }
 
   Widget _createProfileView(BuildContext context, AppLocalizations l10n) {
+    final ThemeData theme = Theme.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,13 +134,15 @@ class ProfileQuickViewCard extends StatelessWidget {
               Text.rich(
                 TextSpan(
                   text: fullName,
-                  style: TextStyles.quickViewProfileCardHighEmphasis(context)
-                      ?.copyWith(height: 1.4),
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    height: 1.4,
+                    color: theme.colorScheme.onPrimaryContainer,
+                  ),
                   children: [
                     TextSpan(
                       text: ' ${_userTypeTag(l10n)}',
-                      style: TextStyles.quickViewProfileCardMediumEmphasis(
-                        context,
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
                       ),
                     )
                   ],
@@ -143,14 +151,19 @@ class ProfileQuickViewCard extends StatelessWidget {
               const SizedBox(height: Insets.widgetSmallestInset),
               Text(
                 location,
-                style: TextStyles.quickViewProfileCardLowEmphasis(context),
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.secondary,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
               const Divider(
                 endIndent: Insets.widgetLargeInset,
               ),
               Text(
                 _companyText(l10n),
-                style: TextStyles.quickViewProfileCardMediumEmphasis(context),
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.secondary,
+                ),
               ),
               const SizedBox(height: Insets.widgetSmallestInset),
               _createProfileChips(l10n),
@@ -162,6 +175,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   }
 
   Widget _createSkillsFooter(BuildContext context, AppLocalizations l10n) {
+    final ThemeData theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -172,7 +186,7 @@ class ProfileQuickViewCard extends StatelessWidget {
           ),
           child: Text(
             _expertiseText(l10n)!,
-            style: TextStyles.quickViewProfileSkillsFooter(context),
+            style: theme.textTheme.labelSmall,
             textAlign: TextAlign.start,
           ),
         ),
@@ -249,7 +263,7 @@ class ProfileQuickViewCard extends StatelessWidget {
           return const SizedBox(width: 0, height: 0);
         }
         return ProfileChip(
-          icon: const Icon(Icons.verified_outlined),
+          icon: Icons.verified_outlined,
           text: l10n.exploreEndorsements(endorsements!),
         );
       default:
