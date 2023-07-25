@@ -14,9 +14,19 @@ class CloseableTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(Insets.widgetSmallestInset),
       child: Card(
+        elevation: 0,
+        color: theme.colorScheme.surface,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(Radii.roundedRectRadius)),
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
               vertical: Insets.widgetSmallInset,
@@ -45,7 +55,9 @@ class CloseableTile extends StatelessWidget {
                   const Spacer(),
                   Text(
                     title,
-                    style: TextStyles.mentorCardTitle(context),
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onPrimaryContainer,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const Spacer(),

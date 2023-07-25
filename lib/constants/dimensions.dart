@@ -37,7 +37,7 @@ class Dimensions {
   static const double avatarRoundedRectLength = 28.0;
   static const double drawerHeaderHeight = 64.0;
   static const double minimumInteractionWidgetLength = 48.0;
-  static const Size imageTile = Size(88.0, 160.0);
+  static const Size imageTile = Size(88.0, 168.0);
   static const Size imageTileRectangularImage = Size(88.0, 72.0);
   static const double reminderBannerImageHeight = 80.0;
   static const double mentorCardHeight = 170;

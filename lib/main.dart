@@ -85,7 +85,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FirebaseNotifications().initialize();
+  if (!kIsWeb) {
+    await FirebaseNotifications().initialize();
+  }
 
   //TODO(m-rosario): Make crash data collection opt-in.
   final CrashHandler crashHandler = CrashHandler(!kDebugMode, true);

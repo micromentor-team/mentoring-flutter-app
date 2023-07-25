@@ -21,6 +21,7 @@ class _MessageBoxState extends State<MessageBox> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
 
     return Padding(
         padding: const EdgeInsets.symmetric(
@@ -52,22 +53,34 @@ class _MessageBoxState extends State<MessageBox> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  style: ButtonStyles.bigTextButton(context),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Dimensions.bigButtonSize,
+                    backgroundColor: theme.colorScheme.surface,
+                    textStyle: theme.textTheme.labelLarge,
+                  ),
                   onPressed: () {
                     _textEditingController.clear();
                   },
                   child: Text(
                     l10n.clear,
-                    style: TextStyles.bigButtonText(context),
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: theme.colorScheme.primary,
+                    ),
                   ),
                 ),
                 const SizedBox(width: Insets.widgetMediumInset),
                 ElevatedButton(
-                  style: ButtonStyles.bigElevatedButton(context),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Dimensions.bigButtonSize,
+                    backgroundColor: theme.colorScheme.primary,
+                    textStyle: theme.textTheme.labelLarge,
+                  ),
                   onPressed: () {},
                   child: Text(
                     l10n.send,
-                    style: TextStyles.bigButtonText(context),
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: theme.colorScheme.onPrimary,
+                    ),
                   ),
                 )
               ],
@@ -100,19 +113,27 @@ class _InviteToConnectState extends State<InviteToConnect> {
 
   Widget _createMessageTips(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
     return Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Insets.widgetMediumInset,
           vertical: Insets.widgetSmallestInset,
         ),
         child: Card(
+          color: theme.colorScheme.tertiaryContainer,
           child: Padding(
               padding: const EdgeInsets.all(Insets.widgetSmallInset),
               child: ListTile(
-                  title: Text(l10n.inviteMessageTips),
+                  title: Text(
+                    l10n.inviteMessageTips,
+                    style: theme.textTheme.titleMedium,
+                  ),
                   subtitle: Padding(
                       padding: const EdgeInsets.all(Insets.widgetSmallInset),
-                      child: Text(l10n.inviteMessageTipsContent)))),
+                      child: Text(
+                        l10n.inviteMessageTipsContent,
+                        style: theme.textTheme.bodyMedium,
+                      )))),
         ));
   }
 
