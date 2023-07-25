@@ -5,6 +5,142 @@ import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import '../../constants/app_constants.dart';
 import '../atoms/skill_chip.dart';
 
+/*
+ * 
+ * Profile quick view helper class and functions
+ */
+class ProfileQuickViewInfo {
+  final bool isRecommended;
+  final UserType userType;
+  final String? avatarUrl;
+  final String fullName;
+  final String location;
+  final String company;
+  final String? companyRole;
+  final ProfileChip? ventureStage;
+  final ProfileChip? ventureIndustry;
+  final int? endorsements;
+  final List<SkillChip> skills;
+
+  const ProfileQuickViewInfo({
+    required this.isRecommended,
+    required this.userType,
+    required this.avatarUrl,
+    required this.fullName,
+    required this.location,
+    required this.company,
+    this.companyRole,
+    this.ventureStage,
+    this.ventureIndustry,
+    this.endorsements,
+    required this.skills,
+  });
+}
+
+ProfileQuickViewInfo createRecommendedMentorExample() {
+  return const ProfileQuickViewInfo(
+      isRecommended: true,
+      userType: UserType.mentor,
+      avatarUrl:
+          'https://media.istockphoto.com/id/1280371040/photo/confident-stylish-european-mature-middle-aged-woman-standing-at-workplace-stylish-older.jpg?s=612x612&w=0&k=20&c=AntzoG_Z1hN6tYVBXbu58Rvz4jweBYa8669bV75yWRw=',
+      fullName: 'Delia Joyce',
+      location: 'Shaker Heights, Ohio, USA',
+      company: 'SparkNow',
+      companyRole: 'Founder',
+      endorsements: 7,
+      skills: [
+        SkillChip(
+          skill: 'Marketing',
+          icon: Icon(Icons.people_alt_outlined),
+        ),
+        SkillChip(
+          skill: 'Operations',
+          icon: Icon(Icons.settings_applications_outlined),
+        ),
+        SkillChip(
+          skill: 'Starting Up',
+          icon: Icon(Icons.rocket_outlined),
+        ),
+      ]);
+}
+
+ProfileQuickViewInfo createRegularMentorExample() {
+  return const ProfileQuickViewInfo(
+      isRecommended: false,
+      userType: UserType.mentor,
+      avatarUrl:
+          'https://media.istockphoto.com/id/1307694427/photo/portrait-of-businessman-in-glasses-holding-smartphone-in-hand.jpg?s=612x612&w=0&k=20&c=P4FDNemdXlXQi3O_yLePrJVzuTYmJx84-iIySj91fGQ=',
+      fullName: 'Jenika Chua',
+      location: 'Shaker Heights, Ohio, USA',
+      company: 'SparkNow',
+      companyRole: 'Founder',
+      endorsements: 7,
+      skills: [
+        SkillChip(
+          skill: 'Marketing',
+          icon: Icon(Icons.people_alt_outlined),
+        ),
+        SkillChip(
+          skill: 'Operations',
+          icon: Icon(Icons.settings_applications_outlined),
+        ),
+        SkillChip(
+          skill: 'Starting Up',
+          icon: Icon(Icons.rocket_outlined),
+        ),
+      ]);
+}
+
+ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
+  return const ProfileQuickViewInfo(
+      isRecommended: true,
+      userType: UserType.entrepreneur,
+      avatarUrl:
+          'https://st4.depositphotos.com/9999814/39958/i/600/depositphotos_399584092-stock-photo-attractive-young-woman-profile-portrait.jpg',
+      fullName: 'Azadeh Sana',
+      location: 'Memphis, Tennessee, USA',
+      company: 'St James Place',
+      ventureStage: ProfileChip(
+        text: 'Operational',
+        icon: Icons.lightbulb_outline,
+      ),
+      ventureIndustry: ProfileChip(text: 'NonProfit/Social Enterprise'),
+      skills: [
+        SkillChip(
+          skill: 'Marketing',
+          icon: Icon(Icons.people_alt_outlined),
+        ),
+        SkillChip(
+          skill: 'Operations',
+          icon: Icon(Icons.settings_applications_outlined),
+        ),
+        SkillChip(
+          skill: 'Starting Up',
+          icon: Icon(Icons.rocket_outlined),
+        ),
+      ]);
+}
+
+ProfileQuickViewCard createProfilCardFromInfoAndCheckbox({
+  required ProfileQuickViewInfo info,
+  Checkbox? checkbox,
+}) {
+  return ProfileQuickViewCard(
+    checkbox: checkbox,
+    isRecommended: info.isRecommended,
+    userType: info.userType,
+    avatarUrl: info.avatarUrl,
+    fullName: info.fullName,
+    location: info.location,
+    company: info.company,
+    companyRole: info.companyRole,
+    ventureStage: info.ventureStage,
+    ventureIndustry: info.ventureIndustry,
+    endorsements: info.endorsements,
+    skills: info.skills,
+  );
+}
+
 class ProfileQuickViewCard extends StatelessWidget {
   static int maxSkillChips = 3;
 
@@ -19,7 +155,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   final ProfileChip? ventureIndustry;
   final int? endorsements;
   final List<SkillChip> skills;
-  final Checkbox checkbox;
+  final Checkbox? checkbox;
 
   const ProfileQuickViewCard({
     Key? key,
@@ -34,7 +170,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     this.ventureIndustry,
     this.endorsements,
     this.skills = const [],
-    required this.checkbox,
+    this.checkbox,
   }) : super(key: key);
 
   @override
