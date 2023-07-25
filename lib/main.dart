@@ -16,9 +16,6 @@ import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
-import 'package:mm_flutter_app/widgets/screens/dashboard/dashboard.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/explore.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 
