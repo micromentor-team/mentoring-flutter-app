@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
+import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_archived_chats.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
@@ -86,6 +88,15 @@ class AppRouter {
                 );
               },
             ),
+            GoRoute(
+                path: Routes.exploreInviteToConnect,
+                builder: (BuildContext context, GoRouterState state) {
+                  List<ProfileQuickViewInfo> selectedProfiles =
+                      state.extra as List<ProfileQuickViewInfo>;
+                  return InviteToConnect(
+                    initialSelectedProfiles: selectedProfiles,
+                  );
+                }),
             GoRoute(
               path: Routes.progress,
               pageBuilder: (BuildContext context, GoRouterState state) {

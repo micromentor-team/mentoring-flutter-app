@@ -8,6 +8,7 @@ class Routes {
   static const String loading = '/loading';
   static const String home = '/home';
   static const String explore = '/explore';
+  static const String exploreInviteToConnect = '$explore/connect';
   static const String progress = '/progress';
   static const String inbox = '/inbox';
   static const String inboxChats = '$inbox/chats';

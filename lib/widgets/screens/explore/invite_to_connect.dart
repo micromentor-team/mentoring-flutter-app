@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/molecules/closable_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 
@@ -77,18 +78,25 @@ class _MessageBoxState extends State<MessageBox> {
 }
 
 class InviteToConnect extends StatefulWidget {
-  const InviteToConnect({Key? key}) : super(key: key);
+  final List<ProfileQuickViewInfo> initialSelectedProfiles;
+
+  const InviteToConnect({Key? key, required this.initialSelectedProfiles})
+      : super(key: key);
 
   @override
   State<InviteToConnect> createState() => _InviteToConnectState();
 }
 
 class _InviteToConnectState extends State<InviteToConnect> {
-  List<ProfileQuickViewInfo> selectedProfiles = [
-    createRecommendedEntrepreneurExample(),
-    createRecommendedMentorExample(),
-    createRegularMentorExample(),
-  ];
+  List<ProfileQuickViewInfo> selectedProfiles = [];
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      selectedProfiles = widget.initialSelectedProfiles;
+    });
+  }
 
   Widget _createMessageTips(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -157,10 +165,8 @@ class _InviteToConnectState extends State<InviteToConnect> {
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.close),
-              tooltip: 'Show Snackbar',
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('This is a snackbar')));
+                context.pop();
               },
             ),
           ],

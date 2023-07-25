@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
@@ -116,7 +117,13 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
             });
           },
           sendInvitesAction: () {
-            debugPrint("Not implemented");
+            List<ProfileQuickViewInfo> selectedInfo = [];
+            for (int i = 0; i < isSelected.length; i++) {
+              if (isSelected[i]) {
+                selectedInfo.add(cardInfo[i]);
+              }
+            }
+            context.push(Routes.exploreInviteToConnect, extra: selectedInfo);
           },
           selectedCount: isSelected
               .map((e) => e ? 1 : 0)
