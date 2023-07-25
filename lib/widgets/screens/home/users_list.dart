@@ -56,7 +56,7 @@ class UsersList extends StatelessWidget {
     final channelIndex =
         channels.indexWhere((item) => item.userIds?.contains(userId) ?? false);
 
-    String? channelId;
+    String channelId;
     final navigator = Navigator.of(context);
 
     if (channelIndex >= 0) {
@@ -75,7 +75,7 @@ class UsersList extends StatelessWidget {
       final result = await channelsProvider.createChannel(
         input: Input$ChannelInput(createdBy: user.id, userIds: userIds),
       );
-      channelId = result.response?.id;
+      channelId = result.response!.id;
     }
     navigator.push(
       MaterialPageRoute(

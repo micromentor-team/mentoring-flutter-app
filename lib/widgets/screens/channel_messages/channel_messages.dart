@@ -9,54 +9,61 @@ import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
+import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/models/scaffold_model.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_bubble/message_hoverover.dart';
 import 'message_bubble/message_peeker.dart';
 import 'message_details.dart';
 import 'message_input.dart';
 
-class ChannelMessagesScreen extends StatelessWidget {
-  const ChannelMessagesScreen({Key? key, required this.channelId})
-      : super(key: key);
-  final String? channelId;
+class ChannelMessagesScreen extends StatefulWidget {
+  final String channelId;
 
-  // void _openChannelDetailsScreen(context) {
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute<void>(
-  //         builder: (BuildContext context) {
-  //           return ChannelDetailsScreen(
-  //             channelId: channelId,
-  //           );
-  //         },
-  //         fullscreenDialog: true),
-  //   );
-  // }
+  const ChannelMessagesScreen({
+    super.key,
+    required this.channelId,
+  });
 
-  // void _openChannelSettings(context) {
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute<void>(
-  //         builder: (BuildContext context) {
-  //           return ChannelSettings(
-  //             channelId: channelId,
-  //           );
-  //         },
-  //         fullscreenDialog: true),
-  //   );
-  // }
+  @override
+  State<ChannelMessagesScreen> createState() => _ChannelMessagesScreenState();
+}
 
-  // void _openAddParticipantsScreen(context, channel) {
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute<void>(
-  //         builder: (BuildContext context) {
-  //           return AddParticipantsScreen(
-  //             channel: channel,
-  //           );
-  //         },
-  //         fullscreenDialog: true),
-  //   );
-  // }
+class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
+    with RouteAwareMixin<ChannelMessagesScreen> {
+  void _refreshScaffold(
+    BuildContext context,
+    String channelName,
+    String? avatarUrl,
+  ) {
+    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
+      context,
+      listen: false,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scaffoldModel.setChannelMessagesScaffold(
+        context,
+        channelName,
+        avatarUrl,
+      );
+    });
+  }
+
+  @override
+  void didPush() {
+    setState(() {
+      super.didPush();
+    });
+  }
+
+  @override
+  void didPopNext() {
+    setState(() {
+      super.didPopNext();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,75 +72,24 @@ class ChannelMessagesScreen extends StatelessWidget {
     final user = userProvider.user;
 
     return channelsProvider.findChannelById(
-      channelId: channelId!,
+      channelId: widget.channelId,
       onData: (data, {refetch, fetchMore}) {
         ChannelById channel = data.response!;
-        final String? channelName = channel.participants
+        final participant = channel.participants
             .firstWhere((item) => item.user.id != user?.id)
-            .user
-            .fullName;
-
-        return Scaffold(
-          appBar: AppBar(
-            title: InkWell(
-              child: Text(channelName!),
-              onTap: () => {
-                FocusManager.instance.primaryFocus?.unfocus(),
-                // _openChannelDetailsScreen(context)
-              },
-            ),
-            // actions: [
-            //   Center(
-            //     child: InkWell(
-            //       onTap: () => {
-            //         FocusManager.instance.primaryFocus?.unfocus(),
-            //         // _openAddParticipantsScreen(context, channel)
-            //       },
-            //       child: SizedBox(
-            //         width: 90.0,
-            //         child: ParticipantStack.channel(
-            //           channel: channel,
-            //           participantRadius: 15.0,
-            //         ),
-            //       ),
-            //     ),
-            //   )
-            // ],
-          ),
-          body: ChannelMessages(
-            channel: channel,
-          ),
+            .user;
+        final String channelName = participant.fullName!;
+        final String? avatarUrl = participant.avatarUrl;
+        if (isRouteActive) {
+          _refreshScaffold(context, channelName, avatarUrl);
+        }
+        return ChannelMessages(
+          channel: channel,
         );
       },
     );
   }
 }
-
-// class SubscribeForMessages extends StatefulWidget {
-//   const SubscribeForMessages({Key? key, required this.channel})
-//       : super(key: key);
-//   final Channel channel;
-//
-//   @override
-//   State<SubscribeForMessages> createState() => _SubscribeForMessagesState();
-// }
-//
-// class _SubscribeForMessagesState extends State<SubscribeForMessages> {
-//   @override
-//   void initState() {
-//     final messagesProvider =
-//         Provider.of<MessagesProvider>(context, listen: false);
-//     messagesProvider.subscribeToChannel(channelId: widget.channel.id);
-//     super.initState();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return ChannelMessages(
-//       channel: widget.channel,
-//     );
-//   }
-// }
 
 class ChannelMessages extends StatelessWidget {
   const ChannelMessages({Key? key, required this.channel}) : super(key: key);
