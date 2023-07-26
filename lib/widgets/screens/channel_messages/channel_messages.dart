@@ -1,15 +1,17 @@
 import 'dart:io';
 
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/scaffold_model.dart';
@@ -127,44 +129,15 @@ class _ChannelChatState extends State<ChannelChat> {
   final TextEditingController messageTextController = TextEditingController();
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
-  double _bottomViewInset = 0; // The "safe" height of the Input
-  bool _scrollButtonVisibility = false;
   bool _unreadMessages = false; // Non-local Message exists outside of viewport
   ChannelMessage? _focusedMessage; // Intended reply Message
   // String newMessageText = ''; // Intended edited text body
-
-  void _scrollListener() {
-    if (listScrollController.position.extentBefore > 80 &&
-        _scrollButtonVisibility != true) {
-      setState(() {
-        _scrollButtonVisibility = true;
-      });
-    }
-    if (listScrollController.position.atEdge &&
-        listScrollController.position.pixels ==
-            listScrollController.position.minScrollExtent &&
-        _scrollButtonVisibility != false) {
-      setState(() {
-        if (_unreadMessages != false) {
-          _unreadMessages = false;
-        }
-        _scrollButtonVisibility = false;
-      });
-    }
-    if (MediaQuery.of(context).viewInsets.bottom > 0 &&
-        _scrollButtonVisibility != true) {
-      setState(() {
-        _scrollButtonVisibility = true;
-      });
-    }
-  }
 
   @override
   void initState() {
     final messagesProvider =
         Provider.of<MessagesProvider>(context, listen: false);
     messagesProvider.subscribeToChannel(channelId: widget.channel.id);
-    listScrollController.addListener(_scrollListener);
     super.initState();
   }
 
@@ -249,50 +222,46 @@ class _ChannelChatState extends State<ChannelChat> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Stack(
-          children: [
-            BuildMessageBubbles(
-              channel: widget.channel,
-              chatMessages: widget.chatMessages,
-              participants: widget.channel.participants,
-              bottomViewInset: _bottomViewInset,
-              listScrollController: listScrollController,
-              onOpenMessageDetails: (message) =>
-                  _openMessageDetailsModal(context, message),
-              onSetReplyingTo: (message) {
-                setState(() {
-                  _focusedMessage = message;
-                });
-              },
-            ),
-            BuildScrollButton(
-              buttonVisibility: _scrollButtonVisibility,
-              bottomViewInset: _bottomViewInset,
-              unreadMessages: _unreadMessages,
-              animationDuration: _animationDuration,
-              onPressed: () => _scrollDown(),
-            ),
-          ],
+        Expanded(
+          child: BuildMessageBubbles(
+            channel: widget.channel,
+            chatMessages: widget.chatMessages,
+            participants: widget.channel.participants,
+            listScrollController: listScrollController,
+            onOpenMessageDetails: (message) =>
+                _openMessageDetailsModal(context, message),
+            onSetReplyingTo: (message) {
+              setState(() {
+                _focusedMessage = message;
+              });
+            },
+          ),
         ),
-        BuildMessageInput(
-          channelId: widget.channel.id,
-          participants: widget.channel.participants,
-          bottomViewInset: _bottomViewInset,
+        MessageInput(
           replyingTo: _focusedMessage,
+          participants: widget.channel.participants,
+          onSubmit: (val, replyToMessageId) {
+            Provider.of<MessagesProvider>(context, listen: false).createMessage(
+              input: Input$ChannelMessageInput(
+                channelId: widget.channel.id,
+                messageText: val,
+                replyToMessageId: replyToMessageId,
+              ),
+            );
+            setState(() {
+              _focusedMessage = null;
+            });
+          },
           onClearReply: () {
             setState(() {
               _focusedMessage = null;
             });
           },
-          onSetBottomInset: (value) {
-            setState(() {
-              _bottomViewInset = value;
-            });
-          },
-        )
+        ),
       ],
     );
   }
@@ -304,7 +273,6 @@ class BuildMessageBubbles extends StatelessWidget {
     required this.channel,
     required this.participants,
     required this.chatMessages,
-    required this.bottomViewInset,
     required this.listScrollController,
     required this.onOpenMessageDetails,
     required this.onSetReplyingTo,
@@ -313,13 +281,13 @@ class BuildMessageBubbles extends StatelessWidget {
   final ChannelById channel;
   final List<ChannelParticipant> participants;
   final List<ChannelMessage> chatMessages;
-  final double bottomViewInset;
   final ScrollController listScrollController;
   final Function(ChannelMessage message) onOpenMessageDetails;
   final Function(ChannelMessage message) onSetReplyingTo;
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     List<ChannelMessage> messages = chatMessages.reversed.toList();
     return chatMessages.isNotEmpty
         ? GroupedListView<ChannelMessage, String>(
@@ -329,15 +297,9 @@ class BuildMessageBubbles extends StatelessWidget {
             sort: false,
             reverse: true,
             order: GroupedListOrder.DESC,
-            useStickyGroupSeparators: true,
-            stickyHeaderBackgroundColor: Colors.transparent,
-            padding: EdgeInsets.only(
-              left: 10.0,
-              top: 10.0,
-              right: 10.0,
-              bottom: kIsWeb || Platform.isMacOS
-                  ? bottomViewInset + 10.0
-                  : bottomViewInset,
+            useStickyGroupSeparators: false,
+            padding: const EdgeInsets.symmetric(
+              horizontal: Insets.widgetMediumInset,
             ),
             groupBy: (message) =>
                 DateFormat('yyyy-MM-dd').format(message.createdAt).toString(),
@@ -357,23 +319,12 @@ class BuildMessageBubbles extends StatelessWidget {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             controller: listScrollController,
             groupHeaderBuilder: (ChannelMessage message) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 30.0,
-                child: Center(
-                  child: Chip(
-                    side: BorderSide.none,
-                    backgroundColor: Colors.grey.shade200,
-                    label: Text(
-                      // 🚨 TODO: Currently looks broken because the sentAt is not localized
-                      DateTime.now().day == message.createdAt.day
-                          ? 'Today'
-                          : DateFormat('MMM d, yyyy').format(message.createdAt),
-                      style:
-                          TextStyle(color: Colors.grey.shade600, fontSize: 11),
-                    ),
-                  ),
-                ),
+              padding: const EdgeInsets.all(Insets.widgetSmallInset),
+              child: TextDivider(
+                text: DateTime.now().day == message.createdAt.day
+                    ? l10n.dateSimpleToday[0].toUpperCase() +
+                        l10n.dateSimpleToday.substring(1)
+                    : DateFormat('EEE. MMM dd').format(message.createdAt),
               ),
             ),
           )
@@ -461,133 +412,6 @@ class BuildMessageBubble extends StatelessWidget {
                 child: bubble,
               ),
       ],
-    );
-  }
-}
-
-class BuildMessageInput extends StatelessWidget {
-  const BuildMessageInput(
-      {Key? key,
-      required this.channelId,
-      required this.bottomViewInset,
-      required this.participants,
-      required this.onClearReply,
-      required this.onSetBottomInset,
-      this.replyingTo})
-      : super(key: key);
-
-  final String channelId;
-  final double bottomViewInset;
-  final ChannelMessage? replyingTo;
-  final List<ChannelParticipant> participants;
-  final Function onClearReply;
-  final Function onSetBottomInset;
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // 📌  This is where we're determining our scroll padding, for the cool transparent stuff.
-        // 1. Get the height of the input section as we have declared it; omitting any system padding
-        final double inputWidgetHeight =
-            MediaQuery.of(context).size.height - constraints.maxHeight;
-        // 2. Get what the ~device~ understands the actual viewport to be; before any of our implementations
-        final EdgeInsets viewInsets = EdgeInsets.fromViewPadding(
-          View.of(context).viewInsets,
-          View.of(context).devicePixelRatio,
-        );
-        // 3. Get the difference between our widget height and the current device bottom (inclusive of any system element)
-        final double inputHeight = inputWidgetHeight - viewInsets.bottom;
-        // ---------------------------------------------------------------------------------
-        // 🕵️‍♀️  If the ~device~ understands it has a system element impeding the viewport bottom,
-        // it prefers the element constraints, nullifying our implemented `SafeArea`...
-        // ---------------------------------------------------------------------------------
-        // 4. Finally, add a callback to the end of the paint and update our double for the keyboard/system element
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          // Given the value is different...
-          if (bottomViewInset != inputWidgetHeight &&
-              bottomViewInset != inputHeight) {
-            onSetBottomInset(inputHeight);
-          }
-        });
-
-        return IntrinsicHeight(
-          child: MessageInput(
-            replyingTo: replyingTo,
-            participants: participants,
-            onSubmit: (val, replyToMessageId) {
-              Provider.of<MessagesProvider>(context, listen: false)
-                  .createMessage(
-                input: Input$ChannelMessageInput(
-                  channelId: channelId,
-                  messageText: val,
-                  replyToMessageId: replyToMessageId,
-                ),
-              );
-
-              onClearReply();
-            },
-            onClearReply: onClearReply,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class BuildScrollButton extends StatelessWidget {
-  const BuildScrollButton(
-      {Key? key,
-      required this.buttonVisibility,
-      required this.bottomViewInset,
-      required this.unreadMessages,
-      required this.animationDuration,
-      required this.onPressed,
-      required})
-      : super(key: key);
-
-  final bool buttonVisibility;
-  final double bottomViewInset;
-  final bool unreadMessages;
-  final Duration animationDuration;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: buttonVisibility ? 1.0 : 0.0,
-      duration: animationDuration,
-      child: Visibility(
-        visible: buttonVisibility,
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: Padding(
-            padding: EdgeInsets.only(
-              right: 10.0,
-              bottom: bottomViewInset,
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                  right: 0,
-                  child: badges.Badge(
-                    showBadge: unreadMessages,
-                  ),
-                ),
-                FloatingActionButton(
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  mini: true,
-                  onPressed: onPressed,
-                  child: Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

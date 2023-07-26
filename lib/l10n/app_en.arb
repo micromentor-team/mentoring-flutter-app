@@ -49,6 +49,7 @@
     "exploreSeeMore": "See More",
     "listSeeAll": "See all",
     "listSeeLess": "See less",
+    "messagesInputHint": "Write a message...",
     "messagesStatusDeleted": "deleted",
     "messagesStatusEdited": "(edited)",
     "navHomeText": "Home",

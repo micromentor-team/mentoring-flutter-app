@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -6,12 +7,13 @@ import 'package:provider/provider.dart';
 import '../../../providers/messages_provider.dart';
 
 class ReplyMessage extends StatelessWidget {
-  const ReplyMessage(
-      {Key? key,
-      required this.replyMessage,
-      required this.participants,
-      this.onClose})
-      : super(key: key);
+  const ReplyMessage({
+    super.key,
+    required this.replyMessage,
+    required this.participants,
+    this.onClose,
+  });
+
   final List<ChannelParticipant> participants;
   final ChannelMessage replyMessage;
   final VoidCallback? onClose;
@@ -35,58 +37,77 @@ class ReplyMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final isUser = _isCurrentUser(
       userId: replyMessage.createdBy,
       context: context,
     );
     return Container(
       decoration: BoxDecoration(
-        color: isUser ? Colors.lightBlue.shade100 : Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(6.0),
+        color: isUser
+            ? theme.colorScheme.primaryContainer
+            : theme.colorScheme.tertiaryContainer,
+        borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
       ),
-      child: IntrinsicHeight(
-        child: Row(
-          // Floats the close icon to the top
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
+      child: Stack(
+        children: [
+          PositionedDirectional(
+            top: 0,
+            bottom: 0,
+            start: 0,
+            child: Container(
               decoration: BoxDecoration(
-                color: isUser ? Colors.lightBlue.shade600 : Colors.grey,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(6.0),
-                  bottomLeft: Radius.circular(6.0),
+                color: isUser
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.tertiary,
+                borderRadius: const BorderRadiusDirectional.only(
+                  topStart: Radius.circular(Radii.roundedRectRadiusSmall),
+                  bottomStart: Radius.circular(Radii.roundedRectRadiusSmall),
                 ),
               ),
-              width: 8.0,
-              height: double.infinity,
+              width: Insets.widgetSmallInset,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _participantName(userId: replyMessage.createdBy),
-                    maxLines: 1,
-                    style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      fontWeight: FontWeight.bold,
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+              start: Insets.widgetSmallInset,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _participantName(userId: replyMessage.createdBy),
+                          maxLines: 1,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: isUser
+                                ? theme.colorScheme.onPrimaryContainer
+                                : theme.colorScheme.onTertiaryContainer,
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          replyMessage.messageText!,
+                          maxLines: 1,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: isUser
+                                ? theme.colorScheme.onPrimaryContainer
+                                : theme.colorScheme.onTertiaryContainer,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    replyMessage.messageText!,
-                    maxLines: 1,
-                    style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            onClose == null ? const SizedBox() : const Spacer(),
-            onClose == null
-                ? const SizedBox()
-                : IconButton(
+                ),
+                if (onClose != null)
+                  IconButton(
                     padding: EdgeInsets.zero,
                     // An empty BoxConstraints overrides the default size, moreso than setting the visualDensity
                     constraints: const BoxConstraints(),
@@ -95,12 +116,14 @@ class ReplyMessage extends StatelessWidget {
                     splashColor: Colors.transparent,
                     icon: const Icon(
                       Icons.close,
-                      size: 16,
+                      size: Dimensions.iconSizeMedium,
                     ),
                     onPressed: onClose,
                   ),
-          ],
-        ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
