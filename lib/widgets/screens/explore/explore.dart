@@ -121,7 +121,8 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                 selectedInfo.add(cardInfo[i]);
               }
             }
-            context.push(Routes.exploreInviteToConnect, extra: selectedInfo);
+            context.push(Routes.exploreInviteToConnect.path,
+                extra: selectedInfo);
           },
           selectedCount: isSelected
               .map((e) => e ? 1 : 0)
