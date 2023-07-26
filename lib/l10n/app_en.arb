@@ -49,6 +49,8 @@
     "exploreSeeMore": "See More",
     "listSeeAll": "See all",
     "listSeeLess": "See less",
+    "messagesStatusDeleted": "deleted",
+    "messagesStatusEdited": "(edited)",
     "navHomeText": "Home",
     "navExploreText": "Explore",
     "navProgressText": "Progress",

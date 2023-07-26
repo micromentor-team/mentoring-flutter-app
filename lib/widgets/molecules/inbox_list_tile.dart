@@ -69,7 +69,7 @@ class InboxListTile extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(
-                          Radii.roundedRectRadius,
+                          Radii.roundedRectRadiusMedium,
                         ),
                         child: Image(
                           image: avatarUrl != null

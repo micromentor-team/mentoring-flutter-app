@@ -120,7 +120,7 @@ class ExploreFilter extends StatelessWidget {
               color: Theme.of(context).colorScheme.surfaceVariant,
               width: Dimensions.highlightBorderWidth,
             ),
-            borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
             color: Theme.of(context).colorScheme.surfaceVariant,
           ),
           child: Row(

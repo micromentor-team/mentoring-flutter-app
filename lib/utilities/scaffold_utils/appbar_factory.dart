@@ -99,7 +99,7 @@ class AppBarFactory {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(
-              Radii.roundedRectRadius,
+              Radii.roundedRectRadiusMedium,
             ),
             child: Image(
               image: avatarUrl != null
