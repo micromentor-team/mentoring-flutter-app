@@ -24,10 +24,11 @@ class AppRouter {
 
   static GoRouter createRouter(BuildContext context) {
     return GoRouter(
-      initialLocation: Routes.root,
+      initialLocation: Routes.root.path,
       routes: [
         GoRoute(
-          path: Routes.root,
+          path: Routes.root.path,
+          name: Routes.root.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
@@ -36,7 +37,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: Routes.signin,
+          path: Routes.signin.path,
+          name: Routes.signin.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
@@ -45,7 +47,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-            path: Routes.signup,
+            path: Routes.signup.path,
+            name: Routes.signup.name,
             pageBuilder: (BuildContext context, GoRouterState state) {
               return MaterialPage(
                 key: state.pageKey,
@@ -53,7 +56,8 @@ class AppRouter {
               );
             }),
         GoRoute(
-          path: Routes.loading,
+          path: Routes.loading.path,
+          name: Routes.loading.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
@@ -71,7 +75,8 @@ class AppRouter {
           },
           routes: <RouteBase>[
             GoRoute(
-              path: Routes.home,
+              path: Routes.home.path,
+              name: Routes.home.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
@@ -80,7 +85,8 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.explore,
+              path: Routes.explore.path,
+              name: Routes.explore.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
@@ -89,7 +95,8 @@ class AppRouter {
               },
             ),
             GoRoute(
-                path: Routes.exploreInviteToConnect,
+                path: Routes.exploreInviteToConnect.path,
+                name: Routes.exploreInviteToConnect.name,
                 builder: (BuildContext context, GoRouterState state) {
                   List<ProfileQuickViewInfo> selectedProfiles =
                       state.extra as List<ProfileQuickViewInfo>;
@@ -98,7 +105,8 @@ class AppRouter {
                   );
                 }),
             GoRoute(
-              path: Routes.progress,
+              path: Routes.progress.path,
+              name: Routes.progress.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
@@ -107,7 +115,8 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.inboxChats,
+              path: Routes.inboxChats.path,
+              name: Routes.inboxChats.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
@@ -116,7 +125,8 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.inboxChats$ChannelId,
+              path: Routes.inboxChatsChannelId.path,
+              name: Routes.inboxChatsChannelId.name,
               pageBuilder: (context, state) {
                 final String channelId =
                     state.pathParameters[RouteParams.channelId]!;
@@ -129,7 +139,8 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.inboxInvitesReceived,
+              path: Routes.inboxInvitesReceived.path,
+              name: Routes.inboxInvitesReceived.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
@@ -138,7 +149,8 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.inboxInvitesSent,
+              path: Routes.inboxInvitesSent.path,
+              name: Routes.inboxInvitesSent.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
@@ -147,7 +159,8 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.inboxArchived,
+              path: Routes.inboxArchived.path,
+              name: Routes.inboxArchived.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
@@ -156,7 +169,8 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.profile,
+              path: Routes.profile.path,
+              name: Routes.profile.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
