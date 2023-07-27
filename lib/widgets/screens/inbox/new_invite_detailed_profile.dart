@@ -53,10 +53,10 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
           decoration: BoxDecoration(
             color: theme.colorScheme.tertiaryContainer,
             borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(0),
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
-                bottomRight: Radius.circular(12)),
+                topLeft: Radius.zero,
+                topRight: Radius.circular(Radii.roundedRectRadius),
+                bottomLeft: Radius.circular(Radii.roundedRectRadius),
+                bottomRight: Radius.circular(Radii.roundedRectRadius)),
           ),
           child: const Padding(
             padding: EdgeInsets.all(
