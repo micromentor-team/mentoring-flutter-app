@@ -7,6 +7,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
+
 import '../../../providers/models/scaffold_model.dart';
 
 class InboxInvitesReceivedScreen extends StatefulWidget {
@@ -88,7 +89,13 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   void didPopNext() {
     super.didPopNext();
     _refreshScaffold();
-    DefaultTabController.of(context).animateTo(tabBarIndex);
+    try {
+      DefaultTabController.of(context).animateTo(tabBarIndex);
+    } catch (_) {
+      // Can fail if the controller is no longer present in the context.
+      // Revert to replacing the page with a new one.
+      GoRouter.of(context).pushReplacement(Routes.inboxInvitesReceived.path);
+    }
   }
 
   @override

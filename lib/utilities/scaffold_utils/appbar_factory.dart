@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../constants/app_constants.dart';
 import '../../widgets/atoms/notification_bubble.dart';
 
@@ -126,6 +127,42 @@ class AppBarFactory {
           icon: const Icon(Icons.more_vert),
           onPressed: () => {}, //TODO(m-rosario): Chat menu
         )
+      ],
+    );
+  }
+
+  static AppBar createInviteReceivedDetailAppBar({
+    required BuildContext context,
+  }) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final GoRouter router = GoRouter.of(context);
+    final ThemeData theme = Theme.of(context);
+    return AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios),
+        onPressed: () {
+          router.pop();
+        },
+      ),
+      title: Text(
+        l10n.newInvite,
+        style: theme.textTheme.titleLarge?.copyWith(
+          color: theme.colorScheme.onPrimaryContainer,
+        ),
+      ),
+      centerTitle: false,
+      actions: [
+        PopupMenuButton(
+          icon: const Icon(Icons.more_vert),
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              child: Text(l10n.blockUser),
+            ),
+            PopupMenuItem(
+              child: Text(l10n.reportUser),
+            ),
+          ],
+        ),
       ],
     );
   }

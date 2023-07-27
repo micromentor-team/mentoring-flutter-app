@@ -9,13 +9,14 @@ import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/progress/progress.dart';
 import 'package:provider/provider.dart';
+
 import '../main.dart';
 import '../widgets/atoms/app_wrapper.dart';
 import '../widgets/screens/channel_messages/channel_messages.dart';
 import '../widgets/screens/dashboard/dashboard.dart';
 import '../widgets/screens/explore/explore.dart';
 import '../widgets/screens/inbox/inbox_chats.dart';
-import '../widgets/screens/new_invite_detailed_profile.dart';
+import '../widgets/screens/inbox/new_invite_detailed_profile.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
 

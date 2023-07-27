@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
@@ -87,7 +88,13 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
   void didPopNext() {
     super.didPopNext();
     _refreshScaffold();
-    DefaultTabController.of(context).animateTo(tabBarIndex);
+    try {
+      DefaultTabController.of(context).animateTo(tabBarIndex);
+    } catch (_) {
+      // Can fail if the controller is no longer present in the context.
+      // Revert to replacing the page with a new one.
+      GoRouter.of(context).pushReplacement(Routes.inboxInvitesSent.path);
+    }
   }
 
   @override

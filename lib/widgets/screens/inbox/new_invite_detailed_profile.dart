@@ -1,9 +1,11 @@
-import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/models/scaffold_model.dart';
 
 class NewInviteDetailedProfile extends StatefulWidget {
   const NewInviteDetailedProfile({
@@ -17,39 +19,6 @@ class NewInviteDetailedProfile extends StatefulWidget {
 
 class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
     with RouteAwareMixin<NewInviteDetailedProfile> {
-  AppBar _createAppBar(
-      AppLocalizations l10n, ThemeData theme, GoRouter router) {
-    return AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios),
-        onPressed: () {
-          router.push(Routes.inboxInvitesReceived.path);
-        },
-        //TODO: make the back icon press go back to the invites page
-      ),
-      title: Text(
-        l10n.newInvite,
-        style: theme.textTheme.titleLarge?.copyWith(
-          color: theme.colorScheme.onPrimaryContainer,
-        ),
-      ),
-      centerTitle: false,
-      actions: [
-        PopupMenuButton(
-          icon: const Icon(Icons.more_vert),
-          itemBuilder: (context) => [
-            PopupMenuItem(
-              child: Text(l10n.blockUser),
-            ),
-            PopupMenuItem(
-              child: Text(l10n.reportUser),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   Widget _createCard() {
     Widget mentorCard =
         createProfilCardFromInfoAndCheckbox(info: createRegularMentorExample());
@@ -161,29 +130,46 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
     );
   }
 
+  void _refreshScaffold() {
+    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
+      context,
+      listen: false,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scaffoldModel.setInviteReceivedDetailScaffold(context);
+    });
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    _refreshScaffold();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    _refreshScaffold();
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
-    final GoRouter router = GoRouter.of(context);
-
-    return Scaffold(
-      appBar: _createAppBar(l10n, theme, router),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                children: [
-                  _createCard(),
-                  _createDateDivider(theme),
-                  _createMessagePopup(theme),
-                  _createDeclineAcceptButtons(theme, l10n),
-                ],
-              ),
+    return SafeArea(
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              children: [
+                _createCard(),
+                _createDateDivider(theme),
+                _createMessagePopup(theme),
+                _createDeclineAcceptButtons(theme, l10n),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
