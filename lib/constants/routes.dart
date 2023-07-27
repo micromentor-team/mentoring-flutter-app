@@ -33,6 +33,9 @@ class Routes {
   static Route inboxArchived =
       Route(name: 'inboxArchived', path: '${inbox.path}/archived');
   static Route profile = Route(name: 'profile', path: '/profile');
+  static Route inboxInvitesReceivedProfile = Route(
+      name: 'inboxInvitesReceivedProfile',
+      path: '${inboxInvitesReceived.path}/profile');
 }
 
 class RouteParams {

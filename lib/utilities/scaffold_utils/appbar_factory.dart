@@ -131,6 +131,42 @@ class AppBarFactory {
     );
   }
 
+  static AppBar createInviteReceivedDetailAppBar({
+    required BuildContext context,
+  }) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final GoRouter router = GoRouter.of(context);
+    final ThemeData theme = Theme.of(context);
+    return AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios),
+        onPressed: () {
+          router.pop();
+        },
+      ),
+      title: Text(
+        l10n.newInvite,
+        style: theme.textTheme.titleLarge?.copyWith(
+          color: theme.colorScheme.onPrimaryContainer,
+        ),
+      ),
+      centerTitle: false,
+      actions: [
+        PopupMenuButton(
+          icon: const Icon(Icons.more_vert),
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              child: Text(l10n.blockUser),
+            ),
+            PopupMenuItem(
+              child: Text(l10n.reportUser),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   static Text _getInboxAppBarTitle(
       ThemeData theme, AppLocalizations l10n, String targetRoute) {
     final String title;

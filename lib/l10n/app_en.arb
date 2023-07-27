@@ -98,5 +98,10 @@
     "inviteSelectedNumberMentor": "You've inviting {num} mentors to connect:",
     "inviteSelectedNumberEntrepreneur": "You've inviting {num} entrepeneurs to connect:",
     "inviteCustomizeMessagePrompt": "Customize your message (optional)",
-    "inviteMessagePlaceholder": "Enter invite message"
+    "inviteMessagePlaceholder": "Enter invite message",
+    "newInvite": "New Invite",
+    "decline": "Decline",
+    "accept": "Accept",
+    "blockUser": "Block User",
+    "reportUser": "Report User"
 }
