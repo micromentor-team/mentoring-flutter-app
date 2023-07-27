@@ -4,12 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
-import 'package:mm_flutter_app/widgets/screens/new_invite_detailed_profile.dart';
-
 import '../../../providers/models/scaffold_model.dart';
 
 class InboxInvitesReceivedScreen extends StatefulWidget {

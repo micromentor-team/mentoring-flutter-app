@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
@@ -18,7 +17,6 @@ class NewInviteDetailedProfile extends StatefulWidget {
 
 class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
     with RouteAwareMixin<NewInviteDetailedProfile> {
-  @override
   AppBar _createAppBar(
       AppLocalizations l10n, ThemeData theme, GoRouter router) {
     return AppBar(
