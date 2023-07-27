@@ -190,8 +190,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                         .gqlQueryResult
                                         .exception
                                         ?.graphqlErrors
-                                        .first
-                                        .message;
+                                        .firstOrNull
+                                        ?.message;
                                     if (signInError != null) {
                                       if (signInError == 'notFound') {
                                         scaffoldManager.showSnackBar(

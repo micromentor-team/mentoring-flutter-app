@@ -109,5 +109,38 @@
     "decline": "Decline",
     "accept": "Accept",
     "blockUser": "Block User",
-    "reportUser": "Report User"
+    "reportUser": "Report User",
+    "exploreSearchFilterTitle": "Search filters",
+    "exploreSearchFilterAdvancedFilters": "Advanced filters",
+    "exploreSearchFilterApply": "Apply",
+    "exploreSearchFilterClear": "Clear",
+    "exploreSearchFilterExpertise": "Expertise",
+    "exploreSearchFilterCountries": "{country, select, USA{USA} other{Unknown}}",
+    "exploreSearchFilterAll": "All",
+    "@exploreSearchFilterCountries": {
+        "description": "Selected country",
+        "placeholders": {
+            "country": {
+                "type": "String"
+            }
+        }
+    },
+    "exploreSearchFilterLanguages": "{language, select, English{English} Urdu{Urdu} Hindi{Hindi} other{Unknown}}",
+    "@exploreSearchFilterLanguages": {
+        "description": "Selected language",
+        "placeholders": {
+            "language": {
+                "type": "String"
+            }
+        }
+    },
+    "exploreSearchFilterSkills": "{skill, select, Marketing{Marketing} Operations{Operations} StartingUp{Starting Up} other{Unknown}}",
+    "@exploreSearchFilterSkills": {
+        "description": "Selected skill",
+        "placeholders": {
+            "skill": {
+                "type": "String"
+            }
+        }
+    }
 }

@@ -19,6 +19,8 @@ in {
   env = {
     ANDROID_HOME     = "${android-sdk-root}";
     ANDROID_SDK_ROOT = "${android-sdk-root}";
+
+    FLUTTER_ROOT = "${pkgs.flutter}";
   };
 
   languages = {

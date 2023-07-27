@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:provider/provider.dart';
 import '../../constants/app_constants.dart';
+import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_filters.dart';
+import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 
 class ExploreFilter extends StatelessWidget {
   final UserType userType;
-  final List<String>? skills;
-  final List<String>? languages;
-  final List<String>? countries;
 
   const ExploreFilter({
     Key? key,
     required this.userType,
-    this.skills,
-    this.languages,
-    this.countries,
   }) : super(key: key);
 
   String? _helpText(AppLocalizations l10n) {
@@ -47,8 +43,9 @@ class ExploreFilter extends StatelessWidget {
   }
 
   Text _createSkillsTextHeader(
-      AppLocalizations l10n, BuildContext context, List<String>? skills) {
-    var skillsText = joinFirstThree(skills);
+      AppLocalizations l10n, BuildContext context, Set<String>? skills) {
+    var skillsText =
+        joinFirstThree(skills?.map(l10n.exploreSearchFilterSkills).toList());
     return Text(
       skillsText,
       style: Theme.of(context).textTheme.labelMedium,
@@ -56,17 +53,20 @@ class ExploreFilter extends StatelessWidget {
   }
 
   Text _createLanguageLocationSubHeader(AppLocalizations l10n,
-      BuildContext context, List<String>? countries, List<String>? languages) {
+      BuildContext context, Set<String>? countries, Set<String>? languages) {
     final ThemeData theme = Theme.of(context);
     //handling scenarios where countries and languages may be null
-    List<String> countryLanguageText = [];
+    Set<String> countryLanguageText = {};
     if (countries != null) {
-      countryLanguageText += countries;
+      countryLanguageText
+          .addAll(countries.map(l10n.exploreSearchFilterCountries));
     }
     if (languages != null) {
-      countryLanguageText += languages;
+      countryLanguageText
+          .addAll(languages.map(l10n.exploreSearchFilterLanguages));
     }
-    var joinedCountryLanguageText = joinFirstThree(countryLanguageText);
+    var joinedCountryLanguageText =
+        joinFirstThree(countryLanguageText.toList());
     //TO-DO(guptarupal): is there a way to optimize this. What is there are too many countries? do we not show languages then?"
 
     return Text(
@@ -87,25 +87,6 @@ class ExploreFilter extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    //logic handling the null scenarios of the lists
-    bool userFiltersSelected = false;
-    bool skillFilterSelected = false;
-    bool languageFilterSelected = false;
-    bool countryFilterSelected = false;
-
-    if (skills != null || languages != null || countries != null) {
-      userFiltersSelected = true;
-    }
-    if (skills != null) {
-      skillFilterSelected = true;
-    }
-    if (languages != null) {
-      languageFilterSelected = true;
-    }
-    if (countries != null) {
-      countryFilterSelected = true;
-    }
-
     return Padding(
       padding: const EdgeInsets.fromLTRB((Insets.paddingExtraSmall),
           Insets.paddingSmall, Insets.paddingExtraSmall, Insets.paddingSmall),
@@ -120,70 +101,91 @@ class ExploreFilter extends StatelessWidget {
             borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
             color: Theme.of(context).colorScheme.surfaceVariant,
           ),
-          child: Row(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                        (Insets.paddingExtraLarge),
-                        0,
-                        (Insets.paddingMedium),
-                        0),
-                    child: Icon(
-                      Icons.search,
-                      color: Color(theme.colorScheme.onSurfaceVariant.value),
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        if (!userFiltersSelected ||
-                            (userFiltersSelected && !skillFilterSelected))
-                          _createHelpTextHeader(l10n, context),
-                        if (userFiltersSelected && skillFilterSelected)
-                          _createSkillsTextHeader(l10n, context, skills),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        if (!userFiltersSelected ||
-                            (userFiltersSelected &&
-                                !languageFilterSelected &&
-                                !countryFilterSelected))
-                          _createInsertLanguageLocationSubHeader(l10n, context),
-                        if (userFiltersSelected)
-                          _createLanguageLocationSubHeader(
-                              l10n, context, countries, languages),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                        (Insets.paddingExtraLarge),
-                        0,
-                        (Insets.paddingMedium),
-                        0),
-                    child: Icon(
-                      Icons.tune,
-                      color: Color(theme.colorScheme.onSurfaceVariant.value),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          child: Consumer<ExploreCardFiltersProvider>(
+              builder: (context, filters, _) => Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                (Insets.paddingExtraLarge),
+                                0,
+                                (Insets.paddingMedium),
+                                0),
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.search,
+                                color: Color(
+                                    theme.colorScheme.onSurfaceVariant.value),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                if (!filters.userFiltersSelected ||
+                                    (filters.userFiltersSelected &&
+                                        !filters.skillFilterSelected))
+                                  _createHelpTextHeader(l10n, context),
+                                if (filters.userFiltersSelected &&
+                                    filters.skillFilterSelected)
+                                  _createSkillsTextHeader(
+                                      l10n, context, filters.selectedSkills),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                if (!filters.userFiltersSelected ||
+                                    (filters.userFiltersSelected &&
+                                        !filters.languageFilterSelected &&
+                                        !filters.countryFilterSelected))
+                                  _createInsertLanguageLocationSubHeader(
+                                      l10n, context),
+                                if (filters.userFiltersSelected)
+                                  _createLanguageLocationSubHeader(
+                                      l10n,
+                                      context,
+                                      filters.selectedCountries,
+                                      filters.selectedLanguages),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                (Insets.paddingExtraLarge),
+                                0,
+                                (Insets.paddingMedium),
+                                0),
+                            child: IconButton(
+                              onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        RecommendedMentorsFilters(
+                                            filtersProvider: filters)),
+                              ),
+                              icon: Icon(
+                                Icons.tune,
+                                color: Color(
+                                    theme.colorScheme.onSurfaceVariant.value),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )),
         ),
       ),
     );
