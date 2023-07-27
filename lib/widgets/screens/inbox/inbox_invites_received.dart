@@ -35,7 +35,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
       highlightMessage: true,
       simplifyDate: true,
       onPressed: () => router.push(
-        Routes.inboxInvitesReceivedProfile,
+        Routes.inboxInvitesReceivedProfile.path,
       ),
     );
   }

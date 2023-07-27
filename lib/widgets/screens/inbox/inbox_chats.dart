@@ -47,7 +47,8 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
         message:
             'Lorem ipsum dolor sit amet consectetur. Enim id interdum pulvinar eget dolor sed sit enim.',
         notifications: notifications,
-        onPressed: () => context.push('${Routes.inboxChats}/$mockChannelId'),
+        onPressed: () =>
+            context.push('${Routes.inboxChats.path}/$mockChannelId'),
       ),
     );
   }

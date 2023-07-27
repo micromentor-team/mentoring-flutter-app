@@ -17,19 +17,19 @@ class AppWrapper extends StatelessWidget {
   int _calculateSelectedIndex(BuildContext context) {
     final GoRouter route = GoRouter.of(context);
     final String location = route.location;
-    if (location.startsWith(Routes.home)) {
+    if (location.startsWith(Routes.home.path)) {
       return 0;
     }
-    if (location.startsWith(Routes.explore)) {
+    if (location.startsWith(Routes.explore.path)) {
       return 1;
     }
-    if (location.startsWith(Routes.progress)) {
+    if (location.startsWith(Routes.progress.path)) {
       return 2;
     }
-    if (location.startsWith(Routes.inbox)) {
+    if (location.startsWith(Routes.inbox.path)) {
       return 3;
     }
-    if (location.startsWith(Routes.profile)) {
+    if (location.startsWith(Routes.profile.path)) {
       return 4;
     }
     return 0;
@@ -73,19 +73,19 @@ class AppWrapper extends StatelessWidget {
               onDestinationSelected: (int index) {
                 switch (index) {
                   case 0:
-                    context.push(Routes.home);
+                    context.push(Routes.home.path);
                     break;
                   case 1:
-                    context.push(Routes.explore);
+                    context.push(Routes.explore.path);
                     break;
                   case 2:
-                    context.push(Routes.progress);
+                    context.push(Routes.progress.path);
                     break;
                   case 3:
-                    context.push(Routes.inboxChats);
+                    context.push(Routes.inboxChats.path);
                     break;
                   case 4:
-                    context.push(Routes.profile);
+                    context.push(Routes.profile.path);
                     break;
                   default:
                     throw UnexpectedStateError(

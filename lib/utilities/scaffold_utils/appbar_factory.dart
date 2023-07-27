@@ -41,7 +41,7 @@ class AppBarFactory {
       ),
       title: _getInboxAppBarTitle(theme, l10n, router.location),
       centerTitle: true,
-      bottom: router.location.startsWith(Routes.inboxInvites)
+      bottom: router.location.startsWith(Routes.inboxInvites.path)
           ? TabBar(
               tabs: [
                 Tab(
@@ -68,9 +68,9 @@ class AppBarFactory {
               onTap: (index) {
                 String newRoute;
                 if (index == 1) {
-                  newRoute = Routes.inboxInvitesSent;
+                  newRoute = Routes.inboxInvitesSent.path;
                 } else {
-                  newRoute = Routes.inboxInvitesReceived;
+                  newRoute = Routes.inboxInvitesReceived.path;
                 }
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   router.push(newRoute);
@@ -133,12 +133,10 @@ class AppBarFactory {
   static Text _getInboxAppBarTitle(
       ThemeData theme, AppLocalizations l10n, String targetRoute) {
     final String title;
-    if (targetRoute == Routes.inboxArchived) {
+    if (targetRoute == Routes.inboxArchived.path) {
       title = l10n.inboxTitleArchivedChats;
-    } else if (targetRoute == Routes.inboxInvitesReceivedProfile) {
-      title = l10n.newInvite;
-    } else if (targetRoute == Routes.inboxInvitesReceived ||
-        targetRoute == Routes.inboxInvitesSent) {
+    } else if (targetRoute == Routes.inboxInvitesReceived.path ||
+        targetRoute == Routes.inboxInvitesSent.path) {
       title = l10n.inboxTitleInvites;
     } else {
       title = l10n.inboxTitleChats;

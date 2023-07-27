@@ -36,7 +36,7 @@ class DrawerFactory {
               onTap: () {
                 // Close Drawer
                 Navigator.of(context).pop();
-                router.push(Routes.inboxChats);
+                router.push(Routes.inboxChats.path);
               },
             ),
             ListTile(
@@ -52,7 +52,7 @@ class DrawerFactory {
               onTap: () {
                 // Close Drawer
                 Navigator.of(context).pop();
-                router.push(Routes.inboxInvitesReceived);
+                router.push(Routes.inboxInvitesReceived.path);
               },
             ),
             ListTile(
@@ -61,7 +61,7 @@ class DrawerFactory {
               onTap: () {
                 // Close Drawer
                 Navigator.of(context).pop();
-                router.push(Routes.inboxArchived);
+                router.push(Routes.inboxArchived.path);
               },
             ),
           ],
