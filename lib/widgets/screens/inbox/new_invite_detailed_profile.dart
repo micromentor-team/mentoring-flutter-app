@@ -4,7 +4,6 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
-
 import '../../../providers/models/scaffold_model.dart';
 
 class NewInviteDetailedProfile extends StatefulWidget {
