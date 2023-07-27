@@ -95,5 +95,10 @@
     "inviteMessageTipsContent": "\u2022 Make your message specific\n\u2022 Keep it concise and simple\n\u2022 Be polite and respectful",
     "inviteDefaultMessageToMentor": "Hi,\nI saw your profile and think you could be a great mentor for my business. Can we connect? I admire your experience and would love to learn from you.\nThanks!",
     "inviteCustomizeMessagePrompt": "Customize your message (optional)",
-    "inviteMessagePlaceholder": "Enter invite message"
+    "inviteMessagePlaceholder": "Enter invite message",
+    "newInvite": "New Invite",
+    "decline": "Decline",
+    "accept": "Accept",
+    "blockUser": "Block User",
+    "reportUser": "Report User"
 }

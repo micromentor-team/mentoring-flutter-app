@@ -16,6 +16,8 @@ class Routes {
       '$inboxChats/:${RouteParams.channelId}';
   static const String inboxInvites = '$inbox/invites';
   static const String inboxInvitesReceived = '$inboxInvites/received';
+  static const String inboxInvitesReceivedProfile =
+      '$inboxInvitesReceived/profile';
   static const String inboxInvitesSent = '$inboxInvites/sent';
   static const String inboxArchived = '$inbox/archived';
   static const String profile = '/profile';
