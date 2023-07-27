@@ -39,6 +39,13 @@ class ScaffoldModel extends ChangeNotifier {
     );
   }
 
+  void setInviteReceivedDetailScaffold(BuildContext context) {
+    _setParams(
+      AppBarFactory.createInviteReceivedDetailAppBar(context: context),
+      null,
+    );
+  }
+
   void setChannelMessagesScaffold(
     BuildContext context,
     String channelName,

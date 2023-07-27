@@ -16,6 +16,7 @@ import '../widgets/screens/channel_messages/channel_messages.dart';
 import '../widgets/screens/dashboard/dashboard.dart';
 import '../widgets/screens/explore/explore.dart';
 import '../widgets/screens/inbox/inbox_chats.dart';
+import '../widgets/screens/inbox/new_invite_detailed_profile.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
 
@@ -155,6 +156,16 @@ class AppRouter {
                 return MaterialPage(
                   key: state.pageKey,
                   child: const InboxInvitesSentScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.inboxInvitesReceivedProfile.path,
+              name: Routes.inboxInvitesReceivedProfile.name,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const NewInviteDetailedProfile(),
                 );
               },
             ),
