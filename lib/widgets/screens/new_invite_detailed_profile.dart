@@ -23,7 +23,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios),
         onPressed: () {
-          router.push(Routes.inboxInvitesReceived);
+          router.push(Routes.inboxInvitesReceived.path);
         },
         //TODO: make the back icon press go back to the invites page
       ),
