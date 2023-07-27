@@ -180,7 +180,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     return Card(
       color: colorScheme.surface,
       surfaceTintColor: Colors.transparent,
-      elevation: Elevations.level2,
+      elevation: Elevations.level0,
       child: InkWell(
         child: Ink(
           decoration: isRecommended
@@ -191,7 +191,13 @@ class ProfileQuickViewCard extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
                 )
-              : null,
+              : BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    width: Dimensions.cardBorderWidth,
+                  ),
+                  borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
+                ),
           child: Stack(
             children: [
               Align(

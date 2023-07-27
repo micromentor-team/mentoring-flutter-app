@@ -58,7 +58,8 @@ class Dimensions {
   static const double channelMessagesAppBarHeight = 96.0;
   static const double channelMessagesAppBarAvatarLength = 48.0;
   static const double exploreFilterSizedBoxHeight = 80.0;
-  static const double highlightBorderWidth = 1.0;
+  static const double highlightBorderWidth = 2.0;
+  static const double cardBorderWidth = 1.0;
   static const double exploreBottomSection = 64.0;
   static const Size bigButtonSize = Size(80.0, 48.0);
   static const double notificationBubbleHeight = 16.0;
