@@ -7,8 +7,10 @@ import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import '../../../constants/app_constants.dart';
 
 class MessageBox extends StatefulWidget {
+  final UserType currentUserType;
   const MessageBox({
     super.key,
+    required this.currentUserType,
   });
 
   @override
@@ -23,6 +25,10 @@ class _MessageBoxState extends State<MessageBox> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
+    final String defaultText = widget.currentUserType == UserType.mentor
+        ? l10n.inviteDefaultMessageToEntrepreneur
+        : l10n.inviteDefaultMessageToMentor;
+
     return Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Insets.widgetMediumInset,
@@ -32,19 +38,29 @@ class _MessageBoxState extends State<MessageBox> {
           children: [
             Align(
               alignment: Alignment.topLeft,
-              child: Text(l10n.inviteCustomizeMessagePrompt),
+              child: Text(
+                l10n.inviteCustomizeMessagePrompt,
+              ),
             ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: Insets.widgetSmallInset),
               child: TextField(
-                controller: _textEditingController
-                  ..text = l10n.inviteDefaultMessageToMentor,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.outline,
+                ),
+                controller: _textEditingController..text = defaultText,
                 keyboardType: TextInputType.multiline,
                 minLines: 5,
                 maxLines: 5,
                 decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: theme.colorScheme.primary),
+                      borderRadius:
+                          BorderRadius.circular(Radii.roundedRectRadius)),
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(Radii.roundedRectRadius)),
                   hintText: l10n.inviteMessagePlaceholder,
                 ),
               ),
@@ -137,7 +153,8 @@ class _InviteToConnectState extends State<InviteToConnect> {
         ));
   }
 
-  Widget _createSelectedProfilesSection(BuildContext context) {
+  Widget _createSelectedProfilesSection(
+      BuildContext context, UserType currentUserType) {
     if (selectedProfiles.length == 1) {
       return Padding(
           padding: const EdgeInsets.symmetric(
@@ -147,6 +164,7 @@ class _InviteToConnectState extends State<InviteToConnect> {
           child: createProfilCardFromInfoAndCheckbox(
               info: selectedProfiles[0], checkbox: null));
     }
+
     List<Widget> profileTiles = [];
     for (int i = 0; i < selectedProfiles.length; i++) {
       ProfileQuickViewInfo profileInfo = selectedProfiles[i];
@@ -163,21 +181,40 @@ class _InviteToConnectState extends State<InviteToConnect> {
             });
           }));
     }
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
-        child: Row(
-          children: profileTiles,
+
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
+    final String selectedText = currentUserType == UserType.mentor
+        ? l10n.inviteSelectedNumberEntrepreneur(profileTiles.length)
+        : l10n.inviteSelectedNumberMentor(profileTiles.length);
+
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: Insets.widgetMediumInset),
+          child: Text(
+            selectedText,
+            style: theme.textTheme.labelSmall,
+          )),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
+          child: Row(
+            children: profileTiles,
+          ),
         ),
-      ),
-    );
+      )
+    ]);
   }
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+
+    // TODO: Replace currentUserType with actual backend
+    const UserType currentUserType = UserType.entrepreneur;
 
     return Scaffold(
         appBar: AppBar(
@@ -195,8 +232,8 @@ class _InviteToConnectState extends State<InviteToConnect> {
         body: Column(children: [
           Expanded(
               child: ListView(children: [
-            _createSelectedProfilesSection(context),
-            const MessageBox(),
+            _createSelectedProfilesSection(context, currentUserType),
+            const MessageBox(currentUserType: currentUserType),
             _createMessageTips(context),
           ])),
         ]));

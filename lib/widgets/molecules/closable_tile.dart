@@ -18,11 +18,11 @@ class CloseableTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(Insets.widgetSmallestInset),
       child: Card(
-        elevation: 0,
+        elevation: Elevations.level0,
         color: theme.colorScheme.surface,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: Theme.of(context).colorScheme.surfaceVariant,
           ),
           borderRadius:
               const BorderRadius.all(Radius.circular(Radii.roundedRectRadius)),
