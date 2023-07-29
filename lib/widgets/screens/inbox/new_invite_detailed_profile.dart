@@ -54,9 +54,9 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
             color: theme.colorScheme.tertiaryContainer,
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.zero,
-                topRight: Radius.circular(Radii.roundedRectRadius),
-                bottomLeft: Radius.circular(Radii.roundedRectRadius),
-                bottomRight: Radius.circular(Radii.roundedRectRadius)),
+                topRight: Radius.circular(Radii.roundedRectRadiusMedium),
+                bottomLeft: Radius.circular(Radii.roundedRectRadiusMedium),
+                bottomRight: Radius.circular(Radii.roundedRectRadiusMedium)),
           ),
           child: const Padding(
             padding: EdgeInsets.all(

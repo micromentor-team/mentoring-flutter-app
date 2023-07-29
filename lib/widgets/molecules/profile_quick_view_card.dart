@@ -197,7 +197,8 @@ class ProfileQuickViewCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.surfaceVariant,
                     width: Dimensions.cardBorderWidth,
                   ),
-                  borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
+                  borderRadius:
+                      BorderRadius.circular(Radii.roundedRectRadiusMedium),
                 ),
           child: Stack(
             children: [

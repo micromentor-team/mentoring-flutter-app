@@ -24,8 +24,8 @@ class CloseableTile extends StatelessWidget {
           side: BorderSide(
             color: Theme.of(context).colorScheme.surfaceVariant,
           ),
-          borderRadius:
-              const BorderRadius.all(Radius.circular(Radii.roundedRectRadius)),
+          borderRadius: const BorderRadius.all(
+              Radius.circular(Radii.roundedRectRadiusMedium)),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -45,7 +45,7 @@ class CloseableTile extends StatelessWidget {
                       height: Dimensions.squareAvatar,
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
-                            Radius.circular(Radii.roundedRectRadius)),
+                            Radius.circular(Radii.roundedRectRadiusMedium)),
                         image: DecorationImage(
                           image: image,
                           fit: BoxFit.cover,
