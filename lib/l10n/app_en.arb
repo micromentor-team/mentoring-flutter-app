@@ -53,7 +53,7 @@
     "messagesActionBlock": "Block user",
     "messagesActionReport": "Report user",
     "messagesInputHint": "Write a message...",
-    "messagesStatusDeleted": "deleted",
+    "messagesStatusDeleted": "(deleted)",
     "messagesStatusEdited": "(edited)",
     "navHomeText": "Home",
     "navExploreText": "Explore",

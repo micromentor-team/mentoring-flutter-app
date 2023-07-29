@@ -42,13 +42,12 @@ class ReplyMessage extends StatelessWidget {
       userId: replyMessage.createdBy,
       context: context,
     );
-    return Container(
-      decoration: BoxDecoration(
-        color: isUser
-            ? theme.colorScheme.primaryContainer
-            : theme.colorScheme.tertiaryContainer,
-        borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
-      ),
+    return Material(
+      elevation: Elevations.level1,
+      color: isUser
+          ? theme.colorScheme.primaryContainer
+          : theme.colorScheme.tertiaryContainer,
+      borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
       child: Stack(
         children: [
           PositionedDirectional(

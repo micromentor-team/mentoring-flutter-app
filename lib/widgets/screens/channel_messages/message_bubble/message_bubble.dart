@@ -63,11 +63,17 @@ class MessageBubble extends StatelessWidget {
     }
 
     if (status != null) {
-      return Text(
-        status,
-        style: theme.textTheme.labelSmall?.copyWith(
-          fontStyle: FontStyle.italic,
-          color: theme.colorScheme.outline,
+      return Padding(
+        padding: const EdgeInsetsDirectional.only(
+          start: Insets.widgetSmallInset,
+          bottom: Insets.widgetSmallInset,
+        ),
+        child: Text(
+          status,
+          style: theme.textTheme.labelSmall?.copyWith(
+            fontStyle: FontStyle.italic,
+            color: theme.colorScheme.outline,
+          ),
         ),
       );
     } else {
@@ -78,43 +84,32 @@ class MessageBubble extends StatelessWidget {
   Widget _buildMessageText(AppLocalizations l10n, ThemeData theme, isUser) {
     final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!);
     if (message.deletedAt != null && !isUser) {
-      return Padding(
-        padding: const EdgeInsets.only(
-          top: Insets.widgetSmallInset,
-          bottom: Insets.widgetMediumInset,
-        ),
-        child: Text(
-          l10n.messagesStatusDeleted,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: theme.colorScheme.outline,
-          ),
+      return Text(
+        l10n.messagesStatusDeleted,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          fontStyle: FontStyle.italic,
+          color: theme.colorScheme.outline,
         ),
       );
     } else {
-      return Padding(
-        padding: isEmoji
-            ? const EdgeInsets.only(
-                bottom: Insets.widgetMediumInset,
-              )
-            : EdgeInsets.zero,
-        child: SelectableLinkify(
-          text: message.messageText!,
-          onOpen: (link) => _onOpenLink(link),
-          linkStyle: theme.textTheme.bodyMedium?.copyWith(
-            color: isUser
-                ? theme.colorScheme.onPrimaryContainer
-                : theme.colorScheme.onTertiaryContainer,
-          ),
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontSize: isEmoji ? 30.0 : null,
-            decoration:
-                message.deletedAt != null ? TextDecoration.lineThrough : null,
-            decorationThickness: 2.0,
-            decorationColor: theme.colorScheme.error,
-            color: isUser
-                ? theme.colorScheme.onPrimaryContainer
-                : theme.colorScheme.onTertiaryContainer,
-          ),
+      return SelectableLinkify(
+        text: message.messageText!,
+        onOpen: (link) => _onOpenLink(link),
+        linkStyle: theme.textTheme.bodyMedium?.copyWith(
+          color: isUser
+              ? theme.colorScheme.onPrimaryContainer
+              : theme.colorScheme.onTertiaryContainer,
+        ),
+        textAlign: isEmoji && isUser ? TextAlign.end : null,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          fontSize: isEmoji ? theme.textTheme.displayMedium?.fontSize : null,
+          decoration:
+              message.deletedAt != null ? TextDecoration.lineThrough : null,
+          decorationThickness: 2.0,
+          decorationColor: theme.colorScheme.error,
+          color: isUser
+              ? theme.colorScheme.onPrimaryContainer
+              : theme.colorScheme.onTertiaryContainer,
         ),
       );
     }
@@ -127,121 +122,106 @@ class MessageBubble extends StatelessWidget {
       userId: message.createdBy,
       context: context,
     );
-    // 🚨 TODO: If the message has ANY related content/attachments: maintain `false`.
     final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
     return Padding(
-      // Bubble padding
-      padding: const EdgeInsets.symmetric(vertical: Insets.widgetSmallInset),
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Container(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.8,
-                ),
-                child: Material(
-                  // If the message is only emojis, ditch the elevation and don't deal with the shadow.
-                  elevation: isEmoji ? 0 : Elevations.level1,
-                  borderRadius: BorderRadiusDirectional.only(
-                    topStart: isUser
-                        ? const Radius.circular(
-                            Radii.roundedRectRadiusSmall,
-                          )
-                        : Radius.zero,
-                    topEnd: isUser
-                        ? Radius.zero
-                        : const Radius.circular(
-                            Radii.roundedRectRadiusSmall,
-                          ),
-                    bottomStart: const Radius.circular(
-                      Radii.roundedRectRadiusSmall,
-                    ),
-                    bottomEnd: const Radius.circular(
-                      Radii.roundedRectRadiusSmall,
-                    ),
+      padding: const EdgeInsets.symmetric(vertical: Insets.widgetSmallestInset),
+      child: Container(
+        constraints: BoxConstraints(
+          minWidth: 80,
+          maxWidth: MediaQuery.of(context).size.width * 0.8,
+        ),
+        child: Material(
+          elevation: isEmoji ? 0 : Elevations.level1,
+          borderRadius: BorderRadiusDirectional.only(
+            topStart: isUser
+                ? const Radius.circular(
+                    Radii.roundedRectRadiusSmall,
+                  )
+                : Radius.zero,
+            topEnd: isUser
+                ? Radius.zero
+                : const Radius.circular(
+                    Radii.roundedRectRadiusSmall,
                   ),
-                  // If the message is only emojis, make the bubble transparent
-                  color: isEmoji
-                      ? Colors.transparent
-                      : isUser
-                          ? theme.colorScheme.primaryContainer
-                          : theme.colorScheme.tertiaryContainer,
-                  child: Padding(
-                    // Message content padding
-                    padding: EdgeInsets.only(
-                      left: Insets.widgetSmallInset,
-                      top: Insets.widgetSmallInset,
-                      right: Insets.widgetSmallInset,
-                      // If the message is only emojis, we'll provide this padding for sentAt down the line
-                      bottom: isEmoji ? 0 : Insets.widgetSmallInset,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (!isUser)
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (participants.length > 2)
-                                Text(
-                                  _participantName(userId: message.createdBy),
-                                  style: theme.textTheme.labelSmall?.copyWith(
-                                    overflow: TextOverflow.ellipsis,
-                                    fontWeight: FontWeight.bold,
-                                    color: theme.colorScheme.outline,
-                                  ),
-                                ),
-                              _buildMessageStatus(l10n, theme, isUser),
-                            ],
-                          ),
-                        // TODO: Paint attachments/content
-                        if (replyingTo != null && message.deletedAt == null)
-                          Padding(
-                            // Padding between attachment and message body
-                            padding: const EdgeInsets.only(
-                              bottom: Insets.widgetSmallInset,
-                            ),
-                            child: ReplyMessage(
-                              replyMessage: replyingTo!,
-                              participants: participants,
-                            ),
-                          ),
-                        _buildMessageText(l10n, theme, isUser),
-                        const SizedBox(
-                          height: Insets.widgetSmallestInset,
-                        ),
-                        Row(
-                          children: [
-                            if (isUser)
-                              const Expanded(
-                                child: SizedBox(),
-                              ),
+            bottomStart: const Radius.circular(
+              Radii.roundedRectRadiusSmall,
+            ),
+            bottomEnd: const Radius.circular(
+              Radii.roundedRectRadiusSmall,
+            ),
+          ),
+          color: isEmoji
+              ? Colors.transparent
+              : isUser
+                  ? theme.colorScheme.primaryContainer
+                  : theme.colorScheme.tertiaryContainer,
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: Insets.widgetSmallInset,
+              top: Insets.widgetSmallInset,
+              right: Insets.widgetSmallInset,
+              bottom: isEmoji ? 0 : Insets.widgetSmallInset,
+            ),
+            child: Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (!isUser)
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (participants.length > 2)
                             Text(
-                              sentAt,
+                              _participantName(userId: message.createdBy),
                               style: theme.textTheme.labelSmall?.copyWith(
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.bold,
                                 color: theme.colorScheme.outline,
                               ),
                             ),
-                            if (!isUser)
-                              const Expanded(
-                                child: SizedBox(),
-                              ),
-                          ],
+                          _buildMessageStatus(l10n, theme, isUser),
+                        ],
+                      ),
+                    if (replyingTo != null && message.deletedAt == null)
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: Insets.widgetSmallInset,
                         ),
-                        // _buildMessageStatus(isUser)
-                      ],
+                        child: ReplyMessage(
+                          replyMessage: replyingTo!,
+                          participants: participants,
+                        ),
+                      ),
+                    _buildMessageText(l10n, theme, isUser),
+                    if (message.deletedAt == null)
+                      const SizedBox(
+                        height: Insets.widgetMediumLargeInset,
+                      ),
+                  ],
+                ),
+                if (message.deletedAt == null)
+                  PositionedDirectional(
+                    bottom: 0,
+                    end:
+                        (isUser && !isEmoji) || (!isUser && isEmoji) ? null : 0,
+                    start:
+                        (isUser && !isEmoji) || (!isUser && isEmoji) ? 0 : null,
+                    child: Text(
+                      sentAt,
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: theme.colorScheme.outline,
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
