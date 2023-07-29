@@ -26,8 +26,8 @@ export function mockMutations(serverState: MockServerState) {
             serverState.channelInvitations.push(invitation);
             return invitation;
         },
-        createChannelMessage: () => {
-            const message = generators.generateChannelMessage(serverState.loggedInUser, true)
+        createChannelMessage: (messageText: string) => {
+            const message = generators.generateChannelMessage(messageText ,serverState.channels[0].id, serverState.loggedInUser, new Date(), true)
             serverState.channelMessages.push(message);
             return message;
         },
