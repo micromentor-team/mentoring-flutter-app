@@ -58,7 +58,7 @@ class Dimensions {
   static const double iconWidth = 24;
   static const double iconSpaceWidth = 8;
   static const double quickViewProfileAvatarLength = 80.0;
-  static const double channelMessagesAppBarHeight = 96.0;
+  static const double channelMessagesAppBarHeight = 80.0;
   static const double channelMessagesAppBarAvatarLength = 48.0;
   static const double exploreFilterSizedBoxHeight = 80.0;
   static const double highlightBorderWidth = 2.0;
