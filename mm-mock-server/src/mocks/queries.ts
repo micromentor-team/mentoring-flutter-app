@@ -1,22 +1,16 @@
-import { faker } from "@faker-js/faker";
 import { MockServerState } from "./util/state";
 import * as generators from "./util/generators";
 
 export function mockQueries(serverState: MockServerState) {
     return {
         findChannelById: () => {
-            return generators.generateChannel([serverState.loggedInUser, serverState.otherUsers[0]]);
+            return serverState.channels[0];
         },
         findChannelMessages: () => {
-            return [
-                generators.generateChannelMessage(serverState.loggedInUser, true),
-                generators.generateChannelMessage(serverState.otherUsers[0], false),
-            ]
+            return serverState.channelMessages;
         },
         findChannelsForUser: () => {
-            return [
-                generators.generateChannel([serverState.loggedInUser, serverState.otherUsers[0]]),
-            ]
+            return serverState.channels;
         },
         findUsers: () => {
             return serverState.otherUsers.concat([serverState.loggedInUser]);
@@ -28,25 +22,18 @@ export function mockQueries(serverState: MockServerState) {
             return serverState.loggedInUser;
         },
         myInbox: () => {
-            var mockChannelId = faker.string.alphanumeric({length: 24});
-            var mockInvitations = [
-                generators.generateChannelInboxItemInvitation(faker.string.alphanumeric({length: 24}), serverState.otherUsers[0], true, false),
-                generators.generateChannelInboxItemInvitation(faker.string.alphanumeric({length: 24}), serverState.otherUsers[1], false, false),
-                generators.generateChannelInboxItemInvitation(faker.string.alphanumeric({length: 24}), serverState.otherUsers[2], false, true),
-                generators.generateChannelInboxItemInvitation(faker.string.alphanumeric({length: 24}), serverState.otherUsers[3], false, false),
-            ];
             return {
                 __typename: "UserInbox",
                 channels: {
                     __typename: "ChannelInbox",
-                    invitations: mockInvitations,
+                    invitations: serverState.channelInboxItemInvitations,
                     pendingInvitations: [
-                        mockInvitations[0],
-                        mockInvitations[1],
+                        serverState.channelInboxItemInvitations[0],
+                        serverState.channelInboxItemInvitations[1],
                     ],
                     unseenMessages: [
-                        generators.generateChannelInboxItemMessage(mockChannelId, serverState.loggedInUser),
-                        generators.generateChannelInboxItemMessage(mockChannelId, serverState.otherUsers[0]),
+                        generators.generateChannelInboxItemMessage(serverState.channels[0].id, serverState.loggedInUser),
+                        generators.generateChannelInboxItemMessage(serverState.channels[0].id, serverState.otherUsers[0]),
                     ],
                 }
             }
