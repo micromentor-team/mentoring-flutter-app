@@ -57,9 +57,18 @@ export function generateChannel(channelParticipants: any[]) {
     }
 }
 
-export function generateChannelMessage(sender: any, seen: boolean) {
+export function generateChannelMessage(
+    text: string = faker.lorem.sentence(),
+    channelId: string,
+    senderUser: any,
+    createdAt: Date,
+    isSeen: boolean = false,
+    isEdited: boolean = false,
+    isDeleted: boolean = false,
+    replyToMessageId: string | null = null,
+) {
     var statuses: object[] | null;
-    if (seen) {
+    if (isSeen) {
         statuses = [
             {
                 __typename: "ChannelMessageStatus",
@@ -72,15 +81,15 @@ export function generateChannelMessage(sender: any, seen: boolean) {
     return {
         __typename: "ChannelMessage",
         id: faker.string.alphanumeric({length: 24}),
-        createdBy: sender.id,
-        channelId: faker.string.alphanumeric({length: 24}),
-        messageText: faker.lorem.sentence(),
-        createdAt: faker.date.past({years: 1}),
-        replyToMessageId: null,
-        deletedBy: null,
+        createdBy: senderUser.id,
+        channelId: channelId,
+        messageText: text,
+        createdAt: createdAt.toISOString(),
+        replyToMessageId: replyToMessageId,
+        deletedBy: isDeleted ? senderUser.id : null,
         updatedAt: faker.date.recent(),
-        deletedAt: null,
-        editedAt: null,
+        deletedAt: isDeleted ? faker.date.recent() : null,
+        editedAt: isEdited ? faker.date.recent() : null,
         statuses: statuses,
     }
 }
