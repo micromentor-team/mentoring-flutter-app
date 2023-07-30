@@ -52,7 +52,8 @@ class MessageBubble extends StatelessWidget {
     return '';
   }
 
-  Widget _buildMessageStatus(AppLocalizations l10n, ThemeData theme, isUser) {
+  Widget _buildMessageStatus(
+      AppLocalizations l10n, ThemeData theme, bool isUser) {
     String? status;
     if (message.deletedAt != null) {
       if (isUser) {
@@ -64,8 +65,7 @@ class MessageBubble extends StatelessWidget {
 
     if (status != null) {
       return Padding(
-        padding: const EdgeInsetsDirectional.only(
-          start: Insets.widgetSmallInset,
+        padding: const EdgeInsets.only(
           bottom: Insets.widgetSmallInset,
         ),
         child: Text(
@@ -82,7 +82,8 @@ class MessageBubble extends StatelessWidget {
   }
 
   Widget _buildMessageText(AppLocalizations l10n, ThemeData theme, isUser) {
-    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!);
+    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!) &&
+        message.replyToMessageId == null;
     if (message.deletedAt != null && !isUser) {
       return Text(
         l10n.messagesStatusDeleted,
@@ -105,8 +106,6 @@ class MessageBubble extends StatelessWidget {
           fontSize: isEmoji ? theme.textTheme.displayMedium?.fontSize : null,
           decoration:
               message.deletedAt != null ? TextDecoration.lineThrough : null,
-          decorationThickness: 2.0,
-          decorationColor: theme.colorScheme.error,
           color: isUser
               ? theme.colorScheme.onPrimaryContainer
               : theme.colorScheme.onTertiaryContainer,
@@ -122,7 +121,8 @@ class MessageBubble extends StatelessWidget {
       userId: message.createdBy,
       context: context,
     );
-    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!);
+    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!) &&
+        message.replyToMessageId == null;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
@@ -171,22 +171,21 @@ class MessageBubble extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (!isUser)
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (participants.length > 2)
-                            Text(
-                              _participantName(userId: message.createdBy),
-                              style: theme.textTheme.labelSmall?.copyWith(
-                                overflow: TextOverflow.ellipsis,
-                                fontWeight: FontWeight.bold,
-                                color: theme.colorScheme.outline,
-                              ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (participants.length > 2)
+                          Text(
+                            _participantName(userId: message.createdBy),
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              overflow: TextOverflow.ellipsis,
+                              fontWeight: FontWeight.bold,
+                              color: theme.colorScheme.outline,
                             ),
-                          _buildMessageStatus(l10n, theme, isUser),
-                        ],
-                      ),
+                          ),
+                        _buildMessageStatus(l10n, theme, isUser),
+                      ],
+                    ),
                     if (replyingTo != null && message.deletedAt == null)
                       Padding(
                         padding: const EdgeInsets.only(
@@ -198,13 +197,13 @@ class MessageBubble extends StatelessWidget {
                         ),
                       ),
                     _buildMessageText(l10n, theme, isUser),
-                    if (message.deletedAt == null)
+                    if (message.deletedAt == null || isUser)
                       const SizedBox(
                         height: Insets.widgetMediumLargeInset,
                       ),
                   ],
                 ),
-                if (message.deletedAt == null)
+                if (message.deletedAt == null || isUser)
                   PositionedDirectional(
                     bottom: 0,
                     end:
