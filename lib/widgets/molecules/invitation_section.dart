@@ -51,7 +51,7 @@ class _InvitationSectionState extends State<InvitationSection> {
           title: l10n.homeInvitationSectionTitle,
           addTopDivider: true,
           removeBottomPadding: true,
-          seeAllOnPressed: () => context.push('/inbox'),
+          seeAllOnPressed: () => context.push(Routes.inboxInvitesReceived.path),
           child: _createInvitationTiles(
             l10n,
             userProvider,

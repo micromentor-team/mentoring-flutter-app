@@ -72,7 +72,7 @@ class UpcomingSection extends StatelessWidget {
       title: l10n.homeUpcomingSectionTitle,
       addTopDivider: true,
       seeAllOnPressed: () {
-        context.go('/progress');
+        context.go(Routes.progress.path);
       },
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

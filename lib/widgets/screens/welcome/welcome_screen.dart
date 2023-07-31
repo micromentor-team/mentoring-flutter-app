@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -18,11 +19,11 @@ class SignInSignUp extends StatelessWidget {
   const SignInSignUp({super.key});
 
   void _openSignUpScreen(context) {
-    context.go('/signup');
+    context.go(Routes.signup.path);
   }
 
   void _openSignInScreen(context) {
-    context.go('/signin');
+    context.go(Routes.signin.path);
   }
 
   @override
