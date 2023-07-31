@@ -32,8 +32,8 @@ class AppBarFactory {
           if (totalNotifications > 0)
             Padding(
               padding: const EdgeInsetsDirectional.only(
-                top: Insets.widgetSmallInset,
-                start: Insets.widgetSmallInset,
+                top: Insets.paddingSmall,
+                start: Insets.paddingSmall,
               ),
               child: NotificationBubble(
                 notifications: totalNotifications,
@@ -51,7 +51,7 @@ class AppBarFactory {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(Icons.mail_outline),
-                      const SizedBox(width: Insets.widgetSmallInset),
+                      const SizedBox(width: Insets.paddingSmall),
                       Text(l10n.inboxInvitesReceived),
                     ],
                   ),
@@ -61,7 +61,7 @@ class AppBarFactory {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(Icons.send_outlined),
-                      const SizedBox(width: Insets.widgetSmallInset),
+                      const SizedBox(width: Insets.paddingSmall),
                       Text(l10n.inboxInvitesSent),
                     ],
                   ),
@@ -92,7 +92,7 @@ class AppBarFactory {
     final ThemeData theme = Theme.of(context);
     final GoRouter router = GoRouter.of(context);
     return AppBar(
-      toolbarHeight: Dimensions.channelMessagesAppBarHeight,
+      toolbarHeight: 80.0,
       leading: IconButton(
         icon: const Icon(Icons.keyboard_arrow_left),
         onPressed: () => router.pop(),
@@ -107,14 +107,13 @@ class AppBarFactory {
               image: avatarUrl != null
                   ? NetworkImage(avatarUrl) as ImageProvider<Object>
                   : const AssetImage(Assets.blankAvatar),
-              width: Dimensions.channelMessagesAppBarAvatarLength,
-              height: Dimensions
-                  .channelMessagesAppBarAvatarLength, // Height of the avatar
+              width: 48.0,
+              height: 48.0,
               fit: BoxFit.cover,
             ),
           ),
           const SizedBox(
-            width: Insets.widgetMediumInset,
+            width: Insets.paddingMedium,
           ),
           Text(
             channelName,

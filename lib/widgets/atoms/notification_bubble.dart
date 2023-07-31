@@ -5,6 +5,11 @@ import '../../constants/app_constants.dart';
 class NotificationBubble extends StatelessWidget {
   final int notifications;
 
+  static const double _notificationBubbleHeight = 16.0;
+  static const double _notificationBubbleSingleCharWidth = 16.0;
+  static const double _notificationBubbleDoubleCharWidth = 20.0;
+  static const double _notificationBubbleTripleCharWidth = 24.0;
+
   const NotificationBubble({
     super.key,
     required this.notifications,
@@ -16,23 +21,22 @@ class NotificationBubble extends StatelessWidget {
     double bubbleWidth;
     String notificationText;
     if (notifications > Limits.maxNotificationsDisplayed) {
-      bubbleWidth = Dimensions.notificationBubbleTripleCharWidth;
+      bubbleWidth = _notificationBubbleTripleCharWidth;
       notificationText = Identifiers.notificationOverflow;
     } else if (notifications > 9) {
-      bubbleWidth = Dimensions.notificationBubbleDoubleCharWidth;
+      bubbleWidth = _notificationBubbleDoubleCharWidth;
       notificationText = notifications.toString();
     } else {
-      bubbleWidth = Dimensions.notificationBubbleSingleCharWidth;
+      bubbleWidth = _notificationBubbleSingleCharWidth;
       notificationText = notifications.toString();
     }
     return Align(
       alignment: Alignment.topLeft,
       child: ClipRRect(
-        borderRadius:
-            BorderRadius.circular(Dimensions.notificationBubbleHeight),
+        borderRadius: BorderRadius.circular(_notificationBubbleHeight),
         child: Container(
           width: bubbleWidth,
-          height: Dimensions.notificationBubbleHeight,
+          height: _notificationBubbleHeight,
           color: theme.colorScheme.error,
           child: Center(
             child: Text(

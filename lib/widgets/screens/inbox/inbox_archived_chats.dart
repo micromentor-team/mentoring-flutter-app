@@ -68,8 +68,8 @@ class _InboxArchivedChatsScreenState extends State<InboxArchivedChatsScreen>
       contentList.addAll([
         const Divider(
           height: 0,
-          indent: Insets.widgetMediumInset,
-          endIndent: Insets.widgetMediumInset,
+          indent: Insets.paddingMedium,
+          endIndent: Insets.paddingMedium,
         ),
         tiles[i],
       ]);

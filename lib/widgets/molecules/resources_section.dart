@@ -44,8 +44,7 @@ class ResourcesSection extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
+          padding: const EdgeInsets.symmetric(horizontal: Insets.paddingSmall),
           child: Row(
             children: resourceTiles,
           ),

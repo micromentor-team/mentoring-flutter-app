@@ -17,14 +17,14 @@ class TextDivider extends StatelessWidget {
         const Expanded(
           child: Divider(),
         ),
-        const SizedBox(width: Insets.widgetSmallInset),
+        const SizedBox(width: Insets.paddingSmall),
         Text(
           text,
           style: theme.textTheme.labelSmall?.copyWith(
             color: theme.colorScheme.outline,
           ),
         ),
-        const SizedBox(width: Insets.widgetSmallInset),
+        const SizedBox(width: Insets.paddingSmall),
         const Expanded(
           child: Divider(),
         ),

@@ -28,7 +28,7 @@ class ExploreBottomButtons extends StatelessWidget {
 
     return Container(
       color: bgColor,
-      height: Dimensions.exploreBottomSection,
+      height: 64.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -64,7 +64,7 @@ class ExploreBottomButtons extends StatelessWidget {
                           l10n.exploreSendInviteButton(selectedCount),
                         ),
                   const SizedBox(
-                    width: Dimensions.iconSpaceWidth,
+                    width: Insets.paddingSmall,
                   ),
                   const Icon(Icons.send),
                 ],

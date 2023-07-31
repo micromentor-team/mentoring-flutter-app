@@ -60,7 +60,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
       contentList.addAll([
         const Divider(
           height: 0,
-          indent: Insets.widgetSmallInset,
+          indent: Insets.paddingSmall,
         ),
         tiles[i],
       ]);
@@ -103,8 +103,8 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
     return SafeArea(
       child: Padding(
         padding: const EdgeInsetsDirectional.only(
-          start: Insets.widgetSmallInset,
-          end: Insets.widgetMediumInset,
+          start: Insets.paddingSmall,
+          end: Insets.paddingMedium,
         ),
         child: ListView(
           children: _createContentList(

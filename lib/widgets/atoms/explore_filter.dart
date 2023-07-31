@@ -107,13 +107,10 @@ class ExploreFilter extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-          (Insets.widgetSmallestInset),
-          Insets.widgetSmallInset,
-          Insets.widgetSmallestInset,
-          Insets.widgetSmallInset),
+      padding: const EdgeInsets.fromLTRB((Insets.paddingExtraSmall),
+          Insets.paddingSmall, Insets.paddingExtraSmall, Insets.paddingSmall),
       child: SizedBox(
-        height: Dimensions.exploreFilterSizedBoxHeight,
+        height: 80.0,
         child: DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(
@@ -130,9 +127,9 @@ class ExploreFilter extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
-                        (Insets.widgetLargeInset),
+                        (Insets.paddingExtraLarge),
                         0,
-                        (Insets.widgetMediumInset),
+                        (Insets.paddingMedium),
                         0),
                     child: Icon(
                       Icons.search,
@@ -174,9 +171,9 @@ class ExploreFilter extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
-                        (Insets.widgetLargeInset),
+                        (Insets.paddingExtraLarge),
                         0,
-                        (Insets.widgetMediumInset),
+                        (Insets.paddingMedium),
                         0),
                     child: Icon(
                       Icons.tune,

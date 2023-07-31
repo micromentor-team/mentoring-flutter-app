@@ -18,7 +18,7 @@ class ImageTile extends StatelessWidget {
   Widget _makeImage() {
     if (isCircle) {
       return Padding(
-        padding: const EdgeInsets.all(Insets.widgetSmallInset),
+        padding: const EdgeInsets.all(Insets.paddingSmall),
         child: CircleAvatar(
           radius: Radii.avatarRadiusSmall,
           child: CircleAvatar(
@@ -30,7 +30,7 @@ class ImageTile extends StatelessWidget {
     } else {
       return Padding(
         padding: const EdgeInsets.only(
-            top: Insets.widgetSmallInset, bottom: Insets.widgetMediumInset),
+            top: Insets.paddingSmall, bottom: Insets.paddingMedium),
         child: Container(
           width: Dimensions.imageTileRectangularImage.width,
           height: Dimensions.imageTileRectangularImage.height,
@@ -52,12 +52,12 @@ class ImageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.all(Insets.widgetSmallestInset),
+      padding: const EdgeInsets.all(Insets.paddingExtraSmall),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: Insets.widgetSmallInset,
-            horizontal: Insets.widgetMediumInset,
+            vertical: Insets.paddingSmall,
+            horizontal: Insets.paddingMedium,
           ),
           child: Align(
             alignment: Alignment.center,
@@ -80,8 +80,8 @@ class ImageTile extends StatelessWidget {
                   const Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: Insets.widgetSmallestInset,
-                        bottom: Insets.widgetSmallInset),
+                        top: Insets.paddingExtraSmall,
+                        bottom: Insets.paddingSmall),
                     child: Text(
                       subtitle,
                       style: theme.textTheme.bodySmall?.copyWith(

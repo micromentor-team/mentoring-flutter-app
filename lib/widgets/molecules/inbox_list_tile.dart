@@ -52,7 +52,7 @@ class InboxListTile extends StatelessWidget {
       onTap: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: Insets.widgetSmallInset,
+          vertical: Insets.paddingSmall,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,8 +64,8 @@ class InboxListTile extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.only(
-                        top: Insets.widgetSmallInset,
-                        start: Insets.widgetSmallInset,
+                        top: Insets.paddingSmall,
+                        start: Insets.paddingSmall,
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(
@@ -76,9 +76,8 @@ class InboxListTile extends StatelessWidget {
                               ? NetworkImage(avatarUrl!)
                                   as ImageProvider<Object>
                               : const AssetImage(Assets.blankAvatar),
-                          width: Dimensions.avatarRoundedRectLength,
-                          height: Dimensions
-                              .avatarRoundedRectLength, // Height of the avatar
+                          width: 28.0,
+                          height: 28.0,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -90,12 +89,12 @@ class InboxListTile extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  width: Insets.widgetSmallInset,
+                  width: Insets.paddingSmall,
                 ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(
-                      bottom: Insets.widgetSmallestInset,
+                      bottom: Insets.paddingExtraSmall,
                     ),
                     child: Text(
                       fullName,
@@ -108,11 +107,11 @@ class InboxListTile extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: Insets.widgetSmallInset,
+                  width: Insets.paddingSmall,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    bottom: Insets.widgetSmallestInset,
+                    bottom: Insets.paddingExtraSmall,
                   ),
                   child: Text(
                     _getDate(context),
@@ -124,17 +123,17 @@ class InboxListTile extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: Insets.widgetSmallInset,
+                  width: Insets.paddingSmall,
                 )
               ],
             ),
             const SizedBox(
-              height: Insets.widgetSmallInset,
+              height: Insets.paddingSmall,
             ),
             if (message != null)
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.widgetSmallInset,
+                  horizontal: Insets.paddingSmall,
                 ),
                 child: Text(
                   message!,

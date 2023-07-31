@@ -66,7 +66,7 @@ class MessageBubble extends StatelessWidget {
     if (status != null) {
       return Padding(
         padding: const EdgeInsets.only(
-          bottom: Insets.widgetSmallInset,
+          bottom: Insets.paddingSmall,
         ),
         child: Text(
           status,
@@ -127,7 +127,7 @@ class MessageBubble extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Insets.widgetSmallestInset),
+      padding: const EdgeInsets.symmetric(vertical: Insets.paddingExtraSmall),
       child: Container(
         constraints: BoxConstraints(
           minWidth: 80,
@@ -160,10 +160,10 @@ class MessageBubble extends StatelessWidget {
                   : theme.colorScheme.tertiaryContainer,
           child: Padding(
             padding: EdgeInsets.only(
-              left: Insets.widgetSmallInset,
-              top: Insets.widgetSmallInset,
-              right: Insets.widgetSmallInset,
-              bottom: isEmoji ? 0 : Insets.widgetSmallInset,
+              left: Insets.paddingSmall,
+              top: Insets.paddingSmall,
+              right: Insets.paddingSmall,
+              bottom: isEmoji ? 0 : Insets.paddingSmall,
             ),
             child: Stack(
               children: [
@@ -189,7 +189,7 @@ class MessageBubble extends StatelessWidget {
                     if (replyingTo != null && message.deletedAt == null)
                       Padding(
                         padding: const EdgeInsets.only(
-                          bottom: Insets.widgetSmallInset,
+                          bottom: Insets.paddingSmall,
                         ),
                         child: ReplyMessage(
                           replyMessage: replyingTo!,
@@ -199,7 +199,7 @@ class MessageBubble extends StatelessWidget {
                     _buildMessageText(l10n, theme, isUser),
                     if (message.deletedAt == null || isUser)
                       const SizedBox(
-                        height: Insets.widgetMediumLargeInset,
+                        height: Insets.paddingLarge,
                       ),
                   ],
                 ),

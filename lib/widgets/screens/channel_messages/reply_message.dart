@@ -64,19 +64,19 @@ class ReplyMessage extends StatelessWidget {
                   bottomStart: Radius.circular(Radii.roundedRectRadiusSmall),
                 ),
               ),
-              width: Insets.widgetSmallInset,
+              width: Insets.paddingSmall,
             ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.only(
-              start: Insets.widgetSmallInset,
+              start: Insets.paddingSmall,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                    padding: const EdgeInsets.all(Insets.paddingSmall),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -115,7 +115,7 @@ class ReplyMessage extends StatelessWidget {
                     splashColor: Colors.transparent,
                     icon: const Icon(
                       Icons.close,
-                      size: Dimensions.iconSizeMedium,
+                      size: 24.0,
                     ),
                     onPressed: onClose,
                   ),

@@ -42,13 +42,13 @@ class RecommendedMentorsScroll extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(Insets.widgetSmallInset),
+          padding: const EdgeInsets.all(Insets.paddingSmall),
           child: Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.widgetSmallInset,
+                  horizontal: Insets.paddingSmall,
                 ),
                 child: Row(
                   children: recommendedMentorCards,
@@ -73,7 +73,7 @@ class RecommendedSection extends StatelessWidget {
       children: [
         const RecommendedMentorsScroll(),
         Padding(
-          padding: const EdgeInsets.all(Insets.widgetMediumInset),
+          padding: const EdgeInsets.all(Insets.paddingMedium),
           child: Container(
             width: 200,
             alignment: Alignment.center,

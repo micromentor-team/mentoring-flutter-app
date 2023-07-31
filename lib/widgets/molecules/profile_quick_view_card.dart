@@ -195,7 +195,7 @@ class ProfileQuickViewCard extends StatelessWidget {
               : BoxDecoration(
                   border: Border.all(
                     color: Theme.of(context).colorScheme.surfaceVariant,
-                    width: Dimensions.cardBorderWidth,
+                    width: 1.0,
                   ),
                   borderRadius:
                       BorderRadius.circular(Radii.roundedRectRadiusMedium),
@@ -207,7 +207,7 @@ class ProfileQuickViewCard extends StatelessWidget {
                 child: checkbox,
               ),
               Padding(
-                padding: const EdgeInsets.all(Insets.widgetMediumInset),
+                padding: const EdgeInsets.all(Insets.paddingMedium),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -230,14 +230,14 @@ class ProfileQuickViewCard extends StatelessWidget {
   ) {
     final ThemeData theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.only(bottom: Insets.widgetSmallInset),
+      padding: const EdgeInsets.only(bottom: Insets.paddingSmall),
       child: Row(
         children: [
           Icon(
             Icons.star,
             color: Theme.of(context).colorScheme.primary,
           ),
-          const SizedBox(width: Insets.widgetSmallInset),
+          const SizedBox(width: Insets.paddingSmall),
           Text(
             l10n.exploreRecommended,
             style: theme.textTheme.titleMedium?.copyWith(
@@ -263,13 +263,12 @@ class ProfileQuickViewCard extends StatelessWidget {
             image: avatarUrl != null
                 ? NetworkImage(avatarUrl!) as ImageProvider<Object>
                 : const AssetImage(Assets.blankAvatar),
-            width: Dimensions.quickViewProfileAvatarLength,
-            height:
-                Dimensions.quickViewProfileAvatarLength, // Height of the avatar
+            width: 80.0,
+            height: 80.0, // Height of the avatar
             fit: BoxFit.cover,
           ),
         ),
-        const SizedBox(width: Insets.widgetMediumInset),
+        const SizedBox(width: Insets.paddingMedium),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -292,7 +291,7 @@ class ProfileQuickViewCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: Insets.widgetSmallestInset),
+              const SizedBox(height: Insets.paddingExtraSmall),
               Text(
                 location,
                 style: theme.textTheme.labelSmall?.copyWith(
@@ -301,7 +300,7 @@ class ProfileQuickViewCard extends StatelessWidget {
                 ),
               ),
               const Divider(
-                endIndent: Insets.widgetLargeInset,
+                endIndent: Insets.paddingExtraLarge,
               ),
               Text(
                 _companyText(l10n),
@@ -309,7 +308,7 @@ class ProfileQuickViewCard extends StatelessWidget {
                   color: theme.colorScheme.secondary,
                 ),
               ),
-              const SizedBox(height: Insets.widgetSmallestInset),
+              const SizedBox(height: Insets.paddingExtraSmall),
               _createProfileChips(l10n),
             ],
           ),
@@ -325,8 +324,8 @@ class ProfileQuickViewCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-            top: Insets.widgetMediumInset,
-            bottom: Insets.widgetSmallestInset,
+            top: Insets.paddingMedium,
+            bottom: Insets.paddingExtraSmall,
           ),
           child: Text(
             _expertiseText(l10n)!,
@@ -347,7 +346,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     for (int i = 1; i < topSkills.length; i++) {
       rowChildren.addAll(
         [
-          const SizedBox(width: Insets.widgetSmallestInset),
+          const SizedBox(width: Insets.paddingExtraSmall),
           topSkills[i],
         ],
       );

@@ -16,7 +16,7 @@ class CloseableTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.all(Insets.widgetSmallestInset),
+      padding: const EdgeInsets.all(Insets.paddingExtraSmall),
       child: Card(
         elevation: Elevations.level0,
         color: theme.colorScheme.surface,
@@ -29,8 +29,7 @@ class CloseableTile extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              vertical: Insets.widgetSmallInset,
-              horizontal: Insets.widgetMediumInset),
+              vertical: Insets.paddingSmall, horizontal: Insets.paddingMedium),
           child: Align(
             alignment: Alignment.center,
             child: SizedBox(
@@ -41,8 +40,8 @@ class CloseableTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                      width: Dimensions.squareAvatar,
-                      height: Dimensions.squareAvatar,
+                      width: 88,
+                      height: 88,
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                             Radius.circular(Radii.roundedRectRadiusMedium)),

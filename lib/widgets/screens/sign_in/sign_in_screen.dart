@@ -23,6 +23,18 @@ class _SignInScreenState extends State<SignInScreen> {
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
+  static const double _loginBoxWidth = 360;
+  static const double _textBoxWidth = 200;
+  static const double _sizedBoxWidth = 360;
+  static const double _iconWidth = 24;
+  static const EdgeInsetsDirectional _signInWithButtonPadding =
+      EdgeInsetsDirectional.fromSTEB(
+    64.0,
+    8.0,
+    8.0,
+    8.0,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -68,11 +80,8 @@ class _SignInScreenState extends State<SignInScreen> {
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                  Insets.widgetSmallInset,
-                  Insets.widgetLargeInset,
-                  Insets.widgetSmallInset,
-                  0),
+              padding: const EdgeInsetsDirectional.fromSTEB(Insets.paddingSmall,
+                  Insets.paddingExtraLarge, Insets.paddingSmall, 0),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -81,9 +90,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
-                          0, Insets.widgetLargeInset, 0, 0),
+                          0, Insets.paddingExtraLarge, 0, 0),
                       child: SizedBox(
-                        width: Dimensions.sizedBoxWidth,
+                        width: _sizedBoxWidth,
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             const Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0, 0, 0, Insets.widgetMediumInset),
+                                  0, 0, 0, Insets.paddingMedium),
                             ),
                             Center(
                               child: Text(
@@ -114,7 +123,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     Center(
                       child: SizedBox(
-                        width: Dimensions.loginBoxWidth,
+                        width: _loginBoxWidth,
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -156,7 +165,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 obscureText: true),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, Insets.widgetMediumInset, 0, 0),
+                                  0, Insets.paddingMedium, 0, 0),
                               child: ElevatedButton(
                                 style:
                                     ButtonStyles.primaryRoundedRectangleButton(
@@ -210,10 +219,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                    vertical:
-                                        Dimensions.loginButtonVerticalPadding,
-                                    horizontal:
-                                        Dimensions.loginButtonHorizontalPadding,
+                                    vertical: 8.0,
+                                    horizontal: 80.0,
                                   ),
                                   child: Text(
                                     l10n.logIn,
@@ -229,7 +236,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                      padding: const EdgeInsets.all(Insets.paddingSmall),
                       child: TextButton(
                         key: const Key('registerButton'),
                         onPressed: () {
@@ -244,13 +251,13 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                      padding: const EdgeInsets.all(Insets.paddingSmall),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: Dimensions.loginBoxWidth / 2,
-                            height: Dimensions.lineHeight,
+                            width: _loginBoxWidth / 2,
+                            height: 1,
                             color: Theme.of(context).colorScheme.outline,
                           ),
                           Text(
@@ -260,8 +267,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           Container(
-                            width: Dimensions.loginBoxWidth / 2,
-                            height: Dimensions.lineHeight,
+                            width: _loginBoxWidth / 2,
+                            height: 1,
                             color: Theme.of(context).colorScheme.outline,
                           ),
                         ],
@@ -271,11 +278,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              Dimensions.signInWithButtonLeftPadding,
-                              Dimensions.signInWithButtonOtherPadding,
-                              Dimensions.signInWithButtonOtherPadding,
-                              Dimensions.signInWithButtonOtherPadding),
+                          padding: _signInWithButtonPadding,
                           child: TextButton(
                             onPressed: () {
                               _openSignUpScreen(context);
@@ -284,16 +287,16 @@ class _SignInScreenState extends State<SignInScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const SizedBox(
-                                  width: Dimensions.iconWidth,
+                                  width: _iconWidth,
                                   child: Image(
                                     image: AssetImage(Assets.googleIcon),
                                   ),
                                 ),
                                 const SizedBox(
-                                  width: Dimensions.iconSpaceWidth,
+                                  width: Insets.paddingSmall,
                                 ),
                                 SizedBox(
-                                  width: Dimensions.textBoxWidth,
+                                  width: _textBoxWidth,
                                   child: Text(
                                     l10n.signInWithGoogle,
                                     style: theme.textTheme.labelLarge?.copyWith(
@@ -306,11 +309,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              Dimensions.signInWithButtonLeftPadding,
-                              Dimensions.signInWithButtonOtherPadding,
-                              Dimensions.signInWithButtonOtherPadding,
-                              Dimensions.signInWithButtonOtherPadding),
+                          padding: _signInWithButtonPadding,
                           child: TextButton(
                             onPressed: () {
                               _openSignUpScreen(context);
@@ -319,16 +318,16 @@ class _SignInScreenState extends State<SignInScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const SizedBox(
-                                  width: Dimensions.iconWidth,
+                                  width: _iconWidth,
                                   child: Image(
                                     image: AssetImage(Assets.facebookIcon),
                                   ),
                                 ),
                                 const SizedBox(
-                                  width: Dimensions.iconSpaceWidth,
+                                  width: Insets.paddingSmall,
                                 ),
                                 SizedBox(
-                                  width: Dimensions.textBoxWidth,
+                                  width: _textBoxWidth,
                                   child: Text(
                                     l10n.signInWithFacebook,
                                     style: theme.textTheme.labelLarge?.copyWith(
@@ -341,11 +340,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              Dimensions.signInWithButtonLeftPadding,
-                              Dimensions.signInWithButtonOtherPadding,
-                              Dimensions.signInWithButtonOtherPadding,
-                              Dimensions.signInWithButtonOtherPadding),
+                          padding: _signInWithButtonPadding,
                           child: TextButton(
                             onPressed: () {
                               _openSignUpScreen(context);
@@ -354,16 +349,16 @@ class _SignInScreenState extends State<SignInScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const SizedBox(
-                                  width: Dimensions.iconWidth,
+                                  width: _iconWidth,
                                   child: Image(
                                     image: AssetImage(Assets.linkedInIcon),
                                   ),
                                 ),
                                 const SizedBox(
-                                  width: Dimensions.iconSpaceWidth,
+                                  width: Insets.paddingSmall,
                                 ),
                                 SizedBox(
-                                  width: Dimensions.textBoxWidth,
+                                  width: _textBoxWidth,
                                   child: Text(
                                     l10n.signInWithLinkedIn,
                                     style: theme.textTheme.labelLarge?.copyWith(
@@ -376,11 +371,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              Dimensions.signInWithButtonLeftPadding,
-                              Dimensions.signInWithButtonOtherPadding,
-                              Dimensions.signInWithButtonOtherPadding,
-                              Dimensions.signInWithButtonOtherPadding),
+                          padding: _signInWithButtonPadding,
                           child: TextButton(
                             onPressed: () {
                               _openSignUpScreen(context);
@@ -389,16 +380,16 @@ class _SignInScreenState extends State<SignInScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const SizedBox(
-                                  width: Dimensions.iconWidth,
+                                  width: _iconWidth,
                                   child: Image(
                                     image: AssetImage(Assets.whatsappIcon),
                                   ),
                                 ),
                                 const SizedBox(
-                                  width: Dimensions.iconSpaceWidth,
+                                  width: Insets.paddingSmall,
                                 ),
                                 SizedBox(
-                                  width: Dimensions.textBoxWidth,
+                                  width: _textBoxWidth,
                                   child: Text(
                                     l10n.signInWithWhatsapp,
                                     style: theme.textTheme.labelLarge?.copyWith(

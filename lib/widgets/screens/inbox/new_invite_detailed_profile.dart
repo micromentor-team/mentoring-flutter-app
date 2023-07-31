@@ -27,7 +27,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
 
   Widget _createDateDivider(ThemeData theme) {
     return Padding(
-      padding: const EdgeInsets.all(Insets.widgetMediumInset),
+      padding: const EdgeInsets.all(Insets.paddingMedium),
       child: Row(
         children: [
           const Expanded(child: Divider()),
@@ -46,8 +46,8 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
 
   Widget _createMessagePopup(ThemeData theme) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(Insets.widgetLargeInset, 0,
-          Insets.widgetLargeInset, Insets.widgetLargeInset),
+      padding: const EdgeInsets.fromLTRB(Insets.paddingExtraLarge, 0,
+          Insets.paddingExtraLarge, Insets.paddingExtraLarge),
       child: SizedBox(
         child: DecoratedBox(
           decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
           ),
           child: const Padding(
             padding: EdgeInsets.all(
-              Insets.widgetSmallInset,
+              Insets.paddingSmall,
             ),
             child: Column(
               children: [
@@ -111,7 +111,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
             ),
           ),
         ),
-        const SizedBox(width: Insets.widgetMediumInset),
+        const SizedBox(width: Insets.paddingMedium),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             minimumSize: Dimensions.bigButtonSize,

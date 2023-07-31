@@ -37,13 +37,13 @@ class _SectionTileState extends State<SectionTile> {
           const Divider(
             thickness: 1,
             height: 0,
-            indent: Insets.widgetSmallInset,
-            endIndent: Insets.widgetSmallInset,
+            indent: Insets.paddingSmall,
+            endIndent: Insets.paddingSmall,
           ),
         Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: Insets.widgetMediumInset,
-            horizontal: Insets.appEdgeInsetCompact,
+            vertical: Insets.paddingMedium,
+            horizontal: AppEdgeInsets.paddingCompact,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +79,7 @@ class _SectionTileState extends State<SectionTile> {
         ),
         Padding(
           padding: EdgeInsets.only(
-            bottom: widget.removeBottomPadding ? 0 : Insets.widgetMediumInset,
+            bottom: widget.removeBottomPadding ? 0 : Insets.paddingMedium,
           ),
           child: Center(
             child: widget.child,
@@ -104,7 +104,7 @@ class _SectionExpandToggle extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.all(Insets.widgetSmallestInset),
+        padding: const EdgeInsets.all(Insets.paddingExtraSmall),
         child: Text(
           text,
           style: theme.textTheme.labelSmall?.copyWith(

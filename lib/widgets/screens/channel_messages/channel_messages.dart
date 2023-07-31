@@ -299,7 +299,7 @@ class BuildMessageBubbles extends StatelessWidget {
             order: GroupedListOrder.DESC,
             useStickyGroupSeparators: false,
             padding: const EdgeInsets.symmetric(
-              horizontal: Insets.widgetMediumInset,
+              horizontal: Insets.paddingMedium,
             ),
             groupBy: (message) =>
                 DateFormat('yyyy-MM-dd').format(message.createdAt).toString(),
@@ -319,7 +319,7 @@ class BuildMessageBubbles extends StatelessWidget {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             controller: listScrollController,
             groupHeaderBuilder: (ChannelMessage message) => Padding(
-              padding: const EdgeInsets.all(Insets.widgetSmallInset),
+              padding: const EdgeInsets.all(Insets.paddingSmall),
               child: TextDivider(
                 text: DateTime.now().day == message.createdAt.day
                     ? l10n.dateSimpleToday[0].toUpperCase() +
