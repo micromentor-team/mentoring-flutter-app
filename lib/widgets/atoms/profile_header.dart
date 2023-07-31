@@ -17,14 +17,14 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.all(Insets.widgetLargeInset),
+      padding: const EdgeInsets.all(Insets.paddingExtraLarge),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.all(Insets.widgetSmallestInset),
+              padding: const EdgeInsets.all(Insets.paddingExtraSmall),
               child: Text(
                 profileMessage,
                 textAlign: TextAlign.start,

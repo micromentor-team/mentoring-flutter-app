@@ -24,7 +24,7 @@ class InvitationTile extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return ListTile(
-      minVerticalPadding: Insets.widgetMediumLargeInset,
+      minVerticalPadding: Insets.paddingLarge,
       leading: CircleAvatar(
         radius: Radii.avatarRadiusSmall,
         backgroundImage: avatarUrl != null ? NetworkImage(avatarUrl!) : null,
@@ -42,7 +42,7 @@ class InvitationTile extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: Insets.widgetSmallestInset,
+              vertical: Insets.paddingExtraSmall,
             ),
             child: Text(
               userJobTitle,

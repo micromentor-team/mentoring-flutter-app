@@ -29,7 +29,7 @@ class ReminderBanner extends StatelessWidget {
                 style: theme.textTheme.titleSmall,
                 textAlign: TextAlign.start,
                 softWrap: true),
-            const SizedBox(height: Insets.widgetSmallestInset),
+            const SizedBox(height: Insets.paddingExtraSmall),
             Text(subtitleText,
                 style: theme.textTheme.bodySmall,
                 textAlign: TextAlign.start,
@@ -48,7 +48,7 @@ class ReminderBanner extends StatelessWidget {
           const SizedBox(
               child: Image(
             image: AssetImage(Assets.reminderBannerStockImage),
-            height: Dimensions.reminderBannerImageHeight,
+            height: 80.0,
           )),
           InkWell(
             onTap: () => {debugPrint("hi")},
@@ -72,13 +72,13 @@ class ReminderBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: Insets.widgetMediumInset,
-        vertical: Insets.widgetSmallestInset,
+        horizontal: Insets.paddingMedium,
+        vertical: Insets.paddingExtraSmall,
       ),
       child: Card(
         surfaceTintColor: Theme.of(context).colorScheme.inverseSurface,
         child: Padding(
-          padding: const EdgeInsets.all(Insets.widgetMediumInset),
+          padding: const EdgeInsets.all(Insets.paddingMedium),
           child: Row(
             children: <Widget>[
               _buildTextColumn(context),

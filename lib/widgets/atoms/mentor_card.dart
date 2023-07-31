@@ -8,6 +8,10 @@ class MentorCard extends StatelessWidget {
   final String mentorBio;
   final List<String> mentorSkill;
 
+  static const double _mentorCardHeight = 170;
+  static const double _mentorCardWidth = 260;
+  static const double _chipMaxWidth = 100;
+
   const MentorCard({
     Key? key,
     required this.avatarUrl,
@@ -21,7 +25,7 @@ class MentorCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.all(Insets.widgetSmallInset),
+          padding: const EdgeInsets.all(Insets.paddingSmall),
           child: CircleAvatar(
             radius: Radii.avatarRadiusLarge,
             child: CircleAvatar(
@@ -52,7 +56,7 @@ class MentorCard extends StatelessWidget {
           //using ConstrainedBox to prevent Text Overflow beyond the Card
           label: ConstrainedBox(
             constraints: const BoxConstraints(
-              maxWidth: Dimensions.chipMaxWidth,
+              maxWidth: _chipMaxWidth,
             ),
             child: Text(
               l10n.recommendedMentorCardScrollable,
@@ -62,17 +66,17 @@ class MentorCard extends StatelessWidget {
             ),
           ),
           visualDensity: const VisualDensity(
-            vertical: Dimensions.chipVisualDensity,
+            vertical: -4,
           ),
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
 
         // Text for Mentor's Name
         Padding(
-          padding: const EdgeInsets.all(Insets.widgetSmallInset),
+          padding: const EdgeInsets.all(Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
-            width: Dimensions.mentorCardWidth / 2,
+            width: _mentorCardWidth / 2,
             child: Text(
               mentorName,
               style: theme.textTheme.titleSmall?.copyWith(
@@ -87,10 +91,10 @@ class MentorCard extends StatelessWidget {
 
         // Text for Mentor's Skill
         Padding(
-          padding: const EdgeInsets.all(Insets.widgetSmallInset),
+          padding: const EdgeInsets.all(Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
-            width: Dimensions.mentorCardWidth / 2,
+            width: _mentorCardWidth / 2,
             child: Text(
               mentorBio,
               style: theme.textTheme.labelSmall?.copyWith(
@@ -136,7 +140,7 @@ class MentorCard extends StatelessWidget {
       //using ConstrainedBox to prevent Text Overflow beyond the Card
       label: ConstrainedBox(
         constraints: const BoxConstraints(
-          maxWidth: Dimensions.chipMaxWidth,
+          maxWidth: _chipMaxWidth,
         ),
         child: Text(
           skill,
@@ -146,7 +150,7 @@ class MentorCard extends StatelessWidget {
         ),
       ),
       visualDensity: const VisualDensity(
-        vertical: Dimensions.chipVisualDensity,
+        vertical: -4,
       ),
       backgroundColor: theme.colorScheme.tertiaryContainer,
       side: BorderSide.none,
@@ -159,8 +163,8 @@ class MentorCard extends StatelessWidget {
     Column mentorInfoColumn = _getMentorInfo(context);
     return Card(
       child: SizedBox(
-        width: Dimensions.mentorCardWidth,
-        height: Dimensions.mentorCardHeight,
+        width: _mentorCardWidth,
+        height: _mentorCardHeight,
         child: Row(
           children: [
             avatarColumn,

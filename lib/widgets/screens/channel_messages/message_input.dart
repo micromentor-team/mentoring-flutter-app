@@ -79,10 +79,10 @@ class _MessageInputState extends State<MessageInput> {
       color: theme.colorScheme.surfaceVariant,
       child: Padding(
         padding: const EdgeInsetsDirectional.only(
-          start: Insets.widgetMediumInset,
-          top: Insets.widgetMediumInset,
-          bottom: Insets.widgetMediumInset,
-          end: Insets.widgetSmallestInset,
+          start: Insets.paddingMedium,
+          top: Insets.paddingMedium,
+          bottom: Insets.paddingMedium,
+          end: Insets.paddingExtraSmall,
         ),
         child: Row(
           children: [
@@ -98,7 +98,7 @@ class _MessageInputState extends State<MessageInput> {
                   children: [
                     if (_replyingTo != null)
                       Padding(
-                        padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                        padding: const EdgeInsets.all(Insets.paddingSmall),
                         child: ReplyMessage(
                           replyMessage: _replyingTo!,
                           participants: widget.participants,
@@ -122,8 +122,8 @@ class _MessageInputState extends State<MessageInput> {
                       onSubmitted: _sendMessage,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
-                          vertical: Insets.widgetSmallestInset,
-                          horizontal: Insets.widgetMediumInset,
+                          vertical: Insets.paddingExtraSmall,
+                          horizontal: Insets.paddingMedium,
                         ),
                         hintText: l10n.messagesInputHint,
                         hintStyle: theme.textTheme.bodyMedium?.copyWith(
@@ -136,7 +136,7 @@ class _MessageInputState extends State<MessageInput> {
                 ),
               ),
             ),
-            const SizedBox(width: Insets.widgetSmallestInset),
+            const SizedBox(width: Insets.paddingExtraSmall),
             IconButton(
               icon: const Icon(
                 Icons.mic_outlined,

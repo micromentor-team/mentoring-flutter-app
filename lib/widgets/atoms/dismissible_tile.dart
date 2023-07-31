@@ -29,7 +29,7 @@ class DismissibleTile extends StatelessWidget {
         child: icon != null
             ? Padding(
                 padding: const EdgeInsetsDirectional.only(
-                  end: Insets.widgetLargeInset,
+                  end: Insets.paddingExtraLarge,
                 ),
                 child: Icon(
                   icon,
@@ -40,8 +40,8 @@ class DismissibleTile extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsetsDirectional.only(
-          start: Insets.widgetSmallInset,
-          end: Insets.widgetMediumInset,
+          start: Insets.paddingSmall,
+          end: Insets.paddingMedium,
         ),
         child: child,
       ),

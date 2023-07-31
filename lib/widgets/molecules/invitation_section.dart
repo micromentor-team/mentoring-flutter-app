@@ -82,8 +82,8 @@ class _InvitationSectionState extends State<InvitationSection> {
               const Divider(
                 thickness: 1,
                 height: 0,
-                indent: Insets.widgetMediumInset,
-                endIndent: Insets.widgetMediumInset,
+                indent: Insets.paddingMedium,
+                endIndent: Insets.paddingMedium,
               ),
             );
           }

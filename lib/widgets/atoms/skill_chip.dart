@@ -31,7 +31,7 @@ class SkillChip extends StatelessWidget {
         vertical: VisualDensity.minimumDensity,
       ),
       labelPadding: icon != null
-          ? const EdgeInsetsDirectional.only(end: Insets.widgetSmallInset)
+          ? const EdgeInsetsDirectional.only(end: Insets.paddingSmall)
           : null,
       padding: EdgeInsets.zero,
     );

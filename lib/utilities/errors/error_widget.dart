@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({super.key});
@@ -10,7 +9,7 @@ class CustomErrorWidget extends StatelessWidget {
     return Center(
       child: Icon(
         Icons.error,
-        size: Dimensions.minimumInteractionWidgetLength,
+        size: 48.0,
         color: theme.colorScheme.error,
       ),
     );

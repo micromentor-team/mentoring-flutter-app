@@ -31,8 +31,8 @@ class _MessageBoxState extends State<MessageBox> {
 
     return Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: Insets.widgetMediumInset,
-          vertical: Insets.widgetSmallestInset,
+          horizontal: Insets.paddingMedium,
+          vertical: Insets.paddingExtraSmall,
         ),
         child: Column(
           children: [
@@ -44,7 +44,7 @@ class _MessageBoxState extends State<MessageBox> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: Insets.widgetSmallInset),
+                  const EdgeInsets.symmetric(vertical: Insets.paddingSmall),
               child: TextField(
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.outline,
@@ -84,7 +84,7 @@ class _MessageBoxState extends State<MessageBox> {
                     ),
                   ),
                 ),
-                const SizedBox(width: Insets.widgetMediumInset),
+                const SizedBox(width: Insets.paddingMedium),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: Dimensions.bigButtonSize,
@@ -132,20 +132,20 @@ class _InviteToConnectState extends State<InviteToConnect> {
     final ThemeData theme = Theme.of(context);
     return Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: Insets.widgetMediumInset,
-          vertical: Insets.widgetSmallestInset,
+          horizontal: Insets.paddingMedium,
+          vertical: Insets.paddingExtraSmall,
         ),
         child: Card(
           color: theme.colorScheme.tertiaryContainer,
           child: Padding(
-              padding: const EdgeInsets.all(Insets.widgetSmallInset),
+              padding: const EdgeInsets.all(Insets.paddingSmall),
               child: ListTile(
                   title: Text(
                     l10n.inviteMessageTips,
                     style: theme.textTheme.titleMedium,
                   ),
                   subtitle: Padding(
-                      padding: const EdgeInsets.all(Insets.widgetSmallInset),
+                      padding: const EdgeInsets.all(Insets.paddingSmall),
                       child: Text(
                         l10n.inviteMessageTipsContent,
                         style: theme.textTheme.bodyMedium,
@@ -158,8 +158,8 @@ class _InviteToConnectState extends State<InviteToConnect> {
     if (selectedProfiles.length == 1) {
       return Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Insets.widgetMediumInset,
-            vertical: Insets.widgetSmallestInset,
+            horizontal: Insets.paddingMedium,
+            vertical: Insets.paddingExtraSmall,
           ),
           child: createProfilCardFromInfoAndCheckbox(
               info: selectedProfiles[0], checkbox: null));
@@ -190,8 +190,7 @@ class _InviteToConnectState extends State<InviteToConnect> {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: Insets.widgetMediumInset),
+          padding: const EdgeInsets.symmetric(horizontal: Insets.paddingMedium),
           child: Text(
             selectedText,
             style: theme.textTheme.labelSmall,
@@ -199,8 +198,7 @@ class _InviteToConnectState extends State<InviteToConnect> {
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: Insets.widgetSmallInset),
+          padding: const EdgeInsets.symmetric(horizontal: Insets.paddingSmall),
           child: Row(
             children: profileTiles,
           ),
