@@ -204,7 +204,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                         passwordController.text = '';
                                       }
                                     } else {
-                                      router.push('/');
+                                      router.push(Routes.root.path);
                                     }
                                   }
                                 },

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   _openHomeScreen(BuildContext context) {
-    context.go('/home');
+    context.go(Routes.home.path);
   }
 
   @override
