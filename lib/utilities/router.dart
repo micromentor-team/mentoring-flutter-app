@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_filters.dart';
 import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';

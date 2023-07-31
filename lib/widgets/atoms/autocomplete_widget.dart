@@ -113,11 +113,12 @@ class AutocompleteWidget extends StatelessWidget {
                               return Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      width: 2.0, color: Colors.black),
+                                      width: 2.0,
+                                      color: theme.colorScheme.primary),
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(8.0),
                                   ),
-                                  color: Colors.white,
+                                  color: theme.colorScheme.surface,
                                 ),
                                 margin: const EdgeInsets.only(right: 10.0),
                                 padding: const EdgeInsets.symmetric(
@@ -129,17 +130,17 @@ class AutocompleteWidget extends StatelessWidget {
                                     InkWell(
                                       child: Text(
                                         optionsTranslations?.call(tag) ?? tag,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: theme.colorScheme.primary),
                                       ),
                                       onTap: () => onTagDelete(tag),
                                     ),
                                     const SizedBox(width: 4.0),
                                     InkWell(
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.close,
                                         size: 20.0,
-                                        color: Colors.black,
+                                        color: theme.colorScheme.primary,
                                       ),
                                       onTap: () => onTagDelete(tag),
                                     )

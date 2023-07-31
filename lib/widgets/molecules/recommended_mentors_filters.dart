@@ -151,14 +151,15 @@ class _ExpertiseState extends State<_Expertise> {
           });
         },
         style: ButtonStyles.primaryRoundedRectangleButton(context).copyWith(
-          backgroundColor: MaterialStatePropertyAll(
-              (isSelected) ? theme.colorScheme.onInverseSurface : Colors.white),
+          backgroundColor: MaterialStatePropertyAll((isSelected)
+              ? theme.colorScheme.onInverseSurface
+              : theme.colorScheme.surface),
         ),
         child: Text(l10n.exploreSearchFilterSkills(skill),
-            style: const TextStyle(color: Colors.black)),
+            style: TextStyle(color: theme.colorScheme.primary)),
       ));
       if (i != ExploreCardFiltersProvider.skills.length - 1) {
-        skillButtons.add(const SizedBox(width: 4));
+        skillButtons.add(const SizedBox(width: Insets.widgetSmallestInset));
       }
     }
 
@@ -172,7 +173,7 @@ class _ExpertiseState extends State<_Expertise> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(l10n.exploreSearchFilterExpertise),
-              const SizedBox(height: 4),
+              const SizedBox(height: Insets.widgetSmallestInset),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: IntrinsicHeight(
@@ -196,11 +197,11 @@ class _ExpertiseState extends State<_Expertise> {
                           backgroundColor: MaterialStatePropertyAll(
                             (allSkillsSelected)
                                 ? theme.colorScheme.onInverseSurface
-                                : Colors.white,
+                                : theme.colorScheme.surface,
                           ),
                         ),
                         child: Text(l10n.exploreSearchFilterAll,
-                            style: const TextStyle(color: Colors.black)),
+                            style: TextStyle(color: theme.colorScheme.primary)),
                       ),
                       const VerticalDivider(),
                       ...skillButtons,
@@ -208,7 +209,7 @@ class _ExpertiseState extends State<_Expertise> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: Insets.widgetSmallInset),
             ],
           ),
         ),
@@ -240,14 +241,14 @@ class _AutocompletePicker extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(fieldName),
-            const SizedBox(height: 4),
+            const SizedBox(height: Insets.widgetSmallestInset),
             AutocompleteWidget(
               options: options.toList(),
               optionsTranslations: optionsTranslations,
               selectedOptions: selectedOptions?.toList() ?? [],
               controller: controller,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: Insets.widgetSmallInset),
           ],
         ),
       ),
