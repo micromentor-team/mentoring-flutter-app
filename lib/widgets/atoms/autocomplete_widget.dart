@@ -113,16 +113,18 @@ class AutocompleteWidget extends StatelessWidget {
                               return Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      width: 2.0,
+                                      width: Dimensions.highlightBorderWidth,
                                       color: theme.colorScheme.primary),
                                   borderRadius: const BorderRadius.all(
-                                    Radius.circular(8.0),
+                                    Radius.circular(Radii.buttonRadius),
                                   ),
                                   color: theme.colorScheme.surface,
                                 ),
-                                margin: const EdgeInsets.only(right: 10.0),
+                                margin: const EdgeInsets.only(
+                                    right: Insets.widgetSmallInset),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 4.0),
+                                    horizontal: Insets.widgetSmallInset,
+                                    vertical: Insets.widgetSmallestInset),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -135,7 +137,8 @@ class AutocompleteWidget extends StatelessWidget {
                                       ),
                                       onTap: () => onTagDelete(tag),
                                     ),
-                                    const SizedBox(width: 4.0),
+                                    const SizedBox(
+                                        width: Insets.widgetSmallestInset),
                                     InkWell(
                                       child: Icon(
                                         Icons.close,
