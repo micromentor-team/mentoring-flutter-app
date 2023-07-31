@@ -6,7 +6,6 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/explore_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 
 import '../../../providers/models/scaffold_model.dart';
 import '../../../utilities/router.dart';
@@ -76,33 +75,30 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     return SafeArea(
       child: Column(children: [
         Expanded(
-            child: ChangeNotifierProvider(
-                create: (context) => ExploreCardFiltersProvider(),
-                child: ListView(
-                  children: _createFilter(context) +
-                      _createCards() +
-                      [
-                        TextButton(
-                            onPressed: () {
-                              setState(() {
-                                _loadMoreRecommendations();
-                              });
-                            },
-                            child: Column(children: [
-                              Text(
-                                l10n.exploreSeeMore,
-                                style: theme.textTheme.labelLarge?.copyWith(
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_drop_down,
-                                color: Color(
-                                    theme.colorScheme.onSurfaceVariant.value),
-                              ),
-                            ]))
-                      ],
-                ))),
+            child: ListView(
+          children: _createFilter(context) +
+              _createCards() +
+              [
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        _loadMoreRecommendations();
+                      });
+                    },
+                    child: Column(children: [
+                      Text(
+                        l10n.exploreSeeMore,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: Color(theme.colorScheme.onSurfaceVariant.value),
+                      ),
+                    ]))
+              ],
+        )),
         ExploreBottomButtons(
           clearAction: () {
             setState(() {

@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/autocomplete_widget.dart';
 import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 
 class RecommendedMentorsFilters extends StatefulWidget {
-  final ExploreCardFiltersProvider filtersProvider;
-
-  const RecommendedMentorsFilters({super.key, required this.filtersProvider});
+  const RecommendedMentorsFilters({super.key});
 
   @override
   State<StatefulWidget> createState() => _RecommendedMentorsFilters();
@@ -18,6 +18,7 @@ class RecommendedMentorsFilters extends StatefulWidget {
 class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters> {
   late final TextfieldTagsController _countriesController;
   late final TextfieldTagsController _languagesController;
+  late final ExploreCardFiltersProvider _filtersProvider;
   Set<String> _selectedSkills = {};
 
   @override
@@ -25,7 +26,9 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters> {
     super.initState();
     _countriesController = TextfieldTagsController();
     _languagesController = TextfieldTagsController();
-    _selectedSkills = widget.filtersProvider.selectedSkills;
+    _filtersProvider =
+        Provider.of<ExploreCardFiltersProvider>(context, listen: false);
+    _selectedSkills = _filtersProvider.selectedSkills;
   }
 
   @override
@@ -53,14 +56,14 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters> {
                 controller: _languagesController,
                 options: ExploreCardFiltersProvider.languages,
                 optionsTranslations: l10n.exploreSearchFilterLanguages,
-                selectedOptions: widget.filtersProvider.selectedLanguages,
+                selectedOptions: _filtersProvider.selectedLanguages,
               ),
               _AutocompletePicker(
                 fieldName: "Countries",
                 controller: _countriesController,
                 options: ExploreCardFiltersProvider.countries,
                 optionsTranslations: l10n.exploreSearchFilterCountries,
-                selectedOptions: widget.filtersProvider.selectedCountries,
+                selectedOptions: _filtersProvider.selectedCountries,
               ),
             ]),
             Align(
@@ -100,12 +103,12 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters> {
                       style: theme.textTheme.labelLarge
                           ?.copyWith(color: theme.colorScheme.primary)),
                   onPressed: () {
-                    widget.filtersProvider.setAll(
+                    _filtersProvider.setAll(
                         _countriesController.getTags?.toSet() ?? {},
                         _languagesController.getTags?.toSet() ?? {},
                         _selectedSkills);
 
-                    Navigator.of(context).pop();
+                    context.go(Routes.explore.path);
                   },
                 ),
               ],

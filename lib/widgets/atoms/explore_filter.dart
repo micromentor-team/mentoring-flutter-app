@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_filters.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 
 class ExploreFilter extends StatelessWidget {
@@ -101,31 +101,30 @@ class ExploreFilter extends StatelessWidget {
             borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
             color: Theme.of(context).colorScheme.surfaceVariant,
           ),
-          child: Consumer<ExploreCardFiltersProvider>(
-              builder: (context, filters, _) => Row(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
+          child: Row(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
                             padding: const EdgeInsets.fromLTRB(
                                 (Insets.paddingExtraLarge),
                                 0,
                                 (Insets.paddingMedium),
                                 0),
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.search,
-                                color: Color(
-                                    theme.colorScheme.onSurfaceVariant.value),
-                              ),
-                            ),
-                          ),
-                        ],
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.search,
+                        color: Color(theme.colorScheme.onSurfaceVariant.value),
                       ),
-                      Expanded(
-                        child: Column(
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Consumer<ExploreCardFiltersProvider>(
+                    builder: (context, filters, _) => Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Row(
@@ -157,35 +156,31 @@ class ExploreFilter extends StatelessWidget {
                               ],
                             ),
                           ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
+                        )),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
                                 (Insets.paddingExtraLarge),
                                 0,
                                 (Insets.paddingMedium),
                                 0),
-                            child: IconButton(
-                              onPressed: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        RecommendedMentorsFilters(
-                                            filtersProvider: filters)),
-                              ),
-                              icon: Icon(
-                                Icons.tune,
-                                color: Color(
-                                    theme.colorScheme.onSurfaceVariant.value),
-                              ),
-                            ),
-                          ),
-                        ],
+                    child: IconButton(
+                      onPressed: () {
+                        context.go(Routes.exploreFilters.path);
+                      },
+                      icon: Icon(
+                        Icons.tune,
+                        color: Color(theme.colorScheme.onSurfaceVariant.value),
                       ),
-                    ],
-                  )),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
