@@ -36,7 +36,7 @@ class ImageTile extends StatelessWidget {
           height: Dimensions.imageTileRectangularImage.height,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
-                Radius.circular(Radii.roundedRectRadius)),
+                Radius.circular(Radii.roundedRectRadiusMedium)),
             image: DecorationImage(
               image: image,
               fit: BoxFit.fill,

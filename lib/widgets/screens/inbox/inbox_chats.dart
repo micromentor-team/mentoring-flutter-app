@@ -7,7 +7,10 @@ import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/channels_provider.dart';
+import '../../../providers/messages_provider.dart';
 import '../../../providers/models/scaffold_model.dart';
+import '../../../providers/user_provider.dart';
 
 class InboxChatsScreen extends StatefulWidget {
   const InboxChatsScreen({super.key});
@@ -18,50 +21,83 @@ class InboxChatsScreen extends StatefulWidget {
 
 class _InboxChatsScreenState extends State<InboxChatsScreen>
     with RouteAwareMixin<InboxChatsScreen> {
-  List<DismissibleTile> tiles = [];
+  AuthenticatedUser? _user;
 
-  DismissibleTile _createTestTile(int notifications, int tileIndex) {
-    // TODO(m-rosario): Replace mock data with backend data.
-    final String mockChannelId = tileIndex.toString();
-    return DismissibleTile(
-      tileId: mockChannelId,
-      onDismissed: () {
-        DebugLogger.debug('Dismissed tile #$mockChannelId');
-        int tileIndexToRemove = -1;
-        for (int i = 0; i < tiles.length; i++) {
-          if (tiles[i].tileId == mockChannelId) {
-            tileIndexToRemove = i;
-            break;
-          }
-        }
-        setState(() {
-          tiles.removeAt(tileIndexToRemove);
-        });
-      },
-      icon: Icons.archive_outlined,
-      child: InboxListTile(
-        avatarUrl:
-            'https://st4.depositphotos.com/9999814/39958/i/600/depositphotos_399584092-stock-photo-attractive-young-woman-profile-portrait.jpg',
-        fullName: 'Azadeh Sana',
-        date: DateTime.now().subtract(Duration(days: tileIndex)),
-        message:
-            'Lorem ipsum dolor sit amet consectetur. Enim id interdum pulvinar eget dolor sed sit enim.',
-        notifications: notifications,
-        onPressed: () =>
-            context.push('${Routes.inboxChats.path}/$mockChannelId'),
-      ),
-    );
+  String _channelName(ChannelForUser channel) {
+    final participant =
+        channel.participants.firstWhere((item) => item.user.id != _user!.id);
+    return participant.user.fullName!;
   }
 
-  void _createTestTiles() {
-    for (int i = 0; i <= 8; i++) {
+  String? _channelAvatarUrl(ChannelForUser channel) {
+    String? avatarUrl = channel.participants
+        .where((element) => element.user.id != _user!.id)
+        .first
+        .user
+        .avatarUrl;
+    return avatarUrl;
+  }
+
+  List<UnseenMessage> _channelUnseenMessages(
+    List<UnseenMessage>? unseenMessages,
+    ChannelForUser channel,
+  ) {
+    if (unseenMessages == null) {
+      return [];
+    }
+    return unseenMessages
+        .where((element) =>
+            element.channelId == channel.id && element.createdBy != _user!.id)
+        .toList();
+  }
+
+  List<Widget> _createContentList(
+    List<ChannelForUser> channels,
+    List<UnseenMessage> unseenMessages,
+  ) {
+    final List<DismissibleTile> tiles = [];
+    if (channels.isEmpty) {
+      return [];
+    }
+
+    for (int i = 0; i < channels.length; i++) {
+      final ChannelForUser channel = channels[i];
+      final String channelName = _channelName(channel);
+      final String? channelAvatarUrl = _channelAvatarUrl(channel);
+      final List<UnseenMessage> channelUnseenMessages =
+          _channelUnseenMessages(unseenMessages, channel);
+
       tiles.add(
-        _createTestTile(8 - i, i),
+        DismissibleTile(
+          tileId: channel.id,
+          onDismissed: () {
+            DebugLogger.verbose('Dismissed tile for channel ${channel.id}');
+            int tileIndexToRemove = -1;
+            for (int i = 0; i < tiles.length; i++) {
+              if (tiles[i].tileId == channel.id) {
+                tileIndexToRemove = i;
+                break;
+              }
+            }
+            setState(() {
+              tiles.removeAt(tileIndexToRemove);
+            });
+          },
+          icon: Icons.archive_outlined,
+          child: InboxListTile(
+            avatarUrl: channelAvatarUrl,
+            fullName: channelName,
+            date: DateTime.now().subtract(Duration(
+                days: i)), // TODO(m-rosario): Use date from last message
+            message: '', // TODO(m-rosario): Get text from last message
+            notifications: channelUnseenMessages.length,
+            onPressed: () =>
+                context.push('${Routes.inboxChats.path}/${channel.id}'),
+          ),
+        ),
       );
     }
-  }
 
-  List<Widget> _createContentList() {
     if (tiles.isEmpty) {
       return [];
     }
@@ -102,18 +138,31 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
   }
 
   @override
-  void initState() {
-    super.initState();
-    _createTestTiles();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final List<Widget> contentList = _createContentList();
-    return SafeArea(
-      child: ListView(
-        children: contentList,
-      ),
+    final channelsProvider = Provider.of<ChannelsProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
+    final messagesProvider = Provider.of<MessagesProvider>(context);
+    _user = userProvider.user;
+    return channelsProvider.queryUserChannels(
+      userId: _user!.id,
+      onData: (userChannelsData, {refetch, fetchMore}) {
+        final List<ChannelForUser> channels = userChannelsData.response ?? [];
+        return messagesProvider.unseenMessages(
+          onData: (unseenMessagesData, {refetch, fetchMore}) {
+            final List<UnseenMessage> unseenMessages =
+                unseenMessagesData.response ?? [];
+            final List<Widget> contentList = _createContentList(
+              channels,
+              unseenMessages,
+            );
+            return SafeArea(
+              child: ListView(
+                children: contentList,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

@@ -57,10 +57,10 @@ class _MessageBoxState extends State<MessageBox> {
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: theme.colorScheme.primary),
                       borderRadius:
-                          BorderRadius.circular(Radii.roundedRectRadius)),
+                          BorderRadius.circular(Radii.roundedRectRadiusMedium)),
                   border: OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(Radii.roundedRectRadius)),
+                          BorderRadius.circular(Radii.roundedRectRadiusMedium)),
                   hintText: l10n.inviteMessagePlaceholder,
                 ),
               ),

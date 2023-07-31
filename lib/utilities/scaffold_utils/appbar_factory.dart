@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/utilities/errors/errors.dart';
 
 import '../../constants/app_constants.dart';
 import '../../widgets/atoms/notification_bubble.dart';
@@ -87,6 +88,7 @@ class AppBarFactory {
     required String channelName,
     String? avatarUrl,
   }) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
     final GoRouter router = GoRouter.of(context);
     return AppBar(
@@ -99,7 +101,7 @@ class AppBarFactory {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(
-              Radii.roundedRectRadius,
+              Radii.roundedRectRadiusSmall,
             ),
             child: Image(
               image: avatarUrl != null
@@ -123,10 +125,40 @@ class AppBarFactory {
         ],
       ),
       actions: [
-        IconButton(
+        PopupMenuButton(
           icon: const Icon(Icons.more_vert),
-          onPressed: () => {}, //TODO(m-rosario): Chat menu
-        )
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              value: 0,
+              child: Text(l10n.messagesActionArchive),
+            ),
+            PopupMenuItem(
+              value: 1,
+              child: Text(l10n.messagesActionBlock),
+            ),
+            PopupMenuItem(
+              value: 2,
+              child: Text(l10n.messagesActionReport),
+            ),
+          ],
+          onSelected: (value) {
+            switch (value) {
+              case 0:
+                // TODO(m-rosario): Archive chat
+                break;
+              case 1:
+                // TODO(m-rosario): Block user
+                break;
+              case 2:
+                // TODO(m-rosario): Report user
+                break;
+              default:
+                throw UnexpectedStateError(
+                  message: 'Invalid PopupMenuItem value: $value ',
+                );
+            }
+          },
+        ),
       ],
     );
   }

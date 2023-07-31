@@ -189,14 +189,16 @@ class ProfileQuickViewCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primaryContainer,
                     width: Dimensions.highlightBorderWidth,
                   ),
-                  borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
+                  borderRadius:
+                      BorderRadius.circular(Radii.roundedRectRadiusMedium),
                 )
               : BoxDecoration(
                   border: Border.all(
                     color: Theme.of(context).colorScheme.surfaceVariant,
                     width: Dimensions.cardBorderWidth,
                   ),
-                  borderRadius: BorderRadius.circular(Radii.roundedRectRadius),
+                  borderRadius:
+                      BorderRadius.circular(Radii.roundedRectRadiusMedium),
                 ),
           child: Stack(
             children: [
@@ -255,7 +257,7 @@ class ProfileQuickViewCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(
-            Radii.roundedRectRadius,
+            Radii.roundedRectRadiusMedium,
           ),
           child: Image(
             image: avatarUrl != null

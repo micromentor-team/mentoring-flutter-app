@@ -8,7 +8,7 @@ class ButtonStyles {
       backgroundColor: Theme.of(context).colorScheme.primary,
       padding: const EdgeInsets.all(Insets.widgetSmallInset),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Radii.buttonRadius * 2),
+        borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall * 2),
       ),
     );
   }
@@ -17,7 +17,7 @@ class ButtonStyles {
     return ElevatedButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Radii.buttonRadius),
+          borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
         ));
   }
 }

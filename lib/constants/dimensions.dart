@@ -14,8 +14,9 @@ class Insets {
 
 class Radii {
   Radii._private();
-  static const double buttonRadius = 8.0;
-  static const double roundedRectRadius = 12.0;
+  static const double roundedRectRadiusSmall = 8.0;
+  static const double roundedRectRadiusMedium = 12.0;
+  static const double roundedRectRadiusLarge = 16.0;
   static const double avatarRadiusSmallest = 14.0;
   static const double avatarRadiusSmall = 24.0;
   static const double avatarRadiusMedium = 40.0;
@@ -52,10 +53,12 @@ class Dimensions {
   static const double lineHeight = 1;
   static const double textBoxWidth = 200;
   static const double sizedBoxWidth = 360;
+  static const double iconSizeSmall = 12.0;
+  static const double iconSizeMedium = 24.0;
   static const double iconWidth = 24;
   static const double iconSpaceWidth = 8;
   static const double quickViewProfileAvatarLength = 80.0;
-  static const double channelMessagesAppBarHeight = 96.0;
+  static const double channelMessagesAppBarHeight = 80.0;
   static const double channelMessagesAppBarAvatarLength = 48.0;
   static const double exploreFilterSizedBoxHeight = 80.0;
   static const double highlightBorderWidth = 2.0;

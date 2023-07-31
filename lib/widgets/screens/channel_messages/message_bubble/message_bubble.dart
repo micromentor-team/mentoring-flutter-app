@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:intl/intl.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/emoji_utils/emoji_utils.dart';
@@ -50,29 +52,28 @@ class MessageBubble extends StatelessWidget {
     return '';
   }
 
-  Widget _buildMessageStatus(isUser) {
+  Widget _buildMessageStatus(
+      AppLocalizations l10n, ThemeData theme, bool isUser) {
     String? status;
     if (message.deletedAt != null) {
       if (isUser) {
-        status = 'deleted';
+        status = l10n.messagesStatusDeleted;
       }
     } else if (message.editedAt != null) {
-      status = ' (edited)';
+      status = l10n.messagesStatusEdited;
     }
 
     if (status != null) {
-      return Text(
-        status,
-        style: TextStyle(
-          fontSize: 10.0,
-          fontStyle: FontStyle.italic,
-          color:
-              // If the message is only emojis, we need grey
-              EmojiUtils.strictlyEmojis(message.messageText!)
-                  ? Colors.grey
-                  : isUser
-                      ? Colors.white
-                      : Colors.grey,
+      return Padding(
+        padding: const EdgeInsets.only(
+          bottom: Insets.widgetSmallInset,
+        ),
+        child: Text(
+          status,
+          style: theme.textTheme.labelSmall?.copyWith(
+            fontStyle: FontStyle.italic,
+            color: theme.colorScheme.outline,
+          ),
         ),
       );
     } else {
@@ -80,58 +81,34 @@ class MessageBubble extends StatelessWidget {
     }
   }
 
-  Widget _buildMessageText(isUser) {
-    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!);
-
+  Widget _buildMessageText(AppLocalizations l10n, ThemeData theme, isUser) {
+    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!) &&
+        message.replyToMessageId == null;
     if (message.deletedAt != null && !isUser) {
-      return Padding(
-        padding: const EdgeInsets.only(
-          top: 10.0,
-          bottom: 20.0,
-        ),
-        child: Text(
-          "Deleted",
-          style: TextStyle(
-            fontStyle: FontStyle.italic,
-            color:
-                // If the message is only emojis, we need grey
-                EmojiUtils.strictlyEmojis(message.messageText!)
-                    ? Colors.grey
-                    : isUser
-                        ? Colors.white
-                        : Colors.grey,
-          ),
+      return Text(
+        l10n.messagesStatusDeleted,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          fontStyle: FontStyle.italic,
+          color: theme.colorScheme.outline,
         ),
       );
     } else {
-      return Padding(
-        // If the message is only emojis, we need to add some padding to unobstruct sentAt
-        padding: isEmoji
-            ? const EdgeInsets.only(
-                bottom: 12.0,
-              )
-            : EdgeInsets.zero,
-        child: SelectableLinkify(
-          //  If the message is only emojis, we don't need the invisible character
-          text: isEmoji
-              ? message.messageText!
-              : '${message.messageText}                ',
-          //  Concatenating white space and an invisible character saves us from having to use a LayoutBuilder.
-          //  The Text sees the invisible character, so it does not trim the extra whitespace we want to use for layout.
-          //  When the Stack sees our addition, it paints our positioned sentAt widget (8 in this case) whitespaces
-          //  the right. Voila, no math! 🪄
-          onOpen: (link) => _onOpenLink(link),
-          linkStyle: TextStyle(
-            color: isUser ? Colors.white : Colors.black,
-          ),
-          style: TextStyle(
-            fontSize: isEmoji ? 30.0 : null,
-            decoration:
-                message.deletedAt != null ? TextDecoration.lineThrough : null,
-            decorationThickness: 2.0,
-            decorationColor: Colors.red,
-            color: isUser ? Colors.white : Colors.black,
-          ),
+      return SelectableLinkify(
+        text: message.messageText!,
+        onOpen: (link) => _onOpenLink(link),
+        linkStyle: theme.textTheme.bodyMedium?.copyWith(
+          color: isUser
+              ? theme.colorScheme.onPrimaryContainer
+              : theme.colorScheme.onTertiaryContainer,
+        ),
+        textAlign: isEmoji && isUser ? TextAlign.end : null,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          fontSize: isEmoji ? theme.textTheme.displayMedium?.fontSize : null,
+          decoration:
+              message.deletedAt != null ? TextDecoration.lineThrough : null,
+          color: isUser
+              ? theme.colorScheme.onPrimaryContainer
+              : theme.colorScheme.onTertiaryContainer,
         ),
       );
     }
@@ -139,136 +116,111 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sentAt = DateFormat.jm().format(message.createdAt);
+    final sentAt = DateFormat.jm().format(message.createdAt).toLowerCase();
     final isUser = _isCurrentUser(
       userId: message.createdBy,
       context: context,
     );
-    // 🚨 TODO: If the message has ANY related content/attachments: maintain `false`.
-    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!);
+    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!) &&
+        message.replyToMessageId == null;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
 
     return Padding(
-      // Bubble padding
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Container(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.7,
-                ),
-                child: Material(
-                  // If the message is only emojis, ditch the elevation and don't deal with the shadow.
-                  elevation: isEmoji ? 0 : 4.0,
-                  borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(8),
-                    topRight: const Radius.circular(8),
-                    bottomLeft: isUser ? const Radius.circular(8) : Radius.zero,
-                    bottomRight:
-                        isUser ? Radius.zero : const Radius.circular(8),
+      padding: const EdgeInsets.symmetric(vertical: Insets.widgetSmallestInset),
+      child: Container(
+        constraints: BoxConstraints(
+          minWidth: 80,
+          maxWidth: MediaQuery.of(context).size.width * 0.8,
+        ),
+        child: Material(
+          elevation: isEmoji ? 0 : Elevations.level1,
+          borderRadius: BorderRadiusDirectional.only(
+            topStart: isUser
+                ? const Radius.circular(
+                    Radii.roundedRectRadiusSmall,
+                  )
+                : Radius.zero,
+            topEnd: isUser
+                ? Radius.zero
+                : const Radius.circular(
+                    Radii.roundedRectRadiusSmall,
                   ),
-                  // If the message is only emojis, make the bubble transparent
-                  color: isEmoji
-                      ? Colors.transparent
-                      : isUser
-                          ? Colors.lightBlue
-                          : Colors.grey.shade200,
-                  child: Padding(
-                    // Message content padding
-                    padding: EdgeInsets.only(
-                      left: 8.0,
-                      top: 8.0,
-                      right: 8.0,
-                      // If the message is only emojis, we'll provide this padding for sentAt down the line
-                      bottom: isEmoji ? 0 : 8.0,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            bottomStart: const Radius.circular(
+              Radii.roundedRectRadiusSmall,
+            ),
+            bottomEnd: const Radius.circular(
+              Radii.roundedRectRadiusSmall,
+            ),
+          ),
+          color: isEmoji
+              ? Colors.transparent
+              : isUser
+                  ? theme.colorScheme.primaryContainer
+                  : theme.colorScheme.tertiaryContainer,
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: Insets.widgetSmallInset,
+              top: Insets.widgetSmallInset,
+              right: Insets.widgetSmallInset,
+              bottom: isEmoji ? 0 : Insets.widgetSmallInset,
+            ),
+            child: Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        isUser
-                            ? const SizedBox()
-                            : Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (participants.length > 2)
-                                    Text(
-                                      _participantName(
-                                          userId: message.createdBy),
-                                      style: const TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10.0,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  _buildMessageStatus(isUser)
-                                ],
-                              ),
-                        // TODO: Paint attachments/content
-                        replyingTo == null || message.deletedAt != null
-                            ? const SizedBox()
-                            : Padding(
-                                // Padding between attachment and message body
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: ReplyMessage(
-                                  replyMessage: replyingTo!,
-                                  participants: participants,
-                                ),
-                              ),
-                        Stack(
-                          children: [
-                            _buildMessageText(isUser),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    sentAt,
-                                    style: TextStyle(
-                                      fontSize: 10.0,
-                                      color:
-                                          // If the message is only emojis, we need grey
-                                          EmojiUtils.strictlyEmojis(
-                                                  message.messageText!)
-                                              ? Colors.grey
-                                              : isUser
-                                                  ? Colors.white
-                                                  : Colors.grey,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  isUser
-                                      ? (message.statuses!.isEmpty
-                                          ? const Icon(
-                                              Icons.check,
-                                              size: 10,
-                                              color: Colors.white,
-                                            )
-                                          : const Icon(
-                                              Icons.done_all,
-                                              size: 10,
-                                              color: Colors.white,
-                                            ))
-                                      : const SizedBox(),
-                                ],
-                              ),
+                        if (participants.length > 2)
+                          Text(
+                            _participantName(userId: message.createdBy),
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              overflow: TextOverflow.ellipsis,
+                              fontWeight: FontWeight.bold,
+                              color: theme.colorScheme.outline,
                             ),
-                          ],
-                        ),
-                        // _buildMessageStatus(isUser)
+                          ),
+                        _buildMessageStatus(l10n, theme, isUser),
                       ],
                     ),
-                  ),
+                    if (replyingTo != null && message.deletedAt == null)
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: Insets.widgetSmallInset,
+                        ),
+                        child: ReplyMessage(
+                          replyMessage: replyingTo!,
+                          participants: participants,
+                        ),
+                      ),
+                    _buildMessageText(l10n, theme, isUser),
+                    if (message.deletedAt == null || isUser)
+                      const SizedBox(
+                        height: Insets.widgetMediumLargeInset,
+                      ),
+                  ],
                 ),
-              ),
-            ],
+                if (message.deletedAt == null || isUser)
+                  PositionedDirectional(
+                    bottom: 0,
+                    end:
+                        (isUser && !isEmoji) || (!isUser && isEmoji) ? null : 0,
+                    start:
+                        (isUser && !isEmoji) || (!isUser && isEmoji) ? 0 : null,
+                    child: Text(
+                      sentAt,
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: theme.colorScheme.outline,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
