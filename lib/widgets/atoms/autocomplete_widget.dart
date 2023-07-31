@@ -41,7 +41,7 @@ class AutocompleteWidget extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: Insets.widgetMediumInset),
+                            vertical: Insets.paddingMedium),
                         child: Text(
                           optionsTranslations?.call(option) ?? option,
                           textAlign: TextAlign.left,
@@ -103,8 +103,8 @@ class AutocompleteWidget extends StatelessWidget {
                   errorText: error,
                   prefixIcon: tags.isNotEmpty
                       ? Padding(
-                          padding: const EdgeInsets.only(
-                              left: Insets.widgetSmallInset),
+                          padding:
+                              const EdgeInsets.only(left: Insets.paddingSmall),
                           child: SingleChildScrollView(
                             controller: sc,
                             scrollDirection: Axis.horizontal,
@@ -123,10 +123,10 @@ class AutocompleteWidget extends StatelessWidget {
                                   color: theme.colorScheme.surface,
                                 ),
                                 margin: const EdgeInsets.only(
-                                    right: Insets.widgetSmallInset),
+                                    right: Insets.paddingSmall),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: Insets.widgetSmallInset,
-                                    vertical: Insets.widgetSmallestInset),
+                                    horizontal: Insets.paddingSmall,
+                                    vertical: Insets.paddingExtraSmall),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -140,7 +140,7 @@ class AutocompleteWidget extends StatelessWidget {
                                       onTap: () => onTagDelete(tag),
                                     ),
                                     const SizedBox(
-                                        width: Insets.widgetSmallestInset),
+                                        width: Insets.paddingExtraSmall),
                                     InkWell(
                                       child: Icon(
                                         Icons.close,

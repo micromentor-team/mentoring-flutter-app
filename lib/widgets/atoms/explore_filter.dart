@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
+import 'package:provider/provider.dart';
 
 class ExploreFilter extends StatelessWidget {
   final UserType userType;
@@ -107,11 +107,8 @@ class ExploreFilter extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                                (Insets.paddingExtraLarge),
-                                0,
-                                (Insets.paddingMedium),
-                                0),
+                    padding: const EdgeInsets.fromLTRB(
+                        (Insets.paddingMedium), 0, (Insets.paddingMedium), 0),
                     child: IconButton(
                       onPressed: () {},
                       icon: Icon(
@@ -163,10 +160,7 @@ class ExploreFilter extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
-                                (Insets.paddingExtraLarge),
-                                0,
-                                (Insets.paddingMedium),
-                                0),
+                        (Insets.paddingMedium), 0, (Insets.paddingMedium), 0),
                     child: IconButton(
                       onPressed: () {
                         context.go(Routes.exploreFilters.path);

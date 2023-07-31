@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
+import 'package:mm_flutter_app/widgets/atoms/autocomplete_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/atoms/autocomplete_widget.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 
 class RecommendedMentorsFilters extends StatefulWidget {
   const RecommendedMentorsFilters({super.key});
@@ -159,7 +159,7 @@ class _ExpertiseState extends State<_Expertise> {
             style: TextStyle(color: theme.colorScheme.primary)),
       ));
       if (i != ExploreCardFiltersProvider.skills.length - 1) {
-        skillButtons.add(const SizedBox(width: Insets.widgetSmallestInset));
+        skillButtons.add(const SizedBox(width: Insets.paddingExtraSmall));
       }
     }
 
@@ -173,7 +173,7 @@ class _ExpertiseState extends State<_Expertise> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(l10n.exploreSearchFilterExpertise),
-              const SizedBox(height: Insets.widgetSmallestInset),
+              const SizedBox(height: Insets.paddingExtraSmall),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: IntrinsicHeight(
@@ -209,7 +209,7 @@ class _ExpertiseState extends State<_Expertise> {
                   ),
                 ),
               ),
-              const SizedBox(height: Insets.widgetSmallInset),
+              const SizedBox(height: Insets.paddingSmall),
             ],
           ),
         ),
@@ -241,14 +241,14 @@ class _AutocompletePicker extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(fieldName),
-            const SizedBox(height: Insets.widgetSmallestInset),
+            const SizedBox(height: Insets.paddingExtraSmall),
             AutocompleteWidget(
               options: options.toList(),
               optionsTranslations: optionsTranslations,
               selectedOptions: selectedOptions?.toList() ?? [],
               controller: controller,
             ),
-            const SizedBox(height: Insets.widgetSmallInset),
+            const SizedBox(height: Insets.paddingSmall),
           ],
         ),
       ),
