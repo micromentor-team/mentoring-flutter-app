@@ -13,9 +13,14 @@ type GroupMembership implements IGroupMembership {
   groupIdent: String!
   userId: ID!
   roles: [GroupMembershipRole!]!
+  expertises: [Expertise!]!
+  industries: [Industry!]!
+  industry: Industry
+  soughtExpertises: [Expertise!]!
 }
 
 interface IGroupMembership {
+  id: ID!
   groupId: ID!
   groupIdent: String!
   userId: ID!
@@ -50,6 +55,120 @@ interface BaseModelMetadata {
   updatedAt: DateTime
 }
 
+type Expertise {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+}
+
+enum OptionType {
+  educationLevel
+  expertise
+  industry
+  companyStage
+  companyType
+  country
+  gender
+  language
+  unset
+}
+
+enum UiLanguage {
+  ar
+  en
+  es
+  id
+  ru
+  so
+}
+
+type Option {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+}
+
+type Industry {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+}
+
 type MenteesGroupMembership implements IGroupMembership {
   id: ID!
   adminNotes: String
@@ -65,8 +184,16 @@ type MenteesGroupMembership implements IGroupMembership {
   groupIdent: String!
   userId: ID!
   roles: [GroupMembershipRole!]!
-  soughtExpertises: [String!]!
-  industry: String
+  expertises: [Expertise!]!
+  industries: [Industry!]!
+  industry: Industry
+  soughtExpertises: [Expertise!]!
+
+  """Must match expertise ids or textIds."""
+  soughtExpertisesTextIds: [String!]
+
+  """Must match industry ids or textIds."""
+  industryTextId: String
   actionsTaken: String
   currentChallenges: String
   futureGoals: String
@@ -88,12 +215,20 @@ type MentorsGroupMembership implements IGroupMembership {
   groupIdent: String!
   userId: ID!
   roles: [GroupMembershipRole!]!
-  expertises: [String!]!
-  industries: [String!]!
-  website: String
+  expertises: [Expertise!]!
+  industries: [Industry!]!
+  industry: Industry
+  soughtExpertises: [Expertise!]!
+
+  """Must match expertise ids or textIds."""
+  expertisesTextIds: [String!]
+
+  """Must match industry ids or textIds."""
+  industriesTextIds: [String!]
   helpICanOffer: String
   expectationsForMentees: String
   menteePreparationInstructions: String
+  endorsements: Int
 }
 
 type UserMetadata implements BaseModelMetadata {
@@ -119,6 +254,7 @@ type Query {
   findUsers(options: FindObjectsOptions, match: UserInput, filter: UserListFilter): [User!]!
   getAvailableUserHandleField(startValue: String!): User!
   getAuthenticatedUser: User!
+  getMyUser: User!
   findUserDeviceById(id: String!): UserDevice!
   findUserDevices(options: FindObjectsOptions, match: UserDeviceInput, filter: SidUserDeviceListFilter): [UserDevice!]!
   findChannelInvitationById(id: String!): ChannelInvitation!
@@ -130,8 +266,15 @@ type Query {
   findChannelMessageById(id: String!): ChannelMessage!
   findChannelMessages(options: FindObjectsOptions, match: ChannelMessageInput, filter: ChannelMessageListFilter): [ChannelMessage!]!
   findChannelParticipantById(id: String!): ChannelParticipant!
-  findOptions(parentTextId: String, optionType: OptionType): [Option!]!
-  findOptionValues(language: Language, parentTextId: String, optionType: OptionType): [String!]!
+  findOptions(uiLanguage: UiLanguage, isParent: Boolean, parentTextId: String, optionType: OptionType!): [Option!]!
+  findCompanyStages(uiLanguage: UiLanguage): [CompanyStage!]!
+  findCompanyTypes(uiLanguage: UiLanguage): [CompanyType!]!
+  findCountries(uiLanguage: UiLanguage): [Country!]!
+  findEducationLevels(uiLanguage: UiLanguage): [EducationLevel!]!
+  findExpertises(uiLanguage: UiLanguage, isParent: Boolean, parentTextId: String): [Expertise!]!
+  findGenders(uiLanguage: UiLanguage): [Gender!]!
+  findIndustries(uiLanguage: UiLanguage): [Industry!]!
+  findLanguages(uiLanguage: UiLanguage): [Language!]!
   apiVersion: String!
   healthReport: SystemHealthReport!
   findGroupMembershipById(id: String!): GroupMembership!
@@ -237,7 +380,7 @@ type User {
   gender: String
   cityOfResidence: String
   regionOfResidence: String
-  countryOfResidence: String
+  countryOfResidenceTextId: String
   postalCode: String
   avatarUrl: String
   jobTitle: String
@@ -245,8 +388,8 @@ type User {
   authType: AuthType
   tfaBackupCodes: String
   passwordUpdatedAt: DateTime
-  preferredLanguage: String!
-  uiLanguage: String!
+  preferredLanguage: UiLanguage
+  uiLanguage: UiLanguage
   spokenLanguages: [String!]!
   roles: [UserRole!]!
   appFeatures: [AppFeature!]
@@ -270,12 +413,11 @@ type User {
   birthYear: Int
   genderSelfDescribed: String
   ethnicity: String
-  educationLevel: EducationLevel
+  educationLevelTextId: String
   professionalBackground: String
   yearsManagementExperience: Int
   yearsOwnershipExperience: Int
   ssoIdp: String
-  profileCompletionPercentage: Int
 
   """This attribute is only used by the MM2 synchronizer."""
   mm2Id: String
@@ -285,6 +427,11 @@ type User {
 
   """This is the MM2 password hash."""
   mm2PasswordHash: String
+
+  """
+  Users can enter a short description to be prominently displayed along with their name and other info.
+  """
+  oneLiner: String
   user: User!
   latestUserDevice: UserDevice!
   unreadInAppMessages: [Notification!]!
@@ -292,15 +439,18 @@ type User {
   channelInvitations: [ChannelInvitation!]!
   channelParticipants: [ChannelParticipant!]!
   companies: [Company!]!
+  countryOfResidence: Country
   groupMembers: [GroupMembership!]!
   groups: [Group!]!
   inbox: [UserInbox!]!
+  profileCompletionPercentage: Int!
   userSearches: [UserSearch!]!
 }
 
 type LabeledStringValue {
   label: String
   value: String!
+  tags: [String!]
 }
 
 enum AuthType {
@@ -383,14 +533,7 @@ type UserDevice {
   oAuthRefreshToken: String!
   pushNotificationToken: String!
   trustedAt: DateTime
-  uiLanguage: String!
-}
-
-enum EducationLevel {
-  doctorate
-  undergraduate
-  secondary
-  primary
+  uiLanguage: UiLanguage
 }
 
 type Notification {
@@ -622,9 +765,9 @@ type Company {
   name: String!
   description: String
   foundedAt: DateTime
-  companyType: CompanyType
-  companyStage: CompanyStage
-  website: String
+  companyTypeTextId: String
+  companyStageTextId: String
+  websites: [LabeledStringValue!]
   industries: [String!]
   isOperational: Boolean
   isFundraising: Boolean
@@ -640,20 +783,42 @@ type Company {
   If a Company was created from the imported from MM2, mm2CompanyRole is either "mentor" or "mentee". This attribute is only used by the MM2 synchronizer.
   """
   mm2CompanyRole: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
 }
 
-enum CompanyType {
-  forProfit
-  nonProfit
-  socialEnterprise
-  unsure
-}
+type Country {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
 
-enum CompanyStage {
-  idea
-  operational
-  earning
-  profitable
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+  alpha2Key: String!
+  alpha3Key: String!
 }
 
 type Group {
@@ -799,7 +964,7 @@ enum UserIdentType {
 
 input FindObjectsOptions {
   limit: Int
-  sort: String
+  sort: [SortItem!]
   skip: Int
   timeout: Boolean
   tailable: Boolean
@@ -813,6 +978,16 @@ input FindObjectsOptions {
   allowPartialResults: Boolean
   showRecordId: Boolean
   includeDeleted: Boolean
+}
+
+input SortItem {
+  field: String! = ""
+  direction: SortDirection = asc
+}
+
+enum SortDirection {
+  asc
+  desc
 }
 
 input UserInput {
@@ -839,7 +1014,7 @@ input UserInput {
   gender: String
   cityOfResidence: String
   regionOfResidence: String
-  countryOfResidence: String
+  countryOfResidenceTextId: String
   postalCode: String
   avatarUrl: String
   jobTitle: String
@@ -849,8 +1024,8 @@ input UserInput {
   newPassword: String
   tfaBackupCodes: String
   passwordUpdatedAt: String
-  preferredLanguage: String
-  uiLanguage: String
+  preferredLanguage: UiLanguage
+  uiLanguage: UiLanguage
   spokenLanguages: [String!]! = []
   roles: [UserRole!]! = []
   appFeatures: [AppFeature!]
@@ -871,15 +1046,20 @@ input UserInput {
   birthYear: Int
   genderSelfDescribed: String
   ethnicity: String
-  educationLevel: EducationLevel
+  educationLevelTextId: String
   professionalBackground: String
   yearsManagementExperience: Int
   yearsOwnershipExperience: Int
   ssoIdp: String
+
+  """
+  Users can enter a short description to be prominently displayed along with their name and other info.
+  """
+  oneLiner: String
 }
 
 input ModelEventInput {
-  time: DateTime! = "2023-06-26T19:59:47.783Z"
+  time: DateTime! = "2023-07-31T21:39:59.808Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -891,6 +1071,7 @@ input BaseModelMetadataInput {
 input LabeledStringValueInput {
   label: String
   value: String
+  tags: [String!]
 }
 
 input UserPreferencesInput {
@@ -918,7 +1099,7 @@ input UserListFilter {
   createdAtUntil: String
   updatedAtFrom: String
   updatedAtUntil: String
-  roles: [UserRole!]
+  rolesIn: [UserRole!]
   companyId: ID
   syncedWithMm2: Boolean
 }
@@ -966,7 +1147,7 @@ input UserDeviceInput {
   oAuthRefreshToken: String
   pushNotificationToken: String
   trustedAt: String
-  uiLanguage: String
+  uiLanguage: UiLanguage
 }
 
 input SidUserDeviceListFilter {
@@ -1004,6 +1185,12 @@ input ChannelInput {
   archivedAt: String
   archivedBy: ID
   assumedMentorId: ID
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: String
 }
 
 input ChannelListFilter {
@@ -1065,7 +1252,7 @@ input ChannelMessageListFilter {
   seen: Boolean
 }
 
-type Option {
+type CompanyStage {
   id: ID!
   adminNotes: String
   events: [ModelEvent!]
@@ -1082,26 +1269,149 @@ type Option {
   optionType: OptionType!
   value: String!
   translatedValue: String
+  language: UiLanguage
 
   """This attribute is only used by the MM2 synchronizer."""
   mm2Id: String
+  mm2Value: String
 
   """This attribute is only used by the MM2 synchronizer."""
   syncedWithMm2At: DateTime
-  childOptions: [Option!]!
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
 }
 
-enum OptionType {
-  expertise
-  industry
-  gender
-  unset
+type CompanyType {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
 }
 
-enum Language {
-  en
-  es
-  id
+type EducationLevel {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+}
+
+type Gender {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+}
+
+type Language {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+  isUiLanguage: Boolean!
+
+  """ISO 639-1, 2 letter language code. e.g. "en" for English."""
+  shortLangCode: String
+
+  """ISO 639-2, 3 letter language code. e.g. "eng" for English."""
+  longLangCode: String
 }
 
 """Server health report"""
@@ -1434,7 +1744,6 @@ type Mutation {
   createChannelParticipant(input: ChannelParticipantInput!): ChannelParticipant!
   deleteChannelParticipant(deletePhysically: Boolean!, channelParticipantId: String!): String!
   updateChannelParticipant(input: ChannelParticipantInput!): String!
-  runDataGenerator(input: GenRequest!): Boolean!
   createGroupMembership(input: GroupMembershipInput!): ServiceRequest!
   createMenteesGroupMembership(input: MenteesGroupMembershipInput!): ServiceRequest!
   createMentorsGroupMembership(input: MentorsGroupMembershipInput!): ServiceRequest!
@@ -1569,108 +1878,6 @@ input ChannelParticipantInput {
   role: ChannelParticipantRole
 }
 
-input GenRequest {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  clearDb: Boolean! = false
-  conversationCount: Int! = 0
-  messageCount: Int! = 0
-  users: GenUserInput! = {count: 0, emailDomain: "micromentor.org"}
-  groups: GenGroupsInput! = {count: 0, specificGroups: []}
-  publishAppEvents: Boolean! = false
-}
-
-input GenUserInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  count: Int! = 0
-  dualRoleCount: Int
-  emailDomain: String! = "micromentor.org"
-  emailPrefix: String
-  mentorCount: Int
-  menteeCount: Int
-  mentorRatio: Float
-}
-
-input GenGroupsInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  count: Int! = 0
-  specificGroups: [GenSpecificGroupInput!]!
-}
-
-input GenSpecificGroupInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  name: String! = ""
-  mentorCount: Int
-  menteeCount: Int
-  groupRules: [GenGroupRuleInput!]
-  matchingEngine: GenMatchingEngineInput
-}
-
-input GenGroupRuleInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  someGroupRule: Boolean! = false
-  someOtherGroupRule: Boolean! = false
-}
-
-input GenMatchingEngineInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  someMatchingRule: Boolean! = false
-  someOtherMatchingRule: Boolean! = false
-}
-
 type ServiceRequest {
   id: ID!
   serviceRequestType: ServiceRequestType!
@@ -1725,6 +1932,11 @@ enum ServiceRequestType {
   graphQlQueryUserCompanies
   graphQlQueryUserGroupMembers
   graphQlQueryUserGroups
+  graphQlQueryFindCountries
+  graphQlQueryFindExpertises
+  graphQlQueryFindIndustries
+  graphQlQueryFindOptions
+  unset
   graphQlMutationRunDataGenerator
   graphQlMutationExecuteAdminTask
   graphQlMutationSignUpOAuthUser
@@ -1787,7 +1999,6 @@ enum ServiceRequestType {
   graphQlQueryGetMultiStepActionProgress
   graphQlQueryLatestUserDevice
   graphQlQueryUserUserDevices
-  unset
 }
 
 enum ModelType {
@@ -1896,8 +2107,12 @@ input MenteesGroupMembershipInput {
   groupId: ID
   userId: ID
   roles: [GroupMembershipRole!]! = []
-  soughtExpertises: [String!]! = []
-  industry: String
+
+  """Must match expertise ids or textIds."""
+  soughtExpertisesTextIds: [String!]! = []
+
+  """Must match industry id or textId."""
+  industryTextId: String
   actionsTaken: String
   currentChallenges: String
   futureGoals: String
@@ -1918,12 +2133,16 @@ input MentorsGroupMembershipInput {
   groupId: ID
   userId: ID
   roles: [GroupMembershipRole!]! = []
-  expertises: [String!]! = []
-  industries: [String!]! = []
-  website: String
+
+  """Must match expertise ids or textIds."""
+  expertisesTextIds: [String!]! = []
+
+  """Must match industry ids or textIds."""
+  industriesTextIds: [String!]! = []
   helpICanOffer: String
   expectationsForMentees: String
   menteePreparationInstructions: String
+  endorsements: Int
 }
 
 input NotificationInput {
@@ -2110,6 +2329,11 @@ enum Mm2ModelType {
   Conversation
   Message
   User
+  MenteeExpertise
+  MenteeWebsite
+  MentorExpertise
+  Profile
+  SpokenLanguage
 }
 
 enum Mm2SynchronizationMode {
@@ -2123,6 +2347,7 @@ type Mm2SynchronizationResult {
   createdCount: Int!
   deletedCount: Int!
   updatedCount: Int!
+  skippedCount: Int!
   errorCount: Int!
   error: String
 }
