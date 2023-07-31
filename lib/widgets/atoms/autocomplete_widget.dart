@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:textfield_tags/textfield_tags.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:textfield_tags/textfield_tags.dart';
 
 class AutocompleteWidget extends StatelessWidget {
   final List<String> options;
@@ -116,7 +116,9 @@ class AutocompleteWidget extends StatelessWidget {
                                       width: Dimensions.highlightBorderWidth,
                                       color: theme.colorScheme.primary),
                                   borderRadius: const BorderRadius.all(
-                                    Radius.circular(Radii.buttonRadius),
+                                    Radius.circular(
+                                      Radii.roundedRectRadiusSmall,
+                                    ),
                                   ),
                                   color: theme.colorScheme.surface,
                                 ),
