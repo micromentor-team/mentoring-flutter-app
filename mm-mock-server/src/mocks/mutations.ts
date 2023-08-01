@@ -26,8 +26,17 @@ export function mockMutations(serverState: MockServerState) {
             serverState.channelInvitations.push(invitation);
             return invitation;
         },
-        createChannelMessage: (_: any, args: { input: { messageText: string }}) => {
-            const message = generators.generateChannelMessage(args.input.messageText ,serverState.channels[0].id, serverState.loggedInUser, new Date(), true)
+        createChannelMessage: (_: any, args: { input: { messageText: string , replyToMessageId: string | null}}) => {
+            const message = generators.generateChannelMessage(
+                args.input.messageText,
+                serverState.channels[0].id,
+                serverState.loggedInUser,
+                new Date(),
+                true,
+                false,
+                false,
+                args.input.replyToMessageId,
+            );
             serverState.channelMessages.push(message);
             return message;
         },
