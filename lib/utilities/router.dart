@@ -67,16 +67,6 @@ class AppRouter {
             );
           },
         ),
-        GoRoute(
-          path: Routes.exploreFilters.path,
-          name: Routes.exploreFilters.name,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return MaterialPage(
-              key: state.pageKey,
-              child: const RecommendedMentorsFilters(),
-            );
-          },
-        ),
         ShellRoute(
           observers: [Provider.of<RouteObserver<PageRoute>>(context)],
           pageBuilder: (context, state, child) {
@@ -103,6 +93,16 @@ class AppRouter {
                 return MaterialPage(
                   key: state.pageKey,
                   child: const ExploreScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.exploreFilters.path,
+              name: Routes.exploreFilters.name,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const RecommendedMentorsFilters(),
                 );
               },
             ),
