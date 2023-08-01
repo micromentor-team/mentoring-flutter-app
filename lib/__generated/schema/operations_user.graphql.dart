@@ -234,7 +234,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     this.fullName,
     this.avatarUrl,
     this.userHandle,
-    this.profileCompletionPercentage,
+    required this.profileCompletionPercentage,
     this.updatedAt,
     this.$__typename = 'User',
   });
@@ -255,7 +255,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
       userHandle: (l$userHandle as String?),
-      profileCompletionPercentage: (l$profileCompletionPercentage as int?),
+      profileCompletionPercentage: (l$profileCompletionPercentage as int),
       updatedAt:
           l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
       $__typename: (l$$__typename as String),
@@ -272,7 +272,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
 
   final String? userHandle;
 
-  final int? profileCompletionPercentage;
+  final int profileCompletionPercentage;
 
   final DateTime? updatedAt;
 
@@ -441,9 +441,11 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
         userHandle: userHandle == _undefined
             ? _instance.userHandle
             : (userHandle as String?),
-        profileCompletionPercentage: profileCompletionPercentage == _undefined
-            ? _instance.profileCompletionPercentage
-            : (profileCompletionPercentage as int?),
+        profileCompletionPercentage:
+            profileCompletionPercentage == _undefined ||
+                    profileCompletionPercentage == null
+                ? _instance.profileCompletionPercentage
+                : (profileCompletionPercentage as int),
         updatedAt: updatedAt == _undefined
             ? _instance.updatedAt
             : (updatedAt as DateTime?),
