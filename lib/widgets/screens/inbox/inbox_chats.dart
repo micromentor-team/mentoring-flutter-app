@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
@@ -38,22 +39,9 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
     return avatarUrl;
   }
 
-  List<UnseenMessage> _channelUnseenMessages(
-    List<UnseenMessage>? unseenMessages,
-    ChannelForUser channel,
-  ) {
-    if (unseenMessages == null) {
-      return [];
-    }
-    return unseenMessages
-        .where((element) =>
-            element.channelId == channel.id && element.createdBy != _user!.id)
-        .toList();
-  }
-
   List<Widget> _createContentList(
     List<ChannelForUser> channels,
-    List<UnseenMessage> unseenMessages,
+    MessagesProvider messagesProvider,
   ) {
     final List<DismissibleTile> tiles = [];
     if (channels.isEmpty) {
@@ -64,8 +52,6 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
       final ChannelForUser channel = channels[i];
       final String channelName = _channelName(channel);
       final String? channelAvatarUrl = _channelAvatarUrl(channel);
-      final List<UnseenMessage> channelUnseenMessages =
-          _channelUnseenMessages(unseenMessages, channel);
 
       tiles.add(
         DismissibleTile(
@@ -84,15 +70,40 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
             });
           },
           icon: Icons.archive_outlined,
-          child: InboxListTile(
-            avatarUrl: channelAvatarUrl,
-            fullName: channelName,
-            date: DateTime.now().subtract(Duration(
-                days: i)), // TODO(m-rosario): Use date from last message
-            message: '', // TODO(m-rosario): Get text from last message
-            notifications: channelUnseenMessages.length,
-            onPressed: () =>
-                context.push('${Routes.inboxChats.path}/${channel.id}'),
+          child: messagesProvider.findChannelMessages(
+            input: Input$ChannelMessageListFilter(channelId: channel.id),
+            onData: (data, {refetch, fetchMore}) {
+              List<ChannelMessage> messages = data.response ?? [];
+              int unseenMessageCount = 0;
+              ChannelMessage? lastMessage;
+              // Initialize lastMessageTime to Epoch in order for the search
+              // algorithm to work when looking for the most recent date.
+              DateTime? lastMessageTime = messages.isEmpty
+                  ? null
+                  : DateTime.fromMillisecondsSinceEpoch(0);
+              for (int i = 0; i < messages.length; i++) {
+                if (messages[i].createdAt.isAfter(lastMessageTime!)) {
+                  lastMessage = messages[i];
+                  lastMessageTime = lastMessage.createdAt;
+                }
+                bool isSeen = messages[i]
+                        .statuses
+                        ?.any((status) => status.seenAt != null) ??
+                    false;
+                if (!isSeen) {
+                  unseenMessageCount++;
+                }
+              }
+              return InboxListTile(
+                avatarUrl: channelAvatarUrl,
+                fullName: channelName,
+                date: lastMessageTime ?? DateTime.now(),
+                message: lastMessage != null ? lastMessage.messageText : '',
+                notifications: unseenMessageCount,
+                onPressed: () =>
+                    context.push('${Routes.inboxChats.path}/${channel.id}'),
+              );
+            },
           ),
         ),
       );
@@ -147,20 +158,14 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
       userId: _user!.id,
       onData: (userChannelsData, {refetch, fetchMore}) {
         final List<ChannelForUser> channels = userChannelsData.response ?? [];
-        return messagesProvider.unseenMessages(
-          onData: (unseenMessagesData, {refetch, fetchMore}) {
-            final List<UnseenMessage> unseenMessages =
-                unseenMessagesData.response ?? [];
-            final List<Widget> contentList = _createContentList(
-              channels,
-              unseenMessages,
-            );
-            return SafeArea(
-              child: ListView(
-                children: contentList,
-              ),
-            );
-          },
+        final List<Widget> contentList = _createContentList(
+          channels,
+          messagesProvider,
+        );
+        return SafeArea(
+          child: ListView(
+            children: contentList,
+          ),
         );
       },
     );
