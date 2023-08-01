@@ -48,6 +48,18 @@ export function mockMutations(serverState: MockServerState) {
             channelMessage.deletedBy = channelMessage.createdBy;
             return "ok";
         },
+        markChannelMessagesAsSeenByMe: (_: any, args: { channelId: string }) => {
+            var channelMessages = serverState.channelMessages.filter((element) => element.channelId == args.channelId);
+            channelMessages.forEach((element) => {
+                element.statuses = [
+                    {
+                        __typename: "ChannelMessageStatus",
+                        seenAt: new Date().toISOString(),
+                    }
+                ];
+            });
+            return "ok";
+        },
         updateChannelInvitation: (_: any, args: { input: { status: string }}) => {
             const invitation = serverState.channelInvitations[0]
             if (args.input.status) {
