@@ -31,6 +31,14 @@ export function mockMutations(serverState: MockServerState) {
             serverState.channelMessages.push(message);
             return message;
         },
+        deleteChannelMessage: (_: any, args: { channelMessageId: string, deletePhysically: boolean }) => {
+            var channelMessage = serverState.channelMessages.find((element) => element.id == args.channelMessageId);
+            const currentTime : string = new Date().toISOString();
+            channelMessage.deletedAt = currentTime;
+            channelMessage.updatedAt = currentTime;
+            channelMessage.deletedBy = channelMessage.createdBy;
+            return "ok";
+        },
         updateChannelInvitation: (_: any, args: { input: { status: string }}) => {
             const invitation = serverState.channelInvitations[0]
             if (args.input.status) {
@@ -43,6 +51,16 @@ export function mockMutations(serverState: MockServerState) {
                     invitation.status = "declined";
             }
             return invitation.id;
-        }
+        },
+        updateChannelMessage: (_: any, args: { input: { id: string | null, messageText: string | null, deletedAt: Date | null } }) => {
+            var channelMessage = serverState.channelMessages.find((element) => element.id == args.input.id);
+            if(args.input.deletedAt) {
+                channelMessage.deletedAt = args.input.deletedAt.toISOString();
+            } else {
+                channelMessage.deletedAt = null;
+            }
+            channelMessage.messageText = args.input.messageText ?? channelMessage.messageText;
+            return "ok";
+        },
     }
 }
