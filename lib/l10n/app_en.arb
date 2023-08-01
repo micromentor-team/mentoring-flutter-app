@@ -110,6 +110,8 @@
     "accept": "Accept",
     "blockUser": "Block User",
     "reportUser": "Report User",
+    "autocompleteAlreadyEntered": "Already entered",
+    "autocompleteInvalidChoice": "Invalid choice",
     "exploreSearchFilterTitle": "Search filters",
     "exploreSearchFilterAdvancedFilters": "Advanced filters",
     "exploreSearchFilterApply": "Apply",

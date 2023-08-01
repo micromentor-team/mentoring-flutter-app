@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
@@ -19,6 +20,7 @@ class AutocompleteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return Autocomplete<String>(
       optionsViewBuilder: (context, onSelected, options) {
@@ -79,10 +81,10 @@ class AutocompleteWidget extends StatelessWidget {
           initialTags: selectedOptions,
           validator: (String tag) {
             if (controller.getTags?.contains(tag) ?? false) {
-              return 'Already entered';
+              return l10n.autocompleteAlreadyEntered;
             }
             if (!options.contains(tag)) {
-              return 'Invalid choice';
+              return l10n.autocompleteInvalidChoice;
             }
             return null;
           },
