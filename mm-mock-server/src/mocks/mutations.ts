@@ -26,10 +26,10 @@ export function mockMutations(serverState: MockServerState) {
             serverState.channelInvitations.push(invitation);
             return invitation;
         },
-        createChannelMessage: (_: any, args: { input: { messageText: string , replyToMessageId: string | null}}) => {
+        createChannelMessage: (_: any, args: { input: { channelId: string, messageText: string , replyToMessageId: string | null}}) => {
             const message = generators.generateChannelMessage(
                 args.input.messageText,
-                serverState.channels[0].id,
+                args.input.channelId,
                 serverState.loggedInUser,
                 new Date(),
                 true,
