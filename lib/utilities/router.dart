@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
+import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_filters.dart';
 import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_archived_chats.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
@@ -92,6 +93,16 @@ class AppRouter {
                 return MaterialPage(
                   key: state.pageKey,
                   child: const ExploreScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.exploreFilters.path,
+              name: Routes.exploreFilters.name,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const RecommendedMentorsFilters(),
                 );
               },
             ),

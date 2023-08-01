@@ -22,6 +22,10 @@ class ScaffoldModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setAppBarTitleOnly(BuildContext context, String title) {
+    _setParams(AppBarFactory.createTitleOnlyAppBar(title: title), null);
+  }
+
   void setInboxScaffold(BuildContext context) {
     //TODO(m-rosario): Get notification data from backend call.
     const int chatsNotifications = 1;

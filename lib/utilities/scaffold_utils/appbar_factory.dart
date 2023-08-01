@@ -9,6 +9,10 @@ import '../../widgets/atoms/notification_bubble.dart';
 class AppBarFactory {
   AppBarFactory._private();
 
+  static AppBar? createTitleOnlyAppBar({required String title}) {
+    return AppBar(title: Text(title));
+  }
+
   static AppBar? createInboxAppBar({
     required BuildContext context,
     required int chatsNotifications,
