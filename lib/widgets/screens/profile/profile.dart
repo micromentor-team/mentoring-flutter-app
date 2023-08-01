@@ -5,7 +5,12 @@ import '../../../providers/models/scaffold_model.dart';
 import '../../molecules/profile_page_header.dart';
 
 class ProfileScreenScroll extends StatefulWidget {
-  const ProfileScreenScroll({Key? key}) : super(key: key);
+  final bool showProfilePagerHeader;
+
+  const ProfileScreenScroll({
+    Key? key,
+    this.showProfilePagerHeader = false,
+  }) : super(key: key);
 
   @override
   State<ProfileScreenScroll> createState() => _ProfileScreenScrollState();
@@ -14,12 +19,13 @@ class ProfileScreenScroll extends StatefulWidget {
 class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Column(
         children: [
-          ProfilePageHeader(),
+          if (widget.showProfilePagerHeader)
+            const ProfilePageHeader(requestReceived: true),
           //TO-DO(all): replace the placeholder with the elements of the profile page you're working on
-          Expanded(
+          const Expanded(
             child: Placeholder(),
           ),
         ],
@@ -61,6 +67,8 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    return const ProfileScreenScroll();
+    return const ProfileScreenScroll(
+      showProfilePagerHeader: true,
+    );
   }
 }
