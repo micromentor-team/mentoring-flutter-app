@@ -163,7 +163,7 @@ class ExploreFilter extends StatelessWidget {
                         (Insets.paddingMedium), 0, (Insets.paddingMedium), 0),
                     child: IconButton(
                       onPressed: () {
-                        context.go(Routes.exploreFilters.path);
+                        context.push(Routes.exploreFilters.path);
                       },
                       icon: Icon(
                         Icons.tune,

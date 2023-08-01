@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
+import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/autocomplete_widget.dart';
 import 'package:provider/provider.dart';
@@ -70,7 +70,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(Insets.paddingMedium),
       child: Column(
         children: [
           Column(children: [
@@ -132,7 +132,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
                       _languagesController.getTags?.toSet() ?? {},
                       _selectedSkills);
 
-                  context.go(Routes.explore.path);
+                  context.push(Routes.explore.path);
                 },
               ),
             ],
