@@ -1,0 +1,75 @@
+query FindCompanyStages {
+  findCompanyStages {
+    textId
+    translatedValue
+  }
+}
+
+query FindCompanyStages {
+  findCompanyTypes {
+    textId
+    translatedValue
+  }
+}
+
+query FindCountries {
+  findCountries {
+    alpha2Key
+    textId
+    translatedValue
+  }
+}
+
+query FindCountriesInLanguage($uiLanguage: UiLanguage) {
+  findCountries(uiLanguage: $uiLanguage) {
+    alpha2Key
+    textId
+    translatedValue
+  }
+}
+
+query FindEducationLevels {
+  findEducationLevels {
+    textId
+    translatedValue
+  }
+}
+
+query FindExpertises {
+  findExpertises {
+    textId
+    translatedValue
+  }
+}
+
+query FindIndustries {
+  findIndustries {
+    textId
+    translatedValue
+  }
+}
+
+query FindGenders {
+  findGenders {
+    textId
+    translatedValue
+  }
+}
+
+query FindLanguages {
+  findLanguages {
+    textId
+    translatedValue
+    isUiLanguage
+    shortLangCode
+    longLangCode
+  }
+}
+
+query FindAllOptions() {
+  findOptions() {
+    textId
+    translatedValue
+    optionType
+  }
+}
