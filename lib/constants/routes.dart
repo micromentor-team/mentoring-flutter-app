@@ -7,6 +7,12 @@ class Route {
   Route({required this.name, required this.path});
 }
 
+class NextRouteParameters {
+  final String nextRouteName;
+
+  NextRouteParameters(this.nextRouteName);
+}
+
 class Routes {
   Routes._private();
   static Route root = Route(name: 'root', path: '/');

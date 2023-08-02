@@ -24,9 +24,11 @@ import '../widgets/screens/sign_up/sign_up_screen.dart';
 class AppRouter {
   AppRouter._private();
 
-  static GoRouter createRouter(BuildContext context) {
+  static GoRouter createRouter(
+      BuildContext context, GlobalKey<NavigatorState> navigatorKey) {
     return GoRouter(
       initialLocation: Routes.root.path,
+      navigatorKey: navigatorKey,
       routes: [
         GoRoute(
           path: Routes.root.path,
@@ -44,7 +46,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              child: const SignInScreen(),
+              child: SignInScreen(nextRouteName: Routes.home.name),
             );
           },
         ),

@@ -11,7 +11,12 @@ import '../../../utilities/utility.dart';
 import '../sign_up/sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  final String nextRouteName;
+
+  const SignInScreen({
+    super.key,
+    required this.nextRouteName,
+  });
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -20,6 +25,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final _unfocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
+
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
@@ -213,7 +219,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                         passwordController.text = '';
                                       }
                                     } else {
-                                      router.push(Routes.root.path);
+                                      router.pushNamed(widget.nextRouteName);
                                     }
                                   }
                                 },

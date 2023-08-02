@@ -23,12 +23,14 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'providers/user_provider.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final GoRouter router = AppRouter.createRouter(context);
+    final GoRouter router = AppRouter.createRouter(context, navigatorKey);
     return MaterialApp.router(
       routerConfig: router,
       title: Identifiers.appName,
@@ -48,16 +50,22 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
+    final routeParameter =
+        ModalRoute.of(context)!.settings.arguments as String?;
+
+    // Redirect to home when there is no nextRoute associated
+    final nextRouteName = routeParameter ?? Routes.home.name;
+
     return userProvider.queryUser(
       onLoading: () {
         return const LoadingScreen();
       },
       onError: (error, {refetch}) {
-        return const SignInScreen();
+        return SignInScreen(nextRouteName: nextRouteName);
       },
       onData: (data, {refetch, fetchMore}) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          context.go(Routes.home.path);
+          context.goNamed(nextRouteName);
         });
 
         return const LoadingScreen();
@@ -85,6 +93,8 @@ void main() async {
 
   if (!kIsWeb) {
     await FirebaseNotifications().initialize();
+    String? token = await FirebaseNotifications().getToken();
+    debugPrint('Token is $token');
   }
 
   //TODO(m-rosario): Make crash data collection opt-in.
