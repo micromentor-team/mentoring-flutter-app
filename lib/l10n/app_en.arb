@@ -61,6 +61,8 @@
     "navInboxText": "Inbox",
     "navProfileText": "Profile",
     "mentors": "Mentors",
+    "entrepreneurCapitalized": "ENTREPRENEUR",
+    "mentorCapitalized": "MENTOR",
     "entrepeneurs": "Entrepeneurs",
     "india": "India",
     "marketing": "Marketing",
@@ -144,5 +146,6 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "profileVacationBanner": "I am on vacation so my responses may be slow."
 }

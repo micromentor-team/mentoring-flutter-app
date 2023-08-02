@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/widgets/screens/profile/profile_basic_info.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/models/scaffold_model.dart';
 import '../../molecules/profile_page_header.dart';
@@ -19,14 +22,24 @@ class ProfileScreenScroll extends StatefulWidget {
 class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context, listen: false).user!;
     return SafeArea(
       child: Column(
         children: [
           if (widget.showProfilePagerHeader)
             const ProfilePageHeader(requestReceived: true),
           //TO-DO(all): replace the placeholder with the elements of the profile page you're working on
-          const Expanded(
-            child: Placeholder(),
+          ProfileBasicInfo(
+            userType: UserType.entrepreneur,
+            fullName: user.fullName!,
+            avatarUrl: user.avatarUrl,
+            pronouns: "she/her",
+            affiliations: const ["Verizon Digital Ready"],
+            company: "SVK Group",
+            companyRole: "Director",
+            education: "Harvard University, MBA",
+            linkedinUrl: "https://www.linkedin.com/in/williamhgates/",
+            vacationMode: true,
           ),
         ],
       ),
@@ -67,8 +80,6 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    return const ProfileScreenScroll(
-      showProfilePagerHeader: true,
-    );
+    return const ProfileScreenScroll(showProfilePagerHeader: true);
   }
 }
