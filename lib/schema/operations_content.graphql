@@ -5,7 +5,7 @@ query FindCompanyStages {
   }
 }
 
-query FindCompanyStages {
+query FindCompanyTypes {
   findCompanyTypes {
     textId
     translatedValue

@@ -14,16 +14,20 @@ query FindAllUsers ($filter: UserListFilter) {
     findUsers(filter: $filter) {
         id
         email
+        firstName
+        lastName
         fullName
         avatarUrl
         userHandle
     }
 }
 
-query FindMenteeUsers($options: FindObjectsOptions, $filter2: UserListFilter, $match2: UserInput) {
-    findUsers(options: $options, filter: $filter2, match: $match2) {
+query FindMenteeUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
+    findUsers(options: $options, filter: $filter, match: $match) {
         id
         email
+        firstName
+        lastName
         fullName
         avatarUrl
         userHandle
@@ -53,10 +57,12 @@ query FindMenteeUsers($options: FindObjectsOptions, $filter2: UserListFilter, $m
 
 query FindMentorUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
     findUsers(options: $options, filter: $filter, match: $match) {
+        id
+        email
         firstName
         lastName
         fullName
-        email
+        avatarUrl
         userHandle
         cityOfResidence
         regionOfResidence

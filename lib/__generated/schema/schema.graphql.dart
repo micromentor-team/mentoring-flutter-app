@@ -12041,6 +12041,796 @@ class _CopyWithStubImpl$Input$UserSearchListFilter<TRes>
       _res;
 }
 
+class Input$CompanyInput {
+  factory Input$CompanyInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? name,
+    String? description,
+    String? companyTypeTextId,
+    String? companyStageTextId,
+    String? foundedAt,
+    List<Input$LabeledStringValueInput>? websites,
+    List<String>? industries,
+    bool? isOperational,
+    bool? isFundraising,
+    int? annualRevenue,
+    int? employeeCount,
+    List<String>? addUserIds,
+  }) =>
+      Input$CompanyInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (name != null) r'name': name,
+        if (description != null) r'description': description,
+        if (companyTypeTextId != null) r'companyTypeTextId': companyTypeTextId,
+        if (companyStageTextId != null)
+          r'companyStageTextId': companyStageTextId,
+        if (foundedAt != null) r'foundedAt': foundedAt,
+        if (websites != null) r'websites': websites,
+        if (industries != null) r'industries': industries,
+        if (isOperational != null) r'isOperational': isOperational,
+        if (isFundraising != null) r'isFundraising': isFundraising,
+        if (annualRevenue != null) r'annualRevenue': annualRevenue,
+        if (employeeCount != null) r'employeeCount': employeeCount,
+        if (addUserIds != null) r'addUserIds': addUserIds,
+      });
+
+  Input$CompanyInput._(this._$data);
+
+  factory Input$CompanyInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = (l$createdAt as String?);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = (l$updatedAt as String?);
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] = (l$deletedAt as String?);
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('description')) {
+      final l$description = data['description'];
+      result$data['description'] = (l$description as String?);
+    }
+    if (data.containsKey('companyTypeTextId')) {
+      final l$companyTypeTextId = data['companyTypeTextId'];
+      result$data['companyTypeTextId'] = (l$companyTypeTextId as String?);
+    }
+    if (data.containsKey('companyStageTextId')) {
+      final l$companyStageTextId = data['companyStageTextId'];
+      result$data['companyStageTextId'] = (l$companyStageTextId as String?);
+    }
+    if (data.containsKey('foundedAt')) {
+      final l$foundedAt = data['foundedAt'];
+      result$data['foundedAt'] = (l$foundedAt as String?);
+    }
+    if (data.containsKey('websites')) {
+      final l$websites = data['websites'];
+      result$data['websites'] = (l$websites as List<dynamic>?)
+          ?.map((e) => Input$LabeledStringValueInput.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('industries')) {
+      final l$industries = data['industries'];
+      result$data['industries'] =
+          (l$industries as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('isOperational')) {
+      final l$isOperational = data['isOperational'];
+      result$data['isOperational'] = (l$isOperational as bool?);
+    }
+    if (data.containsKey('isFundraising')) {
+      final l$isFundraising = data['isFundraising'];
+      result$data['isFundraising'] = (l$isFundraising as bool?);
+    }
+    if (data.containsKey('annualRevenue')) {
+      final l$annualRevenue = data['annualRevenue'];
+      result$data['annualRevenue'] = (l$annualRevenue as int?);
+    }
+    if (data.containsKey('employeeCount')) {
+      final l$employeeCount = data['employeeCount'];
+      result$data['employeeCount'] = (l$employeeCount as int?);
+    }
+    if (data.containsKey('addUserIds')) {
+      final l$addUserIds = data['addUserIds'];
+      result$data['addUserIds'] =
+          (l$addUserIds as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    return Input$CompanyInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  String? get createdAt => (_$data['createdAt'] as String?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  String? get updatedAt => (_$data['updatedAt'] as String?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  String? get deletedAt => (_$data['deletedAt'] as String?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  String? get name => (_$data['name'] as String?);
+  String? get description => (_$data['description'] as String?);
+  String? get companyTypeTextId => (_$data['companyTypeTextId'] as String?);
+  String? get companyStageTextId => (_$data['companyStageTextId'] as String?);
+  String? get foundedAt => (_$data['foundedAt'] as String?);
+  List<Input$LabeledStringValueInput>? get websites =>
+      (_$data['websites'] as List<Input$LabeledStringValueInput>?);
+  List<String>? get industries => (_$data['industries'] as List<String>?);
+  bool? get isOperational => (_$data['isOperational'] as bool?);
+  bool? get isFundraising => (_$data['isFundraising'] as bool?);
+  int? get annualRevenue => (_$data['annualRevenue'] as int?);
+  int? get employeeCount => (_$data['employeeCount'] as int?);
+  List<String>? get addUserIds => (_$data['addUserIds'] as List<String>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt;
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt;
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt;
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('description')) {
+      final l$description = description;
+      result$data['description'] = l$description;
+    }
+    if (_$data.containsKey('companyTypeTextId')) {
+      final l$companyTypeTextId = companyTypeTextId;
+      result$data['companyTypeTextId'] = l$companyTypeTextId;
+    }
+    if (_$data.containsKey('companyStageTextId')) {
+      final l$companyStageTextId = companyStageTextId;
+      result$data['companyStageTextId'] = l$companyStageTextId;
+    }
+    if (_$data.containsKey('foundedAt')) {
+      final l$foundedAt = foundedAt;
+      result$data['foundedAt'] = l$foundedAt;
+    }
+    if (_$data.containsKey('websites')) {
+      final l$websites = websites;
+      result$data['websites'] = l$websites?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('industries')) {
+      final l$industries = industries;
+      result$data['industries'] = l$industries?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('isOperational')) {
+      final l$isOperational = isOperational;
+      result$data['isOperational'] = l$isOperational;
+    }
+    if (_$data.containsKey('isFundraising')) {
+      final l$isFundraising = isFundraising;
+      result$data['isFundraising'] = l$isFundraising;
+    }
+    if (_$data.containsKey('annualRevenue')) {
+      final l$annualRevenue = annualRevenue;
+      result$data['annualRevenue'] = l$annualRevenue;
+    }
+    if (_$data.containsKey('employeeCount')) {
+      final l$employeeCount = employeeCount;
+      result$data['employeeCount'] = l$employeeCount;
+    }
+    if (_$data.containsKey('addUserIds')) {
+      final l$addUserIds = addUserIds;
+      result$data['addUserIds'] = l$addUserIds?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$CompanyInput<Input$CompanyInput> get copyWith =>
+      CopyWith$Input$CompanyInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$CompanyInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$description = description;
+    final lOther$description = other.description;
+    if (_$data.containsKey('description') !=
+        other._$data.containsKey('description')) {
+      return false;
+    }
+    if (l$description != lOther$description) {
+      return false;
+    }
+    final l$companyTypeTextId = companyTypeTextId;
+    final lOther$companyTypeTextId = other.companyTypeTextId;
+    if (_$data.containsKey('companyTypeTextId') !=
+        other._$data.containsKey('companyTypeTextId')) {
+      return false;
+    }
+    if (l$companyTypeTextId != lOther$companyTypeTextId) {
+      return false;
+    }
+    final l$companyStageTextId = companyStageTextId;
+    final lOther$companyStageTextId = other.companyStageTextId;
+    if (_$data.containsKey('companyStageTextId') !=
+        other._$data.containsKey('companyStageTextId')) {
+      return false;
+    }
+    if (l$companyStageTextId != lOther$companyStageTextId) {
+      return false;
+    }
+    final l$foundedAt = foundedAt;
+    final lOther$foundedAt = other.foundedAt;
+    if (_$data.containsKey('foundedAt') !=
+        other._$data.containsKey('foundedAt')) {
+      return false;
+    }
+    if (l$foundedAt != lOther$foundedAt) {
+      return false;
+    }
+    final l$websites = websites;
+    final lOther$websites = other.websites;
+    if (_$data.containsKey('websites') !=
+        other._$data.containsKey('websites')) {
+      return false;
+    }
+    if (l$websites != null && lOther$websites != null) {
+      if (l$websites.length != lOther$websites.length) {
+        return false;
+      }
+      for (int i = 0; i < l$websites.length; i++) {
+        final l$websites$entry = l$websites[i];
+        final lOther$websites$entry = lOther$websites[i];
+        if (l$websites$entry != lOther$websites$entry) {
+          return false;
+        }
+      }
+    } else if (l$websites != lOther$websites) {
+      return false;
+    }
+    final l$industries = industries;
+    final lOther$industries = other.industries;
+    if (_$data.containsKey('industries') !=
+        other._$data.containsKey('industries')) {
+      return false;
+    }
+    if (l$industries != null && lOther$industries != null) {
+      if (l$industries.length != lOther$industries.length) {
+        return false;
+      }
+      for (int i = 0; i < l$industries.length; i++) {
+        final l$industries$entry = l$industries[i];
+        final lOther$industries$entry = lOther$industries[i];
+        if (l$industries$entry != lOther$industries$entry) {
+          return false;
+        }
+      }
+    } else if (l$industries != lOther$industries) {
+      return false;
+    }
+    final l$isOperational = isOperational;
+    final lOther$isOperational = other.isOperational;
+    if (_$data.containsKey('isOperational') !=
+        other._$data.containsKey('isOperational')) {
+      return false;
+    }
+    if (l$isOperational != lOther$isOperational) {
+      return false;
+    }
+    final l$isFundraising = isFundraising;
+    final lOther$isFundraising = other.isFundraising;
+    if (_$data.containsKey('isFundraising') !=
+        other._$data.containsKey('isFundraising')) {
+      return false;
+    }
+    if (l$isFundraising != lOther$isFundraising) {
+      return false;
+    }
+    final l$annualRevenue = annualRevenue;
+    final lOther$annualRevenue = other.annualRevenue;
+    if (_$data.containsKey('annualRevenue') !=
+        other._$data.containsKey('annualRevenue')) {
+      return false;
+    }
+    if (l$annualRevenue != lOther$annualRevenue) {
+      return false;
+    }
+    final l$employeeCount = employeeCount;
+    final lOther$employeeCount = other.employeeCount;
+    if (_$data.containsKey('employeeCount') !=
+        other._$data.containsKey('employeeCount')) {
+      return false;
+    }
+    if (l$employeeCount != lOther$employeeCount) {
+      return false;
+    }
+    final l$addUserIds = addUserIds;
+    final lOther$addUserIds = other.addUserIds;
+    if (_$data.containsKey('addUserIds') !=
+        other._$data.containsKey('addUserIds')) {
+      return false;
+    }
+    if (l$addUserIds != null && lOther$addUserIds != null) {
+      if (l$addUserIds.length != lOther$addUserIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$addUserIds.length; i++) {
+        final l$addUserIds$entry = l$addUserIds[i];
+        final lOther$addUserIds$entry = lOther$addUserIds[i];
+        if (l$addUserIds$entry != lOther$addUserIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$addUserIds != lOther$addUserIds) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$name = name;
+    final l$description = description;
+    final l$companyTypeTextId = companyTypeTextId;
+    final l$companyStageTextId = companyStageTextId;
+    final l$foundedAt = foundedAt;
+    final l$websites = websites;
+    final l$industries = industries;
+    final l$isOperational = isOperational;
+    final l$isFundraising = isFundraising;
+    final l$annualRevenue = annualRevenue;
+    final l$employeeCount = employeeCount;
+    final l$addUserIds = addUserIds;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('description') ? l$description : const {},
+      _$data.containsKey('companyTypeTextId') ? l$companyTypeTextId : const {},
+      _$data.containsKey('companyStageTextId')
+          ? l$companyStageTextId
+          : const {},
+      _$data.containsKey('foundedAt') ? l$foundedAt : const {},
+      _$data.containsKey('websites')
+          ? l$websites == null
+              ? null
+              : Object.hashAll(l$websites.map((v) => v))
+          : const {},
+      _$data.containsKey('industries')
+          ? l$industries == null
+              ? null
+              : Object.hashAll(l$industries.map((v) => v))
+          : const {},
+      _$data.containsKey('isOperational') ? l$isOperational : const {},
+      _$data.containsKey('isFundraising') ? l$isFundraising : const {},
+      _$data.containsKey('annualRevenue') ? l$annualRevenue : const {},
+      _$data.containsKey('employeeCount') ? l$employeeCount : const {},
+      _$data.containsKey('addUserIds')
+          ? l$addUserIds == null
+              ? null
+              : Object.hashAll(l$addUserIds.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$CompanyInput<TRes> {
+  factory CopyWith$Input$CompanyInput(
+    Input$CompanyInput instance,
+    TRes Function(Input$CompanyInput) then,
+  ) = _CopyWithImpl$Input$CompanyInput;
+
+  factory CopyWith$Input$CompanyInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$CompanyInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? name,
+    String? description,
+    String? companyTypeTextId,
+    String? companyStageTextId,
+    String? foundedAt,
+    List<Input$LabeledStringValueInput>? websites,
+    List<String>? industries,
+    bool? isOperational,
+    bool? isFundraising,
+    int? annualRevenue,
+    int? employeeCount,
+    List<String>? addUserIds,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  TRes websites(
+      Iterable<Input$LabeledStringValueInput>? Function(
+              Iterable<
+                  CopyWith$Input$LabeledStringValueInput<
+                      Input$LabeledStringValueInput>>?)
+          _fn);
+}
+
+class _CopyWithImpl$Input$CompanyInput<TRes>
+    implements CopyWith$Input$CompanyInput<TRes> {
+  _CopyWithImpl$Input$CompanyInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$CompanyInput _instance;
+
+  final TRes Function(Input$CompanyInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? name = _undefined,
+    Object? description = _undefined,
+    Object? companyTypeTextId = _undefined,
+    Object? companyStageTextId = _undefined,
+    Object? foundedAt = _undefined,
+    Object? websites = _undefined,
+    Object? industries = _undefined,
+    Object? isOperational = _undefined,
+    Object? isFundraising = _undefined,
+    Object? annualRevenue = _undefined,
+    Object? employeeCount = _undefined,
+    Object? addUserIds = _undefined,
+  }) =>
+      _then(Input$CompanyInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (name != _undefined) 'name': (name as String?),
+        if (description != _undefined) 'description': (description as String?),
+        if (companyTypeTextId != _undefined)
+          'companyTypeTextId': (companyTypeTextId as String?),
+        if (companyStageTextId != _undefined)
+          'companyStageTextId': (companyStageTextId as String?),
+        if (foundedAt != _undefined) 'foundedAt': (foundedAt as String?),
+        if (websites != _undefined)
+          'websites': (websites as List<Input$LabeledStringValueInput>?),
+        if (industries != _undefined)
+          'industries': (industries as List<String>?),
+        if (isOperational != _undefined)
+          'isOperational': (isOperational as bool?),
+        if (isFundraising != _undefined)
+          'isFundraising': (isFundraising as bool?),
+        if (annualRevenue != _undefined)
+          'annualRevenue': (annualRevenue as int?),
+        if (employeeCount != _undefined)
+          'employeeCount': (employeeCount as int?),
+        if (addUserIds != _undefined)
+          'addUserIds': (addUserIds as List<String>?),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  TRes websites(
+          Iterable<Input$LabeledStringValueInput>? Function(
+                  Iterable<
+                      CopyWith$Input$LabeledStringValueInput<
+                          Input$LabeledStringValueInput>>?)
+              _fn) =>
+      call(
+          websites: _fn(_instance.websites
+              ?.map((e) => CopyWith$Input$LabeledStringValueInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+}
+
+class _CopyWithStubImpl$Input$CompanyInput<TRes>
+    implements CopyWith$Input$CompanyInput<TRes> {
+  _CopyWithStubImpl$Input$CompanyInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? deletedAt,
+    String? deletedBy,
+    String? name,
+    String? description,
+    String? companyTypeTextId,
+    String? companyStageTextId,
+    String? foundedAt,
+    List<Input$LabeledStringValueInput>? websites,
+    List<String>? industries,
+    bool? isOperational,
+    bool? isFundraising,
+    int? annualRevenue,
+    int? employeeCount,
+    List<String>? addUserIds,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  websites(_fn) => _res;
+}
+
 class Input$UserSignInInput {
   factory Input$UserSignInInput({
     String? ident,
@@ -15060,7 +15850,6 @@ class Input$MentorsGroupMembershipInput {
     String? helpICanOffer,
     String? expectationsForMentees,
     String? menteePreparationInstructions,
-    int? endorsements,
   }) =>
       Input$MentorsGroupMembershipInput._({
         if (id != null) r'id': id,
@@ -15083,7 +15872,6 @@ class Input$MentorsGroupMembershipInput {
           r'expectationsForMentees': expectationsForMentees,
         if (menteePreparationInstructions != null)
           r'menteePreparationInstructions': menteePreparationInstructions,
-        if (endorsements != null) r'endorsements': endorsements,
       });
 
   Input$MentorsGroupMembershipInput._(this._$data);
@@ -15178,10 +15966,6 @@ class Input$MentorsGroupMembershipInput {
       result$data['menteePreparationInstructions'] =
           (l$menteePreparationInstructions as String?);
     }
-    if (data.containsKey('endorsements')) {
-      final l$endorsements = data['endorsements'];
-      result$data['endorsements'] = (l$endorsements as int?);
-    }
     return Input$MentorsGroupMembershipInput._(result$data);
   }
 
@@ -15212,7 +15996,6 @@ class Input$MentorsGroupMembershipInput {
       (_$data['expectationsForMentees'] as String?);
   String? get menteePreparationInstructions =>
       (_$data['menteePreparationInstructions'] as String?);
-  int? get endorsements => (_$data['endorsements'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -15291,10 +16074,6 @@ class Input$MentorsGroupMembershipInput {
       final l$menteePreparationInstructions = menteePreparationInstructions;
       result$data['menteePreparationInstructions'] =
           l$menteePreparationInstructions;
-    }
-    if (_$data.containsKey('endorsements')) {
-      final l$endorsements = endorsements;
-      result$data['endorsements'] = l$endorsements;
     }
     return result$data;
   }
@@ -15516,15 +16295,6 @@ class Input$MentorsGroupMembershipInput {
         lOther$menteePreparationInstructions) {
       return false;
     }
-    final l$endorsements = endorsements;
-    final lOther$endorsements = other.endorsements;
-    if (_$data.containsKey('endorsements') !=
-        other._$data.containsKey('endorsements')) {
-      return false;
-    }
-    if (l$endorsements != lOther$endorsements) {
-      return false;
-    }
     return true;
   }
 
@@ -15548,7 +16318,6 @@ class Input$MentorsGroupMembershipInput {
     final l$helpICanOffer = helpICanOffer;
     final l$expectationsForMentees = expectationsForMentees;
     final l$menteePreparationInstructions = menteePreparationInstructions;
-    final l$endorsements = endorsements;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -15588,7 +16357,6 @@ class Input$MentorsGroupMembershipInput {
       _$data.containsKey('menteePreparationInstructions')
           ? l$menteePreparationInstructions
           : const {},
-      _$data.containsKey('endorsements') ? l$endorsements : const {},
     ]);
   }
 }
@@ -15621,7 +16389,6 @@ abstract class CopyWith$Input$MentorsGroupMembershipInput<TRes> {
     String? helpICanOffer,
     String? expectationsForMentees,
     String? menteePreparationInstructions,
-    int? endorsements,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
@@ -15662,7 +16429,6 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
     Object? helpICanOffer = _undefined,
     Object? expectationsForMentees = _undefined,
     Object? menteePreparationInstructions = _undefined,
-    Object? endorsements = _undefined,
   }) =>
       _then(Input$MentorsGroupMembershipInput._({
         ..._instance._$data,
@@ -15693,7 +16459,6 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
         if (menteePreparationInstructions != _undefined)
           'menteePreparationInstructions':
               (menteePreparationInstructions as String?),
-        if (endorsements != _undefined) 'endorsements': (endorsements as int?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -15740,7 +16505,6 @@ class _CopyWithStubImpl$Input$MentorsGroupMembershipInput<TRes>
     String? helpICanOffer,
     String? expectationsForMentees,
     String? menteePreparationInstructions,
-    int? endorsements,
   }) =>
       _res;
   events(_fn) => _res;
@@ -22031,37 +22795,12 @@ Enum$MultiStepActionResult fromJson$Enum$MultiStepActionResult(String value) {
   }
 }
 
-enum Enum$ChannelMessageEvent { received, seen, unset, $unknown }
-
-String toJson$Enum$ChannelMessageEvent(Enum$ChannelMessageEvent e) {
-  switch (e) {
-    case Enum$ChannelMessageEvent.received:
-      return r'received';
-    case Enum$ChannelMessageEvent.seen:
-      return r'seen';
-    case Enum$ChannelMessageEvent.unset:
-      return r'unset';
-    case Enum$ChannelMessageEvent.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum$ChannelMessageEvent fromJson$Enum$ChannelMessageEvent(String value) {
-  switch (value) {
-    case r'received':
-      return Enum$ChannelMessageEvent.received;
-    case r'seen':
-      return Enum$ChannelMessageEvent.seen;
-    case r'unset':
-      return Enum$ChannelMessageEvent.unset;
-    default:
-      return Enum$ChannelMessageEvent.$unknown;
-  }
-}
-
 enum Enum$ServiceRequestType {
   graphQlQueryUserInbox,
   graphQlQueryUserUserSearches,
+  graphQlMutationCreateCompany,
+  graphQlMutationDeleteCompany,
+  graphQlMutationUpdateCompany,
   graphQlMutationAddChannelMessageEvent,
   graphQlMutationCreateChannel,
   graphQlMutationCreateChannelInvitation,
@@ -22167,6 +22906,12 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlQueryUserInbox';
     case Enum$ServiceRequestType.graphQlQueryUserUserSearches:
       return r'graphQlQueryUserUserSearches';
+    case Enum$ServiceRequestType.graphQlMutationCreateCompany:
+      return r'graphQlMutationCreateCompany';
+    case Enum$ServiceRequestType.graphQlMutationDeleteCompany:
+      return r'graphQlMutationDeleteCompany';
+    case Enum$ServiceRequestType.graphQlMutationUpdateCompany:
+      return r'graphQlMutationUpdateCompany';
     case Enum$ServiceRequestType.graphQlMutationAddChannelMessageEvent:
       return r'graphQlMutationAddChannelMessageEvent';
     case Enum$ServiceRequestType.graphQlMutationCreateChannel:
@@ -22371,6 +23116,12 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlQueryUserInbox;
     case r'graphQlQueryUserUserSearches':
       return Enum$ServiceRequestType.graphQlQueryUserUserSearches;
+    case r'graphQlMutationCreateCompany':
+      return Enum$ServiceRequestType.graphQlMutationCreateCompany;
+    case r'graphQlMutationDeleteCompany':
+      return Enum$ServiceRequestType.graphQlMutationDeleteCompany;
+    case r'graphQlMutationUpdateCompany':
+      return Enum$ServiceRequestType.graphQlMutationUpdateCompany;
     case r'graphQlMutationAddChannelMessageEvent':
       return Enum$ServiceRequestType.graphQlMutationAddChannelMessageEvent;
     case r'graphQlMutationCreateChannel':
@@ -23036,6 +23787,34 @@ Enum$ErrorCode fromJson$Enum$ErrorCode(String value) {
       return Enum$ErrorCode.authTokenNoMatch;
     default:
       return Enum$ErrorCode.$unknown;
+  }
+}
+
+enum Enum$ChannelMessageEvent { received, seen, unset, $unknown }
+
+String toJson$Enum$ChannelMessageEvent(Enum$ChannelMessageEvent e) {
+  switch (e) {
+    case Enum$ChannelMessageEvent.received:
+      return r'received';
+    case Enum$ChannelMessageEvent.seen:
+      return r'seen';
+    case Enum$ChannelMessageEvent.unset:
+      return r'unset';
+    case Enum$ChannelMessageEvent.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$ChannelMessageEvent fromJson$Enum$ChannelMessageEvent(String value) {
+  switch (value) {
+    case r'received':
+      return Enum$ChannelMessageEvent.received;
+    case r'seen':
+      return Enum$ChannelMessageEvent.seen;
+    case r'unset':
+      return Enum$ChannelMessageEvent.unset;
+    default:
+      return Enum$ChannelMessageEvent.$unknown;
   }
 }
 
