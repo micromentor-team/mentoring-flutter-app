@@ -20,6 +20,65 @@ query FindAllUsers ($filter: UserListFilter) {
     }
 }
 
+query FindMenteeUsers($options: FindObjectsOptions, $filter2: UserListFilter, $match2: UserInput) {
+    findUsers(options: $options, filter: $filter2, match: $match2) {
+        id
+        email
+        fullName
+        avatarUrl
+        userHandle
+        cityOfResidence
+        regionOfResidence
+        countryOfResidence {
+            translatedValue
+        }
+        jobTitle
+        groupMemberships {
+            ... on MenteesGroupMembership {
+                soughtExpertises {
+                    translatedValue
+                }
+                industry {
+                    translatedValue
+                }
+            }
+        }
+        companies {
+            companyStage {
+                translatedValue
+            }
+        }
+    }
+}
+
+query FindMentorUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
+    findUsers(options: $options, filter: $filter, match: $match) {
+        firstName
+        lastName
+        fullName
+        email
+        userHandle
+        cityOfResidence
+        regionOfResidence
+        countryOfResidence {
+            translatedValue
+        }
+        jobTitle
+        groupMemberships {
+            groupId
+            ... on MentorsGroupMembership {
+                expertises {
+                    translatedValue
+                }
+                industries {
+                    translatedValue
+                }
+                endorsements
+            }
+        }
+    }
+}
+
 query FindUsersWithFilter ($filter: UserListFilter) {
     findUsers(filter: $filter) {
         id
