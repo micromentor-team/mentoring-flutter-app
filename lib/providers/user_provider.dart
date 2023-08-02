@@ -157,6 +157,92 @@ class UserProvider extends BaseProvider {
     );
   }
 
+  Widget findMenteeUsers({
+    required Input$FindObjectsOptions optionsInput,
+    required Input$UserListFilter filterInput,
+    required Input$UserInput matchInput,
+    required Widget Function(
+      OperationResult<List<Query$FindMenteeUsers$findUsers>> data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery(
+      document: documentNodeQueryFindMenteeUsers,
+      variables: Variables$Query$FindMenteeUsers(
+              filter: filterInput, options: optionsInput, match: matchInput)
+          .toJson(),
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<List<Query$FindMenteeUsers$findUsers>> result =
+            OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data == null
+              ? null
+              : Query$FindMenteeUsers.fromJson(
+                  queryResult.data!,
+                ).findUsers.map((element) {
+                  if (element.avatarUrl == "") {
+                    return element.copyWith(avatarUrl: null);
+                  }
+                  return element;
+                }).toList(),
+        );
+        return onData(
+          result,
+          refetch: refetch,
+          fetchMore: fetchMore,
+        );
+      },
+      onLoading: onLoading,
+      onError: onError,
+    );
+  }
+
+  Widget findMentorUsers({
+    required Input$FindObjectsOptions optionsInput,
+    required Input$UserListFilter filterInput,
+    required Input$UserInput matchInput,
+    required Widget Function(
+      OperationResult<List<Query$FindMentorUsers$findUsers>> data, {
+      void Function()? refetch,
+      void Function(FetchMoreOptions)? fetchMore,
+    }) onData,
+    Widget Function()? onLoading,
+    Widget Function(String error, {void Function()? refetch})? onError,
+  }) {
+    return runQuery(
+      document: documentNodeQueryFindMentorUsers,
+      variables: Variables$Query$FindMentorUsers(
+              filter: filterInput, options: optionsInput, match: matchInput)
+          .toJson(),
+      onData: (queryResult, {refetch, fetchMore}) {
+        final OperationResult<List<Query$FindMentorUsers$findUsers>> result =
+            OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data == null
+              ? null
+              : Query$FindMentorUsers.fromJson(
+                  queryResult.data!,
+                ).findUsers.map((element) {
+                  if (element.avatarUrl == "") {
+                    return element.copyWith(avatarUrl: null);
+                  }
+                  return element;
+                }).toList(),
+        );
+        return onData(
+          result,
+          refetch: refetch,
+          fetchMore: fetchMore,
+        );
+      },
+      onLoading: onLoading,
+      onError: onError,
+    );
+  }
+
   // Mutations
   Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser({
     required Input$UserSignUpInput input,
