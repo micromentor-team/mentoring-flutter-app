@@ -45,7 +45,6 @@ export function mockMutations(serverState: MockServerState) {
             const currentTime : string = new Date().toISOString();
             channelMessage.deletedAt = currentTime;
             channelMessage.updatedAt = currentTime;
-            channelMessage.deletedBy = channelMessage.createdBy;
             return "ok";
         },
         markChannelMessagesAsSeenByMe: (_: any, args: { channelId: string }) => {
@@ -75,12 +74,17 @@ export function mockMutations(serverState: MockServerState) {
         },
         updateChannelMessage: (_: any, args: { input: { id: string | null, messageText: string | null, deletedAt: Date | null } }) => {
             var channelMessage = serverState.channelMessages.find((element) => element.id == args.input.id);
+            const currentTime : string = new Date().toISOString();
             if(args.input.deletedAt) {
                 channelMessage.deletedAt = args.input.deletedAt.toISOString();
             } else {
                 channelMessage.deletedAt = null;
             }
-            channelMessage.messageText = args.input.messageText ?? channelMessage.messageText;
+            if(args.input.messageText != channelMessage.messageText) {
+                channelMessage.messageText = args.input.messageText;
+                channelMessage.editedAt = currentTime;
+            }
+            channelMessage.updatedAt = currentTime;
             return "ok";
         },
     }
