@@ -640,6 +640,7 @@ type Channel {
   syncedWithMm2At: DateTime
   creator: User!
   invitations: [ChannelInvitation!]!
+  latestMessage: ChannelMessage!
   messages: [ChannelMessage!]!
   participants: [ChannelParticipant!]!
   pendingInvitations: [ChannelInvitation!]!
@@ -1058,7 +1059,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTime! = "2023-07-31T21:39:59.808Z"
+  time: DateTime! = "2023-08-01T15:27:38.856Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
