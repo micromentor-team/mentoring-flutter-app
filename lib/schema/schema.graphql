@@ -786,6 +786,70 @@ type Company {
 
   """This attribute is only used by the MM2 synchronizer."""
   syncedWithMm2At: DateTime
+  companyStage: CompanyStage
+  companyType: CompanyType
+}
+
+type CompanyStage {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+}
+
+type CompanyType {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
 }
 
 type Country {
@@ -1059,7 +1123,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTime! = "2023-08-01T15:27:38.856Z"
+  time: DateTime! = "2023-08-02T20:56:51.049Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -1250,68 +1314,6 @@ input ChannelMessageListFilter {
   includeChannelMessageType: [ChannelMessageType!]
   received: Boolean
   seen: Boolean
-}
-
-type CompanyStage {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  textId: String!
-  parentTextId: String
-  isParent: Boolean
-  optionType: OptionType!
-  value: String!
-  translatedValue: String
-  language: UiLanguage
-
-  """This attribute is only used by the MM2 synchronizer."""
-  mm2Id: String
-  mm2Value: String
-
-  """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
-  childOptions: [Option!]
-  parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
-}
-
-type CompanyType {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  textId: String!
-  parentTextId: String
-  isParent: Boolean
-  optionType: OptionType!
-  value: String!
-  translatedValue: String
-  language: UiLanguage
-
-  """This attribute is only used by the MM2 synchronizer."""
-  mm2Id: String
-  mm2Value: String
-
-  """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
-  childOptions: [Option!]
-  parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
 }
 
 type EducationLevel {
@@ -1720,6 +1722,9 @@ type SidMultiStepActionProgress {
 }
 
 type Mutation {
+  createCompany(input: CompanyInput!): Company!
+  deleteCompany(deletePhysically: Boolean!, companyId: String!): ServiceRequest!
+  updateCompany(input: CompanyInput!): ServiceRequest!
   signInUser(input: UserSignInInput!): UserAuthResponse!
   signMeOut: String!
   signUpUser(input: UserSignUpInput!): UserAuthResponse!
@@ -1782,25 +1787,7 @@ type Mutation {
   verifyMultiStepActionToken(input: VerifyMultiStepActionTokenInput!): SidMultiStepActionProgress!
 }
 
-"""API response to userSignIn/userSignOut"""
-type UserAuthResponse {
-  userId: String!
-  deviceId: String!
-  deviceUuid: String!
-  authToken: String!
-  authTokenExpiresAt: DateTime
-}
-
-"""User sign in input data"""
-input UserSignInInput {
-  ident: String
-  identType: UserIdentType
-  deviceUuid: String
-  password: String
-}
-
-"""User sign up input data"""
-input UserSignUpInput {
+input CompanyInput {
   id: ID
   adminNotes: String
   events: [ModelEventInput!]
@@ -1811,71 +1798,18 @@ input UserSignUpInput {
   updatedBy: ID
   deletedAt: String
   deletedBy: ID
-  firstName: String
-  lastName: String
-  fullName: String
-  userHandle: String
-  email: String
-  phoneNumber: String
-  password: String
-  source: String
-  deviceUuid: String! = ""
-  timezone: String
-  pushNotificationToken: String
-  checkAvailable: Boolean! = true
-}
-
-input ChannelInvitationInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  channelId: ID
-  senderId: ID
-  recipientId: ID
-  channelName: String
-  channelTopic: String
-  messageText: String
-  dismissedFromInboxBySenderAt: String
-  dismissedFromInboxByRecipientAt: String
-  status: ChannelInvitationStatus
-}
-
-input BgAddChannelMessageEventInput {
-  channelId: ID! = ""
-  messageIds: [ID!]! = []
-  recipientId: ID! = ""
-  event: ChannelMessageEvent! = unset
-}
-
-enum ChannelMessageEvent {
-  received
-  seen
-  unset
-}
-
-input ChannelParticipantInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  channelId: ID
-  userId: ID
-  invitedBy: ID
-  channelName: String
-  role: ChannelParticipantRole
+  name: String
+  description: String
+  companyTypeTextId: String
+  companyStageTextId: String
+  foundedAt: String
+  websites: [LabeledStringValueInput!]
+  industries: [String!]
+  isOperational: Boolean
+  isFundraising: Boolean
+  annualRevenue: Int
+  employeeCount: Int
+  addUserIds: [String!]
 }
 
 type ServiceRequest {
@@ -1903,6 +1837,9 @@ type ServiceRequest {
 enum ServiceRequestType {
   graphQlQueryUserInbox
   graphQlQueryUserUserSearches
+  graphQlMutationCreateCompany
+  graphQlMutationDeleteCompany
+  graphQlMutationUpdateCompany
   graphQlMutationAddChannelMessageEvent
   graphQlMutationCreateChannel
   graphQlMutationCreateChannelInvitation
@@ -2093,6 +2030,102 @@ enum ErrorCode {
   authTokenNoMatch
 }
 
+"""API response to userSignIn/userSignOut"""
+type UserAuthResponse {
+  userId: String!
+  deviceId: String!
+  deviceUuid: String!
+  authToken: String!
+  authTokenExpiresAt: DateTime
+}
+
+"""User sign in input data"""
+input UserSignInInput {
+  ident: String
+  identType: UserIdentType
+  deviceUuid: String
+  password: String
+}
+
+"""User sign up input data"""
+input UserSignUpInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: String
+  createdBy: ID
+  updatedAt: String
+  updatedBy: ID
+  deletedAt: String
+  deletedBy: ID
+  firstName: String
+  lastName: String
+  fullName: String
+  userHandle: String
+  email: String
+  phoneNumber: String
+  password: String
+  source: String
+  deviceUuid: String! = ""
+  timezone: String
+  pushNotificationToken: String
+  checkAvailable: Boolean! = true
+}
+
+input ChannelInvitationInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: String
+  createdBy: ID
+  updatedAt: String
+  updatedBy: ID
+  deletedAt: String
+  deletedBy: ID
+  channelId: ID
+  senderId: ID
+  recipientId: ID
+  channelName: String
+  channelTopic: String
+  messageText: String
+  dismissedFromInboxBySenderAt: String
+  dismissedFromInboxByRecipientAt: String
+  status: ChannelInvitationStatus
+}
+
+input BgAddChannelMessageEventInput {
+  channelId: ID! = ""
+  messageIds: [ID!]! = []
+  recipientId: ID! = ""
+  event: ChannelMessageEvent! = unset
+}
+
+enum ChannelMessageEvent {
+  received
+  seen
+  unset
+}
+
+input ChannelParticipantInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: String
+  createdBy: ID
+  updatedAt: String
+  updatedBy: ID
+  deletedAt: String
+  deletedBy: ID
+  channelId: ID
+  userId: ID
+  invitedBy: ID
+  channelName: String
+  role: ChannelParticipantRole
+}
+
 input MenteesGroupMembershipInput {
   id: ID
   adminNotes: String
@@ -2142,7 +2175,6 @@ input MentorsGroupMembershipInput {
   helpICanOffer: String
   expectationsForMentees: String
   menteePreparationInstructions: String
-  endorsements: Int
 }
 
 input NotificationInput {

@@ -7,31 +7,31 @@ import 'schema.graphql.dart';
 
 class Query$FindCompanyStages {
   Query$FindCompanyStages({
-    required this.findCompanyTypes,
+    required this.findCompanyStages,
     this.$__typename = 'Query',
   });
 
   factory Query$FindCompanyStages.fromJson(Map<String, dynamic> json) {
-    final l$findCompanyTypes = json['findCompanyTypes'];
+    final l$findCompanyStages = json['findCompanyStages'];
     final l$$__typename = json['__typename'];
     return Query$FindCompanyStages(
-      findCompanyTypes: (l$findCompanyTypes as List<dynamic>)
-          .map((e) => Query$FindCompanyStages$findCompanyTypes.fromJson(
+      findCompanyStages: (l$findCompanyStages as List<dynamic>)
+          .map((e) => Query$FindCompanyStages$findCompanyStages.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$FindCompanyStages$findCompanyTypes> findCompanyTypes;
+  final List<Query$FindCompanyStages$findCompanyStages> findCompanyStages;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$findCompanyTypes = findCompanyTypes;
-    _resultData['findCompanyTypes'] =
-        l$findCompanyTypes.map((e) => e.toJson()).toList();
+    final l$findCompanyStages = findCompanyStages;
+    _resultData['findCompanyStages'] =
+        l$findCompanyStages.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -39,10 +39,10 @@ class Query$FindCompanyStages {
 
   @override
   int get hashCode {
-    final l$findCompanyTypes = findCompanyTypes;
+    final l$findCompanyStages = findCompanyStages;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      Object.hashAll(l$findCompanyTypes.map((v) => v)),
+      Object.hashAll(l$findCompanyStages.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -56,15 +56,15 @@ class Query$FindCompanyStages {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$findCompanyTypes = findCompanyTypes;
-    final lOther$findCompanyTypes = other.findCompanyTypes;
-    if (l$findCompanyTypes.length != lOther$findCompanyTypes.length) {
+    final l$findCompanyStages = findCompanyStages;
+    final lOther$findCompanyStages = other.findCompanyStages;
+    if (l$findCompanyStages.length != lOther$findCompanyStages.length) {
       return false;
     }
-    for (int i = 0; i < l$findCompanyTypes.length; i++) {
-      final l$findCompanyTypes$entry = l$findCompanyTypes[i];
-      final lOther$findCompanyTypes$entry = lOther$findCompanyTypes[i];
-      if (l$findCompanyTypes$entry != lOther$findCompanyTypes$entry) {
+    for (int i = 0; i < l$findCompanyStages.length; i++) {
+      final l$findCompanyStages$entry = l$findCompanyStages[i];
+      final lOther$findCompanyStages$entry = lOther$findCompanyStages[i];
+      if (l$findCompanyStages$entry != lOther$findCompanyStages$entry) {
         return false;
       }
     }
@@ -95,14 +95,14 @@ abstract class CopyWith$Query$FindCompanyStages<TRes> {
       _CopyWithStubImpl$Query$FindCompanyStages;
 
   TRes call({
-    List<Query$FindCompanyStages$findCompanyTypes>? findCompanyTypes,
+    List<Query$FindCompanyStages$findCompanyStages>? findCompanyStages,
     String? $__typename,
   });
-  TRes findCompanyTypes(
-      Iterable<Query$FindCompanyStages$findCompanyTypes> Function(
+  TRes findCompanyStages(
+      Iterable<Query$FindCompanyStages$findCompanyStages> Function(
               Iterable<
-                  CopyWith$Query$FindCompanyStages$findCompanyTypes<
-                      Query$FindCompanyStages$findCompanyTypes>>)
+                  CopyWith$Query$FindCompanyStages$findCompanyStages<
+                      Query$FindCompanyStages$findCompanyStages>>)
           _fn);
 }
 
@@ -120,28 +120,28 @@ class _CopyWithImpl$Query$FindCompanyStages<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? findCompanyTypes = _undefined,
+    Object? findCompanyStages = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindCompanyStages(
-        findCompanyTypes:
-            findCompanyTypes == _undefined || findCompanyTypes == null
-                ? _instance.findCompanyTypes
-                : (findCompanyTypes
-                    as List<Query$FindCompanyStages$findCompanyTypes>),
+        findCompanyStages:
+            findCompanyStages == _undefined || findCompanyStages == null
+                ? _instance.findCompanyStages
+                : (findCompanyStages
+                    as List<Query$FindCompanyStages$findCompanyStages>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  TRes findCompanyTypes(
-          Iterable<Query$FindCompanyStages$findCompanyTypes> Function(
+  TRes findCompanyStages(
+          Iterable<Query$FindCompanyStages$findCompanyStages> Function(
                   Iterable<
-                      CopyWith$Query$FindCompanyStages$findCompanyTypes<
-                          Query$FindCompanyStages$findCompanyTypes>>)
+                      CopyWith$Query$FindCompanyStages$findCompanyStages<
+                          Query$FindCompanyStages$findCompanyStages>>)
               _fn) =>
       call(
-          findCompanyTypes: _fn(_instance.findCompanyTypes
-              .map((e) => CopyWith$Query$FindCompanyStages$findCompanyTypes(
+          findCompanyStages: _fn(_instance.findCompanyStages
+              .map((e) => CopyWith$Query$FindCompanyStages$findCompanyStages(
                     e,
                     (i) => i,
                   ))).toList());
@@ -154,11 +154,11 @@ class _CopyWithStubImpl$Query$FindCompanyStages<TRes>
   TRes _res;
 
   call({
-    List<Query$FindCompanyStages$findCompanyTypes>? findCompanyTypes,
+    List<Query$FindCompanyStages$findCompanyStages>? findCompanyStages,
     String? $__typename,
   }) =>
       _res;
-  findCompanyTypes(_fn) => _res;
+  findCompanyStages(_fn) => _res;
 }
 
 const documentNodeQueryFindCompanyStages = DocumentNode(definitions: [
@@ -169,7 +169,7 @@ const documentNodeQueryFindCompanyStages = DocumentNode(definitions: [
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'findCompanyTypes'),
+        name: NameNode(value: 'findCompanyStages'),
         alias: null,
         arguments: [],
         directives: [],
@@ -355,19 +355,222 @@ class _CopyWithStubImpl$Query$FindCompanyStages$findCompanyStages<TRes>
       _res;
 }
 
-class Query$FindCompanyStages$findCompanyTypes {
-  Query$FindCompanyStages$findCompanyTypes({
+class Query$FindCompanyTypes {
+  Query$FindCompanyTypes({
+    required this.findCompanyTypes,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$FindCompanyTypes.fromJson(Map<String, dynamic> json) {
+    final l$findCompanyTypes = json['findCompanyTypes'];
+    final l$$__typename = json['__typename'];
+    return Query$FindCompanyTypes(
+      findCompanyTypes: (l$findCompanyTypes as List<dynamic>)
+          .map((e) => Query$FindCompanyTypes$findCompanyTypes.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$FindCompanyTypes$findCompanyTypes> findCompanyTypes;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$findCompanyTypes = findCompanyTypes;
+    _resultData['findCompanyTypes'] =
+        l$findCompanyTypes.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$findCompanyTypes = findCompanyTypes;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$findCompanyTypes.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindCompanyTypes) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$findCompanyTypes = findCompanyTypes;
+    final lOther$findCompanyTypes = other.findCompanyTypes;
+    if (l$findCompanyTypes.length != lOther$findCompanyTypes.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findCompanyTypes.length; i++) {
+      final l$findCompanyTypes$entry = l$findCompanyTypes[i];
+      final lOther$findCompanyTypes$entry = lOther$findCompanyTypes[i];
+      if (l$findCompanyTypes$entry != lOther$findCompanyTypes$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindCompanyTypes on Query$FindCompanyTypes {
+  CopyWith$Query$FindCompanyTypes<Query$FindCompanyTypes> get copyWith =>
+      CopyWith$Query$FindCompanyTypes(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$FindCompanyTypes<TRes> {
+  factory CopyWith$Query$FindCompanyTypes(
+    Query$FindCompanyTypes instance,
+    TRes Function(Query$FindCompanyTypes) then,
+  ) = _CopyWithImpl$Query$FindCompanyTypes;
+
+  factory CopyWith$Query$FindCompanyTypes.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindCompanyTypes;
+
+  TRes call({
+    List<Query$FindCompanyTypes$findCompanyTypes>? findCompanyTypes,
+    String? $__typename,
+  });
+  TRes findCompanyTypes(
+      Iterable<Query$FindCompanyTypes$findCompanyTypes> Function(
+              Iterable<
+                  CopyWith$Query$FindCompanyTypes$findCompanyTypes<
+                      Query$FindCompanyTypes$findCompanyTypes>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindCompanyTypes<TRes>
+    implements CopyWith$Query$FindCompanyTypes<TRes> {
+  _CopyWithImpl$Query$FindCompanyTypes(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindCompanyTypes _instance;
+
+  final TRes Function(Query$FindCompanyTypes) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? findCompanyTypes = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindCompanyTypes(
+        findCompanyTypes:
+            findCompanyTypes == _undefined || findCompanyTypes == null
+                ? _instance.findCompanyTypes
+                : (findCompanyTypes
+                    as List<Query$FindCompanyTypes$findCompanyTypes>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  TRes findCompanyTypes(
+          Iterable<Query$FindCompanyTypes$findCompanyTypes> Function(
+                  Iterable<
+                      CopyWith$Query$FindCompanyTypes$findCompanyTypes<
+                          Query$FindCompanyTypes$findCompanyTypes>>)
+              _fn) =>
+      call(
+          findCompanyTypes: _fn(_instance.findCompanyTypes
+              .map((e) => CopyWith$Query$FindCompanyTypes$findCompanyTypes(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindCompanyTypes<TRes>
+    implements CopyWith$Query$FindCompanyTypes<TRes> {
+  _CopyWithStubImpl$Query$FindCompanyTypes(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$FindCompanyTypes$findCompanyTypes>? findCompanyTypes,
+    String? $__typename,
+  }) =>
+      _res;
+  findCompanyTypes(_fn) => _res;
+}
+
+const documentNodeQueryFindCompanyTypes = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'FindCompanyTypes'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'findCompanyTypes'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$FindCompanyTypes$findCompanyTypes {
+  Query$FindCompanyTypes$findCompanyTypes({
     required this.textId,
     this.translatedValue,
     this.$__typename = 'CompanyType',
   });
 
-  factory Query$FindCompanyStages$findCompanyTypes.fromJson(
+  factory Query$FindCompanyTypes$findCompanyTypes.fromJson(
       Map<String, dynamic> json) {
     final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
-    return Query$FindCompanyStages$findCompanyTypes(
+    return Query$FindCompanyTypes$findCompanyTypes(
       textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
@@ -408,7 +611,7 @@ class Query$FindCompanyStages$findCompanyTypes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FindCompanyStages$findCompanyTypes) ||
+    if (!(other is Query$FindCompanyTypes$findCompanyTypes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -431,24 +634,24 @@ class Query$FindCompanyStages$findCompanyTypes {
   }
 }
 
-extension UtilityExtension$Query$FindCompanyStages$findCompanyTypes
-    on Query$FindCompanyStages$findCompanyTypes {
-  CopyWith$Query$FindCompanyStages$findCompanyTypes<
-          Query$FindCompanyStages$findCompanyTypes>
-      get copyWith => CopyWith$Query$FindCompanyStages$findCompanyTypes(
+extension UtilityExtension$Query$FindCompanyTypes$findCompanyTypes
+    on Query$FindCompanyTypes$findCompanyTypes {
+  CopyWith$Query$FindCompanyTypes$findCompanyTypes<
+          Query$FindCompanyTypes$findCompanyTypes>
+      get copyWith => CopyWith$Query$FindCompanyTypes$findCompanyTypes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$FindCompanyStages$findCompanyTypes<TRes> {
-  factory CopyWith$Query$FindCompanyStages$findCompanyTypes(
-    Query$FindCompanyStages$findCompanyTypes instance,
-    TRes Function(Query$FindCompanyStages$findCompanyTypes) then,
-  ) = _CopyWithImpl$Query$FindCompanyStages$findCompanyTypes;
+abstract class CopyWith$Query$FindCompanyTypes$findCompanyTypes<TRes> {
+  factory CopyWith$Query$FindCompanyTypes$findCompanyTypes(
+    Query$FindCompanyTypes$findCompanyTypes instance,
+    TRes Function(Query$FindCompanyTypes$findCompanyTypes) then,
+  ) = _CopyWithImpl$Query$FindCompanyTypes$findCompanyTypes;
 
-  factory CopyWith$Query$FindCompanyStages$findCompanyTypes.stub(TRes res) =
-      _CopyWithStubImpl$Query$FindCompanyStages$findCompanyTypes;
+  factory CopyWith$Query$FindCompanyTypes$findCompanyTypes.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindCompanyTypes$findCompanyTypes;
 
   TRes call({
     String? textId,
@@ -457,16 +660,16 @@ abstract class CopyWith$Query$FindCompanyStages$findCompanyTypes<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$FindCompanyStages$findCompanyTypes<TRes>
-    implements CopyWith$Query$FindCompanyStages$findCompanyTypes<TRes> {
-  _CopyWithImpl$Query$FindCompanyStages$findCompanyTypes(
+class _CopyWithImpl$Query$FindCompanyTypes$findCompanyTypes<TRes>
+    implements CopyWith$Query$FindCompanyTypes$findCompanyTypes<TRes> {
+  _CopyWithImpl$Query$FindCompanyTypes$findCompanyTypes(
     this._instance,
     this._then,
   );
 
-  final Query$FindCompanyStages$findCompanyTypes _instance;
+  final Query$FindCompanyTypes$findCompanyTypes _instance;
 
-  final TRes Function(Query$FindCompanyStages$findCompanyTypes) _then;
+  final TRes Function(Query$FindCompanyTypes$findCompanyTypes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -475,7 +678,7 @@ class _CopyWithImpl$Query$FindCompanyStages$findCompanyTypes<TRes>
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$FindCompanyStages$findCompanyTypes(
+      _then(Query$FindCompanyTypes$findCompanyTypes(
         textId: textId == _undefined || textId == null
             ? _instance.textId
             : (textId as String),
@@ -488,9 +691,9 @@ class _CopyWithImpl$Query$FindCompanyStages$findCompanyTypes<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$FindCompanyStages$findCompanyTypes<TRes>
-    implements CopyWith$Query$FindCompanyStages$findCompanyTypes<TRes> {
-  _CopyWithStubImpl$Query$FindCompanyStages$findCompanyTypes(this._res);
+class _CopyWithStubImpl$Query$FindCompanyTypes$findCompanyTypes<TRes>
+    implements CopyWith$Query$FindCompanyTypes$findCompanyTypes<TRes> {
+  _CopyWithStubImpl$Query$FindCompanyTypes$findCompanyTypes(this._res);
 
   TRes _res;
 
