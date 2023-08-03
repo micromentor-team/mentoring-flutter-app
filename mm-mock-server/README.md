@@ -4,6 +4,8 @@ This is a mock server that allows the frontend application to be run and tested 
 As mock server, it is extremely limited in the amount of user flows and actions that
 are supported.
 
+Run the commands below in: mm-flutter-app/mm-mock-server
+
 ## Setting Up
 
 1. Install dependencies with `npm install`.
