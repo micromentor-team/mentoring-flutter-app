@@ -27,10 +27,8 @@ Widget _createFooter(BuildContext context, String company, String? companyRole,
       Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          const Icon(
-            Icons.work_outline,
-            size: _inlineIconSize,
-          ),
+          Icon(Icons.work_outline,
+              size: _inlineIconSize, color: theme.colorScheme.secondary),
           const SizedBox(width: Insets.paddingExtraSmall),
           Text(
             companyAndRole,
@@ -44,9 +42,10 @@ Widget _createFooter(BuildContext context, String company, String? companyRole,
         Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.school_outlined,
               size: _inlineIconSize,
+              color: theme.colorScheme.secondary,
             ),
             const SizedBox(width: Insets.paddingExtraSmall),
             Text(
@@ -104,7 +103,7 @@ Widget _createNameAndBadges(BuildContext context, String fullName,
       ),
     ),
     if (pronouns != null)
-      Text(pronouns,
+      Text("($pronouns)",
           style: theme.textTheme.bodySmall
               ?.copyWith(color: theme.colorScheme.secondary)),
     if (userType == UserType.mentor)
@@ -145,21 +144,25 @@ Widget _createVacationBanner(BuildContext context) {
   return Container(
       color: theme.colorScheme.primaryContainer,
       height: 48.0,
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            const Icon(
-              Icons.beach_access_outlined,
-              size: _inlineIconSize,
-            ),
-            const SizedBox(width: Insets.paddingExtraSmall),
-            Text(
-              l10n.profileVacationBanner,
-              style: theme.textTheme.labelSmall!
-                  .copyWith(color: theme.colorScheme.onPrimaryContainer),
-            ),
-          ],
+      child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Insets.paddingMedium),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Icon(
+                Icons.beach_access_outlined,
+                size: _inlineIconSize,
+                color: theme.colorScheme.onPrimaryContainer,
+              ),
+              const SizedBox(width: Insets.paddingExtraSmall),
+              Text(
+                l10n.profileVacationBanner,
+                style: theme.textTheme.labelSmall!
+                    .copyWith(color: theme.colorScheme.onPrimaryContainer),
+              ),
+            ],
+          ),
         ),
       ]));
 }
