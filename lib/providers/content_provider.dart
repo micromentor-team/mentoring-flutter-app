@@ -64,14 +64,44 @@ class ContentProvider extends BaseProvider {
     debugPrint('Updated content provider values: ${this.toString()}');
   }
 
-  // TODO: add get functions for all other variables
+  // getters
 
-  List<Country>? get country {
+  List<CompanyStage>? get companyStageOptions {
+    return _companyStages;
+  }
+
+  List<CompanyType>? get companyTypeOptions {
+    return _companyTypes;
+  }
+
+  List<Country>? get countryOptions {
     return _countries;
   }
 
+  List<EducationLevel>? get educationLevelOptions {
+    return _educationLevels;
+  }
+
+  List<Expertise>? get expertiseOptions {
+    return _expertises;
+  }
+
+  List<Gender>? get presetGenderOptions {
+    return _presetGenders;
+  }
+
+  List<Industry>? get industryOptions {
+    return _industries;
+  }
+
+  List<Language>? get languageOptions {
+    return _languages;
+  }
+
+
   // Queries
   // TODO: add queries for all other variables
+  //    waiting until base provider is refactored to return Future<OperationResult>
 
   Widget queryCountries({
     required Widget Function(
