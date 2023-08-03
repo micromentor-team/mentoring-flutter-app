@@ -80,7 +80,7 @@ export function mockMutations(serverState: MockServerState) {
             } else {
                 channelMessage.deletedAt = null;
             }
-            if(args.input.messageText != channelMessage.messageText) {
+            if(args.input.messageText && args.input.messageText != channelMessage.messageText) {
                 channelMessage.messageText = args.input.messageText;
                 channelMessage.editedAt = currentTime;
             }
