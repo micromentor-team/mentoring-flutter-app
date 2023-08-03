@@ -28,7 +28,7 @@ class RecommendedMentorsScroll extends StatelessWidget {
             mentorName: mentors[i].fullName.toString(),
             //TODO: Once these fields come up in the mock server, replace these hardcoded values with the appropriate fields
             mentorBio: 'CEO, Levi Consulting',
-            mentorSkill: ['Marketing for a startup', 'Operations']),
+            mentorSkill: const ['Marketing for a startup', 'Operations']),
       );
     }
     return recommendedMentors;
