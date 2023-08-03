@@ -6,7 +6,8 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
-import 'package:mm_flutter_app/widgets/atoms/autocomplete_widget.dart';
+import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
+import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
@@ -66,7 +67,6 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return Padding(
@@ -75,15 +75,15 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
         children: [
           Column(children: [
             _Expertise(skills: _selectedSkills),
-            _AutocompletePicker(
-              fieldName: "Language",
+            AutocompletePicker(
+              fieldName: l10n.exploreSearchFilterHeadingLanguage,
               controller: _languagesController,
               options: ExploreCardFiltersProvider.languages,
               optionsTranslations: l10n.exploreSearchFilterLanguages,
               selectedOptions: _filtersProvider.selectedLanguages,
             ),
-            _AutocompletePicker(
-              fieldName: "Countries",
+            AutocompletePicker(
+              fieldName: l10n.exploreSearchFilterHeadingCountries,
               controller: _countriesController,
               options: ExploreCardFiltersProvider.countries,
               optionsTranslations: l10n.exploreSearchFilterCountries,
@@ -95,47 +95,24 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
             child: TextButton.icon(
               icon: const Icon(Icons.tune),
               label: Text(l10n.exploreSearchFilterAdvancedFilters),
-              onPressed: null,
+              onPressed: () => context.push(Routes.exploreFiltersAdvanced.path),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                style: TextButton.styleFrom(
-                  minimumSize: Dimensions.bigButtonSize,
-                ),
-                child: Text(l10n.exploreSearchFilterClear,
-                    style: theme.textTheme.labelLarge
-                        ?.copyWith(color: theme.colorScheme.secondary)),
-                onPressed: () {
-                  setState(() {
-                    _countriesController.clearTags();
-                    _languagesController.clearTags();
-                    _selectedSkills.clear();
-                  });
-                },
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Dimensions.bigButtonSize,
-                  backgroundColor: theme.colorScheme.surface,
-                  disabledBackgroundColor: theme.colorScheme.surface,
-                  textStyle: theme.textTheme.labelLarge,
-                ),
-                child: Text(l10n.exploreSearchFilterApply,
-                    style: theme.textTheme.labelLarge
-                        ?.copyWith(color: theme.colorScheme.primary)),
-                onPressed: () {
-                  _filtersProvider.setAll(
-                      _countriesController.getTags?.toSet() ?? {},
-                      _languagesController.getTags?.toSet() ?? {},
-                      _selectedSkills);
+          ClearApplyButtons(
+            onClear: () => setState(() {
+              _countriesController.clearTags();
+              _languagesController.clearTags();
+              _selectedSkills.clear();
+            }),
+            onApply: () {
+              _filtersProvider.setFilters(
+                selectedCountries: _countriesController.getTags?.toSet(),
+                selectedLanguages: _languagesController.getTags?.toSet(),
+                selectedSkills: _selectedSkills,
+              );
 
-                  context.push(Routes.explore.path);
-                },
-              ),
-            ],
+              context.pop();
+            },
           ),
         ],
       ),
@@ -238,43 +215,5 @@ class _ExpertiseState extends State<_Expertise> {
         ),
       ],
     );
-  }
-}
-
-class _AutocompletePicker extends StatelessWidget {
-  final TextfieldTagsController controller;
-  final String fieldName;
-  final List<String> options;
-  final String Function(String)? optionsTranslations;
-  final Set<String>? selectedOptions;
-
-  const _AutocompletePicker({
-    required this.fieldName,
-    required this.controller,
-    required this.options,
-    this.optionsTranslations,
-    this.selectedOptions,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: [
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(fieldName),
-            const SizedBox(height: Insets.paddingExtraSmall),
-            AutocompleteWidget(
-              options: options.toList(),
-              optionsTranslations: optionsTranslations,
-              selectedOptions: selectedOptions?.toList() ?? [],
-              controller: controller,
-            ),
-            const SizedBox(height: Insets.paddingSmall),
-          ],
-        ),
-      ),
-    ]);
   }
 }
