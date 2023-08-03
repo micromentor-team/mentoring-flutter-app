@@ -19,6 +19,8 @@ class Routes {
       Route(name: 'exploreInviteToConnect', path: '${explore.path}/connect');
   static Route exploreFilters =
       Route(name: 'exploreFilters', path: '${explore.path}/filters');
+  static Route exploreFiltersAdvanced = Route(
+      name: 'exploreFiltersAdvanced', path: '${explore.path}/filters/advanced');
   static Route progress = Route(name: 'progress', path: '/progress');
   static Route inbox = Route(name: 'inbox', path: '/inbox');
   static Route inboxChats =
