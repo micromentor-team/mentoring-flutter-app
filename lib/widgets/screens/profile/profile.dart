@@ -3,6 +3,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile_basic_info.dart';
+import 'package:mm_flutter_app/widgets/molecules/profile_experience_and_education.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/models/scaffold_model.dart';
 import '../../molecules/profile_page_header.dart';
@@ -41,6 +42,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             linkedinUrl: "https://www.linkedin.com/in/williamhgates/",
             vacationMode: true,
           ),
+          const ExperienceAndEducation(),
         ],
       ),
     );
