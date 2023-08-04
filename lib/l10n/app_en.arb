@@ -170,5 +170,8 @@
         }
     },
     "exploreSearchFilterAdvancedTitle": "Advanced filters",
-    "profileVacationBanner": "I am on vacation so my responses may be slow."
+    "profileVacationBanner": "I am on vacation so my responses may be slow.",
+    "profileExperience": "My experience",
+    "profileEducation": "My education",
+    "present": "present"
 }

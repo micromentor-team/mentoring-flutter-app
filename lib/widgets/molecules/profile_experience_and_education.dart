@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ExperienceAndEducation extends StatelessWidget {
@@ -39,6 +41,7 @@ class _Experience extends StatelessWidget {
       start: DateTime.utc(2016, 3),
       end: DateTime.utc(2019, 5),
       location: "Cleveland, Ohio, USA",
+      companyUrl: "https://mcconsulting.com/",
     ),
   ];
 
@@ -47,21 +50,37 @@ class _Experience extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final items = _exampleExperience
-        .map((exp) => [
-              Text(exp.position, style: theme.textTheme.labelMedium),
-              Text(exp.companyName),
-              Text("(${exp.dateRange}) · ${exp.timeRange}"),
-              Text(exp.location),
-              const SizedBox(height: Insets.paddingMedium),
-            ])
+        .map((exp) {
+          final companyName = (exp.companyUrl == null)
+              ? Text(exp.companyName)
+              // https://stackoverflow.com/a/54540261
+              : InkWell(
+                  onTap: () => launchUrl(Uri.parse(exp.companyUrl ?? "")),
+                  child: Text(
+                    exp.companyName,
+                    style: const TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue),
+                  ),
+                );
+
+          return [
+            Text(exp.position, style: theme.textTheme.labelMedium),
+            companyName,
+            Text("(${exp.dateRange(l10n.present)}) · ${exp.timeRange}"),
+            Text(exp.location),
+            const SizedBox(height: Insets.paddingMedium),
+          ];
+        })
         .expand((i) => i)
         .toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("My experience", style: theme.textTheme.labelLarge),
+        Text(l10n.profileExperience, style: theme.textTheme.titleMedium),
         const SizedBox(height: Insets.paddingMedium),
         ...items,
       ],
@@ -98,6 +117,7 @@ class _Education extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final items = _exampleEducation
         .map((edu) => [
               Row(children: [
@@ -114,7 +134,7 @@ class _Education extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("My education", style: theme.textTheme.labelLarge),
+        Text(l10n.profileEducation, style: theme.textTheme.titleMedium),
         const SizedBox(height: Insets.paddingMedium),
         ...items,
       ],
@@ -128,6 +148,7 @@ class _ExperienceItem {
   final DateTime start;
   final DateTime? end;
   final String location;
+  final String? companyUrl;
 
   const _ExperienceItem({
     required this.position,
@@ -135,9 +156,9 @@ class _ExperienceItem {
     required this.start,
     this.end,
     required this.location,
+    this.companyUrl,
   });
 
-  String get dateRange => "${start.year} - ${end?.year ?? "present"}";
   String get timeRange {
     final timeDiffDays = (end ?? DateTime.now()).difference(start).inDays;
     final timeDiffYears = (timeDiffDays / 365).floor();
@@ -148,6 +169,9 @@ class _ExperienceItem {
 
     return "$timeDiffYearsStr $timeDiffMonthsStr";
   }
+
+  String dateRange(String locPresent) =>
+      "${start.year} - ${end?.year ?? locPresent}";
 
   String stringifyDuration(int duration, String name) {
     switch (duration) {
