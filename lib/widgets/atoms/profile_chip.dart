@@ -5,11 +5,13 @@ import '../../constants/app_constants.dart';
 class ProfileChip extends StatelessWidget {
   final String text;
   final IconData? icon;
+  final bool? usePrimaryColor;
 
   const ProfileChip({
     super.key,
     required this.text,
     this.icon,
+    this.usePrimaryColor,
   });
 
   @override
@@ -25,11 +27,15 @@ class ProfileChip extends StatelessWidget {
       label: Text(
         text,
         style: theme.textTheme.labelSmall?.copyWith(
-          color: theme.colorScheme.onSecondaryContainer,
+          color: (usePrimaryColor != null && usePrimaryColor!)
+              ? theme.colorScheme.onSurfaceVariant
+              : theme.colorScheme.onSecondaryContainer,
         ),
         overflow: TextOverflow.ellipsis,
       ),
-      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+      backgroundColor: (usePrimaryColor != null && usePrimaryColor!)
+          ? theme.colorScheme.inversePrimary
+          : theme.colorScheme.secondaryContainer,
       side: BorderSide.none,
       visualDensity: const VisualDensity(
         horizontal: VisualDensity.minimumDensity,
