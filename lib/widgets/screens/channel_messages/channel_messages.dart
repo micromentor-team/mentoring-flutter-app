@@ -11,9 +11,11 @@ import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/base/operation_result.dart';
 import '../../../providers/models/scaffold_model.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_bubble/message_hoverover.dart';
@@ -85,27 +87,8 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
         if (isRouteActive) {
           _refreshScaffold(context, channelName, avatarUrl);
         }
-        return ChannelMessages(
-          channel: channel,
-        );
-      },
-    );
-  }
-}
-
-class ChannelMessages extends StatelessWidget {
-  const ChannelMessages({Key? key, required this.channel}) : super(key: key);
-  final ChannelById channel;
-
-  @override
-  Widget build(BuildContext context) {
-    final messagesProvider = Provider.of<MessagesProvider>(context);
-    return messagesProvider.findChannelMessages(
-      input: Input$ChannelMessageListFilter(channelId: channel.id),
-      onData: (data, {refetch, fetchMore}) {
         return ChannelChat(
           channel: channel,
-          chatMessages: data.response!,
         );
       },
     );
@@ -116,10 +99,8 @@ class ChannelChat extends StatefulWidget {
   const ChannelChat({
     Key? key,
     required this.channel,
-    required this.chatMessages,
   }) : super(key: key);
   final ChannelById channel;
-  final List<ChannelMessage> chatMessages;
 
   @override
   State<ChannelChat> createState() => _ChannelChatState();
@@ -129,48 +110,57 @@ class _ChannelChatState extends State<ChannelChat> {
   final TextEditingController messageTextController = TextEditingController();
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
+  Future<OperationResult<List<ChannelMessage>>>? _gqlOperationResult;
+  MessagesProvider? _messagesProvider;
+  int _messageCount = 0;
   bool _unreadMessages = false; // Non-local Message exists outside of viewport
   ChannelMessage? _focusedMessage; // Intended reply Message
-  // String newMessageText = ''; // Intended edited text body
 
   @override
   void initState() {
-    final messagesProvider =
-        Provider.of<MessagesProvider>(context, listen: false);
-    messagesProvider.subscribeToChannel(channelId: widget.channel.id);
     super.initState();
+    _messagesProvider = Provider.of<MessagesProvider>(
+      context,
+      listen: false,
+    );
+    _markMessageRead();
+    _messageCount = _messagesProvider!.channelMessages.length;
+    _messagesProvider!.subscribeToChannel(channelId: widget.channel.id);
+    _gqlOperationResult = _messagesProvider!.findChannelMessages(
+      input: Input$ChannelMessageListFilter(channelId: widget.channel.id),
+    );
   }
 
   _markMessageRead() {
-    Provider.of<MessagesProvider>(context, listen: false)
-        .markMessageRead(channelId: widget.channel.id);
+    _messagesProvider!.markMessageRead(channelId: widget.channel.id);
   }
 
-  @override
-  void didUpdateWidget(covariant ChannelChat oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.chatMessages.length < widget.chatMessages.length) {
-      debugPrint(
-          'didUpdateWidget: old length: ${oldWidget.chatMessages.length} new: ${widget.chatMessages.length}');
+  void _processNewMessages() {
+    if (_messageCount < _messagesProvider!.channelMessages.length) {
       _markMessageRead();
       if (_isCurrentUser(
-          userId: widget.chatMessages.last.createdBy, context: context)) {
+        userId: _messagesProvider!.channelMessages.last.createdBy,
+        context: context,
+      )) {
         _scrollDown();
       } else if (_unreadMessages != true) {
         _unreadMessages = true;
       }
     }
+    _messageCount = _messagesProvider!.channelMessages.length;
   }
 
   @override
   void dispose() {
+    _messagesProvider?.unsubscribeFromChannel();
     messageTextController.dispose();
     listScrollController.dispose();
     super.dispose();
   }
 
   void _scrollDown() {
-    if (listScrollController.hasClients && widget.chatMessages.isNotEmpty) {
+    if (listScrollController.hasClients &&
+        _messagesProvider!.channelMessages.isNotEmpty) {
       listScrollController.animateTo(
         listScrollController.position.minScrollExtent,
         duration: _animationDuration,
@@ -207,62 +197,67 @@ class _ChannelChatState extends State<ChannelChat> {
         if (reply == true) {
           _focusedMessage = message;
         }
-        // else if (_reply == Message) {
-        //   print(_reply);
-        //   int _messageIndex = widget.chatMessages
-        //       .indexWhere((element) => element.id == message.id);
-        //   setState(() {
-        //     widget.chatMessages
-        //         .replaceRange(_messageIndex, _messageIndex + 1, [_reply]);
-        //   });
-        // }
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          child: BuildMessageBubbles(
-            channel: widget.channel,
-            chatMessages: widget.chatMessages,
-            participants: widget.channel.participants,
-            listScrollController: listScrollController,
-            onOpenMessageDetails: (message) =>
-                _openMessageDetailsModal(context, message),
-            onSetReplyingTo: (message) {
-              setState(() {
-                _focusedMessage = message;
-              });
-            },
-          ),
-        ),
-        MessageInput(
-          replyingTo: _focusedMessage,
-          participants: widget.channel.participants,
-          onSubmit: (val, replyToMessageId) {
-            Provider.of<MessagesProvider>(context, listen: false).createMessage(
-              input: Input$ChannelMessageInput(
-                channelId: widget.channel.id,
-                messageText: val,
-                replyToMessageId: replyToMessageId,
-              ),
-            );
-            setState(() {
-              _focusedMessage = null;
+    return Consumer<MessagesProvider>(
+      builder: (context, messagesProvider, child) {
+        _messagesProvider = messagesProvider;
+        return FutureBuilder(
+          future: _gqlOperationResult,
+          builder: (context, snapshot) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _processNewMessages();
             });
+            return AppUtility.widgetForAsyncSnapshot(snapshot) ??
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: BuildMessageBubbles(
+                        channel: widget.channel,
+                        chatMessages: messagesProvider.channelMessages,
+                        participants: widget.channel.participants,
+                        listScrollController: listScrollController,
+                        onOpenMessageDetails: (message) =>
+                            _openMessageDetailsModal(context, message),
+                        onSetReplyingTo: (message) {
+                          setState(() {
+                            _focusedMessage = message;
+                          });
+                        },
+                      ),
+                    ),
+                    MessageInput(
+                      replyingTo: _focusedMessage,
+                      participants: widget.channel.participants,
+                      onSubmit: (val, replyToMessageId) {
+                        messagesProvider.createMessage(
+                          input: Input$ChannelMessageInput(
+                            channelId: widget.channel.id,
+                            messageText: val,
+                            replyToMessageId: replyToMessageId,
+                          ),
+                        );
+                        setState(() {
+                          _focusedMessage = null;
+                        });
+                      },
+                      onClearReply: () {
+                        setState(() {
+                          _focusedMessage = null;
+                        });
+                      },
+                    ),
+                  ],
+                );
           },
-          onClearReply: () {
-            setState(() {
-              _focusedMessage = null;
-            });
-          },
-        ),
-      ],
+        );
+      },
     );
   }
 }

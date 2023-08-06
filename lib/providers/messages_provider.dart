@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_message.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
@@ -11,8 +14,22 @@ typedef UnseenMessage
     = Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
 
 class MessagesProvider extends BaseProvider {
-  MessagesProvider({required super.client}) {
-    // subscribeToMessages();
+  List<ChannelMessage>? _currentChannelMessages;
+  String? _currentChannelId;
+  StreamSubscription<QueryResult>? _currentStreamSubscription;
+
+  List<ChannelMessage> get channelMessages => _currentChannelMessages ?? [];
+  String? get channelId => _currentChannelId;
+
+  MessagesProvider({required super.client});
+
+  Future<void> _refreshChannelMessages() async {
+    await findChannelMessages(
+      input: Input$ChannelMessageListFilter(
+        channelId: _currentChannelId,
+      ),
+    );
+    notifyListeners();
   }
 
   _addMessageToCache({cache, required String channelId, message}) {
@@ -45,26 +62,18 @@ class MessagesProvider extends BaseProvider {
   }
 
   // Queries
-  Widget findChannelMessages({
+  Future<OperationResult<List<ChannelMessage>>> findChannelMessages({
     required Input$ChannelMessageListFilter input,
-    required Widget Function(
-      OperationResult<List<Query$FindChannelMessages$findChannelMessages>>
-          data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
   }) {
-    return runQuery(
+    final Future<QueryResult> futureQueryResult = asyncQuery(
       document: documentNodeQueryFindChannelMessages,
       variables: Variables$Query$FindChannelMessages(
         filter: input,
       ).toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<
-                List<Query$FindChannelMessages$findChannelMessages>> result =
-            OperationResult(
+    );
+    return futureQueryResult.then(
+      (queryResult) {
+        final result = OperationResult(
           gqlQueryResult: queryResult,
           response: queryResult.data != null
               ? Query$FindChannelMessages.fromJson(
@@ -72,10 +81,10 @@ class MessagesProvider extends BaseProvider {
                 ).findChannelMessages
               : null,
         );
-        return onData(result, refetch: refetch, fetchMore: fetchMore);
+        _currentChannelId = input.channelId;
+        _currentChannelMessages = result.response;
+        return result;
       },
-      onLoading: onLoading,
-      onError: onError,
     );
   }
 
@@ -173,37 +182,6 @@ class MessagesProvider extends BaseProvider {
       variables: Variables$Mutation$UpdateChannelMessage(
         input: input,
       ).toJson(),
-      update: (cache, result) {
-        final req = QueryOptions(
-          document: documentNodeQueryFindChannelMessages,
-          variables: Variables$Query$FindChannelMessages(
-            filter: Input$ChannelMessageListFilter(
-              channelId: input.channelId,
-            ),
-          ).toJson(),
-        ).asRequest;
-
-        // read the channels cache
-        final response = cache.readQuery(req);
-
-        // debugPrint('updateMessage result');
-        // print(result);
-
-        // update the channel in the cache
-        final messagesCache = response?['findChannelMessages'];
-
-        messagesCache[
-                messagesCache.indexWhere((item) => item['id'] == input.id)] =
-            result?.data?['updateChannelMessage'];
-
-        if (response != null) {
-          cache.writeQuery(
-            req,
-            broadcast: true,
-            data: response,
-          );
-        }
-      },
     );
 
     final OperationResult<String> result = OperationResult(
@@ -246,7 +224,14 @@ class MessagesProvider extends BaseProvider {
   Future<void> subscribeToChannel({
     required String channelId,
   }) async {
-    final subscription = client.subscribe(
+    if (_currentChannelId != null) {
+      // Unsubscribe from previous channel.
+      unsubscribeFromChannel();
+    }
+    _currentChannelId = channelId;
+    _currentChannelMessages = [];
+
+    final stream = client.subscribe(
       SubscriptionOptions(
         document: documentNodeSubscriptionChannelUpdated,
         variables: Variables$Subscription$ChannelUpdated(
@@ -255,21 +240,27 @@ class MessagesProvider extends BaseProvider {
       ),
     );
 
-    subscription.listen(
-      (event) {
-        debugPrint('Subscription: Channel Updated: ${event.data}');
-        client.query(
-          QueryOptions(
-            document: documentNodeQueryFindChannelMessages,
-            variables: Variables$Query$FindChannelMessages(
-              filter: Input$ChannelMessageListFilter(
-                channelId: channelId,
-              ),
-            ).toJson(),
-            fetchPolicy: FetchPolicy.networkOnly,
-          ),
-        );
+    _currentStreamSubscription = stream.listen(
+      (queryResult) async {
+        if (queryResult.hasException) {
+          CrashHandler.logCrashReport('Subscription for Channel Id ($channelId)'
+              'encountered an error: ${queryResult.exception}');
+          return;
+        }
+        if (queryResult.isLoading) {
+          // Data is not ready, return and check again on the next cycle.
+          return;
+        }
+        // Process new data.
+        await _refreshChannelMessages();
       },
     );
+  }
+
+  void unsubscribeFromChannel() {
+    _currentStreamSubscription?.cancel();
+    _currentChannelId = null;
+    _currentChannelMessages = null;
+    _currentStreamSubscription = null;
   }
 }

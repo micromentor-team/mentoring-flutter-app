@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
+import '../../../__generated/schema/schema.graphql.dart';
 import '../../../providers/channels_provider.dart';
 import '../../../providers/messages_provider.dart';
 import '../../../providers/models/scaffold_model.dart';
@@ -53,6 +54,10 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
       final String channelName = _channelName(channel);
       final String? channelAvatarUrl = _channelAvatarUrl(channel);
 
+      final futureChannelMessages = messagesProvider.findChannelMessages(
+        input: Input$ChannelMessageListFilter(channelId: channel.id),
+      );
+
       tiles.add(
         DismissibleTile(
           tileId: channel.id,
@@ -70,10 +75,15 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
             });
           },
           icon: Icons.archive_outlined,
-          child: messagesProvider.findChannelMessages(
-            input: Input$ChannelMessageListFilter(channelId: channel.id),
-            onData: (data, {refetch, fetchMore}) {
-              List<ChannelMessage> messages = data.response ?? [];
+          child: FutureBuilder(
+            future: futureChannelMessages,
+            builder: (context, snapshot) {
+              final Widget? specialStateWidget =
+                  AppUtility.widgetForAsyncSnapshot(snapshot);
+              if (specialStateWidget != null) {
+                return specialStateWidget;
+              }
+              List<ChannelMessage> messages = messagesProvider.channelMessages;
               int unseenMessageCount = 0;
               ChannelMessage? lastMessage;
               // Initialize lastMessageTime to Epoch in order for the search
@@ -152,20 +162,20 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
   Widget build(BuildContext context) {
     final channelsProvider = Provider.of<ChannelsProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
-    final messagesProvider = Provider.of<MessagesProvider>(context);
     _user = userProvider.user;
     return channelsProvider.queryUserChannels(
       userId: _user!.id,
       onData: (userChannelsData, {refetch, fetchMore}) {
         final List<ChannelForUser> channels = userChannelsData.response ?? [];
-        final List<Widget> contentList = _createContentList(
-          channels,
-          messagesProvider,
-        );
-        return SafeArea(
-          child: ListView(
-            children: contentList,
-          ),
+        return Consumer<MessagesProvider>(
+          builder: (context, messagesProvider, child) {
+            return ListView(
+              children: _createContentList(
+                channels,
+                messagesProvider,
+              ),
+            );
+          },
         );
       },
     );
