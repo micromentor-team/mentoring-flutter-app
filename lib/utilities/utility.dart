@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:uuid/uuid.dart';
+
+import '../widgets/atoms/loading.dart';
 
 class AppUtility {
   AppUtility._private();
   static String getUuid() {
     return const Uuid().v1();
+  }
+
+  static Widget? widgetForAsyncSnapshot(AsyncSnapshot snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Loading();
+    } else if (snapshot.hasError) {
+      return const CustomErrorWidget();
+    }
+    return null;
   }
 
   static String getUserInitials(String fullName) {
