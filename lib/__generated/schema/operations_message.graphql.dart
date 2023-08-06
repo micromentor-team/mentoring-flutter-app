@@ -3557,42 +3557,28 @@ class _CopyWithStubImpl$Variables$Subscription$ChannelUpdated<TRes>
 }
 
 class Subscription$ChannelUpdated {
-  Subscription$ChannelUpdated({
-    required this.objectChanged,
-    this.$__typename = 'Subscription',
-  });
+  Subscription$ChannelUpdated({required this.objectChanged});
 
   factory Subscription$ChannelUpdated.fromJson(Map<String, dynamic> json) {
     final l$objectChanged = json['objectChanged'];
-    final l$$__typename = json['__typename'];
     return Subscription$ChannelUpdated(
-      objectChanged: Subscription$ChannelUpdated$objectChanged.fromJson(
-          (l$objectChanged as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
+        objectChanged: Subscription$ChannelUpdated$objectChanged.fromJson(
+            (l$objectChanged as Map<String, dynamic>)));
   }
 
   final Subscription$ChannelUpdated$objectChanged objectChanged;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$objectChanged = objectChanged;
     _resultData['objectChanged'] = l$objectChanged.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$objectChanged = objectChanged;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$objectChanged,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$objectChanged]);
   }
 
   @override
@@ -3607,11 +3593,6 @@ class Subscription$ChannelUpdated {
     final l$objectChanged = objectChanged;
     final lOther$objectChanged = other.objectChanged;
     if (l$objectChanged != lOther$objectChanged) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -3636,10 +3617,7 @@ abstract class CopyWith$Subscription$ChannelUpdated<TRes> {
   factory CopyWith$Subscription$ChannelUpdated.stub(TRes res) =
       _CopyWithStubImpl$Subscription$ChannelUpdated;
 
-  TRes call({
-    Subscription$ChannelUpdated$objectChanged? objectChanged,
-    String? $__typename,
-  });
+  TRes call({Subscription$ChannelUpdated$objectChanged? objectChanged});
   CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> get objectChanged;
 }
 
@@ -3656,18 +3634,11 @@ class _CopyWithImpl$Subscription$ChannelUpdated<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? objectChanged = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
+  TRes call({Object? objectChanged = _undefined}) =>
       _then(Subscription$ChannelUpdated(
-        objectChanged: objectChanged == _undefined || objectChanged == null
-            ? _instance.objectChanged
-            : (objectChanged as Subscription$ChannelUpdated$objectChanged),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+          objectChanged: objectChanged == _undefined || objectChanged == null
+              ? _instance.objectChanged
+              : (objectChanged as Subscription$ChannelUpdated$objectChanged)));
   CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> get objectChanged {
     final local$objectChanged = _instance.objectChanged;
     return CopyWith$Subscription$ChannelUpdated$objectChanged(
@@ -3681,11 +3652,7 @@ class _CopyWithStubImpl$Subscription$ChannelUpdated<TRes>
 
   TRes _res;
 
-  call({
-    Subscription$ChannelUpdated$objectChanged? objectChanged,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Subscription$ChannelUpdated$objectChanged? objectChanged}) => _res;
   CopyWith$Subscription$ChannelUpdated$objectChanged<TRes> get objectChanged =>
       CopyWith$Subscription$ChannelUpdated$objectChanged.stub(_res);
 }
@@ -3754,14 +3721,7 @@ const documentNodeSubscriptionChannelUpdated = DocumentNode(definitions: [
             selectionSet: null,
           ),
         ]),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
+      )
     ]),
   ),
 ]);
