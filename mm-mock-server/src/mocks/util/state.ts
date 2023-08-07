@@ -1,3 +1,5 @@
+import { faker } from "@faker-js/faker";
+
 import * as generators from './generators';
 
 export class MockServerState {
@@ -8,16 +10,19 @@ export class MockServerState {
     channelInvitations: any[];
     channelInboxItemInvitations: any[];
     channelMessages: any[];
+    groups: any[];
 
     constructor() {
+        this.groups = generators.generateCoreGroups()
+            .concat(generators.generateGroup());
         this.loggedIn = false;
-        this.loggedInUser = generators.generateUser();
+        this.loggedInUser = generators.generateUser(this.groups.filter(g => g.groupIdent === "mentees"));
         // 4 users, one for each channel and one who hasn't communicated with the logged in user
         this.otherUsers = [
-            generators.generateUser(),
-            generators.generateUser(),
-            generators.generateUser(),
-            generators.generateUser(),
+            generators.generateUser(this.groups.filter(g => g.groupIdent === "mentors")),
+            generators.generateUser(faker.helpers.arrayElements(this.groups, 1)),
+            generators.generateUser(faker.helpers.arrayElements(this.groups, 2)),
+            generators.generateUser(faker.helpers.arrayElements(this.groups, 2)),
         ];
         this.channels = [
             generators.generateChannel([this.loggedInUser, this.otherUsers[0]]),
