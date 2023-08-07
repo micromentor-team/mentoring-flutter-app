@@ -14,62 +14,23 @@ typedef UnseenMessage
     = Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
 
 class MessagesProvider extends BaseProvider {
-  List<ChannelMessage>? _currentChannelMessages;
-  String? _currentChannelId;
-  StreamSubscription<QueryResult>? _currentStreamSubscription;
-
-  List<ChannelMessage> get channelMessages => _currentChannelMessages ?? [];
-  String? get channelId => _currentChannelId;
-
   MessagesProvider({required super.client});
-
-  Future<void> _refreshChannelMessages() async {
-    await findChannelMessages(
-      input: Input$ChannelMessageListFilter(
-        channelId: _currentChannelId,
-      ),
-    );
-    notifyListeners();
-  }
-
-  _addMessageToCache({cache, required String channelId, message}) {
-    final req = QueryOptions(
-      document: documentNodeQueryFindChannelMessages,
-      variables: Variables$Query$FindChannelMessages(
-        filter: Input$ChannelMessageListFilter(
-          channelId: channelId,
-        ),
-      ).toJson(),
-    ).asRequest;
-    final response = cache.readQuery(req);
-
-    // debugPrint('mutation result');
-    // print(result);
-
-    // debugPrint('Channels cache response');
-    // debugPrint('Channels in cache: ${channelsData.length}');
-    response?['findChannelMessages'].add(message);
-
-    // print(response?['messages']);
-
-    if (response != null) {
-      cache.writeQuery(
-        req,
-        broadcast: true,
-        data: response,
-      );
-    }
-  }
 
   // Queries
   Future<OperationResult<List<ChannelMessage>>> findChannelMessages({
     required Input$ChannelMessageListFilter input,
+    bool fetchFromNetworkOnly = false,
   }) {
     final Future<QueryResult> futureQueryResult = asyncQuery(
-      document: documentNodeQueryFindChannelMessages,
-      variables: Variables$Query$FindChannelMessages(
-        filter: input,
-      ).toJson(),
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindChannelMessages,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindChannelMessages(
+          filter: input,
+        ).toJson(),
+      ),
     );
     return futureQueryResult.then(
       (queryResult) {
@@ -81,8 +42,6 @@ class MessagesProvider extends BaseProvider {
                 ).findChannelMessages
               : null,
         );
-        _currentChannelId = input.channelId;
-        _currentChannelMessages = result.response;
         return result;
       },
     );
@@ -129,14 +88,6 @@ class MessagesProvider extends BaseProvider {
       variables: Variables$Mutation$CreateChannelMessage(
         input: input,
       ).toJson(),
-      update: (cache, result) {
-        debugPrint('createMessage result');
-        _addMessageToCache(
-          cache: cache,
-          channelId: input.channelId!,
-          message: result?.data?['createChannelMessage'],
-        );
-      },
     );
 
     final OperationResult<Mutation$CreateChannelMessage$createChannelMessage>
@@ -221,16 +172,10 @@ class MessagesProvider extends BaseProvider {
   }
 
   // Subscriptions
-  Future<void> subscribeToChannel({
+  StreamSubscription<QueryResult<Object?>> subscribeToChannel({
     required String channelId,
-  }) async {
-    if (_currentChannelId != null) {
-      // Unsubscribe from previous channel.
-      unsubscribeFromChannel();
-    }
-    _currentChannelId = channelId;
-    _currentChannelMessages = [];
-
+    required void Function() onSubscriptionEvent,
+  }) {
     final stream = client.subscribe(
       SubscriptionOptions(
         document: documentNodeSubscriptionChannelUpdated,
@@ -240,7 +185,7 @@ class MessagesProvider extends BaseProvider {
       ),
     );
 
-    _currentStreamSubscription = stream.listen(
+    return stream.listen(
       (queryResult) async {
         if (queryResult.hasException) {
           CrashHandler.logCrashReport('Subscription for Channel Id ($channelId)'
@@ -252,15 +197,8 @@ class MessagesProvider extends BaseProvider {
           return;
         }
         // Process new data.
-        await _refreshChannelMessages();
+        onSubscriptionEvent();
       },
     );
-  }
-
-  void unsubscribeFromChannel() {
-    _currentStreamSubscription?.cancel();
-    _currentChannelId = null;
-    _currentChannelMessages = null;
-    _currentStreamSubscription = null;
   }
 }

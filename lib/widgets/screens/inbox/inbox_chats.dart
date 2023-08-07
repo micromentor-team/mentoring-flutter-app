@@ -83,7 +83,7 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
               if (specialStateWidget != null) {
                 return specialStateWidget;
               }
-              List<ChannelMessage> messages = messagesProvider.channelMessages;
+              List<ChannelMessage> messages = snapshot.data?.response ?? [];
               int unseenMessageCount = 0;
               ChannelMessage? lastMessage;
               // Initialize lastMessageTime to Epoch in order for the search
@@ -162,20 +162,20 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
   Widget build(BuildContext context) {
     final channelsProvider = Provider.of<ChannelsProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
+    final messagesProvider = Provider.of<MessagesProvider>(
+      context,
+      listen: false,
+    );
     _user = userProvider.user;
     return channelsProvider.queryUserChannels(
       userId: _user!.id,
       onData: (userChannelsData, {refetch, fetchMore}) {
         final List<ChannelForUser> channels = userChannelsData.response ?? [];
-        return Consumer<MessagesProvider>(
-          builder: (context, messagesProvider, child) {
-            return ListView(
-              children: _createContentList(
-                channels,
-                messagesProvider,
-              ),
-            );
-          },
+        return ListView(
+          children: _createContentList(
+            channels,
+            messagesProvider,
+          ),
         );
       },
     );

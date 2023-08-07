@@ -9,13 +9,13 @@ import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
+import 'package:mm_flutter_app/providers/models/chat_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/base/operation_result.dart';
 import '../../../providers/models/scaffold_model.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_bubble/message_hoverover.dart';
@@ -87,8 +87,14 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
         if (isRouteActive) {
           _refreshScaffold(context, channelName, avatarUrl);
         }
-        return ChannelChat(
-          channel: channel,
+        return ChangeNotifierProvider(
+          create: (context) => ChatModel(
+            context: context,
+            channelId: channel.id,
+          ),
+          child: ChannelChat(
+            channel: channel,
+          ),
         );
       },
     );
@@ -110,8 +116,8 @@ class _ChannelChatState extends State<ChannelChat> {
   final TextEditingController messageTextController = TextEditingController();
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
-  Future<OperationResult<List<ChannelMessage>>>? _gqlOperationResult;
-  MessagesProvider? _messagesProvider;
+  Future<List<ChannelMessage>>? _initQueryResult;
+  ChatModel? _chatModel;
   int _messageCount = 0;
   bool _unreadMessages = false; // Non-local Message exists outside of viewport
   ChannelMessage? _focusedMessage; // Intended reply Message
@@ -119,27 +125,25 @@ class _ChannelChatState extends State<ChannelChat> {
   @override
   void initState() {
     super.initState();
-    _messagesProvider = Provider.of<MessagesProvider>(
+    _chatModel = Provider.of<ChatModel>(
       context,
       listen: false,
     );
     _markMessageRead();
-    _messageCount = _messagesProvider!.channelMessages.length;
-    _messagesProvider!.subscribeToChannel(channelId: widget.channel.id);
-    _gqlOperationResult = _messagesProvider!.findChannelMessages(
-      input: Input$ChannelMessageListFilter(channelId: widget.channel.id),
-    );
+    _chatModel!.createChannelSubscription();
+    _initQueryResult = _chatModel!.refreshChannelMessages();
+    _messageCount = _chatModel!.channelMessages.length;
   }
 
   _markMessageRead() {
-    _messagesProvider!.markMessageRead(channelId: widget.channel.id);
+    _chatModel!.messagesProvider.markMessageRead(channelId: widget.channel.id);
   }
 
   void _processNewMessages() {
-    if (_messageCount < _messagesProvider!.channelMessages.length) {
+    if (_messageCount < _chatModel!.channelMessages.length) {
       _markMessageRead();
       if (_isCurrentUser(
-        userId: _messagesProvider!.channelMessages.last.createdBy,
+        userId: _chatModel!.channelMessages.last.createdBy,
         context: context,
       )) {
         _scrollDown();
@@ -147,12 +151,12 @@ class _ChannelChatState extends State<ChannelChat> {
         _unreadMessages = true;
       }
     }
-    _messageCount = _messagesProvider!.channelMessages.length;
+    _messageCount = _chatModel!.channelMessages.length;
   }
 
   @override
   void dispose() {
-    _messagesProvider?.unsubscribeFromChannel();
+    _chatModel?.cancelChannelSubscription();
     messageTextController.dispose();
     listScrollController.dispose();
     super.dispose();
@@ -160,7 +164,7 @@ class _ChannelChatState extends State<ChannelChat> {
 
   void _scrollDown() {
     if (listScrollController.hasClients &&
-        _messagesProvider!.channelMessages.isNotEmpty) {
+        _chatModel!.channelMessages.isNotEmpty) {
       listScrollController.animateTo(
         listScrollController.position.minScrollExtent,
         duration: _animationDuration,
@@ -203,24 +207,24 @@ class _ChannelChatState extends State<ChannelChat> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MessagesProvider>(
-      builder: (context, messagesProvider, child) {
-        _messagesProvider = messagesProvider;
-        return FutureBuilder(
-          future: _gqlOperationResult,
-          builder: (context, snapshot) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              _processNewMessages();
-            });
-            return AppUtility.widgetForAsyncSnapshot(snapshot) ??
-                Column(
+    return FutureBuilder(
+      future: _initQueryResult,
+      builder: (context, snapshot) {
+        return AppUtility.widgetForAsyncSnapshot(snapshot) ??
+            Consumer<ChatModel>(
+              builder: (context, chatModel, child) {
+                _chatModel = chatModel;
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _processNewMessages();
+                });
+                return Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                       child: BuildMessageBubbles(
                         channel: widget.channel,
-                        chatMessages: messagesProvider.channelMessages,
+                        chatMessages: chatModel.channelMessages,
                         participants: widget.channel.participants,
                         listScrollController: listScrollController,
                         onOpenMessageDetails: (message) =>
@@ -236,7 +240,7 @@ class _ChannelChatState extends State<ChannelChat> {
                       replyingTo: _focusedMessage,
                       participants: widget.channel.participants,
                       onSubmit: (val, replyToMessageId) {
-                        messagesProvider.createMessage(
+                        chatModel.messagesProvider.createMessage(
                           input: Input$ChannelMessageInput(
                             channelId: widget.channel.id,
                             messageText: val,
@@ -255,8 +259,8 @@ class _ChannelChatState extends State<ChannelChat> {
                     ),
                   ],
                 );
-          },
-        );
+              },
+            );
       },
     );
   }

@@ -104,20 +104,14 @@ abstract class BaseProvider extends ChangeNotifier {
   }
 
   Future<QueryResult> asyncQuery({
-    required DocumentNode document,
-    Map<String, dynamic>? variables,
+    required QueryOptions queryOptions,
     bool logFailures = true,
   }) async {
-    final query = QueryOptions(
-      document: document,
-      fetchPolicy: FetchPolicy.networkOnly,
-      variables: variables ?? const {},
-    );
     const RetryOptions retryOptions = RetryOptions(
       maxAttempts: BaseProvider.retryAttempts,
       delayFactor: BaseProvider.retryDelayFactor,
     );
-    QueryResult result = await client.query(query);
+    QueryResult result = await client.query(queryOptions);
     if (result.hasException) {
       if (logFailures) {
         CrashHandler.logCrashReport('Exception while executing Query:'
@@ -127,7 +121,9 @@ abstract class BaseProvider extends ChangeNotifier {
 
       QueryResult? retryResult =
           await CrashHandler.retryOnException<QueryResult?>(
-        () => _retryOperation(() => client.query(query)),
+        () => _retryOperation(
+          () => client.query(queryOptions),
+        ),
         onFailOperation: () {
           if (logFailures) {
             DebugLogger.warning('Failed to complete Query'
