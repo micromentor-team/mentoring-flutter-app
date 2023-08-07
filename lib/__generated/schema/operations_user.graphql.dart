@@ -774,6 +774,20 @@ const documentNodeQueryFindAllUsers = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'firstName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'lastName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'fullName'),
             alias: null,
             arguments: [],
@@ -818,6 +832,8 @@ class Query$FindAllUsers$findUsers {
   Query$FindAllUsers$findUsers({
     required this.id,
     this.email,
+    this.firstName,
+    this.lastName,
     this.fullName,
     this.avatarUrl,
     this.userHandle,
@@ -827,6 +843,8 @@ class Query$FindAllUsers$findUsers {
   factory Query$FindAllUsers$findUsers.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$email = json['email'];
+    final l$firstName = json['firstName'];
+    final l$lastName = json['lastName'];
     final l$fullName = json['fullName'];
     final l$avatarUrl = json['avatarUrl'];
     final l$userHandle = json['userHandle'];
@@ -834,6 +852,8 @@ class Query$FindAllUsers$findUsers {
     return Query$FindAllUsers$findUsers(
       id: (l$id as String),
       email: (l$email as String?),
+      firstName: (l$firstName as String?),
+      lastName: (l$lastName as String?),
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
       userHandle: (l$userHandle as String?),
@@ -844,6 +864,10 @@ class Query$FindAllUsers$findUsers {
   final String id;
 
   final String? email;
+
+  final String? firstName;
+
+  final String? lastName;
 
   final String? fullName;
 
@@ -859,6 +883,10 @@ class Query$FindAllUsers$findUsers {
     _resultData['id'] = l$id;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$firstName = firstName;
+    _resultData['firstName'] = l$firstName;
+    final l$lastName = lastName;
+    _resultData['lastName'] = l$lastName;
     final l$fullName = fullName;
     _resultData['fullName'] = l$fullName;
     final l$avatarUrl = avatarUrl;
@@ -874,6 +902,8 @@ class Query$FindAllUsers$findUsers {
   int get hashCode {
     final l$id = id;
     final l$email = email;
+    final l$firstName = firstName;
+    final l$lastName = lastName;
     final l$fullName = fullName;
     final l$avatarUrl = avatarUrl;
     final l$userHandle = userHandle;
@@ -881,6 +911,8 @@ class Query$FindAllUsers$findUsers {
     return Object.hashAll([
       l$id,
       l$email,
+      l$firstName,
+      l$lastName,
       l$fullName,
       l$avatarUrl,
       l$userHandle,
@@ -905,6 +937,16 @@ class Query$FindAllUsers$findUsers {
     final l$email = email;
     final lOther$email = other.email;
     if (l$email != lOther$email) {
+      return false;
+    }
+    final l$firstName = firstName;
+    final lOther$firstName = other.firstName;
+    if (l$firstName != lOther$firstName) {
+      return false;
+    }
+    final l$lastName = lastName;
+    final lOther$lastName = other.lastName;
+    if (l$lastName != lOther$lastName) {
       return false;
     }
     final l$fullName = fullName;
@@ -952,6 +994,8 @@ abstract class CopyWith$Query$FindAllUsers$findUsers<TRes> {
   TRes call({
     String? id,
     String? email,
+    String? firstName,
+    String? lastName,
     String? fullName,
     String? avatarUrl,
     String? userHandle,
@@ -975,6 +1019,8 @@ class _CopyWithImpl$Query$FindAllUsers$findUsers<TRes>
   TRes call({
     Object? id = _undefined,
     Object? email = _undefined,
+    Object? firstName = _undefined,
+    Object? lastName = _undefined,
     Object? fullName = _undefined,
     Object? avatarUrl = _undefined,
     Object? userHandle = _undefined,
@@ -983,6 +1029,11 @@ class _CopyWithImpl$Query$FindAllUsers$findUsers<TRes>
       _then(Query$FindAllUsers$findUsers(
         id: id == _undefined || id == null ? _instance.id : (id as String),
         email: email == _undefined ? _instance.email : (email as String?),
+        firstName: firstName == _undefined
+            ? _instance.firstName
+            : (firstName as String?),
+        lastName:
+            lastName == _undefined ? _instance.lastName : (lastName as String?),
         fullName:
             fullName == _undefined ? _instance.fullName : (fullName as String?),
         avatarUrl: avatarUrl == _undefined
@@ -1006,6 +1057,8 @@ class _CopyWithStubImpl$Query$FindAllUsers$findUsers<TRes>
   call({
     String? id,
     String? email,
+    String? firstName,
+    String? lastName,
     String? fullName,
     String? avatarUrl,
     String? userHandle,
@@ -1017,13 +1070,13 @@ class _CopyWithStubImpl$Query$FindAllUsers$findUsers<TRes>
 class Variables$Query$FindMenteeUsers {
   factory Variables$Query$FindMenteeUsers({
     Input$FindObjectsOptions? options,
-    Input$UserListFilter? filter2,
-    Input$UserInput? match2,
+    Input$UserListFilter? filter,
+    Input$UserInput? match,
   }) =>
       Variables$Query$FindMenteeUsers._({
         if (options != null) r'options': options,
-        if (filter2 != null) r'filter2': filter2,
-        if (match2 != null) r'match2': match2,
+        if (filter != null) r'filter': filter,
+        if (match != null) r'match': match,
       });
 
   Variables$Query$FindMenteeUsers._(this._$data);
@@ -1037,17 +1090,17 @@ class Variables$Query$FindMenteeUsers {
           : Input$FindObjectsOptions.fromJson(
               (l$options as Map<String, dynamic>));
     }
-    if (data.containsKey('filter2')) {
-      final l$filter2 = data['filter2'];
-      result$data['filter2'] = l$filter2 == null
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
           ? null
-          : Input$UserListFilter.fromJson((l$filter2 as Map<String, dynamic>));
+          : Input$UserListFilter.fromJson((l$filter as Map<String, dynamic>));
     }
-    if (data.containsKey('match2')) {
-      final l$match2 = data['match2'];
-      result$data['match2'] = l$match2 == null
+    if (data.containsKey('match')) {
+      final l$match = data['match'];
+      result$data['match'] = l$match == null
           ? null
-          : Input$UserInput.fromJson((l$match2 as Map<String, dynamic>));
+          : Input$UserInput.fromJson((l$match as Map<String, dynamic>));
     }
     return Variables$Query$FindMenteeUsers._(result$data);
   }
@@ -1056,22 +1109,22 @@ class Variables$Query$FindMenteeUsers {
 
   Input$FindObjectsOptions? get options =>
       (_$data['options'] as Input$FindObjectsOptions?);
-  Input$UserListFilter? get filter2 =>
-      (_$data['filter2'] as Input$UserListFilter?);
-  Input$UserInput? get match2 => (_$data['match2'] as Input$UserInput?);
+  Input$UserListFilter? get filter =>
+      (_$data['filter'] as Input$UserListFilter?);
+  Input$UserInput? get match => (_$data['match'] as Input$UserInput?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('options')) {
       final l$options = options;
       result$data['options'] = l$options?.toJson();
     }
-    if (_$data.containsKey('filter2')) {
-      final l$filter2 = filter2;
-      result$data['filter2'] = l$filter2?.toJson();
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
     }
-    if (_$data.containsKey('match2')) {
-      final l$match2 = match2;
-      result$data['match2'] = l$match2?.toJson();
+    if (_$data.containsKey('match')) {
+      final l$match = match;
+      result$data['match'] = l$match?.toJson();
     }
     return result$data;
   }
@@ -1098,20 +1151,20 @@ class Variables$Query$FindMenteeUsers {
     if (l$options != lOther$options) {
       return false;
     }
-    final l$filter2 = filter2;
-    final lOther$filter2 = other.filter2;
-    if (_$data.containsKey('filter2') != other._$data.containsKey('filter2')) {
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
       return false;
     }
-    if (l$filter2 != lOther$filter2) {
+    if (l$filter != lOther$filter) {
       return false;
     }
-    final l$match2 = match2;
-    final lOther$match2 = other.match2;
-    if (_$data.containsKey('match2') != other._$data.containsKey('match2')) {
+    final l$match = match;
+    final lOther$match = other.match;
+    if (_$data.containsKey('match') != other._$data.containsKey('match')) {
       return false;
     }
-    if (l$match2 != lOther$match2) {
+    if (l$match != lOther$match) {
       return false;
     }
     return true;
@@ -1120,12 +1173,12 @@ class Variables$Query$FindMenteeUsers {
   @override
   int get hashCode {
     final l$options = options;
-    final l$filter2 = filter2;
-    final l$match2 = match2;
+    final l$filter = filter;
+    final l$match = match;
     return Object.hashAll([
       _$data.containsKey('options') ? l$options : const {},
-      _$data.containsKey('filter2') ? l$filter2 : const {},
-      _$data.containsKey('match2') ? l$match2 : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('match') ? l$match : const {},
     ]);
   }
 }
@@ -1141,8 +1194,8 @@ abstract class CopyWith$Variables$Query$FindMenteeUsers<TRes> {
 
   TRes call({
     Input$FindObjectsOptions? options,
-    Input$UserListFilter? filter2,
-    Input$UserInput? match2,
+    Input$UserListFilter? filter,
+    Input$UserInput? match,
   });
 }
 
@@ -1161,16 +1214,15 @@ class _CopyWithImpl$Variables$Query$FindMenteeUsers<TRes>
 
   TRes call({
     Object? options = _undefined,
-    Object? filter2 = _undefined,
-    Object? match2 = _undefined,
+    Object? filter = _undefined,
+    Object? match = _undefined,
   }) =>
       _then(Variables$Query$FindMenteeUsers._({
         ..._instance._$data,
         if (options != _undefined)
           'options': (options as Input$FindObjectsOptions?),
-        if (filter2 != _undefined)
-          'filter2': (filter2 as Input$UserListFilter?),
-        if (match2 != _undefined) 'match2': (match2 as Input$UserInput?),
+        if (filter != _undefined) 'filter': (filter as Input$UserListFilter?),
+        if (match != _undefined) 'match': (match as Input$UserInput?),
       }));
 }
 
@@ -1182,8 +1234,8 @@ class _CopyWithStubImpl$Variables$Query$FindMenteeUsers<TRes>
 
   call({
     Input$FindObjectsOptions? options,
-    Input$UserListFilter? filter2,
-    Input$UserInput? match2,
+    Input$UserListFilter? filter,
+    Input$UserInput? match,
   }) =>
       _res;
 }
@@ -1355,7 +1407,7 @@ const documentNodeQueryFindMenteeUsers = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'filter2')),
+        variable: VariableNode(name: NameNode(value: 'filter')),
         type: NamedTypeNode(
           name: NameNode(value: 'UserListFilter'),
           isNonNull: false,
@@ -1364,7 +1416,7 @@ const documentNodeQueryFindMenteeUsers = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'match2')),
+        variable: VariableNode(name: NameNode(value: 'match')),
         type: NamedTypeNode(
           name: NameNode(value: 'UserInput'),
           isNonNull: false,
@@ -1385,11 +1437,11 @@ const documentNodeQueryFindMenteeUsers = DocumentNode(definitions: [
           ),
           ArgumentNode(
             name: NameNode(value: 'filter'),
-            value: VariableNode(name: NameNode(value: 'filter2')),
+            value: VariableNode(name: NameNode(value: 'filter')),
           ),
           ArgumentNode(
             name: NameNode(value: 'match'),
-            value: VariableNode(name: NameNode(value: 'match2')),
+            value: VariableNode(name: NameNode(value: 'match')),
           ),
         ],
         directives: [],
@@ -1403,6 +1455,20 @@ const documentNodeQueryFindMenteeUsers = DocumentNode(definitions: [
           ),
           FieldNode(
             name: NameNode(value: 'email'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'firstName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'lastName'),
             alias: null,
             arguments: [],
             directives: [],
@@ -1609,6 +1675,8 @@ class Query$FindMenteeUsers$findUsers {
   Query$FindMenteeUsers$findUsers({
     required this.id,
     this.email,
+    this.firstName,
+    this.lastName,
     this.fullName,
     this.avatarUrl,
     this.userHandle,
@@ -1624,6 +1692,8 @@ class Query$FindMenteeUsers$findUsers {
   factory Query$FindMenteeUsers$findUsers.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$email = json['email'];
+    final l$firstName = json['firstName'];
+    final l$lastName = json['lastName'];
     final l$fullName = json['fullName'];
     final l$avatarUrl = json['avatarUrl'];
     final l$userHandle = json['userHandle'];
@@ -1637,6 +1707,8 @@ class Query$FindMenteeUsers$findUsers {
     return Query$FindMenteeUsers$findUsers(
       id: (l$id as String),
       email: (l$email as String?),
+      firstName: (l$firstName as String?),
+      lastName: (l$lastName as String?),
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
       userHandle: (l$userHandle as String?),
@@ -1662,6 +1734,10 @@ class Query$FindMenteeUsers$findUsers {
   final String id;
 
   final String? email;
+
+  final String? firstName;
+
+  final String? lastName;
 
   final String? fullName;
 
@@ -1689,6 +1765,10 @@ class Query$FindMenteeUsers$findUsers {
     _resultData['id'] = l$id;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$firstName = firstName;
+    _resultData['firstName'] = l$firstName;
+    final l$lastName = lastName;
+    _resultData['lastName'] = l$lastName;
     final l$fullName = fullName;
     _resultData['fullName'] = l$fullName;
     final l$avatarUrl = avatarUrl;
@@ -1717,6 +1797,8 @@ class Query$FindMenteeUsers$findUsers {
   int get hashCode {
     final l$id = id;
     final l$email = email;
+    final l$firstName = firstName;
+    final l$lastName = lastName;
     final l$fullName = fullName;
     final l$avatarUrl = avatarUrl;
     final l$userHandle = userHandle;
@@ -1730,6 +1812,8 @@ class Query$FindMenteeUsers$findUsers {
     return Object.hashAll([
       l$id,
       l$email,
+      l$firstName,
+      l$lastName,
       l$fullName,
       l$avatarUrl,
       l$userHandle,
@@ -1760,6 +1844,16 @@ class Query$FindMenteeUsers$findUsers {
     final l$email = email;
     final lOther$email = other.email;
     if (l$email != lOther$email) {
+      return false;
+    }
+    final l$firstName = firstName;
+    final lOther$firstName = other.firstName;
+    if (l$firstName != lOther$firstName) {
+      return false;
+    }
+    final l$lastName = lastName;
+    final lOther$lastName = other.lastName;
+    if (l$lastName != lOther$lastName) {
       return false;
     }
     final l$fullName = fullName;
@@ -1851,6 +1945,8 @@ abstract class CopyWith$Query$FindMenteeUsers$findUsers<TRes> {
   TRes call({
     String? id,
     String? email,
+    String? firstName,
+    String? lastName,
     String? fullName,
     String? avatarUrl,
     String? userHandle,
@@ -1894,6 +1990,8 @@ class _CopyWithImpl$Query$FindMenteeUsers$findUsers<TRes>
   TRes call({
     Object? id = _undefined,
     Object? email = _undefined,
+    Object? firstName = _undefined,
+    Object? lastName = _undefined,
     Object? fullName = _undefined,
     Object? avatarUrl = _undefined,
     Object? userHandle = _undefined,
@@ -1908,6 +2006,11 @@ class _CopyWithImpl$Query$FindMenteeUsers$findUsers<TRes>
       _then(Query$FindMenteeUsers$findUsers(
         id: id == _undefined || id == null ? _instance.id : (id as String),
         email: email == _undefined ? _instance.email : (email as String?),
+        firstName: firstName == _undefined
+            ? _instance.firstName
+            : (firstName as String?),
+        lastName:
+            lastName == _undefined ? _instance.lastName : (lastName as String?),
         fullName:
             fullName == _undefined ? _instance.fullName : (fullName as String?),
         avatarUrl: avatarUrl == _undefined
@@ -1985,6 +2088,8 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers<TRes>
   call({
     String? id,
     String? email,
+    String? firstName,
+    String? lastName,
     String? fullName,
     String? avatarUrl,
     String? userHandle,
@@ -3720,6 +3825,20 @@ const documentNodeQueryFindMentorUsers = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'email'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'firstName'),
             alias: null,
             arguments: [],
@@ -3741,7 +3860,7 @@ const documentNodeQueryFindMentorUsers = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'email'),
+            name: NameNode(value: 'avatarUrl'),
             alias: null,
             arguments: [],
             directives: [],
@@ -3909,10 +4028,12 @@ const documentNodeQueryFindMentorUsers = DocumentNode(definitions: [
 
 class Query$FindMentorUsers$findUsers {
   Query$FindMentorUsers$findUsers({
+    required this.id,
+    this.email,
     this.firstName,
     this.lastName,
     this.fullName,
-    this.email,
+    this.avatarUrl,
     this.userHandle,
     this.cityOfResidence,
     this.regionOfResidence,
@@ -3923,10 +4044,12 @@ class Query$FindMentorUsers$findUsers {
   });
 
   factory Query$FindMentorUsers$findUsers.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$email = json['email'];
     final l$firstName = json['firstName'];
     final l$lastName = json['lastName'];
     final l$fullName = json['fullName'];
-    final l$email = json['email'];
+    final l$avatarUrl = json['avatarUrl'];
     final l$userHandle = json['userHandle'];
     final l$cityOfResidence = json['cityOfResidence'];
     final l$regionOfResidence = json['regionOfResidence'];
@@ -3935,10 +4058,12 @@ class Query$FindMentorUsers$findUsers {
     final l$groupMemberships = json['groupMemberships'];
     final l$$__typename = json['__typename'];
     return Query$FindMentorUsers$findUsers(
+      id: (l$id as String),
+      email: (l$email as String?),
       firstName: (l$firstName as String?),
       lastName: (l$lastName as String?),
       fullName: (l$fullName as String?),
-      email: (l$email as String?),
+      avatarUrl: (l$avatarUrl as String?),
       userHandle: (l$userHandle as String?),
       cityOfResidence: (l$cityOfResidence as String?),
       regionOfResidence: (l$regionOfResidence as String?),
@@ -3955,13 +4080,17 @@ class Query$FindMentorUsers$findUsers {
     );
   }
 
+  final String id;
+
+  final String? email;
+
   final String? firstName;
 
   final String? lastName;
 
   final String? fullName;
 
-  final String? email;
+  final String? avatarUrl;
 
   final String? userHandle;
 
@@ -3979,14 +4108,18 @@ class Query$FindMentorUsers$findUsers {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$email = email;
+    _resultData['email'] = l$email;
     final l$firstName = firstName;
     _resultData['firstName'] = l$firstName;
     final l$lastName = lastName;
     _resultData['lastName'] = l$lastName;
     final l$fullName = fullName;
     _resultData['fullName'] = l$fullName;
-    final l$email = email;
-    _resultData['email'] = l$email;
+    final l$avatarUrl = avatarUrl;
+    _resultData['avatarUrl'] = l$avatarUrl;
     final l$userHandle = userHandle;
     _resultData['userHandle'] = l$userHandle;
     final l$cityOfResidence = cityOfResidence;
@@ -4007,10 +4140,12 @@ class Query$FindMentorUsers$findUsers {
 
   @override
   int get hashCode {
+    final l$id = id;
+    final l$email = email;
     final l$firstName = firstName;
     final l$lastName = lastName;
     final l$fullName = fullName;
-    final l$email = email;
+    final l$avatarUrl = avatarUrl;
     final l$userHandle = userHandle;
     final l$cityOfResidence = cityOfResidence;
     final l$regionOfResidence = regionOfResidence;
@@ -4019,10 +4154,12 @@ class Query$FindMentorUsers$findUsers {
     final l$groupMemberships = groupMemberships;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
+      l$email,
       l$firstName,
       l$lastName,
       l$fullName,
-      l$email,
+      l$avatarUrl,
       l$userHandle,
       l$cityOfResidence,
       l$regionOfResidence,
@@ -4042,6 +4179,16 @@ class Query$FindMentorUsers$findUsers {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) {
+      return false;
+    }
     final l$firstName = firstName;
     final lOther$firstName = other.firstName;
     if (l$firstName != lOther$firstName) {
@@ -4057,9 +4204,9 @@ class Query$FindMentorUsers$findUsers {
     if (l$fullName != lOther$fullName) {
       return false;
     }
-    final l$email = email;
-    final lOther$email = other.email;
-    if (l$email != lOther$email) {
+    final l$avatarUrl = avatarUrl;
+    final lOther$avatarUrl = other.avatarUrl;
+    if (l$avatarUrl != lOther$avatarUrl) {
       return false;
     }
     final l$userHandle = userHandle;
@@ -4127,10 +4274,12 @@ abstract class CopyWith$Query$FindMentorUsers$findUsers<TRes> {
       _CopyWithStubImpl$Query$FindMentorUsers$findUsers;
 
   TRes call({
+    String? id,
+    String? email,
     String? firstName,
     String? lastName,
     String? fullName,
-    String? email,
+    String? avatarUrl,
     String? userHandle,
     String? cityOfResidence,
     String? regionOfResidence,
@@ -4163,10 +4312,12 @@ class _CopyWithImpl$Query$FindMentorUsers$findUsers<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
+    Object? email = _undefined,
     Object? firstName = _undefined,
     Object? lastName = _undefined,
     Object? fullName = _undefined,
-    Object? email = _undefined,
+    Object? avatarUrl = _undefined,
     Object? userHandle = _undefined,
     Object? cityOfResidence = _undefined,
     Object? regionOfResidence = _undefined,
@@ -4176,6 +4327,8 @@ class _CopyWithImpl$Query$FindMentorUsers$findUsers<TRes>
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindMentorUsers$findUsers(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        email: email == _undefined ? _instance.email : (email as String?),
         firstName: firstName == _undefined
             ? _instance.firstName
             : (firstName as String?),
@@ -4183,7 +4336,9 @@ class _CopyWithImpl$Query$FindMentorUsers$findUsers<TRes>
             lastName == _undefined ? _instance.lastName : (lastName as String?),
         fullName:
             fullName == _undefined ? _instance.fullName : (fullName as String?),
-        email: email == _undefined ? _instance.email : (email as String?),
+        avatarUrl: avatarUrl == _undefined
+            ? _instance.avatarUrl
+            : (avatarUrl as String?),
         userHandle: userHandle == _undefined
             ? _instance.userHandle
             : (userHandle as String?),
@@ -4239,10 +4394,12 @@ class _CopyWithStubImpl$Query$FindMentorUsers$findUsers<TRes>
   TRes _res;
 
   call({
+    String? id,
+    String? email,
     String? firstName,
     String? lastName,
     String? fullName,
-    String? email,
+    String? avatarUrl,
     String? userHandle,
     String? cityOfResidence,
     String? regionOfResidence,
