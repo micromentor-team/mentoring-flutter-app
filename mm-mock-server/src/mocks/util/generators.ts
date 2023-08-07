@@ -84,7 +84,7 @@ export function generateCoreGroups() {
     ]
 }
 
-export function generateGroupMembership(group) {
+export function generateGroupMembership(group: any) {
     const membership: any = {
         __typename: "GroupMembership",
         id: faker.string.alphanumeric({ length: 24 }),
@@ -139,7 +139,7 @@ export function generateChannel(channelParticipants: any[]) {
 
 export function generateChannelMessage(
     text: string = faker.lorem.sentence(),
-    channelId: string,
+    channel: any,
     senderUser: any,
     createdAt: Date,
     isSeen: boolean = false,
@@ -158,11 +158,12 @@ export function generateChannelMessage(
     } else {
         statuses = null;
     }
+    assignLastMessage(channel, text);
     return {
         __typename: "ChannelMessage",
         id: faker.string.alphanumeric({length: 24}),
         createdBy: senderUser.id,
-        channelId: channelId,
+        channelId: channel.id,
         messageText: text,
         createdAt: createdAt.toISOString(),
         replyToMessageId: replyToMessageId,
@@ -174,40 +175,43 @@ export function generateChannelMessage(
     }
 }
 
-export function generateChannelInboxItemInvitation(channelId: string, sender: any,  declined?: boolean, accepted?: boolean) {
-var status: string;
+export function generateChannelInboxItemInvitation(channel: any, sender: any, declined?: boolean, accepted?: boolean) {
+    let status: string;
     if (accepted)
         status = "accepted";
     else if (declined)
         status = "declined";
     else
         status = "created";
+    const messageText = faker.lorem.sentence();
+    assignLastMessage(channel, messageText);
     return {
         __typename: "ChannelInboxItemInvitation",
-        channelId: channelId,
+        channelId: channel.id,
         createdAt: faker.date.recent(),
         createdBy: sender.id,
         id: faker.string.alphanumeric({length: 24}),
-        messageText: faker.lorem.sentence(),
+        messageText: messageText,
         status: status,
     }
 }
 
-export function generateChannelInboxItemMessage(channelId: string, sender: any) {
-
+export function generateChannelInboxItemMessage(channel: any, sender: any) {
+    const messageText = faker.lorem.sentence();
+    assignLastMessage(channel, messageText);
     return {
         __typename: "ChannelInboxItemMessage",
-        channelId: channelId,
+        channelId: channel.id,
         id: faker.string.alphanumeric({length: 24}),
-        messageText: faker.lorem.sentence(),
+        messageText: messageText,
         senderFullName: sender.fullName,
         createdBy: sender.id,
     }
 }
 
 export function generateChannelInvitation(sender: any, recipient: any, declined?: boolean, accepted?: boolean) {
-    var status: string;
-    var channel: object | null = null;
+    let status: string;
+    let channel: any | null = null;
     if (accepted) {
         status = "accepted";
         channel = generateChannel([sender, recipient])
@@ -217,13 +221,17 @@ export function generateChannelInvitation(sender: any, recipient: any, declined?
     else
         status = "created";
 
+    const messageText = faker.lorem.sentence();
+    if (channel) {
+        assignLastMessage(channel, messageText);
+    }
     return {
         __typename: "ChannelInvitation",
         id: faker.string.alphanumeric({length: 24}),
         channelName: faker.lorem.words(2),
         channel: channel,
         channelTopic: faker.lorem.sentence(),
-        messageText: faker.lorem.sentence(),
+        messageText: messageText,
         createdBy: sender.id,
         createdAt: faker.date.recent(),
         recipientId: recipient.id,
@@ -231,6 +239,14 @@ export function generateChannelInvitation(sender: any, recipient: any, declined?
         senderId: sender.id,
         sender: sender,
         status: status,
+    }
+}
+
+function assignLastMessage(channel: any, messageText: string) {
+    channel.lastMessage = {
+        __typename: "ChannelLastMessage",
+        channelId: channel.id,
+        messageText: messageText,
     }
 }
 

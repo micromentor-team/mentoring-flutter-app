@@ -3,6 +3,7 @@ import * as generators from "./util/generators";
 
 export function mockMutations(serverState: MockServerState) {
     return {
+        // users
         deleteUser: () => {
             serverState.loggedIn= false;
         },
@@ -16,6 +17,7 @@ export function mockMutations(serverState: MockServerState) {
             serverState.loggedIn = false;
             return "ok";
         },
+        // channels, channel invitations and channel messages
         createChannel: () => {
             const channel = generators.generateChannel([serverState.loggedInUser, serverState.otherUsers[1]])
             serverState.channels.push(channel);
