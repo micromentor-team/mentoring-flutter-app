@@ -219,7 +219,7 @@ class _ChannelChatState extends State<ChannelChat> {
         });
         return AppUtility.widgetForAsyncState(
           state: _chatModel!.state,
-          onReady: Column(
+          onReady: () => Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

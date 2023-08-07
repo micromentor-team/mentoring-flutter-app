@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_message.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
@@ -10,6 +9,8 @@ import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
 typedef ChannelMessage = Query$FindChannelMessages$findChannelMessages;
+typedef FilteredChannelMessage
+    = Query$FindChannelMessagesWithOptions$findChannelMessages;
 typedef UnseenMessage
     = Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
 
@@ -32,7 +33,7 @@ class MessagesProvider extends BaseProvider {
         ).toJson(),
       ),
     );
-    final result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindChannelMessages.fromJson(
@@ -40,37 +41,49 @@ class MessagesProvider extends BaseProvider {
             ).findChannelMessages
           : null,
     );
-    return result;
   }
 
-  Widget unseenMessages({
-    required Widget Function(
-      OperationResult<
-              List<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>>
-          data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
+  Future<OperationResult<List<FilteredChannelMessage>>>
+      findChannelMessagesWithOptions({
+    required Input$ChannelMessageListFilter input,
+    required Input$FindObjectsOptions options,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindChannelMessagesWithOptions,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindChannelMessagesWithOptions(
+          filter: input,
+          options: options,
+        ).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindChannelMessagesWithOptions.fromJson(
+              queryResult.data!,
+            ).findChannelMessages
+          : null,
+    );
+  }
+
+  Future<OperationResult<List<UnseenMessage>>> unseenMessages() async {
+    final QueryResult queryResult = await asyncQuery(
+        queryOptions: QueryOptions(
       document: documentNodeQueryInboxUnseenMessages,
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<
-                List<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>>
-            result = OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data != null
-              ? Query$InboxUnseenMessages.fromJson(
-                  queryResult.data!,
-                ).myInbox.channels?.unseenMessages
-              : null,
-        );
-        return onData(result, refetch: refetch, fetchMore: fetchMore);
-      },
-      onLoading: onLoading,
-      onError: onError,
+      fetchPolicy: FetchPolicy.cacheAndNetwork,
+    ));
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$InboxUnseenMessages.fromJson(
+              queryResult.data!,
+            ).myInbox.channels?.unseenMessages
+          : null,
     );
   }
 

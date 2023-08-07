@@ -17,6 +17,20 @@ query FindChannelMessages ($filter: ChannelMessageListFilter) {
     }
 }
 
+query FindChannelMessagesWithOptions ($filter: ChannelMessageListFilter, $options: FindObjectsOptions) {
+    findChannelMessages(filter: $filter, options: $options) {
+        id
+        channelId
+        createdAt
+        createdBy
+        messageText
+        statuses {
+            seenAt
+            userId
+        }
+    }
+}
+
 query InboxUnseenMessages {
     myInbox {
         channels {

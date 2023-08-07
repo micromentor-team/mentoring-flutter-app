@@ -15,7 +15,7 @@ class AppUtility {
 
   static Widget widgetForAsyncState({
     required AsyncState state,
-    required Widget onReady,
+    required Widget Function() onReady,
   }) {
     switch (state) {
       case AsyncState.loading:
@@ -27,8 +27,23 @@ class AppUtility {
           child: CustomErrorWidget(),
         );
       default:
-        return onReady;
+        return onReady();
     }
+  }
+
+  static Widget widgetForAsyncSnapshot({
+    required AsyncSnapshot snapshot,
+    required Widget Function() onReady,
+  }) {
+    final AsyncState state;
+    if (snapshot.hasError) {
+      state = AsyncState.error;
+    } else if (!snapshot.hasData) {
+      state = AsyncState.loading;
+    } else {
+      state = AsyncState.ready;
+    }
+    return widgetForAsyncState(state: state, onReady: onReady);
   }
 
   static String getUserInitials(String fullName) {
