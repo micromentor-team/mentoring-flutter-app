@@ -31,7 +31,7 @@ export function mockMutations(serverState: MockServerState) {
         createChannelMessage: (_: any, args: { input: { channelId: string, messageText: string , replyToMessageId: string | null}}) => {
             const message = generators.generateChannelMessage(
                 args.input.messageText,
-                args.input.channelId,
+                serverState.channels.find((element) => element.id == args.input.channelId),
                 serverState.loggedInUser,
                 new Date(),
                 true,

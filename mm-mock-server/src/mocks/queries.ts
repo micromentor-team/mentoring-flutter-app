@@ -35,8 +35,8 @@ export function mockQueries(serverState: MockServerState) {
                         serverState.channelInboxItemInvitations[1],
                     ],
                     unseenMessages: [
-                        generators.generateChannelInboxItemMessage(serverState.channels[0].id, serverState.loggedInUser),
-                        generators.generateChannelInboxItemMessage(serverState.channels[0].id, serverState.otherUsers[0]),
+                        generators.generateChannelInboxItemMessage(serverState.channels[0], serverState.loggedInUser),
+                        generators.generateChannelInboxItemMessage(serverState.channels[0], serverState.otherUsers[0]),
                     ],
                 }
             }

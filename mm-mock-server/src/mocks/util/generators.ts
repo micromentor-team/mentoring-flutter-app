@@ -27,7 +27,7 @@ export function generateUser(groups?: any[]) {
         groupIds: [],
     }
     if (groups) {
-        user.groupMemberships = groups.map(generateGroupMembership);
+        user.groupMemberships = groups.map(g => generateGroupMembership(user, g));
         user.groupIds = groups.map(g => g.id);
     }
     return user;
@@ -57,19 +57,19 @@ export function generateGroup(mentorGroup?: boolean, menteeGroup?: boolean) {
         __typename: "Group",
         id: faker.string.alphanumeric({ length: 24 }),
         name: name,
-        groupIdent: faker.lorem.words(1),
+        ident: faker.lorem.words(1),
         slug: name.toLowerCase().replace(/\s/g, '-'),
         embedded: false,
     }
 
     if (mentorGroup) {
-        group.groupIdent = group.slug = "mentors";
+        group.ident = group.slug = "mentors";
         group.name = "Mentors";
         group.embedded = true;
     }
 
     if (menteeGroup) {
-        group.groupIdent = group.slug = "mentees";
+        group.ident = group.slug = "mentees";
         group.name = "Mentees";
         group.embedded = true;
     }
@@ -84,13 +84,13 @@ export function generateCoreGroups() {
     ]
 }
 
-export function generateGroupMembership(group: any) {
+export function generateGroupMembership(user: any, group: any) {
     const membership: any = {
         __typename: "GroupMembership",
         id: faker.string.alphanumeric({ length: 24 }),
         groupId: group.id,
         groupIdent: group.ident,
-        userId: faker.string.alphanumeric({ length: 24 }),
+        userId: user.id,
         roles: ["admin"],
         createdAt: faker.date.recent(),
         updatedAt: faker.date.recent(),
@@ -158,7 +158,11 @@ export function generateChannelMessage(
     } else {
         statuses = null;
     }
-    assignLastMessage(channel, text);
+    channel.lastMessage = {
+        __typename: "ChannelLastMessage",
+        channelId: channel.id,
+        messageText: text,
+    }
     return {
         __typename: "ChannelMessage",
         id: faker.string.alphanumeric({length: 24}),
@@ -183,27 +187,23 @@ export function generateChannelInboxItemInvitation(channel: any, sender: any, de
         status = "declined";
     else
         status = "created";
-    const messageText = faker.lorem.sentence();
-    assignLastMessage(channel, messageText);
     return {
         __typename: "ChannelInboxItemInvitation",
         channelId: channel.id,
         createdAt: faker.date.recent(),
         createdBy: sender.id,
         id: faker.string.alphanumeric({length: 24}),
-        messageText: messageText,
+        messageText: faker.lorem.sentence(),
         status: status,
     }
 }
 
 export function generateChannelInboxItemMessage(channel: any, sender: any) {
-    const messageText = faker.lorem.sentence();
-    assignLastMessage(channel, messageText);
     return {
         __typename: "ChannelInboxItemMessage",
         channelId: channel.id,
         id: faker.string.alphanumeric({length: 24}),
-        messageText: messageText,
+        messageText: faker.lorem.sentence(),
         senderFullName: sender.fullName,
         createdBy: sender.id,
     }
@@ -221,17 +221,13 @@ export function generateChannelInvitation(sender: any, recipient: any, declined?
     else
         status = "created";
 
-    const messageText = faker.lorem.sentence();
-    if (channel) {
-        assignLastMessage(channel, messageText);
-    }
     return {
         __typename: "ChannelInvitation",
         id: faker.string.alphanumeric({length: 24}),
         channelName: faker.lorem.words(2),
         channel: channel,
         channelTopic: faker.lorem.sentence(),
-        messageText: messageText,
+        messageText: faker.lorem.sentence(),
         createdBy: sender.id,
         createdAt: faker.date.recent(),
         recipientId: recipient.id,
@@ -241,23 +237,3 @@ export function generateChannelInvitation(sender: any, recipient: any, declined?
         status: status,
     }
 }
-
-function assignLastMessage(channel: any, messageText: string) {
-    channel.lastMessage = {
-        __typename: "ChannelLastMessage",
-        channelId: channel.id,
-        messageText: messageText,
-    }
-}
-
-// content options
-
-export function generateExpertise() {
-    return {
-        __typename: "Expertise",
-        textId: faker.lorem.words(1),
-        translatedValue: faker.lorem.words(1),
-    }
-}
-
-
