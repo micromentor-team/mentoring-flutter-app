@@ -51,7 +51,7 @@ dependencies:
   expandable: ^5.0.1
   dio: ^5.0.1
   flutter_linkify: ^6.0.0
-  url_launcher: ^6.1.7
+  url_launcher: ^6.1.12
   grouped_list: ^5.1.2
   local_auth: ^2.1.6
   emoji_picker_flutter: ^1.5.4
