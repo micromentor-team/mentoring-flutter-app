@@ -116,7 +116,6 @@ class _ChannelChatState extends State<ChannelChat> {
   final TextEditingController messageTextController = TextEditingController();
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
-  Future<List<ChannelMessage>>? _initQueryResult;
   ChatModel? _chatModel;
   int _messageCount = 0;
   bool _unreadMessages = false; // Non-local Message exists outside of viewport
@@ -131,8 +130,13 @@ class _ChannelChatState extends State<ChannelChat> {
     );
     _markMessageRead();
     _chatModel!.createChannelSubscription();
-    _initQueryResult = _chatModel!.refreshChannelMessages();
     _messageCount = _chatModel!.channelMessages.length;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _chatModel!.refreshChannelMessages();
   }
 
   _markMessageRead() {
@@ -207,60 +211,57 @@ class _ChannelChatState extends State<ChannelChat> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _initQueryResult,
-      builder: (context, snapshot) {
-        return AppUtility.widgetForAsyncSnapshot(snapshot) ??
-            Consumer<ChatModel>(
-              builder: (context, chatModel, child) {
-                _chatModel = chatModel;
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  _processNewMessages();
-                });
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: BuildMessageBubbles(
-                        channel: widget.channel,
-                        chatMessages: chatModel.channelMessages,
-                        participants: widget.channel.participants,
-                        listScrollController: listScrollController,
-                        onOpenMessageDetails: (message) =>
-                            _openMessageDetailsModal(context, message),
-                        onSetReplyingTo: (message) {
-                          setState(() {
-                            _focusedMessage = message;
-                          });
-                        },
-                      ),
+    return Consumer<ChatModel>(
+      builder: (context, chatModel, child) {
+        _chatModel = chatModel;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _processNewMessages();
+        });
+        return AppUtility.widgetForAsyncState(
+          state: _chatModel!.state,
+          onReady: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: BuildMessageBubbles(
+                  channel: widget.channel,
+                  chatMessages: chatModel.channelMessages,
+                  participants: widget.channel.participants,
+                  listScrollController: listScrollController,
+                  onOpenMessageDetails: (message) =>
+                      _openMessageDetailsModal(context, message),
+                  onSetReplyingTo: (message) {
+                    setState(() {
+                      _focusedMessage = message;
+                    });
+                  },
+                ),
+              ),
+              MessageInput(
+                replyingTo: _focusedMessage,
+                participants: widget.channel.participants,
+                onSubmit: (val, replyToMessageId) {
+                  chatModel.messagesProvider.createMessage(
+                    input: Input$ChannelMessageInput(
+                      channelId: widget.channel.id,
+                      messageText: val,
+                      replyToMessageId: replyToMessageId,
                     ),
-                    MessageInput(
-                      replyingTo: _focusedMessage,
-                      participants: widget.channel.participants,
-                      onSubmit: (val, replyToMessageId) {
-                        chatModel.messagesProvider.createMessage(
-                          input: Input$ChannelMessageInput(
-                            channelId: widget.channel.id,
-                            messageText: val,
-                            replyToMessageId: replyToMessageId,
-                          ),
-                        );
-                        setState(() {
-                          _focusedMessage = null;
-                        });
-                      },
-                      onClearReply: () {
-                        setState(() {
-                          _focusedMessage = null;
-                        });
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
+                  );
+                  setState(() {
+                    _focusedMessage = null;
+                  });
+                },
+                onClearReply: () {
+                  setState(() {
+                    _focusedMessage = null;
+                  });
+                },
+              ),
+            ],
+          ),
+        );
       },
     );
   }

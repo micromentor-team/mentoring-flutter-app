@@ -20,8 +20,8 @@ class MessagesProvider extends BaseProvider {
   Future<OperationResult<List<ChannelMessage>>> findChannelMessages({
     required Input$ChannelMessageListFilter input,
     bool fetchFromNetworkOnly = false,
-  }) {
-    final Future<QueryResult> futureQueryResult = asyncQuery(
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindChannelMessages,
         fetchPolicy: fetchFromNetworkOnly
@@ -32,19 +32,15 @@ class MessagesProvider extends BaseProvider {
         ).toJson(),
       ),
     );
-    return futureQueryResult.then(
-      (queryResult) {
-        final result = OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data != null
-              ? Query$FindChannelMessages.fromJson(
-                  queryResult.data!,
-                ).findChannelMessages
-              : null,
-        );
-        return result;
-      },
+    final result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindChannelMessages.fromJson(
+              queryResult.data!,
+            ).findChannelMessages
+          : null,
     );
+    return result;
   }
 
   Widget unseenMessages({

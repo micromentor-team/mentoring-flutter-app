@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
-import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
@@ -78,11 +77,6 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
           child: FutureBuilder(
             future: futureChannelMessages,
             builder: (context, snapshot) {
-              final Widget? specialStateWidget =
-                  AppUtility.widgetForAsyncSnapshot(snapshot);
-              if (specialStateWidget != null) {
-                return specialStateWidget;
-              }
               List<ChannelMessage> messages = snapshot.data?.response ?? [];
               int unseenMessageCount = 0;
               ChannelMessage? lastMessage;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:uuid/uuid.dart';
 
@@ -12,13 +13,22 @@ class AppUtility {
     return const Uuid().v1();
   }
 
-  static Widget? widgetForAsyncSnapshot(AsyncSnapshot snapshot) {
-    if (snapshot.connectionState == ConnectionState.waiting) {
-      return const Loading();
-    } else if (snapshot.hasError) {
-      return const CustomErrorWidget();
+  static Widget widgetForAsyncState({
+    required AsyncState state,
+    required Widget onReady,
+  }) {
+    switch (state) {
+      case AsyncState.loading:
+        return const Center(
+          child: Loading(),
+        );
+      case AsyncState.error:
+        return const Center(
+          child: CustomErrorWidget(),
+        );
+      default:
+        return onReady;
     }
-    return null;
   }
 
   static String getUserInitials(String fullName) {
