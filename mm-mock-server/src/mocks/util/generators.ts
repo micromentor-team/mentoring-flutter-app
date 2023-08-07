@@ -8,9 +8,10 @@ export function generateUser(groups?: any[]) {
     var mockFirstName = faker.person.firstName();
     var mockLastName = faker.person.lastName();
     var mockFullName = `${mockFirstName} ${mockLastName}`;
-    var mockUserHandle = mockFirstName.toLowerCase().charAt(0) + mockLastName.toLowerCase();
-    var mockEmail = `${mockUserHandle}@${faker.internet.domainName()}`;
-    var mockProfileCompletionPercentage = generateUserProfileCompletionPercentage();
+    const mockUserHandle = mockFirstName.toLowerCase().charAt(0) + mockLastName.toLowerCase();
+    const mockEmail = `${mockUserHandle}@${faker.internet.domainName()}`;
+    const mockProfileCompletionPercentage = generateUserProfileCompletionPercentage();
+    const mockCountry = faker.helpers.arrayElement(constants.countries)
     const user: any = {
         __typename: "User",
         id: faker.string.alphanumeric({length: 24}),
@@ -22,6 +23,10 @@ export function generateUser(groups?: any[]) {
         avatarUrl: faker.image.urlPicsumPhotos(),
         jobTitle: faker.person.jobTitle(),
         profileCompletionPercentage: mockProfileCompletionPercentage,
+        countryOfResidence: mockCountry,
+        countryOfResidenceTextId: mockCountry.textId,
+        cityOfResidence: faker.location.city(),
+        regionOfResidence: faker.location.state(),
         updatedAt: faker.date.recent(),
         groupMemberships: [],
         groupIds: [],

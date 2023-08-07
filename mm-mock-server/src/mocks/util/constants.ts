@@ -1,4 +1,5 @@
-// some values from the backend, hard coded as constants here
+// some values from the backend, copy-pasted/hard coded as constants here.
+// we could make this list smaller if this file is too long. it was easy to copy-paste the entire lists of values.
 
 // expertises
 
