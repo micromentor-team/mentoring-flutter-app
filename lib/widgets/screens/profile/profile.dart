@@ -25,25 +25,27 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context, listen: false).user!;
     return SafeArea(
-      child: Column(
-        children: [
-          if (widget.showProfilePagerHeader)
-            const ProfilePageHeader(requestReceived: true),
-          //TO-DO(all): replace the placeholder with the elements of the profile page you're working on
-          ProfileBasicInfo(
-            userType: UserType.entrepreneur,
-            fullName: user.fullName!,
-            avatarUrl: user.avatarUrl,
-            pronouns: "she/her",
-            affiliations: const ["Verizon Digital Ready"],
-            company: "SVK Group",
-            companyRole: "Director",
-            education: "Harvard University, MBA",
-            linkedinUrl: "https://www.linkedin.com/in/williamhgates/",
-            vacationMode: true,
-          ),
-          const ExperienceAndEducation(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            if (widget.showProfilePagerHeader)
+              const ProfilePageHeader(requestReceived: true),
+            //TO-DO(all): replace the placeholder with the elements of the profile page you're working on
+            ProfileBasicInfo(
+              userType: UserType.entrepreneur,
+              fullName: user.fullName!,
+              avatarUrl: user.avatarUrl,
+              pronouns: "she/her",
+              affiliations: const ["Verizon Digital Ready"],
+              company: "SVK Group",
+              companyRole: "Director",
+              education: "Harvard University, MBA",
+              linkedinUrl: "https://www.linkedin.com/in/williamhgates/",
+              vacationMode: true,
+            ),
+            const ExperienceAndEducation(),
+          ],
+        ),
       ),
     );
   }

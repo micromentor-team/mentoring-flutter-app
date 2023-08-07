@@ -36,12 +36,12 @@ class _Experience extends StatelessWidget {
       location: "Cleveland, Ohio, USA",
     ),
     _ExperienceItem(
-      position: "Fonder",
+      position: "Founder",
       companyName: "MC Consulting",
       start: DateTime.utc(2016, 3),
       end: DateTime.utc(2019, 5),
       location: "Cleveland, Ohio, USA",
-      companyUrl: "https://mcconsulting.com/",
+      companyUrl: "https://mcconsulting.com",
     ),
   ];
 
@@ -50,27 +50,36 @@ class _Experience extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final bodySmallOnSurface = theme.textTheme.bodySmall?.copyWith(
+      color: theme.colorScheme.onSurface,
+    );
     final l10n = AppLocalizations.of(context)!;
     final items = _exampleExperience
         .map((exp) {
-          final companyName = (exp.companyUrl == null)
-              ? Text(exp.companyName)
-              // https://stackoverflow.com/a/54540261
-              : InkWell(
-                  onTap: () => launchUrl(Uri.parse(exp.companyUrl ?? "")),
-                  child: Text(
-                    exp.companyName,
-                    style: const TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Colors.blue),
-                  ),
-                );
-
           return [
-            Text(exp.position, style: theme.textTheme.labelMedium),
-            companyName,
-            Text("(${exp.dateRange(l10n.present)}) · ${exp.timeRange}"),
-            Text(exp.location),
+            Text(
+              exp.position,
+              style: bodySmallOnSurface?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(exp.companyName, style: bodySmallOnSurface),
+            Text(
+              "(${exp.dateRange(l10n.present)}) · ${exp.timeRange}",
+              style: bodySmallOnSurface,
+            ),
+            Text(exp.location, style: bodySmallOnSurface),
+            if (exp.companyUrl != null)
+              InkWell(
+                onTap: () => launchUrl(Uri.parse(exp.companyUrl!)),
+                child: Text(
+                  exp.companyUrl!,
+                  style: bodySmallOnSurface?.copyWith(
+                    decoration: TextDecoration.underline,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+              ),
             const SizedBox(height: Insets.paddingMedium),
           ];
         })
@@ -117,15 +126,24 @@ class _Education extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final bodySmallOnSurface = theme.textTheme.bodySmall?.copyWith(
+      color: theme.colorScheme.onSurface,
+    );
     final l10n = AppLocalizations.of(context)!;
     final items = _exampleEducation
         .map((edu) => [
               Row(children: [
-                Text(edu.schoolName, style: theme.textTheme.labelMedium),
-                const Text(" "),
-                Text(edu.yearRange)
+                Text(edu.schoolName,
+                    style: bodySmallOnSurface?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text(" ", style: bodySmallOnSurface),
+                Text(edu.yearRange, style: bodySmallOnSurface)
               ]),
-              Text(edu.title),
+              Text(
+                "${edu.title}${(edu.major != null) ? ", ${edu.major}" : ""}",
+                style: bodySmallOnSurface,
+              ),
               const SizedBox(height: Insets.paddingMedium),
             ])
         .expand((i) => i)
