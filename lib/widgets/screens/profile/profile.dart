@@ -3,6 +3,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile_basic_info.dart';
+import 'package:mm_flutter_app/widgets/molecules/profile_experience_and_education.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/models/scaffold_model.dart';
 import '../../molecules/profile_page_header.dart';
@@ -24,24 +25,27 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context, listen: false).user!;
     return SafeArea(
-      child: Column(
-        children: [
-          if (widget.showProfilePagerHeader)
-            const ProfilePageHeader(requestReceived: true),
-          //TO-DO(all): replace the placeholder with the elements of the profile page you're working on
-          ProfileBasicInfo(
-            userType: UserType.entrepreneur,
-            fullName: user.fullName!,
-            avatarUrl: user.avatarUrl,
-            pronouns: "she/her",
-            affiliations: const ["Verizon Digital Ready"],
-            company: "SVK Group",
-            companyRole: "Director",
-            education: "Harvard University, MBA",
-            linkedinUrl: "https://www.linkedin.com/in/williamhgates/",
-            vacationMode: true,
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            if (widget.showProfilePagerHeader)
+              const ProfilePageHeader(requestReceived: true),
+            //TO-DO(all): replace the placeholder with the elements of the profile page you're working on
+            ProfileBasicInfo(
+              userType: UserType.entrepreneur,
+              fullName: user.fullName!,
+              avatarUrl: user.avatarUrl,
+              pronouns: "she/her",
+              affiliations: const ["Verizon Digital Ready"],
+              company: "SVK Group",
+              companyRole: "Director",
+              education: "Harvard University, MBA",
+              linkedinUrl: "https://www.linkedin.com/in/williamhgates/",
+              vacationMode: true,
+            ),
+            const ExperienceAndEducation(),
+          ],
+        ),
       ),
     );
   }
