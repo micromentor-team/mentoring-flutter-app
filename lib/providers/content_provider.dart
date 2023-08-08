@@ -25,7 +25,9 @@ class ContentProvider extends BaseProvider {
   List<Industry>? _industries;
   List<Language>? _languages;
 
-  ContentProvider({required super.client});
+  ContentProvider({required super.client}) {
+    debugPrint('ContentProvider initialized');
+  }
 
   // one setter for all content options
   void _setAllContentOptions({
@@ -65,6 +67,49 @@ class ContentProvider extends BaseProvider {
     debugPrint('Updated content provider values: ${toString()}');
   }
 
+  // separate setters for each content option
+
+  void _setCompanyStageOptions(List<CompanyStage> companyStages) {
+    _companyStages = companyStages;
+    debugPrint('Updated content provider company stage values: ${toString()}');
+  }
+
+  void _setCompanyTypeOptions(List<CompanyType> companyTypes) {
+    _companyTypes = companyTypes;
+    debugPrint('Updated content provider company type values: ${toString()}');
+  }
+
+  void _setCountryOptions(List<Country> countries) {
+    _countries = countries;
+    debugPrint('Updated content provider country values: ${toString()}');
+  }
+
+  void _setEducationLevelOptions(List<EducationLevel> educationLevels) {
+    _educationLevels = educationLevels;
+    debugPrint(
+        'Updated content provider education level values: ${toString()}');
+  }
+
+  void _setExpertiseOptions(List<Expertise> expertises) {
+    _expertises = expertises;
+    debugPrint('Updated content provider expertise values: ${toString()}');
+  }
+
+  void _setPresetGenderOptions(List<PresetGender> presetGenders) {
+    _presetGenders = presetGenders;
+    debugPrint('Updated content provider preset gender values: ${toString()}');
+  }
+
+  void _setIndustryOptions(List<Industry> industries) {
+    _industries = industries;
+    debugPrint('Updated content provider industry values: ${toString()}');
+  }
+
+  void _setLanguageOptions(List<Language> languages) {
+    _languages = languages;
+    debugPrint('Updated content provider language values: ${toString()}');
+  }
+
   // separate getters for each content option
 
   List<CompanyStage>? get companyStageOptions {
@@ -99,65 +144,16 @@ class ContentProvider extends BaseProvider {
     return _languages;
   }
 
-  // use a query as the primary method for fetching content options
-  Future updateContentOptions({
-    bool fetchFromNetworkOnly = false,
-  }) async {
-    // final List<Future> futures = [
-    //   findCompanyStages(fetchFromNetworkOnly: fetchFromNetworkOnly),
-    //   findCompanyTypes(fetchFromNetworkOnly: fetchFromNetworkOnly),
-    //   findCountries(fetchFromNetworkOnly: fetchFromNetworkOnly),
-    //   findExpertises(fetchFromNetworkOnly: fetchFromNetworkOnly),
-    //   findIndustries(fetchFromNetworkOnly: fetchFromNetworkOnly),
-    //   findLanguages(fetchFromNetworkOnly: fetchFromNetworkOnly),
-    //   findEducationLevels(fetchFromNetworkOnly: fetchFromNetworkOnly),
-    //   findPresetGenders(fetchFromNetworkOnly: fetchFromNetworkOnly),
-    // ];
-    // // await all these at once to avoid multiple blocking calls
-    // final List results = await Future.wait(futures);
-    // _setAllContentOptions(
-    //   companyStages: results[0].response,
-    //   companyTypes: results[1].response,
-    //   countries: results[2].response,
-    //   expertises: results[3].response,
-    //   industries: results[4].response,
-    //   languages: results[5].response,
-    //   educationLevels: results[6].response,
-    //   presetGenders: results[7].response,
-    // );
-
-    // same effect as the above Dart code, but with one GraphQL request instead of 8
-    // casts one type to another, but it's safe because they're all coming from identical graphql queries in operations_content.graphql
-    final data =
-        await findAllOptionsByType(fetchFromNetworkOnly: fetchFromNetworkOnly);
-
-    _setAllContentOptions(
-      companyStages: data.response?.findCompanyStages as List<CompanyStage>?,
-      companyTypes: data.response?.findCompanyTypes as List<CompanyType>?,
-      countries: data.response?.findCountries as List<Country>?,
-      expertises: data.response?.findExpertises as List<Expertise>?,
-      industries: data.response?.findIndustries as List<Industry>?,
-      languages: data.response?.findLanguages as List<Language>?,
-      educationLevels:
-          data.response?.findEducationLevels as List<EducationLevel>?,
-      presetGenders: data.response?.findGenders as List<PresetGender>?,
-    );
-  }
-
   // Queries
 
-  Future<OperationResult<List<Country>>> findCountries({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<List<Country>>> findCountries() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindCountries,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindCountries.fromJson(
@@ -165,20 +161,18 @@ class ContentProvider extends BaseProvider {
             ).findCountries
           : null,
     );
+    if (result.response != null) _setCountryOptions(result.response!);
+    return result;
   }
 
-  Future<OperationResult<List<Expertise>>> findExpertises({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<List<Expertise>>> findExpertises() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindExpertises,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindExpertises.fromJson(
@@ -186,20 +180,18 @@ class ContentProvider extends BaseProvider {
             ).findExpertises
           : null,
     );
+    if (result.response != null) _setExpertiseOptions(result.response!);
+    return result;
   }
 
-  Future<OperationResult<List<Industry>>> findIndustries({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<List<Industry>>> findIndustries() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindIndustries,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindIndustries.fromJson(
@@ -207,20 +199,18 @@ class ContentProvider extends BaseProvider {
             ).findIndustries
           : null,
     );
+    if (result.response != null) _setIndustryOptions(result.response!);
+    return result;
   }
 
-  Future<OperationResult<List<Language>>> findLanguages({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<List<Language>>> findLanguages() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindLanguages,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindLanguages.fromJson(
@@ -228,20 +218,18 @@ class ContentProvider extends BaseProvider {
             ).findLanguages
           : null,
     );
+    if (result.response != null) _setLanguageOptions(result.response!);
+    return result;
   }
 
-  Future<OperationResult<List<CompanyType>>> findCompanyTypes({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<List<CompanyType>>> findCompanyTypes() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindCompanyTypes,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindCompanyTypes.fromJson(
@@ -249,20 +237,18 @@ class ContentProvider extends BaseProvider {
             ).findCompanyTypes
           : null,
     );
+    if (result.response != null) _setCompanyTypeOptions(result.response!);
+    return result;
   }
 
-  Future<OperationResult<List<CompanyStage>>> findCompanyStages({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<List<CompanyStage>>> findCompanyStages() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindCompanyStages,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindCompanyStages.fromJson(
@@ -270,20 +256,18 @@ class ContentProvider extends BaseProvider {
             ).findCompanyStages
           : null,
     );
+    if (result.response != null) _setCompanyStageOptions(result.response!);
+    return result;
   }
 
-  Future<OperationResult<List<EducationLevel>>> findEducationLevels({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<List<EducationLevel>>> findEducationLevels() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindEducationLevels,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindEducationLevels.fromJson(
@@ -291,20 +275,18 @@ class ContentProvider extends BaseProvider {
             ).findEducationLevels
           : null,
     );
+    if (result.response != null) _setEducationLevelOptions(result.response!);
+    return result;
   }
 
-  Future<OperationResult<List<PresetGender>>> findPresetGenders({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<List<PresetGender>>> findPresetGenders() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindGenders,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindGenders.fromJson(
@@ -312,20 +294,19 @@ class ContentProvider extends BaseProvider {
             ).findGenders
           : null,
     );
+    if (result.response != null) _setPresetGenderOptions(result.response!);
+    return result;
   }
 
-  Future<OperationResult<Query$FindAllOptionsByType>> findAllOptionsByType({
-    bool fetchFromNetworkOnly = false,
-  }) async {
+  Future<OperationResult<Query$FindAllOptionsByType>>
+      findAllOptionsByType() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
-        document: documentNodeQueryFindCountries,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
+        document: documentNodeQueryFindAllOptionsByType,
+        fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-    return OperationResult(
+    final result = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindAllOptionsByType.fromJson(
@@ -333,5 +314,39 @@ class ContentProvider extends BaseProvider {
             )
           : null,
     );
+    if (result.response != null) {
+      _setAllContentOptions(
+        companyStages: result.response?.findCompanyStages
+            .map((e) =>
+                Query$FindCompanyStages$findCompanyStages.fromJson(e.toJson()))
+            .toList(),
+        companyTypes: result.response?.findCompanyTypes
+            .map((e) =>
+                Query$FindCompanyTypes$findCompanyTypes.fromJson(e.toJson()))
+            .toList(),
+        countries: result.response?.findCountries
+            .map((e) => Query$FindCountries$findCountries.fromJson(e.toJson()))
+            .toList(),
+        expertises: result.response?.findExpertises
+            .map(
+                (e) => Query$FindExpertises$findExpertises.fromJson(e.toJson()))
+            .toList(),
+        industries: result.response?.findIndustries
+            .map(
+                (e) => Query$FindIndustries$findIndustries.fromJson(e.toJson()))
+            .toList(),
+        languages: result.response?.findLanguages
+            .map((e) => Query$FindLanguages$findLanguages.fromJson(e.toJson()))
+            .toList(),
+        educationLevels: result.response?.findEducationLevels
+            .map((e) => Query$FindEducationLevels$findEducationLevels.fromJson(
+                e.toJson()))
+            .toList(),
+        presetGenders: result.response?.findGenders
+            .map((e) => Query$FindGenders$findGenders.fromJson(e.toJson()))
+            .toList(),
+      );
+    }
+    return result;
   }
 }
