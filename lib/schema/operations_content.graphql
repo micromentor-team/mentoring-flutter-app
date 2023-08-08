@@ -1,3 +1,42 @@
+query FindAllOptionsByType {
+  findCompanyStages {
+    textId
+    translatedValue
+  }
+  findCompanyTypes {
+    textId
+    translatedValue
+  }
+  findCountries {
+    alpha2Key
+    textId
+    translatedValue
+  }
+  findEducationLevels {
+    textId
+    translatedValue
+  }
+  findExpertises {
+    textId
+    translatedValue
+  }
+  findIndustries {
+    textId
+    translatedValue
+  }
+  findGenders {
+    textId
+    translatedValue
+  }
+  findLanguages {
+    textId
+    translatedValue
+    isUiLanguage
+    shortLangCode
+    longLangCode
+  }
+}
+
 query FindCompanyStages {
   findCompanyStages {
     textId
