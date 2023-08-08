@@ -48,8 +48,8 @@ class ProfileHeader extends StatelessWidget {
               CircleAvatar(
                 radius: Radii.avatarRadiusSmall,
                 backgroundImage: avatarUrl != null
-                    ? NetworkImage(avatarUrl.toString())
-                    : null,
+                    ? NetworkImage(avatarUrl!) as ImageProvider<Object>
+                    : const AssetImage(Assets.blankAvatar),
               ),
             ],
           ),
