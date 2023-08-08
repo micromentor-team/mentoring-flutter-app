@@ -57,7 +57,7 @@ Widget _createFooter(BuildContext context, String company, String? companyRole,
         ),
     ]),
     if (linkedinUrl != null)
-      Ink(
+      Container(
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
               borderRadius:
