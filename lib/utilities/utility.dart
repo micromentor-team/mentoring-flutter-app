@@ -1,12 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:uuid/uuid.dart';
+
+import '../widgets/atoms/loading.dart';
 
 class AppUtility {
   AppUtility._private();
   static String getUuid() {
     return const Uuid().v1();
+  }
+
+  static Widget widgetForAsyncState({
+    required AsyncState state,
+    required Widget Function() onReady,
+  }) {
+    switch (state) {
+      case AsyncState.loading:
+        return const Center(
+          child: Loading(),
+        );
+      case AsyncState.error:
+        return const Center(
+          child: CustomErrorWidget(),
+        );
+      default:
+        return onReady();
+    }
+  }
+
+  static Widget widgetForAsyncSnapshot({
+    required AsyncSnapshot snapshot,
+    required Widget Function() onReady,
+  }) {
+    final AsyncState state;
+    if (snapshot.hasError) {
+      state = AsyncState.error;
+    } else if (!snapshot.hasData) {
+      state = AsyncState.loading;
+    } else {
+      state = AsyncState.ready;
+    }
+    return widgetForAsyncState(state: state, onReady: onReady);
   }
 
   static String getUserInitials(String fullName) {

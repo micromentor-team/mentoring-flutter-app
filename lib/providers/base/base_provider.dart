@@ -103,6 +103,45 @@ abstract class BaseProvider extends ChangeNotifier {
     }
   }
 
+  Future<QueryResult> asyncQuery({
+    required QueryOptions queryOptions,
+    bool logFailures = true,
+  }) async {
+    const RetryOptions retryOptions = RetryOptions(
+      maxAttempts: BaseProvider.retryAttempts,
+      delayFactor: BaseProvider.retryDelayFactor,
+    );
+    QueryResult result = await client.query(queryOptions);
+    if (result.hasException) {
+      if (logFailures) {
+        CrashHandler.logCrashReport('Exception while executing Query:'
+            '\n${result.exception.toString()}\n'
+            'Retrying up to ${retryOptions.maxAttempts} additional times.');
+      }
+
+      QueryResult? retryResult =
+          await CrashHandler.retryOnException<QueryResult?>(
+        () => _retryOperation(
+          () => client.query(queryOptions),
+        ),
+        onFailOperation: () {
+          if (logFailures) {
+            DebugLogger.warning('Failed to complete Query'
+                ' after ${retryOptions.maxAttempts + 1} attempts.');
+          }
+          return null;
+        },
+        retryOptions: retryOptions,
+        logFailures: logFailures,
+      );
+      if (retryResult != null) {
+        result = retryResult;
+      }
+    }
+
+    return result;
+  }
+
   Future<QueryResult> runMutation(
       {required DocumentNode document,
       Map<String, dynamic>? variables,
@@ -129,7 +168,7 @@ abstract class BaseProvider extends ChangeNotifier {
 
       QueryResult? retryResult =
           await CrashHandler.retryOnException<QueryResult?>(
-        () => _retryMutation(mutation),
+        () => _retryOperation(() => client.mutate(mutation)),
         onFailOperation: () {
           if (logFailures) {
             DebugLogger.warning('Failed to complete Mutation'
@@ -148,8 +187,9 @@ abstract class BaseProvider extends ChangeNotifier {
     return result;
   }
 
-  Future<QueryResult> _retryMutation(MutationOptions mutation) async {
-    QueryResult retryResult = await client.mutate(mutation);
+  Future<QueryResult> _retryOperation(
+      Future<QueryResult> Function() operation) async {
+    QueryResult retryResult = await operation();
     if (retryResult.hasException) {
       throw RetryException(
         message: retryResult.exception.toString(),
