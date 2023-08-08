@@ -51,7 +51,34 @@ export function generateUserAuthResponse(userId: string) {
 
 export function generateUserProfileCompletionPercentage() {
     // Returns a random integer between 0 and 100
+    // TODO: copy logic from backend (once defined) to rely on other field values
     return Math.floor(Math.random() * 100);
+}
+
+export function generateCompany() {
+    const companyStage = faker.helpers.arrayElement(constants.companyStages);
+    const companyType = faker.helpers.arrayElement(constants.companyTypes);
+    return {
+        __typename: "Company",
+        id: faker.string.alphanumeric({ length: 24 }),
+        name: faker.company.name(),
+        description: faker.lorem.sentence(),
+        foundedAt: faker.date.past(),
+        companyTypeTextId: companyType.textId,
+        companyType: companyType,
+        companyStageTextId: companyStage.textId,
+        companyStage: companyStage,
+        websites: [generateWebsite()],
+    }
+}
+
+export function generateWebsite() {
+    return {
+        __typename: "LabeledStringValue",
+        id: faker.string.alphanumeric({ length: 24 }),
+        value: faker.internet.url(),
+        label: faker.helpers.arrayElement(constants.websiteTypes),
+    }
 }
 
 // groups and group memberships
@@ -82,6 +109,7 @@ export function generateGroup(mentorGroup?: boolean, menteeGroup?: boolean) {
     return group;
 }
 
+// generate mentee and mentor groups
 export function generateCoreGroups() {
     return [
         generateGroup(true, false),
@@ -105,12 +133,14 @@ export function generateGroupMembership(user: any, group: any) {
         membership.__typename = "MentorsGroupMembership";
         membership.expertises = faker.helpers.arrayElements(constants.expertises, 2);
         membership.industries = faker.helpers.arrayElements(constants.industries, 2);
+        membership.endorsements = faker.number.int(5);
     }
 
     if (group.groupIdent === "mentees") {
         membership.__typename = "MenteesGroupMembership";
         membership.soughtExpertises = faker.helpers.arrayElements(constants.expertises, 2);
         membership.industry = faker.helpers.arrayElement(constants.industries);
+        user.companies = generateCompany();
     }
 
     return membership;

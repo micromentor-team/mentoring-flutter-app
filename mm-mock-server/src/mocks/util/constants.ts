@@ -471,3 +471,13 @@ export const genders = [
     value: 'I prefer not to share',
   },
 ]
+
+// website types taken from Micromentor's django app (subject to change)
+
+export const websiteTypes = [
+  "facebook",
+  "twitter",
+  "venture",
+  "linkedin",
+  "other"
+]
