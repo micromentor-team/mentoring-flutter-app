@@ -5,6 +5,2054 @@
 import 'package:gql/ast.dart';
 import 'schema.graphql.dart';
 
+class Query$FindAllOptionsByType {
+  Query$FindAllOptionsByType({
+    required this.findCompanyStages,
+    required this.findCompanyTypes,
+    required this.findCountries,
+    required this.findEducationLevels,
+    required this.findExpertises,
+    required this.findIndustries,
+    required this.findGenders,
+    required this.findLanguages,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$FindAllOptionsByType.fromJson(Map<String, dynamic> json) {
+    final l$findCompanyStages = json['findCompanyStages'];
+    final l$findCompanyTypes = json['findCompanyTypes'];
+    final l$findCountries = json['findCountries'];
+    final l$findEducationLevels = json['findEducationLevels'];
+    final l$findExpertises = json['findExpertises'];
+    final l$findIndustries = json['findIndustries'];
+    final l$findGenders = json['findGenders'];
+    final l$findLanguages = json['findLanguages'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType(
+      findCompanyStages: (l$findCompanyStages as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findCompanyStages.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      findCompanyTypes: (l$findCompanyTypes as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findCompanyTypes.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      findCountries: (l$findCountries as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findCountries.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      findEducationLevels: (l$findEducationLevels as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findEducationLevels.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      findExpertises: (l$findExpertises as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findExpertises.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      findIndustries: (l$findIndustries as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findIndustries.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      findGenders: (l$findGenders as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findGenders.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      findLanguages: (l$findLanguages as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findLanguages.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$FindAllOptionsByType$findCompanyStages> findCompanyStages;
+
+  final List<Query$FindAllOptionsByType$findCompanyTypes> findCompanyTypes;
+
+  final List<Query$FindAllOptionsByType$findCountries> findCountries;
+
+  final List<Query$FindAllOptionsByType$findEducationLevels>
+      findEducationLevels;
+
+  final List<Query$FindAllOptionsByType$findExpertises> findExpertises;
+
+  final List<Query$FindAllOptionsByType$findIndustries> findIndustries;
+
+  final List<Query$FindAllOptionsByType$findGenders> findGenders;
+
+  final List<Query$FindAllOptionsByType$findLanguages> findLanguages;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$findCompanyStages = findCompanyStages;
+    _resultData['findCompanyStages'] =
+        l$findCompanyStages.map((e) => e.toJson()).toList();
+    final l$findCompanyTypes = findCompanyTypes;
+    _resultData['findCompanyTypes'] =
+        l$findCompanyTypes.map((e) => e.toJson()).toList();
+    final l$findCountries = findCountries;
+    _resultData['findCountries'] =
+        l$findCountries.map((e) => e.toJson()).toList();
+    final l$findEducationLevels = findEducationLevels;
+    _resultData['findEducationLevels'] =
+        l$findEducationLevels.map((e) => e.toJson()).toList();
+    final l$findExpertises = findExpertises;
+    _resultData['findExpertises'] =
+        l$findExpertises.map((e) => e.toJson()).toList();
+    final l$findIndustries = findIndustries;
+    _resultData['findIndustries'] =
+        l$findIndustries.map((e) => e.toJson()).toList();
+    final l$findGenders = findGenders;
+    _resultData['findGenders'] = l$findGenders.map((e) => e.toJson()).toList();
+    final l$findLanguages = findLanguages;
+    _resultData['findLanguages'] =
+        l$findLanguages.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$findCompanyStages = findCompanyStages;
+    final l$findCompanyTypes = findCompanyTypes;
+    final l$findCountries = findCountries;
+    final l$findEducationLevels = findEducationLevels;
+    final l$findExpertises = findExpertises;
+    final l$findIndustries = findIndustries;
+    final l$findGenders = findGenders;
+    final l$findLanguages = findLanguages;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$findCompanyStages.map((v) => v)),
+      Object.hashAll(l$findCompanyTypes.map((v) => v)),
+      Object.hashAll(l$findCountries.map((v) => v)),
+      Object.hashAll(l$findEducationLevels.map((v) => v)),
+      Object.hashAll(l$findExpertises.map((v) => v)),
+      Object.hashAll(l$findIndustries.map((v) => v)),
+      Object.hashAll(l$findGenders.map((v) => v)),
+      Object.hashAll(l$findLanguages.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$findCompanyStages = findCompanyStages;
+    final lOther$findCompanyStages = other.findCompanyStages;
+    if (l$findCompanyStages.length != lOther$findCompanyStages.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findCompanyStages.length; i++) {
+      final l$findCompanyStages$entry = l$findCompanyStages[i];
+      final lOther$findCompanyStages$entry = lOther$findCompanyStages[i];
+      if (l$findCompanyStages$entry != lOther$findCompanyStages$entry) {
+        return false;
+      }
+    }
+    final l$findCompanyTypes = findCompanyTypes;
+    final lOther$findCompanyTypes = other.findCompanyTypes;
+    if (l$findCompanyTypes.length != lOther$findCompanyTypes.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findCompanyTypes.length; i++) {
+      final l$findCompanyTypes$entry = l$findCompanyTypes[i];
+      final lOther$findCompanyTypes$entry = lOther$findCompanyTypes[i];
+      if (l$findCompanyTypes$entry != lOther$findCompanyTypes$entry) {
+        return false;
+      }
+    }
+    final l$findCountries = findCountries;
+    final lOther$findCountries = other.findCountries;
+    if (l$findCountries.length != lOther$findCountries.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findCountries.length; i++) {
+      final l$findCountries$entry = l$findCountries[i];
+      final lOther$findCountries$entry = lOther$findCountries[i];
+      if (l$findCountries$entry != lOther$findCountries$entry) {
+        return false;
+      }
+    }
+    final l$findEducationLevels = findEducationLevels;
+    final lOther$findEducationLevels = other.findEducationLevels;
+    if (l$findEducationLevels.length != lOther$findEducationLevels.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findEducationLevels.length; i++) {
+      final l$findEducationLevels$entry = l$findEducationLevels[i];
+      final lOther$findEducationLevels$entry = lOther$findEducationLevels[i];
+      if (l$findEducationLevels$entry != lOther$findEducationLevels$entry) {
+        return false;
+      }
+    }
+    final l$findExpertises = findExpertises;
+    final lOther$findExpertises = other.findExpertises;
+    if (l$findExpertises.length != lOther$findExpertises.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findExpertises.length; i++) {
+      final l$findExpertises$entry = l$findExpertises[i];
+      final lOther$findExpertises$entry = lOther$findExpertises[i];
+      if (l$findExpertises$entry != lOther$findExpertises$entry) {
+        return false;
+      }
+    }
+    final l$findIndustries = findIndustries;
+    final lOther$findIndustries = other.findIndustries;
+    if (l$findIndustries.length != lOther$findIndustries.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findIndustries.length; i++) {
+      final l$findIndustries$entry = l$findIndustries[i];
+      final lOther$findIndustries$entry = lOther$findIndustries[i];
+      if (l$findIndustries$entry != lOther$findIndustries$entry) {
+        return false;
+      }
+    }
+    final l$findGenders = findGenders;
+    final lOther$findGenders = other.findGenders;
+    if (l$findGenders.length != lOther$findGenders.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findGenders.length; i++) {
+      final l$findGenders$entry = l$findGenders[i];
+      final lOther$findGenders$entry = lOther$findGenders[i];
+      if (l$findGenders$entry != lOther$findGenders$entry) {
+        return false;
+      }
+    }
+    final l$findLanguages = findLanguages;
+    final lOther$findLanguages = other.findLanguages;
+    if (l$findLanguages.length != lOther$findLanguages.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findLanguages.length; i++) {
+      final l$findLanguages$entry = l$findLanguages[i];
+      final lOther$findLanguages$entry = lOther$findLanguages[i];
+      if (l$findLanguages$entry != lOther$findLanguages$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType
+    on Query$FindAllOptionsByType {
+  CopyWith$Query$FindAllOptionsByType<Query$FindAllOptionsByType>
+      get copyWith => CopyWith$Query$FindAllOptionsByType(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType(
+    Query$FindAllOptionsByType instance,
+    TRes Function(Query$FindAllOptionsByType) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType;
+
+  factory CopyWith$Query$FindAllOptionsByType.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType;
+
+  TRes call({
+    List<Query$FindAllOptionsByType$findCompanyStages>? findCompanyStages,
+    List<Query$FindAllOptionsByType$findCompanyTypes>? findCompanyTypes,
+    List<Query$FindAllOptionsByType$findCountries>? findCountries,
+    List<Query$FindAllOptionsByType$findEducationLevels>? findEducationLevels,
+    List<Query$FindAllOptionsByType$findExpertises>? findExpertises,
+    List<Query$FindAllOptionsByType$findIndustries>? findIndustries,
+    List<Query$FindAllOptionsByType$findGenders>? findGenders,
+    List<Query$FindAllOptionsByType$findLanguages>? findLanguages,
+    String? $__typename,
+  });
+  TRes findCompanyStages(
+      Iterable<Query$FindAllOptionsByType$findCompanyStages> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findCompanyStages<
+                      Query$FindAllOptionsByType$findCompanyStages>>)
+          _fn);
+  TRes findCompanyTypes(
+      Iterable<Query$FindAllOptionsByType$findCompanyTypes> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findCompanyTypes<
+                      Query$FindAllOptionsByType$findCompanyTypes>>)
+          _fn);
+  TRes findCountries(
+      Iterable<Query$FindAllOptionsByType$findCountries> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findCountries<
+                      Query$FindAllOptionsByType$findCountries>>)
+          _fn);
+  TRes findEducationLevels(
+      Iterable<Query$FindAllOptionsByType$findEducationLevels> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findEducationLevels<
+                      Query$FindAllOptionsByType$findEducationLevels>>)
+          _fn);
+  TRes findExpertises(
+      Iterable<Query$FindAllOptionsByType$findExpertises> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findExpertises<
+                      Query$FindAllOptionsByType$findExpertises>>)
+          _fn);
+  TRes findIndustries(
+      Iterable<Query$FindAllOptionsByType$findIndustries> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findIndustries<
+                      Query$FindAllOptionsByType$findIndustries>>)
+          _fn);
+  TRes findGenders(
+      Iterable<Query$FindAllOptionsByType$findGenders> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findGenders<
+                      Query$FindAllOptionsByType$findGenders>>)
+          _fn);
+  TRes findLanguages(
+      Iterable<Query$FindAllOptionsByType$findLanguages> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findLanguages<
+                      Query$FindAllOptionsByType$findLanguages>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
+    implements CopyWith$Query$FindAllOptionsByType<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType _instance;
+
+  final TRes Function(Query$FindAllOptionsByType) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? findCompanyStages = _undefined,
+    Object? findCompanyTypes = _undefined,
+    Object? findCountries = _undefined,
+    Object? findEducationLevels = _undefined,
+    Object? findExpertises = _undefined,
+    Object? findIndustries = _undefined,
+    Object? findGenders = _undefined,
+    Object? findLanguages = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType(
+        findCompanyStages:
+            findCompanyStages == _undefined || findCompanyStages == null
+                ? _instance.findCompanyStages
+                : (findCompanyStages
+                    as List<Query$FindAllOptionsByType$findCompanyStages>),
+        findCompanyTypes:
+            findCompanyTypes == _undefined || findCompanyTypes == null
+                ? _instance.findCompanyTypes
+                : (findCompanyTypes
+                    as List<Query$FindAllOptionsByType$findCompanyTypes>),
+        findCountries: findCountries == _undefined || findCountries == null
+            ? _instance.findCountries
+            : (findCountries as List<Query$FindAllOptionsByType$findCountries>),
+        findEducationLevels:
+            findEducationLevels == _undefined || findEducationLevels == null
+                ? _instance.findEducationLevels
+                : (findEducationLevels
+                    as List<Query$FindAllOptionsByType$findEducationLevels>),
+        findExpertises: findExpertises == _undefined || findExpertises == null
+            ? _instance.findExpertises
+            : (findExpertises
+                as List<Query$FindAllOptionsByType$findExpertises>),
+        findIndustries: findIndustries == _undefined || findIndustries == null
+            ? _instance.findIndustries
+            : (findIndustries
+                as List<Query$FindAllOptionsByType$findIndustries>),
+        findGenders: findGenders == _undefined || findGenders == null
+            ? _instance.findGenders
+            : (findGenders as List<Query$FindAllOptionsByType$findGenders>),
+        findLanguages: findLanguages == _undefined || findLanguages == null
+            ? _instance.findLanguages
+            : (findLanguages as List<Query$FindAllOptionsByType$findLanguages>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  TRes findCompanyStages(
+          Iterable<Query$FindAllOptionsByType$findCompanyStages> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findCompanyStages<
+                          Query$FindAllOptionsByType$findCompanyStages>>)
+              _fn) =>
+      call(
+          findCompanyStages: _fn(_instance.findCompanyStages
+              .map((e) => CopyWith$Query$FindAllOptionsByType$findCompanyStages(
+                    e,
+                    (i) => i,
+                  ))).toList());
+  TRes findCompanyTypes(
+          Iterable<Query$FindAllOptionsByType$findCompanyTypes> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findCompanyTypes<
+                          Query$FindAllOptionsByType$findCompanyTypes>>)
+              _fn) =>
+      call(
+          findCompanyTypes: _fn(_instance.findCompanyTypes
+              .map((e) => CopyWith$Query$FindAllOptionsByType$findCompanyTypes(
+                    e,
+                    (i) => i,
+                  ))).toList());
+  TRes findCountries(
+          Iterable<Query$FindAllOptionsByType$findCountries> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findCountries<
+                          Query$FindAllOptionsByType$findCountries>>)
+              _fn) =>
+      call(
+          findCountries: _fn(_instance.findCountries
+              .map((e) => CopyWith$Query$FindAllOptionsByType$findCountries(
+                    e,
+                    (i) => i,
+                  ))).toList());
+  TRes findEducationLevels(
+          Iterable<Query$FindAllOptionsByType$findEducationLevels> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findEducationLevels<
+                          Query$FindAllOptionsByType$findEducationLevels>>)
+              _fn) =>
+      call(
+          findEducationLevels: _fn(_instance.findEducationLevels.map(
+              (e) => CopyWith$Query$FindAllOptionsByType$findEducationLevels(
+                    e,
+                    (i) => i,
+                  ))).toList());
+  TRes findExpertises(
+          Iterable<Query$FindAllOptionsByType$findExpertises> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findExpertises<
+                          Query$FindAllOptionsByType$findExpertises>>)
+              _fn) =>
+      call(
+          findExpertises: _fn(_instance.findExpertises
+              .map((e) => CopyWith$Query$FindAllOptionsByType$findExpertises(
+                    e,
+                    (i) => i,
+                  ))).toList());
+  TRes findIndustries(
+          Iterable<Query$FindAllOptionsByType$findIndustries> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findIndustries<
+                          Query$FindAllOptionsByType$findIndustries>>)
+              _fn) =>
+      call(
+          findIndustries: _fn(_instance.findIndustries
+              .map((e) => CopyWith$Query$FindAllOptionsByType$findIndustries(
+                    e,
+                    (i) => i,
+                  ))).toList());
+  TRes findGenders(
+          Iterable<Query$FindAllOptionsByType$findGenders> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findGenders<
+                          Query$FindAllOptionsByType$findGenders>>)
+              _fn) =>
+      call(
+          findGenders: _fn(_instance.findGenders
+              .map((e) => CopyWith$Query$FindAllOptionsByType$findGenders(
+                    e,
+                    (i) => i,
+                  ))).toList());
+  TRes findLanguages(
+          Iterable<Query$FindAllOptionsByType$findLanguages> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findLanguages<
+                          Query$FindAllOptionsByType$findLanguages>>)
+              _fn) =>
+      call(
+          findLanguages: _fn(_instance.findLanguages
+              .map((e) => CopyWith$Query$FindAllOptionsByType$findLanguages(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType<TRes>
+    implements CopyWith$Query$FindAllOptionsByType<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$FindAllOptionsByType$findCompanyStages>? findCompanyStages,
+    List<Query$FindAllOptionsByType$findCompanyTypes>? findCompanyTypes,
+    List<Query$FindAllOptionsByType$findCountries>? findCountries,
+    List<Query$FindAllOptionsByType$findEducationLevels>? findEducationLevels,
+    List<Query$FindAllOptionsByType$findExpertises>? findExpertises,
+    List<Query$FindAllOptionsByType$findIndustries>? findIndustries,
+    List<Query$FindAllOptionsByType$findGenders>? findGenders,
+    List<Query$FindAllOptionsByType$findLanguages>? findLanguages,
+    String? $__typename,
+  }) =>
+      _res;
+  findCompanyStages(_fn) => _res;
+  findCompanyTypes(_fn) => _res;
+  findCountries(_fn) => _res;
+  findEducationLevels(_fn) => _res;
+  findExpertises(_fn) => _res;
+  findIndustries(_fn) => _res;
+  findGenders(_fn) => _res;
+  findLanguages(_fn) => _res;
+}
+
+const documentNodeQueryFindAllOptionsByType = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'FindAllOptionsByType'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'findCompanyStages'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findCompanyTypes'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findCountries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'alpha2Key'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findEducationLevels'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findExpertises'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findIndustries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findGenders'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findLanguages'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'isUiLanguage'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'shortLangCode'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'longLangCode'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$FindAllOptionsByType$findCompanyStages {
+  Query$FindAllOptionsByType$findCompanyStages({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'CompanyStage',
+  });
+
+  factory Query$FindAllOptionsByType$findCompanyStages.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findCompanyStages(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findCompanyStages) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findCompanyStages
+    on Query$FindAllOptionsByType$findCompanyStages {
+  CopyWith$Query$FindAllOptionsByType$findCompanyStages<
+          Query$FindAllOptionsByType$findCompanyStages>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findCompanyStages(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findCompanyStages<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findCompanyStages(
+    Query$FindAllOptionsByType$findCompanyStages instance,
+    TRes Function(Query$FindAllOptionsByType$findCompanyStages) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findCompanyStages;
+
+  factory CopyWith$Query$FindAllOptionsByType$findCompanyStages.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findCompanyStages;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findCompanyStages<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findCompanyStages<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findCompanyStages(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findCompanyStages _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findCompanyStages) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findCompanyStages(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findCompanyStages<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findCompanyStages<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findCompanyStages(this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findCompanyTypes {
+  Query$FindAllOptionsByType$findCompanyTypes({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'CompanyType',
+  });
+
+  factory Query$FindAllOptionsByType$findCompanyTypes.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findCompanyTypes(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findCompanyTypes) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findCompanyTypes
+    on Query$FindAllOptionsByType$findCompanyTypes {
+  CopyWith$Query$FindAllOptionsByType$findCompanyTypes<
+          Query$FindAllOptionsByType$findCompanyTypes>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findCompanyTypes(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findCompanyTypes<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findCompanyTypes(
+    Query$FindAllOptionsByType$findCompanyTypes instance,
+    TRes Function(Query$FindAllOptionsByType$findCompanyTypes) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findCompanyTypes;
+
+  factory CopyWith$Query$FindAllOptionsByType$findCompanyTypes.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findCompanyTypes;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findCompanyTypes<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findCompanyTypes<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findCompanyTypes(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findCompanyTypes _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findCompanyTypes) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findCompanyTypes(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findCompanyTypes<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findCompanyTypes<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findCompanyTypes(this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findCountries {
+  Query$FindAllOptionsByType$findCountries({
+    required this.alpha2Key,
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'Country',
+  });
+
+  factory Query$FindAllOptionsByType$findCountries.fromJson(
+      Map<String, dynamic> json) {
+    final l$alpha2Key = json['alpha2Key'];
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findCountries(
+      alpha2Key: (l$alpha2Key as String),
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String alpha2Key;
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$alpha2Key = alpha2Key;
+    _resultData['alpha2Key'] = l$alpha2Key;
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$alpha2Key = alpha2Key;
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$alpha2Key,
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findCountries) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$alpha2Key = alpha2Key;
+    final lOther$alpha2Key = other.alpha2Key;
+    if (l$alpha2Key != lOther$alpha2Key) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findCountries
+    on Query$FindAllOptionsByType$findCountries {
+  CopyWith$Query$FindAllOptionsByType$findCountries<
+          Query$FindAllOptionsByType$findCountries>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findCountries(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findCountries<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findCountries(
+    Query$FindAllOptionsByType$findCountries instance,
+    TRes Function(Query$FindAllOptionsByType$findCountries) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findCountries;
+
+  factory CopyWith$Query$FindAllOptionsByType$findCountries.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findCountries;
+
+  TRes call({
+    String? alpha2Key,
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findCountries<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findCountries<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findCountries(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findCountries _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findCountries) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? alpha2Key = _undefined,
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findCountries(
+        alpha2Key: alpha2Key == _undefined || alpha2Key == null
+            ? _instance.alpha2Key
+            : (alpha2Key as String),
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findCountries<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findCountries<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findCountries(this._res);
+
+  TRes _res;
+
+  call({
+    String? alpha2Key,
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findEducationLevels {
+  Query$FindAllOptionsByType$findEducationLevels({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'EducationLevel',
+  });
+
+  factory Query$FindAllOptionsByType$findEducationLevels.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findEducationLevels(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findEducationLevels) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findEducationLevels
+    on Query$FindAllOptionsByType$findEducationLevels {
+  CopyWith$Query$FindAllOptionsByType$findEducationLevels<
+          Query$FindAllOptionsByType$findEducationLevels>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findEducationLevels(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findEducationLevels<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findEducationLevels(
+    Query$FindAllOptionsByType$findEducationLevels instance,
+    TRes Function(Query$FindAllOptionsByType$findEducationLevels) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findEducationLevels;
+
+  factory CopyWith$Query$FindAllOptionsByType$findEducationLevels.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findEducationLevels;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findEducationLevels<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findEducationLevels<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findEducationLevels(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findEducationLevels _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findEducationLevels) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findEducationLevels(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findEducationLevels<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findEducationLevels<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findEducationLevels(this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findExpertises {
+  Query$FindAllOptionsByType$findExpertises({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'Expertise',
+  });
+
+  factory Query$FindAllOptionsByType$findExpertises.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findExpertises(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findExpertises) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findExpertises
+    on Query$FindAllOptionsByType$findExpertises {
+  CopyWith$Query$FindAllOptionsByType$findExpertises<
+          Query$FindAllOptionsByType$findExpertises>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findExpertises(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findExpertises<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findExpertises(
+    Query$FindAllOptionsByType$findExpertises instance,
+    TRes Function(Query$FindAllOptionsByType$findExpertises) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findExpertises;
+
+  factory CopyWith$Query$FindAllOptionsByType$findExpertises.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findExpertises;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findExpertises<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findExpertises<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findExpertises(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findExpertises _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findExpertises) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findExpertises(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findExpertises<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findExpertises<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findExpertises(this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findIndustries {
+  Query$FindAllOptionsByType$findIndustries({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'Industry',
+  });
+
+  factory Query$FindAllOptionsByType$findIndustries.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findIndustries(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findIndustries) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findIndustries
+    on Query$FindAllOptionsByType$findIndustries {
+  CopyWith$Query$FindAllOptionsByType$findIndustries<
+          Query$FindAllOptionsByType$findIndustries>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findIndustries(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findIndustries<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findIndustries(
+    Query$FindAllOptionsByType$findIndustries instance,
+    TRes Function(Query$FindAllOptionsByType$findIndustries) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findIndustries;
+
+  factory CopyWith$Query$FindAllOptionsByType$findIndustries.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findIndustries;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findIndustries<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findIndustries<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findIndustries(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findIndustries _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findIndustries) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findIndustries(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findIndustries<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findIndustries<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findIndustries(this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findGenders {
+  Query$FindAllOptionsByType$findGenders({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'Gender',
+  });
+
+  factory Query$FindAllOptionsByType$findGenders.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findGenders(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findGenders) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findGenders
+    on Query$FindAllOptionsByType$findGenders {
+  CopyWith$Query$FindAllOptionsByType$findGenders<
+          Query$FindAllOptionsByType$findGenders>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findGenders(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findGenders<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findGenders(
+    Query$FindAllOptionsByType$findGenders instance,
+    TRes Function(Query$FindAllOptionsByType$findGenders) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findGenders;
+
+  factory CopyWith$Query$FindAllOptionsByType$findGenders.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findGenders;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findGenders<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findGenders<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findGenders(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findGenders _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findGenders) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findGenders(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findGenders<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findGenders<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findGenders(this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findLanguages {
+  Query$FindAllOptionsByType$findLanguages({
+    required this.textId,
+    this.translatedValue,
+    required this.isUiLanguage,
+    this.shortLangCode,
+    this.longLangCode,
+    this.$__typename = 'Language',
+  });
+
+  factory Query$FindAllOptionsByType$findLanguages.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$isUiLanguage = json['isUiLanguage'];
+    final l$shortLangCode = json['shortLangCode'];
+    final l$longLangCode = json['longLangCode'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findLanguages(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      isUiLanguage: (l$isUiLanguage as bool),
+      shortLangCode: (l$shortLangCode as String?),
+      longLangCode: (l$longLangCode as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final bool isUiLanguage;
+
+  final String? shortLangCode;
+
+  final String? longLangCode;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$isUiLanguage = isUiLanguage;
+    _resultData['isUiLanguage'] = l$isUiLanguage;
+    final l$shortLangCode = shortLangCode;
+    _resultData['shortLangCode'] = l$shortLangCode;
+    final l$longLangCode = longLangCode;
+    _resultData['longLangCode'] = l$longLangCode;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$isUiLanguage = isUiLanguage;
+    final l$shortLangCode = shortLangCode;
+    final l$longLangCode = longLangCode;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$isUiLanguage,
+      l$shortLangCode,
+      l$longLangCode,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findLanguages) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$isUiLanguage = isUiLanguage;
+    final lOther$isUiLanguage = other.isUiLanguage;
+    if (l$isUiLanguage != lOther$isUiLanguage) {
+      return false;
+    }
+    final l$shortLangCode = shortLangCode;
+    final lOther$shortLangCode = other.shortLangCode;
+    if (l$shortLangCode != lOther$shortLangCode) {
+      return false;
+    }
+    final l$longLangCode = longLangCode;
+    final lOther$longLangCode = other.longLangCode;
+    if (l$longLangCode != lOther$longLangCode) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findLanguages
+    on Query$FindAllOptionsByType$findLanguages {
+  CopyWith$Query$FindAllOptionsByType$findLanguages<
+          Query$FindAllOptionsByType$findLanguages>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findLanguages(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findLanguages<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findLanguages(
+    Query$FindAllOptionsByType$findLanguages instance,
+    TRes Function(Query$FindAllOptionsByType$findLanguages) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findLanguages;
+
+  factory CopyWith$Query$FindAllOptionsByType$findLanguages.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findLanguages;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    bool? isUiLanguage,
+    String? shortLangCode,
+    String? longLangCode,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findLanguages<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findLanguages<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findLanguages(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findLanguages _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findLanguages) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? isUiLanguage = _undefined,
+    Object? shortLangCode = _undefined,
+    Object? longLangCode = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findLanguages(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        isUiLanguage: isUiLanguage == _undefined || isUiLanguage == null
+            ? _instance.isUiLanguage
+            : (isUiLanguage as bool),
+        shortLangCode: shortLangCode == _undefined
+            ? _instance.shortLangCode
+            : (shortLangCode as String?),
+        longLangCode: longLangCode == _undefined
+            ? _instance.longLangCode
+            : (longLangCode as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findLanguages<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findLanguages<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findLanguages(this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
+    bool? isUiLanguage,
+    String? shortLangCode,
+    String? longLangCode,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Query$FindCompanyStages {
   Query$FindCompanyStages({
     required this.findCompanyStages,

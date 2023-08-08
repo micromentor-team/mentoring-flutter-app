@@ -10,6 +10,9 @@ import 'base/operation_result.dart';
 
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 
+typedef MenteeUser = Query$FindMenteeUsers$findUsers;
+typedef MentorUser = Query$FindMentorUsers$findUsers;
+
 class UserProvider extends BaseProvider {
   AuthenticatedUser? _user;
 
@@ -157,89 +160,57 @@ class UserProvider extends BaseProvider {
     );
   }
 
-  Widget findMenteeUsers({
+  Future<OperationResult<List<MenteeUser>>> findMenteeUsers({
     required Input$FindObjectsOptions optionsInput,
     required Input$UserListFilter filterInput,
     required Input$UserInput matchInput,
-    required Widget Function(
-      OperationResult<List<Query$FindMenteeUsers$findUsers>> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryFindMenteeUsers,
-      variables: Variables$Query$FindMenteeUsers(
-              filter: filterInput, options: optionsInput, match: matchInput)
-          .toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<List<Query$FindMenteeUsers$findUsers>> result =
-            OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data == null
-              ? null
-              : Query$FindMenteeUsers.fromJson(
-                  queryResult.data!,
-                ).findUsers.map((element) {
-                  if (element.avatarUrl == "") {
-                    return element.copyWith(avatarUrl: null);
-                  }
-                  return element;
-                }).toList(),
-        );
-        return onData(
-          result,
-          refetch: refetch,
-          fetchMore: fetchMore,
-        );
-      },
-      onLoading: onLoading,
-      onError: onError,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindMenteeUsers,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindMenteeUsers(
+                filter: filterInput, options: optionsInput, match: matchInput)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindMenteeUsers.fromJson(
+              queryResult.data!,
+            ).findUsers
+          : null,
     );
   }
 
-  Widget findMentorUsers({
+  Future<OperationResult<List<MentorUser>>> findMentorUsers({
     required Input$FindObjectsOptions optionsInput,
     required Input$UserListFilter filterInput,
     required Input$UserInput matchInput,
-    required Widget Function(
-      OperationResult<List<Query$FindMentorUsers$findUsers>> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryFindMentorUsers,
-      variables: Variables$Query$FindMentorUsers(
-              filter: filterInput, options: optionsInput, match: matchInput)
-          .toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<List<Query$FindMentorUsers$findUsers>> result =
-            OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data == null
-              ? null
-              : Query$FindMentorUsers.fromJson(
-                  queryResult.data!,
-                ).findUsers.map((element) {
-                  if (element.avatarUrl == "") {
-                    return element.copyWith(avatarUrl: null);
-                  }
-                  return element;
-                }).toList(),
-        );
-        return onData(
-          result,
-          refetch: refetch,
-          fetchMore: fetchMore,
-        );
-      },
-      onLoading: onLoading,
-      onError: onError,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindMentorUsers,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindMentorUsers(
+                filter: filterInput, options: optionsInput, match: matchInput)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindMentorUsers.fromJson(
+              queryResult.data!,
+            ).findUsers
+          : null,
     );
   }
 
