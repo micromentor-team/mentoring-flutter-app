@@ -1516,6 +1516,13 @@ const documentNodeQueryFindMenteeUsers = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
+                name: NameNode(value: 'textId'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'translatedValue'),
                 alias: null,
                 arguments: [],
@@ -1559,6 +1566,13 @@ const documentNodeQueryFindMenteeUsers = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FieldNode(
+                        name: NameNode(value: 'textId'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'translatedValue'),
                         alias: null,
                         arguments: [],
@@ -1580,6 +1594,13 @@ const documentNodeQueryFindMenteeUsers = DocumentNode(definitions: [
                     arguments: [],
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'textId'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FieldNode(
                         name: NameNode(value: 'translatedValue'),
                         alias: null,
@@ -1626,6 +1647,13 @@ const documentNodeQueryFindMenteeUsers = DocumentNode(definitions: [
                 arguments: [],
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'textId'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
                   FieldNode(
                     name: NameNode(value: 'translatedValue'),
                     alias: null,
@@ -2112,19 +2140,24 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers<TRes>
 
 class Query$FindMenteeUsers$findUsers$countryOfResidence {
   Query$FindMenteeUsers$findUsers$countryOfResidence({
+    required this.textId,
     this.translatedValue,
     this.$__typename = 'Country',
   });
 
   factory Query$FindMenteeUsers$findUsers$countryOfResidence.fromJson(
       Map<String, dynamic> json) {
+    final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
     return Query$FindMenteeUsers$findUsers$countryOfResidence(
+      textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String textId;
 
   final String? translatedValue;
 
@@ -2132,6 +2165,8 @@ class Query$FindMenteeUsers$findUsers$countryOfResidence {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
     final l$$__typename = $__typename;
@@ -2141,9 +2176,11 @@ class Query$FindMenteeUsers$findUsers$countryOfResidence {
 
   @override
   int get hashCode {
+    final l$textId = textId;
     final l$translatedValue = translatedValue;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$textId,
       l$translatedValue,
       l$$__typename,
     ]);
@@ -2156,6 +2193,11 @@ class Query$FindMenteeUsers$findUsers$countryOfResidence {
     }
     if (!(other is Query$FindMenteeUsers$findUsers$countryOfResidence) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
       return false;
     }
     final l$translatedValue = translatedValue;
@@ -2195,6 +2237,7 @@ abstract class CopyWith$Query$FindMenteeUsers$findUsers$countryOfResidence<
       _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$countryOfResidence;
 
   TRes call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   });
@@ -2215,10 +2258,14 @@ class _CopyWithImpl$Query$FindMenteeUsers$findUsers$countryOfResidence<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? textId = _undefined,
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindMenteeUsers$findUsers$countryOfResidence(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
@@ -2237,6 +2284,7 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$countryOfResidence<TRes>
   TRes _res;
 
   call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   }) =>
@@ -2652,19 +2700,24 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$groupMemberships$$Mentee
 
 class Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$soughtExpertises {
   Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$soughtExpertises({
+    required this.textId,
     this.translatedValue,
     this.$__typename = 'Expertise',
   });
 
   factory Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$soughtExpertises.fromJson(
       Map<String, dynamic> json) {
+    final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
     return Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+      textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String textId;
 
   final String? translatedValue;
 
@@ -2672,6 +2725,8 @@ class Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$s
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
     final l$$__typename = $__typename;
@@ -2681,9 +2736,11 @@ class Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$s
 
   @override
   int get hashCode {
+    final l$textId = textId;
     final l$translatedValue = translatedValue;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$textId,
       l$translatedValue,
       l$$__typename,
     ]);
@@ -2697,6 +2754,11 @@ class Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$s
     if (!(other
             is Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$soughtExpertises) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
       return false;
     }
     final l$translatedValue = translatedValue;
@@ -2739,6 +2801,7 @@ abstract class CopyWith$Query$FindMenteeUsers$findUsers$groupMemberships$$Mentee
       _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$soughtExpertises;
 
   TRes call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   });
@@ -2764,11 +2827,15 @@ class _CopyWithImpl$Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGro
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? textId = _undefined,
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(
           Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
@@ -2789,6 +2856,7 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$groupMemberships$$Mentee
   TRes _res;
 
   call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   }) =>
@@ -2797,19 +2865,24 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$groupMemberships$$Mentee
 
 class Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$industry {
   Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$industry({
+    required this.textId,
     this.translatedValue,
     this.$__typename = 'Industry',
   });
 
   factory Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$industry.fromJson(
       Map<String, dynamic> json) {
+    final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
     return Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$industry(
+      textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String textId;
 
   final String? translatedValue;
 
@@ -2817,6 +2890,8 @@ class Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$i
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
     final l$$__typename = $__typename;
@@ -2826,9 +2901,11 @@ class Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$i
 
   @override
   int get hashCode {
+    final l$textId = textId;
     final l$translatedValue = translatedValue;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$textId,
       l$translatedValue,
       l$$__typename,
     ]);
@@ -2842,6 +2919,11 @@ class Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$i
     if (!(other
             is Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$industry) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
       return false;
     }
     final l$translatedValue = translatedValue;
@@ -2884,6 +2966,7 @@ abstract class CopyWith$Query$FindMenteeUsers$findUsers$groupMemberships$$Mentee
       _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$industry;
 
   TRes call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   });
@@ -2909,11 +2992,15 @@ class _CopyWithImpl$Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGro
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? textId = _undefined,
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(
           Query$FindMenteeUsers$findUsers$groupMemberships$$MenteesGroupMembership$industry(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
@@ -2934,6 +3021,7 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$groupMemberships$$Mentee
   TRes _res;
 
   call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   }) =>
@@ -3312,19 +3400,24 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$companies<TRes>
 
 class Query$FindMenteeUsers$findUsers$companies$companyStage {
   Query$FindMenteeUsers$findUsers$companies$companyStage({
+    required this.textId,
     this.translatedValue,
     this.$__typename = 'CompanyStage',
   });
 
   factory Query$FindMenteeUsers$findUsers$companies$companyStage.fromJson(
       Map<String, dynamic> json) {
+    final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
     return Query$FindMenteeUsers$findUsers$companies$companyStage(
+      textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String textId;
 
   final String? translatedValue;
 
@@ -3332,6 +3425,8 @@ class Query$FindMenteeUsers$findUsers$companies$companyStage {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
     final l$$__typename = $__typename;
@@ -3341,9 +3436,11 @@ class Query$FindMenteeUsers$findUsers$companies$companyStage {
 
   @override
   int get hashCode {
+    final l$textId = textId;
     final l$translatedValue = translatedValue;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$textId,
       l$translatedValue,
       l$$__typename,
     ]);
@@ -3356,6 +3453,11 @@ class Query$FindMenteeUsers$findUsers$companies$companyStage {
     }
     if (!(other is Query$FindMenteeUsers$findUsers$companies$companyStage) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
       return false;
     }
     final l$translatedValue = translatedValue;
@@ -3395,6 +3497,7 @@ abstract class CopyWith$Query$FindMenteeUsers$findUsers$companies$companyStage<
       _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$companies$companyStage;
 
   TRes call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   });
@@ -3416,10 +3519,14 @@ class _CopyWithImpl$Query$FindMenteeUsers$findUsers$companies$companyStage<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? textId = _undefined,
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindMenteeUsers$findUsers$companies$companyStage(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
@@ -3439,6 +3546,7 @@ class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers$companies$companyStage<
   TRes _res;
 
   call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   }) =>
@@ -3894,6 +4002,13 @@ const documentNodeQueryFindMentorUsers = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
+                name: NameNode(value: 'textId'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'translatedValue'),
                 alias: null,
                 arguments: [],
@@ -3944,6 +4059,13 @@ const documentNodeQueryFindMentorUsers = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FieldNode(
+                        name: NameNode(value: 'textId'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'translatedValue'),
                         alias: null,
                         arguments: [],
@@ -3965,6 +4087,13 @@ const documentNodeQueryFindMentorUsers = DocumentNode(definitions: [
                     arguments: [],
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'textId'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FieldNode(
                         name: NameNode(value: 'translatedValue'),
                         alias: null,
@@ -4418,19 +4547,24 @@ class _CopyWithStubImpl$Query$FindMentorUsers$findUsers<TRes>
 
 class Query$FindMentorUsers$findUsers$countryOfResidence {
   Query$FindMentorUsers$findUsers$countryOfResidence({
+    required this.textId,
     this.translatedValue,
     this.$__typename = 'Country',
   });
 
   factory Query$FindMentorUsers$findUsers$countryOfResidence.fromJson(
       Map<String, dynamic> json) {
+    final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
     return Query$FindMentorUsers$findUsers$countryOfResidence(
+      textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String textId;
 
   final String? translatedValue;
 
@@ -4438,6 +4572,8 @@ class Query$FindMentorUsers$findUsers$countryOfResidence {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
     final l$$__typename = $__typename;
@@ -4447,9 +4583,11 @@ class Query$FindMentorUsers$findUsers$countryOfResidence {
 
   @override
   int get hashCode {
+    final l$textId = textId;
     final l$translatedValue = translatedValue;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$textId,
       l$translatedValue,
       l$$__typename,
     ]);
@@ -4462,6 +4600,11 @@ class Query$FindMentorUsers$findUsers$countryOfResidence {
     }
     if (!(other is Query$FindMentorUsers$findUsers$countryOfResidence) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
       return false;
     }
     final l$translatedValue = translatedValue;
@@ -4501,6 +4644,7 @@ abstract class CopyWith$Query$FindMentorUsers$findUsers$countryOfResidence<
       _CopyWithStubImpl$Query$FindMentorUsers$findUsers$countryOfResidence;
 
   TRes call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   });
@@ -4521,10 +4665,14 @@ class _CopyWithImpl$Query$FindMentorUsers$findUsers$countryOfResidence<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? textId = _undefined,
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindMentorUsers$findUsers$countryOfResidence(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
@@ -4543,6 +4691,7 @@ class _CopyWithStubImpl$Query$FindMentorUsers$findUsers$countryOfResidence<TRes>
   TRes _res;
 
   call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   }) =>
@@ -5041,19 +5190,24 @@ class _CopyWithStubImpl$Query$FindMentorUsers$findUsers$groupMemberships$$Mentor
 
 class Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$expertises {
   Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$expertises({
+    required this.textId,
     this.translatedValue,
     this.$__typename = 'Expertise',
   });
 
   factory Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$expertises.fromJson(
       Map<String, dynamic> json) {
+    final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
     return Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$expertises(
+      textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String textId;
 
   final String? translatedValue;
 
@@ -5061,6 +5215,8 @@ class Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$e
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
     final l$$__typename = $__typename;
@@ -5070,9 +5226,11 @@ class Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$e
 
   @override
   int get hashCode {
+    final l$textId = textId;
     final l$translatedValue = translatedValue;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$textId,
       l$translatedValue,
       l$$__typename,
     ]);
@@ -5086,6 +5244,11 @@ class Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$e
     if (!(other
             is Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$expertises) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
       return false;
     }
     final l$translatedValue = translatedValue;
@@ -5128,6 +5291,7 @@ abstract class CopyWith$Query$FindMentorUsers$findUsers$groupMemberships$$Mentor
       _CopyWithStubImpl$Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$expertises;
 
   TRes call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   });
@@ -5153,11 +5317,15 @@ class _CopyWithImpl$Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGro
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? textId = _undefined,
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(
           Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$expertises(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
@@ -5178,6 +5346,7 @@ class _CopyWithStubImpl$Query$FindMentorUsers$findUsers$groupMemberships$$Mentor
   TRes _res;
 
   call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   }) =>
@@ -5186,19 +5355,24 @@ class _CopyWithStubImpl$Query$FindMentorUsers$findUsers$groupMemberships$$Mentor
 
 class Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$industries {
   Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$industries({
+    required this.textId,
     this.translatedValue,
     this.$__typename = 'Industry',
   });
 
   factory Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$industries.fromJson(
       Map<String, dynamic> json) {
+    final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
     return Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$industries(
+      textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String textId;
 
   final String? translatedValue;
 
@@ -5206,6 +5380,8 @@ class Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$i
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
     final l$$__typename = $__typename;
@@ -5215,9 +5391,11 @@ class Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$i
 
   @override
   int get hashCode {
+    final l$textId = textId;
     final l$translatedValue = translatedValue;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$textId,
       l$translatedValue,
       l$$__typename,
     ]);
@@ -5231,6 +5409,11 @@ class Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$i
     if (!(other
             is Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$industries) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
       return false;
     }
     final l$translatedValue = translatedValue;
@@ -5273,6 +5456,7 @@ abstract class CopyWith$Query$FindMentorUsers$findUsers$groupMemberships$$Mentor
       _CopyWithStubImpl$Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$industries;
 
   TRes call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   });
@@ -5298,11 +5482,15 @@ class _CopyWithImpl$Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGro
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? textId = _undefined,
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(
           Query$FindMentorUsers$findUsers$groupMemberships$$MentorsGroupMembership$industries(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
@@ -5323,6 +5511,7 @@ class _CopyWithStubImpl$Query$FindMentorUsers$findUsers$groupMemberships$$Mentor
   TRes _res;
 
   call({
+    String? textId,
     String? translatedValue,
     String? $__typename,
   }) =>

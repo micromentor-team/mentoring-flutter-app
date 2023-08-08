@@ -10,6 +10,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/firebase_notifications.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
@@ -131,6 +132,9 @@ void main() async {
               ),
               ChangeNotifierProvider(
                 create: (context) => ExploreCardFiltersProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => ContentProvider(client: client),
               ),
               Provider<RouteObserver<PageRoute>>.value(
                 value: RouteObserver<PageRoute>(),
