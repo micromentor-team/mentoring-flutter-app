@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../constants/app_constants.dart';
 import '../../atoms/profile_chip.dart';
 
@@ -79,6 +78,7 @@ class ProfileAboutMe extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
+    //TODO: call the backend instead of using hardcoded data
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,10 +98,14 @@ class ProfileAboutMe extends StatelessWidget {
                     .copyWith(color: theme.colorScheme.onSurface),
               ),
               const SizedBox(height: Insets.paddingSmall),
-              _createChipsSection(context, null, _createLocationChips()),
+              _createChipsSection(
+                  context,
+                  null,
+                  _createLocationChips(
+                      "Shaker Heights, Ohio, USA", "Manila, Philippines")),
               const SizedBox(height: Insets.paddingSmall),
               _createChipsSection(context, "${l10n.profileMyLanguages}:",
-                  _createLanguageChips()),
+                  _createLanguageChips(["English", "Filipino", "French"])),
               const SizedBox(height: Insets.paddingSmall),
             ],
           ),
@@ -123,34 +127,31 @@ class ProfileAboutMe extends StatelessWidget {
   }
 }
 
-List<ProfileChip> _createLocationChips() {
+List<ProfileChip> _createLocationChips(
+  String cityLivesIn,
+  String? cityFrom,
+) {
   List<ProfileChip> example = [
-    const ProfileChip(
-        text: "Lives in Shaker Heights, Ohio, USA",
-        icon: Icons.flag,
-        applyIconColor: true),
-    const ProfileChip(
-        text: "From Manila, Philippines",
-        icon: Icons.flag,
-        applyIconColor: true),
+    ProfileChip(
+        text: "Lives in $cityLivesIn", icon: Icons.flag, applyIconColor: true),
+    if (cityFrom != null)
+      ProfileChip(
+          text: "From $cityFrom", icon: Icons.flag, applyIconColor: true),
   ];
   return example;
 }
 
-List<ProfileChip> _createLanguageChips() {
-  List<ProfileChip> example = [
-    const ProfileChip(
-        text: "English",
-        icon: Icons.chat_bubble_outline_rounded,
-        applyIconColor: true),
-    const ProfileChip(
-        text: "Filipino",
-        icon: Icons.chat_bubble_outline_rounded,
-        applyIconColor: true),
-    const ProfileChip(
-        text: "French",
-        icon: Icons.chat_bubble_outline_rounded,
-        applyIconColor: true),
-  ];
+List<ProfileChip> _createLanguageChips(
+  List<String> languages,
+) {
+  List<ProfileChip> example = [];
+  for (var language in languages) {
+    example.add(
+      ProfileChip(
+          text: language,
+          icon: Icons.chat_bubble_outline_rounded,
+          applyIconColor: true),
+    );
+  }
   return example;
 }
