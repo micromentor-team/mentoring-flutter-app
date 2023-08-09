@@ -16,6 +16,7 @@ import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/base/operation_result.dart';
 import '../../../providers/models/scaffold_model.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_bubble/message_hoverover.dart';
@@ -37,6 +38,23 @@ class ChannelMessagesScreen extends StatefulWidget {
 
 class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
     with RouteAwareMixin<ChannelMessagesScreen> {
+  ChannelsProvider? _channelsProvider;
+  Future<OperationResult<ChannelById>>? _channel;
+  AuthenticatedUser? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _channelsProvider = Provider.of<ChannelsProvider>(context, listen: false);
+    _user = Provider.of<UserProvider>(context, listen: false).user;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _channel = _channelsProvider?.findChannelById(channelId: widget.channelId);
+  }
+
   void _refreshScaffold(
     BuildContext context,
     String channelName,
@@ -71,30 +89,31 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
 
   @override
   Widget build(BuildContext context) {
-    final channelsProvider = Provider.of<ChannelsProvider>(context);
-    final userProvider = Provider.of<UserProvider>(context);
-    final user = userProvider.user;
-
-    return channelsProvider.findChannelById(
-      channelId: widget.channelId,
-      onData: (data, {refetch, fetchMore}) {
-        ChannelById channel = data.response!;
-        final participant = channel.participants
-            .firstWhere((item) => item.user.id != user?.id)
-            .user;
-        final String channelName = participant.fullName!;
-        final String? avatarUrl = participant.avatarUrl;
-        if (isRouteActive) {
-          _refreshScaffold(context, channelName, avatarUrl);
-        }
-        return ChangeNotifierProvider(
-          create: (context) => ChatModel(
-            context: context,
-            channelId: channel.id,
-          ),
-          child: ChannelChat(
-            channel: channel,
-          ),
+    return FutureBuilder(
+      future: _channel,
+      builder: (context, snapshot) {
+        return AppUtility.widgetForAsyncSnapshot(
+          snapshot: snapshot,
+          onReady: () {
+            ChannelById channel = snapshot.data!.response!;
+            final participant = channel.participants
+                .firstWhere((item) => item.user.id != _user?.id)
+                .user;
+            final String channelName = participant.fullName!;
+            final String? avatarUrl = participant.avatarUrl;
+            if (isRouteActive) {
+              _refreshScaffold(context, channelName, avatarUrl);
+            }
+            return ChangeNotifierProvider(
+              create: (context) => ChatModel(
+                context: context,
+                channelId: channel.id,
+              ),
+              child: ChannelChat(
+                channel: channel,
+              ),
+            );
+          },
         );
       },
     );
@@ -117,6 +136,7 @@ class _ChannelChatState extends State<ChannelChat> {
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
   ChatModel? _chatModel;
+  MessagesProvider? _messagesProvider;
   int _messageCount = 0;
   bool _unreadMessages = false; // Non-local Message exists outside of viewport
   ChannelMessage? _focusedMessage; // Intended reply Message
@@ -124,10 +144,8 @@ class _ChannelChatState extends State<ChannelChat> {
   @override
   void initState() {
     super.initState();
-    _chatModel = Provider.of<ChatModel>(
-      context,
-      listen: false,
-    );
+    _chatModel = Provider.of<ChatModel>(context, listen: false);
+    _messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
     _markMessageRead();
     _chatModel!.createChannelSubscription();
     _messageCount = _chatModel!.channelMessages.length;
@@ -140,7 +158,7 @@ class _ChannelChatState extends State<ChannelChat> {
   }
 
   _markMessageRead() {
-    _chatModel!.messagesProvider.markMessageRead(channelId: widget.channel.id);
+    _messagesProvider?.markMessageRead(channelId: widget.channel.id);
   }
 
   void _processNewMessages() {
@@ -242,7 +260,7 @@ class _ChannelChatState extends State<ChannelChat> {
                 replyingTo: _focusedMessage,
                 participants: widget.channel.participants,
                 onSubmit: (val, replyToMessageId) {
-                  chatModel.messagesProvider.createMessage(
+                  _messagesProvider!.createMessage(
                     input: Input$ChannelMessageInput(
                       channelId: widget.channel.id,
                       messageText: val,

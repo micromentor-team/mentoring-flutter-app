@@ -10,7 +10,7 @@ import '../messages_provider.dart';
 
 class ChatModel extends ChangeNotifier {
   final String channelId;
-  final MessagesProvider messagesProvider;
+  final MessagesProvider _messagesProvider;
   List<ChannelMessage>? _channelMessages;
   StreamSubscription<QueryResult<Object?>>? _streamSubscription;
   AsyncState _state = AsyncState.loading;
@@ -21,14 +21,14 @@ class ChatModel extends ChangeNotifier {
   ChatModel({
     required BuildContext context,
     required this.channelId,
-  }) : messagesProvider = Provider.of<MessagesProvider>(
+  }) : _messagesProvider = Provider.of<MessagesProvider>(
           context,
           listen: false,
         );
 
   Future<void> refreshChannelMessages() async {
     _state = AsyncState.loading;
-    final result = await messagesProvider.findChannelMessages(
+    final result = await _messagesProvider.findChannelMessages(
       fetchFromNetworkOnly: true,
       input: Input$ChannelMessageListFilter(channelId: channelId),
     );
@@ -45,7 +45,7 @@ class ChatModel extends ChangeNotifier {
     if (_streamSubscription != null) {
       return;
     }
-    _streamSubscription = messagesProvider.subscribeToChannel(
+    _streamSubscription = _messagesProvider.subscribeToChannel(
       channelId: channelId,
       onSubscriptionEvent: () => refreshChannelMessages(),
     );

@@ -34,6 +34,15 @@ query FindChannelById ($channelId: String!) {
     }
 }
 
+query FindChannelLatestMessage ($channelId: String!) {
+    findChannelById(id: $channelId) {
+        latestMessage {
+            createdAt
+            messageText
+        }
+    }
+}
+
 query GetChannelsList {
     findChannels {
         id

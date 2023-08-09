@@ -6,17 +6,17 @@ import '../__generated/schema/operations_channel.graphql.dart';
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
+typedef ChannelById = Query$FindChannelById$findChannelById;
 typedef ChannelForUser = Query$FindChannelsForUser$findChannelsForUser;
 typedef ChannelForUserParticipant
     = Query$FindChannelsForUser$findChannelsForUser$participants;
-typedef ChannelById = Query$FindChannelById$findChannelById;
 typedef ChannelParticipant = Query$FindChannelById$findChannelById$participants;
+typedef ChannelLatestMessage
+    = Query$FindChannelLatestMessage$findChannelById$latestMessage;
+typedef InvitationInbox = Query$GetInboxInvitations$myInbox;
 
 class ChannelsProvider extends BaseProvider {
-  ChannelsProvider({required super.client}) {
-    debugPrint('ChannelsProvider initialized');
-    // subscribeToChannels();
-  }
+  ChannelsProvider({required super.client});
 
   // Queries
   Future<OperationResult<List<ChannelForUser>>> queryUserChannels({
@@ -38,61 +38,61 @@ class ChannelsProvider extends BaseProvider {
     );
   }
 
-  Widget findChannelById({
+  Future<OperationResult<ChannelById>> findChannelById({
     required String channelId,
-    required Widget Function(
-      OperationResult<Query$FindChannelById$findChannelById> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryFindChannelById,
-      variables: Variables$Query$FindChannelById(channelId: channelId).toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<Query$FindChannelById$findChannelById> result =
-            OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data != null
-              ? Query$FindChannelById.fromJson(
-                  queryResult.data!,
-                ).findChannelById
-              : null,
-        );
-        return onData(result, refetch: refetch, fetchMore: fetchMore);
-      },
-      onLoading: onLoading,
-      onError: onError,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindChannelById,
+        variables:
+            Variables$Query$FindChannelById(channelId: channelId).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindChannelById.fromJson(
+              queryResult.data!,
+            ).findChannelById
+          : null,
     );
   }
 
-  Widget getInboxInvitations({
-    required Widget Function(
-      OperationResult<Query$GetInboxInvitations$myInbox> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryGetInboxInvitations,
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<Query$GetInboxInvitations$myInbox> result =
-            OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data != null
-              ? Query$GetInboxInvitations.fromJson(
-                  queryResult.data!,
-                ).myInbox
-              : null,
-        );
-        return onData(result, refetch: refetch, fetchMore: fetchMore);
-      },
-      onLoading: onLoading,
-      onError: onError,
+  Future<OperationResult<ChannelLatestMessage>> findChannelLatestMessage({
+    required String channelId,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindChannelLatestMessage,
+        fetchPolicy: FetchPolicy.noCache,
+        variables:
+            Variables$Query$FindChannelLatestMessage(channelId: channelId)
+                .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindChannelLatestMessage.fromJson(
+              queryResult.data!,
+            ).findChannelById.latestMessage
+          : null,
+    );
+  }
+
+  Future<OperationResult<InvitationInbox>> getInboxInvitations() async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryGetInboxInvitations,
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$GetInboxInvitations.fromJson(
+              queryResult.data!,
+            ).myInbox
+          : null,
     );
   }
 
