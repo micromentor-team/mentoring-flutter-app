@@ -18,3 +18,11 @@ Run the commands below in: mm-flutter-app/mm-mock-server
     APP_SUBSCRIPTION_URL="ws://localhost:4000/mmdata/api/graphql"
     ```
 5. Run the Flutter app to have it connect to the mocked server.
+
+# Sending Push Notifications
+
+First download the service account and name it `firebase_service_account.json` in this current directory (https://firebase.google.com/docs/admin/setup#initialize_the_sdk_in_non-google_environments).
+
+1. Get the token from the flutter app
+2. Change the push_notification script with the right token
+3. Run `npm run push_notification`
