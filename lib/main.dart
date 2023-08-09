@@ -51,6 +51,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
+    debugPrint('Next route is $nextRouteName');
 
     return userProvider.queryUser(
       onLoading: () {

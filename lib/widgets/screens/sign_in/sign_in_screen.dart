@@ -219,9 +219,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                         passwordController.text = '';
                                       }
                                     } else {
-                                      router.goNamed(Routes.root.name,
+                                      router.pushNamed(Routes.root.name,
                                           queryParameters: {
-                                            'nextRoute': widget.nextRouteName
+                                            'nextRouteName':
+                                                widget.nextRouteName
                                           });
                                     }
                                   }

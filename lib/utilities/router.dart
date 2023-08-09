@@ -38,8 +38,8 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               child: StartScreen(
-                  nextRouteName:
-                      state.queryParameters['nextRoute'] ?? Routes.home.name),
+                  nextRouteName: state.queryParameters['nextRouteName'] ??
+                      Routes.home.name),
             );
           },
         ),
