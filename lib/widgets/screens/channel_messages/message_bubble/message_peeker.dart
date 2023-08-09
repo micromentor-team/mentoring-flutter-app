@@ -68,12 +68,12 @@ class _MessagePeekerState extends State<MessagePeeker>
 
   @override
   void dispose() {
-    super.dispose();
     if (_controller == widget.controller) {
       return;
     } else {
       _controller.dispose();
     }
+    super.dispose();
   }
 
   void _runAnimation({required bool rightDrag}) {

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/models/inbox_chat_tile_model.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
-import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
+import 'package:mm_flutter_app/widgets/molecules/inbox_chat_list_tile.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/base/operation_result.dart';
 import '../../../providers/channels_provider.dart';
 import '../../../providers/messages_provider.dart';
 import '../../../providers/models/scaffold_model.dart';
@@ -23,6 +24,22 @@ class InboxChatsScreen extends StatefulWidget {
 class _InboxChatsScreenState extends State<InboxChatsScreen>
     with RouteAwareMixin<InboxChatsScreen> {
   AuthenticatedUser? _user;
+  Future<OperationResult<List<ChannelForUser>>>? _userChannels;
+
+  @override
+  void initState() {
+    super.initState();
+    _user = Provider.of<UserProvider>(context, listen: false).user;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _userChannels = Provider.of<ChannelsProvider>(
+      context,
+      listen: false,
+    ).queryUserChannels(userId: _user!.id);
+  }
 
   String _channelName(ChannelForUser channel) {
     final participant =
@@ -70,40 +87,15 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
             });
           },
           icon: Icons.archive_outlined,
-          child: messagesProvider.findChannelMessages(
-            input: Input$ChannelMessageListFilter(channelId: channel.id),
-            onData: (data, {refetch, fetchMore}) {
-              List<ChannelMessage> messages = data.response ?? [];
-              int unseenMessageCount = 0;
-              ChannelMessage? lastMessage;
-              // Initialize lastMessageTime to Epoch in order for the search
-              // algorithm to work when looking for the most recent date.
-              DateTime? lastMessageTime = messages.isEmpty
-                  ? null
-                  : DateTime.fromMillisecondsSinceEpoch(0);
-              for (int i = 0; i < messages.length; i++) {
-                if (messages[i].createdAt.isAfter(lastMessageTime!)) {
-                  lastMessage = messages[i];
-                  lastMessageTime = lastMessage.createdAt;
-                }
-                bool isSeen = messages[i]
-                        .statuses
-                        ?.any((status) => status.seenAt != null) ??
-                    false;
-                if (!isSeen) {
-                  unseenMessageCount++;
-                }
-              }
-              return InboxListTile(
-                avatarUrl: channelAvatarUrl,
-                fullName: channelName,
-                date: lastMessageTime ?? DateTime.now(),
-                message: lastMessage != null ? lastMessage.messageText : '',
-                notifications: unseenMessageCount,
-                onPressed: () =>
-                    context.push('${Routes.inboxChats.path}/${channel.id}'),
-              );
-            },
+          child: ChangeNotifierProvider(
+            create: (context) => InboxChatTileModel(
+              context: context,
+              channelId: channels[i].id,
+              channelName: channelName,
+              channelAvatarUrl: channelAvatarUrl,
+              authenticatedUserId: _user!.id,
+            ),
+            child: const InboxChatListTile(),
           ),
         ),
       );
@@ -150,23 +142,25 @@ class _InboxChatsScreenState extends State<InboxChatsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final channelsProvider = Provider.of<ChannelsProvider>(context);
-    final userProvider = Provider.of<UserProvider>(context);
-    final messagesProvider = Provider.of<MessagesProvider>(context);
-    _user = userProvider.user;
-    return channelsProvider.queryUserChannels(
-      userId: _user!.id,
-      onData: (userChannelsData, {refetch, fetchMore}) {
-        final List<ChannelForUser> channels = userChannelsData.response ?? [];
-        final List<Widget> contentList = _createContentList(
-          channels,
-          messagesProvider,
-        );
-        return SafeArea(
-          child: ListView(
-            children: contentList,
-          ),
-        );
+    return FutureBuilder(
+      future: _userChannels,
+      builder: (context, snapshot) {
+        return AppUtility.widgetForAsyncSnapshot(
+            snapshot: snapshot,
+            onReady: () {
+              final messagesProvider = Provider.of<MessagesProvider>(
+                context,
+                listen: false,
+              );
+              final List<ChannelForUser> channels =
+                  snapshot.data?.response ?? [];
+              return ListView(
+                children: _createContentList(
+                  channels,
+                  messagesProvider,
+                ),
+              );
+            });
       },
     );
   }

@@ -19,35 +19,22 @@ class ChannelsProvider extends BaseProvider {
   }
 
   // Queries
-  Widget queryUserChannels({
+  Future<OperationResult<List<ChannelForUser>>> queryUserChannels({
     required String userId,
-    required Widget Function(
-      OperationResult<List<Query$FindChannelsForUser$findChannelsForUser>>
-          data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryFindChannelsForUser,
-      variables: Variables$Query$FindChannelsForUser(userId: userId).toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<
-                List<Query$FindChannelsForUser$findChannelsForUser>> result =
-            OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data != null
-              ? Query$FindChannelsForUser.fromJson(
-                  queryResult.data!,
-                ).findChannelsForUser
-              : null,
-        );
-        return onData(result, refetch: refetch, fetchMore: fetchMore);
-      },
-      onLoading: onLoading,
-      onError: onError,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindChannelsForUser,
+        variables: Variables$Query$FindChannelsForUser(userId: userId).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindChannelsForUser.fromJson(
+              queryResult.data!,
+            ).findChannelsForUser
+          : null,
     );
   }
 

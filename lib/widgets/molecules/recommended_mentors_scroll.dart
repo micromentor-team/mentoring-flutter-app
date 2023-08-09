@@ -1,43 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_card.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/user_provider.dart';
 
 class RecommendedMentorsScroll extends StatelessWidget {
-  const RecommendedMentorsScroll({Key? key}) : super(key: key);
+  final List<Query$FindAllUsers$findUsers> mentors;
 
-  List<MentorCard> _createMentorCards() {
+  const RecommendedMentorsScroll({
+    Key? key,
+    required this.mentors,
+  }) : super(key: key);
+
+  List<Widget> _createMentorCards() {
+    int numberOfMentors = mentors.length;
     List<MentorCard> recommendedMentors = [];
-    recommendedMentors.addAll(
-      [
-        const MentorCard(
-            avatarUrl:
-                'https://media.istockphoto.com/id/1307694427/photo/portrait-of-businessman-in-glasses-holding-smartphone-in-hand.jpg?s=612x612&w=0&k=20&c=P4FDNemdXlXQi3O_yLePrJVzuTYmJx84-iIySj91fGQ=',
-            mentorName: 'Tamar Levi',
-            mentorBio: 'CEO, Levi Consulting',
-            mentorSkill: ['Marketing for a startup', 'Operations']),
-        const MentorCard(
-            avatarUrl:
-                'https://media.istockphoto.com/id/1160811064/photo/portrait-of-a-handsome-latin-man.jpg?s=612x612&w=0&k=20&c=MxkLwUFZ9ChfzFdB-OmmiWBnZrSioj9MmfSdlwCk4-4=',
-            mentorName: 'Antoine Mousa',
-            mentorBio: 'Founder, VisionForward',
-            mentorSkill: ['Marketing', 'Starting Up']),
-        const MentorCard(
-            avatarUrl:
-                'https://media.istockphoto.com/id/1280371040/photo/confident-stylish-european-mature-middle-aged-woman-standing-at-workplace-stylish-older.jpg?s=612x612&w=0&k=20&c=AntzoG_Z1hN6tYVBXbu58Rvz4jweBYa8669bV75yWRw=',
-            mentorName: 'Emily Marshall',
-            mentorBio: 'Director of Marketing, MarketMe',
-            mentorSkill: ['Marketing', 'Management']),
-      ],
-    );
-    return recommendedMentors;
+    int i;
 
-    //TODO(gupta-rupal): Fetch data from backend instead of using hardcoded mocks.
+    for (i = 0; i < numberOfMentors; i++) {
+      recommendedMentors.add(
+        MentorCard(
+            avatarUrl: mentors[i].avatarUrl.toString(),
+            mentorName: mentors[i].fullName.toString(),
+            //TODO: Once these fields come up in the mock server, replace these hardcoded values with the appropriate fields
+            mentorBio: 'CEO, Levi Consulting',
+            mentorSkill: const ['Marketing for a startup', 'Operations']),
+      );
+    }
+    return recommendedMentors;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<MentorCard> recommendedMentorCards = _createMentorCards();
+    List<Widget> recommendedMentorCards = _createMentorCards();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -62,32 +61,65 @@ class RecommendedMentorsScroll extends StatelessWidget {
   }
 }
 
-class RecommendedSection extends StatelessWidget {
-  const RecommendedSection({Key? key}) : super(key: key);
+class FindMoreMentorsButton extends StatelessWidget {
+  const FindMoreMentorsButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final GoRouter router = GoRouter.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.all(Insets.paddingMedium),
+      child: Container(
+        width: 200,
+        alignment: Alignment.center,
+        child: ElevatedButton.icon(
+          icon: const Icon(Icons.search),
+          onPressed: () => {
+            router.push(Routes.explore.path),
+          },
+          label: Text(
+            l10n.homeFindMoreMentors,
+            style: theme.textTheme.labelLarge,
+          ),
+          style: ButtonStyles.secondaryRoundedRectangleButton(context),
+        ),
+      ),
+    );
+  }
+}
+
+class RecommendedSection extends StatelessWidget {
+  const RecommendedSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
+    final currentUser = userProvider.user;
+
+    return userProvider.queryAllUsers(onLoading: () {
+      return const SizedBox(width: 0.0, height: 0.0);
+    }, onError: (error, {refetch}) {
+      debugPrint(error);
+      return const SizedBox(width: 0.0, height: 0.0);
+    }, onData: (data, {refetch, fetchMore}) {
+      List<Query$FindAllUsers$findUsers> mentors = data.response != null
+          ? data.response!.reversed
+              .where((element) => element.id != currentUser?.id)
+              .toList()
+          : [];
+      return _createRecommendedMentorsWidget(mentors, context);
+    });
+  }
+
+  Column _createRecommendedMentorsWidget(
+      List<Query$FindAllUsers$findUsers> mentors, BuildContext context) {
     return Column(
       children: [
-        const RecommendedMentorsScroll(),
-        Padding(
-          padding: const EdgeInsets.all(Insets.paddingMedium),
-          child: Container(
-            width: 200,
-            alignment: Alignment.center,
-            child: ElevatedButton.icon(
-              icon: const Icon(Icons.search),
-              onPressed: () => {debugPrint("hi")},
-              label: Text(
-                l10n.homeFindMoreMentors,
-                style: theme.textTheme.labelLarge,
-              ),
-              style: ButtonStyles.secondaryRoundedRectangleButton(context),
-            ),
-          ),
-        ),
+        RecommendedMentorsScroll(mentors: mentors),
+        const FindMoreMentorsButton(),
       ],
     );
   }

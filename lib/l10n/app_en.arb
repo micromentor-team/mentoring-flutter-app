@@ -61,6 +61,8 @@
     "navInboxText": "Inbox",
     "navProfileText": "Profile",
     "mentors": "Mentors",
+    "entrepreneurCapitalized": "ENTREPRENEUR",
+    "mentorCapitalized": "MENTOR",
     "entrepeneurs": "Entrepeneurs",
     "india": "India",
     "marketing": "Marketing",
@@ -92,6 +94,7 @@
     "languageLocationFilter": "Any language • Any location",
     "send":"Send",
     "clear": "Clear",
+    "apply": "Apply",
     "signInWithGoogle": "Sign in with Google",
     "signInWithFacebook": "Sign in with Facebook",
     "signInWithLinkedIn": "Sign in with LinkedIn",
@@ -113,9 +116,30 @@
     "autocompleteAlreadyEntered": "Already entered",
     "autocompleteInvalidChoice": "Invalid choice",
     "exploreSearchFilterTitle": "Search filters",
+    "exploreSearchFilterHeadingLanguage": "Language",
+    "exploreSearchFilterHeadingCountries": "Countries",
     "exploreSearchFilterAdvancedFilters": "Advanced filters",
-    "exploreSearchFilterApply": "Apply",
-    "exploreSearchFilterClear": "Clear",
+    "exploreSearchFilterIndustry": "Industry",
+    "exploreSearchFilterIndustries": "{industry, select, Programming{Programming} Farming{Farming} Plumbing{Plumbing} other{Unknown}}",
+    "@exploreSearchFilterIndustries": {
+        "description": "Selected industry",
+        "placeholders": {
+            "industry": {
+                "type": "String"
+            }
+        }
+    },
+    "exploreSearchFilterUserType": "User types",
+    "exploreSearchFilterUserTypes": "{userType, select, Mentor{Mentor} Mentee{Mentee} other{Unknown}}",
+    "@exploreSearchFilterUserTypes": {
+        "description": "Selected user type",
+        "placeholders": {
+            "userType": {
+                "type": "String"
+            }
+        }
+    },
+    "exploreSearchFilterKeyword": "Keyword",
     "exploreSearchFilterExpertise": "Expertise",
     "exploreSearchFilterCountries": "{country, select, USA{USA} other{Unknown}}",
     "exploreSearchFilterAll": "All",
@@ -144,5 +168,15 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "exploreSearchFilterAdvancedTitle": "Advanced filters",
+    "profileVacationBanner": "I am on vacation so my responses may be slow.",
+    "profileExperience": "My experience",
+    "profileEducation": "My education",
+    "present": "present",
+    "howCanIHelp": "How can I help",
+    "myExpertises": "My expertises",
+    "myIndustries": "My industries",
+    "myAvailability": "My availability",
+    "myExpectations": "My expectations"
 }
