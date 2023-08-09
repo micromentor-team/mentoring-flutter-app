@@ -23,7 +23,9 @@ class UpcomingSection extends StatelessWidget {
           DateTime.now().add(const Duration(days: maxDaysDisplayed)))) {
         sessionTiles.add(
           ImageTile(
-            image: NetworkImage(sessions[i].avatarUrl),
+            image: sessions[i].avatarUrl != null
+                ? NetworkImage(sessions[i].avatarUrl!) as ImageProvider<Object>
+                : const AssetImage(Assets.blankAvatar),
             subtitle: dateFormat.format(sessions[i].dateTime),
             title: sessions[i].mentorName,
             isCircle: true,
@@ -90,11 +92,11 @@ class UpcomingSection extends StatelessWidget {
 class _UpcomingSession {
   final String mentorName;
   final DateTime dateTime;
-  final String avatarUrl;
+  final String? avatarUrl;
 
   const _UpcomingSession({
     required this.mentorName,
     required this.dateTime,
-    required this.avatarUrl,
+    this.avatarUrl,
   });
 }

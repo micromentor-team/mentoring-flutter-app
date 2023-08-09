@@ -89,6 +89,9 @@ class UserProvider extends BaseProvider {
   }) {
     return runQuery(
       document: documentNodeQueryFindAllUsers,
+      variables: Variables$Query$FindAllUsers(
+        filter: Input$UserListFilter(caseSensitive: false),
+      ).toJson(),
       onData: (queryResult, {refetch, fetchMore}) {
         final OperationResult<List<Query$FindAllUsers$findUsers>> result =
             OperationResult(

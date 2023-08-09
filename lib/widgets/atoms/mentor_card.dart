@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class MentorCard extends StatelessWidget {
-  final String avatarUrl;
+  final String? avatarUrl;
   final String mentorName;
   final String mentorBio;
   final List<String> mentorSkill;
@@ -14,7 +14,7 @@ class MentorCard extends StatelessWidget {
 
   const MentorCard({
     Key? key,
-    required this.avatarUrl,
+    this.avatarUrl,
     required this.mentorName,
     required this.mentorBio,
     required this.mentorSkill,
@@ -30,7 +30,9 @@ class MentorCard extends StatelessWidget {
             radius: Radii.avatarRadiusLarge,
             child: CircleAvatar(
               radius: Radii.avatarRadiusMedium,
-              backgroundImage: NetworkImage(avatarUrl.toString()),
+              backgroundImage: avatarUrl != null
+                  ? NetworkImage(avatarUrl!) as ImageProvider<Object>
+                  : const AssetImage(Assets.blankAvatar),
             ),
           ),
         ),
