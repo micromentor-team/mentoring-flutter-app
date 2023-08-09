@@ -24,7 +24,7 @@ class RecommendedMentorsScroll extends StatelessWidget {
     for (i = 0; i < numberOfMentors; i++) {
       recommendedMentors.add(
         MentorCard(
-            avatarUrl: mentors[i].avatarUrl.toString(),
+            avatarUrl: mentors[i].avatarUrl,
             mentorName: mentors[i].fullName.toString(),
             //TODO: Once these fields come up in the mock server, replace these hardcoded values with the appropriate fields
             mentorBio: 'CEO, Levi Consulting',
