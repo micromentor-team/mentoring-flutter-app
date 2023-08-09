@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/widgets/screens/profile/about_my_business.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/how_can_i_help_section.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile_basic_info.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_experience_and_education.dart';
@@ -45,6 +46,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
               vacationMode: true,
             ),
             const ExperienceAndEducation(),
+            const AboutMyBusiness(),
             const HowCanIHelpSection(),
           ],
         ),
