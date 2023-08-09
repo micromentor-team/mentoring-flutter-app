@@ -59,3 +59,4 @@ node_modules/
 /lib/firebase_options.dart
 /android/app/google-services.json
 /ios/Runner/GoogleService-Info.plist
+*firebase_service_account.json

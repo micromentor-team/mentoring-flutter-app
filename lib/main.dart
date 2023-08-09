@@ -45,16 +45,12 @@ class MainApp extends StatelessWidget {
 }
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({Key? key}) : super(key: key);
+  final String nextRouteName;
+  const StartScreen({super.key, required this.nextRouteName});
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    final routeParameter =
-        ModalRoute.of(context)!.settings.arguments as String?;
-
-    // Redirect to home when there is no nextRoute associated
-    final nextRouteName = routeParameter ?? Routes.home.name;
 
     return userProvider.queryUser(
       onLoading: () {
@@ -93,6 +89,7 @@ void main() async {
 
   if (!kIsWeb) {
     await FirebaseNotifications().initialize();
+
     String? token = await FirebaseNotifications().getToken();
     debugPrint('Token is $token');
   }

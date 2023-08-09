@@ -37,7 +37,9 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              child: const StartScreen(),
+              child: StartScreen(
+                  nextRouteName:
+                      state.queryParameters['nextRoute'] ?? Routes.home.name),
             );
           },
         ),

@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/main.dart';
 
 import 'constants/app_constants.dart';
@@ -9,12 +10,11 @@ class FirebaseNotifications {
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
 
-    String targetRoute = message.data['routeName'];
+    String? targetRoute = message.data['routeName'];
 
-    // Add the notification as a parameter to the root route, so it can
-    // handle the notification as it wants to
-    navigatorKey.currentState
-        ?.pushNamed(Routes.root.name, arguments: targetRoute);
+    // Pass the nextRoute as query parameter to the root route.
+    navigatorKey.currentState?.context
+        .goNamed(Routes.root.name, queryParameters: {'nextRoute': targetRoute});
   }
 
   Future<void> initialize() async {
