@@ -15,7 +15,7 @@ instructions](https://github.com/micromentor-team/mmdata/blob/main/docs/getting-
 1.  Install Xcode and command-line tools in the Apple App Store
 
 2.  Install Rosetta 2:
-    
+
     softwareupdate --install-rosetta
 
 3.  [Install the Flutter SDK](https://docs.flutter.dev/get-started/install)
@@ -62,8 +62,8 @@ You may want to connect to the live backend:
 This app uses Firebase services, and therefore requires setting up an active
 account with the following services enabled:
 
-  - Crashlytics
-  - Analytics
+- Crashlytics
+- Analytics
 
 The Android and iOS projects already contain the necessary configuration for
 using Firebase, but the files that contain the API key are not included in the
@@ -76,8 +76,8 @@ your Firebase account and regenerate these files in your environment:
 2.  Run the `firebase login` command to authenticate to your Firebase account.
     Ensure there are no errors before moving to the next step.
 
-3.  Install the FlutterFire CLI by running the following command: `dart pub
-    global activate flutterfire_cli`
+3.  Install the FlutterFire CLI by running the following command:
+    `dart pub global activate flutterfire_cli`
 
 4.  Run the following command from the root directory of the Flutter project:
     `flutterfire configure --project=micromentor-d72ff`. This command will
@@ -90,14 +90,14 @@ your Firebase account and regenerate these files in your environment:
 
 6.  Once the command completes, ensure the following files were generated in
     your environment:
-    
-      - /ios/firebase\_app\_id\_file.json
-    
-      - /lib/firebase\_options.dart
-    
-      - /android/app/google-services.json
-    
-      - /ios/Runner/GoogleService-Info.plist
+
+    - /ios/firebase_app_id_file.json
+
+    - /lib/firebase_options.dart
+
+    - /android/app/google-services.json
+
+    - /ios/Runner/GoogleService-Info.plist
 
 7.  Run the app and confirm that there are no errors.
 
@@ -119,8 +119,8 @@ run the app on that platform. Shortcut : `Control + R` (macOS).
 ### Run Widgetbook
 
 In Android Studio, select `Edit Configurations` in the Run menu. Copy
-configurations of main.dart and edit name as `widgetbook`. Edit `Dart
-entrypoint` to the path of your Widgetbook's main.dart. For e.g.
+configurations of main.dart and edit name as `widgetbook`. Edit
+`Dart entrypoint` to the path of your Widgetbook's main.dart. For e.g.
 `mm_flutter_app/widgetbook/main.dart` at the place of
 `mm_flutter_app/lib/main.dart`.
 
@@ -129,7 +129,7 @@ Or to run from terminal, execute `flutter run -t widgetbook/main.dart`.
 ### Run Tests
 
 In Android Studio, Open the test.dart file. Select the Run menu. Click the Run
-'tests in counter\_test.dart' option.
+'tests in counter_test.dart' option.
 
 ### GraphQL Codegen
 
