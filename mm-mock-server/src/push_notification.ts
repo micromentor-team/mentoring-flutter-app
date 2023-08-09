@@ -6,7 +6,7 @@ const app = initializeApp({
 });
 
 // This registration token comes from the client FCM SDKs.
-const registrationToken = 'f2D6BUvoRv2N3FNuezfIRH:APA91bExkHuBwfNq3rnLhuMBUgpy3jpPGBo9Rrs0r7ybphd7D0q8LXfi82XN_L3iWfRXpE_7X2P6GyMllS6XOkHL1UMc3QwBGcBIwzvgGSLQbJI83iq2_NLbXbmH_k3x5UWu9OYBJ4_a';
+const registrationToken = '<FCM_TOKEN_HERE>';
 
 const message = {
   notification: {
