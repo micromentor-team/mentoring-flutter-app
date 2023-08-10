@@ -24,7 +24,8 @@ class ProfileAboutMe extends StatelessWidget {
           children: [
             for (var chip in chips)
               Padding(
-                padding: const EdgeInsets.only(right: Insets.paddingExtraSmall),
+                padding: const EdgeInsetsDirectional.only(
+                    start: Insets.paddingExtraSmall),
                 child: chip,
               )
           ],
