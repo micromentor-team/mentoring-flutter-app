@@ -8,6 +8,7 @@ import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../atoms/text_form_field_widget.dart';
+import '../../../utilities/utility.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -173,6 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fullName: '$firstName $lastName',
                                 email: email,
                                 password: password,
+                                deviceUuid: await AppUtility.getUuid(),
                               ),
                             );
                             if (context.mounted) {

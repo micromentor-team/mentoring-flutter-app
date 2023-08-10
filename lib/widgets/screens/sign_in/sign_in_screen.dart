@@ -180,7 +180,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     final signInResult =
                                         await userProvider.signInUser(
                                       input: Input$UserSignInInput(
-                                        deviceUuid: AppUtility.getUuid(),
+                                        deviceUuid: await AppUtility.getUuid(),
                                         ident: emailController.text,
                                         identType: Enum$UserIdentType.email,
                                         password: passwordController.text,

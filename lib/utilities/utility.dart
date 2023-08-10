@@ -1,16 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_udid/flutter_udid.dart';
 import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../widgets/atoms/loading.dart';
 
 class AppUtility {
   AppUtility._private();
-  static String getUuid() {
+  static String generateUuid() {
     return const Uuid().v1();
+  }
+
+  // Uuid seems to only last until the user deletes the app. Reinstalling the app will generate a new Uuid.
+  static Future<String> getUuid() async {
+    // TODO this may throw an error, need to handle it
+    String udid = await FlutterUdid.udid;
+    if (udid.isNotEmpty) {
+      final pref = await SharedPreferences.getInstance();
+      String? uuid = pref.getString('deviceUuid');
+      if (uuid != null) {
+        udid = uuid;
+      } else {
+        // store a cookie on web
+        uuid = generateUuid();
+        pref.setString('deviceUuid', uuid);
+        return uuid;
+      }
+    }
+    return udid;
   }
 
   static Widget widgetForAsyncState({

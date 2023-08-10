@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../__generated/schema/operations_user.graphql.dart';
@@ -29,14 +28,9 @@ class UserProvider extends BaseProvider {
     // remove tokens
     final pref = await SharedPreferences.getInstance();
     pref.remove('authToken');
+    // we use a app-install-specific deviceUuid for android and iOS.
+    //   if the user creates a new user on the same device, it will have the same deviceUuid.
     pref.remove('deviceUuid');
-  }
-
-  Future<String> _setDeviceUuid() async {
-    final pref = await SharedPreferences.getInstance();
-    final deviceUuid = AppUtility.getUuid();
-    pref.setString('deviceUuid', deviceUuid);
-    return deviceUuid;
   }
 
   AuthenticatedUser? get user {
@@ -164,7 +158,6 @@ class UserProvider extends BaseProvider {
     debugPrint('UserProvider: signUpUser: ${input.fullName}');
 
     await _resetUser();
-    await _setDeviceUuid();
 
     final QueryResult queryResult = await runMutation(
       document: documentNodeMutationSignUpUser,
@@ -200,7 +193,6 @@ class UserProvider extends BaseProvider {
     debugPrint('UserProvider: signInUser: ${input.ident}');
 
     await _resetUser();
-    await _setDeviceUuid();
 
     final QueryResult queryResult = await runMutation(
       document: documentNodeMutationSignInUser,

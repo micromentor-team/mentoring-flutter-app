@@ -45,6 +45,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   provider: ^6.0.5
   uuid: ^3.0.7
+  flutter_udid: ^2.0.1
   google_fonts: ^4.0.3
   font_awesome_flutter: ^10.3.0
   flutter_rating_bar: ^4.0.1
