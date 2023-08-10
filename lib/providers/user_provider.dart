@@ -35,11 +35,12 @@ class UserProvider extends BaseProvider {
     pref.remove('deviceUuid');
   }
 
+  /// @param overrideUuid - if true, the newDeviceUuid will overwrite any existing uuid
   Future<String> _setDeviceUuid() async {
     final pref = await SharedPreferences.getInstance();
-    final deviceUuid = AppUtility.getUuid();
-    pref.setString('deviceUuid', deviceUuid);
-    return deviceUuid;
+    final uuid = await AppUtility.getUuid();
+    pref.setString('deviceUuid', uuid);
+    return uuid;
   }
 
   AuthenticatedUser? get user {
