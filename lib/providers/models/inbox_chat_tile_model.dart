@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,14 +14,15 @@ class InboxChatTileModel extends ChangeNotifier {
   final String channelName;
   final String? channelAvatarUrl;
   final String authenticatedUserId;
-  final MessagesProvider messagesProvider;
+  final MessagesProvider _messagesProvider;
+  final ChannelsProvider _channelsProvider;
 
   StreamSubscription<QueryResult<Object?>>? _streamSubscription;
-  FilteredChannelMessage? _lastMessage;
+  ChannelLatestMessage? _lastMessage;
   int _unseenMessageCount = 0;
   AsyncState _state = AsyncState.loading;
 
-  FilteredChannelMessage? get lastMessage => _lastMessage;
+  ChannelLatestMessage? get lastMessage => _lastMessage;
   AsyncState get state => _state;
   int get unseenMessageCount => _unseenMessageCount;
 
@@ -30,26 +32,41 @@ class InboxChatTileModel extends ChangeNotifier {
     required this.channelName,
     this.channelAvatarUrl,
     required this.authenticatedUserId,
-  }) : messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
+  })  : _messagesProvider = Provider.of<MessagesProvider>(
+          context,
+          listen: false,
+        ),
+        _channelsProvider = Provider.of<ChannelsProvider>(
+          context,
+          listen: false,
+        );
 
   Future<void> refresh() async {
     _state = AsyncState.loading;
-    // TODO - Make this query more efficient by fetching last and unseen messages directly
-    final result = await messagesProvider.findChannelMessagesWithOptions(
+    final latestMessageResult =
+        await _channelsProvider.findChannelLatestMessage(channelId: channelId);
+    // TODO - Make this query more efficient by fetching unseen messages directly
+    // TODO final unseenMessagesResult = await _messagesProvider.unseenMessages();
+    final unseenMessagesResult =
+        await _messagesProvider.findChannelMessagesWithOptions(
       fetchFromNetworkOnly: true,
       input: Input$ChannelMessageListFilter(channelId: channelId),
       options: Input$FindObjectsOptions(
         includeDeleted: false,
-        // TODO limit: 1,
-        // TODO sort: [ {"direction": "desc", "field": "createdAt"} ],
       ),
     );
-    if (result.gqlQueryResult.hasException) {
+    if (latestMessageResult.gqlQueryResult.hasException ||
+        unseenMessagesResult.gqlQueryResult.hasException) {
       _state = AsyncState.error;
     } else {
       _state = AsyncState.ready;
-      _lastMessage = result.response?.last;
-      _unseenMessageCount = _getUnseenMessageCount(result.response ?? []);
+      _lastMessage = latestMessageResult.response;
+      // TODO _unseenMessageCount = unseenMessagesResult.response
+      // TODO        ?.where((element) => element.channelId == channelId)
+      // TODO        .length ??
+      // TODO    0;
+      _unseenMessageCount =
+          _getUnseenMessageCount(unseenMessagesResult.response ?? []);
     }
     notifyListeners();
   }
@@ -58,7 +75,7 @@ class InboxChatTileModel extends ChangeNotifier {
     if (_streamSubscription != null) {
       return;
     }
-    _streamSubscription = messagesProvider.subscribeToChannel(
+    _streamSubscription = _messagesProvider.subscribeToChannel(
       channelId: channelId,
       onSubscriptionEvent: () => refresh(),
     );

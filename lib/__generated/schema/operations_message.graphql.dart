@@ -1978,34 +1978,6 @@ const documentNodeQueryInboxUnseenMessages = DocumentNode(definitions: [
                     selectionSet: null,
                   ),
                   FieldNode(
-                    name: NameNode(value: 'id'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'messageText'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'senderFullName'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'createdBy'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
                     name: NameNode(value: '__typename'),
                     alias: null,
                     arguments: [],
@@ -2353,40 +2325,20 @@ class _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels<TRes>
 class Query$InboxUnseenMessages$myInbox$channels$unseenMessages {
   Query$InboxUnseenMessages$myInbox$channels$unseenMessages({
     required this.channelId,
-    required this.id,
-    this.messageText,
-    this.senderFullName,
-    this.createdBy,
     this.$__typename = 'ChannelInboxItemMessage',
   });
 
   factory Query$InboxUnseenMessages$myInbox$channels$unseenMessages.fromJson(
       Map<String, dynamic> json) {
     final l$channelId = json['channelId'];
-    final l$id = json['id'];
-    final l$messageText = json['messageText'];
-    final l$senderFullName = json['senderFullName'];
-    final l$createdBy = json['createdBy'];
     final l$$__typename = json['__typename'];
     return Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
       channelId: (l$channelId as String),
-      id: (l$id as String),
-      messageText: (l$messageText as String?),
-      senderFullName: (l$senderFullName as String?),
-      createdBy: (l$createdBy as String?),
       $__typename: (l$$__typename as String),
     );
   }
 
   final String channelId;
-
-  final String id;
-
-  final String? messageText;
-
-  final String? senderFullName;
-
-  final String? createdBy;
 
   final String $__typename;
 
@@ -2394,14 +2346,6 @@ class Query$InboxUnseenMessages$myInbox$channels$unseenMessages {
     final _resultData = <String, dynamic>{};
     final l$channelId = channelId;
     _resultData['channelId'] = l$channelId;
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$messageText = messageText;
-    _resultData['messageText'] = l$messageText;
-    final l$senderFullName = senderFullName;
-    _resultData['senderFullName'] = l$senderFullName;
-    final l$createdBy = createdBy;
-    _resultData['createdBy'] = l$createdBy;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2410,17 +2354,9 @@ class Query$InboxUnseenMessages$myInbox$channels$unseenMessages {
   @override
   int get hashCode {
     final l$channelId = channelId;
-    final l$id = id;
-    final l$messageText = messageText;
-    final l$senderFullName = senderFullName;
-    final l$createdBy = createdBy;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$channelId,
-      l$id,
-      l$messageText,
-      l$senderFullName,
-      l$createdBy,
       l$$__typename,
     ]);
   }
@@ -2437,26 +2373,6 @@ class Query$InboxUnseenMessages$myInbox$channels$unseenMessages {
     final l$channelId = channelId;
     final lOther$channelId = other.channelId;
     if (l$channelId != lOther$channelId) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$messageText = messageText;
-    final lOther$messageText = other.messageText;
-    if (l$messageText != lOther$messageText) {
-      return false;
-    }
-    final l$senderFullName = senderFullName;
-    final lOther$senderFullName = other.senderFullName;
-    if (l$senderFullName != lOther$senderFullName) {
-      return false;
-    }
-    final l$createdBy = createdBy;
-    final lOther$createdBy = other.createdBy;
-    if (l$createdBy != lOther$createdBy) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2493,10 +2409,6 @@ abstract class CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessage
 
   TRes call({
     String? channelId,
-    String? id,
-    String? messageText,
-    String? senderFullName,
-    String? createdBy,
     String? $__typename,
   });
 }
@@ -2520,26 +2432,12 @@ class _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
 
   TRes call({
     Object? channelId = _undefined,
-    Object? id = _undefined,
-    Object? messageText = _undefined,
-    Object? senderFullName = _undefined,
-    Object? createdBy = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
         channelId: channelId == _undefined || channelId == null
             ? _instance.channelId
             : (channelId as String),
-        id: id == _undefined || id == null ? _instance.id : (id as String),
-        messageText: messageText == _undefined
-            ? _instance.messageText
-            : (messageText as String?),
-        senderFullName: senderFullName == _undefined
-            ? _instance.senderFullName
-            : (senderFullName as String?),
-        createdBy: createdBy == _undefined
-            ? _instance.createdBy
-            : (createdBy as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2558,10 +2456,6 @@ class _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessage
 
   call({
     String? channelId,
-    String? id,
-    String? messageText,
-    String? senderFullName,
-    String? createdBy,
     String? $__typename,
   }) =>
       _res;

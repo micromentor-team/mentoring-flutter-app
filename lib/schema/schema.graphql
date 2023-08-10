@@ -497,6 +497,7 @@ type Channel {
   syncedWithMm2At: DateTime
   creator: User!
   invitations: [ChannelInvitation!]!
+  latestMessage: ChannelMessage!
   messages: [ChannelMessage!]!
   participants: [ChannelParticipant!]!
   pendingInvitations: [ChannelInvitation!]!

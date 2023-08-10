@@ -5,12 +5,14 @@ import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/invitation_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../__generated/schema/operations_channel.graphql.dart';
 import '../../__generated/schema/operations_user.graphql.dart';
+import '../../providers/base/operation_result.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 2;
@@ -21,43 +23,65 @@ class InvitationSection extends StatefulWidget {
 }
 
 class _InvitationSectionState extends State<InvitationSection> {
+  ChannelsProvider? _channelsProvider;
+  AppLocalizations? l10n;
+  Future<OperationResult<InvitationInbox>>? _invitationInbox;
+
+  @override
+  void initState() {
+    super.initState();
+    _channelsProvider = Provider.of<ChannelsProvider>(context, listen: false);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _invitationInbox = _channelsProvider?.getInboxInvitations();
+    l10n = AppLocalizations.of(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final ChannelsProvider channelsProvider =
-        Provider.of<ChannelsProvider>(context);
     final UserProvider userProvider = Provider.of<UserProvider>(context);
-    return channelsProvider.getInboxInvitations(
-      onData: (data, {refetch, fetchMore}) {
-        if (data.response?.channels?.invitations == null ||
-            data.response!.channels!.invitations!.isEmpty) {
-          return const SizedBox(width: 0, height: 0);
-        }
-        final filteredInvitations = data.response!.channels!.invitations!
-            .where((element) =>
-                element.status == Enum$ChannelInvitationStatus.accepted ||
-                element.status == Enum$ChannelInvitationStatus.created)
-            .take(InvitationSection.maxTilesToShow)
-            .toList(growable: false);
-        List<String> userIds = filteredInvitations
-            .map((e) => e.createdBy)
-            .nonNulls
-            .toList(growable: false);
-        if (filteredInvitations.isEmpty ||
-            filteredInvitations.length != userIds.length) {
-          return const SizedBox(width: 0, height: 0);
-        }
-        return SectionTile(
-          title: l10n.homeInvitationSectionTitle,
-          addTopDivider: true,
-          removeBottomPadding: true,
-          seeAllOnPressed: () => context.push(Routes.inboxInvitesReceived.path),
-          child: _createInvitationTiles(
-            l10n,
-            userProvider,
-            userIds,
-            filteredInvitations,
-          ),
+    return FutureBuilder(
+      future: _invitationInbox,
+      builder: (context, snapshot) {
+        return AppUtility.widgetForAsyncSnapshot(
+          snapshot: snapshot,
+          onReady: () {
+            if (snapshot.data?.response?.channels?.invitations == null ||
+                snapshot.data!.response!.channels!.invitations!.isEmpty) {
+              return const SizedBox(width: 0, height: 0);
+            }
+            final filteredInvitations = snapshot
+                .data!.response!.channels!.invitations!
+                .where((element) =>
+                    element.status == Enum$ChannelInvitationStatus.accepted ||
+                    element.status == Enum$ChannelInvitationStatus.created)
+                .take(InvitationSection.maxTilesToShow)
+                .toList(growable: false);
+            List<String> userIds = filteredInvitations
+                .map((e) => e.createdBy)
+                .nonNulls
+                .toList(growable: false);
+            if (filteredInvitations.isEmpty ||
+                filteredInvitations.length != userIds.length) {
+              return const SizedBox(width: 0, height: 0);
+            }
+            return SectionTile(
+              title: l10n!.homeInvitationSectionTitle,
+              addTopDivider: true,
+              removeBottomPadding: true,
+              seeAllOnPressed: () =>
+                  context.push(Routes.inboxInvitesReceived.path),
+              child: _createInvitationTiles(
+                l10n!,
+                userProvider,
+                userIds,
+                filteredInvitations,
+              ),
+            );
+          },
         );
       },
     );

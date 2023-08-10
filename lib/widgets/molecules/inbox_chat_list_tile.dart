@@ -37,7 +37,7 @@ class _InboxChatListTileState extends State<InboxChatListTile> {
 
   @override
   void dispose() {
-    _inboxChatTileModel?.createChannelSubscription();
+    _inboxChatTileModel?.cancelChannelSubscription();
     super.dispose();
   }
 
