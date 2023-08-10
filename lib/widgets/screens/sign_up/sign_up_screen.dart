@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utilities/utility.dart';
 import '../../atoms/text_form_field_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -54,8 +56,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO use theme on this screen
+    // final ThemeData theme = Theme.of(context);
     final userProvider = Provider.of<UserProvider>(context);
     final mediaQuery = MediaQuery.of(context).size;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       key: scaffoldKey,
       body: SafeArea(
@@ -168,13 +174,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ElevatedButton(
                           onPressed: () async {
                             debugPrint('Button pressed ...');
-                            await userProvider.signUpUser(
+                            final router = GoRouter.of(context);
+                            final scaffoldManager =
+                                ScaffoldMessenger.of(context);
+
+                            final signUpResult = await userProvider.signUpUser(
                               input: Input$UserSignUpInput(
                                 fullName: '$firstName $lastName',
                                 email: email,
                                 password: password,
+                                deviceUuid: await AppUtility.getUuid(),
                               ),
                             );
+                            final signUpError = signUpResult.gqlQueryResult
+                                .exception?.graphqlErrors.firstOrNull?.message;
+                            if (signUpError != null) {
+                              if (signUpError == 'userAlreadyExists') {
+                                scaffoldManager.showSnackBar(
+                                  SnackBar(
+                                    content: Text(l10n.userAlreadyExists),
+                                  ),
+                                );
+                              } else if (signUpError == 'invalidPhoneNumber') {
+                                scaffoldManager.showSnackBar(SnackBar(
+                                  content: Text(l10n.askForValidCredentials),
+                                ));
+                              }
+                            } else {
+                              router.push(Routes.root.path);
+                            }
+
                             if (context.mounted) {
                               _openHomeScreen(context);
                             }
