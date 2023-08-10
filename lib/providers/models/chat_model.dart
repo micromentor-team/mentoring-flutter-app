@@ -11,11 +11,11 @@ import '../messages_provider.dart';
 class ChatModel extends ChangeNotifier {
   final String channelId;
   final MessagesProvider _messagesProvider;
-  List<ChannelMessage>? _channelMessages;
+  List<ChannelMessage> _channelMessages = [];
   StreamSubscription<QueryResult<Object?>>? _streamSubscription;
   AsyncState _state = AsyncState.loading;
 
-  List<ChannelMessage> get channelMessages => _channelMessages ?? [];
+  List<ChannelMessage> get channelMessages => _channelMessages;
   AsyncState get state => _state;
 
   ChatModel({

@@ -38,9 +38,9 @@ class ChannelMessagesScreen extends StatefulWidget {
 
 class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
     with RouteAwareMixin<ChannelMessagesScreen> {
-  ChannelsProvider? _channelsProvider;
-  Future<OperationResult<ChannelById>>? _channel;
-  AuthenticatedUser? _user;
+  late final ChannelsProvider _channelsProvider;
+  late final AuthenticatedUser? _user;
+  late Future<OperationResult<ChannelById>> _channel;
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _channel = _channelsProvider?.findChannelById(channelId: widget.channelId);
+    _channel = _channelsProvider.findChannelById(channelId: widget.channelId);
   }
 
   void _refreshScaffold(
@@ -135,8 +135,8 @@ class _ChannelChatState extends State<ChannelChat> {
   final TextEditingController messageTextController = TextEditingController();
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
-  ChatModel? _chatModel;
-  MessagesProvider? _messagesProvider;
+  late final ChatModel _chatModel;
+  late final MessagesProvider _messagesProvider;
   int _messageCount = 0;
   bool _unreadMessages = false; // Non-local Message exists outside of viewport
   ChannelMessage? _focusedMessage; // Intended reply Message
@@ -147,25 +147,25 @@ class _ChannelChatState extends State<ChannelChat> {
     _chatModel = Provider.of<ChatModel>(context, listen: false);
     _messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
     _markMessageRead();
-    _chatModel!.createChannelSubscription();
-    _messageCount = _chatModel!.channelMessages.length;
+    _chatModel.createChannelSubscription();
+    _messageCount = _chatModel.channelMessages.length;
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _chatModel!.refreshChannelMessages();
+    _chatModel.refreshChannelMessages();
   }
 
   _markMessageRead() {
-    _messagesProvider?.markMessageRead(channelId: widget.channel.id);
+    _messagesProvider.markMessageRead(channelId: widget.channel.id);
   }
 
   void _processNewMessages() {
-    if (_messageCount < _chatModel!.channelMessages.length) {
+    if (_messageCount < _chatModel.channelMessages.length) {
       _markMessageRead();
       if (_isCurrentUser(
-        userId: _chatModel!.channelMessages.last.createdBy,
+        userId: _chatModel.channelMessages.last.createdBy,
         context: context,
       )) {
         _scrollDown();
@@ -173,12 +173,12 @@ class _ChannelChatState extends State<ChannelChat> {
         _unreadMessages = true;
       }
     }
-    _messageCount = _chatModel!.channelMessages.length;
+    _messageCount = _chatModel.channelMessages.length;
   }
 
   @override
   void dispose() {
-    _chatModel?.cancelChannelSubscription();
+    _chatModel.cancelChannelSubscription();
     messageTextController.dispose();
     listScrollController.dispose();
     super.dispose();
@@ -186,7 +186,7 @@ class _ChannelChatState extends State<ChannelChat> {
 
   void _scrollDown() {
     if (listScrollController.hasClients &&
-        _chatModel!.channelMessages.isNotEmpty) {
+        _chatModel.channelMessages.isNotEmpty) {
       listScrollController.animateTo(
         listScrollController.position.minScrollExtent,
         duration: _animationDuration,
@@ -231,12 +231,11 @@ class _ChannelChatState extends State<ChannelChat> {
   Widget build(BuildContext context) {
     return Consumer<ChatModel>(
       builder: (context, chatModel, child) {
-        _chatModel = chatModel;
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _processNewMessages();
         });
         return AppUtility.widgetForAsyncState(
-          state: _chatModel!.state,
+          state: chatModel.state,
           onReady: () => Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -260,7 +259,7 @@ class _ChannelChatState extends State<ChannelChat> {
                 replyingTo: _focusedMessage,
                 participants: widget.channel.participants,
                 onSubmit: (val, replyToMessageId) {
-                  _messagesProvider!.createMessage(
+                  _messagesProvider.createMessage(
                     input: Input$ChannelMessageInput(
                       channelId: widget.channel.id,
                       messageText: val,

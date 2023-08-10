@@ -23,7 +23,7 @@ class InboxChatsScreen extends StatefulWidget {
 
 class _InboxChatsScreenState extends State<InboxChatsScreen>
     with RouteAwareMixin<InboxChatsScreen> {
-  AuthenticatedUser? _user;
+  late final AuthenticatedUser? _user;
   Future<OperationResult<List<ChannelForUser>>>? _userChannels;
 
   @override
