@@ -36,10 +36,6 @@ query InboxUnseenMessages {
         channels {
             unseenMessages {
                 channelId
-                id
-                messageText
-                senderFullName
-                createdBy
             }
         }
     }

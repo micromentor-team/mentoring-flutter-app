@@ -4,7 +4,9 @@ import * as generators from "./util/generators";
 export function mockQueries(serverState: MockServerState) {
     return {
         findChannelById: () => {
-            return serverState.channels[0];
+            var channel = serverState.channels[0];
+            channel.latestMessage = serverState.channelMessages[serverState.channelMessages.length-1];
+            return channel;
         },
         findChannelMessages: () => {
             return serverState.channelMessages;
