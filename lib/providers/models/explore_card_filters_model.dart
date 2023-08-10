@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ExploreCardFiltersProvider extends ChangeNotifier {
+class ExploreCardFiltersModel extends ChangeNotifier {
   static const List<String> countries = ['USA'];
   static const List<String> languages = ['English', 'Urdu', 'Hindi'];
   static const List<String> skills = ['Marketing', 'Operations', 'StartingUp'];

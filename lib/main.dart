@@ -11,8 +11,8 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/firebase_notifications.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
+import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
@@ -130,7 +130,7 @@ void main() async {
                 create: (context) => ScaffoldModel(),
               ),
               ChangeNotifierProvider(
-                create: (context) => ExploreCardFiltersProvider(),
+                create: (context) => ExploreCardFiltersModel(),
               ),
               Provider<RouteObserver<PageRoute>>.value(
                 value: RouteObserver<PageRoute>(),

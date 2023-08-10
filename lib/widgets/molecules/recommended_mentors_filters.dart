@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
+import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
@@ -22,7 +22,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     with RouteAwareMixin<RecommendedMentorsFilters> {
   late final TextfieldTagsController _countriesController;
   late final TextfieldTagsController _languagesController;
-  late final ExploreCardFiltersProvider _filtersProvider;
+  late final ExploreCardFiltersModel _filtersModel;
   Set<String> _selectedSkills = {};
 
   @override
@@ -30,9 +30,9 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     super.initState();
     _countriesController = TextfieldTagsController();
     _languagesController = TextfieldTagsController();
-    _filtersProvider =
-        Provider.of<ExploreCardFiltersProvider>(context, listen: false);
-    _selectedSkills = _filtersProvider.selectedSkills;
+    _filtersModel =
+        Provider.of<ExploreCardFiltersModel>(context, listen: false);
+    _selectedSkills = _filtersModel.selectedSkills;
   }
 
   @override
@@ -78,16 +78,16 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
             AutocompletePicker(
               fieldName: l10n.exploreSearchFilterHeadingLanguage,
               controller: _languagesController,
-              options: ExploreCardFiltersProvider.languages,
+              options: ExploreCardFiltersModel.languages,
               optionsTranslations: l10n.exploreSearchFilterLanguages,
-              selectedOptions: _filtersProvider.selectedLanguages,
+              selectedOptions: _filtersModel.selectedLanguages,
             ),
             AutocompletePicker(
               fieldName: l10n.exploreSearchFilterHeadingCountries,
               controller: _countriesController,
-              options: ExploreCardFiltersProvider.countries,
+              options: ExploreCardFiltersModel.countries,
               optionsTranslations: l10n.exploreSearchFilterCountries,
-              selectedOptions: _filtersProvider.selectedCountries,
+              selectedOptions: _filtersModel.selectedCountries,
             ),
           ]),
           Align(
@@ -105,7 +105,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
               _selectedSkills.clear();
             }),
             onApply: () {
-              _filtersProvider.setFilters(
+              _filtersModel.setFilters(
                 selectedCountries: _countriesController.getTags?.toSet(),
                 selectedLanguages: _languagesController.getTags?.toSet(),
                 selectedSkills: _selectedSkills,
@@ -136,8 +136,8 @@ class _ExpertiseState extends State<_Expertise> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     var skillButtons = [];
-    for (int i = 0; i < ExploreCardFiltersProvider.skills.length; i++) {
-      var skill = ExploreCardFiltersProvider.skills[i];
+    for (int i = 0; i < ExploreCardFiltersModel.skills.length; i++) {
+      var skill = ExploreCardFiltersModel.skills[i];
       var isSelected = widget.skills.contains(skill);
 
       skillButtons.add(OutlinedButton(
@@ -158,13 +158,13 @@ class _ExpertiseState extends State<_Expertise> {
         child: Text(l10n.exploreSearchFilterSkills(skill),
             style: TextStyle(color: theme.colorScheme.primary)),
       ));
-      if (i != ExploreCardFiltersProvider.skills.length - 1) {
+      if (i != ExploreCardFiltersModel.skills.length - 1) {
         skillButtons.add(const SizedBox(width: Insets.paddingExtraSmall));
       }
     }
 
     bool allSkillsSelected =
-        setEquals(widget.skills, ExploreCardFiltersProvider.skills.toSet());
+        setEquals(widget.skills, ExploreCardFiltersModel.skills.toSet());
 
     return Row(
       children: [
@@ -187,7 +187,7 @@ class _ExpertiseState extends State<_Expertise> {
                             } else {
                               widget.skills.clear();
                               widget.skills
-                                  .addAll(ExploreCardFiltersProvider.skills);
+                                  .addAll(ExploreCardFiltersModel.skills);
                             }
                           });
                         },

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
+import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 class RecommendedMentorsFiltersAdvanced extends StatefulWidget {
@@ -22,18 +22,18 @@ class _RecommendedMentorsFiltersAdvanced
     with RouteAwareMixin<RecommendedMentorsFiltersAdvanced> {
   String? _selectedIndustry;
   late final TextfieldTagsController _userTypesController;
-  late final ExploreCardFiltersProvider _filtersProvider;
+  late final ExploreCardFiltersModel _filtersModel;
   late final TextEditingController _keywordController;
 
   @override
   void initState() {
     super.initState();
     _userTypesController = TextfieldTagsController();
-    _filtersProvider =
-        Provider.of<ExploreCardFiltersProvider>(context, listen: false);
-    _selectedIndustry = _filtersProvider.selectedIndustry;
+    _filtersModel =
+        Provider.of<ExploreCardFiltersModel>(context, listen: false);
+    _selectedIndustry = _filtersModel.selectedIndustry;
     _keywordController =
-        TextEditingController(text: _filtersProvider.selectedKeyword);
+        TextEditingController(text: _filtersModel.selectedKeyword);
   }
 
   @override
@@ -85,7 +85,7 @@ class _RecommendedMentorsFiltersAdvanced
                     const SizedBox(height: Insets.paddingExtraSmall),
                     DropdownButton<String>(
                       isExpanded: true,
-                      items: ExploreCardFiltersProvider.industries
+                      items: ExploreCardFiltersModel.industries
                           .map((industry) => DropdownMenuItem(
                                 value: l10n
                                     .exploreSearchFilterIndustries(industry),
@@ -106,9 +106,9 @@ class _RecommendedMentorsFiltersAdvanced
           AutocompletePicker(
             fieldName: l10n.exploreSearchFilterUserType,
             controller: _userTypesController,
-            options: ExploreCardFiltersProvider.userTypes,
+            options: ExploreCardFiltersModel.userTypes,
             optionsTranslations: l10n.exploreSearchFilterUserTypes,
-            selectedOptions: _filtersProvider.selectedUserTypes,
+            selectedOptions: _filtersModel.selectedUserTypes,
           ),
           Row(
             children: [
@@ -143,7 +143,7 @@ class _RecommendedMentorsFiltersAdvanced
               _userTypesController.clearTags();
             }),
             onApply: () {
-              _filtersProvider.setAdvancedFilters(
+              _filtersModel.setAdvancedFilters(
                 selectedIndustry: _selectedIndustry,
                 selectedUserTypes: _userTypesController.getTags?.toSet(),
                 selectedKeyword: _keywordController.text,
