@@ -8,70 +8,75 @@ class ProfileAboutMe extends StatelessWidget {
 
   Widget _createChipsSection(
       BuildContext context, String? title, List<ProfileChip> chips) {
-    final ThemeData theme = Theme.of(context);
+    final theme = Theme.of(context);
 
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      if (title != null)
-        Text(
-          title,
-          style: theme.textTheme.labelSmall!
-              .copyWith(color: theme.colorScheme.secondary),
-        ),
-      const SizedBox(height: Insets.paddingExtraSmall),
-      Wrap(
-        children: [
-          for (var chip in chips)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, Insets.paddingExtraSmall,
-                  Insets.paddingExtraSmall, Insets.paddingExtraSmall),
-              child: chip,
-            )
-        ],
-      )
-    ]);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
+          Text(
+            title,
+            style: theme.textTheme.labelSmall!
+                .copyWith(color: theme.colorScheme.secondary),
+          ),
+        const SizedBox(height: Insets.paddingExtraSmall),
+        Wrap(
+          children: [
+            for (var chip in chips)
+              Padding(
+                padding: const EdgeInsets.only(right: Insets.paddingExtraSmall),
+                child: chip,
+              )
+          ],
+        )
+      ],
+    );
   }
 
   Widget _createBestPieceOfAdviceSection(
       BuildContext context, String title, String content) {
-    final ThemeData theme = Theme.of(context);
+    final theme = Theme.of(context);
 
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      DecoratedBox(
-        decoration: BoxDecoration(
-          color: theme.colorScheme.inversePrimary,
-          borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Insets.paddingMedium,
-                vertical: Insets.paddingSmall,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: theme.colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Insets.paddingMedium,
+                  vertical: Insets.paddingSmall,
+                ),
+                child: Text(
+                  title,
+                  style: theme.textTheme.titleMedium!
+                      .copyWith(color: theme.colorScheme.onSurface),
+                ),
               ),
-              child: Text(
-                title,
-                style: theme.textTheme.titleMedium!
-                    .copyWith(color: theme.colorScheme.onSurface),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Insets.paddingMedium,
+                  vertical: Insets.paddingSmall,
+                ),
+                child: Text(content, style: theme.textTheme.bodyMedium),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Insets.paddingMedium,
-                vertical: Insets.paddingSmall,
-              ),
-              child: Text(content, style: theme.textTheme.bodyMedium),
-            ),
-          ],
-        ),
-      )
-    ]);
+            ],
+          ),
+        )
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final ThemeData theme = Theme.of(context);
+    final theme = Theme.of(context);
 
     //TODO: call the backend instead of using hardcoded data
     return Column(
