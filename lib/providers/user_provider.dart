@@ -11,6 +11,8 @@ import 'base/operation_result.dart';
 typedef AllUsersResult = Query$FindAllUsers$findUsers;
 typedef AllUsersWithFilterResult = Query$FindUsersWithFilter$findUsers;
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
+typedef MenteeUser = Query$FindMenteeUsers$findUsers;
+typedef MentorUser = Query$FindMentorUsers$findUsers;
 
 class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? _user;
@@ -34,11 +36,12 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     pref.remove('deviceUuid');
   }
 
+  /// @param overrideUuid - if true, the newDeviceUuid will overwrite any existing uuid
   Future<String> _setDeviceUuid() async {
     final pref = await SharedPreferences.getInstance();
-    final deviceUuid = AppUtility.getUuid();
-    pref.setString('deviceUuid', deviceUuid);
-    return deviceUuid;
+    final uuid = await AppUtility.getUuid();
+    pref.setString('deviceUuid', uuid);
+    return uuid;
   }
 
   AuthenticatedUser? get user {
@@ -118,6 +121,60 @@ class UserProvider extends BaseProvider with ChangeNotifier {
               }
               return element;
             }).toList(),
+    );
+  }
+
+  Future<OperationResult<List<MenteeUser>>> findMenteeUsers({
+    required Input$FindObjectsOptions optionsInput,
+    required Input$UserListFilter filterInput,
+    required Input$UserInput matchInput,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindMenteeUsers,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindMenteeUsers(
+                filter: filterInput, options: optionsInput, match: matchInput)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindMenteeUsers.fromJson(
+              queryResult.data!,
+            ).findUsers
+          : null,
+    );
+  }
+
+  Future<OperationResult<List<MentorUser>>> findMentorUsers({
+    required Input$FindObjectsOptions optionsInput,
+    required Input$UserListFilter filterInput,
+    required Input$UserInput matchInput,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindMentorUsers,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindMentorUsers(
+                filter: filterInput, options: optionsInput, match: matchInput)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindMentorUsers.fromJson(
+              queryResult.data!,
+            ).findUsers
+          : null,
     );
   }
 
