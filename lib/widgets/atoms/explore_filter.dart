@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
+import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:provider/provider.dart';
 
 class ExploreFilter extends StatelessWidget {
@@ -120,7 +120,7 @@ class ExploreFilter extends StatelessWidget {
                 ],
               ),
               Expanded(
-                child: Consumer<ExploreCardFiltersProvider>(
+                child: Consumer<ExploreCardFiltersModel>(
                     builder: (context, filters, _) => Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
