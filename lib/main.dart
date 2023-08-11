@@ -12,7 +12,6 @@ import 'package:mm_flutter_app/firebase_notifications.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
