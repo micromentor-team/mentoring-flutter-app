@@ -79,6 +79,8 @@
     "reminderBannerProfileUpdateCta": "Update profile",
     "recommendedMentorCardScrollable": "Recommended",
     "welcomeBack": "Welcome Back!",
+    "@_SIGN_IN_PAGE": {
+    },
     "signInMessage": "Please sign into your account with",
     "emailOrPhoneNumber": "Email or phone number",
     "askForValidCredentials": "Please enter a valid email or phone number",
@@ -100,6 +102,9 @@
     "signInWithLinkedIn": "Sign in with LinkedIn",
     "signInWithWhatsapp": "Sign in with Whatsapp",
     "inviteToConnect": "Invite to Connect",
+    "@_SIGN_UP_PAGE":{
+    },
+    "userAlreadyExists": "User already exists",
     "inviteMessageTips": "Message Tips:",
     "inviteMessageTipsContent": "\u2022 Make your message specific\n\u2022 Keep it concise and simple\n\u2022 Be polite and respectful",
     "inviteDefaultMessageToMentor": "Hi,\nI saw your profile and think you could be a great mentor for my business. Can we connect? I admire your experience and would love to learn from you.\nThanks!",

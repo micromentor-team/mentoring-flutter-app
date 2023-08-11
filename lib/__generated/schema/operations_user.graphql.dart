@@ -208,6 +208,13 @@ const documentNodeQueryGetAuthenticatedUser = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -236,6 +243,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     this.userHandle,
     required this.profileCompletionPercentage,
     this.updatedAt,
+    required this.createdAt,
     this.$__typename = 'User',
   });
 
@@ -248,6 +256,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     final l$userHandle = json['userHandle'];
     final l$profileCompletionPercentage = json['profileCompletionPercentage'];
     final l$updatedAt = json['updatedAt'];
+    final l$createdAt = json['createdAt'];
     final l$$__typename = json['__typename'];
     return Query$GetAuthenticatedUser$getAuthenticatedUser(
       id: (l$id as String),
@@ -258,6 +267,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       profileCompletionPercentage: (l$profileCompletionPercentage as int),
       updatedAt:
           l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
+      createdAt: DateTime.parse((l$createdAt as String)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -275,6 +285,8 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
   final int profileCompletionPercentage;
 
   final DateTime? updatedAt;
+
+  final DateTime createdAt;
 
   final String $__typename;
 
@@ -294,6 +306,8 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     _resultData['profileCompletionPercentage'] = l$profileCompletionPercentage;
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = l$updatedAt?.toIso8601String();
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt.toIso8601String();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -308,6 +322,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     final l$userHandle = userHandle;
     final l$profileCompletionPercentage = profileCompletionPercentage;
     final l$updatedAt = updatedAt;
+    final l$createdAt = createdAt;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -317,6 +332,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       l$userHandle,
       l$profileCompletionPercentage,
       l$updatedAt,
+      l$createdAt,
       l$$__typename,
     ]);
   }
@@ -366,6 +382,11 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     if (l$updatedAt != lOther$updatedAt) {
       return false;
     }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -403,6 +424,7 @@ abstract class CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes> {
     String? userHandle,
     int? profileCompletionPercentage,
     DateTime? updatedAt,
+    DateTime? createdAt,
     String? $__typename,
   });
 }
@@ -428,6 +450,7 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
     Object? userHandle = _undefined,
     Object? profileCompletionPercentage = _undefined,
     Object? updatedAt = _undefined,
+    Object? createdAt = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetAuthenticatedUser$getAuthenticatedUser(
@@ -449,6 +472,9 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
         updatedAt: updatedAt == _undefined
             ? _instance.updatedAt
             : (updatedAt as DateTime?),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as DateTime),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -469,6 +495,7 @@ class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
     String? userHandle,
     int? profileCompletionPercentage,
     DateTime? updatedAt,
+    DateTime? createdAt,
     String? $__typename,
   }) =>
       _res;
