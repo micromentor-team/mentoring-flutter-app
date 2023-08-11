@@ -11,6 +11,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/firebase_notifications.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
@@ -140,6 +141,9 @@ void main() async {
             providers: [
               ChangeNotifierProvider(
                 create: (context) => UserProvider(client: client),
+              ),
+              Provider<ContentProvider>.value(
+                value: ContentProvider(client: client),
               ),
               Provider<ChannelsProvider>.value(
                 value: ChannelsProvider(client: client),

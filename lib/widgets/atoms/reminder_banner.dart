@@ -101,7 +101,7 @@ class MaybeReminderBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     int profileCompletionPercentage =
-        authenticatedUser.profileCompletionPercentage ?? 0;
+        authenticatedUser.profileCompletionPercentage;
     DateTime updatedAt = authenticatedUser.updatedAt!;
     if (profileCompletionPercentage < 50) {
       return ReminderBanner(
