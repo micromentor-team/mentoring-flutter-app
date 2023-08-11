@@ -23,9 +23,9 @@ class InvitationSection extends StatefulWidget {
 }
 
 class _InvitationSectionState extends State<InvitationSection> {
-  ChannelsProvider? _channelsProvider;
-  AppLocalizations? l10n;
-  Future<OperationResult<InvitationInbox>>? _invitationInbox;
+  late final ChannelsProvider _channelsProvider;
+  late Future<OperationResult<InvitationInbox>> _invitationInbox;
+  AppLocalizations? _l10n;
 
   @override
   void initState() {
@@ -36,13 +36,12 @@ class _InvitationSectionState extends State<InvitationSection> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _invitationInbox = _channelsProvider?.getInboxInvitations();
-    l10n = AppLocalizations.of(context);
+    _invitationInbox = _channelsProvider.getInboxInvitations();
+    _l10n = AppLocalizations.of(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider userProvider = Provider.of<UserProvider>(context);
     return FutureBuilder(
       future: _invitationInbox,
       builder: (context, snapshot) {
@@ -60,71 +59,59 @@ class _InvitationSectionState extends State<InvitationSection> {
                     element.status == Enum$ChannelInvitationStatus.created)
                 .take(InvitationSection.maxTilesToShow)
                 .toList(growable: false);
-            List<String> userIds = filteredInvitations
-                .map((e) => e.createdBy)
-                .nonNulls
-                .toList(growable: false);
-            if (filteredInvitations.isEmpty ||
-                filteredInvitations.length != userIds.length) {
+            if (filteredInvitations.isEmpty) {
               return const SizedBox(width: 0, height: 0);
             }
             return SectionTile(
-              title: l10n!.homeInvitationSectionTitle,
+              title: _l10n!.homeInvitationSectionTitle,
               addTopDivider: true,
               removeBottomPadding: true,
               seeAllOnPressed: () =>
                   context.push(Routes.inboxInvitesReceived.path),
-              child: _createInvitationTiles(
-                l10n!,
-                userProvider,
-                userIds,
-                filteredInvitations,
-              ),
+              child: InvitationList(invitations: filteredInvitations),
             );
           },
         );
       },
     );
   }
+}
 
-  Widget _createInvitationTiles(
-      AppLocalizations l10n,
-      UserProvider userProvider,
-      List<String> userIds,
-      List<Query$GetInboxInvitations$myInbox$channels$invitations>
-          invitations) {
-    return userProvider.findUsersWithFilter(
+class InvitationList extends StatefulWidget {
+  final List<Query$GetInboxInvitations$myInbox$channels$invitations>
+      invitations;
+
+  const InvitationList({
+    super.key,
+    required this.invitations,
+  });
+
+  @override
+  State<InvitationList> createState() => _InvitationListState();
+}
+
+class _InvitationListState extends State<InvitationList> {
+  late final UserProvider _userProvider;
+  late Future<OperationResult<List<AllUsersWithFilterResult>>> _invitationUsers;
+  AppLocalizations? _l10n;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    List<String> userIds = widget.invitations
+        .map((e) => e.createdBy)
+        .nonNulls
+        .toList(growable: false);
+    _invitationUsers = _userProvider.findUsersWithFilter(
       input: Input$UserListFilter(ids: userIds),
-      onData: (data, {refetch, fetchMore}) {
-        if (data.response == null) {
-          return const SizedBox(width: 0, height: 0);
-        }
-        List<Widget> invitationWidgets = [];
-        for (int i = 0; i < invitations.length; i++) {
-          if (i > 0) {
-            invitationWidgets.add(
-              const Divider(
-                thickness: 1,
-                height: 0,
-                indent: Insets.paddingMedium,
-                endIndent: Insets.paddingMedium,
-              ),
-            );
-          }
-          invitationWidgets.add(
-            _createInvitationTile(
-              l10n,
-              data.response!.firstWhere(
-                  (element) => invitations[i].createdBy! == element.id),
-              invitations[i].status,
-            ),
-          );
-        }
-        return Column(
-          children: invitationWidgets,
-        );
-      },
     );
+    _l10n = AppLocalizations.of(context);
   }
 
   InvitationTile _createInvitationTile(
@@ -139,6 +126,47 @@ class _InvitationSectionState extends State<InvitationSection> {
       avatarUrl: user.avatarUrl,
       buttonOnPressed: () => {
         //TODO(m-rosario): Open profile when clicked.
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _invitationUsers,
+      builder: (context, snapshot) {
+        return AppUtility.widgetForAsyncSnapshot(
+          snapshot: snapshot,
+          onReady: () {
+            if (snapshot.data?.response == null) {
+              return const SizedBox(width: 0, height: 0);
+            }
+            List<Widget> invitationWidgets = [];
+            for (int i = 0; i < widget.invitations.length; i++) {
+              if (i > 0) {
+                invitationWidgets.add(
+                  const Divider(
+                    thickness: 1,
+                    height: 0,
+                    indent: Insets.paddingMedium,
+                    endIndent: Insets.paddingMedium,
+                  ),
+                );
+              }
+              invitationWidgets.add(
+                _createInvitationTile(
+                  _l10n!,
+                  snapshot.data!.response!.firstWhere((element) =>
+                      widget.invitations[i].createdBy! == element.id),
+                  widget.invitations[i].status,
+                ),
+              );
+            }
+            return Column(
+              children: invitationWidgets,
+            );
+          },
+        );
       },
     );
   }

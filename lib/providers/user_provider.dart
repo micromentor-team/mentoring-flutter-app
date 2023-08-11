@@ -96,42 +96,28 @@ class UserProvider extends BaseProvider {
     );
   }
 
-  Widget findUsersWithFilter({
+  Future<OperationResult<List<AllUsersWithFilterResult>>> findUsersWithFilter({
     required Input$UserListFilter input,
-    required Widget Function(
-      OperationResult<List<Query$FindUsersWithFilter$findUsers>> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryFindUsersWithFilter,
-      variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<List<Query$FindUsersWithFilter$findUsers>>
-            result = OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data == null
-              ? null
-              : Query$FindUsersWithFilter.fromJson(
-                  queryResult.data!,
-                ).findUsers.map((element) {
-                  if (element.avatarUrl == "") {
-                    return element.copyWith(avatarUrl: null);
-                  }
-                  return element;
-                }).toList(),
-        );
-        return onData(
-          result,
-          refetch: refetch,
-          fetchMore: fetchMore,
-        );
-      },
-      onLoading: onLoading,
-      onError: onError,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindUsersWithFilter,
+        variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
+      ),
+    );
+
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindUsersWithFilter.fromJson(
+              queryResult.data!,
+            ).findUsers.map((element) {
+              if (element.avatarUrl == "") {
+                return element.copyWith(avatarUrl: null);
+              }
+              return element;
+            }).toList(),
     );
   }
 
