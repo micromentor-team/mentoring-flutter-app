@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_channel.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_message.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
@@ -187,9 +188,9 @@ class MessagesProvider extends BaseProvider {
   }) {
     final stream = client.subscribe(
       SubscriptionOptions(
-        document: documentNodeSubscriptionChannelUpdated,
-        variables: Variables$Subscription$ChannelUpdated(
-          objectId: channelId,
+        document: documentNodeSubscriptionChannelChanged,
+        variables: Variables$Subscription$ChannelChanged(
+          channelId: channelId,
         ).toJson(),
       ),
     );

@@ -72,7 +72,7 @@ mutation UpdateChannelMessage ($input: ChannelMessageInput!) {
     updateChannelMessage(input: $input)
 }
 
-subscription ChannelUpdated ($objectId: ID!) {
+subscription ObjectChanged ($objectId: ID!) {
     objectChanged(objectId: $objectId) {
         objectId
         messageType

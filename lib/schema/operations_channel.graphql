@@ -102,3 +102,14 @@ mutation CreateChannel ($input: ChannelInput!) {
 mutation DeleteChannel ($deletePhysically: Boolean!, $channelId: String!) {
     deleteChannel(deletePhysically: $deletePhysically, channelId: $channelId)
 }
+
+subscription ChannelChanged($channelId: ID!) {
+  channelChanged(channelId: $channelId) {
+    channelId
+    invitationId
+    messageId
+    participantId
+    eventType
+    requestId
+  }
+}
