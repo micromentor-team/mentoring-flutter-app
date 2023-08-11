@@ -92,7 +92,7 @@ class MessagesProvider extends BaseProvider {
       createMessage({
     required Input$ChannelMessageInput input,
   }) async {
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationCreateChannelMessage,
       variables: Variables$Mutation$CreateChannelMessage(
         input: input,
@@ -115,7 +115,7 @@ class MessagesProvider extends BaseProvider {
   Future<OperationResult<String>> markMessageRead({
     required String channelId,
   }) async {
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationMarkChannelMessagesAsSeenByMe,
       variables: Variables$Mutation$MarkChannelMessagesAsSeenByMe(
         channelId: channelId,
@@ -137,7 +137,7 @@ class MessagesProvider extends BaseProvider {
   Future<OperationResult<String>> updateMessage({
     required Input$ChannelMessageInput input,
   }) async {
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationUpdateChannelMessage,
       variables: Variables$Mutation$UpdateChannelMessage(
         input: input,
@@ -160,7 +160,7 @@ class MessagesProvider extends BaseProvider {
     required bool deletePhysically,
     required String channelMessageId,
   }) async {
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationDeleteChannelMessage,
       variables: Variables$Mutation$DeleteChannelMessage(
         deletePhysically: deletePhysically,

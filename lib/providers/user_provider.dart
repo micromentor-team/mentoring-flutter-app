@@ -130,7 +130,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     await _resetUser();
     await _setDeviceUuid();
 
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationSignUpUser,
       variables: Variables$Mutation$SignUpUser(input: input).toJson(),
     );
@@ -166,7 +166,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     await _resetUser();
     await _setDeviceUuid();
 
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationSignInUser,
       variables: Variables$Mutation$SignInUser(input: input).toJson(),
     );
@@ -196,7 +196,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   }
 
   Future<OperationResult<void>> signOutUser() async {
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationSignOutUser,
     );
 
@@ -212,7 +212,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   Future<OperationResult<void>> updateUserData({
     required Input$UserInput input,
   }) async {
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationUpdateUser,
       variables: Variables$Mutation$UpdateUser(input: input).toJson(),
     );
@@ -229,7 +229,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     String? userId = pref.getString('userId');
 
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
       document: documentNodeMutationUpdateUser,
       variables: Variables$Mutation$DeleteUser(
         userId: userId!,

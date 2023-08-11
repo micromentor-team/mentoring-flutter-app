@@ -100,7 +100,7 @@ class ChannelsProvider extends BaseProvider {
   Future<OperationResult<Mutation$CreateChannel$createChannel>> createChannel({
     required Input$ChannelInput input,
   }) async {
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
         document: documentNodeMutationCreateChannel,
         variables: Variables$Mutation$CreateChannel(input: input).toJson(),
         update: (cache, result) {
@@ -143,7 +143,7 @@ class ChannelsProvider extends BaseProvider {
     required bool deletePhysically,
     required String channelId,
   }) async {
-    final QueryResult queryResult = await runMutation(
+    final QueryResult queryResult = await asyncMutation(
         document: documentNodeMutationDeleteChannel,
         variables: Variables$Mutation$DeleteChannel(
           deletePhysically: deletePhysically,
