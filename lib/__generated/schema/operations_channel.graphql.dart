@@ -5709,3 +5709,514 @@ const documentNodeMutationDeleteChannel = DocumentNode(definitions: [
     ]),
   ),
 ]);
+
+class Variables$Subscription$ChannelChanged {
+  factory Variables$Subscription$ChannelChanged({required String channelId}) =>
+      Variables$Subscription$ChannelChanged._({
+        r'channelId': channelId,
+      });
+
+  Variables$Subscription$ChannelChanged._(this._$data);
+
+  factory Variables$Subscription$ChannelChanged.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$channelId = data['channelId'];
+    result$data['channelId'] = (l$channelId as String);
+    return Variables$Subscription$ChannelChanged._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get channelId => (_$data['channelId'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$channelId = channelId;
+    result$data['channelId'] = l$channelId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Subscription$ChannelChanged<
+          Variables$Subscription$ChannelChanged>
+      get copyWith => CopyWith$Variables$Subscription$ChannelChanged(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Subscription$ChannelChanged) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    return Object.hashAll([l$channelId]);
+  }
+}
+
+abstract class CopyWith$Variables$Subscription$ChannelChanged<TRes> {
+  factory CopyWith$Variables$Subscription$ChannelChanged(
+    Variables$Subscription$ChannelChanged instance,
+    TRes Function(Variables$Subscription$ChannelChanged) then,
+  ) = _CopyWithImpl$Variables$Subscription$ChannelChanged;
+
+  factory CopyWith$Variables$Subscription$ChannelChanged.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Subscription$ChannelChanged;
+
+  TRes call({String? channelId});
+}
+
+class _CopyWithImpl$Variables$Subscription$ChannelChanged<TRes>
+    implements CopyWith$Variables$Subscription$ChannelChanged<TRes> {
+  _CopyWithImpl$Variables$Subscription$ChannelChanged(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Subscription$ChannelChanged _instance;
+
+  final TRes Function(Variables$Subscription$ChannelChanged) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelId = _undefined}) =>
+      _then(Variables$Subscription$ChannelChanged._({
+        ..._instance._$data,
+        if (channelId != _undefined && channelId != null)
+          'channelId': (channelId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Subscription$ChannelChanged<TRes>
+    implements CopyWith$Variables$Subscription$ChannelChanged<TRes> {
+  _CopyWithStubImpl$Variables$Subscription$ChannelChanged(this._res);
+
+  TRes _res;
+
+  call({String? channelId}) => _res;
+}
+
+class Subscription$ChannelChanged {
+  Subscription$ChannelChanged({required this.channelChanged});
+
+  factory Subscription$ChannelChanged.fromJson(Map<String, dynamic> json) {
+    final l$channelChanged = json['channelChanged'];
+    return Subscription$ChannelChanged(
+        channelChanged: Subscription$ChannelChanged$channelChanged.fromJson(
+            (l$channelChanged as Map<String, dynamic>)));
+  }
+
+  final Subscription$ChannelChanged$channelChanged channelChanged;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$channelChanged = channelChanged;
+    _resultData['channelChanged'] = l$channelChanged.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelChanged = channelChanged;
+    return Object.hashAll([l$channelChanged]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription$ChannelChanged) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelChanged = channelChanged;
+    final lOther$channelChanged = other.channelChanged;
+    if (l$channelChanged != lOther$channelChanged) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Subscription$ChannelChanged
+    on Subscription$ChannelChanged {
+  CopyWith$Subscription$ChannelChanged<Subscription$ChannelChanged>
+      get copyWith => CopyWith$Subscription$ChannelChanged(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Subscription$ChannelChanged<TRes> {
+  factory CopyWith$Subscription$ChannelChanged(
+    Subscription$ChannelChanged instance,
+    TRes Function(Subscription$ChannelChanged) then,
+  ) = _CopyWithImpl$Subscription$ChannelChanged;
+
+  factory CopyWith$Subscription$ChannelChanged.stub(TRes res) =
+      _CopyWithStubImpl$Subscription$ChannelChanged;
+
+  TRes call({Subscription$ChannelChanged$channelChanged? channelChanged});
+  CopyWith$Subscription$ChannelChanged$channelChanged<TRes> get channelChanged;
+}
+
+class _CopyWithImpl$Subscription$ChannelChanged<TRes>
+    implements CopyWith$Subscription$ChannelChanged<TRes> {
+  _CopyWithImpl$Subscription$ChannelChanged(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription$ChannelChanged _instance;
+
+  final TRes Function(Subscription$ChannelChanged) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelChanged = _undefined}) =>
+      _then(Subscription$ChannelChanged(
+          channelChanged: channelChanged == _undefined || channelChanged == null
+              ? _instance.channelChanged
+              : (channelChanged
+                  as Subscription$ChannelChanged$channelChanged)));
+  CopyWith$Subscription$ChannelChanged$channelChanged<TRes> get channelChanged {
+    final local$channelChanged = _instance.channelChanged;
+    return CopyWith$Subscription$ChannelChanged$channelChanged(
+        local$channelChanged, (e) => call(channelChanged: e));
+  }
+}
+
+class _CopyWithStubImpl$Subscription$ChannelChanged<TRes>
+    implements CopyWith$Subscription$ChannelChanged<TRes> {
+  _CopyWithStubImpl$Subscription$ChannelChanged(this._res);
+
+  TRes _res;
+
+  call({Subscription$ChannelChanged$channelChanged? channelChanged}) => _res;
+  CopyWith$Subscription$ChannelChanged$channelChanged<TRes>
+      get channelChanged =>
+          CopyWith$Subscription$ChannelChanged$channelChanged.stub(_res);
+}
+
+const documentNodeSubscriptionChannelChanged = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'ChannelChanged'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'channelChanged'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'channelId'),
+            value: VariableNode(name: NameNode(value: 'channelId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'channelId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'invitationId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'messageId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'participantId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'eventType'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'requestId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+]);
+
+class Subscription$ChannelChanged$channelChanged {
+  Subscription$ChannelChanged$channelChanged({
+    required this.channelId,
+    this.invitationId,
+    this.messageId,
+    this.participantId,
+    required this.eventType,
+    this.requestId,
+    this.$__typename = 'BgChannelChangedEvent',
+  });
+
+  factory Subscription$ChannelChanged$channelChanged.fromJson(
+      Map<String, dynamic> json) {
+    final l$channelId = json['channelId'];
+    final l$invitationId = json['invitationId'];
+    final l$messageId = json['messageId'];
+    final l$participantId = json['participantId'];
+    final l$eventType = json['eventType'];
+    final l$requestId = json['requestId'];
+    final l$$__typename = json['__typename'];
+    return Subscription$ChannelChanged$channelChanged(
+      channelId: (l$channelId as String),
+      invitationId: (l$invitationId as String?),
+      messageId: (l$messageId as String?),
+      participantId: (l$participantId as String?),
+      eventType: fromJson$Enum$ChannelChangedEventType((l$eventType as String)),
+      requestId: (l$requestId as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String channelId;
+
+  final String? invitationId;
+
+  final String? messageId;
+
+  final String? participantId;
+
+  final Enum$ChannelChangedEventType eventType;
+
+  final String? requestId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$channelId = channelId;
+    _resultData['channelId'] = l$channelId;
+    final l$invitationId = invitationId;
+    _resultData['invitationId'] = l$invitationId;
+    final l$messageId = messageId;
+    _resultData['messageId'] = l$messageId;
+    final l$participantId = participantId;
+    _resultData['participantId'] = l$participantId;
+    final l$eventType = eventType;
+    _resultData['eventType'] = toJson$Enum$ChannelChangedEventType(l$eventType);
+    final l$requestId = requestId;
+    _resultData['requestId'] = l$requestId;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    final l$invitationId = invitationId;
+    final l$messageId = messageId;
+    final l$participantId = participantId;
+    final l$eventType = eventType;
+    final l$requestId = requestId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$channelId,
+      l$invitationId,
+      l$messageId,
+      l$participantId,
+      l$eventType,
+      l$requestId,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription$ChannelChanged$channelChanged) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    final l$invitationId = invitationId;
+    final lOther$invitationId = other.invitationId;
+    if (l$invitationId != lOther$invitationId) {
+      return false;
+    }
+    final l$messageId = messageId;
+    final lOther$messageId = other.messageId;
+    if (l$messageId != lOther$messageId) {
+      return false;
+    }
+    final l$participantId = participantId;
+    final lOther$participantId = other.participantId;
+    if (l$participantId != lOther$participantId) {
+      return false;
+    }
+    final l$eventType = eventType;
+    final lOther$eventType = other.eventType;
+    if (l$eventType != lOther$eventType) {
+      return false;
+    }
+    final l$requestId = requestId;
+    final lOther$requestId = other.requestId;
+    if (l$requestId != lOther$requestId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Subscription$ChannelChanged$channelChanged
+    on Subscription$ChannelChanged$channelChanged {
+  CopyWith$Subscription$ChannelChanged$channelChanged<
+          Subscription$ChannelChanged$channelChanged>
+      get copyWith => CopyWith$Subscription$ChannelChanged$channelChanged(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Subscription$ChannelChanged$channelChanged<TRes> {
+  factory CopyWith$Subscription$ChannelChanged$channelChanged(
+    Subscription$ChannelChanged$channelChanged instance,
+    TRes Function(Subscription$ChannelChanged$channelChanged) then,
+  ) = _CopyWithImpl$Subscription$ChannelChanged$channelChanged;
+
+  factory CopyWith$Subscription$ChannelChanged$channelChanged.stub(TRes res) =
+      _CopyWithStubImpl$Subscription$ChannelChanged$channelChanged;
+
+  TRes call({
+    String? channelId,
+    String? invitationId,
+    String? messageId,
+    String? participantId,
+    Enum$ChannelChangedEventType? eventType,
+    String? requestId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Subscription$ChannelChanged$channelChanged<TRes>
+    implements CopyWith$Subscription$ChannelChanged$channelChanged<TRes> {
+  _CopyWithImpl$Subscription$ChannelChanged$channelChanged(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription$ChannelChanged$channelChanged _instance;
+
+  final TRes Function(Subscription$ChannelChanged$channelChanged) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? channelId = _undefined,
+    Object? invitationId = _undefined,
+    Object? messageId = _undefined,
+    Object? participantId = _undefined,
+    Object? eventType = _undefined,
+    Object? requestId = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription$ChannelChanged$channelChanged(
+        channelId: channelId == _undefined || channelId == null
+            ? _instance.channelId
+            : (channelId as String),
+        invitationId: invitationId == _undefined
+            ? _instance.invitationId
+            : (invitationId as String?),
+        messageId: messageId == _undefined
+            ? _instance.messageId
+            : (messageId as String?),
+        participantId: participantId == _undefined
+            ? _instance.participantId
+            : (participantId as String?),
+        eventType: eventType == _undefined || eventType == null
+            ? _instance.eventType
+            : (eventType as Enum$ChannelChangedEventType),
+        requestId: requestId == _undefined
+            ? _instance.requestId
+            : (requestId as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Subscription$ChannelChanged$channelChanged<TRes>
+    implements CopyWith$Subscription$ChannelChanged$channelChanged<TRes> {
+  _CopyWithStubImpl$Subscription$ChannelChanged$channelChanged(this._res);
+
+  TRes _res;
+
+  call({
+    String? channelId,
+    String? invitationId,
+    String? messageId,
+    String? participantId,
+    Enum$ChannelChangedEventType? eventType,
+    String? requestId,
+    String? $__typename,
+  }) =>
+      _res;
+}

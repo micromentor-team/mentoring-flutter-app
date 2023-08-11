@@ -5776,7 +5776,7 @@ class Input$ChannelInput {
     String? description,
     List<String>? tags,
     Enum$ChannelType? channelType,
-    Enum$ChannelStatus? channelStatus,
+    List<Input$BgChannelStatusInput>? statuses,
     List<String>? userIds,
     List<String>? inviteUserIds,
     String? pausedAt,
@@ -5803,7 +5803,7 @@ class Input$ChannelInput {
         if (description != null) r'description': description,
         if (tags != null) r'tags': tags,
         if (channelType != null) r'channelType': channelType,
-        if (channelStatus != null) r'channelStatus': channelStatus,
+        if (statuses != null) r'statuses': statuses,
         if (userIds != null) r'userIds': userIds,
         if (inviteUserIds != null) r'inviteUserIds': inviteUserIds,
         if (pausedAt != null) r'pausedAt': pausedAt,
@@ -5888,11 +5888,12 @@ class Input$ChannelInput {
           ? null
           : fromJson$Enum$ChannelType((l$channelType as String));
     }
-    if (data.containsKey('channelStatus')) {
-      final l$channelStatus = data['channelStatus'];
-      result$data['channelStatus'] = l$channelStatus == null
-          ? null
-          : fromJson$Enum$ChannelStatus((l$channelStatus as String));
+    if (data.containsKey('statuses')) {
+      final l$statuses = data['statuses'];
+      result$data['statuses'] = (l$statuses as List<dynamic>?)
+          ?.map((e) =>
+              Input$BgChannelStatusInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
     }
     if (data.containsKey('userIds')) {
       final l$userIds = data['userIds'];
@@ -5956,8 +5957,8 @@ class Input$ChannelInput {
   List<String>? get tags => (_$data['tags'] as List<String>?);
   Enum$ChannelType? get channelType =>
       (_$data['channelType'] as Enum$ChannelType?);
-  Enum$ChannelStatus? get channelStatus =>
-      (_$data['channelStatus'] as Enum$ChannelStatus?);
+  List<Input$BgChannelStatusInput>? get statuses =>
+      (_$data['statuses'] as List<Input$BgChannelStatusInput>?);
   List<String>? get userIds => (_$data['userIds'] as List<String>?);
   List<String>? get inviteUserIds => (_$data['inviteUserIds'] as List<String>?);
   String? get pausedAt => (_$data['pausedAt'] as String?);
@@ -6030,11 +6031,9 @@ class Input$ChannelInput {
       result$data['channelType'] =
           l$channelType == null ? null : toJson$Enum$ChannelType(l$channelType);
     }
-    if (_$data.containsKey('channelStatus')) {
-      final l$channelStatus = channelStatus;
-      result$data['channelStatus'] = l$channelStatus == null
-          ? null
-          : toJson$Enum$ChannelStatus(l$channelStatus);
+    if (_$data.containsKey('statuses')) {
+      final l$statuses = statuses;
+      result$data['statuses'] = l$statuses?.map((e) => e.toJson()).toList();
     }
     if (_$data.containsKey('userIds')) {
       final l$userIds = userIds;
@@ -6240,13 +6239,24 @@ class Input$ChannelInput {
     if (l$channelType != lOther$channelType) {
       return false;
     }
-    final l$channelStatus = channelStatus;
-    final lOther$channelStatus = other.channelStatus;
-    if (_$data.containsKey('channelStatus') !=
-        other._$data.containsKey('channelStatus')) {
+    final l$statuses = statuses;
+    final lOther$statuses = other.statuses;
+    if (_$data.containsKey('statuses') !=
+        other._$data.containsKey('statuses')) {
       return false;
     }
-    if (l$channelStatus != lOther$channelStatus) {
+    if (l$statuses != null && lOther$statuses != null) {
+      if (l$statuses.length != lOther$statuses.length) {
+        return false;
+      }
+      for (int i = 0; i < l$statuses.length; i++) {
+        final l$statuses$entry = l$statuses[i];
+        final lOther$statuses$entry = lOther$statuses[i];
+        if (l$statuses$entry != lOther$statuses$entry) {
+          return false;
+        }
+      }
+    } else if (l$statuses != lOther$statuses) {
       return false;
     }
     final l$userIds = userIds;
@@ -6370,7 +6380,7 @@ class Input$ChannelInput {
     final l$description = description;
     final l$tags = tags;
     final l$channelType = channelType;
-    final l$channelStatus = channelStatus;
+    final l$statuses = statuses;
     final l$userIds = userIds;
     final l$inviteUserIds = inviteUserIds;
     final l$pausedAt = pausedAt;
@@ -6404,7 +6414,11 @@ class Input$ChannelInput {
               : Object.hashAll(l$tags.map((v) => v))
           : const {},
       _$data.containsKey('channelType') ? l$channelType : const {},
-      _$data.containsKey('channelStatus') ? l$channelStatus : const {},
+      _$data.containsKey('statuses')
+          ? l$statuses == null
+              ? null
+              : Object.hashAll(l$statuses.map((v) => v))
+          : const {},
       _$data.containsKey('userIds')
           ? l$userIds == null
               ? null
@@ -6451,7 +6465,7 @@ abstract class CopyWith$Input$ChannelInput<TRes> {
     String? description,
     List<String>? tags,
     Enum$ChannelType? channelType,
-    Enum$ChannelStatus? channelStatus,
+    List<Input$BgChannelStatusInput>? statuses,
     List<String>? userIds,
     List<String>? inviteUserIds,
     String? pausedAt,
@@ -6467,6 +6481,12 @@ abstract class CopyWith$Input$ChannelInput<TRes> {
               Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
           _fn);
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  TRes statuses(
+      Iterable<Input$BgChannelStatusInput>? Function(
+              Iterable<
+                  CopyWith$Input$BgChannelStatusInput<
+                      Input$BgChannelStatusInput>>?)
+          _fn);
 }
 
 class _CopyWithImpl$Input$ChannelInput<TRes>
@@ -6498,7 +6518,7 @@ class _CopyWithImpl$Input$ChannelInput<TRes>
     Object? description = _undefined,
     Object? tags = _undefined,
     Object? channelType = _undefined,
-    Object? channelStatus = _undefined,
+    Object? statuses = _undefined,
     Object? userIds = _undefined,
     Object? inviteUserIds = _undefined,
     Object? pausedAt = _undefined,
@@ -6529,8 +6549,8 @@ class _CopyWithImpl$Input$ChannelInput<TRes>
         if (tags != _undefined) 'tags': (tags as List<String>?),
         if (channelType != _undefined)
           'channelType': (channelType as Enum$ChannelType?),
-        if (channelStatus != _undefined)
-          'channelStatus': (channelStatus as Enum$ChannelStatus?),
+        if (statuses != _undefined)
+          'statuses': (statuses as List<Input$BgChannelStatusInput>?),
         if (userIds != _undefined) 'userIds': (userIds as List<String>?),
         if (inviteUserIds != _undefined)
           'inviteUserIds': (inviteUserIds as List<String>?),
@@ -6562,6 +6582,19 @@ class _CopyWithImpl$Input$ChannelInput<TRes>
         : CopyWith$Input$BaseModelMetadataInput(
             local$metadata, (e) => call(metadata: e));
   }
+
+  TRes statuses(
+          Iterable<Input$BgChannelStatusInput>? Function(
+                  Iterable<
+                      CopyWith$Input$BgChannelStatusInput<
+                          Input$BgChannelStatusInput>>?)
+              _fn) =>
+      call(
+          statuses: _fn(_instance.statuses
+              ?.map((e) => CopyWith$Input$BgChannelStatusInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
 }
 
 class _CopyWithStubImpl$Input$ChannelInput<TRes>
@@ -6586,7 +6619,7 @@ class _CopyWithStubImpl$Input$ChannelInput<TRes>
     String? description,
     List<String>? tags,
     Enum$ChannelType? channelType,
-    Enum$ChannelStatus? channelStatus,
+    List<Input$BgChannelStatusInput>? statuses,
     List<String>? userIds,
     List<String>? inviteUserIds,
     String? pausedAt,
@@ -6601,6 +6634,146 @@ class _CopyWithStubImpl$Input$ChannelInput<TRes>
   events(_fn) => _res;
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  statuses(_fn) => _res;
+}
+
+class Input$BgChannelStatusInput {
+  factory Input$BgChannelStatusInput({
+    String? userId,
+    String? archivedAt,
+  }) =>
+      Input$BgChannelStatusInput._({
+        if (userId != null) r'userId': userId,
+        if (archivedAt != null) r'archivedAt': archivedAt,
+      });
+
+  Input$BgChannelStatusInput._(this._$data);
+
+  factory Input$BgChannelStatusInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('userId')) {
+      final l$userId = data['userId'];
+      result$data['userId'] = (l$userId as String?);
+    }
+    if (data.containsKey('archivedAt')) {
+      final l$archivedAt = data['archivedAt'];
+      result$data['archivedAt'] = (l$archivedAt as String?);
+    }
+    return Input$BgChannelStatusInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get userId => (_$data['userId'] as String?);
+  String? get archivedAt => (_$data['archivedAt'] as String?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('userId')) {
+      final l$userId = userId;
+      result$data['userId'] = l$userId;
+    }
+    if (_$data.containsKey('archivedAt')) {
+      final l$archivedAt = archivedAt;
+      result$data['archivedAt'] = l$archivedAt;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$BgChannelStatusInput<Input$BgChannelStatusInput>
+      get copyWith => CopyWith$Input$BgChannelStatusInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$BgChannelStatusInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (_$data.containsKey('userId') != other._$data.containsKey('userId')) {
+      return false;
+    }
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$archivedAt = archivedAt;
+    final lOther$archivedAt = other.archivedAt;
+    if (_$data.containsKey('archivedAt') !=
+        other._$data.containsKey('archivedAt')) {
+      return false;
+    }
+    if (l$archivedAt != lOther$archivedAt) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$userId = userId;
+    final l$archivedAt = archivedAt;
+    return Object.hashAll([
+      _$data.containsKey('userId') ? l$userId : const {},
+      _$data.containsKey('archivedAt') ? l$archivedAt : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$BgChannelStatusInput<TRes> {
+  factory CopyWith$Input$BgChannelStatusInput(
+    Input$BgChannelStatusInput instance,
+    TRes Function(Input$BgChannelStatusInput) then,
+  ) = _CopyWithImpl$Input$BgChannelStatusInput;
+
+  factory CopyWith$Input$BgChannelStatusInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$BgChannelStatusInput;
+
+  TRes call({
+    String? userId,
+    String? archivedAt,
+  });
+}
+
+class _CopyWithImpl$Input$BgChannelStatusInput<TRes>
+    implements CopyWith$Input$BgChannelStatusInput<TRes> {
+  _CopyWithImpl$Input$BgChannelStatusInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$BgChannelStatusInput _instance;
+
+  final TRes Function(Input$BgChannelStatusInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userId = _undefined,
+    Object? archivedAt = _undefined,
+  }) =>
+      _then(Input$BgChannelStatusInput._({
+        ..._instance._$data,
+        if (userId != _undefined) 'userId': (userId as String?),
+        if (archivedAt != _undefined) 'archivedAt': (archivedAt as String?),
+      }));
+}
+
+class _CopyWithStubImpl$Input$BgChannelStatusInput<TRes>
+    implements CopyWith$Input$BgChannelStatusInput<TRes> {
+  _CopyWithStubImpl$Input$BgChannelStatusInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? userId,
+    String? archivedAt,
+  }) =>
+      _res;
 }
 
 class Input$ChannelListFilter {
@@ -15850,6 +16023,7 @@ class Input$MentorsGroupMembershipInput {
     String? helpICanOffer,
     String? expectationsForMentees,
     String? menteePreparationInstructions,
+    int? endorsements,
   }) =>
       Input$MentorsGroupMembershipInput._({
         if (id != null) r'id': id,
@@ -15872,6 +16046,7 @@ class Input$MentorsGroupMembershipInput {
           r'expectationsForMentees': expectationsForMentees,
         if (menteePreparationInstructions != null)
           r'menteePreparationInstructions': menteePreparationInstructions,
+        if (endorsements != null) r'endorsements': endorsements,
       });
 
   Input$MentorsGroupMembershipInput._(this._$data);
@@ -15966,6 +16141,10 @@ class Input$MentorsGroupMembershipInput {
       result$data['menteePreparationInstructions'] =
           (l$menteePreparationInstructions as String?);
     }
+    if (data.containsKey('endorsements')) {
+      final l$endorsements = data['endorsements'];
+      result$data['endorsements'] = (l$endorsements as int?);
+    }
     return Input$MentorsGroupMembershipInput._(result$data);
   }
 
@@ -15996,6 +16175,7 @@ class Input$MentorsGroupMembershipInput {
       (_$data['expectationsForMentees'] as String?);
   String? get menteePreparationInstructions =>
       (_$data['menteePreparationInstructions'] as String?);
+  int? get endorsements => (_$data['endorsements'] as int?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -16074,6 +16254,10 @@ class Input$MentorsGroupMembershipInput {
       final l$menteePreparationInstructions = menteePreparationInstructions;
       result$data['menteePreparationInstructions'] =
           l$menteePreparationInstructions;
+    }
+    if (_$data.containsKey('endorsements')) {
+      final l$endorsements = endorsements;
+      result$data['endorsements'] = l$endorsements;
     }
     return result$data;
   }
@@ -16295,6 +16479,15 @@ class Input$MentorsGroupMembershipInput {
         lOther$menteePreparationInstructions) {
       return false;
     }
+    final l$endorsements = endorsements;
+    final lOther$endorsements = other.endorsements;
+    if (_$data.containsKey('endorsements') !=
+        other._$data.containsKey('endorsements')) {
+      return false;
+    }
+    if (l$endorsements != lOther$endorsements) {
+      return false;
+    }
     return true;
   }
 
@@ -16318,6 +16511,7 @@ class Input$MentorsGroupMembershipInput {
     final l$helpICanOffer = helpICanOffer;
     final l$expectationsForMentees = expectationsForMentees;
     final l$menteePreparationInstructions = menteePreparationInstructions;
+    final l$endorsements = endorsements;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -16357,6 +16551,7 @@ class Input$MentorsGroupMembershipInput {
       _$data.containsKey('menteePreparationInstructions')
           ? l$menteePreparationInstructions
           : const {},
+      _$data.containsKey('endorsements') ? l$endorsements : const {},
     ]);
   }
 }
@@ -16389,6 +16584,7 @@ abstract class CopyWith$Input$MentorsGroupMembershipInput<TRes> {
     String? helpICanOffer,
     String? expectationsForMentees,
     String? menteePreparationInstructions,
+    int? endorsements,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
@@ -16429,6 +16625,7 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
     Object? helpICanOffer = _undefined,
     Object? expectationsForMentees = _undefined,
     Object? menteePreparationInstructions = _undefined,
+    Object? endorsements = _undefined,
   }) =>
       _then(Input$MentorsGroupMembershipInput._({
         ..._instance._$data,
@@ -16459,6 +16656,7 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
         if (menteePreparationInstructions != _undefined)
           'menteePreparationInstructions':
               (menteePreparationInstructions as String?),
+        if (endorsements != _undefined) 'endorsements': (endorsements as int?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -16505,6 +16703,7 @@ class _CopyWithStubImpl$Input$MentorsGroupMembershipInput<TRes>
     String? helpICanOffer,
     String? expectationsForMentees,
     String? menteePreparationInstructions,
+    int? endorsements,
   }) =>
       _res;
   events(_fn) => _res;
@@ -19006,660 +19205,6 @@ class _CopyWithStubImpl$Input$NotificationTemplateInput<TRes>
     bool? sendPushNotification,
     bool? sendSms,
     bool? isCore,
-  }) =>
-      _res;
-  events(_fn) => _res;
-  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
-      CopyWith$Input$BaseModelMetadataInput.stub(_res);
-}
-
-class Input$Mm2SynchronizationInput {
-  factory Input$Mm2SynchronizationInput({
-    String? id,
-    String? adminNotes,
-    List<Input$ModelEventInput>? events,
-    Input$BaseModelMetadataInput? metadata,
-    String? createdAt,
-    String? createdBy,
-    String? updatedAt,
-    String? updatedBy,
-    String? deletedAt,
-    String? deletedBy,
-    Enum$Mm2SyncDirection? direction,
-    String? objectId,
-    Enum$Mm2ModelType? mm2ModelType,
-    Enum$Mm2SynchronizationMode? syncMode,
-    int? limit,
-    bool? autorun,
-    String? usersSinceUpdatedAt,
-    Enum$Mm2SynchronizerLogLevel? logLevel,
-    String? expiresAt,
-  }) =>
-      Input$Mm2SynchronizationInput._({
-        if (id != null) r'id': id,
-        if (adminNotes != null) r'adminNotes': adminNotes,
-        if (events != null) r'events': events,
-        if (metadata != null) r'metadata': metadata,
-        if (createdAt != null) r'createdAt': createdAt,
-        if (createdBy != null) r'createdBy': createdBy,
-        if (updatedAt != null) r'updatedAt': updatedAt,
-        if (updatedBy != null) r'updatedBy': updatedBy,
-        if (deletedAt != null) r'deletedAt': deletedAt,
-        if (deletedBy != null) r'deletedBy': deletedBy,
-        if (direction != null) r'direction': direction,
-        if (objectId != null) r'objectId': objectId,
-        if (mm2ModelType != null) r'mm2ModelType': mm2ModelType,
-        if (syncMode != null) r'syncMode': syncMode,
-        if (limit != null) r'limit': limit,
-        if (autorun != null) r'autorun': autorun,
-        if (usersSinceUpdatedAt != null)
-          r'usersSinceUpdatedAt': usersSinceUpdatedAt,
-        if (logLevel != null) r'logLevel': logLevel,
-        if (expiresAt != null) r'expiresAt': expiresAt,
-      });
-
-  Input$Mm2SynchronizationInput._(this._$data);
-
-  factory Input$Mm2SynchronizationInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = (l$id as String?);
-    }
-    if (data.containsKey('adminNotes')) {
-      final l$adminNotes = data['adminNotes'];
-      result$data['adminNotes'] = (l$adminNotes as String?);
-    }
-    if (data.containsKey('events')) {
-      final l$events = data['events'];
-      result$data['events'] = (l$events as List<dynamic>?)
-          ?.map((e) =>
-              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
-          .toList();
-    }
-    if (data.containsKey('metadata')) {
-      final l$metadata = data['metadata'];
-      result$data['metadata'] = l$metadata == null
-          ? null
-          : Input$BaseModelMetadataInput.fromJson(
-              (l$metadata as Map<String, dynamic>));
-    }
-    if (data.containsKey('createdAt')) {
-      final l$createdAt = data['createdAt'];
-      result$data['createdAt'] = (l$createdAt as String?);
-    }
-    if (data.containsKey('createdBy')) {
-      final l$createdBy = data['createdBy'];
-      result$data['createdBy'] = (l$createdBy as String?);
-    }
-    if (data.containsKey('updatedAt')) {
-      final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] = (l$updatedAt as String?);
-    }
-    if (data.containsKey('updatedBy')) {
-      final l$updatedBy = data['updatedBy'];
-      result$data['updatedBy'] = (l$updatedBy as String?);
-    }
-    if (data.containsKey('deletedAt')) {
-      final l$deletedAt = data['deletedAt'];
-      result$data['deletedAt'] = (l$deletedAt as String?);
-    }
-    if (data.containsKey('deletedBy')) {
-      final l$deletedBy = data['deletedBy'];
-      result$data['deletedBy'] = (l$deletedBy as String?);
-    }
-    if (data.containsKey('direction')) {
-      final l$direction = data['direction'];
-      result$data['direction'] =
-          fromJson$Enum$Mm2SyncDirection((l$direction as String));
-    }
-    if (data.containsKey('objectId')) {
-      final l$objectId = data['objectId'];
-      result$data['objectId'] = (l$objectId as String?);
-    }
-    if (data.containsKey('mm2ModelType')) {
-      final l$mm2ModelType = data['mm2ModelType'];
-      result$data['mm2ModelType'] = l$mm2ModelType == null
-          ? null
-          : fromJson$Enum$Mm2ModelType((l$mm2ModelType as String));
-    }
-    if (data.containsKey('syncMode')) {
-      final l$syncMode = data['syncMode'];
-      result$data['syncMode'] =
-          fromJson$Enum$Mm2SynchronizationMode((l$syncMode as String));
-    }
-    if (data.containsKey('limit')) {
-      final l$limit = data['limit'];
-      result$data['limit'] = (l$limit as int?);
-    }
-    if (data.containsKey('autorun')) {
-      final l$autorun = data['autorun'];
-      result$data['autorun'] = (l$autorun as bool);
-    }
-    if (data.containsKey('usersSinceUpdatedAt')) {
-      final l$usersSinceUpdatedAt = data['usersSinceUpdatedAt'];
-      result$data['usersSinceUpdatedAt'] = (l$usersSinceUpdatedAt as String?);
-    }
-    if (data.containsKey('logLevel')) {
-      final l$logLevel = data['logLevel'];
-      result$data['logLevel'] = l$logLevel == null
-          ? null
-          : fromJson$Enum$Mm2SynchronizerLogLevel((l$logLevel as String));
-    }
-    if (data.containsKey('expiresAt')) {
-      final l$expiresAt = data['expiresAt'];
-      result$data['expiresAt'] = (l$expiresAt as String?);
-    }
-    return Input$Mm2SynchronizationInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get id => (_$data['id'] as String?);
-  String? get adminNotes => (_$data['adminNotes'] as String?);
-  List<Input$ModelEventInput>? get events =>
-      (_$data['events'] as List<Input$ModelEventInput>?);
-  Input$BaseModelMetadataInput? get metadata =>
-      (_$data['metadata'] as Input$BaseModelMetadataInput?);
-  String? get createdAt => (_$data['createdAt'] as String?);
-  String? get createdBy => (_$data['createdBy'] as String?);
-  String? get updatedAt => (_$data['updatedAt'] as String?);
-  String? get updatedBy => (_$data['updatedBy'] as String?);
-  String? get deletedAt => (_$data['deletedAt'] as String?);
-  String? get deletedBy => (_$data['deletedBy'] as String?);
-  Enum$Mm2SyncDirection? get direction =>
-      (_$data['direction'] as Enum$Mm2SyncDirection?);
-  String? get objectId => (_$data['objectId'] as String?);
-  Enum$Mm2ModelType? get mm2ModelType =>
-      (_$data['mm2ModelType'] as Enum$Mm2ModelType?);
-  Enum$Mm2SynchronizationMode? get syncMode =>
-      (_$data['syncMode'] as Enum$Mm2SynchronizationMode?);
-  int? get limit => (_$data['limit'] as int?);
-  bool? get autorun => (_$data['autorun'] as bool?);
-  String? get usersSinceUpdatedAt => (_$data['usersSinceUpdatedAt'] as String?);
-  Enum$Mm2SynchronizerLogLevel? get logLevel =>
-      (_$data['logLevel'] as Enum$Mm2SynchronizerLogLevel?);
-  String? get expiresAt => (_$data['expiresAt'] as String?);
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id;
-    }
-    if (_$data.containsKey('adminNotes')) {
-      final l$adminNotes = adminNotes;
-      result$data['adminNotes'] = l$adminNotes;
-    }
-    if (_$data.containsKey('events')) {
-      final l$events = events;
-      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('metadata')) {
-      final l$metadata = metadata;
-      result$data['metadata'] = l$metadata?.toJson();
-    }
-    if (_$data.containsKey('createdAt')) {
-      final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt;
-    }
-    if (_$data.containsKey('createdBy')) {
-      final l$createdBy = createdBy;
-      result$data['createdBy'] = l$createdBy;
-    }
-    if (_$data.containsKey('updatedAt')) {
-      final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt;
-    }
-    if (_$data.containsKey('updatedBy')) {
-      final l$updatedBy = updatedBy;
-      result$data['updatedBy'] = l$updatedBy;
-    }
-    if (_$data.containsKey('deletedAt')) {
-      final l$deletedAt = deletedAt;
-      result$data['deletedAt'] = l$deletedAt;
-    }
-    if (_$data.containsKey('deletedBy')) {
-      final l$deletedBy = deletedBy;
-      result$data['deletedBy'] = l$deletedBy;
-    }
-    if (_$data.containsKey('direction')) {
-      final l$direction = direction;
-      result$data['direction'] =
-          toJson$Enum$Mm2SyncDirection((l$direction as Enum$Mm2SyncDirection));
-    }
-    if (_$data.containsKey('objectId')) {
-      final l$objectId = objectId;
-      result$data['objectId'] = l$objectId;
-    }
-    if (_$data.containsKey('mm2ModelType')) {
-      final l$mm2ModelType = mm2ModelType;
-      result$data['mm2ModelType'] = l$mm2ModelType == null
-          ? null
-          : toJson$Enum$Mm2ModelType(l$mm2ModelType);
-    }
-    if (_$data.containsKey('syncMode')) {
-      final l$syncMode = syncMode;
-      result$data['syncMode'] = toJson$Enum$Mm2SynchronizationMode(
-          (l$syncMode as Enum$Mm2SynchronizationMode));
-    }
-    if (_$data.containsKey('limit')) {
-      final l$limit = limit;
-      result$data['limit'] = l$limit;
-    }
-    if (_$data.containsKey('autorun')) {
-      final l$autorun = autorun;
-      result$data['autorun'] = (l$autorun as bool);
-    }
-    if (_$data.containsKey('usersSinceUpdatedAt')) {
-      final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
-      result$data['usersSinceUpdatedAt'] = l$usersSinceUpdatedAt;
-    }
-    if (_$data.containsKey('logLevel')) {
-      final l$logLevel = logLevel;
-      result$data['logLevel'] = l$logLevel == null
-          ? null
-          : toJson$Enum$Mm2SynchronizerLogLevel(l$logLevel);
-    }
-    if (_$data.containsKey('expiresAt')) {
-      final l$expiresAt = expiresAt;
-      result$data['expiresAt'] = l$expiresAt;
-    }
-    return result$data;
-  }
-
-  CopyWith$Input$Mm2SynchronizationInput<Input$Mm2SynchronizationInput>
-      get copyWith => CopyWith$Input$Mm2SynchronizationInput(
-            this,
-            (i) => i,
-          );
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Input$Mm2SynchronizationInput) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$adminNotes = adminNotes;
-    final lOther$adminNotes = other.adminNotes;
-    if (_$data.containsKey('adminNotes') !=
-        other._$data.containsKey('adminNotes')) {
-      return false;
-    }
-    if (l$adminNotes != lOther$adminNotes) {
-      return false;
-    }
-    final l$events = events;
-    final lOther$events = other.events;
-    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
-      return false;
-    }
-    if (l$events != null && lOther$events != null) {
-      if (l$events.length != lOther$events.length) {
-        return false;
-      }
-      for (int i = 0; i < l$events.length; i++) {
-        final l$events$entry = l$events[i];
-        final lOther$events$entry = lOther$events[i];
-        if (l$events$entry != lOther$events$entry) {
-          return false;
-        }
-      }
-    } else if (l$events != lOther$events) {
-      return false;
-    }
-    final l$metadata = metadata;
-    final lOther$metadata = other.metadata;
-    if (_$data.containsKey('metadata') !=
-        other._$data.containsKey('metadata')) {
-      return false;
-    }
-    if (l$metadata != lOther$metadata) {
-      return false;
-    }
-    final l$createdAt = createdAt;
-    final lOther$createdAt = other.createdAt;
-    if (_$data.containsKey('createdAt') !=
-        other._$data.containsKey('createdAt')) {
-      return false;
-    }
-    if (l$createdAt != lOther$createdAt) {
-      return false;
-    }
-    final l$createdBy = createdBy;
-    final lOther$createdBy = other.createdBy;
-    if (_$data.containsKey('createdBy') !=
-        other._$data.containsKey('createdBy')) {
-      return false;
-    }
-    if (l$createdBy != lOther$createdBy) {
-      return false;
-    }
-    final l$updatedAt = updatedAt;
-    final lOther$updatedAt = other.updatedAt;
-    if (_$data.containsKey('updatedAt') !=
-        other._$data.containsKey('updatedAt')) {
-      return false;
-    }
-    if (l$updatedAt != lOther$updatedAt) {
-      return false;
-    }
-    final l$updatedBy = updatedBy;
-    final lOther$updatedBy = other.updatedBy;
-    if (_$data.containsKey('updatedBy') !=
-        other._$data.containsKey('updatedBy')) {
-      return false;
-    }
-    if (l$updatedBy != lOther$updatedBy) {
-      return false;
-    }
-    final l$deletedAt = deletedAt;
-    final lOther$deletedAt = other.deletedAt;
-    if (_$data.containsKey('deletedAt') !=
-        other._$data.containsKey('deletedAt')) {
-      return false;
-    }
-    if (l$deletedAt != lOther$deletedAt) {
-      return false;
-    }
-    final l$deletedBy = deletedBy;
-    final lOther$deletedBy = other.deletedBy;
-    if (_$data.containsKey('deletedBy') !=
-        other._$data.containsKey('deletedBy')) {
-      return false;
-    }
-    if (l$deletedBy != lOther$deletedBy) {
-      return false;
-    }
-    final l$direction = direction;
-    final lOther$direction = other.direction;
-    if (_$data.containsKey('direction') !=
-        other._$data.containsKey('direction')) {
-      return false;
-    }
-    if (l$direction != lOther$direction) {
-      return false;
-    }
-    final l$objectId = objectId;
-    final lOther$objectId = other.objectId;
-    if (_$data.containsKey('objectId') !=
-        other._$data.containsKey('objectId')) {
-      return false;
-    }
-    if (l$objectId != lOther$objectId) {
-      return false;
-    }
-    final l$mm2ModelType = mm2ModelType;
-    final lOther$mm2ModelType = other.mm2ModelType;
-    if (_$data.containsKey('mm2ModelType') !=
-        other._$data.containsKey('mm2ModelType')) {
-      return false;
-    }
-    if (l$mm2ModelType != lOther$mm2ModelType) {
-      return false;
-    }
-    final l$syncMode = syncMode;
-    final lOther$syncMode = other.syncMode;
-    if (_$data.containsKey('syncMode') !=
-        other._$data.containsKey('syncMode')) {
-      return false;
-    }
-    if (l$syncMode != lOther$syncMode) {
-      return false;
-    }
-    final l$limit = limit;
-    final lOther$limit = other.limit;
-    if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
-      return false;
-    }
-    if (l$limit != lOther$limit) {
-      return false;
-    }
-    final l$autorun = autorun;
-    final lOther$autorun = other.autorun;
-    if (_$data.containsKey('autorun') != other._$data.containsKey('autorun')) {
-      return false;
-    }
-    if (l$autorun != lOther$autorun) {
-      return false;
-    }
-    final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
-    final lOther$usersSinceUpdatedAt = other.usersSinceUpdatedAt;
-    if (_$data.containsKey('usersSinceUpdatedAt') !=
-        other._$data.containsKey('usersSinceUpdatedAt')) {
-      return false;
-    }
-    if (l$usersSinceUpdatedAt != lOther$usersSinceUpdatedAt) {
-      return false;
-    }
-    final l$logLevel = logLevel;
-    final lOther$logLevel = other.logLevel;
-    if (_$data.containsKey('logLevel') !=
-        other._$data.containsKey('logLevel')) {
-      return false;
-    }
-    if (l$logLevel != lOther$logLevel) {
-      return false;
-    }
-    final l$expiresAt = expiresAt;
-    final lOther$expiresAt = other.expiresAt;
-    if (_$data.containsKey('expiresAt') !=
-        other._$data.containsKey('expiresAt')) {
-      return false;
-    }
-    if (l$expiresAt != lOther$expiresAt) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$adminNotes = adminNotes;
-    final l$events = events;
-    final l$metadata = metadata;
-    final l$createdAt = createdAt;
-    final l$createdBy = createdBy;
-    final l$updatedAt = updatedAt;
-    final l$updatedBy = updatedBy;
-    final l$deletedAt = deletedAt;
-    final l$deletedBy = deletedBy;
-    final l$direction = direction;
-    final l$objectId = objectId;
-    final l$mm2ModelType = mm2ModelType;
-    final l$syncMode = syncMode;
-    final l$limit = limit;
-    final l$autorun = autorun;
-    final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
-    final l$logLevel = logLevel;
-    final l$expiresAt = expiresAt;
-    return Object.hashAll([
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
-      _$data.containsKey('events')
-          ? l$events == null
-              ? null
-              : Object.hashAll(l$events.map((v) => v))
-          : const {},
-      _$data.containsKey('metadata') ? l$metadata : const {},
-      _$data.containsKey('createdAt') ? l$createdAt : const {},
-      _$data.containsKey('createdBy') ? l$createdBy : const {},
-      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
-      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
-      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
-      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
-      _$data.containsKey('direction') ? l$direction : const {},
-      _$data.containsKey('objectId') ? l$objectId : const {},
-      _$data.containsKey('mm2ModelType') ? l$mm2ModelType : const {},
-      _$data.containsKey('syncMode') ? l$syncMode : const {},
-      _$data.containsKey('limit') ? l$limit : const {},
-      _$data.containsKey('autorun') ? l$autorun : const {},
-      _$data.containsKey('usersSinceUpdatedAt')
-          ? l$usersSinceUpdatedAt
-          : const {},
-      _$data.containsKey('logLevel') ? l$logLevel : const {},
-      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith$Input$Mm2SynchronizationInput<TRes> {
-  factory CopyWith$Input$Mm2SynchronizationInput(
-    Input$Mm2SynchronizationInput instance,
-    TRes Function(Input$Mm2SynchronizationInput) then,
-  ) = _CopyWithImpl$Input$Mm2SynchronizationInput;
-
-  factory CopyWith$Input$Mm2SynchronizationInput.stub(TRes res) =
-      _CopyWithStubImpl$Input$Mm2SynchronizationInput;
-
-  TRes call({
-    String? id,
-    String? adminNotes,
-    List<Input$ModelEventInput>? events,
-    Input$BaseModelMetadataInput? metadata,
-    String? createdAt,
-    String? createdBy,
-    String? updatedAt,
-    String? updatedBy,
-    String? deletedAt,
-    String? deletedBy,
-    Enum$Mm2SyncDirection? direction,
-    String? objectId,
-    Enum$Mm2ModelType? mm2ModelType,
-    Enum$Mm2SynchronizationMode? syncMode,
-    int? limit,
-    bool? autorun,
-    String? usersSinceUpdatedAt,
-    Enum$Mm2SynchronizerLogLevel? logLevel,
-    String? expiresAt,
-  });
-  TRes events(
-      Iterable<Input$ModelEventInput>? Function(
-              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
-          _fn);
-  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
-}
-
-class _CopyWithImpl$Input$Mm2SynchronizationInput<TRes>
-    implements CopyWith$Input$Mm2SynchronizationInput<TRes> {
-  _CopyWithImpl$Input$Mm2SynchronizationInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input$Mm2SynchronizationInput _instance;
-
-  final TRes Function(Input$Mm2SynchronizationInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? adminNotes = _undefined,
-    Object? events = _undefined,
-    Object? metadata = _undefined,
-    Object? createdAt = _undefined,
-    Object? createdBy = _undefined,
-    Object? updatedAt = _undefined,
-    Object? updatedBy = _undefined,
-    Object? deletedAt = _undefined,
-    Object? deletedBy = _undefined,
-    Object? direction = _undefined,
-    Object? objectId = _undefined,
-    Object? mm2ModelType = _undefined,
-    Object? syncMode = _undefined,
-    Object? limit = _undefined,
-    Object? autorun = _undefined,
-    Object? usersSinceUpdatedAt = _undefined,
-    Object? logLevel = _undefined,
-    Object? expiresAt = _undefined,
-  }) =>
-      _then(Input$Mm2SynchronizationInput._({
-        ..._instance._$data,
-        if (id != _undefined) 'id': (id as String?),
-        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
-        if (events != _undefined)
-          'events': (events as List<Input$ModelEventInput>?),
-        if (metadata != _undefined)
-          'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as String?),
-        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as String?),
-        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as String?),
-        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
-        if (direction != _undefined && direction != null)
-          'direction': (direction as Enum$Mm2SyncDirection),
-        if (objectId != _undefined) 'objectId': (objectId as String?),
-        if (mm2ModelType != _undefined)
-          'mm2ModelType': (mm2ModelType as Enum$Mm2ModelType?),
-        if (syncMode != _undefined && syncMode != null)
-          'syncMode': (syncMode as Enum$Mm2SynchronizationMode),
-        if (limit != _undefined) 'limit': (limit as int?),
-        if (autorun != _undefined && autorun != null)
-          'autorun': (autorun as bool),
-        if (usersSinceUpdatedAt != _undefined)
-          'usersSinceUpdatedAt': (usersSinceUpdatedAt as String?),
-        if (logLevel != _undefined)
-          'logLevel': (logLevel as Enum$Mm2SynchronizerLogLevel?),
-        if (expiresAt != _undefined) 'expiresAt': (expiresAt as String?),
-      }));
-  TRes events(
-          Iterable<Input$ModelEventInput>? Function(
-                  Iterable<
-                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
-              _fn) =>
-      call(
-          events:
-              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
-                    e,
-                    (i) => i,
-                  )))?.toList());
-  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
-    final local$metadata = _instance.metadata;
-    return local$metadata == null
-        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
-        : CopyWith$Input$BaseModelMetadataInput(
-            local$metadata, (e) => call(metadata: e));
-  }
-}
-
-class _CopyWithStubImpl$Input$Mm2SynchronizationInput<TRes>
-    implements CopyWith$Input$Mm2SynchronizationInput<TRes> {
-  _CopyWithStubImpl$Input$Mm2SynchronizationInput(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? adminNotes,
-    List<Input$ModelEventInput>? events,
-    Input$BaseModelMetadataInput? metadata,
-    String? createdAt,
-    String? createdBy,
-    String? updatedAt,
-    String? updatedBy,
-    String? deletedAt,
-    String? deletedBy,
-    Enum$Mm2SyncDirection? direction,
-    String? objectId,
-    Enum$Mm2ModelType? mm2ModelType,
-    Enum$Mm2SynchronizationMode? syncMode,
-    int? limit,
-    bool? autorun,
-    String? usersSinceUpdatedAt,
-    Enum$Mm2SynchronizerLogLevel? logLevel,
-    String? expiresAt,
   }) =>
       _res;
   events(_fn) => _res;
@@ -22219,38 +21764,6 @@ Enum$ChannelType fromJson$Enum$ChannelType(String value) {
   }
 }
 
-enum Enum$ChannelStatus { unset, active, paused, archived, $unknown }
-
-String toJson$Enum$ChannelStatus(Enum$ChannelStatus e) {
-  switch (e) {
-    case Enum$ChannelStatus.unset:
-      return r'unset';
-    case Enum$ChannelStatus.active:
-      return r'active';
-    case Enum$ChannelStatus.paused:
-      return r'paused';
-    case Enum$ChannelStatus.archived:
-      return r'archived';
-    case Enum$ChannelStatus.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum$ChannelStatus fromJson$Enum$ChannelStatus(String value) {
-  switch (value) {
-    case r'unset':
-      return Enum$ChannelStatus.unset;
-    case r'active':
-      return Enum$ChannelStatus.active;
-    case r'paused':
-      return Enum$ChannelStatus.paused;
-    case r'archived':
-      return Enum$ChannelStatus.archived;
-    default:
-      return Enum$ChannelStatus.$unknown;
-  }
-}
-
 enum Enum$ChannelParticipantRole { owner, admin, moderator, unset, $unknown }
 
 String toJson$Enum$ChannelParticipantRole(Enum$ChannelParticipantRole e) {
@@ -22802,6 +22315,7 @@ enum Enum$ServiceRequestType {
   graphQlMutationDeleteCompany,
   graphQlMutationUpdateCompany,
   graphQlMutationAddChannelMessageEvent,
+  graphQlMutationArchiveChannelForUserByMe,
   graphQlMutationCreateChannel,
   graphQlMutationCreateChannelInvitation,
   graphQlMutationCreateChannelMessage,
@@ -22914,6 +22428,8 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlMutationUpdateCompany';
     case Enum$ServiceRequestType.graphQlMutationAddChannelMessageEvent:
       return r'graphQlMutationAddChannelMessageEvent';
+    case Enum$ServiceRequestType.graphQlMutationArchiveChannelForUserByMe:
+      return r'graphQlMutationArchiveChannelForUserByMe';
     case Enum$ServiceRequestType.graphQlMutationCreateChannel:
       return r'graphQlMutationCreateChannel';
     case Enum$ServiceRequestType.graphQlMutationCreateChannelInvitation:
@@ -23124,6 +22640,8 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlMutationUpdateCompany;
     case r'graphQlMutationAddChannelMessageEvent':
       return Enum$ServiceRequestType.graphQlMutationAddChannelMessageEvent;
+    case r'graphQlMutationArchiveChannelForUserByMe':
+      return Enum$ServiceRequestType.graphQlMutationArchiveChannelForUserByMe;
     case r'graphQlMutationCreateChannel':
       return Enum$ServiceRequestType.graphQlMutationCreateChannel;
     case r'graphQlMutationCreateChannelInvitation':
@@ -23847,195 +23365,82 @@ Enum$NotificationTemplateName fromJson$Enum$NotificationTemplateName(
   }
 }
 
-enum Enum$Mm2SyncDirection { mm2ToMm3, mm3ToMm2, $unknown }
-
-String toJson$Enum$Mm2SyncDirection(Enum$Mm2SyncDirection e) {
-  switch (e) {
-    case Enum$Mm2SyncDirection.mm2ToMm3:
-      return r'mm2ToMm3';
-    case Enum$Mm2SyncDirection.mm3ToMm2:
-      return r'mm3ToMm2';
-    case Enum$Mm2SyncDirection.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum$Mm2SyncDirection fromJson$Enum$Mm2SyncDirection(String value) {
-  switch (value) {
-    case r'mm2ToMm3':
-      return Enum$Mm2SyncDirection.mm2ToMm3;
-    case r'mm3ToMm2':
-      return Enum$Mm2SyncDirection.mm3ToMm2;
-    default:
-      return Enum$Mm2SyncDirection.$unknown;
-  }
-}
-
-enum Enum$Mm2ModelType {
-  Community,
-  Organization,
-  Conversation,
-  Message,
-  User,
-  MenteeExpertise,
-  MenteeWebsite,
-  MentorExpertise,
-  Profile,
-  SpokenLanguage,
+enum Enum$ChannelChangedEventType {
+  channelUpdated,
+  channelDeleted,
+  invitationCreated,
+  invitationUpdated,
+  invitationDeleted,
+  messageCreated,
+  messageUpdated,
+  messageDeleted,
+  messageStatusChanged,
+  participantCreated,
+  participantUpdated,
+  participantDeleted,
   $unknown
 }
 
-String toJson$Enum$Mm2ModelType(Enum$Mm2ModelType e) {
+String toJson$Enum$ChannelChangedEventType(Enum$ChannelChangedEventType e) {
   switch (e) {
-    case Enum$Mm2ModelType.Community:
-      return r'Community';
-    case Enum$Mm2ModelType.Organization:
-      return r'Organization';
-    case Enum$Mm2ModelType.Conversation:
-      return r'Conversation';
-    case Enum$Mm2ModelType.Message:
-      return r'Message';
-    case Enum$Mm2ModelType.User:
-      return r'User';
-    case Enum$Mm2ModelType.MenteeExpertise:
-      return r'MenteeExpertise';
-    case Enum$Mm2ModelType.MenteeWebsite:
-      return r'MenteeWebsite';
-    case Enum$Mm2ModelType.MentorExpertise:
-      return r'MentorExpertise';
-    case Enum$Mm2ModelType.Profile:
-      return r'Profile';
-    case Enum$Mm2ModelType.SpokenLanguage:
-      return r'SpokenLanguage';
-    case Enum$Mm2ModelType.$unknown:
+    case Enum$ChannelChangedEventType.channelUpdated:
+      return r'channelUpdated';
+    case Enum$ChannelChangedEventType.channelDeleted:
+      return r'channelDeleted';
+    case Enum$ChannelChangedEventType.invitationCreated:
+      return r'invitationCreated';
+    case Enum$ChannelChangedEventType.invitationUpdated:
+      return r'invitationUpdated';
+    case Enum$ChannelChangedEventType.invitationDeleted:
+      return r'invitationDeleted';
+    case Enum$ChannelChangedEventType.messageCreated:
+      return r'messageCreated';
+    case Enum$ChannelChangedEventType.messageUpdated:
+      return r'messageUpdated';
+    case Enum$ChannelChangedEventType.messageDeleted:
+      return r'messageDeleted';
+    case Enum$ChannelChangedEventType.messageStatusChanged:
+      return r'messageStatusChanged';
+    case Enum$ChannelChangedEventType.participantCreated:
+      return r'participantCreated';
+    case Enum$ChannelChangedEventType.participantUpdated:
+      return r'participantUpdated';
+    case Enum$ChannelChangedEventType.participantDeleted:
+      return r'participantDeleted';
+    case Enum$ChannelChangedEventType.$unknown:
       return r'$unknown';
   }
 }
 
-Enum$Mm2ModelType fromJson$Enum$Mm2ModelType(String value) {
-  switch (value) {
-    case r'Community':
-      return Enum$Mm2ModelType.Community;
-    case r'Organization':
-      return Enum$Mm2ModelType.Organization;
-    case r'Conversation':
-      return Enum$Mm2ModelType.Conversation;
-    case r'Message':
-      return Enum$Mm2ModelType.Message;
-    case r'User':
-      return Enum$Mm2ModelType.User;
-    case r'MenteeExpertise':
-      return Enum$Mm2ModelType.MenteeExpertise;
-    case r'MenteeWebsite':
-      return Enum$Mm2ModelType.MenteeWebsite;
-    case r'MentorExpertise':
-      return Enum$Mm2ModelType.MentorExpertise;
-    case r'Profile':
-      return Enum$Mm2ModelType.Profile;
-    case r'SpokenLanguage':
-      return Enum$Mm2ModelType.SpokenLanguage;
-    default:
-      return Enum$Mm2ModelType.$unknown;
-  }
-}
-
-enum Enum$Mm2SynchronizationMode { full, incremental, updated, $unknown }
-
-String toJson$Enum$Mm2SynchronizationMode(Enum$Mm2SynchronizationMode e) {
-  switch (e) {
-    case Enum$Mm2SynchronizationMode.full:
-      return r'full';
-    case Enum$Mm2SynchronizationMode.incremental:
-      return r'incremental';
-    case Enum$Mm2SynchronizationMode.updated:
-      return r'updated';
-    case Enum$Mm2SynchronizationMode.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum$Mm2SynchronizationMode fromJson$Enum$Mm2SynchronizationMode(String value) {
-  switch (value) {
-    case r'full':
-      return Enum$Mm2SynchronizationMode.full;
-    case r'incremental':
-      return Enum$Mm2SynchronizationMode.incremental;
-    case r'updated':
-      return Enum$Mm2SynchronizationMode.updated;
-    default:
-      return Enum$Mm2SynchronizationMode.$unknown;
-  }
-}
-
-enum Enum$SyncActionTaken {
-  created,
-  updated,
-  deleted,
-  skipped,
-  unset,
-  $unknown
-}
-
-String toJson$Enum$SyncActionTaken(Enum$SyncActionTaken e) {
-  switch (e) {
-    case Enum$SyncActionTaken.created:
-      return r'created';
-    case Enum$SyncActionTaken.updated:
-      return r'updated';
-    case Enum$SyncActionTaken.deleted:
-      return r'deleted';
-    case Enum$SyncActionTaken.skipped:
-      return r'skipped';
-    case Enum$SyncActionTaken.unset:
-      return r'unset';
-    case Enum$SyncActionTaken.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum$SyncActionTaken fromJson$Enum$SyncActionTaken(String value) {
-  switch (value) {
-    case r'created':
-      return Enum$SyncActionTaken.created;
-    case r'updated':
-      return Enum$SyncActionTaken.updated;
-    case r'deleted':
-      return Enum$SyncActionTaken.deleted;
-    case r'skipped':
-      return Enum$SyncActionTaken.skipped;
-    case r'unset':
-      return Enum$SyncActionTaken.unset;
-    default:
-      return Enum$SyncActionTaken.$unknown;
-  }
-}
-
-enum Enum$Mm2SynchronizerLogLevel { none, info, error, $unknown }
-
-String toJson$Enum$Mm2SynchronizerLogLevel(Enum$Mm2SynchronizerLogLevel e) {
-  switch (e) {
-    case Enum$Mm2SynchronizerLogLevel.none:
-      return r'none';
-    case Enum$Mm2SynchronizerLogLevel.info:
-      return r'info';
-    case Enum$Mm2SynchronizerLogLevel.error:
-      return r'error';
-    case Enum$Mm2SynchronizerLogLevel.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum$Mm2SynchronizerLogLevel fromJson$Enum$Mm2SynchronizerLogLevel(
+Enum$ChannelChangedEventType fromJson$Enum$ChannelChangedEventType(
     String value) {
   switch (value) {
-    case r'none':
-      return Enum$Mm2SynchronizerLogLevel.none;
-    case r'info':
-      return Enum$Mm2SynchronizerLogLevel.info;
-    case r'error':
-      return Enum$Mm2SynchronizerLogLevel.error;
+    case r'channelUpdated':
+      return Enum$ChannelChangedEventType.channelUpdated;
+    case r'channelDeleted':
+      return Enum$ChannelChangedEventType.channelDeleted;
+    case r'invitationCreated':
+      return Enum$ChannelChangedEventType.invitationCreated;
+    case r'invitationUpdated':
+      return Enum$ChannelChangedEventType.invitationUpdated;
+    case r'invitationDeleted':
+      return Enum$ChannelChangedEventType.invitationDeleted;
+    case r'messageCreated':
+      return Enum$ChannelChangedEventType.messageCreated;
+    case r'messageUpdated':
+      return Enum$ChannelChangedEventType.messageUpdated;
+    case r'messageDeleted':
+      return Enum$ChannelChangedEventType.messageDeleted;
+    case r'messageStatusChanged':
+      return Enum$ChannelChangedEventType.messageStatusChanged;
+    case r'participantCreated':
+      return Enum$ChannelChangedEventType.participantCreated;
+    case r'participantUpdated':
+      return Enum$ChannelChangedEventType.participantUpdated;
+    case r'participantDeleted':
+      return Enum$ChannelChangedEventType.participantDeleted;
     default:
-      return Enum$Mm2SynchronizerLogLevel.$unknown;
+      return Enum$ChannelChangedEventType.$unknown;
   }
 }
 
