@@ -131,8 +131,11 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     await _setDeviceUuid();
 
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationSignUpUser,
-      variables: Variables$Mutation$SignUpUser(input: input).toJson(),
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationSignUpUser,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$SignUpUser(input: input).toJson(),
+      ),
     );
 
     final OperationResult<Mutation$SignUpUser$signUpUser> result =
@@ -167,8 +170,11 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     await _setDeviceUuid();
 
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationSignInUser,
-      variables: Variables$Mutation$SignInUser(input: input).toJson(),
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationSignInUser,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$SignInUser(input: input).toJson(),
+      ),
     );
 
     final OperationResult<Mutation$SignInUser$signInUser> result =
@@ -197,32 +203,34 @@ class UserProvider extends BaseProvider with ChangeNotifier {
 
   Future<OperationResult<void>> signOutUser() async {
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationSignOutUser,
-    );
-
-    final OperationResult<void> result = OperationResult(
-      gqlQueryResult: queryResult,
-      response: null,
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationSignOutUser,
+        fetchPolicy: FetchPolicy.noCache,
+      ),
     );
     _resetUser();
     notifyListeners();
-    return result;
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
   }
 
   Future<OperationResult<void>> updateUserData({
     required Input$UserInput input,
   }) async {
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationUpdateUser,
-      variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateUser,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+      ),
     );
-
-    final OperationResult<void> result = OperationResult(
+    notifyListeners();
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: null,
     );
-    notifyListeners();
-    return result;
   }
 
   Future<OperationResult<void>> deleteUser() async {
@@ -230,19 +238,20 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     String? userId = pref.getString('userId');
 
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationUpdateUser,
-      variables: Variables$Mutation$DeleteUser(
-        userId: userId!,
-        deletePhysically: true,
-      ).toJson(),
-    );
-
-    final OperationResult<void> result = OperationResult(
-      gqlQueryResult: queryResult,
-      response: null,
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateUser,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$DeleteUser(
+          userId: userId!,
+          deletePhysically: true,
+        ).toJson(),
+      ),
     );
     _resetUser();
     notifyListeners();
-    return result;
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
   }
 }

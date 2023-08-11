@@ -93,14 +93,15 @@ class MessagesProvider extends BaseProvider {
     required Input$ChannelMessageInput input,
   }) async {
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationCreateChannelMessage,
-      variables: Variables$Mutation$CreateChannelMessage(
-        input: input,
-      ).toJson(),
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationCreateChannelMessage,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$CreateChannelMessage(
+          input: input,
+        ).toJson(),
+      ),
     );
-
-    final OperationResult<Mutation$CreateChannelMessage$createChannelMessage>
-        result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$CreateChannelMessage.fromJson(
@@ -108,21 +109,21 @@ class MessagesProvider extends BaseProvider {
             ).createChannelMessage
           : null,
     );
-
-    return result;
   }
 
   Future<OperationResult<String>> markMessageRead({
     required String channelId,
   }) async {
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationMarkChannelMessagesAsSeenByMe,
-      variables: Variables$Mutation$MarkChannelMessagesAsSeenByMe(
-        channelId: channelId,
-      ).toJson(),
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationMarkChannelMessagesAsSeenByMe,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$MarkChannelMessagesAsSeenByMe(
+          channelId: channelId,
+        ).toJson(),
+      ),
     );
-
-    final OperationResult<String> result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$MarkChannelMessagesAsSeenByMe.fromJson(
@@ -130,21 +131,21 @@ class MessagesProvider extends BaseProvider {
             ).markChannelMessagesAsSeenByMe
           : null,
     );
-
-    return result;
   }
 
   Future<OperationResult<String>> updateMessage({
     required Input$ChannelMessageInput input,
   }) async {
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationUpdateChannelMessage,
-      variables: Variables$Mutation$UpdateChannelMessage(
-        input: input,
-      ).toJson(),
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateChannelMessage,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateChannelMessage(
+          input: input,
+        ).toJson(),
+      ),
     );
-
-    final OperationResult<String> result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$UpdateChannelMessage.fromJson(
@@ -152,8 +153,6 @@ class MessagesProvider extends BaseProvider {
             ).updateChannelMessage
           : null,
     );
-
-    return result;
   }
 
   Future<OperationResult<String>> deleteMessage({
@@ -161,14 +160,16 @@ class MessagesProvider extends BaseProvider {
     required String channelMessageId,
   }) async {
     final QueryResult queryResult = await asyncMutation(
-      document: documentNodeMutationDeleteChannelMessage,
-      variables: Variables$Mutation$DeleteChannelMessage(
-        deletePhysically: deletePhysically,
-        channelMessageId: channelMessageId,
-      ).toJson(),
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationDeleteChannelMessage,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$DeleteChannelMessage(
+          deletePhysically: deletePhysically,
+          channelMessageId: channelMessageId,
+        ).toJson(),
+      ),
     );
-
-    final OperationResult<String> result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$DeleteChannelMessage.fromJson(
@@ -176,8 +177,6 @@ class MessagesProvider extends BaseProvider {
             ).deleteChannelMessage
           : null,
     );
-
-    return result;
   }
 
   // Subscriptions
@@ -193,7 +192,6 @@ class MessagesProvider extends BaseProvider {
         ).toJson(),
       ),
     );
-
     return stream.listen(
       (queryResult) async {
         if (queryResult.hasException) {

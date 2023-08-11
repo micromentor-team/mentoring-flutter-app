@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
@@ -53,23 +52,15 @@ abstract class BaseProvider {
     return result;
   }
 
-  Future<QueryResult> asyncMutation(
-      {required DocumentNode document,
-      Map<String, dynamic>? variables,
-      bool logFailures = true,
-      FutureOr<void> Function(GraphQLDataProxy, QueryResult<Object?>?)?
-          update}) async {
-    final mutation = MutationOptions(
-      document: document,
-      fetchPolicy: FetchPolicy.networkOnly,
-      variables: variables ?? const {},
-      update: update,
-    );
+  Future<QueryResult> asyncMutation({
+    required MutationOptions mutationOptions,
+    bool logFailures = true,
+  }) async {
     const RetryOptions retryOptions = RetryOptions(
       maxAttempts: BaseProvider.retryAttempts,
       delayFactor: BaseProvider.retryDelayFactor,
     );
-    QueryResult result = await client.mutate(mutation);
+    QueryResult result = await client.mutate(mutationOptions);
     if (result.hasException) {
       if (logFailures) {
         CrashHandler.logCrashReport('Exception while executing Mutation:'
@@ -79,7 +70,7 @@ abstract class BaseProvider {
 
       QueryResult? retryResult =
           await CrashHandler.retryOnException<QueryResult?>(
-        () => _retryOperation(() => client.mutate(mutation)),
+        () => _retryOperation(() => client.mutate(mutationOptions)),
         onFailOperation: () {
           if (logFailures) {
             DebugLogger.warning('Failed to complete Mutation'

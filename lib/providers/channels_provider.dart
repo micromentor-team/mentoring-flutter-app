@@ -101,7 +101,9 @@ class ChannelsProvider extends BaseProvider {
     required Input$ChannelInput input,
   }) async {
     final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
         document: documentNodeMutationCreateChannel,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Mutation$CreateChannel(input: input).toJson(),
         update: (cache, result) {
           final req = QueryOptions(
@@ -111,12 +113,10 @@ class ChannelsProvider extends BaseProvider {
                     .toJson(),
           ).asRequest;
           final response = cache.readQuery(req);
-
           debugPrint('Channels cache response');
           List channelsData = response?['findChannelsForUser'];
           debugPrint('Channels in cache: ${channelsData.length}');
           response?['findChannelsForUser'].add(result?.data?['createChannel']);
-
           if (response != null) {
             cache.writeQuery(
               req,
@@ -124,10 +124,10 @@ class ChannelsProvider extends BaseProvider {
               data: response,
             );
           }
-        });
-
-    final OperationResult<Mutation$CreateChannel$createChannel> result =
-        OperationResult(
+        },
+      ),
+    );
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$CreateChannel.fromJson(
@@ -135,8 +135,6 @@ class ChannelsProvider extends BaseProvider {
             ).createChannel
           : null,
     );
-
-    return result;
   }
 
   Future<OperationResult<String>> deleteChannel({
@@ -144,7 +142,9 @@ class ChannelsProvider extends BaseProvider {
     required String channelId,
   }) async {
     final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
         document: documentNodeMutationDeleteChannel,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Mutation$DeleteChannel(
           deletePhysically: deletePhysically,
           channelId: channelId,
@@ -153,16 +153,12 @@ class ChannelsProvider extends BaseProvider {
           final req = QueryOptions(
             document: documentNodeQueryGetChannelsList,
           ).asRequest;
-
           // read the channels cache
           final response = cache.readQuery(req);
-
           // debugPrint('deleteChannel result');
           // debugPrint(result);
-
           // remove the channel from the cache
           response?['channels'].removeWhere((item) => item['id'] == channelId);
-
           if (response != null) {
             cache.writeQuery(
               req,
@@ -170,9 +166,10 @@ class ChannelsProvider extends BaseProvider {
               data: response,
             );
           }
-        });
-
-    final OperationResult<String> result = OperationResult(
+        },
+      ),
+    );
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$DeleteChannel.fromJson(
@@ -180,7 +177,5 @@ class ChannelsProvider extends BaseProvider {
             ).deleteChannel
           : null,
     );
-
-    return result;
   }
 }
