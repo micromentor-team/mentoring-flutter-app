@@ -10,6 +10,9 @@ import 'base/operation_result.dart';
 
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 
+typedef MenteeUser = Query$FindMenteeUsers$findUsers;
+typedef MentorUser = Query$FindMentorUsers$findUsers;
+
 class UserProvider extends BaseProvider {
   AuthenticatedUser? _user;
 
@@ -154,6 +157,60 @@ class UserProvider extends BaseProvider {
       },
       onLoading: onLoading,
       onError: onError,
+    );
+  }
+
+  Future<OperationResult<List<MenteeUser>>> findMenteeUsers({
+    required Input$FindObjectsOptions optionsInput,
+    required Input$UserListFilter filterInput,
+    required Input$UserInput matchInput,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindMenteeUsers,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindMenteeUsers(
+                filter: filterInput, options: optionsInput, match: matchInput)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindMenteeUsers.fromJson(
+              queryResult.data!,
+            ).findUsers
+          : null,
+    );
+  }
+
+  Future<OperationResult<List<MentorUser>>> findMentorUsers({
+    required Input$FindObjectsOptions optionsInput,
+    required Input$UserListFilter filterInput,
+    required Input$UserInput matchInput,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindMentorUsers,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindMentorUsers(
+                filter: filterInput, options: optionsInput, match: matchInput)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindMentorUsers.fromJson(
+              queryResult.data!,
+            ).findUsers
+          : null,
     );
   }
 

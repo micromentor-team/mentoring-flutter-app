@@ -83,7 +83,8 @@ class HowCanIHelpSection extends StatelessWidget {
             children: [
               for (var chip in chips)
                 Padding(
-                  padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+                  padding: const EdgeInsetsDirectional.only(
+                      end: Insets.paddingExtraSmall),
                   child: chip,
                 )
             ],
