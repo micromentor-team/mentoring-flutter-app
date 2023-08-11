@@ -43,39 +43,30 @@ class UserProvider extends BaseProvider {
     return _user;
   }
 
-  Widget queryUser({
-    required Widget Function(
-      OperationResult<Query$GetAuthenticatedUser$getAuthenticatedUser> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
+  Future<OperationResult<AuthenticatedUser>> getAuthenticatedUser({
     bool logFailures = true,
-  }) {
-    return runQuery(
-      document: documentNodeQueryGetAuthenticatedUser,
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<Query$GetAuthenticatedUser$getAuthenticatedUser>
-            result = OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data != null
-              ? Query$GetAuthenticatedUser.fromJson(
-                  queryResult.data!,
-                ).getAuthenticatedUser
-              : null,
-        );
-        if (result.response != null) {
-          _setUser(result.response!);
-        } else {
-          _resetUser();
-        }
-        return onData(result, refetch: refetch, fetchMore: fetchMore);
-      },
-      onLoading: onLoading,
-      onError: onError,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryGetAuthenticatedUser,
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
       logFailures: logFailures,
     );
+    final operationResult = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$GetAuthenticatedUser.fromJson(
+              queryResult.data!,
+            ).getAuthenticatedUser
+          : null,
+    );
+    if (operationResult.response != null) {
+      _setUser(operationResult.response!);
+    } else {
+      _resetUser();
+    }
+    return operationResult;
   }
 
   Widget queryAllUsers({

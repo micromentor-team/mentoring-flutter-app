@@ -9,13 +9,15 @@ import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/firebase_notifications.dart';
+import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
-import 'package:mm_flutter_app/providers/explore_card_filters_provider.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:provider/provider.dart';
@@ -42,27 +44,46 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class StartScreen extends StatelessWidget {
+class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    return userProvider.queryUser(
-      onLoading: () {
-        return const LoadingScreen();
-      },
-      onError: (error, {refetch}) {
-        return const SignInScreen();
-      },
-      onData: (data, {refetch, fetchMore}) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          context.go(Routes.home.path);
-        });
+  State<StartScreen> createState() => _StartScreenState();
+}
 
-        return const LoadingScreen();
-      },
+class _StartScreenState extends State<StartScreen> {
+  late Future<OperationResult<AuthenticatedUser?>> _authenticatedUser;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _authenticatedUser =
+        Provider.of<UserProvider>(context).getAuthenticatedUser(
       logFailures: false, // Error is expected when user is not logged in.
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _authenticatedUser,
+      builder: (context, snapshot) {
+        return AppUtility.widgetForAsyncSnapshot(
+          snapshot: snapshot,
+          onLoading: () => const LoadingScreen(),
+          onError: () => const SignInScreen(),
+          onReady: () {
+            if (snapshot.data?.response == null) {
+              // Empty result means that the user not signed in.
+              return const SignInScreen();
+            }
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              context.go(Routes.home.path);
+            });
+            return const LoadingScreen();
+          },
+        );
+      },
     );
   }
 }

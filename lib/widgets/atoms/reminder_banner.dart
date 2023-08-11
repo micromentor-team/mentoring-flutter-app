@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:provider/provider.dart';
 
 import '../../providers/user_provider.dart';
 
@@ -92,37 +91,32 @@ class ReminderBanner extends StatelessWidget {
 }
 
 class MaybeReminderBanner extends StatelessWidget {
-  const MaybeReminderBanner({Key? key}) : super(key: key);
+  final AuthenticatedUser authenticatedUser;
+  const MaybeReminderBanner({
+    Key? key,
+    required this.authenticatedUser,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-
-    return userProvider.queryUser(onLoading: () {
+    int profileCompletionPercentage =
+        authenticatedUser.profileCompletionPercentage ?? 0;
+    DateTime updatedAt = authenticatedUser.updatedAt!;
+    if (profileCompletionPercentage < 50) {
+      return ReminderBanner(
+        titleText: l10n
+            .reminderBannerProfileCompleteTitle(profileCompletionPercentage),
+        subtitleText: l10n.reminderBannerProfileCompleteSubtitle,
+        ctaText: l10n.reminderBannerProfileCompleteCta,
+      );
+    } else if (DateTime.now().difference(updatedAt).inDays > 30 * 6) {
+      return ReminderBanner(
+          titleText: l10n.reminderBannerProfileUpdateTitle,
+          subtitleText: l10n.reminderBannerProfileUpdateSubtitle,
+          ctaText: l10n.reminderBannerProfileUpdateCta);
+    } else {
       return const SizedBox(width: 0.0, height: 0.0);
-    }, onError: (error, {refetch}) {
-      debugPrint(error);
-      return const SizedBox(width: 0.0, height: 0.0);
-    }, onData: (data, {refetch, fetchMore}) {
-      int profileCompletionPercentage =
-          data.response!.profileCompletionPercentage ?? 0;
-      DateTime updatedAt = data.response!.updatedAt!;
-      if (profileCompletionPercentage < 50) {
-        return ReminderBanner(
-          titleText: l10n
-              .reminderBannerProfileCompleteTitle(profileCompletionPercentage),
-          subtitleText: l10n.reminderBannerProfileCompleteSubtitle,
-          ctaText: l10n.reminderBannerProfileCompleteCta,
-        );
-      } else if (DateTime.now().difference(updatedAt).inDays > 30 * 6) {
-        return ReminderBanner(
-            titleText: l10n.reminderBannerProfileUpdateTitle,
-            subtitleText: l10n.reminderBannerProfileUpdateSubtitle,
-            ctaText: l10n.reminderBannerProfileUpdateCta);
-      } else {
-        return const SizedBox(width: 0.0, height: 0.0);
-      }
-    });
+    }
   }
 }

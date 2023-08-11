@@ -91,15 +91,29 @@ class FindMoreMentorsButton extends StatelessWidget {
   }
 }
 
-class RecommendedSection extends StatelessWidget {
-  const RecommendedSection({Key? key}) : super(key: key);
+class RecommendedSection extends StatefulWidget {
+  final AuthenticatedUser authenticatedUser;
+  const RecommendedSection({
+    Key? key,
+    required this.authenticatedUser,
+  }) : super(key: key);
+
+  @override
+  State<RecommendedSection> createState() => _RecommendedSectionState();
+}
+
+class _RecommendedSectionState extends State<RecommendedSection> {
+  late final UserProvider _userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider userProvider = Provider.of<UserProvider>(context);
-    final currentUser = userProvider.user;
-
-    return userProvider.queryAllUsers(onLoading: () {
+    return _userProvider.queryAllUsers(onLoading: () {
       return const SizedBox(width: 0.0, height: 0.0);
     }, onError: (error, {refetch}) {
       debugPrint(error);
@@ -107,7 +121,7 @@ class RecommendedSection extends StatelessWidget {
     }, onData: (data, {refetch, fetchMore}) {
       List<Query$FindAllUsers$findUsers> mentors = data.response != null
           ? data.response!.reversed
-              .where((element) => element.id != currentUser?.id)
+              .where((element) => element.id != widget.authenticatedUser.id)
               .toList()
           : [];
       return _createRecommendedMentorsWidget(mentors, context);
