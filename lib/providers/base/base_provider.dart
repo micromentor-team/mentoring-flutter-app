@@ -10,7 +10,7 @@ import 'package:retry/retry.dart';
 
 import '../../../widgets/atoms/server_error.dart';
 
-abstract class BaseProvider extends ChangeNotifier {
+abstract class BaseProvider {
   static const int retryAttempts = 2;
   static const Duration retryDelayFactor = Duration(milliseconds: 500);
   final GraphQLClient client;

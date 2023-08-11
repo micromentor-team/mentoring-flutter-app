@@ -141,11 +141,11 @@ void main() async {
               ChangeNotifierProvider(
                 create: (context) => UserProvider(client: client),
               ),
-              ChangeNotifierProvider(
-                create: (context) => ChannelsProvider(client: client),
+              Provider<ChannelsProvider>.value(
+                value: ChannelsProvider(client: client),
               ),
-              ChangeNotifierProvider(
-                create: (context) => MessagesProvider(client: client),
+              Provider<MessagesProvider>.value(
+                value: MessagesProvider(client: client),
               ),
               ChangeNotifierProvider(
                 create: (context) => ScaffoldModel(),

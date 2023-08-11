@@ -12,7 +12,7 @@ typedef AllUsersResult = Query$FindAllUsers$findUsers;
 typedef AllUsersWithFilterResult = Query$FindUsersWithFilter$findUsers;
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 
-class UserProvider extends BaseProvider {
+class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? _user;
 
   UserProvider({required super.client});
