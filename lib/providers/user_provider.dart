@@ -8,6 +8,8 @@ import '../__generated/schema/schema.graphql.dart';
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
+typedef AllUsersResult = Query$FindAllUsers$findUsers;
+typedef AllUsersWithFilterResult = Query$FindUsersWithFilter$findUsers;
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 
 class UserProvider extends BaseProvider {
@@ -69,43 +71,28 @@ class UserProvider extends BaseProvider {
     return operationResult;
   }
 
-  Widget queryAllUsers({
-    required Widget Function(
-      OperationResult<List<Query$FindAllUsers$findUsers>> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryFindAllUsers,
-      variables: Variables$Query$FindAllUsers(
-        filter: Input$UserListFilter(caseSensitive: false),
-      ).toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<List<Query$FindAllUsers$findUsers>> result =
-            OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data == null
-              ? null
-              : Query$FindAllUsers.fromJson(
-                  queryResult.data!,
-                ).findUsers.map((element) {
-                  if (element.avatarUrl == "") {
-                    return element.copyWith(avatarUrl: null);
-                  }
-                  return element;
-                }).toList(),
-        );
-        return onData(
-          result,
-          refetch: refetch,
-          fetchMore: fetchMore,
-        );
-      },
-      onLoading: onLoading,
-      onError: onError,
+  Future<OperationResult<List<AllUsersResult>>> findAllUsers() async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindAllUsers,
+        variables: Variables$Query$FindAllUsers(
+          filter: Input$UserListFilter(caseSensitive: false),
+        ).toJson(),
+      ),
+    );
+
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindAllUsers.fromJson(
+              queryResult.data!,
+            ).findUsers.map((element) {
+              if (element.avatarUrl == "") {
+                return element.copyWith(avatarUrl: null);
+              }
+              return element;
+            }).toList(),
     );
   }
 

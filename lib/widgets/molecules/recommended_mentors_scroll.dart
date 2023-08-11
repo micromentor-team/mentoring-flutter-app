@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_card.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/base/operation_result.dart';
 import '../../providers/user_provider.dart';
 
 class RecommendedMentorsScroll extends StatelessWidget {
-  final List<Query$FindAllUsers$findUsers> mentors;
+  final List<AllUsersResult> mentors;
 
   const RecommendedMentorsScroll({
     Key? key,
@@ -104,6 +105,7 @@ class RecommendedSection extends StatefulWidget {
 
 class _RecommendedSectionState extends State<RecommendedSection> {
   late final UserProvider _userProvider;
+  late Future<OperationResult<List<AllUsersResult>>> _allUsers;
 
   @override
   void initState() {
@@ -112,24 +114,34 @@ class _RecommendedSectionState extends State<RecommendedSection> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _allUsers = _userProvider.findAllUsers();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return _userProvider.queryAllUsers(onLoading: () {
-      return const SizedBox(width: 0.0, height: 0.0);
-    }, onError: (error, {refetch}) {
-      debugPrint(error);
-      return const SizedBox(width: 0.0, height: 0.0);
-    }, onData: (data, {refetch, fetchMore}) {
-      List<Query$FindAllUsers$findUsers> mentors = data.response != null
-          ? data.response!.reversed
-              .where((element) => element.id != widget.authenticatedUser.id)
-              .toList()
-          : [];
-      return _createRecommendedMentorsWidget(mentors, context);
-    });
+    return FutureBuilder(
+      future: _allUsers,
+      builder: (context, snapshot) {
+        return AppUtility.widgetForAsyncSnapshot(
+          snapshot: snapshot,
+          onReady: () {
+            List<AllUsersResult> mentors = snapshot.data?.response != null
+                ? snapshot.data!.response!.reversed
+                    .where(
+                        (element) => element.id != widget.authenticatedUser.id)
+                    .toList()
+                : [];
+            return _createRecommendedMentorsWidget(mentors, context);
+          },
+        );
+      },
+    );
   }
 
   Column _createRecommendedMentorsWidget(
-      List<Query$FindAllUsers$findUsers> mentors, BuildContext context) {
+      List<AllUsersResult> mentors, BuildContext context) {
     return Column(
       children: [
         RecommendedMentorsScroll(mentors: mentors),
