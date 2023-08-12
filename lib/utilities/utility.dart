@@ -29,16 +29,22 @@ class AppUtility {
   static Widget widgetForAsyncState({
     required AsyncState state,
     required Widget Function() onReady,
+    Widget Function()? onLoading,
+    Widget Function()? onError,
   }) {
     switch (state) {
       case AsyncState.loading:
-        return const Center(
-          child: Loading(),
-        );
+        return onLoading != null
+            ? onLoading()
+            : const Center(
+                child: Loading(),
+              );
       case AsyncState.error:
-        return const Center(
-          child: CustomErrorWidget(),
-        );
+        return onError != null
+            ? onError()
+            : const Center(
+                child: CustomErrorWidget(),
+              );
       default:
         return onReady();
     }
@@ -47,6 +53,8 @@ class AppUtility {
   static Widget widgetForAsyncSnapshot({
     required AsyncSnapshot snapshot,
     required Widget Function() onReady,
+    Widget Function()? onLoading,
+    Widget Function()? onError,
   }) {
     final AsyncState state;
     if (snapshot.hasError) {
@@ -56,7 +64,12 @@ class AppUtility {
     } else {
       state = AsyncState.ready;
     }
-    return widgetForAsyncState(state: state, onReady: onReady);
+    return widgetForAsyncState(
+      state: state,
+      onReady: onReady,
+      onLoading: onLoading,
+      onError: onError,
+    );
   }
 
   static String getUserInitials(String fullName) {

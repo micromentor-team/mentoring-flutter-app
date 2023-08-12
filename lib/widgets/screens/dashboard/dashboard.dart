@@ -21,6 +21,8 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen>
     with RouteAwareMixin<DashboardScreen> {
+  late AuthenticatedUser _authenticatedUser;
+
   String _getGreeting(AppLocalizations l10n, String? fullName) {
     int hour = DateTime.now().hour;
     String timeOfDayGreeting;
@@ -59,9 +61,14 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _authenticatedUser = Provider.of<UserProvider>(context).user!;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final user = Provider.of<UserProvider>(context, listen: false).user!;
     return SafeArea(
       child: Column(
         children: [
@@ -69,12 +76,18 @@ class _DashboardScreenState extends State<DashboardScreen>
             child: ListView(
               children: [
                 ProfileHeader(
-                  avatarUrl: user.avatarUrl,
-                  profileMessage: _getGreeting(l10n, user.fullName),
-                  profileCompletionPercentage: 30,
+                  avatarUrl: _authenticatedUser.avatarUrl,
+                  profileMessage:
+                      _getGreeting(l10n, _authenticatedUser.fullName),
+                  profileCompletionPercentage:
+                      _authenticatedUser.profileCompletionPercentage,
                 ),
-                const MaybeReminderBanner(),
-                const RecommendedSection(),
+                MaybeReminderBanner(
+                  authenticatedUser: _authenticatedUser,
+                ),
+                RecommendedSection(
+                  authenticatedUser: _authenticatedUser,
+                ),
                 const UpcomingSection(),
                 const InvitationSection(),
                 const ResourcesSection(),

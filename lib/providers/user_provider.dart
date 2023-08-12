@@ -8,12 +8,13 @@ import '../__generated/schema/schema.graphql.dart';
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
+typedef AllUsersResult = Query$FindAllUsers$findUsers;
+typedef AllUsersWithFilterResult = Query$FindUsersWithFilter$findUsers;
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
-
 typedef MenteeUser = Query$FindMenteeUsers$findUsers;
 typedef MentorUser = Query$FindMentorUsers$findUsers;
 
-class UserProvider extends BaseProvider {
+class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? _user;
 
   UserProvider({required super.client});
@@ -47,117 +48,79 @@ class UserProvider extends BaseProvider {
     return _user;
   }
 
-  Widget queryUser({
-    required Widget Function(
-      OperationResult<Query$GetAuthenticatedUser$getAuthenticatedUser> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
+  Future<OperationResult<AuthenticatedUser>> getAuthenticatedUser({
     bool logFailures = true,
-  }) {
-    return runQuery(
-      document: documentNodeQueryGetAuthenticatedUser,
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<Query$GetAuthenticatedUser$getAuthenticatedUser>
-            result = OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data != null
-              ? Query$GetAuthenticatedUser.fromJson(
-                  queryResult.data!,
-                ).getAuthenticatedUser
-              : null,
-        );
-        if (result.response != null) {
-          _setUser(result.response!);
-        } else {
-          _resetUser();
-        }
-        return onData(result, refetch: refetch, fetchMore: fetchMore);
-      },
-      onLoading: onLoading,
-      onError: onError,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryGetAuthenticatedUser,
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
       logFailures: logFailures,
     );
+    final operationResult = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$GetAuthenticatedUser.fromJson(
+              queryResult.data!,
+            ).getAuthenticatedUser
+          : null,
+    );
+    if (operationResult.response != null) {
+      _setUser(operationResult.response!);
+    } else {
+      _resetUser();
+    }
+    return operationResult;
   }
 
-  Widget queryAllUsers({
-    required Widget Function(
-      OperationResult<List<Query$FindAllUsers$findUsers>> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryFindAllUsers,
-      variables: Variables$Query$FindAllUsers(
-        filter: Input$UserListFilter(caseSensitive: false),
-      ).toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<List<Query$FindAllUsers$findUsers>> result =
-            OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data == null
-              ? null
-              : Query$FindAllUsers.fromJson(
-                  queryResult.data!,
-                ).findUsers.map((element) {
-                  if (element.avatarUrl == "") {
-                    return element.copyWith(avatarUrl: null);
-                  }
-                  return element;
-                }).toList(),
-        );
-        return onData(
-          result,
-          refetch: refetch,
-          fetchMore: fetchMore,
-        );
-      },
-      onLoading: onLoading,
-      onError: onError,
+  Future<OperationResult<List<AllUsersResult>>> findAllUsers() async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindAllUsers,
+        variables: Variables$Query$FindAllUsers(
+          filter: Input$UserListFilter(caseSensitive: false),
+        ).toJson(),
+      ),
+    );
+
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindAllUsers.fromJson(
+              queryResult.data!,
+            ).findUsers.map((element) {
+              if (element.avatarUrl == "") {
+                return element.copyWith(avatarUrl: null);
+              }
+              return element;
+            }).toList(),
     );
   }
 
-  Widget findUsersWithFilter({
+  Future<OperationResult<List<AllUsersWithFilterResult>>> findUsersWithFilter({
     required Input$UserListFilter input,
-    required Widget Function(
-      OperationResult<List<Query$FindUsersWithFilter$findUsers>> data, {
-      void Function()? refetch,
-      void Function(FetchMoreOptions)? fetchMore,
-    }) onData,
-    Widget Function()? onLoading,
-    Widget Function(String error, {void Function()? refetch})? onError,
-  }) {
-    return runQuery(
-      document: documentNodeQueryFindUsersWithFilter,
-      variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
-      onData: (queryResult, {refetch, fetchMore}) {
-        final OperationResult<List<Query$FindUsersWithFilter$findUsers>>
-            result = OperationResult(
-          gqlQueryResult: queryResult,
-          response: queryResult.data == null
-              ? null
-              : Query$FindUsersWithFilter.fromJson(
-                  queryResult.data!,
-                ).findUsers.map((element) {
-                  if (element.avatarUrl == "") {
-                    return element.copyWith(avatarUrl: null);
-                  }
-                  return element;
-                }).toList(),
-        );
-        return onData(
-          result,
-          refetch: refetch,
-          fetchMore: fetchMore,
-        );
-      },
-      onLoading: onLoading,
-      onError: onError,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindUsersWithFilter,
+        variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
+      ),
+    );
+
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindUsersWithFilter.fromJson(
+              queryResult.data!,
+            ).findUsers.map((element) {
+              if (element.avatarUrl == "") {
+                return element.copyWith(avatarUrl: null);
+              }
+              return element;
+            }).toList(),
     );
   }
 
@@ -224,9 +187,12 @@ class UserProvider extends BaseProvider {
     await _resetUser();
     await _setDeviceUuid();
 
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationSignUpUser,
-      variables: Variables$Mutation$SignUpUser(input: input).toJson(),
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationSignUpUser,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$SignUpUser(input: input).toJson(),
+      ),
     );
 
     final OperationResult<Mutation$SignUpUser$signUpUser> result =
@@ -260,9 +226,12 @@ class UserProvider extends BaseProvider {
     await _resetUser();
     await _setDeviceUuid();
 
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationSignInUser,
-      variables: Variables$Mutation$SignInUser(input: input).toJson(),
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationSignInUser,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$SignInUser(input: input).toJson(),
+      ),
     );
 
     final OperationResult<Mutation$SignInUser$signInUser> result =
@@ -290,53 +259,56 @@ class UserProvider extends BaseProvider {
   }
 
   Future<OperationResult<void>> signOutUser() async {
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationSignOutUser,
-    );
-
-    final OperationResult<void> result = OperationResult(
-      gqlQueryResult: queryResult,
-      response: null,
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationSignOutUser,
+        fetchPolicy: FetchPolicy.noCache,
+      ),
     );
     _resetUser();
     notifyListeners();
-    return result;
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
   }
 
   Future<OperationResult<void>> updateUserData({
     required Input$UserInput input,
   }) async {
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationUpdateUser,
-      variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateUser,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+      ),
     );
-
-    final OperationResult<void> result = OperationResult(
+    notifyListeners();
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: null,
     );
-    notifyListeners();
-    return result;
   }
 
   Future<OperationResult<void>> deleteUser() async {
     final pref = await SharedPreferences.getInstance();
     String? userId = pref.getString('userId');
 
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationUpdateUser,
-      variables: Variables$Mutation$DeleteUser(
-        userId: userId!,
-        deletePhysically: true,
-      ).toJson(),
-    );
-
-    final OperationResult<void> result = OperationResult(
-      gqlQueryResult: queryResult,
-      response: null,
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateUser,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$DeleteUser(
+          userId: userId!,
+          deletePhysically: true,
+        ).toJson(),
+      ),
     );
     _resetUser();
     notifyListeners();
-    return result;
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
   }
 }
