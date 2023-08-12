@@ -50,8 +50,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  _openHomeScreen(BuildContext context) {
-    context.go(Routes.home.path);
+  _openStartScreen(BuildContext context) {
+    context.go(Routes.root.path);
   }
 
   @override
@@ -205,7 +205,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }
 
                             if (context.mounted) {
-                              _openHomeScreen(context);
+                              _openStartScreen(context);
                             }
                           },
                           child: Padding(
