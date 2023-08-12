@@ -17,7 +17,7 @@ class InboxChatListTile extends StatefulWidget {
 }
 
 class _InboxChatListTileState extends State<InboxChatListTile> {
-  InboxChatTileModel? _inboxChatTileModel;
+  late final InboxChatTileModel _inboxChatTileModel;
 
   @override
   void initState() {
@@ -26,36 +26,35 @@ class _InboxChatListTileState extends State<InboxChatListTile> {
       context,
       listen: false,
     );
-    _inboxChatTileModel!.createChannelSubscription();
+    _inboxChatTileModel.createChannelSubscription();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _inboxChatTileModel?.refresh();
+    _inboxChatTileModel.refresh();
   }
 
   @override
   void dispose() {
-    _inboxChatTileModel?.cancelChannelSubscription();
+    _inboxChatTileModel.cancelChannelSubscription();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<InboxChatTileModel>(
-      builder: (context, inboxChatTileModel, child) {
-        _inboxChatTileModel = inboxChatTileModel;
+      builder: (context, inboxChatTileModel, _) {
         return AppUtility.widgetForAsyncState(
-          state: _inboxChatTileModel!.state,
+          state: inboxChatTileModel.state,
           onReady: () => InboxListTile(
-            avatarUrl: _inboxChatTileModel!.channelAvatarUrl,
-            fullName: _inboxChatTileModel!.channelName,
-            date: _inboxChatTileModel?.lastMessage?.createdAt ?? DateTime.now(),
-            message: _inboxChatTileModel?.lastMessage?.messageText ?? '',
-            notifications: _inboxChatTileModel?.unseenMessageCount ?? 0,
+            avatarUrl: inboxChatTileModel.channelAvatarUrl,
+            fullName: inboxChatTileModel.channelName,
+            date: inboxChatTileModel.lastMessage?.createdAt ?? DateTime.now(),
+            message: inboxChatTileModel.lastMessage?.messageText ?? '',
+            notifications: inboxChatTileModel.unseenMessageCount,
             onPressed: () => context.push(
-                '${Routes.inboxChats.path}/${_inboxChatTileModel!.channelId}'),
+                '${Routes.inboxChats.path}/${inboxChatTileModel.channelId}'),
           ),
         );
       },

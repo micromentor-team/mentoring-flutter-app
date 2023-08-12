@@ -67,5 +67,6 @@ export class MockServerState {
             message9,
             message10,
         ];
+        this.channels[0].latestMessage = message10;
     }
 }

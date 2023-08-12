@@ -20,7 +20,7 @@ class DismissibleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Dismissible(
-      key: Key(tileId),
+      key: UniqueKey(),
       direction: DismissDirection.endToStart,
       onDismissed: (direction) => onDismissed(),
       background: Container(

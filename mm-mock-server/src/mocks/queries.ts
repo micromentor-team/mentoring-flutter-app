@@ -15,10 +15,8 @@ export function mockQueries(serverState: MockServerState) {
             return serverState.loggedInUser;
         },
         // channels, channel invitations and channel messages
-        findChannelById: () => {
-            var channel = serverState.channels[0];
-            channel.latestMessage = serverState.channelMessages[serverState.channelMessages.length - 1];
-            return channel;
+        findChannelById: (_: any, args: { id: string }) => {
+            return serverState.channels.find((element) => element.id == args.id);
         },
         findChannelMessages: () => {
             return serverState.channelMessages;

@@ -76,7 +76,7 @@ class MessagesProvider extends BaseProvider {
     final QueryResult queryResult = await asyncQuery(
         queryOptions: QueryOptions(
       document: documentNodeQueryInboxUnseenMessages,
-      fetchPolicy: FetchPolicy.cacheAndNetwork,
+      fetchPolicy: FetchPolicy.networkOnly,
     ));
     return OperationResult(
       gqlQueryResult: queryResult,

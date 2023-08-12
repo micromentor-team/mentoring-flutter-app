@@ -78,6 +78,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindAllUsers,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$FindAllUsers(
           filter: Input$UserListFilter(caseSensitive: false),
         ).toJson(),
@@ -105,6 +106,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindUsersWithFilter,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
       ),
     );

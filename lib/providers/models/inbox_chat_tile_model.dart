@@ -68,7 +68,9 @@ class InboxChatTileModel extends ChangeNotifier {
       _unseenMessageCount =
           _getUnseenMessageCount(unseenMessagesResult.response ?? []);
     }
-    notifyListeners();
+    if (hasListeners) {
+      notifyListeners();
+    }
   }
 
   void createChannelSubscription() {

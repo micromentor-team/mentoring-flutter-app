@@ -159,6 +159,7 @@ export function generateChannel(channelParticipants: any[]) {
         ],
         createdBy: channelParticipants[0].id,
         createdAt: faker.date.recent(),
+        isArchivedForMe: false,
         participants: [
             {
                 __typename: "ChannelParticipant",
@@ -192,11 +193,6 @@ export function generateChannelMessage(
         ]
     } else {
         statuses = null;
-    }
-    channel.lastMessage = {
-        __typename: "ChannelLastMessage",
-        channelId: channel.id,
-        messageText: text,
     }
     return {
         __typename: "ChannelMessage",
