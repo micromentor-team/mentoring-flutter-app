@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
@@ -74,7 +73,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setInboxScaffold(context: context);
+      scaffoldModel.setInboxScaffold(router: router);
     });
   }
 
@@ -93,7 +92,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
     } catch (_) {
       // Can fail if the controller is no longer present in the context.
       // Revert to replacing the page with a new one.
-      GoRouter.of(context).pushReplacement(Routes.inboxInvitesSent.path);
+      router.pushReplacement(Routes.inboxInvitesSent.path);
     }
   }
 

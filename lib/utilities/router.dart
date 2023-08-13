@@ -235,24 +235,27 @@ class AppRouter {
 
 mixin RouteAwareMixin<T extends StatefulWidget> on State<T>
     implements RouteAware {
-  RouteObserver<PageRoute>? _routeObserver;
+  late GoRouter _router;
+  late RouteObserver<PageRoute> _routeObserver;
   bool _isActive = false;
 
   bool get isRouteActive => _isActive;
+  GoRouter get router => _router;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _router = GoRouter.of(context);
     _routeObserver = Provider.of<RouteObserver<PageRoute>>(
       context,
       listen: false,
     );
-    _routeObserver!.subscribe(this, ModalRoute.of(context)! as PageRoute);
+    _routeObserver.subscribe(this, ModalRoute.of(context)! as PageRoute);
   }
 
   @override
   void dispose() {
-    _routeObserver?.unsubscribe(this);
+    _routeObserver.unsubscribe(this);
     super.dispose();
   }
 

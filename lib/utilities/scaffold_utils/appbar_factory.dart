@@ -17,14 +17,17 @@ class AppBarFactory {
   }
 
   static AppBar? createInboxAppBar({
-    required BuildContext context,
+    required GoRouter router,
     required int chatsNotifications,
     required int invitesNotifications,
   }) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final ThemeData theme = Theme.of(context);
-    final GoRouter router = GoRouter.of(context);
-    final totalNotifications = chatsNotifications + invitesNotifications;
+    int totalNotifications = 0;
+    if (!router.location.startsWith(Routes.inboxChats.path)) {
+      totalNotifications += chatsNotifications;
+    }
+    if (!router.location.startsWith(Routes.inboxInvites.path)) {
+      totalNotifications += invitesNotifications;
+    }
     return AppBar(
       leading: Stack(
         children: [
@@ -48,29 +51,49 @@ class AppBarFactory {
             ),
         ],
       ),
-      title: _getInboxAppBarTitle(theme, l10n, router.location),
+      title: Builder(
+        builder: (context) {
+          return _getInboxAppBarTitle(
+            Theme.of(context),
+            AppLocalizations.of(context)!,
+            router.location,
+          );
+        },
+      ),
       centerTitle: true,
       bottom: router.location.startsWith(Routes.inboxInvites.path)
           ? TabBar(
               tabs: [
                 Tab(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.mail_outline),
-                      const SizedBox(width: Insets.paddingSmall),
-                      Text(l10n.inboxInvitesReceived),
-                    ],
+                  child: Builder(
+                    builder: (context) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.mail_outline),
+                          const SizedBox(width: Insets.paddingSmall),
+                          Text(
+                            AppLocalizations.of(context)!.inboxInvitesReceived,
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
                 Tab(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.send_outlined),
-                      const SizedBox(width: Insets.paddingSmall),
-                      Text(l10n.inboxInvitesSent),
-                    ],
+                  child: Builder(
+                    builder: (context) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.send_outlined),
+                          const SizedBox(width: Insets.paddingSmall),
+                          Text(
+                            AppLocalizations.of(context)!.inboxInvitesSent,
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ],

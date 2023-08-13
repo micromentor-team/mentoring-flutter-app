@@ -27,6 +27,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
     with RouteAwareMixin<InboxChatListScreen> {
   late final AuthenticatedUser? _authenticatedUser;
   late final ChannelsProvider _channelsProvider;
+  late final ScaffoldModel _scaffoldModel;
   late Future<List<ChannelForUser>> _userChannels;
 
   @override
@@ -34,6 +35,10 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
     super.initState();
     _authenticatedUser = Provider.of<UserProvider>(context, listen: false).user;
     _channelsProvider = Provider.of<ChannelsProvider>(
+      context,
+      listen: false,
+    );
+    _scaffoldModel = Provider.of<ScaffoldModel>(
       context,
       listen: false,
     );
@@ -55,12 +60,8 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
   }
 
   void _refreshScaffold() {
-    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
-      context,
-      listen: false,
-    );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setInboxScaffold(context: context);
+      _scaffoldModel.setInboxScaffold(router: router);
     });
   }
 
@@ -112,6 +113,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
                 channelId: channel.id,
               );
             }
+            _refreshScaffold();
           },
           icon: widget.isArchivedForUser
               ? Icons.unarchive_outlined
