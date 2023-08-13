@@ -6,7 +6,6 @@ import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../__generated/schema/schema.graphql.dart';
 import '../../constants/app_constants.dart';
 
 class InboxChatTileModel extends ChangeNotifier {
@@ -45,28 +44,17 @@ class InboxChatTileModel extends ChangeNotifier {
     _state = AsyncState.loading;
     final latestMessageResult =
         await _channelsProvider.findChannelLatestMessage(channelId: channelId);
-    // TODO - Make this query more efficient by fetching unseen messages directly
-    // TODO final unseenMessagesResult = await _messagesProvider.unseenMessages();
-    final unseenMessagesResult =
-        await _messagesProvider.findChannelMessagesWithOptions(
-      fetchFromNetworkOnly: true,
-      input: Input$ChannelMessageListFilter(channelId: channelId),
-      options: Input$FindObjectsOptions(
-        includeDeleted: false,
-      ),
-    );
+    final unseenMessagesResult = await _messagesProvider.unseenMessages();
     if (latestMessageResult.gqlQueryResult.hasException ||
         unseenMessagesResult.gqlQueryResult.hasException) {
       _state = AsyncState.error;
     } else {
       _state = AsyncState.ready;
       _lastMessage = latestMessageResult.response;
-      // TODO _unseenMessageCount = unseenMessagesResult.response
-      // TODO        ?.where((element) => element.channelId == channelId)
-      // TODO        .length ??
-      // TODO    0;
-      _unseenMessageCount =
-          _getUnseenMessageCount(unseenMessagesResult.response ?? []);
+      _unseenMessageCount = unseenMessagesResult.response
+              ?.where((element) => element.channelId == channelId)
+              .length ??
+          0;
     }
     if (hasListeners) {
       notifyListeners();
@@ -85,21 +73,5 @@ class InboxChatTileModel extends ChangeNotifier {
 
   void cancelChannelSubscription() {
     _streamSubscription?.cancel();
-  }
-
-  int _getUnseenMessageCount(List<FilteredChannelMessage> messages) {
-    int unseenMessageCount = 0;
-    final notMyMessages = messages
-        .where((element) => element.createdBy != authenticatedUserId)
-        .toList();
-    for (int i = 0; i < notMyMessages.length; i++) {
-      bool isSeen = notMyMessages[i].statuses?.any((status) =>
-              status.seenAt != null && status.userId == authenticatedUserId) ??
-          false;
-      if (!isSeen) {
-        unseenMessageCount++;
-      }
-    }
-    return unseenMessageCount;
   }
 }

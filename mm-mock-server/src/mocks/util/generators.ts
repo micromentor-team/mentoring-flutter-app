@@ -229,12 +229,12 @@ export function generateChannelInboxItemInvitation(channel: any, sender: any, de
     }
 }
 
-export function generateChannelInboxItemMessage(channel: any, sender: any) {
+export function generateChannelInboxItemMessage(sender: any, message: any) {
     return {
         __typename: "ChannelInboxItemMessage",
-        channelId: channel.id,
-        id: faker.string.alphanumeric({length: 24}),
-        messageText: faker.lorem.sentence(),
+        channelId: message.channelId,
+        id: message.id,
+        messageText: message.messageText,
         senderFullName: sender.fullName,
         createdBy: sender.id,
     }

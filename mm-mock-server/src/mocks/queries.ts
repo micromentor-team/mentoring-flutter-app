@@ -1,6 +1,5 @@
 import { MockServerState } from "./util/state";
 import * as constants from "./util/constants";
-import * as generators from "./util/generators";
 
 export function mockQueries(serverState: MockServerState) {
     return {
@@ -30,14 +29,8 @@ export function mockQueries(serverState: MockServerState) {
                 channels: {
                     __typename: "ChannelInbox",
                     invitations: serverState.channelInboxItemInvitations,
-                    pendingInvitations: [
-                        serverState.channelInboxItemInvitations[0],
-                        serverState.channelInboxItemInvitations[1],
-                    ],
-                    unseenMessages: [
-                        generators.generateChannelInboxItemMessage(serverState.channels[0], serverState.loggedInUser),
-                        generators.generateChannelInboxItemMessage(serverState.channels[0], serverState.otherUsers[0]),
-                    ],
+                    pendingInvitations: serverState.channelInboxItemInvitations.filter((e) => e.status == "created"),
+                    unseenMessages: serverState.channelMessages.filter((e) => !e.statuses || e.statuses.length == 0),
                 }
             }
         },
