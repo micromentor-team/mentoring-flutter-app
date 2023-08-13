@@ -66,7 +66,7 @@ class ChannelsProvider extends BaseProvider {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindChannelLatestMessage,
-        fetchPolicy: FetchPolicy.networkOnly,
+        fetchPolicy: FetchPolicy.noCache,
         variables:
             Variables$Query$FindChannelLatestMessage(channelId: channelId)
                 .toJson(),

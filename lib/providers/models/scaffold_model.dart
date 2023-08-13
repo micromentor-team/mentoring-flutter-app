@@ -10,7 +10,7 @@ class ScaffoldModel extends ChangeNotifier {
   AppBar? get appBar => _appBar;
   Drawer? get drawer => _drawer;
 
-  void _setParams(AppBar? appBar, Drawer? drawer) {
+  void _setParams({AppBar? appBar, Drawer? drawer}) {
     _appBar = appBar;
     _drawer = drawer;
     notifyListeners();
@@ -22,46 +22,56 @@ class ScaffoldModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setAppBarTitleOnly(BuildContext context, String title) {
-    _setParams(AppBarFactory.createTitleOnlyAppBar(title: title), null);
+  void setAppBarTitleOnly({
+    required BuildContext context,
+    required String title,
+  }) {
+    _setParams(
+      appBar: AppBarFactory.createTitleOnlyAppBar(title: title),
+      drawer: null,
+    );
   }
 
-  void setInboxScaffold(BuildContext context) {
+  void setInboxScaffold({required BuildContext context}) {
     //TODO(m-rosario): Get notification data from backend call.
     const int chatsNotifications = 1;
     const int invitesNotifications = 1;
     _setParams(
-      AppBarFactory.createInboxAppBar(
+      appBar: AppBarFactory.createInboxAppBar(
         context: context,
         chatsNotifications: chatsNotifications,
         invitesNotifications: invitesNotifications,
       ),
-      DrawerFactory.createInboxDrawer(
+      drawer: DrawerFactory.createInboxDrawer(
         chatsNotifications: chatsNotifications,
         invitesNotifications: invitesNotifications,
       ),
     );
   }
 
-  void setInviteReceivedDetailScaffold(BuildContext context) {
+  void setInviteReceivedDetailScaffold({required BuildContext context}) {
     _setParams(
-      AppBarFactory.createInviteReceivedDetailAppBar(context: context),
-      null,
+      appBar: AppBarFactory.createInviteReceivedDetailAppBar(context: context),
+      drawer: null,
     );
   }
 
-  void setChannelMessagesScaffold(
-    BuildContext context,
-    String channelName,
+  void setChannelMessagesScaffold({
+    required BuildContext context,
+    required String channelName,
+    required String channelId,
+    required bool isArchivedForUser,
     String? avatarUrl,
-  ) {
+  }) {
     _setParams(
-      AppBarFactory.createChannelMessagesAppBar(
+      appBar: AppBarFactory.createChannelMessagesAppBar(
         context: context,
         channelName: channelName,
+        channelId: channelId,
+        isArchivedForUser: isArchivedForUser,
         avatarUrl: avatarUrl,
       ),
-      null,
+      drawer: null,
     );
   }
 }

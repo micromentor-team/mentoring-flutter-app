@@ -26,10 +26,12 @@ import 'message_input.dart';
 
 class ChannelMessagesScreen extends StatefulWidget {
   final String channelId;
+  final bool isArchivedForUser;
 
   const ChannelMessagesScreen({
     super.key,
     required this.channelId,
+    required this.isArchivedForUser,
   });
 
   @override
@@ -66,9 +68,11 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scaffoldModel.setChannelMessagesScaffold(
-        context,
-        channelName,
-        avatarUrl,
+        context: context,
+        channelName: channelName,
+        channelId: widget.channelId,
+        isArchivedForUser: widget.isArchivedForUser,
+        avatarUrl: avatarUrl,
       );
     });
   }

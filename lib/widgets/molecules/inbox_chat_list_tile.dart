@@ -8,8 +8,11 @@ import 'package:provider/provider.dart';
 import '../../constants/app_constants.dart';
 
 class InboxChatListTile extends StatefulWidget {
+  final bool isArchivedForUser;
+
   const InboxChatListTile({
     super.key,
+    required this.isArchivedForUser,
   });
 
   @override
@@ -18,6 +21,7 @@ class InboxChatListTile extends StatefulWidget {
 
 class _InboxChatListTileState extends State<InboxChatListTile> {
   late final InboxChatTileModel _inboxChatTileModel;
+  late final String _nextRoute;
 
   @override
   void initState() {
@@ -27,6 +31,9 @@ class _InboxChatListTileState extends State<InboxChatListTile> {
       listen: false,
     );
     _inboxChatTileModel.createChannelSubscription();
+    _nextRoute = widget.isArchivedForUser
+        ? '${Routes.inboxArchived.path}/${_inboxChatTileModel.channelId}'
+        : '${Routes.inboxChats.path}/${_inboxChatTileModel.channelId}';
   }
 
   @override
@@ -53,8 +60,7 @@ class _InboxChatListTileState extends State<InboxChatListTile> {
             date: inboxChatTileModel.lastMessage?.createdAt ?? DateTime.now(),
             message: inboxChatTileModel.lastMessage?.messageText ?? '',
             notifications: inboxChatTileModel.unseenMessageCount,
-            onPressed: () => context.push(
-                '${Routes.inboxChats.path}/${inboxChatTileModel.channelId}'),
+            onPressed: () => context.push(_nextRoute),
           ),
         );
       },

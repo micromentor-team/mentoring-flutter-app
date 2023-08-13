@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/utilities/errors/errors.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/report_or_block_menu_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/app_constants.dart';
 import '../../widgets/atoms/notification_bubble.dart';
@@ -91,16 +93,26 @@ class AppBarFactory {
   static AppBar createChannelMessagesAppBar({
     required BuildContext context,
     required String channelName,
+    required String channelId,
+    required bool isArchivedForUser,
     String? avatarUrl,
   }) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
     final GoRouter router = GoRouter.of(context);
+    final ChannelsProvider channelsProvider = Provider.of<ChannelsProvider>(
+      context,
+      listen: false,
+    );
     return AppBar(
       toolbarHeight: 80.0,
       leading: IconButton(
         icon: const Icon(Icons.keyboard_arrow_left),
-        onPressed: () => router.pop(),
+        onPressed: () => router.push(
+          isArchivedForUser
+              ? Routes.inboxArchived.path
+              : Routes.inboxChats.path,
+        ),
       ),
       title: Row(
         children: [
@@ -134,7 +146,9 @@ class AppBarFactory {
           itemBuilder: (context) => [
             PopupMenuItem(
               value: 0,
-              child: Text(l10n.messagesActionArchive),
+              child: isArchivedForUser
+                  ? Text(l10n.messagesActionUnarchive)
+                  : Text(l10n.messagesActionArchive),
             ),
             PopupMenuItem(
               value: 1,
@@ -148,7 +162,17 @@ class AppBarFactory {
           onSelected: (value) {
             switch (value) {
               case 0:
-                // TODO(m-rosario): Archive chat
+                if (isArchivedForUser) {
+                  channelsProvider.unarchiveChannelForAuthenticatedUser(
+                    channelId: channelId,
+                  );
+                  router.push('${Routes.inboxChats.path}/$channelId');
+                } else {
+                  channelsProvider.archiveChannelForAuthenticatedUser(
+                    channelId: channelId,
+                  );
+                  router.push('${Routes.inboxArchived.path}/$channelId');
+                }
                 break;
               case 1:
                 // TODO(m-rosario): Block user

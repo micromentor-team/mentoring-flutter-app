@@ -60,7 +60,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setInboxScaffold(context);
+      scaffoldModel.setInboxScaffold(context: context);
     });
   }
 
@@ -124,7 +124,9 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
               channelAvatarUrl: channelAvatarUrl,
               authenticatedUserId: _authenticatedUser!.id,
             ),
-            child: const InboxChatListTile(),
+            child: InboxChatListTile(
+              isArchivedForUser: widget.isArchivedForUser,
+            ),
           ),
         ),
       );

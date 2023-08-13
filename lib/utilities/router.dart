@@ -156,6 +156,7 @@ class AppRouter {
                   key: state.pageKey,
                   child: ChannelMessagesScreen(
                     channelId: channelId,
+                    isArchivedForUser: false,
                   ),
                 );
               },
@@ -197,6 +198,21 @@ class AppRouter {
                 return MaterialPage(
                   key: state.pageKey,
                   child: const InboxChatListScreen(isArchivedForUser: true),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.inboxArchivedChannelId.path,
+              name: Routes.inboxArchivedChannelId.name,
+              pageBuilder: (context, state) {
+                final String channelId =
+                    state.pathParameters[RouteParams.channelId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: ChannelMessagesScreen(
+                    channelId: channelId,
+                    isArchivedForUser: true,
+                  ),
                 );
               },
             ),

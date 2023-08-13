@@ -75,7 +75,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setInboxScaffold(context);
+      scaffoldModel.setInboxScaffold(context: context);
     });
   }
 
