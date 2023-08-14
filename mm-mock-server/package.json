@@ -4,7 +4,8 @@
   "description": "Runs a GraphQL server that serves mock values using the MM backend schema.",
   "main": "src/server.ts",
   "scripts": {
-    "start": "ts-node src/server.ts"
+    "start": "ts-node src/server.ts",
+    "push_notification": "ts-node src/push_notification.ts"
   },
   "author": "",
   "license": "ISC",
@@ -18,5 +19,8 @@
     "path": "^0.12.7",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.10.1"
   }
 }

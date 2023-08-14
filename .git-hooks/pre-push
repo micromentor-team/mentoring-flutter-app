@@ -13,7 +13,7 @@ flutter analyze
 flutter gen-l10n
 
 if ! [ -x "$(command -v pandoc)" ] &>/dev/null; then
-    echo "Please install pandoc at version 2.19"
+    echo "Please install pandoc at version 3.1"
     exit 1
 fi
 

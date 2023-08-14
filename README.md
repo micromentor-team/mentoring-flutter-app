@@ -62,8 +62,8 @@ You may want to connect to the live backend:
 This app uses Firebase services, and therefore requires setting up an active
 account with the following services enabled:
 
--   Crashlytics
--   Analytics
+- Crashlytics
+- Analytics
 
 The Android and iOS projects already contain the necessary configuration for
 using Firebase, but the files that contain the API key are not included in the
@@ -91,13 +91,13 @@ your Firebase account and regenerate these files in your environment:
 6.  Once the command completes, ensure the following files were generated in
     your environment:
 
-    -   /ios/firebase_app_id_file.json
+    - /ios/firebase_app_id_file.json
 
-    -   /lib/firebase_options.dart
+    - /lib/firebase_options.dart
 
-    -   /android/app/google-services.json
+    - /android/app/google-services.json
 
-    -   /ios/Runner/GoogleService-Info.plist
+    - /ios/Runner/GoogleService-Info.plist
 
 7.  Run the app and confirm that there are no errors.
 
