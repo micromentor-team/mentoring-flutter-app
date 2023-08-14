@@ -1,0 +1,114 @@
+query FindAllOptionsByType {
+  findCompanyStages {
+    textId
+    translatedValue
+  }
+  findCompanyTypes {
+    textId
+    translatedValue
+  }
+  findCountries {
+    alpha2Key
+    textId
+    translatedValue
+  }
+  findEducationLevels {
+    textId
+    translatedValue
+  }
+  findExpertises {
+    textId
+    translatedValue
+  }
+  findIndustries {
+    textId
+    translatedValue
+  }
+  findGenders {
+    textId
+    translatedValue
+  }
+  findLanguages {
+    textId
+    translatedValue
+    isUiLanguage
+    shortLangCode
+    longLangCode
+  }
+}
+
+query FindCompanyStages {
+  findCompanyStages {
+    textId
+    translatedValue
+  }
+}
+
+query FindCompanyTypes {
+  findCompanyTypes {
+    textId
+    translatedValue
+  }
+}
+
+query FindCountries {
+  findCountries {
+    alpha2Key
+    textId
+    translatedValue
+  }
+}
+
+query FindCountriesInLanguage($uiLanguage: UiLanguage) {
+  findCountries(uiLanguage: $uiLanguage) {
+    alpha2Key
+    textId
+    translatedValue
+  }
+}
+
+query FindEducationLevels {
+  findEducationLevels {
+    textId
+    translatedValue
+  }
+}
+
+query FindExpertises {
+  findExpertises {
+    textId
+    translatedValue
+  }
+}
+
+query FindIndustries {
+  findIndustries {
+    textId
+    translatedValue
+  }
+}
+
+query FindGenders {
+  findGenders {
+    textId
+    translatedValue
+  }
+}
+
+query FindLanguages {
+  findLanguages {
+    textId
+    translatedValue
+    isUiLanguage
+    shortLangCode
+    longLangCode
+  }
+}
+
+query FindAllOptions() {
+  findOptions() {
+    textId
+    translatedValue
+    optionType
+  }
+}

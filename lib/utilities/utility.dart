@@ -3,29 +3,48 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../widgets/atoms/loading.dart';
 
 class AppUtility {
   AppUtility._private();
-  static String getUuid() {
+  static String generateUuid() {
     return const Uuid().v1();
+  }
+
+  // Uuid on mobile only lasts until the user deletes the app. Reinstalling the app will generate a new Uuid.
+  static Future<String> getUuid() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? uuid = pref.getString('deviceUuid');
+    if (uuid == null) {
+      // store the uuid
+      uuid = generateUuid();
+      pref.setString('deviceUuid', uuid);
+    }
+    return uuid;
   }
 
   static Widget widgetForAsyncState({
     required AsyncState state,
     required Widget Function() onReady,
+    Widget Function()? onLoading,
+    Widget Function()? onError,
   }) {
     switch (state) {
       case AsyncState.loading:
-        return const Center(
-          child: Loading(),
-        );
+        return onLoading != null
+            ? onLoading()
+            : const Center(
+                child: Loading(),
+              );
       case AsyncState.error:
-        return const Center(
-          child: CustomErrorWidget(),
-        );
+        return onError != null
+            ? onError()
+            : const Center(
+                child: CustomErrorWidget(),
+              );
       default:
         return onReady();
     }
@@ -34,6 +53,8 @@ class AppUtility {
   static Widget widgetForAsyncSnapshot({
     required AsyncSnapshot snapshot,
     required Widget Function() onReady,
+    Widget Function()? onLoading,
+    Widget Function()? onError,
   }) {
     final AsyncState state;
     if (snapshot.hasError) {
@@ -43,7 +64,12 @@ class AppUtility {
     } else {
       state = AsyncState.ready;
     }
-    return widgetForAsyncState(state: state, onReady: onReady);
+    return widgetForAsyncState(
+      state: state,
+      onReady: onReady,
+      onLoading: onLoading,
+      onError: onError,
+    );
   }
 
   static String getUserInitials(String fullName) {

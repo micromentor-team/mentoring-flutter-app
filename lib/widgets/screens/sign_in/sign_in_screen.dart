@@ -186,7 +186,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                     final signInResult =
                                         await userProvider.signInUser(
                                       input: Input$UserSignInInput(
-                                        deviceUuid: AppUtility.getUuid(),
+                                        // TODO: This generates a new UUID for the device every time the user signs in.
+                                        // it should be relying on the uuid stored on the device instead.
+                                        deviceUuid: await AppUtility.getUuid(),
                                         ident: emailController.text,
                                         identType: Enum$UserIdentType.email,
                                         password: passwordController.text,

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_channel.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_message.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
@@ -92,15 +93,16 @@ class MessagesProvider extends BaseProvider {
       createMessage({
     required Input$ChannelMessageInput input,
   }) async {
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationCreateChannelMessage,
-      variables: Variables$Mutation$CreateChannelMessage(
-        input: input,
-      ).toJson(),
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationCreateChannelMessage,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$CreateChannelMessage(
+          input: input,
+        ).toJson(),
+      ),
     );
-
-    final OperationResult<Mutation$CreateChannelMessage$createChannelMessage>
-        result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$CreateChannelMessage.fromJson(
@@ -108,21 +110,21 @@ class MessagesProvider extends BaseProvider {
             ).createChannelMessage
           : null,
     );
-
-    return result;
   }
 
   Future<OperationResult<String>> markMessageRead({
     required String channelId,
   }) async {
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationMarkChannelMessagesAsSeenByMe,
-      variables: Variables$Mutation$MarkChannelMessagesAsSeenByMe(
-        channelId: channelId,
-      ).toJson(),
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationMarkChannelMessagesAsSeenByMe,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$MarkChannelMessagesAsSeenByMe(
+          channelId: channelId,
+        ).toJson(),
+      ),
     );
-
-    final OperationResult<String> result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$MarkChannelMessagesAsSeenByMe.fromJson(
@@ -130,21 +132,21 @@ class MessagesProvider extends BaseProvider {
             ).markChannelMessagesAsSeenByMe
           : null,
     );
-
-    return result;
   }
 
   Future<OperationResult<String>> updateMessage({
     required Input$ChannelMessageInput input,
   }) async {
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationUpdateChannelMessage,
-      variables: Variables$Mutation$UpdateChannelMessage(
-        input: input,
-      ).toJson(),
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateChannelMessage,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateChannelMessage(
+          input: input,
+        ).toJson(),
+      ),
     );
-
-    final OperationResult<String> result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$UpdateChannelMessage.fromJson(
@@ -152,23 +154,23 @@ class MessagesProvider extends BaseProvider {
             ).updateChannelMessage
           : null,
     );
-
-    return result;
   }
 
   Future<OperationResult<String>> deleteMessage({
     required bool deletePhysically,
     required String channelMessageId,
   }) async {
-    final QueryResult queryResult = await runMutation(
-      document: documentNodeMutationDeleteChannelMessage,
-      variables: Variables$Mutation$DeleteChannelMessage(
-        deletePhysically: deletePhysically,
-        channelMessageId: channelMessageId,
-      ).toJson(),
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationDeleteChannelMessage,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$DeleteChannelMessage(
+          deletePhysically: deletePhysically,
+          channelMessageId: channelMessageId,
+        ).toJson(),
+      ),
     );
-
-    final OperationResult<String> result = OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Mutation$DeleteChannelMessage.fromJson(
@@ -176,8 +178,6 @@ class MessagesProvider extends BaseProvider {
             ).deleteChannelMessage
           : null,
     );
-
-    return result;
   }
 
   // Subscriptions
@@ -187,13 +187,12 @@ class MessagesProvider extends BaseProvider {
   }) {
     final stream = client.subscribe(
       SubscriptionOptions(
-        document: documentNodeSubscriptionChannelUpdated,
-        variables: Variables$Subscription$ChannelUpdated(
-          objectId: channelId,
+        document: documentNodeSubscriptionChannelChanged,
+        variables: Variables$Subscription$ChannelChanged(
+          channelId: channelId,
         ).toJson(),
       ),
     );
-
     return stream.listen(
       (queryResult) async {
         if (queryResult.hasException) {

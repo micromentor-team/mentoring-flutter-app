@@ -34,6 +34,15 @@ query FindChannelById ($channelId: String!) {
     }
 }
 
+query FindChannelLatestMessage ($channelId: String!) {
+    findChannelById(id: $channelId) {
+        latestMessage {
+            createdAt
+            messageText
+        }
+    }
+}
+
 query GetChannelsList {
     findChannels {
         id
@@ -92,4 +101,15 @@ mutation CreateChannel ($input: ChannelInput!) {
 
 mutation DeleteChannel ($deletePhysically: Boolean!, $channelId: String!) {
     deleteChannel(deletePhysically: $deletePhysically, channelId: $channelId)
+}
+
+subscription ChannelChanged($channelId: ID!) {
+  channelChanged(channelId: $channelId) {
+    channelId
+    invitationId
+    messageId
+    participantId
+    eventType
+    requestId
+  }
 }
