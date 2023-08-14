@@ -26,12 +26,14 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'providers/user_provider.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final GoRouter router = AppRouter.createRouter(context);
+    final GoRouter router = AppRouter.createRouter(context, navigatorKey);
     return MaterialApp.router(
       routerConfig: router,
       title: Identifiers.appName,
@@ -46,7 +48,8 @@ class MainApp extends StatelessWidget {
 }
 
 class StartScreen extends StatefulWidget {
-  const StartScreen({Key? key}) : super(key: key);
+  final String nextRouteName;
+  const StartScreen({Key? key, required this.nextRouteName}) : super(key: key);
 
   @override
   State<StartScreen> createState() => _StartScreenState();
@@ -72,14 +75,16 @@ class _StartScreenState extends State<StartScreen> {
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onLoading: () => const LoadingScreen(),
-          onError: () => const SignInScreen(),
+          onError: () => SignInScreen(
+            nextRouteName: widget.nextRouteName,
+          ),
           onReady: () {
             if (snapshot.data?.response == null) {
               // Empty result means that the user not signed in.
-              return const SignInScreen();
+              return SignInScreen(nextRouteName: widget.nextRouteName);
             }
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              context.go(Routes.home.path);
+              context.go(widget.nextRouteName);
             });
             return const LoadingScreen();
           },
@@ -107,6 +112,9 @@ void main() async {
 
   if (!kIsWeb) {
     await FirebaseNotifications().initialize();
+
+    String? token = await FirebaseNotifications().getToken();
+    debugPrint('Token is $token');
   }
 
   //TODO(m-rosario): Make crash data collection opt-in.
