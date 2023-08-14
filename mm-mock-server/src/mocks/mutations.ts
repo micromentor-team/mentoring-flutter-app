@@ -1,4 +1,5 @@
 import { MockServerState } from "./util/state";
+import { PUBSUB_OBJECT_CHANGED, PUBSUB_CHANNEL_CHANGED } from "./subscriptions";
 import * as generators from "./util/generators";
 
 export function mockMutations(serverState: MockServerState) {
@@ -21,6 +22,13 @@ export function mockMutations(serverState: MockServerState) {
         archiveChannelForMe: (_: any, args: { channelId: string }) => {
             let channel = serverState.channels.find((element) => element.id == args.channelId);
             channel.isArchivedForMe = true;
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: args.channelId}});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: args.channelId,
+                    eventType: 'channelUpdated',
+                }
+            });
             return channel.id;
         },
         createChannel: () => {
@@ -31,6 +39,14 @@ export function mockMutations(serverState: MockServerState) {
         createChannelInvitation: () => {
             const invitation = generators.generateChannelInvitation(serverState.loggedInUser, serverState.otherUsers[1])
             serverState.channelInvitations.push(invitation);
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: invitation.channel.id }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: invitation.channel.id,
+                    invitationId: invitation.id,
+                    eventType: 'invitationCreated',
+                }
+            });
             return invitation;
         },
         createChannelMessage: (_: any, args: { input: { channelId: string, messageText: string , replyToMessageId: string | null}}) => {
@@ -47,6 +63,14 @@ export function mockMutations(serverState: MockServerState) {
             );
             channel.latestMessage = message;
             serverState.channelMessages.push(message);
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: args.input.channelId }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: args.input.channelId,
+                    messageId: message.channelId,
+                    eventType: 'messageCreated',
+                }
+            });
             return message;
         },
         deleteChannelMessage: (_: any, args: { channelMessageId: string, deletePhysically: boolean }) => {
@@ -54,6 +78,14 @@ export function mockMutations(serverState: MockServerState) {
             const currentTime : string = new Date().toISOString();
             channelMessage.deletedAt = currentTime;
             channelMessage.updatedAt = currentTime;
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: args.channelMessageId }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: channelMessage.channelId,
+                    messageId: args.channelMessageId,
+                    eventType: 'messageDeleted',
+                }
+            });
             return args.channelMessageId;
         },
         markChannelMessagesAsSeenByMe: (_: any, args: { channelId: string }) => {
@@ -65,12 +97,27 @@ export function mockMutations(serverState: MockServerState) {
                         seenAt: new Date().toISOString(),
                     }
                 ];
+                serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                    channelChanged: {
+                        channelId: args.channelId,
+                        messageId: element.id,
+                        eventType: 'messageStatusChanged',
+                    }
+                });
             });
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: args.channelId }});
             return args.channelId;
         },
         unarchiveChannelForMe: (_: any, args: { channelId: string }) => {
             let channel = serverState.channels.find((element) => element.id == args.channelId);
             channel.isArchivedForMe = false;
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: args.channelId }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: args.channelId,
+                    eventType: 'channelUpdated',
+                }
+            });
             return channel.id;
         },
         updateChannelInvitation: (_: any, args: { input: { status: string }}) => {
@@ -84,6 +131,14 @@ export function mockMutations(serverState: MockServerState) {
                 else if (args.input.status === "declined")
                     invitation.status = "declined";
             }
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: invitation.id }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: invitation.channel.id,
+                    invitationId: invitation.id,
+                    eventType: 'invitationUpdated',
+                }
+            });
             return invitation.id;
         },
         updateChannelMessage: (_: any, args: { input: { id: string | null, messageText: string | null, deletedAt: Date | null } }) => {
@@ -99,6 +154,14 @@ export function mockMutations(serverState: MockServerState) {
                 channelMessage.editedAt = currentTime;
             }
             channelMessage.updatedAt = currentTime;
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: channelMessage.channelId }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: channelMessage.channelId,
+                    messageId: channelMessage.id,
+                    eventType: 'messageUpdated',
+                }
+            });
             return channelMessage.id;
         },
     }

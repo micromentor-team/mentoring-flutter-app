@@ -14,6 +14,8 @@
     "@faker-js/faker": "^8.0.1",
     "@graphql-tools/mock": "^9.0.0",
     "@graphql-tools/schema": "^10.0.0",
+    "@types/cors": "^2.8.13",
+    "@types/ws": "^8.5.5",
     "apollo-server-core": "^3.12.0",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
@@ -21,6 +23,10 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "firebase-admin": "^11.10.1"
+    "cors": "^2.8.5",
+    "firebase-admin": "^11.10.1",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.14.0",
+    "ws": "^8.13.0"
   }
 }

@@ -84,7 +84,7 @@ class _StartScreenState extends State<StartScreen> {
               return SignInScreen(nextRouteName: widget.nextRouteName);
             }
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              context.go(widget.nextRouteName);
+              context.goNamed(widget.nextRouteName);
             });
             return const LoadingScreen();
           },
