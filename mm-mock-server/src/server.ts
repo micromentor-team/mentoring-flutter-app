@@ -1,13 +1,21 @@
 import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
 import { addMocksToSchema } from "@graphql-tools/mock";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { expressMiddleware } from '@apollo/server/express4';
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
 import { readFileSync } from "fs"
 import { join } from "path";
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import { createServer } from 'http';
 import { MockServerState } from "./mocks/util/state";
 import { mockTypes } from "./mocks/types"
 import { mockQueries } from "./mocks/queries"
 import { mockMutations } from "./mocks/mutations"
+import { mockSubscriptions } from "./mocks/subscriptions";
 
 async function startApolloServer() {
     // Obtain type definitions from the schema file.
@@ -22,6 +30,7 @@ async function startApolloServer() {
         resolvers: {
             Query: mockQueries(serverState),
             Mutation: mockMutations(serverState),
+            Subscription: mockSubscriptions(serverState),
         },
     });
 
@@ -32,13 +41,43 @@ async function startApolloServer() {
         preserveResolvers: true
     });
 
-    const server = new ApolloServer({ schema: schemaWithResolversAndMocks });
+    const app = express();
+    const httpServer = createServer(app);
 
-    const { url } = await startStandaloneServer(server, {
-        listen: { port: 4000 },
+    // Create our WebSocket server using the HTTP server we just set up.
+    const wsServer = new WebSocketServer({
+        server: httpServer,
+    });
+    // Save the returned server's info so we can shutdown this server later  
+    const serverCleanup = useServer({ schema: schemaWithResolversAndMocks }, wsServer);
+
+    const server = new ApolloServer({
+        schema: schemaWithResolversAndMocks,
+        plugins: [
+            // Proper shutdown for the HTTP server.
+            ApolloServerPluginDrainHttpServer({ httpServer }),
+        
+            // Proper shutdown for the WebSocket server.
+            {
+                async serverWillStart() {
+                    return {
+                        async drainServer() {
+                            await serverCleanup.dispose();
+                        },
+                    };
+                },
+            },
+        ],
     });
 
-    console.log(`Mock Apollo Server ready at ${url}`);
+    await server.start();
+    app.use(cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(server));
+
+    const PORT = 4000;
+    // Now that our HTTP server is fully set up, we can listen to it.
+    httpServer.listen(PORT, () => {
+        console.log(`Mock server is now running on http://localhost:${PORT}`);
+    });
 }
 
 startApolloServer();

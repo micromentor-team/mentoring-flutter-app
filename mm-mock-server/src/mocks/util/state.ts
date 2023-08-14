@@ -1,8 +1,10 @@
+import { PubSub } from 'graphql-subscriptions';
 import { faker } from "@faker-js/faker";
 
 import * as generators from './generators';
 
 export class MockServerState {
+    pubsub: PubSub;
     loggedIn: boolean;
     loggedInUser: any;
     otherUsers: any[];
@@ -13,6 +15,7 @@ export class MockServerState {
     groups: any[];
 
     constructor() {
+        this.pubsub = new PubSub();
         this.groups = generators.generateCoreGroups()
             .concat(generators.generateGroup());
         this.loggedIn = false;
