@@ -124,9 +124,20 @@ void main() async {
       crashHandler.handleUncaughtPlatformError;
   ErrorWidget.builder = crashHandler.handleBuildError;
 
-  await dotenv.load(fileName: "assets/.env");
-  final serverUrl = dotenv.env['APP_GRAPHQL_URL'];
-  final subscriptionUrl = dotenv.env['APP_SUBSCRIPTION_URL'];
+  bool dotenvLoaded = true;
+  // error handling for flutter hosting where there is no .env file
+  try {
+    await dotenv.load(fileName: "assets/.env");
+  } catch (e) {
+    debugPrint('No .env file found');
+    dotenvLoaded = false;
+  }
+  final serverUrl = dotenvLoaded
+      ? dotenv.env['APP_GRAPHQL_URL']
+      : 'https://mmdata-api.micromentor.org/mmdata/api/graphql';
+  final subscriptionUrl = dotenvLoaded
+      ? dotenv.env['APP_SUBSCRIPTION_URL']
+      : 'wss://mmdata-api.mic romentor.org/mmdata/api/graphql';
 
   debugPrint('Server: $serverUrl');
   if (serverUrl == null || subscriptionUrl == null) {
