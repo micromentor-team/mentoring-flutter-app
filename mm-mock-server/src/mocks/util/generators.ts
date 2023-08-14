@@ -159,6 +159,7 @@ export function generateChannel(channelParticipants: any[]) {
         ],
         createdBy: channelParticipants[0].id,
         createdAt: faker.date.recent(),
+        isArchivedForMe: false,
         participants: [
             {
                 __typename: "ChannelParticipant",
@@ -192,11 +193,6 @@ export function generateChannelMessage(
         ]
     } else {
         statuses = null;
-    }
-    channel.lastMessage = {
-        __typename: "ChannelLastMessage",
-        channelId: channel.id,
-        messageText: text,
     }
     return {
         __typename: "ChannelMessage",
@@ -233,12 +229,12 @@ export function generateChannelInboxItemInvitation(channel: any, sender: any, de
     }
 }
 
-export function generateChannelInboxItemMessage(channel: any, sender: any) {
+export function generateChannelInboxItemMessage(sender: any, message: any) {
     return {
         __typename: "ChannelInboxItemMessage",
-        channelId: channel.id,
-        id: faker.string.alphanumeric({length: 24}),
-        messageText: faker.lorem.sentence(),
+        channelId: message.channelId,
+        id: message.id,
+        messageText: message.messageText,
         senderFullName: sender.fullName,
         createdBy: sender.id,
     }

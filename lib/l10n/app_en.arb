@@ -50,6 +50,7 @@
     "listSeeAll": "See all",
     "listSeeLess": "See less",
     "messagesActionArchive": "Archive chat",
+    "messagesActionUnarchive": "Unarchive chat",
     "messagesActionBlock": "Block user",
     "messagesActionReport": "Report user",
     "messagesInputHint": "Write a message...",

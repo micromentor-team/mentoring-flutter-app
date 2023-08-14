@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
@@ -24,7 +23,6 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   InboxListTile _createTestTile(
       BuildContext context, String message, int tileIndex) {
     // TODO(m-rosario): Replace mock data with backend data.
-    final GoRouter router = GoRouter.of(context);
     final DateTime date = DateTime.now()
         .subtract(Duration(days: tileIndex * pow(1.4, tileIndex).floor()));
     return InboxListTile(
@@ -75,7 +73,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setInboxScaffold(context);
+      scaffoldModel.setInboxScaffold(router: router);
     });
   }
 
@@ -94,7 +92,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     } catch (_) {
       // Can fail if the controller is no longer present in the context.
       // Revert to replacing the page with a new one.
-      GoRouter.of(context).pushReplacement(Routes.inboxInvitesReceived.path);
+      router.pushReplacement(Routes.inboxInvitesReceived.path);
     }
   }
 

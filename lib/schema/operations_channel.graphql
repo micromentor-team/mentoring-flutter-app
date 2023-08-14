@@ -5,6 +5,7 @@ query FindChannelsForUser ($userId: String!) {
         userIds
         createdBy
         createdAt
+        isArchivedForMe
         participants {
             user {
                 id
@@ -23,6 +24,7 @@ query FindChannelById ($channelId: String!) {
         userIds
         createdBy
         createdAt
+        isArchivedForMe
         participants {
             user {
                 id
@@ -101,6 +103,14 @@ mutation CreateChannel ($input: ChannelInput!) {
 
 mutation DeleteChannel ($deletePhysically: Boolean!, $channelId: String!) {
     deleteChannel(deletePhysically: $deletePhysically, channelId: $channelId)
+}
+
+mutation ArchiveChannelForMe($channelId: String!) {
+  archiveChannelForMe(channelId: $channelId)
+}
+
+mutation UnarchiveChannelForMe($channelId: String!) {
+  unarchiveChannelForMe(channelId: $channelId)
 }
 
 subscription ChannelChanged($channelId: ID!) {

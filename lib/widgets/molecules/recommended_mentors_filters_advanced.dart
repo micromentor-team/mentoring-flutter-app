@@ -61,8 +61,10 @@ class _RecommendedMentorsFiltersAdvanced
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setAppBarTitleOnly(context,
-          AppLocalizations.of(context)!.exploreSearchFilterAdvancedTitle);
+      scaffoldModel.setAppBarTitleOnly(
+        context: context,
+        title: AppLocalizations.of(context)!.exploreSearchFilterAdvancedTitle,
+      );
     });
   }
 

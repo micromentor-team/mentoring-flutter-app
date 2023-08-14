@@ -18,6 +18,11 @@ export function mockMutations(serverState: MockServerState) {
             return "ok";
         },
         // channels, channel invitations and channel messages
+        archiveChannelForMe: (_: any, args: { channelId: string }) => {
+            let channel = serverState.channels.find((element) => element.id == args.channelId);
+            channel.isArchivedForMe = true;
+            return channel.id;
+        },
         createChannel: () => {
             const channel = generators.generateChannel([serverState.loggedInUser, serverState.otherUsers[1]])
             serverState.channels.push(channel);
@@ -29,9 +34,10 @@ export function mockMutations(serverState: MockServerState) {
             return invitation;
         },
         createChannelMessage: (_: any, args: { input: { channelId: string, messageText: string , replyToMessageId: string | null}}) => {
+            let channel = serverState.channels.find((element) => element.id == args.input.channelId);
             const message = generators.generateChannelMessage(
                 args.input.messageText,
-                serverState.channels.find((element) => element.id == args.input.channelId),
+                channel,
                 serverState.loggedInUser,
                 new Date(),
                 true,
@@ -39,6 +45,7 @@ export function mockMutations(serverState: MockServerState) {
                 false,
                 args.input.replyToMessageId,
             );
+            channel.latestMessage = message;
             serverState.channelMessages.push(message);
             return message;
         },
@@ -47,7 +54,7 @@ export function mockMutations(serverState: MockServerState) {
             const currentTime : string = new Date().toISOString();
             channelMessage.deletedAt = currentTime;
             channelMessage.updatedAt = currentTime;
-            return "ok";
+            return args.channelMessageId;
         },
         markChannelMessagesAsSeenByMe: (_: any, args: { channelId: string }) => {
             var channelMessages = serverState.channelMessages.filter((element) => element.channelId == args.channelId);
@@ -59,7 +66,12 @@ export function mockMutations(serverState: MockServerState) {
                     }
                 ];
             });
-            return "ok";
+            return args.channelId;
+        },
+        unarchiveChannelForMe: (_: any, args: { channelId: string }) => {
+            let channel = serverState.channels.find((element) => element.id == args.channelId);
+            channel.isArchivedForMe = false;
+            return channel.id;
         },
         updateChannelInvitation: (_: any, args: { input: { status: string }}) => {
             const invitation = serverState.channelInvitations[0]
@@ -87,7 +99,7 @@ export function mockMutations(serverState: MockServerState) {
                 channelMessage.editedAt = currentTime;
             }
             channelMessage.updatedAt = currentTime;
-            return "ok";
+            return channelMessage.id;
         },
     }
 }

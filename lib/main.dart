@@ -160,7 +160,7 @@ void main() async {
                 value: MessagesProvider(client: client),
               ),
               ChangeNotifierProvider(
-                create: (context) => ScaffoldModel(),
+                create: (context) => ScaffoldModel(context: context),
               ),
               ChangeNotifierProvider(
                 create: (context) => ExploreCardFiltersModel(),

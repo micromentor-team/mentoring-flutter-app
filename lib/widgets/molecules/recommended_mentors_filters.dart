@@ -61,7 +61,9 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scaffoldModel.setAppBarTitleOnly(
-          context, AppLocalizations.of(context)!.exploreSearchFilterTitle);
+        context: context,
+        title: AppLocalizations.of(context)!.exploreSearchFilterTitle,
+      );
     });
   }
 

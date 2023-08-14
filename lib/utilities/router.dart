@@ -5,7 +5,6 @@ import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_filters.dart';
 import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_filters_advanced.dart';
 import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';
-import 'package:mm_flutter_app/widgets/screens/inbox/inbox_archived_chats.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
@@ -17,7 +16,7 @@ import '../widgets/atoms/app_wrapper.dart';
 import '../widgets/screens/channel_messages/channel_messages.dart';
 import '../widgets/screens/dashboard/dashboard.dart';
 import '../widgets/screens/explore/explore.dart';
-import '../widgets/screens/inbox/inbox_chats.dart';
+import '../widgets/screens/inbox/inbox_chat_list.dart';
 import '../widgets/screens/inbox/new_invite_detailed_profile.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
@@ -147,7 +146,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
-                  child: const InboxChatsScreen(),
+                  child: const InboxChatListScreen(isArchivedForUser: false),
                 );
               },
             ),
@@ -161,6 +160,7 @@ class AppRouter {
                   key: state.pageKey,
                   child: ChannelMessagesScreen(
                     channelId: channelId,
+                    isArchivedForUser: false,
                   ),
                 );
               },
@@ -201,7 +201,22 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
-                  child: const InboxArchivedChatsScreen(),
+                  child: const InboxChatListScreen(isArchivedForUser: true),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.inboxArchivedChannelId.path,
+              name: Routes.inboxArchivedChannelId.name,
+              pageBuilder: (context, state) {
+                final String channelId =
+                    state.pathParameters[RouteParams.channelId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: ChannelMessagesScreen(
+                    channelId: channelId,
+                    isArchivedForUser: true,
+                  ),
                 );
               },
             ),
@@ -224,24 +239,27 @@ class AppRouter {
 
 mixin RouteAwareMixin<T extends StatefulWidget> on State<T>
     implements RouteAware {
-  RouteObserver<PageRoute>? _routeObserver;
+  late GoRouter _router;
+  late RouteObserver<PageRoute> _routeObserver;
   bool _isActive = false;
 
   bool get isRouteActive => _isActive;
+  GoRouter get router => _router;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _router = GoRouter.of(context);
     _routeObserver = Provider.of<RouteObserver<PageRoute>>(
       context,
       listen: false,
     );
-    _routeObserver!.subscribe(this, ModalRoute.of(context)! as PageRoute);
+    _routeObserver.subscribe(this, ModalRoute.of(context)! as PageRoute);
   }
 
   @override
   void dispose() {
-    _routeObserver?.unsubscribe(this);
+    _routeObserver.unsubscribe(this);
     super.dispose();
   }
 

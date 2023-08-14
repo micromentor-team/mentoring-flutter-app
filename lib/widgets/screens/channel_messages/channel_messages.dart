@@ -26,10 +26,12 @@ import 'message_input.dart';
 
 class ChannelMessagesScreen extends StatefulWidget {
   final String channelId;
+  final bool isArchivedForUser;
 
   const ChannelMessagesScreen({
     super.key,
     required this.channelId,
+    required this.isArchivedForUser,
   });
 
   @override
@@ -39,14 +41,14 @@ class ChannelMessagesScreen extends StatefulWidget {
 class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
     with RouteAwareMixin<ChannelMessagesScreen> {
   late final ChannelsProvider _channelsProvider;
-  late final AuthenticatedUser? _user;
+  late final AuthenticatedUser _user;
   late Future<OperationResult<ChannelById>> _channel;
 
   @override
   void initState() {
     super.initState();
     _channelsProvider = Provider.of<ChannelsProvider>(context, listen: false);
-    _user = Provider.of<UserProvider>(context, listen: false).user;
+    _user = Provider.of<UserProvider>(context, listen: false).user!;
   }
 
   @override
@@ -66,9 +68,11 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scaffoldModel.setChannelMessagesScaffold(
-        context,
-        channelName,
-        avatarUrl,
+        context: context,
+        channelName: channelName,
+        channelId: widget.channelId,
+        isArchivedForUser: widget.isArchivedForUser,
+        avatarUrl: avatarUrl,
       );
     });
   }
@@ -97,7 +101,7 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
           onReady: () {
             ChannelById channel = snapshot.data!.response!;
             final participant = channel.participants
-                .firstWhere((item) => item.user.id != _user?.id)
+                .firstWhere((item) => item.user.id != _user.id)
                 .user;
             final String channelName = participant.fullName!;
             final String? avatarUrl = participant.avatarUrl;

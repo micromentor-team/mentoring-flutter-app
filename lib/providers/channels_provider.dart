@@ -25,6 +25,7 @@ class ChannelsProvider extends BaseProvider {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindChannelsForUser,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables: Variables$Query$FindChannelsForUser(userId: userId).toJson(),
       ),
     );
@@ -44,6 +45,7 @@ class ChannelsProvider extends BaseProvider {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindChannelById,
+        fetchPolicy: FetchPolicy.networkOnly,
         variables:
             Variables$Query$FindChannelById(channelId: channelId).toJson(),
       ),
@@ -84,6 +86,7 @@ class ChannelsProvider extends BaseProvider {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryGetInboxInvitations,
+        fetchPolicy: FetchPolicy.networkOnly,
       ),
     );
     return OperationResult(
@@ -175,6 +178,49 @@ class ChannelsProvider extends BaseProvider {
           ? Mutation$DeleteChannel.fromJson(
               queryResult.data!,
             ).deleteChannel
+          : null,
+    );
+  }
+
+  Future<OperationResult<String>> archiveChannelForAuthenticatedUser({
+    required String channelId,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationArchiveChannelForMe,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$ArchiveChannelForMe(channelId: channelId)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$ArchiveChannelForMe.fromJson(
+              queryResult.data!,
+            ).archiveChannelForMe
+          : null,
+    );
+  }
+
+  Future<OperationResult<String>> unarchiveChannelForAuthenticatedUser({
+    required String channelId,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUnarchiveChannelForMe,
+        fetchPolicy: FetchPolicy.noCache,
+        variables:
+            Variables$Mutation$UnarchiveChannelForMe(channelId: channelId)
+                .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$UnarchiveChannelForMe.fromJson(
+              queryResult.data!,
+            ).unarchiveChannelForMe
           : null,
     );
   }

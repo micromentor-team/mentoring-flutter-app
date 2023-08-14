@@ -324,6 +324,13 @@ const documentNodeQueryFindChannelsForUser = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'isArchivedForMe'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'participants'),
             alias: null,
             arguments: [],
@@ -408,6 +415,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
     this.userIds,
     this.createdBy,
     required this.createdAt,
+    required this.isArchivedForMe,
     required this.participants,
     this.$__typename = 'Channel',
   });
@@ -419,6 +427,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
     final l$userIds = json['userIds'];
     final l$createdBy = json['createdBy'];
     final l$createdAt = json['createdAt'];
+    final l$isArchivedForMe = json['isArchivedForMe'];
     final l$participants = json['participants'];
     final l$$__typename = json['__typename'];
     return Query$FindChannelsForUser$findChannelsForUser(
@@ -428,6 +437,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
           (l$userIds as List<dynamic>?)?.map((e) => (e as String)).toList(),
       createdBy: (l$createdBy as String?),
       createdAt: DateTime.parse((l$createdAt as String)),
+      isArchivedForMe: (l$isArchivedForMe as bool),
       participants: (l$participants as List<dynamic>)
           .map((e) => Query$FindChannelsForUser$findChannelsForUser$participants
               .fromJson((e as Map<String, dynamic>)))
@@ -446,6 +456,8 @@ class Query$FindChannelsForUser$findChannelsForUser {
 
   final DateTime createdAt;
 
+  final bool isArchivedForMe;
+
   final List<Query$FindChannelsForUser$findChannelsForUser$participants>
       participants;
 
@@ -463,6 +475,8 @@ class Query$FindChannelsForUser$findChannelsForUser {
     _resultData['createdBy'] = l$createdBy;
     final l$createdAt = createdAt;
     _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$isArchivedForMe = isArchivedForMe;
+    _resultData['isArchivedForMe'] = l$isArchivedForMe;
     final l$participants = participants;
     _resultData['participants'] =
         l$participants.map((e) => e.toJson()).toList();
@@ -478,6 +492,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
     final l$userIds = userIds;
     final l$createdBy = createdBy;
     final l$createdAt = createdAt;
+    final l$isArchivedForMe = isArchivedForMe;
     final l$participants = participants;
     final l$$__typename = $__typename;
     return Object.hashAll([
@@ -486,6 +501,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
       l$userIds == null ? null : Object.hashAll(l$userIds.map((v) => v)),
       l$createdBy,
       l$createdAt,
+      l$isArchivedForMe,
       Object.hashAll(l$participants.map((v) => v)),
       l$$__typename,
     ]);
@@ -536,6 +552,11 @@ class Query$FindChannelsForUser$findChannelsForUser {
     if (l$createdAt != lOther$createdAt) {
       return false;
     }
+    final l$isArchivedForMe = isArchivedForMe;
+    final lOther$isArchivedForMe = other.isArchivedForMe;
+    if (l$isArchivedForMe != lOther$isArchivedForMe) {
+      return false;
+    }
     final l$participants = participants;
     final lOther$participants = other.participants;
     if (l$participants.length != lOther$participants.length) {
@@ -583,6 +604,7 @@ abstract class CopyWith$Query$FindChannelsForUser$findChannelsForUser<TRes> {
     List<String>? userIds,
     String? createdBy,
     DateTime? createdAt,
+    bool? isArchivedForMe,
     List<Query$FindChannelsForUser$findChannelsForUser$participants>?
         participants,
     String? $__typename,
@@ -614,6 +636,7 @@ class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
     Object? userIds = _undefined,
     Object? createdBy = _undefined,
     Object? createdAt = _undefined,
+    Object? isArchivedForMe = _undefined,
     Object? participants = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -629,6 +652,10 @@ class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
         createdAt: createdAt == _undefined || createdAt == null
             ? _instance.createdAt
             : (createdAt as DateTime),
+        isArchivedForMe:
+            isArchivedForMe == _undefined || isArchivedForMe == null
+                ? _instance.isArchivedForMe
+                : (isArchivedForMe as bool),
         participants: participants == _undefined || participants == null
             ? _instance.participants
             : (participants as List<
@@ -663,6 +690,7 @@ class _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
     List<String>? userIds,
     String? createdBy,
     DateTime? createdAt,
+    bool? isArchivedForMe,
     List<Query$FindChannelsForUser$findChannelsForUser$participants>?
         participants,
     String? $__typename,
@@ -1317,6 +1345,13 @@ const documentNodeQueryFindChannelById = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'isArchivedForMe'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'participants'),
             alias: null,
             arguments: [],
@@ -1401,6 +1436,7 @@ class Query$FindChannelById$findChannelById {
     this.userIds,
     this.createdBy,
     required this.createdAt,
+    required this.isArchivedForMe,
     required this.participants,
     this.$__typename = 'Channel',
   });
@@ -1412,6 +1448,7 @@ class Query$FindChannelById$findChannelById {
     final l$userIds = json['userIds'];
     final l$createdBy = json['createdBy'];
     final l$createdAt = json['createdAt'];
+    final l$isArchivedForMe = json['isArchivedForMe'];
     final l$participants = json['participants'];
     final l$$__typename = json['__typename'];
     return Query$FindChannelById$findChannelById(
@@ -1421,6 +1458,7 @@ class Query$FindChannelById$findChannelById {
           (l$userIds as List<dynamic>?)?.map((e) => (e as String)).toList(),
       createdBy: (l$createdBy as String?),
       createdAt: DateTime.parse((l$createdAt as String)),
+      isArchivedForMe: (l$isArchivedForMe as bool),
       participants: (l$participants as List<dynamic>)
           .map((e) =>
               Query$FindChannelById$findChannelById$participants.fromJson(
@@ -1440,6 +1478,8 @@ class Query$FindChannelById$findChannelById {
 
   final DateTime createdAt;
 
+  final bool isArchivedForMe;
+
   final List<Query$FindChannelById$findChannelById$participants> participants;
 
   final String $__typename;
@@ -1456,6 +1496,8 @@ class Query$FindChannelById$findChannelById {
     _resultData['createdBy'] = l$createdBy;
     final l$createdAt = createdAt;
     _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$isArchivedForMe = isArchivedForMe;
+    _resultData['isArchivedForMe'] = l$isArchivedForMe;
     final l$participants = participants;
     _resultData['participants'] =
         l$participants.map((e) => e.toJson()).toList();
@@ -1471,6 +1513,7 @@ class Query$FindChannelById$findChannelById {
     final l$userIds = userIds;
     final l$createdBy = createdBy;
     final l$createdAt = createdAt;
+    final l$isArchivedForMe = isArchivedForMe;
     final l$participants = participants;
     final l$$__typename = $__typename;
     return Object.hashAll([
@@ -1479,6 +1522,7 @@ class Query$FindChannelById$findChannelById {
       l$userIds == null ? null : Object.hashAll(l$userIds.map((v) => v)),
       l$createdBy,
       l$createdAt,
+      l$isArchivedForMe,
       Object.hashAll(l$participants.map((v) => v)),
       l$$__typename,
     ]);
@@ -1529,6 +1573,11 @@ class Query$FindChannelById$findChannelById {
     if (l$createdAt != lOther$createdAt) {
       return false;
     }
+    final l$isArchivedForMe = isArchivedForMe;
+    final lOther$isArchivedForMe = other.isArchivedForMe;
+    if (l$isArchivedForMe != lOther$isArchivedForMe) {
+      return false;
+    }
     final l$participants = participants;
     final lOther$participants = other.participants;
     if (l$participants.length != lOther$participants.length) {
@@ -1575,6 +1624,7 @@ abstract class CopyWith$Query$FindChannelById$findChannelById<TRes> {
     List<String>? userIds,
     String? createdBy,
     DateTime? createdAt,
+    bool? isArchivedForMe,
     List<Query$FindChannelById$findChannelById$participants>? participants,
     String? $__typename,
   });
@@ -1605,6 +1655,7 @@ class _CopyWithImpl$Query$FindChannelById$findChannelById<TRes>
     Object? userIds = _undefined,
     Object? createdBy = _undefined,
     Object? createdAt = _undefined,
+    Object? isArchivedForMe = _undefined,
     Object? participants = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -1620,6 +1671,10 @@ class _CopyWithImpl$Query$FindChannelById$findChannelById<TRes>
         createdAt: createdAt == _undefined || createdAt == null
             ? _instance.createdAt
             : (createdAt as DateTime),
+        isArchivedForMe:
+            isArchivedForMe == _undefined || isArchivedForMe == null
+                ? _instance.isArchivedForMe
+                : (isArchivedForMe as bool),
         participants: participants == _undefined || participants == null
             ? _instance.participants
             : (participants
@@ -1654,6 +1709,7 @@ class _CopyWithStubImpl$Query$FindChannelById$findChannelById<TRes>
     List<String>? userIds,
     String? createdBy,
     DateTime? createdAt,
+    bool? isArchivedForMe,
     List<Query$FindChannelById$findChannelById$participants>? participants,
     String? $__typename,
   }) =>
@@ -5695,6 +5751,535 @@ const documentNodeMutationDeleteChannel = DocumentNode(definitions: [
             name: NameNode(value: 'channelId'),
             value: VariableNode(name: NameNode(value: 'channelId')),
           ),
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Variables$Mutation$ArchiveChannelForMe {
+  factory Variables$Mutation$ArchiveChannelForMe({required String channelId}) =>
+      Variables$Mutation$ArchiveChannelForMe._({
+        r'channelId': channelId,
+      });
+
+  Variables$Mutation$ArchiveChannelForMe._(this._$data);
+
+  factory Variables$Mutation$ArchiveChannelForMe.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$channelId = data['channelId'];
+    result$data['channelId'] = (l$channelId as String);
+    return Variables$Mutation$ArchiveChannelForMe._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get channelId => (_$data['channelId'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$channelId = channelId;
+    result$data['channelId'] = l$channelId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$ArchiveChannelForMe<
+          Variables$Mutation$ArchiveChannelForMe>
+      get copyWith => CopyWith$Variables$Mutation$ArchiveChannelForMe(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$ArchiveChannelForMe) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    return Object.hashAll([l$channelId]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$ArchiveChannelForMe<TRes> {
+  factory CopyWith$Variables$Mutation$ArchiveChannelForMe(
+    Variables$Mutation$ArchiveChannelForMe instance,
+    TRes Function(Variables$Mutation$ArchiveChannelForMe) then,
+  ) = _CopyWithImpl$Variables$Mutation$ArchiveChannelForMe;
+
+  factory CopyWith$Variables$Mutation$ArchiveChannelForMe.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$ArchiveChannelForMe;
+
+  TRes call({String? channelId});
+}
+
+class _CopyWithImpl$Variables$Mutation$ArchiveChannelForMe<TRes>
+    implements CopyWith$Variables$Mutation$ArchiveChannelForMe<TRes> {
+  _CopyWithImpl$Variables$Mutation$ArchiveChannelForMe(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$ArchiveChannelForMe _instance;
+
+  final TRes Function(Variables$Mutation$ArchiveChannelForMe) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelId = _undefined}) =>
+      _then(Variables$Mutation$ArchiveChannelForMe._({
+        ..._instance._$data,
+        if (channelId != _undefined && channelId != null)
+          'channelId': (channelId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$ArchiveChannelForMe<TRes>
+    implements CopyWith$Variables$Mutation$ArchiveChannelForMe<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$ArchiveChannelForMe(this._res);
+
+  TRes _res;
+
+  call({String? channelId}) => _res;
+}
+
+class Mutation$ArchiveChannelForMe {
+  Mutation$ArchiveChannelForMe({
+    required this.archiveChannelForMe,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$ArchiveChannelForMe.fromJson(Map<String, dynamic> json) {
+    final l$archiveChannelForMe = json['archiveChannelForMe'];
+    final l$$__typename = json['__typename'];
+    return Mutation$ArchiveChannelForMe(
+      archiveChannelForMe: (l$archiveChannelForMe as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String archiveChannelForMe;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$archiveChannelForMe = archiveChannelForMe;
+    _resultData['archiveChannelForMe'] = l$archiveChannelForMe;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$archiveChannelForMe = archiveChannelForMe;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$archiveChannelForMe,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$ArchiveChannelForMe) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$archiveChannelForMe = archiveChannelForMe;
+    final lOther$archiveChannelForMe = other.archiveChannelForMe;
+    if (l$archiveChannelForMe != lOther$archiveChannelForMe) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$ArchiveChannelForMe
+    on Mutation$ArchiveChannelForMe {
+  CopyWith$Mutation$ArchiveChannelForMe<Mutation$ArchiveChannelForMe>
+      get copyWith => CopyWith$Mutation$ArchiveChannelForMe(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$ArchiveChannelForMe<TRes> {
+  factory CopyWith$Mutation$ArchiveChannelForMe(
+    Mutation$ArchiveChannelForMe instance,
+    TRes Function(Mutation$ArchiveChannelForMe) then,
+  ) = _CopyWithImpl$Mutation$ArchiveChannelForMe;
+
+  factory CopyWith$Mutation$ArchiveChannelForMe.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$ArchiveChannelForMe;
+
+  TRes call({
+    String? archiveChannelForMe,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$ArchiveChannelForMe<TRes>
+    implements CopyWith$Mutation$ArchiveChannelForMe<TRes> {
+  _CopyWithImpl$Mutation$ArchiveChannelForMe(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$ArchiveChannelForMe _instance;
+
+  final TRes Function(Mutation$ArchiveChannelForMe) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? archiveChannelForMe = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$ArchiveChannelForMe(
+        archiveChannelForMe:
+            archiveChannelForMe == _undefined || archiveChannelForMe == null
+                ? _instance.archiveChannelForMe
+                : (archiveChannelForMe as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$ArchiveChannelForMe<TRes>
+    implements CopyWith$Mutation$ArchiveChannelForMe<TRes> {
+  _CopyWithStubImpl$Mutation$ArchiveChannelForMe(this._res);
+
+  TRes _res;
+
+  call({
+    String? archiveChannelForMe,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationArchiveChannelForMe = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'ArchiveChannelForMe'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'archiveChannelForMe'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'channelId'),
+            value: VariableNode(name: NameNode(value: 'channelId')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Variables$Mutation$UnarchiveChannelForMe {
+  factory Variables$Mutation$UnarchiveChannelForMe(
+          {required String channelId}) =>
+      Variables$Mutation$UnarchiveChannelForMe._({
+        r'channelId': channelId,
+      });
+
+  Variables$Mutation$UnarchiveChannelForMe._(this._$data);
+
+  factory Variables$Mutation$UnarchiveChannelForMe.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$channelId = data['channelId'];
+    result$data['channelId'] = (l$channelId as String);
+    return Variables$Mutation$UnarchiveChannelForMe._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get channelId => (_$data['channelId'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$channelId = channelId;
+    result$data['channelId'] = l$channelId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$UnarchiveChannelForMe<
+          Variables$Mutation$UnarchiveChannelForMe>
+      get copyWith => CopyWith$Variables$Mutation$UnarchiveChannelForMe(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$UnarchiveChannelForMe) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    return Object.hashAll([l$channelId]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$UnarchiveChannelForMe<TRes> {
+  factory CopyWith$Variables$Mutation$UnarchiveChannelForMe(
+    Variables$Mutation$UnarchiveChannelForMe instance,
+    TRes Function(Variables$Mutation$UnarchiveChannelForMe) then,
+  ) = _CopyWithImpl$Variables$Mutation$UnarchiveChannelForMe;
+
+  factory CopyWith$Variables$Mutation$UnarchiveChannelForMe.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$UnarchiveChannelForMe;
+
+  TRes call({String? channelId});
+}
+
+class _CopyWithImpl$Variables$Mutation$UnarchiveChannelForMe<TRes>
+    implements CopyWith$Variables$Mutation$UnarchiveChannelForMe<TRes> {
+  _CopyWithImpl$Variables$Mutation$UnarchiveChannelForMe(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$UnarchiveChannelForMe _instance;
+
+  final TRes Function(Variables$Mutation$UnarchiveChannelForMe) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelId = _undefined}) =>
+      _then(Variables$Mutation$UnarchiveChannelForMe._({
+        ..._instance._$data,
+        if (channelId != _undefined && channelId != null)
+          'channelId': (channelId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$UnarchiveChannelForMe<TRes>
+    implements CopyWith$Variables$Mutation$UnarchiveChannelForMe<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$UnarchiveChannelForMe(this._res);
+
+  TRes _res;
+
+  call({String? channelId}) => _res;
+}
+
+class Mutation$UnarchiveChannelForMe {
+  Mutation$UnarchiveChannelForMe({
+    required this.unarchiveChannelForMe,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$UnarchiveChannelForMe.fromJson(Map<String, dynamic> json) {
+    final l$unarchiveChannelForMe = json['unarchiveChannelForMe'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UnarchiveChannelForMe(
+      unarchiveChannelForMe: (l$unarchiveChannelForMe as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String unarchiveChannelForMe;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$unarchiveChannelForMe = unarchiveChannelForMe;
+    _resultData['unarchiveChannelForMe'] = l$unarchiveChannelForMe;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$unarchiveChannelForMe = unarchiveChannelForMe;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$unarchiveChannelForMe,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UnarchiveChannelForMe) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$unarchiveChannelForMe = unarchiveChannelForMe;
+    final lOther$unarchiveChannelForMe = other.unarchiveChannelForMe;
+    if (l$unarchiveChannelForMe != lOther$unarchiveChannelForMe) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UnarchiveChannelForMe
+    on Mutation$UnarchiveChannelForMe {
+  CopyWith$Mutation$UnarchiveChannelForMe<Mutation$UnarchiveChannelForMe>
+      get copyWith => CopyWith$Mutation$UnarchiveChannelForMe(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$UnarchiveChannelForMe<TRes> {
+  factory CopyWith$Mutation$UnarchiveChannelForMe(
+    Mutation$UnarchiveChannelForMe instance,
+    TRes Function(Mutation$UnarchiveChannelForMe) then,
+  ) = _CopyWithImpl$Mutation$UnarchiveChannelForMe;
+
+  factory CopyWith$Mutation$UnarchiveChannelForMe.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UnarchiveChannelForMe;
+
+  TRes call({
+    String? unarchiveChannelForMe,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$UnarchiveChannelForMe<TRes>
+    implements CopyWith$Mutation$UnarchiveChannelForMe<TRes> {
+  _CopyWithImpl$Mutation$UnarchiveChannelForMe(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UnarchiveChannelForMe _instance;
+
+  final TRes Function(Mutation$UnarchiveChannelForMe) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? unarchiveChannelForMe = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UnarchiveChannelForMe(
+        unarchiveChannelForMe:
+            unarchiveChannelForMe == _undefined || unarchiveChannelForMe == null
+                ? _instance.unarchiveChannelForMe
+                : (unarchiveChannelForMe as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$UnarchiveChannelForMe<TRes>
+    implements CopyWith$Mutation$UnarchiveChannelForMe<TRes> {
+  _CopyWithStubImpl$Mutation$UnarchiveChannelForMe(this._res);
+
+  TRes _res;
+
+  call({
+    String? unarchiveChannelForMe,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationUnarchiveChannelForMe = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'UnarchiveChannelForMe'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'unarchiveChannelForMe'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'channelId'),
+            value: VariableNode(name: NameNode(value: 'channelId')),
+          )
         ],
         directives: [],
         selectionSet: null,

@@ -136,7 +136,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setInviteReceivedDetailScaffold(context);
+      scaffoldModel.setInviteReceivedDetailScaffold(context: context);
     });
   }
 
