@@ -148,7 +148,12 @@ class UserProvider extends BaseProvider with ChangeNotifier {
       response: queryResult.data != null
           ? Query$FindMenteeUsers.fromJson(
               queryResult.data!,
-            ).findUsers
+            ).findUsers.map((element) {
+              if (element.avatarUrl == "") {
+                return element.copyWith(avatarUrl: null);
+              }
+              return element;
+            }).toList()
           : null,
     );
   }
@@ -175,7 +180,12 @@ class UserProvider extends BaseProvider with ChangeNotifier {
       response: queryResult.data != null
           ? Query$FindMentorUsers.fromJson(
               queryResult.data!,
-            ).findUsers
+            ).findUsers.map((element) {
+              if (element.avatarUrl == "") {
+                return element.copyWith(avatarUrl: null);
+              }
+              return element;
+            }).toList()
           : null,
     );
   }
