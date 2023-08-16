@@ -20,6 +20,9 @@ export function mockQueries(serverState: MockServerState) {
         findChannelMessages: () => {
             return serverState.channelMessages;
         },
+        findChannelMessageById: (_: any, args: { id: string }) => {
+            return serverState.channelMessages.find((element) => element.id == args.id);
+        },
         findChannelsForUser: () => {
             return serverState.channels;
         },

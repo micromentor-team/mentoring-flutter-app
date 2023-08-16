@@ -1,5 +1,5 @@
-query FindChannelMessages ($filter: ChannelMessageListFilter) {
-    findChannelMessages(filter: $filter) {
+query FindChannelMessages ($filter: ChannelMessageListFilter, $options: FindObjectsOptions) {
+    findChannelMessages(filter: $filter, options: $options) {
         id
         createdBy
         channelId
@@ -17,13 +17,18 @@ query FindChannelMessages ($filter: ChannelMessageListFilter) {
     }
 }
 
-query FindChannelMessagesWithOptions ($filter: ChannelMessageListFilter, $options: FindObjectsOptions) {
-    findChannelMessages(filter: $filter, options: $options) {
+query FindChannelMessageById($channelMessageId: String!) {
+    findChannelMessageById(id: $channelMessageId) {
         id
-        channelId
-        createdAt
         createdBy
+        channelId
         messageText
+        createdAt
+        replyToMessageId
+        deletedBy
+        updatedAt
+        deletedAt
+        editedAt
         statuses {
             seenAt
             userId

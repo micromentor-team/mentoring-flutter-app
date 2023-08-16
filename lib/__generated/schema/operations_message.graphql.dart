@@ -6,10 +6,13 @@ import 'package:gql/ast.dart';
 import 'schema.graphql.dart';
 
 class Variables$Query$FindChannelMessages {
-  factory Variables$Query$FindChannelMessages(
-          {Input$ChannelMessageListFilter? filter}) =>
+  factory Variables$Query$FindChannelMessages({
+    Input$ChannelMessageListFilter? filter,
+    Input$FindObjectsOptions? options,
+  }) =>
       Variables$Query$FindChannelMessages._({
         if (filter != null) r'filter': filter,
+        if (options != null) r'options': options,
       });
 
   Variables$Query$FindChannelMessages._(this._$data);
@@ -24,6 +27,13 @@ class Variables$Query$FindChannelMessages {
           : Input$ChannelMessageListFilter.fromJson(
               (l$filter as Map<String, dynamic>));
     }
+    if (data.containsKey('options')) {
+      final l$options = data['options'];
+      result$data['options'] = l$options == null
+          ? null
+          : Input$FindObjectsOptions.fromJson(
+              (l$options as Map<String, dynamic>));
+    }
     return Variables$Query$FindChannelMessages._(result$data);
   }
 
@@ -31,11 +41,17 @@ class Variables$Query$FindChannelMessages {
 
   Input$ChannelMessageListFilter? get filter =>
       (_$data['filter'] as Input$ChannelMessageListFilter?);
+  Input$FindObjectsOptions? get options =>
+      (_$data['options'] as Input$FindObjectsOptions?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('filter')) {
       final l$filter = filter;
       result$data['filter'] = l$filter?.toJson();
+    }
+    if (_$data.containsKey('options')) {
+      final l$options = options;
+      result$data['options'] = l$options?.toJson();
     }
     return result$data;
   }
@@ -63,13 +79,25 @@ class Variables$Query$FindChannelMessages {
     if (l$filter != lOther$filter) {
       return false;
     }
+    final l$options = options;
+    final lOther$options = other.options;
+    if (_$data.containsKey('options') != other._$data.containsKey('options')) {
+      return false;
+    }
+    if (l$options != lOther$options) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$filter = filter;
-    return Object.hashAll([_$data.containsKey('filter') ? l$filter : const {}]);
+    final l$options = options;
+    return Object.hashAll([
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('options') ? l$options : const {},
+    ]);
   }
 }
 
@@ -82,7 +110,10 @@ abstract class CopyWith$Variables$Query$FindChannelMessages<TRes> {
   factory CopyWith$Variables$Query$FindChannelMessages.stub(TRes res) =
       _CopyWithStubImpl$Variables$Query$FindChannelMessages;
 
-  TRes call({Input$ChannelMessageListFilter? filter});
+  TRes call({
+    Input$ChannelMessageListFilter? filter,
+    Input$FindObjectsOptions? options,
+  });
 }
 
 class _CopyWithImpl$Variables$Query$FindChannelMessages<TRes>
@@ -98,11 +129,16 @@ class _CopyWithImpl$Variables$Query$FindChannelMessages<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? filter = _undefined}) =>
+  TRes call({
+    Object? filter = _undefined,
+    Object? options = _undefined,
+  }) =>
       _then(Variables$Query$FindChannelMessages._({
         ..._instance._$data,
         if (filter != _undefined)
           'filter': (filter as Input$ChannelMessageListFilter?),
+        if (options != _undefined)
+          'options': (options as Input$FindObjectsOptions?),
       }));
 }
 
@@ -112,7 +148,11 @@ class _CopyWithStubImpl$Variables$Query$FindChannelMessages<TRes>
 
   TRes _res;
 
-  call({Input$ChannelMessageListFilter? filter}) => _res;
+  call({
+    Input$ChannelMessageListFilter? filter,
+    Input$FindObjectsOptions? options,
+  }) =>
+      _res;
 }
 
 class Query$FindChannelMessages {
@@ -285,7 +325,16 @@ const documentNodeQueryFindChannelMessages = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'options')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'FindObjectsOptions'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -296,7 +345,11 @@ const documentNodeQueryFindChannelMessages = DocumentNode(definitions: [
           ArgumentNode(
             name: NameNode(value: 'filter'),
             value: VariableNode(name: NameNode(value: 'filter')),
-          )
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'options'),
+            value: VariableNode(name: NameNode(value: 'options')),
+          ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
@@ -936,60 +989,36 @@ class _CopyWithStubImpl$Query$FindChannelMessages$findChannelMessages$statuses<
       _res;
 }
 
-class Variables$Query$FindChannelMessagesWithOptions {
-  factory Variables$Query$FindChannelMessagesWithOptions({
-    Input$ChannelMessageListFilter? filter,
-    Input$FindObjectsOptions? options,
-  }) =>
-      Variables$Query$FindChannelMessagesWithOptions._({
-        if (filter != null) r'filter': filter,
-        if (options != null) r'options': options,
+class Variables$Query$FindChannelMessageById {
+  factory Variables$Query$FindChannelMessageById(
+          {required String channelMessageId}) =>
+      Variables$Query$FindChannelMessageById._({
+        r'channelMessageId': channelMessageId,
       });
 
-  Variables$Query$FindChannelMessagesWithOptions._(this._$data);
+  Variables$Query$FindChannelMessageById._(this._$data);
 
-  factory Variables$Query$FindChannelMessagesWithOptions.fromJson(
+  factory Variables$Query$FindChannelMessageById.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input$ChannelMessageListFilter.fromJson(
-              (l$filter as Map<String, dynamic>));
-    }
-    if (data.containsKey('options')) {
-      final l$options = data['options'];
-      result$data['options'] = l$options == null
-          ? null
-          : Input$FindObjectsOptions.fromJson(
-              (l$options as Map<String, dynamic>));
-    }
-    return Variables$Query$FindChannelMessagesWithOptions._(result$data);
+    final l$channelMessageId = data['channelMessageId'];
+    result$data['channelMessageId'] = (l$channelMessageId as String);
+    return Variables$Query$FindChannelMessageById._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input$ChannelMessageListFilter? get filter =>
-      (_$data['filter'] as Input$ChannelMessageListFilter?);
-  Input$FindObjectsOptions? get options =>
-      (_$data['options'] as Input$FindObjectsOptions?);
+  String get channelMessageId => (_$data['channelMessageId'] as String);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    if (_$data.containsKey('options')) {
-      final l$options = options;
-      result$data['options'] = l$options?.toJson();
-    }
+    final l$channelMessageId = channelMessageId;
+    result$data['channelMessageId'] = l$channelMessageId;
     return result$data;
   }
 
-  CopyWith$Variables$Query$FindChannelMessagesWithOptions<
-          Variables$Query$FindChannelMessagesWithOptions>
-      get copyWith => CopyWith$Variables$Query$FindChannelMessagesWithOptions(
+  CopyWith$Variables$Query$FindChannelMessageById<
+          Variables$Query$FindChannelMessageById>
+      get copyWith => CopyWith$Variables$Query$FindChannelMessageById(
             this,
             (i) => i,
           );
@@ -998,24 +1027,13 @@ class Variables$Query$FindChannelMessagesWithOptions {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$FindChannelMessagesWithOptions) ||
+    if (!(other is Variables$Query$FindChannelMessageById) ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$options = options;
-    final lOther$options = other.options;
-    if (_$data.containsKey('options') != other._$data.containsKey('options')) {
-      return false;
-    }
-    if (l$options != lOther$options) {
+    final l$channelMessageId = channelMessageId;
+    final lOther$channelMessageId = other.channelMessageId;
+    if (l$channelMessageId != lOther$channelMessageId) {
       return false;
     }
     return true;
@@ -1023,100 +1041,79 @@ class Variables$Query$FindChannelMessagesWithOptions {
 
   @override
   int get hashCode {
-    final l$filter = filter;
-    final l$options = options;
-    return Object.hashAll([
-      _$data.containsKey('filter') ? l$filter : const {},
-      _$data.containsKey('options') ? l$options : const {},
-    ]);
+    final l$channelMessageId = channelMessageId;
+    return Object.hashAll([l$channelMessageId]);
   }
 }
 
-abstract class CopyWith$Variables$Query$FindChannelMessagesWithOptions<TRes> {
-  factory CopyWith$Variables$Query$FindChannelMessagesWithOptions(
-    Variables$Query$FindChannelMessagesWithOptions instance,
-    TRes Function(Variables$Query$FindChannelMessagesWithOptions) then,
-  ) = _CopyWithImpl$Variables$Query$FindChannelMessagesWithOptions;
+abstract class CopyWith$Variables$Query$FindChannelMessageById<TRes> {
+  factory CopyWith$Variables$Query$FindChannelMessageById(
+    Variables$Query$FindChannelMessageById instance,
+    TRes Function(Variables$Query$FindChannelMessageById) then,
+  ) = _CopyWithImpl$Variables$Query$FindChannelMessageById;
 
-  factory CopyWith$Variables$Query$FindChannelMessagesWithOptions.stub(
-          TRes res) =
-      _CopyWithStubImpl$Variables$Query$FindChannelMessagesWithOptions;
+  factory CopyWith$Variables$Query$FindChannelMessageById.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$FindChannelMessageById;
 
-  TRes call({
-    Input$ChannelMessageListFilter? filter,
-    Input$FindObjectsOptions? options,
-  });
+  TRes call({String? channelMessageId});
 }
 
-class _CopyWithImpl$Variables$Query$FindChannelMessagesWithOptions<TRes>
-    implements CopyWith$Variables$Query$FindChannelMessagesWithOptions<TRes> {
-  _CopyWithImpl$Variables$Query$FindChannelMessagesWithOptions(
+class _CopyWithImpl$Variables$Query$FindChannelMessageById<TRes>
+    implements CopyWith$Variables$Query$FindChannelMessageById<TRes> {
+  _CopyWithImpl$Variables$Query$FindChannelMessageById(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$FindChannelMessagesWithOptions _instance;
+  final Variables$Query$FindChannelMessageById _instance;
 
-  final TRes Function(Variables$Query$FindChannelMessagesWithOptions) _then;
+  final TRes Function(Variables$Query$FindChannelMessageById) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? filter = _undefined,
-    Object? options = _undefined,
-  }) =>
-      _then(Variables$Query$FindChannelMessagesWithOptions._({
+  TRes call({Object? channelMessageId = _undefined}) =>
+      _then(Variables$Query$FindChannelMessageById._({
         ..._instance._$data,
-        if (filter != _undefined)
-          'filter': (filter as Input$ChannelMessageListFilter?),
-        if (options != _undefined)
-          'options': (options as Input$FindObjectsOptions?),
+        if (channelMessageId != _undefined && channelMessageId != null)
+          'channelMessageId': (channelMessageId as String),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$FindChannelMessagesWithOptions<TRes>
-    implements CopyWith$Variables$Query$FindChannelMessagesWithOptions<TRes> {
-  _CopyWithStubImpl$Variables$Query$FindChannelMessagesWithOptions(this._res);
+class _CopyWithStubImpl$Variables$Query$FindChannelMessageById<TRes>
+    implements CopyWith$Variables$Query$FindChannelMessageById<TRes> {
+  _CopyWithStubImpl$Variables$Query$FindChannelMessageById(this._res);
 
   TRes _res;
 
-  call({
-    Input$ChannelMessageListFilter? filter,
-    Input$FindObjectsOptions? options,
-  }) =>
-      _res;
+  call({String? channelMessageId}) => _res;
 }
 
-class Query$FindChannelMessagesWithOptions {
-  Query$FindChannelMessagesWithOptions({
-    required this.findChannelMessages,
+class Query$FindChannelMessageById {
+  Query$FindChannelMessageById({
+    required this.findChannelMessageById,
     this.$__typename = 'Query',
   });
 
-  factory Query$FindChannelMessagesWithOptions.fromJson(
-      Map<String, dynamic> json) {
-    final l$findChannelMessages = json['findChannelMessages'];
+  factory Query$FindChannelMessageById.fromJson(Map<String, dynamic> json) {
+    final l$findChannelMessageById = json['findChannelMessageById'];
     final l$$__typename = json['__typename'];
-    return Query$FindChannelMessagesWithOptions(
-      findChannelMessages: (l$findChannelMessages as List<dynamic>)
-          .map((e) =>
-              Query$FindChannelMessagesWithOptions$findChannelMessages.fromJson(
-                  (e as Map<String, dynamic>)))
-          .toList(),
+    return Query$FindChannelMessageById(
+      findChannelMessageById:
+          Query$FindChannelMessageById$findChannelMessageById.fromJson(
+              (l$findChannelMessageById as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$FindChannelMessagesWithOptions$findChannelMessages>
-      findChannelMessages;
+  final Query$FindChannelMessageById$findChannelMessageById
+      findChannelMessageById;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$findChannelMessages = findChannelMessages;
-    _resultData['findChannelMessages'] =
-        l$findChannelMessages.map((e) => e.toJson()).toList();
+    final l$findChannelMessageById = findChannelMessageById;
+    _resultData['findChannelMessageById'] = l$findChannelMessageById.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1124,10 +1121,10 @@ class Query$FindChannelMessagesWithOptions {
 
   @override
   int get hashCode {
-    final l$findChannelMessages = findChannelMessages;
+    final l$findChannelMessageById = findChannelMessageById;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      Object.hashAll(l$findChannelMessages.map((v) => v)),
+      l$findChannelMessageById,
       l$$__typename,
     ]);
   }
@@ -1137,21 +1134,14 @@ class Query$FindChannelMessagesWithOptions {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FindChannelMessagesWithOptions) ||
+    if (!(other is Query$FindChannelMessageById) ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$findChannelMessages = findChannelMessages;
-    final lOther$findChannelMessages = other.findChannelMessages;
-    if (l$findChannelMessages.length != lOther$findChannelMessages.length) {
+    final l$findChannelMessageById = findChannelMessageById;
+    final lOther$findChannelMessageById = other.findChannelMessageById;
+    if (l$findChannelMessageById != lOther$findChannelMessageById) {
       return false;
-    }
-    for (int i = 0; i < l$findChannelMessages.length; i++) {
-      final l$findChannelMessages$entry = l$findChannelMessages[i];
-      final lOther$findChannelMessages$entry = lOther$findChannelMessages[i];
-      if (l$findChannelMessages$entry != lOther$findChannelMessages$entry) {
-        return false;
-      }
     }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
@@ -1162,152 +1152,114 @@ class Query$FindChannelMessagesWithOptions {
   }
 }
 
-extension UtilityExtension$Query$FindChannelMessagesWithOptions
-    on Query$FindChannelMessagesWithOptions {
-  CopyWith$Query$FindChannelMessagesWithOptions<
-          Query$FindChannelMessagesWithOptions>
-      get copyWith => CopyWith$Query$FindChannelMessagesWithOptions(
+extension UtilityExtension$Query$FindChannelMessageById
+    on Query$FindChannelMessageById {
+  CopyWith$Query$FindChannelMessageById<Query$FindChannelMessageById>
+      get copyWith => CopyWith$Query$FindChannelMessageById(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$FindChannelMessagesWithOptions<TRes> {
-  factory CopyWith$Query$FindChannelMessagesWithOptions(
-    Query$FindChannelMessagesWithOptions instance,
-    TRes Function(Query$FindChannelMessagesWithOptions) then,
-  ) = _CopyWithImpl$Query$FindChannelMessagesWithOptions;
+abstract class CopyWith$Query$FindChannelMessageById<TRes> {
+  factory CopyWith$Query$FindChannelMessageById(
+    Query$FindChannelMessageById instance,
+    TRes Function(Query$FindChannelMessageById) then,
+  ) = _CopyWithImpl$Query$FindChannelMessageById;
 
-  factory CopyWith$Query$FindChannelMessagesWithOptions.stub(TRes res) =
-      _CopyWithStubImpl$Query$FindChannelMessagesWithOptions;
+  factory CopyWith$Query$FindChannelMessageById.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindChannelMessageById;
 
   TRes call({
-    List<Query$FindChannelMessagesWithOptions$findChannelMessages>?
-        findChannelMessages,
+    Query$FindChannelMessageById$findChannelMessageById? findChannelMessageById,
     String? $__typename,
   });
-  TRes findChannelMessages(
-      Iterable<Query$FindChannelMessagesWithOptions$findChannelMessages> Function(
-              Iterable<
-                  CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages<
-                      Query$FindChannelMessagesWithOptions$findChannelMessages>>)
-          _fn);
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
+      get findChannelMessageById;
 }
 
-class _CopyWithImpl$Query$FindChannelMessagesWithOptions<TRes>
-    implements CopyWith$Query$FindChannelMessagesWithOptions<TRes> {
-  _CopyWithImpl$Query$FindChannelMessagesWithOptions(
+class _CopyWithImpl$Query$FindChannelMessageById<TRes>
+    implements CopyWith$Query$FindChannelMessageById<TRes> {
+  _CopyWithImpl$Query$FindChannelMessageById(
     this._instance,
     this._then,
   );
 
-  final Query$FindChannelMessagesWithOptions _instance;
+  final Query$FindChannelMessageById _instance;
 
-  final TRes Function(Query$FindChannelMessagesWithOptions) _then;
+  final TRes Function(Query$FindChannelMessageById) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? findChannelMessages = _undefined,
+    Object? findChannelMessageById = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$FindChannelMessagesWithOptions(
-        findChannelMessages:
-            findChannelMessages == _undefined || findChannelMessages == null
-                ? _instance.findChannelMessages
-                : (findChannelMessages as List<
-                    Query$FindChannelMessagesWithOptions$findChannelMessages>),
+      _then(Query$FindChannelMessageById(
+        findChannelMessageById: findChannelMessageById == _undefined ||
+                findChannelMessageById == null
+            ? _instance.findChannelMessageById
+            : (findChannelMessageById
+                as Query$FindChannelMessageById$findChannelMessageById),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  TRes findChannelMessages(
-          Iterable<Query$FindChannelMessagesWithOptions$findChannelMessages> Function(
-                  Iterable<
-                      CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages<
-                          Query$FindChannelMessagesWithOptions$findChannelMessages>>)
-              _fn) =>
-      call(
-          findChannelMessages: _fn(_instance.findChannelMessages.map((e) =>
-              CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages(
-                e,
-                (i) => i,
-              ))).toList());
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
+      get findChannelMessageById {
+    final local$findChannelMessageById = _instance.findChannelMessageById;
+    return CopyWith$Query$FindChannelMessageById$findChannelMessageById(
+        local$findChannelMessageById, (e) => call(findChannelMessageById: e));
+  }
 }
 
-class _CopyWithStubImpl$Query$FindChannelMessagesWithOptions<TRes>
-    implements CopyWith$Query$FindChannelMessagesWithOptions<TRes> {
-  _CopyWithStubImpl$Query$FindChannelMessagesWithOptions(this._res);
+class _CopyWithStubImpl$Query$FindChannelMessageById<TRes>
+    implements CopyWith$Query$FindChannelMessageById<TRes> {
+  _CopyWithStubImpl$Query$FindChannelMessageById(this._res);
 
   TRes _res;
 
   call({
-    List<Query$FindChannelMessagesWithOptions$findChannelMessages>?
-        findChannelMessages,
+    Query$FindChannelMessageById$findChannelMessageById? findChannelMessageById,
     String? $__typename,
   }) =>
       _res;
-  findChannelMessages(_fn) => _res;
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
+      get findChannelMessageById =>
+          CopyWith$Query$FindChannelMessageById$findChannelMessageById.stub(
+              _res);
 }
 
-const documentNodeQueryFindChannelMessagesWithOptions =
-    DocumentNode(definitions: [
+const documentNodeQueryFindChannelMessageById = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'FindChannelMessagesWithOptions'),
+    name: NameNode(value: 'FindChannelMessageById'),
     variableDefinitions: [
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'filter')),
+        variable: VariableNode(name: NameNode(value: 'channelMessageId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'ChannelMessageListFilter'),
-          isNonNull: false,
+          name: NameNode(value: 'String'),
+          isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'options')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'FindObjectsOptions'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
+      )
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'findChannelMessages'),
+        name: NameNode(value: 'findChannelMessageById'),
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'filter'),
-            value: VariableNode(name: NameNode(value: 'filter')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'options'),
-            value: VariableNode(name: NameNode(value: 'options')),
-          ),
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'channelMessageId')),
+          )
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
             name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'channelId'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'createdAt'),
             alias: null,
             arguments: [],
             directives: [],
@@ -1321,7 +1273,56 @@ const documentNodeQueryFindChannelMessagesWithOptions =
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'channelId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'messageText'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'replyToMessageId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'deletedBy'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'updatedAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'deletedAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'editedAt'),
             alias: null,
             arguments: [],
             directives: [],
@@ -1376,35 +1377,53 @@ const documentNodeQueryFindChannelMessagesWithOptions =
   ),
 ]);
 
-class Query$FindChannelMessagesWithOptions$findChannelMessages {
-  Query$FindChannelMessagesWithOptions$findChannelMessages({
+class Query$FindChannelMessageById$findChannelMessageById {
+  Query$FindChannelMessageById$findChannelMessageById({
     required this.id,
-    required this.channelId,
-    required this.createdAt,
     this.createdBy,
+    required this.channelId,
     this.messageText,
+    required this.createdAt,
+    this.replyToMessageId,
+    this.deletedBy,
+    this.updatedAt,
+    this.deletedAt,
+    this.editedAt,
     this.statuses,
     this.$__typename = 'ChannelMessage',
   });
 
-  factory Query$FindChannelMessagesWithOptions$findChannelMessages.fromJson(
+  factory Query$FindChannelMessageById$findChannelMessageById.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
-    final l$channelId = json['channelId'];
-    final l$createdAt = json['createdAt'];
     final l$createdBy = json['createdBy'];
+    final l$channelId = json['channelId'];
     final l$messageText = json['messageText'];
+    final l$createdAt = json['createdAt'];
+    final l$replyToMessageId = json['replyToMessageId'];
+    final l$deletedBy = json['deletedBy'];
+    final l$updatedAt = json['updatedAt'];
+    final l$deletedAt = json['deletedAt'];
+    final l$editedAt = json['editedAt'];
     final l$statuses = json['statuses'];
     final l$$__typename = json['__typename'];
-    return Query$FindChannelMessagesWithOptions$findChannelMessages(
+    return Query$FindChannelMessageById$findChannelMessageById(
       id: (l$id as String),
-      channelId: (l$channelId as String),
-      createdAt: DateTime.parse((l$createdAt as String)),
       createdBy: (l$createdBy as String?),
+      channelId: (l$channelId as String),
       messageText: (l$messageText as String?),
+      createdAt: DateTime.parse((l$createdAt as String)),
+      replyToMessageId: (l$replyToMessageId as String?),
+      deletedBy: (l$deletedBy as String?),
+      updatedAt:
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
+      deletedAt:
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String)),
+      editedAt:
+          l$editedAt == null ? null : DateTime.parse((l$editedAt as String)),
       statuses: (l$statuses as List<dynamic>?)
           ?.map((e) =>
-              Query$FindChannelMessagesWithOptions$findChannelMessages$statuses
+              Query$FindChannelMessageById$findChannelMessageById$statuses
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
@@ -1413,15 +1432,25 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages {
 
   final String id;
 
-  final String channelId;
-
-  final DateTime createdAt;
-
   final String? createdBy;
+
+  final String channelId;
 
   final String? messageText;
 
-  final List<Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>?
+  final DateTime createdAt;
+
+  final String? replyToMessageId;
+
+  final String? deletedBy;
+
+  final DateTime? updatedAt;
+
+  final DateTime? deletedAt;
+
+  final DateTime? editedAt;
+
+  final List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
       statuses;
 
   final String $__typename;
@@ -1430,14 +1459,24 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages {
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
-    final l$channelId = channelId;
-    _resultData['channelId'] = l$channelId;
-    final l$createdAt = createdAt;
-    _resultData['createdAt'] = l$createdAt.toIso8601String();
     final l$createdBy = createdBy;
     _resultData['createdBy'] = l$createdBy;
+    final l$channelId = channelId;
+    _resultData['channelId'] = l$channelId;
     final l$messageText = messageText;
     _resultData['messageText'] = l$messageText;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$replyToMessageId = replyToMessageId;
+    _resultData['replyToMessageId'] = l$replyToMessageId;
+    final l$deletedBy = deletedBy;
+    _resultData['deletedBy'] = l$deletedBy;
+    final l$updatedAt = updatedAt;
+    _resultData['updatedAt'] = l$updatedAt?.toIso8601String();
+    final l$deletedAt = deletedAt;
+    _resultData['deletedAt'] = l$deletedAt?.toIso8601String();
+    final l$editedAt = editedAt;
+    _resultData['editedAt'] = l$editedAt?.toIso8601String();
     final l$statuses = statuses;
     _resultData['statuses'] = l$statuses?.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
@@ -1448,18 +1487,28 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages {
   @override
   int get hashCode {
     final l$id = id;
-    final l$channelId = channelId;
-    final l$createdAt = createdAt;
     final l$createdBy = createdBy;
+    final l$channelId = channelId;
     final l$messageText = messageText;
+    final l$createdAt = createdAt;
+    final l$replyToMessageId = replyToMessageId;
+    final l$deletedBy = deletedBy;
+    final l$updatedAt = updatedAt;
+    final l$deletedAt = deletedAt;
+    final l$editedAt = editedAt;
     final l$statuses = statuses;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
-      l$channelId,
-      l$createdAt,
       l$createdBy,
+      l$channelId,
       l$messageText,
+      l$createdAt,
+      l$replyToMessageId,
+      l$deletedBy,
+      l$updatedAt,
+      l$deletedAt,
+      l$editedAt,
       l$statuses == null ? null : Object.hashAll(l$statuses.map((v) => v)),
       l$$__typename,
     ]);
@@ -1470,7 +1519,7 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FindChannelMessagesWithOptions$findChannelMessages) ||
+    if (!(other is Query$FindChannelMessageById$findChannelMessageById) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1479,9 +1528,19 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages {
     if (l$id != lOther$id) {
       return false;
     }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
     final l$channelId = channelId;
     final lOther$channelId = other.channelId;
     if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    final l$messageText = messageText;
+    final lOther$messageText = other.messageText;
+    if (l$messageText != lOther$messageText) {
       return false;
     }
     final l$createdAt = createdAt;
@@ -1489,14 +1548,29 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages {
     if (l$createdAt != lOther$createdAt) {
       return false;
     }
-    final l$createdBy = createdBy;
-    final lOther$createdBy = other.createdBy;
-    if (l$createdBy != lOther$createdBy) {
+    final l$replyToMessageId = replyToMessageId;
+    final lOther$replyToMessageId = other.replyToMessageId;
+    if (l$replyToMessageId != lOther$replyToMessageId) {
       return false;
     }
-    final l$messageText = messageText;
-    final lOther$messageText = other.messageText;
-    if (l$messageText != lOther$messageText) {
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$editedAt = editedAt;
+    final lOther$editedAt = other.editedAt;
+    if (l$editedAt != lOther$editedAt) {
       return false;
     }
     final l$statuses = statuses;
@@ -1524,126 +1598,152 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages {
   }
 }
 
-extension UtilityExtension$Query$FindChannelMessagesWithOptions$findChannelMessages
-    on Query$FindChannelMessagesWithOptions$findChannelMessages {
-  CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages<
-          Query$FindChannelMessagesWithOptions$findChannelMessages>
+extension UtilityExtension$Query$FindChannelMessageById$findChannelMessageById
+    on Query$FindChannelMessageById$findChannelMessageById {
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById<
+          Query$FindChannelMessageById$findChannelMessageById>
       get copyWith =>
-          CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages(
+          CopyWith$Query$FindChannelMessageById$findChannelMessageById(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages<
+abstract class CopyWith$Query$FindChannelMessageById$findChannelMessageById<
     TRes> {
-  factory CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages(
-    Query$FindChannelMessagesWithOptions$findChannelMessages instance,
-    TRes Function(Query$FindChannelMessagesWithOptions$findChannelMessages)
-        then,
-  ) = _CopyWithImpl$Query$FindChannelMessagesWithOptions$findChannelMessages;
+  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById(
+    Query$FindChannelMessageById$findChannelMessageById instance,
+    TRes Function(Query$FindChannelMessageById$findChannelMessageById) then,
+  ) = _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById;
 
-  factory CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages.stub(
+  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$FindChannelMessagesWithOptions$findChannelMessages;
+      _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById;
 
   TRes call({
     String? id,
-    String? channelId,
-    DateTime? createdAt,
     String? createdBy,
+    String? channelId,
     String? messageText,
-    List<Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>?
+    DateTime? createdAt,
+    String? replyToMessageId,
+    String? deletedBy,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
+    DateTime? editedAt,
+    List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
         statuses,
     String? $__typename,
   });
   TRes statuses(
-      Iterable<Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>? Function(
+      Iterable<Query$FindChannelMessageById$findChannelMessageById$statuses>? Function(
               Iterable<
-                  CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses<
-                      Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>>?)
+                  CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+                      Query$FindChannelMessageById$findChannelMessageById$statuses>>?)
           _fn);
 }
 
-class _CopyWithImpl$Query$FindChannelMessagesWithOptions$findChannelMessages<
-        TRes>
+class _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById<TRes>
     implements
-        CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages<
-            TRes> {
-  _CopyWithImpl$Query$FindChannelMessagesWithOptions$findChannelMessages(
+        CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes> {
+  _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById(
     this._instance,
     this._then,
   );
 
-  final Query$FindChannelMessagesWithOptions$findChannelMessages _instance;
+  final Query$FindChannelMessageById$findChannelMessageById _instance;
 
-  final TRes Function(Query$FindChannelMessagesWithOptions$findChannelMessages)
+  final TRes Function(Query$FindChannelMessageById$findChannelMessageById)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
-    Object? channelId = _undefined,
-    Object? createdAt = _undefined,
     Object? createdBy = _undefined,
+    Object? channelId = _undefined,
     Object? messageText = _undefined,
+    Object? createdAt = _undefined,
+    Object? replyToMessageId = _undefined,
+    Object? deletedBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? deletedAt = _undefined,
+    Object? editedAt = _undefined,
     Object? statuses = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$FindChannelMessagesWithOptions$findChannelMessages(
+      _then(Query$FindChannelMessageById$findChannelMessageById(
         id: id == _undefined || id == null ? _instance.id : (id as String),
-        channelId: channelId == _undefined || channelId == null
-            ? _instance.channelId
-            : (channelId as String),
-        createdAt: createdAt == _undefined || createdAt == null
-            ? _instance.createdAt
-            : (createdAt as DateTime),
         createdBy: createdBy == _undefined
             ? _instance.createdBy
             : (createdBy as String?),
+        channelId: channelId == _undefined || channelId == null
+            ? _instance.channelId
+            : (channelId as String),
         messageText: messageText == _undefined
             ? _instance.messageText
             : (messageText as String?),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as DateTime),
+        replyToMessageId: replyToMessageId == _undefined
+            ? _instance.replyToMessageId
+            : (replyToMessageId as String?),
+        deletedBy: deletedBy == _undefined
+            ? _instance.deletedBy
+            : (deletedBy as String?),
+        updatedAt: updatedAt == _undefined
+            ? _instance.updatedAt
+            : (updatedAt as DateTime?),
+        deletedAt: deletedAt == _undefined
+            ? _instance.deletedAt
+            : (deletedAt as DateTime?),
+        editedAt: editedAt == _undefined
+            ? _instance.editedAt
+            : (editedAt as DateTime?),
         statuses: statuses == _undefined
             ? _instance.statuses
             : (statuses as List<
-                Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>?),
+                Query$FindChannelMessageById$findChannelMessageById$statuses>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes statuses(
-          Iterable<Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>? Function(
+          Iterable<Query$FindChannelMessageById$findChannelMessageById$statuses>? Function(
                   Iterable<
-                      CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses<
-                          Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>>?)
+                      CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+                          Query$FindChannelMessageById$findChannelMessageById$statuses>>?)
               _fn) =>
       call(
           statuses: _fn(_instance.statuses?.map((e) =>
-              CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses(
+              CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
                 e,
                 (i) => i,
               )))?.toList());
 }
 
-class _CopyWithStubImpl$Query$FindChannelMessagesWithOptions$findChannelMessages<
+class _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById<
         TRes>
     implements
-        CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages<
-            TRes> {
-  _CopyWithStubImpl$Query$FindChannelMessagesWithOptions$findChannelMessages(
+        CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes> {
+  _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById(
       this._res);
 
   TRes _res;
 
   call({
     String? id,
-    String? channelId,
-    DateTime? createdAt,
     String? createdBy,
+    String? channelId,
     String? messageText,
-    List<Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>?
+    DateTime? createdAt,
+    String? replyToMessageId,
+    String? deletedBy,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
+    DateTime? editedAt,
+    List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
         statuses,
     String? $__typename,
   }) =>
@@ -1651,19 +1751,19 @@ class _CopyWithStubImpl$Query$FindChannelMessagesWithOptions$findChannelMessages
   statuses(_fn) => _res;
 }
 
-class Query$FindChannelMessagesWithOptions$findChannelMessages$statuses {
-  Query$FindChannelMessagesWithOptions$findChannelMessages$statuses({
+class Query$FindChannelMessageById$findChannelMessageById$statuses {
+  Query$FindChannelMessageById$findChannelMessageById$statuses({
     this.seenAt,
     required this.userId,
     this.$__typename = 'ChannelMessageStatus',
   });
 
-  factory Query$FindChannelMessagesWithOptions$findChannelMessages$statuses.fromJson(
+  factory Query$FindChannelMessageById$findChannelMessageById$statuses.fromJson(
       Map<String, dynamic> json) {
     final l$seenAt = json['seenAt'];
     final l$userId = json['userId'];
     final l$$__typename = json['__typename'];
-    return Query$FindChannelMessagesWithOptions$findChannelMessages$statuses(
+    return Query$FindChannelMessageById$findChannelMessageById$statuses(
       seenAt: l$seenAt == null ? null : DateTime.parse((l$seenAt as String)),
       userId: (l$userId as String),
       $__typename: (l$$__typename as String),
@@ -1705,7 +1805,7 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages$statuses {
       return true;
     }
     if (!(other
-            is Query$FindChannelMessagesWithOptions$findChannelMessages$statuses) ||
+            is Query$FindChannelMessageById$findChannelMessageById$statuses) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1728,29 +1828,28 @@ class Query$FindChannelMessagesWithOptions$findChannelMessages$statuses {
   }
 }
 
-extension UtilityExtension$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses
-    on Query$FindChannelMessagesWithOptions$findChannelMessages$statuses {
-  CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses<
-          Query$FindChannelMessagesWithOptions$findChannelMessages$statuses>
+extension UtilityExtension$Query$FindChannelMessageById$findChannelMessageById$statuses
+    on Query$FindChannelMessageById$findChannelMessageById$statuses {
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+          Query$FindChannelMessageById$findChannelMessageById$statuses>
       get copyWith =>
-          CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses(
+          CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses<
+abstract class CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
     TRes> {
-  factory CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses(
-    Query$FindChannelMessagesWithOptions$findChannelMessages$statuses instance,
-    TRes Function(
-            Query$FindChannelMessagesWithOptions$findChannelMessages$statuses)
+  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
+    Query$FindChannelMessageById$findChannelMessageById$statuses instance,
+    TRes Function(Query$FindChannelMessageById$findChannelMessageById$statuses)
         then,
-  ) = _CopyWithImpl$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses;
+  ) = _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses;
 
-  factory CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses.stub(
+  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses;
+      _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses;
 
   TRes call({
     DateTime? seenAt,
@@ -1759,21 +1858,20 @@ abstract class CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages
   });
 }
 
-class _CopyWithImpl$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses<
+class _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses<
         TRes>
     implements
-        CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses<
+        CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
             TRes> {
-  _CopyWithImpl$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses(
+  _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses(
     this._instance,
     this._then,
   );
 
-  final Query$FindChannelMessagesWithOptions$findChannelMessages$statuses
-      _instance;
+  final Query$FindChannelMessageById$findChannelMessageById$statuses _instance;
 
   final TRes Function(
-      Query$FindChannelMessagesWithOptions$findChannelMessages$statuses) _then;
+      Query$FindChannelMessageById$findChannelMessageById$statuses) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1782,7 +1880,7 @@ class _CopyWithImpl$Query$FindChannelMessagesWithOptions$findChannelMessages$sta
     Object? userId = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$FindChannelMessagesWithOptions$findChannelMessages$statuses(
+      _then(Query$FindChannelMessageById$findChannelMessageById$statuses(
         seenAt: seenAt == _undefined ? _instance.seenAt : (seenAt as DateTime?),
         userId: userId == _undefined || userId == null
             ? _instance.userId
@@ -1793,12 +1891,12 @@ class _CopyWithImpl$Query$FindChannelMessagesWithOptions$findChannelMessages$sta
       ));
 }
 
-class _CopyWithStubImpl$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses<
+class _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses<
         TRes>
     implements
-        CopyWith$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses<
+        CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
             TRes> {
-  _CopyWithStubImpl$Query$FindChannelMessagesWithOptions$findChannelMessages$statuses(
+  _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses(
       this._res);
 
   TRes _res;
