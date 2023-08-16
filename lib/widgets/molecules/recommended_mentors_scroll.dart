@@ -6,11 +6,12 @@ import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_card.dart';
 import 'package:provider/provider.dart';
 
+import '../../__generated/schema/schema.graphql.dart';
 import '../../providers/base/operation_result.dart';
 import '../../providers/user_provider.dart';
 
 class RecommendedMentorsScroll extends StatelessWidget {
-  final List<AllUsersResult> mentors;
+  final List<MentorUser> mentors;
 
   const RecommendedMentorsScroll({
     Key? key,
@@ -105,7 +106,7 @@ class RecommendedSection extends StatefulWidget {
 
 class _RecommendedSectionState extends State<RecommendedSection> {
   late final UserProvider _userProvider;
-  late Future<OperationResult<List<AllUsersResult>>> _allUsers;
+  late Future<OperationResult<List<MentorUser>>> _allUsers;
 
   @override
   void initState() {
@@ -116,7 +117,11 @@ class _RecommendedSectionState extends State<RecommendedSection> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _allUsers = _userProvider.findAllUsers();
+    _allUsers = _userProvider.findMentorUsers(
+      optionsInput: Input$FindObjectsOptions(limit: 10), // only return 10 users
+      filterInput: Input$UserListFilter(ids: null), // no filter/null filter
+      matchInput: Input$UserInput(), // empty input, won't restrict matches
+    );
   }
 
   @override
@@ -127,7 +132,7 @@ class _RecommendedSectionState extends State<RecommendedSection> {
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onReady: () {
-            List<AllUsersResult> mentors = snapshot.data?.response != null
+            List<MentorUser> mentors = snapshot.data?.response != null
                 ? snapshot.data!.response!.reversed
                     .where(
                         (element) => element.id != widget.authenticatedUser.id)
@@ -141,7 +146,7 @@ class _RecommendedSectionState extends State<RecommendedSection> {
   }
 
   Column _createRecommendedMentorsWidget(
-      List<AllUsersResult> mentors, BuildContext context) {
+      List<MentorUser> mentors, BuildContext context) {
     return Column(
       children: [
         RecommendedMentorsScroll(mentors: mentors),
