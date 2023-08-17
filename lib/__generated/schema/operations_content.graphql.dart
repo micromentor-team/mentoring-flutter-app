@@ -3415,7 +3415,7 @@ const documentNodeQueryFindCountriesInLanguage = DocumentNode(definitions: [
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'uiLanguage'),
+            name: NameNode(value: 'fallbackUiLanguage'),
             value: VariableNode(name: NameNode(value: 'uiLanguage')),
           )
         ],

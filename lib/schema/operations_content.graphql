@@ -60,7 +60,7 @@ query FindCountries {
 }
 
 query FindCountriesInLanguage($uiLanguage: UiLanguage) {
-  findCountries(uiLanguage: $uiLanguage) {
+  findCountries(fallbackUiLanguage: $uiLanguage) {
     alpha2Key
     textId
     translatedValue

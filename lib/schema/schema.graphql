@@ -1,3 +1,28 @@
+type UserMetadata implements BaseModelMetadata {
+  updatedAt: DateTime
+  totalTimeOnPlatform: Int!
+  channelsMetadata: ChannelsUserMetadata!
+  groupsMetadata: GroupsUserMetadata!
+}
+
+interface BaseModelMetadata {
+  updatedAt: DateTime
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type ChannelsUserMetadata {
+  mentoringSessionCount: Int!
+}
+
+type GroupsUserMetadata {
+  groupCount: Int!
+  updatedAt: DateTime
+}
+
 type GroupMembership implements IGroupMembership {
   id: ID!
   adminNotes: String
@@ -40,19 +65,10 @@ type ModelEvent {
   message: String!
 }
 
-"""
-The javascript `Date` as string. Type represents date and time as the ISO Date string.
-"""
-scalar DateTime
-
 enum ModelEventType {
   error
   warning
   info
-}
-
-interface BaseModelMetadata {
-  updatedAt: DateTime
 }
 
 type Expertise {
@@ -90,6 +106,7 @@ enum OptionType {
   educationLevel
   expertise
   industry
+  contentFlagType
   companyStage
   companyType
   country
@@ -231,24 +248,7 @@ type MentorsGroupMembership implements IGroupMembership {
   endorsements: Int
 }
 
-type UserMetadata implements BaseModelMetadata {
-  totalTimeOnPlatform: Int!
-  updatedAt: DateTime
-  channelsMetadata: ChannelsUserMetadata!
-  groupsMetadata: GroupsUserMetadata!
-}
-
-type ChannelsUserMetadata {
-  mentoringSessionCount: Int!
-}
-
-type GroupsUserMetadata {
-  groupCount: Int!
-  updatedAt: DateTime
-}
-
 type Query {
-  myInbox(refresh: Boolean): UserInbox!
   findUserById(id: String!): User!
   findUserByIdent(options: FindUserByIdentOptions, identType: UserIdentType, ident: String!): User!
   findUsers(options: FindObjectsOptions, match: UserInput, filter: UserListFilter): [User!]!
@@ -257,6 +257,7 @@ type Query {
   getMyUser: User!
   findUserDeviceById(id: String!): UserDevice!
   findUserDevices(options: FindObjectsOptions, match: UserDeviceInput, filter: SidUserDeviceListFilter): [UserDevice!]!
+  myInbox(refresh: Boolean): UserInbox!
   findChannelInvitationById(id: String!): ChannelInvitation!
   findChannelInvitationsForUser(options: FindObjectsOptions, userId: String!): [ChannelInvitation!]!
   findPendingChannelInvitationsForUser(options: FindObjectsOptions, userId: String!): [ChannelInvitation!]!
@@ -266,15 +267,15 @@ type Query {
   findChannelMessageById(id: String!): ChannelMessage!
   findChannelMessages(options: FindObjectsOptions, match: ChannelMessageInput, filter: ChannelMessageListFilter): [ChannelMessage!]!
   findChannelParticipantById(id: String!): ChannelParticipant!
-  findOptions(uiLanguage: UiLanguage, isParent: Boolean, parentTextId: String, optionType: OptionType!): [Option!]!
-  findCompanyStages(uiLanguage: UiLanguage): [CompanyStage!]!
-  findCompanyTypes(uiLanguage: UiLanguage): [CompanyType!]!
-  findCountries(uiLanguage: UiLanguage): [Country!]!
-  findEducationLevels(uiLanguage: UiLanguage): [EducationLevel!]!
-  findExpertises(uiLanguage: UiLanguage, isParent: Boolean, parentTextId: String): [Expertise!]!
-  findGenders(uiLanguage: UiLanguage): [Gender!]!
-  findIndustries(uiLanguage: UiLanguage): [Industry!]!
-  findLanguages(uiLanguage: UiLanguage): [Language!]!
+  findOptions(fallbackUiLanguage: UiLanguage, isParent: Boolean, parentTextId: String, optionType: OptionType!): [Option!]!
+  findCompanyStages(fallbackUiLanguage: UiLanguage): [CompanyStage!]!
+  findCompanyTypes(fallbackUiLanguage: UiLanguage): [CompanyType!]!
+  findCountries(fallbackUiLanguage: UiLanguage): [Country!]!
+  findEducationLevels(fallbackUiLanguage: UiLanguage): [EducationLevel!]!
+  findExpertises(fallbackUiLanguage: UiLanguage, isParent: Boolean, parentTextId: String): [Expertise!]!
+  findGenders(fallbackUiLanguage: UiLanguage): [Gender!]!
+  findIndustries(fallbackUiLanguage: UiLanguage): [Industry!]!
+  findLanguages(fallbackUiLanguage: UiLanguage): [Language!]!
   apiVersion: String!
   healthReport: SystemHealthReport!
   findGroupMembershipById(id: String!): GroupMembership!
@@ -285,6 +286,7 @@ type Query {
   findUserSearchById(userSearchId: String!): UserSearch!
   findUserSearches(options: FindObjectsOptions, match: UserSearchInput, filter: UserSearchListFilter): [UserSearch!]!
   myUserSearches: [UserSearch!]!
+  getMm2Integration: Mm2Integration!
   findMyActiveMultiStepAction: [SidMultiStepAction!]!
   getMultiStepActionProgress(
     """
@@ -293,66 +295,6 @@ type Query {
     confirmToken: String
     actionId: String!
   ): SidMultiStepActionProgress!
-}
-
-type UserInbox {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  userId: ID!
-  channels: ChannelInbox
-}
-
-type ChannelInbox {
-  userId: ID!
-  unseenMessages: [ChannelInboxItemMessage!]
-  pendingInvitations: [ChannelInboxItemInvitation!]
-  invitations: [ChannelInboxItemInvitation!]
-  updatedAt: DateTime
-  updatedBy: ID
-}
-
-type ChannelInboxItemMessage {
-  id: ID!
-  channelId: ID!
-  replyToMessageId: ID
-  channelMessageType: ChannelMessageType
-  messageText: String
-  senderUserHandle: String
-  senderFirstName: String
-  senderLastName: String
-  senderFullName: String
-  senderAvatarUrl: String
-  createdAt: DateTime!
-  createdBy: ID
-}
-
-enum ChannelMessageType {
-  unset
-  invitation
-}
-
-type ChannelInboxItemInvitation {
-  id: ID!
-  channelId: ID
-  messageText: String
-  status: ChannelInvitationStatus!
-  createdAt: DateTime!
-  createdBy: ID
-}
-
-enum ChannelInvitationStatus {
-  created
-  accepted
-  declined
-  unset
 }
 
 type User {
@@ -387,9 +329,10 @@ type User {
   authType: AuthType
   tfaBackupCodes: String
   passwordUpdatedAt: DateTime
-  preferredLanguage: UiLanguage
-  uiLanguage: UiLanguage
-  spokenLanguages: [String!]!
+  preferredLanguageTextId: String
+  spokenLanguagesTextIds: [String!]!
+  selectedUiLanguageTextId: UiLanguage
+  fallbackUiLanguageTextId: UiLanguage
   roles: [UserRole!]!
   appFeatures: [AppFeature!]
   source: String
@@ -431,14 +374,18 @@ type User {
   Users can enter a short description to be prominently displayed along with their name and other info.
   """
   oneLiner: String
-  user: User!
+  countryOfResidence: Country
   latestUserDevice: UserDevice!
+  spokenLanguages: [Language!]!
+  preferredLanguage: Language!
+  fallbackUiLanguage: Language!
+  preferredUiLanguage: Language!
   unreadInAppMessages: [Notification!]!
+  user: User!
   channels: [Channel!]!
   channelInvitations: [ChannelInvitation!]!
   channelParticipants: [ChannelParticipant!]!
   companies: [Company!]!
-  countryOfResidence: Country
   groupMembers: [GroupMembership!]!
   groups: [Group!]!
   inbox: [UserInbox!]!
@@ -532,7 +479,77 @@ type UserDevice {
   oAuthRefreshToken: String!
   pushNotificationToken: String!
   trustedAt: DateTime
-  uiLanguage: UiLanguage
+}
+
+type Country {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+  alpha2Key: String!
+  alpha3Key: String!
+}
+
+type Language {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+  isUiLanguage: Boolean!
+
+  """ISO 639-1, 2 letter language code. e.g. "en" for English."""
+  shortLangCode: String
+
+  """ISO 639-2, 3 letter language code. e.g. "eng" for English."""
+  longLangCode: String
 }
 
 type Notification {
@@ -682,6 +699,13 @@ type ChannelInvitation {
   sender: User!
 }
 
+enum ChannelInvitationStatus {
+  created
+  accepted
+  declined
+  unset
+}
+
 type ChannelMessage {
   id: ID!
   adminNotes: String
@@ -710,11 +734,17 @@ type ChannelMessage {
 }
 
 type ChannelMessageMetadata {
+  updatedAt: DateTime
   senderUserHandle: String
   senderFirstName: String
   senderLastName: String
   senderFullName: String
   senderAvatarUrl: String
+}
+
+enum ChannelMessageType {
+  unset
+  invitation
 }
 
 type ChannelMessageStatus {
@@ -851,39 +881,6 @@ type CompanyType {
   parentExpertise: Expertise
 }
 
-type Country {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  textId: String!
-  parentTextId: String
-  isParent: Boolean
-  optionType: OptionType!
-  value: String!
-  translatedValue: String
-  language: UiLanguage
-
-  """This attribute is only used by the MM2 synchronizer."""
-  mm2Id: String
-  mm2Value: String
-
-  """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
-  childOptions: [Option!]
-  parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
-  alpha2Key: String!
-  alpha3Key: String!
-}
-
 type Group {
   id: ID!
   adminNotes: String
@@ -955,6 +952,54 @@ type GroupRuleBaseConfig {
   deletedAt: DateTime
   deletedBy: ID
   value: String!
+}
+
+type UserInbox {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  userId: ID!
+  channels: ChannelInbox
+}
+
+type ChannelInbox {
+  userId: ID!
+  unseenMessages: [ChannelInboxItemMessage!]
+  pendingInvitations: [ChannelInboxItemInvitation!]
+  invitations: [ChannelInboxItemInvitation!]
+  updatedAt: DateTime
+  updatedBy: ID
+}
+
+type ChannelInboxItemMessage {
+  id: ID!
+  channelId: ID!
+  replyToMessageId: ID
+  channelMessageType: ChannelMessageType
+  messageText: String
+  senderUserHandle: String
+  senderFirstName: String
+  senderLastName: String
+  senderFullName: String
+  senderAvatarUrl: String
+  createdAt: DateTime!
+  createdBy: ID
+}
+
+type ChannelInboxItemInvitation {
+  id: ID!
+  channelId: ID
+  messageText: String
+  status: ChannelInvitationStatus!
+  createdAt: DateTime!
+  createdBy: ID
 }
 
 type UserSearch {
@@ -1041,6 +1086,7 @@ input FindObjectsOptions {
   allowPartialResults: Boolean
   showRecordId: Boolean
   includeDeleted: Boolean
+  includeArchived: Boolean
 }
 
 input SortItem {
@@ -1087,9 +1133,10 @@ input UserInput {
   newPassword: String
   tfaBackupCodes: String
   passwordUpdatedAt: String
-  preferredLanguage: UiLanguage
-  uiLanguage: UiLanguage
-  spokenLanguages: [String!]! = []
+  preferredLanguageTextId: String
+  spokenLanguagesTextIds: [String!]! = []
+  selectedUiLanguageTextId: UiLanguage
+  fallbackUiLanguageTextId: UiLanguage
   roles: [UserRole!]! = []
   appFeatures: [AppFeature!]
   source: String
@@ -1122,7 +1169,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTime! = "2023-08-11T16:58:59.974Z"
+  time: DateTime! = "2023-08-17T00:38:40.751Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -1210,7 +1257,6 @@ input UserDeviceInput {
   oAuthRefreshToken: String
   pushNotificationToken: String
   trustedAt: String
-  uiLanguage: UiLanguage
 }
 
 input SidUserDeviceListFilter {
@@ -1382,44 +1428,6 @@ type Gender {
   parentExpertise: Expertise
 }
 
-type Language {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  textId: String!
-  parentTextId: String
-  isParent: Boolean
-  optionType: OptionType!
-  value: String!
-  translatedValue: String
-  language: UiLanguage
-
-  """This attribute is only used by the MM2 synchronizer."""
-  mm2Id: String
-  mm2Value: String
-
-  """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
-  childOptions: [Option!]
-  parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
-  isUiLanguage: Boolean!
-
-  """ISO 639-1, 2 letter language code. e.g. "en" for English."""
-  shortLangCode: String
-
-  """ISO 639-2, 3 letter language code. e.g. "eng" for English."""
-  longLangCode: String
-}
-
 """Server health report"""
 type SystemHealthReport {
   environment: String!
@@ -1554,6 +1562,20 @@ input UserSearchListFilter {
   createdAtUntil: String
   updatedAtFrom: String
   updatedAtUntil: String
+}
+
+type Mm2Integration {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  fullSyncAt: DateTime
 }
 
 type SidMultiStepAction {
@@ -1712,9 +1734,6 @@ type SidMultiStepActionProgress {
 }
 
 type Mutation {
-  createCompany(input: CompanyInput!): Company!
-  deleteCompany(deletePhysically: Boolean!, companyId: String!): ServiceRequest!
-  updateCompany(input: CompanyInput!): ServiceRequest!
   signInUser(input: UserSignInInput!): UserAuthResponse!
   signMeOut: String!
   signUpUser(input: UserSignUpInput!): UserAuthResponse!
@@ -1722,6 +1741,12 @@ type Mutation {
   updateUser(input: UserInput!): String!
   createUserDevice(input: UserDeviceInput!): UserDevice!
   updateUserDevice(input: UserDeviceInput!): String!
+  createCompany(input: CompanyInput!): Company!
+  deleteCompany(deletePhysically: Boolean!, companyId: String!): ServiceRequest!
+  updateCompany(input: CompanyInput!): ServiceRequest!
+  createContentFlag(input: ContentFlagInput!): ContentFlag!
+  deleteContentFlag(deletePhysically: Boolean!, contentFlagId: String!): ServiceRequest!
+  updateContentFlag(input: ContentFlagInput!): ServiceRequest!
   acceptChannelInvitation(channelInvitationId: String!): String!
   createChannelInvitation(input: ChannelInvitationInput!): ChannelInvitation!
   declineChannelInvitation(channelInvitationId: String!): String!
@@ -1762,11 +1787,64 @@ type Mutation {
   createNotificationTemplate(notificationTemplateInput: NotificationTemplateInput!): NotificationTemplate!
   deleteNotificationTemplate(deletePhysically: Boolean!, notificationTemplateId: String!): String!
   updateNotificationTemplate(notificationTemplateInput: NotificationTemplateInput!): String!
+  clearAllSyncInfo(includeMm3: Boolean!, includeMm2: Boolean!): String!
+
+  """
+  Deletes all data that was imported from MM2. This field is only available in non-production environments.
+  """
+  deleteAllMm2DataInMm3: String!
+  createMm2Synchronization(input: Mm2SynchronizationInput!): Mm2Synchronization!
+  deleteMm2Synchronization(mm2SynchronizationId: String!): Mm2Synchronization!
+  findMm2SynchronizationById(mm2SynchronizationId: String!): Mm2Synchronization!
+  runMm2Synchronization(runAgain: Boolean, id: String!): Mm2Synchronization!
   createMultiStepAction(input: SidMultiStepActionInput!): SidMultiStepActionProgress!
   startResetPassword(deviceUuid: String!, input: UserIdentInput!): SidMultiStepActionProgress!
   startVerifyEmail(email: String!): SidMultiStepActionProgress!
   startVerifyPhoneNumber(phoneNumber: String): SidMultiStepActionProgress!
   verifyMultiStepActionToken(input: VerifyMultiStepActionTokenInput!): SidMultiStepActionProgress!
+}
+
+"""API response to userSignIn/userSignOut"""
+type UserAuthResponse {
+  userId: String!
+  deviceId: String!
+  deviceUuid: String!
+  authToken: String!
+  authTokenExpiresAt: DateTime
+}
+
+"""User sign in input data"""
+input UserSignInInput {
+  ident: String
+  identType: UserIdentType
+  deviceUuid: String
+  password: String
+}
+
+"""User sign up input data"""
+input UserSignUpInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: String
+  createdBy: ID
+  updatedAt: String
+  updatedBy: ID
+  deletedAt: String
+  deletedBy: ID
+  firstName: String
+  lastName: String
+  fullName: String
+  userHandle: String
+  email: String
+  phoneNumber: String
+  password: String
+  source: String
+  deviceUuid: String! = ""
+  timezone: String
+  pushNotificationToken: String
+  checkAvailable: Boolean! = true
 }
 
 input CompanyInput {
@@ -1822,6 +1900,10 @@ enum ServiceRequestType {
   graphQlMutationCreateCompany
   graphQlMutationDeleteCompany
   graphQlMutationUpdateCompany
+  graphQlQueryContentFlag
+  graphQlMutationCreateContentFlag
+  graphQlMutationDeleteContentFlag
+  graphQlMutationUpdateContentFlag
   graphQlMutationAddChannelMessageEvent
   graphQlMutationArchiveChannelForUserByMe
   graphQlMutationCreateChannel
@@ -1928,6 +2010,7 @@ enum ModelType {
   UserInbox
   UserMetadata
   UserPreferences
+  ContentFlag
   BackgroundTask
   Channel
   ChannelInbox
@@ -1953,6 +2036,7 @@ enum ModelType {
   ServiceRequest
   User
   UserDevice
+  unset
 }
 
 enum ServiceRequestResult {
@@ -1971,6 +2055,10 @@ enum ServiceRequestMessageId {
 enum ErrorCode {
   companyNameMissing
   companyNameTaken
+  contentFlagAlreadyExist
+  contentFlagModelTypeMissing
+  contentFlagObjectIdMissing
+  contentFlagTypeMissing
   alreadyGroupMember
   groupLevelTooDeep
   groupNameMissing
@@ -2013,25 +2101,60 @@ enum ErrorCode {
   authTokenNoMatch
 }
 
-"""API response to userSignIn/userSignOut"""
-type UserAuthResponse {
-  userId: String!
-  deviceId: String!
-  deviceUuid: String!
-  authToken: String!
-  authTokenExpiresAt: DateTime
+type ContentFlag {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  objectId: String!
+  modelType: ModelType!
+  flagTypeTextId: String!
+  flagSubTypeTextId: String
+  messageText: String
+  approvedByRecipientAt: DateTime
+  flagSubType: ContentFlagType
+  flagType: ContentFlagType
 }
 
-"""User sign in input data"""
-input UserSignInInput {
-  ident: String
-  identType: UserIdentType
-  deviceUuid: String
-  password: String
+type ContentFlagType {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTime
+  childOptions: [Option!]
+  parentOption: [Option!]
+  childExpertises: [Expertise!]
+  parentExpertise: Expertise
+  addToTrustLevel: Int
 }
 
-"""User sign up input data"""
-input UserSignUpInput {
+input ContentFlagInput {
   id: ID
   adminNotes: String
   events: [ModelEventInput!]
@@ -2042,18 +2165,12 @@ input UserSignUpInput {
   updatedBy: ID
   deletedAt: String
   deletedBy: ID
-  firstName: String
-  lastName: String
-  fullName: String
-  userHandle: String
-  email: String
-  phoneNumber: String
-  password: String
-  source: String
-  deviceUuid: String! = ""
-  timezone: String
-  pushNotificationToken: String
-  checkAvailable: Boolean! = true
+  objectId: String
+  modelType: ModelType
+  flagTypeTextId: String
+  flagSubTypeTextId: String
+  messageText: String
+  approvedByRecipientAt: String
 }
 
 input ChannelInvitationInput {
@@ -2284,6 +2401,155 @@ input NotificationTemplateInput {
   isCore: Boolean
 }
 
+type Mm2Synchronization {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  direction: Mm2SyncDirection!
+
+  """If synchronizing a single object, set this to its ID."""
+  objectId: String
+
+  """If synchronizing a single object, set this to its model type."""
+  mm2ModelType: Mm2ModelType
+  syncMode: Mm2SynchronizationMode!
+
+  """Set to true to run the synchronization right after creation."""
+  autorun: Boolean!
+
+  """
+  Will be updated with number of synchronized objects throughout the run.
+  """
+  progress: Int!
+  totalItemCount: Int!
+
+  """Number of objects to synchronize."""
+  limit: Int
+  result: Mm2SynchronizationResult!
+
+  """
+  Set to `info` or `error` to save Mm2SynchronizationResultItem objects to Mm2Synchronization.result. Using info on a large amount of items may expand the size of the MongoDB document beyond its limit, so only use it for local debugging. `none` disables saving any items to the synchronization object. Default: `error`
+  """
+  logLevel: Mm2SynchronizerLogLevel
+
+  """Will only include objects with a newer then specified updatedAt date."""
+  usersSinceUpdatedAt: String
+  previousSyncAt: DateTime
+  startedAt: DateTime
+  finishedAt: DateTime
+
+  """
+  Time this object will be deleted from the DB. Default = 10 days after creation.
+  """
+  expiresAt: DateTime
+}
+
+enum Mm2SyncDirection {
+  mm2ToMm3
+  mm3ToMm2
+}
+
+enum Mm2ModelType {
+  Community
+  Organization
+  Conversation
+  Message
+  User
+  MenteeExpertise
+  MenteeWebsite
+  MentorExpertise
+  Profile
+  SpokenLanguage
+}
+
+enum Mm2SynchronizationMode {
+  full
+  incremental
+  updated
+}
+
+type Mm2SynchronizationResult {
+  items: [Mm2SynchronizationResultItem!]!
+  createdCount: Int!
+  deletedCount: Int!
+  updatedCount: Int!
+  skippedCount: Int!
+  errorCount: Int!
+  error: String
+}
+
+type Mm2SynchronizationResultItem {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTime!
+  createdBy: ID
+  updatedAt: DateTime
+  updatedBy: ID
+  deletedAt: DateTime
+  deletedBy: ID
+  synchronizationId: ID!
+  modelType: ModelType
+  mm2ModelType: Mm2ModelType
+  objectId: String!
+  mm2ObjectId: String!
+  name: String
+  operation: SyncActionTaken!
+  error: String
+}
+
+enum SyncActionTaken {
+  created
+  updated
+  deleted
+  skipped
+  unset
+}
+
+enum Mm2SynchronizerLogLevel {
+  none
+  info
+  error
+}
+
+input Mm2SynchronizationInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: String
+  createdBy: ID
+  updatedAt: String
+  updatedBy: ID
+  deletedAt: String
+  deletedBy: ID
+  direction: Mm2SyncDirection! = mm2ToMm3
+  objectId: String
+  mm2ModelType: Mm2ModelType
+  syncMode: Mm2SynchronizationMode! = full
+  limit: Int
+  autorun: Boolean! = true
+  usersSinceUpdatedAt: String
+
+  """
+  Set to `info` or `error` to save Mm2SynchronizationResultItem objects to Mm2Synchronization.result. Using info on a large amount of items may expand the size of the MongoDB document beyond its limit, so only use it for local debugging. `none` disables saving any items to the synchronization object. Default: `error`
+  """
+  logLevel: Mm2SynchronizerLogLevel
+
+  """
+  Time this object will be deleted from the DB. Default = 10 days after creation.
+  """
+  expiresAt: String
+}
+
 input SidMultiStepActionInput {
   id: ID
   adminNotes: String
@@ -2371,7 +2637,7 @@ type BgChannelChangedEvent {
   messageId: ID
   participantId: ID
   eventType: ChannelChangedEventType!
-  requestId: String
+  requestId: ID
 }
 
 enum ChannelChangedEventType {
