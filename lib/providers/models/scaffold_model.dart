@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ import '../messages_provider.dart';
 class ScaffoldModel extends ChangeNotifier {
   final MessagesProvider _messagesProvider;
   final ChannelsProvider _channelsProvider;
+  final InvitationsProvider _invitationsProvider;
   final UserProvider _userProvider;
 
   AppBar? _appBar;
@@ -32,6 +34,10 @@ class ScaffoldModel extends ChangeNotifier {
           listen: false,
         ),
         _userProvider = Provider.of<UserProvider>(
+          context,
+          listen: false,
+        ),
+        _invitationsProvider = Provider.of<InvitationsProvider>(
           context,
           listen: false,
         );
@@ -72,8 +78,10 @@ class ScaffoldModel extends ChangeNotifier {
     final channelsResult = await _channelsProvider.queryUserChannels(
         userId: _userProvider.user!.id);
     final unseenMessagesResult = await _messagesProvider.unseenMessages();
+    final invitationsResult = await _invitationsProvider.getInboxInvitations();
     if (channelsResult.gqlQueryResult.hasException ||
-        unseenMessagesResult.gqlQueryResult.hasException) {
+        unseenMessagesResult.gqlQueryResult.hasException ||
+        invitationsResult.gqlQueryResult.hasException) {
       _state = AsyncState.error;
     } else {
       List<ChannelForUser> unarchivedChannels = channelsResult.response!
@@ -84,7 +92,8 @@ class ScaffoldModel extends ChangeNotifier {
             .where((unseenMessage) => unseenMessage.channelId == channel.id)
             .length;
       }
-      // TODO: Get invites from backend
+      invitesNotifications =
+          invitationsResult.response?.channels?.pendingInvitations?.length ?? 0;
     }
     _setParams(
       appBar: AppBarFactory.createInboxAppBar(
