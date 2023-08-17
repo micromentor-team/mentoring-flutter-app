@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
@@ -112,6 +111,7 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
               create: (context) => ChatModel(
                 context: context,
                 channelId: channel.id,
+                authenticatedUser: _user,
               ),
               child: ChannelChat(
                 channel: channel,
@@ -135,12 +135,12 @@ class ChannelChat extends StatefulWidget {
   State<ChannelChat> createState() => _ChannelChatState();
 }
 
-class _ChannelChatState extends State<ChannelChat> {
+class _ChannelChatState extends State<ChannelChat>
+    with RouteAwareMixin<ChannelChat> {
   final TextEditingController messageTextController = TextEditingController();
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
   late final ChatModel _chatModel;
-  late final MessagesProvider _messagesProvider;
   int _messageCount = 0;
   bool _unreadMessages = false; // Non-local Message exists outside of viewport
   ChannelMessage? _focusedMessage; // Intended reply Message
@@ -149,8 +149,7 @@ class _ChannelChatState extends State<ChannelChat> {
   void initState() {
     super.initState();
     _chatModel = Provider.of<ChatModel>(context, listen: false);
-    _messagesProvider = Provider.of<MessagesProvider>(context, listen: false);
-    _markMessageRead();
+    _chatModel.markMessagesAsRead();
     _chatModel.createChannelSubscription();
     _messageCount = _chatModel.channelMessages.length;
   }
@@ -161,13 +160,9 @@ class _ChannelChatState extends State<ChannelChat> {
     _chatModel.refreshChannelMessages();
   }
 
-  _markMessageRead() {
-    _messagesProvider.markMessageRead(channelId: widget.channel.id);
-  }
-
   void _processNewMessages() {
     if (_messageCount < _chatModel.channelMessages.length) {
-      _markMessageRead();
+      _chatModel.markMessagesAsRead();
       if (_isCurrentUser(
         userId: _chatModel.channelMessages.last.createdBy,
         context: context,
@@ -235,9 +230,11 @@ class _ChannelChatState extends State<ChannelChat> {
   Widget build(BuildContext context) {
     return Consumer<ChatModel>(
       builder: (context, chatModel, child) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _processNewMessages();
-        });
+        if (isRouteActive) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _processNewMessages();
+          });
+        }
         return AppUtility.widgetForAsyncState(
           state: chatModel.state,
           onReady: () => Column(
@@ -263,12 +260,10 @@ class _ChannelChatState extends State<ChannelChat> {
                 replyingTo: _focusedMessage,
                 participants: widget.channel.participants,
                 onSubmit: (val, replyToMessageId) {
-                  _messagesProvider.createMessage(
-                    input: Input$ChannelMessageInput(
-                      channelId: widget.channel.id,
-                      messageText: val,
-                      replyToMessageId: replyToMessageId,
-                    ),
+                  _chatModel.addChannelMessage(
+                    channelId: widget.channel.id,
+                    messageText: val,
+                    replyToMessageId: replyToMessageId,
                   );
                   setState(() {
                     _focusedMessage = null;

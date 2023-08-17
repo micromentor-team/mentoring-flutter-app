@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/__generated/schema/operations_channel.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_message.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
-import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
 typedef ChannelMessage = Query$FindChannelMessages$findChannelMessages;
-typedef FilteredChannelMessage
-    = Query$FindChannelMessagesWithOptions$findChannelMessages;
+typedef ChannelMessageById
+    = Query$FindChannelMessageById$findChannelMessageById;
+typedef CreatedMessage = Mutation$CreateChannelMessage$createChannelMessage;
 typedef UnseenMessage
     = Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
 
@@ -31,6 +30,9 @@ class MessagesProvider extends BaseProvider {
             : FetchPolicy.cacheFirst,
         variables: Variables$Query$FindChannelMessages(
           filter: input,
+          options: Input$FindObjectsOptions(
+            includeDeleted: true,
+          ),
         ).toJson(),
       ),
     );
@@ -44,30 +46,24 @@ class MessagesProvider extends BaseProvider {
     );
   }
 
-  Future<OperationResult<List<FilteredChannelMessage>>>
-      findChannelMessagesWithOptions({
-    required Input$ChannelMessageListFilter input,
-    required Input$FindObjectsOptions options,
-    bool fetchFromNetworkOnly = false,
+  Future<OperationResult<ChannelMessageById>> findChannelMessageById({
+    required String channelMessageId,
   }) async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
-        document: documentNodeQueryFindChannelMessagesWithOptions,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
-        variables: Variables$Query$FindChannelMessagesWithOptions(
-          filter: input,
-          options: options,
+        document: documentNodeQueryFindChannelMessageById,
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables$Query$FindChannelMessageById(
+          channelMessageId: channelMessageId,
         ).toJson(),
       ),
     );
     return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
-          ? Query$FindChannelMessagesWithOptions.fromJson(
+          ? Query$FindChannelMessageById.fromJson(
               queryResult.data!,
-            ).findChannelMessages
+            ).findChannelMessageById
           : null,
     );
   }
@@ -89,8 +85,7 @@ class MessagesProvider extends BaseProvider {
   }
 
   // Mutations
-  Future<OperationResult<Mutation$CreateChannelMessage$createChannelMessage>>
-      createMessage({
+  Future<OperationResult<CreatedMessage>> createMessage({
     required Input$ChannelMessageInput input,
   }) async {
     final QueryResult queryResult = await asyncMutation(
@@ -177,36 +172,6 @@ class MessagesProvider extends BaseProvider {
               queryResult.data!,
             ).deleteChannelMessage
           : null,
-    );
-  }
-
-  // Subscriptions
-  StreamSubscription<QueryResult<Object?>> subscribeToChannel({
-    required String channelId,
-    required void Function() onSubscriptionEvent,
-  }) {
-    final stream = client.subscribe(
-      SubscriptionOptions(
-        document: documentNodeSubscriptionChannelChanged,
-        variables: Variables$Subscription$ChannelChanged(
-          channelId: channelId,
-        ).toJson(),
-      ),
-    );
-    return stream.listen(
-      (queryResult) async {
-        if (queryResult.hasException) {
-          CrashHandler.logCrashReport('Subscription for Channel Id ($channelId)'
-              'encountered an error: ${queryResult.exception}');
-          return;
-        }
-        if (queryResult.isLoading) {
-          // Data is not ready, return and check again on the next cycle.
-          return;
-        }
-        // Process new data.
-        onSubscriptionEvent();
-      },
     );
   }
 }

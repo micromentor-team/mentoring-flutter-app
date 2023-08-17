@@ -2336,6 +2336,13 @@ const documentNodeQueryFindChannelLatestMessage = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'createdBy'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'messageText'),
                 alias: null,
                 arguments: [],
@@ -2518,6 +2525,7 @@ class _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById<TRes>
 class Query$FindChannelLatestMessage$findChannelById$latestMessage {
   Query$FindChannelLatestMessage$findChannelById$latestMessage({
     required this.createdAt,
+    this.createdBy,
     this.messageText,
     this.$__typename = 'ChannelMessage',
   });
@@ -2525,16 +2533,20 @@ class Query$FindChannelLatestMessage$findChannelById$latestMessage {
   factory Query$FindChannelLatestMessage$findChannelById$latestMessage.fromJson(
       Map<String, dynamic> json) {
     final l$createdAt = json['createdAt'];
+    final l$createdBy = json['createdBy'];
     final l$messageText = json['messageText'];
     final l$$__typename = json['__typename'];
     return Query$FindChannelLatestMessage$findChannelById$latestMessage(
       createdAt: DateTime.parse((l$createdAt as String)),
+      createdBy: (l$createdBy as String?),
       messageText: (l$messageText as String?),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime createdAt;
+
+  final String? createdBy;
 
   final String? messageText;
 
@@ -2544,6 +2556,8 @@ class Query$FindChannelLatestMessage$findChannelById$latestMessage {
     final _resultData = <String, dynamic>{};
     final l$createdAt = createdAt;
     _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$createdBy = createdBy;
+    _resultData['createdBy'] = l$createdBy;
     final l$messageText = messageText;
     _resultData['messageText'] = l$messageText;
     final l$$__typename = $__typename;
@@ -2554,10 +2568,12 @@ class Query$FindChannelLatestMessage$findChannelById$latestMessage {
   @override
   int get hashCode {
     final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
     final l$messageText = messageText;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$createdAt,
+      l$createdBy,
       l$messageText,
       l$$__typename,
     ]);
@@ -2576,6 +2592,11 @@ class Query$FindChannelLatestMessage$findChannelById$latestMessage {
     final l$createdAt = createdAt;
     final lOther$createdAt = other.createdAt;
     if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (l$createdBy != lOther$createdBy) {
       return false;
     }
     final l$messageText = messageText;
@@ -2617,6 +2638,7 @@ abstract class CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMes
 
   TRes call({
     DateTime? createdAt,
+    String? createdBy,
     String? messageText,
     String? $__typename,
   });
@@ -2641,6 +2663,7 @@ class _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById$latestMessage
 
   TRes call({
     Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
     Object? messageText = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -2648,6 +2671,9 @@ class _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById$latestMessage
         createdAt: createdAt == _undefined || createdAt == null
             ? _instance.createdAt
             : (createdAt as DateTime),
+        createdBy: createdBy == _undefined
+            ? _instance.createdBy
+            : (createdBy as String?),
         messageText: messageText == _undefined
             ? _instance.messageText
             : (messageText as String?),
@@ -2669,6 +2695,7 @@ class _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById$latestMes
 
   call({
     DateTime? createdAt,
+    String? createdBy,
     String? messageText,
     String? $__typename,
   }) =>

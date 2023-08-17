@@ -67,7 +67,7 @@ export function mockMutations(serverState: MockServerState) {
             serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
                 channelChanged: {
                     channelId: args.input.channelId,
-                    messageId: message.channelId,
+                    messageId: message.id,
                     eventType: 'messageCreated',
                 }
             });
