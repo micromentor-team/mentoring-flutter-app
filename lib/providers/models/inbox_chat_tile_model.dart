@@ -45,7 +45,7 @@ class InboxChatTileModel extends ChangeNotifier {
   Future<void> refresh() async {
     _state = AsyncState.loading;
     final latestMessageResult =
-        await _channelsProvider.findChannelLatestMessage(channelId: channelId);
+        await _messagesProvider.findChannelLatestMessage(channelId: channelId);
     final unseenMessagesResult = await _messagesProvider.unseenMessages();
     if (latestMessageResult.gqlQueryResult.hasException ||
         unseenMessagesResult.gqlQueryResult.hasException) {
@@ -66,7 +66,7 @@ class InboxChatTileModel extends ChangeNotifier {
   Future<void> _latestMessageRefresh() async {
     // TODO: Possible race condition here if the query executes before the mutation completes, consider polling result
     final latestMessageResult =
-        await _channelsProvider.findChannelLatestMessage(
+        await _messagesProvider.findChannelLatestMessage(
       channelId: channelId,
     );
     if (latestMessageResult.gqlQueryResult.hasException) {
