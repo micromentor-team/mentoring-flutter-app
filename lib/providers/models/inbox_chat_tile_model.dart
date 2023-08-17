@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/app_constants.dart';
+import '../../utilities/errors/crash_handler.dart';
 
 class InboxChatTileModel extends ChangeNotifier {
   final String channelId;
@@ -61,17 +63,48 @@ class InboxChatTileModel extends ChangeNotifier {
     }
   }
 
+  Future<void> _latestMessageRefresh() async {
+    // TODO: Possible race condition here if the query executes before the mutation completes, consider polling result
+    final latestMessageResult =
+        await _channelsProvider.findChannelLatestMessage(
+      channelId: channelId,
+    );
+    if (latestMessageResult.gqlQueryResult.hasException) {
+      final String e = latestMessageResult.gqlQueryResult.exception.toString();
+      CrashHandler.logCrashReport('Could not retrieve latest message: $e');
+      return;
+    }
+    _lastMessage = latestMessageResult.response;
+    if (_lastMessage?.createdBy != authenticatedUserId) {
+      _unseenMessageCount++;
+    }
+    if (hasListeners) {
+      notifyListeners();
+    }
+  }
+
   void createChannelSubscription() {
     if (_streamSubscription != null) {
       return;
     }
-    _streamSubscription = _messagesProvider.subscribeToChannel(
+    _streamSubscription = _channelsProvider.subscribeToChannel(
       channelId: channelId,
-      onSubscriptionEvent: () => refresh(),
+      onSubscriptionEvent: (event) {
+        switch (event.eventType) {
+          case Enum$ChannelChangedEventType.messageCreated:
+            if (event.channelId == channelId) {
+              _latestMessageRefresh();
+            }
+            return;
+          default:
+            return;
+        }
+      },
     );
   }
 
   void cancelChannelSubscription() {
     _streamSubscription?.cancel();
+    _streamSubscription = null;
   }
 }

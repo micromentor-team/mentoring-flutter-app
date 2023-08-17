@@ -40,6 +40,7 @@ query FindChannelLatestMessage ($channelId: String!) {
     findChannelById(id: $channelId) {
         latestMessage {
             createdAt
+            createdBy
             messageText
         }
     }
