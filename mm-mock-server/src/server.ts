@@ -31,6 +31,11 @@ async function startApolloServer() {
             Query: mockQueries(serverState),
             Mutation: mockMutations(serverState),
             Subscription: mockSubscriptions(serverState),
+            IGroupMembership: {
+                __resolveType(obj: any, contextValue: any, info: any){
+                    return obj.__typename;
+                },
+            },
         },
     });
 

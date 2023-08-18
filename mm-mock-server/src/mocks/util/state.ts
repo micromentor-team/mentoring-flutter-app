@@ -19,10 +19,10 @@ export class MockServerState {
         this.groups = generators.generateCoreGroups()
             .concat(generators.generateGroup());
         this.loggedIn = false;
-        this.loggedInUser = generators.generateUser(this.groups.filter(g => g.groupIdent === "mentees"));
+        this.loggedInUser = generators.generateUser(this.groups.filter(g => g.ident === "mentees"));
         // 4 users, one for each channel and one who hasn't communicated with the logged in user
         this.otherUsers = [
-            generators.generateUser(this.groups.filter(g => g.groupIdent === "mentors")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
             generators.generateUser(faker.helpers.arrayElements(this.groups, 1)),
             generators.generateUser(faker.helpers.arrayElements(this.groups, 2)),
             generators.generateUser(faker.helpers.arrayElements(this.groups, 2)),
