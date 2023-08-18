@@ -129,14 +129,14 @@ export function generateGroupMembership(user: any, group: any) {
         updatedAt: faker.date.recent(),
     }
 
-    if (group.groupIdent === "mentors") {
+    if (membership.groupIdent === "mentors") {
         membership.__typename = "MentorsGroupMembership";
         membership.expertises = faker.helpers.arrayElements(constants.expertises, 2);
         membership.industries = faker.helpers.arrayElements(constants.industries, 2);
         membership.endorsements = faker.number.int(5);
     }
 
-    if (group.groupIdent === "mentees") {
+    if (membership.groupIdent === "mentees") {
         membership.__typename = "MenteesGroupMembership";
         membership.soughtExpertises = faker.helpers.arrayElements(constants.expertises, 2);
         membership.industry = faker.helpers.arrayElement(constants.industries);
