@@ -11,13 +11,11 @@ import 'base/operation_result.dart';
 
 typedef ChannelById = Query$FindChannelById$findChannelById;
 typedef ChannelChangedEvent = Subscription$ChannelChanged$channelChanged;
+typedef ChannelCreated = Mutation$CreateChannel$createChannel;
 typedef ChannelForUser = Query$FindChannelsForUser$findChannelsForUser;
 typedef ChannelForUserParticipant
     = Query$FindChannelsForUser$findChannelsForUser$participants;
 typedef ChannelParticipant = Query$FindChannelById$findChannelById$participants;
-typedef ChannelLatestMessage
-    = Query$FindChannelLatestMessage$findChannelById$latestMessage;
-typedef InvitationInbox = Query$GetInboxInvitations$myInbox;
 
 class ChannelsProvider extends BaseProvider {
   ChannelsProvider({required super.client});
@@ -64,47 +62,8 @@ class ChannelsProvider extends BaseProvider {
     );
   }
 
-  Future<OperationResult<ChannelLatestMessage>> findChannelLatestMessage({
-    required String channelId,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindChannelLatestMessage,
-        fetchPolicy: FetchPolicy.noCache,
-        variables:
-            Variables$Query$FindChannelLatestMessage(channelId: channelId)
-                .toJson(),
-      ),
-    );
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Query$FindChannelLatestMessage.fromJson(
-              queryResult.data!,
-            ).findChannelById.latestMessage
-          : null,
-    );
-  }
-
-  Future<OperationResult<InvitationInbox>> getInboxInvitations() async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryGetInboxInvitations,
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-    );
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Query$GetInboxInvitations.fromJson(
-              queryResult.data!,
-            ).myInbox
-          : null,
-    );
-  }
-
   // Mutations
-  Future<OperationResult<Mutation$CreateChannel$createChannel>> createChannel({
+  Future<OperationResult<ChannelCreated>> createChannel({
     required Input$ChannelInput input,
   }) async {
     final QueryResult queryResult = await asyncMutation(

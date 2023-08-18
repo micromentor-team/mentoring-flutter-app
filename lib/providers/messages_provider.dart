@@ -7,6 +7,8 @@ import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
+typedef ChannelLatestMessage
+    = Query$FindChannelLatestMessage$findChannelById$latestMessage;
 typedef ChannelMessage = Query$FindChannelMessages$findChannelMessages;
 typedef ChannelMessageById
     = Query$FindChannelMessageById$findChannelMessageById;
@@ -18,6 +20,28 @@ class MessagesProvider extends BaseProvider {
   MessagesProvider({required super.client});
 
   // Queries
+  Future<OperationResult<ChannelLatestMessage>> findChannelLatestMessage({
+    required String channelId,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindChannelLatestMessage,
+        fetchPolicy: FetchPolicy.noCache,
+        variables:
+            Variables$Query$FindChannelLatestMessage(channelId: channelId)
+                .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindChannelLatestMessage.fromJson(
+              queryResult.data!,
+            ).findChannelById.latestMessage
+          : null,
+    );
+  }
+
   Future<OperationResult<List<ChannelMessage>>> findChannelMessages({
     required Input$ChannelMessageListFilter input,
     bool fetchFromNetworkOnly = false,

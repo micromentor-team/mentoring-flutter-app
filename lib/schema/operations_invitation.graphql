@@ -1,0 +1,30 @@
+query GetInboxInvitations {
+  myInbox {
+    channels {
+      invitations {
+        channelId
+        createdAt
+        createdBy
+        id
+        messageText
+        status
+      }
+      pendingInvitations {
+        channelId
+        createdAt
+        createdBy
+        id
+        messageText
+        status
+      }
+    }
+  }
+}
+
+mutation AcceptChannelInvitation($channelInvitationId: String!) {
+  acceptChannelInvitation(channelInvitationId: $channelInvitationId)
+}
+
+mutation DeclineChannelInvitation($channelInvitationId: String!) {
+  declineChannelInvitation(channelInvitationId: $channelInvitationId)
+}

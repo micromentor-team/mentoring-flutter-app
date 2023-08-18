@@ -3,16 +3,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/invitation_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../../__generated/schema/operations_channel.graphql.dart';
 import '../../__generated/schema/operations_user.graphql.dart';
 import '../../providers/base/operation_result.dart';
+import '../../providers/invitations_provider.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 2;
@@ -23,20 +22,21 @@ class InvitationSection extends StatefulWidget {
 }
 
 class _InvitationSectionState extends State<InvitationSection> {
-  late final ChannelsProvider _channelsProvider;
+  late final InvitationsProvider _invitationsProvider;
   late Future<OperationResult<InvitationInbox>> _invitationInbox;
   AppLocalizations? _l10n;
 
   @override
   void initState() {
     super.initState();
-    _channelsProvider = Provider.of<ChannelsProvider>(context, listen: false);
+    _invitationsProvider =
+        Provider.of<InvitationsProvider>(context, listen: false);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _invitationInbox = _channelsProvider.getInboxInvitations();
+    _invitationInbox = _invitationsProvider.getInboxInvitations();
     _l10n = AppLocalizations.of(context);
   }
 
@@ -78,8 +78,7 @@ class _InvitationSectionState extends State<InvitationSection> {
 }
 
 class InvitationList extends StatefulWidget {
-  final List<Query$GetInboxInvitations$myInbox$channels$invitations>
-      invitations;
+  final List<ChannelInvitation> invitations;
 
   const InvitationList({
     super.key,
