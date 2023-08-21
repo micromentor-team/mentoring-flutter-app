@@ -10,7 +10,6 @@ export class MockServerState {
     otherUsers: any[];
     channels: any[];
     channelInvitations: any[];
-    channelInboxItemInvitations: any[];
     channelMessages: any[];
     groups: any[];
 
@@ -23,28 +22,23 @@ export class MockServerState {
         // 4 users, one for each channel and one who hasn't communicated with the logged in user
         this.otherUsers = [
             generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
-            generators.generateUser(faker.helpers.arrayElements(this.groups, 1)),
-            generators.generateUser(faker.helpers.arrayElements(this.groups, 2)),
-            generators.generateUser(faker.helpers.arrayElements(this.groups, 2)),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentors" || g.ident === "mentees")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentees")),
         ];
         this.channels = [
             generators.generateChannel([this.loggedInUser, this.otherUsers[0]]),
         ];
         this.channelInvitations = [
             // accepted invitation, channel exists
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[0], false, true),
-            // pending invitation
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[1]),
+            generators.generateChannelInvitation(this.otherUsers[0], this.loggedInUser, false, true),
+            // pending invitations
+            generators.generateChannelInvitation(this.otherUsers[1], this.loggedInUser),
+            generators.generateChannelInvitation(this.otherUsers[2], this.loggedInUser),
             // declined invitation
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[2], true),
+            generators.generateChannelInvitation(this.otherUsers[3], this.loggedInUser, true),
             // TODO: accepted invitation, message doesn't exist yet in channel (a.k.a "match")
             // generators.generateChannelInvitation([this.loggedInUser, this.otherUsers[1]], false, true),
-        ];
-        this.channelInboxItemInvitations = [
-            generators.generateChannelInboxItemInvitation(this.channels[0], this.otherUsers[0], true, false),
-            generators.generateChannelInboxItemInvitation(this.channels[0], this.otherUsers[1], false, false),
-            generators.generateChannelInboxItemInvitation(this.channels[0], this.otherUsers[2], false, true),
-            generators.generateChannelInboxItemInvitation(this.channels[0], this.otherUsers[3], false, false),
         ];
         const message0 = generators.generateChannelMessage('Hello!', this.channels[0], this.loggedInUser, new Date('2023-07-26T12:34:01-07:00'), true);
         const message1 = generators.generateChannelMessage('👋', this.channels[0], this.loggedInUser, new Date('2023-07-26T12:34:01-07:00'), true, false, false);

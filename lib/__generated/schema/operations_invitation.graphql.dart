@@ -5,6 +5,2501 @@
 import 'package:gql/ast.dart';
 import 'schema.graphql.dart';
 
+class Variables$Query$FindChannelInvitationById {
+  factory Variables$Query$FindChannelInvitationById(
+          {required String channelInvitationId}) =>
+      Variables$Query$FindChannelInvitationById._({
+        r'channelInvitationId': channelInvitationId,
+      });
+
+  Variables$Query$FindChannelInvitationById._(this._$data);
+
+  factory Variables$Query$FindChannelInvitationById.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$channelInvitationId = data['channelInvitationId'];
+    result$data['channelInvitationId'] = (l$channelInvitationId as String);
+    return Variables$Query$FindChannelInvitationById._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get channelInvitationId => (_$data['channelInvitationId'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$channelInvitationId = channelInvitationId;
+    result$data['channelInvitationId'] = l$channelInvitationId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$FindChannelInvitationById<
+          Variables$Query$FindChannelInvitationById>
+      get copyWith => CopyWith$Variables$Query$FindChannelInvitationById(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$FindChannelInvitationById) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelInvitationId = channelInvitationId;
+    final lOther$channelInvitationId = other.channelInvitationId;
+    if (l$channelInvitationId != lOther$channelInvitationId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelInvitationId = channelInvitationId;
+    return Object.hashAll([l$channelInvitationId]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$FindChannelInvitationById<TRes> {
+  factory CopyWith$Variables$Query$FindChannelInvitationById(
+    Variables$Query$FindChannelInvitationById instance,
+    TRes Function(Variables$Query$FindChannelInvitationById) then,
+  ) = _CopyWithImpl$Variables$Query$FindChannelInvitationById;
+
+  factory CopyWith$Variables$Query$FindChannelInvitationById.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$FindChannelInvitationById;
+
+  TRes call({String? channelInvitationId});
+}
+
+class _CopyWithImpl$Variables$Query$FindChannelInvitationById<TRes>
+    implements CopyWith$Variables$Query$FindChannelInvitationById<TRes> {
+  _CopyWithImpl$Variables$Query$FindChannelInvitationById(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$FindChannelInvitationById _instance;
+
+  final TRes Function(Variables$Query$FindChannelInvitationById) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelInvitationId = _undefined}) =>
+      _then(Variables$Query$FindChannelInvitationById._({
+        ..._instance._$data,
+        if (channelInvitationId != _undefined && channelInvitationId != null)
+          'channelInvitationId': (channelInvitationId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$FindChannelInvitationById<TRes>
+    implements CopyWith$Variables$Query$FindChannelInvitationById<TRes> {
+  _CopyWithStubImpl$Variables$Query$FindChannelInvitationById(this._res);
+
+  TRes _res;
+
+  call({String? channelInvitationId}) => _res;
+}
+
+class Query$FindChannelInvitationById {
+  Query$FindChannelInvitationById({
+    required this.findChannelInvitationById,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$FindChannelInvitationById.fromJson(Map<String, dynamic> json) {
+    final l$findChannelInvitationById = json['findChannelInvitationById'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById(
+      findChannelInvitationById:
+          Query$FindChannelInvitationById$findChannelInvitationById.fromJson(
+              (l$findChannelInvitationById as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$FindChannelInvitationById$findChannelInvitationById
+      findChannelInvitationById;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$findChannelInvitationById = findChannelInvitationById;
+    _resultData['findChannelInvitationById'] =
+        l$findChannelInvitationById.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$findChannelInvitationById = findChannelInvitationById;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$findChannelInvitationById,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindChannelInvitationById) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$findChannelInvitationById = findChannelInvitationById;
+    final lOther$findChannelInvitationById = other.findChannelInvitationById;
+    if (l$findChannelInvitationById != lOther$findChannelInvitationById) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById
+    on Query$FindChannelInvitationById {
+  CopyWith$Query$FindChannelInvitationById<Query$FindChannelInvitationById>
+      get copyWith => CopyWith$Query$FindChannelInvitationById(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById<TRes> {
+  factory CopyWith$Query$FindChannelInvitationById(
+    Query$FindChannelInvitationById instance,
+    TRes Function(Query$FindChannelInvitationById) then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById;
+
+  factory CopyWith$Query$FindChannelInvitationById.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById;
+
+  TRes call({
+    Query$FindChannelInvitationById$findChannelInvitationById?
+        findChannelInvitationById,
+    String? $__typename,
+  });
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<TRes>
+      get findChannelInvitationById;
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById<TRes>
+    implements CopyWith$Query$FindChannelInvitationById<TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById _instance;
+
+  final TRes Function(Query$FindChannelInvitationById) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? findChannelInvitationById = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelInvitationById(
+        findChannelInvitationById: findChannelInvitationById == _undefined ||
+                findChannelInvitationById == null
+            ? _instance.findChannelInvitationById
+            : (findChannelInvitationById
+                as Query$FindChannelInvitationById$findChannelInvitationById),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<TRes>
+      get findChannelInvitationById {
+    final local$findChannelInvitationById = _instance.findChannelInvitationById;
+    return CopyWith$Query$FindChannelInvitationById$findChannelInvitationById(
+        local$findChannelInvitationById,
+        (e) => call(findChannelInvitationById: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById<TRes>
+    implements CopyWith$Query$FindChannelInvitationById<TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById(this._res);
+
+  TRes _res;
+
+  call({
+    Query$FindChannelInvitationById$findChannelInvitationById?
+        findChannelInvitationById,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<TRes>
+      get findChannelInvitationById =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById
+              .stub(_res);
+}
+
+const documentNodeQueryFindChannelInvitationById = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'FindChannelInvitationById'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelInvitationId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'findChannelInvitationById'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'channelInvitationId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'messageText'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'sender'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'fullName'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'avatarUrl'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'jobTitle'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'offersHelp'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'seeksHelp'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'companies'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'name'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'countryOfResidence'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'translatedValue'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'groupMemberships'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'groupIdent'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  InlineFragmentNode(
+                    typeCondition: TypeConditionNode(
+                        on: NamedTypeNode(
+                      name: NameNode(value: 'MentorsGroupMembership'),
+                      isNonNull: false,
+                    )),
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'endorsements'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'industries'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'translatedValue'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'expertises'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'translatedValue'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$FindChannelInvitationById$findChannelInvitationById {
+  Query$FindChannelInvitationById$findChannelInvitationById({
+    required this.createdAt,
+    this.messageText,
+    required this.status,
+    required this.sender,
+    this.$__typename = 'ChannelInvitation',
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById.fromJson(
+      Map<String, dynamic> json) {
+    final l$createdAt = json['createdAt'];
+    final l$messageText = json['messageText'];
+    final l$status = json['status'];
+    final l$sender = json['sender'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById$findChannelInvitationById(
+      createdAt: DateTime.parse((l$createdAt as String)),
+      messageText: (l$messageText as String?),
+      status: fromJson$Enum$ChannelInvitationStatus((l$status as String)),
+      sender: Query$FindChannelInvitationById$findChannelInvitationById$sender
+          .fromJson((l$sender as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime createdAt;
+
+  final String? messageText;
+
+  final Enum$ChannelInvitationStatus status;
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender sender;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$messageText = messageText;
+    _resultData['messageText'] = l$messageText;
+    final l$status = status;
+    _resultData['status'] = toJson$Enum$ChannelInvitationStatus(l$status);
+    final l$sender = sender;
+    _resultData['sender'] = l$sender.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$createdAt = createdAt;
+    final l$messageText = messageText;
+    final l$status = status;
+    final l$sender = sender;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$createdAt,
+      l$messageText,
+      l$status,
+      l$sender,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindChannelInvitationById$findChannelInvitationById) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$messageText = messageText;
+    final lOther$messageText = other.messageText;
+    if (l$messageText != lOther$messageText) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$sender = sender;
+    final lOther$sender = other.sender;
+    if (l$sender != lOther$sender) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById
+    on Query$FindChannelInvitationById$findChannelInvitationById {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<
+          Query$FindChannelInvitationById$findChannelInvitationById>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById(
+    Query$FindChannelInvitationById$findChannelInvitationById instance,
+    TRes Function(Query$FindChannelInvitationById$findChannelInvitationById)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById;
+
+  TRes call({
+    DateTime? createdAt,
+    String? messageText,
+    Enum$ChannelInvitationStatus? status,
+    Query$FindChannelInvitationById$findChannelInvitationById$sender? sender,
+    String? $__typename,
+  });
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+      TRes> get sender;
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById _instance;
+
+  final TRes Function(Query$FindChannelInvitationById$findChannelInvitationById)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createdAt = _undefined,
+    Object? messageText = _undefined,
+    Object? status = _undefined,
+    Object? sender = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelInvitationById$findChannelInvitationById(
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as DateTime),
+        messageText: messageText == _undefined
+            ? _instance.messageText
+            : (messageText as String?),
+        status: status == _undefined || status == null
+            ? _instance.status
+            : (status as Enum$ChannelInvitationStatus),
+        sender: sender == _undefined || sender == null
+            ? _instance.sender
+            : (sender
+                as Query$FindChannelInvitationById$findChannelInvitationById$sender),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+      TRes> get sender {
+    final local$sender = _instance.sender;
+    return CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender(
+        local$sender, (e) => call(sender: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById(
+      this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? createdAt,
+    String? messageText,
+    Enum$ChannelInvitationStatus? status,
+    Query$FindChannelInvitationById$findChannelInvitationById$sender? sender,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+          TRes>
+      get sender =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender
+              .stub(_res);
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender({
+    required this.id,
+    this.fullName,
+    this.avatarUrl,
+    this.jobTitle,
+    required this.offersHelp,
+    required this.seeksHelp,
+    required this.companies,
+    this.countryOfResidence,
+    required this.groupMemberships,
+    this.$__typename = 'User',
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$fullName = json['fullName'];
+    final l$avatarUrl = json['avatarUrl'];
+    final l$jobTitle = json['jobTitle'];
+    final l$offersHelp = json['offersHelp'];
+    final l$seeksHelp = json['seeksHelp'];
+    final l$companies = json['companies'];
+    final l$countryOfResidence = json['countryOfResidence'];
+    final l$groupMemberships = json['groupMemberships'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById$findChannelInvitationById$sender(
+      id: (l$id as String),
+      fullName: (l$fullName as String?),
+      avatarUrl: (l$avatarUrl as String?),
+      jobTitle: (l$jobTitle as String?),
+      offersHelp: (l$offersHelp as bool),
+      seeksHelp: (l$seeksHelp as bool),
+      companies: (l$companies as List<dynamic>)
+          .map((e) =>
+              Query$FindChannelInvitationById$findChannelInvitationById$sender$companies
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      countryOfResidence: l$countryOfResidence == null
+          ? null
+          : Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence
+              .fromJson((l$countryOfResidence as Map<String, dynamic>)),
+      groupMemberships: (l$groupMemberships as List<dynamic>)
+          .map((e) =>
+              Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String? fullName;
+
+  final String? avatarUrl;
+
+  final String? jobTitle;
+
+  final bool offersHelp;
+
+  final bool seeksHelp;
+
+  final List<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$companies>
+      companies;
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence?
+      countryOfResidence;
+
+  final List<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships>
+      groupMemberships;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$fullName = fullName;
+    _resultData['fullName'] = l$fullName;
+    final l$avatarUrl = avatarUrl;
+    _resultData['avatarUrl'] = l$avatarUrl;
+    final l$jobTitle = jobTitle;
+    _resultData['jobTitle'] = l$jobTitle;
+    final l$offersHelp = offersHelp;
+    _resultData['offersHelp'] = l$offersHelp;
+    final l$seeksHelp = seeksHelp;
+    _resultData['seeksHelp'] = l$seeksHelp;
+    final l$companies = companies;
+    _resultData['companies'] = l$companies.map((e) => e.toJson()).toList();
+    final l$countryOfResidence = countryOfResidence;
+    _resultData['countryOfResidence'] = l$countryOfResidence?.toJson();
+    final l$groupMemberships = groupMemberships;
+    _resultData['groupMemberships'] =
+        l$groupMemberships.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$fullName = fullName;
+    final l$avatarUrl = avatarUrl;
+    final l$jobTitle = jobTitle;
+    final l$offersHelp = offersHelp;
+    final l$seeksHelp = seeksHelp;
+    final l$companies = companies;
+    final l$countryOfResidence = countryOfResidence;
+    final l$groupMemberships = groupMemberships;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$fullName,
+      l$avatarUrl,
+      l$jobTitle,
+      l$offersHelp,
+      l$seeksHelp,
+      Object.hashAll(l$companies.map((v) => v)),
+      l$countryOfResidence,
+      Object.hashAll(l$groupMemberships.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$fullName = fullName;
+    final lOther$fullName = other.fullName;
+    if (l$fullName != lOther$fullName) {
+      return false;
+    }
+    final l$avatarUrl = avatarUrl;
+    final lOther$avatarUrl = other.avatarUrl;
+    if (l$avatarUrl != lOther$avatarUrl) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (l$jobTitle != lOther$jobTitle) {
+      return false;
+    }
+    final l$offersHelp = offersHelp;
+    final lOther$offersHelp = other.offersHelp;
+    if (l$offersHelp != lOther$offersHelp) {
+      return false;
+    }
+    final l$seeksHelp = seeksHelp;
+    final lOther$seeksHelp = other.seeksHelp;
+    if (l$seeksHelp != lOther$seeksHelp) {
+      return false;
+    }
+    final l$companies = companies;
+    final lOther$companies = other.companies;
+    if (l$companies.length != lOther$companies.length) {
+      return false;
+    }
+    for (int i = 0; i < l$companies.length; i++) {
+      final l$companies$entry = l$companies[i];
+      final lOther$companies$entry = lOther$companies[i];
+      if (l$companies$entry != lOther$companies$entry) {
+        return false;
+      }
+    }
+    final l$countryOfResidence = countryOfResidence;
+    final lOther$countryOfResidence = other.countryOfResidence;
+    if (l$countryOfResidence != lOther$countryOfResidence) {
+      return false;
+    }
+    final l$groupMemberships = groupMemberships;
+    final lOther$groupMemberships = other.groupMemberships;
+    if (l$groupMemberships.length != lOther$groupMemberships.length) {
+      return false;
+    }
+    for (int i = 0; i < l$groupMemberships.length; i++) {
+      final l$groupMemberships$entry = l$groupMemberships[i];
+      final lOther$groupMemberships$entry = lOther$groupMemberships[i];
+      if (l$groupMemberships$entry != lOther$groupMemberships$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender;
+
+  TRes call({
+    String? id,
+    String? fullName,
+    String? avatarUrl,
+    String? jobTitle,
+    bool? offersHelp,
+    bool? seeksHelp,
+    List<Query$FindChannelInvitationById$findChannelInvitationById$sender$companies>?
+        companies,
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence?
+        countryOfResidence,
+    List<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships>?
+        groupMemberships,
+    String? $__typename,
+  });
+  TRes companies(
+      Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$companies> Function(
+              Iterable<
+                  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies<
+                      Query$FindChannelInvitationById$findChannelInvitationById$sender$companies>>)
+          _fn);
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+      TRes> get countryOfResidence;
+  TRes groupMemberships(
+      Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships> Function(
+              Iterable<
+                  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships<
+                      Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender
+      _instance;
+
+  final TRes Function(
+      Query$FindChannelInvitationById$findChannelInvitationById$sender) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? fullName = _undefined,
+    Object? avatarUrl = _undefined,
+    Object? jobTitle = _undefined,
+    Object? offersHelp = _undefined,
+    Object? seeksHelp = _undefined,
+    Object? companies = _undefined,
+    Object? countryOfResidence = _undefined,
+    Object? groupMemberships = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelInvitationById$findChannelInvitationById$sender(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        fullName:
+            fullName == _undefined ? _instance.fullName : (fullName as String?),
+        avatarUrl: avatarUrl == _undefined
+            ? _instance.avatarUrl
+            : (avatarUrl as String?),
+        jobTitle:
+            jobTitle == _undefined ? _instance.jobTitle : (jobTitle as String?),
+        offersHelp: offersHelp == _undefined || offersHelp == null
+            ? _instance.offersHelp
+            : (offersHelp as bool),
+        seeksHelp: seeksHelp == _undefined || seeksHelp == null
+            ? _instance.seeksHelp
+            : (seeksHelp as bool),
+        companies: companies == _undefined || companies == null
+            ? _instance.companies
+            : (companies as List<
+                Query$FindChannelInvitationById$findChannelInvitationById$sender$companies>),
+        countryOfResidence: countryOfResidence == _undefined
+            ? _instance.countryOfResidence
+            : (countryOfResidence
+                as Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence?),
+        groupMemberships: groupMemberships == _undefined ||
+                groupMemberships == null
+            ? _instance.groupMemberships
+            : (groupMemberships as List<
+                Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  TRes companies(
+          Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$companies> Function(
+                  Iterable<
+                      CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies<
+                          Query$FindChannelInvitationById$findChannelInvitationById$sender$companies>>)
+              _fn) =>
+      call(
+          companies: _fn(_instance.companies.map((e) =>
+              CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies(
+                e,
+                (i) => i,
+              ))).toList());
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+      TRes> get countryOfResidence {
+    final local$countryOfResidence = _instance.countryOfResidence;
+    return local$countryOfResidence == null
+        ? CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence
+            .stub(_then(_instance))
+        : CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence(
+            local$countryOfResidence, (e) => call(countryOfResidence: e));
+  }
+
+  TRes groupMemberships(
+          Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships> Function(
+                  Iterable<
+                      CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships<
+                          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships>>)
+              _fn) =>
+      call(
+          groupMemberships: _fn(_instance.groupMemberships.map((e) =>
+              CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? fullName,
+    String? avatarUrl,
+    String? jobTitle,
+    bool? offersHelp,
+    bool? seeksHelp,
+    List<Query$FindChannelInvitationById$findChannelInvitationById$sender$companies>?
+        companies,
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence?
+        countryOfResidence,
+    List<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships>?
+        groupMemberships,
+    String? $__typename,
+  }) =>
+      _res;
+  companies(_fn) => _res;
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+          TRes>
+      get countryOfResidence =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence
+              .stub(_res);
+  groupMemberships(_fn) => _res;
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender$companies {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender$companies({
+    required this.name,
+    this.$__typename = 'Company',
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender$companies.fromJson(
+      Map<String, dynamic> json) {
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById$findChannelInvitationById$sender$companies(
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender$companies) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender$companies {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$companies>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$companies
+        instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$companies)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies;
+
+  TRes call({
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$companies
+      _instance;
+
+  final TRes Function(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$companies)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$companies(
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence({
+    this.translatedValue,
+    this.$__typename = 'Country',
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence
+        instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence
+      _instance;
+
+  final TRes Function(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships({
+    required this.groupIdent,
+    required this.$__typename,
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships.fromJson(
+      Map<String, dynamic> json) {
+    switch (json["__typename"] as String) {
+      case "MentorsGroupMembership":
+        return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership
+            .fromJson(json);
+
+      case "GroupMembership":
+        return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership
+            .fromJson(json);
+
+      case "MenteesGroupMembership":
+        return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership
+            .fromJson(json);
+
+      default:
+        final l$groupIdent = json['groupIdent'];
+        final l$$__typename = json['__typename'];
+        return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships(
+          groupIdent: (l$groupIdent as String),
+          $__typename: (l$$__typename as String),
+        );
+    }
+  }
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships(
+            this,
+            (i) => i,
+          );
+  _T when<_T>({
+    required _T Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership)
+        mentorsGroupMembership,
+    required _T Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership)
+        groupMembership,
+    required _T Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership)
+        menteesGroupMembership,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "MentorsGroupMembership":
+        return mentorsGroupMembership(this
+            as Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership);
+
+      case "GroupMembership":
+        return groupMembership(this
+            as Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership);
+
+      case "MenteesGroupMembership":
+        return menteesGroupMembership(this
+            as Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership);
+
+      default:
+        return orElse();
+    }
+  }
+
+  _T maybeWhen<_T>({
+    _T Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership)?
+        mentorsGroupMembership,
+    _T Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership)?
+        groupMembership,
+    _T Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership)?
+        menteesGroupMembership,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "MentorsGroupMembership":
+        if (mentorsGroupMembership != null) {
+          return mentorsGroupMembership(this
+              as Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership);
+        } else {
+          return orElse();
+        }
+
+      case "GroupMembership":
+        if (groupMembership != null) {
+          return groupMembership(this
+              as Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership);
+        } else {
+          return orElse();
+        }
+
+      case "MenteesGroupMembership":
+        if (menteesGroupMembership != null) {
+          return menteesGroupMembership(this
+              as Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership);
+        } else {
+          return orElse();
+        }
+
+      default:
+        return orElse();
+    }
+  }
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships
+        instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships;
+
+  TRes call({
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships
+      _instance;
+
+  final TRes Function(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships(
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership
+    implements
+        Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership({
+    this.endorsements,
+    required this.industries,
+    required this.expertises,
+    this.$__typename = 'MentorsGroupMembership',
+    required this.groupIdent,
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$endorsements = json['endorsements'];
+    final l$industries = json['industries'];
+    final l$expertises = json['expertises'];
+    final l$$__typename = json['__typename'];
+    final l$groupIdent = json['groupIdent'];
+    return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership(
+      endorsements: (l$endorsements as int?),
+      industries: (l$industries as List<dynamic>)
+          .map((e) =>
+              Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      expertises: (l$expertises as List<dynamic>)
+          .map((e) =>
+              Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+      groupIdent: (l$groupIdent as String),
+    );
+  }
+
+  final int? endorsements;
+
+  final List<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries>
+      industries;
+
+  final List<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises>
+      expertises;
+
+  final String $__typename;
+
+  final String groupIdent;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$endorsements = endorsements;
+    _resultData['endorsements'] = l$endorsements;
+    final l$industries = industries;
+    _resultData['industries'] = l$industries.map((e) => e.toJson()).toList();
+    final l$expertises = expertises;
+    _resultData['expertises'] = l$expertises.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$endorsements = endorsements;
+    final l$industries = industries;
+    final l$expertises = expertises;
+    final l$$__typename = $__typename;
+    final l$groupIdent = groupIdent;
+    return Object.hashAll([
+      l$endorsements,
+      Object.hashAll(l$industries.map((v) => v)),
+      Object.hashAll(l$expertises.map((v) => v)),
+      l$$__typename,
+      l$groupIdent,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$endorsements = endorsements;
+    final lOther$endorsements = other.endorsements;
+    if (l$endorsements != lOther$endorsements) {
+      return false;
+    }
+    final l$industries = industries;
+    final lOther$industries = other.industries;
+    if (l$industries.length != lOther$industries.length) {
+      return false;
+    }
+    for (int i = 0; i < l$industries.length; i++) {
+      final l$industries$entry = l$industries[i];
+      final lOther$industries$entry = lOther$industries[i];
+      if (l$industries$entry != lOther$industries$entry) {
+        return false;
+      }
+    }
+    final l$expertises = expertises;
+    final lOther$expertises = other.expertises;
+    if (l$expertises.length != lOther$expertises.length) {
+      return false;
+    }
+    for (int i = 0; i < l$expertises.length; i++) {
+      final l$expertises$entry = l$expertises[i];
+      final lOther$expertises$entry = lOther$expertises[i];
+      if (l$expertises$entry != lOther$expertises$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership
+        instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership;
+
+  TRes call({
+    int? endorsements,
+    List<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries>?
+        industries,
+    List<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises>?
+        expertises,
+    String? $__typename,
+    String? groupIdent,
+  });
+  TRes industries(
+      Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries> Function(
+              Iterable<
+                  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries<
+                      Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries>>)
+          _fn);
+  TRes expertises(
+      Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises> Function(
+              Iterable<
+                  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises<
+                      Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? endorsements = _undefined,
+    Object? industries = _undefined,
+    Object? expertises = _undefined,
+    Object? $__typename = _undefined,
+    Object? groupIdent = _undefined,
+  }) =>
+      _then(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership(
+        endorsements: endorsements == _undefined
+            ? _instance.endorsements
+            : (endorsements as int?),
+        industries: industries == _undefined || industries == null
+            ? _instance.industries
+            : (industries as List<
+                Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries>),
+        expertises: expertises == _undefined || expertises == null
+            ? _instance.expertises
+            : (expertises as List<
+                Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+      ));
+  TRes industries(
+          Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries> Function(
+                  Iterable<
+                      CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries<
+                          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries>>)
+              _fn) =>
+      call(
+          industries: _fn(_instance.industries.map((e) =>
+              CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries(
+                e,
+                (i) => i,
+              ))).toList());
+  TRes expertises(
+          Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises> Function(
+                  Iterable<
+                      CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises<
+                          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises>>)
+              _fn) =>
+      call(
+          expertises: _fn(_instance.expertises.map((e) =>
+              CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? endorsements,
+    List<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries>?
+        industries,
+    List<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises>?
+        expertises,
+    String? $__typename,
+    String? groupIdent,
+  }) =>
+      _res;
+  industries(_fn) => _res;
+  expertises(_fn) => _res;
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries({
+    this.translatedValue,
+    this.$__typename = 'Industry',
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries
+        instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries
+      _instance;
+
+  final TRes Function(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises({
+    this.translatedValue,
+    this.$__typename = 'Expertise',
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises
+        instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises
+      _instance;
+
+  final TRes Function(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership
+    implements
+        Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership({
+    required this.groupIdent,
+    this.$__typename = 'GroupMembership',
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$groupIdent = json['groupIdent'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership(
+      groupIdent: (l$groupIdent as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership
+        instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership;
+
+  TRes call({
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership(
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$GroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership
+    implements
+        Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships {
+  Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership({
+    required this.groupIdent,
+    this.$__typename = 'MenteesGroupMembership',
+  });
+
+  factory Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$groupIdent = json['groupIdent'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership(
+      groupIdent: (l$groupIdent as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership
+    on Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership {
+  CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership<
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership(
+    Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership
+        instance,
+    TRes Function(
+            Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership;
+
+  factory CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership;
+
+  TRes call({
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership(
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Query$GetInboxInvitations {
   Query$GetInboxInvitations({
     required this.myInbox,

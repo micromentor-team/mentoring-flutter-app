@@ -176,22 +176,26 @@ class AppRouter {
               },
             ),
             GoRoute(
+              path: Routes.inboxInvitesReceivedId.path,
+              name: Routes.inboxInvitesReceivedId.name,
+              pageBuilder: (context, state) {
+                final String channelInvitationId =
+                    state.pathParameters[RouteParams.channelInvitationId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: NewInviteDetailedProfile(
+                    channelInvitationId: channelInvitationId,
+                  ),
+                );
+              },
+            ),
+            GoRoute(
               path: Routes.inboxInvitesSent.path,
               name: Routes.inboxInvitesSent.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
                   child: const InboxInvitesSentScreen(),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxInvitesReceivedProfile.path,
-              name: Routes.inboxInvitesReceivedProfile.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  child: const NewInviteDetailedProfile(),
                 );
               },
             ),

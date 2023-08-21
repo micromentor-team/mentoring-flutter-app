@@ -1,3 +1,37 @@
+query FindChannelInvitationById($channelInvitationId: String!) {
+  findChannelInvitationById(id: $channelInvitationId) {
+    createdAt
+    messageText
+    status
+    sender {
+      id
+      fullName
+      avatarUrl
+      jobTitle
+      offersHelp
+      seeksHelp
+      companies {
+        name
+      }
+      countryOfResidence {
+        translatedValue
+      }
+      groupMemberships {
+        groupIdent
+        ... on MentorsGroupMembership {
+          endorsements
+          industries {
+            translatedValue
+          }
+          expertises {
+            translatedValue
+          }
+        }
+      }
+    }
+  }
+}
+
 query GetInboxInvitations {
   myInbox {
     channels {

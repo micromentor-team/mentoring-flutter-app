@@ -139,8 +139,8 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
       highlightMessage: true,
       simplifyDate: true,
       onPressed: () => router.push(
-        Routes.inboxInvitesReceivedProfile.path,
-      ), // TODO: Use InvitationID to route to correct invitation detail page.
+        '${Routes.inboxInvitesReceived.path}/${invitation.id}',
+      ),
     );
   }
 

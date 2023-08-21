@@ -15,7 +15,7 @@ class ProfileQuickViewInfo {
   final String? avatarUrl;
   final String fullName;
   final String location;
-  final String company;
+  final String? company;
   final String? companyRole;
   final ProfileChip? ventureStage;
   final ProfileChip? ventureIndustry;
@@ -28,7 +28,7 @@ class ProfileQuickViewInfo {
     required this.avatarUrl,
     required this.fullName,
     required this.location,
-    required this.company,
+    this.company,
     this.companyRole,
     this.ventureStage,
     this.ventureIndustry,
@@ -149,7 +149,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   final String? avatarUrl;
   final String fullName;
   final String location;
-  final String company;
+  final String? company;
   final String? companyRole;
   final ProfileChip? ventureStage;
   final ProfileChip? ventureIndustry;
@@ -164,7 +164,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     this.avatarUrl,
     required this.fullName,
     required this.location,
-    required this.company,
+    this.company,
     this.companyRole,
     this.ventureStage,
     this.ventureIndustry,
@@ -251,6 +251,7 @@ class ProfileQuickViewCard extends StatelessWidget {
 
   Widget _createProfileView(BuildContext context, AppLocalizations l10n) {
     final ThemeData theme = Theme.of(context);
+    final String? companyText = _companyText(l10n);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -302,12 +303,13 @@ class ProfileQuickViewCard extends StatelessWidget {
               const Divider(
                 endIndent: Insets.paddingExtraLarge,
               ),
-              Text(
-                _companyText(l10n),
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.secondary,
+              if (companyText != null)
+                Text(
+                  companyText,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
                 ),
-              ),
               const SizedBox(height: Insets.paddingExtraSmall),
               _createProfileChips(l10n),
             ],
@@ -376,7 +378,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     }
   }
 
-  String _companyText(AppLocalizations l10n) {
+  String? _companyText(AppLocalizations l10n) {
     switch (userType) {
       case UserType.entrepreneur:
         return '${l10n.exploreEntrepreneurVenture} $company';

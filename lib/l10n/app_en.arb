@@ -9,6 +9,7 @@
     "datePastYears": "{numYears} years ago",
     "dateSimpleToday": "today",
     "dateSimpleYesterday": "yesterday",
+    "defaultValueLocation": "Unknown location",
     "exploreEndorsements": "Endorsed by {numEndorsements} entrepreneurs",
     "exploreEntrepreneurVenture": "Venture:",
     "exploreExpertiseOffering": "Offering expertise in:",

@@ -120,27 +120,6 @@ export function mockMutations(serverState: MockServerState) {
             });
             return channel.id;
         },
-        updateChannelInvitation: (_: any, args: { input: { status: string }}) => {
-            const invitation = serverState.channelInvitations[0]
-            if (args.input.status) {
-                if (args.input.status === "accepted"){
-                    invitation.status = "accepted";
-                    invitation.channel = generators.generateChannel([serverState.loggedInUser, serverState.otherUsers[3]])
-                    serverState.channels.push(invitation.channel);
-                }
-                else if (args.input.status === "declined")
-                    invitation.status = "declined";
-            }
-            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: invitation.id }});
-            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
-                channelChanged: {
-                    channelId: invitation.channel.id,
-                    invitationId: invitation.id,
-                    eventType: 'invitationUpdated',
-                }
-            });
-            return invitation.id;
-        },
         updateChannelMessage: (_: any, args: { input: { id: string | null, messageText: string | null, deletedAt: Date | null } }) => {
             var channelMessage = serverState.channelMessages.find((element) => element.id == args.input.id);
             const currentTime : string = new Date().toISOString();
