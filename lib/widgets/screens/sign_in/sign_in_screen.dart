@@ -276,22 +276,20 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width: _loginBoxWidth / 2,
-                            height: 1,
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
+                          Expanded(
+                              child: Divider(
+                                  color:
+                                      Theme.of(context).colorScheme.outline)),
                           Text(
                             l10n.orLoginWith,
                             style: theme.textTheme.labelMedium?.copyWith(
                               color: theme.colorScheme.secondary,
                             ),
                           ),
-                          Container(
-                            width: _loginBoxWidth / 2,
-                            height: 1,
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
+                          Expanded(
+                              child: Divider(
+                                  color:
+                                      Theme.of(context).colorScheme.outline)),
                         ],
                       ),
                     ),
