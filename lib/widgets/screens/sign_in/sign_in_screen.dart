@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../__generated/schema/schema.graphql.dart';
 import '../../../utilities/utility.dart';
+import '../../atoms/social_sign_in_button.dart';
 import '../sign_up/sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -30,16 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
   late final TextEditingController passwordController;
 
   static const double _loginBoxWidth = 360;
-  static const double _textBoxWidth = 200;
   static const double _sizedBoxWidth = 360;
-  static const double _iconWidth = 24;
-  static const EdgeInsetsDirectional _signInWithButtonPadding =
-      EdgeInsetsDirectional.fromSTEB(
-    64.0,
-    8.0,
-    8.0,
-    8.0,
-  );
 
   @override
   void initState() {
@@ -105,7 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           children: [
                             Center(
                               child: Text(
-                                l10n.welcomeBack,
+                                l10n.welcome,
                                 style: theme.textTheme.headlineSmall?.copyWith(
                                   color: theme.colorScheme.primary,
                                 ),
@@ -169,9 +161,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                   return null;
                                 },
                                 obscureText: true),
+                            SizedBox(
+                              height: mediaQuery.height * 0.03,
+                            ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, Insets.paddingMedium, 0, 0),
+                              padding:
+                                  const EdgeInsets.all(Insets.paddingSmall),
                               child: ElevatedButton(
                                 style:
                                     ButtonStyles.primaryRoundedRectangleButton(
@@ -250,6 +245,20 @@ class _SignInScreenState extends State<SignInScreen> {
                     Padding(
                       padding: const EdgeInsets.all(Insets.paddingSmall),
                       child: TextButton(
+                        onPressed: () {
+                          debugPrint("reset password");
+                        },
+                        child: Text(
+                          l10n.resetPassword,
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(Insets.paddingSmall),
+                      child: TextButton(
                         key: const Key('registerButton'),
                         onPressed: () {
                           _openSignUpScreen(context);
@@ -263,7 +272,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(Insets.paddingSmall),
+                      padding: const EdgeInsets.all(Insets.paddingMedium),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -273,7 +282,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: Theme.of(context).colorScheme.outline,
                           ),
                           Text(
-                            l10n.or,
+                            l10n.orLoginWith,
                             style: theme.textTheme.labelMedium?.copyWith(
                               color: theme.colorScheme.secondary,
                             ),
@@ -287,131 +296,31 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: _signInWithButtonPadding,
-                          child: TextButton(
-                            onPressed: () {
-                              _openSignUpScreen(context);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  width: _iconWidth,
-                                  child: Image(
-                                    image: AssetImage(Assets.googleIcon),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Insets.paddingSmall,
-                                ),
-                                SizedBox(
-                                  width: _textBoxWidth,
-                                  child: Text(
-                                    l10n.signInWithGoogle,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        SocialSignInButton(
+                          option: SignInOptions.facebook,
+                          onPressed: () {},
                         ),
-                        Padding(
-                          padding: _signInWithButtonPadding,
-                          child: TextButton(
-                            onPressed: () {
-                              _openSignUpScreen(context);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  width: _iconWidth,
-                                  child: Image(
-                                    image: AssetImage(Assets.facebookIcon),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Insets.paddingSmall,
-                                ),
-                                SizedBox(
-                                  width: _textBoxWidth,
-                                  child: Text(
-                                    l10n.signInWithFacebook,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        SocialSignInButton(
+                          option: SignInOptions.whatsapp,
+                          onPressed: () {},
                         ),
-                        Padding(
-                          padding: _signInWithButtonPadding,
-                          child: TextButton(
-                            onPressed: () {
-                              _openSignUpScreen(context);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  width: _iconWidth,
-                                  child: Image(
-                                    image: AssetImage(Assets.linkedInIcon),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Insets.paddingSmall,
-                                ),
-                                SizedBox(
-                                  width: _textBoxWidth,
-                                  child: Text(
-                                    l10n.signInWithLinkedIn,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        SocialSignInButton(
+                          option: SignInOptions.linkedin,
+                          onPressed: () {},
                         ),
-                        Padding(
-                          padding: _signInWithButtonPadding,
-                          child: TextButton(
-                            onPressed: () {
-                              _openSignUpScreen(context);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  width: _iconWidth,
-                                  child: Image(
-                                    image: AssetImage(Assets.whatsappIcon),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Insets.paddingSmall,
-                                ),
-                                SizedBox(
-                                  width: _textBoxWidth,
-                                  child: Text(
-                                    l10n.signInWithWhatsapp,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        SocialSignInButton(
+                          option: SignInOptions.telegram,
+                          onPressed: () {},
+                        ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        SocialSignInButton(
+                          option: SignInOptions.google,
+                          onPressed: () {},
                         ),
                       ],
                     ),
