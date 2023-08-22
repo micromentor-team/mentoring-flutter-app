@@ -21,8 +21,8 @@ export function mockQueries(serverState: MockServerState) {
         findChannelInvitationById: (_: any, args: { id: string }) => {
             return serverState.channelInvitations.find((e) => e.id == args.id);
         },
-        findChannelMessages: () => {
-            return serverState.channelMessages;
+        findChannelMessages: (_: any, args: { filter: { channelId: string }}) => {
+            return serverState.channelMessages.filter((e) => e.channelId == args.filter.channelId);
         },
         findChannelMessageById: (_: any, args: { id: string }) => {
             return serverState.channelMessages.find((e) => e.id == args.id);

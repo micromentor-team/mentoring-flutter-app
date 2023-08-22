@@ -152,7 +152,12 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
             backgroundColor: theme.colorScheme.surface,
             textStyle: theme.textTheme.labelLarge,
           ),
-          onPressed: () {},
+          onPressed: () async {
+            await _invitationsProvider.declineChannelInvitation(
+              channelInvitationId: widget.channelInvitationId,
+            );
+            router.push(Routes.inboxInvitesReceived.path);
+          },
           child: Text(
             _l10n.decline,
             style: theme.textTheme.labelLarge?.copyWith(
@@ -167,7 +172,12 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
             backgroundColor: theme.colorScheme.primary,
             textStyle: theme.textTheme.labelLarge,
           ),
-          onPressed: () {},
+          onPressed: () async {
+            await _invitationsProvider.acceptChannelInvitation(
+              channelInvitationId: widget.channelInvitationId,
+            );
+            router.push(Routes.inboxChats.path);
+          },
           child: Text(
             _l10n.accept,
             style: theme.textTheme.labelLarge?.copyWith(
