@@ -5,6 +5,652 @@
 import 'package:gql/ast.dart';
 import 'schema.graphql.dart';
 
+class Variables$Query$FindChannelLatestMessage {
+  factory Variables$Query$FindChannelLatestMessage(
+          {required String channelId}) =>
+      Variables$Query$FindChannelLatestMessage._({
+        r'channelId': channelId,
+      });
+
+  Variables$Query$FindChannelLatestMessage._(this._$data);
+
+  factory Variables$Query$FindChannelLatestMessage.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$channelId = data['channelId'];
+    result$data['channelId'] = (l$channelId as String);
+    return Variables$Query$FindChannelLatestMessage._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get channelId => (_$data['channelId'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$channelId = channelId;
+    result$data['channelId'] = l$channelId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$FindChannelLatestMessage<
+          Variables$Query$FindChannelLatestMessage>
+      get copyWith => CopyWith$Variables$Query$FindChannelLatestMessage(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$FindChannelLatestMessage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    return Object.hashAll([l$channelId]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$FindChannelLatestMessage<TRes> {
+  factory CopyWith$Variables$Query$FindChannelLatestMessage(
+    Variables$Query$FindChannelLatestMessage instance,
+    TRes Function(Variables$Query$FindChannelLatestMessage) then,
+  ) = _CopyWithImpl$Variables$Query$FindChannelLatestMessage;
+
+  factory CopyWith$Variables$Query$FindChannelLatestMessage.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$FindChannelLatestMessage;
+
+  TRes call({String? channelId});
+}
+
+class _CopyWithImpl$Variables$Query$FindChannelLatestMessage<TRes>
+    implements CopyWith$Variables$Query$FindChannelLatestMessage<TRes> {
+  _CopyWithImpl$Variables$Query$FindChannelLatestMessage(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$FindChannelLatestMessage _instance;
+
+  final TRes Function(Variables$Query$FindChannelLatestMessage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelId = _undefined}) =>
+      _then(Variables$Query$FindChannelLatestMessage._({
+        ..._instance._$data,
+        if (channelId != _undefined && channelId != null)
+          'channelId': (channelId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$FindChannelLatestMessage<TRes>
+    implements CopyWith$Variables$Query$FindChannelLatestMessage<TRes> {
+  _CopyWithStubImpl$Variables$Query$FindChannelLatestMessage(this._res);
+
+  TRes _res;
+
+  call({String? channelId}) => _res;
+}
+
+class Query$FindChannelLatestMessage {
+  Query$FindChannelLatestMessage({
+    required this.findChannelById,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$FindChannelLatestMessage.fromJson(Map<String, dynamic> json) {
+    final l$findChannelById = json['findChannelById'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelLatestMessage(
+      findChannelById: Query$FindChannelLatestMessage$findChannelById.fromJson(
+          (l$findChannelById as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$FindChannelLatestMessage$findChannelById findChannelById;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$findChannelById = findChannelById;
+    _resultData['findChannelById'] = l$findChannelById.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$findChannelById = findChannelById;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$findChannelById,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindChannelLatestMessage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$findChannelById = findChannelById;
+    final lOther$findChannelById = other.findChannelById;
+    if (l$findChannelById != lOther$findChannelById) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelLatestMessage
+    on Query$FindChannelLatestMessage {
+  CopyWith$Query$FindChannelLatestMessage<Query$FindChannelLatestMessage>
+      get copyWith => CopyWith$Query$FindChannelLatestMessage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelLatestMessage<TRes> {
+  factory CopyWith$Query$FindChannelLatestMessage(
+    Query$FindChannelLatestMessage instance,
+    TRes Function(Query$FindChannelLatestMessage) then,
+  ) = _CopyWithImpl$Query$FindChannelLatestMessage;
+
+  factory CopyWith$Query$FindChannelLatestMessage.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindChannelLatestMessage;
+
+  TRes call({
+    Query$FindChannelLatestMessage$findChannelById? findChannelById,
+    String? $__typename,
+  });
+  CopyWith$Query$FindChannelLatestMessage$findChannelById<TRes>
+      get findChannelById;
+}
+
+class _CopyWithImpl$Query$FindChannelLatestMessage<TRes>
+    implements CopyWith$Query$FindChannelLatestMessage<TRes> {
+  _CopyWithImpl$Query$FindChannelLatestMessage(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelLatestMessage _instance;
+
+  final TRes Function(Query$FindChannelLatestMessage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? findChannelById = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelLatestMessage(
+        findChannelById:
+            findChannelById == _undefined || findChannelById == null
+                ? _instance.findChannelById
+                : (findChannelById
+                    as Query$FindChannelLatestMessage$findChannelById),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$FindChannelLatestMessage$findChannelById<TRes>
+      get findChannelById {
+    final local$findChannelById = _instance.findChannelById;
+    return CopyWith$Query$FindChannelLatestMessage$findChannelById(
+        local$findChannelById, (e) => call(findChannelById: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$FindChannelLatestMessage<TRes>
+    implements CopyWith$Query$FindChannelLatestMessage<TRes> {
+  _CopyWithStubImpl$Query$FindChannelLatestMessage(this._res);
+
+  TRes _res;
+
+  call({
+    Query$FindChannelLatestMessage$findChannelById? findChannelById,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$FindChannelLatestMessage$findChannelById<TRes>
+      get findChannelById =>
+          CopyWith$Query$FindChannelLatestMessage$findChannelById.stub(_res);
+}
+
+const documentNodeQueryFindChannelLatestMessage = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'FindChannelLatestMessage'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'findChannelById'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'channelId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'latestMessage'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'createdAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'createdBy'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'messageText'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$FindChannelLatestMessage$findChannelById {
+  Query$FindChannelLatestMessage$findChannelById({
+    required this.latestMessage,
+    this.$__typename = 'Channel',
+  });
+
+  factory Query$FindChannelLatestMessage$findChannelById.fromJson(
+      Map<String, dynamic> json) {
+    final l$latestMessage = json['latestMessage'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelLatestMessage$findChannelById(
+      latestMessage:
+          Query$FindChannelLatestMessage$findChannelById$latestMessage.fromJson(
+              (l$latestMessage as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$FindChannelLatestMessage$findChannelById$latestMessage
+      latestMessage;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$latestMessage = latestMessage;
+    _resultData['latestMessage'] = l$latestMessage.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$latestMessage = latestMessage;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$latestMessage,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindChannelLatestMessage$findChannelById) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$latestMessage = latestMessage;
+    final lOther$latestMessage = other.latestMessage;
+    if (l$latestMessage != lOther$latestMessage) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelLatestMessage$findChannelById
+    on Query$FindChannelLatestMessage$findChannelById {
+  CopyWith$Query$FindChannelLatestMessage$findChannelById<
+          Query$FindChannelLatestMessage$findChannelById>
+      get copyWith => CopyWith$Query$FindChannelLatestMessage$findChannelById(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelLatestMessage$findChannelById<TRes> {
+  factory CopyWith$Query$FindChannelLatestMessage$findChannelById(
+    Query$FindChannelLatestMessage$findChannelById instance,
+    TRes Function(Query$FindChannelLatestMessage$findChannelById) then,
+  ) = _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById;
+
+  factory CopyWith$Query$FindChannelLatestMessage$findChannelById.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById;
+
+  TRes call({
+    Query$FindChannelLatestMessage$findChannelById$latestMessage? latestMessage,
+    String? $__typename,
+  });
+  CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<TRes>
+      get latestMessage;
+}
+
+class _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById<TRes>
+    implements CopyWith$Query$FindChannelLatestMessage$findChannelById<TRes> {
+  _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelLatestMessage$findChannelById _instance;
+
+  final TRes Function(Query$FindChannelLatestMessage$findChannelById) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? latestMessage = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelLatestMessage$findChannelById(
+        latestMessage: latestMessage == _undefined || latestMessage == null
+            ? _instance.latestMessage
+            : (latestMessage
+                as Query$FindChannelLatestMessage$findChannelById$latestMessage),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<TRes>
+      get latestMessage {
+    final local$latestMessage = _instance.latestMessage;
+    return CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage(
+        local$latestMessage, (e) => call(latestMessage: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById<TRes>
+    implements CopyWith$Query$FindChannelLatestMessage$findChannelById<TRes> {
+  _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById(this._res);
+
+  TRes _res;
+
+  call({
+    Query$FindChannelLatestMessage$findChannelById$latestMessage? latestMessage,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<TRes>
+      get latestMessage =>
+          CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage
+              .stub(_res);
+}
+
+class Query$FindChannelLatestMessage$findChannelById$latestMessage {
+  Query$FindChannelLatestMessage$findChannelById$latestMessage({
+    required this.createdAt,
+    this.createdBy,
+    this.messageText,
+    this.$__typename = 'ChannelMessage',
+  });
+
+  factory Query$FindChannelLatestMessage$findChannelById$latestMessage.fromJson(
+      Map<String, dynamic> json) {
+    final l$createdAt = json['createdAt'];
+    final l$createdBy = json['createdBy'];
+    final l$messageText = json['messageText'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelLatestMessage$findChannelById$latestMessage(
+      createdAt: DateTime.parse((l$createdAt as String)),
+      createdBy: (l$createdBy as String?),
+      messageText: (l$messageText as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime createdAt;
+
+  final String? createdBy;
+
+  final String? messageText;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$createdBy = createdBy;
+    _resultData['createdBy'] = l$createdBy;
+    final l$messageText = messageText;
+    _resultData['messageText'] = l$messageText;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$messageText = messageText;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$createdAt,
+      l$createdBy,
+      l$messageText,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelLatestMessage$findChannelById$latestMessage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$messageText = messageText;
+    final lOther$messageText = other.messageText;
+    if (l$messageText != lOther$messageText) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelLatestMessage$findChannelById$latestMessage
+    on Query$FindChannelLatestMessage$findChannelById$latestMessage {
+  CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<
+          Query$FindChannelLatestMessage$findChannelById$latestMessage>
+      get copyWith =>
+          CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<
+    TRes> {
+  factory CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage(
+    Query$FindChannelLatestMessage$findChannelById$latestMessage instance,
+    TRes Function(Query$FindChannelLatestMessage$findChannelById$latestMessage)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById$latestMessage;
+
+  factory CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById$latestMessage;
+
+  TRes call({
+    DateTime? createdAt,
+    String? createdBy,
+    String? messageText,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById$latestMessage<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById$latestMessage(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelLatestMessage$findChannelById$latestMessage _instance;
+
+  final TRes Function(
+      Query$FindChannelLatestMessage$findChannelById$latestMessage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? messageText = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelLatestMessage$findChannelById$latestMessage(
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as DateTime),
+        createdBy: createdBy == _undefined
+            ? _instance.createdBy
+            : (createdBy as String?),
+        messageText: messageText == _undefined
+            ? _instance.messageText
+            : (messageText as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById$latestMessage<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById$latestMessage(
+      this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? createdAt,
+    String? createdBy,
+    String? messageText,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables$Query$FindChannelMessages {
   factory Variables$Query$FindChannelMessages({
     Input$ChannelMessageListFilter? filter,

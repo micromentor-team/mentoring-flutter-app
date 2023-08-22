@@ -1,3 +1,13 @@
+query FindChannelLatestMessage ($channelId: String!) {
+    findChannelById(id: $channelId) {
+        latestMessage {
+            createdAt
+            createdBy
+            messageText
+        }
+    }
+}
+
 query FindChannelMessages ($filter: ChannelMessageListFilter, $options: FindObjectsOptions) {
     findChannelMessages(filter: $filter, options: $options) {
         id

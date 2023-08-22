@@ -36,16 +36,6 @@ query FindChannelById ($channelId: String!) {
     }
 }
 
-query FindChannelLatestMessage ($channelId: String!) {
-    findChannelById(id: $channelId) {
-        latestMessage {
-            createdAt
-            createdBy
-            messageText
-        }
-    }
-}
-
 query GetChannelsList {
     findChannels {
         id
@@ -61,27 +51,8 @@ query GetChannelsList {
     }
 }
 
-query GetInboxInvitations {
-  myInbox {
-    channels {
-      invitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
-      pendingInvitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
-    }
-  }
+mutation ArchiveChannelForMe($channelId: String!) {
+  archiveChannelForMe(channelId: $channelId)
 }
 
 mutation CreateChannel ($input: ChannelInput!) {
@@ -104,10 +75,6 @@ mutation CreateChannel ($input: ChannelInput!) {
 
 mutation DeleteChannel ($deletePhysically: Boolean!, $channelId: String!) {
     deleteChannel(deletePhysically: $deletePhysically, channelId: $channelId)
-}
-
-mutation ArchiveChannelForMe($channelId: String!) {
-  archiveChannelForMe(channelId: $channelId)
 }
 
 mutation UnarchiveChannelForMe($channelId: String!) {
