@@ -1,4 +1,4 @@
-package com.example.mm_flutter_app
+package com.micromentor.mm_flutter_app
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.engine.FlutterEngine

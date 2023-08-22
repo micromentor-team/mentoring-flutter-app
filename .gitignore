@@ -60,3 +60,5 @@ node_modules/
 /android/app/google-services.json
 /ios/Runner/GoogleService-Info.plist
 *firebase_service_account.json
+
+*service_account.json
