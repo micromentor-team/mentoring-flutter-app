@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../__generated/schema/schema.graphql.dart';
 import '../../../utilities/utility.dart';
+import '../../atoms/social_sign_in_button.dart';
 import '../sign_up/sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -30,16 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
   late final TextEditingController passwordController;
 
   static const double _loginBoxWidth = 360;
-  static const double _textBoxWidth = 200;
   static const double _sizedBoxWidth = 360;
-  static const double _iconWidth = 24;
-  static const EdgeInsetsDirectional _signInWithButtonPadding =
-      EdgeInsetsDirectional.fromSTEB(
-    64.0,
-    8.0,
-    8.0,
-    8.0,
-  );
 
   @override
   void initState() {
@@ -96,7 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
-                          0, Insets.paddingExtraLarge, 0, 0),
+                          0, Insets.paddingLarge, 0, 0),
                       child: SizedBox(
                         width: _sizedBoxWidth,
                         child: Column(
@@ -105,7 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           children: [
                             Center(
                               child: Text(
-                                l10n.welcomeBack,
+                                l10n.welcome,
                                 style: theme.textTheme.headlineSmall?.copyWith(
                                   color: theme.colorScheme.primary,
                                 ),
@@ -169,76 +161,73 @@ class _SignInScreenState extends State<SignInScreen> {
                                   return null;
                                 },
                                 obscureText: true),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, Insets.paddingMedium, 0, 0),
-                              child: ElevatedButton(
-                                style:
-                                    ButtonStyles.primaryRoundedRectangleButton(
-                                        context),
-                                key: const Key('btnSignIn'),
-                                onPressed: () async {
-                                  final router = GoRouter.of(context);
-                                  final scaffoldManager =
-                                      ScaffoldMessenger.of(context);
+                            SizedBox(
+                              height: mediaQuery.height * 0.03,
+                            ),
+                            ElevatedButton(
+                              style: ButtonStyles.primaryRoundedRectangleButton(
+                                  context),
+                              key: const Key('btnSignIn'),
+                              onPressed: () async {
+                                final router = GoRouter.of(context);
+                                final scaffoldManager =
+                                    ScaffoldMessenger.of(context);
 
-                                  if (_formKey.currentState!.validate()) {
-                                    final signInResult =
-                                        await userProvider.signInUser(
-                                      input: Input$UserSignInInput(
-                                        // TODO: This generates a new UUID for the device every time the user signs in.
-                                        // it should be relying on the uuid stored on the device instead.
-                                        deviceUuid: await AppUtility.getUuid(),
-                                        ident: emailController.text,
-                                        identType: Enum$UserIdentType.email,
-                                        password: passwordController.text,
-                                      ),
-                                    );
-                                    final signInError = signInResult
-                                        .gqlQueryResult
-                                        .exception
-                                        ?.graphqlErrors
-                                        .firstOrNull
-                                        ?.message;
-                                    if (signInError != null) {
-                                      if (signInError == 'notFound') {
-                                        scaffoldManager.showSnackBar(
-                                          SnackBar(
-                                            content:
-                                                Text(l10n.accountNotFoundError),
-                                          ),
-                                        );
-                                        if (context.mounted) {
-                                          emailController.text = '';
-                                          passwordController.text = '';
-                                        }
-                                      } else if (signInError ==
-                                          'passwordNoMatch') {
-                                        scaffoldManager.showSnackBar(SnackBar(
+                                if (_formKey.currentState!.validate()) {
+                                  final signInResult =
+                                      await userProvider.signInUser(
+                                    input: Input$UserSignInInput(
+                                      // TODO: This generates a new UUID for the device every time the user signs in.
+                                      // it should be relying on the uuid stored on the device instead.
+                                      deviceUuid: await AppUtility.getUuid(),
+                                      ident: emailController.text,
+                                      identType: Enum$UserIdentType.email,
+                                      password: passwordController.text,
+                                    ),
+                                  );
+                                  final signInError = signInResult
+                                      .gqlQueryResult
+                                      .exception
+                                      ?.graphqlErrors
+                                      .firstOrNull
+                                      ?.message;
+                                  if (signInError != null) {
+                                    if (signInError == 'notFound') {
+                                      scaffoldManager.showSnackBar(
+                                        SnackBar(
                                           content:
-                                              Text(l10n.incorrectPasswordError),
-                                        ));
+                                              Text(l10n.accountNotFoundError),
+                                        ),
+                                      );
+                                      if (context.mounted) {
+                                        emailController.text = '';
                                         passwordController.text = '';
                                       }
-                                    } else {
-                                      router.pushNamed(Routes.root.name,
-                                          queryParameters: {
-                                            'nextRouteName':
-                                                widget.nextRouteName
-                                          });
+                                    } else if (signInError ==
+                                        'passwordNoMatch') {
+                                      scaffoldManager.showSnackBar(SnackBar(
+                                        content:
+                                            Text(l10n.incorrectPasswordError),
+                                      ));
+                                      passwordController.text = '';
                                     }
+                                  } else {
+                                    router.pushNamed(Routes.root.name,
+                                        queryParameters: {
+                                          'nextRouteName': widget.nextRouteName
+                                        });
                                   }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                    horizontal: 80.0,
-                                  ),
-                                  child: Text(
-                                    l10n.logIn,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.onPrimary,
-                                    ),
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                  horizontal: 80.0,
+                                ),
+                                child: Text(
+                                  l10n.logIn,
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: theme.colorScheme.onPrimary,
                                   ),
                                 ),
                               ),
@@ -247,18 +236,26 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(Insets.paddingSmall),
-                      child: TextButton(
-                        key: const Key('registerButton'),
-                        onPressed: () {
-                          _openSignUpScreen(context);
-                        },
-                        child: Text(
-                          l10n.createNewAccount,
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: theme.colorScheme.primary,
-                          ),
+                    TextButton(
+                      onPressed: () {
+                        debugPrint("reset password");
+                      },
+                      child: Text(
+                        l10n.resetPassword,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      key: const Key('registerButton'),
+                      onPressed: () {
+                        _openSignUpScreen(context);
+                      },
+                      child: Text(
+                        l10n.createNewAccount,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                     ),
@@ -267,151 +264,49 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width: _loginBoxWidth / 2,
-                            height: 1,
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
+                          Expanded(
+                              child: Divider(
+                                  color:
+                                      Theme.of(context).colorScheme.outline)),
                           Text(
-                            l10n.or,
+                            l10n.orLoginWith,
                             style: theme.textTheme.labelMedium?.copyWith(
                               color: theme.colorScheme.secondary,
                             ),
                           ),
-                          Container(
-                            width: _loginBoxWidth / 2,
-                            height: 1,
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
+                          Expanded(
+                              child: Divider(
+                                  color:
+                                      Theme.of(context).colorScheme.outline)),
                         ],
                       ),
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: _signInWithButtonPadding,
-                          child: TextButton(
-                            onPressed: () {
-                              _openSignUpScreen(context);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  width: _iconWidth,
-                                  child: Image(
-                                    image: AssetImage(Assets.googleIcon),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Insets.paddingSmall,
-                                ),
-                                SizedBox(
-                                  width: _textBoxWidth,
-                                  child: Text(
-                                    l10n.signInWithGoogle,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        SocialSignInButton(
+                          option: SignInOptions.facebook,
+                          onPressed: () {},
                         ),
-                        Padding(
-                          padding: _signInWithButtonPadding,
-                          child: TextButton(
-                            onPressed: () {
-                              _openSignUpScreen(context);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  width: _iconWidth,
-                                  child: Image(
-                                    image: AssetImage(Assets.facebookIcon),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Insets.paddingSmall,
-                                ),
-                                SizedBox(
-                                  width: _textBoxWidth,
-                                  child: Text(
-                                    l10n.signInWithFacebook,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        SocialSignInButton(
+                          option: SignInOptions.whatsapp,
+                          onPressed: () {},
                         ),
-                        Padding(
-                          padding: _signInWithButtonPadding,
-                          child: TextButton(
-                            onPressed: () {
-                              _openSignUpScreen(context);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  width: _iconWidth,
-                                  child: Image(
-                                    image: AssetImage(Assets.linkedInIcon),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Insets.paddingSmall,
-                                ),
-                                SizedBox(
-                                  width: _textBoxWidth,
-                                  child: Text(
-                                    l10n.signInWithLinkedIn,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        SocialSignInButton(
+                          option: SignInOptions.linkedin,
+                          onPressed: () {},
                         ),
-                        Padding(
-                          padding: _signInWithButtonPadding,
-                          child: TextButton(
-                            onPressed: () {
-                              _openSignUpScreen(context);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  width: _iconWidth,
-                                  child: Image(
-                                    image: AssetImage(Assets.whatsappIcon),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Insets.paddingSmall,
-                                ),
-                                SizedBox(
-                                  width: _textBoxWidth,
-                                  child: Text(
-                                    l10n.signInWithWhatsapp,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        SocialSignInButton(
+                          option: SignInOptions.telegram,
+                          onPressed: () {},
+                        ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        SocialSignInButton(
+                          option: SignInOptions.google,
+                          onPressed: () {},
                         ),
                       ],
                     ),
