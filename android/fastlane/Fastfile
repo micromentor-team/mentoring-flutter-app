@@ -62,7 +62,7 @@ platform :android do
       app: ENV["FIREBASE_ANDROID_APP_ID"],
       android_artifact_type: "APK",
       groups: "testers",
-      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
       android_artifact_path: "../build/app/outputs/apk/release/app-release.apk"
     )
   end
