@@ -11,16 +11,20 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.10.1'
-    - uses: fwilhe2/setup-kotlin@main
-      with:
-        install-native: true
-        version: 1.7.10
     - name: Add assets/.env
       run: touch assets/.env
     - name: Add Google Services JSON
       run: 'echo "$GOOGLE_SERVICES_JSON_FILE" > android/app/google-services.json'
       env:
-        GOOGLE_SERVICES_JSON_FILE: ${{ secrets. GOOGLE_SERVICES_JSON_FILE }} 
+        GOOGLE_SERVICES_JSON_FILE: ${{ secrets.GOOGLE_SERVICES_JSON_FILE }}
+    - name: Add key.properties
+      run: 'echo "$ANDROID_KEY_PROPERTIES" > android/key.properties'
+      env:
+        ANDROID_KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES }}
+    - name: Add upload-keystore.jks
+      run: 'echo "$UPLOAD_KEYSTORE_JKS" > android/fastlane/upload-keystore.jks'
+      env:
+        UPLOAD_KEYSTORE_JKS: ${{ secrets.UPLOAD_KEYSTORE_JKS }}
     - name: Set up ruby env
       uses: ruby/setup-ruby@v1
       with:
