@@ -88,7 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
-                          0, Insets.paddingExtraLarge, 0, 0),
+                          0, Insets.paddingLarge, 0, 0),
                       child: SizedBox(
                         width: _sizedBoxWidth,
                         child: Column(
@@ -164,76 +164,70 @@ class _SignInScreenState extends State<SignInScreen> {
                             SizedBox(
                               height: mediaQuery.height * 0.03,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.all(Insets.paddingSmall),
-                              child: ElevatedButton(
-                                style:
-                                    ButtonStyles.primaryRoundedRectangleButton(
-                                        context),
-                                key: const Key('btnSignIn'),
-                                onPressed: () async {
-                                  final router = GoRouter.of(context);
-                                  final scaffoldManager =
-                                      ScaffoldMessenger.of(context);
+                            ElevatedButton(
+                              style: ButtonStyles.primaryRoundedRectangleButton(
+                                  context),
+                              key: const Key('btnSignIn'),
+                              onPressed: () async {
+                                final router = GoRouter.of(context);
+                                final scaffoldManager =
+                                    ScaffoldMessenger.of(context);
 
-                                  if (_formKey.currentState!.validate()) {
-                                    final signInResult =
-                                        await userProvider.signInUser(
-                                      input: Input$UserSignInInput(
-                                        // TODO: This generates a new UUID for the device every time the user signs in.
-                                        // it should be relying on the uuid stored on the device instead.
-                                        deviceUuid: await AppUtility.getUuid(),
-                                        ident: emailController.text,
-                                        identType: Enum$UserIdentType.email,
-                                        password: passwordController.text,
-                                      ),
-                                    );
-                                    final signInError = signInResult
-                                        .gqlQueryResult
-                                        .exception
-                                        ?.graphqlErrors
-                                        .firstOrNull
-                                        ?.message;
-                                    if (signInError != null) {
-                                      if (signInError == 'notFound') {
-                                        scaffoldManager.showSnackBar(
-                                          SnackBar(
-                                            content:
-                                                Text(l10n.accountNotFoundError),
-                                          ),
-                                        );
-                                        if (context.mounted) {
-                                          emailController.text = '';
-                                          passwordController.text = '';
-                                        }
-                                      } else if (signInError ==
-                                          'passwordNoMatch') {
-                                        scaffoldManager.showSnackBar(SnackBar(
+                                if (_formKey.currentState!.validate()) {
+                                  final signInResult =
+                                      await userProvider.signInUser(
+                                    input: Input$UserSignInInput(
+                                      // TODO: This generates a new UUID for the device every time the user signs in.
+                                      // it should be relying on the uuid stored on the device instead.
+                                      deviceUuid: await AppUtility.getUuid(),
+                                      ident: emailController.text,
+                                      identType: Enum$UserIdentType.email,
+                                      password: passwordController.text,
+                                    ),
+                                  );
+                                  final signInError = signInResult
+                                      .gqlQueryResult
+                                      .exception
+                                      ?.graphqlErrors
+                                      .firstOrNull
+                                      ?.message;
+                                  if (signInError != null) {
+                                    if (signInError == 'notFound') {
+                                      scaffoldManager.showSnackBar(
+                                        SnackBar(
                                           content:
-                                              Text(l10n.incorrectPasswordError),
-                                        ));
+                                              Text(l10n.accountNotFoundError),
+                                        ),
+                                      );
+                                      if (context.mounted) {
+                                        emailController.text = '';
                                         passwordController.text = '';
                                       }
-                                    } else {
-                                      router.pushNamed(Routes.root.name,
-                                          queryParameters: {
-                                            'nextRouteName':
-                                                widget.nextRouteName
-                                          });
+                                    } else if (signInError ==
+                                        'passwordNoMatch') {
+                                      scaffoldManager.showSnackBar(SnackBar(
+                                        content:
+                                            Text(l10n.incorrectPasswordError),
+                                      ));
+                                      passwordController.text = '';
                                     }
+                                  } else {
+                                    router.pushNamed(Routes.root.name,
+                                        queryParameters: {
+                                          'nextRouteName': widget.nextRouteName
+                                        });
                                   }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                    horizontal: 80.0,
-                                  ),
-                                  child: Text(
-                                    l10n.logIn,
-                                    style: theme.textTheme.labelLarge?.copyWith(
-                                      color: theme.colorScheme.onPrimary,
-                                    ),
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                  horizontal: 80.0,
+                                ),
+                                child: Text(
+                                  l10n.logIn,
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: theme.colorScheme.onPrimary,
                                   ),
                                 ),
                               ),
@@ -242,37 +236,31 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(Insets.paddingSmall),
-                      child: TextButton(
-                        onPressed: () {
-                          debugPrint("reset password");
-                        },
-                        child: Text(
-                          l10n.resetPassword,
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: theme.colorScheme.primary,
-                          ),
+                    TextButton(
+                      onPressed: () {
+                        debugPrint("reset password");
+                      },
+                      child: Text(
+                        l10n.resetPassword,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      key: const Key('registerButton'),
+                      onPressed: () {
+                        _openSignUpScreen(context);
+                      },
+                      child: Text(
+                        l10n.createNewAccount,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(Insets.paddingSmall),
-                      child: TextButton(
-                        key: const Key('registerButton'),
-                        onPressed: () {
-                          _openSignUpScreen(context);
-                        },
-                        child: Text(
-                          l10n.createNewAccount,
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: theme.colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(Insets.paddingMedium),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
