@@ -20,4 +20,15 @@ class ButtonStyles {
           borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
         ));
   }
+
+  static ButtonStyle secondaryRoundedRectangleButtonLarge(
+      BuildContext context) {
+    return ElevatedButton.styleFrom(
+        minimumSize: const Size(288.0, 48.0),
+        maximumSize: const Size(288.0, 48.0),
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+        ));
+  }
 }
