@@ -54,4 +54,17 @@ platform :android do
       aab: "../build/app/outputs/bundle/release/app-release.aab",
     )
   end
+
+  desc "Build and deploy the Android app to Firebase app distrubtion"
+  lane :build_and_distribute_android_with_firebase do
+    sh("flutter", "build", "apk")
+    firebase_app_distribution(
+      app: ENV["FIREBASE_ANDROID_APP_ID"],
+      android_artifact_type: "APK",
+      groups: "testers",
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
+      android_artifact_path: "../build/app/outputs/apk/release/app-release.apk"
+    )
+  end
+
 end
