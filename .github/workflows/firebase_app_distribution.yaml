@@ -22,7 +22,7 @@ jobs:
       env:
         ANDROID_KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES }}
     - name: Add upload-keystore.jks
-      run: 'echo "$UPLOAD_KEYSTORE_JKS" > android/fastlane/upload-keystore.jks'
+      run: 'echo "$UPLOAD_KEYSTORE_JKS" | base64 --decode > android/fastlane/upload-keystore.jks'
       env:
         UPLOAD_KEYSTORE_JKS: ${{ secrets.UPLOAD_KEYSTORE_JKS }}
     - name: Set up ruby env
