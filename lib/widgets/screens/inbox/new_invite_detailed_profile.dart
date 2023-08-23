@@ -4,7 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_invitation.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
+import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
@@ -28,6 +30,8 @@ class NewInviteDetailedProfile extends StatefulWidget {
 class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
     with RouteAwareMixin<NewInviteDetailedProfile> {
   late final InvitationsProvider _invitationsProvider;
+  late final ChannelsProvider _channelsProvider;
+  late final UserProvider _userProvider;
   late Future<OperationResult<ChannelInvitationById>> _invitation;
   late AppLocalizations _l10n;
 
@@ -35,6 +39,14 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
   void initState() {
     super.initState();
     _invitationsProvider = Provider.of<InvitationsProvider>(
+      context,
+      listen: false,
+    );
+    _channelsProvider = Provider.of<ChannelsProvider>(
+      context,
+      listen: false,
+    );
+    _userProvider = Provider.of<UserProvider>(
       context,
       listen: false,
     );
@@ -142,6 +154,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
 
   Widget _createDeclineAcceptButtons(
     ThemeData theme,
+    String senderId,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -176,6 +189,20 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
             await _invitationsProvider.acceptChannelInvitation(
               channelInvitationId: widget.channelInvitationId,
             );
+            final userChannels = await _channelsProvider.queryUserChannels(
+              userId: _userProvider.user!.id,
+            );
+            for (ChannelForUser channel in userChannels.response!) {
+              if (channel.participants.any(
+                    (c) => c.user.id == _userProvider.user!.id,
+                  ) &&
+                  channel.participants.any(
+                    (c) => c.user.id == senderId,
+                  )) {
+                router.push('${Routes.inboxChats.path}/${channel.id}');
+                return;
+              }
+            }
             router.push(Routes.inboxChats.path);
           },
           child: Text(
@@ -242,7 +269,8 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                             .format(invitationResult.createdAt)
                             .toLowerCase(),
                       ),
-                      _createDeclineAcceptButtons(theme),
+                      _createDeclineAcceptButtons(
+                          theme, invitationResult.sender.id),
                     ],
                   ),
                 ),
