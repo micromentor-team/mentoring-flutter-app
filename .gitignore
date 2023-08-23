@@ -62,3 +62,7 @@ node_modules/
 *firebase_service_account.json
 
 *service_account.json
+*upload-keystore.jks
+android/key.properties
+android/fastlane/metadata/*/*/images/*Screenshots/
+android/fastlane/report.xml

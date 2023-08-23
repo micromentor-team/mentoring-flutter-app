@@ -32,13 +32,26 @@ platform :android do
 
   desc "Build and deploy the Android app to the Play Store"
   lane :build_and_deploy_android do
-    sh("flutter", "build", "apk", "--release")
+    version_code = google_play_track_version_codes(
+      package_name: "org.micromentor.mm_flutter_app",
+      track: "internal",
+      json_key: "./fastlane/service_account.json",
+      #json_key_data: ENV["PLAYSTORE_JSON_KEY"],  # Enable this for Github Actions
+    )
+     
+    # Make sure to default to zero when there is no version in Playstore (ie, it`s a new app)
+    version_code_play_store = version_code.fetch(0, 0).to_i
+    update_version_code = version_code_play_store + 1
+
+    sh("flutter", "build", "appbundle", "--build-number=#{update_version_code}")
 
     upload_to_play_store(
-      track: 'internal',  # or 'alpha', 'beta', 'production'
-      json_key_data: ENV['PLAYSTORE_JSON_KEY'],  # Will explain how to set this up in GitHub Actions
+      track: "internal",  # or "alpha", "beta", "production"
+      release_status: 'draft',
+      json_key: "./fastlane/service_account.json",
+      #json_key_data: ENV["PLAYSTORE_JSON_KEY"],  # Enable this for Github Actions
       package_name: "org.micromentor.mm_flutter_app",
-      apk: "./build/app/outputs/flutter-apk/app-release.apk"
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
     )
   end
 end
