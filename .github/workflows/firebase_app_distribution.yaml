@@ -18,8 +18,10 @@ jobs:
       with:
         ruby-version: 2.7.2
         bundler-cache: true
+    - name: Install dependencies
+      run: cd android && bundle install
     - name: Run app distribution
-      run: bundle exec fastlane build_and_distribute_android_with_firebase
+      run: cd android && bundle exec fastlane build_and_distribute_android_with_firebase
       env:
         FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
         FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
