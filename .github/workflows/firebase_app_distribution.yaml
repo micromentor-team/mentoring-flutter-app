@@ -13,6 +13,11 @@ jobs:
         flutter-version: '3.10.1'
     - name: Add assets/.env
       run: touch assets/.env
+    - name: Add Google Services JSON
+      run: 'echo "$GOOGLE_SERVICES_JSON_FILE" > android/app/google-services.json'
+      env:
+        GOOGLE_SERVICES_JSON_FILE: ${{ secrets. GOOGLE_SERVICES_JSON_FILE }} 
+         
     - name: Set up ruby env
       uses: ruby/setup-ruby@v1
       with:
