@@ -21,10 +21,10 @@ export class MockServerState {
         this.loggedInUser = generators.generateUser(this.groups.filter(g => g.ident === "mentees"));
         // 4 users, one for each channel and one who hasn't communicated with the logged in user
         this.otherUsers = [
-            generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
-            generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
             generators.generateUser(this.groups.filter(g => g.ident === "mentors" || g.ident === "mentees")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
             generators.generateUser(this.groups.filter(g => g.ident === "mentees")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentees" || g.ident === "mentors")),
         ];
         this.channels = [
             generators.generateChannel([this.loggedInUser, this.otherUsers[0]]),

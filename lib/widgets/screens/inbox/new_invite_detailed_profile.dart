@@ -9,6 +9,7 @@ import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
+import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
@@ -62,6 +63,41 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
   }
 
   Widget _createCard(ChannelInvitationById invitation) {
+    final maybeMentorsGroupMembership = invitation.sender.offersHelp
+        ? invitation.sender.groupMemberships
+            .where(
+              (element) => element.groupIdent == GroupIdent.mentors,
+            )
+            .firstOrNull
+            ?.maybeWhen(
+              mentorsGroupMembership: (g) => g,
+              orElse: () => null,
+            )
+        : null;
+    final maybeMenteesGroupMembership = invitation.sender.seeksHelp
+        ? invitation.sender.groupMemberships
+            .where(
+              (element) => element.groupIdent == GroupIdent.mentees,
+            )
+            .firstOrNull
+            ?.maybeWhen(
+              menteesGroupMembership: (g) => g,
+              orElse: () => null,
+            )
+        : null;
+    final List<SkillChip> skills = invitation.sender.offersHelp
+        ? maybeMentorsGroupMembership?.expertises
+                .map(
+                  (e) => SkillChip(skill: e.translatedValue!),
+                )
+                .toList() ??
+            []
+        : maybeMenteesGroupMembership?.soughtExpertises
+                .map(
+                  (e) => SkillChip(skill: e.translatedValue!),
+                )
+                .toList() ??
+            [];
     return createProfilCardFromInfoAndCheckbox(
       info: ProfileQuickViewInfo(
         isRecommended: false,
@@ -74,20 +110,25 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
             _l10n.defaultValueLocation,
         company: invitation.sender.companies.firstOrNull?.name,
         companyRole: invitation.sender.jobTitle,
-        endorsements: invitation.sender.groupMemberships
-            .firstWhere((element) => element.groupIdent == GroupIdent.mentors)
-            .maybeWhen(
-              mentorsGroupMembership: (g) => g.endorsements,
-              orElse: () => 0,
-            ),
-        skills: invitation.sender.groupMemberships
-            .firstWhere((element) => element.groupIdent == GroupIdent.mentors)
-            .maybeWhen(
-              mentorsGroupMembership: (g) => g.expertises
-                  .map((e) => SkillChip(skill: e.translatedValue!))
-                  .toList(),
-              orElse: () => [],
-            ),
+        ventureStage: invitation.sender.seeksHelp &&
+                invitation.sender.companies.firstOrNull?.companyStage
+                        ?.translatedValue !=
+                    null
+            ? ProfileChip(
+                text: invitation
+                    .sender.companies.first.companyStage!.translatedValue!,
+              )
+            : null,
+        ventureIndustry: invitation.sender.seeksHelp &&
+                maybeMenteesGroupMembership?.industry?.translatedValue != null
+            ? ProfileChip(
+                text: maybeMenteesGroupMembership!.industry!.translatedValue!,
+              )
+            : null,
+        endorsements: invitation.sender.offersHelp
+            ? maybeMentorsGroupMembership?.endorsements ?? 0
+            : 0,
+        skills: skills,
       ),
     );
   }
