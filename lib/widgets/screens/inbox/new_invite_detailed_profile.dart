@@ -11,6 +11,7 @@ import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
+import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
 
@@ -133,29 +134,14 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
     );
   }
 
-  Widget _createDateDivider(ThemeData theme, String date) {
-    return Padding(
-      padding: const EdgeInsets.all(Insets.paddingMedium),
-      child: Row(
-        children: [
-          const Expanded(child: Divider()),
-          Text(
-            date,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: theme.colorScheme.secondary,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          const Expanded(child: Divider()),
-        ],
-      ),
-    );
-  }
-
   Widget _createMessagePopup(ThemeData theme, String messageText, String time) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(Insets.paddingExtraLarge, 0,
-          Insets.paddingExtraLarge, Insets.paddingExtraLarge),
+      padding: const EdgeInsetsDirectional.fromSTEB(
+        Insets.paddingExtraLarge,
+        0,
+        Insets.paddingExtraLarge,
+        Insets.paddingExtraLarge,
+      ),
       child: SizedBox(
         child: DecoratedBox(
           decoration: BoxDecoration(
@@ -175,14 +161,24 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                 Row(
                   children: [
                     Flexible(
-                      child: Text(messageText),
+                      child: Text(
+                        messageText,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onTertiaryContainer,
+                        ),
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(time),
+                    Text(
+                      time,
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: theme.colorScheme.outline,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -296,13 +292,14 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                   child: ListView(
                     children: [
                       _createCard(invitationResult),
-                      _createDateDivider(
-                        theme,
-                        AppUtility.simplePastDateFormat(
+                      const SizedBox(height: Insets.paddingMedium),
+                      TextDivider(
+                        text: AppUtility.simplePastDateFormat(
                           context,
                           invitationResult.createdAt,
                         ),
                       ),
+                      const SizedBox(height: Insets.paddingMedium),
                       _createMessagePopup(
                         theme,
                         invitationResult.messageText!,
