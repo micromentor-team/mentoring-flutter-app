@@ -197,5 +197,11 @@
     "myAvailability": "My availability",
     "myExpectations": "My expectations",
     "profileAboutMe": "About Me",
-    "profileMyLanguages": "My languages"
+    "profileMyLanguages": "My languages",
+    "letsGetStarted": "Let's get started",
+    "getStarted": "Get Started",
+    "startScreenPrompt": "It only takes a few minutes.",
+    "micromentorDesc": "MicroMentor is a global community of small business owners and volunteer mentors.",
+    "haveAnAccount": "Have an account? Log in",
+    "changeYourLanguage": "Change your language"
 }

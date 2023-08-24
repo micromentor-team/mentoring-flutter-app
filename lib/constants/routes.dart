@@ -13,6 +13,10 @@ class Routes {
     name: 'root',
     path: '/',
   );
+  static Route welcome = Route(
+    name: 'welcome',
+    path: '/welcome',
+  );
   static Route signin = Route(
     name: 'signin',
     path: '/signin',
