@@ -331,6 +331,28 @@ const documentNodeQueryFindChannelsForUser = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'latestMessage'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'createdAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: 'participants'),
             alias: null,
             arguments: [],
@@ -416,6 +438,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
     this.createdBy,
     required this.createdAt,
     required this.isArchivedForMe,
+    required this.latestMessage,
     required this.participants,
     this.$__typename = 'Channel',
   });
@@ -428,6 +451,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
     final l$createdBy = json['createdBy'];
     final l$createdAt = json['createdAt'];
     final l$isArchivedForMe = json['isArchivedForMe'];
+    final l$latestMessage = json['latestMessage'];
     final l$participants = json['participants'];
     final l$$__typename = json['__typename'];
     return Query$FindChannelsForUser$findChannelsForUser(
@@ -438,6 +462,9 @@ class Query$FindChannelsForUser$findChannelsForUser {
       createdBy: (l$createdBy as String?),
       createdAt: DateTime.parse((l$createdAt as String)),
       isArchivedForMe: (l$isArchivedForMe as bool),
+      latestMessage:
+          Query$FindChannelsForUser$findChannelsForUser$latestMessage.fromJson(
+              (l$latestMessage as Map<String, dynamic>)),
       participants: (l$participants as List<dynamic>)
           .map((e) => Query$FindChannelsForUser$findChannelsForUser$participants
               .fromJson((e as Map<String, dynamic>)))
@@ -458,6 +485,9 @@ class Query$FindChannelsForUser$findChannelsForUser {
 
   final bool isArchivedForMe;
 
+  final Query$FindChannelsForUser$findChannelsForUser$latestMessage
+      latestMessage;
+
   final List<Query$FindChannelsForUser$findChannelsForUser$participants>
       participants;
 
@@ -477,6 +507,8 @@ class Query$FindChannelsForUser$findChannelsForUser {
     _resultData['createdAt'] = l$createdAt.toIso8601String();
     final l$isArchivedForMe = isArchivedForMe;
     _resultData['isArchivedForMe'] = l$isArchivedForMe;
+    final l$latestMessage = latestMessage;
+    _resultData['latestMessage'] = l$latestMessage.toJson();
     final l$participants = participants;
     _resultData['participants'] =
         l$participants.map((e) => e.toJson()).toList();
@@ -493,6 +525,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
     final l$createdBy = createdBy;
     final l$createdAt = createdAt;
     final l$isArchivedForMe = isArchivedForMe;
+    final l$latestMessage = latestMessage;
     final l$participants = participants;
     final l$$__typename = $__typename;
     return Object.hashAll([
@@ -502,6 +535,7 @@ class Query$FindChannelsForUser$findChannelsForUser {
       l$createdBy,
       l$createdAt,
       l$isArchivedForMe,
+      l$latestMessage,
       Object.hashAll(l$participants.map((v) => v)),
       l$$__typename,
     ]);
@@ -557,6 +591,11 @@ class Query$FindChannelsForUser$findChannelsForUser {
     if (l$isArchivedForMe != lOther$isArchivedForMe) {
       return false;
     }
+    final l$latestMessage = latestMessage;
+    final lOther$latestMessage = other.latestMessage;
+    if (l$latestMessage != lOther$latestMessage) {
+      return false;
+    }
     final l$participants = participants;
     final lOther$participants = other.participants;
     if (l$participants.length != lOther$participants.length) {
@@ -605,10 +644,13 @@ abstract class CopyWith$Query$FindChannelsForUser$findChannelsForUser<TRes> {
     String? createdBy,
     DateTime? createdAt,
     bool? isArchivedForMe,
+    Query$FindChannelsForUser$findChannelsForUser$latestMessage? latestMessage,
     List<Query$FindChannelsForUser$findChannelsForUser$participants>?
         participants,
     String? $__typename,
   });
+  CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<TRes>
+      get latestMessage;
   TRes participants(
       Iterable<Query$FindChannelsForUser$findChannelsForUser$participants> Function(
               Iterable<
@@ -637,6 +679,7 @@ class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
     Object? createdBy = _undefined,
     Object? createdAt = _undefined,
     Object? isArchivedForMe = _undefined,
+    Object? latestMessage = _undefined,
     Object? participants = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -656,6 +699,10 @@ class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
             isArchivedForMe == _undefined || isArchivedForMe == null
                 ? _instance.isArchivedForMe
                 : (isArchivedForMe as bool),
+        latestMessage: latestMessage == _undefined || latestMessage == null
+            ? _instance.latestMessage
+            : (latestMessage
+                as Query$FindChannelsForUser$findChannelsForUser$latestMessage),
         participants: participants == _undefined || participants == null
             ? _instance.participants
             : (participants as List<
@@ -664,6 +711,13 @@ class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+  CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<TRes>
+      get latestMessage {
+    final local$latestMessage = _instance.latestMessage;
+    return CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage(
+        local$latestMessage, (e) => call(latestMessage: e));
+  }
+
   TRes participants(
           Iterable<Query$FindChannelsForUser$findChannelsForUser$participants> Function(
                   Iterable<
@@ -691,12 +745,157 @@ class _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
     String? createdBy,
     DateTime? createdAt,
     bool? isArchivedForMe,
+    Query$FindChannelsForUser$findChannelsForUser$latestMessage? latestMessage,
     List<Query$FindChannelsForUser$findChannelsForUser$participants>?
         participants,
     String? $__typename,
   }) =>
       _res;
+  CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<TRes>
+      get latestMessage =>
+          CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage
+              .stub(_res);
   participants(_fn) => _res;
+}
+
+class Query$FindChannelsForUser$findChannelsForUser$latestMessage {
+  Query$FindChannelsForUser$findChannelsForUser$latestMessage({
+    required this.createdAt,
+    this.$__typename = 'ChannelMessage',
+  });
+
+  factory Query$FindChannelsForUser$findChannelsForUser$latestMessage.fromJson(
+      Map<String, dynamic> json) {
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelsForUser$findChannelsForUser$latestMessage(
+      createdAt: DateTime.parse((l$createdAt as String)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelsForUser$findChannelsForUser$latestMessage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelsForUser$findChannelsForUser$latestMessage
+    on Query$FindChannelsForUser$findChannelsForUser$latestMessage {
+  CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<
+          Query$FindChannelsForUser$findChannelsForUser$latestMessage>
+      get copyWith =>
+          CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<
+    TRes> {
+  factory CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage(
+    Query$FindChannelsForUser$findChannelsForUser$latestMessage instance,
+    TRes Function(Query$FindChannelsForUser$findChannelsForUser$latestMessage)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser$latestMessage;
+
+  factory CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser$latestMessage;
+
+  TRes call({
+    DateTime? createdAt,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser$latestMessage<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser$latestMessage(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelsForUser$findChannelsForUser$latestMessage _instance;
+
+  final TRes Function(
+      Query$FindChannelsForUser$findChannelsForUser$latestMessage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelsForUser$findChannelsForUser$latestMessage(
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as DateTime),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser$latestMessage<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser$latestMessage(
+      this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
 }
 
 class Query$FindChannelsForUser$findChannelsForUser$participants {

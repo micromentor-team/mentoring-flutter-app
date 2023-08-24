@@ -5,6 +5,7 @@ import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
+import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     with RouteAwareMixin<InboxInvitesReceivedScreen> {
   late final InvitationsProvider _invitationsProvider;
   late Future<OperationResult<InvitationInbox>> _invitationInbox;
+  late AppLocalizations _l10n;
 
   static const int tabBarIndex = 0;
 
@@ -40,6 +42,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     _invitationInbox = _invitationsProvider.getInboxInvitations();
+    _l10n = AppLocalizations.of(context)!;
   }
 
   void _refreshScaffold() {
@@ -79,9 +82,16 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onReady: () {
+            final pendingInvitations =
+                snapshot.data?.response?.channels?.pendingInvitations ?? [];
+            if (pendingInvitations.isEmpty) {
+              return EmptyStateMessage(
+                icon: Icons.mail,
+                text: _l10n.emptyStateInvites,
+              );
+            }
             return InvitesReceivedList(
-              pendingInvitations:
-                  snapshot.data?.response?.channels?.pendingInvitations ?? [],
+              pendingInvitations: pendingInvitations,
             );
           },
         );
@@ -147,6 +157,10 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
   List<InboxListTile> _createTileList(
     List<AllUsersWithFilterResult> invitationSenders,
   ) {
+    // Sort invitations by creation time, from most recent to least recent
+    widget.pendingInvitations.sort(
+      (a, b) => b.createdAt.compareTo(a.createdAt),
+    );
     List<InboxListTile> tiles = [];
     for (ChannelPendingInvitation invitation in widget.pendingInvitations) {
       tiles.add(

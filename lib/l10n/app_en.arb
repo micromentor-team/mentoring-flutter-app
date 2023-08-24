@@ -10,6 +10,8 @@
     "dateSimpleToday": "today",
     "dateSimpleYesterday": "yesterday",
     "defaultValueLocation": "Unknown location",
+    "emptyStateChats": "There are no conversations.",
+    "emptyStateInvites": "There are no requests.",
     "exploreEndorsements": "Endorsed by {numEndorsements} entrepreneurs",
     "exploreEntrepreneurVenture": "Venture:",
     "exploreExpertiseOffering": "Offering expertise in:",
