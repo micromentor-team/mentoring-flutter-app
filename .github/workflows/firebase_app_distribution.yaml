@@ -2,7 +2,7 @@ name: Release App with Fastlane (Firebase App Distribution)
 on:
   push:
     branches:
-      - 'app_distribution'
+      - 'main'
 jobs:
   build_android:
     runs-on: ubuntu-latest
