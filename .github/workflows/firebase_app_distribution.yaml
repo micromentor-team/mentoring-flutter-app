@@ -14,7 +14,7 @@ jobs:
     - name: Add assets/.env
       run: 'echo "$ENV_FILE" > assets/.env'
       env:
-        ENV_FILE: $${{ env.FLUTTER_APP_ENV_FILE }}
+        ENV_FILE: $${{ vars.FLUTTER_APP_ENV_FILE }}
     - name: Debug assets/.env
       run: echo "envfile=$(cat assets/.env)" >> $GITHUB_OUTPUT
     - name: Add Google Services JSON
