@@ -94,7 +94,9 @@ class WelcomeScreen extends StatelessWidget {
                         color: theme.colorScheme.primary,
                         decoration: TextDecoration.underline,
                       )),
-                  onTap: () {},
+                  onTap: () {
+                    context.push(Routes.selectLanguage.path);
+                  },
                 )),
           ]),
     )));

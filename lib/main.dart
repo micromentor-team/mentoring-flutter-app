@@ -15,13 +15,13 @@ import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
+import 'package:mm_flutter_app/providers/models/locale_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -42,9 +42,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppThemes.light(),
       darkTheme: AppThemes.dark(),
-      locale: const Locale('en'),
+      locale: Provider.of<LocaleModel>(context).locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      supportedLocales: Provider.of<LocaleModel>(context).getSupportedLocales(),
     );
   }
 }
@@ -167,6 +167,9 @@ void main() async {
               ),
               ChangeNotifierProvider(
                 create: (context) => ExploreCardFiltersModel(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => LocaleModel(),
               ),
               Provider<RouteObserver<PageRoute>>.value(
                 value: RouteObserver<PageRoute>(),

@@ -9,6 +9,7 @@ import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/progress/progress.dart';
+import 'package:mm_flutter_app/widgets/screens/welcome/select_language.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
@@ -50,6 +51,16 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               child: const WelcomeScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.selectLanguage.path,
+          name: Routes.selectLanguage.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const SelectLanguage(),
             );
           },
         ),

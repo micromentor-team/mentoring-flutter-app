@@ -105,10 +105,6 @@
     "linkedin": "LinkedIn",
     "telegram": "Telegram",
     "google": "Google",
-    "signInWithGoogle": "Sign in with Google",
-    "signInWithFacebook": "Sign in with Facebook",
-    "signInWithLinkedIn": "Sign in with LinkedIn",
-    "signInWithWhatsapp": "Sign in with Whatsapp",
     "inviteToConnect": "Invite to Connect",
     "@_SIGN_UP_PAGE":{
     },
@@ -203,5 +199,9 @@
     "startScreenPrompt": "It only takes a few minutes.",
     "micromentorDesc": "MicroMentor is a global community of small business owners and volunteer mentors.",
     "haveAnAccount": "Have an account? Log in",
-    "changeYourLanguage": "Change your language"
+    "changeYourLanguage": "Change your language",
+    "selectYourLanguage": "Select your language",
+    "currentLanguage": "Current language",
+    "otherLanguages": "Other languages",
+    "backToSignUp": "Back to sign up"
 }
