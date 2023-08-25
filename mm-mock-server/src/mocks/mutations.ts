@@ -19,6 +19,29 @@ export function mockMutations(serverState: MockServerState) {
             return "ok";
         },
         // channels, channel invitations and channel messages
+        acceptChannelInvitation: (_: any, args: { channelInvitationId: string }) => {
+            const channelInvitation = serverState.channelInvitations.find((e) => e.id == args.channelInvitationId);
+            channelInvitation.status = "accepted";
+            channelInvitation.channel = generators.generateChannel([channelInvitation.sender, channelInvitation.recipient]);
+            const messageFromInvitation = generators.generateChannelMessage(
+                channelInvitation.messageText,
+                channelInvitation.channel,
+                channelInvitation.sender,
+                channelInvitation.createdAt,
+            );
+            serverState.channelMessages.push(messageFromInvitation);
+            channelInvitation.channel.latestMessage = messageFromInvitation;
+            serverState.channels.push(channelInvitation.channel);
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: channelInvitation.id }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: channelInvitation.channel.id,
+                    invitationId: channelInvitation.id,
+                    eventType: 'invitationUpdated',
+                }
+            });
+            return channelInvitation.id;
+        },
         archiveChannelForMe: (_: any, args: { channelId: string }) => {
             let channel = serverState.channels.find((element) => element.id == args.channelId);
             channel.isArchivedForMe = true;
@@ -73,6 +96,19 @@ export function mockMutations(serverState: MockServerState) {
             });
             return message;
         },
+        declineChannelInvitation: (_: any, args: { channelInvitationId: string }) => {
+            const channelInvitation = serverState.channelInvitations.find((e) => e.id == args.channelInvitationId);
+            channelInvitation.status = "declined";
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: channelInvitation.id }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: channelInvitation.channel?.id,
+                    invitationId: channelInvitation.id,
+                    eventType: 'invitationUpdated',
+                }
+            });
+            return channelInvitation.id;
+        },
         deleteChannelMessage: (_: any, args: { channelMessageId: string, deletePhysically: boolean }) => {
             var channelMessage = serverState.channelMessages.find((element) => element.id == args.channelMessageId);
             const currentTime : string = new Date().toISOString();
@@ -119,27 +155,6 @@ export function mockMutations(serverState: MockServerState) {
                 }
             });
             return channel.id;
-        },
-        updateChannelInvitation: (_: any, args: { input: { status: string }}) => {
-            const invitation = serverState.channelInvitations[0]
-            if (args.input.status) {
-                if (args.input.status === "accepted"){
-                    invitation.status = "accepted";
-                    invitation.channel = generators.generateChannel([serverState.loggedInUser, serverState.otherUsers[3]])
-                    serverState.channels.push(invitation.channel);
-                }
-                else if (args.input.status === "declined")
-                    invitation.status = "declined";
-            }
-            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: invitation.id }});
-            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
-                channelChanged: {
-                    channelId: invitation.channel.id,
-                    invitationId: invitation.id,
-                    eventType: 'invitationUpdated',
-                }
-            });
-            return invitation.id;
         },
         updateChannelMessage: (_: any, args: { input: { id: string | null, messageText: string | null, deletedAt: Date | null } }) => {
             var channelMessage = serverState.channelMessages.find((element) => element.id == args.input.id);
