@@ -30,6 +30,9 @@ export function generateUser(groups?: any[]) {
         updatedAt: faker.date.recent(),
         groupMemberships: [],
         groupIds: [],
+        companies: [generateCompany()],
+        offersHelp: groups?.some(g => g.ident === "mentors") ?? false,
+        seeksHelp: groups?.some(g => g.ident === "mentees") ?? false,
     }
     if (groups) {
         user.groupMemberships = groups.map(g => generateGroupMembership(user, g));
@@ -140,7 +143,6 @@ export function generateGroupMembership(user: any, group: any) {
         membership.__typename = "MenteesGroupMembership";
         membership.soughtExpertises = faker.helpers.arrayElements(constants.expertises, 2);
         membership.industry = faker.helpers.arrayElement(constants.industries);
-        user.companies = generateCompany();
     }
 
     return membership;
@@ -210,22 +212,15 @@ export function generateChannelMessage(
     }
 }
 
-export function generateChannelInboxItemInvitation(channel: any, sender: any, declined?: boolean, accepted?: boolean) {
-    let status: string;
-    if (accepted)
-        status = "accepted";
-    else if (declined)
-        status = "declined";
-    else
-        status = "created";
+export function generateChannelInboxItemInvitation(channelInvitation: any) {
     return {
         __typename: "ChannelInboxItemInvitation",
-        channelId: channel.id,
-        createdAt: faker.date.recent(),
-        createdBy: sender.id,
-        id: faker.string.alphanumeric({length: 24}),
-        messageText: faker.lorem.sentence(),
-        status: status,
+        channelId: channelInvitation.channel?.id,
+        createdAt: channelInvitation.createdAt,
+        createdBy: channelInvitation.sender.id,
+        id: channelInvitation.id,
+        messageText: channelInvitation.messageText,
+        status: channelInvitation.status,
     }
 }
 

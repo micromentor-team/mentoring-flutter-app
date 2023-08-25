@@ -6,6 +6,9 @@ query FindChannelsForUser ($userId: String!) {
         createdBy
         createdAt
         isArchivedForMe
+        latestMessage {
+            createdAt
+        }
         participants {
             user {
                 id

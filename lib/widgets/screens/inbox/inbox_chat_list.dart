@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/inbox_chat_tile_model.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
+import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_chat_list_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +31,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
   late final ChannelsProvider _channelsProvider;
   late final ScaffoldModel _scaffoldModel;
   late Future<List<ChannelForUser>> _userChannels;
+  late AppLocalizations _l10n;
 
   @override
   void initState() {
@@ -47,6 +50,11 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _l10n = AppLocalizations.of(context)!;
+    _queryUserChannels();
+  }
+
+  void _queryUserChannels() {
     _userChannels = _channelsProvider
         .queryUserChannels(userId: _authenticatedUser!.id)
         .then((result) {
@@ -81,9 +89,11 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
     List<ChannelForUser> channels,
   ) {
     final List<DismissibleTile> tiles = [];
-    if (channels.isEmpty) {
-      return [];
-    }
+
+    // Sort channels by latestMessage creation time, starting from most recent
+    channels.sort(
+      (a, b) => b.latestMessage.createdAt.compareTo(a.latestMessage.createdAt),
+    );
 
     for (int i = 0; i < channels.length; i++) {
       final ChannelForUser channel = channels[i];
@@ -114,6 +124,11 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
               );
             }
             _refreshScaffold();
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              setState(() {
+                _queryUserChannels();
+              });
+            });
           },
           icon: widget.isArchivedForUser
               ? Icons.unarchive_outlined
@@ -134,9 +149,6 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
       );
     }
 
-    if (tiles.isEmpty) {
-      return [];
-    }
     List<Widget> contentList = [tiles.first];
     for (int i = 1; i < tiles.length; i++) {
       contentList.addAll([
@@ -160,6 +172,12 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
           snapshot: snapshot,
           onReady: () {
             final List<ChannelForUser> channels = snapshot.data ?? [];
+            if (channels.isEmpty) {
+              return EmptyStateMessage(
+                icon: Icons.chat,
+                text: _l10n.emptyStateChats,
+              );
+            }
             return ListView(
               children: _createContentList(
                 channels,
