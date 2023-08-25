@@ -2,7 +2,7 @@ name: Release App with Fastlane (Firebase App Distribution)
 on:
   push:
     branches:
-      - 'main'
+      - 'app_distribution'
 jobs:
   build_android:
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
       env:
         ENV_FILE: $${{ env.FLUTTER_APP_ENV_FILE }}
     - name: Debug assets/.env
-      run: cat assets/.env
+      run: echo "envfile=$(cat assets/.env)" >> $GITHUB_OUTPUT
     - name: Add Google Services JSON
       run: 'echo "$GOOGLE_SERVICES_JSON_FILE" > android/app/google-services.json'
       env:
