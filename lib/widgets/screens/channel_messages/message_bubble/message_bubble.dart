@@ -81,13 +81,10 @@ class MessageBubble extends StatelessWidget {
     }
   }
 
-  Widget _buildMessageText(
-    AppLocalizations l10n,
-    ThemeData theme,
-    bool isUser,
-  ) {
+  Widget _buildMessageText(AppLocalizations l10n, ThemeData theme, isUser) {
+    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!) &&
+        message.replyToMessageId == null;
     if (message.deletedAt != null && !isUser) {
-      // Message has been deleted by the other user. Conceal message text.
       return Text(
         l10n.messagesStatusDeleted,
         style: theme.textTheme.bodyMedium?.copyWith(
@@ -95,76 +92,26 @@ class MessageBubble extends StatelessWidget {
           color: theme.colorScheme.outline,
         ),
       );
-    }
-    final isOnlyText = !EmojiUtils.containsEmojis(message.messageText!);
-    final isOnlyEmoji = !isOnlyText &&
-        EmojiUtils.isOnlyEmoji(message.messageText!) &&
-        message.replyToMessageId == null;
-    if (isOnlyText || isOnlyEmoji) {
-      // Message contains either only text, or only emoji. Use consistent
-      // fontSize for the message. Return a single selectable text widget.
-      return _createSelectableText(
-        theme: theme,
-        isUser: isUser,
+    } else {
+      return SelectableLinkify(
         text: message.messageText!,
-        isOnlyEmoji: isOnlyEmoji,
-        isMessageFragment: false,
-      );
-    }
-    // Message contains a mixture of emoji and text. Iterate through each
-    // character to make Emoji a larger fontSize than the text. Return a
-    // collection of fragments consisting of emoji and text.
-    final List<MessageFragment> messageFragments = EmojiUtils.splitTextAndEmoji(
-      message.messageText!,
-    );
-    final List<Widget> reconstructedText = [];
-    for (MessageFragment messageFragment in messageFragments) {
-      reconstructedText.add(
-        _createSelectableText(
-          theme: theme,
-          isUser: isUser,
-          text: messageFragment.text,
-          isOnlyEmoji: messageFragment.isEmoji,
-          isMessageFragment: true,
+        onOpen: (link) => _onOpenLink(link),
+        linkStyle: theme.textTheme.bodyMedium?.copyWith(
+          color: isUser
+              ? theme.colorScheme.onPrimaryContainer
+              : theme.colorScheme.onTertiaryContainer,
+        ),
+        textAlign: isEmoji && isUser ? TextAlign.end : null,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          fontSize: isEmoji ? theme.textTheme.displayMedium?.fontSize : null,
+          decoration:
+              message.deletedAt != null ? TextDecoration.lineThrough : null,
+          color: isUser
+              ? theme.colorScheme.onPrimaryContainer
+              : theme.colorScheme.onTertiaryContainer,
         ),
       );
     }
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: reconstructedText,
-    );
-  }
-
-  SelectableLinkify _createSelectableText({
-    required ThemeData theme,
-    required bool isUser,
-    required String text,
-    required bool isOnlyEmoji,
-    required bool isMessageFragment,
-  }) {
-    final double? overrideFontSize = isOnlyEmoji
-        ? isMessageFragment
-            ? theme.textTheme.titleLarge?.fontSize
-            : theme.textTheme.displayMedium?.fontSize
-        : null;
-    return SelectableLinkify(
-      text: text,
-      onOpen: (link) => _onOpenLink(link),
-      linkStyle: theme.textTheme.bodyMedium?.copyWith(
-        color: isUser
-            ? theme.colorScheme.onPrimaryContainer
-            : theme.colorScheme.onTertiaryContainer,
-      ),
-      textAlign: isOnlyEmoji && isUser ? TextAlign.end : null,
-      style: theme.textTheme.bodyMedium?.copyWith(
-        fontSize: overrideFontSize,
-        decoration:
-            message.deletedAt != null ? TextDecoration.lineThrough : null,
-        color: isUser
-            ? theme.colorScheme.onPrimaryContainer
-            : theme.colorScheme.onTertiaryContainer,
-      ),
-    );
   }
 
   @override
@@ -174,7 +121,7 @@ class MessageBubble extends StatelessWidget {
       userId: message.createdBy,
       context: context,
     );
-    final isEmoji = EmojiUtils.isOnlyEmoji(message.messageText!) &&
+    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!) &&
         message.replyToMessageId == null;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
