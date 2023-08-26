@@ -24,7 +24,7 @@ class InvitationSection extends StatefulWidget {
 class _InvitationSectionState extends State<InvitationSection> {
   late final InvitationsProvider _invitationsProvider;
   late Future<OperationResult<InvitationInbox>> _invitationInbox;
-  AppLocalizations? _l10n;
+  late AppLocalizations _l10n;
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _InvitationSectionState extends State<InvitationSection> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _invitationInbox = _invitationsProvider.getInboxInvitations();
-    _l10n = AppLocalizations.of(context);
+    _l10n = AppLocalizations.of(context)!;
   }
 
   @override
@@ -48,22 +48,21 @@ class _InvitationSectionState extends State<InvitationSection> {
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onReady: () {
-            if (snapshot.data?.response?.channels?.invitations == null ||
-                snapshot.data!.response!.channels!.invitations!.isEmpty) {
+            // TODO: Get invitations sent by this user that were accepted (matches)
+            if (snapshot.data?.response?.channels?.pendingInvitations == null ||
+                snapshot
+                    .data!.response!.channels!.pendingInvitations!.isEmpty) {
               return const SizedBox(width: 0, height: 0);
             }
             final filteredInvitations = snapshot
-                .data!.response!.channels!.invitations!
-                .where((element) =>
-                    element.status == Enum$ChannelInvitationStatus.accepted ||
-                    element.status == Enum$ChannelInvitationStatus.created)
+                .data!.response!.channels!.pendingInvitations!
                 .take(InvitationSection.maxTilesToShow)
                 .toList(growable: false);
             if (filteredInvitations.isEmpty) {
               return const SizedBox(width: 0, height: 0);
             }
             return SectionTile(
-              title: _l10n!.homeInvitationSectionTitle,
+              title: _l10n.homeInvitationSectionTitle,
               addTopDivider: true,
               removeBottomPadding: true,
               seeAllOnPressed: () =>
@@ -78,7 +77,7 @@ class _InvitationSectionState extends State<InvitationSection> {
 }
 
 class InvitationList extends StatefulWidget {
-  final List<ChannelInvitation> invitations;
+  final List<ChannelPendingInvitation> invitations;
 
   const InvitationList({
     super.key,
@@ -114,7 +113,9 @@ class _InvitationListState extends State<InvitationList> {
   }
 
   InvitationTile _createInvitationTile(
+    BuildContext context,
     AppLocalizations l10n,
+    String channelInvitationId,
     Query$FindUsersWithFilter$findUsers user,
     Enum$ChannelInvitationStatus invitationStatus,
   ) {
@@ -124,7 +125,12 @@ class _InvitationListState extends State<InvitationList> {
       invitationStatus: invitationStatus,
       avatarUrl: user.avatarUrl,
       buttonOnPressed: () => {
-        //TODO(m-rosario): Open profile when clicked.
+        if (invitationStatus == Enum$ChannelInvitationStatus.created)
+          {
+            context.push(
+              '${Routes.inboxInvitesReceived.path}/$channelInvitationId',
+            )
+          }
       },
     );
   }
@@ -154,7 +160,9 @@ class _InvitationListState extends State<InvitationList> {
               }
               invitationWidgets.add(
                 _createInvitationTile(
+                  context,
                   _l10n!,
+                  widget.invitations[i].id,
                   snapshot.data!.response!.firstWhere((element) =>
                       widget.invitations[i].createdBy! == element.id),
                   widget.invitations[i].status,

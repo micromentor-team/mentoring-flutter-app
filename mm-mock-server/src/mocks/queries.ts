@@ -1,5 +1,6 @@
 import { MockServerState } from "./util/state";
 import * as constants from "./util/constants";
+import { generateChannelInboxItemInvitation } from "./util/generators";
 
 export function mockQueries(serverState: MockServerState) {
     return {
@@ -15,24 +16,28 @@ export function mockQueries(serverState: MockServerState) {
         },
         // channels, channel invitations and channel messages
         findChannelById: (_: any, args: { id: string }) => {
-            return serverState.channels.find((element) => element.id == args.id);
+            return serverState.channels.find((e) => e.id == args.id);
         },
-        findChannelMessages: () => {
-            return serverState.channelMessages;
+        findChannelInvitationById: (_: any, args: { id: string }) => {
+            return serverState.channelInvitations.find((e) => e.id == args.id);
+        },
+        findChannelMessages: (_: any, args: { filter: { channelId: string }}) => {
+            return serverState.channelMessages.filter((e) => e.channelId == args.filter.channelId);
         },
         findChannelMessageById: (_: any, args: { id: string }) => {
-            return serverState.channelMessages.find((element) => element.id == args.id);
+            return serverState.channelMessages.find((e) => e.id == args.id);
         },
         findChannelsForUser: () => {
             return serverState.channels;
         },
         myInbox: () => {
+            const channelInboxItemInvitations = serverState.channelInvitations.map((e) => generateChannelInboxItemInvitation(e));
             return {
                 __typename: "UserInbox",
                 channels: {
                     __typename: "ChannelInbox",
-                    invitations: serverState.channelInboxItemInvitations,
-                    pendingInvitations: serverState.channelInboxItemInvitations.filter((e) => e.status == "created"),
+                    invitations: channelInboxItemInvitations,
+                    pendingInvitations: channelInboxItemInvitations.filter((e) => e.status == "created"),
                     unseenMessages: serverState.channelMessages.filter((e) => !e.statuses || e.statuses.length == 0),
                 }
             }

@@ -77,6 +77,10 @@ class Routes {
     name: 'inboxInvitesReceived',
     path: '${inboxInvites.path}/received',
   );
+  static Route inboxInvitesReceivedId = Route(
+    name: 'inboxInvitesReceivedId',
+    path: '${inboxInvitesReceived.path}/:${RouteParams.channelInvitationId}',
+  );
   static Route inboxInvitesSent = Route(
     name: 'inboxInvitesSent',
     path: '${inboxInvites.path}/sent',
@@ -93,13 +97,10 @@ class Routes {
     name: 'profile',
     path: '/profile',
   );
-  static Route inboxInvitesReceivedProfile = Route(
-    name: 'inboxInvitesReceivedProfile',
-    path: '${inboxInvitesReceived.path}/profile',
-  );
 }
 
 class RouteParams {
   RouteParams._private();
   static const String channelId = 'channelId';
+  static const String channelInvitationId = 'channelInvitationId';
 }
