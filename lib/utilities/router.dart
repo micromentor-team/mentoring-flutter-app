@@ -9,6 +9,7 @@ import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/progress/progress.dart';
+import 'package:mm_flutter_app/widgets/screens/welcome/select_language.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
@@ -20,6 +21,7 @@ import '../widgets/screens/inbox/inbox_chat_list.dart';
 import '../widgets/screens/inbox/new_invite_detailed_profile.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
+import '../widgets/screens/welcome/welcome_screen.dart';
 
 class AppRouter {
   AppRouter._private();
@@ -39,6 +41,26 @@ class AppRouter {
               child: StartScreen(
                   nextRouteName: state.queryParameters['nextRouteName'] ??
                       Routes.home.name),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.welcome.path,
+          name: Routes.welcome.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const WelcomeScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.selectLanguage.path,
+          name: Routes.selectLanguage.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const SelectLanguage(),
             );
           },
         ),

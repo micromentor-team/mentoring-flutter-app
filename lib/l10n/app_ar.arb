@@ -3,5 +3,18 @@
     "navExploreText": "استكشاف",
     "navProgressText": "الرحلة",
     "navInboxText": "صندوق الوارد",
-    "navProfileText": "الملف الشخصي"
+    "navProfileText": "الملف الشخصي",
+    "logIn": "تسجيل الدخول",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "createNewAccount": "انشاء حساب جديد",
+    "welcome": "مرحباً",
+    "letsGetStarted": "هيا بنا نبدأ",
+    "getStarted": "البدء",
+    "startScreenPrompt": "يستغرق سوى بضع دقائق.",
+    "micromentorDesc": "MicroMentor هو مجتمع عالمي من أصحاب الأعمال الصغيرة والموجهين المتطوعين.",
+    "haveAnAccount": "هل لديك حساب؟ تسجيل الدخول",
+    "changeYourLanguage": "تغيير لغتك",
+    "selectYourLanguage": "اختر لغتك",
+    "currentLanguage": "اللغة الحالية",
+    "otherLanguages": "لغات اخرى"
 }
