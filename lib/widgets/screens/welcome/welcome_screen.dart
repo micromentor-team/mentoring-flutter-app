@@ -64,7 +64,9 @@ class WelcomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(Insets.paddingSmall),
                 child: ElevatedButton(
                     style: ButtonStyles.primaryRoundedRectangleButton(context),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(Routes.signup.path);
+                    },
                     child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 24.0, vertical: 4.0),
