@@ -20,6 +20,7 @@ import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
 import 'package:mm_flutter_app/widgets/screens/welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -79,7 +80,9 @@ class _StartScreenState extends State<StartScreen> {
           onReady: () {
             if (snapshot.data?.response == null) {
               // Empty result means that the user not signed in.
-              return const WelcomeScreen();
+              return widget.nextRouteName == Routes.home.name
+                  ? const WelcomeScreen()
+                  : SignInScreen(nextRouteName: widget.nextRouteName);
             }
             WidgetsBinding.instance.addPostFrameCallback((_) {
               context.goNamed(widget.nextRouteName);
