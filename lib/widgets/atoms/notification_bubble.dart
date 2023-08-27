@@ -5,10 +5,10 @@ import '../../constants/app_constants.dart';
 class NotificationBubble extends StatelessWidget {
   final int notifications;
 
-  static const double _notificationBubbleHeight = 16.0;
-  static const double _notificationBubbleSingleCharWidth = 16.0;
-  static const double _notificationBubbleDoubleCharWidth = 20.0;
-  static const double _notificationBubbleTripleCharWidth = 24.0;
+  static const double _notificationBubbleHeight = 20.0;
+  static const double _notificationBubbleSingleCharWidth = 20.0;
+  static const double _notificationBubbleDoubleCharWidth = 24.0;
+  static const double _notificationBubbleTripleCharWidth = 28.0;
 
   const NotificationBubble({
     super.key,
