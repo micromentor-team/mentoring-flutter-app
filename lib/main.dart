@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +13,7 @@ import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
+import 'package:mm_flutter_app/providers/models/locale_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
@@ -22,6 +21,7 @@ import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/loading.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
+import 'package:mm_flutter_app/widgets/screens/welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -41,9 +41,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppThemes.light(),
       darkTheme: AppThemes.dark(),
-      locale: const Locale('en'),
+      locale: Provider.of<LocaleModel>(context).locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      supportedLocales: Provider.of<LocaleModel>(context).getSupportedLocales(),
     );
   }
 }
@@ -76,13 +76,13 @@ class _StartScreenState extends State<StartScreen> {
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onLoading: () => const LoadingScreen(),
-          onError: () => SignInScreen(
-            nextRouteName: widget.nextRouteName,
-          ),
+          onError: () => const WelcomeScreen(),
           onReady: () {
             if (snapshot.data?.response == null) {
               // Empty result means that the user not signed in.
-              return SignInScreen(nextRouteName: widget.nextRouteName);
+              return widget.nextRouteName == Routes.home.name
+                  ? const WelcomeScreen()
+                  : SignInScreen(nextRouteName: widget.nextRouteName);
             }
             WidgetsBinding.instance.addPostFrameCallback((_) {
               context.goNamed(widget.nextRouteName);
@@ -168,6 +168,9 @@ void main() async {
               ),
               ChangeNotifierProvider(
                 create: (context) => ExploreCardFiltersModel(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => LocaleModel(),
               ),
               Provider<RouteObserver<PageRoute>>.value(
                 value: RouteObserver<PageRoute>(),

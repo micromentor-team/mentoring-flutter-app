@@ -1,0 +1,20 @@
+{
+    "navHomeText": "hogar",
+    "navExploreText": "explorar",
+    "navProgressText": "progreso",
+    "navInboxText": "bandeja de entrada",
+    "navProfileText": "perfil",
+    "logIn": "acceso",
+    "resetPassword": "restablecer la contraseña",
+    "createNewAccount": "crear una nueva cuenta",
+    "welcome": "Bienvenida",
+    "letsGetStarted": "Empecemos",
+    "getStarted": "Empezar",
+    "startScreenPrompt": "Sólo lleva unos minutos.",
+    "micromentorDesc": "MicroMentor es una comunidad global de propietarios de pequeñas empresas y mentores voluntarios.",
+    "haveAnAccount": "¿Tener una cuenta? Acceso",
+    "changeYourLanguage": "Cambia tu idioma",
+    "selectYourLanguage": "elige tu idioma",
+    "currentLanguage": "Idioma actual",
+    "otherLanguages": "Otros idiomas"
+}
