@@ -7,7 +7,7 @@ class InboxListTile extends StatelessWidget {
   final String? avatarUrl;
   final String fullName;
   final DateTime date;
-  final String? message;
+  final String message;
   final int notifications;
   final bool highlightTile;
   final bool simplifyDate;
@@ -19,7 +19,7 @@ class InboxListTile extends StatelessWidget {
     this.avatarUrl,
     required this.fullName,
     required this.date,
-    this.message,
+    required this.message,
     this.notifications = 0,
     this.highlightTile = false,
     this.simplifyDate = false,
@@ -135,24 +135,23 @@ class InboxListTile extends StatelessWidget {
             const SizedBox(
               height: Insets.paddingSmall,
             ),
-            if (message != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.paddingSmall,
-                ),
-                child: Text(
-                  message!,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: highlightTile
-                      ? theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onBackground,
-                        )
-                      : theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.hintColor,
-                        ),
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Insets.paddingSmall,
               ),
+              child: Text(
+                message,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: highlightTile
+                    ? theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onBackground,
+                      )
+                    : theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.hintColor,
+                      ),
+              ),
+            ),
           ],
         ),
       ),

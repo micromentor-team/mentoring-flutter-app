@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
@@ -20,35 +18,47 @@ class InboxInvitesSentScreen extends StatefulWidget {
 class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
     with RouteAwareMixin<InboxInvitesSentScreen> {
   static const int tabBarIndex = 1;
-  InboxListTile _createTestTile(
-    BuildContext context,
-    AppLocalizations l10n,
-    int tileIndex,
-  ) {
-    // TODO(m-rosario): Replace mock data with backend data.
-    final DateTime date = DateTime.now()
-        .subtract(Duration(days: tileIndex * pow(1.4, tileIndex).floor()));
-    return InboxListTile(
-      avatarUrl:
-          'https://media.istockphoto.com/id/1160811064/photo/portrait-of-a-handsome-latin-man.jpg?s=612x612&w=0&k=20&c=MxkLwUFZ9ChfzFdB-OmmiWBnZrSioj9MmfSdlwCk4-4=',
-      fullName: 'Antoine Mousa',
-      date: date,
-      highlightTile: true,
-      simplifyDate: true,
-      datePrefix: l10n.inboxInvitesDateSent,
-      onPressed: () => DebugLogger.warning('TODO: NOT IMPLEMENTED.'),
-    );
-  }
 
-  List<InboxListTile> _createTestTiles(
-      BuildContext context, AppLocalizations l10n) {
-    List<InboxListTile> tiles = [];
-    for (int i = 0; i <= 12; i++) {
-      tiles.add(
-        _createTestTile(context, l10n, i),
-      );
-    }
-    return tiles;
+  List<InboxListTile> _createTestTiles(AppLocalizations l10n) {
+    // TODO(m-rosario): Replace mock data with backend data.
+    return [
+      InboxListTile(
+        avatarUrl:
+            'https://media.istockphoto.com/id/1160811064/photo/portrait-of-a-handsome-latin-man.jpg?s=612x612&w=0&k=20&c=MxkLwUFZ9ChfzFdB-OmmiWBnZrSioj9MmfSdlwCk4-4=',
+        fullName: 'Antoine Mousa',
+        date: DateTime.now(),
+        message:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        highlightTile: true,
+        simplifyDate: true,
+        datePrefix: l10n.inboxInvitesDateSent,
+        onPressed: () => DebugLogger.warning('TODO: NOT IMPLEMENTED.'),
+      ),
+      InboxListTile(
+        avatarUrl:
+            'https://st4.depositphotos.com/9999814/39958/i/600/depositphotos_399584092-stock-photo-attractive-young-woman-profile-portrait.jpg',
+        fullName: 'Azadeh Sana',
+        date: DateTime.now().subtract(const Duration(days: 1)),
+        message:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        highlightTile: true,
+        simplifyDate: true,
+        datePrefix: l10n.inboxInvitesDateSent,
+        onPressed: () => DebugLogger.warning('TODO: NOT IMPLEMENTED.'),
+      ),
+      InboxListTile(
+        avatarUrl:
+            'https://media.istockphoto.com/id/1307694427/photo/portrait-of-businessman-in-glasses-holding-smartphone-in-hand.jpg?s=612x612&w=0&k=20&c=P4FDNemdXlXQi3O_yLePrJVzuTYmJx84-iIySj91fGQ=',
+        fullName: 'Jenika Chua',
+        date: DateTime.now().subtract(const Duration(days: 7)),
+        message:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        highlightTile: true,
+        simplifyDate: true,
+        datePrefix: l10n.inboxInvitesDateSent,
+        onPressed: () => DebugLogger.warning('TODO: NOT IMPLEMENTED.'),
+      ),
+    ];
   }
 
   List<Widget> _createContentList(List<InboxListTile> tiles) {
@@ -108,7 +118,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
         ),
         child: ListView(
           children: _createContentList(
-            _createTestTiles(context, l10n),
+            _createTestTiles(l10n),
           ),
         ),
       ),
