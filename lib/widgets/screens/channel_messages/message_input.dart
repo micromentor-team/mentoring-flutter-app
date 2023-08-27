@@ -138,20 +138,25 @@ class _MessageInputState extends State<MessageInput> {
               ),
             ),
             const SizedBox(width: Insets.paddingExtraSmall),
-            IconButton(
-              icon: const Icon(
-                Icons.mic_outlined,
+            if (!_enableSend)
+              IconButton(
+                icon: const Icon(
+                  Icons.mic_outlined,
+                ),
+                onPressed: () {
+                  //TODO: Implement voice input.
+                },
               ),
-              onPressed: () {
-                //TODO: Implement voice input.
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.send_outlined,
+            if (_enableSend)
+              IconButton(
+                icon: const Icon(
+                  Icons.send_outlined,
+                ),
+                onPressed: _sendMessage,
+                color: theme.colorScheme.onSecondary,
+                style: IconButton.styleFrom(
+                    backgroundColor: theme.colorScheme.secondary),
               ),
-              onPressed: _enableSend ? _sendMessage : null,
-            ),
           ],
         ),
       ),
