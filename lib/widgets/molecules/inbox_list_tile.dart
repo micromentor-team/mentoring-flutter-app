@@ -9,7 +9,7 @@ class InboxListTile extends StatelessWidget {
   final DateTime date;
   final String? message;
   final int notifications;
-  final bool highlightMessage;
+  final bool highlightTile;
   final bool simplifyDate;
   final String? datePrefix;
   final void Function() onPressed;
@@ -21,7 +21,7 @@ class InboxListTile extends StatelessWidget {
     required this.date,
     this.message,
     this.notifications = 0,
-    this.highlightMessage = false,
+    this.highlightTile = false,
     this.simplifyDate = false,
     this.datePrefix,
     required this.onPressed,
@@ -100,7 +100,9 @@ class InboxListTile extends StatelessWidget {
                       fullName,
                       maxLines: 1,
                       style: theme.textTheme.labelMedium?.copyWith(
-                        color: theme.colorScheme.onPrimaryContainer,
+                        color: highlightTile
+                            ? theme.colorScheme.onPrimaryContainer
+                            : theme.hintColor,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -117,7 +119,7 @@ class InboxListTile extends StatelessWidget {
                     _getDate(context),
                     maxLines: 1,
                     style: theme.textTheme.labelSmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
+                      color: theme.colorScheme.secondary.withOpacity(0.70),
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -139,12 +141,12 @@ class InboxListTile extends StatelessWidget {
                   message!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: highlightMessage
-                      ? theme.textTheme.labelMedium?.copyWith(
-                          color: theme.colorScheme.primary,
+                  style: highlightTile
+                      ? theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onBackground,
                         )
                       : theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
+                          color: theme.hintColor,
                         ),
                 ),
               ),

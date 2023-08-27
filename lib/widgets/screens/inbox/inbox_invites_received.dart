@@ -146,7 +146,8 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
       fullName: sender.fullName ?? '',
       date: invitation.createdAt,
       message: _l10n.inboxInvitesReceivedMessage,
-      highlightMessage: true,
+      highlightTile:
+          true, // TODO - Highlight and show notification bubble only if unseen
       simplifyDate: true,
       onPressed: () => router.push(
         '${Routes.inboxInvitesReceived.path}/${invitation.id}',

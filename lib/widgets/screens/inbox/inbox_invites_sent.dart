@@ -33,6 +33,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
           'https://media.istockphoto.com/id/1160811064/photo/portrait-of-a-handsome-latin-man.jpg?s=612x612&w=0&k=20&c=MxkLwUFZ9ChfzFdB-OmmiWBnZrSioj9MmfSdlwCk4-4=',
       fullName: 'Antoine Mousa',
       date: date,
+      highlightTile: true,
       simplifyDate: true,
       datePrefix: l10n.inboxInvitesDateSent,
       onPressed: () => DebugLogger.warning('TODO: NOT IMPLEMENTED.'),
