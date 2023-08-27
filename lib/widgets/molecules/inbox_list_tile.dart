@@ -83,8 +83,11 @@ class InboxListTile extends StatelessWidget {
                       ),
                     ),
                     if (notifications > 0)
-                      NotificationBubble(
-                        notifications: notifications,
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: NotificationBubble(
+                          notifications: notifications,
+                        ),
                       ),
                   ],
                 ),

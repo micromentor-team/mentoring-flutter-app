@@ -74,7 +74,7 @@ class ScaffoldModel extends ChangeNotifier {
     _state = AsyncState.loading;
     int chatsNotifications = 0;
     int invitesNotifications = 0;
-    // TODO: Use subscriptions to update notification count in real-time
+    int archivedNotifications = 0;
     final channelsResult = await _channelsProvider.queryUserChannels(
         userId: _userProvider.user!.id);
     final unseenMessagesResult = await _messagesProvider.unseenMessages();
@@ -84,12 +84,28 @@ class ScaffoldModel extends ChangeNotifier {
         invitationsResult.gqlQueryResult.hasException) {
       _state = AsyncState.error;
     } else {
-      List<ChannelForUser> unarchivedChannels = channelsResult.response!
-          .where((channel) => !channel.isArchivedForMe)
-          .toList();
-      for (ChannelForUser channel in unarchivedChannels) {
+      List<ChannelForUser> unarchivedChannels = [];
+      List<ChannelForUser> archivedChannels = [];
+      for (ChannelForUser channel in channelsResult.response!) {
+        if (channel.isArchivedForMe) {
+          archivedChannels.add(channel);
+        } else {
+          unarchivedChannels.add(channel);
+        }
+      }
+      for (ChannelForUser unarchivedChannel in unarchivedChannels) {
         chatsNotifications += unseenMessagesResult.response!
-            .where((unseenMessage) => unseenMessage.channelId == channel.id)
+            .where(
+              (unseenMessage) =>
+                  unseenMessage.channelId == unarchivedChannel.id,
+            )
+            .length;
+      }
+      for (ChannelForUser archivedChannel in archivedChannels) {
+        archivedNotifications += unseenMessagesResult.response!
+            .where(
+              (unseenMessage) => unseenMessage.channelId == archivedChannel.id,
+            )
             .length;
       }
       invitesNotifications =
@@ -104,6 +120,7 @@ class ScaffoldModel extends ChangeNotifier {
       drawer: DrawerFactory.createInboxDrawer(
         chatsNotifications: chatsNotifications,
         invitesNotifications: invitesNotifications,
+        archivedNotifications: archivedNotifications,
       ),
     );
   }

@@ -45,8 +45,11 @@ class AppBarFactory {
                 top: Insets.paddingSmall,
                 start: Insets.paddingSmall,
               ),
-              child: NotificationBubble(
-                notifications: totalNotifications,
+              child: Align(
+                alignment: AlignmentDirectional.topStart,
+                child: NotificationBubble(
+                  notifications: totalNotifications,
+                ),
               ),
             ),
         ],
