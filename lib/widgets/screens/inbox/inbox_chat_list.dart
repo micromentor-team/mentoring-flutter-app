@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/inbox_chat_tile_model.dart';
+import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
+import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
@@ -105,7 +109,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
       tiles.add(
         DismissibleTile(
           tileId: channel.id,
-          onDismissed: () {
+          onDismissed: () async {
             int tileIndexToRemove = -1;
             for (int i = 0; i < tiles.length; i++) {
               if (tiles[i].tileId == channel.id) {
@@ -123,12 +127,29 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
                 channelId: channel.id,
               );
             }
-            _refreshScaffold();
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              setState(() {
-                _queryUserChannels();
-              });
-            });
+            // Refresh Scaffold and channels only once the change is live.
+            final bool updateCompleted =
+                await CrashHandler.retryOnException<bool>(
+              () async {
+                final result = await _channelsProvider.findChannelById(
+                    channelId: channel.id);
+                final bool? isArchived = result.response?.isArchivedForMe;
+                if (isArchived == null ||
+                    isArchived == widget.isArchivedForUser) {
+                  throw RetryException(
+                    message: 'Waiting for isArchivedForMe to update...',
+                  );
+                }
+                return true;
+              },
+              onFailOperation: () => false,
+              logFailures: false,
+            );
+            if (updateCompleted) {
+              _refreshScaffold();
+              _queryUserChannels();
+              setState(() {});
+            }
           },
           icon: widget.isArchivedForUser
               ? Icons.unarchive_outlined
