@@ -6,6 +6,8 @@ targets:
           scalars:
             DateTime:
               type: DateTime
+            DateTimeISO:
+              type: DateTime
             ISODateTime:
               type: DateTime
             JSON:

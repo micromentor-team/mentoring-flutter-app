@@ -9,7 +9,7 @@ import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
 typedef AllUsersResult = Query$FindAllUsers$findUsers;
-typedef AllUsersWithFilterResult = Query$FindUsersWithFilter$findUsers;
+typedef UserWithFilterResult = Query$FindUsersWithFilter$findUsers;
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 typedef MenteeUser = Query$FindMenteeUsers$findUsers;
 typedef MentorUser = Query$FindMentorUsers$findUsers;
@@ -100,7 +100,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     );
   }
 
-  Future<OperationResult<List<AllUsersWithFilterResult>>> findUsersWithFilter({
+  Future<OperationResult<List<UserWithFilterResult>>> findUsersWithFilter({
     required Input$UserListFilter input,
   }) async {
     final QueryResult queryResult = await asyncQuery(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/__generated/schema/operations_invitation.graphql.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
@@ -35,6 +36,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
   late final ChannelsProvider _channelsProvider;
   late final UserProvider _userProvider;
   late Future<OperationResult<ChannelInvitationById>> _invitation;
+  late Future<OperationResult<List<UserWithFilterResult>>> _sender;
   late AppLocalizations _l10n;
 
   @override
@@ -57,15 +59,26 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _l10n = AppLocalizations.of(context)!;
     _invitation = _invitationsProvider.findChannelInvitationById(
       channelInvitationId: widget.channelInvitationId,
     );
-    _l10n = AppLocalizations.of(context)!;
+    _sender = _invitation.then(
+      (invitationResult) {
+        return _userProvider.findUsersWithFilter(
+          input: Input$UserListFilter(
+            ids: [
+              invitationResult.response!.senderId,
+            ],
+          ),
+        );
+      },
+    );
   }
 
-  Widget _createCard(ChannelInvitationById invitation) {
-    final maybeMentorsGroupMembership = invitation.sender.offersHelp
-        ? invitation.sender.groupMemberships
+  Widget _createCard(UserWithFilterResult sender) {
+    final maybeMentorsGroupMembership = sender.offersHelp
+        ? sender.groupMemberships
             .where(
               (element) => element.groupIdent == GroupIdent.mentors,
             )
@@ -75,8 +88,8 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
               orElse: () => null,
             )
         : null;
-    final maybeMenteesGroupMembership = invitation.sender.seeksHelp
-        ? invitation.sender.groupMemberships
+    final maybeMenteesGroupMembership = sender.seeksHelp
+        ? sender.groupMemberships
             .where(
               (element) => element.groupIdent == GroupIdent.mentees,
             )
@@ -86,7 +99,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
               orElse: () => null,
             )
         : null;
-    final List<SkillChip> skills = invitation.sender.offersHelp
+    final List<SkillChip> skills = sender.offersHelp
         ? maybeMentorsGroupMembership?.expertises
                 .map(
                   (e) => SkillChip(skill: e.translatedValue!),
@@ -102,31 +115,27 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
     return createProfilCardFromInfoAndCheckbox(
       info: ProfileQuickViewInfo(
         isRecommended: false,
-        userType: invitation.sender.offersHelp
-            ? UserType.mentor
-            : UserType.entrepreneur,
-        avatarUrl: invitation.sender.avatarUrl,
-        fullName: invitation.sender.fullName ?? '',
-        location: invitation.sender.countryOfResidence?.translatedValue ??
+        userType: sender.offersHelp ? UserType.mentor : UserType.entrepreneur,
+        avatarUrl: sender.avatarUrl,
+        fullName: sender.fullName ?? '',
+        location: sender.countryOfResidence?.translatedValue ??
             _l10n.defaultValueLocation,
-        company: invitation.sender.companies.firstOrNull?.name,
-        companyRole: invitation.sender.jobTitle,
-        ventureStage: invitation.sender.seeksHelp &&
-                invitation.sender.companies.firstOrNull?.companyStage
-                        ?.translatedValue !=
+        company: sender.companies?.firstOrNull?.name,
+        companyRole: sender.jobTitle,
+        ventureStage: sender.seeksHelp &&
+                sender.companies?.firstOrNull?.companyStage?.translatedValue !=
                     null
             ? ProfileChip(
-                text: invitation
-                    .sender.companies.first.companyStage!.translatedValue!,
+                text: sender.companies!.first.companyStage!.translatedValue!,
               )
             : null,
-        ventureIndustry: invitation.sender.seeksHelp &&
+        ventureIndustry: sender.seeksHelp &&
                 maybeMenteesGroupMembership?.industry?.translatedValue != null
             ? ProfileChip(
                 text: maybeMenteesGroupMembership!.industry!.translatedValue!,
               )
             : null,
-        endorsements: invitation.sender.offersHelp
+        endorsements: sender.offersHelp
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
         skills: skills,
@@ -279,45 +288,55 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return FutureBuilder(
-      future: _invitation,
-      builder: (context, snapshot) {
+      future: _sender,
+      builder: (context, senderSnapshot) {
         return AppUtility.widgetForAsyncSnapshot(
-          snapshot: snapshot,
+          snapshot: senderSnapshot,
           onReady: () {
-            final ChannelInvitationById invitationResult =
-                snapshot.data!.response!;
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    children: [
-                      _createCard(invitationResult),
-                      const SizedBox(height: Insets.paddingMedium),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Insets.paddingMedium,
-                        ),
-                        child: TextDivider(
-                          text: AppUtility.simplePastDateFormat(
-                            context,
-                            invitationResult.createdAt,
+            return FutureBuilder(
+              future: _invitation,
+              builder: (context, invitationSnapshot) {
+                return AppUtility.widgetForAsyncSnapshot(
+                  snapshot: invitationSnapshot,
+                  onReady: () {
+                    final ChannelInvitationById invitationResult =
+                        invitationSnapshot.data!.response!;
+                    return Column(
+                      children: [
+                        Expanded(
+                          child: ListView(
+                            children: [
+                              _createCard(senderSnapshot.data!.response!.first),
+                              const SizedBox(height: Insets.paddingMedium),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: Insets.paddingMedium,
+                                ),
+                                child: TextDivider(
+                                  text: AppUtility.simplePastDateFormat(
+                                    context,
+                                    invitationResult.createdAt,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: Insets.paddingMedium),
+                              _createMessagePopup(
+                                theme,
+                                invitationResult.messageText!,
+                                DateFormat.jm()
+                                    .format(invitationResult.createdAt)
+                                    .toLowerCase(),
+                              ),
+                              _createDeclineAcceptButtons(
+                                  theme, invitationResult.senderId),
+                            ],
                           ),
                         ),
-                      ),
-                      const SizedBox(height: Insets.paddingMedium),
-                      _createMessagePopup(
-                        theme,
-                        invitationResult.messageText!,
-                        DateFormat.jm()
-                            .format(invitationResult.createdAt)
-                            .toLowerCase(),
-                      ),
-                      _createDeclineAcceptButtons(
-                          theme, invitationResult.sender.id),
-                    ],
-                  ),
-                ),
-              ],
+                      ],
+                    );
+                  },
+                );
+              },
             );
           },
         );

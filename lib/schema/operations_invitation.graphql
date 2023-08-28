@@ -3,47 +3,7 @@ query FindChannelInvitationById($channelInvitationId: String!) {
     createdAt
     messageText
     status
-    sender {
-      id
-      fullName
-      avatarUrl
-      jobTitle
-      offersHelp
-      seeksHelp
-      companies {
-        id
-        name
-        companyStage {
-          translatedValue
-        }
-        companyType {
-          translatedValue
-        }
-      }
-      countryOfResidence {
-        translatedValue
-      }
-      groupMemberships {
-        groupIdent
-        ... on MentorsGroupMembership {
-          endorsements
-          industries {
-            translatedValue
-          }
-          expertises {
-            translatedValue
-          }
-        }
-        ... on MenteesGroupMembership {
-          industry {
-            translatedValue
-          }
-          soughtExpertises {
-            translatedValue
-          }
-        }
-      }
-    }
+    senderId
   }
 }
 
