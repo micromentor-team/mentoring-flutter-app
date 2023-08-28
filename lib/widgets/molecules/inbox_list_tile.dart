@@ -7,9 +7,9 @@ class InboxListTile extends StatelessWidget {
   final String? avatarUrl;
   final String fullName;
   final DateTime date;
-  final String? message;
+  final String message;
   final int notifications;
-  final bool highlightMessage;
+  final bool highlightTile;
   final bool simplifyDate;
   final String? datePrefix;
   final void Function() onPressed;
@@ -19,9 +19,9 @@ class InboxListTile extends StatelessWidget {
     this.avatarUrl,
     required this.fullName,
     required this.date,
-    this.message,
+    required this.message,
     this.notifications = 0,
-    this.highlightMessage = false,
+    this.highlightTile = false,
     this.simplifyDate = false,
     this.datePrefix,
     required this.onPressed,
@@ -83,8 +83,11 @@ class InboxListTile extends StatelessWidget {
                       ),
                     ),
                     if (notifications > 0)
-                      NotificationBubble(
-                        notifications: notifications,
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: NotificationBubble(
+                          notifications: notifications,
+                        ),
                       ),
                   ],
                 ),
@@ -100,7 +103,9 @@ class InboxListTile extends StatelessWidget {
                       fullName,
                       maxLines: 1,
                       style: theme.textTheme.labelMedium?.copyWith(
-                        color: theme.colorScheme.onPrimaryContainer,
+                        color: highlightTile
+                            ? theme.colorScheme.onPrimaryContainer
+                            : theme.hintColor,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -117,7 +122,7 @@ class InboxListTile extends StatelessWidget {
                     _getDate(context),
                     maxLines: 1,
                     style: theme.textTheme.labelSmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
+                      color: theme.colorScheme.secondary.withOpacity(0.70),
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -130,24 +135,23 @@ class InboxListTile extends StatelessWidget {
             const SizedBox(
               height: Insets.paddingSmall,
             ),
-            if (message != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.paddingSmall,
-                ),
-                child: Text(
-                  message!,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: highlightMessage
-                      ? theme.textTheme.labelMedium?.copyWith(
-                          color: theme.colorScheme.primary,
-                        )
-                      : theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Insets.paddingSmall,
               ),
+              child: Text(
+                message,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: highlightTile
+                    ? theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onBackground,
+                      )
+                    : theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.hintColor,
+                      ),
+              ),
+            ),
           ],
         ),
       ),

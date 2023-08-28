@@ -35,10 +35,11 @@ class MessageInput extends StatefulWidget {
 class _MessageInputState extends State<MessageInput> {
   late TextEditingController _controller;
   late bool _autoFocus;
+  bool _enableSend = false;
   ChannelMessage? _replyingTo;
 
-  void _sendMessage(String messageText) {
-    widget.onSubmit(messageText, _replyingTo?.id);
+  void _sendMessage() {
+    widget.onSubmit(_controller.text, _replyingTo?.id);
     setState(() {
       _controller.clear();
       _replyingTo = null;
@@ -49,7 +50,9 @@ class _MessageInputState extends State<MessageInput> {
   void initState() {
     _controller = widget.controller ?? TextEditingController();
     _controller.addListener(() {
-      setState(() {});
+      setState(() {
+        _enableSend = _controller.text.isNotEmpty;
+      });
     });
     _autoFocus = widget.autoFocus == true;
     _replyingTo = widget.replyingTo;
@@ -117,9 +120,7 @@ class _MessageInputState extends State<MessageInput> {
                       autofocus: _autoFocus,
                       controller: _controller,
                       keyboardType: TextInputType.multiline,
-                      textInputAction: TextInputAction.send,
                       onTap: widget.onTapEmptyInput,
-                      onSubmitted: _sendMessage,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                           vertical: Insets.paddingExtraSmall,
@@ -137,14 +138,25 @@ class _MessageInputState extends State<MessageInput> {
               ),
             ),
             const SizedBox(width: Insets.paddingExtraSmall),
-            IconButton(
-              icon: const Icon(
-                Icons.mic_outlined,
+            if (!_enableSend)
+              IconButton(
+                icon: const Icon(
+                  Icons.mic_outlined,
+                ),
+                onPressed: () {
+                  //TODO: Implement voice input.
+                },
               ),
-              onPressed: () {
-                //TODO: Implement voice input.
-              },
-            ),
+            if (_enableSend)
+              IconButton(
+                icon: const Icon(
+                  Icons.send_outlined,
+                ),
+                onPressed: _sendMessage,
+                color: theme.colorScheme.onSecondary,
+                style: IconButton.styleFrom(
+                    backgroundColor: theme.colorScheme.secondary),
+              ),
           ],
         ),
       ),

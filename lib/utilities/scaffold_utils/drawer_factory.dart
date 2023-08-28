@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../constants/app_constants.dart';
+import '../../widgets/atoms/notification_bubble.dart';
 
 class DrawerFactory {
   DrawerFactory._private();
@@ -10,11 +11,13 @@ class DrawerFactory {
   static Drawer? createInboxDrawer({
     required int chatsNotifications,
     required int invitesNotifications,
+    required int archivedNotifications,
   }) {
     return Drawer(
       child: Builder(builder: (context) {
         final AppLocalizations l10n = AppLocalizations.of(context)!;
         final GoRouter router = GoRouter.of(context);
+        final ThemeData theme = Theme.of(context);
         return ListView(
           children: [
             SizedBox(
@@ -27,10 +30,9 @@ class DrawerFactory {
               leading: const Icon(Icons.chat_bubble_outline),
               title: Text(l10n.inboxTitleChats),
               trailing: chatsNotifications > 0
-                  ? Text(
-                      chatsNotifications > Limits.maxNotificationsDisplayed
-                          ? Identifiers.notificationOverflow
-                          : chatsNotifications.toString(),
+                  ? NotificationBubble(
+                      notifications: chatsNotifications,
+                      enlarge: true,
                     )
                   : null,
               onTap: () {
@@ -43,10 +45,9 @@ class DrawerFactory {
               leading: const Icon(Icons.person_add_outlined),
               title: Text(l10n.inboxTitleInvites),
               trailing: invitesNotifications > 0
-                  ? Text(
-                      invitesNotifications > Limits.maxNotificationsDisplayed
-                          ? Identifiers.notificationOverflow
-                          : invitesNotifications.toString(),
+                  ? NotificationBubble(
+                      notifications: invitesNotifications,
+                      enlarge: true,
                     )
                   : null,
               onTap: () {
@@ -56,8 +57,16 @@ class DrawerFactory {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.folder_outlined),
+              leading: const Icon(Icons.inventory_2_outlined),
               title: Text(l10n.inboxTitleArchivedChats),
+              trailing: archivedNotifications > 0
+                  ? NotificationBubble(
+                      notifications: archivedNotifications,
+                      bubbleColor: Colors.transparent,
+                      textColor: theme.colorScheme.onBackground,
+                      enlarge: true,
+                    )
+                  : null,
               onTap: () {
                 // Close Drawer
                 Navigator.of(context).pop();

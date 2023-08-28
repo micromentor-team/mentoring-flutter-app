@@ -82,7 +82,7 @@ class MessageBubble extends StatelessWidget {
   }
 
   Widget _buildMessageText(AppLocalizations l10n, ThemeData theme, isUser) {
-    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!) &&
+    final isEmoji = EmojiUtils.isOnlyEmoji(message.messageText!) &&
         message.replyToMessageId == null;
     if (message.deletedAt != null && !isUser) {
       return Text(
@@ -121,7 +121,7 @@ class MessageBubble extends StatelessWidget {
       userId: message.createdBy,
       context: context,
     );
-    final isEmoji = EmojiUtils.strictlyEmojis(message.messageText!) &&
+    final isEmoji = EmojiUtils.isOnlyEmoji(message.messageText!) &&
         message.replyToMessageId == null;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);

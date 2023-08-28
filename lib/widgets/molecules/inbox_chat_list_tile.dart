@@ -60,6 +60,7 @@ class _InboxChatListTileState extends State<InboxChatListTile> {
             date: inboxChatTileModel.lastMessage?.createdAt ?? DateTime.now(),
             message: inboxChatTileModel.lastMessage?.messageText ?? '',
             notifications: inboxChatTileModel.unseenMessageCount,
+            highlightTile: inboxChatTileModel.unseenMessageCount > 0,
             onPressed: () => context.push(_nextRoute),
           ),
         );

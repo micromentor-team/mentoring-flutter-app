@@ -293,10 +293,15 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                     children: [
                       _createCard(invitationResult),
                       const SizedBox(height: Insets.paddingMedium),
-                      TextDivider(
-                        text: AppUtility.simplePastDateFormat(
-                          context,
-                          invitationResult.createdAt,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Insets.paddingMedium,
+                        ),
+                        child: TextDivider(
+                          text: AppUtility.simplePastDateFormat(
+                            context,
+                            invitationResult.createdAt,
+                          ),
                         ),
                       ),
                       const SizedBox(height: Insets.paddingMedium),
