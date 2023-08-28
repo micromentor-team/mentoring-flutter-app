@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
@@ -37,6 +38,7 @@ class ReplyMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
     final isUser = _isCurrentUser(
       userId: replyMessage.createdBy,
@@ -92,7 +94,9 @@ class ReplyMessage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          replyMessage.messageText!,
+                          replyMessage.deletedAt == null
+                              ? replyMessage.messageText!
+                              : l10n.messagesStatusDeleted,
                           maxLines: 1,
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color: isUser
