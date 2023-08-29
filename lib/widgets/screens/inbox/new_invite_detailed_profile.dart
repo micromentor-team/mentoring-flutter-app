@@ -120,13 +120,13 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
         fullName: sender.fullName ?? '',
         location: sender.countryOfResidence?.translatedValue ??
             _l10n.defaultValueLocation,
-        company: sender.companies?.firstOrNull?.name,
+        company: sender.companies.firstOrNull?.name,
         companyRole: sender.jobTitle,
         ventureStage: sender.seeksHelp &&
-                sender.companies?.firstOrNull?.companyStage?.translatedValue !=
+                sender.companies.firstOrNull?.companyStage?.translatedValue !=
                     null
             ? ProfileChip(
-                text: sender.companies!.first.companyStage!.translatedValue!,
+                text: sender.companies.first.companyStage!.translatedValue!,
               )
             : null,
         ventureIndustry: sender.seeksHelp &&
