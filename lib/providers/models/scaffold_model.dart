@@ -150,4 +150,43 @@ class ScaffoldModel extends ChangeNotifier {
       drawer: null,
     );
   }
+
+  //TODO(m-rosario): Remove this once the real logout flow is defined by UX
+  void setTestHomeScaffold() {
+    _setParams(
+      appBar: null,
+      drawer: Drawer(
+        child: Builder(
+          builder: (context) {
+            final GoRouter router = GoRouter.of(context);
+            return ListView(
+              children: [
+                ListTile(
+                  title: const Text("Logout"),
+                  titleAlignment: ListTileTitleAlignment.center,
+                  trailing: Icon(
+                    Icons.logout_outlined,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  onTap: () {
+                    Provider.of<UserProvider>(
+                      context,
+                      listen: false,
+                    ).signOutUser().then(
+                      (void future) {
+                        try {
+                          Navigator.of(context).pop();
+                          router.goNamed(Routes.root.name);
+                        } catch (_) {}
+                      },
+                    );
+                  },
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
 }
