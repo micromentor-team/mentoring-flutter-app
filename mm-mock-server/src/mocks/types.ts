@@ -6,6 +6,7 @@ import * as generators from "./util/generators"
 export function mockTypes(serverState: MockServerState): IMocks {
     return {
         DateTime: () => faker.date.recent(),
+        DateTimeISO: () => faker.date.recent(),
         UserAuthResponse: () => generators.generateUserAuthResponse(serverState.loggedInUser.id),
     }
 }
