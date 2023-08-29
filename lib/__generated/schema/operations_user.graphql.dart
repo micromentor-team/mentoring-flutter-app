@@ -241,10 +241,10 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     this.fullName,
     this.avatarUrl,
     this.userHandle,
-    this.profileCompletionPercentage,
+    required this.profileCompletionPercentage,
     this.updatedAt,
     required this.createdAt,
-    this.$__typename = 'UserExt',
+    this.$__typename = 'User',
   });
 
   factory Query$GetAuthenticatedUser$getAuthenticatedUser.fromJson(
@@ -264,7 +264,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
       userHandle: (l$userHandle as String?),
-      profileCompletionPercentage: (l$profileCompletionPercentage as int?),
+      profileCompletionPercentage: (l$profileCompletionPercentage as int),
       updatedAt:
           l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
       createdAt: DateTime.parse((l$createdAt as String)),
@@ -282,7 +282,7 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
 
   final String? userHandle;
 
-  final int? profileCompletionPercentage;
+  final int profileCompletionPercentage;
 
   final DateTime? updatedAt;
 
@@ -464,9 +464,11 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
         userHandle: userHandle == _undefined
             ? _instance.userHandle
             : (userHandle as String?),
-        profileCompletionPercentage: profileCompletionPercentage == _undefined
-            ? _instance.profileCompletionPercentage
-            : (profileCompletionPercentage as int?),
+        profileCompletionPercentage:
+            profileCompletionPercentage == _undefined ||
+                    profileCompletionPercentage == null
+                ? _instance.profileCompletionPercentage
+                : (profileCompletionPercentage as int),
         updatedAt: updatedAt == _undefined
             ? _instance.updatedAt
             : (updatedAt as DateTime?),
@@ -862,7 +864,7 @@ class Query$FindAllUsers$findUsers {
     this.fullName,
     this.avatarUrl,
     this.userHandle,
-    this.$__typename = 'UserExt',
+    this.$__typename = 'User',
   });
 
   factory Query$FindAllUsers$findUsers.fromJson(Map<String, dynamic> json) {
@@ -1738,8 +1740,8 @@ class Query$FindMenteeUsers$findUsers {
     this.countryOfResidence,
     this.jobTitle,
     required this.groupMemberships,
-    this.companies,
-    this.$__typename = 'UserExt',
+    required this.companies,
+    this.$__typename = 'User',
   });
 
   factory Query$FindMenteeUsers$findUsers.fromJson(Map<String, dynamic> json) {
@@ -1776,8 +1778,8 @@ class Query$FindMenteeUsers$findUsers {
           .map((e) => Query$FindMenteeUsers$findUsers$groupMemberships.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
-      companies: (l$companies as List<dynamic>?)
-          ?.map((e) => Query$FindMenteeUsers$findUsers$companies.fromJson(
+      companies: (l$companies as List<dynamic>)
+          .map((e) => Query$FindMenteeUsers$findUsers$companies.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
@@ -1808,7 +1810,7 @@ class Query$FindMenteeUsers$findUsers {
 
   final List<Query$FindMenteeUsers$findUsers$groupMemberships> groupMemberships;
 
-  final List<Query$FindMenteeUsers$findUsers$companies>? companies;
+  final List<Query$FindMenteeUsers$findUsers$companies> companies;
 
   final String $__typename;
 
@@ -1840,7 +1842,7 @@ class Query$FindMenteeUsers$findUsers {
     _resultData['groupMemberships'] =
         l$groupMemberships.map((e) => e.toJson()).toList();
     final l$companies = companies;
-    _resultData['companies'] = l$companies?.map((e) => e.toJson()).toList();
+    _resultData['companies'] = l$companies.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1875,7 +1877,7 @@ class Query$FindMenteeUsers$findUsers {
       l$countryOfResidence,
       l$jobTitle,
       Object.hashAll(l$groupMemberships.map((v) => v)),
-      l$companies == null ? null : Object.hashAll(l$companies.map((v) => v)),
+      Object.hashAll(l$companies.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -1958,19 +1960,15 @@ class Query$FindMenteeUsers$findUsers {
     }
     final l$companies = companies;
     final lOther$companies = other.companies;
-    if (l$companies != null && lOther$companies != null) {
-      if (l$companies.length != lOther$companies.length) {
+    if (l$companies.length != lOther$companies.length) {
+      return false;
+    }
+    for (int i = 0; i < l$companies.length; i++) {
+      final l$companies$entry = l$companies[i];
+      final lOther$companies$entry = lOther$companies[i];
+      if (l$companies$entry != lOther$companies$entry) {
         return false;
       }
-      for (int i = 0; i < l$companies.length; i++) {
-        final l$companies$entry = l$companies[i];
-        final lOther$companies$entry = lOther$companies[i];
-        if (l$companies$entry != lOther$companies$entry) {
-          return false;
-        }
-      }
-    } else if (l$companies != lOther$companies) {
-      return false;
     }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
@@ -2024,10 +2022,10 @@ abstract class CopyWith$Query$FindMenteeUsers$findUsers<TRes> {
                       Query$FindMenteeUsers$findUsers$groupMemberships>>)
           _fn);
   TRes companies(
-      Iterable<Query$FindMenteeUsers$findUsers$companies>? Function(
+      Iterable<Query$FindMenteeUsers$findUsers$companies> Function(
               Iterable<
                   CopyWith$Query$FindMenteeUsers$findUsers$companies<
-                      Query$FindMenteeUsers$findUsers$companies>>?)
+                      Query$FindMenteeUsers$findUsers$companies>>)
           _fn);
 }
 
@@ -2093,9 +2091,9 @@ class _CopyWithImpl$Query$FindMenteeUsers$findUsers<TRes>
                 ? _instance.groupMemberships
                 : (groupMemberships
                     as List<Query$FindMenteeUsers$findUsers$groupMemberships>),
-        companies: companies == _undefined
+        companies: companies == _undefined || companies == null
             ? _instance.companies
-            : (companies as List<Query$FindMenteeUsers$findUsers$companies>?),
+            : (companies as List<Query$FindMenteeUsers$findUsers$companies>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2123,17 +2121,17 @@ class _CopyWithImpl$Query$FindMenteeUsers$findUsers<TRes>
                     (i) => i,
                   ))).toList());
   TRes companies(
-          Iterable<Query$FindMenteeUsers$findUsers$companies>? Function(
+          Iterable<Query$FindMenteeUsers$findUsers$companies> Function(
                   Iterable<
                       CopyWith$Query$FindMenteeUsers$findUsers$companies<
-                          Query$FindMenteeUsers$findUsers$companies>>?)
+                          Query$FindMenteeUsers$findUsers$companies>>)
               _fn) =>
       call(
           companies: _fn(_instance.companies
-              ?.map((e) => CopyWith$Query$FindMenteeUsers$findUsers$companies(
+              .map((e) => CopyWith$Query$FindMenteeUsers$findUsers$companies(
                     e,
                     (i) => i,
-                  )))?.toList());
+                  ))).toList());
 }
 
 class _CopyWithStubImpl$Query$FindMenteeUsers$findUsers<TRes>
@@ -4198,7 +4196,7 @@ class Query$FindMentorUsers$findUsers {
     this.countryOfResidence,
     this.jobTitle,
     required this.groupMemberships,
-    this.$__typename = 'UserExt',
+    this.$__typename = 'User',
   });
 
   factory Query$FindMentorUsers$findUsers.fromJson(Map<String, dynamic> json) {
@@ -6457,10 +6455,10 @@ class Query$FindUsersWithFilter$findUsers {
     this.jobTitle,
     required this.offersHelp,
     required this.seeksHelp,
-    this.companies,
+    required this.companies,
     this.countryOfResidence,
     required this.groupMemberships,
-    this.$__typename = 'UserExt',
+    this.$__typename = 'User',
   });
 
   factory Query$FindUsersWithFilter$findUsers.fromJson(
@@ -6486,8 +6484,8 @@ class Query$FindUsersWithFilter$findUsers {
       jobTitle: (l$jobTitle as String?),
       offersHelp: (l$offersHelp as bool),
       seeksHelp: (l$seeksHelp as bool),
-      companies: (l$companies as List<dynamic>?)
-          ?.map((e) => Query$FindUsersWithFilter$findUsers$companies.fromJson(
+      companies: (l$companies as List<dynamic>)
+          .map((e) => Query$FindUsersWithFilter$findUsers$companies.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       countryOfResidence: l$countryOfResidence == null
@@ -6519,7 +6517,7 @@ class Query$FindUsersWithFilter$findUsers {
 
   final bool seeksHelp;
 
-  final List<Query$FindUsersWithFilter$findUsers$companies>? companies;
+  final List<Query$FindUsersWithFilter$findUsers$companies> companies;
 
   final Query$FindUsersWithFilter$findUsers$countryOfResidence?
       countryOfResidence;
@@ -6548,7 +6546,7 @@ class Query$FindUsersWithFilter$findUsers {
     final l$seeksHelp = seeksHelp;
     _resultData['seeksHelp'] = l$seeksHelp;
     final l$companies = companies;
-    _resultData['companies'] = l$companies?.map((e) => e.toJson()).toList();
+    _resultData['companies'] = l$companies.map((e) => e.toJson()).toList();
     final l$countryOfResidence = countryOfResidence;
     _resultData['countryOfResidence'] = l$countryOfResidence?.toJson();
     final l$groupMemberships = groupMemberships;
@@ -6582,7 +6580,7 @@ class Query$FindUsersWithFilter$findUsers {
       l$jobTitle,
       l$offersHelp,
       l$seeksHelp,
-      l$companies == null ? null : Object.hashAll(l$companies.map((v) => v)),
+      Object.hashAll(l$companies.map((v) => v)),
       l$countryOfResidence,
       Object.hashAll(l$groupMemberships.map((v) => v)),
       l$$__typename,
@@ -6640,19 +6638,15 @@ class Query$FindUsersWithFilter$findUsers {
     }
     final l$companies = companies;
     final lOther$companies = other.companies;
-    if (l$companies != null && lOther$companies != null) {
-      if (l$companies.length != lOther$companies.length) {
+    if (l$companies.length != lOther$companies.length) {
+      return false;
+    }
+    for (int i = 0; i < l$companies.length; i++) {
+      final l$companies$entry = l$companies[i];
+      final lOther$companies$entry = lOther$companies[i];
+      if (l$companies$entry != lOther$companies$entry) {
         return false;
       }
-      for (int i = 0; i < l$companies.length; i++) {
-        final l$companies$entry = l$companies[i];
-        final lOther$companies$entry = lOther$companies[i];
-        if (l$companies$entry != lOther$companies$entry) {
-          return false;
-        }
-      }
-    } else if (l$companies != lOther$companies) {
-      return false;
     }
     final l$countryOfResidence = countryOfResidence;
     final lOther$countryOfResidence = other.countryOfResidence;
@@ -6715,10 +6709,10 @@ abstract class CopyWith$Query$FindUsersWithFilter$findUsers<TRes> {
     String? $__typename,
   });
   TRes companies(
-      Iterable<Query$FindUsersWithFilter$findUsers$companies>? Function(
+      Iterable<Query$FindUsersWithFilter$findUsers$companies> Function(
               Iterable<
                   CopyWith$Query$FindUsersWithFilter$findUsers$companies<
-                      Query$FindUsersWithFilter$findUsers$companies>>?)
+                      Query$FindUsersWithFilter$findUsers$companies>>)
           _fn);
   CopyWith$Query$FindUsersWithFilter$findUsers$countryOfResidence<TRes>
       get countryOfResidence;
@@ -6776,10 +6770,10 @@ class _CopyWithImpl$Query$FindUsersWithFilter$findUsers<TRes>
         seeksHelp: seeksHelp == _undefined || seeksHelp == null
             ? _instance.seeksHelp
             : (seeksHelp as bool),
-        companies: companies == _undefined
+        companies: companies == _undefined || companies == null
             ? _instance.companies
             : (companies
-                as List<Query$FindUsersWithFilter$findUsers$companies>?),
+                as List<Query$FindUsersWithFilter$findUsers$companies>),
         countryOfResidence: countryOfResidence == _undefined
             ? _instance.countryOfResidence
             : (countryOfResidence
@@ -6794,17 +6788,17 @@ class _CopyWithImpl$Query$FindUsersWithFilter$findUsers<TRes>
             : ($__typename as String),
       ));
   TRes companies(
-          Iterable<Query$FindUsersWithFilter$findUsers$companies>? Function(
+          Iterable<Query$FindUsersWithFilter$findUsers$companies> Function(
                   Iterable<
                       CopyWith$Query$FindUsersWithFilter$findUsers$companies<
-                          Query$FindUsersWithFilter$findUsers$companies>>?)
+                          Query$FindUsersWithFilter$findUsers$companies>>)
               _fn) =>
       call(
-          companies: _fn(_instance.companies?.map(
+          companies: _fn(_instance.companies.map(
               (e) => CopyWith$Query$FindUsersWithFilter$findUsers$companies(
                     e,
                     (i) => i,
-                  )))?.toList());
+                  ))).toList());
   CopyWith$Query$FindUsersWithFilter$findUsers$countryOfResidence<TRes>
       get countryOfResidence {
     final local$countryOfResidence = _instance.countryOfResidence;

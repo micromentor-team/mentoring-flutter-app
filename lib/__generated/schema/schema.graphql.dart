@@ -20325,81 +20325,276 @@ class _CopyWithStubImpl$Input$NotificationTemplateInput<TRes>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
 
-class Input$NlpMessageInput {
-  factory Input$NlpMessageInput({
+class Input$Mm2SynchronizationInput {
+  factory Input$Mm2SynchronizationInput({
     String? id,
-    String? labelName,
-    String? labelProcessor,
-    int? labelProbability,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    Enum$Mm2SyncDirection? direction,
+    String? objectId,
+    Enum$Mm2ModelType? mm2ModelType,
+    Enum$Mm2SynchronizationMode? syncMode,
+    int? limit,
+    bool? autorun,
+    String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    DateTime? expiresAt,
   }) =>
-      Input$NlpMessageInput._({
+      Input$Mm2SynchronizationInput._({
         if (id != null) r'id': id,
-        if (labelName != null) r'labelName': labelName,
-        if (labelProcessor != null) r'labelProcessor': labelProcessor,
-        if (labelProbability != null) r'labelProbability': labelProbability,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (direction != null) r'direction': direction,
+        if (objectId != null) r'objectId': objectId,
+        if (mm2ModelType != null) r'mm2ModelType': mm2ModelType,
+        if (syncMode != null) r'syncMode': syncMode,
+        if (limit != null) r'limit': limit,
+        if (autorun != null) r'autorun': autorun,
+        if (usersSinceUpdatedAt != null)
+          r'usersSinceUpdatedAt': usersSinceUpdatedAt,
+        if (logLevel != null) r'logLevel': logLevel,
+        if (expiresAt != null) r'expiresAt': expiresAt,
       });
 
-  Input$NlpMessageInput._(this._$data);
+  Input$Mm2SynchronizationInput._(this._$data);
 
-  factory Input$NlpMessageInput.fromJson(Map<String, dynamic> data) {
+  factory Input$Mm2SynchronizationInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('id')) {
       final l$id = data['id'];
-      result$data['id'] = (l$id as String);
+      result$data['id'] = (l$id as String?);
     }
-    if (data.containsKey('labelName')) {
-      final l$labelName = data['labelName'];
-      result$data['labelName'] = (l$labelName as String);
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
     }
-    if (data.containsKey('labelProcessor')) {
-      final l$labelProcessor = data['labelProcessor'];
-      result$data['labelProcessor'] = (l$labelProcessor as String);
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
     }
-    if (data.containsKey('labelProbability')) {
-      final l$labelProbability = data['labelProbability'];
-      result$data['labelProbability'] = (l$labelProbability as int);
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
     }
-    return Input$NlpMessageInput._(result$data);
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('direction')) {
+      final l$direction = data['direction'];
+      result$data['direction'] =
+          fromJson$Enum$Mm2SyncDirection((l$direction as String));
+    }
+    if (data.containsKey('objectId')) {
+      final l$objectId = data['objectId'];
+      result$data['objectId'] = (l$objectId as String?);
+    }
+    if (data.containsKey('mm2ModelType')) {
+      final l$mm2ModelType = data['mm2ModelType'];
+      result$data['mm2ModelType'] = l$mm2ModelType == null
+          ? null
+          : fromJson$Enum$Mm2ModelType((l$mm2ModelType as String));
+    }
+    if (data.containsKey('syncMode')) {
+      final l$syncMode = data['syncMode'];
+      result$data['syncMode'] =
+          fromJson$Enum$Mm2SynchronizationMode((l$syncMode as String));
+    }
+    if (data.containsKey('limit')) {
+      final l$limit = data['limit'];
+      result$data['limit'] = (l$limit as int?);
+    }
+    if (data.containsKey('autorun')) {
+      final l$autorun = data['autorun'];
+      result$data['autorun'] = (l$autorun as bool);
+    }
+    if (data.containsKey('usersSinceUpdatedAt')) {
+      final l$usersSinceUpdatedAt = data['usersSinceUpdatedAt'];
+      result$data['usersSinceUpdatedAt'] = (l$usersSinceUpdatedAt as String?);
+    }
+    if (data.containsKey('logLevel')) {
+      final l$logLevel = data['logLevel'];
+      result$data['logLevel'] = l$logLevel == null
+          ? null
+          : fromJson$Enum$Mm2SynchronizerLogLevel((l$logLevel as String));
+    }
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] =
+          l$expiresAt == null ? null : DateTime.parse((l$expiresAt as String));
+    }
+    return Input$Mm2SynchronizationInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-  String? get labelName => (_$data['labelName'] as String?);
-  String? get labelProcessor => (_$data['labelProcessor'] as String?);
-  int? get labelProbability => (_$data['labelProbability'] as int?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  Enum$Mm2SyncDirection? get direction =>
+      (_$data['direction'] as Enum$Mm2SyncDirection?);
+  String? get objectId => (_$data['objectId'] as String?);
+  Enum$Mm2ModelType? get mm2ModelType =>
+      (_$data['mm2ModelType'] as Enum$Mm2ModelType?);
+  Enum$Mm2SynchronizationMode? get syncMode =>
+      (_$data['syncMode'] as Enum$Mm2SynchronizationMode?);
+  int? get limit => (_$data['limit'] as int?);
+  bool? get autorun => (_$data['autorun'] as bool?);
+  String? get usersSinceUpdatedAt => (_$data['usersSinceUpdatedAt'] as String?);
+  Enum$Mm2SynchronizerLogLevel? get logLevel =>
+      (_$data['logLevel'] as Enum$Mm2SynchronizerLogLevel?);
+  DateTime? get expiresAt => (_$data['expiresAt'] as DateTime?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
       final l$id = id;
-      result$data['id'] = (l$id as String);
+      result$data['id'] = l$id;
     }
-    if (_$data.containsKey('labelName')) {
-      final l$labelName = labelName;
-      result$data['labelName'] = (l$labelName as String);
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
     }
-    if (_$data.containsKey('labelProcessor')) {
-      final l$labelProcessor = labelProcessor;
-      result$data['labelProcessor'] = (l$labelProcessor as String);
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('labelProbability')) {
-      final l$labelProbability = labelProbability;
-      result$data['labelProbability'] = (l$labelProbability as int);
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('direction')) {
+      final l$direction = direction;
+      result$data['direction'] =
+          toJson$Enum$Mm2SyncDirection((l$direction as Enum$Mm2SyncDirection));
+    }
+    if (_$data.containsKey('objectId')) {
+      final l$objectId = objectId;
+      result$data['objectId'] = l$objectId;
+    }
+    if (_$data.containsKey('mm2ModelType')) {
+      final l$mm2ModelType = mm2ModelType;
+      result$data['mm2ModelType'] = l$mm2ModelType == null
+          ? null
+          : toJson$Enum$Mm2ModelType(l$mm2ModelType);
+    }
+    if (_$data.containsKey('syncMode')) {
+      final l$syncMode = syncMode;
+      result$data['syncMode'] = toJson$Enum$Mm2SynchronizationMode(
+          (l$syncMode as Enum$Mm2SynchronizationMode));
+    }
+    if (_$data.containsKey('limit')) {
+      final l$limit = limit;
+      result$data['limit'] = l$limit;
+    }
+    if (_$data.containsKey('autorun')) {
+      final l$autorun = autorun;
+      result$data['autorun'] = (l$autorun as bool);
+    }
+    if (_$data.containsKey('usersSinceUpdatedAt')) {
+      final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
+      result$data['usersSinceUpdatedAt'] = l$usersSinceUpdatedAt;
+    }
+    if (_$data.containsKey('logLevel')) {
+      final l$logLevel = logLevel;
+      result$data['logLevel'] = l$logLevel == null
+          ? null
+          : toJson$Enum$Mm2SynchronizerLogLevel(l$logLevel);
+    }
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt?.toIso8601String();
     }
     return result$data;
   }
 
-  CopyWith$Input$NlpMessageInput<Input$NlpMessageInput> get copyWith =>
-      CopyWith$Input$NlpMessageInput(
-        this,
-        (i) => i,
-      );
+  CopyWith$Input$Mm2SynchronizationInput<Input$Mm2SynchronizationInput>
+      get copyWith => CopyWith$Input$Mm2SynchronizationInput(
+            this,
+            (i) => i,
+          );
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input$NlpMessageInput) || runtimeType != other.runtimeType) {
+    if (!(other is Input$Mm2SynchronizationInput) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -20410,31 +20605,174 @@ class Input$NlpMessageInput {
     if (l$id != lOther$id) {
       return false;
     }
-    final l$labelName = labelName;
-    final lOther$labelName = other.labelName;
-    if (_$data.containsKey('labelName') !=
-        other._$data.containsKey('labelName')) {
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
       return false;
     }
-    if (l$labelName != lOther$labelName) {
+    if (l$adminNotes != lOther$adminNotes) {
       return false;
     }
-    final l$labelProcessor = labelProcessor;
-    final lOther$labelProcessor = other.labelProcessor;
-    if (_$data.containsKey('labelProcessor') !=
-        other._$data.containsKey('labelProcessor')) {
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
       return false;
     }
-    if (l$labelProcessor != lOther$labelProcessor) {
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
       return false;
     }
-    final l$labelProbability = labelProbability;
-    final lOther$labelProbability = other.labelProbability;
-    if (_$data.containsKey('labelProbability') !=
-        other._$data.containsKey('labelProbability')) {
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
       return false;
     }
-    if (l$labelProbability != lOther$labelProbability) {
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$direction = direction;
+    final lOther$direction = other.direction;
+    if (_$data.containsKey('direction') !=
+        other._$data.containsKey('direction')) {
+      return false;
+    }
+    if (l$direction != lOther$direction) {
+      return false;
+    }
+    final l$objectId = objectId;
+    final lOther$objectId = other.objectId;
+    if (_$data.containsKey('objectId') !=
+        other._$data.containsKey('objectId')) {
+      return false;
+    }
+    if (l$objectId != lOther$objectId) {
+      return false;
+    }
+    final l$mm2ModelType = mm2ModelType;
+    final lOther$mm2ModelType = other.mm2ModelType;
+    if (_$data.containsKey('mm2ModelType') !=
+        other._$data.containsKey('mm2ModelType')) {
+      return false;
+    }
+    if (l$mm2ModelType != lOther$mm2ModelType) {
+      return false;
+    }
+    final l$syncMode = syncMode;
+    final lOther$syncMode = other.syncMode;
+    if (_$data.containsKey('syncMode') !=
+        other._$data.containsKey('syncMode')) {
+      return false;
+    }
+    if (l$syncMode != lOther$syncMode) {
+      return false;
+    }
+    final l$limit = limit;
+    final lOther$limit = other.limit;
+    if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
+      return false;
+    }
+    if (l$limit != lOther$limit) {
+      return false;
+    }
+    final l$autorun = autorun;
+    final lOther$autorun = other.autorun;
+    if (_$data.containsKey('autorun') != other._$data.containsKey('autorun')) {
+      return false;
+    }
+    if (l$autorun != lOther$autorun) {
+      return false;
+    }
+    final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
+    final lOther$usersSinceUpdatedAt = other.usersSinceUpdatedAt;
+    if (_$data.containsKey('usersSinceUpdatedAt') !=
+        other._$data.containsKey('usersSinceUpdatedAt')) {
+      return false;
+    }
+    if (l$usersSinceUpdatedAt != lOther$usersSinceUpdatedAt) {
+      return false;
+    }
+    final l$logLevel = logLevel;
+    final lOther$logLevel = other.logLevel;
+    if (_$data.containsKey('logLevel') !=
+        other._$data.containsKey('logLevel')) {
+      return false;
+    }
+    if (l$logLevel != lOther$logLevel) {
+      return false;
+    }
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
       return false;
     }
     return true;
@@ -20443,79 +20781,206 @@ class Input$NlpMessageInput {
   @override
   int get hashCode {
     final l$id = id;
-    final l$labelName = labelName;
-    final l$labelProcessor = labelProcessor;
-    final l$labelProbability = labelProbability;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$direction = direction;
+    final l$objectId = objectId;
+    final l$mm2ModelType = mm2ModelType;
+    final l$syncMode = syncMode;
+    final l$limit = limit;
+    final l$autorun = autorun;
+    final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
+    final l$logLevel = logLevel;
+    final l$expiresAt = expiresAt;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('labelName') ? l$labelName : const {},
-      _$data.containsKey('labelProcessor') ? l$labelProcessor : const {},
-      _$data.containsKey('labelProbability') ? l$labelProbability : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('direction') ? l$direction : const {},
+      _$data.containsKey('objectId') ? l$objectId : const {},
+      _$data.containsKey('mm2ModelType') ? l$mm2ModelType : const {},
+      _$data.containsKey('syncMode') ? l$syncMode : const {},
+      _$data.containsKey('limit') ? l$limit : const {},
+      _$data.containsKey('autorun') ? l$autorun : const {},
+      _$data.containsKey('usersSinceUpdatedAt')
+          ? l$usersSinceUpdatedAt
+          : const {},
+      _$data.containsKey('logLevel') ? l$logLevel : const {},
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
     ]);
   }
 }
 
-abstract class CopyWith$Input$NlpMessageInput<TRes> {
-  factory CopyWith$Input$NlpMessageInput(
-    Input$NlpMessageInput instance,
-    TRes Function(Input$NlpMessageInput) then,
-  ) = _CopyWithImpl$Input$NlpMessageInput;
+abstract class CopyWith$Input$Mm2SynchronizationInput<TRes> {
+  factory CopyWith$Input$Mm2SynchronizationInput(
+    Input$Mm2SynchronizationInput instance,
+    TRes Function(Input$Mm2SynchronizationInput) then,
+  ) = _CopyWithImpl$Input$Mm2SynchronizationInput;
 
-  factory CopyWith$Input$NlpMessageInput.stub(TRes res) =
-      _CopyWithStubImpl$Input$NlpMessageInput;
+  factory CopyWith$Input$Mm2SynchronizationInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$Mm2SynchronizationInput;
 
   TRes call({
     String? id,
-    String? labelName,
-    String? labelProcessor,
-    int? labelProbability,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    Enum$Mm2SyncDirection? direction,
+    String? objectId,
+    Enum$Mm2ModelType? mm2ModelType,
+    Enum$Mm2SynchronizationMode? syncMode,
+    int? limit,
+    bool? autorun,
+    String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    DateTime? expiresAt,
   });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
 }
 
-class _CopyWithImpl$Input$NlpMessageInput<TRes>
-    implements CopyWith$Input$NlpMessageInput<TRes> {
-  _CopyWithImpl$Input$NlpMessageInput(
+class _CopyWithImpl$Input$Mm2SynchronizationInput<TRes>
+    implements CopyWith$Input$Mm2SynchronizationInput<TRes> {
+  _CopyWithImpl$Input$Mm2SynchronizationInput(
     this._instance,
     this._then,
   );
 
-  final Input$NlpMessageInput _instance;
+  final Input$Mm2SynchronizationInput _instance;
 
-  final TRes Function(Input$NlpMessageInput) _then;
+  final TRes Function(Input$Mm2SynchronizationInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
-    Object? labelName = _undefined,
-    Object? labelProcessor = _undefined,
-    Object? labelProbability = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? direction = _undefined,
+    Object? objectId = _undefined,
+    Object? mm2ModelType = _undefined,
+    Object? syncMode = _undefined,
+    Object? limit = _undefined,
+    Object? autorun = _undefined,
+    Object? usersSinceUpdatedAt = _undefined,
+    Object? logLevel = _undefined,
+    Object? expiresAt = _undefined,
   }) =>
-      _then(Input$NlpMessageInput._({
+      _then(Input$Mm2SynchronizationInput._({
         ..._instance._$data,
-        if (id != _undefined && id != null) 'id': (id as String),
-        if (labelName != _undefined && labelName != null)
-          'labelName': (labelName as String),
-        if (labelProcessor != _undefined && labelProcessor != null)
-          'labelProcessor': (labelProcessor as String),
-        if (labelProbability != _undefined && labelProbability != null)
-          'labelProbability': (labelProbability as int),
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (direction != _undefined && direction != null)
+          'direction': (direction as Enum$Mm2SyncDirection),
+        if (objectId != _undefined) 'objectId': (objectId as String?),
+        if (mm2ModelType != _undefined)
+          'mm2ModelType': (mm2ModelType as Enum$Mm2ModelType?),
+        if (syncMode != _undefined && syncMode != null)
+          'syncMode': (syncMode as Enum$Mm2SynchronizationMode),
+        if (limit != _undefined) 'limit': (limit as int?),
+        if (autorun != _undefined && autorun != null)
+          'autorun': (autorun as bool),
+        if (usersSinceUpdatedAt != _undefined)
+          'usersSinceUpdatedAt': (usersSinceUpdatedAt as String?),
+        if (logLevel != _undefined)
+          'logLevel': (logLevel as Enum$Mm2SynchronizerLogLevel?),
+        if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
       }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
 }
 
-class _CopyWithStubImpl$Input$NlpMessageInput<TRes>
-    implements CopyWith$Input$NlpMessageInput<TRes> {
-  _CopyWithStubImpl$Input$NlpMessageInput(this._res);
+class _CopyWithStubImpl$Input$Mm2SynchronizationInput<TRes>
+    implements CopyWith$Input$Mm2SynchronizationInput<TRes> {
+  _CopyWithStubImpl$Input$Mm2SynchronizationInput(this._res);
 
   TRes _res;
 
   call({
     String? id,
-    String? labelName,
-    String? labelProcessor,
-    int? labelProbability,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    Enum$Mm2SyncDirection? direction,
+    String? objectId,
+    Enum$Mm2ModelType? mm2ModelType,
+    Enum$Mm2SynchronizationMode? syncMode,
+    int? limit,
+    bool? autorun,
+    String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    DateTime? expiresAt,
   }) =>
       _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
 
 class Input$SidMultiStepActionInput {
@@ -22988,6 +23453,34 @@ Enum$AppFeature fromJson$Enum$AppFeature(String value) {
   }
 }
 
+enum Enum$AppAction { editProfile, updateApp, unset, $unknown }
+
+String toJson$Enum$AppAction(Enum$AppAction e) {
+  switch (e) {
+    case Enum$AppAction.editProfile:
+      return r'editProfile';
+    case Enum$AppAction.updateApp:
+      return r'updateApp';
+    case Enum$AppAction.unset:
+      return r'unset';
+    case Enum$AppAction.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$AppAction fromJson$Enum$AppAction(String value) {
+  switch (value) {
+    case r'editProfile':
+      return Enum$AppAction.editProfile;
+    case r'updateApp':
+      return Enum$AppAction.updateApp;
+    case r'unset':
+      return Enum$AppAction.unset;
+    default:
+      return Enum$AppAction.$unknown;
+  }
+}
+
 enum Enum$ChannelType { unset, mentoring, $unknown }
 
 String toJson$Enum$ChannelType(Enum$ChannelType e) {
@@ -23435,34 +23928,6 @@ Enum$UserSearchSubscriptionType fromJson$Enum$UserSearchSubscriptionType(
       return Enum$UserSearchSubscriptionType.monthly;
     default:
       return Enum$UserSearchSubscriptionType.$unknown;
-  }
-}
-
-enum Enum$AppAction { editProfile, updateApp, unset, $unknown }
-
-String toJson$Enum$AppAction(Enum$AppAction e) {
-  switch (e) {
-    case Enum$AppAction.editProfile:
-      return r'editProfile';
-    case Enum$AppAction.updateApp:
-      return r'updateApp';
-    case Enum$AppAction.unset:
-      return r'unset';
-    case Enum$AppAction.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum$AppAction fromJson$Enum$AppAction(String value) {
-  switch (value) {
-    case r'editProfile':
-      return Enum$AppAction.editProfile;
-    case r'updateApp':
-      return Enum$AppAction.updateApp;
-    case r'unset':
-      return Enum$AppAction.unset;
-    default:
-      return Enum$AppAction.$unknown;
   }
 }
 
@@ -24809,6 +25274,198 @@ Enum$NotificationTemplateName fromJson$Enum$NotificationTemplateName(
       return Enum$NotificationTemplateName.welcome;
     default:
       return Enum$NotificationTemplateName.$unknown;
+  }
+}
+
+enum Enum$Mm2SyncDirection { mm2ToMm3, mm3ToMm2, $unknown }
+
+String toJson$Enum$Mm2SyncDirection(Enum$Mm2SyncDirection e) {
+  switch (e) {
+    case Enum$Mm2SyncDirection.mm2ToMm3:
+      return r'mm2ToMm3';
+    case Enum$Mm2SyncDirection.mm3ToMm2:
+      return r'mm3ToMm2';
+    case Enum$Mm2SyncDirection.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2SyncDirection fromJson$Enum$Mm2SyncDirection(String value) {
+  switch (value) {
+    case r'mm2ToMm3':
+      return Enum$Mm2SyncDirection.mm2ToMm3;
+    case r'mm3ToMm2':
+      return Enum$Mm2SyncDirection.mm3ToMm2;
+    default:
+      return Enum$Mm2SyncDirection.$unknown;
+  }
+}
+
+enum Enum$Mm2ModelType {
+  Community,
+  Organization,
+  Conversation,
+  Message,
+  User,
+  MenteeExpertise,
+  MenteeWebsite,
+  MentorExpertise,
+  Profile,
+  SpokenLanguage,
+  $unknown
+}
+
+String toJson$Enum$Mm2ModelType(Enum$Mm2ModelType e) {
+  switch (e) {
+    case Enum$Mm2ModelType.Community:
+      return r'Community';
+    case Enum$Mm2ModelType.Organization:
+      return r'Organization';
+    case Enum$Mm2ModelType.Conversation:
+      return r'Conversation';
+    case Enum$Mm2ModelType.Message:
+      return r'Message';
+    case Enum$Mm2ModelType.User:
+      return r'User';
+    case Enum$Mm2ModelType.MenteeExpertise:
+      return r'MenteeExpertise';
+    case Enum$Mm2ModelType.MenteeWebsite:
+      return r'MenteeWebsite';
+    case Enum$Mm2ModelType.MentorExpertise:
+      return r'MentorExpertise';
+    case Enum$Mm2ModelType.Profile:
+      return r'Profile';
+    case Enum$Mm2ModelType.SpokenLanguage:
+      return r'SpokenLanguage';
+    case Enum$Mm2ModelType.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2ModelType fromJson$Enum$Mm2ModelType(String value) {
+  switch (value) {
+    case r'Community':
+      return Enum$Mm2ModelType.Community;
+    case r'Organization':
+      return Enum$Mm2ModelType.Organization;
+    case r'Conversation':
+      return Enum$Mm2ModelType.Conversation;
+    case r'Message':
+      return Enum$Mm2ModelType.Message;
+    case r'User':
+      return Enum$Mm2ModelType.User;
+    case r'MenteeExpertise':
+      return Enum$Mm2ModelType.MenteeExpertise;
+    case r'MenteeWebsite':
+      return Enum$Mm2ModelType.MenteeWebsite;
+    case r'MentorExpertise':
+      return Enum$Mm2ModelType.MentorExpertise;
+    case r'Profile':
+      return Enum$Mm2ModelType.Profile;
+    case r'SpokenLanguage':
+      return Enum$Mm2ModelType.SpokenLanguage;
+    default:
+      return Enum$Mm2ModelType.$unknown;
+  }
+}
+
+enum Enum$Mm2SynchronizationMode { full, incremental, updated, $unknown }
+
+String toJson$Enum$Mm2SynchronizationMode(Enum$Mm2SynchronizationMode e) {
+  switch (e) {
+    case Enum$Mm2SynchronizationMode.full:
+      return r'full';
+    case Enum$Mm2SynchronizationMode.incremental:
+      return r'incremental';
+    case Enum$Mm2SynchronizationMode.updated:
+      return r'updated';
+    case Enum$Mm2SynchronizationMode.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2SynchronizationMode fromJson$Enum$Mm2SynchronizationMode(String value) {
+  switch (value) {
+    case r'full':
+      return Enum$Mm2SynchronizationMode.full;
+    case r'incremental':
+      return Enum$Mm2SynchronizationMode.incremental;
+    case r'updated':
+      return Enum$Mm2SynchronizationMode.updated;
+    default:
+      return Enum$Mm2SynchronizationMode.$unknown;
+  }
+}
+
+enum Enum$SyncActionTaken {
+  created,
+  updated,
+  deleted,
+  skipped,
+  unset,
+  $unknown
+}
+
+String toJson$Enum$SyncActionTaken(Enum$SyncActionTaken e) {
+  switch (e) {
+    case Enum$SyncActionTaken.created:
+      return r'created';
+    case Enum$SyncActionTaken.updated:
+      return r'updated';
+    case Enum$SyncActionTaken.deleted:
+      return r'deleted';
+    case Enum$SyncActionTaken.skipped:
+      return r'skipped';
+    case Enum$SyncActionTaken.unset:
+      return r'unset';
+    case Enum$SyncActionTaken.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$SyncActionTaken fromJson$Enum$SyncActionTaken(String value) {
+  switch (value) {
+    case r'created':
+      return Enum$SyncActionTaken.created;
+    case r'updated':
+      return Enum$SyncActionTaken.updated;
+    case r'deleted':
+      return Enum$SyncActionTaken.deleted;
+    case r'skipped':
+      return Enum$SyncActionTaken.skipped;
+    case r'unset':
+      return Enum$SyncActionTaken.unset;
+    default:
+      return Enum$SyncActionTaken.$unknown;
+  }
+}
+
+enum Enum$Mm2SynchronizerLogLevel { none, info, error, $unknown }
+
+String toJson$Enum$Mm2SynchronizerLogLevel(Enum$Mm2SynchronizerLogLevel e) {
+  switch (e) {
+    case Enum$Mm2SynchronizerLogLevel.none:
+      return r'none';
+    case Enum$Mm2SynchronizerLogLevel.info:
+      return r'info';
+    case Enum$Mm2SynchronizerLogLevel.error:
+      return r'error';
+    case Enum$Mm2SynchronizerLogLevel.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2SynchronizerLogLevel fromJson$Enum$Mm2SynchronizerLogLevel(
+    String value) {
+  switch (value) {
+    case r'none':
+      return Enum$Mm2SynchronizerLogLevel.none;
+    case r'info':
+      return Enum$Mm2SynchronizerLogLevel.info;
+    case r'error':
+      return Enum$Mm2SynchronizerLogLevel.error;
+    default:
+      return Enum$Mm2SynchronizerLogLevel.$unknown;
   }
 }
 
