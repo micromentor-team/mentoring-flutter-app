@@ -90,7 +90,7 @@ class InvitationList extends StatefulWidget {
 
 class _InvitationListState extends State<InvitationList> {
   late final UserProvider _userProvider;
-  late Future<OperationResult<List<AllUsersWithFilterResult>>> _invitationUsers;
+  late Future<OperationResult<List<UserWithFilterResult>>> _invitationUsers;
   AppLocalizations? _l10n;
 
   @override
