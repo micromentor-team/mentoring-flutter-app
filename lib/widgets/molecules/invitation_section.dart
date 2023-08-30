@@ -15,7 +15,11 @@ import '../../providers/invitations_provider.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 2;
-  const InvitationSection({Key? key}) : super(key: key);
+  final AuthenticatedUser authenticatedUser;
+  const InvitationSection({
+    Key? key,
+    required this.authenticatedUser,
+  }) : super(key: key);
 
   @override
   State<InvitationSection> createState() => _InvitationSectionState();
@@ -49,18 +53,17 @@ class _InvitationSectionState extends State<InvitationSection> {
           snapshot: snapshot,
           onReady: () {
             // TODO: Get invitations sent by this user that were accepted (matches)
-            if (snapshot.data?.response?.channels?.pendingInvitations == null ||
-                snapshot
-                    .data!.response!.channels!.pendingInvitations!.isEmpty) {
-              return const SizedBox(width: 0, height: 0);
-            }
             final filteredInvitations = snapshot
-                .data!.response!.channels!.pendingInvitations!
-                .take(InvitationSection.maxTilesToShow)
-                .toList(growable: false);
+                    .data?.response?.channels?.pendingInvitations
+                    ?.where((element) =>
+                        element.createdBy != widget.authenticatedUser.id)
+                    .take(InvitationSection.maxTilesToShow)
+                    .toList(growable: false) ??
+                [];
             if (filteredInvitations.isEmpty) {
               return const SizedBox(width: 0, height: 0);
             }
+
             return SectionTile(
               title: _l10n.homeInvitationSectionTitle,
               addTopDivider: true,

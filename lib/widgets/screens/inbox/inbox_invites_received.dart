@@ -24,6 +24,7 @@ class InboxInvitesReceivedScreen extends StatefulWidget {
 class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     with RouteAwareMixin<InboxInvitesReceivedScreen> {
   late final InvitationsProvider _invitationsProvider;
+  late final UserProvider _userProvider;
   late Future<OperationResult<InvitationInbox>> _invitationInbox;
   late AppLocalizations _l10n;
 
@@ -33,6 +34,10 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   void initState() {
     super.initState();
     _invitationsProvider = Provider.of<InvitationsProvider>(
+      context,
+      listen: false,
+    );
+    _userProvider = Provider.of<UserProvider>(
       context,
       listen: false,
     );
@@ -82,8 +87,12 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onReady: () {
-            final pendingInvitations =
-                snapshot.data?.response?.channels?.pendingInvitations ?? [];
+            final pendingInvitations = snapshot
+                    .data?.response?.channels?.pendingInvitations
+                    ?.where((element) =>
+                        element.createdBy != _userProvider.user!.id)
+                    .toList() ??
+                [];
             if (pendingInvitations.isEmpty) {
               return EmptyStateMessage(
                 icon: Icons.mail,
