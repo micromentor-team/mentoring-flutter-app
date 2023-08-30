@@ -91,7 +91,9 @@ class _DashboardScreenState extends State<DashboardScreen>
                   authenticatedUser: _authenticatedUser,
                 ),
                 const UpcomingSection(),
-                const InvitationSection(),
+                InvitationSection(
+                  authenticatedUser: _authenticatedUser,
+                ),
                 const ResourcesSection(),
               ],
             ),

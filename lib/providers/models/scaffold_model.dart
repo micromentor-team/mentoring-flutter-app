@@ -108,8 +108,11 @@ class ScaffoldModel extends ChangeNotifier {
             )
             .length;
       }
-      invitesNotifications =
-          invitationsResult.response?.channels?.pendingInvitations?.length ?? 0;
+      invitesNotifications = invitationsResult
+              .response?.channels?.pendingInvitations
+              ?.where((element) => element.createdBy != _userProvider.user!.id)
+              .length ??
+          0;
     }
     _setParams(
       appBar: AppBarFactory.createInboxAppBar(
