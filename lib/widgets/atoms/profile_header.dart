@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
+import 'package:provider/provider.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String? avatarUrl;
@@ -45,11 +47,21 @@ class ProfileHeader extends StatelessWidget {
                     value: profileCompletionPercentage! / 100,
                   ),
                 ),
-              CircleAvatar(
-                radius: Radii.avatarRadiusSmall,
-                backgroundImage: avatarUrl != null
-                    ? NetworkImage(avatarUrl!) as ImageProvider<Object>
-                    : const AssetImage(Assets.blankAvatar),
+              InkWell(
+                onTap: () {
+                  //TODO(m-rosario): Remove this once the real logout flow is defined by UX
+                  Provider.of<ScaffoldModel>(
+                    context,
+                    listen: false,
+                  ).setTestHomeScaffold();
+                  Scaffold.of(context).openDrawer();
+                },
+                child: CircleAvatar(
+                  radius: Radii.avatarRadiusSmall,
+                  backgroundImage: avatarUrl != null
+                      ? NetworkImage(avatarUrl!) as ImageProvider<Object>
+                      : const AssetImage(Assets.blankAvatar),
+                ),
               ),
             ],
           ),
