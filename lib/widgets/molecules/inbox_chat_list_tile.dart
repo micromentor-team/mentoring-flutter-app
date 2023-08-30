@@ -57,7 +57,8 @@ class _InboxChatListTileState extends State<InboxChatListTile> {
           onReady: () => InboxListTile(
             avatarUrl: inboxChatTileModel.channelAvatarUrl,
             fullName: inboxChatTileModel.channelName,
-            date: inboxChatTileModel.lastMessage?.createdAt ?? DateTime.now(),
+            date: inboxChatTileModel.lastMessage?.createdAt.toLocal() ??
+                DateTime.now(),
             message: inboxChatTileModel.lastMessage?.messageText ?? '',
             notifications: inboxChatTileModel.unseenMessageCount,
             highlightTile: inboxChatTileModel.unseenMessageCount > 0,

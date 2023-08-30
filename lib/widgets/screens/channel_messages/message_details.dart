@@ -44,7 +44,7 @@ class _MessageDetailsModalState extends State<MessageDetailsModal> {
   @override
   void initState() {
     _message = widget.message;
-    _sentAt = DateFormat.Hm().format(_message.createdAt);
+    _sentAt = DateFormat.Hm().format(_message.createdAt.toLocal());
     _controller.text = _message.messageText!;
     super.initState();
   }

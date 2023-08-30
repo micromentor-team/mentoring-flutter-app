@@ -300,7 +300,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                         child: TextDivider(
                           text: AppUtility.simplePastDateFormat(
                             context,
-                            invitationResult.createdAt,
+                            invitationResult.createdAt.toLocal(),
                           ),
                         ),
                       ),
@@ -309,7 +309,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                         theme,
                         invitationResult.messageText!,
                         DateFormat.jm()
-                            .format(invitationResult.createdAt)
+                            .format(invitationResult.createdAt.toLocal())
                             .toLowerCase(),
                       ),
                       _createDeclineAcceptButtons(

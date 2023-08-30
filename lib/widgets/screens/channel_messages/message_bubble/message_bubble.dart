@@ -116,7 +116,8 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sentAt = DateFormat.jm().format(message.createdAt).toLowerCase();
+    final sentAt =
+        DateFormat.jm().format(message.createdAt.toLocal()).toLowerCase();
     final isUser = _isCurrentUser(
       userId: message.createdBy,
       context: context,

@@ -96,7 +96,9 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
 
     // Sort channels by latestMessage creation time, starting from most recent
     channels.sort(
-      (a, b) => b.latestMessage.createdAt.compareTo(a.latestMessage.createdAt),
+      (a, b) => b.latestMessage.createdAt
+          .toLocal()
+          .compareTo(a.latestMessage.createdAt.toLocal()),
     );
 
     for (int i = 0; i < channels.length; i++) {

@@ -317,8 +317,9 @@ class BuildMessageBubbles extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               horizontal: Insets.paddingMedium,
             ),
-            groupBy: (message) =>
-                DateFormat('yyyy-MM-dd').format(message.createdAt).toString(),
+            groupBy: (message) => DateFormat('yyyy-MM-dd')
+                .format(message.createdAt.toLocal())
+                .toString(),
             indexedItemBuilder: (context, ChannelMessage message, i) {
               // return buildMessageBubble(_messages[i]);
               final message = messages[i];
@@ -337,10 +338,11 @@ class BuildMessageBubbles extends StatelessWidget {
             groupHeaderBuilder: (ChannelMessage message) => Padding(
               padding: const EdgeInsets.all(Insets.paddingSmall),
               child: TextDivider(
-                text: DateTime.now().day == message.createdAt.day
+                text: DateTime.now().day == message.createdAt.toLocal().day
                     ? l10n.dateSimpleToday[0].toUpperCase() +
                         l10n.dateSimpleToday.substring(1)
-                    : DateFormat('EEE. MMM dd').format(message.createdAt),
+                    : DateFormat('EEE. MMM dd')
+                        .format(message.createdAt.toLocal()),
               ),
             ),
           )
