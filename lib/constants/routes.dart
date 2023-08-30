@@ -53,10 +53,6 @@ class Routes {
     name: 'exploreFiltersAdvanced',
     path: '${exploreFilters.path}/advanced',
   );
-  static Route progress = Route(
-    name: 'progress',
-    path: '/progress',
-  );
   static Route inbox = Route(
     name: 'inbox',
     path: '/inbox',

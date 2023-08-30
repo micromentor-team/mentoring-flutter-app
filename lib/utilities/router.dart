@@ -8,7 +8,6 @@ import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
-import 'package:mm_flutter_app/widgets/screens/progress/progress.dart';
 import 'package:mm_flutter_app/widgets/screens/welcome/select_language.dart';
 import 'package:provider/provider.dart';
 
@@ -143,22 +142,13 @@ class AppRouter {
               },
             ),
             GoRoute(
-                path: Routes.exploreInviteToConnect.path,
-                name: Routes.exploreInviteToConnect.name,
-                builder: (BuildContext context, GoRouterState state) {
-                  List<ProfileQuickViewInfo> selectedProfiles =
-                      state.extra as List<ProfileQuickViewInfo>;
-                  return InviteToConnect(
-                    initialSelectedProfiles: selectedProfiles,
-                  );
-                }),
-            GoRoute(
-              path: Routes.progress.path,
-              name: Routes.progress.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  child: const ProgressScreen(),
+              path: Routes.exploreInviteToConnect.path,
+              name: Routes.exploreInviteToConnect.name,
+              builder: (BuildContext context, GoRouterState state) {
+                List<ProfileQuickViewInfo> selectedProfiles =
+                    state.extra as List<ProfileQuickViewInfo>;
+                return InviteToConnect(
+                  initialSelectedProfiles: selectedProfiles,
                 );
               },
             ),
