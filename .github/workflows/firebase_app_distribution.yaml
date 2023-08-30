@@ -39,3 +39,28 @@ jobs:
       env:
         FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
         FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
+
+build_ios:
+  runs-on: macos-latest
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Flutter get
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.10.1'
+    # !!!
+    # Build and Sign application here
+    # !!
+    - name: Set up ruby env
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+        bundler-cache: true
+    - name: Install dependencies
+      run: cd ios && bundle install
+    - name: Run app distribution
+      run: cd ios && bundle exec fastlane build_and_distribute_ios_with_firebase
+      env:
+        FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+        FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
