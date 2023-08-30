@@ -63,7 +63,9 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _authenticatedUser = Provider.of<UserProvider>(context).user!;
+    if (Provider.of<UserProvider>(context).user != null) {
+      _authenticatedUser = Provider.of<UserProvider>(context).user!;
+    }
   }
 
   @override
