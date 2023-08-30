@@ -153,7 +153,7 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
     return InboxListTile(
       avatarUrl: sender.avatarUrl,
       fullName: sender.fullName ?? '',
-      date: invitation.createdAt,
+      date: invitation.createdAt.toLocal(),
       message: invitation.messageText ?? _l10n.inboxInvitesReceivedMessage,
       highlightTile:
           true, // TODO - Highlight and show notification bubble only if unseen
@@ -169,7 +169,7 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
   ) {
     // Sort invitations by creation time, from most recent to least recent
     widget.pendingInvitations.sort(
-      (a, b) => b.createdAt.compareTo(a.createdAt),
+      (a, b) => b.createdAt.toLocal().compareTo(a.createdAt.toLocal()),
     );
     List<InboxListTile> tiles = [];
     for (ChannelPendingInvitation invitation in widget.pendingInvitations) {

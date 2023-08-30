@@ -102,7 +102,7 @@ class MaybeReminderBanner extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     int profileCompletionPercentage =
         authenticatedUser.profileCompletionPercentage;
-    DateTime? updatedAt = authenticatedUser.updatedAt;
+    DateTime? updatedAt = authenticatedUser.updatedAt?.toLocal();
     if (profileCompletionPercentage < 50) {
       return ReminderBanner(
         titleText: l10n
@@ -111,7 +111,7 @@ class MaybeReminderBanner extends StatelessWidget {
         ctaText: l10n.reminderBannerProfileCompleteCta,
       );
     } else if (updatedAt != null &&
-        DateTime.now().difference(updatedAt).inDays > 30 * 6) {
+        DateTime.now().difference(updatedAt.toLocal()).inDays > 30 * 6) {
       return ReminderBanner(
           titleText: l10n.reminderBannerProfileUpdateTitle,
           subtitleText: l10n.reminderBannerProfileUpdateSubtitle,
