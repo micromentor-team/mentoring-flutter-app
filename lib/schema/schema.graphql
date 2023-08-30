@@ -1,18 +1,18 @@
 type UserMetadata implements BaseModelMetadata {
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   totalTimeOnPlatform: Int!
   channelsMetadata: ChannelsUserMetadata!
   groupsMetadata: GroupsUserMetadata!
 }
 
 interface BaseModelMetadata {
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
 }
 
 """
-The javascript `Date` as string. Type represents date and time as the ISO Date string.
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
 """
-scalar DateTime
+scalar DateTimeISO
 
 type ChannelsUserMetadata {
   mentoringSessionCount: Int!
@@ -20,7 +20,7 @@ type ChannelsUserMetadata {
 
 type GroupsUserMetadata {
   groupCount: Int!
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
 }
 
 type GroupMembership implements IGroupMembership {
@@ -28,11 +28,11 @@ type GroupMembership implements IGroupMembership {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   groupId: ID!
   groupIdent: String!
@@ -60,7 +60,7 @@ enum GroupMembershipRole {
 }
 
 type ModelEvent {
-  time: DateTime!
+  time: DateTimeISO!
   modelEventType: ModelEventType!
   message: String!
 }
@@ -76,11 +76,11 @@ type Expertise {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   textId: String!
   parentTextId: String
@@ -95,7 +95,7 @@ type Expertise {
   mm2Value: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   childOptions: [Option!]
   parentOption: [Option!]
   childExpertises: [Expertise!]
@@ -103,16 +103,16 @@ type Expertise {
 }
 
 enum OptionType {
-  educationLevel
-  expertise
-  industry
-  contentFlagType
   companyStage
   companyType
-  country
+  educationLevel
+  expertise
   gender
+  country
+  industry
   language
   unset
+  contentTagType
 }
 
 enum UiLanguage {
@@ -129,11 +129,11 @@ type Option {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   textId: String!
   parentTextId: String
@@ -148,11 +148,9 @@ type Option {
   mm2Value: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   childOptions: [Option!]
   parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
 }
 
 type Industry {
@@ -160,11 +158,11 @@ type Industry {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   textId: String!
   parentTextId: String
@@ -179,11 +177,9 @@ type Industry {
   mm2Value: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   childOptions: [Option!]
   parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
 }
 
 type MenteesGroupMembership implements IGroupMembership {
@@ -191,11 +187,11 @@ type MenteesGroupMembership implements IGroupMembership {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   groupId: ID!
   groupIdent: String!
@@ -222,11 +218,11 @@ type MentorsGroupMembership implements IGroupMembership {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   groupId: ID!
   groupIdent: String!
@@ -257,9 +253,15 @@ type Query {
   getMyUser: User!
   findUserDeviceById(id: String!): UserDevice!
   findUserDevices(options: FindObjectsOptions, match: UserDeviceInput, filter: SidUserDeviceListFilter): [UserDevice!]!
+  findCompanyStages(fallbackUiLanguage: UiLanguage): [CompanyStage!]!
+  findCompanyTypes(fallbackUiLanguage: UiLanguage): [CompanyType!]!
+  findEducationLevels(fallbackUiLanguage: UiLanguage): [EducationLevel!]!
+  findExpertises(fallbackUiLanguage: UiLanguage, isParent: Boolean, parentTextId: String): [Expertise!]!
+  findGenders(fallbackUiLanguage: UiLanguage): [Gender!]!
   myInbox(refresh: Boolean): UserInbox!
   findChannelInvitationById(id: String!): ChannelInvitation!
-  findChannelInvitationsForUser(options: FindObjectsOptions, userId: String!): [ChannelInvitation!]!
+  findChannelInvitationsForUser(options: FindObjectsOptions, onlyPending: Boolean, direction: ChannelInvitationDirection, userId: String!): [ChannelInvitation!]!
+  myChannelInvitations(options: FindObjectsOptions, onlyPending: Boolean, direction: ChannelInvitationDirection): [ChannelInvitation!]!
   findPendingChannelInvitationsForUser(options: FindObjectsOptions, userId: String!): [ChannelInvitation!]!
   findChannelById(id: String!): Channel!
   findChannels(options: FindObjectsOptions, match: ChannelInput, filter: ChannelListFilter): [Channel!]!
@@ -268,12 +270,7 @@ type Query {
   findChannelMessages(options: FindObjectsOptions, match: ChannelMessageInput, filter: ChannelMessageListFilter): [ChannelMessage!]!
   findChannelParticipantById(id: String!): ChannelParticipant!
   findOptions(fallbackUiLanguage: UiLanguage, isParent: Boolean, parentTextId: String, optionType: OptionType!): [Option!]!
-  findCompanyStages(fallbackUiLanguage: UiLanguage): [CompanyStage!]!
-  findCompanyTypes(fallbackUiLanguage: UiLanguage): [CompanyType!]!
   findCountries(fallbackUiLanguage: UiLanguage): [Country!]!
-  findEducationLevels(fallbackUiLanguage: UiLanguage): [EducationLevel!]!
-  findExpertises(fallbackUiLanguage: UiLanguage, isParent: Boolean, parentTextId: String): [Expertise!]!
-  findGenders(fallbackUiLanguage: UiLanguage): [Gender!]!
   findIndustries(fallbackUiLanguage: UiLanguage): [Industry!]!
   findLanguages(fallbackUiLanguage: UiLanguage): [Language!]!
   apiVersion: String!
@@ -302,23 +299,23 @@ type User {
   adminNotes: String
   events: [ModelEvent!]
   metadata: UserMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   firstName: String
   lastName: String
   fullName: String
   userHandle: String
   phoneNumber: String
-  phoneNumberUpdatedAt: DateTime
+  phoneNumberUpdatedAt: DateTimeISO
   isPhoneNumberVerified: Boolean!
   email: String
-  emailUpdatedAt: DateTime
+  emailUpdatedAt: DateTimeISO
   isEmailVerified: Boolean!
-  gender: String
+  genderTextId: String
   cityOfResidence: String
   regionOfResidence: String
   countryOfResidenceTextId: String
@@ -328,7 +325,7 @@ type User {
   websites: [LabeledStringValue!]
   authType: AuthType
   tfaBackupCodes: String
-  passwordUpdatedAt: DateTime
+  passwordUpdatedAt: DateTimeISO
   preferredLanguageTextId: String
   spokenLanguagesTextIds: [String!]!
   selectedUiLanguageTextId: UiLanguage
@@ -339,11 +336,11 @@ type User {
   timezone: String
   preferences: UserPreferences
   trustLevel: Int!
-  signedInAt: DateTime
-  signedOutAt: DateTime
-  latestActivityAt: DateTime
+  signedInAt: DateTimeISO
+  signedOutAt: DateTimeISO
+  latestActivityAt: DateTimeISO
   userDevices: [UserDevice!]!
-  inactivatedAt: DateTime
+  inactivatedAt: DateTimeISO
   inactivatedBy: ID
   companyIds: [ID!]
   groupIds: [ID!]!
@@ -365,7 +362,7 @@ type User {
   mm2Id: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
 
   """This is the MM2 password hash."""
   mm2PasswordHash: String
@@ -375,6 +372,7 @@ type User {
   """
   oneLiner: String
   countryOfResidence: Country
+  gender: Gender
   latestUserDevice: UserDevice!
   spokenLanguages: [Language!]!
   preferredLanguage: Language!
@@ -386,9 +384,11 @@ type User {
   channelInvitations: [ChannelInvitation!]!
   channelParticipants: [ChannelParticipant!]!
   companies: [Company!]!
+  educationLevel: EducationLevel
+  endorsements: [EndorsementWithTypes!]
   groupMembers: [GroupMembership!]!
   groups: [Group!]!
-  inbox: [UserInbox!]!
+  inbox: UserInbox!
   profileCompletionPercentage: Int!
   userSearches: [UserSearch!]!
 }
@@ -425,11 +425,11 @@ type UserPreferences {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   shareEmail: Boolean
   sharePhoneNumber: Boolean
@@ -441,44 +441,44 @@ type UserDevice {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   userId: ID!
   deviceUuid: String!
-  deviceType: String!
+  deviceType: String
   trusted: Boolean!
-  phoneNumber: String!
-  phoneNumberUpdatedAt: DateTime
+  phoneNumber: String
+  phoneNumberUpdatedAt: DateTimeISO
   isPhoneNumberVerified: Boolean!
-  brand: String!
-  model: String!
+  brand: String
+  model: String
   isTablet: Boolean!
   screenWidth: Int!
   screenHeight: Int!
-  os: String!
-  osVersion: String!
-  timezone: String!
-  ipAddress: String!
-  locale: String!
-  countryCode: String!
-  appVersion: String!
-  signedInAt: DateTime
-  signedOutAt: DateTime
-  sessionStartedAt: DateTime
-  sessionEndedAt: DateTime
-  authToken: String!
-  authTokenCreatedAt: DateTime
-  authTokenExpiresAt: DateTime
-  oAuthToken: String!
-  oAuthTokenExpiresAt: DateTime
-  oAuthProvider: String!
-  oAuthRefreshToken: String!
-  pushNotificationToken: String!
-  trustedAt: DateTime
+  os: String
+  osVersion: String
+  timezone: String
+  ipAddress: String
+  locale: String
+  countryCode: String
+  appVersion: String
+  signedInAt: DateTimeISO
+  signedOutAt: DateTimeISO
+  sessionStartedAt: DateTimeISO
+  sessionEndedAt: DateTimeISO
+  authToken: String
+  authTokenCreatedAt: DateTimeISO
+  authTokenExpiresAt: DateTimeISO
+  oAuthToken: String
+  oAuthTokenExpiresAt: DateTimeISO
+  oAuthProvider: String
+  oAuthRefreshToken: String
+  pushNotificationToken: String
+  trustedAt: DateTimeISO
 }
 
 type Country {
@@ -486,11 +486,11 @@ type Country {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   textId: String!
   parentTextId: String
@@ -505,13 +505,40 @@ type Country {
   mm2Value: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   childOptions: [Option!]
   parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
   alpha2Key: String!
   alpha3Key: String!
+}
+
+type Gender {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTimeISO
+  childOptions: [Option!]
+  parentOption: [Option!]
 }
 
 type Language {
@@ -519,11 +546,11 @@ type Language {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   textId: String!
   parentTextId: String
@@ -538,11 +565,9 @@ type Language {
   mm2Value: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   childOptions: [Option!]
   parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
   isUiLanguage: Boolean!
 
   """ISO 639-1, 2 letter language code. e.g. "en" for English."""
@@ -557,11 +582,11 @@ type Notification {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   templateId: ID!
   toUserId: ID!
@@ -582,11 +607,11 @@ type Notification {
   sendInAppMessage: Boolean!
   sendPushNotification: Boolean!
   sendSms: Boolean!
-  emailSentAt: DateTime
-  inAppMessageSentAt: DateTime
-  inAppMessageReceivedAt: DateTime
-  pushNotificationSentAt: DateTime
-  smsSentAt: DateTime
+  emailSentAt: DateTimeISO
+  inAppMessageSentAt: DateTimeISO
+  inAppMessageReceivedAt: DateTimeISO
+  pushNotificationSentAt: DateTimeISO
+  smsSentAt: DateTimeISO
   emailSendReport: String!
   pushNotificationSendReport: String!
   smsSendReport: String!
@@ -630,11 +655,11 @@ type Channel {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   name: String
   topic: String
@@ -643,9 +668,9 @@ type Channel {
   channelType: ChannelType!
   statuses: [BgChannelStatus!]
   userIds: [ID!]
-  pausedAt: DateTime
+  pausedAt: DateTimeISO
   pausedBy: ID
-  archivedAt: DateTime
+  archivedAt: DateTimeISO
   archivedBy: ID
   assumedMentorId: ID
 
@@ -653,7 +678,7 @@ type Channel {
   mm2Id: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   creator: User!
   status: BgChannelStatus
   invitations: [ChannelInvitation!]!
@@ -671,7 +696,7 @@ enum ChannelType {
 
 type BgChannelStatus {
   userId: ID!
-  archivedAt: DateTime
+  archivedAt: DateTimeISO
 }
 
 type ChannelInvitation {
@@ -679,20 +704,20 @@ type ChannelInvitation {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
-  channelId: ID!
+  channelId: ID
   senderId: ID!
   recipientId: ID!
   channelName: String
   channelTopic: String
   messageText: String
-  dismissedFromInboxBySenderAt: DateTime
-  dismissedFromInboxByRecipientAt: DateTime
+  dismissedFromInboxBySenderAt: DateTimeISO
+  dismissedFromInboxByRecipientAt: DateTimeISO
   status: ChannelInvitationStatus!
   channel: Channel!
   recipient: User!
@@ -711,30 +736,30 @@ type ChannelMessage {
   adminNotes: String
   events: [ModelEvent!]
   metadata: ChannelMessageMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   channelId: ID!
   replyToMessageId: ID
   channelMessageType: ChannelMessageType
   messageText: String
   statuses: [ChannelMessageStatus!]
-  editedAt: DateTime
+  editedAt: DateTimeISO
 
   """This attribute is only used by the MM2 synchronizer."""
   mm2Id: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   channel: Channel!
   sender: User!
 }
 
 type ChannelMessageMetadata {
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   senderUserHandle: String
   senderFirstName: String
   senderLastName: String
@@ -749,8 +774,8 @@ enum ChannelMessageType {
 
 type ChannelMessageStatus {
   userId: ID!
-  receivedAt: DateTime
-  seenAt: DateTime
+  receivedAt: DateTimeISO
+  seenAt: DateTimeISO
 }
 
 type ChannelParticipant {
@@ -758,15 +783,15 @@ type ChannelParticipant {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   channelId: ID!
   userId: ID!
-  invitedBy: ID!
+  invitedBy: ID
   channelName: String
   role: ChannelParticipantRole
   channel: Channel!
@@ -785,15 +810,14 @@ type Company {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   name: String!
   description: String
-  foundedAt: DateTime
   companyTypeTextId: String
   companyStageTextId: String
   websites: [LabeledStringValue!]
@@ -802,6 +826,7 @@ type Company {
   isFundraising: Boolean
   annualRevenue: Int
   employeeCount: Int
+  foundedAt: DateTimeISO
 
   """
   If a Company was created from the imported attributes of an MM2 Profile, mm2UserId references the MM2 user ID. This attribute is only used by the MM2 synchronizer.
@@ -814,7 +839,7 @@ type Company {
   mm2CompanyRole: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   companyStage: CompanyStage
   companyType: CompanyType
 }
@@ -824,11 +849,11 @@ type CompanyStage {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   textId: String!
   parentTextId: String
@@ -843,11 +868,9 @@ type CompanyStage {
   mm2Value: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   childOptions: [Option!]
   parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
 }
 
 type CompanyType {
@@ -855,11 +878,11 @@ type CompanyType {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   textId: String!
   parentTextId: String
@@ -874,11 +897,125 @@ type CompanyType {
   mm2Value: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
   childOptions: [Option!]
   parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
+}
+
+type EducationLevel {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTimeISO
+  childOptions: [Option!]
+  parentOption: [Option!]
+}
+
+type EndorsementWithTypes {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  objectId: String!
+  modelType: ModelType!
+  contentTagTypeTextId: String!
+  childContentTagTypeTextId: String
+  messageText: String
+  approvedByRecipientAt: DateTimeISO
+  childContentTagType: ContentTagType
+  contentTagType: ContentTagType
+}
+
+enum ModelType {
+  Company
+  MentorBoard
+  MentoringSession
+  UserInbox
+  UserMetadata
+  UserPreferences
+  BackgroundTask
+  Channel
+  ChannelInbox
+  ChannelInvitation
+  ChannelMessage
+  ChannelParticipant
+  Option
+  ContentTag
+  AppliedGroupRule
+  Group
+  GroupMembership
+  GroupRule
+  GroupRuleConfig
+  Match
+  MatchProfile
+  MatchingEngine
+  UserSearch
+  Notification
+  NotificationTemplate
+  Mm2Integration
+  Mm2Synchronization
+  Mm2SynchronizationResultItem
+  MultiStepAction
+  ServiceRequest
+  User
+  UserDevice
+  unset
+}
+
+type ContentTagType {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTimeISO
+  childOptions: [Option!]
+  parentOption: [Option!]
+  addToTrustLevel: Int
 }
 
 type Group {
@@ -886,11 +1023,11 @@ type Group {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   parentGroupId: ID
   matchingEngineId: ID
@@ -910,7 +1047,7 @@ type Group {
   isMm2Organization: Boolean
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
 }
 
 type AppliedGroupRule {
@@ -918,11 +1055,11 @@ type AppliedGroupRule {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   groupRuleId: ID!
   groupId: ID!
@@ -945,11 +1082,11 @@ type GroupRuleBaseConfig {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   value: String!
 }
@@ -959,11 +1096,11 @@ type UserInbox {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   userId: ID!
   channels: ChannelInbox
@@ -974,7 +1111,7 @@ type ChannelInbox {
   unseenMessages: [ChannelInboxItemMessage!]
   pendingInvitations: [ChannelInboxItemInvitation!]
   invitations: [ChannelInboxItemInvitation!]
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
 }
 
@@ -989,7 +1126,7 @@ type ChannelInboxItemMessage {
   senderLastName: String
   senderFullName: String
   senderAvatarUrl: String
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
 }
 
@@ -998,7 +1135,7 @@ type ChannelInboxItemInvitation {
   channelId: ID
   messageText: String
   status: ChannelInvitationStatus!
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
 }
 
@@ -1007,11 +1144,11 @@ type UserSearch {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   userId: ID!
   matchingEngineId: ID
@@ -1023,8 +1160,8 @@ type UserSearch {
   offersHelp: UserSearchFieldPreference
   maxResultCount: Int!
   subscription: UserSearchSubscriptionType
-  expiresAt: DateTime
-  resultExpiresAt: DateTime
+  expiresAt: DateTimeISO
+  resultExpiresAt: DateTimeISO
   runInfos: [UserSearchRunInfo!]
   topFoundUsers: [User!]!
 }
@@ -1052,8 +1189,8 @@ enum UserSearchSubscriptionType {
 type UserSearchRunInfo {
   topUserIds: [ID!]
   matchCount: Int!
-  startedAt: DateTime
-  finishedAt: DateTime
+  startedAt: DateTimeISO
+  finishedAt: DateTimeISO
 }
 
 input FindUserByIdentOptions {
@@ -1104,23 +1241,23 @@ input UserInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   firstName: String
   lastName: String
   fullName: String
   userHandle: String
   phoneNumber: String
-  phoneNumberUpdatedAt: String
-  isPhoneNumberVerified: Boolean! = false
+  phoneNumberUpdatedAt: DateTimeISO
+  isPhoneNumberVerified: Boolean
   email: String
-  emailUpdatedAt: String
-  isEmailVerified: Boolean! = false
-  gender: String
+  emailUpdatedAt: DateTimeISO
+  isEmailVerified: Boolean
+  genderTextId: String
   cityOfResidence: String
   regionOfResidence: String
   countryOfResidenceTextId: String
@@ -1131,26 +1268,28 @@ input UserInput {
   authType: AuthType
   currentPassword: String
   newPassword: String
-  tfaBackupCodes: String
-  passwordUpdatedAt: String
   preferredLanguageTextId: String
-  spokenLanguagesTextIds: [String!]! = []
+  spokenLanguagesTextIds: [String!]
   selectedUiLanguageTextId: UiLanguage
   fallbackUiLanguageTextId: UiLanguage
-  roles: [UserRole!]! = []
+  roles: [UserRole!]
   appFeatures: [AppFeature!]
   source: String
   timezone: String
   preferences: UserPreferencesInput
-  trustLevel: Int! = 1
-  signedInAt: String
-  signedOutAt: String
-  latestActivityAt: String
-  inactivatedAt: String
+  trustLevel: Int
+  signedInAt: DateTimeISO
+  signedOutAt: DateTimeISO
+  latestActivityAt: DateTimeISO
+  inactivatedAt: DateTimeISO
   inactivatedBy: ID
+  companyIds: [ID!]
+  groupIds: [ID!]
+  parentGroupIds: [ID!]
+  externalGroupIds: [ID!]
+  groupMemberships: [GroupMembershipInput!]
   addToGroupIds: [String!]
   removeFromGroupIds: [String!]
-  companyIds: [ID!]
   seeksHelp: Boolean
   offersHelp: Boolean
   birthYear: Int
@@ -1166,16 +1305,19 @@ input UserInput {
   Users can enter a short description to be prominently displayed along with their name and other info.
   """
   oneLiner: String
+
+  """Specify a company you want to create and add the user to."""
+  company: CompanyInput
 }
 
 input ModelEventInput {
-  time: DateTime! = "2023-08-17T00:38:40.751Z"
+  time: DateTimeISO! = "2023-08-29T11:25:18.823Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
 
 input BaseModelMetadataInput {
-  updatedAt: String
+  updatedAt: DateTimeISO
 }
 
 input LabeledStringValueInput {
@@ -1189,15 +1331,57 @@ input UserPreferencesInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   shareEmail: Boolean
   sharePhoneNumber: Boolean
   showWelcomeMessage: Boolean
+}
+
+input GroupMembershipInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  groupId: ID
+  groupIdent: String
+  userId: ID
+  roles: [GroupMembershipRole!]
+}
+
+input CompanyInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  name: String
+  description: String
+  companyTypeTextId: String
+  companyStageTextId: String
+  websites: [LabeledStringValueInput!]
+  industries: [String!]
+  isOperational: Boolean
+  isFundraising: Boolean
+  annualRevenue: Int
+  employeeCount: Int
+  foundedAt: DateTimeISO
+  addUserIds: [String!]
 }
 
 input UserListFilter {
@@ -1205,10 +1389,10 @@ input UserListFilter {
   searchText: String
   caseSensitive: Boolean
   textSearchFields: [String!]
-  createdAtFrom: String
-  createdAtUntil: String
-  updatedAtFrom: String
-  updatedAtUntil: String
+  createdAtFrom: DateTimeISO
+  createdAtUntil: DateTimeISO
+  updatedAtFrom: DateTimeISO
+  updatedAtUntil: DateTimeISO
   rolesIn: [UserRole!]
   companyId: ID
   syncedWithMm2: Boolean
@@ -1219,18 +1403,18 @@ input UserDeviceInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   userId: ID
   deviceUuid: String
   deviceType: String
   trusted: Boolean
   phoneNumber: String
-  phoneNumberUpdatedAt: String
+  phoneNumberUpdatedAt: DateTimeISO
   isPhoneNumberVerified: Boolean
   brand: String
   model: String
@@ -1244,19 +1428,19 @@ input UserDeviceInput {
   locale: String
   countryCode: String
   appVersion: String
-  signedInAt: String
-  signedOutAt: String
-  sessionStartedAt: String
-  sessionEndedAt: String
+  signedInAt: DateTimeISO
+  signedOutAt: DateTimeISO
+  sessionStartedAt: DateTimeISO
+  sessionEndedAt: DateTimeISO
   authToken: String
-  authTokenCreatedAt: String
-  authTokenExperiesAt: String
+  authTokenCreatedAt: DateTimeISO
+  authTokenExperiesAt: DateTimeISO
   oAuthToken: String
-  oAuthTokenExpiresAt: String
+  oAuthTokenExpiresAt: DateTimeISO
   oAuthProvider: String
   oAuthRefreshToken: String
   pushNotificationToken: String
-  trustedAt: String
+  trustedAt: DateTimeISO
 }
 
 input SidUserDeviceListFilter {
@@ -1264,10 +1448,15 @@ input SidUserDeviceListFilter {
   searchText: String
   caseSensitive: Boolean
   textSearchFields: [String!]
-  createdAtFrom: String
-  createdAtUntil: String
-  updatedAtFrom: String
-  updatedAtUntil: String
+  createdAtFrom: DateTimeISO
+  createdAtUntil: DateTimeISO
+  updatedAtFrom: DateTimeISO
+  updatedAtUntil: DateTimeISO
+}
+
+enum ChannelInvitationDirection {
+  sent
+  received
 }
 
 input ChannelInput {
@@ -1275,11 +1464,11 @@ input ChannelInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   name: String
   topic: String
@@ -1289,9 +1478,9 @@ input ChannelInput {
   statuses: [BgChannelStatusInput!]
   userIds: [ID!]
   inviteUserIds: [ID!]
-  pausedAt: String
+  pausedAt: DateTimeISO
   pausedBy: ID
-  archivedAt: String
+  archivedAt: DateTimeISO
   archivedBy: ID
   assumedMentorId: ID
 
@@ -1299,12 +1488,12 @@ input ChannelInput {
   mm2Id: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: String
+  syncedWithMm2At: DateTimeISO
 }
 
 input BgChannelStatusInput {
   userId: ID
-  archivedAt: String
+  archivedAt: DateTimeISO
 }
 
 input ChannelListFilter {
@@ -1312,10 +1501,10 @@ input ChannelListFilter {
   searchText: String
   caseSensitive: Boolean
   textSearchFields: [String!]
-  createdAtFrom: String
-  createdAtUntil: String
-  updatedAtFrom: String
-  updatedAtUntil: String
+  createdAtFrom: DateTimeISO
+  createdAtUntil: DateTimeISO
+  updatedAtFrom: DateTimeISO
+  updatedAtUntil: DateTimeISO
 }
 
 input ChannelMessageInput {
@@ -1323,30 +1512,30 @@ input ChannelMessageInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   channelId: ID
   replyToMessageId: ID
   channelMessageType: ChannelMessageType
   messageText: String
   statuses: [ChannelMessageStatusInput!]
-  editedAt: String
+  editedAt: DateTimeISO
 
   """This attribute is only used by the MM2 synchronizer."""
   mm2Id: String
 
   """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
+  syncedWithMm2At: DateTimeISO
 }
 
 input ChannelMessageStatusInput {
   userId: ID
-  receivedAt: String
-  seenAt: String
+  receivedAt: DateTimeISO
+  seenAt: DateTimeISO
 }
 
 input ChannelMessageListFilter {
@@ -1354,78 +1543,16 @@ input ChannelMessageListFilter {
   searchText: String
   caseSensitive: Boolean
   textSearchFields: [String!]
-  createdAtFrom: String
-  createdAtUntil: String
-  updatedAtFrom: String
-  updatedAtUntil: String
+  createdAtFrom: DateTimeISO
+  createdAtUntil: DateTimeISO
+  updatedAtFrom: DateTimeISO
+  updatedAtUntil: DateTimeISO
   channelId: ID
   receiverUserId: ID
   replyToMessageId: ID
   includeChannelMessageType: [ChannelMessageType!]
   received: Boolean
   seen: Boolean
-}
-
-type EducationLevel {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  textId: String!
-  parentTextId: String
-  isParent: Boolean
-  optionType: OptionType!
-  value: String!
-  translatedValue: String
-  language: UiLanguage
-
-  """This attribute is only used by the MM2 synchronizer."""
-  mm2Id: String
-  mm2Value: String
-
-  """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
-  childOptions: [Option!]
-  parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
-}
-
-type Gender {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  textId: String!
-  parentTextId: String
-  isParent: Boolean
-  optionType: OptionType!
-  value: String!
-  translatedValue: String
-  language: UiLanguage
-
-  """This attribute is only used by the MM2 synchronizer."""
-  mm2Id: String
-  mm2Value: String
-
-  """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
-  childOptions: [Option!]
-  parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
 }
 
 """Server health report"""
@@ -1440,31 +1567,15 @@ type SystemHealthReport {
   messageBus: Boolean!
 }
 
-input GroupMembershipInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  groupId: ID
-  userId: ID
-  roles: [GroupMembershipRole!]! = []
-}
-
 input GroupMembershipListFilter {
   ids: [String!]
   searchText: String
   caseSensitive: Boolean
   textSearchFields: [String!]
-  createdAtFrom: String
-  createdAtUntil: String
-  updatedAtFrom: String
-  updatedAtUntil: String
+  createdAtFrom: DateTimeISO
+  createdAtUntil: DateTimeISO
+  updatedAtFrom: DateTimeISO
+  updatedAtUntil: DateTimeISO
   userId: ID
   embedded: Boolean
   roles: [GroupMembershipRole!]
@@ -1475,11 +1586,11 @@ input GroupInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   parentGroupId: ID
   matchingEngineId: ID
@@ -1498,11 +1609,11 @@ input AppliedGroupRuleInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   groupRuleId: ID! = ""
   groupId: ID! = ""
@@ -1519,10 +1630,10 @@ input GroupListFilter {
   searchText: String
   caseSensitive: Boolean
   textSearchFields: [String!]
-  createdAtFrom: String
-  createdAtUntil: String
-  updatedAtFrom: String
-  updatedAtUntil: String
+  createdAtFrom: DateTimeISO
+  createdAtUntil: DateTimeISO
+  updatedAtFrom: DateTimeISO
+  updatedAtUntil: DateTimeISO
   embedded: Boolean
   syncedWithMm2: Boolean
 }
@@ -1532,11 +1643,11 @@ input UserSearchInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   userId: ID
   matchingEngineId: ID
@@ -1546,10 +1657,10 @@ input UserSearchInput {
   searchText: String
   seeksHelp: UserSearchFieldPreference
   offersHelp: UserSearchFieldPreference
-  maxResultCount: Int! = 0
+  maxResultCount: Int! = 10
   subscription: UserSearchSubscriptionType
-  expiresAt: String
-  resultExpiresAt: String
+  expiresAt: DateTimeISO
+  resultExpiresAt: DateTimeISO
   startSearch: Boolean! = true
 }
 
@@ -1558,10 +1669,10 @@ input UserSearchListFilter {
   searchText: String
   caseSensitive: Boolean
   textSearchFields: [String!]
-  createdAtFrom: String
-  createdAtUntil: String
-  updatedAtFrom: String
-  updatedAtUntil: String
+  createdAtFrom: DateTimeISO
+  createdAtUntil: DateTimeISO
+  updatedAtFrom: DateTimeISO
+  updatedAtUntil: DateTimeISO
 }
 
 type Mm2Integration {
@@ -1569,13 +1680,13 @@ type Mm2Integration {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
-  fullSyncAt: DateTime
+  fullSyncAt: DateTimeISO
 }
 
 type SidMultiStepAction {
@@ -1583,11 +1694,11 @@ type SidMultiStepAction {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   userId: ID!
   userIdent: String
@@ -1601,27 +1712,27 @@ type SidMultiStepAction {
   result: MultiStepActionResult!
   confirmToken: String
   attemptCount: Int!
-  notificationSentAt: DateTime
+  notificationSentAt: DateTimeISO
   notificationResult: String
   notificationId: String
   textData: String
   report: String
   authToken: String
-  authTokenExpiresAt: DateTime
+  authTokenExpiresAt: DateTimeISO
   emailPassed: Boolean
-  emailUpdatedAt: DateTime
-  emailVerifiedAt: DateTime
+  emailUpdatedAt: DateTimeISO
+  emailVerifiedAt: DateTimeISO
   errors: [MultiStepActionError!]
   password: String
   passwordPassed: Boolean
-  passwordResettedAt: DateTime
-  passwordUpdatedAt: DateTime
+  passwordResettedAt: DateTimeISO
+  passwordUpdatedAt: DateTimeISO
   phoneNumberPassed: Boolean
-  phoneNumberUpdatedAt: DateTime
-  phoneNumberVerifiedAt: DateTime
-  signedInAt: DateTime
+  phoneNumberUpdatedAt: DateTimeISO
+  phoneNumberVerifiedAt: DateTimeISO
+  signedInAt: DateTimeISO
   tfaBackupCodes: String
-  expiresAt: DateTime
+  expiresAt: DateTimeISO
 }
 
 enum MultiStepActionType {
@@ -1685,11 +1796,11 @@ type MultiStepActionError {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   key: String!
   messageId: String!
@@ -1704,32 +1815,32 @@ type SidMultiStepActionProgress {
   notificationMethod: NotificationMethod
   result: MultiStepActionResult!
   attemptCount: Int!
-  notificationSentAt: DateTime
-  notificationResult: String!
-  notificationId: String!
+  notificationSentAt: DateTimeISO
+  notificationResult: String
+  notificationId: String
   textData: String
   report: String
   emailPassed: Boolean
-  emailUpdatedAt: DateTime
-  emailVerifiedAt: DateTime
+  emailUpdatedAt: DateTimeISO
+  emailVerifiedAt: DateTimeISO
   errors: [MultiStepActionError!]
   authToken: String
-  authTokenExpiresAt: DateTime
+  authTokenExpiresAt: DateTimeISO
   passwordPassed: Boolean
-  passwordResettedAt: DateTime
-  passwordUpdatedAt: DateTime
+  passwordResettedAt: DateTimeISO
+  passwordUpdatedAt: DateTimeISO
   phoneNumberPassed: Boolean
-  phoneNumberUpdatedAt: DateTime
-  phoneNumberVerifiedAt: DateTime
-  signedInAt: DateTime
-  expiresAt: DateTime
+  phoneNumberUpdatedAt: DateTimeISO
+  phoneNumberVerifiedAt: DateTimeISO
+  signedInAt: DateTimeISO
+  expiresAt: DateTimeISO
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
 }
 
@@ -1744,9 +1855,6 @@ type Mutation {
   createCompany(input: CompanyInput!): Company!
   deleteCompany(deletePhysically: Boolean!, companyId: String!): ServiceRequest!
   updateCompany(input: CompanyInput!): ServiceRequest!
-  createContentFlag(input: ContentFlagInput!): ContentFlag!
-  deleteContentFlag(deletePhysically: Boolean!, contentFlagId: String!): ServiceRequest!
-  updateContentFlag(input: ContentFlagInput!): ServiceRequest!
   acceptChannelInvitation(channelInvitationId: String!): String!
   createChannelInvitation(input: ChannelInvitationInput!): ChannelInvitation!
   declineChannelInvitation(channelInvitationId: String!): String!
@@ -1766,15 +1874,20 @@ type Mutation {
   createChannelParticipant(input: ChannelParticipantInput!): ChannelParticipant!
   deleteChannelParticipant(deletePhysically: Boolean!, channelParticipantId: String!): String!
   updateChannelParticipant(input: ChannelParticipantInput!): String!
+  createContentTag(input: ContentTagInput!): ContentTag!
+  deleteContentTag(deletePhysically: Boolean!, contentTagId: String!): ServiceRequest!
+  updateContentTag(input: ContentTagInput!): ServiceRequest!
   createGroupMembership(input: GroupMembershipInput!): ServiceRequest!
   createMenteesGroupMembership(input: MenteesGroupMembershipInput!): ServiceRequest!
   createMentorsGroupMembership(input: MentorsGroupMembershipInput!): ServiceRequest!
   deleteGroupMembership(deletePhysically: Boolean!, groupMembershipId: String!): String!
   updateGroupMembership(input: GroupMembershipInput!): ServiceRequest!
-  addUserToGroup(roles: [GroupMembershipRole!]!, groupId: String!, userId: String!): ServiceRequest!
+  updateMenteesGroupMembership(input: MenteesGroupMembershipInput!): ServiceRequest!
+  updateMentorsGroupMembership(input: MentorsGroupMembershipInput!): ServiceRequest!
+  addUserToGroup(roles: [GroupMembershipRole!]!, groupIdent: String, groupId: String, userId: String!): ServiceRequest!
   createGroup(input: GroupInput!): Group!
   deleteGroup(deletePhysically: Boolean!, groupId: String!): ServiceRequest!
-  removeUserFromGroup(force: Boolean!, groupId: String!, userId: String!): String!
+  removeUserFromGroup(force: Boolean!, groupIdent: String, groupId: String, userId: String!): String!
   updateGroup(input: GroupInput!): ServiceRequest!
   createUserSearch(input: UserSearchInput!): UserSearch!
   deleteUserSearch(deletePhysically: Boolean!, userSearchId: String!): ServiceRequest!
@@ -1810,7 +1923,7 @@ type UserAuthResponse {
   deviceId: String!
   deviceUuid: String!
   authToken: String!
-  authTokenExpiresAt: DateTime
+  authTokenExpiresAt: DateTimeISO
 }
 
 """User sign in input data"""
@@ -1827,11 +1940,11 @@ input UserSignUpInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   firstName: String
   lastName: String
@@ -1845,31 +1958,8 @@ input UserSignUpInput {
   timezone: String
   pushNotificationToken: String
   checkAvailable: Boolean! = true
-}
-
-input CompanyInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  name: String
-  description: String
-  companyTypeTextId: String
-  companyStageTextId: String
-  foundedAt: String
-  websites: [LabeledStringValueInput!]
-  industries: [String!]
-  isOperational: Boolean
-  isFundraising: Boolean
-  annualRevenue: Int
-  employeeCount: Int
-  addUserIds: [String!]
+  offersHelp: Boolean
+  seeksHelp: Boolean
 }
 
 type ServiceRequest {
@@ -1884,14 +1974,15 @@ type ServiceRequest {
   message: String
   errorCode: ErrorCode
   events: [ModelEvent!]
-  createdAt: DateTime!
+  source: ServiceRequestSource
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
-  finishedAt: DateTime
-  expiresAt: DateTime
+  finishedAt: DateTimeISO
+  expiresAt: DateTimeISO
 }
 
 enum ServiceRequestType {
@@ -1900,10 +1991,6 @@ enum ServiceRequestType {
   graphQlMutationCreateCompany
   graphQlMutationDeleteCompany
   graphQlMutationUpdateCompany
-  graphQlQueryContentFlag
-  graphQlMutationCreateContentFlag
-  graphQlMutationDeleteContentFlag
-  graphQlMutationUpdateContentFlag
   graphQlMutationAddChannelMessageEvent
   graphQlMutationArchiveChannelForUserByMe
   graphQlMutationCreateChannel
@@ -1939,6 +2026,10 @@ enum ServiceRequestType {
   graphQlQueryFindIndustries
   graphQlQueryFindOptions
   unset
+  graphQlQueryContentTag
+  graphQlMutationCreateContentTag
+  graphQlMutationDeleteContentTag
+  graphQlMutationUpdateContentTag
   graphQlMutationRunDataGenerator
   graphQlMutationExecuteAdminTask
   graphQlMutationSignUpOAuthUser
@@ -2003,42 +2094,6 @@ enum ServiceRequestType {
   graphQlQueryUserUserDevices
 }
 
-enum ModelType {
-  Company
-  MentorBoard
-  MentoringSession
-  UserInbox
-  UserMetadata
-  UserPreferences
-  ContentFlag
-  BackgroundTask
-  Channel
-  ChannelInbox
-  ChannelInvitation
-  ChannelMessage
-  ChannelParticipant
-  Option
-  AppliedGroupRule
-  Group
-  GroupMembership
-  GroupRule
-  GroupRuleConfig
-  Match
-  MatchProfile
-  MatchingEngine
-  UserSearch
-  Notification
-  NotificationTemplate
-  Mm2Integration
-  Mm2Synchronization
-  Mm2SynchronizationResultItem
-  MultiStepAction
-  ServiceRequest
-  User
-  UserDevice
-  unset
-}
-
 enum ServiceRequestResult {
   ok
   error
@@ -2055,10 +2110,10 @@ enum ServiceRequestMessageId {
 enum ErrorCode {
   companyNameMissing
   companyNameTaken
-  contentFlagAlreadyExist
-  contentFlagModelTypeMissing
-  contentFlagObjectIdMissing
-  contentFlagTypeMissing
+  contentTagAlreadyExist
+  contentTagModelTypeMissing
+  contentTagObjectIdMissing
+  contentTagTypeMissing
   alreadyGroupMember
   groupLevelTooDeep
   groupNameMissing
@@ -2101,76 +2156,11 @@ enum ErrorCode {
   authTokenNoMatch
 }
 
-type ContentFlag {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  objectId: String!
-  modelType: ModelType!
-  flagTypeTextId: String!
-  flagSubTypeTextId: String
-  messageText: String
-  approvedByRecipientAt: DateTime
-  flagSubType: ContentFlagType
-  flagType: ContentFlagType
-}
-
-type ContentFlagType {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTime!
-  createdBy: ID
-  updatedAt: DateTime
-  updatedBy: ID
-  deletedAt: DateTime
-  deletedBy: ID
-  textId: String!
-  parentTextId: String
-  isParent: Boolean
-  optionType: OptionType!
-  value: String!
-  translatedValue: String
-  language: UiLanguage
-
-  """This attribute is only used by the MM2 synchronizer."""
-  mm2Id: String
-  mm2Value: String
-
-  """This attribute is only used by the MM2 synchronizer."""
-  syncedWithMm2At: DateTime
-  childOptions: [Option!]
-  parentOption: [Option!]
-  childExpertises: [Expertise!]
-  parentExpertise: Expertise
-  addToTrustLevel: Int
-}
-
-input ContentFlagInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: String
-  createdBy: ID
-  updatedAt: String
-  updatedBy: ID
-  deletedAt: String
-  deletedBy: ID
-  objectId: String
-  modelType: ModelType
-  flagTypeTextId: String
-  flagSubTypeTextId: String
-  messageText: String
-  approvedByRecipientAt: String
+enum ServiceRequestSource {
+  graphQlApi
+  restApi
+  mm2
+  system
 }
 
 input ChannelInvitationInput {
@@ -2178,11 +2168,11 @@ input ChannelInvitationInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   channelId: ID
   senderId: ID
@@ -2190,8 +2180,8 @@ input ChannelInvitationInput {
   channelName: String
   channelTopic: String
   messageText: String
-  dismissedFromInboxBySenderAt: String
-  dismissedFromInboxByRecipientAt: String
+  dismissedFromInboxBySenderAt: DateTimeISO
+  dismissedFromInboxByRecipientAt: DateTimeISO
   status: ChannelInvitationStatus
 }
 
@@ -2213,11 +2203,11 @@ input ChannelParticipantInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   channelId: ID
   userId: ID
@@ -2226,20 +2216,61 @@ input ChannelParticipantInput {
   role: ChannelParticipantRole
 }
 
+type ContentTag {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  objectId: String!
+  modelType: ModelType!
+  contentTagTypeTextId: String!
+  childContentTagTypeTextId: String
+  messageText: String
+  approvedByRecipientAt: DateTimeISO
+  childContentTagType: ContentTagType
+  contentTagType: ContentTagType
+}
+
+input ContentTagInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  objectId: String
+  modelType: ModelType = ContentTag
+  contentTagTypeTextId: String
+  childContentTagTypeTextId: String
+  messageText: String
+  approvedByRecipientAt: DateTimeISO
+}
+
 input MenteesGroupMembershipInput {
   id: ID
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   groupId: ID
+  groupIdent: String
   userId: ID
-  roles: [GroupMembershipRole!]! = []
+  roles: [GroupMembershipRole!]
 
   """Must match expertise ids or textIds."""
   soughtExpertisesTextIds: [String!]! = []
@@ -2257,15 +2288,16 @@ input MentorsGroupMembershipInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   groupId: ID
+  groupIdent: String
   userId: ID
-  roles: [GroupMembershipRole!]! = []
+  roles: [GroupMembershipRole!]
 
   """Must match expertise ids or textIds."""
   expertisesTextIds: [String!]! = []
@@ -2283,11 +2315,11 @@ input NotificationInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   templateId: ID
   templateName: ID
@@ -2309,11 +2341,11 @@ input NotificationInput {
   sendInAppMessage: Boolean
   sendPushNotification: Boolean
   sendSms: Boolean
-  emailSentAt: String
-  inAppMessageSentAt: String
-  inAppMessageReceivedAt: String
-  pushNotificationSentAt: String
-  smsSentAt: String
+  emailSentAt: DateTimeISO
+  inAppMessageSentAt: DateTimeISO
+  inAppMessageReceivedAt: DateTimeISO
+  pushNotificationSentAt: DateTimeISO
+  smsSentAt: DateTimeISO
   emailSendReport: String
   pushNotificationSendReport: String
   smsSendReport: String
@@ -2339,11 +2371,11 @@ type NotificationTemplate {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   name: NotificationTemplateName!
   description: String!
@@ -2375,11 +2407,11 @@ input NotificationTemplateInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   templateId: ID
   name: NotificationTemplateName
@@ -2406,11 +2438,11 @@ type Mm2Synchronization {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   direction: Mm2SyncDirection!
 
@@ -2441,14 +2473,14 @@ type Mm2Synchronization {
 
   """Will only include objects with a newer then specified updatedAt date."""
   usersSinceUpdatedAt: String
-  previousSyncAt: DateTime
-  startedAt: DateTime
-  finishedAt: DateTime
+  previousSyncAt: DateTimeISO
+  startedAt: DateTimeISO
+  finishedAt: DateTimeISO
 
   """
   Time this object will be deleted from the DB. Default = 10 days after creation.
   """
-  expiresAt: DateTime
+  expiresAt: DateTimeISO
 }
 
 enum Mm2SyncDirection {
@@ -2490,11 +2522,11 @@ type Mm2SynchronizationResultItem {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
   synchronizationId: ID!
   modelType: ModelType
@@ -2525,11 +2557,11 @@ input Mm2SynchronizationInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   direction: Mm2SyncDirection! = mm2ToMm3
   objectId: String
@@ -2547,7 +2579,7 @@ input Mm2SynchronizationInput {
   """
   Time this object will be deleted from the DB. Default = 10 days after creation.
   """
-  expiresAt: String
+  expiresAt: DateTimeISO
 }
 
 input SidMultiStepActionInput {
@@ -2555,11 +2587,11 @@ input SidMultiStepActionInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   userId: ID
   userIdent: String
@@ -2573,26 +2605,26 @@ input SidMultiStepActionInput {
   result: MultiStepActionResult
   confirmToken: String
   attemptCount: Int
-  notificationSentAt: String
+  notificationSentAt: DateTimeISO
   notificationResult: String
   notificationId: String
   textData: String
   report: String
   authToken: String
   emailPassed: Boolean
-  emailUpdatedAt: String
-  emailVerifiedAt: String
+  emailUpdatedAt: DateTimeISO
+  emailVerifiedAt: DateTimeISO
   errors: [MultiStepActionErrorInput!]
   password: String
   passwordPassed: Boolean
-  passwordResettedAt: String
-  passwordUpdatedAt: String
+  passwordResettedAt: DateTimeISO
+  passwordUpdatedAt: DateTimeISO
   phoneNumberPassed: Boolean
-  phoneNumberUpdatedAt: String
-  phoneNumberVerifiedAt: String
-  signedInAt: String
+  phoneNumberUpdatedAt: DateTimeISO
+  phoneNumberVerifiedAt: DateTimeISO
+  signedInAt: DateTimeISO
   tfaBackupCodes: String
-  expiresAt: String
+  expiresAt: DateTimeISO
 }
 
 input MultiStepActionErrorInput {
@@ -2600,11 +2632,11 @@ input MultiStepActionErrorInput {
   adminNotes: String
   events: [ModelEventInput!]
   metadata: BaseModelMetadataInput
-  createdAt: String
+  createdAt: DateTimeISO
   createdBy: ID
-  updatedAt: String
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: String
+  deletedAt: DateTimeISO
   deletedBy: ID
   key: String
   messageId: String
@@ -2676,10 +2708,10 @@ type BaseModel {
   adminNotes: String
   events: [ModelEvent!]
   metadata: BaseModelMetadata
-  createdAt: DateTime!
+  createdAt: DateTimeISO!
   createdBy: ID
-  updatedAt: DateTime
+  updatedAt: DateTimeISO
   updatedBy: ID
-  deletedAt: DateTime
+  deletedAt: DateTimeISO
   deletedBy: ID
 }

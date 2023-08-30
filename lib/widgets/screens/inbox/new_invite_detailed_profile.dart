@@ -57,10 +57,10 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _l10n = AppLocalizations.of(context)!;
     _invitation = _invitationsProvider.findChannelInvitationById(
       channelInvitationId: widget.channelInvitationId,
     );
-    _l10n = AppLocalizations.of(context)!;
   }
 
   Widget _createCard(ChannelInvitationById invitation) {
@@ -313,7 +313,9 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                             .toLowerCase(),
                       ),
                       _createDeclineAcceptButtons(
-                          theme, invitationResult.sender.id),
+                        theme,
+                        invitationResult.sender.id,
+                      ),
                     ],
                   ),
                 ),

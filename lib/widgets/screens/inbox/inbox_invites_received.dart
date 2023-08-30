@@ -115,7 +115,7 @@ class InvitesReceivedList extends StatefulWidget {
 class _InvitesReceivedListState extends State<InvitesReceivedList>
     with RouteAwareMixin<InvitesReceivedList> {
   late final UserProvider _userProvider;
-  late Future<OperationResult<List<AllUsersWithFilterResult>>> _invitationUsers;
+  late Future<OperationResult<List<UserWithFilterResult>>> _invitationUsers;
   late AppLocalizations _l10n;
 
   @override
@@ -139,7 +139,7 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
 
   InboxListTile _createTile(
     ChannelPendingInvitation invitation,
-    AllUsersWithFilterResult sender,
+    UserWithFilterResult sender,
   ) {
     return InboxListTile(
       avatarUrl: sender.avatarUrl,
@@ -156,7 +156,7 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
   }
 
   List<InboxListTile> _createTileList(
-    List<AllUsersWithFilterResult> invitationSenders,
+    List<UserWithFilterResult> invitationSenders,
   ) {
     // Sort invitations by creation time, from most recent to least recent
     widget.pendingInvitations.sort(
