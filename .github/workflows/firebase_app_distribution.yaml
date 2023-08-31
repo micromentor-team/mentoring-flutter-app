@@ -39,3 +39,27 @@ jobs:
       env:
         FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
         FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
+  build_and_deploy_web:
+    name: Build Flutter (Web)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: subosito/flutter-action@v1
+      with:
+          channel: 'dev'
+    - run: flutter pub get
+    - run: flutter config --enable-web
+    - run: flutter build web
+    - name: Add assets/.env
+      run: 'echo "$ENV_FILE" > assets/.env'
+      env:
+        ENV_FILE: ${{ vars.FLUTTER_APP_ENV_FILE }}
+    - name: Deploy to Firebase
+      uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting --public build/web
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+        PROJECT_ID: micromentor-d72ff
+        APP_SUBSCRIPTION_URL: ${{ vars.APP_SUBSCRIPTION_URL }}
+        APP_GRAPHQL_URL: ${{ vars.APP_GRAPHQL_URL }}
