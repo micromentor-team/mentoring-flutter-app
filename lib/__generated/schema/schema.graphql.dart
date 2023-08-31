@@ -12314,6 +12314,11 @@ class Input$UserSearchInput {
     String? searchText,
     Enum$UserSearchFieldPreference? seeksHelp,
     Enum$UserSearchFieldPreference? offersHelp,
+    List<String>? languagesTextIds,
+    List<String>? expertisesTextIds,
+    List<String>? industriesTextIds,
+    List<String>? countryTextIds,
+    List<String>? companyStagesTextIds,
     int? maxResultCount,
     Enum$UserSearchSubscriptionType? subscription,
     DateTime? expiresAt,
@@ -12339,6 +12344,12 @@ class Input$UserSearchInput {
         if (searchText != null) r'searchText': searchText,
         if (seeksHelp != null) r'seeksHelp': seeksHelp,
         if (offersHelp != null) r'offersHelp': offersHelp,
+        if (languagesTextIds != null) r'languagesTextIds': languagesTextIds,
+        if (expertisesTextIds != null) r'expertisesTextIds': expertisesTextIds,
+        if (industriesTextIds != null) r'industriesTextIds': industriesTextIds,
+        if (countryTextIds != null) r'countryTextIds': countryTextIds,
+        if (companyStagesTextIds != null)
+          r'companyStagesTextIds': companyStagesTextIds,
         if (maxResultCount != null) r'maxResultCount': maxResultCount,
         if (subscription != null) r'subscription': subscription,
         if (expiresAt != null) r'expiresAt': expiresAt,
@@ -12439,6 +12450,37 @@ class Input$UserSearchInput {
           ? null
           : fromJson$Enum$UserSearchFieldPreference((l$offersHelp as String));
     }
+    if (data.containsKey('languagesTextIds')) {
+      final l$languagesTextIds = data['languagesTextIds'];
+      result$data['languagesTextIds'] = (l$languagesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('expertisesTextIds')) {
+      final l$expertisesTextIds = data['expertisesTextIds'];
+      result$data['expertisesTextIds'] = (l$expertisesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('industriesTextIds')) {
+      final l$industriesTextIds = data['industriesTextIds'];
+      result$data['industriesTextIds'] = (l$industriesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('countryTextIds')) {
+      final l$countryTextIds = data['countryTextIds'];
+      result$data['countryTextIds'] = (l$countryTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('companyStagesTextIds')) {
+      final l$companyStagesTextIds = data['companyStagesTextIds'];
+      result$data['companyStagesTextIds'] =
+          (l$companyStagesTextIds as List<dynamic>)
+              .map((e) => (e as String))
+              .toList();
+    }
     if (data.containsKey('maxResultCount')) {
       final l$maxResultCount = data['maxResultCount'];
       result$data['maxResultCount'] = (l$maxResultCount as int);
@@ -12494,6 +12536,16 @@ class Input$UserSearchInput {
       (_$data['seeksHelp'] as Enum$UserSearchFieldPreference?);
   Enum$UserSearchFieldPreference? get offersHelp =>
       (_$data['offersHelp'] as Enum$UserSearchFieldPreference?);
+  List<String>? get languagesTextIds =>
+      (_$data['languagesTextIds'] as List<String>?);
+  List<String>? get expertisesTextIds =>
+      (_$data['expertisesTextIds'] as List<String>?);
+  List<String>? get industriesTextIds =>
+      (_$data['industriesTextIds'] as List<String>?);
+  List<String>? get countryTextIds =>
+      (_$data['countryTextIds'] as List<String>?);
+  List<String>? get companyStagesTextIds =>
+      (_$data['companyStagesTextIds'] as List<String>?);
   int? get maxResultCount => (_$data['maxResultCount'] as int?);
   Enum$UserSearchSubscriptionType? get subscription =>
       (_$data['subscription'] as Enum$UserSearchSubscriptionType?);
@@ -12580,6 +12632,31 @@ class Input$UserSearchInput {
       result$data['offersHelp'] = l$offersHelp == null
           ? null
           : toJson$Enum$UserSearchFieldPreference(l$offersHelp);
+    }
+    if (_$data.containsKey('languagesTextIds')) {
+      final l$languagesTextIds = languagesTextIds;
+      result$data['languagesTextIds'] =
+          (l$languagesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('expertisesTextIds')) {
+      final l$expertisesTextIds = expertisesTextIds;
+      result$data['expertisesTextIds'] =
+          (l$expertisesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('industriesTextIds')) {
+      final l$industriesTextIds = industriesTextIds;
+      result$data['industriesTextIds'] =
+          (l$industriesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('countryTextIds')) {
+      final l$countryTextIds = countryTextIds;
+      result$data['countryTextIds'] =
+          (l$countryTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('companyStagesTextIds')) {
+      final l$companyStagesTextIds = companyStagesTextIds;
+      result$data['companyStagesTextIds'] =
+          (l$companyStagesTextIds as List<String>).map((e) => e).toList();
     }
     if (_$data.containsKey('maxResultCount')) {
       final l$maxResultCount = maxResultCount;
@@ -12788,6 +12865,107 @@ class Input$UserSearchInput {
     if (l$offersHelp != lOther$offersHelp) {
       return false;
     }
+    final l$languagesTextIds = languagesTextIds;
+    final lOther$languagesTextIds = other.languagesTextIds;
+    if (_$data.containsKey('languagesTextIds') !=
+        other._$data.containsKey('languagesTextIds')) {
+      return false;
+    }
+    if (l$languagesTextIds != null && lOther$languagesTextIds != null) {
+      if (l$languagesTextIds.length != lOther$languagesTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$languagesTextIds.length; i++) {
+        final l$languagesTextIds$entry = l$languagesTextIds[i];
+        final lOther$languagesTextIds$entry = lOther$languagesTextIds[i];
+        if (l$languagesTextIds$entry != lOther$languagesTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$languagesTextIds != lOther$languagesTextIds) {
+      return false;
+    }
+    final l$expertisesTextIds = expertisesTextIds;
+    final lOther$expertisesTextIds = other.expertisesTextIds;
+    if (_$data.containsKey('expertisesTextIds') !=
+        other._$data.containsKey('expertisesTextIds')) {
+      return false;
+    }
+    if (l$expertisesTextIds != null && lOther$expertisesTextIds != null) {
+      if (l$expertisesTextIds.length != lOther$expertisesTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$expertisesTextIds.length; i++) {
+        final l$expertisesTextIds$entry = l$expertisesTextIds[i];
+        final lOther$expertisesTextIds$entry = lOther$expertisesTextIds[i];
+        if (l$expertisesTextIds$entry != lOther$expertisesTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$expertisesTextIds != lOther$expertisesTextIds) {
+      return false;
+    }
+    final l$industriesTextIds = industriesTextIds;
+    final lOther$industriesTextIds = other.industriesTextIds;
+    if (_$data.containsKey('industriesTextIds') !=
+        other._$data.containsKey('industriesTextIds')) {
+      return false;
+    }
+    if (l$industriesTextIds != null && lOther$industriesTextIds != null) {
+      if (l$industriesTextIds.length != lOther$industriesTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$industriesTextIds.length; i++) {
+        final l$industriesTextIds$entry = l$industriesTextIds[i];
+        final lOther$industriesTextIds$entry = lOther$industriesTextIds[i];
+        if (l$industriesTextIds$entry != lOther$industriesTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$industriesTextIds != lOther$industriesTextIds) {
+      return false;
+    }
+    final l$countryTextIds = countryTextIds;
+    final lOther$countryTextIds = other.countryTextIds;
+    if (_$data.containsKey('countryTextIds') !=
+        other._$data.containsKey('countryTextIds')) {
+      return false;
+    }
+    if (l$countryTextIds != null && lOther$countryTextIds != null) {
+      if (l$countryTextIds.length != lOther$countryTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$countryTextIds.length; i++) {
+        final l$countryTextIds$entry = l$countryTextIds[i];
+        final lOther$countryTextIds$entry = lOther$countryTextIds[i];
+        if (l$countryTextIds$entry != lOther$countryTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$countryTextIds != lOther$countryTextIds) {
+      return false;
+    }
+    final l$companyStagesTextIds = companyStagesTextIds;
+    final lOther$companyStagesTextIds = other.companyStagesTextIds;
+    if (_$data.containsKey('companyStagesTextIds') !=
+        other._$data.containsKey('companyStagesTextIds')) {
+      return false;
+    }
+    if (l$companyStagesTextIds != null && lOther$companyStagesTextIds != null) {
+      if (l$companyStagesTextIds.length != lOther$companyStagesTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$companyStagesTextIds.length; i++) {
+        final l$companyStagesTextIds$entry = l$companyStagesTextIds[i];
+        final lOther$companyStagesTextIds$entry =
+            lOther$companyStagesTextIds[i];
+        if (l$companyStagesTextIds$entry != lOther$companyStagesTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$companyStagesTextIds != lOther$companyStagesTextIds) {
+      return false;
+    }
     final l$maxResultCount = maxResultCount;
     final lOther$maxResultCount = other.maxResultCount;
     if (_$data.containsKey('maxResultCount') !=
@@ -12856,6 +13034,11 @@ class Input$UserSearchInput {
     final l$searchText = searchText;
     final l$seeksHelp = seeksHelp;
     final l$offersHelp = offersHelp;
+    final l$languagesTextIds = languagesTextIds;
+    final l$expertisesTextIds = expertisesTextIds;
+    final l$industriesTextIds = industriesTextIds;
+    final l$countryTextIds = countryTextIds;
+    final l$companyStagesTextIds = companyStagesTextIds;
     final l$maxResultCount = maxResultCount;
     final l$subscription = subscription;
     final l$expiresAt = expiresAt;
@@ -12884,6 +13067,31 @@ class Input$UserSearchInput {
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('seeksHelp') ? l$seeksHelp : const {},
       _$data.containsKey('offersHelp') ? l$offersHelp : const {},
+      _$data.containsKey('languagesTextIds')
+          ? l$languagesTextIds == null
+              ? null
+              : Object.hashAll(l$languagesTextIds.map((v) => v))
+          : const {},
+      _$data.containsKey('expertisesTextIds')
+          ? l$expertisesTextIds == null
+              ? null
+              : Object.hashAll(l$expertisesTextIds.map((v) => v))
+          : const {},
+      _$data.containsKey('industriesTextIds')
+          ? l$industriesTextIds == null
+              ? null
+              : Object.hashAll(l$industriesTextIds.map((v) => v))
+          : const {},
+      _$data.containsKey('countryTextIds')
+          ? l$countryTextIds == null
+              ? null
+              : Object.hashAll(l$countryTextIds.map((v) => v))
+          : const {},
+      _$data.containsKey('companyStagesTextIds')
+          ? l$companyStagesTextIds == null
+              ? null
+              : Object.hashAll(l$companyStagesTextIds.map((v) => v))
+          : const {},
       _$data.containsKey('maxResultCount') ? l$maxResultCount : const {},
       _$data.containsKey('subscription') ? l$subscription : const {},
       _$data.containsKey('expiresAt') ? l$expiresAt : const {},
@@ -12921,6 +13129,11 @@ abstract class CopyWith$Input$UserSearchInput<TRes> {
     String? searchText,
     Enum$UserSearchFieldPreference? seeksHelp,
     Enum$UserSearchFieldPreference? offersHelp,
+    List<String>? languagesTextIds,
+    List<String>? expertisesTextIds,
+    List<String>? industriesTextIds,
+    List<String>? countryTextIds,
+    List<String>? companyStagesTextIds,
     int? maxResultCount,
     Enum$UserSearchSubscriptionType? subscription,
     DateTime? expiresAt,
@@ -12966,6 +13179,11 @@ class _CopyWithImpl$Input$UserSearchInput<TRes>
     Object? searchText = _undefined,
     Object? seeksHelp = _undefined,
     Object? offersHelp = _undefined,
+    Object? languagesTextIds = _undefined,
+    Object? expertisesTextIds = _undefined,
+    Object? industriesTextIds = _undefined,
+    Object? countryTextIds = _undefined,
+    Object? companyStagesTextIds = _undefined,
     Object? maxResultCount = _undefined,
     Object? subscription = _undefined,
     Object? expiresAt = _undefined,
@@ -12999,6 +13217,16 @@ class _CopyWithImpl$Input$UserSearchInput<TRes>
           'seeksHelp': (seeksHelp as Enum$UserSearchFieldPreference?),
         if (offersHelp != _undefined)
           'offersHelp': (offersHelp as Enum$UserSearchFieldPreference?),
+        if (languagesTextIds != _undefined && languagesTextIds != null)
+          'languagesTextIds': (languagesTextIds as List<String>),
+        if (expertisesTextIds != _undefined && expertisesTextIds != null)
+          'expertisesTextIds': (expertisesTextIds as List<String>),
+        if (industriesTextIds != _undefined && industriesTextIds != null)
+          'industriesTextIds': (industriesTextIds as List<String>),
+        if (countryTextIds != _undefined && countryTextIds != null)
+          'countryTextIds': (countryTextIds as List<String>),
+        if (companyStagesTextIds != _undefined && companyStagesTextIds != null)
+          'companyStagesTextIds': (companyStagesTextIds as List<String>),
         if (maxResultCount != _undefined && maxResultCount != null)
           'maxResultCount': (maxResultCount as int),
         if (subscription != _undefined)
@@ -13054,6 +13282,11 @@ class _CopyWithStubImpl$Input$UserSearchInput<TRes>
     String? searchText,
     Enum$UserSearchFieldPreference? seeksHelp,
     Enum$UserSearchFieldPreference? offersHelp,
+    List<String>? languagesTextIds,
+    List<String>? expertisesTextIds,
+    List<String>? industriesTextIds,
+    List<String>? countryTextIds,
+    List<String>? companyStagesTextIds,
     int? maxResultCount,
     Enum$UserSearchSubscriptionType? subscription,
     DateTime? expiresAt,
@@ -16359,6 +16592,3161 @@ class _CopyWithStubImpl$Input$ContentTagInput<TRes>
     String? childContentTagTypeTextId,
     String? messageText,
     DateTime? approvedByRecipientAt,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
+class Input$GenRequest {
+  factory Input$GenRequest({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? clearDb,
+    int? conversationCount,
+    int? messageCount,
+    Input$GenUserInput? users,
+    Input$GenGroupsInput? groups,
+    bool? publishAppEvents,
+  }) =>
+      Input$GenRequest._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (clearDb != null) r'clearDb': clearDb,
+        if (conversationCount != null) r'conversationCount': conversationCount,
+        if (messageCount != null) r'messageCount': messageCount,
+        if (users != null) r'users': users,
+        if (groups != null) r'groups': groups,
+        if (publishAppEvents != null) r'publishAppEvents': publishAppEvents,
+      });
+
+  Input$GenRequest._(this._$data);
+
+  factory Input$GenRequest.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('clearDb')) {
+      final l$clearDb = data['clearDb'];
+      result$data['clearDb'] = (l$clearDb as bool);
+    }
+    if (data.containsKey('conversationCount')) {
+      final l$conversationCount = data['conversationCount'];
+      result$data['conversationCount'] = (l$conversationCount as int);
+    }
+    if (data.containsKey('messageCount')) {
+      final l$messageCount = data['messageCount'];
+      result$data['messageCount'] = (l$messageCount as int);
+    }
+    if (data.containsKey('users')) {
+      final l$users = data['users'];
+      result$data['users'] =
+          Input$GenUserInput.fromJson((l$users as Map<String, dynamic>));
+    }
+    if (data.containsKey('groups')) {
+      final l$groups = data['groups'];
+      result$data['groups'] =
+          Input$GenGroupsInput.fromJson((l$groups as Map<String, dynamic>));
+    }
+    if (data.containsKey('publishAppEvents')) {
+      final l$publishAppEvents = data['publishAppEvents'];
+      result$data['publishAppEvents'] = (l$publishAppEvents as bool);
+    }
+    return Input$GenRequest._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  bool? get clearDb => (_$data['clearDb'] as bool?);
+  int? get conversationCount => (_$data['conversationCount'] as int?);
+  int? get messageCount => (_$data['messageCount'] as int?);
+  Input$GenUserInput? get users => (_$data['users'] as Input$GenUserInput?);
+  Input$GenGroupsInput? get groups =>
+      (_$data['groups'] as Input$GenGroupsInput?);
+  bool? get publishAppEvents => (_$data['publishAppEvents'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('clearDb')) {
+      final l$clearDb = clearDb;
+      result$data['clearDb'] = (l$clearDb as bool);
+    }
+    if (_$data.containsKey('conversationCount')) {
+      final l$conversationCount = conversationCount;
+      result$data['conversationCount'] = (l$conversationCount as int);
+    }
+    if (_$data.containsKey('messageCount')) {
+      final l$messageCount = messageCount;
+      result$data['messageCount'] = (l$messageCount as int);
+    }
+    if (_$data.containsKey('users')) {
+      final l$users = users;
+      result$data['users'] = (l$users as Input$GenUserInput).toJson();
+    }
+    if (_$data.containsKey('groups')) {
+      final l$groups = groups;
+      result$data['groups'] = (l$groups as Input$GenGroupsInput).toJson();
+    }
+    if (_$data.containsKey('publishAppEvents')) {
+      final l$publishAppEvents = publishAppEvents;
+      result$data['publishAppEvents'] = (l$publishAppEvents as bool);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenRequest<Input$GenRequest> get copyWith =>
+      CopyWith$Input$GenRequest(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenRequest) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$clearDb = clearDb;
+    final lOther$clearDb = other.clearDb;
+    if (_$data.containsKey('clearDb') != other._$data.containsKey('clearDb')) {
+      return false;
+    }
+    if (l$clearDb != lOther$clearDb) {
+      return false;
+    }
+    final l$conversationCount = conversationCount;
+    final lOther$conversationCount = other.conversationCount;
+    if (_$data.containsKey('conversationCount') !=
+        other._$data.containsKey('conversationCount')) {
+      return false;
+    }
+    if (l$conversationCount != lOther$conversationCount) {
+      return false;
+    }
+    final l$messageCount = messageCount;
+    final lOther$messageCount = other.messageCount;
+    if (_$data.containsKey('messageCount') !=
+        other._$data.containsKey('messageCount')) {
+      return false;
+    }
+    if (l$messageCount != lOther$messageCount) {
+      return false;
+    }
+    final l$users = users;
+    final lOther$users = other.users;
+    if (_$data.containsKey('users') != other._$data.containsKey('users')) {
+      return false;
+    }
+    if (l$users != lOther$users) {
+      return false;
+    }
+    final l$groups = groups;
+    final lOther$groups = other.groups;
+    if (_$data.containsKey('groups') != other._$data.containsKey('groups')) {
+      return false;
+    }
+    if (l$groups != lOther$groups) {
+      return false;
+    }
+    final l$publishAppEvents = publishAppEvents;
+    final lOther$publishAppEvents = other.publishAppEvents;
+    if (_$data.containsKey('publishAppEvents') !=
+        other._$data.containsKey('publishAppEvents')) {
+      return false;
+    }
+    if (l$publishAppEvents != lOther$publishAppEvents) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$clearDb = clearDb;
+    final l$conversationCount = conversationCount;
+    final l$messageCount = messageCount;
+    final l$users = users;
+    final l$groups = groups;
+    final l$publishAppEvents = publishAppEvents;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('clearDb') ? l$clearDb : const {},
+      _$data.containsKey('conversationCount') ? l$conversationCount : const {},
+      _$data.containsKey('messageCount') ? l$messageCount : const {},
+      _$data.containsKey('users') ? l$users : const {},
+      _$data.containsKey('groups') ? l$groups : const {},
+      _$data.containsKey('publishAppEvents') ? l$publishAppEvents : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenRequest<TRes> {
+  factory CopyWith$Input$GenRequest(
+    Input$GenRequest instance,
+    TRes Function(Input$GenRequest) then,
+  ) = _CopyWithImpl$Input$GenRequest;
+
+  factory CopyWith$Input$GenRequest.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenRequest;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? clearDb,
+    int? conversationCount,
+    int? messageCount,
+    Input$GenUserInput? users,
+    Input$GenGroupsInput? groups,
+    bool? publishAppEvents,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  CopyWith$Input$GenUserInput<TRes> get users;
+  CopyWith$Input$GenGroupsInput<TRes> get groups;
+}
+
+class _CopyWithImpl$Input$GenRequest<TRes>
+    implements CopyWith$Input$GenRequest<TRes> {
+  _CopyWithImpl$Input$GenRequest(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenRequest _instance;
+
+  final TRes Function(Input$GenRequest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? clearDb = _undefined,
+    Object? conversationCount = _undefined,
+    Object? messageCount = _undefined,
+    Object? users = _undefined,
+    Object? groups = _undefined,
+    Object? publishAppEvents = _undefined,
+  }) =>
+      _then(Input$GenRequest._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (clearDb != _undefined && clearDb != null)
+          'clearDb': (clearDb as bool),
+        if (conversationCount != _undefined && conversationCount != null)
+          'conversationCount': (conversationCount as int),
+        if (messageCount != _undefined && messageCount != null)
+          'messageCount': (messageCount as int),
+        if (users != _undefined && users != null)
+          'users': (users as Input$GenUserInput),
+        if (groups != _undefined && groups != null)
+          'groups': (groups as Input$GenGroupsInput),
+        if (publishAppEvents != _undefined && publishAppEvents != null)
+          'publishAppEvents': (publishAppEvents as bool),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  CopyWith$Input$GenUserInput<TRes> get users {
+    final local$users = _instance.users;
+    return local$users == null
+        ? CopyWith$Input$GenUserInput.stub(_then(_instance))
+        : CopyWith$Input$GenUserInput(local$users, (e) => call(users: e));
+  }
+
+  CopyWith$Input$GenGroupsInput<TRes> get groups {
+    final local$groups = _instance.groups;
+    return local$groups == null
+        ? CopyWith$Input$GenGroupsInput.stub(_then(_instance))
+        : CopyWith$Input$GenGroupsInput(local$groups, (e) => call(groups: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenRequest<TRes>
+    implements CopyWith$Input$GenRequest<TRes> {
+  _CopyWithStubImpl$Input$GenRequest(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? clearDb,
+    int? conversationCount,
+    int? messageCount,
+    Input$GenUserInput? users,
+    Input$GenGroupsInput? groups,
+    bool? publishAppEvents,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  CopyWith$Input$GenUserInput<TRes> get users =>
+      CopyWith$Input$GenUserInput.stub(_res);
+  CopyWith$Input$GenGroupsInput<TRes> get groups =>
+      CopyWith$Input$GenGroupsInput.stub(_res);
+}
+
+class Input$GenUserInput {
+  factory Input$GenUserInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    int? count,
+    int? dualRoleCount,
+    String? emailDomain,
+    String? emailPrefix,
+    int? mentorCount,
+    int? menteeCount,
+    double? mentorRatio,
+  }) =>
+      Input$GenUserInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (count != null) r'count': count,
+        if (dualRoleCount != null) r'dualRoleCount': dualRoleCount,
+        if (emailDomain != null) r'emailDomain': emailDomain,
+        if (emailPrefix != null) r'emailPrefix': emailPrefix,
+        if (mentorCount != null) r'mentorCount': mentorCount,
+        if (menteeCount != null) r'menteeCount': menteeCount,
+        if (mentorRatio != null) r'mentorRatio': mentorRatio,
+      });
+
+  Input$GenUserInput._(this._$data);
+
+  factory Input$GenUserInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = (l$count as int);
+    }
+    if (data.containsKey('dualRoleCount')) {
+      final l$dualRoleCount = data['dualRoleCount'];
+      result$data['dualRoleCount'] = (l$dualRoleCount as int?);
+    }
+    if (data.containsKey('emailDomain')) {
+      final l$emailDomain = data['emailDomain'];
+      result$data['emailDomain'] = (l$emailDomain as String);
+    }
+    if (data.containsKey('emailPrefix')) {
+      final l$emailPrefix = data['emailPrefix'];
+      result$data['emailPrefix'] = (l$emailPrefix as String?);
+    }
+    if (data.containsKey('mentorCount')) {
+      final l$mentorCount = data['mentorCount'];
+      result$data['mentorCount'] = (l$mentorCount as int?);
+    }
+    if (data.containsKey('menteeCount')) {
+      final l$menteeCount = data['menteeCount'];
+      result$data['menteeCount'] = (l$menteeCount as int?);
+    }
+    if (data.containsKey('mentorRatio')) {
+      final l$mentorRatio = data['mentorRatio'];
+      result$data['mentorRatio'] = (l$mentorRatio as num?)?.toDouble();
+    }
+    return Input$GenUserInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  int? get count => (_$data['count'] as int?);
+  int? get dualRoleCount => (_$data['dualRoleCount'] as int?);
+  String? get emailDomain => (_$data['emailDomain'] as String?);
+  String? get emailPrefix => (_$data['emailPrefix'] as String?);
+  int? get mentorCount => (_$data['mentorCount'] as int?);
+  int? get menteeCount => (_$data['menteeCount'] as int?);
+  double? get mentorRatio => (_$data['mentorRatio'] as double?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = (l$count as int);
+    }
+    if (_$data.containsKey('dualRoleCount')) {
+      final l$dualRoleCount = dualRoleCount;
+      result$data['dualRoleCount'] = l$dualRoleCount;
+    }
+    if (_$data.containsKey('emailDomain')) {
+      final l$emailDomain = emailDomain;
+      result$data['emailDomain'] = (l$emailDomain as String);
+    }
+    if (_$data.containsKey('emailPrefix')) {
+      final l$emailPrefix = emailPrefix;
+      result$data['emailPrefix'] = l$emailPrefix;
+    }
+    if (_$data.containsKey('mentorCount')) {
+      final l$mentorCount = mentorCount;
+      result$data['mentorCount'] = l$mentorCount;
+    }
+    if (_$data.containsKey('menteeCount')) {
+      final l$menteeCount = menteeCount;
+      result$data['menteeCount'] = l$menteeCount;
+    }
+    if (_$data.containsKey('mentorRatio')) {
+      final l$mentorRatio = mentorRatio;
+      result$data['mentorRatio'] = l$mentorRatio;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenUserInput<Input$GenUserInput> get copyWith =>
+      CopyWith$Input$GenUserInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenUserInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$dualRoleCount = dualRoleCount;
+    final lOther$dualRoleCount = other.dualRoleCount;
+    if (_$data.containsKey('dualRoleCount') !=
+        other._$data.containsKey('dualRoleCount')) {
+      return false;
+    }
+    if (l$dualRoleCount != lOther$dualRoleCount) {
+      return false;
+    }
+    final l$emailDomain = emailDomain;
+    final lOther$emailDomain = other.emailDomain;
+    if (_$data.containsKey('emailDomain') !=
+        other._$data.containsKey('emailDomain')) {
+      return false;
+    }
+    if (l$emailDomain != lOther$emailDomain) {
+      return false;
+    }
+    final l$emailPrefix = emailPrefix;
+    final lOther$emailPrefix = other.emailPrefix;
+    if (_$data.containsKey('emailPrefix') !=
+        other._$data.containsKey('emailPrefix')) {
+      return false;
+    }
+    if (l$emailPrefix != lOther$emailPrefix) {
+      return false;
+    }
+    final l$mentorCount = mentorCount;
+    final lOther$mentorCount = other.mentorCount;
+    if (_$data.containsKey('mentorCount') !=
+        other._$data.containsKey('mentorCount')) {
+      return false;
+    }
+    if (l$mentorCount != lOther$mentorCount) {
+      return false;
+    }
+    final l$menteeCount = menteeCount;
+    final lOther$menteeCount = other.menteeCount;
+    if (_$data.containsKey('menteeCount') !=
+        other._$data.containsKey('menteeCount')) {
+      return false;
+    }
+    if (l$menteeCount != lOther$menteeCount) {
+      return false;
+    }
+    final l$mentorRatio = mentorRatio;
+    final lOther$mentorRatio = other.mentorRatio;
+    if (_$data.containsKey('mentorRatio') !=
+        other._$data.containsKey('mentorRatio')) {
+      return false;
+    }
+    if (l$mentorRatio != lOther$mentorRatio) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$count = count;
+    final l$dualRoleCount = dualRoleCount;
+    final l$emailDomain = emailDomain;
+    final l$emailPrefix = emailPrefix;
+    final l$mentorCount = mentorCount;
+    final l$menteeCount = menteeCount;
+    final l$mentorRatio = mentorRatio;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('count') ? l$count : const {},
+      _$data.containsKey('dualRoleCount') ? l$dualRoleCount : const {},
+      _$data.containsKey('emailDomain') ? l$emailDomain : const {},
+      _$data.containsKey('emailPrefix') ? l$emailPrefix : const {},
+      _$data.containsKey('mentorCount') ? l$mentorCount : const {},
+      _$data.containsKey('menteeCount') ? l$menteeCount : const {},
+      _$data.containsKey('mentorRatio') ? l$mentorRatio : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenUserInput<TRes> {
+  factory CopyWith$Input$GenUserInput(
+    Input$GenUserInput instance,
+    TRes Function(Input$GenUserInput) then,
+  ) = _CopyWithImpl$Input$GenUserInput;
+
+  factory CopyWith$Input$GenUserInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenUserInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    int? count,
+    int? dualRoleCount,
+    String? emailDomain,
+    String? emailPrefix,
+    int? mentorCount,
+    int? menteeCount,
+    double? mentorRatio,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$GenUserInput<TRes>
+    implements CopyWith$Input$GenUserInput<TRes> {
+  _CopyWithImpl$Input$GenUserInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenUserInput _instance;
+
+  final TRes Function(Input$GenUserInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? count = _undefined,
+    Object? dualRoleCount = _undefined,
+    Object? emailDomain = _undefined,
+    Object? emailPrefix = _undefined,
+    Object? mentorCount = _undefined,
+    Object? menteeCount = _undefined,
+    Object? mentorRatio = _undefined,
+  }) =>
+      _then(Input$GenUserInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (count != _undefined && count != null) 'count': (count as int),
+        if (dualRoleCount != _undefined)
+          'dualRoleCount': (dualRoleCount as int?),
+        if (emailDomain != _undefined && emailDomain != null)
+          'emailDomain': (emailDomain as String),
+        if (emailPrefix != _undefined) 'emailPrefix': (emailPrefix as String?),
+        if (mentorCount != _undefined) 'mentorCount': (mentorCount as int?),
+        if (menteeCount != _undefined) 'menteeCount': (menteeCount as int?),
+        if (mentorRatio != _undefined) 'mentorRatio': (mentorRatio as double?),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenUserInput<TRes>
+    implements CopyWith$Input$GenUserInput<TRes> {
+  _CopyWithStubImpl$Input$GenUserInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    int? count,
+    int? dualRoleCount,
+    String? emailDomain,
+    String? emailPrefix,
+    int? mentorCount,
+    int? menteeCount,
+    double? mentorRatio,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
+class Input$GenGroupsInput {
+  factory Input$GenGroupsInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    int? count,
+    List<Input$GenSpecificGroupInput>? specificGroups,
+  }) =>
+      Input$GenGroupsInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (count != null) r'count': count,
+        if (specificGroups != null) r'specificGroups': specificGroups,
+      });
+
+  Input$GenGroupsInput._(this._$data);
+
+  factory Input$GenGroupsInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = (l$count as int);
+    }
+    if (data.containsKey('specificGroups')) {
+      final l$specificGroups = data['specificGroups'];
+      result$data['specificGroups'] = (l$specificGroups as List<dynamic>)
+          .map((e) =>
+              Input$GenSpecificGroupInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Input$GenGroupsInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  int? get count => (_$data['count'] as int?);
+  List<Input$GenSpecificGroupInput>? get specificGroups =>
+      (_$data['specificGroups'] as List<Input$GenSpecificGroupInput>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = (l$count as int);
+    }
+    if (_$data.containsKey('specificGroups')) {
+      final l$specificGroups = specificGroups;
+      result$data['specificGroups'] =
+          (l$specificGroups as List<Input$GenSpecificGroupInput>)
+              .map((e) => e.toJson())
+              .toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenGroupsInput<Input$GenGroupsInput> get copyWith =>
+      CopyWith$Input$GenGroupsInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenGroupsInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$specificGroups = specificGroups;
+    final lOther$specificGroups = other.specificGroups;
+    if (_$data.containsKey('specificGroups') !=
+        other._$data.containsKey('specificGroups')) {
+      return false;
+    }
+    if (l$specificGroups != null && lOther$specificGroups != null) {
+      if (l$specificGroups.length != lOther$specificGroups.length) {
+        return false;
+      }
+      for (int i = 0; i < l$specificGroups.length; i++) {
+        final l$specificGroups$entry = l$specificGroups[i];
+        final lOther$specificGroups$entry = lOther$specificGroups[i];
+        if (l$specificGroups$entry != lOther$specificGroups$entry) {
+          return false;
+        }
+      }
+    } else if (l$specificGroups != lOther$specificGroups) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$count = count;
+    final l$specificGroups = specificGroups;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('count') ? l$count : const {},
+      _$data.containsKey('specificGroups')
+          ? l$specificGroups == null
+              ? null
+              : Object.hashAll(l$specificGroups.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenGroupsInput<TRes> {
+  factory CopyWith$Input$GenGroupsInput(
+    Input$GenGroupsInput instance,
+    TRes Function(Input$GenGroupsInput) then,
+  ) = _CopyWithImpl$Input$GenGroupsInput;
+
+  factory CopyWith$Input$GenGroupsInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenGroupsInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    int? count,
+    List<Input$GenSpecificGroupInput>? specificGroups,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  TRes specificGroups(
+      Iterable<Input$GenSpecificGroupInput> Function(
+              Iterable<
+                  CopyWith$Input$GenSpecificGroupInput<
+                      Input$GenSpecificGroupInput>>)
+          _fn);
+}
+
+class _CopyWithImpl$Input$GenGroupsInput<TRes>
+    implements CopyWith$Input$GenGroupsInput<TRes> {
+  _CopyWithImpl$Input$GenGroupsInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenGroupsInput _instance;
+
+  final TRes Function(Input$GenGroupsInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? count = _undefined,
+    Object? specificGroups = _undefined,
+  }) =>
+      _then(Input$GenGroupsInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (count != _undefined && count != null) 'count': (count as int),
+        if (specificGroups != _undefined && specificGroups != null)
+          'specificGroups':
+              (specificGroups as List<Input$GenSpecificGroupInput>),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  TRes specificGroups(
+          Iterable<Input$GenSpecificGroupInput> Function(
+                  Iterable<
+                      CopyWith$Input$GenSpecificGroupInput<
+                          Input$GenSpecificGroupInput>>)
+              _fn) =>
+      call(
+          specificGroups: _fn((_instance.specificGroups ?? [])
+              .map((e) => CopyWith$Input$GenSpecificGroupInput(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Input$GenGroupsInput<TRes>
+    implements CopyWith$Input$GenGroupsInput<TRes> {
+  _CopyWithStubImpl$Input$GenGroupsInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    int? count,
+    List<Input$GenSpecificGroupInput>? specificGroups,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  specificGroups(_fn) => _res;
+}
+
+class Input$GenSpecificGroupInput {
+  factory Input$GenSpecificGroupInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? name,
+    int? mentorCount,
+    int? menteeCount,
+    List<Input$GenGroupRuleInput>? groupRules,
+    Input$GenMatchingEngineInput? matchingEngine,
+  }) =>
+      Input$GenSpecificGroupInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (name != null) r'name': name,
+        if (mentorCount != null) r'mentorCount': mentorCount,
+        if (menteeCount != null) r'menteeCount': menteeCount,
+        if (groupRules != null) r'groupRules': groupRules,
+        if (matchingEngine != null) r'matchingEngine': matchingEngine,
+      });
+
+  Input$GenSpecificGroupInput._(this._$data);
+
+  factory Input$GenSpecificGroupInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String);
+    }
+    if (data.containsKey('mentorCount')) {
+      final l$mentorCount = data['mentorCount'];
+      result$data['mentorCount'] = (l$mentorCount as int?);
+    }
+    if (data.containsKey('menteeCount')) {
+      final l$menteeCount = data['menteeCount'];
+      result$data['menteeCount'] = (l$menteeCount as int?);
+    }
+    if (data.containsKey('groupRules')) {
+      final l$groupRules = data['groupRules'];
+      result$data['groupRules'] = (l$groupRules as List<dynamic>?)
+          ?.map((e) =>
+              Input$GenGroupRuleInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('matchingEngine')) {
+      final l$matchingEngine = data['matchingEngine'];
+      result$data['matchingEngine'] = l$matchingEngine == null
+          ? null
+          : Input$GenMatchingEngineInput.fromJson(
+              (l$matchingEngine as Map<String, dynamic>));
+    }
+    return Input$GenSpecificGroupInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  String? get name => (_$data['name'] as String?);
+  int? get mentorCount => (_$data['mentorCount'] as int?);
+  int? get menteeCount => (_$data['menteeCount'] as int?);
+  List<Input$GenGroupRuleInput>? get groupRules =>
+      (_$data['groupRules'] as List<Input$GenGroupRuleInput>?);
+  Input$GenMatchingEngineInput? get matchingEngine =>
+      (_$data['matchingEngine'] as Input$GenMatchingEngineInput?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = (l$name as String);
+    }
+    if (_$data.containsKey('mentorCount')) {
+      final l$mentorCount = mentorCount;
+      result$data['mentorCount'] = l$mentorCount;
+    }
+    if (_$data.containsKey('menteeCount')) {
+      final l$menteeCount = menteeCount;
+      result$data['menteeCount'] = l$menteeCount;
+    }
+    if (_$data.containsKey('groupRules')) {
+      final l$groupRules = groupRules;
+      result$data['groupRules'] = l$groupRules?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('matchingEngine')) {
+      final l$matchingEngine = matchingEngine;
+      result$data['matchingEngine'] = l$matchingEngine?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenSpecificGroupInput<Input$GenSpecificGroupInput>
+      get copyWith => CopyWith$Input$GenSpecificGroupInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenSpecificGroupInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$mentorCount = mentorCount;
+    final lOther$mentorCount = other.mentorCount;
+    if (_$data.containsKey('mentorCount') !=
+        other._$data.containsKey('mentorCount')) {
+      return false;
+    }
+    if (l$mentorCount != lOther$mentorCount) {
+      return false;
+    }
+    final l$menteeCount = menteeCount;
+    final lOther$menteeCount = other.menteeCount;
+    if (_$data.containsKey('menteeCount') !=
+        other._$data.containsKey('menteeCount')) {
+      return false;
+    }
+    if (l$menteeCount != lOther$menteeCount) {
+      return false;
+    }
+    final l$groupRules = groupRules;
+    final lOther$groupRules = other.groupRules;
+    if (_$data.containsKey('groupRules') !=
+        other._$data.containsKey('groupRules')) {
+      return false;
+    }
+    if (l$groupRules != null && lOther$groupRules != null) {
+      if (l$groupRules.length != lOther$groupRules.length) {
+        return false;
+      }
+      for (int i = 0; i < l$groupRules.length; i++) {
+        final l$groupRules$entry = l$groupRules[i];
+        final lOther$groupRules$entry = lOther$groupRules[i];
+        if (l$groupRules$entry != lOther$groupRules$entry) {
+          return false;
+        }
+      }
+    } else if (l$groupRules != lOther$groupRules) {
+      return false;
+    }
+    final l$matchingEngine = matchingEngine;
+    final lOther$matchingEngine = other.matchingEngine;
+    if (_$data.containsKey('matchingEngine') !=
+        other._$data.containsKey('matchingEngine')) {
+      return false;
+    }
+    if (l$matchingEngine != lOther$matchingEngine) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$name = name;
+    final l$mentorCount = mentorCount;
+    final l$menteeCount = menteeCount;
+    final l$groupRules = groupRules;
+    final l$matchingEngine = matchingEngine;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('mentorCount') ? l$mentorCount : const {},
+      _$data.containsKey('menteeCount') ? l$menteeCount : const {},
+      _$data.containsKey('groupRules')
+          ? l$groupRules == null
+              ? null
+              : Object.hashAll(l$groupRules.map((v) => v))
+          : const {},
+      _$data.containsKey('matchingEngine') ? l$matchingEngine : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenSpecificGroupInput<TRes> {
+  factory CopyWith$Input$GenSpecificGroupInput(
+    Input$GenSpecificGroupInput instance,
+    TRes Function(Input$GenSpecificGroupInput) then,
+  ) = _CopyWithImpl$Input$GenSpecificGroupInput;
+
+  factory CopyWith$Input$GenSpecificGroupInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenSpecificGroupInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? name,
+    int? mentorCount,
+    int? menteeCount,
+    List<Input$GenGroupRuleInput>? groupRules,
+    Input$GenMatchingEngineInput? matchingEngine,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  TRes groupRules(
+      Iterable<Input$GenGroupRuleInput>? Function(
+              Iterable<
+                  CopyWith$Input$GenGroupRuleInput<Input$GenGroupRuleInput>>?)
+          _fn);
+  CopyWith$Input$GenMatchingEngineInput<TRes> get matchingEngine;
+}
+
+class _CopyWithImpl$Input$GenSpecificGroupInput<TRes>
+    implements CopyWith$Input$GenSpecificGroupInput<TRes> {
+  _CopyWithImpl$Input$GenSpecificGroupInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenSpecificGroupInput _instance;
+
+  final TRes Function(Input$GenSpecificGroupInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? name = _undefined,
+    Object? mentorCount = _undefined,
+    Object? menteeCount = _undefined,
+    Object? groupRules = _undefined,
+    Object? matchingEngine = _undefined,
+  }) =>
+      _then(Input$GenSpecificGroupInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (name != _undefined && name != null) 'name': (name as String),
+        if (mentorCount != _undefined) 'mentorCount': (mentorCount as int?),
+        if (menteeCount != _undefined) 'menteeCount': (menteeCount as int?),
+        if (groupRules != _undefined)
+          'groupRules': (groupRules as List<Input$GenGroupRuleInput>?),
+        if (matchingEngine != _undefined)
+          'matchingEngine': (matchingEngine as Input$GenMatchingEngineInput?),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  TRes groupRules(
+          Iterable<Input$GenGroupRuleInput>? Function(
+                  Iterable<
+                      CopyWith$Input$GenGroupRuleInput<
+                          Input$GenGroupRuleInput>>?)
+              _fn) =>
+      call(
+          groupRules: _fn(
+              _instance.groupRules?.map((e) => CopyWith$Input$GenGroupRuleInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$GenMatchingEngineInput<TRes> get matchingEngine {
+    final local$matchingEngine = _instance.matchingEngine;
+    return local$matchingEngine == null
+        ? CopyWith$Input$GenMatchingEngineInput.stub(_then(_instance))
+        : CopyWith$Input$GenMatchingEngineInput(
+            local$matchingEngine, (e) => call(matchingEngine: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenSpecificGroupInput<TRes>
+    implements CopyWith$Input$GenSpecificGroupInput<TRes> {
+  _CopyWithStubImpl$Input$GenSpecificGroupInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? name,
+    int? mentorCount,
+    int? menteeCount,
+    List<Input$GenGroupRuleInput>? groupRules,
+    Input$GenMatchingEngineInput? matchingEngine,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  groupRules(_fn) => _res;
+  CopyWith$Input$GenMatchingEngineInput<TRes> get matchingEngine =>
+      CopyWith$Input$GenMatchingEngineInput.stub(_res);
+}
+
+class Input$GenGroupRuleInput {
+  factory Input$GenGroupRuleInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? someGroupRule,
+    bool? someOtherGroupRule,
+  }) =>
+      Input$GenGroupRuleInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (someGroupRule != null) r'someGroupRule': someGroupRule,
+        if (someOtherGroupRule != null)
+          r'someOtherGroupRule': someOtherGroupRule,
+      });
+
+  Input$GenGroupRuleInput._(this._$data);
+
+  factory Input$GenGroupRuleInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('someGroupRule')) {
+      final l$someGroupRule = data['someGroupRule'];
+      result$data['someGroupRule'] = (l$someGroupRule as bool);
+    }
+    if (data.containsKey('someOtherGroupRule')) {
+      final l$someOtherGroupRule = data['someOtherGroupRule'];
+      result$data['someOtherGroupRule'] = (l$someOtherGroupRule as bool);
+    }
+    return Input$GenGroupRuleInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  bool? get someGroupRule => (_$data['someGroupRule'] as bool?);
+  bool? get someOtherGroupRule => (_$data['someOtherGroupRule'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('someGroupRule')) {
+      final l$someGroupRule = someGroupRule;
+      result$data['someGroupRule'] = (l$someGroupRule as bool);
+    }
+    if (_$data.containsKey('someOtherGroupRule')) {
+      final l$someOtherGroupRule = someOtherGroupRule;
+      result$data['someOtherGroupRule'] = (l$someOtherGroupRule as bool);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenGroupRuleInput<Input$GenGroupRuleInput> get copyWith =>
+      CopyWith$Input$GenGroupRuleInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenGroupRuleInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$someGroupRule = someGroupRule;
+    final lOther$someGroupRule = other.someGroupRule;
+    if (_$data.containsKey('someGroupRule') !=
+        other._$data.containsKey('someGroupRule')) {
+      return false;
+    }
+    if (l$someGroupRule != lOther$someGroupRule) {
+      return false;
+    }
+    final l$someOtherGroupRule = someOtherGroupRule;
+    final lOther$someOtherGroupRule = other.someOtherGroupRule;
+    if (_$data.containsKey('someOtherGroupRule') !=
+        other._$data.containsKey('someOtherGroupRule')) {
+      return false;
+    }
+    if (l$someOtherGroupRule != lOther$someOtherGroupRule) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$someGroupRule = someGroupRule;
+    final l$someOtherGroupRule = someOtherGroupRule;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('someGroupRule') ? l$someGroupRule : const {},
+      _$data.containsKey('someOtherGroupRule')
+          ? l$someOtherGroupRule
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenGroupRuleInput<TRes> {
+  factory CopyWith$Input$GenGroupRuleInput(
+    Input$GenGroupRuleInput instance,
+    TRes Function(Input$GenGroupRuleInput) then,
+  ) = _CopyWithImpl$Input$GenGroupRuleInput;
+
+  factory CopyWith$Input$GenGroupRuleInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenGroupRuleInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? someGroupRule,
+    bool? someOtherGroupRule,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$GenGroupRuleInput<TRes>
+    implements CopyWith$Input$GenGroupRuleInput<TRes> {
+  _CopyWithImpl$Input$GenGroupRuleInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenGroupRuleInput _instance;
+
+  final TRes Function(Input$GenGroupRuleInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? someGroupRule = _undefined,
+    Object? someOtherGroupRule = _undefined,
+  }) =>
+      _then(Input$GenGroupRuleInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (someGroupRule != _undefined && someGroupRule != null)
+          'someGroupRule': (someGroupRule as bool),
+        if (someOtherGroupRule != _undefined && someOtherGroupRule != null)
+          'someOtherGroupRule': (someOtherGroupRule as bool),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenGroupRuleInput<TRes>
+    implements CopyWith$Input$GenGroupRuleInput<TRes> {
+  _CopyWithStubImpl$Input$GenGroupRuleInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? someGroupRule,
+    bool? someOtherGroupRule,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
+class Input$GenMatchingEngineInput {
+  factory Input$GenMatchingEngineInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? someMatchingRule,
+    bool? someOtherMatchingRule,
+  }) =>
+      Input$GenMatchingEngineInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (someMatchingRule != null) r'someMatchingRule': someMatchingRule,
+        if (someOtherMatchingRule != null)
+          r'someOtherMatchingRule': someOtherMatchingRule,
+      });
+
+  Input$GenMatchingEngineInput._(this._$data);
+
+  factory Input$GenMatchingEngineInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('someMatchingRule')) {
+      final l$someMatchingRule = data['someMatchingRule'];
+      result$data['someMatchingRule'] = (l$someMatchingRule as bool);
+    }
+    if (data.containsKey('someOtherMatchingRule')) {
+      final l$someOtherMatchingRule = data['someOtherMatchingRule'];
+      result$data['someOtherMatchingRule'] = (l$someOtherMatchingRule as bool);
+    }
+    return Input$GenMatchingEngineInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  bool? get someMatchingRule => (_$data['someMatchingRule'] as bool?);
+  bool? get someOtherMatchingRule => (_$data['someOtherMatchingRule'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('someMatchingRule')) {
+      final l$someMatchingRule = someMatchingRule;
+      result$data['someMatchingRule'] = (l$someMatchingRule as bool);
+    }
+    if (_$data.containsKey('someOtherMatchingRule')) {
+      final l$someOtherMatchingRule = someOtherMatchingRule;
+      result$data['someOtherMatchingRule'] = (l$someOtherMatchingRule as bool);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$GenMatchingEngineInput<Input$GenMatchingEngineInput>
+      get copyWith => CopyWith$Input$GenMatchingEngineInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$GenMatchingEngineInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$someMatchingRule = someMatchingRule;
+    final lOther$someMatchingRule = other.someMatchingRule;
+    if (_$data.containsKey('someMatchingRule') !=
+        other._$data.containsKey('someMatchingRule')) {
+      return false;
+    }
+    if (l$someMatchingRule != lOther$someMatchingRule) {
+      return false;
+    }
+    final l$someOtherMatchingRule = someOtherMatchingRule;
+    final lOther$someOtherMatchingRule = other.someOtherMatchingRule;
+    if (_$data.containsKey('someOtherMatchingRule') !=
+        other._$data.containsKey('someOtherMatchingRule')) {
+      return false;
+    }
+    if (l$someOtherMatchingRule != lOther$someOtherMatchingRule) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$someMatchingRule = someMatchingRule;
+    final l$someOtherMatchingRule = someOtherMatchingRule;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('someMatchingRule') ? l$someMatchingRule : const {},
+      _$data.containsKey('someOtherMatchingRule')
+          ? l$someOtherMatchingRule
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$GenMatchingEngineInput<TRes> {
+  factory CopyWith$Input$GenMatchingEngineInput(
+    Input$GenMatchingEngineInput instance,
+    TRes Function(Input$GenMatchingEngineInput) then,
+  ) = _CopyWithImpl$Input$GenMatchingEngineInput;
+
+  factory CopyWith$Input$GenMatchingEngineInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$GenMatchingEngineInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? someMatchingRule,
+    bool? someOtherMatchingRule,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$GenMatchingEngineInput<TRes>
+    implements CopyWith$Input$GenMatchingEngineInput<TRes> {
+  _CopyWithImpl$Input$GenMatchingEngineInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$GenMatchingEngineInput _instance;
+
+  final TRes Function(Input$GenMatchingEngineInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? someMatchingRule = _undefined,
+    Object? someOtherMatchingRule = _undefined,
+  }) =>
+      _then(Input$GenMatchingEngineInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (someMatchingRule != _undefined && someMatchingRule != null)
+          'someMatchingRule': (someMatchingRule as bool),
+        if (someOtherMatchingRule != _undefined &&
+            someOtherMatchingRule != null)
+          'someOtherMatchingRule': (someOtherMatchingRule as bool),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$GenMatchingEngineInput<TRes>
+    implements CopyWith$Input$GenMatchingEngineInput<TRes> {
+  _CopyWithStubImpl$Input$GenMatchingEngineInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    bool? someMatchingRule,
+    bool? someOtherMatchingRule,
   }) =>
       _res;
   events(_fn) => _res;
@@ -23413,16 +26801,18 @@ Enum$ProfileType fromJson$Enum$ProfileType(String value) {
   }
 }
 
-enum Enum$UserSearchFieldPreference { mustMatch, match, mustNotMatch, $unknown }
+enum Enum$UserSearchFieldPreference { isTrue, isFalse, any, match, $unknown }
 
 String toJson$Enum$UserSearchFieldPreference(Enum$UserSearchFieldPreference e) {
   switch (e) {
-    case Enum$UserSearchFieldPreference.mustMatch:
-      return r'mustMatch';
+    case Enum$UserSearchFieldPreference.isTrue:
+      return r'isTrue';
+    case Enum$UserSearchFieldPreference.isFalse:
+      return r'isFalse';
+    case Enum$UserSearchFieldPreference.any:
+      return r'any';
     case Enum$UserSearchFieldPreference.match:
       return r'match';
-    case Enum$UserSearchFieldPreference.mustNotMatch:
-      return r'mustNotMatch';
     case Enum$UserSearchFieldPreference.$unknown:
       return r'$unknown';
   }
@@ -23431,12 +26821,14 @@ String toJson$Enum$UserSearchFieldPreference(Enum$UserSearchFieldPreference e) {
 Enum$UserSearchFieldPreference fromJson$Enum$UserSearchFieldPreference(
     String value) {
   switch (value) {
-    case r'mustMatch':
-      return Enum$UserSearchFieldPreference.mustMatch;
+    case r'isTrue':
+      return Enum$UserSearchFieldPreference.isTrue;
+    case r'isFalse':
+      return Enum$UserSearchFieldPreference.isFalse;
+    case r'any':
+      return Enum$UserSearchFieldPreference.any;
     case r'match':
       return Enum$UserSearchFieldPreference.match;
-    case r'mustNotMatch':
-      return Enum$UserSearchFieldPreference.mustNotMatch;
     default:
       return Enum$UserSearchFieldPreference.$unknown;
   }

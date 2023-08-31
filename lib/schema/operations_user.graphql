@@ -11,6 +11,135 @@ query GetAuthenticatedUser {
     }
 }
 
+mutation CreateUserSearch($input: UserSearchInput!) {
+    createUserSearch(input: $input) {
+        name
+        seeksHelp
+        offersHelp
+        searchText
+        id
+        expiresAt
+        userId
+        updatedAt
+    }
+}
+
+query MyUserSearches {
+  myUserSearches {
+    topFoundUsers {
+        id
+        email
+        firstName
+        lastName
+        fullName
+        avatarUrl
+        userHandle
+        countryOfResidence {
+            translatedValue
+            textId
+        }
+        groupMemberships {
+            groupIdent
+            ... on MentorsGroupMembership {
+                expertisesTextIds
+                industriesTextIds
+                expertises {
+                    translatedValue
+                }
+                industries {
+                    translatedValue
+                }
+                endorsements
+            }
+            ... on MenteesGroupMembership {
+                soughtExpertisesTextIds
+                industryTextId
+                soughtExpertises {
+                    translatedValue
+                }
+                industry {
+                    translatedValue
+                }
+            }
+        }
+        companies {
+            name
+            companyStageTextId
+            companyStage {
+                translatedValue
+            }
+            companyTypeTextId
+            companyType {
+                translatedValue
+            }
+        }
+    }
+    runInfos {
+      matchCount
+      topUserIds
+    }
+    updatedAt
+  }
+}
+
+query FindUserSearch($userSearchId: String!) {
+  findUserSearchById(userSearchId: $userSearchId) {
+    topFoundUsers {
+        id
+        email
+        firstName
+        lastName
+        fullName
+        avatarUrl
+        userHandle
+        countryOfResidence {
+            translatedValue
+            textId
+        }
+        groupMemberships {
+            groupIdent
+            ... on MentorsGroupMembership {
+                expertisesTextIds
+                industriesTextIds
+                expertises {
+                    translatedValue
+                }
+                industries {
+                    translatedValue
+                }
+                endorsements
+            }
+            ... on MenteesGroupMembership {
+                soughtExpertisesTextIds
+                industryTextId
+                soughtExpertises {
+                    translatedValue
+                }
+                industry {
+                    translatedValue
+                }
+            }
+        }
+        companies {
+            name
+            companyStageTextId
+            companyStage {
+                translatedValue
+            }
+            companyTypeTextId
+            companyType {
+                translatedValue
+            }
+        }
+    }
+    runInfos {
+      matchCount
+      topUserIds
+    }
+    updatedAt
+  }
+}
+
 query FindMenteeUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
     findUsers(options: $options, filter: $filter, match: $match) {
         id

@@ -1110,6 +1110,7 @@ type ChannelInbox {
   userId: ID!
   unseenMessages: [ChannelInboxItemMessage!]
   unseenArchivedMessages: [ChannelInboxItemMessage!]
+  unseenArchivedMessages: [ChannelInboxItemMessage!]
   pendingInvitations: [ChannelInboxItemInvitation!]
   invitations: [ChannelInboxItemInvitation!]
   updatedAt: DateTimeISO
@@ -1159,6 +1160,11 @@ type UserSearch {
   searchText: String
   seeksHelp: UserSearchFieldPreference
   offersHelp: UserSearchFieldPreference
+  languagesTextIds: [String!]
+  expertisesTextIds: [String!]
+  industriesTextIds: [String!]
+  countryTextIds: [String!]
+  companyStagesTextIds: [String!]
   maxResultCount: Int!
   subscription: UserSearchSubscriptionType
   expiresAt: DateTimeISO
@@ -1175,9 +1181,10 @@ enum ProfileType {
 }
 
 enum UserSearchFieldPreference {
-  mustMatch
+  isTrue
+  isFalse
+  any
   match
-  mustNotMatch
 }
 
 enum UserSearchSubscriptionType {
@@ -1225,6 +1232,8 @@ input FindObjectsOptions {
   showRecordId: Boolean
   includeDeleted: IncludeFilterOption
   includeArchived: IncludeFilterOption
+  includeDeleted: IncludeFilterOption
+  includeArchived: IncludeFilterOption
 }
 
 input SortItem {
@@ -1235,6 +1244,12 @@ input SortItem {
 enum SortDirection {
   asc
   desc
+}
+
+enum IncludeFilterOption {
+  include
+  exclude
+  only
 }
 
 enum IncludeFilterOption {
@@ -1318,7 +1333,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTimeISO! = "2023-09-01T18:02:56.892Z"
+  time: DateTimeISO! = "2023-08-31T14:35:36.176Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -1664,6 +1679,11 @@ input UserSearchInput {
   searchText: String
   seeksHelp: UserSearchFieldPreference
   offersHelp: UserSearchFieldPreference
+  languagesTextIds: [String!]! = []
+  expertisesTextIds: [String!]! = []
+  industriesTextIds: [String!]! = []
+  countryTextIds: [String!]! = []
+  companyStagesTextIds: [String!]! = []
   maxResultCount: Int! = 10
   subscription: UserSearchSubscriptionType
   expiresAt: DateTimeISO
@@ -1896,6 +1916,7 @@ type Mutation {
   createContentTag(input: ContentTagInput!): ContentTag!
   deleteContentTag(deletePhysically: Boolean!, contentTagId: String!): ServiceRequest!
   updateContentTag(input: ContentTagInput!): ServiceRequest!
+  runDataGenerator(input: GenRequest!): Boolean!
   createGroupMembership(input: GroupMembershipInput!): ServiceRequest!
   createMenteesGroupMembership(input: MenteesGroupMembershipInput!): ServiceRequest!
   createMentorsGroupMembership(input: MentorsGroupMembershipInput!): ServiceRequest!
@@ -2266,6 +2287,108 @@ input ContentTagInput {
   childContentTagTypeTextId: String
   messageText: String
   approvedByRecipientAt: DateTimeISO
+}
+
+input GenRequest {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  clearDb: Boolean! = false
+  conversationCount: Int! = 0
+  messageCount: Int! = 0
+  users: GenUserInput! = {count: 0, emailDomain: "micromentor.org"}
+  groups: GenGroupsInput! = {count: 0, specificGroups: []}
+  publishAppEvents: Boolean! = false
+}
+
+input GenUserInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  count: Int! = 0
+  dualRoleCount: Int
+  emailDomain: String! = "micromentor.org"
+  emailPrefix: String
+  mentorCount: Int
+  menteeCount: Int
+  mentorRatio: Float
+}
+
+input GenGroupsInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  count: Int! = 0
+  specificGroups: [GenSpecificGroupInput!]! = []
+}
+
+input GenSpecificGroupInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  name: String! = ""
+  mentorCount: Int
+  menteeCount: Int
+  groupRules: [GenGroupRuleInput!]
+  matchingEngine: GenMatchingEngineInput
+}
+
+input GenGroupRuleInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  someGroupRule: Boolean! = false
+  someOtherGroupRule: Boolean! = false
+}
+
+input GenMatchingEngineInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  someMatchingRule: Boolean! = false
+  someOtherMatchingRule: Boolean! = false
 }
 
 input MenteesGroupMembershipInput {
