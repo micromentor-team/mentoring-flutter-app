@@ -28,7 +28,12 @@ class ChannelsProvider extends BaseProvider {
       queryOptions: QueryOptions(
         document: documentNodeQueryFindChannelsForUser,
         fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Query$FindChannelsForUser(userId: userId).toJson(),
+        variables: Variables$Query$FindChannelsForUser(
+          userId: userId,
+          options: Input$FindObjectsOptions(
+            includeArchived: Enum$IncludeFilterOption.include,
+          ),
+        ).toJson(),
       ),
     );
     return OperationResult(

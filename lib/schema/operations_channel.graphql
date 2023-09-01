@@ -1,5 +1,5 @@
-query FindChannelsForUser ($userId: String!) {
-    findChannelsForUser(userId: $userId) {
+query FindChannelsForUser ($userId: String!, $options: FindObjectsOptions) {
+    findChannelsForUser(userId: $userId, options: $options) {
         id
         name
         userIds
