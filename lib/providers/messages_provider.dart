@@ -55,7 +55,7 @@ class MessagesProvider extends BaseProvider {
         variables: Variables$Query$FindChannelMessages(
           filter: input,
           options: Input$FindObjectsOptions(
-            includeDeleted: true,
+            includeDeleted: Enum$IncludeFilterOption.include,
           ),
         ).toJson(),
       ),
