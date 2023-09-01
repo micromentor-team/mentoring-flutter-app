@@ -13,6 +13,8 @@ typedef ChannelMessage = Query$FindChannelMessages$findChannelMessages;
 typedef ChannelMessageById
     = Query$FindChannelMessageById$findChannelMessageById;
 typedef CreatedMessage = Mutation$CreateChannelMessage$createChannelMessage;
+typedef UnseenArchivedMessage
+    = Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages;
 typedef UnseenMessage
     = Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
 
@@ -88,6 +90,23 @@ class MessagesProvider extends BaseProvider {
           ? Query$FindChannelMessageById.fromJson(
               queryResult.data!,
             ).findChannelMessageById
+          : null,
+    );
+  }
+
+  Future<OperationResult<List<UnseenArchivedMessage>>>
+      unseenArchivedMessages() async {
+    final QueryResult queryResult = await asyncQuery(
+        queryOptions: QueryOptions(
+      document: documentNodeQueryInboxUnseenArchivedMessages,
+      fetchPolicy: FetchPolicy.networkOnly,
+    ));
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$InboxUnseenArchivedMessages.fromJson(
+              queryResult.data!,
+            ).myInbox.channels?.unseenArchivedMessages
           : null,
     );
   }
