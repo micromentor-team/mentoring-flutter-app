@@ -53,7 +53,7 @@ class InboxChatTileModel extends ChangeNotifier {
     if (isArchivedChannel) {
       unseenMessagesResult = await _messagesProvider.unseenArchivedMessages();
     } else {
-      unseenMessagesResult = await _messagesProvider.unseenMessages();
+      unseenMessagesResult = await _messagesProvider.unseenUnarchivedMessages();
     }
     if (latestMessageResult.gqlQueryResult.hasException ||
         unseenMessagesResult.gqlQueryResult.hasException) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +11,6 @@ import '../messages_provider.dart';
 
 class ScaffoldModel extends ChangeNotifier {
   final MessagesProvider _messagesProvider;
-  final ChannelsProvider _channelsProvider;
   final InvitationsProvider _invitationsProvider;
   final UserProvider _userProvider;
 
@@ -26,10 +24,6 @@ class ScaffoldModel extends ChangeNotifier {
 
   ScaffoldModel({required BuildContext context})
       : _messagesProvider = Provider.of<MessagesProvider>(
-          context,
-          listen: false,
-        ),
-        _channelsProvider = Provider.of<ChannelsProvider>(
           context,
           listen: false,
         ),
@@ -73,41 +67,18 @@ class ScaffoldModel extends ChangeNotifier {
   Future<void> setInboxScaffold({required GoRouter router}) async {
     _state = AsyncState.loading;
     int chatsNotifications = 0;
-    int invitesNotifications = 0;
     int archivedNotifications = 0;
-    final channelsResult = await _channelsProvider.queryUserChannels(
-        userId: _userProvider.user!.id);
-    final unseenMessagesResult = await _messagesProvider.unseenMessages();
+    int invitesNotifications = 0;
+    final allUnseenMessagesResult = await _messagesProvider.allUnseenMessages();
     final invitationsResult = await _invitationsProvider.getInboxInvitations();
-    if (channelsResult.gqlQueryResult.hasException ||
-        unseenMessagesResult.gqlQueryResult.hasException ||
+    if (allUnseenMessagesResult.gqlQueryResult.hasException ||
         invitationsResult.gqlQueryResult.hasException) {
       _state = AsyncState.error;
     } else {
-      List<ChannelForUser> unarchivedChannels = [];
-      List<ChannelForUser> archivedChannels = [];
-      for (ChannelForUser channel in channelsResult.response!) {
-        if (channel.isArchivedForMe) {
-          archivedChannels.add(channel);
-        } else {
-          unarchivedChannels.add(channel);
-        }
-      }
-      for (ChannelForUser unarchivedChannel in unarchivedChannels) {
-        chatsNotifications += unseenMessagesResult.response!
-            .where(
-              (unseenMessage) =>
-                  unseenMessage.channelId == unarchivedChannel.id,
-            )
-            .length;
-      }
-      for (ChannelForUser archivedChannel in archivedChannels) {
-        archivedNotifications += unseenMessagesResult.response!
-            .where(
-              (unseenMessage) => unseenMessage.channelId == archivedChannel.id,
-            )
-            .length;
-      }
+      chatsNotifications =
+          allUnseenMessagesResult.response?.unseenMessages?.length ?? 0;
+      archivedNotifications =
+          allUnseenMessagesResult.response?.unseenArchivedMessages?.length ?? 0;
       invitesNotifications = invitationsResult
               .response?.channels?.pendingInvitations
               ?.where((element) => element.createdBy != _userProvider.user!.id)

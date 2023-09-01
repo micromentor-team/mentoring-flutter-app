@@ -12,11 +12,12 @@ typedef ChannelLatestMessage
 typedef ChannelMessage = Query$FindChannelMessages$findChannelMessages;
 typedef ChannelMessageById
     = Query$FindChannelMessageById$findChannelMessageById;
+typedef ChannelMessageInbox = Query$InboxAllUnseenMessages$myInbox$channels;
 typedef CreatedMessage = Mutation$CreateChannelMessage$createChannelMessage;
 typedef UnseenArchivedMessage
     = Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages;
-typedef UnseenMessage
-    = Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
+typedef UnseenUnarchivedMessage
+    = Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages;
 
 class MessagesProvider extends BaseProvider {
   MessagesProvider({required super.client});
@@ -94,13 +95,31 @@ class MessagesProvider extends BaseProvider {
     );
   }
 
+  Future<OperationResult<ChannelMessageInbox>> allUnseenMessages() async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryInboxAllUnseenMessages,
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$InboxAllUnseenMessages.fromJson(
+              queryResult.data!,
+            ).myInbox.channels
+          : null,
+    );
+  }
+
   Future<OperationResult<List<UnseenArchivedMessage>>>
       unseenArchivedMessages() async {
     final QueryResult queryResult = await asyncQuery(
-        queryOptions: QueryOptions(
-      document: documentNodeQueryInboxUnseenArchivedMessages,
-      fetchPolicy: FetchPolicy.networkOnly,
-    ));
+      queryOptions: QueryOptions(
+        document: documentNodeQueryInboxUnseenArchivedMessages,
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+    );
     return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
@@ -111,16 +130,18 @@ class MessagesProvider extends BaseProvider {
     );
   }
 
-  Future<OperationResult<List<UnseenMessage>>> unseenMessages() async {
+  Future<OperationResult<List<UnseenUnarchivedMessage>>>
+      unseenUnarchivedMessages() async {
     final QueryResult queryResult = await asyncQuery(
-        queryOptions: QueryOptions(
-      document: documentNodeQueryInboxUnseenMessages,
-      fetchPolicy: FetchPolicy.networkOnly,
-    ));
+      queryOptions: QueryOptions(
+        document: documentNodeQueryInboxUnseenUnarchivedMessages,
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+    );
     return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
-          ? Query$InboxUnseenMessages.fromJson(
+          ? Query$InboxUnseenUnarchivedMessages.fromJson(
               queryResult.data!,
             ).myInbox.channels?.unseenMessages
           : null,
