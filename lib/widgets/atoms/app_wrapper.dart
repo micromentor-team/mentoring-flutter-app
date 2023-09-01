@@ -23,14 +23,11 @@ class AppWrapper extends StatelessWidget {
     if (location.startsWith(Routes.explore.path)) {
       return 1;
     }
-    if (location.startsWith(Routes.progress.path)) {
+    if (location.startsWith(Routes.inbox.path)) {
       return 2;
     }
-    if (location.startsWith(Routes.inbox.path)) {
-      return 3;
-    }
     if (location.startsWith(Routes.profile.path)) {
-      return 4;
+      return 3;
     }
     return 0;
   }
@@ -57,10 +54,6 @@ class AppWrapper extends StatelessWidget {
                   label: AppLocalizations.of(context)!.navExploreText,
                 ),
                 NavigationDestination(
-                  icon: const Icon(Icons.incomplete_circle),
-                  label: AppLocalizations.of(context)!.navProgressText,
-                ),
-                NavigationDestination(
                   icon: const Icon(Icons.mail_outline),
                   label: AppLocalizations.of(context)!.navInboxText,
                 ),
@@ -79,12 +72,9 @@ class AppWrapper extends StatelessWidget {
                     context.push(Routes.explore.path);
                     break;
                   case 2:
-                    context.push(Routes.progress.path);
-                    break;
-                  case 3:
                     context.push(Routes.inboxChats.path);
                     break;
-                  case 4:
+                  case 3:
                     context.push(Routes.profile.path);
                     break;
                   default:
