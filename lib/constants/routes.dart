@@ -29,6 +29,10 @@ class Routes {
     name: 'signup',
     path: '/signup',
   );
+  static Route signupEmail = Route(
+    name: 'signupEmail',
+    path: '${signup.path}/connect',
+  );
   static Route loading = Route(
     name: 'loading',
     path: '/loading',
