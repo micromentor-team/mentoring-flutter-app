@@ -1,16 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/invitation_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../../__generated/schema/operations_user.graphql.dart';
-import '../../providers/base/operation_result.dart';
 import '../../providers/invitations_provider.dart';
 
 class InvitationSection extends StatefulWidget {
@@ -26,154 +26,85 @@ class InvitationSection extends StatefulWidget {
 }
 
 class _InvitationSectionState extends State<InvitationSection> {
-  late final InvitationsProvider _invitationsProvider;
-  late Future<OperationResult<InvitationInbox>> _invitationInbox;
+  late final MyChannelInvitationsModel _myChannelInvitationsModel;
   late AppLocalizations _l10n;
 
   @override
   void initState() {
     super.initState();
-    _invitationsProvider =
-        Provider.of<InvitationsProvider>(context, listen: false);
+    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
+      context,
+      listen: false,
+    );
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _invitationInbox = _invitationsProvider.getInboxInvitations();
     _l10n = AppLocalizations.of(context)!;
+    _myChannelInvitationsModel.refreshReceivedInvitations(onlyPending: true);
+  }
+
+  InvitationTile _createInvitationTile(
+    BuildContext context,
+    ReceivedChannelInvitation receivedInvitation,
+  ) {
+    return InvitationTile(
+      userName: receivedInvitation.sender.fullName ?? '',
+      userJobTitle: receivedInvitation.sender.jobTitle ?? '',
+      invitationStatus: receivedInvitation.status,
+      avatarUrl: receivedInvitation.sender.avatarUrl,
+      buttonOnPressed: () => context.push(
+        '${Routes.inboxInvitesReceived.path}/${receivedInvitation.id}',
+      ),
+    );
+  }
+
+  Widget _createInvitationList(
+    List<ReceivedChannelInvitation> receivedInvitations,
+  ) {
+    List<Widget> invitationWidgets = [];
+    for (int i = 0;
+        i < min(InvitationSection.maxTilesToShow, receivedInvitations.length);
+        i++) {
+      if (invitationWidgets.isNotEmpty) {
+        invitationWidgets.add(
+          const Divider(
+            thickness: 1,
+            height: 0,
+            indent: Insets.paddingMedium,
+            endIndent: Insets.paddingMedium,
+          ),
+        );
+      }
+      invitationWidgets.add(
+        _createInvitationTile(context, receivedInvitations[i]),
+      );
+    }
+    return Column(
+      children: invitationWidgets,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _invitationInbox,
-      builder: (context, snapshot) {
-        return AppUtility.widgetForAsyncSnapshot(
-          snapshot: snapshot,
+    return Consumer<MyChannelInvitationsModel>(
+      builder: (context, myChannelInvitationsModel, _) {
+        return AppUtility.widgetForAsyncState(
+          state: myChannelInvitationsModel.state,
           onReady: () {
-            // TODO: Get invitations sent by this user that were accepted (matches)
-            final filteredInvitations = snapshot
-                    .data?.response?.channels?.pendingInvitations
-                    ?.where((element) =>
-                        element.createdBy != widget.authenticatedUser.id)
-                    .take(InvitationSection.maxTilesToShow)
-                    .toList(growable: false) ??
-                [];
-            if (filteredInvitations.isEmpty) {
+            if (myChannelInvitationsModel.receivedInvitations.isEmpty) {
               return const SizedBox(width: 0, height: 0);
             }
-
             return SectionTile(
               title: _l10n.homeInvitationSectionTitle,
               addTopDivider: true,
               removeBottomPadding: true,
               seeAllOnPressed: () =>
                   context.push(Routes.inboxInvitesReceived.path),
-              child: InvitationList(invitations: filteredInvitations),
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-class InvitationList extends StatefulWidget {
-  final List<ChannelPendingInvitation> invitations;
-
-  const InvitationList({
-    super.key,
-    required this.invitations,
-  });
-
-  @override
-  State<InvitationList> createState() => _InvitationListState();
-}
-
-class _InvitationListState extends State<InvitationList> {
-  late final UserProvider _userProvider;
-  late Future<OperationResult<List<UserWithFilterResult>>> _invitationUsers;
-  AppLocalizations? _l10n;
-
-  @override
-  void initState() {
-    super.initState();
-    _userProvider = Provider.of<UserProvider>(context, listen: false);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    List<String> userIds = widget.invitations
-        .map((e) => e.createdBy)
-        .nonNulls
-        .toList(growable: false);
-    _invitationUsers = _userProvider.findUsersWithFilter(
-      input: Input$UserListFilter(ids: userIds),
-    );
-    _l10n = AppLocalizations.of(context);
-  }
-
-  InvitationTile _createInvitationTile(
-    BuildContext context,
-    AppLocalizations l10n,
-    String channelInvitationId,
-    Query$FindUsersWithFilter$findUsers user,
-    Enum$ChannelInvitationStatus invitationStatus,
-  ) {
-    return InvitationTile(
-      userName: user.fullName ?? '',
-      userJobTitle: user.jobTitle ?? '',
-      invitationStatus: invitationStatus,
-      avatarUrl: user.avatarUrl,
-      buttonOnPressed: () => {
-        if (invitationStatus == Enum$ChannelInvitationStatus.created)
-          {
-            context.push(
-              '${Routes.inboxInvitesReceived.path}/$channelInvitationId',
-            )
-          }
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _invitationUsers,
-      builder: (context, snapshot) {
-        return AppUtility.widgetForAsyncSnapshot(
-          snapshot: snapshot,
-          onReady: () {
-            if (snapshot.data?.response == null) {
-              return const SizedBox(width: 0, height: 0);
-            }
-            List<Widget> invitationWidgets = [];
-            for (int i = 0; i < widget.invitations.length; i++) {
-              if (i > 0) {
-                invitationWidgets.add(
-                  const Divider(
-                    thickness: 1,
-                    height: 0,
-                    indent: Insets.paddingMedium,
-                    endIndent: Insets.paddingMedium,
-                  ),
-                );
-              }
-              invitationWidgets.add(
-                _createInvitationTile(
-                  context,
-                  _l10n!,
-                  widget.invitations[i].id,
-                  snapshot.data!.response!.firstWhere((element) =>
-                      widget.invitations[i].createdBy! == element.id),
-                  widget.invitations[i].status,
-                ),
-              );
-            }
-            return Column(
-              children: invitationWidgets,
+              child: _createInvitationList(
+                myChannelInvitationsModel.receivedInvitations,
+              ),
             );
           },
         );

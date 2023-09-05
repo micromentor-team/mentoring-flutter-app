@@ -12,7 +12,6 @@ import '../messages_provider.dart';
 class ScaffoldModel extends ChangeNotifier {
   final MessagesProvider _messagesProvider;
   final InvitationsProvider _invitationsProvider;
-  final UserProvider _userProvider;
 
   AppBar? _appBar;
   Drawer? _drawer;
@@ -24,10 +23,6 @@ class ScaffoldModel extends ChangeNotifier {
 
   ScaffoldModel({required BuildContext context})
       : _messagesProvider = Provider.of<MessagesProvider>(
-          context,
-          listen: false,
-        ),
-        _userProvider = Provider.of<UserProvider>(
           context,
           listen: false,
         ),
@@ -70,20 +65,17 @@ class ScaffoldModel extends ChangeNotifier {
     int archivedNotifications = 0;
     int invitesNotifications = 0;
     final allUnseenMessagesResult = await _messagesProvider.allUnseenMessages();
-    final invitationsResult = await _invitationsProvider.getInboxInvitations();
+    final receivedInvitationsResult =
+        await _invitationsProvider.getReceivedInvitations(onlyPending: true);
     if (allUnseenMessagesResult.gqlQueryResult.hasException ||
-        invitationsResult.gqlQueryResult.hasException) {
+        receivedInvitationsResult.gqlQueryResult.hasException) {
       _state = AsyncState.error;
     } else {
       chatsNotifications =
           allUnseenMessagesResult.response?.unseenMessages?.length ?? 0;
       archivedNotifications =
           allUnseenMessagesResult.response?.unseenArchivedMessages?.length ?? 0;
-      invitesNotifications = invitationsResult
-              .response?.channels?.pendingInvitations
-              ?.where((element) => element.createdBy != _userProvider.user!.id)
-              .length ??
-          0;
+      invitesNotifications = receivedInvitationsResult.response?.length ?? 0;
     }
     _setParams(
       appBar: AppBarFactory.createInboxAppBar(

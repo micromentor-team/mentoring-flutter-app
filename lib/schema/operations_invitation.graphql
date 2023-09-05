@@ -47,25 +47,34 @@ query FindChannelInvitationById($channelInvitationId: String!) {
   }
 }
 
-query GetInboxInvitations {
-  myInbox {
-    channels {
-      invitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
-      pendingInvitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
+query MyReceivedChannelInvitations($direction: ChannelInvitationDirection, $onlyPending: Boolean) {
+  myChannelInvitations(direction: $direction, onlyPending: $onlyPending) {
+    channelId
+    createdAt
+    id
+    messageText
+    status
+    sender {
+      avatarUrl
+      fullName
+      jobTitle
+      id
+    }
+  }
+}
+
+query MySentChannelInvitations($direction: ChannelInvitationDirection, $onlyPending: Boolean) {
+  myChannelInvitations(direction: $direction, onlyPending: $onlyPending) {
+    channelId
+    createdAt
+    id
+    messageText
+    status
+    recipient {
+      avatarUrl
+      fullName
+      jobTitle
+      id
     }
   }
 }

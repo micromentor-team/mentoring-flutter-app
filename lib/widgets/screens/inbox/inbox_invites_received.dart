@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
+import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../../../__generated/schema/schema.graphql.dart';
 import '../../../providers/models/scaffold_model.dart';
-import '../../../providers/user_provider.dart';
 
 class InboxInvitesReceivedScreen extends StatefulWidget {
   const InboxInvitesReceivedScreen({super.key});
@@ -23,9 +21,7 @@ class InboxInvitesReceivedScreen extends StatefulWidget {
 
 class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     with RouteAwareMixin<InboxInvitesReceivedScreen> {
-  late final InvitationsProvider _invitationsProvider;
-  late final UserProvider _userProvider;
-  late Future<OperationResult<InvitationInbox>> _invitationInbox;
+  late final MyChannelInvitationsModel _myChannelInvitationsModel;
   late AppLocalizations _l10n;
 
   static const int tabBarIndex = 0;
@@ -33,11 +29,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   @override
   void initState() {
     super.initState();
-    _invitationsProvider = Provider.of<InvitationsProvider>(
-      context,
-      listen: false,
-    );
-    _userProvider = Provider.of<UserProvider>(
+    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
       context,
       listen: false,
     );
@@ -46,7 +38,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _invitationInbox = _invitationsProvider.getInboxInvitations();
+    _myChannelInvitationsModel.refreshReceivedInvitations(onlyPending: true);
     _l10n = AppLocalizations.of(context)!;
   }
 
@@ -79,80 +71,12 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _invitationInbox,
-      builder: (context, snapshot) {
-        return AppUtility.widgetForAsyncSnapshot(
-          snapshot: snapshot,
-          onReady: () {
-            final pendingInvitations = snapshot
-                    .data?.response?.channels?.pendingInvitations
-                    ?.where((element) =>
-                        element.createdBy != _userProvider.user!.id)
-                    .toList() ??
-                [];
-            if (pendingInvitations.isEmpty) {
-              return EmptyStateMessage(
-                icon: Icons.mail,
-                text: _l10n.emptyStateInvites,
-              );
-            }
-            return InvitesReceivedList(
-              pendingInvitations: pendingInvitations,
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-class InvitesReceivedList extends StatefulWidget {
-  final List<ChannelPendingInvitation> pendingInvitations;
-
-  const InvitesReceivedList({
-    super.key,
-    required this.pendingInvitations,
-  });
-
-  @override
-  State<InvitesReceivedList> createState() => _InvitesReceivedListState();
-}
-
-class _InvitesReceivedListState extends State<InvitesReceivedList>
-    with RouteAwareMixin<InvitesReceivedList> {
-  late final UserProvider _userProvider;
-  late Future<OperationResult<List<UserWithFilterResult>>> _invitationUsers;
-  late AppLocalizations _l10n;
-
-  @override
-  void initState() {
-    super.initState();
-    _userProvider = Provider.of<UserProvider>(context, listen: false);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _l10n = AppLocalizations.of(context)!;
-    List<String> userIds = widget.pendingInvitations
-        .map((e) => e.createdBy)
-        .nonNulls
-        .toList(growable: false);
-    _invitationUsers = _userProvider.findUsersWithFilter(
-      input: Input$UserListFilter(ids: userIds),
-    );
-  }
-
   InboxListTile _createTile(
-    ChannelPendingInvitation invitation,
-    UserWithFilterResult sender,
+    ReceivedChannelInvitation invitation,
   ) {
     return InboxListTile(
-      avatarUrl: sender.avatarUrl,
-      fullName: sender.fullName ?? '',
+      avatarUrl: invitation.sender.avatarUrl,
+      fullName: invitation.sender.fullName ?? '',
       date: invitation.createdAt.toLocal(),
       message: invitation.messageText ?? _l10n.inboxInvitesReceivedMessage,
       highlightTile:
@@ -165,18 +89,13 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
   }
 
   List<InboxListTile> _createTileList(
-    List<UserWithFilterResult> invitationSenders,
+    List<ReceivedChannelInvitation> invitations,
   ) {
-    // Sort invitations by creation time, from most recent to least recent
-    widget.pendingInvitations.sort(
-      (a, b) => b.createdAt.toLocal().compareTo(a.createdAt.toLocal()),
-    );
     List<InboxListTile> tiles = [];
-    for (ChannelPendingInvitation invitation in widget.pendingInvitations) {
+    for (ReceivedChannelInvitation invitation in invitations) {
       tiles.add(
         _createTile(
           invitation,
-          invitationSenders.firstWhere((e) => e.id == invitation.createdBy),
         ),
       );
     }
@@ -202,12 +121,17 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _invitationUsers,
-      builder: (context, snapshot) {
-        return AppUtility.widgetForAsyncSnapshot(
-          snapshot: snapshot,
+    return Consumer<MyChannelInvitationsModel>(
+      builder: (context, myChannelInvitationsModel, _) {
+        return AppUtility.widgetForAsyncState(
+          state: myChannelInvitationsModel.state,
           onReady: () {
+            if (myChannelInvitationsModel.receivedInvitations.isEmpty) {
+              return EmptyStateMessage(
+                icon: Icons.mail,
+                text: _l10n.emptyStateInvites,
+              );
+            }
             return Padding(
               padding: const EdgeInsetsDirectional.only(
                 start: Insets.paddingSmall,
@@ -215,7 +139,9 @@ class _InvitesReceivedListState extends State<InvitesReceivedList>
               ),
               child: ListView(
                 children: _createContentList(
-                  _createTileList(snapshot.data?.response ?? []),
+                  _createTileList(
+                    myChannelInvitationsModel.receivedInvitations,
+                  ),
                 ),
               ),
             );
