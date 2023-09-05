@@ -99,7 +99,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                 )
                 .toList() ??
             [];
-    return createProfilCardFromInfoAndCheckbox(
+    return createProfilCardFromInfo(
       info: ProfileQuickViewInfo(
         isRecommended: false,
         userType: invitation.sender.offersHelp

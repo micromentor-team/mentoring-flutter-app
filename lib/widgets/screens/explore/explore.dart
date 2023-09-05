@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
-import 'package:mm_flutter_app/widgets/molecules/explore_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 
 import '../../../providers/models/scaffold_model.dart';
@@ -39,15 +37,9 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   List<Widget> _createCards() {
     List<Widget> exploreCards = [];
     for (int i = 0; i < isSelected.length; i++) {
-      exploreCards.add(createProfilCardFromInfoAndCheckbox(
-          info: cardInfo[i],
-          checkbox: Checkbox(
-              value: isSelected[i],
-              onChanged: (bool? value) {
-                setState(() {
-                  isSelected[i] = value!;
-                });
-              })));
+      exploreCards.add(createProfilCardFromInfo(
+        info: cardInfo[i],
+      ));
     }
     return exploreCards;
   }
@@ -73,55 +65,72 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SafeArea(
-      child: Column(children: [
-        Expanded(
-            child: ListView(
-          children: _createFilter(context) +
-              _createCards() +
-              [
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _loadMoreRecommendations();
-                      });
-                    },
-                    child: Column(children: [
-                      Text(
-                        l10n.exploreSeeMore,
-                        style: theme.textTheme.labelLarge?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
+      child: Column(
+        children: [
+          Expanded(
+              child: ListView(
+            children: _createFilter(context) +
+                _createCards() +
+                [
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _loadMoreRecommendations();
+                        });
+                      },
+                      child: Column(children: [
+                        Text(
+                          l10n.exploreSeeMore,
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
                         ),
+                        Icon(
+                          Icons.arrow_drop_down,
+                          color:
+                              Color(theme.colorScheme.onSurfaceVariant.value),
+                        ),
+                      ]))
+                ],
+          )),
+          TextButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: theme.colorScheme.primaryContainer,
+                  content: Padding(
+                    padding: const EdgeInsets.all(Insets.paddingMedium),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Text(
+                            l10n.maximizeYourImpact,
+                            style: theme.textTheme.labelLarge?.copyWith(
+                              color: theme.colorScheme.secondary,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            l10n.connectWithThreeEntrepreneurs,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.secondary,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
-                      Icon(
-                        Icons.arrow_drop_down,
-                        color: Color(theme.colorScheme.onSurfaceVariant.value),
-                      ),
-                    ]))
-              ],
-        )),
-        ExploreBottomButtons(
-          clearAction: () {
-            setState(() {
-              for (int i = 0; i < isSelected.length; i++) {
-                isSelected[i] = false;
-              }
-            });
-          },
-          sendInvitesAction: () {
-            List<ProfileQuickViewInfo> selectedInfo = [];
-            for (int i = 0; i < isSelected.length; i++) {
-              if (isSelected[i]) {
-                selectedInfo.add(cardInfo[i]);
-              }
-            }
-            context.push(Routes.exploreInviteToConnect.path,
-                extra: selectedInfo);
-          },
-          selectedCount: isSelected
-              .map((e) => e ? 1 : 0)
-              .reduce((value, element) => value + element),
-        ),
-      ]),
+                    ),
+                  ),
+                  showCloseIcon: true,
+                  closeIconColor: theme.colorScheme.onSurfaceVariant,
+                  padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+                ),
+              );
+            },
+            child: const Text("Show some tips on a SnackBar"),
+          ),
+        ],
+      ),
     );
   }
 }
