@@ -125,7 +125,6 @@ ProfileQuickViewCard createProfilCardFromInfo({
   required ProfileQuickViewInfo info,
 }) {
   return ProfileQuickViewCard(
-    // checkbox: checkbox,
     isRecommended: info.isRecommended,
     userType: info.userType,
     avatarUrl: info.avatarUrl,
@@ -154,7 +153,6 @@ class ProfileQuickViewCard extends StatelessWidget {
   final ProfileChip? ventureIndustry;
   final int? endorsements;
   final List<SkillChip> skills;
-  // final Checkbox? checkbox;
 
   const ProfileQuickViewCard({
     Key? key,
@@ -204,7 +202,10 @@ class ProfileQuickViewCard extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: Padding(
                   padding: EdgeInsets.all(Insets.paddingMedium),
-                  child: Icon(Icons.arrow_forward),
+                  child: TextButton(
+                    onPressed: null,
+                    child: Icon(Icons.arrow_forward),
+                  ),
                 ),
               ),
               Padding(
