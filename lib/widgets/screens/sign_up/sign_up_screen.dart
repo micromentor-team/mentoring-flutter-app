@@ -22,8 +22,8 @@ class SignUpScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          LinearProgressIndicator(value: 0.25),
-                          SizedBox(height: Insets.paddingMedium),
+                          const LinearProgressIndicator(value: 0.25),
+                          const SizedBox(height: Insets.paddingMedium),
                           Text(
                             l10n.signUp,
                             style: theme.textTheme.headlineSmall?.copyWith(
