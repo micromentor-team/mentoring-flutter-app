@@ -6,6 +6,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
@@ -60,9 +61,10 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setAppBarTitleOnly(
-        context: context,
-        title: AppLocalizations.of(context)!.exploreSearchFilterTitle,
+      scaffoldModel.setParams(
+        appBar: AppBarFactory.createTitleOnlyAppBar(
+          title: AppLocalizations.of(context)!.exploreSearchFilterTitle,
+        ),
       );
     });
   }

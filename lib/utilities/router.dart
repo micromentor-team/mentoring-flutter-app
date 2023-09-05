@@ -18,7 +18,7 @@ import '../widgets/screens/channel_messages/channel_messages.dart';
 import '../widgets/screens/dashboard/dashboard.dart';
 import '../widgets/screens/explore/explore.dart';
 import '../widgets/screens/inbox/inbox_chat_list.dart';
-import '../widgets/screens/inbox/new_invite_detailed_profile.dart';
+import '../widgets/screens/inbox/invitation_detail.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
 import '../widgets/screens/welcome/welcome_screen.dart';
@@ -205,8 +205,9 @@ class AppRouter {
                     state.pathParameters[RouteParams.channelInvitationId]!;
                 return MaterialPage(
                   key: state.pageKey,
-                  child: NewInviteDetailedProfile(
+                  child: InvitationDetail(
                     channelInvitationId: channelInvitationId,
+                    invitationDirection: MessageDirection.received,
                   ),
                 );
               },
@@ -218,6 +219,21 @@ class AppRouter {
                 return MaterialPage(
                   key: state.pageKey,
                   child: const InboxInvitesSentScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.inboxInvitesSentId.path,
+              name: Routes.inboxInvitesSentId.name,
+              pageBuilder: (context, state) {
+                final String channelInvitationId =
+                    state.pathParameters[RouteParams.channelInvitationId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: InvitationDetail(
+                    channelInvitationId: channelInvitationId,
+                    invitationDirection: MessageDirection.sent,
+                  ),
                 );
               },
             ),

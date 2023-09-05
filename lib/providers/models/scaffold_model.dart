@@ -31,7 +31,7 @@ class ScaffoldModel extends ChangeNotifier {
           listen: false,
         );
 
-  void _setParams({AppBar? appBar, Drawer? drawer}) {
+  void setParams({AppBar? appBar, Drawer? drawer}) {
     _appBar = appBar;
     _drawer = drawer;
     _state = AsyncState.ready;
@@ -47,16 +47,6 @@ class ScaffoldModel extends ChangeNotifier {
     if (hasListeners) {
       notifyListeners();
     }
-  }
-
-  void setAppBarTitleOnly({
-    required BuildContext context,
-    required String title,
-  }) {
-    _setParams(
-      appBar: AppBarFactory.createTitleOnlyAppBar(title: title),
-      drawer: null,
-    );
   }
 
   Future<void> setInboxScaffold({required GoRouter router}) async {
@@ -77,7 +67,7 @@ class ScaffoldModel extends ChangeNotifier {
           allUnseenMessagesResult.response?.unseenArchivedMessages?.length ?? 0;
       invitesNotifications = receivedInvitationsResult.response?.length ?? 0;
     }
-    _setParams(
+    setParams(
       appBar: AppBarFactory.createInboxAppBar(
         router: router,
         chatsNotifications: chatsNotifications,
@@ -91,35 +81,9 @@ class ScaffoldModel extends ChangeNotifier {
     );
   }
 
-  void setInviteReceivedDetailScaffold({required BuildContext context}) {
-    _setParams(
-      appBar: AppBarFactory.createInviteReceivedDetailAppBar(context: context),
-      drawer: null,
-    );
-  }
-
-  void setChannelMessagesScaffold({
-    required BuildContext context,
-    required String channelName,
-    required String channelId,
-    required bool isArchivedForUser,
-    String? avatarUrl,
-  }) {
-    _setParams(
-      appBar: AppBarFactory.createChannelMessagesAppBar(
-        context: context,
-        channelName: channelName,
-        channelId: channelId,
-        isArchivedForUser: isArchivedForUser,
-        avatarUrl: avatarUrl,
-      ),
-      drawer: null,
-    );
-  }
-
   //TODO(m-rosario): Remove this once the real logout flow is defined by UX
   void setTestHomeScaffold() {
-    _setParams(
+    setParams(
       appBar: null,
       drawer: Drawer(
         child: Builder(
