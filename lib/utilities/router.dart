@@ -153,22 +153,13 @@ class AppRouter {
               },
             ),
             GoRoute(
-                path: Routes.exploreInviteToConnect.path,
-                name: Routes.exploreInviteToConnect.name,
-                builder: (BuildContext context, GoRouterState state) {
-                  List<ProfileQuickViewInfo> selectedProfiles =
-                      state.extra as List<ProfileQuickViewInfo>;
-                  return InviteToConnect(
-                    initialSelectedProfiles: selectedProfiles,
-                  );
-                }),
-            GoRoute(
-              path: Routes.progress.path,
-              name: Routes.progress.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  child: const ProgressScreen(),
+              path: Routes.exploreInviteToConnect.path,
+              name: Routes.exploreInviteToConnect.name,
+              builder: (BuildContext context, GoRouterState state) {
+                List<ProfileQuickViewInfo> selectedProfiles =
+                    state.extra as List<ProfileQuickViewInfo>;
+                return InviteToConnect(
+                  initialSelectedProfiles: selectedProfiles,
                 );
               },
             ),
