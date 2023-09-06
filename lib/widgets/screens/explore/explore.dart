@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
+import 'package:provider/provider.dart';
 
 import '../../../providers/models/scaffold_model.dart';
 import '../../../utilities/router.dart';
@@ -37,7 +37,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   List<Widget> _createCards() {
     List<Widget> exploreCards = [];
     for (int i = 0; i < isSelected.length; i++) {
-      exploreCards.add(createProfilCardFromInfo(
+      exploreCards.add(createProfileCardFromInfo(
         info: cardInfo[i],
       ));
     }

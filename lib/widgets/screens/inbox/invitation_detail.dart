@@ -102,7 +102,7 @@ class _InvitationDetailState extends State<InvitationDetail>
                 )
                 .toList() ??
             [];
-    return createProfilCardFromInfo(
+    return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
         isRecommended: false,
         userType: invitation.sender.offersHelp
@@ -173,7 +173,7 @@ class _InvitationDetailState extends State<InvitationDetail>
                 )
                 .toList() ??
             [];
-    return createProfilCardFromInfoAndCheckbox(
+    return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
         isRecommended: false,
         userType: invitation.recipient.offersHelp

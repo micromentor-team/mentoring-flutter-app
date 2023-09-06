@@ -161,7 +161,7 @@ class _InviteToConnectState extends State<InviteToConnect> {
             horizontal: Insets.paddingMedium,
             vertical: Insets.paddingExtraSmall,
           ),
-          child: createProfilCardFromInfo(
+          child: createProfileCardFromInfo(
             info: selectedProfiles[0],
           ));
     }
