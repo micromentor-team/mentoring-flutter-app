@@ -125,9 +125,24 @@ void main() async {
       crashHandler.handleUncaughtPlatformError;
   ErrorWidget.builder = crashHandler.handleBuildError;
 
-  await dotenv.load(fileName: "assets/.env");
-  final serverUrl = dotenv.env['APP_GRAPHQL_URL'];
-  final subscriptionUrl = dotenv.env['APP_SUBSCRIPTION_URL'];
+  // web won't have a .env file so we need to check for it
+  bool useDotenv = false;
+  try {
+    await dotenv.load(fileName: "assets/.env");
+    useDotenv = true;
+  } catch (e) {
+    // .env files shouldn't be used on the web client side in production
+    debugPrint('No .env file found');
+  }
+
+  const backupServerUrl = String.fromEnvironment('APP_GRAPHQL_URL',
+      defaultValue: 'https://mmdata-api.micromentor.org/mmdata/api/graphql');
+  final serverUrl = useDotenv ? dotenv.env['APP_GRAPHQL_URL'] : backupServerUrl;
+
+  const backupSubscriptionUrl = String.fromEnvironment('APP_SUBSCRIPTION_URL',
+      defaultValue: 'wss://mmdata-api.micromentor.org/mmdata/api/graphql');
+  final subscriptionUrl =
+      useDotenv ? dotenv.env['APP_SUBSCRIPTION_URL'] : backupSubscriptionUrl;
 
   debugPrint('Server: $serverUrl');
   if (serverUrl == null || subscriptionUrl == null) {

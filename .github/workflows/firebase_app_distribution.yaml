@@ -46,20 +46,22 @@ jobs:
     - uses: actions/checkout@v1
     - uses: subosito/flutter-action@v1
       with:
-          channel: 'dev'
+        flutter-version: '3.10.1'
     - run: flutter pub get
     - run: flutter config --enable-web
-    - run: flutter build web
     - name: Add assets/.env
       run: 'echo "$ENV_FILE" > assets/.env'
       env:
         ENV_FILE: ${{ vars.FLUTTER_APP_ENV_FILE }}
-    - name: Deploy to Firebase
-      uses: w9jds/firebase-action@master
-      with:
-        args: deploy --only hosting --public build/web
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-        PROJECT_ID: micromentor-d72ff
+    - run: flutter build web
+    - run: echo ${{ secrets.GOOGLE_SERVICES_JSON_FILE }}
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with: 
+        firebaseServiceAccount: ${{ secrets.GOOGLE_SERVICES_JSON_FILE }}
+        projectId: micromentor-d72ff
+        channelId: live
         APP_SUBSCRIPTION_URL: ${{ vars.APP_SUBSCRIPTION_URL }}
         APP_GRAPHQL_URL: ${{ vars.APP_GRAPHQL_URL }}
+        
+      env:
+        FIREBASE_CLI_EXPERIMENTS: webframeworks
