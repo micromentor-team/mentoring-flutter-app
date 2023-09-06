@@ -163,6 +163,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
               channelName: channelName,
               channelAvatarUrl: channelAvatarUrl,
               authenticatedUserId: _authenticatedUser!.id,
+              isArchivedChannel: widget.isArchivedForUser,
             ),
             child: InboxChatListTile(
               isArchivedForUser: widget.isArchivedForUser,

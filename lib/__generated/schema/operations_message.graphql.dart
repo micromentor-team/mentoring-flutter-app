@@ -2555,23 +2555,23 @@ class _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$stat
       _res;
 }
 
-class Query$InboxUnseenMessages {
-  Query$InboxUnseenMessages({
+class Query$InboxAllUnseenMessages {
+  Query$InboxAllUnseenMessages({
     required this.myInbox,
     this.$__typename = 'Query',
   });
 
-  factory Query$InboxUnseenMessages.fromJson(Map<String, dynamic> json) {
+  factory Query$InboxAllUnseenMessages.fromJson(Map<String, dynamic> json) {
     final l$myInbox = json['myInbox'];
     final l$$__typename = json['__typename'];
-    return Query$InboxUnseenMessages(
-      myInbox: Query$InboxUnseenMessages$myInbox.fromJson(
+    return Query$InboxAllUnseenMessages(
+      myInbox: Query$InboxAllUnseenMessages$myInbox.fromJson(
           (l$myInbox as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$InboxUnseenMessages$myInbox myInbox;
+  final Query$InboxAllUnseenMessages$myInbox myInbox;
 
   final String $__typename;
 
@@ -2599,7 +2599,7 @@ class Query$InboxUnseenMessages {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$InboxUnseenMessages) ||
+    if (!(other is Query$InboxAllUnseenMessages) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2617,41 +2617,41 @@ class Query$InboxUnseenMessages {
   }
 }
 
-extension UtilityExtension$Query$InboxUnseenMessages
-    on Query$InboxUnseenMessages {
-  CopyWith$Query$InboxUnseenMessages<Query$InboxUnseenMessages> get copyWith =>
-      CopyWith$Query$InboxUnseenMessages(
-        this,
-        (i) => i,
-      );
+extension UtilityExtension$Query$InboxAllUnseenMessages
+    on Query$InboxAllUnseenMessages {
+  CopyWith$Query$InboxAllUnseenMessages<Query$InboxAllUnseenMessages>
+      get copyWith => CopyWith$Query$InboxAllUnseenMessages(
+            this,
+            (i) => i,
+          );
 }
 
-abstract class CopyWith$Query$InboxUnseenMessages<TRes> {
-  factory CopyWith$Query$InboxUnseenMessages(
-    Query$InboxUnseenMessages instance,
-    TRes Function(Query$InboxUnseenMessages) then,
-  ) = _CopyWithImpl$Query$InboxUnseenMessages;
+abstract class CopyWith$Query$InboxAllUnseenMessages<TRes> {
+  factory CopyWith$Query$InboxAllUnseenMessages(
+    Query$InboxAllUnseenMessages instance,
+    TRes Function(Query$InboxAllUnseenMessages) then,
+  ) = _CopyWithImpl$Query$InboxAllUnseenMessages;
 
-  factory CopyWith$Query$InboxUnseenMessages.stub(TRes res) =
-      _CopyWithStubImpl$Query$InboxUnseenMessages;
+  factory CopyWith$Query$InboxAllUnseenMessages.stub(TRes res) =
+      _CopyWithStubImpl$Query$InboxAllUnseenMessages;
 
   TRes call({
-    Query$InboxUnseenMessages$myInbox? myInbox,
+    Query$InboxAllUnseenMessages$myInbox? myInbox,
     String? $__typename,
   });
-  CopyWith$Query$InboxUnseenMessages$myInbox<TRes> get myInbox;
+  CopyWith$Query$InboxAllUnseenMessages$myInbox<TRes> get myInbox;
 }
 
-class _CopyWithImpl$Query$InboxUnseenMessages<TRes>
-    implements CopyWith$Query$InboxUnseenMessages<TRes> {
-  _CopyWithImpl$Query$InboxUnseenMessages(
+class _CopyWithImpl$Query$InboxAllUnseenMessages<TRes>
+    implements CopyWith$Query$InboxAllUnseenMessages<TRes> {
+  _CopyWithImpl$Query$InboxAllUnseenMessages(
     this._instance,
     this._then,
   );
 
-  final Query$InboxUnseenMessages _instance;
+  final Query$InboxAllUnseenMessages _instance;
 
-  final TRes Function(Query$InboxUnseenMessages) _then;
+  final TRes Function(Query$InboxAllUnseenMessages) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2659,40 +2659,1604 @@ class _CopyWithImpl$Query$InboxUnseenMessages<TRes>
     Object? myInbox = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$InboxUnseenMessages(
+      _then(Query$InboxAllUnseenMessages(
         myInbox: myInbox == _undefined || myInbox == null
             ? _instance.myInbox
-            : (myInbox as Query$InboxUnseenMessages$myInbox),
+            : (myInbox as Query$InboxAllUnseenMessages$myInbox),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$InboxUnseenMessages$myInbox<TRes> get myInbox {
+  CopyWith$Query$InboxAllUnseenMessages$myInbox<TRes> get myInbox {
     final local$myInbox = _instance.myInbox;
-    return CopyWith$Query$InboxUnseenMessages$myInbox(
+    return CopyWith$Query$InboxAllUnseenMessages$myInbox(
         local$myInbox, (e) => call(myInbox: e));
   }
 }
 
-class _CopyWithStubImpl$Query$InboxUnseenMessages<TRes>
-    implements CopyWith$Query$InboxUnseenMessages<TRes> {
-  _CopyWithStubImpl$Query$InboxUnseenMessages(this._res);
+class _CopyWithStubImpl$Query$InboxAllUnseenMessages<TRes>
+    implements CopyWith$Query$InboxAllUnseenMessages<TRes> {
+  _CopyWithStubImpl$Query$InboxAllUnseenMessages(this._res);
 
   TRes _res;
 
   call({
-    Query$InboxUnseenMessages$myInbox? myInbox,
+    Query$InboxAllUnseenMessages$myInbox? myInbox,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$InboxUnseenMessages$myInbox<TRes> get myInbox =>
-      CopyWith$Query$InboxUnseenMessages$myInbox.stub(_res);
+  CopyWith$Query$InboxAllUnseenMessages$myInbox<TRes> get myInbox =>
+      CopyWith$Query$InboxAllUnseenMessages$myInbox.stub(_res);
 }
 
-const documentNodeQueryInboxUnseenMessages = DocumentNode(definitions: [
+const documentNodeQueryInboxAllUnseenMessages = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'InboxUnseenMessages'),
+    name: NameNode(value: 'InboxAllUnseenMessages'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'myInbox'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'channels'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'unseenMessages'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'channelId'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'unseenArchivedMessages'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'channelId'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$InboxAllUnseenMessages$myInbox {
+  Query$InboxAllUnseenMessages$myInbox({
+    this.channels,
+    this.$__typename = 'UserInbox',
+  });
+
+  factory Query$InboxAllUnseenMessages$myInbox.fromJson(
+      Map<String, dynamic> json) {
+    final l$channels = json['channels'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxAllUnseenMessages$myInbox(
+      channels: l$channels == null
+          ? null
+          : Query$InboxAllUnseenMessages$myInbox$channels.fromJson(
+              (l$channels as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$InboxAllUnseenMessages$myInbox$channels? channels;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$channels = channels;
+    _resultData['channels'] = l$channels?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$channels = channels;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$channels,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$InboxAllUnseenMessages$myInbox) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channels = channels;
+    final lOther$channels = other.channels;
+    if (l$channels != lOther$channels) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxAllUnseenMessages$myInbox
+    on Query$InboxAllUnseenMessages$myInbox {
+  CopyWith$Query$InboxAllUnseenMessages$myInbox<
+          Query$InboxAllUnseenMessages$myInbox>
+      get copyWith => CopyWith$Query$InboxAllUnseenMessages$myInbox(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxAllUnseenMessages$myInbox<TRes> {
+  factory CopyWith$Query$InboxAllUnseenMessages$myInbox(
+    Query$InboxAllUnseenMessages$myInbox instance,
+    TRes Function(Query$InboxAllUnseenMessages$myInbox) then,
+  ) = _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox;
+
+  factory CopyWith$Query$InboxAllUnseenMessages$myInbox.stub(TRes res) =
+      _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox;
+
+  TRes call({
+    Query$InboxAllUnseenMessages$myInbox$channels? channels,
+    String? $__typename,
+  });
+  CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<TRes> get channels;
+}
+
+class _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox<TRes>
+    implements CopyWith$Query$InboxAllUnseenMessages$myInbox<TRes> {
+  _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxAllUnseenMessages$myInbox _instance;
+
+  final TRes Function(Query$InboxAllUnseenMessages$myInbox) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? channels = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$InboxAllUnseenMessages$myInbox(
+        channels: channels == _undefined
+            ? _instance.channels
+            : (channels as Query$InboxAllUnseenMessages$myInbox$channels?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<TRes> get channels {
+    final local$channels = _instance.channels;
+    return local$channels == null
+        ? CopyWith$Query$InboxAllUnseenMessages$myInbox$channels.stub(
+            _then(_instance))
+        : CopyWith$Query$InboxAllUnseenMessages$myInbox$channels(
+            local$channels, (e) => call(channels: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox<TRes>
+    implements CopyWith$Query$InboxAllUnseenMessages$myInbox<TRes> {
+  _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox(this._res);
+
+  TRes _res;
+
+  call({
+    Query$InboxAllUnseenMessages$myInbox$channels? channels,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<TRes> get channels =>
+      CopyWith$Query$InboxAllUnseenMessages$myInbox$channels.stub(_res);
+}
+
+class Query$InboxAllUnseenMessages$myInbox$channels {
+  Query$InboxAllUnseenMessages$myInbox$channels({
+    this.unseenMessages,
+    this.unseenArchivedMessages,
+    this.$__typename = 'ChannelInbox',
+  });
+
+  factory Query$InboxAllUnseenMessages$myInbox$channels.fromJson(
+      Map<String, dynamic> json) {
+    final l$unseenMessages = json['unseenMessages'];
+    final l$unseenArchivedMessages = json['unseenArchivedMessages'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxAllUnseenMessages$myInbox$channels(
+      unseenMessages: (l$unseenMessages as List<dynamic>?)
+          ?.map((e) =>
+              Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      unseenArchivedMessages: (l$unseenArchivedMessages as List<dynamic>?)
+          ?.map((e) =>
+              Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>?
+      unseenMessages;
+
+  final List<
+          Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>?
+      unseenArchivedMessages;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$unseenMessages = unseenMessages;
+    _resultData['unseenMessages'] =
+        l$unseenMessages?.map((e) => e.toJson()).toList();
+    final l$unseenArchivedMessages = unseenArchivedMessages;
+    _resultData['unseenArchivedMessages'] =
+        l$unseenArchivedMessages?.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$unseenMessages = unseenMessages;
+    final l$unseenArchivedMessages = unseenArchivedMessages;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$unseenMessages == null
+          ? null
+          : Object.hashAll(l$unseenMessages.map((v) => v)),
+      l$unseenArchivedMessages == null
+          ? null
+          : Object.hashAll(l$unseenArchivedMessages.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$InboxAllUnseenMessages$myInbox$channels) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$unseenMessages = unseenMessages;
+    final lOther$unseenMessages = other.unseenMessages;
+    if (l$unseenMessages != null && lOther$unseenMessages != null) {
+      if (l$unseenMessages.length != lOther$unseenMessages.length) {
+        return false;
+      }
+      for (int i = 0; i < l$unseenMessages.length; i++) {
+        final l$unseenMessages$entry = l$unseenMessages[i];
+        final lOther$unseenMessages$entry = lOther$unseenMessages[i];
+        if (l$unseenMessages$entry != lOther$unseenMessages$entry) {
+          return false;
+        }
+      }
+    } else if (l$unseenMessages != lOther$unseenMessages) {
+      return false;
+    }
+    final l$unseenArchivedMessages = unseenArchivedMessages;
+    final lOther$unseenArchivedMessages = other.unseenArchivedMessages;
+    if (l$unseenArchivedMessages != null &&
+        lOther$unseenArchivedMessages != null) {
+      if (l$unseenArchivedMessages.length !=
+          lOther$unseenArchivedMessages.length) {
+        return false;
+      }
+      for (int i = 0; i < l$unseenArchivedMessages.length; i++) {
+        final l$unseenArchivedMessages$entry = l$unseenArchivedMessages[i];
+        final lOther$unseenArchivedMessages$entry =
+            lOther$unseenArchivedMessages[i];
+        if (l$unseenArchivedMessages$entry !=
+            lOther$unseenArchivedMessages$entry) {
+          return false;
+        }
+      }
+    } else if (l$unseenArchivedMessages != lOther$unseenArchivedMessages) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxAllUnseenMessages$myInbox$channels
+    on Query$InboxAllUnseenMessages$myInbox$channels {
+  CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<
+          Query$InboxAllUnseenMessages$myInbox$channels>
+      get copyWith => CopyWith$Query$InboxAllUnseenMessages$myInbox$channels(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<TRes> {
+  factory CopyWith$Query$InboxAllUnseenMessages$myInbox$channels(
+    Query$InboxAllUnseenMessages$myInbox$channels instance,
+    TRes Function(Query$InboxAllUnseenMessages$myInbox$channels) then,
+  ) = _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels;
+
+  factory CopyWith$Query$InboxAllUnseenMessages$myInbox$channels.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels;
+
+  TRes call({
+    List<Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>?
+        unseenMessages,
+    List<Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>?
+        unseenArchivedMessages,
+    String? $__typename,
+  });
+  TRes unseenMessages(
+      Iterable<Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>? Function(
+              Iterable<
+                  CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages<
+                      Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>>?)
+          _fn);
+  TRes unseenArchivedMessages(
+      Iterable<Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>? Function(
+              Iterable<
+                  CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages<
+                      Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels<TRes>
+    implements CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<TRes> {
+  _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxAllUnseenMessages$myInbox$channels _instance;
+
+  final TRes Function(Query$InboxAllUnseenMessages$myInbox$channels) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? unseenMessages = _undefined,
+    Object? unseenArchivedMessages = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$InboxAllUnseenMessages$myInbox$channels(
+        unseenMessages: unseenMessages == _undefined
+            ? _instance.unseenMessages
+            : (unseenMessages as List<
+                Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>?),
+        unseenArchivedMessages: unseenArchivedMessages == _undefined
+            ? _instance.unseenArchivedMessages
+            : (unseenArchivedMessages as List<
+                Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  TRes unseenMessages(
+          Iterable<Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>? Function(
+                  Iterable<
+                      CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages<
+                          Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>>?)
+              _fn) =>
+      call(
+          unseenMessages: _fn(_instance.unseenMessages?.map((e) =>
+              CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages(
+                e,
+                (i) => i,
+              )))?.toList());
+  TRes unseenArchivedMessages(
+          Iterable<Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>? Function(
+                  Iterable<
+                      CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages<
+                          Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>>?)
+              _fn) =>
+      call(
+          unseenArchivedMessages: _fn(_instance.unseenArchivedMessages?.map((e) =>
+              CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages(
+                e,
+                (i) => i,
+              )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels<TRes>
+    implements CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<TRes> {
+  _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>?
+        unseenMessages,
+    List<Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>?
+        unseenArchivedMessages,
+    String? $__typename,
+  }) =>
+      _res;
+  unseenMessages(_fn) => _res;
+  unseenArchivedMessages(_fn) => _res;
+}
+
+class Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages {
+  Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages({
+    required this.channelId,
+    this.$__typename = 'ChannelInboxItemMessage',
+  });
+
+  factory Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages.fromJson(
+      Map<String, dynamic> json) {
+    final l$channelId = json['channelId'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages(
+      channelId: (l$channelId as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String channelId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$channelId = channelId;
+    _resultData['channelId'] = l$channelId;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$channelId,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages
+    on Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages {
+  CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages<
+          Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>
+      get copyWith =>
+          CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages<
+    TRes> {
+  factory CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages(
+    Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages instance,
+    TRes Function(Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages)
+        then,
+  ) = _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages;
+
+  factory CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages;
+
+  TRes call({
+    String? channelId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages<
+        TRes>
+    implements
+        CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages<
+            TRes> {
+  _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages _instance;
+
+  final TRes Function(
+      Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? channelId = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages(
+        channelId: channelId == _undefined || channelId == null
+            ? _instance.channelId
+            : (channelId as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages<
+        TRes>
+    implements
+        CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages<
+            TRes> {
+  _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? channelId,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages {
+  Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages({
+    required this.channelId,
+    this.$__typename = 'ChannelInboxItemMessage',
+  });
+
+  factory Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages.fromJson(
+      Map<String, dynamic> json) {
+    final l$channelId = json['channelId'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages(
+      channelId: (l$channelId as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String channelId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$channelId = channelId;
+    _resultData['channelId'] = l$channelId;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$channelId,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages
+    on Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages {
+  CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages<
+          Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>
+      get copyWith =>
+          CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages<
+    TRes> {
+  factory CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages(
+    Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages
+        instance,
+    TRes Function(
+            Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages)
+        then,
+  ) = _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages;
+
+  factory CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages;
+
+  TRes call({
+    String? channelId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages<
+        TRes>
+    implements
+        CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages<
+            TRes> {
+  _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages
+      _instance;
+
+  final TRes Function(
+          Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? channelId = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages(
+        channelId: channelId == _undefined || channelId == null
+            ? _instance.channelId
+            : (channelId as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages<
+        TRes>
+    implements
+        CopyWith$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages<
+            TRes> {
+  _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? channelId,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$InboxUnseenArchivedMessages {
+  Query$InboxUnseenArchivedMessages({
+    required this.myInbox,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$InboxUnseenArchivedMessages.fromJson(
+      Map<String, dynamic> json) {
+    final l$myInbox = json['myInbox'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxUnseenArchivedMessages(
+      myInbox: Query$InboxUnseenArchivedMessages$myInbox.fromJson(
+          (l$myInbox as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$InboxUnseenArchivedMessages$myInbox myInbox;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$myInbox = myInbox;
+    _resultData['myInbox'] = l$myInbox.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$myInbox = myInbox;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$myInbox,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$InboxUnseenArchivedMessages) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$myInbox = myInbox;
+    final lOther$myInbox = other.myInbox;
+    if (l$myInbox != lOther$myInbox) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxUnseenArchivedMessages
+    on Query$InboxUnseenArchivedMessages {
+  CopyWith$Query$InboxUnseenArchivedMessages<Query$InboxUnseenArchivedMessages>
+      get copyWith => CopyWith$Query$InboxUnseenArchivedMessages(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxUnseenArchivedMessages<TRes> {
+  factory CopyWith$Query$InboxUnseenArchivedMessages(
+    Query$InboxUnseenArchivedMessages instance,
+    TRes Function(Query$InboxUnseenArchivedMessages) then,
+  ) = _CopyWithImpl$Query$InboxUnseenArchivedMessages;
+
+  factory CopyWith$Query$InboxUnseenArchivedMessages.stub(TRes res) =
+      _CopyWithStubImpl$Query$InboxUnseenArchivedMessages;
+
+  TRes call({
+    Query$InboxUnseenArchivedMessages$myInbox? myInbox,
+    String? $__typename,
+  });
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox<TRes> get myInbox;
+}
+
+class _CopyWithImpl$Query$InboxUnseenArchivedMessages<TRes>
+    implements CopyWith$Query$InboxUnseenArchivedMessages<TRes> {
+  _CopyWithImpl$Query$InboxUnseenArchivedMessages(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxUnseenArchivedMessages _instance;
+
+  final TRes Function(Query$InboxUnseenArchivedMessages) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? myInbox = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$InboxUnseenArchivedMessages(
+        myInbox: myInbox == _undefined || myInbox == null
+            ? _instance.myInbox
+            : (myInbox as Query$InboxUnseenArchivedMessages$myInbox),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox<TRes> get myInbox {
+    final local$myInbox = _instance.myInbox;
+    return CopyWith$Query$InboxUnseenArchivedMessages$myInbox(
+        local$myInbox, (e) => call(myInbox: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$InboxUnseenArchivedMessages<TRes>
+    implements CopyWith$Query$InboxUnseenArchivedMessages<TRes> {
+  _CopyWithStubImpl$Query$InboxUnseenArchivedMessages(this._res);
+
+  TRes _res;
+
+  call({
+    Query$InboxUnseenArchivedMessages$myInbox? myInbox,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox<TRes> get myInbox =>
+      CopyWith$Query$InboxUnseenArchivedMessages$myInbox.stub(_res);
+}
+
+const documentNodeQueryInboxUnseenArchivedMessages = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'InboxUnseenArchivedMessages'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'myInbox'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'channels'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'unseenArchivedMessages'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'channelId'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$InboxUnseenArchivedMessages$myInbox {
+  Query$InboxUnseenArchivedMessages$myInbox({
+    this.channels,
+    this.$__typename = 'UserInbox',
+  });
+
+  factory Query$InboxUnseenArchivedMessages$myInbox.fromJson(
+      Map<String, dynamic> json) {
+    final l$channels = json['channels'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxUnseenArchivedMessages$myInbox(
+      channels: l$channels == null
+          ? null
+          : Query$InboxUnseenArchivedMessages$myInbox$channels.fromJson(
+              (l$channels as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$InboxUnseenArchivedMessages$myInbox$channels? channels;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$channels = channels;
+    _resultData['channels'] = l$channels?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$channels = channels;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$channels,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$InboxUnseenArchivedMessages$myInbox) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channels = channels;
+    final lOther$channels = other.channels;
+    if (l$channels != lOther$channels) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxUnseenArchivedMessages$myInbox
+    on Query$InboxUnseenArchivedMessages$myInbox {
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox<
+          Query$InboxUnseenArchivedMessages$myInbox>
+      get copyWith => CopyWith$Query$InboxUnseenArchivedMessages$myInbox(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxUnseenArchivedMessages$myInbox<TRes> {
+  factory CopyWith$Query$InboxUnseenArchivedMessages$myInbox(
+    Query$InboxUnseenArchivedMessages$myInbox instance,
+    TRes Function(Query$InboxUnseenArchivedMessages$myInbox) then,
+  ) = _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox;
+
+  factory CopyWith$Query$InboxUnseenArchivedMessages$myInbox.stub(TRes res) =
+      _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox;
+
+  TRes call({
+    Query$InboxUnseenArchivedMessages$myInbox$channels? channels,
+    String? $__typename,
+  });
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels<TRes>
+      get channels;
+}
+
+class _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox<TRes>
+    implements CopyWith$Query$InboxUnseenArchivedMessages$myInbox<TRes> {
+  _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxUnseenArchivedMessages$myInbox _instance;
+
+  final TRes Function(Query$InboxUnseenArchivedMessages$myInbox) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? channels = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$InboxUnseenArchivedMessages$myInbox(
+        channels: channels == _undefined
+            ? _instance.channels
+            : (channels as Query$InboxUnseenArchivedMessages$myInbox$channels?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels<TRes>
+      get channels {
+    final local$channels = _instance.channels;
+    return local$channels == null
+        ? CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels.stub(
+            _then(_instance))
+        : CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels(
+            local$channels, (e) => call(channels: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox<TRes>
+    implements CopyWith$Query$InboxUnseenArchivedMessages$myInbox<TRes> {
+  _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox(this._res);
+
+  TRes _res;
+
+  call({
+    Query$InboxUnseenArchivedMessages$myInbox$channels? channels,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels<TRes>
+      get channels =>
+          CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels.stub(
+              _res);
+}
+
+class Query$InboxUnseenArchivedMessages$myInbox$channels {
+  Query$InboxUnseenArchivedMessages$myInbox$channels({
+    this.unseenArchivedMessages,
+    this.$__typename = 'ChannelInbox',
+  });
+
+  factory Query$InboxUnseenArchivedMessages$myInbox$channels.fromJson(
+      Map<String, dynamic> json) {
+    final l$unseenArchivedMessages = json['unseenArchivedMessages'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxUnseenArchivedMessages$myInbox$channels(
+      unseenArchivedMessages: (l$unseenArchivedMessages as List<dynamic>?)
+          ?.map((e) =>
+              Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<
+          Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>?
+      unseenArchivedMessages;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$unseenArchivedMessages = unseenArchivedMessages;
+    _resultData['unseenArchivedMessages'] =
+        l$unseenArchivedMessages?.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$unseenArchivedMessages = unseenArchivedMessages;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$unseenArchivedMessages == null
+          ? null
+          : Object.hashAll(l$unseenArchivedMessages.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$InboxUnseenArchivedMessages$myInbox$channels) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$unseenArchivedMessages = unseenArchivedMessages;
+    final lOther$unseenArchivedMessages = other.unseenArchivedMessages;
+    if (l$unseenArchivedMessages != null &&
+        lOther$unseenArchivedMessages != null) {
+      if (l$unseenArchivedMessages.length !=
+          lOther$unseenArchivedMessages.length) {
+        return false;
+      }
+      for (int i = 0; i < l$unseenArchivedMessages.length; i++) {
+        final l$unseenArchivedMessages$entry = l$unseenArchivedMessages[i];
+        final lOther$unseenArchivedMessages$entry =
+            lOther$unseenArchivedMessages[i];
+        if (l$unseenArchivedMessages$entry !=
+            lOther$unseenArchivedMessages$entry) {
+          return false;
+        }
+      }
+    } else if (l$unseenArchivedMessages != lOther$unseenArchivedMessages) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxUnseenArchivedMessages$myInbox$channels
+    on Query$InboxUnseenArchivedMessages$myInbox$channels {
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels<
+          Query$InboxUnseenArchivedMessages$myInbox$channels>
+      get copyWith =>
+          CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels<
+    TRes> {
+  factory CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels(
+    Query$InboxUnseenArchivedMessages$myInbox$channels instance,
+    TRes Function(Query$InboxUnseenArchivedMessages$myInbox$channels) then,
+  ) = _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox$channels;
+
+  factory CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox$channels;
+
+  TRes call({
+    List<Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>?
+        unseenArchivedMessages,
+    String? $__typename,
+  });
+  TRes unseenArchivedMessages(
+      Iterable<Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>? Function(
+              Iterable<
+                  CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages<
+                      Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox$channels<TRes>
+    implements
+        CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels<TRes> {
+  _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox$channels(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxUnseenArchivedMessages$myInbox$channels _instance;
+
+  final TRes Function(Query$InboxUnseenArchivedMessages$myInbox$channels) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? unseenArchivedMessages = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$InboxUnseenArchivedMessages$myInbox$channels(
+        unseenArchivedMessages: unseenArchivedMessages == _undefined
+            ? _instance.unseenArchivedMessages
+            : (unseenArchivedMessages as List<
+                Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  TRes unseenArchivedMessages(
+          Iterable<Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>? Function(
+                  Iterable<
+                      CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages<
+                          Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>>?)
+              _fn) =>
+      call(
+          unseenArchivedMessages: _fn(_instance.unseenArchivedMessages?.map((e) =>
+              CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages(
+                e,
+                (i) => i,
+              )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox$channels<TRes>
+    implements
+        CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels<TRes> {
+  _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox$channels(
+      this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>?
+        unseenArchivedMessages,
+    String? $__typename,
+  }) =>
+      _res;
+  unseenArchivedMessages(_fn) => _res;
+}
+
+class Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages {
+  Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages({
+    required this.channelId,
+    this.$__typename = 'ChannelInboxItemMessage',
+  });
+
+  factory Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages.fromJson(
+      Map<String, dynamic> json) {
+    final l$channelId = json['channelId'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages(
+      channelId: (l$channelId as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String channelId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$channelId = channelId;
+    _resultData['channelId'] = l$channelId;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$channelId,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages
+    on Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages {
+  CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages<
+          Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages>
+      get copyWith =>
+          CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages<
+    TRes> {
+  factory CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages(
+    Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages
+        instance,
+    TRes Function(
+            Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages)
+        then,
+  ) = _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages;
+
+  factory CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages;
+
+  TRes call({
+    String? channelId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages<
+        TRes>
+    implements
+        CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages<
+            TRes> {
+  _CopyWithImpl$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages
+      _instance;
+
+  final TRes Function(
+          Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? channelId = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages(
+        channelId: channelId == _undefined || channelId == null
+            ? _instance.channelId
+            : (channelId as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages<
+        TRes>
+    implements
+        CopyWith$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages<
+            TRes> {
+  _CopyWithStubImpl$Query$InboxUnseenArchivedMessages$myInbox$channels$unseenArchivedMessages(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? channelId,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$InboxUnseenUnarchivedMessages {
+  Query$InboxUnseenUnarchivedMessages({
+    required this.myInbox,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$InboxUnseenUnarchivedMessages.fromJson(
+      Map<String, dynamic> json) {
+    final l$myInbox = json['myInbox'];
+    final l$$__typename = json['__typename'];
+    return Query$InboxUnseenUnarchivedMessages(
+      myInbox: Query$InboxUnseenUnarchivedMessages$myInbox.fromJson(
+          (l$myInbox as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$InboxUnseenUnarchivedMessages$myInbox myInbox;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$myInbox = myInbox;
+    _resultData['myInbox'] = l$myInbox.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$myInbox = myInbox;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$myInbox,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$InboxUnseenUnarchivedMessages) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$myInbox = myInbox;
+    final lOther$myInbox = other.myInbox;
+    if (l$myInbox != lOther$myInbox) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$InboxUnseenUnarchivedMessages
+    on Query$InboxUnseenUnarchivedMessages {
+  CopyWith$Query$InboxUnseenUnarchivedMessages<
+          Query$InboxUnseenUnarchivedMessages>
+      get copyWith => CopyWith$Query$InboxUnseenUnarchivedMessages(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$InboxUnseenUnarchivedMessages<TRes> {
+  factory CopyWith$Query$InboxUnseenUnarchivedMessages(
+    Query$InboxUnseenUnarchivedMessages instance,
+    TRes Function(Query$InboxUnseenUnarchivedMessages) then,
+  ) = _CopyWithImpl$Query$InboxUnseenUnarchivedMessages;
+
+  factory CopyWith$Query$InboxUnseenUnarchivedMessages.stub(TRes res) =
+      _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages;
+
+  TRes call({
+    Query$InboxUnseenUnarchivedMessages$myInbox? myInbox,
+    String? $__typename,
+  });
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox<TRes> get myInbox;
+}
+
+class _CopyWithImpl$Query$InboxUnseenUnarchivedMessages<TRes>
+    implements CopyWith$Query$InboxUnseenUnarchivedMessages<TRes> {
+  _CopyWithImpl$Query$InboxUnseenUnarchivedMessages(
+    this._instance,
+    this._then,
+  );
+
+  final Query$InboxUnseenUnarchivedMessages _instance;
+
+  final TRes Function(Query$InboxUnseenUnarchivedMessages) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? myInbox = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$InboxUnseenUnarchivedMessages(
+        myInbox: myInbox == _undefined || myInbox == null
+            ? _instance.myInbox
+            : (myInbox as Query$InboxUnseenUnarchivedMessages$myInbox),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox<TRes> get myInbox {
+    final local$myInbox = _instance.myInbox;
+    return CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox(
+        local$myInbox, (e) => call(myInbox: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages<TRes>
+    implements CopyWith$Query$InboxUnseenUnarchivedMessages<TRes> {
+  _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages(this._res);
+
+  TRes _res;
+
+  call({
+    Query$InboxUnseenUnarchivedMessages$myInbox? myInbox,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox<TRes> get myInbox =>
+      CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox.stub(_res);
+}
+
+const documentNodeQueryInboxUnseenUnarchivedMessages =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'InboxUnseenUnarchivedMessages'),
     variableDefinitions: [],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -2759,26 +4323,26 @@ const documentNodeQueryInboxUnseenMessages = DocumentNode(definitions: [
   ),
 ]);
 
-class Query$InboxUnseenMessages$myInbox {
-  Query$InboxUnseenMessages$myInbox({
+class Query$InboxUnseenUnarchivedMessages$myInbox {
+  Query$InboxUnseenUnarchivedMessages$myInbox({
     this.channels,
     this.$__typename = 'UserInbox',
   });
 
-  factory Query$InboxUnseenMessages$myInbox.fromJson(
+  factory Query$InboxUnseenUnarchivedMessages$myInbox.fromJson(
       Map<String, dynamic> json) {
     final l$channels = json['channels'];
     final l$$__typename = json['__typename'];
-    return Query$InboxUnseenMessages$myInbox(
+    return Query$InboxUnseenUnarchivedMessages$myInbox(
       channels: l$channels == null
           ? null
-          : Query$InboxUnseenMessages$myInbox$channels.fromJson(
+          : Query$InboxUnseenUnarchivedMessages$myInbox$channels.fromJson(
               (l$channels as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$InboxUnseenMessages$myInbox$channels? channels;
+  final Query$InboxUnseenUnarchivedMessages$myInbox$channels? channels;
 
   final String $__typename;
 
@@ -2806,7 +4370,7 @@ class Query$InboxUnseenMessages$myInbox {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$InboxUnseenMessages$myInbox) ||
+    if (!(other is Query$InboxUnseenUnarchivedMessages$myInbox) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2824,41 +4388,43 @@ class Query$InboxUnseenMessages$myInbox {
   }
 }
 
-extension UtilityExtension$Query$InboxUnseenMessages$myInbox
-    on Query$InboxUnseenMessages$myInbox {
-  CopyWith$Query$InboxUnseenMessages$myInbox<Query$InboxUnseenMessages$myInbox>
-      get copyWith => CopyWith$Query$InboxUnseenMessages$myInbox(
+extension UtilityExtension$Query$InboxUnseenUnarchivedMessages$myInbox
+    on Query$InboxUnseenUnarchivedMessages$myInbox {
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox<
+          Query$InboxUnseenUnarchivedMessages$myInbox>
+      get copyWith => CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$InboxUnseenMessages$myInbox<TRes> {
-  factory CopyWith$Query$InboxUnseenMessages$myInbox(
-    Query$InboxUnseenMessages$myInbox instance,
-    TRes Function(Query$InboxUnseenMessages$myInbox) then,
-  ) = _CopyWithImpl$Query$InboxUnseenMessages$myInbox;
+abstract class CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox<TRes> {
+  factory CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox(
+    Query$InboxUnseenUnarchivedMessages$myInbox instance,
+    TRes Function(Query$InboxUnseenUnarchivedMessages$myInbox) then,
+  ) = _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox;
 
-  factory CopyWith$Query$InboxUnseenMessages$myInbox.stub(TRes res) =
-      _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox;
+  factory CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox.stub(TRes res) =
+      _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox;
 
   TRes call({
-    Query$InboxUnseenMessages$myInbox$channels? channels,
+    Query$InboxUnseenUnarchivedMessages$myInbox$channels? channels,
     String? $__typename,
   });
-  CopyWith$Query$InboxUnseenMessages$myInbox$channels<TRes> get channels;
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels<TRes>
+      get channels;
 }
 
-class _CopyWithImpl$Query$InboxUnseenMessages$myInbox<TRes>
-    implements CopyWith$Query$InboxUnseenMessages$myInbox<TRes> {
-  _CopyWithImpl$Query$InboxUnseenMessages$myInbox(
+class _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox<TRes>
+    implements CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox<TRes> {
+  _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox(
     this._instance,
     this._then,
   );
 
-  final Query$InboxUnseenMessages$myInbox _instance;
+  final Query$InboxUnseenUnarchivedMessages$myInbox _instance;
 
-  final TRes Function(Query$InboxUnseenMessages$myInbox) _then;
+  final TRes Function(Query$InboxUnseenUnarchivedMessages$myInbox) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2866,59 +4432,65 @@ class _CopyWithImpl$Query$InboxUnseenMessages$myInbox<TRes>
     Object? channels = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$InboxUnseenMessages$myInbox(
+      _then(Query$InboxUnseenUnarchivedMessages$myInbox(
         channels: channels == _undefined
             ? _instance.channels
-            : (channels as Query$InboxUnseenMessages$myInbox$channels?),
+            : (channels
+                as Query$InboxUnseenUnarchivedMessages$myInbox$channels?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$InboxUnseenMessages$myInbox$channels<TRes> get channels {
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels<TRes>
+      get channels {
     final local$channels = _instance.channels;
     return local$channels == null
-        ? CopyWith$Query$InboxUnseenMessages$myInbox$channels.stub(
+        ? CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels.stub(
             _then(_instance))
-        : CopyWith$Query$InboxUnseenMessages$myInbox$channels(
+        : CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels(
             local$channels, (e) => call(channels: e));
   }
 }
 
-class _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox<TRes>
-    implements CopyWith$Query$InboxUnseenMessages$myInbox<TRes> {
-  _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox(this._res);
+class _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox<TRes>
+    implements CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox<TRes> {
+  _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox(this._res);
 
   TRes _res;
 
   call({
-    Query$InboxUnseenMessages$myInbox$channels? channels,
+    Query$InboxUnseenUnarchivedMessages$myInbox$channels? channels,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$InboxUnseenMessages$myInbox$channels<TRes> get channels =>
-      CopyWith$Query$InboxUnseenMessages$myInbox$channels.stub(_res);
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels<TRes>
+      get channels =>
+          CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels.stub(
+              _res);
 }
 
-class Query$InboxUnseenMessages$myInbox$channels {
-  Query$InboxUnseenMessages$myInbox$channels({
+class Query$InboxUnseenUnarchivedMessages$myInbox$channels {
+  Query$InboxUnseenUnarchivedMessages$myInbox$channels({
     this.unseenMessages,
     this.$__typename = 'ChannelInbox',
   });
 
-  factory Query$InboxUnseenMessages$myInbox$channels.fromJson(
+  factory Query$InboxUnseenUnarchivedMessages$myInbox$channels.fromJson(
       Map<String, dynamic> json) {
     final l$unseenMessages = json['unseenMessages'];
     final l$$__typename = json['__typename'];
-    return Query$InboxUnseenMessages$myInbox$channels(
+    return Query$InboxUnseenUnarchivedMessages$myInbox$channels(
       unseenMessages: (l$unseenMessages as List<dynamic>?)
-          ?.map((e) => Query$InboxUnseenMessages$myInbox$channels$unseenMessages
-              .fromJson((e as Map<String, dynamic>)))
+          ?.map((e) =>
+              Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages
+                  .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>?
+  final List<
+          Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>?
       unseenMessages;
 
   final String $__typename;
@@ -2950,7 +4522,7 @@ class Query$InboxUnseenMessages$myInbox$channels {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$InboxUnseenMessages$myInbox$channels) ||
+    if (!(other is Query$InboxUnseenUnarchivedMessages$myInbox$channels) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2979,48 +4551,53 @@ class Query$InboxUnseenMessages$myInbox$channels {
   }
 }
 
-extension UtilityExtension$Query$InboxUnseenMessages$myInbox$channels
-    on Query$InboxUnseenMessages$myInbox$channels {
-  CopyWith$Query$InboxUnseenMessages$myInbox$channels<
-          Query$InboxUnseenMessages$myInbox$channels>
-      get copyWith => CopyWith$Query$InboxUnseenMessages$myInbox$channels(
+extension UtilityExtension$Query$InboxUnseenUnarchivedMessages$myInbox$channels
+    on Query$InboxUnseenUnarchivedMessages$myInbox$channels {
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels<
+          Query$InboxUnseenUnarchivedMessages$myInbox$channels>
+      get copyWith =>
+          CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$InboxUnseenMessages$myInbox$channels<TRes> {
-  factory CopyWith$Query$InboxUnseenMessages$myInbox$channels(
-    Query$InboxUnseenMessages$myInbox$channels instance,
-    TRes Function(Query$InboxUnseenMessages$myInbox$channels) then,
-  ) = _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels;
+abstract class CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels<
+    TRes> {
+  factory CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels(
+    Query$InboxUnseenUnarchivedMessages$myInbox$channels instance,
+    TRes Function(Query$InboxUnseenUnarchivedMessages$myInbox$channels) then,
+  ) = _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels;
 
-  factory CopyWith$Query$InboxUnseenMessages$myInbox$channels.stub(TRes res) =
-      _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels;
+  factory CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels;
 
   TRes call({
-    List<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>?
+    List<Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>?
         unseenMessages,
     String? $__typename,
   });
   TRes unseenMessages(
-      Iterable<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>? Function(
+      Iterable<Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>? Function(
               Iterable<
-                  CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
-                      Query$InboxUnseenMessages$myInbox$channels$unseenMessages>>?)
+                  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages<
+                      Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>>?)
           _fn);
 }
 
-class _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels<TRes>
-    implements CopyWith$Query$InboxUnseenMessages$myInbox$channels<TRes> {
-  _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels(
+class _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels<TRes>
+    implements
+        CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels<TRes> {
+  _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels(
     this._instance,
     this._then,
   );
 
-  final Query$InboxUnseenMessages$myInbox$channels _instance;
+  final Query$InboxUnseenUnarchivedMessages$myInbox$channels _instance;
 
-  final TRes Function(Query$InboxUnseenMessages$myInbox$channels) _then;
+  final TRes Function(Query$InboxUnseenUnarchivedMessages$myInbox$channels)
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3028,37 +4605,40 @@ class _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels<TRes>
     Object? unseenMessages = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$InboxUnseenMessages$myInbox$channels(
+      _then(Query$InboxUnseenUnarchivedMessages$myInbox$channels(
         unseenMessages: unseenMessages == _undefined
             ? _instance.unseenMessages
             : (unseenMessages as List<
-                Query$InboxUnseenMessages$myInbox$channels$unseenMessages>?),
+                Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes unseenMessages(
-          Iterable<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>? Function(
+          Iterable<Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>? Function(
                   Iterable<
-                      CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
-                          Query$InboxUnseenMessages$myInbox$channels$unseenMessages>>?)
+                      CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages<
+                          Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>>?)
               _fn) =>
       call(
           unseenMessages: _fn(_instance.unseenMessages?.map((e) =>
-              CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
+              CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages(
                 e,
                 (i) => i,
               )))?.toList());
 }
 
-class _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels<TRes>
-    implements CopyWith$Query$InboxUnseenMessages$myInbox$channels<TRes> {
-  _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels(this._res);
+class _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels<
+        TRes>
+    implements
+        CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels<TRes> {
+  _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels(
+      this._res);
 
   TRes _res;
 
   call({
-    List<Query$InboxUnseenMessages$myInbox$channels$unseenMessages>?
+    List<Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>?
         unseenMessages,
     String? $__typename,
   }) =>
@@ -3066,17 +4646,17 @@ class _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels<TRes>
   unseenMessages(_fn) => _res;
 }
 
-class Query$InboxUnseenMessages$myInbox$channels$unseenMessages {
-  Query$InboxUnseenMessages$myInbox$channels$unseenMessages({
+class Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages {
+  Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages({
     required this.channelId,
     this.$__typename = 'ChannelInboxItemMessage',
   });
 
-  factory Query$InboxUnseenMessages$myInbox$channels$unseenMessages.fromJson(
+  factory Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages.fromJson(
       Map<String, dynamic> json) {
     final l$channelId = json['channelId'];
     final l$$__typename = json['__typename'];
-    return Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
+    return Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages(
       channelId: (l$channelId as String),
       $__typename: (l$$__typename as String),
     );
@@ -3110,7 +4690,8 @@ class Query$InboxUnseenMessages$myInbox$channels$unseenMessages {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$InboxUnseenMessages$myInbox$channels$unseenMessages) ||
+    if (!(other
+            is Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3128,28 +4709,30 @@ class Query$InboxUnseenMessages$myInbox$channels$unseenMessages {
   }
 }
 
-extension UtilityExtension$Query$InboxUnseenMessages$myInbox$channels$unseenMessages
-    on Query$InboxUnseenMessages$myInbox$channels$unseenMessages {
-  CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
-          Query$InboxUnseenMessages$myInbox$channels$unseenMessages>
+extension UtilityExtension$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages
+    on Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages {
+  CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages<
+          Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages>
       get copyWith =>
-          CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
+          CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
+abstract class CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages<
     TRes> {
-  factory CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
-    Query$InboxUnseenMessages$myInbox$channels$unseenMessages instance,
-    TRes Function(Query$InboxUnseenMessages$myInbox$channels$unseenMessages)
+  factory CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages(
+    Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages
+        instance,
+    TRes Function(
+            Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages)
         then,
-  ) = _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
+  ) = _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages;
 
-  factory CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages.stub(
+  factory CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages;
+      _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages;
 
   TRes call({
     String? channelId,
@@ -3157,19 +4740,21 @@ abstract class CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessage
   });
 }
 
-class _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
+class _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages<
         TRes>
     implements
-        CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
+        CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages<
             TRes> {
-  _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
+  _CopyWithImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages(
     this._instance,
     this._then,
   );
 
-  final Query$InboxUnseenMessages$myInbox$channels$unseenMessages _instance;
+  final Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages
+      _instance;
 
-  final TRes Function(Query$InboxUnseenMessages$myInbox$channels$unseenMessages)
+  final TRes Function(
+          Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -3178,7 +4763,7 @@ class _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
     Object? channelId = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
+      _then(Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages(
         channelId: channelId == _undefined || channelId == null
             ? _instance.channelId
             : (channelId as String),
@@ -3188,12 +4773,12 @@ class _CopyWithImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
       ));
 }
 
-class _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
+class _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages<
         TRes>
     implements
-        CopyWith$Query$InboxUnseenMessages$myInbox$channels$unseenMessages<
+        CopyWith$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages<
             TRes> {
-  _CopyWithStubImpl$Query$InboxUnseenMessages$myInbox$channels$unseenMessages(
+  _CopyWithStubImpl$Query$InboxUnseenUnarchivedMessages$myInbox$channels$unseenMessages(
       this._res);
 
   TRes _res;

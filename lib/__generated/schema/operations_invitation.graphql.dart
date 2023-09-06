@@ -3398,30 +3398,184 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
       _res;
 }
 
-class Query$GetInboxInvitations {
-  Query$GetInboxInvitations({
-    required this.myInbox,
+class Variables$Query$MyReceivedChannelInvitations {
+  factory Variables$Query$MyReceivedChannelInvitations({
+    Enum$ChannelInvitationDirection? direction,
+    bool? onlyPending,
+  }) =>
+      Variables$Query$MyReceivedChannelInvitations._({
+        if (direction != null) r'direction': direction,
+        if (onlyPending != null) r'onlyPending': onlyPending,
+      });
+
+  Variables$Query$MyReceivedChannelInvitations._(this._$data);
+
+  factory Variables$Query$MyReceivedChannelInvitations.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('direction')) {
+      final l$direction = data['direction'];
+      result$data['direction'] = l$direction == null
+          ? null
+          : fromJson$Enum$ChannelInvitationDirection((l$direction as String));
+    }
+    if (data.containsKey('onlyPending')) {
+      final l$onlyPending = data['onlyPending'];
+      result$data['onlyPending'] = (l$onlyPending as bool?);
+    }
+    return Variables$Query$MyReceivedChannelInvitations._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum$ChannelInvitationDirection? get direction =>
+      (_$data['direction'] as Enum$ChannelInvitationDirection?);
+  bool? get onlyPending => (_$data['onlyPending'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('direction')) {
+      final l$direction = direction;
+      result$data['direction'] = l$direction == null
+          ? null
+          : toJson$Enum$ChannelInvitationDirection(l$direction);
+    }
+    if (_$data.containsKey('onlyPending')) {
+      final l$onlyPending = onlyPending;
+      result$data['onlyPending'] = l$onlyPending;
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$MyReceivedChannelInvitations<
+          Variables$Query$MyReceivedChannelInvitations>
+      get copyWith => CopyWith$Variables$Query$MyReceivedChannelInvitations(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$MyReceivedChannelInvitations) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$direction = direction;
+    final lOther$direction = other.direction;
+    if (_$data.containsKey('direction') !=
+        other._$data.containsKey('direction')) {
+      return false;
+    }
+    if (l$direction != lOther$direction) {
+      return false;
+    }
+    final l$onlyPending = onlyPending;
+    final lOther$onlyPending = other.onlyPending;
+    if (_$data.containsKey('onlyPending') !=
+        other._$data.containsKey('onlyPending')) {
+      return false;
+    }
+    if (l$onlyPending != lOther$onlyPending) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$direction = direction;
+    final l$onlyPending = onlyPending;
+    return Object.hashAll([
+      _$data.containsKey('direction') ? l$direction : const {},
+      _$data.containsKey('onlyPending') ? l$onlyPending : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$MyReceivedChannelInvitations<TRes> {
+  factory CopyWith$Variables$Query$MyReceivedChannelInvitations(
+    Variables$Query$MyReceivedChannelInvitations instance,
+    TRes Function(Variables$Query$MyReceivedChannelInvitations) then,
+  ) = _CopyWithImpl$Variables$Query$MyReceivedChannelInvitations;
+
+  factory CopyWith$Variables$Query$MyReceivedChannelInvitations.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$MyReceivedChannelInvitations;
+
+  TRes call({
+    Enum$ChannelInvitationDirection? direction,
+    bool? onlyPending,
+  });
+}
+
+class _CopyWithImpl$Variables$Query$MyReceivedChannelInvitations<TRes>
+    implements CopyWith$Variables$Query$MyReceivedChannelInvitations<TRes> {
+  _CopyWithImpl$Variables$Query$MyReceivedChannelInvitations(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$MyReceivedChannelInvitations _instance;
+
+  final TRes Function(Variables$Query$MyReceivedChannelInvitations) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? direction = _undefined,
+    Object? onlyPending = _undefined,
+  }) =>
+      _then(Variables$Query$MyReceivedChannelInvitations._({
+        ..._instance._$data,
+        if (direction != _undefined)
+          'direction': (direction as Enum$ChannelInvitationDirection?),
+        if (onlyPending != _undefined) 'onlyPending': (onlyPending as bool?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$MyReceivedChannelInvitations<TRes>
+    implements CopyWith$Variables$Query$MyReceivedChannelInvitations<TRes> {
+  _CopyWithStubImpl$Variables$Query$MyReceivedChannelInvitations(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$ChannelInvitationDirection? direction,
+    bool? onlyPending,
+  }) =>
+      _res;
+}
+
+class Query$MyReceivedChannelInvitations {
+  Query$MyReceivedChannelInvitations({
+    required this.myChannelInvitations,
     this.$__typename = 'Query',
   });
 
-  factory Query$GetInboxInvitations.fromJson(Map<String, dynamic> json) {
-    final l$myInbox = json['myInbox'];
+  factory Query$MyReceivedChannelInvitations.fromJson(
+      Map<String, dynamic> json) {
+    final l$myChannelInvitations = json['myChannelInvitations'];
     final l$$__typename = json['__typename'];
-    return Query$GetInboxInvitations(
-      myInbox: Query$GetInboxInvitations$myInbox.fromJson(
-          (l$myInbox as Map<String, dynamic>)),
+    return Query$MyReceivedChannelInvitations(
+      myChannelInvitations: (l$myChannelInvitations as List<dynamic>)
+          .map((e) =>
+              Query$MyReceivedChannelInvitations$myChannelInvitations.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$GetInboxInvitations$myInbox myInbox;
+  final List<Query$MyReceivedChannelInvitations$myChannelInvitations>
+      myChannelInvitations;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$myInbox = myInbox;
-    _resultData['myInbox'] = l$myInbox.toJson();
+    final l$myChannelInvitations = myChannelInvitations;
+    _resultData['myChannelInvitations'] =
+        l$myChannelInvitations.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3429,10 +3583,10 @@ class Query$GetInboxInvitations {
 
   @override
   int get hashCode {
-    final l$myInbox = myInbox;
+    final l$myChannelInvitations = myChannelInvitations;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$myInbox,
+      Object.hashAll(l$myChannelInvitations.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -3442,14 +3596,21 @@ class Query$GetInboxInvitations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetInboxInvitations) ||
+    if (!(other is Query$MyReceivedChannelInvitations) ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$myInbox = myInbox;
-    final lOther$myInbox = other.myInbox;
-    if (l$myInbox != lOther$myInbox) {
+    final l$myChannelInvitations = myChannelInvitations;
+    final lOther$myChannelInvitations = other.myChannelInvitations;
+    if (l$myChannelInvitations.length != lOther$myChannelInvitations.length) {
       return false;
+    }
+    for (int i = 0; i < l$myChannelInvitations.length; i++) {
+      final l$myChannelInvitations$entry = l$myChannelInvitations[i];
+      final lOther$myChannelInvitations$entry = lOther$myChannelInvitations[i];
+      if (l$myChannelInvitations$entry != lOther$myChannelInvitations$entry) {
+        return false;
+      }
     }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
@@ -3460,210 +3621,204 @@ class Query$GetInboxInvitations {
   }
 }
 
-extension UtilityExtension$Query$GetInboxInvitations
-    on Query$GetInboxInvitations {
-  CopyWith$Query$GetInboxInvitations<Query$GetInboxInvitations> get copyWith =>
-      CopyWith$Query$GetInboxInvitations(
-        this,
-        (i) => i,
-      );
+extension UtilityExtension$Query$MyReceivedChannelInvitations
+    on Query$MyReceivedChannelInvitations {
+  CopyWith$Query$MyReceivedChannelInvitations<
+          Query$MyReceivedChannelInvitations>
+      get copyWith => CopyWith$Query$MyReceivedChannelInvitations(
+            this,
+            (i) => i,
+          );
 }
 
-abstract class CopyWith$Query$GetInboxInvitations<TRes> {
-  factory CopyWith$Query$GetInboxInvitations(
-    Query$GetInboxInvitations instance,
-    TRes Function(Query$GetInboxInvitations) then,
-  ) = _CopyWithImpl$Query$GetInboxInvitations;
+abstract class CopyWith$Query$MyReceivedChannelInvitations<TRes> {
+  factory CopyWith$Query$MyReceivedChannelInvitations(
+    Query$MyReceivedChannelInvitations instance,
+    TRes Function(Query$MyReceivedChannelInvitations) then,
+  ) = _CopyWithImpl$Query$MyReceivedChannelInvitations;
 
-  factory CopyWith$Query$GetInboxInvitations.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetInboxInvitations;
+  factory CopyWith$Query$MyReceivedChannelInvitations.stub(TRes res) =
+      _CopyWithStubImpl$Query$MyReceivedChannelInvitations;
 
   TRes call({
-    Query$GetInboxInvitations$myInbox? myInbox,
+    List<Query$MyReceivedChannelInvitations$myChannelInvitations>?
+        myChannelInvitations,
     String? $__typename,
   });
-  CopyWith$Query$GetInboxInvitations$myInbox<TRes> get myInbox;
+  TRes myChannelInvitations(
+      Iterable<Query$MyReceivedChannelInvitations$myChannelInvitations> Function(
+              Iterable<
+                  CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations<
+                      Query$MyReceivedChannelInvitations$myChannelInvitations>>)
+          _fn);
 }
 
-class _CopyWithImpl$Query$GetInboxInvitations<TRes>
-    implements CopyWith$Query$GetInboxInvitations<TRes> {
-  _CopyWithImpl$Query$GetInboxInvitations(
+class _CopyWithImpl$Query$MyReceivedChannelInvitations<TRes>
+    implements CopyWith$Query$MyReceivedChannelInvitations<TRes> {
+  _CopyWithImpl$Query$MyReceivedChannelInvitations(
     this._instance,
     this._then,
   );
 
-  final Query$GetInboxInvitations _instance;
+  final Query$MyReceivedChannelInvitations _instance;
 
-  final TRes Function(Query$GetInboxInvitations) _then;
+  final TRes Function(Query$MyReceivedChannelInvitations) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? myInbox = _undefined,
+    Object? myChannelInvitations = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$GetInboxInvitations(
-        myInbox: myInbox == _undefined || myInbox == null
-            ? _instance.myInbox
-            : (myInbox as Query$GetInboxInvitations$myInbox),
+      _then(Query$MyReceivedChannelInvitations(
+        myChannelInvitations:
+            myChannelInvitations == _undefined || myChannelInvitations == null
+                ? _instance.myChannelInvitations
+                : (myChannelInvitations as List<
+                    Query$MyReceivedChannelInvitations$myChannelInvitations>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$GetInboxInvitations$myInbox<TRes> get myInbox {
-    final local$myInbox = _instance.myInbox;
-    return CopyWith$Query$GetInboxInvitations$myInbox(
-        local$myInbox, (e) => call(myInbox: e));
-  }
+  TRes myChannelInvitations(
+          Iterable<Query$MyReceivedChannelInvitations$myChannelInvitations> Function(
+                  Iterable<
+                      CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations<
+                          Query$MyReceivedChannelInvitations$myChannelInvitations>>)
+              _fn) =>
+      call(
+          myChannelInvitations: _fn(_instance.myChannelInvitations.map((e) =>
+              CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations(
+                e,
+                (i) => i,
+              ))).toList());
 }
 
-class _CopyWithStubImpl$Query$GetInboxInvitations<TRes>
-    implements CopyWith$Query$GetInboxInvitations<TRes> {
-  _CopyWithStubImpl$Query$GetInboxInvitations(this._res);
+class _CopyWithStubImpl$Query$MyReceivedChannelInvitations<TRes>
+    implements CopyWith$Query$MyReceivedChannelInvitations<TRes> {
+  _CopyWithStubImpl$Query$MyReceivedChannelInvitations(this._res);
 
   TRes _res;
 
   call({
-    Query$GetInboxInvitations$myInbox? myInbox,
+    List<Query$MyReceivedChannelInvitations$myChannelInvitations>?
+        myChannelInvitations,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$GetInboxInvitations$myInbox<TRes> get myInbox =>
-      CopyWith$Query$GetInboxInvitations$myInbox.stub(_res);
+  myChannelInvitations(_fn) => _res;
 }
 
-const documentNodeQueryGetInboxInvitations = DocumentNode(definitions: [
+const documentNodeQueryMyReceivedChannelInvitations =
+    DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'GetInboxInvitations'),
-    variableDefinitions: [],
+    name: NameNode(value: 'MyReceivedChannelInvitations'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'direction')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ChannelInvitationDirection'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'onlyPending')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'myInbox'),
+        name: NameNode(value: 'myChannelInvitations'),
         alias: null,
-        arguments: [],
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'direction'),
+            value: VariableNode(name: NameNode(value: 'direction')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'onlyPending'),
+            value: VariableNode(name: NameNode(value: 'onlyPending')),
+          ),
+        ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'channels'),
+            name: NameNode(value: 'channelId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'messageText'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'sender'),
             alias: null,
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'invitations'),
+                name: NameNode(value: 'avatarUrl'),
                 alias: null,
                 arguments: [],
                 directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'channelId'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'createdAt'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'createdBy'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'id'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'messageText'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'status'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
+                selectionSet: null,
               ),
               FieldNode(
-                name: NameNode(value: 'pendingInvitations'),
+                name: NameNode(value: 'fullName'),
                 alias: null,
                 arguments: [],
                 directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'channelId'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'createdAt'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'createdBy'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'id'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'messageText'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'status'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'jobTitle'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -3694,399 +3849,34 @@ const documentNodeQueryGetInboxInvitations = DocumentNode(definitions: [
   ),
 ]);
 
-class Query$GetInboxInvitations$myInbox {
-  Query$GetInboxInvitations$myInbox({
-    this.channels,
-    this.$__typename = 'UserInbox',
-  });
-
-  factory Query$GetInboxInvitations$myInbox.fromJson(
-      Map<String, dynamic> json) {
-    final l$channels = json['channels'];
-    final l$$__typename = json['__typename'];
-    return Query$GetInboxInvitations$myInbox(
-      channels: l$channels == null
-          ? null
-          : Query$GetInboxInvitations$myInbox$channels.fromJson(
-              (l$channels as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final Query$GetInboxInvitations$myInbox$channels? channels;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$channels = channels;
-    _resultData['channels'] = l$channels?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$channels = channels;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$channels,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetInboxInvitations$myInbox) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$channels = channels;
-    final lOther$channels = other.channels;
-    if (l$channels != lOther$channels) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetInboxInvitations$myInbox
-    on Query$GetInboxInvitations$myInbox {
-  CopyWith$Query$GetInboxInvitations$myInbox<Query$GetInboxInvitations$myInbox>
-      get copyWith => CopyWith$Query$GetInboxInvitations$myInbox(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetInboxInvitations$myInbox<TRes> {
-  factory CopyWith$Query$GetInboxInvitations$myInbox(
-    Query$GetInboxInvitations$myInbox instance,
-    TRes Function(Query$GetInboxInvitations$myInbox) then,
-  ) = _CopyWithImpl$Query$GetInboxInvitations$myInbox;
-
-  factory CopyWith$Query$GetInboxInvitations$myInbox.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetInboxInvitations$myInbox;
-
-  TRes call({
-    Query$GetInboxInvitations$myInbox$channels? channels,
-    String? $__typename,
-  });
-  CopyWith$Query$GetInboxInvitations$myInbox$channels<TRes> get channels;
-}
-
-class _CopyWithImpl$Query$GetInboxInvitations$myInbox<TRes>
-    implements CopyWith$Query$GetInboxInvitations$myInbox<TRes> {
-  _CopyWithImpl$Query$GetInboxInvitations$myInbox(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetInboxInvitations$myInbox _instance;
-
-  final TRes Function(Query$GetInboxInvitations$myInbox) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? channels = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetInboxInvitations$myInbox(
-        channels: channels == _undefined
-            ? _instance.channels
-            : (channels as Query$GetInboxInvitations$myInbox$channels?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  CopyWith$Query$GetInboxInvitations$myInbox$channels<TRes> get channels {
-    final local$channels = _instance.channels;
-    return local$channels == null
-        ? CopyWith$Query$GetInboxInvitations$myInbox$channels.stub(
-            _then(_instance))
-        : CopyWith$Query$GetInboxInvitations$myInbox$channels(
-            local$channels, (e) => call(channels: e));
-  }
-}
-
-class _CopyWithStubImpl$Query$GetInboxInvitations$myInbox<TRes>
-    implements CopyWith$Query$GetInboxInvitations$myInbox<TRes> {
-  _CopyWithStubImpl$Query$GetInboxInvitations$myInbox(this._res);
-
-  TRes _res;
-
-  call({
-    Query$GetInboxInvitations$myInbox$channels? channels,
-    String? $__typename,
-  }) =>
-      _res;
-  CopyWith$Query$GetInboxInvitations$myInbox$channels<TRes> get channels =>
-      CopyWith$Query$GetInboxInvitations$myInbox$channels.stub(_res);
-}
-
-class Query$GetInboxInvitations$myInbox$channels {
-  Query$GetInboxInvitations$myInbox$channels({
-    this.invitations,
-    this.pendingInvitations,
-    this.$__typename = 'ChannelInbox',
-  });
-
-  factory Query$GetInboxInvitations$myInbox$channels.fromJson(
-      Map<String, dynamic> json) {
-    final l$invitations = json['invitations'];
-    final l$pendingInvitations = json['pendingInvitations'];
-    final l$$__typename = json['__typename'];
-    return Query$GetInboxInvitations$myInbox$channels(
-      invitations: (l$invitations as List<dynamic>?)
-          ?.map((e) =>
-              Query$GetInboxInvitations$myInbox$channels$invitations.fromJson(
-                  (e as Map<String, dynamic>)))
-          .toList(),
-      pendingInvitations: (l$pendingInvitations as List<dynamic>?)
-          ?.map((e) =>
-              Query$GetInboxInvitations$myInbox$channels$pendingInvitations
-                  .fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Query$GetInboxInvitations$myInbox$channels$invitations>?
-      invitations;
-
-  final List<Query$GetInboxInvitations$myInbox$channels$pendingInvitations>?
-      pendingInvitations;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$invitations = invitations;
-    _resultData['invitations'] = l$invitations?.map((e) => e.toJson()).toList();
-    final l$pendingInvitations = pendingInvitations;
-    _resultData['pendingInvitations'] =
-        l$pendingInvitations?.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$invitations = invitations;
-    final l$pendingInvitations = pendingInvitations;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$invitations == null
-          ? null
-          : Object.hashAll(l$invitations.map((v) => v)),
-      l$pendingInvitations == null
-          ? null
-          : Object.hashAll(l$pendingInvitations.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetInboxInvitations$myInbox$channels) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$invitations = invitations;
-    final lOther$invitations = other.invitations;
-    if (l$invitations != null && lOther$invitations != null) {
-      if (l$invitations.length != lOther$invitations.length) {
-        return false;
-      }
-      for (int i = 0; i < l$invitations.length; i++) {
-        final l$invitations$entry = l$invitations[i];
-        final lOther$invitations$entry = lOther$invitations[i];
-        if (l$invitations$entry != lOther$invitations$entry) {
-          return false;
-        }
-      }
-    } else if (l$invitations != lOther$invitations) {
-      return false;
-    }
-    final l$pendingInvitations = pendingInvitations;
-    final lOther$pendingInvitations = other.pendingInvitations;
-    if (l$pendingInvitations != null && lOther$pendingInvitations != null) {
-      if (l$pendingInvitations.length != lOther$pendingInvitations.length) {
-        return false;
-      }
-      for (int i = 0; i < l$pendingInvitations.length; i++) {
-        final l$pendingInvitations$entry = l$pendingInvitations[i];
-        final lOther$pendingInvitations$entry = lOther$pendingInvitations[i];
-        if (l$pendingInvitations$entry != lOther$pendingInvitations$entry) {
-          return false;
-        }
-      }
-    } else if (l$pendingInvitations != lOther$pendingInvitations) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetInboxInvitations$myInbox$channels
-    on Query$GetInboxInvitations$myInbox$channels {
-  CopyWith$Query$GetInboxInvitations$myInbox$channels<
-          Query$GetInboxInvitations$myInbox$channels>
-      get copyWith => CopyWith$Query$GetInboxInvitations$myInbox$channels(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetInboxInvitations$myInbox$channels<TRes> {
-  factory CopyWith$Query$GetInboxInvitations$myInbox$channels(
-    Query$GetInboxInvitations$myInbox$channels instance,
-    TRes Function(Query$GetInboxInvitations$myInbox$channels) then,
-  ) = _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels;
-
-  factory CopyWith$Query$GetInboxInvitations$myInbox$channels.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels;
-
-  TRes call({
-    List<Query$GetInboxInvitations$myInbox$channels$invitations>? invitations,
-    List<Query$GetInboxInvitations$myInbox$channels$pendingInvitations>?
-        pendingInvitations,
-    String? $__typename,
-  });
-  TRes invitations(
-      Iterable<Query$GetInboxInvitations$myInbox$channels$invitations>? Function(
-              Iterable<
-                  CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations<
-                      Query$GetInboxInvitations$myInbox$channels$invitations>>?)
-          _fn);
-  TRes pendingInvitations(
-      Iterable<Query$GetInboxInvitations$myInbox$channels$pendingInvitations>? Function(
-              Iterable<
-                  CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations<
-                      Query$GetInboxInvitations$myInbox$channels$pendingInvitations>>?)
-          _fn);
-}
-
-class _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels<TRes>
-    implements CopyWith$Query$GetInboxInvitations$myInbox$channels<TRes> {
-  _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetInboxInvitations$myInbox$channels _instance;
-
-  final TRes Function(Query$GetInboxInvitations$myInbox$channels) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? invitations = _undefined,
-    Object? pendingInvitations = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetInboxInvitations$myInbox$channels(
-        invitations: invitations == _undefined
-            ? _instance.invitations
-            : (invitations as List<
-                Query$GetInboxInvitations$myInbox$channels$invitations>?),
-        pendingInvitations: pendingInvitations == _undefined
-            ? _instance.pendingInvitations
-            : (pendingInvitations as List<
-                Query$GetInboxInvitations$myInbox$channels$pendingInvitations>?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  TRes invitations(
-          Iterable<Query$GetInboxInvitations$myInbox$channels$invitations>? Function(
-                  Iterable<
-                      CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations<
-                          Query$GetInboxInvitations$myInbox$channels$invitations>>?)
-              _fn) =>
-      call(
-          invitations: _fn(_instance.invitations?.map((e) =>
-              CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations(
-                e,
-                (i) => i,
-              )))?.toList());
-  TRes pendingInvitations(
-          Iterable<Query$GetInboxInvitations$myInbox$channels$pendingInvitations>? Function(
-                  Iterable<
-                      CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations<
-                          Query$GetInboxInvitations$myInbox$channels$pendingInvitations>>?)
-              _fn) =>
-      call(
-          pendingInvitations: _fn(_instance.pendingInvitations?.map((e) =>
-              CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations(
-                e,
-                (i) => i,
-              )))?.toList());
-}
-
-class _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels<TRes>
-    implements CopyWith$Query$GetInboxInvitations$myInbox$channels<TRes> {
-  _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels(this._res);
-
-  TRes _res;
-
-  call({
-    List<Query$GetInboxInvitations$myInbox$channels$invitations>? invitations,
-    List<Query$GetInboxInvitations$myInbox$channels$pendingInvitations>?
-        pendingInvitations,
-    String? $__typename,
-  }) =>
-      _res;
-  invitations(_fn) => _res;
-  pendingInvitations(_fn) => _res;
-}
-
-class Query$GetInboxInvitations$myInbox$channels$invitations {
-  Query$GetInboxInvitations$myInbox$channels$invitations({
+class Query$MyReceivedChannelInvitations$myChannelInvitations {
+  Query$MyReceivedChannelInvitations$myChannelInvitations({
     this.channelId,
     required this.createdAt,
-    this.createdBy,
     required this.id,
     this.messageText,
     required this.status,
-    this.$__typename = 'ChannelInboxItemInvitation',
+    required this.sender,
+    this.$__typename = 'ChannelInvitation',
   });
 
-  factory Query$GetInboxInvitations$myInbox$channels$invitations.fromJson(
+  factory Query$MyReceivedChannelInvitations$myChannelInvitations.fromJson(
       Map<String, dynamic> json) {
     final l$channelId = json['channelId'];
     final l$createdAt = json['createdAt'];
-    final l$createdBy = json['createdBy'];
     final l$id = json['id'];
     final l$messageText = json['messageText'];
     final l$status = json['status'];
+    final l$sender = json['sender'];
     final l$$__typename = json['__typename'];
-    return Query$GetInboxInvitations$myInbox$channels$invitations(
+    return Query$MyReceivedChannelInvitations$myChannelInvitations(
       channelId: (l$channelId as String?),
       createdAt: DateTime.parse((l$createdAt as String)),
-      createdBy: (l$createdBy as String?),
       id: (l$id as String),
       messageText: (l$messageText as String?),
       status: fromJson$Enum$ChannelInvitationStatus((l$status as String)),
+      sender: Query$MyReceivedChannelInvitations$myChannelInvitations$sender
+          .fromJson((l$sender as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -4095,13 +3885,13 @@ class Query$GetInboxInvitations$myInbox$channels$invitations {
 
   final DateTime createdAt;
 
-  final String? createdBy;
-
   final String id;
 
   final String? messageText;
 
   final Enum$ChannelInvitationStatus status;
+
+  final Query$MyReceivedChannelInvitations$myChannelInvitations$sender sender;
 
   final String $__typename;
 
@@ -4111,14 +3901,14 @@ class Query$GetInboxInvitations$myInbox$channels$invitations {
     _resultData['channelId'] = l$channelId;
     final l$createdAt = createdAt;
     _resultData['createdAt'] = l$createdAt.toIso8601String();
-    final l$createdBy = createdBy;
-    _resultData['createdBy'] = l$createdBy;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$messageText = messageText;
     _resultData['messageText'] = l$messageText;
     final l$status = status;
     _resultData['status'] = toJson$Enum$ChannelInvitationStatus(l$status);
+    final l$sender = sender;
+    _resultData['sender'] = l$sender.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -4128,18 +3918,18 @@ class Query$GetInboxInvitations$myInbox$channels$invitations {
   int get hashCode {
     final l$channelId = channelId;
     final l$createdAt = createdAt;
-    final l$createdBy = createdBy;
     final l$id = id;
     final l$messageText = messageText;
     final l$status = status;
+    final l$sender = sender;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$channelId,
       l$createdAt,
-      l$createdBy,
       l$id,
       l$messageText,
       l$status,
+      l$sender,
       l$$__typename,
     ]);
   }
@@ -4149,7 +3939,7 @@ class Query$GetInboxInvitations$myInbox$channels$invitations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetInboxInvitations$myInbox$channels$invitations) ||
+    if (!(other is Query$MyReceivedChannelInvitations$myChannelInvitations) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4161,11 +3951,6 @@ class Query$GetInboxInvitations$myInbox$channels$invitations {
     final l$createdAt = createdAt;
     final lOther$createdAt = other.createdAt;
     if (l$createdAt != lOther$createdAt) {
-      return false;
-    }
-    final l$createdBy = createdBy;
-    final lOther$createdBy = other.createdBy;
-    if (l$createdBy != lOther$createdBy) {
       return false;
     }
     final l$id = id;
@@ -4183,6 +3968,11 @@ class Query$GetInboxInvitations$myInbox$channels$invitations {
     if (l$status != lOther$status) {
       return false;
     }
+    final l$sender = sender;
+    final lOther$sender = other.sender;
+    if (l$sender != lOther$sender) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -4192,50 +3982,53 @@ class Query$GetInboxInvitations$myInbox$channels$invitations {
   }
 }
 
-extension UtilityExtension$Query$GetInboxInvitations$myInbox$channels$invitations
-    on Query$GetInboxInvitations$myInbox$channels$invitations {
-  CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations<
-          Query$GetInboxInvitations$myInbox$channels$invitations>
+extension UtilityExtension$Query$MyReceivedChannelInvitations$myChannelInvitations
+    on Query$MyReceivedChannelInvitations$myChannelInvitations {
+  CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations<
+          Query$MyReceivedChannelInvitations$myChannelInvitations>
       get copyWith =>
-          CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations(
+          CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations<
+abstract class CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations<
     TRes> {
-  factory CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations(
-    Query$GetInboxInvitations$myInbox$channels$invitations instance,
-    TRes Function(Query$GetInboxInvitations$myInbox$channels$invitations) then,
-  ) = _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$invitations;
+  factory CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations(
+    Query$MyReceivedChannelInvitations$myChannelInvitations instance,
+    TRes Function(Query$MyReceivedChannelInvitations$myChannelInvitations) then,
+  ) = _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations;
 
-  factory CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations.stub(
+  factory CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels$invitations;
+      _CopyWithStubImpl$Query$MyReceivedChannelInvitations$myChannelInvitations;
 
   TRes call({
     String? channelId,
     DateTime? createdAt,
-    String? createdBy,
     String? id,
     String? messageText,
     Enum$ChannelInvitationStatus? status,
+    Query$MyReceivedChannelInvitations$myChannelInvitations$sender? sender,
     String? $__typename,
   });
+  CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<TRes>
+      get sender;
 }
 
-class _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$invitations<TRes>
+class _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations<
+        TRes>
     implements
-        CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations<TRes> {
-  _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$invitations(
+        CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations<TRes> {
+  _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations(
     this._instance,
     this._then,
   );
 
-  final Query$GetInboxInvitations$myInbox$channels$invitations _instance;
+  final Query$MyReceivedChannelInvitations$myChannelInvitations _instance;
 
-  final TRes Function(Query$GetInboxInvitations$myInbox$channels$invitations)
+  final TRes Function(Query$MyReceivedChannelInvitations$myChannelInvitations)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -4243,22 +4036,19 @@ class _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$invitations<TRes>
   TRes call({
     Object? channelId = _undefined,
     Object? createdAt = _undefined,
-    Object? createdBy = _undefined,
     Object? id = _undefined,
     Object? messageText = _undefined,
     Object? status = _undefined,
+    Object? sender = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$GetInboxInvitations$myInbox$channels$invitations(
+      _then(Query$MyReceivedChannelInvitations$myChannelInvitations(
         channelId: channelId == _undefined
             ? _instance.channelId
             : (channelId as String?),
         createdAt: createdAt == _undefined || createdAt == null
             ? _instance.createdAt
             : (createdAt as DateTime),
-        createdBy: createdBy == _undefined
-            ? _instance.createdBy
-            : (createdBy as String?),
         id: id == _undefined || id == null ? _instance.id : (id as String),
         messageText: messageText == _undefined
             ? _instance.messageText
@@ -4266,17 +4056,27 @@ class _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$invitations<TRes>
         status: status == _undefined || status == null
             ? _instance.status
             : (status as Enum$ChannelInvitationStatus),
+        sender: sender == _undefined || sender == null
+            ? _instance.sender
+            : (sender
+                as Query$MyReceivedChannelInvitations$myChannelInvitations$sender),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
+  CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<TRes>
+      get sender {
+    final local$sender = _instance.sender;
+    return CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender(
+        local$sender, (e) => call(sender: e));
+  }
 }
 
-class _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels$invitations<
+class _CopyWithStubImpl$Query$MyReceivedChannelInvitations$myChannelInvitations<
         TRes>
     implements
-        CopyWith$Query$GetInboxInvitations$myInbox$channels$invitations<TRes> {
-  _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels$invitations(
+        CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations<TRes> {
+  _CopyWithStubImpl$Query$MyReceivedChannelInvitations$myChannelInvitations(
       this._res);
 
   TRes _res;
@@ -4284,74 +4084,64 @@ class _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels$invitations<
   call({
     String? channelId,
     DateTime? createdAt,
-    String? createdBy,
     String? id,
     String? messageText,
     Enum$ChannelInvitationStatus? status,
+    Query$MyReceivedChannelInvitations$myChannelInvitations$sender? sender,
     String? $__typename,
   }) =>
       _res;
+  CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<TRes>
+      get sender =>
+          CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender
+              .stub(_res);
 }
 
-class Query$GetInboxInvitations$myInbox$channels$pendingInvitations {
-  Query$GetInboxInvitations$myInbox$channels$pendingInvitations({
-    this.channelId,
-    required this.createdAt,
-    this.createdBy,
+class Query$MyReceivedChannelInvitations$myChannelInvitations$sender {
+  Query$MyReceivedChannelInvitations$myChannelInvitations$sender({
+    this.avatarUrl,
+    this.fullName,
+    this.jobTitle,
     required this.id,
-    this.messageText,
-    required this.status,
-    this.$__typename = 'ChannelInboxItemInvitation',
+    this.$__typename = 'User',
   });
 
-  factory Query$GetInboxInvitations$myInbox$channels$pendingInvitations.fromJson(
+  factory Query$MyReceivedChannelInvitations$myChannelInvitations$sender.fromJson(
       Map<String, dynamic> json) {
-    final l$channelId = json['channelId'];
-    final l$createdAt = json['createdAt'];
-    final l$createdBy = json['createdBy'];
+    final l$avatarUrl = json['avatarUrl'];
+    final l$fullName = json['fullName'];
+    final l$jobTitle = json['jobTitle'];
     final l$id = json['id'];
-    final l$messageText = json['messageText'];
-    final l$status = json['status'];
     final l$$__typename = json['__typename'];
-    return Query$GetInboxInvitations$myInbox$channels$pendingInvitations(
-      channelId: (l$channelId as String?),
-      createdAt: DateTime.parse((l$createdAt as String)),
-      createdBy: (l$createdBy as String?),
+    return Query$MyReceivedChannelInvitations$myChannelInvitations$sender(
+      avatarUrl: (l$avatarUrl as String?),
+      fullName: (l$fullName as String?),
+      jobTitle: (l$jobTitle as String?),
       id: (l$id as String),
-      messageText: (l$messageText as String?),
-      status: fromJson$Enum$ChannelInvitationStatus((l$status as String)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final String? channelId;
+  final String? avatarUrl;
 
-  final DateTime createdAt;
+  final String? fullName;
 
-  final String? createdBy;
+  final String? jobTitle;
 
   final String id;
-
-  final String? messageText;
-
-  final Enum$ChannelInvitationStatus status;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$channelId = channelId;
-    _resultData['channelId'] = l$channelId;
-    final l$createdAt = createdAt;
-    _resultData['createdAt'] = l$createdAt.toIso8601String();
-    final l$createdBy = createdBy;
-    _resultData['createdBy'] = l$createdBy;
+    final l$avatarUrl = avatarUrl;
+    _resultData['avatarUrl'] = l$avatarUrl;
+    final l$fullName = fullName;
+    _resultData['fullName'] = l$fullName;
+    final l$jobTitle = jobTitle;
+    _resultData['jobTitle'] = l$jobTitle;
     final l$id = id;
     _resultData['id'] = l$id;
-    final l$messageText = messageText;
-    _resultData['messageText'] = l$messageText;
-    final l$status = status;
-    _resultData['status'] = toJson$Enum$ChannelInvitationStatus(l$status);
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -4359,20 +4149,16 @@ class Query$GetInboxInvitations$myInbox$channels$pendingInvitations {
 
   @override
   int get hashCode {
-    final l$channelId = channelId;
-    final l$createdAt = createdAt;
-    final l$createdBy = createdBy;
+    final l$avatarUrl = avatarUrl;
+    final l$fullName = fullName;
+    final l$jobTitle = jobTitle;
     final l$id = id;
-    final l$messageText = messageText;
-    final l$status = status;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$channelId,
-      l$createdAt,
-      l$createdBy,
+      l$avatarUrl,
+      l$fullName,
+      l$jobTitle,
       l$id,
-      l$messageText,
-      l$status,
       l$$__typename,
     ]);
   }
@@ -4383,7 +4169,671 @@ class Query$GetInboxInvitations$myInbox$channels$pendingInvitations {
       return true;
     }
     if (!(other
-            is Query$GetInboxInvitations$myInbox$channels$pendingInvitations) ||
+            is Query$MyReceivedChannelInvitations$myChannelInvitations$sender) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$avatarUrl = avatarUrl;
+    final lOther$avatarUrl = other.avatarUrl;
+    if (l$avatarUrl != lOther$avatarUrl) {
+      return false;
+    }
+    final l$fullName = fullName;
+    final lOther$fullName = other.fullName;
+    if (l$fullName != lOther$fullName) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (l$jobTitle != lOther$jobTitle) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$MyReceivedChannelInvitations$myChannelInvitations$sender
+    on Query$MyReceivedChannelInvitations$myChannelInvitations$sender {
+  CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<
+          Query$MyReceivedChannelInvitations$myChannelInvitations$sender>
+      get copyWith =>
+          CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<
+    TRes> {
+  factory CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender(
+    Query$MyReceivedChannelInvitations$myChannelInvitations$sender instance,
+    TRes Function(
+            Query$MyReceivedChannelInvitations$myChannelInvitations$sender)
+        then,
+  ) = _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations$sender;
+
+  factory CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$MyReceivedChannelInvitations$myChannelInvitations$sender;
+
+  TRes call({
+    String? avatarUrl,
+    String? fullName,
+    String? jobTitle,
+    String? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<
+        TRes>
+    implements
+        CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<
+            TRes> {
+  _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations$sender(
+    this._instance,
+    this._then,
+  );
+
+  final Query$MyReceivedChannelInvitations$myChannelInvitations$sender
+      _instance;
+
+  final TRes Function(
+      Query$MyReceivedChannelInvitations$myChannelInvitations$sender) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? avatarUrl = _undefined,
+    Object? fullName = _undefined,
+    Object? jobTitle = _undefined,
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$MyReceivedChannelInvitations$myChannelInvitations$sender(
+        avatarUrl: avatarUrl == _undefined
+            ? _instance.avatarUrl
+            : (avatarUrl as String?),
+        fullName:
+            fullName == _undefined ? _instance.fullName : (fullName as String?),
+        jobTitle:
+            jobTitle == _undefined ? _instance.jobTitle : (jobTitle as String?),
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<
+        TRes>
+    implements
+        CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<
+            TRes> {
+  _CopyWithStubImpl$Query$MyReceivedChannelInvitations$myChannelInvitations$sender(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? avatarUrl,
+    String? fullName,
+    String? jobTitle,
+    String? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Query$MySentChannelInvitations {
+  factory Variables$Query$MySentChannelInvitations({
+    Enum$ChannelInvitationDirection? direction,
+    bool? onlyPending,
+  }) =>
+      Variables$Query$MySentChannelInvitations._({
+        if (direction != null) r'direction': direction,
+        if (onlyPending != null) r'onlyPending': onlyPending,
+      });
+
+  Variables$Query$MySentChannelInvitations._(this._$data);
+
+  factory Variables$Query$MySentChannelInvitations.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('direction')) {
+      final l$direction = data['direction'];
+      result$data['direction'] = l$direction == null
+          ? null
+          : fromJson$Enum$ChannelInvitationDirection((l$direction as String));
+    }
+    if (data.containsKey('onlyPending')) {
+      final l$onlyPending = data['onlyPending'];
+      result$data['onlyPending'] = (l$onlyPending as bool?);
+    }
+    return Variables$Query$MySentChannelInvitations._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum$ChannelInvitationDirection? get direction =>
+      (_$data['direction'] as Enum$ChannelInvitationDirection?);
+  bool? get onlyPending => (_$data['onlyPending'] as bool?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('direction')) {
+      final l$direction = direction;
+      result$data['direction'] = l$direction == null
+          ? null
+          : toJson$Enum$ChannelInvitationDirection(l$direction);
+    }
+    if (_$data.containsKey('onlyPending')) {
+      final l$onlyPending = onlyPending;
+      result$data['onlyPending'] = l$onlyPending;
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$MySentChannelInvitations<
+          Variables$Query$MySentChannelInvitations>
+      get copyWith => CopyWith$Variables$Query$MySentChannelInvitations(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$MySentChannelInvitations) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$direction = direction;
+    final lOther$direction = other.direction;
+    if (_$data.containsKey('direction') !=
+        other._$data.containsKey('direction')) {
+      return false;
+    }
+    if (l$direction != lOther$direction) {
+      return false;
+    }
+    final l$onlyPending = onlyPending;
+    final lOther$onlyPending = other.onlyPending;
+    if (_$data.containsKey('onlyPending') !=
+        other._$data.containsKey('onlyPending')) {
+      return false;
+    }
+    if (l$onlyPending != lOther$onlyPending) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$direction = direction;
+    final l$onlyPending = onlyPending;
+    return Object.hashAll([
+      _$data.containsKey('direction') ? l$direction : const {},
+      _$data.containsKey('onlyPending') ? l$onlyPending : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$MySentChannelInvitations<TRes> {
+  factory CopyWith$Variables$Query$MySentChannelInvitations(
+    Variables$Query$MySentChannelInvitations instance,
+    TRes Function(Variables$Query$MySentChannelInvitations) then,
+  ) = _CopyWithImpl$Variables$Query$MySentChannelInvitations;
+
+  factory CopyWith$Variables$Query$MySentChannelInvitations.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$MySentChannelInvitations;
+
+  TRes call({
+    Enum$ChannelInvitationDirection? direction,
+    bool? onlyPending,
+  });
+}
+
+class _CopyWithImpl$Variables$Query$MySentChannelInvitations<TRes>
+    implements CopyWith$Variables$Query$MySentChannelInvitations<TRes> {
+  _CopyWithImpl$Variables$Query$MySentChannelInvitations(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$MySentChannelInvitations _instance;
+
+  final TRes Function(Variables$Query$MySentChannelInvitations) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? direction = _undefined,
+    Object? onlyPending = _undefined,
+  }) =>
+      _then(Variables$Query$MySentChannelInvitations._({
+        ..._instance._$data,
+        if (direction != _undefined)
+          'direction': (direction as Enum$ChannelInvitationDirection?),
+        if (onlyPending != _undefined) 'onlyPending': (onlyPending as bool?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$MySentChannelInvitations<TRes>
+    implements CopyWith$Variables$Query$MySentChannelInvitations<TRes> {
+  _CopyWithStubImpl$Variables$Query$MySentChannelInvitations(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$ChannelInvitationDirection? direction,
+    bool? onlyPending,
+  }) =>
+      _res;
+}
+
+class Query$MySentChannelInvitations {
+  Query$MySentChannelInvitations({
+    required this.myChannelInvitations,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$MySentChannelInvitations.fromJson(Map<String, dynamic> json) {
+    final l$myChannelInvitations = json['myChannelInvitations'];
+    final l$$__typename = json['__typename'];
+    return Query$MySentChannelInvitations(
+      myChannelInvitations: (l$myChannelInvitations as List<dynamic>)
+          .map((e) =>
+              Query$MySentChannelInvitations$myChannelInvitations.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$MySentChannelInvitations$myChannelInvitations>
+      myChannelInvitations;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$myChannelInvitations = myChannelInvitations;
+    _resultData['myChannelInvitations'] =
+        l$myChannelInvitations.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$myChannelInvitations = myChannelInvitations;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$myChannelInvitations.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$MySentChannelInvitations) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$myChannelInvitations = myChannelInvitations;
+    final lOther$myChannelInvitations = other.myChannelInvitations;
+    if (l$myChannelInvitations.length != lOther$myChannelInvitations.length) {
+      return false;
+    }
+    for (int i = 0; i < l$myChannelInvitations.length; i++) {
+      final l$myChannelInvitations$entry = l$myChannelInvitations[i];
+      final lOther$myChannelInvitations$entry = lOther$myChannelInvitations[i];
+      if (l$myChannelInvitations$entry != lOther$myChannelInvitations$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$MySentChannelInvitations
+    on Query$MySentChannelInvitations {
+  CopyWith$Query$MySentChannelInvitations<Query$MySentChannelInvitations>
+      get copyWith => CopyWith$Query$MySentChannelInvitations(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$MySentChannelInvitations<TRes> {
+  factory CopyWith$Query$MySentChannelInvitations(
+    Query$MySentChannelInvitations instance,
+    TRes Function(Query$MySentChannelInvitations) then,
+  ) = _CopyWithImpl$Query$MySentChannelInvitations;
+
+  factory CopyWith$Query$MySentChannelInvitations.stub(TRes res) =
+      _CopyWithStubImpl$Query$MySentChannelInvitations;
+
+  TRes call({
+    List<Query$MySentChannelInvitations$myChannelInvitations>?
+        myChannelInvitations,
+    String? $__typename,
+  });
+  TRes myChannelInvitations(
+      Iterable<Query$MySentChannelInvitations$myChannelInvitations> Function(
+              Iterable<
+                  CopyWith$Query$MySentChannelInvitations$myChannelInvitations<
+                      Query$MySentChannelInvitations$myChannelInvitations>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$MySentChannelInvitations<TRes>
+    implements CopyWith$Query$MySentChannelInvitations<TRes> {
+  _CopyWithImpl$Query$MySentChannelInvitations(
+    this._instance,
+    this._then,
+  );
+
+  final Query$MySentChannelInvitations _instance;
+
+  final TRes Function(Query$MySentChannelInvitations) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? myChannelInvitations = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$MySentChannelInvitations(
+        myChannelInvitations: myChannelInvitations == _undefined ||
+                myChannelInvitations == null
+            ? _instance.myChannelInvitations
+            : (myChannelInvitations
+                as List<Query$MySentChannelInvitations$myChannelInvitations>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  TRes myChannelInvitations(
+          Iterable<Query$MySentChannelInvitations$myChannelInvitations> Function(
+                  Iterable<
+                      CopyWith$Query$MySentChannelInvitations$myChannelInvitations<
+                          Query$MySentChannelInvitations$myChannelInvitations>>)
+              _fn) =>
+      call(
+          myChannelInvitations: _fn(_instance.myChannelInvitations.map((e) =>
+              CopyWith$Query$MySentChannelInvitations$myChannelInvitations(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$MySentChannelInvitations<TRes>
+    implements CopyWith$Query$MySentChannelInvitations<TRes> {
+  _CopyWithStubImpl$Query$MySentChannelInvitations(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$MySentChannelInvitations$myChannelInvitations>?
+        myChannelInvitations,
+    String? $__typename,
+  }) =>
+      _res;
+  myChannelInvitations(_fn) => _res;
+}
+
+const documentNodeQueryMySentChannelInvitations = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'MySentChannelInvitations'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'direction')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ChannelInvitationDirection'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'onlyPending')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'myChannelInvitations'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'direction'),
+            value: VariableNode(name: NameNode(value: 'direction')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'onlyPending'),
+            value: VariableNode(name: NameNode(value: 'onlyPending')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'channelId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'messageText'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'recipient'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'avatarUrl'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'fullName'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'jobTitle'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$MySentChannelInvitations$myChannelInvitations {
+  Query$MySentChannelInvitations$myChannelInvitations({
+    this.channelId,
+    required this.createdAt,
+    required this.id,
+    this.messageText,
+    required this.status,
+    required this.recipient,
+    this.$__typename = 'ChannelInvitation',
+  });
+
+  factory Query$MySentChannelInvitations$myChannelInvitations.fromJson(
+      Map<String, dynamic> json) {
+    final l$channelId = json['channelId'];
+    final l$createdAt = json['createdAt'];
+    final l$id = json['id'];
+    final l$messageText = json['messageText'];
+    final l$status = json['status'];
+    final l$recipient = json['recipient'];
+    final l$$__typename = json['__typename'];
+    return Query$MySentChannelInvitations$myChannelInvitations(
+      channelId: (l$channelId as String?),
+      createdAt: DateTime.parse((l$createdAt as String)),
+      id: (l$id as String),
+      messageText: (l$messageText as String?),
+      status: fromJson$Enum$ChannelInvitationStatus((l$status as String)),
+      recipient: Query$MySentChannelInvitations$myChannelInvitations$recipient
+          .fromJson((l$recipient as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? channelId;
+
+  final DateTime createdAt;
+
+  final String id;
+
+  final String? messageText;
+
+  final Enum$ChannelInvitationStatus status;
+
+  final Query$MySentChannelInvitations$myChannelInvitations$recipient recipient;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$channelId = channelId;
+    _resultData['channelId'] = l$channelId;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$messageText = messageText;
+    _resultData['messageText'] = l$messageText;
+    final l$status = status;
+    _resultData['status'] = toJson$Enum$ChannelInvitationStatus(l$status);
+    final l$recipient = recipient;
+    _resultData['recipient'] = l$recipient.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelId = channelId;
+    final l$createdAt = createdAt;
+    final l$id = id;
+    final l$messageText = messageText;
+    final l$status = status;
+    final l$recipient = recipient;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$channelId,
+      l$createdAt,
+      l$id,
+      l$messageText,
+      l$status,
+      l$recipient,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$MySentChannelInvitations$myChannelInvitations) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4395,11 +4845,6 @@ class Query$GetInboxInvitations$myInbox$channels$pendingInvitations {
     final l$createdAt = createdAt;
     final lOther$createdAt = other.createdAt;
     if (l$createdAt != lOther$createdAt) {
-      return false;
-    }
-    final l$createdBy = createdBy;
-    final lOther$createdBy = other.createdBy;
-    if (l$createdBy != lOther$createdBy) {
       return false;
     }
     final l$id = id;
@@ -4417,6 +4862,11 @@ class Query$GetInboxInvitations$myInbox$channels$pendingInvitations {
     if (l$status != lOther$status) {
       return false;
     }
+    final l$recipient = recipient;
+    final lOther$recipient = other.recipient;
+    if (l$recipient != lOther$recipient) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -4426,76 +4876,72 @@ class Query$GetInboxInvitations$myInbox$channels$pendingInvitations {
   }
 }
 
-extension UtilityExtension$Query$GetInboxInvitations$myInbox$channels$pendingInvitations
-    on Query$GetInboxInvitations$myInbox$channels$pendingInvitations {
-  CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations<
-          Query$GetInboxInvitations$myInbox$channels$pendingInvitations>
+extension UtilityExtension$Query$MySentChannelInvitations$myChannelInvitations
+    on Query$MySentChannelInvitations$myChannelInvitations {
+  CopyWith$Query$MySentChannelInvitations$myChannelInvitations<
+          Query$MySentChannelInvitations$myChannelInvitations>
       get copyWith =>
-          CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations(
+          CopyWith$Query$MySentChannelInvitations$myChannelInvitations(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations<
+abstract class CopyWith$Query$MySentChannelInvitations$myChannelInvitations<
     TRes> {
-  factory CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations(
-    Query$GetInboxInvitations$myInbox$channels$pendingInvitations instance,
-    TRes Function(Query$GetInboxInvitations$myInbox$channels$pendingInvitations)
-        then,
-  ) = _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$pendingInvitations;
+  factory CopyWith$Query$MySentChannelInvitations$myChannelInvitations(
+    Query$MySentChannelInvitations$myChannelInvitations instance,
+    TRes Function(Query$MySentChannelInvitations$myChannelInvitations) then,
+  ) = _CopyWithImpl$Query$MySentChannelInvitations$myChannelInvitations;
 
-  factory CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations.stub(
+  factory CopyWith$Query$MySentChannelInvitations$myChannelInvitations.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels$pendingInvitations;
+      _CopyWithStubImpl$Query$MySentChannelInvitations$myChannelInvitations;
 
   TRes call({
     String? channelId,
     DateTime? createdAt,
-    String? createdBy,
     String? id,
     String? messageText,
     Enum$ChannelInvitationStatus? status,
+    Query$MySentChannelInvitations$myChannelInvitations$recipient? recipient,
     String? $__typename,
   });
+  CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<TRes>
+      get recipient;
 }
 
-class _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$pendingInvitations<
-        TRes>
+class _CopyWithImpl$Query$MySentChannelInvitations$myChannelInvitations<TRes>
     implements
-        CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations<
-            TRes> {
-  _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$pendingInvitations(
+        CopyWith$Query$MySentChannelInvitations$myChannelInvitations<TRes> {
+  _CopyWithImpl$Query$MySentChannelInvitations$myChannelInvitations(
     this._instance,
     this._then,
   );
 
-  final Query$GetInboxInvitations$myInbox$channels$pendingInvitations _instance;
+  final Query$MySentChannelInvitations$myChannelInvitations _instance;
 
-  final TRes Function(
-      Query$GetInboxInvitations$myInbox$channels$pendingInvitations) _then;
+  final TRes Function(Query$MySentChannelInvitations$myChannelInvitations)
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? channelId = _undefined,
     Object? createdAt = _undefined,
-    Object? createdBy = _undefined,
     Object? id = _undefined,
     Object? messageText = _undefined,
     Object? status = _undefined,
+    Object? recipient = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$GetInboxInvitations$myInbox$channels$pendingInvitations(
+      _then(Query$MySentChannelInvitations$myChannelInvitations(
         channelId: channelId == _undefined
             ? _instance.channelId
             : (channelId as String?),
         createdAt: createdAt == _undefined || createdAt == null
             ? _instance.createdAt
             : (createdAt as DateTime),
-        createdBy: createdBy == _undefined
-            ? _instance.createdBy
-            : (createdBy as String?),
         id: id == _undefined || id == null ? _instance.id : (id as String),
         messageText: messageText == _undefined
             ? _instance.messageText
@@ -4503,18 +4949,27 @@ class _CopyWithImpl$Query$GetInboxInvitations$myInbox$channels$pendingInvitation
         status: status == _undefined || status == null
             ? _instance.status
             : (status as Enum$ChannelInvitationStatus),
+        recipient: recipient == _undefined || recipient == null
+            ? _instance.recipient
+            : (recipient
+                as Query$MySentChannelInvitations$myChannelInvitations$recipient),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
+  CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<TRes>
+      get recipient {
+    final local$recipient = _instance.recipient;
+    return CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient(
+        local$recipient, (e) => call(recipient: e));
+  }
 }
 
-class _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels$pendingInvitations<
+class _CopyWithStubImpl$Query$MySentChannelInvitations$myChannelInvitations<
         TRes>
     implements
-        CopyWith$Query$GetInboxInvitations$myInbox$channels$pendingInvitations<
-            TRes> {
-  _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels$pendingInvitations(
+        CopyWith$Query$MySentChannelInvitations$myChannelInvitations<TRes> {
+  _CopyWithStubImpl$Query$MySentChannelInvitations$myChannelInvitations(
       this._res);
 
   TRes _res;
@@ -4522,10 +4977,210 @@ class _CopyWithStubImpl$Query$GetInboxInvitations$myInbox$channels$pendingInvita
   call({
     String? channelId,
     DateTime? createdAt,
-    String? createdBy,
     String? id,
     String? messageText,
     Enum$ChannelInvitationStatus? status,
+    Query$MySentChannelInvitations$myChannelInvitations$recipient? recipient,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<TRes>
+      get recipient =>
+          CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient
+              .stub(_res);
+}
+
+class Query$MySentChannelInvitations$myChannelInvitations$recipient {
+  Query$MySentChannelInvitations$myChannelInvitations$recipient({
+    this.avatarUrl,
+    this.fullName,
+    this.jobTitle,
+    required this.id,
+    this.$__typename = 'User',
+  });
+
+  factory Query$MySentChannelInvitations$myChannelInvitations$recipient.fromJson(
+      Map<String, dynamic> json) {
+    final l$avatarUrl = json['avatarUrl'];
+    final l$fullName = json['fullName'];
+    final l$jobTitle = json['jobTitle'];
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Query$MySentChannelInvitations$myChannelInvitations$recipient(
+      avatarUrl: (l$avatarUrl as String?),
+      fullName: (l$fullName as String?),
+      jobTitle: (l$jobTitle as String?),
+      id: (l$id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? avatarUrl;
+
+  final String? fullName;
+
+  final String? jobTitle;
+
+  final String id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$avatarUrl = avatarUrl;
+    _resultData['avatarUrl'] = l$avatarUrl;
+    final l$fullName = fullName;
+    _resultData['fullName'] = l$fullName;
+    final l$jobTitle = jobTitle;
+    _resultData['jobTitle'] = l$jobTitle;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$avatarUrl = avatarUrl;
+    final l$fullName = fullName;
+    final l$jobTitle = jobTitle;
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$avatarUrl,
+      l$fullName,
+      l$jobTitle,
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$MySentChannelInvitations$myChannelInvitations$recipient) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$avatarUrl = avatarUrl;
+    final lOther$avatarUrl = other.avatarUrl;
+    if (l$avatarUrl != lOther$avatarUrl) {
+      return false;
+    }
+    final l$fullName = fullName;
+    final lOther$fullName = other.fullName;
+    if (l$fullName != lOther$fullName) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (l$jobTitle != lOther$jobTitle) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$MySentChannelInvitations$myChannelInvitations$recipient
+    on Query$MySentChannelInvitations$myChannelInvitations$recipient {
+  CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<
+          Query$MySentChannelInvitations$myChannelInvitations$recipient>
+      get copyWith =>
+          CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<
+    TRes> {
+  factory CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient(
+    Query$MySentChannelInvitations$myChannelInvitations$recipient instance,
+    TRes Function(Query$MySentChannelInvitations$myChannelInvitations$recipient)
+        then,
+  ) = _CopyWithImpl$Query$MySentChannelInvitations$myChannelInvitations$recipient;
+
+  factory CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$MySentChannelInvitations$myChannelInvitations$recipient;
+
+  TRes call({
+    String? avatarUrl,
+    String? fullName,
+    String? jobTitle,
+    String? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$MySentChannelInvitations$myChannelInvitations$recipient<
+        TRes>
+    implements
+        CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<
+            TRes> {
+  _CopyWithImpl$Query$MySentChannelInvitations$myChannelInvitations$recipient(
+    this._instance,
+    this._then,
+  );
+
+  final Query$MySentChannelInvitations$myChannelInvitations$recipient _instance;
+
+  final TRes Function(
+      Query$MySentChannelInvitations$myChannelInvitations$recipient) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? avatarUrl = _undefined,
+    Object? fullName = _undefined,
+    Object? jobTitle = _undefined,
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$MySentChannelInvitations$myChannelInvitations$recipient(
+        avatarUrl: avatarUrl == _undefined
+            ? _instance.avatarUrl
+            : (avatarUrl as String?),
+        fullName:
+            fullName == _undefined ? _instance.fullName : (fullName as String?),
+        jobTitle:
+            jobTitle == _undefined ? _instance.jobTitle : (jobTitle as String?),
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$MySentChannelInvitations$myChannelInvitations$recipient<
+        TRes>
+    implements
+        CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<
+            TRes> {
+  _CopyWithStubImpl$Query$MySentChannelInvitations$myChannelInvitations$recipient(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? avatarUrl,
+    String? fullName,
+    String? jobTitle,
+    String? id,
     String? $__typename,
   }) =>
       _res;

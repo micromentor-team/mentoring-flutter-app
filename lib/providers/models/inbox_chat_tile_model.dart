@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ class InboxChatTileModel extends ChangeNotifier {
   final String channelName;
   final String? channelAvatarUrl;
   final String authenticatedUserId;
+  final bool isArchivedChannel;
   final MessagesProvider _messagesProvider;
   final ChannelsProvider _channelsProvider;
 
@@ -33,6 +35,7 @@ class InboxChatTileModel extends ChangeNotifier {
     required this.channelName,
     this.channelAvatarUrl,
     required this.authenticatedUserId,
+    required this.isArchivedChannel,
   })  : _messagesProvider = Provider.of<MessagesProvider>(
           context,
           listen: false,
@@ -46,7 +49,12 @@ class InboxChatTileModel extends ChangeNotifier {
     _state = AsyncState.loading;
     final latestMessageResult =
         await _messagesProvider.findChannelLatestMessage(channelId: channelId);
-    final unseenMessagesResult = await _messagesProvider.unseenMessages();
+    final OperationResult<List> unseenMessagesResult;
+    if (isArchivedChannel) {
+      unseenMessagesResult = await _messagesProvider.unseenArchivedMessages();
+    } else {
+      unseenMessagesResult = await _messagesProvider.unseenUnarchivedMessages();
+    }
     if (latestMessageResult.gqlQueryResult.hasException ||
         unseenMessagesResult.gqlQueryResult.hasException) {
       _state = AsyncState.error;
