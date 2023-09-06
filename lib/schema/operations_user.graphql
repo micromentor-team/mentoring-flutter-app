@@ -21,6 +21,10 @@ mutation CreateUserSearch($input: UserSearchInput!) {
         expiresAt
         userId
         updatedAt
+        runInfos {
+            finishedAt
+            matchCount
+        }
     }
 }
 
@@ -34,6 +38,9 @@ query MyUserSearches {
         fullName
         avatarUrl
         userHandle
+        offersHelp
+        seeksHelp
+        jobTitle
         countryOfResidence {
             translatedValue
             textId
@@ -75,6 +82,7 @@ query MyUserSearches {
         }
     }
     runInfos {
+      finishedAt
       matchCount
       topUserIds
     }
@@ -92,6 +100,9 @@ query FindUserSearch($userSearchId: String!) {
         fullName
         avatarUrl
         userHandle
+        offersHelp
+        seeksHelp
+        jobTitle
         countryOfResidence {
             translatedValue
             textId
@@ -133,6 +144,7 @@ query FindUserSearch($userSearchId: String!) {
         }
     }
     runInfos {
+      finishedAt
       matchCount
       topUserIds
     }

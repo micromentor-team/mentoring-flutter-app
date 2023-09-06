@@ -20,6 +20,7 @@ typedef MentorUser = Query$FindMentorUsers$findUsers;
 // UserSearch queries and mutation
 typedef CreateUserSearchResponse = Mutation$CreateUserSearch$createUserSearch;
 typedef UserSearch = Query$FindUserSearch$findUserSearchById;
+typedef TopFoundUser = Query$FindUserSearch$findUserSearchById$topFoundUsers;
 
 class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? _user;

@@ -824,6 +824,35 @@ const documentNodeMutationCreateUserSearch = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'runInfos'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'finishedAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'matchCount'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -853,6 +882,7 @@ class Mutation$CreateUserSearch$createUserSearch {
     this.expiresAt,
     required this.userId,
     this.updatedAt,
+    this.runInfos,
     this.$__typename = 'UserSearch',
   });
 
@@ -866,6 +896,7 @@ class Mutation$CreateUserSearch$createUserSearch {
     final l$expiresAt = json['expiresAt'];
     final l$userId = json['userId'];
     final l$updatedAt = json['updatedAt'];
+    final l$runInfos = json['runInfos'];
     final l$$__typename = json['__typename'];
     return Mutation$CreateUserSearch$createUserSearch(
       name: (l$name as String?),
@@ -882,6 +913,11 @@ class Mutation$CreateUserSearch$createUserSearch {
       userId: (l$userId as String),
       updatedAt:
           l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
+      runInfos: (l$runInfos as List<dynamic>?)
+          ?.map((e) =>
+              Mutation$CreateUserSearch$createUserSearch$runInfos.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
@@ -901,6 +937,8 @@ class Mutation$CreateUserSearch$createUserSearch {
   final String userId;
 
   final DateTime? updatedAt;
+
+  final List<Mutation$CreateUserSearch$createUserSearch$runInfos>? runInfos;
 
   final String $__typename;
 
@@ -926,6 +964,8 @@ class Mutation$CreateUserSearch$createUserSearch {
     _resultData['userId'] = l$userId;
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = l$updatedAt?.toIso8601String();
+    final l$runInfos = runInfos;
+    _resultData['runInfos'] = l$runInfos?.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -941,6 +981,7 @@ class Mutation$CreateUserSearch$createUserSearch {
     final l$expiresAt = expiresAt;
     final l$userId = userId;
     final l$updatedAt = updatedAt;
+    final l$runInfos = runInfos;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$name,
@@ -951,6 +992,7 @@ class Mutation$CreateUserSearch$createUserSearch {
       l$expiresAt,
       l$userId,
       l$updatedAt,
+      l$runInfos == null ? null : Object.hashAll(l$runInfos.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -1004,6 +1046,22 @@ class Mutation$CreateUserSearch$createUserSearch {
     if (l$updatedAt != lOther$updatedAt) {
       return false;
     }
+    final l$runInfos = runInfos;
+    final lOther$runInfos = other.runInfos;
+    if (l$runInfos != null && lOther$runInfos != null) {
+      if (l$runInfos.length != lOther$runInfos.length) {
+        return false;
+      }
+      for (int i = 0; i < l$runInfos.length; i++) {
+        final l$runInfos$entry = l$runInfos[i];
+        final lOther$runInfos$entry = lOther$runInfos[i];
+        if (l$runInfos$entry != lOther$runInfos$entry) {
+          return false;
+        }
+      }
+    } else if (l$runInfos != lOther$runInfos) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1041,8 +1099,15 @@ abstract class CopyWith$Mutation$CreateUserSearch$createUserSearch<TRes> {
     DateTime? expiresAt,
     String? userId,
     DateTime? updatedAt,
+    List<Mutation$CreateUserSearch$createUserSearch$runInfos>? runInfos,
     String? $__typename,
   });
+  TRes runInfos(
+      Iterable<Mutation$CreateUserSearch$createUserSearch$runInfos>? Function(
+              Iterable<
+                  CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos<
+                      Mutation$CreateUserSearch$createUserSearch$runInfos>>?)
+          _fn);
 }
 
 class _CopyWithImpl$Mutation$CreateUserSearch$createUserSearch<TRes>
@@ -1067,6 +1132,7 @@ class _CopyWithImpl$Mutation$CreateUserSearch$createUserSearch<TRes>
     Object? expiresAt = _undefined,
     Object? userId = _undefined,
     Object? updatedAt = _undefined,
+    Object? runInfos = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$CreateUserSearch$createUserSearch(
@@ -1090,10 +1156,26 @@ class _CopyWithImpl$Mutation$CreateUserSearch$createUserSearch<TRes>
         updatedAt: updatedAt == _undefined
             ? _instance.updatedAt
             : (updatedAt as DateTime?),
+        runInfos: runInfos == _undefined
+            ? _instance.runInfos
+            : (runInfos
+                as List<Mutation$CreateUserSearch$createUserSearch$runInfos>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
+  TRes runInfos(
+          Iterable<Mutation$CreateUserSearch$createUserSearch$runInfos>? Function(
+                  Iterable<
+                      CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos<
+                          Mutation$CreateUserSearch$createUserSearch$runInfos>>?)
+              _fn) =>
+      call(
+          runInfos: _fn(_instance.runInfos?.map((e) =>
+              CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos(
+                e,
+                (i) => i,
+              )))?.toList());
 }
 
 class _CopyWithStubImpl$Mutation$CreateUserSearch$createUserSearch<TRes>
@@ -1111,6 +1193,165 @@ class _CopyWithStubImpl$Mutation$CreateUserSearch$createUserSearch<TRes>
     DateTime? expiresAt,
     String? userId,
     DateTime? updatedAt,
+    List<Mutation$CreateUserSearch$createUserSearch$runInfos>? runInfos,
+    String? $__typename,
+  }) =>
+      _res;
+  runInfos(_fn) => _res;
+}
+
+class Mutation$CreateUserSearch$createUserSearch$runInfos {
+  Mutation$CreateUserSearch$createUserSearch$runInfos({
+    this.finishedAt,
+    required this.matchCount,
+    this.$__typename = 'UserSearchRunInfo',
+  });
+
+  factory Mutation$CreateUserSearch$createUserSearch$runInfos.fromJson(
+      Map<String, dynamic> json) {
+    final l$finishedAt = json['finishedAt'];
+    final l$matchCount = json['matchCount'];
+    final l$$__typename = json['__typename'];
+    return Mutation$CreateUserSearch$createUserSearch$runInfos(
+      finishedAt: l$finishedAt == null
+          ? null
+          : DateTime.parse((l$finishedAt as String)),
+      matchCount: (l$matchCount as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime? finishedAt;
+
+  final int matchCount;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$finishedAt = finishedAt;
+    _resultData['finishedAt'] = l$finishedAt?.toIso8601String();
+    final l$matchCount = matchCount;
+    _resultData['matchCount'] = l$matchCount;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$finishedAt = finishedAt;
+    final l$matchCount = matchCount;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$finishedAt,
+      l$matchCount,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$CreateUserSearch$createUserSearch$runInfos) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$finishedAt = finishedAt;
+    final lOther$finishedAt = other.finishedAt;
+    if (l$finishedAt != lOther$finishedAt) {
+      return false;
+    }
+    final l$matchCount = matchCount;
+    final lOther$matchCount = other.matchCount;
+    if (l$matchCount != lOther$matchCount) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$CreateUserSearch$createUserSearch$runInfos
+    on Mutation$CreateUserSearch$createUserSearch$runInfos {
+  CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos<
+          Mutation$CreateUserSearch$createUserSearch$runInfos>
+      get copyWith =>
+          CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos<
+    TRes> {
+  factory CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos(
+    Mutation$CreateUserSearch$createUserSearch$runInfos instance,
+    TRes Function(Mutation$CreateUserSearch$createUserSearch$runInfos) then,
+  ) = _CopyWithImpl$Mutation$CreateUserSearch$createUserSearch$runInfos;
+
+  factory CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos.stub(
+          TRes res) =
+      _CopyWithStubImpl$Mutation$CreateUserSearch$createUserSearch$runInfos;
+
+  TRes call({
+    DateTime? finishedAt,
+    int? matchCount,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$CreateUserSearch$createUserSearch$runInfos<TRes>
+    implements
+        CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos<TRes> {
+  _CopyWithImpl$Mutation$CreateUserSearch$createUserSearch$runInfos(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$CreateUserSearch$createUserSearch$runInfos _instance;
+
+  final TRes Function(Mutation$CreateUserSearch$createUserSearch$runInfos)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? finishedAt = _undefined,
+    Object? matchCount = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$CreateUserSearch$createUserSearch$runInfos(
+        finishedAt: finishedAt == _undefined
+            ? _instance.finishedAt
+            : (finishedAt as DateTime?),
+        matchCount: matchCount == _undefined || matchCount == null
+            ? _instance.matchCount
+            : (matchCount as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$CreateUserSearch$createUserSearch$runInfos<
+        TRes>
+    implements
+        CopyWith$Mutation$CreateUserSearch$createUserSearch$runInfos<TRes> {
+  _CopyWithStubImpl$Mutation$CreateUserSearch$createUserSearch$runInfos(
+      this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? finishedAt,
+    int? matchCount,
     String? $__typename,
   }) =>
       _res;
@@ -1332,6 +1573,27 @@ const documentNodeQueryMyUserSearches = DocumentNode(definitions: [
               ),
               FieldNode(
                 name: NameNode(value: 'userHandle'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'offersHelp'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'seeksHelp'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'jobTitle'),
                 alias: null,
                 arguments: [],
                 directives: [],
@@ -1641,6 +1903,13 @@ const documentNodeQueryMyUserSearches = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
+                name: NameNode(value: 'finishedAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'matchCount'),
                 alias: null,
                 arguments: [],
@@ -1932,6 +2201,9 @@ class Query$MyUserSearches$myUserSearches$topFoundUsers {
     this.fullName,
     this.avatarUrl,
     this.userHandle,
+    required this.offersHelp,
+    required this.seeksHelp,
+    this.jobTitle,
     this.countryOfResidence,
     required this.groupMemberships,
     required this.companies,
@@ -1947,6 +2219,9 @@ class Query$MyUserSearches$myUserSearches$topFoundUsers {
     final l$fullName = json['fullName'];
     final l$avatarUrl = json['avatarUrl'];
     final l$userHandle = json['userHandle'];
+    final l$offersHelp = json['offersHelp'];
+    final l$seeksHelp = json['seeksHelp'];
+    final l$jobTitle = json['jobTitle'];
     final l$countryOfResidence = json['countryOfResidence'];
     final l$groupMemberships = json['groupMemberships'];
     final l$companies = json['companies'];
@@ -1959,6 +2234,9 @@ class Query$MyUserSearches$myUserSearches$topFoundUsers {
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
       userHandle: (l$userHandle as String?),
+      offersHelp: (l$offersHelp as bool),
+      seeksHelp: (l$seeksHelp as bool),
+      jobTitle: (l$jobTitle as String?),
       countryOfResidence: l$countryOfResidence == null
           ? null
           : Query$MyUserSearches$myUserSearches$topFoundUsers$countryOfResidence
@@ -1991,6 +2269,12 @@ class Query$MyUserSearches$myUserSearches$topFoundUsers {
 
   final String? userHandle;
 
+  final bool offersHelp;
+
+  final bool seeksHelp;
+
+  final String? jobTitle;
+
   final Query$MyUserSearches$myUserSearches$topFoundUsers$countryOfResidence?
       countryOfResidence;
 
@@ -2018,6 +2302,12 @@ class Query$MyUserSearches$myUserSearches$topFoundUsers {
     _resultData['avatarUrl'] = l$avatarUrl;
     final l$userHandle = userHandle;
     _resultData['userHandle'] = l$userHandle;
+    final l$offersHelp = offersHelp;
+    _resultData['offersHelp'] = l$offersHelp;
+    final l$seeksHelp = seeksHelp;
+    _resultData['seeksHelp'] = l$seeksHelp;
+    final l$jobTitle = jobTitle;
+    _resultData['jobTitle'] = l$jobTitle;
     final l$countryOfResidence = countryOfResidence;
     _resultData['countryOfResidence'] = l$countryOfResidence?.toJson();
     final l$groupMemberships = groupMemberships;
@@ -2039,6 +2329,9 @@ class Query$MyUserSearches$myUserSearches$topFoundUsers {
     final l$fullName = fullName;
     final l$avatarUrl = avatarUrl;
     final l$userHandle = userHandle;
+    final l$offersHelp = offersHelp;
+    final l$seeksHelp = seeksHelp;
+    final l$jobTitle = jobTitle;
     final l$countryOfResidence = countryOfResidence;
     final l$groupMemberships = groupMemberships;
     final l$companies = companies;
@@ -2051,6 +2344,9 @@ class Query$MyUserSearches$myUserSearches$topFoundUsers {
       l$fullName,
       l$avatarUrl,
       l$userHandle,
+      l$offersHelp,
+      l$seeksHelp,
+      l$jobTitle,
       l$countryOfResidence,
       Object.hashAll(l$groupMemberships.map((v) => v)),
       Object.hashAll(l$companies.map((v) => v)),
@@ -2100,6 +2396,21 @@ class Query$MyUserSearches$myUserSearches$topFoundUsers {
     final l$userHandle = userHandle;
     final lOther$userHandle = other.userHandle;
     if (l$userHandle != lOther$userHandle) {
+      return false;
+    }
+    final l$offersHelp = offersHelp;
+    final lOther$offersHelp = other.offersHelp;
+    if (l$offersHelp != lOther$offersHelp) {
+      return false;
+    }
+    final l$seeksHelp = seeksHelp;
+    final lOther$seeksHelp = other.seeksHelp;
+    if (l$seeksHelp != lOther$seeksHelp) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (l$jobTitle != lOther$jobTitle) {
       return false;
     }
     final l$countryOfResidence = countryOfResidence;
@@ -2170,6 +2481,9 @@ abstract class CopyWith$Query$MyUserSearches$myUserSearches$topFoundUsers<
     String? fullName,
     String? avatarUrl,
     String? userHandle,
+    bool? offersHelp,
+    bool? seeksHelp,
+    String? jobTitle,
     Query$MyUserSearches$myUserSearches$topFoundUsers$countryOfResidence?
         countryOfResidence,
     List<Query$MyUserSearches$myUserSearches$topFoundUsers$groupMemberships>?
@@ -2216,6 +2530,9 @@ class _CopyWithImpl$Query$MyUserSearches$myUserSearches$topFoundUsers<TRes>
     Object? fullName = _undefined,
     Object? avatarUrl = _undefined,
     Object? userHandle = _undefined,
+    Object? offersHelp = _undefined,
+    Object? seeksHelp = _undefined,
+    Object? jobTitle = _undefined,
     Object? countryOfResidence = _undefined,
     Object? groupMemberships = _undefined,
     Object? companies = _undefined,
@@ -2237,6 +2554,14 @@ class _CopyWithImpl$Query$MyUserSearches$myUserSearches$topFoundUsers<TRes>
         userHandle: userHandle == _undefined
             ? _instance.userHandle
             : (userHandle as String?),
+        offersHelp: offersHelp == _undefined || offersHelp == null
+            ? _instance.offersHelp
+            : (offersHelp as bool),
+        seeksHelp: seeksHelp == _undefined || seeksHelp == null
+            ? _instance.seeksHelp
+            : (seeksHelp as bool),
+        jobTitle:
+            jobTitle == _undefined ? _instance.jobTitle : (jobTitle as String?),
         countryOfResidence: countryOfResidence == _undefined
             ? _instance.countryOfResidence
             : (countryOfResidence
@@ -2306,6 +2631,9 @@ class _CopyWithStubImpl$Query$MyUserSearches$myUserSearches$topFoundUsers<TRes>
     String? fullName,
     String? avatarUrl,
     String? userHandle,
+    bool? offersHelp,
+    bool? seeksHelp,
+    String? jobTitle,
     Query$MyUserSearches$myUserSearches$topFoundUsers$countryOfResidence?
         countryOfResidence,
     List<Query$MyUserSearches$myUserSearches$topFoundUsers$groupMemberships>?
@@ -4659,6 +4987,7 @@ class _CopyWithStubImpl$Query$MyUserSearches$myUserSearches$topFoundUsers$compan
 
 class Query$MyUserSearches$myUserSearches$runInfos {
   Query$MyUserSearches$myUserSearches$runInfos({
+    this.finishedAt,
     required this.matchCount,
     this.topUserIds,
     this.$__typename = 'UserSearchRunInfo',
@@ -4666,16 +4995,22 @@ class Query$MyUserSearches$myUserSearches$runInfos {
 
   factory Query$MyUserSearches$myUserSearches$runInfos.fromJson(
       Map<String, dynamic> json) {
+    final l$finishedAt = json['finishedAt'];
     final l$matchCount = json['matchCount'];
     final l$topUserIds = json['topUserIds'];
     final l$$__typename = json['__typename'];
     return Query$MyUserSearches$myUserSearches$runInfos(
+      finishedAt: l$finishedAt == null
+          ? null
+          : DateTime.parse((l$finishedAt as String)),
       matchCount: (l$matchCount as int),
       topUserIds:
           (l$topUserIds as List<dynamic>?)?.map((e) => (e as String)).toList(),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final DateTime? finishedAt;
 
   final int matchCount;
 
@@ -4685,6 +5020,8 @@ class Query$MyUserSearches$myUserSearches$runInfos {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$finishedAt = finishedAt;
+    _resultData['finishedAt'] = l$finishedAt?.toIso8601String();
     final l$matchCount = matchCount;
     _resultData['matchCount'] = l$matchCount;
     final l$topUserIds = topUserIds;
@@ -4696,10 +5033,12 @@ class Query$MyUserSearches$myUserSearches$runInfos {
 
   @override
   int get hashCode {
+    final l$finishedAt = finishedAt;
     final l$matchCount = matchCount;
     final l$topUserIds = topUserIds;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$finishedAt,
       l$matchCount,
       l$topUserIds == null ? null : Object.hashAll(l$topUserIds.map((v) => v)),
       l$$__typename,
@@ -4713,6 +5052,11 @@ class Query$MyUserSearches$myUserSearches$runInfos {
     }
     if (!(other is Query$MyUserSearches$myUserSearches$runInfos) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$finishedAt = finishedAt;
+    final lOther$finishedAt = other.finishedAt;
+    if (l$finishedAt != lOther$finishedAt) {
       return false;
     }
     final l$matchCount = matchCount;
@@ -4765,6 +5109,7 @@ abstract class CopyWith$Query$MyUserSearches$myUserSearches$runInfos<TRes> {
       _CopyWithStubImpl$Query$MyUserSearches$myUserSearches$runInfos;
 
   TRes call({
+    DateTime? finishedAt,
     int? matchCount,
     List<String>? topUserIds,
     String? $__typename,
@@ -4785,11 +5130,15 @@ class _CopyWithImpl$Query$MyUserSearches$myUserSearches$runInfos<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? finishedAt = _undefined,
     Object? matchCount = _undefined,
     Object? topUserIds = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$MyUserSearches$myUserSearches$runInfos(
+        finishedAt: finishedAt == _undefined
+            ? _instance.finishedAt
+            : (finishedAt as DateTime?),
         matchCount: matchCount == _undefined || matchCount == null
             ? _instance.matchCount
             : (matchCount as int),
@@ -4809,6 +5158,7 @@ class _CopyWithStubImpl$Query$MyUserSearches$myUserSearches$runInfos<TRes>
   TRes _res;
 
   call({
+    DateTime? finishedAt,
     int? matchCount,
     List<String>? topUserIds,
     String? $__typename,
@@ -5131,6 +5481,27 @@ const documentNodeQueryFindUserSearch = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'offersHelp'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'seeksHelp'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'jobTitle'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'countryOfResidence'),
                 alias: null,
                 arguments: [],
@@ -5434,6 +5805,13 @@ const documentNodeQueryFindUserSearch = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
+                name: NameNode(value: 'finishedAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'matchCount'),
                 alias: null,
                 arguments: [],
@@ -5728,6 +6106,9 @@ class Query$FindUserSearch$findUserSearchById$topFoundUsers {
     this.fullName,
     this.avatarUrl,
     this.userHandle,
+    required this.offersHelp,
+    required this.seeksHelp,
+    this.jobTitle,
     this.countryOfResidence,
     required this.groupMemberships,
     required this.companies,
@@ -5743,6 +6124,9 @@ class Query$FindUserSearch$findUserSearchById$topFoundUsers {
     final l$fullName = json['fullName'];
     final l$avatarUrl = json['avatarUrl'];
     final l$userHandle = json['userHandle'];
+    final l$offersHelp = json['offersHelp'];
+    final l$seeksHelp = json['seeksHelp'];
+    final l$jobTitle = json['jobTitle'];
     final l$countryOfResidence = json['countryOfResidence'];
     final l$groupMemberships = json['groupMemberships'];
     final l$companies = json['companies'];
@@ -5755,6 +6139,9 @@ class Query$FindUserSearch$findUserSearchById$topFoundUsers {
       fullName: (l$fullName as String?),
       avatarUrl: (l$avatarUrl as String?),
       userHandle: (l$userHandle as String?),
+      offersHelp: (l$offersHelp as bool),
+      seeksHelp: (l$seeksHelp as bool),
+      jobTitle: (l$jobTitle as String?),
       countryOfResidence: l$countryOfResidence == null
           ? null
           : Query$FindUserSearch$findUserSearchById$topFoundUsers$countryOfResidence
@@ -5787,6 +6174,12 @@ class Query$FindUserSearch$findUserSearchById$topFoundUsers {
 
   final String? userHandle;
 
+  final bool offersHelp;
+
+  final bool seeksHelp;
+
+  final String? jobTitle;
+
   final Query$FindUserSearch$findUserSearchById$topFoundUsers$countryOfResidence?
       countryOfResidence;
 
@@ -5815,6 +6208,12 @@ class Query$FindUserSearch$findUserSearchById$topFoundUsers {
     _resultData['avatarUrl'] = l$avatarUrl;
     final l$userHandle = userHandle;
     _resultData['userHandle'] = l$userHandle;
+    final l$offersHelp = offersHelp;
+    _resultData['offersHelp'] = l$offersHelp;
+    final l$seeksHelp = seeksHelp;
+    _resultData['seeksHelp'] = l$seeksHelp;
+    final l$jobTitle = jobTitle;
+    _resultData['jobTitle'] = l$jobTitle;
     final l$countryOfResidence = countryOfResidence;
     _resultData['countryOfResidence'] = l$countryOfResidence?.toJson();
     final l$groupMemberships = groupMemberships;
@@ -5836,6 +6235,9 @@ class Query$FindUserSearch$findUserSearchById$topFoundUsers {
     final l$fullName = fullName;
     final l$avatarUrl = avatarUrl;
     final l$userHandle = userHandle;
+    final l$offersHelp = offersHelp;
+    final l$seeksHelp = seeksHelp;
+    final l$jobTitle = jobTitle;
     final l$countryOfResidence = countryOfResidence;
     final l$groupMemberships = groupMemberships;
     final l$companies = companies;
@@ -5848,6 +6250,9 @@ class Query$FindUserSearch$findUserSearchById$topFoundUsers {
       l$fullName,
       l$avatarUrl,
       l$userHandle,
+      l$offersHelp,
+      l$seeksHelp,
+      l$jobTitle,
       l$countryOfResidence,
       Object.hashAll(l$groupMemberships.map((v) => v)),
       Object.hashAll(l$companies.map((v) => v)),
@@ -5897,6 +6302,21 @@ class Query$FindUserSearch$findUserSearchById$topFoundUsers {
     final l$userHandle = userHandle;
     final lOther$userHandle = other.userHandle;
     if (l$userHandle != lOther$userHandle) {
+      return false;
+    }
+    final l$offersHelp = offersHelp;
+    final lOther$offersHelp = other.offersHelp;
+    if (l$offersHelp != lOther$offersHelp) {
+      return false;
+    }
+    final l$seeksHelp = seeksHelp;
+    final lOther$seeksHelp = other.seeksHelp;
+    if (l$seeksHelp != lOther$seeksHelp) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (l$jobTitle != lOther$jobTitle) {
       return false;
     }
     final l$countryOfResidence = countryOfResidence;
@@ -5967,6 +6387,9 @@ abstract class CopyWith$Query$FindUserSearch$findUserSearchById$topFoundUsers<
     String? fullName,
     String? avatarUrl,
     String? userHandle,
+    bool? offersHelp,
+    bool? seeksHelp,
+    String? jobTitle,
     Query$FindUserSearch$findUserSearchById$topFoundUsers$countryOfResidence?
         countryOfResidence,
     List<Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships>?
@@ -6014,6 +6437,9 @@ class _CopyWithImpl$Query$FindUserSearch$findUserSearchById$topFoundUsers<TRes>
     Object? fullName = _undefined,
     Object? avatarUrl = _undefined,
     Object? userHandle = _undefined,
+    Object? offersHelp = _undefined,
+    Object? seeksHelp = _undefined,
+    Object? jobTitle = _undefined,
     Object? countryOfResidence = _undefined,
     Object? groupMemberships = _undefined,
     Object? companies = _undefined,
@@ -6035,6 +6461,14 @@ class _CopyWithImpl$Query$FindUserSearch$findUserSearchById$topFoundUsers<TRes>
         userHandle: userHandle == _undefined
             ? _instance.userHandle
             : (userHandle as String?),
+        offersHelp: offersHelp == _undefined || offersHelp == null
+            ? _instance.offersHelp
+            : (offersHelp as bool),
+        seeksHelp: seeksHelp == _undefined || seeksHelp == null
+            ? _instance.seeksHelp
+            : (seeksHelp as bool),
+        jobTitle:
+            jobTitle == _undefined ? _instance.jobTitle : (jobTitle as String?),
         countryOfResidence: countryOfResidence == _undefined
             ? _instance.countryOfResidence
             : (countryOfResidence
@@ -6105,6 +6539,9 @@ class _CopyWithStubImpl$Query$FindUserSearch$findUserSearchById$topFoundUsers<
     String? fullName,
     String? avatarUrl,
     String? userHandle,
+    bool? offersHelp,
+    bool? seeksHelp,
+    String? jobTitle,
     Query$FindUserSearch$findUserSearchById$topFoundUsers$countryOfResidence?
         countryOfResidence,
     List<Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships>?
@@ -8463,6 +8900,7 @@ class _CopyWithStubImpl$Query$FindUserSearch$findUserSearchById$topFoundUsers$co
 
 class Query$FindUserSearch$findUserSearchById$runInfos {
   Query$FindUserSearch$findUserSearchById$runInfos({
+    this.finishedAt,
     required this.matchCount,
     this.topUserIds,
     this.$__typename = 'UserSearchRunInfo',
@@ -8470,16 +8908,22 @@ class Query$FindUserSearch$findUserSearchById$runInfos {
 
   factory Query$FindUserSearch$findUserSearchById$runInfos.fromJson(
       Map<String, dynamic> json) {
+    final l$finishedAt = json['finishedAt'];
     final l$matchCount = json['matchCount'];
     final l$topUserIds = json['topUserIds'];
     final l$$__typename = json['__typename'];
     return Query$FindUserSearch$findUserSearchById$runInfos(
+      finishedAt: l$finishedAt == null
+          ? null
+          : DateTime.parse((l$finishedAt as String)),
       matchCount: (l$matchCount as int),
       topUserIds:
           (l$topUserIds as List<dynamic>?)?.map((e) => (e as String)).toList(),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final DateTime? finishedAt;
 
   final int matchCount;
 
@@ -8489,6 +8933,8 @@ class Query$FindUserSearch$findUserSearchById$runInfos {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$finishedAt = finishedAt;
+    _resultData['finishedAt'] = l$finishedAt?.toIso8601String();
     final l$matchCount = matchCount;
     _resultData['matchCount'] = l$matchCount;
     final l$topUserIds = topUserIds;
@@ -8500,10 +8946,12 @@ class Query$FindUserSearch$findUserSearchById$runInfos {
 
   @override
   int get hashCode {
+    final l$finishedAt = finishedAt;
     final l$matchCount = matchCount;
     final l$topUserIds = topUserIds;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$finishedAt,
       l$matchCount,
       l$topUserIds == null ? null : Object.hashAll(l$topUserIds.map((v) => v)),
       l$$__typename,
@@ -8517,6 +8965,11 @@ class Query$FindUserSearch$findUserSearchById$runInfos {
     }
     if (!(other is Query$FindUserSearch$findUserSearchById$runInfos) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$finishedAt = finishedAt;
+    final lOther$finishedAt = other.finishedAt;
+    if (l$finishedAt != lOther$finishedAt) {
       return false;
     }
     final l$matchCount = matchCount;
@@ -8570,6 +9023,7 @@ abstract class CopyWith$Query$FindUserSearch$findUserSearchById$runInfos<TRes> {
       _CopyWithStubImpl$Query$FindUserSearch$findUserSearchById$runInfos;
 
   TRes call({
+    DateTime? finishedAt,
     int? matchCount,
     List<String>? topUserIds,
     String? $__typename,
@@ -8590,11 +9044,15 @@ class _CopyWithImpl$Query$FindUserSearch$findUserSearchById$runInfos<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? finishedAt = _undefined,
     Object? matchCount = _undefined,
     Object? topUserIds = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindUserSearch$findUserSearchById$runInfos(
+        finishedAt: finishedAt == _undefined
+            ? _instance.finishedAt
+            : (finishedAt as DateTime?),
         matchCount: matchCount == _undefined || matchCount == null
             ? _instance.matchCount
             : (matchCount as int),
@@ -8614,6 +9072,7 @@ class _CopyWithStubImpl$Query$FindUserSearch$findUserSearchById$runInfos<TRes>
   TRes _res;
 
   call({
+    DateTime? finishedAt,
     int? matchCount,
     List<String>? topUserIds,
     String? $__typename,
