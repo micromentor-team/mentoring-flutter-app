@@ -188,5 +188,26 @@ export function mockMutations(serverState: MockServerState) {
             });
             return channelMessage.id;
         },
+        createUserSearch: (_: any, args: {
+            seeksHelp: string | null,
+            offersHelp: string | null,
+            expertisesTextIds: string[] | null,
+            businessDevelopment: string[] | null,
+            industriesTextIds: string[] | null,
+            countryTextIds: string[] | null,
+            companyStagesTextIds: string[] | null,
+            languagesTextIds: string[] | null,
+        }) => {
+            const search = generators.generateUserSearch(args, serverState.otherUsers);
+            serverState.userSearches.push(search);
+            // clone search
+            const response = JSON.parse(JSON.stringify(search));
+            response.runInfos = null;
+            response.updatedAt = null;
+            return response;
+        },
+        findUserSearchById: (_: any, userSearchId: string) => {
+            return serverState.userSearches.find((element) => element.id == userSearchId);
+        }
     }
 }

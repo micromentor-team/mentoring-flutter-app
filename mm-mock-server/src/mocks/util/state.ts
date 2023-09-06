@@ -12,6 +12,7 @@ export class MockServerState {
     channelInvitations: any[];
     channelMessages: any[];
     groups: any[];
+    userSearches: any[];
 
     constructor() {
         this.pubsub = new PubSub();
@@ -52,6 +53,7 @@ export class MockServerState {
             // declined invitation
             generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[7], undefined, true),
         ];
+        this.userSearches = [];
         // Messages for first channel
         const message0 = generators.generateChannelMessage('Hello!', this.channels[0], this.otherUsers[0], new Date('2023-07-26T12:34:01-00:00'), true);
         const message1 = generators.generateChannelMessage('👋', this.channels[0], this.loggedInUser, new Date('2023-07-26T12:34:01-00:00'), true, false, false);

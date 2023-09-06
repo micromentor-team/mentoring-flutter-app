@@ -87,6 +87,26 @@ export function generateWebsite() {
     }
 }
 
+export function generateUserSearch(args, users) {
+    return {
+        __typename: "UserSearch",
+        id: faker.string.alphanumeric({ length: 24 }),
+        "name": null,
+        "seeksHelp": args.seeksHelp,
+        "offersHelp": args.offersHelp,
+        "searchText": args.searchText,
+        "expiresAt": null,
+        "userId": faker.string.alphanumeric({length: 24}),
+        "updatedAt": faker.date.recent(),
+        "runInfos": {
+            "resultsCount": faker.number.int(20),
+            "runAt": faker.date.recent(),
+            "topFoundUsers": users,
+            // TODO verify that this mirrors final backend implementation
+        }
+    }
+}
+
 // groups and group memberships
 
 export function generateGroup(mentorGroup?: boolean, menteeGroup?: boolean) {
