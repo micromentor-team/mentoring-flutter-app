@@ -121,12 +121,10 @@ ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
       ]);
 }
 
-ProfileQuickViewCard createProfilCardFromInfoAndCheckbox({
+ProfileQuickViewCard createProfilCardFromInfo({
   required ProfileQuickViewInfo info,
-  Checkbox? checkbox,
 }) {
   return ProfileQuickViewCard(
-    checkbox: checkbox,
     isRecommended: info.isRecommended,
     userType: info.userType,
     avatarUrl: info.avatarUrl,
@@ -155,7 +153,6 @@ class ProfileQuickViewCard extends StatelessWidget {
   final ProfileChip? ventureIndustry;
   final int? endorsements;
   final List<SkillChip> skills;
-  final Checkbox? checkbox;
 
   const ProfileQuickViewCard({
     Key? key,
@@ -170,7 +167,6 @@ class ProfileQuickViewCard extends StatelessWidget {
     this.ventureIndustry,
     this.endorsements,
     this.skills = const [],
-    this.checkbox,
   }) : super(key: key);
 
   @override
@@ -202,12 +198,18 @@ class ProfileQuickViewCard extends StatelessWidget {
                 ),
           child: Stack(
             children: [
-              Align(
+              const Align(
                 alignment: Alignment.topRight,
-                child: checkbox,
+                child: Padding(
+                  padding: EdgeInsets.all(Insets.paddingMedium),
+                  child: TextButton(
+                    onPressed: null,
+                    child: Icon(Icons.arrow_forward),
+                  ),
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.all(Insets.paddingMedium),
+                padding: const EdgeInsets.all(Insets.paddingLarge),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
