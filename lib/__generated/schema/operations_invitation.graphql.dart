@@ -8623,3 +8623,310 @@ const documentNodeMutationDeclineChannelInvitation = DocumentNode(definitions: [
     ]),
   ),
 ]);
+
+class Variables$Mutation$DeleteChannelInvitation {
+  factory Variables$Mutation$DeleteChannelInvitation({
+    required bool deletePhysically,
+    required String channelInvitationId,
+  }) =>
+      Variables$Mutation$DeleteChannelInvitation._({
+        r'deletePhysically': deletePhysically,
+        r'channelInvitationId': channelInvitationId,
+      });
+
+  Variables$Mutation$DeleteChannelInvitation._(this._$data);
+
+  factory Variables$Mutation$DeleteChannelInvitation.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$deletePhysically = data['deletePhysically'];
+    result$data['deletePhysically'] = (l$deletePhysically as bool);
+    final l$channelInvitationId = data['channelInvitationId'];
+    result$data['channelInvitationId'] = (l$channelInvitationId as String);
+    return Variables$Mutation$DeleteChannelInvitation._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool get deletePhysically => (_$data['deletePhysically'] as bool);
+  String get channelInvitationId => (_$data['channelInvitationId'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$deletePhysically = deletePhysically;
+    result$data['deletePhysically'] = l$deletePhysically;
+    final l$channelInvitationId = channelInvitationId;
+    result$data['channelInvitationId'] = l$channelInvitationId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$DeleteChannelInvitation<
+          Variables$Mutation$DeleteChannelInvitation>
+      get copyWith => CopyWith$Variables$Mutation$DeleteChannelInvitation(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$DeleteChannelInvitation) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$deletePhysically = deletePhysically;
+    final lOther$deletePhysically = other.deletePhysically;
+    if (l$deletePhysically != lOther$deletePhysically) {
+      return false;
+    }
+    final l$channelInvitationId = channelInvitationId;
+    final lOther$channelInvitationId = other.channelInvitationId;
+    if (l$channelInvitationId != lOther$channelInvitationId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$deletePhysically = deletePhysically;
+    final l$channelInvitationId = channelInvitationId;
+    return Object.hashAll([
+      l$deletePhysically,
+      l$channelInvitationId,
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$DeleteChannelInvitation<TRes> {
+  factory CopyWith$Variables$Mutation$DeleteChannelInvitation(
+    Variables$Mutation$DeleteChannelInvitation instance,
+    TRes Function(Variables$Mutation$DeleteChannelInvitation) then,
+  ) = _CopyWithImpl$Variables$Mutation$DeleteChannelInvitation;
+
+  factory CopyWith$Variables$Mutation$DeleteChannelInvitation.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$DeleteChannelInvitation;
+
+  TRes call({
+    bool? deletePhysically,
+    String? channelInvitationId,
+  });
+}
+
+class _CopyWithImpl$Variables$Mutation$DeleteChannelInvitation<TRes>
+    implements CopyWith$Variables$Mutation$DeleteChannelInvitation<TRes> {
+  _CopyWithImpl$Variables$Mutation$DeleteChannelInvitation(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$DeleteChannelInvitation _instance;
+
+  final TRes Function(Variables$Mutation$DeleteChannelInvitation) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? deletePhysically = _undefined,
+    Object? channelInvitationId = _undefined,
+  }) =>
+      _then(Variables$Mutation$DeleteChannelInvitation._({
+        ..._instance._$data,
+        if (deletePhysically != _undefined && deletePhysically != null)
+          'deletePhysically': (deletePhysically as bool),
+        if (channelInvitationId != _undefined && channelInvitationId != null)
+          'channelInvitationId': (channelInvitationId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$DeleteChannelInvitation<TRes>
+    implements CopyWith$Variables$Mutation$DeleteChannelInvitation<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$DeleteChannelInvitation(this._res);
+
+  TRes _res;
+
+  call({
+    bool? deletePhysically,
+    String? channelInvitationId,
+  }) =>
+      _res;
+}
+
+class Mutation$DeleteChannelInvitation {
+  Mutation$DeleteChannelInvitation({
+    required this.deleteChannelInvitation,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$DeleteChannelInvitation.fromJson(Map<String, dynamic> json) {
+    final l$deleteChannelInvitation = json['deleteChannelInvitation'];
+    final l$$__typename = json['__typename'];
+    return Mutation$DeleteChannelInvitation(
+      deleteChannelInvitation: (l$deleteChannelInvitation as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String deleteChannelInvitation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$deleteChannelInvitation = deleteChannelInvitation;
+    _resultData['deleteChannelInvitation'] = l$deleteChannelInvitation;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$deleteChannelInvitation = deleteChannelInvitation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$deleteChannelInvitation,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$DeleteChannelInvitation) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$deleteChannelInvitation = deleteChannelInvitation;
+    final lOther$deleteChannelInvitation = other.deleteChannelInvitation;
+    if (l$deleteChannelInvitation != lOther$deleteChannelInvitation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$DeleteChannelInvitation
+    on Mutation$DeleteChannelInvitation {
+  CopyWith$Mutation$DeleteChannelInvitation<Mutation$DeleteChannelInvitation>
+      get copyWith => CopyWith$Mutation$DeleteChannelInvitation(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$DeleteChannelInvitation<TRes> {
+  factory CopyWith$Mutation$DeleteChannelInvitation(
+    Mutation$DeleteChannelInvitation instance,
+    TRes Function(Mutation$DeleteChannelInvitation) then,
+  ) = _CopyWithImpl$Mutation$DeleteChannelInvitation;
+
+  factory CopyWith$Mutation$DeleteChannelInvitation.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$DeleteChannelInvitation;
+
+  TRes call({
+    String? deleteChannelInvitation,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$DeleteChannelInvitation<TRes>
+    implements CopyWith$Mutation$DeleteChannelInvitation<TRes> {
+  _CopyWithImpl$Mutation$DeleteChannelInvitation(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$DeleteChannelInvitation _instance;
+
+  final TRes Function(Mutation$DeleteChannelInvitation) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? deleteChannelInvitation = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$DeleteChannelInvitation(
+        deleteChannelInvitation: deleteChannelInvitation == _undefined ||
+                deleteChannelInvitation == null
+            ? _instance.deleteChannelInvitation
+            : (deleteChannelInvitation as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$DeleteChannelInvitation<TRes>
+    implements CopyWith$Mutation$DeleteChannelInvitation<TRes> {
+  _CopyWithStubImpl$Mutation$DeleteChannelInvitation(this._res);
+
+  TRes _res;
+
+  call({
+    String? deleteChannelInvitation,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationDeleteChannelInvitation = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'DeleteChannelInvitation'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'deletePhysically')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelInvitationId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'deleteChannelInvitation'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'deletePhysically'),
+            value: VariableNode(name: NameNode(value: 'deletePhysically')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'channelInvitationId'),
+            value: VariableNode(name: NameNode(value: 'channelInvitationId')),
+          ),
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);

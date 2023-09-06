@@ -327,6 +327,40 @@ class _InvitationDetailState extends State<InvitationDetail>
     );
   }
 
+  Widget _createWithdrawButton(
+    ThemeData theme,
+  ) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          _l10n.inboxInvitesSentFooter,
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: theme.colorScheme.secondary,
+          ),
+        ),
+        const SizedBox(height: Insets.paddingMedium),
+        OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            minimumSize: Dimensions.bigButtonSize,
+          ),
+          onPressed: () async {
+            await _invitationsProvider.withdrawChannelInvitation(
+              channelInvitationId: widget.channelInvitationId,
+            );
+            router.push(Routes.inboxInvitesSent.path);
+          },
+          child: Text(
+            _l10n.inboxInvitesActionWithdraw,
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
   void _refreshScaffold() {
     final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
       context,
@@ -405,10 +439,14 @@ class _InvitationDetailState extends State<InvitationDetail>
                             .format(invitationResult.createdAt.toLocal())
                             .toLowerCase(),
                       ),
-                      _createDeclineAcceptButtons(
-                        theme,
-                        invitationResult.sender.id,
-                      ), //TODO DO NOT SUBMIT - Swap with Withdraw
+                      widget.invitationDirection == MessageDirection.received
+                          ? _createDeclineAcceptButtons(
+                              theme,
+                              invitationResult.sender.id,
+                            )
+                          : widget.invitationDirection == MessageDirection.sent
+                              ? _createWithdrawButton(theme)
+                              : const SizedBox(height: 0, width: 0),
                     ],
                   ),
                 ),
