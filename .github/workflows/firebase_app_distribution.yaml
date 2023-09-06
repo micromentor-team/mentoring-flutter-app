@@ -49,12 +49,11 @@ jobs:
         flutter-version: '3.10.1'
     - run: flutter pub get
     - run: flutter config --enable-web
-    - name: Add assets/.env
+    - name: Add assets/.env (not working)
       run: 'echo "$ENV_FILE" > assets/.env'
       env:
         ENV_FILE: ${{ vars.FLUTTER_APP_ENV_FILE }}
     - run: flutter build web
-    - run: echo ${{ secrets.GOOGLE_SERVICES_JSON_FILE }}
     - uses: FirebaseExtended/action-hosting-deploy@v0
       with: 
         firebaseServiceAccount: ${{ secrets.GOOGLE_SERVICES_JSON_FILE }}
