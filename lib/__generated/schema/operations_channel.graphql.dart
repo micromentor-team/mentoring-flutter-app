@@ -6,9 +6,13 @@ import 'package:gql/ast.dart';
 import 'schema.graphql.dart';
 
 class Variables$Query$FindChannelsForUser {
-  factory Variables$Query$FindChannelsForUser({required String userId}) =>
+  factory Variables$Query$FindChannelsForUser({
+    required String userId,
+    Input$FindObjectsOptions? options,
+  }) =>
       Variables$Query$FindChannelsForUser._({
         r'userId': userId,
+        if (options != null) r'options': options,
       });
 
   Variables$Query$FindChannelsForUser._(this._$data);
@@ -18,16 +22,29 @@ class Variables$Query$FindChannelsForUser {
     final result$data = <String, dynamic>{};
     final l$userId = data['userId'];
     result$data['userId'] = (l$userId as String);
+    if (data.containsKey('options')) {
+      final l$options = data['options'];
+      result$data['options'] = l$options == null
+          ? null
+          : Input$FindObjectsOptions.fromJson(
+              (l$options as Map<String, dynamic>));
+    }
     return Variables$Query$FindChannelsForUser._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   String get userId => (_$data['userId'] as String);
+  Input$FindObjectsOptions? get options =>
+      (_$data['options'] as Input$FindObjectsOptions?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$userId = userId;
     result$data['userId'] = l$userId;
+    if (_$data.containsKey('options')) {
+      final l$options = options;
+      result$data['options'] = l$options?.toJson();
+    }
     return result$data;
   }
 
@@ -51,13 +68,25 @@ class Variables$Query$FindChannelsForUser {
     if (l$userId != lOther$userId) {
       return false;
     }
+    final l$options = options;
+    final lOther$options = other.options;
+    if (_$data.containsKey('options') != other._$data.containsKey('options')) {
+      return false;
+    }
+    if (l$options != lOther$options) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$userId = userId;
-    return Object.hashAll([l$userId]);
+    final l$options = options;
+    return Object.hashAll([
+      l$userId,
+      _$data.containsKey('options') ? l$options : const {},
+    ]);
   }
 }
 
@@ -70,7 +99,10 @@ abstract class CopyWith$Variables$Query$FindChannelsForUser<TRes> {
   factory CopyWith$Variables$Query$FindChannelsForUser.stub(TRes res) =
       _CopyWithStubImpl$Variables$Query$FindChannelsForUser;
 
-  TRes call({String? userId});
+  TRes call({
+    String? userId,
+    Input$FindObjectsOptions? options,
+  });
 }
 
 class _CopyWithImpl$Variables$Query$FindChannelsForUser<TRes>
@@ -86,11 +118,16 @@ class _CopyWithImpl$Variables$Query$FindChannelsForUser<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? userId = _undefined}) =>
+  TRes call({
+    Object? userId = _undefined,
+    Object? options = _undefined,
+  }) =>
       _then(Variables$Query$FindChannelsForUser._({
         ..._instance._$data,
         if (userId != _undefined && userId != null)
           'userId': (userId as String),
+        if (options != _undefined)
+          'options': (options as Input$FindObjectsOptions?),
       }));
 }
 
@@ -100,7 +137,11 @@ class _CopyWithStubImpl$Variables$Query$FindChannelsForUser<TRes>
 
   TRes _res;
 
-  call({String? userId}) => _res;
+  call({
+    String? userId,
+    Input$FindObjectsOptions? options,
+  }) =>
+      _res;
 }
 
 class Query$FindChannelsForUser {
@@ -273,7 +314,16 @@ const documentNodeQueryFindChannelsForUser = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'options')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'FindObjectsOptions'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -284,7 +334,11 @@ const documentNodeQueryFindChannelsForUser = DocumentNode(definitions: [
           ArgumentNode(
             name: NameNode(value: 'userId'),
             value: VariableNode(name: NameNode(value: 'userId')),
-          )
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'options'),
+            value: VariableNode(name: NameNode(value: 'options')),
+          ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
