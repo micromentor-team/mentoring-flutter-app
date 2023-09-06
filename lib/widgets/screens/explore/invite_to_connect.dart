@@ -161,8 +161,9 @@ class _InviteToConnectState extends State<InviteToConnect> {
             horizontal: Insets.paddingMedium,
             vertical: Insets.paddingExtraSmall,
           ),
-          child: createProfilCardFromInfoAndCheckbox(
-              info: selectedProfiles[0], checkbox: null));
+          child: createProfilCardFromInfo(
+            info: selectedProfiles[0],
+          ));
     }
 
     List<Widget> profileTiles = [];
