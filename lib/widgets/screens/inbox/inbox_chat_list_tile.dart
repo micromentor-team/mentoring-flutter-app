@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/providers/models/inbox_chat_tile_model.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
+import 'package:mm_flutter_app/widgets/screens/inbox/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants/app_constants.dart';
+import '../../../constants/app_constants.dart';
 
 class InboxChatListTile extends StatefulWidget {
   final bool isArchivedForUser;
@@ -52,6 +52,7 @@ class _InboxChatListTileState extends State<InboxChatListTile> {
   Widget build(BuildContext context) {
     return Consumer<InboxChatTileModel>(
       builder: (context, inboxChatTileModel, _) {
+        final bool isHighlighted = inboxChatTileModel.unseenMessageCount > 0;
         return AppUtility.widgetForAsyncState(
           state: inboxChatTileModel.state,
           onReady: () => InboxListTile(
@@ -61,7 +62,8 @@ class _InboxChatListTileState extends State<InboxChatListTile> {
                 DateTime.now(),
             message: inboxChatTileModel.lastMessage?.messageText ?? '',
             notifications: inboxChatTileModel.unseenMessageCount,
-            highlightTile: inboxChatTileModel.unseenMessageCount > 0,
+            highlightTileTitle: isHighlighted,
+            highlightTileText: isHighlighted,
             onPressed: () => context.push(_nextRoute),
           ),
         );

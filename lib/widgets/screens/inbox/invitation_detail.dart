@@ -8,6 +8,7 @@ import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
@@ -17,20 +18,22 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/models/scaffold_model.dart';
 
-class NewInviteDetailedProfile extends StatefulWidget {
+class InvitationDetail extends StatefulWidget {
   final String channelInvitationId;
-  const NewInviteDetailedProfile({
+  final MessageDirection invitationDirection;
+
+  const InvitationDetail({
     super.key,
     required this.channelInvitationId,
+    required this.invitationDirection,
   });
 
   @override
-  State<NewInviteDetailedProfile> createState() =>
-      _NewInviteDetailedProfileState();
+  State<InvitationDetail> createState() => _InvitationDetailState();
 }
 
-class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
-    with RouteAwareMixin<NewInviteDetailedProfile> {
+class _InvitationDetailState extends State<InvitationDetail>
+    with RouteAwareMixin<InvitationDetail> {
   late final InvitationsProvider _invitationsProvider;
   late final ChannelsProvider _channelsProvider;
   late final UserProvider _userProvider;
@@ -63,7 +66,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
     );
   }
 
-  Widget _createCard(ChannelInvitationById invitation) {
+  Widget _createSenderCard(ChannelInvitationById invitation) {
     final maybeMentorsGroupMembership = invitation.sender.offersHelp
         ? invitation.sender.groupMemberships
             .where(
@@ -99,7 +102,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                 )
                 .toList() ??
             [];
-    return createProfilCardFromInfo(
+    return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
         isRecommended: false,
         userType: invitation.sender.offersHelp
@@ -127,6 +130,77 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
               )
             : null,
         endorsements: invitation.sender.offersHelp
+            ? maybeMentorsGroupMembership?.endorsements ?? 0
+            : 0,
+        skills: skills,
+      ),
+    );
+  }
+
+  Widget _createRecipientCard(ChannelInvitationById invitation) {
+    final maybeMentorsGroupMembership = invitation.recipient.offersHelp
+        ? invitation.recipient.groupMemberships
+            .where(
+              (element) => element.groupIdent == GroupIdent.mentors,
+            )
+            .firstOrNull
+            ?.maybeWhen(
+              mentorsGroupMembership: (g) => g,
+              orElse: () => null,
+            )
+        : null;
+    final maybeMenteesGroupMembership = invitation.recipient.seeksHelp
+        ? invitation.recipient.groupMemberships
+            .where(
+              (element) => element.groupIdent == GroupIdent.mentees,
+            )
+            .firstOrNull
+            ?.maybeWhen(
+              menteesGroupMembership: (g) => g,
+              orElse: () => null,
+            )
+        : null;
+    final List<SkillChip> skills = invitation.recipient.offersHelp
+        ? maybeMentorsGroupMembership?.expertises
+                .map(
+                  (e) => SkillChip(skill: e.translatedValue!),
+                )
+                .toList() ??
+            []
+        : maybeMenteesGroupMembership?.soughtExpertises
+                .map(
+                  (e) => SkillChip(skill: e.translatedValue!),
+                )
+                .toList() ??
+            [];
+    return createProfileCardFromInfo(
+      info: ProfileQuickViewInfo(
+        isRecommended: false,
+        userType: invitation.recipient.offersHelp
+            ? UserType.mentor
+            : UserType.entrepreneur,
+        avatarUrl: invitation.recipient.avatarUrl,
+        fullName: invitation.recipient.fullName ?? '',
+        location: invitation.recipient.countryOfResidence?.translatedValue ??
+            _l10n.defaultValueLocation,
+        company: invitation.recipient.companies.firstOrNull?.name,
+        companyRole: invitation.recipient.jobTitle,
+        ventureStage: invitation.recipient.seeksHelp &&
+                invitation.recipient.companies.firstOrNull?.companyStage
+                        ?.translatedValue !=
+                    null
+            ? ProfileChip(
+                text: invitation
+                    .sender.companies.first.companyStage!.translatedValue!,
+              )
+            : null,
+        ventureIndustry: invitation.recipient.seeksHelp &&
+                maybeMenteesGroupMembership?.industry?.translatedValue != null
+            ? ProfileChip(
+                text: maybeMenteesGroupMembership!.industry!.translatedValue!,
+              )
+            : null,
+        endorsements: invitation.recipient.offersHelp
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
         skills: skills,
@@ -253,13 +327,57 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
     );
   }
 
+  Widget _createWithdrawButton(
+    ThemeData theme,
+  ) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          _l10n.inboxInvitesSentFooter,
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: theme.colorScheme.secondary,
+          ),
+        ),
+        const SizedBox(height: Insets.paddingMedium),
+        OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            minimumSize: Dimensions.bigButtonSize,
+          ),
+          onPressed: () async {
+            await _invitationsProvider.withdrawChannelInvitation(
+              channelInvitationId: widget.channelInvitationId,
+            );
+            router.push(Routes.inboxInvitesSent.path);
+          },
+          child: Text(
+            _l10n.inboxInvitesActionWithdraw,
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
   void _refreshScaffold() {
     final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
       context,
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setInviteReceivedDetailScaffold(context: context);
+      AppBar? appBar;
+      switch (widget.invitationDirection) {
+        case MessageDirection.received:
+          appBar =
+              AppBarFactory.createInviteReceivedDetailAppBar(context: context);
+          break;
+        case MessageDirection.sent:
+          appBar = AppBarFactory.createInviteSentDetailAppBar(context: context);
+          break;
+      }
+      scaffoldModel.setParams(appBar: appBar);
     });
   }
 
@@ -278,6 +396,15 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    Widget Function(ChannelInvitationById) userCardCreateFunction;
+    switch (widget.invitationDirection) {
+      case MessageDirection.received:
+        userCardCreateFunction = _createSenderCard;
+        break;
+      case MessageDirection.sent:
+        userCardCreateFunction = _createRecipientCard;
+        break;
+    }
     return FutureBuilder(
       future: _invitation,
       builder: (context, snapshot) {
@@ -291,7 +418,7 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                 Expanded(
                   child: ListView(
                     children: [
-                      _createCard(invitationResult),
+                      userCardCreateFunction(invitationResult),
                       const SizedBox(height: Insets.paddingMedium),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -312,10 +439,14 @@ class _NewInviteDetailedProfileState extends State<NewInviteDetailedProfile>
                             .format(invitationResult.createdAt.toLocal())
                             .toLowerCase(),
                       ),
-                      _createDeclineAcceptButtons(
-                        theme,
-                        invitationResult.sender.id,
-                      ),
+                      widget.invitationDirection == MessageDirection.received
+                          ? _createDeclineAcceptButtons(
+                              theme,
+                              invitationResult.sender.id,
+                            )
+                          : widget.invitationDirection == MessageDirection.sent
+                              ? _createWithdrawButton(theme)
+                              : const SizedBox(height: 0, width: 0),
                     ],
                   ),
                 ),

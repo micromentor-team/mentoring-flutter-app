@@ -11,6 +11,7 @@ import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/chat_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:provider/provider.dart';
@@ -65,15 +66,19 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
       context,
       listen: false,
     );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setChannelMessagesScaffold(
-        context: context,
-        channelName: channelName,
-        channelId: widget.channelId,
-        isArchivedForUser: widget.isArchivedForUser,
-        avatarUrl: avatarUrl,
-      );
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        scaffoldModel.setParams(
+          appBar: AppBarFactory.createChannelMessagesAppBar(
+            context: context,
+            channelName: channelName,
+            channelId: widget.channelId,
+            isArchivedForUser: widget.isArchivedForUser,
+            avatarUrl: avatarUrl,
+          ),
+        );
+      },
+    );
   }
 
   @override

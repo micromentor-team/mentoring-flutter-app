@@ -129,4 +129,27 @@ class InvitationsProvider extends BaseProvider {
           : null,
     );
   }
+
+  Future<OperationResult<String>> withdrawChannelInvitation({
+    required String channelInvitationId,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationDeleteChannelInvitation,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$DeleteChannelInvitation(
+          channelInvitationId: channelInvitationId,
+          deletePhysically: false,
+        ).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$DeleteChannelInvitation.fromJson(
+              queryResult.data!,
+            ).deleteChannelInvitation
+          : null,
+    );
+  }
 }

@@ -121,7 +121,7 @@ ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
       ]);
 }
 
-ProfileQuickViewCard createProfilCardFromInfo({
+ProfileQuickViewCard createProfileCardFromInfo({
   required ProfileQuickViewInfo info,
 }) {
   return ProfileQuickViewCard(

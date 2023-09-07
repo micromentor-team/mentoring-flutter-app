@@ -36,7 +36,9 @@ class MyChannelInvitationsModel extends ChangeNotifier {
       _receivedInvitations.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       _state = AsyncState.ready;
     }
-    notifyListeners();
+    if (hasListeners) {
+      notifyListeners();
+    }
   }
 
   Future<void> refreshSentInvitations({required bool onlyPending}) async {
@@ -51,6 +53,8 @@ class MyChannelInvitationsModel extends ChangeNotifier {
       _sentInvitations.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       _state = AsyncState.ready;
     }
-    notifyListeners();
+    if (hasListeners) {
+      notifyListeners();
+    }
   }
 }

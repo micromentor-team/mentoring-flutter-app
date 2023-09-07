@@ -6,7 +6,7 @@ import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dar
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
-import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
+import 'package:mm_flutter_app/widgets/screens/inbox/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/scaffold_model.dart';
@@ -52,6 +52,17 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     });
   }
 
+  void _refreshTabIndex(BuildContext context) {
+    if (isRouteActive) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        TabController? tabController = DefaultTabController.maybeOf(context);
+        if (tabController != null && tabController.index != tabBarIndex) {
+          tabController.animateTo(tabBarIndex);
+        }
+      });
+    }
+  }
+
   @override
   void didPush() {
     super.didPush();
@@ -62,13 +73,6 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   void didPopNext() {
     super.didPopNext();
     _refreshScaffold();
-    try {
-      DefaultTabController.of(context).animateTo(tabBarIndex);
-    } catch (_) {
-      // Can fail if the controller is no longer present in the context.
-      // Revert to replacing the page with a new one.
-      router.pushReplacement(Routes.inboxInvitesReceived.path);
-    }
   }
 
   InboxListTile _createTile(
@@ -79,8 +83,9 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
       fullName: invitation.sender.fullName ?? '',
       date: invitation.createdAt.toLocal(),
       message: invitation.messageText ?? _l10n.inboxInvitesReceivedMessage,
-      highlightTile:
+      highlightTileTitle:
           true, // TODO - Highlight and show notification bubble only if unseen
+      highlightTileText: true,
       simplifyDate: true,
       onPressed: () => router.push(
         '${Routes.inboxInvitesReceived.path}/${invitation.id}',
@@ -121,6 +126,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
 
   @override
   Widget build(BuildContext context) {
+    _refreshTabIndex(context);
     return Consumer<MyChannelInvitationsModel>(
       builder: (context, myChannelInvitationsModel, _) {
         return AppUtility.widgetForAsyncState(

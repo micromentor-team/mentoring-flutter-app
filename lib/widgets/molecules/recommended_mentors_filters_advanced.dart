@@ -10,6 +10,8 @@ import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
+import '../../utilities/scaffold_utils/appbar_factory.dart';
+
 class RecommendedMentorsFiltersAdvanced extends StatefulWidget {
   const RecommendedMentorsFiltersAdvanced({super.key});
 
@@ -61,9 +63,10 @@ class _RecommendedMentorsFiltersAdvanced
       listen: false,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setAppBarTitleOnly(
-        context: context,
-        title: AppLocalizations.of(context)!.exploreSearchFilterAdvancedTitle,
+      scaffoldModel.setParams(
+        appBar: AppBarFactory.createTitleOnlyAppBar(
+          title: AppLocalizations.of(context)!.exploreSearchFilterAdvancedTitle,
+        ),
       );
     });
   }
