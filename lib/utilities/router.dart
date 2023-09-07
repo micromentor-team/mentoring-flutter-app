@@ -122,7 +122,7 @@ class AppRouter {
         ),
         ShellRoute(
           observers: [Provider.of<RouteObserver<PageRoute>>(context)],
-          pageBuilder: (context, state, child) {
+          pageBuilder: (BuildContext context, GoRouterState state, child) {
             return MaterialPage(
               key: state.pageKey,
               maintainState: true,
@@ -203,7 +203,7 @@ class AppRouter {
             GoRoute(
               path: Routes.inboxChatsChannelId.path,
               name: Routes.inboxChatsChannelId.name,
-              pageBuilder: (context, state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 final String channelId =
                     state.pathParameters[RouteParams.channelId]!;
                 return MaterialPage(
@@ -230,7 +230,7 @@ class AppRouter {
             GoRoute(
               path: Routes.inboxInvitesReceivedId.path,
               name: Routes.inboxInvitesReceivedId.name,
-              pageBuilder: (context, state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 final String channelInvitationId =
                     state.pathParameters[RouteParams.channelInvitationId]!;
                 return MaterialPage(
@@ -257,7 +257,7 @@ class AppRouter {
             GoRoute(
               path: Routes.inboxInvitesSentId.path,
               name: Routes.inboxInvitesSentId.name,
-              pageBuilder: (context, state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 final String channelInvitationId =
                     state.pathParameters[RouteParams.channelInvitationId]!;
                 return MaterialPage(
@@ -284,7 +284,7 @@ class AppRouter {
             GoRoute(
               path: Routes.inboxArchivedChannelId.path,
               name: Routes.inboxArchivedChannelId.name,
-              pageBuilder: (context, state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 final String channelId =
                     state.pathParameters[RouteParams.channelId]!;
                 return MaterialPage(
@@ -305,6 +305,19 @@ class AppRouter {
                   key: state.pageKey,
                   maintainState: false,
                   child: const ProfileScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.profileId.path,
+              name: Routes.profileId.name,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                final String userId = state.pathParameters[RouteParams.userId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: ProfileScreen(
+                    userId: userId,
+                  ),
                 );
               },
             ),

@@ -11,6 +11,29 @@ import 'package:provider/provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../molecules/profile_page_header.dart';
 
+class ProfileScreen extends StatefulWidget {
+  final String? userId;
+  const ProfileScreen({
+    super.key,
+    this.userId,
+  });
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen>
+    with NavigationMixin<ProfileScreen> {
+  @override
+  Widget build(BuildContext context) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
+    buildPageRouteScaffold((scaffoldModel) {
+      scaffoldModel.clear();
+    });
+    return const ProfileScreenScroll(showProfilePagerHeader: true);
+  }
+}
+
 class ProfileScreenScroll extends StatefulWidget {
   final bool showProfilePagerHeader;
 
@@ -54,24 +77,5 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
         ),
       ),
     );
-  }
-}
-
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen>
-    with NavigationMixin<ProfileScreen> {
-  @override
-  Widget build(BuildContext context) {
-    if (!pageRoute.isCurrent) return const SizedBox.shrink();
-    buildPageRouteScaffold((scaffoldModel) {
-      scaffoldModel.clear();
-    });
-    return const ProfileScreenScroll(showProfilePagerHeader: true);
   }
 }

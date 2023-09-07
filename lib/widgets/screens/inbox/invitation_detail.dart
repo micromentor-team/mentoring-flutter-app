@@ -105,6 +105,7 @@ class _InvitationDetailState extends State<InvitationDetail>
     return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
         isRecommended: false,
+        userId: invitation.sender.id,
         userType: invitation.sender.offersHelp
             ? UserType.mentor
             : UserType.entrepreneur,
@@ -176,6 +177,7 @@ class _InvitationDetailState extends State<InvitationDetail>
     return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
         isRecommended: false,
+        userId: invitation.recipient.id,
         userType: invitation.recipient.offersHelp
             ? UserType.mentor
             : UserType.entrepreneur,

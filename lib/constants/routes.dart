@@ -105,10 +105,15 @@ class Routes {
     name: 'profile',
     path: '/profile',
   );
+  static Route profileId = Route(
+    name: 'profileId',
+    path: '${profile.path}/:${RouteParams.userId}',
+  );
 }
 
 class RouteParams {
   RouteParams._private();
   static const String channelId = 'channelId';
   static const String channelInvitationId = 'channelInvitationId';
+  static const String userId = 'userId';
 }
