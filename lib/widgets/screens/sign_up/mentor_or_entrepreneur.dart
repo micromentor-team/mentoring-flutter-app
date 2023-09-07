@@ -37,7 +37,7 @@ class _MentorOrEntrepreneurScreenState
                 ),
               ),
               const SizedBox(height: Insets.paddingMedium),
-              createEntrepreneurMentorCard(context),
+              createEntrepreneurMentorCards(context),
               const SizedBox(height: Insets.paddingMedium),
               Padding(
                 padding: const EdgeInsets.all(Insets.paddingSmall),
