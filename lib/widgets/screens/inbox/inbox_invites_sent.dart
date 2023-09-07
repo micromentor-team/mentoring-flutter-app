@@ -6,7 +6,7 @@ import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dar
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
-import 'package:mm_flutter_app/widgets/molecules/inbox_list_tile.dart';
+import 'package:mm_flutter_app/widgets/screens/inbox/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/scaffold_model.dart';
@@ -78,7 +78,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
       fullName: invitation.recipient.fullName ?? '',
       date: invitation.createdAt.toLocal(),
       message: invitation.messageText ?? '',
-      highlightTile: false,
+      highlightTileTitle: true,
       simplifyDate: true,
       onPressed: () => router.push(
         '${Routes.inboxInvitesSent.path}/${invitation.id}',
