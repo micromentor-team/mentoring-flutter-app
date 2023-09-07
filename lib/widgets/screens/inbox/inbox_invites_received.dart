@@ -52,6 +52,17 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     });
   }
 
+  void _refreshTabIndex(BuildContext context) {
+    if (isRouteActive) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        TabController? tabController = DefaultTabController.maybeOf(context);
+        if (tabController != null && tabController.index != tabBarIndex) {
+          tabController.animateTo(tabBarIndex);
+        }
+      });
+    }
+  }
+
   @override
   void didPush() {
     super.didPush();
@@ -62,13 +73,6 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   void didPopNext() {
     super.didPopNext();
     _refreshScaffold();
-    try {
-      DefaultTabController.of(context).animateTo(tabBarIndex);
-    } catch (_) {
-      // Can fail if the controller is no longer present in the context.
-      // Revert to replacing the page with a new one.
-      router.pushReplacement(Routes.inboxInvitesReceived.path);
-    }
   }
 
   InboxListTile _createTile(
@@ -122,6 +126,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
 
   @override
   Widget build(BuildContext context) {
+    _refreshTabIndex(context);
     return Consumer<MyChannelInvitationsModel>(
       builder: (context, myChannelInvitationsModel, _) {
         return AppUtility.widgetForAsyncState(
