@@ -33,6 +33,10 @@ class Routes {
     name: 'signupEmail',
     path: '${signup.path}/connect',
   );
+  static Route entrepreneurOrMentor = Route(
+    name: 'entrepreneurOrMentor',
+    path: '${signup.path}/userrole',
+  );
   static Route loading = Route(
     name: 'loading',
     path: '/loading',

@@ -67,7 +67,8 @@ class _SignUpEmailState extends State<SignUpEmail> {
                                                   theme.colorScheme.outline))),
                             ],
                           )),
-                      const SignUpBottomButtons(),
+                      SignUpBottomButtons(
+                          nextRoute: Routes.entrepreneurOrMentor.path),
                     ]))));
   }
 }

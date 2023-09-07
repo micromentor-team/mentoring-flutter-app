@@ -17,4 +17,6 @@ class Assets {
   static const String facebookIcon = "assets/images/facebook.png";
   static const String linkedInIcon = "assets/images/linkedin.png";
   static const String whatsappIcon = "assets/images/whatsapp.png";
+  static const String entrepreneurIcon = "assets/images/Entrepreneur.png";
+  static const String mentorIcon = "assets/images/Mentor.png";
 }

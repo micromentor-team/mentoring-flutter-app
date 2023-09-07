@@ -20,6 +20,7 @@ import '../widgets/screens/explore/explore.dart';
 import '../widgets/screens/inbox/inbox_chat_list.dart';
 import '../widgets/screens/inbox/new_invite_detailed_profile.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
+import '../widgets/screens/sign_up/mentor_or_entrepreneur.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
 import '../widgets/screens/welcome/welcome_screen.dart';
 
@@ -81,6 +82,15 @@ class AppRouter {
               return MaterialPage(
                 key: state.pageKey,
                 child: const SignUpScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.entrepreneurOrMentor.path,
+            name: Routes.entrepreneurOrMentor.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                child: const MentorOrEntrepreneurScreen(),
               );
             }),
         GoRoute(
