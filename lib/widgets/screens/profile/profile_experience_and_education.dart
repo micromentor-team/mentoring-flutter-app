@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ExperienceAndEducation extends StatelessWidget {
-  const ExperienceAndEducation({super.key});
+  final List<ExperienceInput> experience;
+  final List<EducationInput> education;
+
+  const ExperienceAndEducation({
+    super.key,
+    this.experience = const [],
+    this.education = const [],
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(Insets.paddingMedium),
+    return Padding(
+      padding: const EdgeInsets.all(Insets.paddingMedium),
       child: Column(
         children: [
-          Row(children: [_Experience()]),
-          Row(children: [_Education()]),
+          if (experience.isNotEmpty)
+            Row(children: [_Experience(experience: experience)]),
+          if (education.isNotEmpty)
+            Row(children: [_Education(education: education)]),
         ],
       ),
     );
@@ -21,31 +30,8 @@ class ExperienceAndEducation extends StatelessWidget {
 }
 
 class _Experience extends StatelessWidget {
-  static final List<_ExperienceItem> _exampleExperience = [
-    _ExperienceItem(
-      position: "Marketing director",
-      companyName: "SVK Group",
-      start: DateTime.utc(2021, 12),
-      location: "Cleveland, Ohio, USA",
-    ),
-    _ExperienceItem(
-      position: "Senior Marketing Manager",
-      companyName: "SVK Group",
-      start: DateTime.utc(2019, 6),
-      end: DateTime.utc(2021, 11),
-      location: "Cleveland, Ohio, USA",
-    ),
-    _ExperienceItem(
-      position: "Founder",
-      companyName: "MC Consulting",
-      start: DateTime.utc(2016, 3),
-      end: DateTime.utc(2019, 5),
-      location: "Cleveland, Ohio, USA",
-      companyUrl: "https://mcconsulting.com",
-    ),
-  ];
-
-  const _Experience();
+  final List<ExperienceInput> experience;
+  const _Experience({required this.experience});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +40,7 @@ class _Experience extends StatelessWidget {
       color: theme.colorScheme.onSurface,
     );
     final l10n = AppLocalizations.of(context)!;
-    final items = _exampleExperience
+    final items = experience
         .map((exp) {
           return [
             Text(
@@ -98,30 +84,9 @@ class _Experience extends StatelessWidget {
 }
 
 class _Education extends StatelessWidget {
-  static final List<_EducationItem> _exampleEducation = [
-    _EducationItem(
-      schoolName: "Case Western Reserve University",
-      start: DateTime.utc(2017),
-      end: DateTime.utc(2019),
-      title: "Master of Business Administration (MBA)",
-    ),
-    _EducationItem(
-      schoolName: "Ohio State University",
-      start: DateTime.utc(2007),
-      end: DateTime.utc(2010),
-      title: "Bachelor of Arts (BA)",
-      major: "Marketing and Advertising",
-    ),
-    _EducationItem(
-      schoolName: "Columbus State University College",
-      start: DateTime.utc(2005),
-      end: DateTime.utc(2007),
-      title: "Associate of Arts (AA)",
-      major: "Business",
-    ),
-  ];
+  final List<EducationInput> education;
 
-  const _Education();
+  const _Education({required this.education});
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +95,7 @@ class _Education extends StatelessWidget {
       color: theme.colorScheme.onSurface,
     );
     final l10n = AppLocalizations.of(context)!;
-    final items = _exampleEducation
+    final items = education
         .map((edu) => [
               Row(children: [
                 Text(edu.schoolName,
@@ -160,7 +125,7 @@ class _Education extends StatelessWidget {
   }
 }
 
-class _ExperienceItem {
+class ExperienceInput {
   final String position;
   final String companyName;
   final DateTime start;
@@ -168,7 +133,7 @@ class _ExperienceItem {
   final String location;
   final String? companyUrl;
 
-  const _ExperienceItem({
+  const ExperienceInput({
     required this.position,
     required this.companyName,
     required this.start,
@@ -203,14 +168,14 @@ class _ExperienceItem {
   }
 }
 
-class _EducationItem {
+class EducationInput {
   final String schoolName;
   final DateTime start;
   final DateTime end;
   final String title;
   final String? major;
 
-  const _EducationItem({
+  const EducationInput({
     required this.schoolName,
     required this.start,
     required this.end,

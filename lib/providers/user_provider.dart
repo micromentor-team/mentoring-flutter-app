@@ -8,7 +8,7 @@ import '../__generated/schema/schema.graphql.dart';
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
-typedef AllUsersResult = Query$FindAllUsers$findUsers;
+typedef UserDetailedProfile = Query$FindUserDetailedProfile$findUserById;
 typedef UserWithFilterResult = Query$FindUsersWithFilter$findUsers;
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 typedef MenteeUser = Query$FindMenteeUsers$findUsers;
@@ -46,84 +46,6 @@ class UserProvider extends BaseProvider with ChangeNotifier {
 
   AuthenticatedUser? get user {
     return _user;
-  }
-
-  Future<OperationResult<AuthenticatedUser>> getAuthenticatedUser({
-    bool logFailures = true,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryGetAuthenticatedUser,
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-      logFailures: logFailures,
-    );
-    final operationResult = OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Query$GetAuthenticatedUser.fromJson(
-              queryResult.data!,
-            ).getAuthenticatedUser
-          : null,
-    );
-    if (operationResult.response != null) {
-      _setUser(operationResult.response!);
-    } else {
-      _resetUser();
-    }
-    return operationResult;
-  }
-
-  Future<OperationResult<List<AllUsersResult>>> findAllUsers() async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindAllUsers,
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Query$FindAllUsers(
-          filter: Input$UserListFilter(caseSensitive: false),
-        ).toJson(),
-      ),
-    );
-
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data == null
-          ? null
-          : Query$FindAllUsers.fromJson(
-              queryResult.data!,
-            ).findUsers.map((element) {
-              if (element.avatarUrl == "") {
-                return element.copyWith(avatarUrl: null);
-              }
-              return element;
-            }).toList(),
-    );
-  }
-
-  Future<OperationResult<List<UserWithFilterResult>>> findUsersWithFilter({
-    required Input$UserListFilter input,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindUsersWithFilter,
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
-      ),
-    );
-
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data == null
-          ? null
-          : Query$FindUsersWithFilter.fromJson(
-              queryResult.data!,
-            ).findUsers.map((element) {
-              if (element.avatarUrl == "") {
-                return element.copyWith(avatarUrl: null);
-              }
-              return element;
-            }).toList(),
-    );
   }
 
   Future<OperationResult<List<MenteeUser>>> findMenteeUsers({
@@ -188,6 +110,92 @@ class UserProvider extends BaseProvider with ChangeNotifier {
             }).toList()
           : null,
     );
+  }
+
+  Future<OperationResult<UserDetailedProfile>> findUserDetailedProfile({
+    required String userId,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindUserDetailedProfile,
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables$Query$FindUserDetailedProfile(
+          userId: userId,
+        ).toJson(),
+      ),
+    );
+
+    final operationResult = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindUserDetailedProfile.fromJson(
+              queryResult.data!,
+            ).findUserById,
+    );
+    if (operationResult.response?.avatarUrl == "") {
+      operationResult.response = operationResult.response!.copyWith(
+        avatarUrl: null,
+      );
+    }
+    return operationResult;
+  }
+
+  Future<OperationResult<List<UserWithFilterResult>>> findUsersWithFilter({
+    required Input$UserListFilter input,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindUsersWithFilter,
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
+      ),
+    );
+
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindUsersWithFilter.fromJson(
+              queryResult.data!,
+            ).findUsers.map((element) {
+              if (element.avatarUrl == "") {
+                return element.copyWith(avatarUrl: null);
+              }
+              return element;
+            }).toList(),
+    );
+  }
+
+  Future<OperationResult<AuthenticatedUser>> getAuthenticatedUser({
+    bool logFailures = true,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryGetAuthenticatedUser,
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+      logFailures: logFailures,
+    );
+    final operationResult = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$GetAuthenticatedUser.fromJson(
+              queryResult.data!,
+            ).getAuthenticatedUser
+          : null,
+    );
+    if (operationResult.response?.avatarUrl == "") {
+      operationResult.response = operationResult.response!.copyWith(
+        avatarUrl: null,
+      );
+    }
+    if (operationResult.response != null) {
+      _setUser(operationResult.response!);
+    } else {
+      _resetUser();
+    }
+    return operationResult;
   }
 
   // Mutations
