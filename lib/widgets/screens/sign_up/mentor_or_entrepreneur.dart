@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/molecules/sign_up_bottom_buttons.dart';
 
-import '../../atoms/text_form_field_widget.dart';
+import '../../molecules/login_radio_button_cards.dart';
+import '../../molecules/sign_up_bottom_buttons.dart';
 
-class SignUpEmail extends StatefulWidget {
-  const SignUpEmail({super.key});
+class MentorOrEntrepreneurScreen extends StatefulWidget {
+  const MentorOrEntrepreneurScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpEmail> createState() => _SignUpEmailState();
+  State<MentorOrEntrepreneurScreen> createState() =>
+      _MentorOrEntrepreneurScreenState();
 }
 
-class _SignUpEmailState extends State<SignUpEmail> {
-  TextEditingController? emailTextController;
-  String? email;
-
+class _MentorOrEntrepreneurScreenState
+    extends State<MentorOrEntrepreneurScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -32,22 +31,25 @@ class _SignUpEmailState extends State<SignUpEmail> {
               const LinearProgressIndicator(value: 0.25),
               const SizedBox(height: Insets.paddingMedium),
               Text(
-                l10n.whatIsYourEmailAddress,
-                softWrap: true,
+                l10n.roleMicroMentor,
                 style: theme.textTheme.headlineSmall?.copyWith(
                   color: theme.colorScheme.primary,
                 ),
               ),
               const SizedBox(height: Insets.paddingMedium),
-              TextFormFieldWidget(
-                  textController: emailTextController,
-                  label: l10n.emailAddress,
-                  onPressed: (value) {
-                    setState(() {
-                      email = value;
-                    });
-                  },
-                  obscureText: false),
+              createEntrepreneurMentorCards(context),
+              const SizedBox(height: Insets.paddingMedium),
+              Padding(
+                padding: const EdgeInsets.all(Insets.paddingSmall),
+                child: InkWell(
+                  child: Text(l10n.learnMoreAboutMentoring,
+                      style: TextStyle(
+                        color: theme.colorScheme.primary,
+                        decoration: TextDecoration.underline,
+                      )),
+                  onTap: () {},
+                ),
+              ),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -57,15 +59,10 @@ class _SignUpEmailState extends State<SignUpEmail> {
                   children: [
                     Icon(Icons.lock_outline, color: theme.colorScheme.outline),
                     Expanded(
-                      // fit: BoxFit.contain,
-                      child: Text(
-                        l10n.signUpHiddenInfoDesc,
-                        softWrap: true,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.outline,
-                        ),
-                      ),
-                    ),
+                        child: Text(l10n.signUpHiddenInfoDesc,
+                            softWrap: true,
+                            style: theme.textTheme.bodySmall
+                                ?.copyWith(color: theme.colorScheme.outline))),
                   ],
                 ),
               ),
@@ -77,3 +74,5 @@ class _SignUpEmailState extends State<SignUpEmail> {
     );
   }
 }
+
+enum UserRole { mentor, entrepreneur }
