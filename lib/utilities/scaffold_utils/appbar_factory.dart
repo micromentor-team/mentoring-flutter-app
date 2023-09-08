@@ -231,7 +231,7 @@ class AppBarFactory {
         },
       ),
       title: Text(
-        l10n.newInvite,
+        l10n.inboxTitleInviteReceived,
         style: theme.textTheme.titleLarge?.copyWith(
           color: theme.colorScheme.onPrimaryContainer,
         ),
@@ -240,6 +240,29 @@ class AppBarFactory {
       actions: [
         ReportOrBlockMenuButton(l10n: l10n),
       ],
+    );
+  }
+
+  static AppBar createInviteSentDetailAppBar({
+    required BuildContext context,
+  }) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final GoRouter router = GoRouter.of(context);
+    final ThemeData theme = Theme.of(context);
+    return AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios),
+        onPressed: () {
+          router.pop();
+        },
+      ),
+      title: Text(
+        l10n.inboxTitleInviteSent,
+        style: theme.textTheme.titleLarge?.copyWith(
+          color: theme.colorScheme.onPrimaryContainer,
+        ),
+      ),
+      centerTitle: false,
     );
   }
 

@@ -9,7 +9,8 @@ class InboxListTile extends StatelessWidget {
   final DateTime date;
   final String message;
   final int notifications;
-  final bool highlightTile;
+  final bool highlightTileTitle;
+  final bool highlightTileText;
   final bool simplifyDate;
   final String? datePrefix;
   final void Function() onPressed;
@@ -21,7 +22,8 @@ class InboxListTile extends StatelessWidget {
     required this.date,
     required this.message,
     this.notifications = 0,
-    this.highlightTile = false,
+    this.highlightTileTitle = false,
+    this.highlightTileText = false,
     this.simplifyDate = false,
     this.datePrefix,
     required this.onPressed,
@@ -103,7 +105,7 @@ class InboxListTile extends StatelessWidget {
                       fullName,
                       maxLines: 1,
                       style: theme.textTheme.labelMedium?.copyWith(
-                        color: highlightTile
+                        color: highlightTileTitle
                             ? theme.colorScheme.onPrimaryContainer
                             : theme.hintColor,
                       ),
@@ -143,7 +145,7 @@ class InboxListTile extends StatelessWidget {
                 message,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: highlightTile
+                style: highlightTileText
                     ? theme.textTheme.bodyMedium?.copyWith(
                         color: theme.colorScheme.onBackground,
                       )

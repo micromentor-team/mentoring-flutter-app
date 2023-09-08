@@ -8,9 +8,9 @@ import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/atoms/dismissible_tile.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
-import 'package:mm_flutter_app/widgets/molecules/inbox_chat_list_tile.dart';
+import 'package:mm_flutter_app/widgets/screens/inbox/dismissible_tile.dart';
+import 'package:mm_flutter_app/widgets/screens/inbox/inbox_chat_list_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/channels_provider.dart';
@@ -163,6 +163,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
               channelName: channelName,
               channelAvatarUrl: channelAvatarUrl,
               authenticatedUserId: _authenticatedUser!.id,
+              isArchivedChannel: widget.isArchivedForUser,
             ),
             child: InboxChatListTile(
               isArchivedForUser: widget.isArchivedForUser,

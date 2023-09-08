@@ -1,16 +1,16 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 
 import '../__generated/schema/operations_invitation.graphql.dart';
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
-typedef ChannelInvitation
-    = Query$GetInboxInvitations$myInbox$channels$invitations;
 typedef ChannelInvitationById
     = Query$FindChannelInvitationById$findChannelInvitationById;
-typedef ChannelPendingInvitation
-    = Query$GetInboxInvitations$myInbox$channels$pendingInvitations;
-typedef InvitationInbox = Query$GetInboxInvitations$myInbox;
+typedef ReceivedChannelInvitation
+    = Query$MyReceivedChannelInvitations$myChannelInvitations;
+typedef SentChannelInvitation
+    = Query$MySentChannelInvitations$myChannelInvitations;
 
 class InvitationsProvider extends BaseProvider {
   InvitationsProvider({required super.client});
@@ -38,19 +38,49 @@ class InvitationsProvider extends BaseProvider {
     );
   }
 
-  Future<OperationResult<InvitationInbox>> getInboxInvitations() async {
+  Future<OperationResult<List<ReceivedChannelInvitation>>>
+      getReceivedInvitations({
+    required bool onlyPending,
+  }) async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
-        document: documentNodeQueryGetInboxInvitations,
+        document: documentNodeQueryMyReceivedChannelInvitations,
         fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables$Query$MyReceivedChannelInvitations(
+          direction: Enum$ChannelInvitationDirection.received,
+          onlyPending: onlyPending,
+        ).toJson(),
       ),
     );
     return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
-          ? Query$GetInboxInvitations.fromJson(
+          ? Query$MyReceivedChannelInvitations.fromJson(
               queryResult.data!,
-            ).myInbox
+            ).myChannelInvitations
+          : null,
+    );
+  }
+
+  Future<OperationResult<List<SentChannelInvitation>>> getSentInvitations({
+    required bool onlyPending,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryMySentChannelInvitations,
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables$Query$MyReceivedChannelInvitations(
+          direction: Enum$ChannelInvitationDirection.sent,
+          onlyPending: onlyPending,
+        ).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$MySentChannelInvitations.fromJson(
+              queryResult.data!,
+            ).myChannelInvitations
           : null,
     );
   }
@@ -96,6 +126,29 @@ class InvitationsProvider extends BaseProvider {
           ? Mutation$DeclineChannelInvitation.fromJson(
               queryResult.data!,
             ).declineChannelInvitation
+          : null,
+    );
+  }
+
+  Future<OperationResult<String>> withdrawChannelInvitation({
+    required String channelInvitationId,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationDeleteChannelInvitation,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$DeleteChannelInvitation(
+          channelInvitationId: channelInvitationId,
+          deletePhysically: false,
+        ).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$DeleteChannelInvitation.fromJson(
+              queryResult.data!,
+            ).deleteChannelInvitation
           : null,
     );
   }

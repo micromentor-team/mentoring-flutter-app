@@ -46,7 +46,30 @@ query FindChannelMessageById($channelMessageId: String!) {
     }
 }
 
-query InboxUnseenMessages {
+query InboxAllUnseenMessages {
+    myInbox {
+        channels {
+            unseenMessages {
+                channelId
+            }
+            unseenArchivedMessages {
+                channelId
+            }
+        }
+    }
+}
+
+query InboxUnseenArchivedMessages {
+    myInbox {
+        channels {
+            unseenArchivedMessages {
+                channelId
+            }
+        }
+    }
+}
+
+query InboxUnseenUnarchivedMessages {
     myInbox {
         channels {
             unseenMessages {

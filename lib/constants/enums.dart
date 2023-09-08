@@ -10,3 +10,8 @@ enum UserType {
   mentor,
   entrepreneur,
 }
+
+enum MessageDirection {
+  sent,
+  received,
+}

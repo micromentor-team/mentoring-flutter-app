@@ -89,6 +89,10 @@ class Routes {
     name: 'inboxInvitesSent',
     path: '${inboxInvites.path}/sent',
   );
+  static Route inboxInvitesSentId = Route(
+    name: 'inboxInvitesSentId',
+    path: '${inboxInvitesSent.path}/:${RouteParams.channelInvitationId}',
+  );
   static Route inboxArchived = Route(
     name: 'inboxArchived',
     path: '${inbox.path}/archived',

@@ -44,28 +44,78 @@ query FindChannelInvitationById($channelInvitationId: String!) {
             }
         }
     }
+    recipient {
+        id
+        fullName
+        avatarUrl
+        jobTitle
+        offersHelp
+        seeksHelp
+        companies {
+            id
+            name
+            companyStage {
+                translatedValue
+            }
+            companyType {
+                translatedValue
+            }
+        }
+        countryOfResidence {
+            translatedValue
+        }
+        groupMemberships {
+            groupIdent
+            ... on MentorsGroupMembership {
+                endorsements
+                industries {
+                    translatedValue
+                }
+                expertises {
+                    translatedValue
+                }
+            }
+            ... on MenteesGroupMembership {
+                industry {
+                    translatedValue
+                }
+                soughtExpertises {
+                    translatedValue
+                }
+            }
+        }
+    }
   }
 }
 
-query GetInboxInvitations {
-  myInbox {
-    channels {
-      invitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
-      pendingInvitations {
-        channelId
-        createdAt
-        createdBy
-        id
-        messageText
-        status
-      }
+query MyReceivedChannelInvitations($direction: ChannelInvitationDirection, $onlyPending: Boolean) {
+  myChannelInvitations(direction: $direction, onlyPending: $onlyPending) {
+    channelId
+    createdAt
+    id
+    messageText
+    status
+    sender {
+      avatarUrl
+      fullName
+      jobTitle
+      id
+    }
+  }
+}
+
+query MySentChannelInvitations($direction: ChannelInvitationDirection, $onlyPending: Boolean) {
+  myChannelInvitations(direction: $direction, onlyPending: $onlyPending) {
+    channelId
+    createdAt
+    id
+    messageText
+    status
+    recipient {
+      avatarUrl
+      fullName
+      jobTitle
+      id
     }
   }
 }
@@ -76,4 +126,8 @@ mutation AcceptChannelInvitation($channelInvitationId: String!) {
 
 mutation DeclineChannelInvitation($channelInvitationId: String!) {
   declineChannelInvitation(channelInvitationId: $channelInvitationId)
+}
+
+mutation DeleteChannelInvitation($deletePhysically: Boolean!, $channelInvitationId: String!) {
+  deleteChannelInvitation(deletePhysically: $deletePhysically, channelInvitationId: $channelInvitationId)
 }
