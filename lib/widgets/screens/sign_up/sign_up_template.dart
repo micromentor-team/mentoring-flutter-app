@@ -3,7 +3,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 
 enum SignUpProgress { one, two, three, four }
 
-double _SignUpProgressToDouble(SignUpProgress signUpProgress) {
+double _signUpProgressToDouble(SignUpProgress signUpProgress) {
   switch (signUpProgress) {
     case SignUpProgress.one:
       return 0.25;
@@ -43,7 +43,7 @@ class SignUpTemplate extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              LinearProgressIndicator(value: _SignUpProgressToDouble(progress)),
+              LinearProgressIndicator(value: _signUpProgressToDouble(progress)),
               const SizedBox(height: Insets.paddingMedium),
               Text(
                 title,
