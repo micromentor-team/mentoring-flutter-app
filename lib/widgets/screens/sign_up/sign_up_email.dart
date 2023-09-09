@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,7 @@ class SignUpEmail extends StatefulWidget {
 
 class _SignUpEmailState extends State<SignUpEmail> {
   TextEditingController? emailTextController;
+  final _formKey = GlobalKey<FormState>();
   String? email;
 
   @override
@@ -26,15 +28,25 @@ class _SignUpEmailState extends State<SignUpEmail> {
     return SignUpTemplate(
         progress: SignUpProgress.one,
         title: l10n.whatIsYourEmailAddress,
-        body: TextFormFieldWidget(
-            textController: emailTextController,
-            label: l10n.emailAddress,
-            onPressed: (value) {
-              setState(() {
-                email = value;
-              });
-            },
-            obscureText: false),
+        body: Form(
+            key: _formKey,
+            child: TextFormFieldWidget(
+              textController: emailTextController,
+              label: l10n.emailAddress,
+              onPressed: (value) {
+                setState(() {
+                  email = value;
+                });
+              },
+              obscureText: false,
+              validator: (value) {
+                bool validEmail = EmailValidator.validate(value!);
+                if (validEmail != true) {
+                  return l10n.invalidEmailSnackBar;
+                }
+                return null;
+              },
+            )),
         footer: SignUpIconFooter(
             icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
         bottomButtons: SignUpBottomButtons(
@@ -44,7 +56,9 @@ class _SignUpEmailState extends State<SignUpEmail> {
             context.pop();
           },
           rightOnPress: () {
-            context.push(Routes.entrepreneurOrMentor.path);
+            if (_formKey.currentState!.validate()) {
+              context.push(Routes.entrepreneurOrMentor.path);
+            }
           },
         ));
   }

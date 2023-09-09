@@ -226,6 +226,7 @@
     "iAmAnEntrepreneur": "I am an entrepreneur",
     "entrepreneurDescription": "I own a business and I am looking for a mentor",
     "iAmAMentor": "I am a mentor",
-    "mentorDescription": "I am an experienced professional and I want to share my knowledge"
+    "mentorDescription": "I am an experienced professional and I want to share my knowledge",
+    "invalidEmailSnackBar": "Please enter a valid email address"
 
 }
