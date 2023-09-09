@@ -109,6 +109,21 @@ export function mockMutations(serverState: MockServerState) {
             });
             return channelInvitation.id;
         },
+        deleteChannelInvitation: (_: any, args: { deletePhysically: boolean, channelInvitationId: string }) => {
+            const channelInvitation = serverState.channelInvitations.find((e) => e.id == args.channelInvitationId);
+            const currentTime : string = new Date().toISOString();
+            channelInvitation.deletedAt = currentTime;
+            channelInvitation.updatedAt = currentTime;
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: channelInvitation.id }});
+            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
+                channelChanged: {
+                    channelId: channelInvitation.channel?.id,
+                    invitationId: channelInvitation.id,
+                    eventType: 'invitationDeleted',
+                }
+            });
+            return channelInvitation.id;
+        },
         deleteChannelMessage: (_: any, args: { channelMessageId: string, deletePhysically: boolean }) => {
             var channelMessage = serverState.channelMessages.find((element) => element.id == args.channelMessageId);
             const currentTime : string = new Date().toISOString();

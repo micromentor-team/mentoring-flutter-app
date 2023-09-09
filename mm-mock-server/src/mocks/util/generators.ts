@@ -200,6 +200,7 @@ export function generateChannelMessage(
         __typename: "ChannelMessage",
         id: faker.string.alphanumeric({length: 24}),
         createdBy: senderUser.id,
+        channel: channel,
         channelId: channel.id,
         messageText: text,
         createdAt: createdAt.toISOString(),
