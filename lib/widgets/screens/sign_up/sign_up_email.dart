@@ -1,7 +1,11 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/molecules/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 
 import '../../atoms/text_form_field_widget.dart';
 
@@ -14,66 +18,48 @@ class SignUpEmail extends StatefulWidget {
 
 class _SignUpEmailState extends State<SignUpEmail> {
   TextEditingController? emailTextController;
+  final _formKey = GlobalKey<FormState>();
   String? email;
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(Insets.paddingExtraLarge),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const LinearProgressIndicator(value: 0.25),
-              const SizedBox(height: Insets.paddingMedium),
-              Text(
-                l10n.whatIsYourEmailAddress,
-                softWrap: true,
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  color: theme.colorScheme.primary,
-                ),
-              ),
-              const SizedBox(height: Insets.paddingMedium),
-              TextFormFieldWidget(
-                  textController: emailTextController,
-                  label: l10n.emailAddress,
-                  onPressed: (value) {
-                    setState(() {
-                      email = value;
-                    });
-                  },
-                  obscureText: false),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Insets.paddingExtraLarge * 2),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.lock_outline, color: theme.colorScheme.outline),
-                    Expanded(
-                      // fit: BoxFit.contain,
-                      child: Text(
-                        l10n.signUpHiddenInfoDesc,
-                        softWrap: true,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.outline,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SignUpBottomButtons(),
-            ],
-          ),
-        ),
-      ),
-    );
+    return SignUpTemplate(
+        progress: SignUpProgress.one,
+        title: l10n.whatIsYourEmailAddress,
+        body: Form(
+            key: _formKey,
+            child: TextFormFieldWidget(
+              textController: emailTextController,
+              label: l10n.emailAddress,
+              onPressed: (value) {
+                setState(() {
+                  email = value;
+                });
+              },
+              obscureText: false,
+              validator: (value) {
+                bool validEmail = EmailValidator.validate(value!);
+                if (validEmail != true) {
+                  return l10n.invalidEmailSnackBar;
+                }
+                return null;
+              },
+            )),
+        footer: SignUpIconFooter(
+            icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+        bottomButtons: SignUpBottomButtons(
+          leftButtonText: l10n.previous,
+          rightButtonText: l10n.next,
+          leftOnPress: () {
+            context.pop();
+          },
+          rightOnPress: () {
+            if (_formKey.currentState!.validate()) {
+              context.push(Routes.entrepreneurOrMentor.path);
+            }
+          },
+        ));
   }
 }
