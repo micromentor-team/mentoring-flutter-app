@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class SignUpBottomButtons extends StatelessWidget {
-  final String? nextRoute;
+  final String leftButtonText;
+  final String rightButtonText;
+  final Function()? leftOnPress;
+  final Function()? rightOnPress;
 
   const SignUpBottomButtons({
     Key? key,
-    this.nextRoute,
+    required this.leftButtonText,
+    required this.rightButtonText,
+    this.leftOnPress,
+    this.rightOnPress,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SizedBox(
       height: 64.0,
@@ -25,13 +29,11 @@ class SignUpBottomButtons extends StatelessWidget {
             style: TextButton.styleFrom(
               minimumSize: Dimensions.bigButtonSize,
             ),
-            onPressed: () {
-              context.pop();
-            },
+            onPressed: leftOnPress,
             child: Text(
-              l10n.previous,
+              leftButtonText,
               style: theme.textTheme.labelLarge?.copyWith(
-                color: theme.colorScheme.secondary,
+                color: theme.colorScheme.primary,
               ),
             ),
           ),
@@ -43,13 +45,9 @@ class SignUpBottomButtons extends StatelessWidget {
               backgroundColor: theme.colorScheme.primary,
               textStyle: theme.textTheme.labelLarge,
             ),
-            onPressed: () {
-              if (nextRoute != null) {
-                context.push(nextRoute!);
-              }
-            },
+            onPressed: rightOnPress,
             child: Text(
-              l10n.next,
+              rightButtonText,
               style: theme.textTheme.labelLarge?.copyWith(
                 color: theme.colorScheme.onPrimary,
               ),
