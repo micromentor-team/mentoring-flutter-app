@@ -15,7 +15,7 @@ import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utilities/scaffold_utils/navigation_mixin.dart';
+import '../../../utilities/navigation_mixin.dart';
 
 class InvitationDetail extends StatefulWidget {
   final String channelInvitationId;
@@ -59,6 +59,7 @@ class _InvitationDetailState extends State<InvitationDetail>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!pageRoute.isCurrent) return;
     _l10n = AppLocalizations.of(context)!;
     _invitation = _invitationsProvider.findChannelInvitationById(
       channelInvitationId: widget.channelInvitationId,
@@ -362,7 +363,8 @@ class _InvitationDetailState extends State<InvitationDetail>
 
   @override
   Widget build(BuildContext context) {
-    buildScaffold((scaffoldModel) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
+    buildPageRouteScaffold((scaffoldModel) {
       AppBar? appBar;
       switch (widget.invitationDirection) {
         case MessageDirection.received:

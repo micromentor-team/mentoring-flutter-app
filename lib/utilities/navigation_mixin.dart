@@ -9,10 +9,10 @@ mixin NavigationMixin<T extends StatefulWidget> on State<T>
   late final ScaffoldModel _scaffoldModel;
   late GoRouter _router;
   late final RouteObserver<PageRoute> _routeObserver;
-  bool _isActive = false;
+  PageRoute? _pageRoute;
 
   AsyncState get navigationState => _scaffoldModel.state;
-  bool get isRouteActive => _isActive;
+  PageRoute get pageRoute => _pageRoute!;
   GoRouter get router => _router;
 
   @override
@@ -32,7 +32,11 @@ mixin NavigationMixin<T extends StatefulWidget> on State<T>
   void didChangeDependencies() {
     super.didChangeDependencies();
     _router = GoRouter.of(context);
-    _routeObserver.subscribe(this, ModalRoute.of(context)! as PageRoute);
+    if (_pageRoute != null) {
+      _routeObserver.unsubscribe(this);
+    }
+    _pageRoute = ModalRoute.of(context)! as PageRoute;
+    _routeObserver.subscribe(this, _pageRoute!);
   }
 
   @override
@@ -42,27 +46,21 @@ mixin NavigationMixin<T extends StatefulWidget> on State<T>
   }
 
   @override
-  void didPop() {
-    _isActive = false;
-  }
+  void didPop() {}
 
   @override
-  void didPopNext() {
-    _isActive = true;
-  }
+  void didPopNext() {}
 
   @override
-  void didPush() {
-    _isActive = true;
-  }
+  void didPush() {}
 
   @override
-  void didPushNext() {
-    _isActive = false;
-  }
+  void didPushNext() {}
 
-  void buildScaffold(void Function(ScaffoldModel scaffoldModel) build) {
-    if (_isActive && _scaffoldModel.lastRefreshRoute != _router.location) {
+  void buildPageRouteScaffold(
+      void Function(ScaffoldModel scaffoldModel) build) {
+    if (_pageRoute!.isCurrent &&
+        _scaffoldModel.lastRefreshRoute != _router.location) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scaffoldModel.setLastRefreshRoute(_router.location);
         build(_scaffoldModel);

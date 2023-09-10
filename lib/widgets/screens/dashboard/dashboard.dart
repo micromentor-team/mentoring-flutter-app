@@ -9,7 +9,7 @@ import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utilities/scaffold_utils/navigation_mixin.dart';
+import '../../../utilities/navigation_mixin.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -40,6 +40,7 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!pageRoute.isCurrent) return;
     if (Provider.of<UserProvider>(context).user != null) {
       _authenticatedUser = Provider.of<UserProvider>(context).user!;
     }
@@ -47,7 +48,8 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   @override
   Widget build(BuildContext context) {
-    buildScaffold((scaffoldModel) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
+    buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.clear();
     });
     final AppLocalizations l10n = AppLocalizations.of(context)!;

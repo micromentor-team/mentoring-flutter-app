@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/channels_provider.dart';
 import '../../../providers/user_provider.dart';
-import '../../../utilities/scaffold_utils/navigation_mixin.dart';
+import '../../../utilities/navigation_mixin.dart';
 
 class InboxChatListScreen extends StatefulWidget {
   final bool isArchivedForUser;
@@ -48,6 +48,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!pageRoute.isCurrent) return;
     _l10n = AppLocalizations.of(context)!;
     _queryUserChannels();
   }
@@ -124,7 +125,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
               logFailures: false,
             );
             if (updateCompleted) {
-              buildScaffold((scaffoldModel) {
+              buildPageRouteScaffold((scaffoldModel) {
                 scaffoldModel.setInboxScaffold(router: router);
               });
               _queryUserChannels();
@@ -167,7 +168,8 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
 
   @override
   Widget build(BuildContext context) {
-    buildScaffold((scaffoldModel) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
+    buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.setInboxScaffold(router: router);
     });
     return FutureBuilder(

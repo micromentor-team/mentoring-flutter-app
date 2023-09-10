@@ -4,7 +4,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 
-import '../../../utilities/scaffold_utils/navigation_mixin.dart';
+import '../../../utilities/navigation_mixin.dart';
 
 class ExploreCardScroll extends StatefulWidget {
   const ExploreCardScroll({super.key});
@@ -144,7 +144,8 @@ class _ExploreScreenState extends State<ExploreScreen>
     with NavigationMixin<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
-    buildScaffold((scaffoldModel) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
+    buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.clear();
     });
     return const ExploreCardScroll();

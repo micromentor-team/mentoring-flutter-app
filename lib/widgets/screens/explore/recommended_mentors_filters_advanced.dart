@@ -8,8 +8,8 @@ import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
-import '../../utilities/scaffold_utils/appbar_factory.dart';
-import '../../utilities/scaffold_utils/navigation_mixin.dart';
+import '../../../utilities/navigation_mixin.dart';
+import '../../../utilities/scaffold_utils/appbar_factory.dart';
 
 class RecommendedMentorsFiltersAdvanced extends StatefulWidget {
   const RecommendedMentorsFiltersAdvanced({super.key});
@@ -46,7 +46,8 @@ class _RecommendedMentorsFiltersAdvanced
 
   @override
   Widget build(BuildContext context) {
-    buildScaffold((scaffoldModel) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
+    buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.setParams(
         appBar: AppBarFactory.createTitleOnlyAppBar(
           title: AppLocalizations.of(context)!.exploreSearchFilterAdvancedTitle,

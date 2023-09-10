@@ -16,7 +16,7 @@ import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/base/operation_result.dart';
-import '../../../utilities/scaffold_utils/navigation_mixin.dart';
+import '../../../utilities/navigation_mixin.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_bubble/message_hoverover.dart';
 import 'message_bubble/message_peeker.dart';
@@ -53,11 +53,13 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!pageRoute.isCurrent) return;
     _channel = _channelsProvider.findChannelById(channelId: widget.channelId);
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
     return FutureBuilder(
       future: _channel,
       builder: (context, snapshot) {
@@ -70,7 +72,7 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
                 .user;
             final String channelName = participant.fullName!;
             final String? avatarUrl = participant.avatarUrl;
-            buildScaffold((scaffoldModel) {
+            buildPageRouteScaffold((scaffoldModel) {
               scaffoldModel.setParams(
                 appBar: AppBarFactory.createChannelMessagesAppBar(
                   context: context,
@@ -204,7 +206,7 @@ class _ChannelChatState extends State<ChannelChat>
   Widget build(BuildContext context) {
     return Consumer<ChatModel>(
       builder: (context, chatModel, child) {
-        if (isRouteActive) {
+        if (pageRoute.isCurrent) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             _processNewMessages();
           });

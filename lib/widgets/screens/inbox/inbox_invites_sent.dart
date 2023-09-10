@@ -8,7 +8,7 @@ import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utilities/scaffold_utils/navigation_mixin.dart';
+import '../../../utilities/navigation_mixin.dart';
 
 class InboxInvitesSentScreen extends StatefulWidget {
   const InboxInvitesSentScreen({super.key});
@@ -36,19 +36,18 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!pageRoute.isCurrent) return;
     _myChannelInvitationsModel.refreshSentInvitations(onlyPending: true);
     _l10n = AppLocalizations.of(context)!;
   }
 
   void _refreshTabIndex(BuildContext context) {
-    if (isRouteActive) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        TabController? tabController = DefaultTabController.maybeOf(context);
-        if (tabController != null && tabController.index != tabBarIndex) {
-          tabController.animateTo(tabBarIndex);
-        }
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      TabController? tabController = DefaultTabController.maybeOf(context);
+      if (tabController != null && tabController.index != tabBarIndex) {
+        tabController.animateTo(tabBarIndex);
+      }
+    });
   }
 
   InboxListTile _createTile(
@@ -100,7 +99,8 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
 
   @override
   Widget build(BuildContext context) {
-    buildScaffold((scaffoldModel) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
+    buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.setInboxScaffold(router: router);
     });
     _refreshTabIndex(context);

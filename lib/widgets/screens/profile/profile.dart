@@ -8,7 +8,7 @@ import 'package:mm_flutter_app/widgets/screens/profile/profile_about_me.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile_basic_info.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utilities/scaffold_utils/navigation_mixin.dart';
+import '../../../utilities/navigation_mixin.dart';
 import '../../molecules/profile_page_header.dart';
 
 class ProfileScreenScroll extends StatefulWidget {
@@ -68,7 +68,8 @@ class _ProfileScreenState extends State<ProfileScreen>
     with NavigationMixin<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    buildScaffold((scaffoldModel) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
+    buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.clear();
     });
     return const ProfileScreenScroll(showProfilePagerHeader: true);
