@@ -7,7 +7,6 @@ import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
@@ -16,7 +15,7 @@ import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/models/scaffold_model.dart';
+import '../../../utilities/scaffold_utils/navigation_mixin.dart';
 
 class InvitationDetail extends StatefulWidget {
   final String channelInvitationId;
@@ -33,7 +32,7 @@ class InvitationDetail extends StatefulWidget {
 }
 
 class _InvitationDetailState extends State<InvitationDetail>
-    with RouteAwareMixin<InvitationDetail> {
+    with NavigationMixin<InvitationDetail> {
   late final InvitationsProvider _invitationsProvider;
   late final ChannelsProvider _channelsProvider;
   late final UserProvider _userProvider;
@@ -361,12 +360,9 @@ class _InvitationDetailState extends State<InvitationDetail>
     );
   }
 
-  void _refreshScaffold() {
-    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
-      context,
-      listen: false,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  @override
+  Widget build(BuildContext context) {
+    buildScaffold((scaffoldModel) {
       AppBar? appBar;
       switch (widget.invitationDirection) {
         case MessageDirection.received:
@@ -379,22 +375,6 @@ class _InvitationDetailState extends State<InvitationDetail>
       }
       scaffoldModel.setParams(appBar: appBar);
     });
-  }
-
-  @override
-  void didPush() {
-    super.didPush();
-    _refreshScaffold();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    _refreshScaffold();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     Widget Function(ChannelInvitationById) userCardCreateFunction;
     switch (widget.invitationDirection) {

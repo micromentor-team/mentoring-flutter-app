@@ -3,13 +3,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
-import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/models/scaffold_model.dart';
+import '../../../utilities/scaffold_utils/navigation_mixin.dart';
 
 class InboxInvitesReceivedScreen extends StatefulWidget {
   const InboxInvitesReceivedScreen({super.key});
@@ -20,7 +19,7 @@ class InboxInvitesReceivedScreen extends StatefulWidget {
 }
 
 class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
-    with RouteAwareMixin<InboxInvitesReceivedScreen> {
+    with NavigationMixin<InboxInvitesReceivedScreen> {
   late final MyChannelInvitationsModel _myChannelInvitationsModel;
   late AppLocalizations _l10n;
 
@@ -42,16 +41,6 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     _l10n = AppLocalizations.of(context)!;
   }
 
-  void _refreshScaffold() {
-    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
-      context,
-      listen: false,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.setInboxScaffold(router: router);
-    });
-  }
-
   void _refreshTabIndex(BuildContext context) {
     if (isRouteActive) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -61,18 +50,6 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
         }
       });
     }
-  }
-
-  @override
-  void didPush() {
-    super.didPush();
-    _refreshScaffold();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    _refreshScaffold();
   }
 
   InboxListTile _createTile(
@@ -126,6 +103,9 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
 
   @override
   Widget build(BuildContext context) {
+    buildScaffold((scaffoldModel) {
+      scaffoldModel.setInboxScaffold(router: router);
+    });
     _refreshTabIndex(context);
     return Consumer<MyChannelInvitationsModel>(
       builder: (context, myChannelInvitationsModel, _) {

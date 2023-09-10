@@ -15,10 +15,12 @@ class ScaffoldModel extends ChangeNotifier {
 
   AppBar? _appBar;
   Drawer? _drawer;
+  String? _lastRefreshRoute;
   AsyncState _state = AsyncState.ready;
 
   AppBar? get appBar => _appBar;
   Drawer? get drawer => _drawer;
+  String? get lastRefreshRoute => _lastRefreshRoute;
   AsyncState get state => _state;
 
   ScaffoldModel({required BuildContext context})
@@ -30,6 +32,10 @@ class ScaffoldModel extends ChangeNotifier {
           context,
           listen: false,
         );
+
+  void setLastRefreshRoute(String lastRefreshRoute) {
+    _lastRefreshRoute = lastRefreshRoute;
+  }
 
   void setParams({AppBar? appBar, Drawer? drawer}) {
     _appBar = appBar;

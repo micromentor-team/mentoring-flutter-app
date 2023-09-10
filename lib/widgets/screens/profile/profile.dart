@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/utilities/router.dart';
+import 'package:mm_flutter_app/widgets/molecules/profile_experience_and_education.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/about_my_business.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/how_can_i_help_section.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile_about_me.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile_basic_info.dart';
-import 'package:mm_flutter_app/widgets/molecules/profile_experience_and_education.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/models/scaffold_model.dart';
+
+import '../../../utilities/scaffold_utils/navigation_mixin.dart';
 import '../../molecules/profile_page_header.dart';
 
 class ProfileScreenScroll extends StatefulWidget {
@@ -65,31 +65,12 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen>
-    with RouteAwareMixin<ProfileScreen> {
-  void _refreshScaffold() {
-    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
-      context,
-      listen: false,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.clear();
-    });
-  }
-
-  @override
-  void didPush() {
-    super.didPush();
-    _refreshScaffold();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    _refreshScaffold();
-  }
-
+    with NavigationMixin<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    buildScaffold((scaffoldModel) {
+      scaffoldModel.clear();
+    });
     return const ProfileScreenScroll(showProfilePagerHeader: true);
   }
 }

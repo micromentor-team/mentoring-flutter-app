@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/molecules/invitation_section.dart';
@@ -10,7 +9,7 @@ import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/models/scaffold_model.dart';
+import '../../../utilities/scaffold_utils/navigation_mixin.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -20,7 +19,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen>
-    with RouteAwareMixin<DashboardScreen> {
+    with NavigationMixin<DashboardScreen> {
   late AuthenticatedUser _authenticatedUser;
 
   String _getGreeting(AppLocalizations l10n, String? fullName) {
@@ -38,28 +37,6 @@ class _DashboardScreenState extends State<DashboardScreen>
         : timeOfDayGreeting;
   }
 
-  void _refreshScaffold() {
-    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
-      context,
-      listen: false,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      scaffoldModel.clear();
-    });
-  }
-
-  @override
-  void didPush() {
-    super.didPush();
-    _refreshScaffold();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    _refreshScaffold();
-  }
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -70,6 +47,9 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   @override
   Widget build(BuildContext context) {
+    buildScaffold((scaffoldModel) {
+      scaffoldModel.clear();
+    });
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Column(

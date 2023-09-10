@@ -3,14 +3,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
-import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
-import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../utilities/scaffold_utils/appbar_factory.dart';
+import '../../utilities/scaffold_utils/navigation_mixin.dart';
 
 class RecommendedMentorsFiltersAdvanced extends StatefulWidget {
   const RecommendedMentorsFiltersAdvanced({super.key});
@@ -21,7 +20,7 @@ class RecommendedMentorsFiltersAdvanced extends StatefulWidget {
 
 class _RecommendedMentorsFiltersAdvanced
     extends State<RecommendedMentorsFiltersAdvanced>
-    with RouteAwareMixin<RecommendedMentorsFiltersAdvanced> {
+    with NavigationMixin<RecommendedMentorsFiltersAdvanced> {
   String? _selectedIndustry;
   late final TextfieldTagsController _userTypesController;
   late final ExploreCardFiltersModel _filtersModel;
@@ -46,33 +45,14 @@ class _RecommendedMentorsFiltersAdvanced
   }
 
   @override
-  void didPush() {
-    super.didPush();
-    _refreshScaffold();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    _refreshScaffold();
-  }
-
-  void _refreshScaffold() {
-    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
-      context,
-      listen: false,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  Widget build(BuildContext context) {
+    buildScaffold((scaffoldModel) {
       scaffoldModel.setParams(
         appBar: AppBarFactory.createTitleOnlyAppBar(
           title: AppLocalizations.of(context)!.exploreSearchFilterAdvancedTitle,
         ),
       );
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 

@@ -6,7 +6,6 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/inbox_chat_tile_model.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
-import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/dismissible_tile.dart';
@@ -14,8 +13,8 @@ import 'package:mm_flutter_app/widgets/screens/inbox/inbox_chat_list_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/channels_provider.dart';
-import '../../../providers/models/scaffold_model.dart';
 import '../../../providers/user_provider.dart';
+import '../../../utilities/scaffold_utils/navigation_mixin.dart';
 
 class InboxChatListScreen extends StatefulWidget {
   final bool isArchivedForUser;
@@ -30,10 +29,9 @@ class InboxChatListScreen extends StatefulWidget {
 }
 
 class _InboxChatListScreenState extends State<InboxChatListScreen>
-    with RouteAwareMixin<InboxChatListScreen> {
+    with NavigationMixin<InboxChatListScreen> {
   late final AuthenticatedUser? _authenticatedUser;
   late final ChannelsProvider _channelsProvider;
-  late final ScaffoldModel _scaffoldModel;
   late Future<List<ChannelForUser>> _userChannels;
   late AppLocalizations _l10n;
 
@@ -42,10 +40,6 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
     super.initState();
     _authenticatedUser = Provider.of<UserProvider>(context, listen: false).user;
     _channelsProvider = Provider.of<ChannelsProvider>(
-      context,
-      listen: false,
-    );
-    _scaffoldModel = Provider.of<ScaffoldModel>(
       context,
       listen: false,
     );
@@ -69,24 +63,6 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
           ).toList() ??
           [];
     });
-  }
-
-  void _refreshScaffold() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scaffoldModel.setInboxScaffold(router: router);
-    });
-  }
-
-  @override
-  void didPush() {
-    super.didPush();
-    _refreshScaffold();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    _refreshScaffold();
   }
 
   List<Widget> _createContentList(
@@ -148,7 +124,9 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
               logFailures: false,
             );
             if (updateCompleted) {
-              _refreshScaffold();
+              buildScaffold((scaffoldModel) {
+                scaffoldModel.setInboxScaffold(router: router);
+              });
               _queryUserChannels();
               setState(() {});
             }
@@ -189,6 +167,9 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
 
   @override
   Widget build(BuildContext context) {
+    buildScaffold((scaffoldModel) {
+      scaffoldModel.setInboxScaffold(router: router);
+    });
     return FutureBuilder(
       future: _userChannels,
       builder: (context, snapshot) {

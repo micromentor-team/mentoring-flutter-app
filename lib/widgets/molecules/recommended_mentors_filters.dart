@@ -4,13 +4,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
-import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
-import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
+
+import '../../utilities/scaffold_utils/navigation_mixin.dart';
 
 class RecommendedMentorsFilters extends StatefulWidget {
   const RecommendedMentorsFilters({super.key});
@@ -20,7 +20,7 @@ class RecommendedMentorsFilters extends StatefulWidget {
 }
 
 class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
-    with RouteAwareMixin<RecommendedMentorsFilters> {
+    with NavigationMixin<RecommendedMentorsFilters> {
   late final TextfieldTagsController _countriesController;
   late final TextfieldTagsController _languagesController;
   late final ExploreCardFiltersModel _filtersModel;
@@ -44,35 +44,15 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
   }
 
   @override
-  void didPush() {
-    super.didPush();
-    _refreshScaffold();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    _refreshScaffold();
-  }
-
-  void _refreshScaffold() {
-    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
-      context,
-      listen: false,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  Widget build(BuildContext context) {
+    buildScaffold((scaffoldModel) {
       scaffoldModel.setParams(
         appBar: AppBarFactory.createTitleOnlyAppBar(
           title: AppLocalizations.of(context)!.exploreSearchFilterTitle,
         ),
       );
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-
     return Padding(
       padding: const EdgeInsets.all(Insets.paddingMedium),
       child: Column(
