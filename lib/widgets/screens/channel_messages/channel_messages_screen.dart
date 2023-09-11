@@ -206,11 +206,9 @@ class _ChannelChatState extends State<ChannelChat>
   Widget build(BuildContext context) {
     return Consumer<ChatModel>(
       builder: (context, chatModel, child) {
-        if (pageRoute.isCurrent) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _processNewMessages();
-          });
-        }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _processNewMessages();
+        });
         return AppUtility.widgetForAsyncState(
           state: chatModel.state,
           onReady: () => Column(
