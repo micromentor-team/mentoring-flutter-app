@@ -23,39 +23,54 @@ Widget _createFooter(BuildContext context, String company, String? companyRole,
   }
 
   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-    Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          Icon(Icons.work_outline,
-              size: _inlineIconSize, color: theme.colorScheme.secondary),
-          const SizedBox(width: Insets.paddingExtraSmall),
-          Text(
-            companyAndRole,
-            style: theme.textTheme.labelSmall!
-                .copyWith(color: theme.colorScheme.secondary),
-          ),
-        ],
-      ),
-      if (education != null) const SizedBox(height: Insets.paddingExtraSmall),
-      if (education != null)
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
+    Expanded(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(
-              Icons.school_outlined,
+              Icons.work_outline,
               size: _inlineIconSize,
               color: theme.colorScheme.secondary,
             ),
             const SizedBox(width: Insets.paddingExtraSmall),
-            Text(
-              education,
-              style: theme.textTheme.labelSmall!
-                  .copyWith(color: theme.colorScheme.secondary),
+            Expanded(
+              child: Text(
+                companyAndRole,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: theme.textTheme.labelSmall!.copyWith(
+                  color: theme.colorScheme.secondary,
+                ),
+              ),
             ),
           ],
         ),
-    ]),
+        if (education != null) const SizedBox(height: Insets.paddingExtraSmall),
+        if (education != null)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.school_outlined,
+                size: _inlineIconSize,
+                color: theme.colorScheme.secondary,
+              ),
+              const SizedBox(width: Insets.paddingExtraSmall),
+              Expanded(
+                child: Text(
+                  education,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelSmall!.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+      ]),
+    ),
     if (linkedinUrl != null)
       Container(
         decoration: ShapeDecoration(

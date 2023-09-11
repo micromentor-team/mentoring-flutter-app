@@ -8,6 +8,9 @@ export function mockQueries(serverState: MockServerState) {
         findUsers: () => {
             return serverState.otherUsers.concat([serverState.loggedInUser]);
         },
+        findUserById: (_: any, args: { id: string}) => {
+            return serverState.otherUsers.concat([serverState.loggedInUser]).find((e) => e.id == args.id);
+        },
         getAuthenticatedUser: () => {
             if (!serverState.loggedIn) {
                 return null;

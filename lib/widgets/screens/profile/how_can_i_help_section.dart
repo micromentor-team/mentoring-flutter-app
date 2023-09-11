@@ -73,7 +73,6 @@ class HowCanIHelpSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(
               horizontal: Insets.paddingMedium, vertical: Insets.paddingSmall),

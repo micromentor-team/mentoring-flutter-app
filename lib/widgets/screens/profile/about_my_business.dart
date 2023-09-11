@@ -29,10 +29,12 @@ class AboutMyBusiness extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(l10n.profileAboutBusiness,
-                  style: theme.textTheme.titleMedium),
+              Text(
+                l10n.profileAboutBusiness,
+                style: theme.textTheme.titleMedium,
+              ),
               const SizedBox(height: Insets.paddingSmall),
-              Row(
+              Wrap(
                 children: [
                   Text(companyInput.name, style: theme.textTheme.titleSmall),
                   const SizedBox(width: Insets.paddingSmall),

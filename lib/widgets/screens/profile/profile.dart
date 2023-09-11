@@ -110,6 +110,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
               linkedinUrl: "https://www.linkedin.com/in/williamhgates/", //TODO
               vacationMode: true, //TODO
             ),
+            const Divider(),
             ProfileAboutMe(
               cityOfResidence: widget.userData.cityOfResidence,
               countryOfResidence:
