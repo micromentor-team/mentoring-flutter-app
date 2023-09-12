@@ -10,14 +10,13 @@ import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/chat_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/base/operation_result.dart';
-import '../../../providers/models/scaffold_model.dart';
+import '../../../utilities/navigation_mixin.dart';
 import 'message_bubble/message_bubble.dart';
 import 'message_bubble/message_hoverover.dart';
 import 'message_bubble/message_peeker.dart';
@@ -39,7 +38,7 @@ class ChannelMessagesScreen extends StatefulWidget {
 }
 
 class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
-    with RouteAwareMixin<ChannelMessagesScreen> {
+    with NavigationMixin<ChannelMessagesScreen> {
   late final ChannelsProvider _channelsProvider;
   late final AuthenticatedUser _user;
   late Future<OperationResult<ChannelById>> _channel;
@@ -54,49 +53,13 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!pageRoute.isCurrent) return;
     _channel = _channelsProvider.findChannelById(channelId: widget.channelId);
-  }
-
-  void _refreshScaffold(
-    BuildContext context,
-    String channelName,
-    String? avatarUrl,
-  ) {
-    final ScaffoldModel scaffoldModel = Provider.of<ScaffoldModel>(
-      context,
-      listen: false,
-    );
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        scaffoldModel.setParams(
-          appBar: AppBarFactory.createChannelMessagesAppBar(
-            context: context,
-            channelName: channelName,
-            channelId: widget.channelId,
-            isArchivedForUser: widget.isArchivedForUser,
-            avatarUrl: avatarUrl,
-          ),
-        );
-      },
-    );
-  }
-
-  @override
-  void didPush() {
-    setState(() {
-      super.didPush();
-    });
-  }
-
-  @override
-  void didPopNext() {
-    setState(() {
-      super.didPopNext();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
     return FutureBuilder(
       future: _channel,
       builder: (context, snapshot) {
@@ -109,9 +72,17 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
                 .user;
             final String channelName = participant.fullName!;
             final String? avatarUrl = participant.avatarUrl;
-            if (isRouteActive) {
-              _refreshScaffold(context, channelName, avatarUrl);
-            }
+            buildPageRouteScaffold((scaffoldModel) {
+              scaffoldModel.setParams(
+                appBar: AppBarFactory.createChannelMessagesAppBar(
+                  context: context,
+                  channelName: channelName,
+                  channelId: widget.channelId,
+                  isArchivedForUser: widget.isArchivedForUser,
+                  avatarUrl: avatarUrl,
+                ),
+              );
+            });
             return ChangeNotifierProvider(
               create: (context) => ChatModel(
                 context: context,
@@ -141,7 +112,7 @@ class ChannelChat extends StatefulWidget {
 }
 
 class _ChannelChatState extends State<ChannelChat>
-    with RouteAwareMixin<ChannelChat> {
+    with NavigationMixin<ChannelChat> {
   final TextEditingController messageTextController = TextEditingController();
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
@@ -235,11 +206,9 @@ class _ChannelChatState extends State<ChannelChat>
   Widget build(BuildContext context) {
     return Consumer<ChatModel>(
       builder: (context, chatModel, child) {
-        if (isRouteActive) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _processNewMessages();
-          });
-        }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _processNewMessages();
+        });
         return AppUtility.widgetForAsyncState(
           state: chatModel.state,
           onReady: () => Column(

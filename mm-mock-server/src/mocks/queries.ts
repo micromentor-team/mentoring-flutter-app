@@ -30,15 +30,26 @@ export function mockQueries(serverState: MockServerState) {
         findChannelsForUser: () => {
             return serverState.channels;
         },
+        myChannelInvitations: (_: any, args: { direction: string, onlyPending: boolean }) => {
+            return serverState.channelInvitations.filter((e) => {
+                if(args.direction == "sent") {
+                    return serverState.loggedInUser.id == e.senderId;
+                } else {
+                    return serverState.loggedInUser.id == e.recipientId;
+                }
+            }).filter((e) => args.onlyPending? e.status == "created" : true)
+                .filter((e) => e.deletedAt == null);
+        },
         myInbox: () => {
             const channelInboxItemInvitations = serverState.channelInvitations.map((e) => generateChannelInboxItemInvitation(e));
             return {
                 __typename: "UserInbox",
                 channels: {
                     __typename: "ChannelInbox",
-                    invitations: channelInboxItemInvitations,
-                    pendingInvitations: channelInboxItemInvitations.filter((e) => e.status == "created"),
-                    unseenMessages: serverState.channelMessages.filter((e) => !e.statuses || e.statuses.length == 0),
+                    unseenMessages: serverState.channelMessages.filter((e) => !e.statuses || e.statuses.length == 0)
+                        .filter((e) => !e.channel.isArchivedForMe),
+                    unseenArchivedMessages: serverState.channelMessages.filter((e) => !e.statuses || e.statuses.length == 0)
+                        .filter((e) => e.channel.isArchivedForMe)
                 }
             }
         },

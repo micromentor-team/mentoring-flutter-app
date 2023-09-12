@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
-import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_filters.dart';
-import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_filters_advanced.dart';
 import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';
+import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters.dart';
+import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters_advanced.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 import '../main.dart';
 import '../widgets/atoms/app_wrapper.dart';
-import '../widgets/screens/channel_messages/channel_messages.dart';
+import '../widgets/screens/channel_messages/channel_messages_screen.dart';
 import '../widgets/screens/dashboard/dashboard.dart';
 import '../widgets/screens/explore/explore.dart';
 import '../widgets/screens/inbox/inbox_chat_list.dart';
@@ -40,6 +40,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
+              maintainState: false,
               child: StartScreen(
                   nextRouteName: state.queryParameters['nextRouteName'] ??
                       Routes.home.name),
@@ -52,6 +53,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
+              maintainState: false,
               child: const WelcomeScreen(),
             );
           },
@@ -62,6 +64,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
+              maintainState: false,
               child: const SelectLanguage(),
             );
           },
@@ -72,6 +75,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
+              maintainState: false,
               child: SignInScreen(nextRouteName: Routes.home.name),
             );
           },
@@ -82,6 +86,7 @@ class AppRouter {
             pageBuilder: (BuildContext context, GoRouterState state) {
               return MaterialPage(
                 key: state.pageKey,
+                maintainState: false,
                 child: const SignUpScreen(),
               );
             }),
@@ -91,6 +96,7 @@ class AppRouter {
             pageBuilder: (BuildContext context, GoRouterState state) {
               return MaterialPage(
                 key: state.pageKey,
+                maintainState: false,
                 child: const MentorOrEntrepreneurScreen(),
               );
             }),
@@ -100,6 +106,7 @@ class AppRouter {
             pageBuilder: (BuildContext context, GoRouterState state) {
               return MaterialPage(
                 key: state.pageKey,
+                maintainState: false,
                 child: const SignUpEmail(),
               );
             }),
@@ -118,6 +125,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
+              maintainState: false,
               child: const LoadingScreen(),
             );
           },
@@ -127,6 +135,7 @@ class AppRouter {
           pageBuilder: (context, state, child) {
             return MaterialPage(
               key: state.pageKey,
+              maintainState: true,
               child: AppWrapper(child: child),
             );
           },
@@ -137,6 +146,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: const DashboardScreen(),
                 );
               },
@@ -147,6 +157,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: true,
                   child: const ExploreScreen(),
                 );
               },
@@ -157,6 +168,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: true,
                   child: const RecommendedMentorsFilters(),
                 );
               },
@@ -167,6 +179,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: true,
                   child: const RecommendedMentorsFiltersAdvanced(),
                 );
               },
@@ -174,11 +187,15 @@ class AppRouter {
             GoRoute(
               path: Routes.exploreInviteToConnect.path,
               name: Routes.exploreInviteToConnect.name,
-              builder: (BuildContext context, GoRouterState state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 List<ProfileQuickViewInfo> selectedProfiles =
                     state.extra as List<ProfileQuickViewInfo>;
-                return InviteToConnect(
-                  initialSelectedProfiles: selectedProfiles,
+                return MaterialPage(
+                  key: state.pageKey,
+                  maintainState: false,
+                  child: InviteToConnect(
+                    initialSelectedProfiles: selectedProfiles,
+                  ),
                 );
               },
             ),
@@ -188,6 +205,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: const InboxChatListScreen(isArchivedForUser: false),
                 );
               },
@@ -200,6 +218,7 @@ class AppRouter {
                     state.pathParameters[RouteParams.channelId]!;
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: ChannelMessagesScreen(
                     channelId: channelId,
                     isArchivedForUser: false,
@@ -213,6 +232,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: const InboxInvitesReceivedScreen(),
                 );
               },
@@ -225,6 +245,7 @@ class AppRouter {
                     state.pathParameters[RouteParams.channelInvitationId]!;
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: InvitationDetail(
                     channelInvitationId: channelInvitationId,
                     invitationDirection: MessageDirection.received,
@@ -238,6 +259,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: const InboxInvitesSentScreen(),
                 );
               },
@@ -250,6 +272,7 @@ class AppRouter {
                     state.pathParameters[RouteParams.channelInvitationId]!;
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: InvitationDetail(
                     channelInvitationId: channelInvitationId,
                     invitationDirection: MessageDirection.sent,
@@ -263,6 +286,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: const InboxChatListScreen(isArchivedForUser: true),
                 );
               },
@@ -275,6 +299,7 @@ class AppRouter {
                     state.pathParameters[RouteParams.channelId]!;
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: ChannelMessagesScreen(
                     channelId: channelId,
                     isArchivedForUser: true,
@@ -288,6 +313,7 @@ class AppRouter {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return MaterialPage(
                   key: state.pageKey,
+                  maintainState: false,
                   child: const ProfileScreen(),
                 );
               },
@@ -296,52 +322,5 @@ class AppRouter {
         ),
       ],
     );
-  }
-}
-
-mixin RouteAwareMixin<T extends StatefulWidget> on State<T>
-    implements RouteAware {
-  late GoRouter _router;
-  late RouteObserver<PageRoute> _routeObserver;
-  bool _isActive = false;
-
-  bool get isRouteActive => _isActive;
-  GoRouter get router => _router;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _router = GoRouter.of(context);
-    _routeObserver = Provider.of<RouteObserver<PageRoute>>(
-      context,
-      listen: false,
-    );
-    _routeObserver.subscribe(this, ModalRoute.of(context)! as PageRoute);
-  }
-
-  @override
-  void dispose() {
-    _routeObserver.unsubscribe(this);
-    super.dispose();
-  }
-
-  @override
-  void didPop() {
-    _isActive = false;
-  }
-
-  @override
-  void didPopNext() {
-    _isActive = true;
-  }
-
-  @override
-  void didPush() {
-    _isActive = true;
-  }
-
-  @override
-  void didPushNext() {
-    _isActive = false;
   }
 }
