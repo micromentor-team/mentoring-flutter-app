@@ -59,6 +59,7 @@ class CreateMultiSelectChips extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    Set<FilterChipWidget> AllChips = {};
 
     String textString = maxSelection != null
         ? l10n.profileChipsSelectUpTo(maxSelection!)
@@ -69,6 +70,9 @@ class CreateMultiSelectChips extends StatelessWidget {
       var chip = FilterChipWidget(
         chipName: chips[i].chipName,
         icon: chips[i].icon,
+        callback: (Set<FilterChipWidget> val) {
+          AllChips = val;
+        },
       );
       chipListWithPadding.add(chip);
       var padding = const SizedBox(
@@ -92,19 +96,27 @@ class CreateMultiSelectChips extends StatelessWidget {
         Column(
           children: chipListWithPadding,
         ),
+        const Text("Selected widgets are: "),
+        for (var chip in AllChips) Text(chip.chipName)
       ],
     );
   }
 }
 
+typedef FilterChipWidgetCallback = void Function(Set<FilterChipWidget> val);
+
 class FilterChipWidget extends StatefulWidget {
   final String chipName;
   final IconData? icon;
+  final FilterChipWidgetCallback callback;
+  bool selected;
 
-  const FilterChipWidget({
+  FilterChipWidget({
     Key? key,
     required this.chipName,
+    required this.callback,
     this.icon,
+    this.selected = false,
   }) : super(key: key);
 
   @override
@@ -117,6 +129,16 @@ class _FilterChipWidgetState extends State<FilterChipWidget> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    // Set<FilterChipWidget> allFilterChips = {};
+    // allFilterChips.add(widget);
+    // print(allFilterChips.length);
+    // widget.callback(allFilterChips);
+    // allFilterChips.forEach((element) {
+    //   if (element.selected) print(element.chipName);
+    // });
+
+    // Set<FilterChipWidget> selectedFilterChips = {};
+
     return FilterChip(
       avatar: widget.icon != null
           ? Icon(
@@ -141,6 +163,7 @@ class _FilterChipWidgetState extends State<FilterChipWidget> {
       onSelected: (bool selected) {
         setState(() {
           _isSelected = selected;
+          widget.selected = selected;
         });
       },
     );
