@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //class chip
 class Chip {
   final String chipName;
   final IconData? icon;
 
-  const Chip({
+  Chip({
     required this.chipName,
     this.icon,
   });
@@ -13,7 +15,7 @@ class Chip {
 
 //example
 CreateMultiSelectChips createMultiSelectChipsExample() {
-  return const CreateMultiSelectChips(
+  return CreateMultiSelectChips(
     chips: [
       Chip(chipName: 'Weekly check-ins'),
       Chip(chipName: 'Monthly check-ins'),
@@ -27,21 +29,17 @@ CreateMultiSelectChips createMultiSelectChipsExample() {
 
 //example 2
 CreateMultiSelectChips createMultiSelectChipsExampleWithIcon() {
-  return const CreateMultiSelectChips(
+  return CreateMultiSelectChips(
     chips: [
-      Chip(chipName: 'Administrative Services', icon: Icons.campaign_outlined),
-      Chip(chipName: 'Agriculture & Forestry', icon: Icons.campaign_outlined),
-      Chip(
-          chipName: 'Architecture & Engineering',
-          icon: Icons.campaign_outlined),
+      Chip(chipName: 'Administrative Services', icon: Icons.work_outline),
+      Chip(chipName: 'Agriculture & Forestry', icon: Icons.work_outline),
+      Chip(chipName: 'Architecture & Engineering', icon: Icons.work_outline),
       Chip(
           chipName: 'Arts, Entertainment, & Recreation',
-          icon: Icons.campaign_outlined),
+          icon: Icons.work_outline),
+      Chip(chipName: 'Beauty, Hair, & Cosmetics', icon: Icons.work_outline),
       Chip(
-          chipName: 'Beauty, Hair, & Cosmetics', icon: Icons.campaign_outlined),
-      Chip(
-          chipName: 'Building & Grounds Maintenance',
-          icon: Icons.campaign_outlined),
+          chipName: 'Building & Grounds Maintenance', icon: Icons.work_outline),
     ],
     maxSelection: 3,
   );
@@ -60,10 +58,24 @@ class CreateMultiSelectChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    String textString = maxSelection != null
-        ? "Select up to $maxSelection (optional)"
-        : "Select all that apply (optional)";
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
+    String textString = maxSelection != null
+        ? l10n.profileChipsSelectUpTo(maxSelection!)
+        : l10n.profileChipsSelectAllThatApply;
+
+    List<Widget> chipListWithPadding = [];
+    for (int i = 0; i < chips.length; i++) {
+      var chip = FilterChipWidget(
+        chipName: chips[i].chipName,
+        icon: chips[i].icon,
+      );
+      chipListWithPadding.add(chip);
+      var padding = const SizedBox(
+        height: Insets.paddingMedium,
+      );
+      chipListWithPadding.add(padding);
+    }
     return Column(
       children: [
         Center(
@@ -75,16 +87,10 @@ class CreateMultiSelectChips extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: Insets.paddingLarge,
         ),
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 10.0,
-          runSpacing: 10.0,
-          children: [
-            for (int i = 0; i < chips.length; i++)
-              FilterChipWidget(chipName: chips[i].chipName, icon: chips[i].icon)
-          ],
+        Column(
+          children: chipListWithPadding,
         ),
       ],
     );
@@ -116,20 +122,21 @@ class _FilterChipWidgetState extends State<FilterChipWidget> {
           ? Icon(
               widget.icon!,
               color: _isSelected
-                  ? theme.colorScheme.onPrimary
+                  ? theme.colorScheme.onSurfaceVariant
                   : theme.colorScheme.onSecondaryContainer,
             )
           : null,
       label: Text(widget.chipName),
-      labelStyle: theme.textTheme.labelSmall?.copyWith(
+      labelStyle: theme.textTheme.labelLarge?.copyWith(
         color: _isSelected
-            ? theme.colorScheme.onPrimary
+            ? theme.colorScheme.onSurfaceVariant
             : theme.colorScheme.onSecondaryContainer,
       ),
-      backgroundColor: theme.colorScheme.secondaryContainer,
-      selectedColor: theme.colorScheme.primary,
+      selectedColor: theme.colorScheme.secondaryContainer,
       selected: _isSelected,
-      side: BorderSide.none,
+      side: _isSelected == false
+          ? BorderSide(color: theme.colorScheme.outline)
+          : null,
       showCheckmark: false,
       onSelected: (bool selected) {
         setState(() {
