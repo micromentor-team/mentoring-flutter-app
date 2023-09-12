@@ -139,12 +139,14 @@ class ProfileAboutMe extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: Insets.paddingSmall),
-              _createChipsSection(
-                context,
-                l10n.profileMyLanguages,
-                _createLanguageChips(languages),
-              ),
-              const SizedBox(height: Insets.paddingSmall),
+              if (languages.isNotEmpty) ...[
+                _createChipsSection(
+                  context,
+                  l10n.profileMyLanguages,
+                  _createLanguageChips(languages),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
             ],
           ),
         ),

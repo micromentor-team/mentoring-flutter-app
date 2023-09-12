@@ -83,8 +83,11 @@ query FindMentorUsers($options: FindObjectsOptions, $filter: UserListFilter, $ma
 
 query FindUserDetailedProfile($userId: String!) {
     findUserById(id: $userId) {
+        id
         avatarUrl
         fullName
+        firstName
+        lastName
         regionOfResidence
         cityOfResidence
         countryOfResidence {

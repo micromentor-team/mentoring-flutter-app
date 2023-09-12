@@ -7,14 +7,14 @@ class HowCanIHelpSection extends StatelessWidget {
   final List<String> expertises;
   final List<String> industries;
   final List<String> mentoringPreferences;
-  final String expectations;
+  final String? expectations;
 
   const HowCanIHelpSection({
     super.key,
-    required this.expertises,
-    required this.industries,
-    required this.mentoringPreferences,
-    required this.expectations,
+    this.expertises = const [],
+    this.industries = const [],
+    this.mentoringPreferences = const [],
+    this.expectations,
   });
 
   Widget _createChipsSection(
@@ -86,29 +86,38 @@ class HowCanIHelpSection extends StatelessWidget {
                     .copyWith(color: theme.colorScheme.onSurface),
               ),
               const SizedBox(height: Insets.paddingSmall),
-              _createChipsSection(
-                context,
-                l10n.profileHowCanIHelpExpertises,
-                expertises.map((e) => ProfileChip(text: e)).toList(),
-              ),
-              const SizedBox(height: Insets.paddingSmall),
-              _createChipsSection(
-                context,
-                l10n.profileHowCanIHelpIndustries,
-                industries.map((e) => ProfileChip(text: e)).toList(),
-              ),
-              const SizedBox(height: Insets.paddingSmall),
-              _createChipsSection(
-                context,
-                l10n.profileHowCanIHelpPreferences,
-                mentoringPreferences.map((e) => ProfileChip(text: e)).toList(),
-              ),
-              const SizedBox(height: Insets.paddingSmall),
-              _createTextSection(
-                context,
-                l10n.profileHowCanIHelpExpectations,
-                expectations,
-              )
+              if (expertises.isNotEmpty) ...[
+                _createChipsSection(
+                  context,
+                  l10n.profileHowCanIHelpExpertises,
+                  expertises.map((e) => ProfileChip(text: e)).toList(),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
+              if (industries.isNotEmpty) ...[
+                _createChipsSection(
+                  context,
+                  l10n.profileHowCanIHelpIndustries,
+                  industries.map((e) => ProfileChip(text: e)).toList(),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
+              if (mentoringPreferences.isNotEmpty) ...[
+                _createChipsSection(
+                  context,
+                  l10n.profileHowCanIHelpPreferences,
+                  mentoringPreferences
+                      .map((e) => ProfileChip(text: e))
+                      .toList(),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
+              if (expectations != null)
+                _createTextSection(
+                  context,
+                  l10n.profileHowCanIHelpExpectations,
+                  expectations!,
+                )
             ],
           ),
         ),

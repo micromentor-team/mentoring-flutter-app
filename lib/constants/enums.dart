@@ -14,4 +14,5 @@ enum UserType {
 enum MessageDirection {
   sent,
   received,
+  unset,
 }

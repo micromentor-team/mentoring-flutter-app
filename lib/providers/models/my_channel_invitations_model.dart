@@ -10,7 +10,7 @@ class MyChannelInvitationsModel extends ChangeNotifier {
 
   List<ReceivedChannelInvitation> _receivedInvitations = [];
   List<SentChannelInvitation> _sentInvitations = [];
-  AsyncState _state = AsyncState.loading;
+  AsyncState _state = AsyncState.ready;
 
   List<ReceivedChannelInvitation> get receivedInvitations =>
       _receivedInvitations;

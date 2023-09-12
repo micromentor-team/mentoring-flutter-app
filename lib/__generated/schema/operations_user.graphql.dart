@@ -5502,6 +5502,13 @@ const documentNodeQueryFindUserDetailedProfile = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'avatarUrl'),
             alias: null,
             arguments: [],
@@ -5510,6 +5517,20 @@ const documentNodeQueryFindUserDetailedProfile = DocumentNode(definitions: [
           ),
           FieldNode(
             name: NameNode(value: 'fullName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'firstName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'lastName'),
             alias: null,
             arguments: [],
             directives: [],
@@ -5913,8 +5934,11 @@ const documentNodeQueryFindUserDetailedProfile = DocumentNode(definitions: [
 
 class Query$FindUserDetailedProfile$findUserById {
   Query$FindUserDetailedProfile$findUserById({
+    required this.id,
     this.avatarUrl,
     this.fullName,
+    this.firstName,
+    this.lastName,
     this.regionOfResidence,
     this.cityOfResidence,
     this.countryOfResidence,
@@ -5931,8 +5955,11 @@ class Query$FindUserDetailedProfile$findUserById {
 
   factory Query$FindUserDetailedProfile$findUserById.fromJson(
       Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$avatarUrl = json['avatarUrl'];
     final l$fullName = json['fullName'];
+    final l$firstName = json['firstName'];
+    final l$lastName = json['lastName'];
     final l$regionOfResidence = json['regionOfResidence'];
     final l$cityOfResidence = json['cityOfResidence'];
     final l$countryOfResidence = json['countryOfResidence'];
@@ -5946,8 +5973,11 @@ class Query$FindUserDetailedProfile$findUserById {
     final l$groupMemberships = json['groupMemberships'];
     final l$$__typename = json['__typename'];
     return Query$FindUserDetailedProfile$findUserById(
+      id: (l$id as String),
       avatarUrl: (l$avatarUrl as String?),
       fullName: (l$fullName as String?),
+      firstName: (l$firstName as String?),
+      lastName: (l$lastName as String?),
       regionOfResidence: (l$regionOfResidence as String?),
       cityOfResidence: (l$cityOfResidence as String?),
       countryOfResidence: l$countryOfResidence == null
@@ -5984,9 +6014,15 @@ class Query$FindUserDetailedProfile$findUserById {
     );
   }
 
+  final String id;
+
   final String? avatarUrl;
 
   final String? fullName;
+
+  final String? firstName;
+
+  final String? lastName;
 
   final String? regionOfResidence;
 
@@ -6018,10 +6054,16 @@ class Query$FindUserDetailedProfile$findUserById {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$avatarUrl = avatarUrl;
     _resultData['avatarUrl'] = l$avatarUrl;
     final l$fullName = fullName;
     _resultData['fullName'] = l$fullName;
+    final l$firstName = firstName;
+    _resultData['firstName'] = l$firstName;
+    final l$lastName = lastName;
+    _resultData['lastName'] = l$lastName;
     final l$regionOfResidence = regionOfResidence;
     _resultData['regionOfResidence'] = l$regionOfResidence;
     final l$cityOfResidence = cityOfResidence;
@@ -6053,8 +6095,11 @@ class Query$FindUserDetailedProfile$findUserById {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$avatarUrl = avatarUrl;
     final l$fullName = fullName;
+    final l$firstName = firstName;
+    final l$lastName = lastName;
     final l$regionOfResidence = regionOfResidence;
     final l$cityOfResidence = cityOfResidence;
     final l$countryOfResidence = countryOfResidence;
@@ -6068,8 +6113,11 @@ class Query$FindUserDetailedProfile$findUserById {
     final l$groupMemberships = groupMemberships;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$avatarUrl,
       l$fullName,
+      l$firstName,
+      l$lastName,
       l$regionOfResidence,
       l$cityOfResidence,
       l$countryOfResidence,
@@ -6094,6 +6142,11 @@ class Query$FindUserDetailedProfile$findUserById {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
     final l$avatarUrl = avatarUrl;
     final lOther$avatarUrl = other.avatarUrl;
     if (l$avatarUrl != lOther$avatarUrl) {
@@ -6102,6 +6155,16 @@ class Query$FindUserDetailedProfile$findUserById {
     final l$fullName = fullName;
     final lOther$fullName = other.fullName;
     if (l$fullName != lOther$fullName) {
+      return false;
+    }
+    final l$firstName = firstName;
+    final lOther$firstName = other.firstName;
+    if (l$firstName != lOther$firstName) {
+      return false;
+    }
+    final l$lastName = lastName;
+    final lOther$lastName = other.lastName;
+    if (l$lastName != lOther$lastName) {
       return false;
     }
     final l$regionOfResidence = regionOfResidence;
@@ -6220,8 +6283,11 @@ abstract class CopyWith$Query$FindUserDetailedProfile$findUserById<TRes> {
       _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById;
 
   TRes call({
+    String? id,
     String? avatarUrl,
     String? fullName,
+    String? firstName,
+    String? lastName,
     String? regionOfResidence,
     String? cityOfResidence,
     Query$FindUserDetailedProfile$findUserById$countryOfResidence?
@@ -6282,8 +6348,11 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? avatarUrl = _undefined,
     Object? fullName = _undefined,
+    Object? firstName = _undefined,
+    Object? lastName = _undefined,
     Object? regionOfResidence = _undefined,
     Object? cityOfResidence = _undefined,
     Object? countryOfResidence = _undefined,
@@ -6298,11 +6367,17 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindUserDetailedProfile$findUserById(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
         avatarUrl: avatarUrl == _undefined
             ? _instance.avatarUrl
             : (avatarUrl as String?),
         fullName:
             fullName == _undefined ? _instance.fullName : (fullName as String?),
+        firstName: firstName == _undefined
+            ? _instance.firstName
+            : (firstName as String?),
+        lastName:
+            lastName == _undefined ? _instance.lastName : (lastName as String?),
         regionOfResidence: regionOfResidence == _undefined
             ? _instance.regionOfResidence
             : (regionOfResidence as String?),
@@ -6424,8 +6499,11 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById<TRes>
   TRes _res;
 
   call({
+    String? id,
     String? avatarUrl,
     String? fullName,
+    String? firstName,
+    String? lastName,
     String? regionOfResidence,
     String? cityOfResidence,
     Query$FindUserDetailedProfile$findUserById$countryOfResidence?

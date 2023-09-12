@@ -1,47 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/invitations_provider.dart';
+import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
+import 'package:provider/provider.dart';
 
-class ProfilePageHeader extends StatelessWidget {
-  final bool requestReceived;
+class ProfilePageHeader extends StatefulWidget {
+  final String userId;
+  final String? invitationId;
+  final String userFirstName;
+  final MessageDirection invitationDirection;
 
   const ProfilePageHeader({
     Key? key,
-    this.requestReceived = false,
+    required this.userId,
+    required this.userFirstName,
+    this.invitationId,
+    this.invitationDirection = MessageDirection.unset,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-
-    return Container(
-        color: theme.colorScheme.secondaryContainer,
-        height: 68.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(Insets.paddingLarge),
-              child: Icon(
-                Icons.keyboard_backspace_outlined,
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-            if (requestReceived == false) _createSendInviteButton(theme),
-            if (requestReceived == true)
-              _createAcceptRejectInviteButtons(theme, l10n),
-          ],
-        ));
-  }
+  State<ProfilePageHeader> createState() => _ProfilePageHeaderState();
 }
 
-_createAcceptRejectInviteButtons(ThemeData theme, AppLocalizations l10n) {
-  return Padding(
-    padding: const EdgeInsets.only(
-      right: (Insets.paddingLarge),
-    ),
-    child: Row(
+class _ProfilePageHeaderState extends State<ProfilePageHeader> {
+  late final InvitationsProvider _invitationsProvider;
+  late final MyChannelInvitationsModel _myChannelInvitationsModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _invitationsProvider = Provider.of<InvitationsProvider>(
+      context,
+      listen: false,
+    );
+    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
+      context,
+      listen: false,
+    );
+  }
+
+  Widget _createAcceptRejectInviteButtons(
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
@@ -50,7 +54,14 @@ _createAcceptRejectInviteButtons(ThemeData theme, AppLocalizations l10n) {
             backgroundColor: theme.colorScheme.secondaryContainer,
             textStyle: theme.textTheme.labelLarge,
           ),
-          onPressed: () {},
+          onPressed: () async {
+            await _invitationsProvider.declineChannelInvitation(
+              channelInvitationId: widget.invitationId!,
+            );
+            _myChannelInvitationsModel.refreshReceivedInvitations(
+              onlyPending: false,
+            );
+          },
           child: Text(
             l10n.decline,
             style: theme.textTheme.labelLarge?.copyWith(
@@ -65,25 +76,30 @@ _createAcceptRejectInviteButtons(ThemeData theme, AppLocalizations l10n) {
             backgroundColor: theme.colorScheme.primary,
             textStyle: theme.textTheme.labelLarge,
           ),
-          onPressed: () {},
+          onPressed: () async {
+            await _invitationsProvider.acceptChannelInvitation(
+              channelInvitationId: widget.invitationId!,
+            );
+            _myChannelInvitationsModel.refreshReceivedInvitations(
+              onlyPending: false,
+            );
+          },
           child: Text(
             l10n.accept,
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.onPrimary,
             ),
           ),
-        )
+        ),
       ],
-    ),
-  );
-}
+    );
+  }
 
-_createSendInviteButton(ThemeData theme) {
-  return Padding(
-    padding: const EdgeInsets.only(
-      right: (Insets.paddingLarge),
-    ),
-    child: ElevatedButton(
+  Widget _createSendInviteButton(
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
+    return ElevatedButton(
       style: ElevatedButton.styleFrom(
         minimumSize: Dimensions.bigButtonSize,
         backgroundColor: theme.colorScheme.surface,
@@ -93,9 +109,10 @@ _createSendInviteButton(ThemeData theme) {
       child: Row(
         children: [
           Text(
-            "Invite Maria to Connect",
-            style: theme.textTheme.labelLarge
-                ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+            l10n.profileHeaderInvite(widget.userFirstName),
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(
             width: Insets.paddingSmall,
@@ -106,6 +123,70 @@ _createSendInviteButton(ThemeData theme) {
           ),
         ],
       ),
-    ),
-  );
+    );
+  }
+
+  Widget _createWithdrawInviteButton(
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: Dimensions.bigButtonSize,
+        backgroundColor: theme.colorScheme.primary,
+        textStyle: theme.textTheme.labelLarge,
+      ),
+      onPressed: () async {
+        await _invitationsProvider.withdrawChannelInvitation(
+          channelInvitationId: widget.invitationId!,
+        );
+        _myChannelInvitationsModel.refreshSentInvitations(onlyPending: false);
+      },
+      child: Text(
+        l10n.profileHeaderWithdraw,
+        style: theme.textTheme.labelLarge?.copyWith(
+          color: theme.colorScheme.onPrimary,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+
+    final Widget actions;
+    switch (widget.invitationDirection) {
+      case MessageDirection.unset:
+        actions = _createSendInviteButton(theme, l10n);
+        break;
+      case MessageDirection.received:
+        actions = _createAcceptRejectInviteButtons(theme, l10n);
+        break;
+      case MessageDirection.sent:
+        actions = _createWithdrawInviteButton(theme, l10n);
+        break;
+    }
+    return Container(
+      color: theme.colorScheme.secondaryContainer,
+      height: 68.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: Icon(
+              Icons.keyboard_backspace_outlined,
+              color: theme.colorScheme.secondary,
+            ),
+            onPressed: () => context.pop(),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(end: Insets.paddingLarge),
+            child: actions,
+          )
+        ],
+      ),
+    );
+  }
 }

@@ -376,17 +376,21 @@ class _InvitationDetailState extends State<InvitationDetail>
         case MessageDirection.sent:
           appBar = AppBarFactory.createInviteSentDetailAppBar(context: context);
           break;
+        default:
+          break;
       }
       scaffoldModel.setParams(appBar: appBar);
     });
     final ThemeData theme = Theme.of(context);
-    Widget Function(ChannelInvitationById) userCardCreateFunction;
+    Widget Function(ChannelInvitationById)? userCardCreateFunction;
     switch (widget.invitationDirection) {
       case MessageDirection.received:
         userCardCreateFunction = _createSenderCard;
         break;
       case MessageDirection.sent:
         userCardCreateFunction = _createRecipientCard;
+        break;
+      default:
         break;
     }
     return FutureBuilder(
@@ -402,7 +406,8 @@ class _InvitationDetailState extends State<InvitationDetail>
                 Expanded(
                   child: ListView(
                     children: [
-                      userCardCreateFunction(invitationResult),
+                      if (userCardCreateFunction != null)
+                        userCardCreateFunction(invitationResult),
                       const SizedBox(height: Insets.paddingMedium),
                       Padding(
                         padding: const EdgeInsets.symmetric(

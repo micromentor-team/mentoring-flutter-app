@@ -38,61 +38,76 @@ class AboutMyBusiness extends StatelessWidget {
                 children: [
                   Text(companyInput.name, style: theme.textTheme.titleSmall),
                   const SizedBox(width: Insets.paddingSmall),
-                  InkWell(
-                    onTap: () => launchUrl(Uri.parse(companyInput.website)),
-                    child: Text(
-                      companyInput.website,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: theme.colorScheme.primary,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Wrap(
-                children: [
-                  ProfileChipPadded(
-                    text: [companyInput.city, companyInput.country]
-                        .join(l10n.listSeparator),
-                  ),
-                  ProfileChipPadded(text: companyInput.industry),
-                  ProfileChipPadded(
-                    text: l10n.profileAboutBusinessStage(companyInput.stage),
-                  ),
-                ],
-              ),
-              const SizedBox(height: Insets.paddingSmall),
-              Text(l10n.profileHelpWith, style: textContentTheme),
-              Wrap(
-                children: [
-                  for (final help in companyInput.expertisesSought)
-                    ProfileChipPadded(text: help),
-                ],
-              ),
-              const SizedBox(height: Insets.paddingSmall),
-              Text(l10n.profileMission, style: textContentTheme),
-              Text(companyInput.mission, style: theme.textTheme.bodyMedium),
-              const SizedBox(height: Insets.paddingSmall),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    for (final imageUrl in companyInput.imageUrls)
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(right: Insets.paddingSmall),
-                        child: Image(
-                          image: NetworkImage(imageUrl),
-                          height: Dimensions.imageTile.height,
+                  if (companyInput.website != null)
+                    InkWell(
+                      onTap: () => launchUrl(Uri.parse(companyInput.website!)),
+                      child: Text(
+                        companyInput.website!,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          decoration: TextDecoration.underline,
+                          color: theme.colorScheme.primary,
                         ),
                       ),
-                  ],
-                ),
+                    ),
+                ],
+              ),
+              Wrap(
+                children: [
+                  if (companyInput.city != null || companyInput.country != null)
+                    ProfileChipPadded(
+                      text: [companyInput.city, companyInput.country]
+                          .join(l10n.listSeparator),
+                    ),
+                  if (companyInput.industry != null)
+                    ProfileChipPadded(
+                      text: companyInput.industry!,
+                    ),
+                  if (companyInput.stage != null)
+                    ProfileChipPadded(
+                      text: l10n.profileAboutBusinessStage(companyInput.stage!),
+                    ),
+                ],
               ),
               const SizedBox(height: Insets.paddingSmall),
-              Text(l10n.profileMotivation, style: textContentTheme),
-              Text(companyInput.motivation, style: theme.textTheme.bodyMedium),
+              if (companyInput.expertisesSought.isNotEmpty) ...[
+                Text(l10n.profileHelpWith, style: textContentTheme),
+                Wrap(
+                  children: [
+                    for (final help in companyInput.expertisesSought)
+                      ProfileChipPadded(text: help),
+                  ],
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
+              if (companyInput.mission != null) ...[
+                Text(l10n.profileMission, style: textContentTheme),
+                Text(companyInput.mission!, style: theme.textTheme.bodyMedium),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
+              if (companyInput.imageUrls.isNotEmpty)
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (final imageUrl in companyInput.imageUrls)
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(right: Insets.paddingSmall),
+                          child: Image(
+                            image: NetworkImage(imageUrl),
+                            height: Dimensions.imageTile.height,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              if (companyInput.imageUrls.isNotEmpty)
+                const SizedBox(height: Insets.paddingSmall),
+              if (companyInput.motivation != null) ...[
+                Text(l10n.profileMotivation, style: textContentTheme),
+                Text(companyInput.motivation!,
+                    style: theme.textTheme.bodyMedium),
+              ],
             ],
           ),
         ),
@@ -103,26 +118,26 @@ class AboutMyBusiness extends StatelessWidget {
 
 class CompanyInput {
   final String name;
-  final String website;
-  final String stage;
-  final String city;
-  final String country;
-  final String industry;
+  final String? website;
+  final String? stage;
+  final String? city;
+  final String? country;
+  final String? industry;
   final List<String> expertisesSought;
-  final String mission;
+  final String? mission;
   final List<String> imageUrls;
-  final String motivation;
+  final String? motivation;
 
   CompanyInput({
     required this.name,
-    required this.website,
-    required this.stage,
-    required this.city,
-    required this.country,
-    required this.industry,
-    required this.expertisesSought,
-    required this.mission,
-    required this.imageUrls,
-    required this.motivation,
+    this.website,
+    this.stage,
+    this.city,
+    this.country,
+    this.industry,
+    this.expertisesSought = const [],
+    this.mission,
+    this.imageUrls = const [],
+    this.motivation,
   });
 }

@@ -192,6 +192,8 @@
     "profileAboutBusinessStage": "{stageDescriptor} stage",
     "profileAboutFrom": "From {location}",
     "profileAboutLivesIn": "Lives in {location}",
+    "profileHeaderInvite": "Invite {firstName} to Connect",
+    "profileHeaderWithdraw": "Cancel pending request",
     "profileHelpWith": "I am looking to help with",
     "profileHowCanIHelp": "How can I help",
     "profileHowCanIHelpExpectations": "My expectations:",
