@@ -9,6 +9,7 @@ import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_email.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_password.dart';
 import 'package:mm_flutter_app/widgets/screens/welcome/select_language.dart';
 import 'package:provider/provider.dart';
 
@@ -100,6 +101,15 @@ class AppRouter {
               return MaterialPage(
                 key: state.pageKey,
                 child: const SignUpEmail(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupPassword.path,
+            name: Routes.signupPassword.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                child: const SignUpPassword(),
               );
             }),
         GoRoute(
