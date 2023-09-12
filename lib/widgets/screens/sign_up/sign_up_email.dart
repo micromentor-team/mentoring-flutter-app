@@ -38,7 +38,6 @@ class _SignUpEmailState extends State<SignUpEmail> {
                   email = value;
                 });
               },
-              obscureText: false,
               validator: (value) {
                 bool validEmail = EmailValidator.validate(value!);
                 if (validEmail != true) {
@@ -57,7 +56,7 @@ class _SignUpEmailState extends State<SignUpEmail> {
           },
           rightOnPress: () {
             if (_formKey.currentState!.validate()) {
-              context.push(Routes.entrepreneurOrMentor.path);
+              context.push(Routes.signupPassword.path);
             }
           },
         ));
