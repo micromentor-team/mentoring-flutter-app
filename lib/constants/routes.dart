@@ -53,10 +53,6 @@ class Routes {
     name: 'explore',
     path: '/explore',
   );
-  static Route exploreInviteToConnect = Route(
-    name: 'exploreInviteToConnect',
-    path: '${explore.path}/connect',
-  );
   static Route exploreFilters = Route(
     name: 'exploreFilters',
     path: '${explore.path}/filters',
@@ -112,6 +108,14 @@ class Routes {
   static Route profileId = Route(
     name: 'profileId',
     path: '${profile.path}/:${RouteParams.userId}',
+  );
+  static Route profileInvite = Route(
+    name: 'profileInvite',
+    path: '${profile.path}/invite',
+  );
+  static Route profileInviteId = Route(
+    name: 'profileInviteId',
+    path: '${profileInvite.path}/:${RouteParams.userId}',
   );
 }
 

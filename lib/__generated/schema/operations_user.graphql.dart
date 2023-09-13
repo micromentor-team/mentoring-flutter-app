@@ -9320,6 +9320,2242 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$groupMembersh
       _res;
 }
 
+class Variables$Query$FindUserQuickViewProfile {
+  factory Variables$Query$FindUserQuickViewProfile({required String userId}) =>
+      Variables$Query$FindUserQuickViewProfile._({
+        r'userId': userId,
+      });
+
+  Variables$Query$FindUserQuickViewProfile._(this._$data);
+
+  factory Variables$Query$FindUserQuickViewProfile.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$userId = data['userId'];
+    result$data['userId'] = (l$userId as String);
+    return Variables$Query$FindUserQuickViewProfile._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get userId => (_$data['userId'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$userId = userId;
+    result$data['userId'] = l$userId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$FindUserQuickViewProfile<
+          Variables$Query$FindUserQuickViewProfile>
+      get copyWith => CopyWith$Variables$Query$FindUserQuickViewProfile(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$FindUserQuickViewProfile) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$userId = userId;
+    return Object.hashAll([l$userId]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$FindUserQuickViewProfile<TRes> {
+  factory CopyWith$Variables$Query$FindUserQuickViewProfile(
+    Variables$Query$FindUserQuickViewProfile instance,
+    TRes Function(Variables$Query$FindUserQuickViewProfile) then,
+  ) = _CopyWithImpl$Variables$Query$FindUserQuickViewProfile;
+
+  factory CopyWith$Variables$Query$FindUserQuickViewProfile.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$FindUserQuickViewProfile;
+
+  TRes call({String? userId});
+}
+
+class _CopyWithImpl$Variables$Query$FindUserQuickViewProfile<TRes>
+    implements CopyWith$Variables$Query$FindUserQuickViewProfile<TRes> {
+  _CopyWithImpl$Variables$Query$FindUserQuickViewProfile(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$FindUserQuickViewProfile _instance;
+
+  final TRes Function(Variables$Query$FindUserQuickViewProfile) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? userId = _undefined}) =>
+      _then(Variables$Query$FindUserQuickViewProfile._({
+        ..._instance._$data,
+        if (userId != _undefined && userId != null)
+          'userId': (userId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$FindUserQuickViewProfile<TRes>
+    implements CopyWith$Variables$Query$FindUserQuickViewProfile<TRes> {
+  _CopyWithStubImpl$Variables$Query$FindUserQuickViewProfile(this._res);
+
+  TRes _res;
+
+  call({String? userId}) => _res;
+}
+
+class Query$FindUserQuickViewProfile {
+  Query$FindUserQuickViewProfile({
+    required this.findUserById,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$FindUserQuickViewProfile.fromJson(Map<String, dynamic> json) {
+    final l$findUserById = json['findUserById'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserQuickViewProfile(
+      findUserById: Query$FindUserQuickViewProfile$findUserById.fromJson(
+          (l$findUserById as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$FindUserQuickViewProfile$findUserById findUserById;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$findUserById = findUserById;
+    _resultData['findUserById'] = l$findUserById.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$findUserById = findUserById;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$findUserById,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindUserQuickViewProfile) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$findUserById = findUserById;
+    final lOther$findUserById = other.findUserById;
+    if (l$findUserById != lOther$findUserById) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile
+    on Query$FindUserQuickViewProfile {
+  CopyWith$Query$FindUserQuickViewProfile<Query$FindUserQuickViewProfile>
+      get copyWith => CopyWith$Query$FindUserQuickViewProfile(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile<TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile(
+    Query$FindUserQuickViewProfile instance,
+    TRes Function(Query$FindUserQuickViewProfile) then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile;
+
+  factory CopyWith$Query$FindUserQuickViewProfile.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile;
+
+  TRes call({
+    Query$FindUserQuickViewProfile$findUserById? findUserById,
+    String? $__typename,
+  });
+  CopyWith$Query$FindUserQuickViewProfile$findUserById<TRes> get findUserById;
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile<TRes>
+    implements CopyWith$Query$FindUserQuickViewProfile<TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile _instance;
+
+  final TRes Function(Query$FindUserQuickViewProfile) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? findUserById = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserQuickViewProfile(
+        findUserById: findUserById == _undefined || findUserById == null
+            ? _instance.findUserById
+            : (findUserById as Query$FindUserQuickViewProfile$findUserById),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$FindUserQuickViewProfile$findUserById<TRes> get findUserById {
+    final local$findUserById = _instance.findUserById;
+    return CopyWith$Query$FindUserQuickViewProfile$findUserById(
+        local$findUserById, (e) => call(findUserById: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile<TRes>
+    implements CopyWith$Query$FindUserQuickViewProfile<TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile(this._res);
+
+  TRes _res;
+
+  call({
+    Query$FindUserQuickViewProfile$findUserById? findUserById,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$FindUserQuickViewProfile$findUserById<TRes> get findUserById =>
+      CopyWith$Query$FindUserQuickViewProfile$findUserById.stub(_res);
+}
+
+const documentNodeQueryFindUserQuickViewProfile = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'FindUserQuickViewProfile'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'userId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'findUserById'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'userId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'avatarUrl'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'fullName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'regionOfResidence'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'cityOfResidence'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'countryOfResidence'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'translatedValue'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'jobTitle'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'companies'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'offersHelp'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'seeksHelp'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'groupMemberships'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'groupIdent'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              InlineFragmentNode(
+                typeCondition: TypeConditionNode(
+                    on: NamedTypeNode(
+                  name: NameNode(value: 'MenteesGroupMembership'),
+                  isNonNull: false,
+                )),
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'soughtExpertises'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'translatedValue'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              InlineFragmentNode(
+                typeCondition: TypeConditionNode(
+                    on: NamedTypeNode(
+                  name: NameNode(value: 'MentorsGroupMembership'),
+                  isNonNull: false,
+                )),
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'expertises'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'translatedValue'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$FindUserQuickViewProfile$findUserById {
+  Query$FindUserQuickViewProfile$findUserById({
+    required this.id,
+    this.avatarUrl,
+    this.fullName,
+    this.regionOfResidence,
+    this.cityOfResidence,
+    this.countryOfResidence,
+    this.jobTitle,
+    required this.companies,
+    required this.offersHelp,
+    required this.seeksHelp,
+    required this.groupMemberships,
+    this.$__typename = 'User',
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$avatarUrl = json['avatarUrl'];
+    final l$fullName = json['fullName'];
+    final l$regionOfResidence = json['regionOfResidence'];
+    final l$cityOfResidence = json['cityOfResidence'];
+    final l$countryOfResidence = json['countryOfResidence'];
+    final l$jobTitle = json['jobTitle'];
+    final l$companies = json['companies'];
+    final l$offersHelp = json['offersHelp'];
+    final l$seeksHelp = json['seeksHelp'];
+    final l$groupMemberships = json['groupMemberships'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserQuickViewProfile$findUserById(
+      id: (l$id as String),
+      avatarUrl: (l$avatarUrl as String?),
+      fullName: (l$fullName as String?),
+      regionOfResidence: (l$regionOfResidence as String?),
+      cityOfResidence: (l$cityOfResidence as String?),
+      countryOfResidence: l$countryOfResidence == null
+          ? null
+          : Query$FindUserQuickViewProfile$findUserById$countryOfResidence
+              .fromJson((l$countryOfResidence as Map<String, dynamic>)),
+      jobTitle: (l$jobTitle as String?),
+      companies: (l$companies as List<dynamic>)
+          .map((e) =>
+              Query$FindUserQuickViewProfile$findUserById$companies.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      offersHelp: (l$offersHelp as bool),
+      seeksHelp: (l$seeksHelp as bool),
+      groupMemberships: (l$groupMemberships as List<dynamic>)
+          .map((e) =>
+              Query$FindUserQuickViewProfile$findUserById$groupMemberships
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String? avatarUrl;
+
+  final String? fullName;
+
+  final String? regionOfResidence;
+
+  final String? cityOfResidence;
+
+  final Query$FindUserQuickViewProfile$findUserById$countryOfResidence?
+      countryOfResidence;
+
+  final String? jobTitle;
+
+  final List<Query$FindUserQuickViewProfile$findUserById$companies> companies;
+
+  final bool offersHelp;
+
+  final bool seeksHelp;
+
+  final List<Query$FindUserQuickViewProfile$findUserById$groupMemberships>
+      groupMemberships;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$avatarUrl = avatarUrl;
+    _resultData['avatarUrl'] = l$avatarUrl;
+    final l$fullName = fullName;
+    _resultData['fullName'] = l$fullName;
+    final l$regionOfResidence = regionOfResidence;
+    _resultData['regionOfResidence'] = l$regionOfResidence;
+    final l$cityOfResidence = cityOfResidence;
+    _resultData['cityOfResidence'] = l$cityOfResidence;
+    final l$countryOfResidence = countryOfResidence;
+    _resultData['countryOfResidence'] = l$countryOfResidence?.toJson();
+    final l$jobTitle = jobTitle;
+    _resultData['jobTitle'] = l$jobTitle;
+    final l$companies = companies;
+    _resultData['companies'] = l$companies.map((e) => e.toJson()).toList();
+    final l$offersHelp = offersHelp;
+    _resultData['offersHelp'] = l$offersHelp;
+    final l$seeksHelp = seeksHelp;
+    _resultData['seeksHelp'] = l$seeksHelp;
+    final l$groupMemberships = groupMemberships;
+    _resultData['groupMemberships'] =
+        l$groupMemberships.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$avatarUrl = avatarUrl;
+    final l$fullName = fullName;
+    final l$regionOfResidence = regionOfResidence;
+    final l$cityOfResidence = cityOfResidence;
+    final l$countryOfResidence = countryOfResidence;
+    final l$jobTitle = jobTitle;
+    final l$companies = companies;
+    final l$offersHelp = offersHelp;
+    final l$seeksHelp = seeksHelp;
+    final l$groupMemberships = groupMemberships;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$avatarUrl,
+      l$fullName,
+      l$regionOfResidence,
+      l$cityOfResidence,
+      l$countryOfResidence,
+      l$jobTitle,
+      Object.hashAll(l$companies.map((v) => v)),
+      l$offersHelp,
+      l$seeksHelp,
+      Object.hashAll(l$groupMemberships.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindUserQuickViewProfile$findUserById) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$avatarUrl = avatarUrl;
+    final lOther$avatarUrl = other.avatarUrl;
+    if (l$avatarUrl != lOther$avatarUrl) {
+      return false;
+    }
+    final l$fullName = fullName;
+    final lOther$fullName = other.fullName;
+    if (l$fullName != lOther$fullName) {
+      return false;
+    }
+    final l$regionOfResidence = regionOfResidence;
+    final lOther$regionOfResidence = other.regionOfResidence;
+    if (l$regionOfResidence != lOther$regionOfResidence) {
+      return false;
+    }
+    final l$cityOfResidence = cityOfResidence;
+    final lOther$cityOfResidence = other.cityOfResidence;
+    if (l$cityOfResidence != lOther$cityOfResidence) {
+      return false;
+    }
+    final l$countryOfResidence = countryOfResidence;
+    final lOther$countryOfResidence = other.countryOfResidence;
+    if (l$countryOfResidence != lOther$countryOfResidence) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (l$jobTitle != lOther$jobTitle) {
+      return false;
+    }
+    final l$companies = companies;
+    final lOther$companies = other.companies;
+    if (l$companies.length != lOther$companies.length) {
+      return false;
+    }
+    for (int i = 0; i < l$companies.length; i++) {
+      final l$companies$entry = l$companies[i];
+      final lOther$companies$entry = lOther$companies[i];
+      if (l$companies$entry != lOther$companies$entry) {
+        return false;
+      }
+    }
+    final l$offersHelp = offersHelp;
+    final lOther$offersHelp = other.offersHelp;
+    if (l$offersHelp != lOther$offersHelp) {
+      return false;
+    }
+    final l$seeksHelp = seeksHelp;
+    final lOther$seeksHelp = other.seeksHelp;
+    if (l$seeksHelp != lOther$seeksHelp) {
+      return false;
+    }
+    final l$groupMemberships = groupMemberships;
+    final lOther$groupMemberships = other.groupMemberships;
+    if (l$groupMemberships.length != lOther$groupMemberships.length) {
+      return false;
+    }
+    for (int i = 0; i < l$groupMemberships.length; i++) {
+      final l$groupMemberships$entry = l$groupMemberships[i];
+      final lOther$groupMemberships$entry = lOther$groupMemberships[i];
+      if (l$groupMemberships$entry != lOther$groupMemberships$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById
+    on Query$FindUserQuickViewProfile$findUserById {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById<
+          Query$FindUserQuickViewProfile$findUserById>
+      get copyWith => CopyWith$Query$FindUserQuickViewProfile$findUserById(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById<TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById(
+    Query$FindUserQuickViewProfile$findUserById instance,
+    TRes Function(Query$FindUserQuickViewProfile$findUserById) then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById;
+
+  TRes call({
+    String? id,
+    String? avatarUrl,
+    String? fullName,
+    String? regionOfResidence,
+    String? cityOfResidence,
+    Query$FindUserQuickViewProfile$findUserById$countryOfResidence?
+        countryOfResidence,
+    String? jobTitle,
+    List<Query$FindUserQuickViewProfile$findUserById$companies>? companies,
+    bool? offersHelp,
+    bool? seeksHelp,
+    List<Query$FindUserQuickViewProfile$findUserById$groupMemberships>?
+        groupMemberships,
+    String? $__typename,
+  });
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<TRes>
+      get countryOfResidence;
+  TRes companies(
+      Iterable<Query$FindUserQuickViewProfile$findUserById$companies> Function(
+              Iterable<
+                  CopyWith$Query$FindUserQuickViewProfile$findUserById$companies<
+                      Query$FindUserQuickViewProfile$findUserById$companies>>)
+          _fn);
+  TRes groupMemberships(
+      Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships> Function(
+              Iterable<
+                  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships<
+                      Query$FindUserQuickViewProfile$findUserById$groupMemberships>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById<TRes>
+    implements CopyWith$Query$FindUserQuickViewProfile$findUserById<TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById _instance;
+
+  final TRes Function(Query$FindUserQuickViewProfile$findUserById) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? avatarUrl = _undefined,
+    Object? fullName = _undefined,
+    Object? regionOfResidence = _undefined,
+    Object? cityOfResidence = _undefined,
+    Object? countryOfResidence = _undefined,
+    Object? jobTitle = _undefined,
+    Object? companies = _undefined,
+    Object? offersHelp = _undefined,
+    Object? seeksHelp = _undefined,
+    Object? groupMemberships = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserQuickViewProfile$findUserById(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        avatarUrl: avatarUrl == _undefined
+            ? _instance.avatarUrl
+            : (avatarUrl as String?),
+        fullName:
+            fullName == _undefined ? _instance.fullName : (fullName as String?),
+        regionOfResidence: regionOfResidence == _undefined
+            ? _instance.regionOfResidence
+            : (regionOfResidence as String?),
+        cityOfResidence: cityOfResidence == _undefined
+            ? _instance.cityOfResidence
+            : (cityOfResidence as String?),
+        countryOfResidence: countryOfResidence == _undefined
+            ? _instance.countryOfResidence
+            : (countryOfResidence
+                as Query$FindUserQuickViewProfile$findUserById$countryOfResidence?),
+        jobTitle:
+            jobTitle == _undefined ? _instance.jobTitle : (jobTitle as String?),
+        companies: companies == _undefined || companies == null
+            ? _instance.companies
+            : (companies
+                as List<Query$FindUserQuickViewProfile$findUserById$companies>),
+        offersHelp: offersHelp == _undefined || offersHelp == null
+            ? _instance.offersHelp
+            : (offersHelp as bool),
+        seeksHelp: seeksHelp == _undefined || seeksHelp == null
+            ? _instance.seeksHelp
+            : (seeksHelp as bool),
+        groupMemberships: groupMemberships == _undefined ||
+                groupMemberships == null
+            ? _instance.groupMemberships
+            : (groupMemberships as List<
+                Query$FindUserQuickViewProfile$findUserById$groupMemberships>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<TRes>
+      get countryOfResidence {
+    final local$countryOfResidence = _instance.countryOfResidence;
+    return local$countryOfResidence == null
+        ? CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence
+            .stub(_then(_instance))
+        : CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence(
+            local$countryOfResidence, (e) => call(countryOfResidence: e));
+  }
+
+  TRes companies(
+          Iterable<Query$FindUserQuickViewProfile$findUserById$companies> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserQuickViewProfile$findUserById$companies<
+                          Query$FindUserQuickViewProfile$findUserById$companies>>)
+              _fn) =>
+      call(
+          companies: _fn(_instance.companies.map((e) =>
+              CopyWith$Query$FindUserQuickViewProfile$findUserById$companies(
+                e,
+                (i) => i,
+              ))).toList());
+  TRes groupMemberships(
+          Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships<
+                          Query$FindUserQuickViewProfile$findUserById$groupMemberships>>)
+              _fn) =>
+      call(
+          groupMemberships: _fn(_instance.groupMemberships.map((e) =>
+              CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById<TRes>
+    implements CopyWith$Query$FindUserQuickViewProfile$findUserById<TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? avatarUrl,
+    String? fullName,
+    String? regionOfResidence,
+    String? cityOfResidence,
+    Query$FindUserQuickViewProfile$findUserById$countryOfResidence?
+        countryOfResidence,
+    String? jobTitle,
+    List<Query$FindUserQuickViewProfile$findUserById$companies>? companies,
+    bool? offersHelp,
+    bool? seeksHelp,
+    List<Query$FindUserQuickViewProfile$findUserById$groupMemberships>?
+        groupMemberships,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<TRes>
+      get countryOfResidence =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence
+              .stub(_res);
+  companies(_fn) => _res;
+  groupMemberships(_fn) => _res;
+}
+
+class Query$FindUserQuickViewProfile$findUserById$countryOfResidence {
+  Query$FindUserQuickViewProfile$findUserById$countryOfResidence({
+    this.translatedValue,
+    this.$__typename = 'Country',
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById$countryOfResidence.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserQuickViewProfile$findUserById$countryOfResidence(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserQuickViewProfile$findUserById$countryOfResidence) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById$countryOfResidence
+    on Query$FindUserQuickViewProfile$findUserById$countryOfResidence {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<
+          Query$FindUserQuickViewProfile$findUserById$countryOfResidence>
+      get copyWith =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<
+    TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence(
+    Query$FindUserQuickViewProfile$findUserById$countryOfResidence instance,
+    TRes Function(
+            Query$FindUserQuickViewProfile$findUserById$countryOfResidence)
+        then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$countryOfResidence;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$countryOfResidence;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<
+            TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$countryOfResidence(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById$countryOfResidence
+      _instance;
+
+  final TRes Function(
+      Query$FindUserQuickViewProfile$findUserById$countryOfResidence) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserQuickViewProfile$findUserById$countryOfResidence(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$countryOfResidence(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserQuickViewProfile$findUserById$companies {
+  Query$FindUserQuickViewProfile$findUserById$companies({
+    required this.name,
+    this.$__typename = 'Company',
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById$companies.fromJson(
+      Map<String, dynamic> json) {
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserQuickViewProfile$findUserById$companies(
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindUserQuickViewProfile$findUserById$companies) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById$companies
+    on Query$FindUserQuickViewProfile$findUserById$companies {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$companies<
+          Query$FindUserQuickViewProfile$findUserById$companies>
+      get copyWith =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$companies(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById$companies<
+    TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$companies(
+    Query$FindUserQuickViewProfile$findUserById$companies instance,
+    TRes Function(Query$FindUserQuickViewProfile$findUserById$companies) then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$companies;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$companies.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$companies;
+
+  TRes call({
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$companies<TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$companies<TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$companies(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById$companies _instance;
+
+  final TRes Function(Query$FindUserQuickViewProfile$findUserById$companies)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserQuickViewProfile$findUserById$companies(
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$companies<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$companies<TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$companies(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserQuickViewProfile$findUserById$groupMemberships {
+  Query$FindUserQuickViewProfile$findUserById$groupMemberships({
+    required this.groupIdent,
+    required this.$__typename,
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById$groupMemberships.fromJson(
+      Map<String, dynamic> json) {
+    switch (json["__typename"] as String) {
+      case "MenteesGroupMembership":
+        return Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership
+            .fromJson(json);
+
+      case "MentorsGroupMembership":
+        return Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership
+            .fromJson(json);
+
+      case "GroupMembership":
+        return Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership
+            .fromJson(json);
+
+      default:
+        final l$groupIdent = json['groupIdent'];
+        final l$$__typename = json['__typename'];
+        return Query$FindUserQuickViewProfile$findUserById$groupMemberships(
+          groupIdent: (l$groupIdent as String),
+          $__typename: (l$$__typename as String),
+        );
+    }
+  }
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserQuickViewProfile$findUserById$groupMemberships) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById$groupMemberships
+    on Query$FindUserQuickViewProfile$findUserById$groupMemberships {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships<
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships>
+      get copyWith =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships(
+            this,
+            (i) => i,
+          );
+  _T when<_T>({
+    required _T Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership)
+        menteesGroupMembership,
+    required _T Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership)
+        mentorsGroupMembership,
+    required _T Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership)
+        groupMembership,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "MenteesGroupMembership":
+        return menteesGroupMembership(this
+            as Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership);
+
+      case "MentorsGroupMembership":
+        return mentorsGroupMembership(this
+            as Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership);
+
+      case "GroupMembership":
+        return groupMembership(this
+            as Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership);
+
+      default:
+        return orElse();
+    }
+  }
+
+  _T maybeWhen<_T>({
+    _T Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership)?
+        menteesGroupMembership,
+    _T Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership)?
+        mentorsGroupMembership,
+    _T Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership)?
+        groupMembership,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "MenteesGroupMembership":
+        if (menteesGroupMembership != null) {
+          return menteesGroupMembership(this
+              as Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership);
+        } else {
+          return orElse();
+        }
+
+      case "MentorsGroupMembership":
+        if (mentorsGroupMembership != null) {
+          return mentorsGroupMembership(this
+              as Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership);
+        } else {
+          return orElse();
+        }
+
+      case "GroupMembership":
+        if (groupMembership != null) {
+          return groupMembership(this
+              as Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership);
+        } else {
+          return orElse();
+        }
+
+      default:
+        return orElse();
+    }
+  }
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships<
+    TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships(
+    Query$FindUserQuickViewProfile$findUserById$groupMemberships instance,
+    TRes Function(Query$FindUserQuickViewProfile$findUserById$groupMemberships)
+        then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships;
+
+  TRes call({
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships<
+            TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById$groupMemberships _instance;
+
+  final TRes Function(
+      Query$FindUserQuickViewProfile$findUserById$groupMemberships) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserQuickViewProfile$findUserById$groupMemberships(
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership
+    implements Query$FindUserQuickViewProfile$findUserById$groupMemberships {
+  Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership({
+    required this.soughtExpertises,
+    this.$__typename = 'MenteesGroupMembership',
+    required this.groupIdent,
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$soughtExpertises = json['soughtExpertises'];
+    final l$$__typename = json['__typename'];
+    final l$groupIdent = json['groupIdent'];
+    return Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership(
+      soughtExpertises: (l$soughtExpertises as List<dynamic>)
+          .map((e) =>
+              Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+      groupIdent: (l$groupIdent as String),
+    );
+  }
+
+  final List<
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises>
+      soughtExpertises;
+
+  final String $__typename;
+
+  final String groupIdent;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$soughtExpertises = soughtExpertises;
+    _resultData['soughtExpertises'] =
+        l$soughtExpertises.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$soughtExpertises = soughtExpertises;
+    final l$$__typename = $__typename;
+    final l$groupIdent = groupIdent;
+    return Object.hashAll([
+      Object.hashAll(l$soughtExpertises.map((v) => v)),
+      l$$__typename,
+      l$groupIdent,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$soughtExpertises = soughtExpertises;
+    final lOther$soughtExpertises = other.soughtExpertises;
+    if (l$soughtExpertises.length != lOther$soughtExpertises.length) {
+      return false;
+    }
+    for (int i = 0; i < l$soughtExpertises.length; i++) {
+      final l$soughtExpertises$entry = l$soughtExpertises[i];
+      final lOther$soughtExpertises$entry = lOther$soughtExpertises[i];
+      if (l$soughtExpertises$entry != lOther$soughtExpertises$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership
+    on Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership<
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership(
+    Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership
+        instance,
+    TRes Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership;
+
+  TRes call({
+    List<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises>?
+        soughtExpertises,
+    String? $__typename,
+    String? groupIdent,
+  });
+  TRes soughtExpertises(
+      Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises> Function(
+              Iterable<
+                  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+                      Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? soughtExpertises = _undefined,
+    Object? $__typename = _undefined,
+    Object? groupIdent = _undefined,
+  }) =>
+      _then(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership(
+        soughtExpertises: soughtExpertises == _undefined ||
+                soughtExpertises == null
+            ? _instance.soughtExpertises
+            : (soughtExpertises as List<
+                Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+      ));
+  TRes soughtExpertises(
+          Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+                          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises>>)
+              _fn) =>
+      call(
+          soughtExpertises: _fn(_instance.soughtExpertises.map((e) =>
+              CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises>?
+        soughtExpertises,
+    String? $__typename,
+    String? groupIdent,
+  }) =>
+      _res;
+  soughtExpertises(_fn) => _res;
+}
+
+class Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises {
+  Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises({
+    this.translatedValue,
+    this.$__typename = 'Expertise',
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises
+    on Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises>
+      get copyWith =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+    TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+    Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises
+        instance,
+    TRes Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises)
+        then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+            TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises
+      _instance;
+
+  final TRes Function(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership
+    implements Query$FindUserQuickViewProfile$findUserById$groupMemberships {
+  Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership({
+    required this.expertises,
+    this.$__typename = 'MentorsGroupMembership',
+    required this.groupIdent,
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$expertises = json['expertises'];
+    final l$$__typename = json['__typename'];
+    final l$groupIdent = json['groupIdent'];
+    return Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership(
+      expertises: (l$expertises as List<dynamic>)
+          .map((e) =>
+              Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+      groupIdent: (l$groupIdent as String),
+    );
+  }
+
+  final List<
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises>
+      expertises;
+
+  final String $__typename;
+
+  final String groupIdent;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$expertises = expertises;
+    _resultData['expertises'] = l$expertises.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$expertises = expertises;
+    final l$$__typename = $__typename;
+    final l$groupIdent = groupIdent;
+    return Object.hashAll([
+      Object.hashAll(l$expertises.map((v) => v)),
+      l$$__typename,
+      l$groupIdent,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$expertises = expertises;
+    final lOther$expertises = other.expertises;
+    if (l$expertises.length != lOther$expertises.length) {
+      return false;
+    }
+    for (int i = 0; i < l$expertises.length; i++) {
+      final l$expertises$entry = l$expertises[i];
+      final lOther$expertises$entry = lOther$expertises[i];
+      if (l$expertises$entry != lOther$expertises$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership
+    on Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership<
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership(
+    Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership
+        instance,
+    TRes Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership;
+
+  TRes call({
+    List<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises>?
+        expertises,
+    String? $__typename,
+    String? groupIdent,
+  });
+  TRes expertises(
+      Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises> Function(
+              Iterable<
+                  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises<
+                      Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? expertises = _undefined,
+    Object? $__typename = _undefined,
+    Object? groupIdent = _undefined,
+  }) =>
+      _then(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership(
+        expertises: expertises == _undefined || expertises == null
+            ? _instance.expertises
+            : (expertises as List<
+                Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+      ));
+  TRes expertises(
+          Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises<
+                          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises>>)
+              _fn) =>
+      call(
+          expertises: _fn(_instance.expertises.map((e) =>
+              CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises>?
+        expertises,
+    String? $__typename,
+    String? groupIdent,
+  }) =>
+      _res;
+  expertises(_fn) => _res;
+}
+
+class Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises {
+  Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises({
+    this.translatedValue,
+    this.$__typename = 'Expertise',
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises
+    on Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises<
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises>
+      get copyWith =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises<
+    TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises(
+    Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises
+        instance,
+    TRes Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises)
+        then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises<
+            TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises
+      _instance;
+
+  final TRes Function(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership
+    implements Query$FindUserQuickViewProfile$findUserById$groupMemberships {
+  Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership({
+    required this.groupIdent,
+    this.$__typename = 'GroupMembership',
+  });
+
+  factory Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$groupIdent = json['groupIdent'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership(
+      groupIdent: (l$groupIdent as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership
+    on Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership {
+  CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership<
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership(
+    Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership
+        instance,
+    TRes Function(
+            Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership;
+
+  factory CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership;
+
+  TRes call({
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership(
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships$$GroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables$Query$FindUsersWithFilter {
   factory Variables$Query$FindUsersWithFilter({Input$UserListFilter? filter}) =>
       Variables$Query$FindUsersWithFilter._({

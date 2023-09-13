@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters.dart';
 import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters_advanced.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
+import 'package:mm_flutter_app/widgets/screens/profile/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_email.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_password.dart';
@@ -185,16 +184,15 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.exploreInviteToConnect.path,
-              name: Routes.exploreInviteToConnect.name,
+              path: Routes.profileInviteId.path,
+              name: Routes.profileInviteId.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
-                List<ProfileQuickViewInfo> selectedProfiles =
-                    state.extra as List<ProfileQuickViewInfo>;
+                final String userId = state.pathParameters[RouteParams.userId]!;
                 return MaterialPage(
                   key: state.pageKey,
                   maintainState: false,
                   child: InviteToConnect(
-                    initialSelectedProfiles: selectedProfiles,
+                    userId: userId,
                   ),
                 );
               },

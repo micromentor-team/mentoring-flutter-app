@@ -9,6 +9,7 @@ import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
 typedef UserDetailedProfile = Query$FindUserDetailedProfile$findUserById;
+typedef UserQuickViewProfile = Query$FindUserQuickViewProfile$findUserById;
 typedef UserWithFilterResult = Query$FindUsersWithFilter$findUsers;
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 typedef MenteeUser = Query$FindMenteeUsers$findUsers;
@@ -130,6 +131,35 @@ class UserProvider extends BaseProvider with ChangeNotifier {
       response: queryResult.data == null
           ? null
           : Query$FindUserDetailedProfile.fromJson(
+              queryResult.data!,
+            ).findUserById,
+    );
+    if (operationResult.response?.avatarUrl == "") {
+      operationResult.response = operationResult.response!.copyWith(
+        avatarUrl: null,
+      );
+    }
+    return operationResult;
+  }
+
+  Future<OperationResult<UserQuickViewProfile>> findUserQuickViewProfile({
+    required String userId,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindUserQuickViewProfile,
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables$Query$FindUserQuickViewProfile(
+          userId: userId,
+        ).toJson(),
+      ),
+    );
+
+    final operationResult = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindUserQuickViewProfile.fromJson(
               queryResult.data!,
             ).findUserById,
     );

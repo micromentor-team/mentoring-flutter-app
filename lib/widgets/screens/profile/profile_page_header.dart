@@ -118,6 +118,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
   Widget _createSendInviteButton(
     ThemeData theme,
     AppLocalizations l10n,
+    GoRouter router,
   ) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -125,7 +126,9 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
         backgroundColor: theme.colorScheme.surface,
         disabledBackgroundColor: theme.colorScheme.surface,
       ),
-      onPressed: () {},
+      onPressed: () {
+        router.push('${Routes.profileInvite.path}/${widget.userId}');
+      },
       child: Row(
         children: [
           Text(
@@ -179,7 +182,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
     final Widget actions;
     switch (widget.invitationDirection) {
       case MessageDirection.unset:
-        actions = _createSendInviteButton(theme, l10n);
+        actions = _createSendInviteButton(theme, l10n, router);
         break;
       case MessageDirection.received:
         actions = _createAcceptRejectInviteButtons(theme, l10n, router);

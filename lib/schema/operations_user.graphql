@@ -142,6 +142,38 @@ query FindUserDetailedProfile($userId: String!) {
     }
 }
 
+query FindUserQuickViewProfile($userId: String!) {
+    findUserById(id: $userId) {
+        id
+        avatarUrl
+        fullName
+        regionOfResidence
+        cityOfResidence
+        countryOfResidence {
+            translatedValue
+        }
+        jobTitle
+        companies {
+            name
+        }
+        offersHelp
+        seeksHelp
+        groupMemberships {
+            groupIdent
+            ... on MenteesGroupMembership {
+                soughtExpertises {
+                    translatedValue
+                }
+            }
+            ... on MentorsGroupMembership {
+                expertises {
+                    translatedValue
+                }
+            }
+        }
+    }
+}
+
 query FindUsersWithFilter ($filter: UserListFilter) {
     findUsers(filter: $filter) {
         id
