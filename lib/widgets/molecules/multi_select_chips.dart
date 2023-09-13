@@ -46,9 +46,10 @@ CreateMultiSelectChips createMultiSelectChipsExampleWithIcon() {
 }
 
 //build
-class CreateMultiSelectChips extends StatelessWidget {
+class CreateMultiSelectChips extends StatefulWidget {
   final List<Chip> chips;
   final int? maxSelection;
+
   const CreateMultiSelectChips({
     Key? key,
     required this.chips,
@@ -56,30 +57,74 @@ class CreateMultiSelectChips extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CreateMultiSelectChips> createState() => _CreateMultiSelectChipsState();
+}
+
+class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
+  Set<int> _childIsSelected = {-1};
+
+  // Callback function to be called by the child widget when selected
+  void handleChildSelection(Set<int> isSelected) {
+    setState(() {
+      _childIsSelected = isSelected;
+      print(_childIsSelected);
+    });
+  }
+
+  //Helper2: input the list of all chips and returns a list of selected chips
+  List<FilterChipWidget> findSelectedChips(List<FilterChipWidget> allChips) {
+    List<FilterChipWidget> selectedChip = [];
+    for (var chip in allChips) {
+      if (chip.selected == true) {
+        selectedChip.add(chip);
+      }
+    }
+    return selectedChip;
+  }
+
+  //Helper2: input a list of selected chips, return a list of selected chips' names
+  List<String?> returnSelectedChipNames(List<FilterChipWidget> selectedChips) {
+    List<String> names = [];
+    for (var chip in selectedChips) {
+      if (chip.selected == true) {
+        names.add(chip.chipName);
+      }
+    }
+    return names;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    Set<FilterChipWidget> AllChips = {};
 
-    String textString = maxSelection != null
-        ? l10n.profileChipsSelectUpTo(maxSelection!)
+    String textString = widget.maxSelection != null
+        ? l10n.profileChipsSelectUpTo(widget.maxSelection!)
         : l10n.profileChipsSelectAllThatApply;
 
     List<Widget> chipListWithPadding = [];
-    for (int i = 0; i < chips.length; i++) {
+    List<FilterChipWidget> chipList = [];
+    for (int i = 0; i < widget.chips.length; i++) {
       var chip = FilterChipWidget(
-        chipName: chips[i].chipName,
-        icon: chips[i].icon,
-        callback: (Set<FilterChipWidget> val) {
-          AllChips = val;
-        },
+        id: i,
+        selected: _childIsSelected.contains(i) ? true : false,
+        chipName: widget.chips[i].chipName,
+        icon: widget.chips[i].icon,
+        onSelectionChanged: handleChildSelection,
       );
+      chipList.add(chip);
       chipListWithPadding.add(chip);
       var padding = const SizedBox(
         height: Insets.paddingMedium,
       );
       chipListWithPadding.add(padding);
     }
+
+    //Example of how to use the helper functions:
+    var selectedChips = findSelectedChips(chipList);
+    var names = returnSelectedChipNames(selectedChips);
+    // print(names);
+
     return Column(
       children: [
         Center(
@@ -96,28 +141,26 @@ class CreateMultiSelectChips extends StatelessWidget {
         Column(
           children: chipListWithPadding,
         ),
-        const Text("Selected widgets are: "),
-        for (var chip in AllChips) Text(chip.chipName)
       ],
     );
   }
 }
 
-typedef FilterChipWidgetCallback = void Function(Set<FilterChipWidget> val);
-
 class FilterChipWidget extends StatefulWidget {
+  final int id;
   final String chipName;
   final IconData? icon;
-  final FilterChipWidgetCallback callback;
-  bool selected;
+  final bool selected;
+  final Function(Set<int> isSelected) onSelectionChanged;
 
-  FilterChipWidget({
-    Key? key,
-    required this.chipName,
-    required this.callback,
-    this.icon,
-    this.selected = false,
-  }) : super(key: key);
+  const FilterChipWidget(
+      {Key? key,
+      required this.id,
+      required this.chipName,
+      this.icon,
+      this.selected = false,
+      required this.onSelectionChanged})
+      : super(key: key);
 
   @override
   State<FilterChipWidget> createState() => _FilterChipWidgetState();
@@ -125,19 +168,11 @@ class FilterChipWidget extends StatefulWidget {
 
 class _FilterChipWidgetState extends State<FilterChipWidget> {
   var _isSelected = false;
+  Set<int> _selectedIdSet = {-1};
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    // Set<FilterChipWidget> allFilterChips = {};
-    // allFilterChips.add(widget);
-    // print(allFilterChips.length);
-    // widget.callback(allFilterChips);
-    // allFilterChips.forEach((element) {
-    //   if (element.selected) print(element.chipName);
-    // });
-
-    // Set<FilterChipWidget> selectedFilterChips = {};
 
     return FilterChip(
       avatar: widget.icon != null
@@ -163,8 +198,11 @@ class _FilterChipWidgetState extends State<FilterChipWidget> {
       onSelected: (bool selected) {
         setState(() {
           _isSelected = selected;
-          widget.selected = selected;
         });
+        (_isSelected == true)
+            ? _selectedIdSet.add(widget.id)
+            : _selectedIdSet.remove(widget.id);
+        widget.onSelectionChanged(_selectedIdSet);
       },
     );
   }
