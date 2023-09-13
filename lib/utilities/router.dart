@@ -184,20 +184,6 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.profileInviteId.path,
-              name: Routes.profileInviteId.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                final String userId = state.pathParameters[RouteParams.userId]!;
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: InviteToConnect(
-                    userId: userId,
-                  ),
-                );
-              },
-            ),
-            GoRoute(
               path: Routes.inboxChats.path,
               name: Routes.inboxChats.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
@@ -324,6 +310,20 @@ class AppRouter {
                 return MaterialPage(
                   key: state.pageKey,
                   child: ProfileScreen(
+                    userId: userId,
+                  ),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.profileInviteId.path,
+              name: Routes.profileInviteId.name,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                final String userId = state.pathParameters[RouteParams.userId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  maintainState: false,
+                  child: InviteToConnect(
                     userId: userId,
                   ),
                 );

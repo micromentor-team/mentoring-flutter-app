@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
+import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
@@ -146,7 +147,11 @@ class _InviteToConnectState extends State<InviteToConnect>
                             ),
                           ),
                         ),
-                        MessageBox(currentUserType: userType),
+                        MessageBox(
+                          currentUserType: userType,
+                          senderId: _userProvider.user!.id,
+                          recipientId: widget.userId,
+                        ),
                         _createMessageTips(theme),
                       ],
                     ),
@@ -163,9 +168,13 @@ class _InviteToConnectState extends State<InviteToConnect>
 
 class MessageBox extends StatefulWidget {
   final UserType currentUserType;
+  final String senderId;
+  final String recipientId;
   const MessageBox({
     super.key,
     required this.currentUserType,
+    required this.senderId,
+    required this.recipientId,
   });
 
   @override
@@ -173,7 +182,19 @@ class MessageBox extends StatefulWidget {
 }
 
 class _MessageBoxState extends State<MessageBox> {
+  late final InvitationsProvider _invitationsProvider;
+  late final GoRouter _router;
   final TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _invitationsProvider = Provider.of<InvitationsProvider>(
+      context,
+      listen: false,
+    );
+    _router = GoRouter.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +266,18 @@ class _MessageBoxState extends State<MessageBox> {
                   backgroundColor: theme.colorScheme.primary,
                   textStyle: theme.textTheme.labelLarge,
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  final createdInvitation =
+                      (await _invitationsProvider.createChannelInvitation(
+                    senderId: widget.senderId,
+                    recipientId: widget.recipientId,
+                    messageText: _textEditingController.value.text,
+                  ))
+                          .response!;
+                  _router.pushReplacement(
+                    '${Routes.inboxInvitesSent.path}/${createdInvitation.id}',
+                  );
+                },
                 child: Text(
                   l10n.send,
                   style: theme.textTheme.labelLarge?.copyWith(

@@ -239,7 +239,7 @@ export function generateChannelInboxItemMessage(sender: any, message: any) {
     }
 }
 
-export function generateChannelInvitation(sender: any, recipient: any, declined?: boolean, accepted?: boolean) {
+export function generateChannelInvitation(sender: any, recipient: any, messageText?: string, declined?: boolean, accepted?: boolean) {
     let status: string;
     let channel: any | null = null;
     if (accepted) {
@@ -257,7 +257,7 @@ export function generateChannelInvitation(sender: any, recipient: any, declined?
         channelName: faker.lorem.words(2),
         channel: channel,
         channelTopic: faker.lorem.sentence(),
-        messageText: faker.lorem.sentence(),
+        messageText: messageText ?? faker.lorem.sentence(),
         createdBy: sender.id,
         createdAt: faker.date.recent(),
         recipientId: recipient.id,

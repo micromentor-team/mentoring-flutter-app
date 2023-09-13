@@ -124,6 +124,12 @@ mutation AcceptChannelInvitation($channelInvitationId: String!) {
   acceptChannelInvitation(channelInvitationId: $channelInvitationId)
 }
 
+mutation CreateChannelInvitation($channelInvitationInput: ChannelInvitationInput!) {
+  createChannelInvitation(input: $channelInvitationInput) {
+    id
+  }
+}
+
 mutation DeclineChannelInvitation($channelInvitationId: String!) {
   declineChannelInvitation(channelInvitationId: $channelInvitationId)
 }

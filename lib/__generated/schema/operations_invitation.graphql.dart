@@ -8358,6 +8358,447 @@ const documentNodeMutationAcceptChannelInvitation = DocumentNode(definitions: [
   ),
 ]);
 
+class Variables$Mutation$CreateChannelInvitation {
+  factory Variables$Mutation$CreateChannelInvitation(
+          {required Input$ChannelInvitationInput channelInvitationInput}) =>
+      Variables$Mutation$CreateChannelInvitation._({
+        r'channelInvitationInput': channelInvitationInput,
+      });
+
+  Variables$Mutation$CreateChannelInvitation._(this._$data);
+
+  factory Variables$Mutation$CreateChannelInvitation.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$channelInvitationInput = data['channelInvitationInput'];
+    result$data['channelInvitationInput'] =
+        Input$ChannelInvitationInput.fromJson(
+            (l$channelInvitationInput as Map<String, dynamic>));
+    return Variables$Mutation$CreateChannelInvitation._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$ChannelInvitationInput get channelInvitationInput =>
+      (_$data['channelInvitationInput'] as Input$ChannelInvitationInput);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$channelInvitationInput = channelInvitationInput;
+    result$data['channelInvitationInput'] = l$channelInvitationInput.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$CreateChannelInvitation<
+          Variables$Mutation$CreateChannelInvitation>
+      get copyWith => CopyWith$Variables$Mutation$CreateChannelInvitation(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$CreateChannelInvitation) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelInvitationInput = channelInvitationInput;
+    final lOther$channelInvitationInput = other.channelInvitationInput;
+    if (l$channelInvitationInput != lOther$channelInvitationInput) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelInvitationInput = channelInvitationInput;
+    return Object.hashAll([l$channelInvitationInput]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$CreateChannelInvitation<TRes> {
+  factory CopyWith$Variables$Mutation$CreateChannelInvitation(
+    Variables$Mutation$CreateChannelInvitation instance,
+    TRes Function(Variables$Mutation$CreateChannelInvitation) then,
+  ) = _CopyWithImpl$Variables$Mutation$CreateChannelInvitation;
+
+  factory CopyWith$Variables$Mutation$CreateChannelInvitation.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$CreateChannelInvitation;
+
+  TRes call({Input$ChannelInvitationInput? channelInvitationInput});
+}
+
+class _CopyWithImpl$Variables$Mutation$CreateChannelInvitation<TRes>
+    implements CopyWith$Variables$Mutation$CreateChannelInvitation<TRes> {
+  _CopyWithImpl$Variables$Mutation$CreateChannelInvitation(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$CreateChannelInvitation _instance;
+
+  final TRes Function(Variables$Mutation$CreateChannelInvitation) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelInvitationInput = _undefined}) =>
+      _then(Variables$Mutation$CreateChannelInvitation._({
+        ..._instance._$data,
+        if (channelInvitationInput != _undefined &&
+            channelInvitationInput != null)
+          'channelInvitationInput':
+              (channelInvitationInput as Input$ChannelInvitationInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$CreateChannelInvitation<TRes>
+    implements CopyWith$Variables$Mutation$CreateChannelInvitation<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$CreateChannelInvitation(this._res);
+
+  TRes _res;
+
+  call({Input$ChannelInvitationInput? channelInvitationInput}) => _res;
+}
+
+class Mutation$CreateChannelInvitation {
+  Mutation$CreateChannelInvitation({
+    required this.createChannelInvitation,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$CreateChannelInvitation.fromJson(Map<String, dynamic> json) {
+    final l$createChannelInvitation = json['createChannelInvitation'];
+    final l$$__typename = json['__typename'];
+    return Mutation$CreateChannelInvitation(
+      createChannelInvitation:
+          Mutation$CreateChannelInvitation$createChannelInvitation.fromJson(
+              (l$createChannelInvitation as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$CreateChannelInvitation$createChannelInvitation
+      createChannelInvitation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$createChannelInvitation = createChannelInvitation;
+    _resultData['createChannelInvitation'] = l$createChannelInvitation.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$createChannelInvitation = createChannelInvitation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$createChannelInvitation,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$CreateChannelInvitation) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createChannelInvitation = createChannelInvitation;
+    final lOther$createChannelInvitation = other.createChannelInvitation;
+    if (l$createChannelInvitation != lOther$createChannelInvitation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$CreateChannelInvitation
+    on Mutation$CreateChannelInvitation {
+  CopyWith$Mutation$CreateChannelInvitation<Mutation$CreateChannelInvitation>
+      get copyWith => CopyWith$Mutation$CreateChannelInvitation(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$CreateChannelInvitation<TRes> {
+  factory CopyWith$Mutation$CreateChannelInvitation(
+    Mutation$CreateChannelInvitation instance,
+    TRes Function(Mutation$CreateChannelInvitation) then,
+  ) = _CopyWithImpl$Mutation$CreateChannelInvitation;
+
+  factory CopyWith$Mutation$CreateChannelInvitation.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$CreateChannelInvitation;
+
+  TRes call({
+    Mutation$CreateChannelInvitation$createChannelInvitation?
+        createChannelInvitation,
+    String? $__typename,
+  });
+  CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<TRes>
+      get createChannelInvitation;
+}
+
+class _CopyWithImpl$Mutation$CreateChannelInvitation<TRes>
+    implements CopyWith$Mutation$CreateChannelInvitation<TRes> {
+  _CopyWithImpl$Mutation$CreateChannelInvitation(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$CreateChannelInvitation _instance;
+
+  final TRes Function(Mutation$CreateChannelInvitation) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createChannelInvitation = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$CreateChannelInvitation(
+        createChannelInvitation: createChannelInvitation == _undefined ||
+                createChannelInvitation == null
+            ? _instance.createChannelInvitation
+            : (createChannelInvitation
+                as Mutation$CreateChannelInvitation$createChannelInvitation),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<TRes>
+      get createChannelInvitation {
+    final local$createChannelInvitation = _instance.createChannelInvitation;
+    return CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation(
+        local$createChannelInvitation, (e) => call(createChannelInvitation: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$CreateChannelInvitation<TRes>
+    implements CopyWith$Mutation$CreateChannelInvitation<TRes> {
+  _CopyWithStubImpl$Mutation$CreateChannelInvitation(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$CreateChannelInvitation$createChannelInvitation?
+        createChannelInvitation,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<TRes>
+      get createChannelInvitation =>
+          CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation
+              .stub(_res);
+}
+
+const documentNodeMutationCreateChannelInvitation = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreateChannelInvitation'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelInvitationInput')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ChannelInvitationInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createChannelInvitation'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value:
+                VariableNode(name: NameNode(value: 'channelInvitationInput')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Mutation$CreateChannelInvitation$createChannelInvitation {
+  Mutation$CreateChannelInvitation$createChannelInvitation({
+    required this.id,
+    this.$__typename = 'ChannelInvitation',
+  });
+
+  factory Mutation$CreateChannelInvitation$createChannelInvitation.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Mutation$CreateChannelInvitation$createChannelInvitation(
+      id: (l$id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$CreateChannelInvitation$createChannelInvitation) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$CreateChannelInvitation$createChannelInvitation
+    on Mutation$CreateChannelInvitation$createChannelInvitation {
+  CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<
+          Mutation$CreateChannelInvitation$createChannelInvitation>
+      get copyWith =>
+          CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<
+    TRes> {
+  factory CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation(
+    Mutation$CreateChannelInvitation$createChannelInvitation instance,
+    TRes Function(Mutation$CreateChannelInvitation$createChannelInvitation)
+        then,
+  ) = _CopyWithImpl$Mutation$CreateChannelInvitation$createChannelInvitation;
+
+  factory CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation.stub(
+          TRes res) =
+      _CopyWithStubImpl$Mutation$CreateChannelInvitation$createChannelInvitation;
+
+  TRes call({
+    String? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$CreateChannelInvitation$createChannelInvitation<
+        TRes>
+    implements
+        CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<
+            TRes> {
+  _CopyWithImpl$Mutation$CreateChannelInvitation$createChannelInvitation(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$CreateChannelInvitation$createChannelInvitation _instance;
+
+  final TRes Function(Mutation$CreateChannelInvitation$createChannelInvitation)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$CreateChannelInvitation$createChannelInvitation(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$CreateChannelInvitation$createChannelInvitation<
+        TRes>
+    implements
+        CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<
+            TRes> {
+  _CopyWithStubImpl$Mutation$CreateChannelInvitation$createChannelInvitation(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables$Mutation$DeclineChannelInvitation {
   factory Variables$Mutation$DeclineChannelInvitation(
           {required String channelInvitationId}) =>

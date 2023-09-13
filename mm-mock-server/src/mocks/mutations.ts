@@ -59,17 +59,11 @@ export function mockMutations(serverState: MockServerState) {
             serverState.channels.push(channel);
             return channel;
         },
-        createChannelInvitation: () => {
-            const invitation = generators.generateChannelInvitation(serverState.loggedInUser, serverState.otherUsers[1])
+        createChannelInvitation: (_: any, args: { input: { senderId: string, recipientId: string, messageText: string}}) => {
+            const recipient = serverState.otherUsers.find((e) => e.id == args.input.recipientId);
+            const invitation = generators.generateChannelInvitation(serverState.loggedInUser, recipient, args.input.messageText);
             serverState.channelInvitations.push(invitation);
-            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: invitation.channel.id }});
-            serverState.pubsub.publish(PUBSUB_CHANNEL_CHANGED, { 
-                channelChanged: {
-                    channelId: invitation.channel.id,
-                    invitationId: invitation.id,
-                    eventType: 'invitationCreated',
-                }
-            });
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: invitation.id }});
             return invitation;
         },
         createChannelMessage: (_: any, args: { input: { channelId: string, messageText: string , replyToMessageId: string | null}}) => {
