@@ -31,7 +31,11 @@ class Routes {
   );
   static Route signupEmail = Route(
     name: 'signupEmail',
-    path: '${signup.path}/connect',
+    path: '${signup.path}/email',
+  );
+  static Route signupPassword = Route(
+    name: 'signupPassword',
+    path: '${signup.path}/password',
   );
   static Route entrepreneurOrMentor = Route(
     name: 'entrepreneurOrMentor',

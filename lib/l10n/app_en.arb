@@ -233,6 +233,10 @@
     "entrepreneurDescription": "I own a business and I am looking for a mentor",
     "iAmAMentor": "I am a mentor",
     "mentorDescription": "I am an experienced professional and I want to share my knowledge",
-    "invalidEmailSnackBar": "Please enter a valid email address"
-
+    "invalidEmailSnackBar": "Please enter a valid email address",
+    "profileChipsSelectAllThatApply": "Select all that apply (optional)",
+    "profileChipsSelectUpTo": "Select up to {maxSelection} (optional)",
+    "createAPassword": "Create a password",
+    "password": "Password",
+    "confirmPassword": "Confirm password"
 }
