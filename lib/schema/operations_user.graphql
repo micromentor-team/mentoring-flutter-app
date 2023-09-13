@@ -40,6 +40,7 @@ query FindMenteeUsers($options: FindObjectsOptions, $filter: UserListFilter, $ma
             }
         }
         companies {
+            name
             companyStage {
                 textId
                 translatedValue
@@ -77,6 +78,9 @@ query FindMentorUsers($options: FindObjectsOptions, $filter: UserListFilter, $ma
                 }
                 endorsements
             }
+        }
+        companies {
+            name
         }
     }
 }
