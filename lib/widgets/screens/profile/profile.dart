@@ -138,6 +138,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 if (invitesFromUser.isEmpty && invitesToUser.isEmpty) {
                   // There is no connection between users
                   return ProfilePageHeader(
+                    authenticatedUser: widget.authenticatedUser,
                     userId: userId,
                     userFirstName: userFirstName,
                   );
@@ -146,6 +147,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                         e.status == Enum$ChannelInvitationStatus.created)) {
                   // There is a pending invitation received from this user
                   return ProfilePageHeader(
+                    authenticatedUser: widget.authenticatedUser,
                     userId: userId,
                     userFirstName: userFirstName,
                     invitationId: invitesFromUser
@@ -159,6 +161,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                         e.status == Enum$ChannelInvitationStatus.created)) {
                   // There is a pending invitation sent to this user
                   return ProfilePageHeader(
+                    authenticatedUser: widget.authenticatedUser,
                     userId: userId,
                     userFirstName: userFirstName,
                     invitationId: invitesToUser

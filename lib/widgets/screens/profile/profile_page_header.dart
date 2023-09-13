@@ -4,9 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/channels_provider.dart';
+
 class ProfilePageHeader extends StatefulWidget {
+  final AuthenticatedUser authenticatedUser;
   final String userId;
   final String? invitationId;
   final String userFirstName;
@@ -14,6 +18,7 @@ class ProfilePageHeader extends StatefulWidget {
 
   const ProfilePageHeader({
     Key? key,
+    required this.authenticatedUser,
     required this.userId,
     required this.userFirstName,
     this.invitationId,
@@ -26,12 +31,17 @@ class ProfilePageHeader extends StatefulWidget {
 
 class _ProfilePageHeaderState extends State<ProfilePageHeader> {
   late final InvitationsProvider _invitationsProvider;
+  late final ChannelsProvider _channelsProvider;
   late final MyChannelInvitationsModel _myChannelInvitationsModel;
 
   @override
   void initState() {
     super.initState();
     _invitationsProvider = Provider.of<InvitationsProvider>(
+      context,
+      listen: false,
+    );
+    _channelsProvider = Provider.of<ChannelsProvider>(
       context,
       listen: false,
     );
@@ -44,6 +54,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
   Widget _createAcceptRejectInviteButtons(
     ThemeData theme,
     AppLocalizations l10n,
+    GoRouter router,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -80,9 +91,18 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
             await _invitationsProvider.acceptChannelInvitation(
               channelInvitationId: widget.invitationId!,
             );
-            _myChannelInvitationsModel.refreshReceivedInvitations(
-              onlyPending: false,
+            final userChannels = await _channelsProvider.queryUserChannels(
+              userId: widget.authenticatedUser.id,
             );
+            for (ChannelForUser channel in userChannels.response!) {
+              if (channel.participants
+                      .any((c) => c.user.id == widget.authenticatedUser.id) &&
+                  channel.participants.any((c) => c.user.id == widget.userId)) {
+                router.push('${Routes.inboxChats.path}/${channel.id}');
+                return;
+              }
+            }
+            router.push(Routes.inboxChats.path);
           },
           child: Text(
             l10n.accept,
@@ -155,14 +175,14 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-
+    final GoRouter router = GoRouter.of(context);
     final Widget actions;
     switch (widget.invitationDirection) {
       case MessageDirection.unset:
         actions = _createSendInviteButton(theme, l10n);
         break;
       case MessageDirection.received:
-        actions = _createAcceptRejectInviteButtons(theme, l10n);
+        actions = _createAcceptRejectInviteButtons(theme, l10n, router);
         break;
       case MessageDirection.sent:
         actions = _createWithdrawInviteButton(theme, l10n);
@@ -179,7 +199,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
               Icons.keyboard_backspace_outlined,
               color: theme.colorScheme.secondary,
             ),
-            onPressed: () => context.pop(),
+            onPressed: () => router.pop(),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.only(end: Insets.paddingLarge),
