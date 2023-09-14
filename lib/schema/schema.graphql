@@ -108,6 +108,7 @@ enum OptionType {
   educationLevel
   expertise
   gender
+  pronoun
   country
   industry
   language
@@ -207,10 +208,19 @@ type MenteesGroupMembership implements IGroupMembership {
 
   """Must match industry ids or textIds."""
   industryTextId: String
+
+  """From MM2, not used in MM3 (yet)"""
   actionsTaken: String
+
+  """From MM2, not used in MM3 (yet)"""
   currentChallenges: String
+
+  """From MM2, not used in MM3 (yet)"""
   futureGoals: String
+
+  """From MM2, not used in MM3 (yet)"""
   motivationsForMentorship: String
+  reasonsForStartingBusiness: String
 }
 
 type MentorsGroupMembership implements IGroupMembership {
@@ -260,6 +270,7 @@ type Query {
   findGenders(fallbackUiLanguage: UiLanguage): [Gender!]!
   myInbox(refresh: Boolean): UserInbox!
   findChannelInvitationById(id: String!): ChannelInvitation!
+  findChannelInvitationsBetweenUsers(options: FindObjectsOptions, onlyPending: Boolean, userIds: [String!]!): [ChannelInvitation!]!
   findChannelInvitationsForUser(options: FindObjectsOptions, onlyPending: Boolean, direction: ChannelInvitationDirection, userId: String!): [ChannelInvitation!]!
   myChannelInvitations(options: FindObjectsOptions, onlyPending: Boolean, direction: ChannelInvitationDirection): [ChannelInvitation!]!
   findPendingChannelInvitationsForUser(options: FindObjectsOptions, userId: String!): [ChannelInvitation!]!
@@ -283,7 +294,7 @@ type Query {
   findUserSearchById(userSearchId: String!): UserSearch!
   findUserSearches(options: FindObjectsOptions, match: UserSearchInput, filter: UserSearchListFilter): [UserSearch!]!
   myUserSearches: [UserSearch!]!
-  findNlpConversation(conversationId: String!): NlpConversation!
+  getMm2Integration: Mm2Integration!
   findMyActiveMultiStepAction: [SidMultiStepAction!]!
   getMultiStepActionProgress(
     """
@@ -353,10 +364,11 @@ type User {
   genderSelfDescribed: String
   ethnicity: String
   educationLevelTextId: String
-  professionalBackground: String
+  personalBio: String
   yearsManagementExperience: Int
   yearsOwnershipExperience: Int
   ssoIdp: String
+  pronounsTextIds: [String!]
 
   """This attribute is only used by the MM2 synchronizer."""
   mm2Id: String
@@ -366,11 +378,13 @@ type User {
 
   """This is the MM2 password hash."""
   mm2PasswordHash: String
-
-  """
-  Users can enter a short description to be prominently displayed along with their name and other info.
-  """
-  oneLiner: String
+  businessExperienceIds: [ID!]
+  academicExperienceIds: [ID!]
+  businessExperiences: [BusinessExperience!]
+  academicExperiences: [AcademicExperience!]
+  cityOfOrigin: String
+  regionOfOrigin: String
+  countryOfOriginTextId: String
   countryOfResidence: Country
   gender: Gender
   latestUserDevice: UserDevice!
@@ -384,12 +398,15 @@ type User {
   channelInvitations: [ChannelInvitation!]!
   channelParticipants: [ChannelParticipant!]!
   companies: [Company!]!
+  countryOfOrigin: Country
   educationLevel: EducationLevel
   endorsements: [EndorsementWithTypes!]
   groupMembers: [GroupMembership!]!
   groups: [Group!]!
   inbox: UserInbox!
   profileCompletionPercentage: Int!
+  pronouns: [Pronoun!]!
+  pronounsDisplay: String!
   userSearches: [UserSearch!]!
 }
 
@@ -479,6 +496,58 @@ type UserDevice {
   oAuthRefreshToken: String
   pushNotificationToken: String
   trustedAt: DateTimeISO
+}
+
+type BusinessExperience {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  businessName: String!
+  jobTitle: String!
+  city: String
+  state: String
+  country: String
+  startDate: DateTimeISO!
+
+  """If the experience is ongoing, endDate is null."""
+  endDate: DateTimeISO
+  userId: ID!
+}
+
+type AcademicExperience {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  institutionName: String!
+
+  """
+  E.g. "Bachelor of Science"
+  """
+  degreeType: String
+
+  """
+  E.g. "Computer Science"
+  """
+  fieldOfStudy: String
+  startDate: DateTimeISO!
+
+  """If the experience is ongoing, endDate is null."""
+  endDate: DateTimeISO
+  userId: ID!
 }
 
 type Country {
@@ -818,6 +887,7 @@ type Company {
   deletedBy: ID
   name: String!
   description: String
+  userIds: [String!]
   companyTypeTextId: String
   companyStageTextId: String
   websites: [LabeledStringValue!]
@@ -953,6 +1023,8 @@ type EndorsementWithTypes {
 }
 
 enum ModelType {
+  AcademicExperience
+  BusinessExperience
   Company
   MentorBoard
   MentoringSession
@@ -1110,7 +1182,6 @@ type ChannelInbox {
   userId: ID!
   unseenMessages: [ChannelInboxItemMessage!]
   unseenArchivedMessages: [ChannelInboxItemMessage!]
-  unseenArchivedMessages: [ChannelInboxItemMessage!]
   pendingInvitations: [ChannelInboxItemInvitation!]
   invitations: [ChannelInboxItemInvitation!]
   updatedAt: DateTimeISO
@@ -1139,6 +1210,35 @@ type ChannelInboxItemInvitation {
   status: ChannelInvitationStatus!
   createdAt: DateTimeISO!
   createdBy: ID
+}
+
+type Pronoun {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTimeISO
+  childOptions: [Option!]
+  parentOption: [Option!]
 }
 
 type UserSearch {
@@ -1232,8 +1332,6 @@ input FindObjectsOptions {
   showRecordId: Boolean
   includeDeleted: IncludeFilterOption
   includeArchived: IncludeFilterOption
-  includeDeleted: IncludeFilterOption
-  includeArchived: IncludeFilterOption
 }
 
 input SortItem {
@@ -1244,12 +1342,6 @@ input SortItem {
 enum SortDirection {
   asc
   desc
-}
-
-enum IncludeFilterOption {
-  include
-  exclude
-  only
 }
 
 enum IncludeFilterOption {
@@ -1318,22 +1410,35 @@ input UserInput {
   genderSelfDescribed: String
   ethnicity: String
   educationLevelTextId: String
-  professionalBackground: String
+  personalBio: String
   yearsManagementExperience: Int
   yearsOwnershipExperience: Int
   ssoIdp: String
-
-  """
-  Users can enter a short description to be prominently displayed along with their name and other info.
-  """
-  oneLiner: String
+  pronounsTextIds: [String!]
 
   """Specify a company you want to create and add the user to."""
   company: CompanyInput
+
+  """
+  Specify a list of business experiences you want to create for the user.
+  """
+  businessExperiences: [BusinessExperienceInput!]
+
+  """
+  Specify a list of academic experiences you want to create for the user.
+  """
+  academicExperiences: [AcademicExperienceInput!]
+  businessExperienceIds: [ID!]
+  academicExperienceIds: [ID!]
+  cityOfOrigin: String
+  regionOfOrigin: String
+
+  """Users Country of origin. Use a Country Options textId."""
+  countryOfOriginTextId: String
 }
 
 input ModelEventInput {
-  time: DateTimeISO! = "2023-08-31T14:35:36.176Z"
+  time: DateTimeISO! = "2023-09-14T22:08:19.691Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -1404,6 +1509,58 @@ input CompanyInput {
   employeeCount: Int
   foundedAt: DateTimeISO
   addUserIds: [String!]
+}
+
+input BusinessExperienceInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  businessName: String
+  jobTitle: String
+  city: String
+  state: String
+  country: String
+  startDate: DateTimeISO
+
+  """If the experience is ongoing, endDate is null."""
+  endDate: DateTimeISO
+  userId: ID
+}
+
+input AcademicExperienceInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  institutionName: String
+
+  """
+  E.g. "Bachelor of Science"
+  """
+  degreeType: String
+
+  """
+  E.g. "Computer Science"
+  """
+  fieldOfStudy: String
+  startDate: DateTimeISO
+
+  """If the experience is ongoing, endDate is null."""
+  endDate: DateTimeISO
+  userId: ID
 }
 
 input UserListFilter {
@@ -1702,30 +1859,18 @@ input UserSearchListFilter {
   updatedAtUntil: DateTimeISO
 }
 
-type NlpConversation {
+type Mm2Integration {
   id: ID!
-  userIds: [ID!]!
-  assumedMentorUserId: ID!
-  messages: [NlpMessage!]!
-  labelName: String!
-  labelProcessor: String!
-  labelProbability: Int!
-  labeledAt: DateTimeISO
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
   updatedAt: DateTimeISO
-  createdAt: DateTimeISO
-}
-
-type NlpMessage {
-  id: ID!
-  conversationId: ID!
-  messageText: String!
-  senderRole: String!
-  labelName: String
-  labelProcessor: String
-  labelProbability: Int
-  labeledAt: DateTimeISO
-  createdBy: ID!
-  createdAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  fullSyncAt: DateTimeISO
 }
 
 type SidMultiStepAction {
@@ -1891,6 +2036,12 @@ type Mutation {
   updateUser(input: UserInput!): String!
   createUserDevice(input: UserDeviceInput!): UserDevice!
   updateUserDevice(input: UserDeviceInput!): String!
+  createAcademicExperience(input: AcademicExperienceInput!): AcademicExperience!
+  deleteAcademicExperience(deletePhysically: Boolean!, academicExperienceId: String!): ServiceRequest!
+  updateAcademicExperience(input: AcademicExperienceInput!): ServiceRequest!
+  createBusinessExperience(input: BusinessExperienceInput!): BusinessExperience!
+  deleteBusinessExperience(deletePhysically: Boolean!, businessExperienceId: String!): ServiceRequest!
+  updateBusinessExperience(input: BusinessExperienceInput!): ServiceRequest!
   createCompany(input: CompanyInput!): Company!
   deleteCompany(deletePhysically: Boolean!, companyId: String!): ServiceRequest!
   updateCompany(input: CompanyInput!): ServiceRequest!
@@ -1916,7 +2067,6 @@ type Mutation {
   createContentTag(input: ContentTagInput!): ContentTag!
   deleteContentTag(deletePhysically: Boolean!, contentTagId: String!): ServiceRequest!
   updateContentTag(input: ContentTagInput!): ServiceRequest!
-  runDataGenerator(input: GenRequest!): Boolean!
   createGroupMembership(input: GroupMembershipInput!): ServiceRequest!
   createMenteesGroupMembership(input: MenteesGroupMembershipInput!): ServiceRequest!
   createMentorsGroupMembership(input: MentorsGroupMembershipInput!): ServiceRequest!
@@ -1940,9 +2090,16 @@ type Mutation {
   createNotificationTemplate(notificationTemplateInput: NotificationTemplateInput!): NotificationTemplate!
   deleteNotificationTemplate(deletePhysically: Boolean!, notificationTemplateId: String!): String!
   updateNotificationTemplate(notificationTemplateInput: NotificationTemplateInput!): String!
+  clearAllSyncInfo(includeMm3: Boolean!, includeMm2: Boolean!): String!
 
-  """Label a platform message for the NLP learning process."""
-  nlpLabelMessage(input: NlpMessageInput!): String!
+  """
+  Deletes all data that was imported from MM2. This field is only available in non-production environments.
+  """
+  deleteAllMm2DataInMm3: String!
+  createMm2Synchronization(input: Mm2SynchronizationInput!): Mm2Synchronization!
+  deleteMm2Synchronization(mm2SynchronizationId: String!): Mm2Synchronization!
+  findMm2SynchronizationById(mm2SynchronizationId: String!): Mm2Synchronization!
+  runMm2Synchronization(runAgain: Boolean, id: String!): Mm2Synchronization!
   createMultiStepAction(input: SidMultiStepActionInput!): SidMultiStepActionProgress!
   startResetPassword(deviceUuid: String!, input: UserIdentInput!): SidMultiStepActionProgress!
   startVerifyEmail(email: String!): SidMultiStepActionProgress!
@@ -2021,6 +2178,12 @@ type ServiceRequest {
 enum ServiceRequestType {
   graphQlQueryUserInbox
   graphQlQueryUserUserSearches
+  graphQlMutationCreateAcademicExperience
+  graphQlMutationDeleteAcademicExperience
+  graphQlMutationUpdateAcademicExperience
+  graphQlMutationCreateBusinessExperience
+  graphQlMutationDeleteBusinessExperience
+  graphQlMutationUpdateBusinessExperience
   graphQlMutationCreateCompany
   graphQlMutationDeleteCompany
   graphQlMutationUpdateCompany
@@ -2044,6 +2207,7 @@ enum ServiceRequestType {
   graphQlQueryChannelInvitations
   graphQlQueryChannelParticipants
   graphQlQueryFindChannelInvitationById
+  graphQlQueryFindChannelInvitationsBetweenUsers
   graphQlQueryFindChannelInvitationsForUser
   graphQlQueryFindChannelMessageById
   graphQlQueryFindChannelMessages
@@ -2141,6 +2305,10 @@ enum ServiceRequestMessageId {
 }
 
 enum ErrorCode {
+  academicExperienceNameMissing
+  academicExperienceUserIdMissing
+  businessExperienceNameMissing
+  businessExperienceUserIdMissing
   companyNameMissing
   companyNameTaken
   contentTagAlreadyExist
@@ -2289,108 +2457,6 @@ input ContentTagInput {
   approvedByRecipientAt: DateTimeISO
 }
 
-input GenRequest {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: DateTimeISO
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  clearDb: Boolean! = false
-  conversationCount: Int! = 0
-  messageCount: Int! = 0
-  users: GenUserInput! = {count: 0, emailDomain: "micromentor.org"}
-  groups: GenGroupsInput! = {count: 0, specificGroups: []}
-  publishAppEvents: Boolean! = false
-}
-
-input GenUserInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: DateTimeISO
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  count: Int! = 0
-  dualRoleCount: Int
-  emailDomain: String! = "micromentor.org"
-  emailPrefix: String
-  mentorCount: Int
-  menteeCount: Int
-  mentorRatio: Float
-}
-
-input GenGroupsInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: DateTimeISO
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  count: Int! = 0
-  specificGroups: [GenSpecificGroupInput!]! = []
-}
-
-input GenSpecificGroupInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: DateTimeISO
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  name: String! = ""
-  mentorCount: Int
-  menteeCount: Int
-  groupRules: [GenGroupRuleInput!]
-  matchingEngine: GenMatchingEngineInput
-}
-
-input GenGroupRuleInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: DateTimeISO
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  someGroupRule: Boolean! = false
-  someOtherGroupRule: Boolean! = false
-}
-
-input GenMatchingEngineInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: DateTimeISO
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  someMatchingRule: Boolean! = false
-  someOtherMatchingRule: Boolean! = false
-}
-
 input MenteesGroupMembershipInput {
   id: ID
   adminNotes: String
@@ -2413,9 +2479,16 @@ input MenteesGroupMembershipInput {
   """Must match industry id or textId."""
   industryTextId: String
   actionsTaken: String
+
+  """From MM2, not used in MM3 (yet)"""
   currentChallenges: String
+
+  """From MM2, not used in MM3 (yet)"""
   futureGoals: String
+
+  """From MM2, not used in MM3 (yet)"""
   motivationsForMentorship: String
+  reasonsForStartingBusiness: String
 }
 
 input MentorsGroupMembershipInput {
@@ -2568,11 +2641,153 @@ input NotificationTemplateInput {
   isCore: Boolean
 }
 
-input NlpMessageInput {
-  id: ID! = ""
-  labelName: String! = ""
-  labelProcessor: String! = ""
-  labelProbability: Int! = 0
+type Mm2Synchronization {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  direction: Mm2SyncDirection!
+
+  """If synchronizing a single object, set this to its ID."""
+  objectId: String
+
+  """If synchronizing a single object, set this to its model type."""
+  mm2ModelType: Mm2ModelType
+  syncMode: Mm2SynchronizationMode!
+
+  """Set to true to run the synchronization right after creation."""
+  autorun: Boolean!
+
+  """
+  Will be updated with number of synchronized objects throughout the run.
+  """
+  progress: Int!
+  totalItemCount: Int!
+
+  """Number of objects to synchronize."""
+  limit: Int
+  result: Mm2SynchronizationResult!
+
+  """
+  Set to `info` or `error` to save Mm2SynchronizationResultItem objects to Mm2Synchronization.result. Using info on a large amount of items may expand the size of the MongoDB document beyond its limit, so only use it for local debugging. `none` disables saving any items to the synchronization object. Default: `error`
+  """
+  logLevel: Mm2SynchronizerLogLevel
+
+  """Will only include objects with a newer then specified updatedAt date."""
+  usersSinceUpdatedAt: String
+  previousSyncAt: DateTimeISO
+  startedAt: DateTimeISO
+  finishedAt: DateTimeISO
+
+  """
+  Time this object will be deleted from the DB. Default = 10 days after creation.
+  """
+  expiresAt: DateTimeISO
+}
+
+enum Mm2SyncDirection {
+  mm2ToMm3
+  mm3ToMm2
+}
+
+enum Mm2ModelType {
+  Community
+  Organization
+  Conversation
+  Message
+  User
+  MenteeExpertise
+  MenteeWebsite
+  MentorExpertise
+  Profile
+  SpokenLanguage
+}
+
+enum Mm2SynchronizationMode {
+  full
+  incremental
+  updated
+}
+
+type Mm2SynchronizationResult {
+  items: [Mm2SynchronizationResultItem!]!
+  createdCount: Int!
+  deletedCount: Int!
+  updatedCount: Int!
+  skippedCount: Int!
+  errorCount: Int!
+  error: String
+}
+
+type Mm2SynchronizationResultItem {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  synchronizationId: ID!
+  modelType: ModelType
+  mm2ModelType: Mm2ModelType
+  objectId: String!
+  mm2ObjectId: String!
+  name: String
+  operation: SyncActionTaken!
+  error: String
+}
+
+enum SyncActionTaken {
+  created
+  updated
+  deleted
+  skipped
+  unset
+}
+
+enum Mm2SynchronizerLogLevel {
+  none
+  info
+  error
+}
+
+input Mm2SynchronizationInput {
+  id: ID
+  adminNotes: String
+  events: [ModelEventInput!]
+  metadata: BaseModelMetadataInput
+  createdAt: DateTimeISO
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  direction: Mm2SyncDirection! = mm2ToMm3
+  objectId: String
+  mm2ModelType: Mm2ModelType
+  syncMode: Mm2SynchronizationMode! = full
+  limit: Int
+  autorun: Boolean! = true
+  usersSinceUpdatedAt: String
+
+  """
+  Set to `info` or `error` to save Mm2SynchronizationResultItem objects to Mm2Synchronization.result. Using info on a large amount of items may expand the size of the MongoDB document beyond its limit, so only use it for local debugging. `none` disables saving any items to the synchronization object. Default: `error`
+  """
+  logLevel: Mm2SynchronizerLogLevel
+
+  """
+  Time this object will be deleted from the DB. Default = 10 days after creation.
+  """
+  expiresAt: DateTimeISO
 }
 
 input SidMultiStepActionInput {

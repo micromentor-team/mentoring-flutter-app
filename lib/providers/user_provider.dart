@@ -10,6 +10,10 @@ import 'base/operation_result.dart';
 
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 
+typedef MentorUserDetailedProfile
+    = Query$FindMentorUserDetailedProfile$findUserById;
+typedef MenteeUserDetailedProfile
+    = Query$FindMenteeUserDetailedProfile$findUserById;
 typedef UserDetailedProfile = Query$FindUserDetailedProfile$findUserById;
 typedef UserQuickViewProfile = Query$FindUserQuickViewProfile$findUserById;
 // findAllUsers queries
@@ -55,7 +59,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? get user {
     return _user;
   }
-
+  
   // userSearch mutation
   Future<OperationResult<CreateUserSearchResponse>> createUserSearch({
     required Input$UserSearchInput searchInput,
@@ -170,6 +174,66 @@ class UserProvider extends BaseProvider with ChangeNotifier {
             }).toList()
           : null,
     );
+  }
+
+  Future<OperationResult<MenteeUserDetailedProfile>>
+      findMenteeUserDetailedProfile({
+    required String userId,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindMenteeUserDetailedProfile,
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables$Query$FindMenteeUserDetailedProfile(
+          id: userId,
+        ).toJson(),
+      ),
+    );
+
+    final operationResult = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindMenteeUserDetailedProfile.fromJson(
+              queryResult.data!,
+            ).findUserById,
+    );
+    if (operationResult.response?.avatarUrl == "") {
+      operationResult.response = operationResult.response!.copyWith(
+        avatarUrl: null,
+      );
+    }
+    return operationResult;
+  }
+
+  Future<OperationResult<MentorUserDetailedProfile>>
+      findMentorUserDetailedProfile({
+    required String userId,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindMentorUserDetailedProfile,
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables$Query$FindMentorUserDetailedProfile(
+          id: userId,
+        ).toJson(),
+      ),
+    );
+
+    final operationResult = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data == null
+          ? null
+          : Query$FindMentorUserDetailedProfile.fromJson(
+              queryResult.data!,
+            ).findUserById,
+    );
+    if (operationResult.response?.avatarUrl == "") {
+      operationResult.response = operationResult.response!.copyWith(
+        avatarUrl: null,
+      );
+    }
+    return operationResult;
   }
 
   Future<OperationResult<UserDetailedProfile>> findUserDetailedProfile({
