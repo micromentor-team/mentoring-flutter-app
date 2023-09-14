@@ -59,7 +59,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? get user {
     return _user;
   }
-  
+
   // userSearch mutation
   Future<OperationResult<CreateUserSearchResponse>> createUserSearch({
     required Input$UserSearchInput searchInput,
