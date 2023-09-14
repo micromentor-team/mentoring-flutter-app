@@ -13,7 +13,7 @@ class Chip {
   });
 }
 
-//example
+//example 1
 CreateMultiSelectChips createMultiSelectChipsExample() {
   return CreateMultiSelectChips(
     chips: [
@@ -64,12 +64,16 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
   final Set<int> _childIsSelected = {};
 
   // Callback function to be called by the child widget when selected
-  void handleChildSelection(int isSelected) {
+  void handleChildSelection(int chipId) {
     setState(() {
-      if (_childIsSelected.contains(isSelected)) {
-        _childIsSelected.remove(isSelected);
+      if (_childIsSelected.contains(chipId)) {
+        _childIsSelected.remove(chipId);
+      } else if (widget.maxSelection != null) {
+        if (_childIsSelected.length < widget.maxSelection!) {
+          _childIsSelected.add(chipId);
+        }
       } else {
-        _childIsSelected.add(isSelected);
+        _childIsSelected.add(chipId);
       }
     });
   }
@@ -110,7 +114,7 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
     for (int i = 0; i < widget.chips.length; i++) {
       var chip = FilterChipWidget(
         id: i,
-        selected: _childIsSelected.contains(i) ? true : false,
+        selected: _childIsSelected.contains(i),
         chipName: widget.chips[i].chipName,
         icon: widget.chips[i].icon,
         onSelectionChanged: handleChildSelection,
@@ -149,12 +153,12 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
   }
 }
 
-class FilterChipWidget extends StatefulWidget {
+class FilterChipWidget extends StatelessWidget {
   final int id;
   final String chipName;
   final IconData? icon;
   final bool selected;
-  final Function(int isSelected) onSelectionChanged;
+  final Function(int chipId) onSelectionChanged;
 
   const FilterChipWidget(
       {Key? key,
@@ -166,42 +170,32 @@ class FilterChipWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<FilterChipWidget> createState() => _FilterChipWidgetState();
-}
-
-class _FilterChipWidgetState extends State<FilterChipWidget> {
-  var _isSelected = false;
-
-  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
     return FilterChip(
-      avatar: widget.icon != null
+      avatar: icon != null
           ? Icon(
-              widget.icon!,
-              color: _isSelected
+              icon!,
+              color: selected
                   ? theme.colorScheme.onSurfaceVariant
                   : theme.colorScheme.onSecondaryContainer,
             )
           : null,
-      label: Text(widget.chipName),
+      label: Text(chipName),
       labelStyle: theme.textTheme.labelLarge?.copyWith(
-        color: _isSelected
+        color: selected
             ? theme.colorScheme.onSurfaceVariant
             : theme.colorScheme.onSecondaryContainer,
       ),
       selectedColor: theme.colorScheme.secondaryContainer,
-      selected: _isSelected,
-      side: _isSelected == false
+      selected: selected,
+      side: selected == false
           ? BorderSide(color: theme.colorScheme.outline)
           : null,
       showCheckmark: false,
       onSelected: (bool selected) {
-        setState(() {
-          _isSelected = selected;
-        });
-        widget.onSelectionChanged(widget.id);
+        onSelectionChanged(id);
       },
     );
   }
