@@ -61,13 +61,16 @@ class CreateMultiSelectChips extends StatefulWidget {
 }
 
 class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
-  Set<int> _childIsSelected = {-1};
+  final Set<int> _childIsSelected = {};
 
   // Callback function to be called by the child widget when selected
-  void handleChildSelection(Set<int> isSelected) {
+  void handleChildSelection(int isSelected) {
     setState(() {
-      _childIsSelected = isSelected;
-      print(_childIsSelected);
+      if (_childIsSelected.contains(isSelected)) {
+        _childIsSelected.remove(isSelected);
+      } else {
+        _childIsSelected.add(isSelected);
+      }
     });
   }
 
@@ -120,9 +123,9 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
       chipListWithPadding.add(padding);
     }
 
-    //Example of how to use the helper functions:
-    var selectedChips = findSelectedChips(chipList);
-    var names = returnSelectedChipNames(selectedChips);
+    //Example of how to use the 2 helper functions in the build method:
+    // var selectedChips = findSelectedChips(chipList);
+    // var names = returnSelectedChipNames(selectedChips);
     // print(names);
 
     return Column(
@@ -151,7 +154,7 @@ class FilterChipWidget extends StatefulWidget {
   final String chipName;
   final IconData? icon;
   final bool selected;
-  final Function(Set<int> isSelected) onSelectionChanged;
+  final Function(int isSelected) onSelectionChanged;
 
   const FilterChipWidget(
       {Key? key,
@@ -168,7 +171,6 @@ class FilterChipWidget extends StatefulWidget {
 
 class _FilterChipWidgetState extends State<FilterChipWidget> {
   var _isSelected = false;
-  Set<int> _selectedIdSet = {-1};
 
   @override
   Widget build(BuildContext context) {
@@ -199,10 +201,7 @@ class _FilterChipWidgetState extends State<FilterChipWidget> {
         setState(() {
           _isSelected = selected;
         });
-        (_isSelected == true)
-            ? _selectedIdSet.add(widget.id)
-            : _selectedIdSet.remove(widget.id);
-        widget.onSelectionChanged(_selectedIdSet);
+        widget.onSelectionChanged(widget.id);
       },
     );
   }
