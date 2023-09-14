@@ -7,6 +7,7 @@ class MentorCard extends StatelessWidget {
   final String mentorName;
   final String mentorBio;
   final List<String> mentorSkill;
+  final void Function()? onTap;
 
   static const double _mentorCardHeight = 170;
   static const double _mentorCardWidth = 260;
@@ -18,6 +19,7 @@ class MentorCard extends StatelessWidget {
     required this.mentorName,
     required this.mentorBio,
     required this.mentorSkill,
+    this.onTap,
   }) : super(key: key);
 
   Column _getAvatar() {
@@ -110,8 +112,8 @@ class MentorCard extends StatelessWidget {
         ),
 
         //Assuming that only the first two skills are shown in this card
-        mentorSkills[0],
-        mentorSkills[1],
+        if (mentorSkills.isNotEmpty) mentorSkills[0],
+        if (mentorSkills.length > 1) mentorSkills[1],
       ],
     );
   }
@@ -164,14 +166,17 @@ class MentorCard extends StatelessWidget {
     Column avatarColumn = _getAvatar();
     Column mentorInfoColumn = _getMentorInfo(context);
     return Card(
-      child: SizedBox(
-        width: _mentorCardWidth,
-        height: _mentorCardHeight,
-        child: Row(
-          children: [
-            avatarColumn,
-            mentorInfoColumn,
-          ],
+      child: InkWell(
+        onTap: onTap,
+        child: SizedBox(
+          width: _mentorCardWidth,
+          height: _mentorCardHeight,
+          child: Row(
+            children: [
+              avatarColumn,
+              mentorInfoColumn,
+            ],
+          ),
         ),
       ),
     );

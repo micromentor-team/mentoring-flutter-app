@@ -7,6 +7,8 @@ import 'base/operation_result.dart';
 
 typedef ChannelInvitationById
     = Query$FindChannelInvitationById$findChannelInvitationById;
+typedef CreatedChannelInvitation
+    = Mutation$CreateChannelInvitation$createChannelInvitation;
 typedef ReceivedChannelInvitation
     = Query$MyReceivedChannelInvitations$myChannelInvitations;
 typedef SentChannelInvitation
@@ -104,6 +106,34 @@ class InvitationsProvider extends BaseProvider {
           ? Mutation$AcceptChannelInvitation.fromJson(
               queryResult.data!,
             ).acceptChannelInvitation
+          : null,
+    );
+  }
+
+  Future<OperationResult<CreatedChannelInvitation>> createChannelInvitation({
+    required String senderId,
+    required String recipientId,
+    required String messageText,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationCreateChannelInvitation,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$CreateChannelInvitation(
+          channelInvitationInput: Input$ChannelInvitationInput(
+            senderId: senderId,
+            recipientId: recipientId,
+            messageText: messageText,
+          ),
+        ).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$CreateChannelInvitation.fromJson(
+              queryResult.data!,
+            ).createChannelInvitation
           : null,
     );
   }

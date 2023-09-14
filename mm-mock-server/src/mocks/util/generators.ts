@@ -19,6 +19,7 @@ export function generateUser(groups?: any[]) {
         lastName: mockLastName,
         fullName: mockFullName,
         userHandle: mockUserHandle,
+        educationLevel: faker.helpers.arrayElement(constants.educationLevels),
         email: mockEmail,
         avatarUrl: faker.image.urlPicsumPhotos(),
         jobTitle: faker.person.jobTitle(),
@@ -27,6 +28,7 @@ export function generateUser(groups?: any[]) {
         countryOfResidenceTextId: mockCountry.textId,
         cityOfResidence: faker.location.city(),
         regionOfResidence: faker.location.state(),
+        spokenLanguages: faker.helpers.arrayElements(constants.languages, {min: 1, max: 4}),
         updatedAt: faker.date.recent(),
         groupMemberships: [],
         groupIds: [],
@@ -71,6 +73,7 @@ export function generateCompany() {
         companyType: companyType,
         companyStageTextId: companyStage.textId,
         companyStage: companyStage,
+        industries: faker.helpers.arrayElements(constants.industries, {min: 1, max: 3}).map((e) => e.translatedValue),
         websites: [generateWebsite()],
     }
 }
@@ -236,7 +239,7 @@ export function generateChannelInboxItemMessage(sender: any, message: any) {
     }
 }
 
-export function generateChannelInvitation(sender: any, recipient: any, declined?: boolean, accepted?: boolean) {
+export function generateChannelInvitation(sender: any, recipient: any, messageText?: string, declined?: boolean, accepted?: boolean) {
     let status: string;
     let channel: any | null = null;
     if (accepted) {
@@ -254,7 +257,7 @@ export function generateChannelInvitation(sender: any, recipient: any, declined?
         channelName: faker.lorem.words(2),
         channel: channel,
         channelTopic: faker.lorem.sentence(),
-        messageText: faker.lorem.sentence(),
+        messageText: messageText ?? faker.lorem.sentence(),
         createdBy: sender.id,
         createdAt: faker.date.recent(),
         recipientId: recipient.id,

@@ -18,7 +18,7 @@ class ChatModel extends ChangeNotifier {
   final ChannelsProvider _channelsProvider;
   List<ChannelMessage> _channelMessages = [];
   StreamSubscription<QueryResult<Object?>>? _streamSubscription;
-  AsyncState _state = AsyncState.loading;
+  AsyncState _state = AsyncState.ready;
 
   List<ChannelMessage> get channelMessages => _channelMessages;
   AsyncState get state => _state;

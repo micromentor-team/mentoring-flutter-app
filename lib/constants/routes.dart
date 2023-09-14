@@ -53,10 +53,6 @@ class Routes {
     name: 'explore',
     path: '/explore',
   );
-  static Route exploreInviteToConnect = Route(
-    name: 'exploreInviteToConnect',
-    path: '${explore.path}/connect',
-  );
   static Route exploreFilters = Route(
     name: 'exploreFilters',
     path: '${explore.path}/filters',
@@ -109,10 +105,23 @@ class Routes {
     name: 'profile',
     path: '/profile',
   );
+  static Route profileId = Route(
+    name: 'profileId',
+    path: '${profile.path}/:${RouteParams.userId}',
+  );
+  static Route profileInvite = Route(
+    name: 'profileInvite',
+    path: '${profile.path}/invite',
+  );
+  static Route profileInviteId = Route(
+    name: 'profileInviteId',
+    path: '${profileInvite.path}/:${RouteParams.userId}',
+  );
 }
 
 class RouteParams {
   RouteParams._private();
   static const String channelId = 'channelId';
   static const String channelInvitationId = 'channelInvitationId';
+  static const String userId = 'userId';
 }

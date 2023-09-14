@@ -36,21 +36,21 @@ export class MockServerState {
         this.channelInvitations = [
             // RECEIVED INVITATIONS
             // accepted invitation, channel exists
-            generators.generateChannelInvitation(this.otherUsers[0], this.loggedInUser, false, true),
+            generators.generateChannelInvitation(this.otherUsers[0], this.loggedInUser, undefined, false, true),
             // pending invitations
             generators.generateChannelInvitation(this.otherUsers[1], this.loggedInUser),
             generators.generateChannelInvitation(this.otherUsers[2], this.loggedInUser),
             // declined invitation
-            generators.generateChannelInvitation(this.otherUsers[3], this.loggedInUser, true),
+            generators.generateChannelInvitation(this.otherUsers[3], this.loggedInUser, undefined, true),
 
             // SENT INVITATIONS
             // accepted invitation, channel exists
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[4], false, true),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[4], undefined, false, true),
             // pending invitations
             generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[5]),
             generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[6]),
             // declined invitation
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[7], true),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[7], undefined, true),
         ];
         // Messages for first channel
         const message0 = generators.generateChannelMessage('Hello!', this.channels[0], this.otherUsers[0], new Date('2023-07-26T12:34:01-00:00'), true);

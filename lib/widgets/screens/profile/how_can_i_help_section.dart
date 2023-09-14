@@ -3,93 +3,46 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 
-List<ProfileChip> _createExpertisesChips() {
-  List<ProfileChip> example = [
-    const ProfileChip(
-        text: "Marketing", icon: Icons.campaign_outlined, applyIconColor: true),
-    const ProfileChip(
-        text: "Operations",
-        icon: Icons.settings_applications_outlined,
-        applyIconColor: true),
-    const ProfileChip(
-        text: "Starting up", icon: Icons.rocket_outlined, applyIconColor: true),
-    const ProfileChip(
-        text: "Management", icon: Icons.people_outlined, applyIconColor: true),
-    const ProfileChip(
-        text: "Sales", icon: Icons.trending_up_outlined, applyIconColor: true),
-  ];
-  return example;
-}
-
-List<ProfileChip> _createIndustriesChips() {
-  List<ProfileChip> example = [
-    const ProfileChip(
-        text: "Digital Marketing, e-Commerce, Social Media",
-        icon: Icons.campaign_outlined,
-        applyIconColor: true),
-    const ProfileChip(
-        text: "Management of Companies",
-        icon: Icons.people_outlined,
-        applyIconColor: true),
-    const ProfileChip(
-        text: "Healthcare and Social Services",
-        icon: Icons.medication_outlined,
-        applyIconColor: true),
-  ];
-  return example;
-}
-
-List<ProfileChip> _createAvailabilityChips() {
-  List<ProfileChip> example = [
-    const ProfileChip(
-      text: "Weekly check-ins",
-    ),
-    const ProfileChip(
-      text: "Monthly check-ins",
-    ),
-    const ProfileChip(
-      text: "Informal chats",
-    ),
-    const ProfileChip(
-      text: "Formal meetings",
-    ),
-    const ProfileChip(
-      text: "Spot mentoring",
-    ),
-  ];
-  return example;
-}
-
 class HowCanIHelpSection extends StatelessWidget {
+  final List<String> expertises;
+  final List<String> industries;
+  final List<String> mentoringPreferences;
+  final String? expectations;
+
   const HowCanIHelpSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+    this.expertises = const [],
+    this.industries = const [],
+    this.mentoringPreferences = const [],
+    this.expectations,
+  });
 
   Widget _createChipsSection(
       BuildContext context, String title, List<ProfileChip> chips) {
     final ThemeData theme = Theme.of(context);
 
     return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: theme.textTheme.labelSmall!
-                .copyWith(color: theme.colorScheme.secondary),
-          ),
-          const SizedBox(height: Insets.paddingExtraSmall),
-          Wrap(
-            children: [
-              for (var chip in chips)
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(
-                      end: Insets.paddingExtraSmall),
-                  child: chip,
-                )
-            ],
-          )
-        ]);
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: theme.textTheme.labelSmall!
+              .copyWith(color: theme.colorScheme.secondary),
+        ),
+        const SizedBox(height: Insets.paddingExtraSmall),
+        Wrap(
+          children: [
+            for (var chip in chips)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(
+                    end: Insets.paddingExtraSmall),
+                child: chip,
+              )
+          ],
+        )
+      ],
+    );
   }
 
   Widget _createTextSection(
@@ -97,17 +50,18 @@ class HowCanIHelpSection extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: theme.textTheme.labelSmall!
-                .copyWith(color: theme.colorScheme.secondary),
-          ),
-          const SizedBox(height: Insets.paddingExtraSmall),
-          Text(content, style: theme.textTheme.bodyMedium),
-        ]);
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: theme.textTheme.labelSmall!
+              .copyWith(color: theme.colorScheme.secondary),
+        ),
+        const SizedBox(height: Insets.paddingExtraSmall),
+        Text(content, style: theme.textTheme.bodyMedium),
+      ],
+    );
   }
 
   @override
@@ -116,36 +70,58 @@ class HowCanIHelpSection extends StatelessWidget {
 
     final ThemeData theme = Theme.of(context);
     return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Divider(),
-          Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.paddingMedium,
-                  vertical: Insets.paddingSmall),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.howCanIHelp,
-                      style: theme.textTheme.titleMedium!
-                          .copyWith(color: theme.colorScheme.onSurface),
-                    ),
-                    const SizedBox(height: Insets.paddingSmall),
-                    _createChipsSection(context, "${l10n.myExpertises}:",
-                        _createExpertisesChips()),
-                    const SizedBox(height: Insets.paddingSmall),
-                    _createChipsSection(context, "${l10n.myIndustries}:",
-                        _createIndustriesChips()),
-                    const SizedBox(height: Insets.paddingSmall),
-                    _createChipsSection(context, "${l10n.myAvailability}:",
-                        _createAvailabilityChips()),
-                    const SizedBox(height: Insets.paddingSmall),
-                    _createTextSection(context, "${l10n.myExpectations}:",
-                        """Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend.""")
-                  ]))
-        ]);
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: Insets.paddingMedium, vertical: Insets.paddingSmall),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.profileHowCanIHelp,
+                style: theme.textTheme.titleMedium!
+                    .copyWith(color: theme.colorScheme.onSurface),
+              ),
+              const SizedBox(height: Insets.paddingSmall),
+              if (expertises.isNotEmpty) ...[
+                _createChipsSection(
+                  context,
+                  l10n.profileHowCanIHelpExpertises,
+                  expertises.map((e) => ProfileChip(text: e)).toList(),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
+              if (industries.isNotEmpty) ...[
+                _createChipsSection(
+                  context,
+                  l10n.profileHowCanIHelpIndustries,
+                  industries.map((e) => ProfileChip(text: e)).toList(),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
+              if (mentoringPreferences.isNotEmpty) ...[
+                _createChipsSection(
+                  context,
+                  l10n.profileHowCanIHelpPreferences,
+                  mentoringPreferences
+                      .map((e) => ProfileChip(text: e))
+                      .toList(),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
+              if (expectations != null)
+                _createTextSection(
+                  context,
+                  l10n.profileHowCanIHelpExpectations,
+                  expectations!,
+                )
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

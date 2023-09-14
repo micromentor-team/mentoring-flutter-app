@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters.dart';
 import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters_advanced.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
+import 'package:mm_flutter_app/widgets/screens/profile/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_email.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_password.dart';
@@ -132,7 +131,7 @@ class AppRouter {
         ),
         ShellRoute(
           observers: [Provider.of<RouteObserver<PageRoute>>(context)],
-          pageBuilder: (context, state, child) {
+          pageBuilder: (BuildContext context, GoRouterState state, child) {
             return MaterialPage(
               key: state.pageKey,
               maintainState: true,
@@ -185,21 +184,6 @@ class AppRouter {
               },
             ),
             GoRoute(
-              path: Routes.exploreInviteToConnect.path,
-              name: Routes.exploreInviteToConnect.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                List<ProfileQuickViewInfo> selectedProfiles =
-                    state.extra as List<ProfileQuickViewInfo>;
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: InviteToConnect(
-                    initialSelectedProfiles: selectedProfiles,
-                  ),
-                );
-              },
-            ),
-            GoRoute(
               path: Routes.inboxChats.path,
               name: Routes.inboxChats.name,
               pageBuilder: (BuildContext context, GoRouterState state) {
@@ -213,7 +197,7 @@ class AppRouter {
             GoRoute(
               path: Routes.inboxChatsChannelId.path,
               name: Routes.inboxChatsChannelId.name,
-              pageBuilder: (context, state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 final String channelId =
                     state.pathParameters[RouteParams.channelId]!;
                 return MaterialPage(
@@ -240,7 +224,7 @@ class AppRouter {
             GoRoute(
               path: Routes.inboxInvitesReceivedId.path,
               name: Routes.inboxInvitesReceivedId.name,
-              pageBuilder: (context, state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 final String channelInvitationId =
                     state.pathParameters[RouteParams.channelInvitationId]!;
                 return MaterialPage(
@@ -267,7 +251,7 @@ class AppRouter {
             GoRoute(
               path: Routes.inboxInvitesSentId.path,
               name: Routes.inboxInvitesSentId.name,
-              pageBuilder: (context, state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 final String channelInvitationId =
                     state.pathParameters[RouteParams.channelInvitationId]!;
                 return MaterialPage(
@@ -294,7 +278,7 @@ class AppRouter {
             GoRoute(
               path: Routes.inboxArchivedChannelId.path,
               name: Routes.inboxArchivedChannelId.name,
-              pageBuilder: (context, state) {
+              pageBuilder: (BuildContext context, GoRouterState state) {
                 final String channelId =
                     state.pathParameters[RouteParams.channelId]!;
                 return MaterialPage(
@@ -315,6 +299,33 @@ class AppRouter {
                   key: state.pageKey,
                   maintainState: false,
                   child: const ProfileScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.profileId.path,
+              name: Routes.profileId.name,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                final String userId = state.pathParameters[RouteParams.userId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: ProfileScreen(
+                    userId: userId,
+                  ),
+                );
+              },
+            ),
+            GoRoute(
+              path: Routes.profileInviteId.path,
+              name: Routes.profileInviteId.name,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                final String userId = state.pathParameters[RouteParams.userId]!;
+                return MaterialPage(
+                  key: state.pageKey,
+                  maintainState: false,
+                  child: InviteToConnect(
+                    userId: userId,
+                  ),
                 );
               },
             ),

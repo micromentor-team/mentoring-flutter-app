@@ -23,7 +23,7 @@ class InboxChatTileModel extends ChangeNotifier {
   StreamSubscription<QueryResult<Object?>>? _streamSubscription;
   ChannelLatestMessage? _lastMessage;
   int _unseenMessageCount = 0;
-  AsyncState _state = AsyncState.loading;
+  AsyncState _state = AsyncState.ready;
 
   ChannelLatestMessage? get lastMessage => _lastMessage;
   AsyncState get state => _state;

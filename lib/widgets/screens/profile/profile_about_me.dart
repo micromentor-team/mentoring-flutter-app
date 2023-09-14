@@ -4,40 +4,66 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 
 class ProfileAboutMe extends StatelessWidget {
-  const ProfileAboutMe({super.key});
+  final String? cityOfResidence;
+  final String? countryOfResidence;
+  final String? cityFrom;
+  final String? countryFrom;
+  final String promptTitle;
+  final String promptResponse;
+  final List<String> languages;
+
+  const ProfileAboutMe({
+    super.key,
+    this.cityOfResidence,
+    this.countryOfResidence,
+    this.cityFrom,
+    this.countryFrom,
+    required this.promptTitle,
+    required this.promptResponse,
+    this.languages = const [],
+  });
 
   Widget _createChipsSection(
-      BuildContext context, String? title, List<ProfileChip> chips) {
+    BuildContext context,
+    String? title,
+    List<ProfileChip> chips,
+  ) {
     final theme = Theme.of(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (title != null)
-          Text(
-            title,
-            style: theme.textTheme.labelSmall!
-                .copyWith(color: theme.colorScheme.secondary),
-          ),
-        const SizedBox(height: Insets.paddingExtraSmall),
-        Wrap(
-          children: [
-            for (var chip in chips)
-              Padding(
-                padding: const EdgeInsetsDirectional.only(
-                    end: Insets.paddingExtraSmall),
-                child: chip,
+    return chips.isNotEmpty
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (title != null)
+                Text(
+                  title,
+                  style: theme.textTheme.labelSmall!.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                ),
+              const SizedBox(height: Insets.paddingExtraSmall),
+              Wrap(
+                children: [
+                  for (var chip in chips)
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                        end: Insets.paddingExtraSmall,
+                      ),
+                      child: chip,
+                    )
+                ],
               )
-          ],
-        )
-      ],
-    );
+            ],
+          )
+        : const SizedBox(height: 0, width: 0);
   }
 
-  Widget _createBestPieceOfAdviceSection(
-      BuildContext context, String title, String content) {
+  Widget _createPromptSection(
+    BuildContext context,
+    String title,
+    String content,
+  ) {
     final theme = Theme.of(context);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -78,8 +104,14 @@ class ProfileAboutMe extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-
-    //TODO: call the backend instead of using hardcoded data
+    final String livesInLocation = [
+      cityOfResidence,
+      countryOfResidence,
+    ].nonNulls.toList().join(l10n.listSeparator);
+    final String fromLocation = [
+      cityFrom,
+      countryFrom,
+    ].nonNulls.join(l10n.listSeparator);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -98,14 +130,23 @@ class ProfileAboutMe extends StatelessWidget {
               ),
               const SizedBox(height: Insets.paddingSmall),
               _createChipsSection(
+                context,
+                null,
+                _createLocationChips(
+                  l10n,
+                  livesInLocation,
+                  fromLocation,
+                ),
+              ),
+              const SizedBox(height: Insets.paddingSmall),
+              if (languages.isNotEmpty) ...[
+                _createChipsSection(
                   context,
-                  null,
-                  _createLocationChips(
-                      "Shaker Heights, Ohio, USA", "Manila, Philippines")),
-              const SizedBox(height: Insets.paddingSmall),
-              _createChipsSection(context, "${l10n.profileMyLanguages}:",
-                  _createLanguageChips(["English", "Filipino", "French"])),
-              const SizedBox(height: Insets.paddingSmall),
+                  l10n.profileMyLanguages,
+                  _createLanguageChips(languages),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ],
             ],
           ),
         ),
@@ -114,28 +155,35 @@ class ProfileAboutMe extends StatelessWidget {
             horizontal: Insets.paddingSmall,
             vertical: Insets.paddingSmall,
           ),
-          child: _createBestPieceOfAdviceSection(
+          child: _createPromptSection(
             context,
-            "The best piece of advice I’ve ever received is:",
-            "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.",
+            promptTitle,
+            promptResponse,
           ),
         ),
-        const Divider(),
       ],
     );
   }
 }
 
 List<ProfileChip> _createLocationChips(
-  String cityLivesIn,
-  String? cityFrom,
+  AppLocalizations l10n,
+  String? livesInLocation,
+  String? fromLocation,
 ) {
   List<ProfileChip> example = [
-    ProfileChip(
-        text: "Lives in $cityLivesIn", icon: Icons.flag, applyIconColor: true),
-    if (cityFrom != null)
+    if (livesInLocation != null && livesInLocation.isNotEmpty)
       ProfileChip(
-          text: "From $cityFrom", icon: Icons.flag, applyIconColor: true),
+        text: l10n.profileAboutLivesIn(livesInLocation),
+        icon: Icons.flag,
+        applyIconColor: true,
+      ),
+    if (fromLocation != null && fromLocation.isNotEmpty)
+      ProfileChip(
+        text: l10n.profileAboutFrom(fromLocation),
+        icon: Icons.flag,
+        applyIconColor: true,
+      ),
   ];
   return example;
 }
@@ -147,9 +195,10 @@ List<ProfileChip> _createLanguageChips(
   for (var language in languages) {
     example.add(
       ProfileChip(
-          text: language,
-          icon: Icons.chat_bubble_outline_rounded,
-          applyIconColor: true),
+        text: language,
+        icon: Icons.chat_bubble_outline_rounded,
+        applyIconColor: true,
+      ),
     );
   }
   return example;

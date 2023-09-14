@@ -11,18 +11,6 @@ query GetAuthenticatedUser {
     }
 }
 
-query FindAllUsers ($filter: UserListFilter) {
-    findUsers(filter: $filter) {
-        id
-        email
-        firstName
-        lastName
-        fullName
-        avatarUrl
-        userHandle
-    }
-}
-
 query FindMenteeUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
     findUsers(options: $options, filter: $filter, match: $match) {
         id
@@ -52,6 +40,7 @@ query FindMenteeUsers($options: FindObjectsOptions, $filter: UserListFilter, $ma
             }
         }
         companies {
+            name
             companyStage {
                 textId
                 translatedValue
@@ -88,6 +77,102 @@ query FindMentorUsers($options: FindObjectsOptions, $filter: UserListFilter, $ma
                     translatedValue
                 }
                 endorsements
+            }
+        }
+        companies {
+            name
+        }
+    }
+}
+
+query FindUserDetailedProfile($userId: String!) {
+    findUserById(id: $userId) {
+        id
+        avatarUrl
+        fullName
+        firstName
+        lastName
+        regionOfResidence
+        cityOfResidence
+        countryOfResidence {
+            translatedValue
+        }
+        jobTitle
+        companies {
+            name
+            websites {
+                value
+            }
+            description
+            isOperational
+            industries
+            companyStage {
+                translatedValue
+            }
+            companyType {
+                translatedValue
+            }
+        }
+        educationLevel {
+            translatedValue
+        }
+        offersHelp
+        seeksHelp
+        spokenLanguages {
+            translatedValue
+        }
+        websites {
+            value
+        }
+        groupMemberships {
+            groupIdent
+            ... on MenteesGroupMembership {
+                industry {
+                    translatedValue
+                }
+                soughtExpertises {
+                    translatedValue
+                }
+            }
+            ... on MentorsGroupMembership {
+                industries {
+                    translatedValue
+                }
+                expertises {
+                    translatedValue
+                }
+            }
+        }
+    }
+}
+
+query FindUserQuickViewProfile($userId: String!) {
+    findUserById(id: $userId) {
+        id
+        avatarUrl
+        fullName
+        regionOfResidence
+        cityOfResidence
+        countryOfResidence {
+            translatedValue
+        }
+        jobTitle
+        companies {
+            name
+        }
+        offersHelp
+        seeksHelp
+        groupMemberships {
+            groupIdent
+            ... on MenteesGroupMembership {
+                soughtExpertises {
+                    translatedValue
+                }
+            }
+            ... on MentorsGroupMembership {
+                expertises {
+                    translatedValue
+                }
             }
         }
     }

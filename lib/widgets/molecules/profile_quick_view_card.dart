@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 
 import '../../constants/app_constants.dart';
@@ -11,6 +12,7 @@ import '../atoms/skill_chip.dart';
  */
 class ProfileQuickViewInfo {
   final bool isRecommended;
+  final String userId;
   final UserType userType;
   final String? avatarUrl;
   final String fullName;
@@ -24,6 +26,7 @@ class ProfileQuickViewInfo {
 
   const ProfileQuickViewInfo({
     required this.isRecommended,
+    required this.userId,
     required this.userType,
     required this.avatarUrl,
     required this.fullName,
@@ -40,6 +43,7 @@ class ProfileQuickViewInfo {
 ProfileQuickViewInfo createRecommendedMentorExample() {
   return const ProfileQuickViewInfo(
       isRecommended: true,
+      userId: '',
       userType: UserType.mentor,
       avatarUrl:
           'https://media.istockphoto.com/id/1280371040/photo/confident-stylish-european-mature-middle-aged-woman-standing-at-workplace-stylish-older.jpg?s=612x612&w=0&k=20&c=AntzoG_Z1hN6tYVBXbu58Rvz4jweBYa8669bV75yWRw=',
@@ -67,6 +71,7 @@ ProfileQuickViewInfo createRecommendedMentorExample() {
 ProfileQuickViewInfo createRegularMentorExample() {
   return const ProfileQuickViewInfo(
       isRecommended: false,
+      userId: '',
       userType: UserType.mentor,
       avatarUrl:
           'https://media.istockphoto.com/id/1307694427/photo/portrait-of-businessman-in-glasses-holding-smartphone-in-hand.jpg?s=612x612&w=0&k=20&c=P4FDNemdXlXQi3O_yLePrJVzuTYmJx84-iIySj91fGQ=',
@@ -94,6 +99,7 @@ ProfileQuickViewInfo createRegularMentorExample() {
 ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
   return const ProfileQuickViewInfo(
       isRecommended: true,
+      userId: '',
       userType: UserType.entrepreneur,
       avatarUrl:
           'https://st4.depositphotos.com/9999814/39958/i/600/depositphotos_399584092-stock-photo-attractive-young-woman-profile-portrait.jpg',
@@ -126,6 +132,7 @@ ProfileQuickViewCard createProfileCardFromInfo({
 }) {
   return ProfileQuickViewCard(
     isRecommended: info.isRecommended,
+    userId: info.userId,
     userType: info.userType,
     avatarUrl: info.avatarUrl,
     fullName: info.fullName,
@@ -143,6 +150,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   static int maxSkillChips = 3;
 
   final bool isRecommended;
+  final String userId;
   final UserType userType;
   final String? avatarUrl;
   final String fullName;
@@ -157,6 +165,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   const ProfileQuickViewCard({
     Key? key,
     this.isRecommended = false,
+    required this.userId,
     required this.userType,
     this.avatarUrl,
     required this.fullName,
@@ -173,6 +182,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final GoRouter router = GoRouter.of(context);
     return Card(
       color: colorScheme.surface,
       surfaceTintColor: Colors.transparent,
@@ -198,13 +208,15 @@ class ProfileQuickViewCard extends StatelessWidget {
                 ),
           child: Stack(
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                  padding: EdgeInsets.all(Insets.paddingMedium),
+                  padding: const EdgeInsets.all(Insets.paddingMedium),
                   child: TextButton(
-                    onPressed: null,
-                    child: Icon(Icons.arrow_forward),
+                    onPressed: () {
+                      router.push('${Routes.profile.path}/$userId');
+                    },
+                    child: const Icon(Icons.arrow_forward),
                   ),
                 ),
               ),
