@@ -5,10 +5,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //class chip
 class Chip {
   final String chipName;
+  final String textId;
   final IconData? icon;
 
   Chip({
     required this.chipName,
+    required this.textId,
     this.icon,
   });
 }
@@ -17,12 +19,12 @@ class Chip {
 CreateMultiSelectChips createMultiSelectChipsExample() {
   return CreateMultiSelectChips(
     chips: [
-      Chip(chipName: 'Weekly check-ins'),
-      Chip(chipName: 'Monthly check-ins'),
-      Chip(chipName: 'One-off sessions'),
-      Chip(chipName: 'Informal chats'),
-      Chip(chipName: 'Formal meetings'),
-      Chip(chipName: 'Long term'),
+      Chip(chipName: 'Weekly check-ins', textId: 'weeklyCheckIn'),
+      Chip(chipName: 'Monthly check-ins', textId: 'monthlyCheckIn'),
+      Chip(chipName: 'One-off sessions', textId: 'oneOffSessions'),
+      Chip(chipName: 'Informal chats', textId: 'informalChats'),
+      Chip(chipName: 'Formal meetings', textId: 'formatMeetings'),
+      Chip(chipName: 'Long term', textId: 'longTerm'),
     ],
   );
 }
@@ -31,15 +33,30 @@ CreateMultiSelectChips createMultiSelectChipsExample() {
 CreateMultiSelectChips createMultiSelectChipsExampleWithIcon() {
   return CreateMultiSelectChips(
     chips: [
-      Chip(chipName: 'Administrative Services', icon: Icons.work_outline),
-      Chip(chipName: 'Agriculture & Forestry', icon: Icons.work_outline),
-      Chip(chipName: 'Architecture & Engineering', icon: Icons.work_outline),
+      Chip(
+          chipName: 'Administrative Services',
+          textId: 'administrativeServices',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Agriculture & Forestry',
+          textId: 'agricultureAndForestry',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Architecture & Engineering',
+          textId: 'architectureAndEngineering',
+          icon: Icons.work_outline),
       Chip(
           chipName: 'Arts, Entertainment, & Recreation',
+          textId: 'artsEntertainmentAndRecreation',
           icon: Icons.work_outline),
-      Chip(chipName: 'Beauty, Hair, & Cosmetics', icon: Icons.work_outline),
       Chip(
-          chipName: 'Building & Grounds Maintenance', icon: Icons.work_outline),
+          chipName: 'Beauty, Hair, & Cosmetics',
+          textId: 'beautyHairAndCosmetics',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Building & Grounds Maintenance',
+          textId: 'buildingAndGroundsMaintenance',
+          icon: Icons.work_outline),
     ],
     maxSelection: 3,
   );
@@ -89,15 +106,15 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
     return selectedChip;
   }
 
-  //Helper2: input a list of selected chips, return a list of selected chips' names
+  //Helper2: input a list of selected chips, return a list of selected chips' text IDs
   List<String?> returnSelectedChipNames(List<FilterChipWidget> selectedChips) {
-    List<String> names = [];
+    List<String> textIds = [];
     for (var chip in selectedChips) {
       if (chip.selected == true) {
-        names.add(chip.chipName);
+        textIds.add(chip.textId);
       }
     }
-    return names;
+    return textIds;
   }
 
   @override
@@ -116,6 +133,7 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
         id: i,
         selected: _childIsSelected.contains(i),
         chipName: widget.chips[i].chipName,
+        textId: widget.chips[i].textId,
         icon: widget.chips[i].icon,
         onSelectionChanged: handleChildSelection,
       );
@@ -127,10 +145,10 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
       chipListWithPadding.add(padding);
     }
 
-    //Example of how to use the 2 helper functions in the build method:
+    // Example of how to use the 2 helper functions in the build method:
     // var selectedChips = findSelectedChips(chipList);
-    // var names = returnSelectedChipNames(selectedChips);
-    // print(names);
+    // var textIds = returnSelectedChipNames(selectedChips);
+    // print(textIds);
 
     return Column(
       children: [
@@ -156,6 +174,7 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
 class FilterChipWidget extends StatelessWidget {
   final int id;
   final String chipName;
+  final String textId;
   final IconData? icon;
   final bool selected;
   final Function(int chipId) onSelectionChanged;
@@ -163,6 +182,7 @@ class FilterChipWidget extends StatelessWidget {
   const FilterChipWidget(
       {Key? key,
       required this.id,
+      required this.textId,
       required this.chipName,
       this.icon,
       this.selected = false,
