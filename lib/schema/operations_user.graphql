@@ -11,6 +11,123 @@ query GetAuthenticatedUser {
     }
 }
 
+mutation CreateUserSearch($input: UserSearchInput!) {
+    createUserSearch(input: $input) {
+        name
+        seeksHelp
+        offersHelp
+        searchText
+        id
+        expiresAt
+        userId
+        updatedAt
+        runInfos {
+            finishedAt
+            matchCount
+        }
+    }
+}
+
+query MyUserSearches {
+  myUserSearches {
+    topFoundUsers {
+        id
+        email
+        firstName
+        lastName
+        fullName
+        avatarUrl
+        userHandle
+        offersHelp
+        seeksHelp
+        jobTitle
+        countryOfResidence {
+            translatedValue
+        }
+        groupMemberships {
+            groupIdent
+            ... on MentorsGroupMembership {
+                expertises {
+                    translatedValue
+                }
+                industries {
+                    translatedValue
+                }
+                endorsements
+            }
+            ... on MenteesGroupMembership {
+                soughtExpertises {
+                    translatedValue
+                }
+                industry {
+                    translatedValue
+                }
+            }
+        }
+        companies {
+            name
+            companyStage {
+                translatedValue
+            }
+            companyType {
+                translatedValue
+            }
+        }
+    }
+    runInfos {
+      finishedAt
+      matchCount
+      topUserIds
+    }
+    updatedAt
+  }
+}
+
+query FindUserSearch($userSearchId: String!) {
+  findUserSearchById(userSearchId: $userSearchId) {
+    topFoundUsers {
+        id
+        email
+        firstName
+        lastName
+        fullName
+        avatarUrl
+        userHandle
+        offersHelp
+        seeksHelp
+        jobTitle
+        cityOfResidence
+        regionOfResidence
+        countryOfResidence {
+            translatedValue
+        }
+        groupMemberships {
+            groupIdent
+            ... on MentorsGroupMembership {
+                expertises {
+                    translatedValue
+                }
+                endorsements
+            }
+            ... on MenteesGroupMembership {
+                soughtExpertises {
+                    translatedValue
+                }
+            }
+        }
+        companies {
+            name
+        }
+    }
+    runInfos {
+      finishedAt
+      matchCount
+      topUserIds
+    }
+    updatedAt
+  }
+}
+
 query FindMenteeUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
     findUsers(options: $options, filter: $filter, match: $match) {
         id
@@ -144,6 +261,167 @@ query FindUserDetailedProfile($userId: String!) {
             }
         }
     }
+}
+
+query FindMentorUserDetailedProfile($id: String!) {
+  findUserById(id: $id) {
+    id
+    firstName
+    lastName
+    fullName
+    offersHelp
+    seeksHelp
+    websites {
+        value
+        label # label == "linkedin" for the linkedin button
+    }
+    spokenLanguages {
+      translatedValue
+    }
+    avatarUrl # not yet functional
+    groupMemberships {
+      groupId
+      groupIdent
+      ... on MentorsGroupMembership {
+        expertisesTextIds
+        industriesTextIds
+        expertises {
+          translatedValue
+          # icon not yet defined, coming later
+        }
+        industries {
+          translatedValue
+          # icon not yet defined, coming later
+        }
+        endorsements # just a number for now, not yet defined as an object
+        expectationsForMentees
+        # TODO: implement mentoring preferences
+      }
+    }
+    pronounsDisplay # this handles some display logic, "she/they" for a user with both "they/them" and "she/her" pronouns
+    pronouns {
+      translatedValue # e.g. "she/her"
+    }
+    businessExperiences {
+      businessName
+      jobTitle
+      startDate
+      endDate
+      city
+      state
+      country
+    }
+    academicExperiences {
+      institutionName
+      degreeType
+      fieldOfStudy
+      startDate
+      endDate
+    }
+    cityOfResidence
+    regionOfResidence
+    countryOfResidenceTextId
+    countryOfResidence {
+      translatedValue
+    }
+    cityOfOrigin
+    regionOfOrigin
+    countryOfOriginTextId
+    countryOfOrigin {
+      translatedValue
+    }
+    # these last 2 fields were created for the top area of the profile page (job title and company name). 
+    # maybe we'll switch this to businessExperiences later - depends on the onboarding process
+    jobTitle
+    companies {
+      name
+    }
+  }
+}
+
+
+query FindMenteeUserDetailedProfile($id: String!) {
+  findUserById(id: $id) {
+    id
+    firstName
+    lastName
+    fullName
+    email
+    userHandle
+    offersHelp
+    seeksHelp
+    websites {
+        value
+        label # label == "linkedin" for the linkedin button
+    }
+    spokenLanguages {
+      translatedValue
+    }
+    avatarUrl # not yet functional
+    groupMemberships {
+      groupId
+      groupIdent
+      # group name isn't served with this (used in the chip below "ENTREPRENEUR" or "MENTOR"). TBD how it'll be accessed
+        ... on MenteesGroupMembership {
+            soughtExpertises {
+                translatedValue
+            }
+            industry {
+                translatedValue
+            }
+            reasonsForStartingBusiness
+            # business mission not defined, use companies[0].description instead
+        }
+    }
+    jobTitle
+    companies {
+      name # venture name
+      description # "business mission" can be drawn from here for now
+      websites {
+        value # url
+        label # type of website. might not be relevant
+      }
+      companyStage {
+        translatedValue
+      }
+      companyType {
+        translatedValue
+      }
+      # we may need to add city/state/country to this model for the mentee
+    }
+    pronounsDisplay # this handles some display logic, "she/they" for a user with both "they/them" and "she/her" pronouns
+    pronouns {
+      translatedValue # e.g. "she/her"
+    }
+    businessExperiences {
+      businessName
+      jobTitle
+      startDate
+      endDate
+      city
+      state
+      country
+    }
+    academicExperiences {
+      institutionName
+      degreeType
+      fieldOfStudy
+      startDate
+      endDate
+    }
+    cityOfResidence
+    regionOfResidence
+    countryOfResidenceTextId
+    countryOfResidence {
+      translatedValue
+    }
+    cityOfOrigin
+    regionOfOrigin
+    countryOfOriginTextId
+    countryOfOrigin {
+      translatedValue
+    }
+  }
 }
 
 query FindUserQuickViewProfile($userId: String!) {

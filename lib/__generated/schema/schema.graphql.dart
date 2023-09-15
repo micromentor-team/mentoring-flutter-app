@@ -919,12 +919,19 @@ class Input$UserInput {
     String? genderSelfDescribed,
     String? ethnicity,
     String? educationLevelTextId,
-    String? professionalBackground,
+    String? personalBio,
     int? yearsManagementExperience,
     int? yearsOwnershipExperience,
     String? ssoIdp,
-    String? oneLiner,
+    List<String>? pronounsTextIds,
     Input$CompanyInput? company,
+    List<Input$BusinessExperienceInput>? businessExperiences,
+    List<Input$AcademicExperienceInput>? academicExperiences,
+    List<String>? businessExperienceIds,
+    List<String>? academicExperienceIds,
+    String? cityOfOrigin,
+    String? regionOfOrigin,
+    String? countryOfOriginTextId,
   }) =>
       Input$UserInput._({
         if (id != null) r'id': id,
@@ -996,15 +1003,26 @@ class Input$UserInput {
         if (ethnicity != null) r'ethnicity': ethnicity,
         if (educationLevelTextId != null)
           r'educationLevelTextId': educationLevelTextId,
-        if (professionalBackground != null)
-          r'professionalBackground': professionalBackground,
+        if (personalBio != null) r'personalBio': personalBio,
         if (yearsManagementExperience != null)
           r'yearsManagementExperience': yearsManagementExperience,
         if (yearsOwnershipExperience != null)
           r'yearsOwnershipExperience': yearsOwnershipExperience,
         if (ssoIdp != null) r'ssoIdp': ssoIdp,
-        if (oneLiner != null) r'oneLiner': oneLiner,
+        if (pronounsTextIds != null) r'pronounsTextIds': pronounsTextIds,
         if (company != null) r'company': company,
+        if (businessExperiences != null)
+          r'businessExperiences': businessExperiences,
+        if (academicExperiences != null)
+          r'academicExperiences': academicExperiences,
+        if (businessExperienceIds != null)
+          r'businessExperienceIds': businessExperienceIds,
+        if (academicExperienceIds != null)
+          r'academicExperienceIds': academicExperienceIds,
+        if (cityOfOrigin != null) r'cityOfOrigin': cityOfOrigin,
+        if (regionOfOrigin != null) r'regionOfOrigin': regionOfOrigin,
+        if (countryOfOriginTextId != null)
+          r'countryOfOriginTextId': countryOfOriginTextId,
       });
 
   Input$UserInput._(this._$data);
@@ -1305,10 +1323,9 @@ class Input$UserInput {
       final l$educationLevelTextId = data['educationLevelTextId'];
       result$data['educationLevelTextId'] = (l$educationLevelTextId as String?);
     }
-    if (data.containsKey('professionalBackground')) {
-      final l$professionalBackground = data['professionalBackground'];
-      result$data['professionalBackground'] =
-          (l$professionalBackground as String?);
+    if (data.containsKey('personalBio')) {
+      final l$personalBio = data['personalBio'];
+      result$data['personalBio'] = (l$personalBio as String?);
     }
     if (data.containsKey('yearsManagementExperience')) {
       final l$yearsManagementExperience = data['yearsManagementExperience'];
@@ -1324,15 +1341,60 @@ class Input$UserInput {
       final l$ssoIdp = data['ssoIdp'];
       result$data['ssoIdp'] = (l$ssoIdp as String?);
     }
-    if (data.containsKey('oneLiner')) {
-      final l$oneLiner = data['oneLiner'];
-      result$data['oneLiner'] = (l$oneLiner as String?);
+    if (data.containsKey('pronounsTextIds')) {
+      final l$pronounsTextIds = data['pronounsTextIds'];
+      result$data['pronounsTextIds'] = (l$pronounsTextIds as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
     }
     if (data.containsKey('company')) {
       final l$company = data['company'];
       result$data['company'] = l$company == null
           ? null
           : Input$CompanyInput.fromJson((l$company as Map<String, dynamic>));
+    }
+    if (data.containsKey('businessExperiences')) {
+      final l$businessExperiences = data['businessExperiences'];
+      result$data['businessExperiences'] =
+          (l$businessExperiences as List<dynamic>?)
+              ?.map((e) => Input$BusinessExperienceInput.fromJson(
+                  (e as Map<String, dynamic>)))
+              .toList();
+    }
+    if (data.containsKey('academicExperiences')) {
+      final l$academicExperiences = data['academicExperiences'];
+      result$data['academicExperiences'] =
+          (l$academicExperiences as List<dynamic>?)
+              ?.map((e) => Input$AcademicExperienceInput.fromJson(
+                  (e as Map<String, dynamic>)))
+              .toList();
+    }
+    if (data.containsKey('businessExperienceIds')) {
+      final l$businessExperienceIds = data['businessExperienceIds'];
+      result$data['businessExperienceIds'] =
+          (l$businessExperienceIds as List<dynamic>?)
+              ?.map((e) => (e as String))
+              .toList();
+    }
+    if (data.containsKey('academicExperienceIds')) {
+      final l$academicExperienceIds = data['academicExperienceIds'];
+      result$data['academicExperienceIds'] =
+          (l$academicExperienceIds as List<dynamic>?)
+              ?.map((e) => (e as String))
+              .toList();
+    }
+    if (data.containsKey('cityOfOrigin')) {
+      final l$cityOfOrigin = data['cityOfOrigin'];
+      result$data['cityOfOrigin'] = (l$cityOfOrigin as String?);
+    }
+    if (data.containsKey('regionOfOrigin')) {
+      final l$regionOfOrigin = data['regionOfOrigin'];
+      result$data['regionOfOrigin'] = (l$regionOfOrigin as String?);
+    }
+    if (data.containsKey('countryOfOriginTextId')) {
+      final l$countryOfOriginTextId = data['countryOfOriginTextId'];
+      result$data['countryOfOriginTextId'] =
+          (l$countryOfOriginTextId as String?);
     }
     return Input$UserInput._(result$data);
   }
@@ -1414,15 +1476,27 @@ class Input$UserInput {
   String? get ethnicity => (_$data['ethnicity'] as String?);
   String? get educationLevelTextId =>
       (_$data['educationLevelTextId'] as String?);
-  String? get professionalBackground =>
-      (_$data['professionalBackground'] as String?);
+  String? get personalBio => (_$data['personalBio'] as String?);
   int? get yearsManagementExperience =>
       (_$data['yearsManagementExperience'] as int?);
   int? get yearsOwnershipExperience =>
       (_$data['yearsOwnershipExperience'] as int?);
   String? get ssoIdp => (_$data['ssoIdp'] as String?);
-  String? get oneLiner => (_$data['oneLiner'] as String?);
+  List<String>? get pronounsTextIds =>
+      (_$data['pronounsTextIds'] as List<String>?);
   Input$CompanyInput? get company => (_$data['company'] as Input$CompanyInput?);
+  List<Input$BusinessExperienceInput>? get businessExperiences =>
+      (_$data['businessExperiences'] as List<Input$BusinessExperienceInput>?);
+  List<Input$AcademicExperienceInput>? get academicExperiences =>
+      (_$data['academicExperiences'] as List<Input$AcademicExperienceInput>?);
+  List<String>? get businessExperienceIds =>
+      (_$data['businessExperienceIds'] as List<String>?);
+  List<String>? get academicExperienceIds =>
+      (_$data['academicExperienceIds'] as List<String>?);
+  String? get cityOfOrigin => (_$data['cityOfOrigin'] as String?);
+  String? get regionOfOrigin => (_$data['regionOfOrigin'] as String?);
+  String? get countryOfOriginTextId =>
+      (_$data['countryOfOriginTextId'] as String?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -1675,9 +1749,9 @@ class Input$UserInput {
       final l$educationLevelTextId = educationLevelTextId;
       result$data['educationLevelTextId'] = l$educationLevelTextId;
     }
-    if (_$data.containsKey('professionalBackground')) {
-      final l$professionalBackground = professionalBackground;
-      result$data['professionalBackground'] = l$professionalBackground;
+    if (_$data.containsKey('personalBio')) {
+      final l$personalBio = personalBio;
+      result$data['personalBio'] = l$personalBio;
     }
     if (_$data.containsKey('yearsManagementExperience')) {
       final l$yearsManagementExperience = yearsManagementExperience;
@@ -1691,13 +1765,46 @@ class Input$UserInput {
       final l$ssoIdp = ssoIdp;
       result$data['ssoIdp'] = l$ssoIdp;
     }
-    if (_$data.containsKey('oneLiner')) {
-      final l$oneLiner = oneLiner;
-      result$data['oneLiner'] = l$oneLiner;
+    if (_$data.containsKey('pronounsTextIds')) {
+      final l$pronounsTextIds = pronounsTextIds;
+      result$data['pronounsTextIds'] =
+          l$pronounsTextIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('company')) {
       final l$company = company;
       result$data['company'] = l$company?.toJson();
+    }
+    if (_$data.containsKey('businessExperiences')) {
+      final l$businessExperiences = businessExperiences;
+      result$data['businessExperiences'] =
+          l$businessExperiences?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('academicExperiences')) {
+      final l$academicExperiences = academicExperiences;
+      result$data['academicExperiences'] =
+          l$academicExperiences?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('businessExperienceIds')) {
+      final l$businessExperienceIds = businessExperienceIds;
+      result$data['businessExperienceIds'] =
+          l$businessExperienceIds?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('academicExperienceIds')) {
+      final l$academicExperienceIds = academicExperienceIds;
+      result$data['academicExperienceIds'] =
+          l$academicExperienceIds?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('cityOfOrigin')) {
+      final l$cityOfOrigin = cityOfOrigin;
+      result$data['cityOfOrigin'] = l$cityOfOrigin;
+    }
+    if (_$data.containsKey('regionOfOrigin')) {
+      final l$regionOfOrigin = regionOfOrigin;
+      result$data['regionOfOrigin'] = l$regionOfOrigin;
+    }
+    if (_$data.containsKey('countryOfOriginTextId')) {
+      final l$countryOfOriginTextId = countryOfOriginTextId;
+      result$data['countryOfOriginTextId'] = l$countryOfOriginTextId;
     }
     return result$data;
   }
@@ -2377,13 +2484,13 @@ class Input$UserInput {
     if (l$educationLevelTextId != lOther$educationLevelTextId) {
       return false;
     }
-    final l$professionalBackground = professionalBackground;
-    final lOther$professionalBackground = other.professionalBackground;
-    if (_$data.containsKey('professionalBackground') !=
-        other._$data.containsKey('professionalBackground')) {
+    final l$personalBio = personalBio;
+    final lOther$personalBio = other.personalBio;
+    if (_$data.containsKey('personalBio') !=
+        other._$data.containsKey('personalBio')) {
       return false;
     }
-    if (l$professionalBackground != lOther$professionalBackground) {
+    if (l$personalBio != lOther$personalBio) {
       return false;
     }
     final l$yearsManagementExperience = yearsManagementExperience;
@@ -2412,13 +2519,24 @@ class Input$UserInput {
     if (l$ssoIdp != lOther$ssoIdp) {
       return false;
     }
-    final l$oneLiner = oneLiner;
-    final lOther$oneLiner = other.oneLiner;
-    if (_$data.containsKey('oneLiner') !=
-        other._$data.containsKey('oneLiner')) {
+    final l$pronounsTextIds = pronounsTextIds;
+    final lOther$pronounsTextIds = other.pronounsTextIds;
+    if (_$data.containsKey('pronounsTextIds') !=
+        other._$data.containsKey('pronounsTextIds')) {
       return false;
     }
-    if (l$oneLiner != lOther$oneLiner) {
+    if (l$pronounsTextIds != null && lOther$pronounsTextIds != null) {
+      if (l$pronounsTextIds.length != lOther$pronounsTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$pronounsTextIds.length; i++) {
+        final l$pronounsTextIds$entry = l$pronounsTextIds[i];
+        final lOther$pronounsTextIds$entry = lOther$pronounsTextIds[i];
+        if (l$pronounsTextIds$entry != lOther$pronounsTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$pronounsTextIds != lOther$pronounsTextIds) {
       return false;
     }
     final l$company = company;
@@ -2427,6 +2545,121 @@ class Input$UserInput {
       return false;
     }
     if (l$company != lOther$company) {
+      return false;
+    }
+    final l$businessExperiences = businessExperiences;
+    final lOther$businessExperiences = other.businessExperiences;
+    if (_$data.containsKey('businessExperiences') !=
+        other._$data.containsKey('businessExperiences')) {
+      return false;
+    }
+    if (l$businessExperiences != null && lOther$businessExperiences != null) {
+      if (l$businessExperiences.length != lOther$businessExperiences.length) {
+        return false;
+      }
+      for (int i = 0; i < l$businessExperiences.length; i++) {
+        final l$businessExperiences$entry = l$businessExperiences[i];
+        final lOther$businessExperiences$entry = lOther$businessExperiences[i];
+        if (l$businessExperiences$entry != lOther$businessExperiences$entry) {
+          return false;
+        }
+      }
+    } else if (l$businessExperiences != lOther$businessExperiences) {
+      return false;
+    }
+    final l$academicExperiences = academicExperiences;
+    final lOther$academicExperiences = other.academicExperiences;
+    if (_$data.containsKey('academicExperiences') !=
+        other._$data.containsKey('academicExperiences')) {
+      return false;
+    }
+    if (l$academicExperiences != null && lOther$academicExperiences != null) {
+      if (l$academicExperiences.length != lOther$academicExperiences.length) {
+        return false;
+      }
+      for (int i = 0; i < l$academicExperiences.length; i++) {
+        final l$academicExperiences$entry = l$academicExperiences[i];
+        final lOther$academicExperiences$entry = lOther$academicExperiences[i];
+        if (l$academicExperiences$entry != lOther$academicExperiences$entry) {
+          return false;
+        }
+      }
+    } else if (l$academicExperiences != lOther$academicExperiences) {
+      return false;
+    }
+    final l$businessExperienceIds = businessExperienceIds;
+    final lOther$businessExperienceIds = other.businessExperienceIds;
+    if (_$data.containsKey('businessExperienceIds') !=
+        other._$data.containsKey('businessExperienceIds')) {
+      return false;
+    }
+    if (l$businessExperienceIds != null &&
+        lOther$businessExperienceIds != null) {
+      if (l$businessExperienceIds.length !=
+          lOther$businessExperienceIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$businessExperienceIds.length; i++) {
+        final l$businessExperienceIds$entry = l$businessExperienceIds[i];
+        final lOther$businessExperienceIds$entry =
+            lOther$businessExperienceIds[i];
+        if (l$businessExperienceIds$entry !=
+            lOther$businessExperienceIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$businessExperienceIds != lOther$businessExperienceIds) {
+      return false;
+    }
+    final l$academicExperienceIds = academicExperienceIds;
+    final lOther$academicExperienceIds = other.academicExperienceIds;
+    if (_$data.containsKey('academicExperienceIds') !=
+        other._$data.containsKey('academicExperienceIds')) {
+      return false;
+    }
+    if (l$academicExperienceIds != null &&
+        lOther$academicExperienceIds != null) {
+      if (l$academicExperienceIds.length !=
+          lOther$academicExperienceIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$academicExperienceIds.length; i++) {
+        final l$academicExperienceIds$entry = l$academicExperienceIds[i];
+        final lOther$academicExperienceIds$entry =
+            lOther$academicExperienceIds[i];
+        if (l$academicExperienceIds$entry !=
+            lOther$academicExperienceIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$academicExperienceIds != lOther$academicExperienceIds) {
+      return false;
+    }
+    final l$cityOfOrigin = cityOfOrigin;
+    final lOther$cityOfOrigin = other.cityOfOrigin;
+    if (_$data.containsKey('cityOfOrigin') !=
+        other._$data.containsKey('cityOfOrigin')) {
+      return false;
+    }
+    if (l$cityOfOrigin != lOther$cityOfOrigin) {
+      return false;
+    }
+    final l$regionOfOrigin = regionOfOrigin;
+    final lOther$regionOfOrigin = other.regionOfOrigin;
+    if (_$data.containsKey('regionOfOrigin') !=
+        other._$data.containsKey('regionOfOrigin')) {
+      return false;
+    }
+    if (l$regionOfOrigin != lOther$regionOfOrigin) {
+      return false;
+    }
+    final l$countryOfOriginTextId = countryOfOriginTextId;
+    final lOther$countryOfOriginTextId = other.countryOfOriginTextId;
+    if (_$data.containsKey('countryOfOriginTextId') !=
+        other._$data.containsKey('countryOfOriginTextId')) {
+      return false;
+    }
+    if (l$countryOfOriginTextId != lOther$countryOfOriginTextId) {
       return false;
     }
     return true;
@@ -2493,12 +2726,19 @@ class Input$UserInput {
     final l$genderSelfDescribed = genderSelfDescribed;
     final l$ethnicity = ethnicity;
     final l$educationLevelTextId = educationLevelTextId;
-    final l$professionalBackground = professionalBackground;
+    final l$personalBio = personalBio;
     final l$yearsManagementExperience = yearsManagementExperience;
     final l$yearsOwnershipExperience = yearsOwnershipExperience;
     final l$ssoIdp = ssoIdp;
-    final l$oneLiner = oneLiner;
+    final l$pronounsTextIds = pronounsTextIds;
     final l$company = company;
+    final l$businessExperiences = businessExperiences;
+    final l$academicExperiences = academicExperiences;
+    final l$businessExperienceIds = businessExperienceIds;
+    final l$academicExperienceIds = academicExperienceIds;
+    final l$cityOfOrigin = cityOfOrigin;
+    final l$regionOfOrigin = regionOfOrigin;
+    final l$countryOfOriginTextId = countryOfOriginTextId;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -2623,9 +2863,7 @@ class Input$UserInput {
       _$data.containsKey('educationLevelTextId')
           ? l$educationLevelTextId
           : const {},
-      _$data.containsKey('professionalBackground')
-          ? l$professionalBackground
-          : const {},
+      _$data.containsKey('personalBio') ? l$personalBio : const {},
       _$data.containsKey('yearsManagementExperience')
           ? l$yearsManagementExperience
           : const {},
@@ -2633,8 +2871,37 @@ class Input$UserInput {
           ? l$yearsOwnershipExperience
           : const {},
       _$data.containsKey('ssoIdp') ? l$ssoIdp : const {},
-      _$data.containsKey('oneLiner') ? l$oneLiner : const {},
+      _$data.containsKey('pronounsTextIds')
+          ? l$pronounsTextIds == null
+              ? null
+              : Object.hashAll(l$pronounsTextIds.map((v) => v))
+          : const {},
       _$data.containsKey('company') ? l$company : const {},
+      _$data.containsKey('businessExperiences')
+          ? l$businessExperiences == null
+              ? null
+              : Object.hashAll(l$businessExperiences.map((v) => v))
+          : const {},
+      _$data.containsKey('academicExperiences')
+          ? l$academicExperiences == null
+              ? null
+              : Object.hashAll(l$academicExperiences.map((v) => v))
+          : const {},
+      _$data.containsKey('businessExperienceIds')
+          ? l$businessExperienceIds == null
+              ? null
+              : Object.hashAll(l$businessExperienceIds.map((v) => v))
+          : const {},
+      _$data.containsKey('academicExperienceIds')
+          ? l$academicExperienceIds == null
+              ? null
+              : Object.hashAll(l$academicExperienceIds.map((v) => v))
+          : const {},
+      _$data.containsKey('cityOfOrigin') ? l$cityOfOrigin : const {},
+      _$data.containsKey('regionOfOrigin') ? l$regionOfOrigin : const {},
+      _$data.containsKey('countryOfOriginTextId')
+          ? l$countryOfOriginTextId
+          : const {},
     ]);
   }
 }
@@ -2708,12 +2975,19 @@ abstract class CopyWith$Input$UserInput<TRes> {
     String? genderSelfDescribed,
     String? ethnicity,
     String? educationLevelTextId,
-    String? professionalBackground,
+    String? personalBio,
     int? yearsManagementExperience,
     int? yearsOwnershipExperience,
     String? ssoIdp,
-    String? oneLiner,
+    List<String>? pronounsTextIds,
     Input$CompanyInput? company,
+    List<Input$BusinessExperienceInput>? businessExperiences,
+    List<Input$AcademicExperienceInput>? academicExperiences,
+    List<String>? businessExperienceIds,
+    List<String>? academicExperienceIds,
+    String? cityOfOrigin,
+    String? regionOfOrigin,
+    String? countryOfOriginTextId,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
@@ -2734,6 +3008,18 @@ abstract class CopyWith$Input$UserInput<TRes> {
                       Input$GroupMembershipInput>>?)
           _fn);
   CopyWith$Input$CompanyInput<TRes> get company;
+  TRes businessExperiences(
+      Iterable<Input$BusinessExperienceInput>? Function(
+              Iterable<
+                  CopyWith$Input$BusinessExperienceInput<
+                      Input$BusinessExperienceInput>>?)
+          _fn);
+  TRes academicExperiences(
+      Iterable<Input$AcademicExperienceInput>? Function(
+              Iterable<
+                  CopyWith$Input$AcademicExperienceInput<
+                      Input$AcademicExperienceInput>>?)
+          _fn);
 }
 
 class _CopyWithImpl$Input$UserInput<TRes>
@@ -2809,12 +3095,19 @@ class _CopyWithImpl$Input$UserInput<TRes>
     Object? genderSelfDescribed = _undefined,
     Object? ethnicity = _undefined,
     Object? educationLevelTextId = _undefined,
-    Object? professionalBackground = _undefined,
+    Object? personalBio = _undefined,
     Object? yearsManagementExperience = _undefined,
     Object? yearsOwnershipExperience = _undefined,
     Object? ssoIdp = _undefined,
-    Object? oneLiner = _undefined,
+    Object? pronounsTextIds = _undefined,
     Object? company = _undefined,
+    Object? businessExperiences = _undefined,
+    Object? academicExperiences = _undefined,
+    Object? businessExperienceIds = _undefined,
+    Object? academicExperienceIds = _undefined,
+    Object? cityOfOrigin = _undefined,
+    Object? regionOfOrigin = _undefined,
+    Object? countryOfOriginTextId = _undefined,
   }) =>
       _then(Input$UserInput._({
         ..._instance._$data,
@@ -2910,15 +3203,31 @@ class _CopyWithImpl$Input$UserInput<TRes>
         if (ethnicity != _undefined) 'ethnicity': (ethnicity as String?),
         if (educationLevelTextId != _undefined)
           'educationLevelTextId': (educationLevelTextId as String?),
-        if (professionalBackground != _undefined)
-          'professionalBackground': (professionalBackground as String?),
+        if (personalBio != _undefined) 'personalBio': (personalBio as String?),
         if (yearsManagementExperience != _undefined)
           'yearsManagementExperience': (yearsManagementExperience as int?),
         if (yearsOwnershipExperience != _undefined)
           'yearsOwnershipExperience': (yearsOwnershipExperience as int?),
         if (ssoIdp != _undefined) 'ssoIdp': (ssoIdp as String?),
-        if (oneLiner != _undefined) 'oneLiner': (oneLiner as String?),
+        if (pronounsTextIds != _undefined)
+          'pronounsTextIds': (pronounsTextIds as List<String>?),
         if (company != _undefined) 'company': (company as Input$CompanyInput?),
+        if (businessExperiences != _undefined)
+          'businessExperiences':
+              (businessExperiences as List<Input$BusinessExperienceInput>?),
+        if (academicExperiences != _undefined)
+          'academicExperiences':
+              (academicExperiences as List<Input$AcademicExperienceInput>?),
+        if (businessExperienceIds != _undefined)
+          'businessExperienceIds': (businessExperienceIds as List<String>?),
+        if (academicExperienceIds != _undefined)
+          'academicExperienceIds': (academicExperienceIds as List<String>?),
+        if (cityOfOrigin != _undefined)
+          'cityOfOrigin': (cityOfOrigin as String?),
+        if (regionOfOrigin != _undefined)
+          'regionOfOrigin': (regionOfOrigin as String?),
+        if (countryOfOriginTextId != _undefined)
+          'countryOfOriginTextId': (countryOfOriginTextId as String?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -2977,6 +3286,31 @@ class _CopyWithImpl$Input$UserInput<TRes>
         ? CopyWith$Input$CompanyInput.stub(_then(_instance))
         : CopyWith$Input$CompanyInput(local$company, (e) => call(company: e));
   }
+
+  TRes businessExperiences(
+          Iterable<Input$BusinessExperienceInput>? Function(
+                  Iterable<
+                      CopyWith$Input$BusinessExperienceInput<
+                          Input$BusinessExperienceInput>>?)
+              _fn) =>
+      call(
+          businessExperiences: _fn(_instance.businessExperiences
+              ?.map((e) => CopyWith$Input$BusinessExperienceInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  TRes academicExperiences(
+          Iterable<Input$AcademicExperienceInput>? Function(
+                  Iterable<
+                      CopyWith$Input$AcademicExperienceInput<
+                          Input$AcademicExperienceInput>>?)
+              _fn) =>
+      call(
+          academicExperiences: _fn(_instance.academicExperiences
+              ?.map((e) => CopyWith$Input$AcademicExperienceInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
 }
 
 class _CopyWithStubImpl$Input$UserInput<TRes>
@@ -3045,12 +3379,19 @@ class _CopyWithStubImpl$Input$UserInput<TRes>
     String? genderSelfDescribed,
     String? ethnicity,
     String? educationLevelTextId,
-    String? professionalBackground,
+    String? personalBio,
     int? yearsManagementExperience,
     int? yearsOwnershipExperience,
     String? ssoIdp,
-    String? oneLiner,
+    List<String>? pronounsTextIds,
     Input$CompanyInput? company,
+    List<Input$BusinessExperienceInput>? businessExperiences,
+    List<Input$AcademicExperienceInput>? academicExperiences,
+    List<String>? businessExperienceIds,
+    List<String>? academicExperienceIds,
+    String? cityOfOrigin,
+    String? regionOfOrigin,
+    String? countryOfOriginTextId,
   }) =>
       _res;
   events(_fn) => _res;
@@ -3062,6 +3403,8 @@ class _CopyWithStubImpl$Input$UserInput<TRes>
   groupMemberships(_fn) => _res;
   CopyWith$Input$CompanyInput<TRes> get company =>
       CopyWith$Input$CompanyInput.stub(_res);
+  businessExperiences(_fn) => _res;
+  academicExperiences(_fn) => _res;
 }
 
 class Input$ModelEventInput {
@@ -5312,6 +5655,1170 @@ class _CopyWithStubImpl$Input$CompanyInput<TRes>
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
   websites(_fn) => _res;
+}
+
+class Input$BusinessExperienceInput {
+  factory Input$BusinessExperienceInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? businessName,
+    String? jobTitle,
+    String? city,
+    String? state,
+    String? country,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? userId,
+  }) =>
+      Input$BusinessExperienceInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (businessName != null) r'businessName': businessName,
+        if (jobTitle != null) r'jobTitle': jobTitle,
+        if (city != null) r'city': city,
+        if (state != null) r'state': state,
+        if (country != null) r'country': country,
+        if (startDate != null) r'startDate': startDate,
+        if (endDate != null) r'endDate': endDate,
+        if (userId != null) r'userId': userId,
+      });
+
+  Input$BusinessExperienceInput._(this._$data);
+
+  factory Input$BusinessExperienceInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('businessName')) {
+      final l$businessName = data['businessName'];
+      result$data['businessName'] = (l$businessName as String?);
+    }
+    if (data.containsKey('jobTitle')) {
+      final l$jobTitle = data['jobTitle'];
+      result$data['jobTitle'] = (l$jobTitle as String?);
+    }
+    if (data.containsKey('city')) {
+      final l$city = data['city'];
+      result$data['city'] = (l$city as String?);
+    }
+    if (data.containsKey('state')) {
+      final l$state = data['state'];
+      result$data['state'] = (l$state as String?);
+    }
+    if (data.containsKey('country')) {
+      final l$country = data['country'];
+      result$data['country'] = (l$country as String?);
+    }
+    if (data.containsKey('startDate')) {
+      final l$startDate = data['startDate'];
+      result$data['startDate'] =
+          l$startDate == null ? null : DateTime.parse((l$startDate as String));
+    }
+    if (data.containsKey('endDate')) {
+      final l$endDate = data['endDate'];
+      result$data['endDate'] =
+          l$endDate == null ? null : DateTime.parse((l$endDate as String));
+    }
+    if (data.containsKey('userId')) {
+      final l$userId = data['userId'];
+      result$data['userId'] = (l$userId as String?);
+    }
+    return Input$BusinessExperienceInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  String? get businessName => (_$data['businessName'] as String?);
+  String? get jobTitle => (_$data['jobTitle'] as String?);
+  String? get city => (_$data['city'] as String?);
+  String? get state => (_$data['state'] as String?);
+  String? get country => (_$data['country'] as String?);
+  DateTime? get startDate => (_$data['startDate'] as DateTime?);
+  DateTime? get endDate => (_$data['endDate'] as DateTime?);
+  String? get userId => (_$data['userId'] as String?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('businessName')) {
+      final l$businessName = businessName;
+      result$data['businessName'] = l$businessName;
+    }
+    if (_$data.containsKey('jobTitle')) {
+      final l$jobTitle = jobTitle;
+      result$data['jobTitle'] = l$jobTitle;
+    }
+    if (_$data.containsKey('city')) {
+      final l$city = city;
+      result$data['city'] = l$city;
+    }
+    if (_$data.containsKey('state')) {
+      final l$state = state;
+      result$data['state'] = l$state;
+    }
+    if (_$data.containsKey('country')) {
+      final l$country = country;
+      result$data['country'] = l$country;
+    }
+    if (_$data.containsKey('startDate')) {
+      final l$startDate = startDate;
+      result$data['startDate'] = l$startDate?.toIso8601String();
+    }
+    if (_$data.containsKey('endDate')) {
+      final l$endDate = endDate;
+      result$data['endDate'] = l$endDate?.toIso8601String();
+    }
+    if (_$data.containsKey('userId')) {
+      final l$userId = userId;
+      result$data['userId'] = l$userId;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$BusinessExperienceInput<Input$BusinessExperienceInput>
+      get copyWith => CopyWith$Input$BusinessExperienceInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$BusinessExperienceInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$businessName = businessName;
+    final lOther$businessName = other.businessName;
+    if (_$data.containsKey('businessName') !=
+        other._$data.containsKey('businessName')) {
+      return false;
+    }
+    if (l$businessName != lOther$businessName) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (_$data.containsKey('jobTitle') !=
+        other._$data.containsKey('jobTitle')) {
+      return false;
+    }
+    if (l$jobTitle != lOther$jobTitle) {
+      return false;
+    }
+    final l$city = city;
+    final lOther$city = other.city;
+    if (_$data.containsKey('city') != other._$data.containsKey('city')) {
+      return false;
+    }
+    if (l$city != lOther$city) {
+      return false;
+    }
+    final l$state = state;
+    final lOther$state = other.state;
+    if (_$data.containsKey('state') != other._$data.containsKey('state')) {
+      return false;
+    }
+    if (l$state != lOther$state) {
+      return false;
+    }
+    final l$country = country;
+    final lOther$country = other.country;
+    if (_$data.containsKey('country') != other._$data.containsKey('country')) {
+      return false;
+    }
+    if (l$country != lOther$country) {
+      return false;
+    }
+    final l$startDate = startDate;
+    final lOther$startDate = other.startDate;
+    if (_$data.containsKey('startDate') !=
+        other._$data.containsKey('startDate')) {
+      return false;
+    }
+    if (l$startDate != lOther$startDate) {
+      return false;
+    }
+    final l$endDate = endDate;
+    final lOther$endDate = other.endDate;
+    if (_$data.containsKey('endDate') != other._$data.containsKey('endDate')) {
+      return false;
+    }
+    if (l$endDate != lOther$endDate) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (_$data.containsKey('userId') != other._$data.containsKey('userId')) {
+      return false;
+    }
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$businessName = businessName;
+    final l$jobTitle = jobTitle;
+    final l$city = city;
+    final l$state = state;
+    final l$country = country;
+    final l$startDate = startDate;
+    final l$endDate = endDate;
+    final l$userId = userId;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('businessName') ? l$businessName : const {},
+      _$data.containsKey('jobTitle') ? l$jobTitle : const {},
+      _$data.containsKey('city') ? l$city : const {},
+      _$data.containsKey('state') ? l$state : const {},
+      _$data.containsKey('country') ? l$country : const {},
+      _$data.containsKey('startDate') ? l$startDate : const {},
+      _$data.containsKey('endDate') ? l$endDate : const {},
+      _$data.containsKey('userId') ? l$userId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$BusinessExperienceInput<TRes> {
+  factory CopyWith$Input$BusinessExperienceInput(
+    Input$BusinessExperienceInput instance,
+    TRes Function(Input$BusinessExperienceInput) then,
+  ) = _CopyWithImpl$Input$BusinessExperienceInput;
+
+  factory CopyWith$Input$BusinessExperienceInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$BusinessExperienceInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? businessName,
+    String? jobTitle,
+    String? city,
+    String? state,
+    String? country,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? userId,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$BusinessExperienceInput<TRes>
+    implements CopyWith$Input$BusinessExperienceInput<TRes> {
+  _CopyWithImpl$Input$BusinessExperienceInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$BusinessExperienceInput _instance;
+
+  final TRes Function(Input$BusinessExperienceInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? businessName = _undefined,
+    Object? jobTitle = _undefined,
+    Object? city = _undefined,
+    Object? state = _undefined,
+    Object? country = _undefined,
+    Object? startDate = _undefined,
+    Object? endDate = _undefined,
+    Object? userId = _undefined,
+  }) =>
+      _then(Input$BusinessExperienceInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (businessName != _undefined)
+          'businessName': (businessName as String?),
+        if (jobTitle != _undefined) 'jobTitle': (jobTitle as String?),
+        if (city != _undefined) 'city': (city as String?),
+        if (state != _undefined) 'state': (state as String?),
+        if (country != _undefined) 'country': (country as String?),
+        if (startDate != _undefined) 'startDate': (startDate as DateTime?),
+        if (endDate != _undefined) 'endDate': (endDate as DateTime?),
+        if (userId != _undefined) 'userId': (userId as String?),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$BusinessExperienceInput<TRes>
+    implements CopyWith$Input$BusinessExperienceInput<TRes> {
+  _CopyWithStubImpl$Input$BusinessExperienceInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? businessName,
+    String? jobTitle,
+    String? city,
+    String? state,
+    String? country,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? userId,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
+class Input$AcademicExperienceInput {
+  factory Input$AcademicExperienceInput({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? institutionName,
+    String? degreeType,
+    String? fieldOfStudy,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? userId,
+  }) =>
+      Input$AcademicExperienceInput._({
+        if (id != null) r'id': id,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (institutionName != null) r'institutionName': institutionName,
+        if (degreeType != null) r'degreeType': degreeType,
+        if (fieldOfStudy != null) r'fieldOfStudy': fieldOfStudy,
+        if (startDate != null) r'startDate': startDate,
+        if (endDate != null) r'endDate': endDate,
+        if (userId != null) r'userId': userId,
+      });
+
+  Input$AcademicExperienceInput._(this._$data);
+
+  factory Input$AcademicExperienceInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
+    }
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('institutionName')) {
+      final l$institutionName = data['institutionName'];
+      result$data['institutionName'] = (l$institutionName as String?);
+    }
+    if (data.containsKey('degreeType')) {
+      final l$degreeType = data['degreeType'];
+      result$data['degreeType'] = (l$degreeType as String?);
+    }
+    if (data.containsKey('fieldOfStudy')) {
+      final l$fieldOfStudy = data['fieldOfStudy'];
+      result$data['fieldOfStudy'] = (l$fieldOfStudy as String?);
+    }
+    if (data.containsKey('startDate')) {
+      final l$startDate = data['startDate'];
+      result$data['startDate'] =
+          l$startDate == null ? null : DateTime.parse((l$startDate as String));
+    }
+    if (data.containsKey('endDate')) {
+      final l$endDate = data['endDate'];
+      result$data['endDate'] =
+          l$endDate == null ? null : DateTime.parse((l$endDate as String));
+    }
+    if (data.containsKey('userId')) {
+      final l$userId = data['userId'];
+      result$data['userId'] = (l$userId as String?);
+    }
+    return Input$AcademicExperienceInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  String? get institutionName => (_$data['institutionName'] as String?);
+  String? get degreeType => (_$data['degreeType'] as String?);
+  String? get fieldOfStudy => (_$data['fieldOfStudy'] as String?);
+  DateTime? get startDate => (_$data['startDate'] as DateTime?);
+  DateTime? get endDate => (_$data['endDate'] as DateTime?);
+  String? get userId => (_$data['userId'] as String?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
+    }
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('institutionName')) {
+      final l$institutionName = institutionName;
+      result$data['institutionName'] = l$institutionName;
+    }
+    if (_$data.containsKey('degreeType')) {
+      final l$degreeType = degreeType;
+      result$data['degreeType'] = l$degreeType;
+    }
+    if (_$data.containsKey('fieldOfStudy')) {
+      final l$fieldOfStudy = fieldOfStudy;
+      result$data['fieldOfStudy'] = l$fieldOfStudy;
+    }
+    if (_$data.containsKey('startDate')) {
+      final l$startDate = startDate;
+      result$data['startDate'] = l$startDate?.toIso8601String();
+    }
+    if (_$data.containsKey('endDate')) {
+      final l$endDate = endDate;
+      result$data['endDate'] = l$endDate?.toIso8601String();
+    }
+    if (_$data.containsKey('userId')) {
+      final l$userId = userId;
+      result$data['userId'] = l$userId;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$AcademicExperienceInput<Input$AcademicExperienceInput>
+      get copyWith => CopyWith$Input$AcademicExperienceInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$AcademicExperienceInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
+      return false;
+    }
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
+      return false;
+    }
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
+      return false;
+    }
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$institutionName = institutionName;
+    final lOther$institutionName = other.institutionName;
+    if (_$data.containsKey('institutionName') !=
+        other._$data.containsKey('institutionName')) {
+      return false;
+    }
+    if (l$institutionName != lOther$institutionName) {
+      return false;
+    }
+    final l$degreeType = degreeType;
+    final lOther$degreeType = other.degreeType;
+    if (_$data.containsKey('degreeType') !=
+        other._$data.containsKey('degreeType')) {
+      return false;
+    }
+    if (l$degreeType != lOther$degreeType) {
+      return false;
+    }
+    final l$fieldOfStudy = fieldOfStudy;
+    final lOther$fieldOfStudy = other.fieldOfStudy;
+    if (_$data.containsKey('fieldOfStudy') !=
+        other._$data.containsKey('fieldOfStudy')) {
+      return false;
+    }
+    if (l$fieldOfStudy != lOther$fieldOfStudy) {
+      return false;
+    }
+    final l$startDate = startDate;
+    final lOther$startDate = other.startDate;
+    if (_$data.containsKey('startDate') !=
+        other._$data.containsKey('startDate')) {
+      return false;
+    }
+    if (l$startDate != lOther$startDate) {
+      return false;
+    }
+    final l$endDate = endDate;
+    final lOther$endDate = other.endDate;
+    if (_$data.containsKey('endDate') != other._$data.containsKey('endDate')) {
+      return false;
+    }
+    if (l$endDate != lOther$endDate) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (_$data.containsKey('userId') != other._$data.containsKey('userId')) {
+      return false;
+    }
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$institutionName = institutionName;
+    final l$degreeType = degreeType;
+    final l$fieldOfStudy = fieldOfStudy;
+    final l$startDate = startDate;
+    final l$endDate = endDate;
+    final l$userId = userId;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('institutionName') ? l$institutionName : const {},
+      _$data.containsKey('degreeType') ? l$degreeType : const {},
+      _$data.containsKey('fieldOfStudy') ? l$fieldOfStudy : const {},
+      _$data.containsKey('startDate') ? l$startDate : const {},
+      _$data.containsKey('endDate') ? l$endDate : const {},
+      _$data.containsKey('userId') ? l$userId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$AcademicExperienceInput<TRes> {
+  factory CopyWith$Input$AcademicExperienceInput(
+    Input$AcademicExperienceInput instance,
+    TRes Function(Input$AcademicExperienceInput) then,
+  ) = _CopyWithImpl$Input$AcademicExperienceInput;
+
+  factory CopyWith$Input$AcademicExperienceInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$AcademicExperienceInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? institutionName,
+    String? degreeType,
+    String? fieldOfStudy,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? userId,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+}
+
+class _CopyWithImpl$Input$AcademicExperienceInput<TRes>
+    implements CopyWith$Input$AcademicExperienceInput<TRes> {
+  _CopyWithImpl$Input$AcademicExperienceInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$AcademicExperienceInput _instance;
+
+  final TRes Function(Input$AcademicExperienceInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? institutionName = _undefined,
+    Object? degreeType = _undefined,
+    Object? fieldOfStudy = _undefined,
+    Object? startDate = _undefined,
+    Object? endDate = _undefined,
+    Object? userId = _undefined,
+  }) =>
+      _then(Input$AcademicExperienceInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (institutionName != _undefined)
+          'institutionName': (institutionName as String?),
+        if (degreeType != _undefined) 'degreeType': (degreeType as String?),
+        if (fieldOfStudy != _undefined)
+          'fieldOfStudy': (fieldOfStudy as String?),
+        if (startDate != _undefined) 'startDate': (startDate as DateTime?),
+        if (endDate != _undefined) 'endDate': (endDate as DateTime?),
+        if (userId != _undefined) 'userId': (userId as String?),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$AcademicExperienceInput<TRes>
+    implements CopyWith$Input$AcademicExperienceInput<TRes> {
+  _CopyWithStubImpl$Input$AcademicExperienceInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? institutionName,
+    String? degreeType,
+    String? fieldOfStudy,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? userId,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
 
 class Input$UserListFilter {
@@ -12314,6 +13821,11 @@ class Input$UserSearchInput {
     String? searchText,
     Enum$UserSearchFieldPreference? seeksHelp,
     Enum$UserSearchFieldPreference? offersHelp,
+    List<String>? languagesTextIds,
+    List<String>? expertisesTextIds,
+    List<String>? industriesTextIds,
+    List<String>? countryTextIds,
+    List<String>? companyStagesTextIds,
     int? maxResultCount,
     Enum$UserSearchSubscriptionType? subscription,
     DateTime? expiresAt,
@@ -12339,6 +13851,12 @@ class Input$UserSearchInput {
         if (searchText != null) r'searchText': searchText,
         if (seeksHelp != null) r'seeksHelp': seeksHelp,
         if (offersHelp != null) r'offersHelp': offersHelp,
+        if (languagesTextIds != null) r'languagesTextIds': languagesTextIds,
+        if (expertisesTextIds != null) r'expertisesTextIds': expertisesTextIds,
+        if (industriesTextIds != null) r'industriesTextIds': industriesTextIds,
+        if (countryTextIds != null) r'countryTextIds': countryTextIds,
+        if (companyStagesTextIds != null)
+          r'companyStagesTextIds': companyStagesTextIds,
         if (maxResultCount != null) r'maxResultCount': maxResultCount,
         if (subscription != null) r'subscription': subscription,
         if (expiresAt != null) r'expiresAt': expiresAt,
@@ -12439,6 +13957,37 @@ class Input$UserSearchInput {
           ? null
           : fromJson$Enum$UserSearchFieldPreference((l$offersHelp as String));
     }
+    if (data.containsKey('languagesTextIds')) {
+      final l$languagesTextIds = data['languagesTextIds'];
+      result$data['languagesTextIds'] = (l$languagesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('expertisesTextIds')) {
+      final l$expertisesTextIds = data['expertisesTextIds'];
+      result$data['expertisesTextIds'] = (l$expertisesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('industriesTextIds')) {
+      final l$industriesTextIds = data['industriesTextIds'];
+      result$data['industriesTextIds'] = (l$industriesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('countryTextIds')) {
+      final l$countryTextIds = data['countryTextIds'];
+      result$data['countryTextIds'] = (l$countryTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('companyStagesTextIds')) {
+      final l$companyStagesTextIds = data['companyStagesTextIds'];
+      result$data['companyStagesTextIds'] =
+          (l$companyStagesTextIds as List<dynamic>)
+              .map((e) => (e as String))
+              .toList();
+    }
     if (data.containsKey('maxResultCount')) {
       final l$maxResultCount = data['maxResultCount'];
       result$data['maxResultCount'] = (l$maxResultCount as int);
@@ -12494,6 +14043,16 @@ class Input$UserSearchInput {
       (_$data['seeksHelp'] as Enum$UserSearchFieldPreference?);
   Enum$UserSearchFieldPreference? get offersHelp =>
       (_$data['offersHelp'] as Enum$UserSearchFieldPreference?);
+  List<String>? get languagesTextIds =>
+      (_$data['languagesTextIds'] as List<String>?);
+  List<String>? get expertisesTextIds =>
+      (_$data['expertisesTextIds'] as List<String>?);
+  List<String>? get industriesTextIds =>
+      (_$data['industriesTextIds'] as List<String>?);
+  List<String>? get countryTextIds =>
+      (_$data['countryTextIds'] as List<String>?);
+  List<String>? get companyStagesTextIds =>
+      (_$data['companyStagesTextIds'] as List<String>?);
   int? get maxResultCount => (_$data['maxResultCount'] as int?);
   Enum$UserSearchSubscriptionType? get subscription =>
       (_$data['subscription'] as Enum$UserSearchSubscriptionType?);
@@ -12580,6 +14139,31 @@ class Input$UserSearchInput {
       result$data['offersHelp'] = l$offersHelp == null
           ? null
           : toJson$Enum$UserSearchFieldPreference(l$offersHelp);
+    }
+    if (_$data.containsKey('languagesTextIds')) {
+      final l$languagesTextIds = languagesTextIds;
+      result$data['languagesTextIds'] =
+          (l$languagesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('expertisesTextIds')) {
+      final l$expertisesTextIds = expertisesTextIds;
+      result$data['expertisesTextIds'] =
+          (l$expertisesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('industriesTextIds')) {
+      final l$industriesTextIds = industriesTextIds;
+      result$data['industriesTextIds'] =
+          (l$industriesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('countryTextIds')) {
+      final l$countryTextIds = countryTextIds;
+      result$data['countryTextIds'] =
+          (l$countryTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('companyStagesTextIds')) {
+      final l$companyStagesTextIds = companyStagesTextIds;
+      result$data['companyStagesTextIds'] =
+          (l$companyStagesTextIds as List<String>).map((e) => e).toList();
     }
     if (_$data.containsKey('maxResultCount')) {
       final l$maxResultCount = maxResultCount;
@@ -12788,6 +14372,107 @@ class Input$UserSearchInput {
     if (l$offersHelp != lOther$offersHelp) {
       return false;
     }
+    final l$languagesTextIds = languagesTextIds;
+    final lOther$languagesTextIds = other.languagesTextIds;
+    if (_$data.containsKey('languagesTextIds') !=
+        other._$data.containsKey('languagesTextIds')) {
+      return false;
+    }
+    if (l$languagesTextIds != null && lOther$languagesTextIds != null) {
+      if (l$languagesTextIds.length != lOther$languagesTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$languagesTextIds.length; i++) {
+        final l$languagesTextIds$entry = l$languagesTextIds[i];
+        final lOther$languagesTextIds$entry = lOther$languagesTextIds[i];
+        if (l$languagesTextIds$entry != lOther$languagesTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$languagesTextIds != lOther$languagesTextIds) {
+      return false;
+    }
+    final l$expertisesTextIds = expertisesTextIds;
+    final lOther$expertisesTextIds = other.expertisesTextIds;
+    if (_$data.containsKey('expertisesTextIds') !=
+        other._$data.containsKey('expertisesTextIds')) {
+      return false;
+    }
+    if (l$expertisesTextIds != null && lOther$expertisesTextIds != null) {
+      if (l$expertisesTextIds.length != lOther$expertisesTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$expertisesTextIds.length; i++) {
+        final l$expertisesTextIds$entry = l$expertisesTextIds[i];
+        final lOther$expertisesTextIds$entry = lOther$expertisesTextIds[i];
+        if (l$expertisesTextIds$entry != lOther$expertisesTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$expertisesTextIds != lOther$expertisesTextIds) {
+      return false;
+    }
+    final l$industriesTextIds = industriesTextIds;
+    final lOther$industriesTextIds = other.industriesTextIds;
+    if (_$data.containsKey('industriesTextIds') !=
+        other._$data.containsKey('industriesTextIds')) {
+      return false;
+    }
+    if (l$industriesTextIds != null && lOther$industriesTextIds != null) {
+      if (l$industriesTextIds.length != lOther$industriesTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$industriesTextIds.length; i++) {
+        final l$industriesTextIds$entry = l$industriesTextIds[i];
+        final lOther$industriesTextIds$entry = lOther$industriesTextIds[i];
+        if (l$industriesTextIds$entry != lOther$industriesTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$industriesTextIds != lOther$industriesTextIds) {
+      return false;
+    }
+    final l$countryTextIds = countryTextIds;
+    final lOther$countryTextIds = other.countryTextIds;
+    if (_$data.containsKey('countryTextIds') !=
+        other._$data.containsKey('countryTextIds')) {
+      return false;
+    }
+    if (l$countryTextIds != null && lOther$countryTextIds != null) {
+      if (l$countryTextIds.length != lOther$countryTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$countryTextIds.length; i++) {
+        final l$countryTextIds$entry = l$countryTextIds[i];
+        final lOther$countryTextIds$entry = lOther$countryTextIds[i];
+        if (l$countryTextIds$entry != lOther$countryTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$countryTextIds != lOther$countryTextIds) {
+      return false;
+    }
+    final l$companyStagesTextIds = companyStagesTextIds;
+    final lOther$companyStagesTextIds = other.companyStagesTextIds;
+    if (_$data.containsKey('companyStagesTextIds') !=
+        other._$data.containsKey('companyStagesTextIds')) {
+      return false;
+    }
+    if (l$companyStagesTextIds != null && lOther$companyStagesTextIds != null) {
+      if (l$companyStagesTextIds.length != lOther$companyStagesTextIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$companyStagesTextIds.length; i++) {
+        final l$companyStagesTextIds$entry = l$companyStagesTextIds[i];
+        final lOther$companyStagesTextIds$entry =
+            lOther$companyStagesTextIds[i];
+        if (l$companyStagesTextIds$entry != lOther$companyStagesTextIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$companyStagesTextIds != lOther$companyStagesTextIds) {
+      return false;
+    }
     final l$maxResultCount = maxResultCount;
     final lOther$maxResultCount = other.maxResultCount;
     if (_$data.containsKey('maxResultCount') !=
@@ -12856,6 +14541,11 @@ class Input$UserSearchInput {
     final l$searchText = searchText;
     final l$seeksHelp = seeksHelp;
     final l$offersHelp = offersHelp;
+    final l$languagesTextIds = languagesTextIds;
+    final l$expertisesTextIds = expertisesTextIds;
+    final l$industriesTextIds = industriesTextIds;
+    final l$countryTextIds = countryTextIds;
+    final l$companyStagesTextIds = companyStagesTextIds;
     final l$maxResultCount = maxResultCount;
     final l$subscription = subscription;
     final l$expiresAt = expiresAt;
@@ -12884,6 +14574,31 @@ class Input$UserSearchInput {
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('seeksHelp') ? l$seeksHelp : const {},
       _$data.containsKey('offersHelp') ? l$offersHelp : const {},
+      _$data.containsKey('languagesTextIds')
+          ? l$languagesTextIds == null
+              ? null
+              : Object.hashAll(l$languagesTextIds.map((v) => v))
+          : const {},
+      _$data.containsKey('expertisesTextIds')
+          ? l$expertisesTextIds == null
+              ? null
+              : Object.hashAll(l$expertisesTextIds.map((v) => v))
+          : const {},
+      _$data.containsKey('industriesTextIds')
+          ? l$industriesTextIds == null
+              ? null
+              : Object.hashAll(l$industriesTextIds.map((v) => v))
+          : const {},
+      _$data.containsKey('countryTextIds')
+          ? l$countryTextIds == null
+              ? null
+              : Object.hashAll(l$countryTextIds.map((v) => v))
+          : const {},
+      _$data.containsKey('companyStagesTextIds')
+          ? l$companyStagesTextIds == null
+              ? null
+              : Object.hashAll(l$companyStagesTextIds.map((v) => v))
+          : const {},
       _$data.containsKey('maxResultCount') ? l$maxResultCount : const {},
       _$data.containsKey('subscription') ? l$subscription : const {},
       _$data.containsKey('expiresAt') ? l$expiresAt : const {},
@@ -12921,6 +14636,11 @@ abstract class CopyWith$Input$UserSearchInput<TRes> {
     String? searchText,
     Enum$UserSearchFieldPreference? seeksHelp,
     Enum$UserSearchFieldPreference? offersHelp,
+    List<String>? languagesTextIds,
+    List<String>? expertisesTextIds,
+    List<String>? industriesTextIds,
+    List<String>? countryTextIds,
+    List<String>? companyStagesTextIds,
     int? maxResultCount,
     Enum$UserSearchSubscriptionType? subscription,
     DateTime? expiresAt,
@@ -12966,6 +14686,11 @@ class _CopyWithImpl$Input$UserSearchInput<TRes>
     Object? searchText = _undefined,
     Object? seeksHelp = _undefined,
     Object? offersHelp = _undefined,
+    Object? languagesTextIds = _undefined,
+    Object? expertisesTextIds = _undefined,
+    Object? industriesTextIds = _undefined,
+    Object? countryTextIds = _undefined,
+    Object? companyStagesTextIds = _undefined,
     Object? maxResultCount = _undefined,
     Object? subscription = _undefined,
     Object? expiresAt = _undefined,
@@ -12999,6 +14724,16 @@ class _CopyWithImpl$Input$UserSearchInput<TRes>
           'seeksHelp': (seeksHelp as Enum$UserSearchFieldPreference?),
         if (offersHelp != _undefined)
           'offersHelp': (offersHelp as Enum$UserSearchFieldPreference?),
+        if (languagesTextIds != _undefined && languagesTextIds != null)
+          'languagesTextIds': (languagesTextIds as List<String>),
+        if (expertisesTextIds != _undefined && expertisesTextIds != null)
+          'expertisesTextIds': (expertisesTextIds as List<String>),
+        if (industriesTextIds != _undefined && industriesTextIds != null)
+          'industriesTextIds': (industriesTextIds as List<String>),
+        if (countryTextIds != _undefined && countryTextIds != null)
+          'countryTextIds': (countryTextIds as List<String>),
+        if (companyStagesTextIds != _undefined && companyStagesTextIds != null)
+          'companyStagesTextIds': (companyStagesTextIds as List<String>),
         if (maxResultCount != _undefined && maxResultCount != null)
           'maxResultCount': (maxResultCount as int),
         if (subscription != _undefined)
@@ -13054,6 +14789,11 @@ class _CopyWithStubImpl$Input$UserSearchInput<TRes>
     String? searchText,
     Enum$UserSearchFieldPreference? seeksHelp,
     Enum$UserSearchFieldPreference? offersHelp,
+    List<String>? languagesTextIds,
+    List<String>? expertisesTextIds,
+    List<String>? industriesTextIds,
+    List<String>? countryTextIds,
+    List<String>? companyStagesTextIds,
     int? maxResultCount,
     Enum$UserSearchSubscriptionType? subscription,
     DateTime? expiresAt,
@@ -16388,6 +18128,7 @@ class Input$MenteesGroupMembershipInput {
     String? currentChallenges,
     String? futureGoals,
     String? motivationsForMentorship,
+    String? reasonsForStartingBusiness,
   }) =>
       Input$MenteesGroupMembershipInput._({
         if (id != null) r'id': id,
@@ -16412,6 +18153,8 @@ class Input$MenteesGroupMembershipInput {
         if (futureGoals != null) r'futureGoals': futureGoals,
         if (motivationsForMentorship != null)
           r'motivationsForMentorship': motivationsForMentorship,
+        if (reasonsForStartingBusiness != null)
+          r'reasonsForStartingBusiness': reasonsForStartingBusiness,
       });
 
   Input$MenteesGroupMembershipInput._(this._$data);
@@ -16514,6 +18257,11 @@ class Input$MenteesGroupMembershipInput {
       result$data['motivationsForMentorship'] =
           (l$motivationsForMentorship as String?);
     }
+    if (data.containsKey('reasonsForStartingBusiness')) {
+      final l$reasonsForStartingBusiness = data['reasonsForStartingBusiness'];
+      result$data['reasonsForStartingBusiness'] =
+          (l$reasonsForStartingBusiness as String?);
+    }
     return Input$MenteesGroupMembershipInput._(result$data);
   }
 
@@ -16544,6 +18292,8 @@ class Input$MenteesGroupMembershipInput {
   String? get futureGoals => (_$data['futureGoals'] as String?);
   String? get motivationsForMentorship =>
       (_$data['motivationsForMentorship'] as String?);
+  String? get reasonsForStartingBusiness =>
+      (_$data['reasonsForStartingBusiness'] as String?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -16627,6 +18377,10 @@ class Input$MenteesGroupMembershipInput {
     if (_$data.containsKey('motivationsForMentorship')) {
       final l$motivationsForMentorship = motivationsForMentorship;
       result$data['motivationsForMentorship'] = l$motivationsForMentorship;
+    }
+    if (_$data.containsKey('reasonsForStartingBusiness')) {
+      final l$reasonsForStartingBusiness = reasonsForStartingBusiness;
+      result$data['reasonsForStartingBusiness'] = l$reasonsForStartingBusiness;
     }
     return result$data;
   }
@@ -16857,6 +18611,15 @@ class Input$MenteesGroupMembershipInput {
     if (l$motivationsForMentorship != lOther$motivationsForMentorship) {
       return false;
     }
+    final l$reasonsForStartingBusiness = reasonsForStartingBusiness;
+    final lOther$reasonsForStartingBusiness = other.reasonsForStartingBusiness;
+    if (_$data.containsKey('reasonsForStartingBusiness') !=
+        other._$data.containsKey('reasonsForStartingBusiness')) {
+      return false;
+    }
+    if (l$reasonsForStartingBusiness != lOther$reasonsForStartingBusiness) {
+      return false;
+    }
     return true;
   }
 
@@ -16882,6 +18645,7 @@ class Input$MenteesGroupMembershipInput {
     final l$currentChallenges = currentChallenges;
     final l$futureGoals = futureGoals;
     final l$motivationsForMentorship = motivationsForMentorship;
+    final l$reasonsForStartingBusiness = reasonsForStartingBusiness;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('adminNotes') ? l$adminNotes : const {},
@@ -16917,6 +18681,9 @@ class Input$MenteesGroupMembershipInput {
       _$data.containsKey('motivationsForMentorship')
           ? l$motivationsForMentorship
           : const {},
+      _$data.containsKey('reasonsForStartingBusiness')
+          ? l$reasonsForStartingBusiness
+          : const {},
     ]);
   }
 }
@@ -16951,6 +18718,7 @@ abstract class CopyWith$Input$MenteesGroupMembershipInput<TRes> {
     String? currentChallenges,
     String? futureGoals,
     String? motivationsForMentorship,
+    String? reasonsForStartingBusiness,
   });
   TRes events(
       Iterable<Input$ModelEventInput>? Function(
@@ -16993,6 +18761,7 @@ class _CopyWithImpl$Input$MenteesGroupMembershipInput<TRes>
     Object? currentChallenges = _undefined,
     Object? futureGoals = _undefined,
     Object? motivationsForMentorship = _undefined,
+    Object? reasonsForStartingBusiness = _undefined,
   }) =>
       _then(Input$MenteesGroupMembershipInput._({
         ..._instance._$data,
@@ -17025,6 +18794,8 @@ class _CopyWithImpl$Input$MenteesGroupMembershipInput<TRes>
         if (futureGoals != _undefined) 'futureGoals': (futureGoals as String?),
         if (motivationsForMentorship != _undefined)
           'motivationsForMentorship': (motivationsForMentorship as String?),
+        if (reasonsForStartingBusiness != _undefined)
+          'reasonsForStartingBusiness': (reasonsForStartingBusiness as String?),
       }));
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
@@ -17073,6 +18844,7 @@ class _CopyWithStubImpl$Input$MenteesGroupMembershipInput<TRes>
     String? currentChallenges,
     String? futureGoals,
     String? motivationsForMentorship,
+    String? reasonsForStartingBusiness,
   }) =>
       _res;
   events(_fn) => _res;
@@ -20335,81 +22107,276 @@ class _CopyWithStubImpl$Input$NotificationTemplateInput<TRes>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
 
-class Input$NlpMessageInput {
-  factory Input$NlpMessageInput({
+class Input$Mm2SynchronizationInput {
+  factory Input$Mm2SynchronizationInput({
     String? id,
-    String? labelName,
-    String? labelProcessor,
-    int? labelProbability,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    Enum$Mm2SyncDirection? direction,
+    String? objectId,
+    Enum$Mm2ModelType? mm2ModelType,
+    Enum$Mm2SynchronizationMode? syncMode,
+    int? limit,
+    bool? autorun,
+    String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    DateTime? expiresAt,
   }) =>
-      Input$NlpMessageInput._({
+      Input$Mm2SynchronizationInput._({
         if (id != null) r'id': id,
-        if (labelName != null) r'labelName': labelName,
-        if (labelProcessor != null) r'labelProcessor': labelProcessor,
-        if (labelProbability != null) r'labelProbability': labelProbability,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+        if (events != null) r'events': events,
+        if (metadata != null) r'metadata': metadata,
+        if (createdAt != null) r'createdAt': createdAt,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (updatedAt != null) r'updatedAt': updatedAt,
+        if (updatedBy != null) r'updatedBy': updatedBy,
+        if (deletedAt != null) r'deletedAt': deletedAt,
+        if (deletedBy != null) r'deletedBy': deletedBy,
+        if (direction != null) r'direction': direction,
+        if (objectId != null) r'objectId': objectId,
+        if (mm2ModelType != null) r'mm2ModelType': mm2ModelType,
+        if (syncMode != null) r'syncMode': syncMode,
+        if (limit != null) r'limit': limit,
+        if (autorun != null) r'autorun': autorun,
+        if (usersSinceUpdatedAt != null)
+          r'usersSinceUpdatedAt': usersSinceUpdatedAt,
+        if (logLevel != null) r'logLevel': logLevel,
+        if (expiresAt != null) r'expiresAt': expiresAt,
       });
 
-  Input$NlpMessageInput._(this._$data);
+  Input$Mm2SynchronizationInput._(this._$data);
 
-  factory Input$NlpMessageInput.fromJson(Map<String, dynamic> data) {
+  factory Input$Mm2SynchronizationInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('id')) {
       final l$id = data['id'];
-      result$data['id'] = (l$id as String);
+      result$data['id'] = (l$id as String?);
     }
-    if (data.containsKey('labelName')) {
-      final l$labelName = data['labelName'];
-      result$data['labelName'] = (l$labelName as String);
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String?);
     }
-    if (data.containsKey('labelProcessor')) {
-      final l$labelProcessor = data['labelProcessor'];
-      result$data['labelProcessor'] = (l$labelProcessor as String);
+    if (data.containsKey('events')) {
+      final l$events = data['events'];
+      result$data['events'] = (l$events as List<dynamic>?)
+          ?.map((e) =>
+              Input$ModelEventInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
     }
-    if (data.containsKey('labelProbability')) {
-      final l$labelProbability = data['labelProbability'];
-      result$data['labelProbability'] = (l$labelProbability as int);
+    if (data.containsKey('metadata')) {
+      final l$metadata = data['metadata'];
+      result$data['metadata'] = l$metadata == null
+          ? null
+          : Input$BaseModelMetadataInput.fromJson(
+              (l$metadata as Map<String, dynamic>));
     }
-    return Input$NlpMessageInput._(result$data);
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] =
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String));
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = (l$updatedBy as String?);
+    }
+    if (data.containsKey('deletedAt')) {
+      final l$deletedAt = data['deletedAt'];
+      result$data['deletedAt'] =
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String));
+    }
+    if (data.containsKey('deletedBy')) {
+      final l$deletedBy = data['deletedBy'];
+      result$data['deletedBy'] = (l$deletedBy as String?);
+    }
+    if (data.containsKey('direction')) {
+      final l$direction = data['direction'];
+      result$data['direction'] =
+          fromJson$Enum$Mm2SyncDirection((l$direction as String));
+    }
+    if (data.containsKey('objectId')) {
+      final l$objectId = data['objectId'];
+      result$data['objectId'] = (l$objectId as String?);
+    }
+    if (data.containsKey('mm2ModelType')) {
+      final l$mm2ModelType = data['mm2ModelType'];
+      result$data['mm2ModelType'] = l$mm2ModelType == null
+          ? null
+          : fromJson$Enum$Mm2ModelType((l$mm2ModelType as String));
+    }
+    if (data.containsKey('syncMode')) {
+      final l$syncMode = data['syncMode'];
+      result$data['syncMode'] =
+          fromJson$Enum$Mm2SynchronizationMode((l$syncMode as String));
+    }
+    if (data.containsKey('limit')) {
+      final l$limit = data['limit'];
+      result$data['limit'] = (l$limit as int?);
+    }
+    if (data.containsKey('autorun')) {
+      final l$autorun = data['autorun'];
+      result$data['autorun'] = (l$autorun as bool);
+    }
+    if (data.containsKey('usersSinceUpdatedAt')) {
+      final l$usersSinceUpdatedAt = data['usersSinceUpdatedAt'];
+      result$data['usersSinceUpdatedAt'] = (l$usersSinceUpdatedAt as String?);
+    }
+    if (data.containsKey('logLevel')) {
+      final l$logLevel = data['logLevel'];
+      result$data['logLevel'] = l$logLevel == null
+          ? null
+          : fromJson$Enum$Mm2SynchronizerLogLevel((l$logLevel as String));
+    }
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] =
+          l$expiresAt == null ? null : DateTime.parse((l$expiresAt as String));
+    }
+    return Input$Mm2SynchronizationInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-  String? get labelName => (_$data['labelName'] as String?);
-  String? get labelProcessor => (_$data['labelProcessor'] as String?);
-  int? get labelProbability => (_$data['labelProbability'] as int?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  List<Input$ModelEventInput>? get events =>
+      (_$data['events'] as List<Input$ModelEventInput>?);
+  Input$BaseModelMetadataInput? get metadata =>
+      (_$data['metadata'] as Input$BaseModelMetadataInput?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+  String? get updatedBy => (_$data['updatedBy'] as String?);
+  DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
+  String? get deletedBy => (_$data['deletedBy'] as String?);
+  Enum$Mm2SyncDirection? get direction =>
+      (_$data['direction'] as Enum$Mm2SyncDirection?);
+  String? get objectId => (_$data['objectId'] as String?);
+  Enum$Mm2ModelType? get mm2ModelType =>
+      (_$data['mm2ModelType'] as Enum$Mm2ModelType?);
+  Enum$Mm2SynchronizationMode? get syncMode =>
+      (_$data['syncMode'] as Enum$Mm2SynchronizationMode?);
+  int? get limit => (_$data['limit'] as int?);
+  bool? get autorun => (_$data['autorun'] as bool?);
+  String? get usersSinceUpdatedAt => (_$data['usersSinceUpdatedAt'] as String?);
+  Enum$Mm2SynchronizerLogLevel? get logLevel =>
+      (_$data['logLevel'] as Enum$Mm2SynchronizerLogLevel?);
+  DateTime? get expiresAt => (_$data['expiresAt'] as DateTime?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
       final l$id = id;
-      result$data['id'] = (l$id as String);
+      result$data['id'] = l$id;
     }
-    if (_$data.containsKey('labelName')) {
-      final l$labelName = labelName;
-      result$data['labelName'] = (l$labelName as String);
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = l$adminNotes;
     }
-    if (_$data.containsKey('labelProcessor')) {
-      final l$labelProcessor = labelProcessor;
-      result$data['labelProcessor'] = (l$labelProcessor as String);
+    if (_$data.containsKey('events')) {
+      final l$events = events;
+      result$data['events'] = l$events?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('labelProbability')) {
-      final l$labelProbability = labelProbability;
-      result$data['labelProbability'] = (l$labelProbability as int);
+    if (_$data.containsKey('metadata')) {
+      final l$metadata = metadata;
+      result$data['metadata'] = l$metadata?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy;
+    }
+    if (_$data.containsKey('deletedAt')) {
+      final l$deletedAt = deletedAt;
+      result$data['deletedAt'] = l$deletedAt?.toIso8601String();
+    }
+    if (_$data.containsKey('deletedBy')) {
+      final l$deletedBy = deletedBy;
+      result$data['deletedBy'] = l$deletedBy;
+    }
+    if (_$data.containsKey('direction')) {
+      final l$direction = direction;
+      result$data['direction'] =
+          toJson$Enum$Mm2SyncDirection((l$direction as Enum$Mm2SyncDirection));
+    }
+    if (_$data.containsKey('objectId')) {
+      final l$objectId = objectId;
+      result$data['objectId'] = l$objectId;
+    }
+    if (_$data.containsKey('mm2ModelType')) {
+      final l$mm2ModelType = mm2ModelType;
+      result$data['mm2ModelType'] = l$mm2ModelType == null
+          ? null
+          : toJson$Enum$Mm2ModelType(l$mm2ModelType);
+    }
+    if (_$data.containsKey('syncMode')) {
+      final l$syncMode = syncMode;
+      result$data['syncMode'] = toJson$Enum$Mm2SynchronizationMode(
+          (l$syncMode as Enum$Mm2SynchronizationMode));
+    }
+    if (_$data.containsKey('limit')) {
+      final l$limit = limit;
+      result$data['limit'] = l$limit;
+    }
+    if (_$data.containsKey('autorun')) {
+      final l$autorun = autorun;
+      result$data['autorun'] = (l$autorun as bool);
+    }
+    if (_$data.containsKey('usersSinceUpdatedAt')) {
+      final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
+      result$data['usersSinceUpdatedAt'] = l$usersSinceUpdatedAt;
+    }
+    if (_$data.containsKey('logLevel')) {
+      final l$logLevel = logLevel;
+      result$data['logLevel'] = l$logLevel == null
+          ? null
+          : toJson$Enum$Mm2SynchronizerLogLevel(l$logLevel);
+    }
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt?.toIso8601String();
     }
     return result$data;
   }
 
-  CopyWith$Input$NlpMessageInput<Input$NlpMessageInput> get copyWith =>
-      CopyWith$Input$NlpMessageInput(
-        this,
-        (i) => i,
-      );
+  CopyWith$Input$Mm2SynchronizationInput<Input$Mm2SynchronizationInput>
+      get copyWith => CopyWith$Input$Mm2SynchronizationInput(
+            this,
+            (i) => i,
+          );
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input$NlpMessageInput) || runtimeType != other.runtimeType) {
+    if (!(other is Input$Mm2SynchronizationInput) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -20420,31 +22387,174 @@ class Input$NlpMessageInput {
     if (l$id != lOther$id) {
       return false;
     }
-    final l$labelName = labelName;
-    final lOther$labelName = other.labelName;
-    if (_$data.containsKey('labelName') !=
-        other._$data.containsKey('labelName')) {
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
       return false;
     }
-    if (l$labelName != lOther$labelName) {
+    if (l$adminNotes != lOther$adminNotes) {
       return false;
     }
-    final l$labelProcessor = labelProcessor;
-    final lOther$labelProcessor = other.labelProcessor;
-    if (_$data.containsKey('labelProcessor') !=
-        other._$data.containsKey('labelProcessor')) {
+    final l$events = events;
+    final lOther$events = other.events;
+    if (_$data.containsKey('events') != other._$data.containsKey('events')) {
       return false;
     }
-    if (l$labelProcessor != lOther$labelProcessor) {
+    if (l$events != null && lOther$events != null) {
+      if (l$events.length != lOther$events.length) {
+        return false;
+      }
+      for (int i = 0; i < l$events.length; i++) {
+        final l$events$entry = l$events[i];
+        final lOther$events$entry = lOther$events[i];
+        if (l$events$entry != lOther$events$entry) {
+          return false;
+        }
+      }
+    } else if (l$events != lOther$events) {
       return false;
     }
-    final l$labelProbability = labelProbability;
-    final lOther$labelProbability = other.labelProbability;
-    if (_$data.containsKey('labelProbability') !=
-        other._$data.containsKey('labelProbability')) {
+    final l$metadata = metadata;
+    final lOther$metadata = other.metadata;
+    if (_$data.containsKey('metadata') !=
+        other._$data.containsKey('metadata')) {
       return false;
     }
-    if (l$labelProbability != lOther$labelProbability) {
+    if (l$metadata != lOther$metadata) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (_$data.containsKey('deletedAt') !=
+        other._$data.containsKey('deletedAt')) {
+      return false;
+    }
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (_$data.containsKey('deletedBy') !=
+        other._$data.containsKey('deletedBy')) {
+      return false;
+    }
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$direction = direction;
+    final lOther$direction = other.direction;
+    if (_$data.containsKey('direction') !=
+        other._$data.containsKey('direction')) {
+      return false;
+    }
+    if (l$direction != lOther$direction) {
+      return false;
+    }
+    final l$objectId = objectId;
+    final lOther$objectId = other.objectId;
+    if (_$data.containsKey('objectId') !=
+        other._$data.containsKey('objectId')) {
+      return false;
+    }
+    if (l$objectId != lOther$objectId) {
+      return false;
+    }
+    final l$mm2ModelType = mm2ModelType;
+    final lOther$mm2ModelType = other.mm2ModelType;
+    if (_$data.containsKey('mm2ModelType') !=
+        other._$data.containsKey('mm2ModelType')) {
+      return false;
+    }
+    if (l$mm2ModelType != lOther$mm2ModelType) {
+      return false;
+    }
+    final l$syncMode = syncMode;
+    final lOther$syncMode = other.syncMode;
+    if (_$data.containsKey('syncMode') !=
+        other._$data.containsKey('syncMode')) {
+      return false;
+    }
+    if (l$syncMode != lOther$syncMode) {
+      return false;
+    }
+    final l$limit = limit;
+    final lOther$limit = other.limit;
+    if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
+      return false;
+    }
+    if (l$limit != lOther$limit) {
+      return false;
+    }
+    final l$autorun = autorun;
+    final lOther$autorun = other.autorun;
+    if (_$data.containsKey('autorun') != other._$data.containsKey('autorun')) {
+      return false;
+    }
+    if (l$autorun != lOther$autorun) {
+      return false;
+    }
+    final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
+    final lOther$usersSinceUpdatedAt = other.usersSinceUpdatedAt;
+    if (_$data.containsKey('usersSinceUpdatedAt') !=
+        other._$data.containsKey('usersSinceUpdatedAt')) {
+      return false;
+    }
+    if (l$usersSinceUpdatedAt != lOther$usersSinceUpdatedAt) {
+      return false;
+    }
+    final l$logLevel = logLevel;
+    final lOther$logLevel = other.logLevel;
+    if (_$data.containsKey('logLevel') !=
+        other._$data.containsKey('logLevel')) {
+      return false;
+    }
+    if (l$logLevel != lOther$logLevel) {
+      return false;
+    }
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
       return false;
     }
     return true;
@@ -20453,79 +22563,206 @@ class Input$NlpMessageInput {
   @override
   int get hashCode {
     final l$id = id;
-    final l$labelName = labelName;
-    final l$labelProcessor = labelProcessor;
-    final l$labelProbability = labelProbability;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$direction = direction;
+    final l$objectId = objectId;
+    final l$mm2ModelType = mm2ModelType;
+    final l$syncMode = syncMode;
+    final l$limit = limit;
+    final l$autorun = autorun;
+    final l$usersSinceUpdatedAt = usersSinceUpdatedAt;
+    final l$logLevel = logLevel;
+    final l$expiresAt = expiresAt;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('labelName') ? l$labelName : const {},
-      _$data.containsKey('labelProcessor') ? l$labelProcessor : const {},
-      _$data.containsKey('labelProbability') ? l$labelProbability : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('direction') ? l$direction : const {},
+      _$data.containsKey('objectId') ? l$objectId : const {},
+      _$data.containsKey('mm2ModelType') ? l$mm2ModelType : const {},
+      _$data.containsKey('syncMode') ? l$syncMode : const {},
+      _$data.containsKey('limit') ? l$limit : const {},
+      _$data.containsKey('autorun') ? l$autorun : const {},
+      _$data.containsKey('usersSinceUpdatedAt')
+          ? l$usersSinceUpdatedAt
+          : const {},
+      _$data.containsKey('logLevel') ? l$logLevel : const {},
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
     ]);
   }
 }
 
-abstract class CopyWith$Input$NlpMessageInput<TRes> {
-  factory CopyWith$Input$NlpMessageInput(
-    Input$NlpMessageInput instance,
-    TRes Function(Input$NlpMessageInput) then,
-  ) = _CopyWithImpl$Input$NlpMessageInput;
+abstract class CopyWith$Input$Mm2SynchronizationInput<TRes> {
+  factory CopyWith$Input$Mm2SynchronizationInput(
+    Input$Mm2SynchronizationInput instance,
+    TRes Function(Input$Mm2SynchronizationInput) then,
+  ) = _CopyWithImpl$Input$Mm2SynchronizationInput;
 
-  factory CopyWith$Input$NlpMessageInput.stub(TRes res) =
-      _CopyWithStubImpl$Input$NlpMessageInput;
+  factory CopyWith$Input$Mm2SynchronizationInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$Mm2SynchronizationInput;
 
   TRes call({
     String? id,
-    String? labelName,
-    String? labelProcessor,
-    int? labelProbability,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    Enum$Mm2SyncDirection? direction,
+    String? objectId,
+    Enum$Mm2ModelType? mm2ModelType,
+    Enum$Mm2SynchronizationMode? syncMode,
+    int? limit,
+    bool? autorun,
+    String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    DateTime? expiresAt,
   });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
 }
 
-class _CopyWithImpl$Input$NlpMessageInput<TRes>
-    implements CopyWith$Input$NlpMessageInput<TRes> {
-  _CopyWithImpl$Input$NlpMessageInput(
+class _CopyWithImpl$Input$Mm2SynchronizationInput<TRes>
+    implements CopyWith$Input$Mm2SynchronizationInput<TRes> {
+  _CopyWithImpl$Input$Mm2SynchronizationInput(
     this._instance,
     this._then,
   );
 
-  final Input$NlpMessageInput _instance;
+  final Input$Mm2SynchronizationInput _instance;
 
-  final TRes Function(Input$NlpMessageInput) _then;
+  final TRes Function(Input$Mm2SynchronizationInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
-    Object? labelName = _undefined,
-    Object? labelProcessor = _undefined,
-    Object? labelProbability = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? direction = _undefined,
+    Object? objectId = _undefined,
+    Object? mm2ModelType = _undefined,
+    Object? syncMode = _undefined,
+    Object? limit = _undefined,
+    Object? autorun = _undefined,
+    Object? usersSinceUpdatedAt = _undefined,
+    Object? logLevel = _undefined,
+    Object? expiresAt = _undefined,
   }) =>
-      _then(Input$NlpMessageInput._({
+      _then(Input$Mm2SynchronizationInput._({
         ..._instance._$data,
-        if (id != _undefined && id != null) 'id': (id as String),
-        if (labelName != _undefined && labelName != null)
-          'labelName': (labelName as String),
-        if (labelProcessor != _undefined && labelProcessor != null)
-          'labelProcessor': (labelProcessor as String),
-        if (labelProbability != _undefined && labelProbability != null)
-          'labelProbability': (labelProbability as int),
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (direction != _undefined && direction != null)
+          'direction': (direction as Enum$Mm2SyncDirection),
+        if (objectId != _undefined) 'objectId': (objectId as String?),
+        if (mm2ModelType != _undefined)
+          'mm2ModelType': (mm2ModelType as Enum$Mm2ModelType?),
+        if (syncMode != _undefined && syncMode != null)
+          'syncMode': (syncMode as Enum$Mm2SynchronizationMode),
+        if (limit != _undefined) 'limit': (limit as int?),
+        if (autorun != _undefined && autorun != null)
+          'autorun': (autorun as bool),
+        if (usersSinceUpdatedAt != _undefined)
+          'usersSinceUpdatedAt': (usersSinceUpdatedAt as String?),
+        if (logLevel != _undefined)
+          'logLevel': (logLevel as Enum$Mm2SynchronizerLogLevel?),
+        if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
       }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
 }
 
-class _CopyWithStubImpl$Input$NlpMessageInput<TRes>
-    implements CopyWith$Input$NlpMessageInput<TRes> {
-  _CopyWithStubImpl$Input$NlpMessageInput(this._res);
+class _CopyWithStubImpl$Input$Mm2SynchronizationInput<TRes>
+    implements CopyWith$Input$Mm2SynchronizationInput<TRes> {
+  _CopyWithStubImpl$Input$Mm2SynchronizationInput(this._res);
 
   TRes _res;
 
   call({
     String? id,
-    String? labelName,
-    String? labelProcessor,
-    int? labelProbability,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    Enum$Mm2SyncDirection? direction,
+    String? objectId,
+    Enum$Mm2ModelType? mm2ModelType,
+    Enum$Mm2SynchronizationMode? syncMode,
+    int? limit,
+    bool? autorun,
+    String? usersSinceUpdatedAt,
+    Enum$Mm2SynchronizerLogLevel? logLevel,
+    DateTime? expiresAt,
   }) =>
       _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
 
 class Input$SidMultiStepActionInput {
@@ -22800,6 +25037,7 @@ enum Enum$OptionType {
   educationLevel,
   expertise,
   gender,
+  pronoun,
   country,
   industry,
   language,
@@ -22820,6 +25058,8 @@ String toJson$Enum$OptionType(Enum$OptionType e) {
       return r'expertise';
     case Enum$OptionType.gender:
       return r'gender';
+    case Enum$OptionType.pronoun:
+      return r'pronoun';
     case Enum$OptionType.country:
       return r'country';
     case Enum$OptionType.industry:
@@ -22847,6 +25087,8 @@ Enum$OptionType fromJson$Enum$OptionType(String value) {
       return Enum$OptionType.expertise;
     case r'gender':
       return Enum$OptionType.gender;
+    case r'pronoun':
+      return Enum$OptionType.pronoun;
     case r'country':
       return Enum$OptionType.country;
     case r'industry':
@@ -23146,6 +25388,8 @@ Enum$ChannelParticipantRole fromJson$Enum$ChannelParticipantRole(String value) {
 }
 
 enum Enum$ModelType {
+  AcademicExperience,
+  BusinessExperience,
   Company,
   MentorBoard,
   MentoringSession,
@@ -23184,6 +25428,10 @@ enum Enum$ModelType {
 
 String toJson$Enum$ModelType(Enum$ModelType e) {
   switch (e) {
+    case Enum$ModelType.AcademicExperience:
+      return r'AcademicExperience';
+    case Enum$ModelType.BusinessExperience:
+      return r'BusinessExperience';
     case Enum$ModelType.Company:
       return r'Company';
     case Enum$ModelType.MentorBoard:
@@ -23257,6 +25505,10 @@ String toJson$Enum$ModelType(Enum$ModelType e) {
 
 Enum$ModelType fromJson$Enum$ModelType(String value) {
   switch (value) {
+    case r'AcademicExperience':
+      return Enum$ModelType.AcademicExperience;
+    case r'BusinessExperience':
+      return Enum$ModelType.BusinessExperience;
     case r'Company':
       return Enum$ModelType.Company;
     case r'MentorBoard':
@@ -23413,16 +25665,18 @@ Enum$ProfileType fromJson$Enum$ProfileType(String value) {
   }
 }
 
-enum Enum$UserSearchFieldPreference { mustMatch, match, mustNotMatch, $unknown }
+enum Enum$UserSearchFieldPreference { isTrue, isFalse, any, match, $unknown }
 
 String toJson$Enum$UserSearchFieldPreference(Enum$UserSearchFieldPreference e) {
   switch (e) {
-    case Enum$UserSearchFieldPreference.mustMatch:
-      return r'mustMatch';
+    case Enum$UserSearchFieldPreference.isTrue:
+      return r'isTrue';
+    case Enum$UserSearchFieldPreference.isFalse:
+      return r'isFalse';
+    case Enum$UserSearchFieldPreference.any:
+      return r'any';
     case Enum$UserSearchFieldPreference.match:
       return r'match';
-    case Enum$UserSearchFieldPreference.mustNotMatch:
-      return r'mustNotMatch';
     case Enum$UserSearchFieldPreference.$unknown:
       return r'$unknown';
   }
@@ -23431,12 +25685,14 @@ String toJson$Enum$UserSearchFieldPreference(Enum$UserSearchFieldPreference e) {
 Enum$UserSearchFieldPreference fromJson$Enum$UserSearchFieldPreference(
     String value) {
   switch (value) {
-    case r'mustMatch':
-      return Enum$UserSearchFieldPreference.mustMatch;
+    case r'isTrue':
+      return Enum$UserSearchFieldPreference.isTrue;
+    case r'isFalse':
+      return Enum$UserSearchFieldPreference.isFalse;
+    case r'any':
+      return Enum$UserSearchFieldPreference.any;
     case r'match':
       return Enum$UserSearchFieldPreference.match;
-    case r'mustNotMatch':
-      return Enum$UserSearchFieldPreference.mustNotMatch;
     default:
       return Enum$UserSearchFieldPreference.$unknown;
   }
@@ -23897,6 +26153,12 @@ Enum$MultiStepActionResult fromJson$Enum$MultiStepActionResult(String value) {
 enum Enum$ServiceRequestType {
   graphQlQueryUserInbox,
   graphQlQueryUserUserSearches,
+  graphQlMutationCreateAcademicExperience,
+  graphQlMutationDeleteAcademicExperience,
+  graphQlMutationUpdateAcademicExperience,
+  graphQlMutationCreateBusinessExperience,
+  graphQlMutationDeleteBusinessExperience,
+  graphQlMutationUpdateBusinessExperience,
   graphQlMutationCreateCompany,
   graphQlMutationDeleteCompany,
   graphQlMutationUpdateCompany,
@@ -23920,6 +26182,7 @@ enum Enum$ServiceRequestType {
   graphQlQueryChannelInvitations,
   graphQlQueryChannelParticipants,
   graphQlQueryFindChannelInvitationById,
+  graphQlQueryFindChannelInvitationsBetweenUsers,
   graphQlQueryFindChannelInvitationsForUser,
   graphQlQueryFindChannelMessageById,
   graphQlQueryFindChannelMessages,
@@ -24010,6 +26273,18 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlQueryUserInbox';
     case Enum$ServiceRequestType.graphQlQueryUserUserSearches:
       return r'graphQlQueryUserUserSearches';
+    case Enum$ServiceRequestType.graphQlMutationCreateAcademicExperience:
+      return r'graphQlMutationCreateAcademicExperience';
+    case Enum$ServiceRequestType.graphQlMutationDeleteAcademicExperience:
+      return r'graphQlMutationDeleteAcademicExperience';
+    case Enum$ServiceRequestType.graphQlMutationUpdateAcademicExperience:
+      return r'graphQlMutationUpdateAcademicExperience';
+    case Enum$ServiceRequestType.graphQlMutationCreateBusinessExperience:
+      return r'graphQlMutationCreateBusinessExperience';
+    case Enum$ServiceRequestType.graphQlMutationDeleteBusinessExperience:
+      return r'graphQlMutationDeleteBusinessExperience';
+    case Enum$ServiceRequestType.graphQlMutationUpdateBusinessExperience:
+      return r'graphQlMutationUpdateBusinessExperience';
     case Enum$ServiceRequestType.graphQlMutationCreateCompany:
       return r'graphQlMutationCreateCompany';
     case Enum$ServiceRequestType.graphQlMutationDeleteCompany:
@@ -24056,6 +26331,8 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlQueryChannelParticipants';
     case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationById:
       return r'graphQlQueryFindChannelInvitationById';
+    case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsBetweenUsers:
+      return r'graphQlQueryFindChannelInvitationsBetweenUsers';
     case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsForUser:
       return r'graphQlQueryFindChannelInvitationsForUser';
     case Enum$ServiceRequestType.graphQlQueryFindChannelMessageById:
@@ -24230,6 +26507,18 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlQueryUserInbox;
     case r'graphQlQueryUserUserSearches':
       return Enum$ServiceRequestType.graphQlQueryUserUserSearches;
+    case r'graphQlMutationCreateAcademicExperience':
+      return Enum$ServiceRequestType.graphQlMutationCreateAcademicExperience;
+    case r'graphQlMutationDeleteAcademicExperience':
+      return Enum$ServiceRequestType.graphQlMutationDeleteAcademicExperience;
+    case r'graphQlMutationUpdateAcademicExperience':
+      return Enum$ServiceRequestType.graphQlMutationUpdateAcademicExperience;
+    case r'graphQlMutationCreateBusinessExperience':
+      return Enum$ServiceRequestType.graphQlMutationCreateBusinessExperience;
+    case r'graphQlMutationDeleteBusinessExperience':
+      return Enum$ServiceRequestType.graphQlMutationDeleteBusinessExperience;
+    case r'graphQlMutationUpdateBusinessExperience':
+      return Enum$ServiceRequestType.graphQlMutationUpdateBusinessExperience;
     case r'graphQlMutationCreateCompany':
       return Enum$ServiceRequestType.graphQlMutationCreateCompany;
     case r'graphQlMutationDeleteCompany':
@@ -24277,6 +26566,9 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlQueryChannelParticipants;
     case r'graphQlQueryFindChannelInvitationById':
       return Enum$ServiceRequestType.graphQlQueryFindChannelInvitationById;
+    case r'graphQlQueryFindChannelInvitationsBetweenUsers':
+      return Enum$ServiceRequestType
+          .graphQlQueryFindChannelInvitationsBetweenUsers;
     case r'graphQlQueryFindChannelInvitationsForUser':
       return Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsForUser;
     case r'graphQlQueryFindChannelMessageById':
@@ -24514,6 +26806,10 @@ Enum$ServiceRequestMessageId fromJson$Enum$ServiceRequestMessageId(
 }
 
 enum Enum$ErrorCode {
+  academicExperienceNameMissing,
+  academicExperienceUserIdMissing,
+  businessExperienceNameMissing,
+  businessExperienceUserIdMissing,
   companyNameMissing,
   companyNameTaken,
   contentTagAlreadyExist,
@@ -24565,6 +26861,14 @@ enum Enum$ErrorCode {
 
 String toJson$Enum$ErrorCode(Enum$ErrorCode e) {
   switch (e) {
+    case Enum$ErrorCode.academicExperienceNameMissing:
+      return r'academicExperienceNameMissing';
+    case Enum$ErrorCode.academicExperienceUserIdMissing:
+      return r'academicExperienceUserIdMissing';
+    case Enum$ErrorCode.businessExperienceNameMissing:
+      return r'businessExperienceNameMissing';
+    case Enum$ErrorCode.businessExperienceUserIdMissing:
+      return r'businessExperienceUserIdMissing';
     case Enum$ErrorCode.companyNameMissing:
       return r'companyNameMissing';
     case Enum$ErrorCode.companyNameTaken:
@@ -24664,6 +26968,14 @@ String toJson$Enum$ErrorCode(Enum$ErrorCode e) {
 
 Enum$ErrorCode fromJson$Enum$ErrorCode(String value) {
   switch (value) {
+    case r'academicExperienceNameMissing':
+      return Enum$ErrorCode.academicExperienceNameMissing;
+    case r'academicExperienceUserIdMissing':
+      return Enum$ErrorCode.academicExperienceUserIdMissing;
+    case r'businessExperienceNameMissing':
+      return Enum$ErrorCode.businessExperienceNameMissing;
+    case r'businessExperienceUserIdMissing':
+      return Enum$ErrorCode.businessExperienceUserIdMissing;
     case r'companyNameMissing':
       return Enum$ErrorCode.companyNameMissing;
     case r'companyNameTaken':
@@ -24847,6 +27159,198 @@ Enum$NotificationTemplateName fromJson$Enum$NotificationTemplateName(
       return Enum$NotificationTemplateName.welcome;
     default:
       return Enum$NotificationTemplateName.$unknown;
+  }
+}
+
+enum Enum$Mm2SyncDirection { mm2ToMm3, mm3ToMm2, $unknown }
+
+String toJson$Enum$Mm2SyncDirection(Enum$Mm2SyncDirection e) {
+  switch (e) {
+    case Enum$Mm2SyncDirection.mm2ToMm3:
+      return r'mm2ToMm3';
+    case Enum$Mm2SyncDirection.mm3ToMm2:
+      return r'mm3ToMm2';
+    case Enum$Mm2SyncDirection.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2SyncDirection fromJson$Enum$Mm2SyncDirection(String value) {
+  switch (value) {
+    case r'mm2ToMm3':
+      return Enum$Mm2SyncDirection.mm2ToMm3;
+    case r'mm3ToMm2':
+      return Enum$Mm2SyncDirection.mm3ToMm2;
+    default:
+      return Enum$Mm2SyncDirection.$unknown;
+  }
+}
+
+enum Enum$Mm2ModelType {
+  Community,
+  Organization,
+  Conversation,
+  Message,
+  User,
+  MenteeExpertise,
+  MenteeWebsite,
+  MentorExpertise,
+  Profile,
+  SpokenLanguage,
+  $unknown
+}
+
+String toJson$Enum$Mm2ModelType(Enum$Mm2ModelType e) {
+  switch (e) {
+    case Enum$Mm2ModelType.Community:
+      return r'Community';
+    case Enum$Mm2ModelType.Organization:
+      return r'Organization';
+    case Enum$Mm2ModelType.Conversation:
+      return r'Conversation';
+    case Enum$Mm2ModelType.Message:
+      return r'Message';
+    case Enum$Mm2ModelType.User:
+      return r'User';
+    case Enum$Mm2ModelType.MenteeExpertise:
+      return r'MenteeExpertise';
+    case Enum$Mm2ModelType.MenteeWebsite:
+      return r'MenteeWebsite';
+    case Enum$Mm2ModelType.MentorExpertise:
+      return r'MentorExpertise';
+    case Enum$Mm2ModelType.Profile:
+      return r'Profile';
+    case Enum$Mm2ModelType.SpokenLanguage:
+      return r'SpokenLanguage';
+    case Enum$Mm2ModelType.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2ModelType fromJson$Enum$Mm2ModelType(String value) {
+  switch (value) {
+    case r'Community':
+      return Enum$Mm2ModelType.Community;
+    case r'Organization':
+      return Enum$Mm2ModelType.Organization;
+    case r'Conversation':
+      return Enum$Mm2ModelType.Conversation;
+    case r'Message':
+      return Enum$Mm2ModelType.Message;
+    case r'User':
+      return Enum$Mm2ModelType.User;
+    case r'MenteeExpertise':
+      return Enum$Mm2ModelType.MenteeExpertise;
+    case r'MenteeWebsite':
+      return Enum$Mm2ModelType.MenteeWebsite;
+    case r'MentorExpertise':
+      return Enum$Mm2ModelType.MentorExpertise;
+    case r'Profile':
+      return Enum$Mm2ModelType.Profile;
+    case r'SpokenLanguage':
+      return Enum$Mm2ModelType.SpokenLanguage;
+    default:
+      return Enum$Mm2ModelType.$unknown;
+  }
+}
+
+enum Enum$Mm2SynchronizationMode { full, incremental, updated, $unknown }
+
+String toJson$Enum$Mm2SynchronizationMode(Enum$Mm2SynchronizationMode e) {
+  switch (e) {
+    case Enum$Mm2SynchronizationMode.full:
+      return r'full';
+    case Enum$Mm2SynchronizationMode.incremental:
+      return r'incremental';
+    case Enum$Mm2SynchronizationMode.updated:
+      return r'updated';
+    case Enum$Mm2SynchronizationMode.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2SynchronizationMode fromJson$Enum$Mm2SynchronizationMode(String value) {
+  switch (value) {
+    case r'full':
+      return Enum$Mm2SynchronizationMode.full;
+    case r'incremental':
+      return Enum$Mm2SynchronizationMode.incremental;
+    case r'updated':
+      return Enum$Mm2SynchronizationMode.updated;
+    default:
+      return Enum$Mm2SynchronizationMode.$unknown;
+  }
+}
+
+enum Enum$SyncActionTaken {
+  created,
+  updated,
+  deleted,
+  skipped,
+  unset,
+  $unknown
+}
+
+String toJson$Enum$SyncActionTaken(Enum$SyncActionTaken e) {
+  switch (e) {
+    case Enum$SyncActionTaken.created:
+      return r'created';
+    case Enum$SyncActionTaken.updated:
+      return r'updated';
+    case Enum$SyncActionTaken.deleted:
+      return r'deleted';
+    case Enum$SyncActionTaken.skipped:
+      return r'skipped';
+    case Enum$SyncActionTaken.unset:
+      return r'unset';
+    case Enum$SyncActionTaken.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$SyncActionTaken fromJson$Enum$SyncActionTaken(String value) {
+  switch (value) {
+    case r'created':
+      return Enum$SyncActionTaken.created;
+    case r'updated':
+      return Enum$SyncActionTaken.updated;
+    case r'deleted':
+      return Enum$SyncActionTaken.deleted;
+    case r'skipped':
+      return Enum$SyncActionTaken.skipped;
+    case r'unset':
+      return Enum$SyncActionTaken.unset;
+    default:
+      return Enum$SyncActionTaken.$unknown;
+  }
+}
+
+enum Enum$Mm2SynchronizerLogLevel { none, info, error, $unknown }
+
+String toJson$Enum$Mm2SynchronizerLogLevel(Enum$Mm2SynchronizerLogLevel e) {
+  switch (e) {
+    case Enum$Mm2SynchronizerLogLevel.none:
+      return r'none';
+    case Enum$Mm2SynchronizerLogLevel.info:
+      return r'info';
+    case Enum$Mm2SynchronizerLogLevel.error:
+      return r'error';
+    case Enum$Mm2SynchronizerLogLevel.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$Mm2SynchronizerLogLevel fromJson$Enum$Mm2SynchronizerLogLevel(
+    String value) {
+  switch (value) {
+    case r'none':
+      return Enum$Mm2SynchronizerLogLevel.none;
+    case r'info':
+      return Enum$Mm2SynchronizerLogLevel.info;
+    case r'error':
+      return Enum$Mm2SynchronizerLogLevel.error;
+    default:
+      return Enum$Mm2SynchronizerLogLevel.$unknown;
   }
 }
 
