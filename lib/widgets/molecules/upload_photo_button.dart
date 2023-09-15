@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UploadPhotoButton extends StatelessWidget {
   const UploadPhotoButton({Key? key}) : super(key: key);
@@ -7,6 +8,7 @@ class UploadPhotoButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return OutlinedButton(
       onPressed: () {
@@ -15,15 +17,19 @@ class UploadPhotoButton extends StatelessWidget {
           builder: (BuildContext context) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0)),
-              backgroundColor: theme.colorScheme.secondaryContainer,
+                  borderRadius: BorderRadius.circular(Insets.paddingSmall)),
+              //converting secondary color to one with 95% brightness below:
+              backgroundColor: HSLColor.fromColor(theme.colorScheme.secondary)
+                  .withLightness(0.95)
+                  .toColor(),
               contentPadding: EdgeInsets.zero,
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+                    padding: const EdgeInsets.only(
+                        top: Insets.paddingMedium, bottom: Insets.paddingSmall),
                     child: OutlinedButton(
                       onPressed: () {},
                       style: ButtonStyle(
@@ -31,21 +37,24 @@ class UploadPhotoButton extends StatelessWidget {
                             theme.colorScheme.onSecondaryContainer),
                         side: const MaterialStatePropertyAll(BorderSide.none),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.insert_photo_outlined,
                           ),
-                          SizedBox(width: 8),
-                          Text("Upload photo"),
+                          const SizedBox(width: Insets.paddingSmall),
+                          Text(l10n.uploadPhoto),
                         ],
                       ),
                     ),
                   ),
-                  const Divider(),
+                  Divider(
+                    color: theme.colorScheme.outlineVariant,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
+                    padding: const EdgeInsets.only(
+                        bottom: Insets.paddingMedium, top: Insets.paddingSmall),
                     child: OutlinedButton(
                       onPressed: () {},
                       style: ButtonStyle(
@@ -53,14 +62,14 @@ class UploadPhotoButton extends StatelessWidget {
                             theme.colorScheme.onSecondaryContainer),
                         side: const MaterialStatePropertyAll(BorderSide.none),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.camera_alt_outlined,
                           ),
-                          SizedBox(width: 8),
-                          Text("Take photo"),
+                          const SizedBox(width: Insets.paddingSmall),
+                          Text(l10n.takePhoto),
                         ],
                       ),
                     ),
@@ -72,13 +81,13 @@ class UploadPhotoButton extends StatelessWidget {
         );
       },
       style: ButtonStyle(
-        shape: MaterialStatePropertyAll(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))),
+        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Insets.paddingSmall))),
         backgroundColor:
             MaterialStatePropertyAll(theme.colorScheme.secondaryContainer),
         side: const MaterialStatePropertyAll(BorderSide.none),
       ),
-      child: Container(
+      child: SizedBox(
         width: 200,
         height: 200,
         child: Center(
