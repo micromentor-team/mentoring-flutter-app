@@ -238,5 +238,7 @@
     "profileChipsSelectUpTo": "Select up to {maxSelection} (optional)",
     "createAPassword": "Create a password",
     "password": "Password",
-    "confirmPassword": "Confirm password"
+    "confirmPassword": "Confirm password",
+    "uploadPhoto": "Upload photo",
+    "takePhoto": "Take photo"
 }

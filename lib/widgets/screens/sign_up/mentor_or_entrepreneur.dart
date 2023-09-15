@@ -4,9 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
-
 import '../../molecules/login_radio_button_cards.dart';
-import '../../molecules/upload_photo_button.dart';
 import 'sign_up_bottom_buttons.dart';
 
 class MentorOrEntrepreneurScreen extends StatefulWidget {
@@ -38,8 +36,7 @@ class _MentorOrEntrepreneurScreenState
           icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
       body: Column(
         children: [
-          // createEntrepreneurMentorCards(context),
-          UploadPhotoButton(),
+          createEntrepreneurMentorCards(context),
           const SizedBox(height: Insets.paddingMedium),
           Padding(
             padding: const EdgeInsets.all(Insets.paddingSmall),
