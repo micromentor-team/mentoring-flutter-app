@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 
 class ExploreCardFiltersModel extends ChangeNotifier {
   static const List<String> countries = ['USA'];
@@ -22,7 +23,10 @@ class ExploreCardFiltersModel extends ChangeNotifier {
 
   String? get selectedIndustry => _selectedIndustry;
   Set<String> get selectedUserTypes => _selectedUserTypes;
-  String? get selectedKeyword => _selectedKeyword;
+  String? get selectedKeyword =>
+      (_selectedKeyword == null || (_selectedKeyword?.isEmpty ?? false))
+          ? null
+          : _selectedKeyword!;
 
   bool get countryFilterSelected => _selectedCountries.isNotEmpty;
   bool get languageFilterSelected => _selectedLanguages.isNotEmpty;
@@ -50,5 +54,26 @@ class ExploreCardFiltersModel extends ChangeNotifier {
     _selectedUserTypes = selectedUserTypes ?? {};
     _selectedKeyword = selectedKeyword;
     notifyListeners();
+  }
+
+  Input$UserSearchInput toUserSearchInput(int maxResultsCount) {
+    return Input$UserSearchInput(
+      countryTextIds:
+          _selectedCountries.isEmpty ? null : _selectedCountries.toList(),
+      expertisesTextIds:
+          _selectedSkills.isEmpty ? null : _selectedSkills.toList(),
+      maxResultCount: maxResultsCount,
+      languagesTextIds:
+          _selectedLanguages.isEmpty ? null : _selectedLanguages.toList(),
+      offersHelp:
+          (_selectedUserTypes.contains("Mentor") || _selectedUserTypes.isEmpty)
+              ? Enum$UserSearchFieldPreference.isTrue
+              : Enum$UserSearchFieldPreference.isFalse,
+      searchText: selectedKeyword,
+      seeksHelp:
+          (_selectedUserTypes.contains("Mentee") || _selectedUserTypes.isEmpty)
+              ? Enum$UserSearchFieldPreference.isTrue
+              : Enum$UserSearchFieldPreference.isFalse,
+    );
   }
 }

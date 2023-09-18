@@ -36,78 +36,6 @@ class ProfileQuickViewInfo {
   });
 }
 
-ProfileQuickViewInfo createRecommendedMentorExample() {
-  return const ProfileQuickViewInfo(
-      userId: '',
-      userType: UserType.mentor,
-      avatarUrl:
-          'https://media.istockphoto.com/id/1280371040/photo/confident-stylish-european-mature-middle-aged-woman-standing-at-workplace-stylish-older.jpg?s=612x612&w=0&k=20&c=AntzoG_Z1hN6tYVBXbu58Rvz4jweBYa8669bV75yWRw=',
-      fullName: 'Delia Joyce',
-      groupMembership: "Verizon Digital Ready",
-      location: 'Shaker Heights, Ohio, USA',
-      company: 'SparkNow',
-      companyRole: 'Founder',
-      endorsements: 7,
-      skills: [
-        SkillChip(
-          skill: 'Marketing',
-        ),
-        SkillChip(
-          skill: 'Operations',
-        ),
-        SkillChip(
-          skill: 'Starting Up',
-        ),
-      ]);
-}
-
-ProfileQuickViewInfo createRegularMentorExample() {
-  return const ProfileQuickViewInfo(
-      userId: '',
-      userType: UserType.mentor,
-      avatarUrl:
-          'https://media.istockphoto.com/id/1307694427/photo/portrait-of-businessman-in-glasses-holding-smartphone-in-hand.jpg?s=612x612&w=0&k=20&c=P4FDNemdXlXQi3O_yLePrJVzuTYmJx84-iIySj91fGQ=',
-      fullName: 'Jenika Chua',
-      location: 'Shaker Heights, Ohio, USA',
-      company: 'SparkNow',
-      companyRole: 'Founder',
-      endorsements: 7,
-      skills: [
-        SkillChip(
-          skill: 'Marketing',
-        ),
-        SkillChip(
-          skill: 'Operations',
-        ),
-        SkillChip(
-          skill: 'Starting Up',
-        ),
-      ]);
-}
-
-ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
-  return const ProfileQuickViewInfo(
-      userId: '',
-      userType: UserType.entrepreneur,
-      avatarUrl:
-          'https://st4.depositphotos.com/9999814/39958/i/600/depositphotos_399584092-stock-photo-attractive-young-woman-profile-portrait.jpg',
-      fullName: 'Azadeh Sana',
-      location: 'Memphis, Tennessee, USA',
-      company: 'St James Place',
-      endorsements: 2,
-      skills: [
-        SkillChip(
-          skill: 'Marketing',
-        ),
-        SkillChip(
-          skill: 'Operations',
-        ),
-        SkillChip(
-          skill: 'Starting Up',
-        ),
-      ]);
-}
-
 ProfileQuickViewCard createProfileCardFromInfo({
   required ProfileQuickViewInfo info,
 }) {
@@ -361,7 +289,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   }
 
   Widget _createEndorsements(AppLocalizations l10n, ThemeData theme) {
-    if (endorsements == null) {
+    if (endorsements == null || endorsements == 0) {
       return const SizedBox(width: 0, height: 0);
     }
     return Row(
