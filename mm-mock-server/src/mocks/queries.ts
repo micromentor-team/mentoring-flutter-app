@@ -85,5 +85,9 @@ export function mockQueries(serverState: MockServerState) {
         findGroups: () => {
             return serverState.groups;
         },
+        // user searches
+        findUserSearchById: (_: any, userSearchId: string) => {
+            return serverState.userSearches.find((element) => element.id == userSearchId);
+        },
     }
 }

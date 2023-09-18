@@ -87,7 +87,7 @@ export function generateWebsite() {
     }
 }
 
-export function generateUserSearch(args, users) {
+export function generateUserSearch(args: any, users: any) {
     return {
         __typename: "UserSearch",
         id: faker.string.alphanumeric({ length: 24 }),
