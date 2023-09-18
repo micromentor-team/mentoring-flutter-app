@@ -205,9 +205,6 @@ export function mockMutations(serverState: MockServerState) {
             response.runInfos = null;
             response.updatedAt = null;
             return response;
-        },
-        findUserSearchById: (_: any, userSearchId: string) => {
-            return serverState.userSearches.find((element) => element.id == userSearchId);
         }
     }
 }
