@@ -59,10 +59,8 @@ mixin NavigationMixin<T extends StatefulWidget> on State<T>
 
   void buildPageRouteScaffold(
       void Function(ScaffoldModel scaffoldModel) build) {
-    if (_pageRoute!.isCurrent &&
-        _scaffoldModel.lastRefreshRoute != _router.location) {
+    if (_pageRoute!.isCurrent) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scaffoldModel.setLastRefreshRoute(_router.location);
         build(_scaffoldModel);
       });
     }

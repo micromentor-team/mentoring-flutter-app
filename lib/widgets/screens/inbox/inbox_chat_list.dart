@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/inbox_chat_tile_model.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
-import 'package:mm_flutter_app/widgets/screens/inbox/dismissible_tile.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_chat_list_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -34,6 +34,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
   late final ChannelsProvider _channelsProvider;
   late Future<List<ChannelForUser>> _userChannels;
   late AppLocalizations _l10n;
+  late List<SwipeActionCell> _tiles;
 
   @override
   void initState() {
@@ -69,7 +70,8 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
   List<Widget> _createContentList(
     List<ChannelForUser> channels,
   ) {
-    final List<DismissibleTile> tiles = [];
+    final ThemeData theme = Theme.of(context);
+    _tiles = [];
 
     // Sort channels by latestMessage creation time, starting from most recent
     channels.sort(
@@ -85,56 +87,24 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
       final String channelName = otherParticipant.user.fullName!;
       final String? channelAvatarUrl = otherParticipant.user.avatarUrl;
 
-      tiles.add(
-        DismissibleTile(
-          tileId: channel.id,
-          onDismissed: () async {
-            int tileIndexToRemove = -1;
-            for (int i = 0; i < tiles.length; i++) {
-              if (tiles[i].tileId == channel.id) {
-                tileIndexToRemove = i;
-                break;
-              }
-            }
-            tiles.removeAt(tileIndexToRemove);
-            if (widget.isArchivedForUser) {
-              _channelsProvider.unarchiveChannelForAuthenticatedUser(
-                channelId: channel.id,
-              );
-            } else {
-              _channelsProvider.archiveChannelForAuthenticatedUser(
-                channelId: channel.id,
-              );
-            }
-            // Refresh Scaffold and channels only once the change is live.
-            final bool updateCompleted =
-                await CrashHandler.retryOnException<bool>(
-              () async {
-                final result = await _channelsProvider.findChannelById(
-                    channelId: channel.id);
-                final bool? isArchived = result.response?.isArchivedForMe;
-                if (isArchived == null ||
-                    isArchived == widget.isArchivedForUser) {
-                  throw RetryException(
-                    message: 'Waiting for isArchivedForMe to update...',
-                  );
-                }
-                return true;
+      _tiles.add(
+        SwipeActionCell(
+          key: ValueKey(channel.id),
+          trailingActions: <SwipeAction>[
+            SwipeAction(
+              icon: Icon(
+                widget.isArchivedForUser
+                    ? Icons.unarchive_outlined
+                    : Icons.archive_outlined,
+                color: theme.colorScheme.primary,
+              ),
+              onTap: (CompletionHandler handler) async {
+                await handler(true);
+                _dismissTile(channel.id);
               },
-              onFailOperation: () => false,
-              logFailures: false,
-            );
-            if (updateCompleted) {
-              buildPageRouteScaffold((scaffoldModel) {
-                scaffoldModel.setInboxScaffold(router: router);
-              });
-              _queryUserChannels();
-              setState(() {});
-            }
-          },
-          icon: widget.isArchivedForUser
-              ? Icons.unarchive_outlined
-              : Icons.archive_outlined,
+              color: theme.colorScheme.primaryContainer,
+            ),
+          ],
           child: ChangeNotifierProvider(
             create: (context) => InboxChatTileModel(
               context: context,
@@ -144,26 +114,72 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
               authenticatedUserId: _authenticatedUser!.id,
               isArchivedChannel: widget.isArchivedForUser,
             ),
-            child: InboxChatListTile(
-              isArchivedForUser: widget.isArchivedForUser,
+            child: Padding(
+              padding: const EdgeInsetsDirectional.only(
+                start: Insets.paddingSmall,
+                end: Insets.paddingMedium,
+              ),
+              child: InboxChatListTile(
+                isArchivedForUser: widget.isArchivedForUser,
+              ),
             ),
           ),
         ),
       );
     }
 
-    List<Widget> contentList = [tiles.first];
-    for (int i = 1; i < tiles.length; i++) {
+    List<Widget> contentList = [_tiles.first];
+    for (int i = 1; i < _tiles.length; i++) {
       contentList.addAll([
         const Divider(
           height: 0,
           indent: Insets.paddingMedium,
           endIndent: Insets.paddingMedium,
         ),
-        tiles[i],
+        _tiles[i],
       ]);
     }
     return contentList;
+  }
+
+  void _dismissTile(String channelId) async {
+    int tileIndexToRemove = -1;
+    for (int i = 0; i < _tiles.length; i++) {
+      if ((_tiles[i].key as ValueKey).value == channelId) {
+        tileIndexToRemove = i;
+        break;
+      }
+    }
+    _tiles.removeAt(tileIndexToRemove);
+    if (widget.isArchivedForUser) {
+      _channelsProvider.unarchiveChannelForAuthenticatedUser(
+        channelId: channelId,
+      );
+    } else {
+      _channelsProvider.archiveChannelForAuthenticatedUser(
+        channelId: channelId,
+      );
+    }
+    // Refresh Scaffold and channels only once the change is live.
+    final bool updateCompleted = await CrashHandler.retryOnException<bool>(
+      () async {
+        final result =
+            await _channelsProvider.findChannelById(channelId: channelId);
+        final bool? isArchived = result.response?.isArchivedForMe;
+        if (isArchived == null || isArchived == widget.isArchivedForUser) {
+          throw RetryException(
+            message: 'Waiting for isArchivedForMe to update...',
+          );
+        }
+        return true;
+      },
+      onFailOperation: () => false,
+      logFailures: false,
+    );
+    if (updateCompleted) {
+      _queryUserChannels();
+      setState(() {});
+    }
   }
 
   @override
