@@ -54,6 +54,7 @@ class Dimensions {
   Dimensions._private();
   static const double drawerHeaderHeight = 64.0;
   static const double highlightBorderWidth = 2.0;
+  static const double customToolbarHeight = 80.0;
 
   static const Size bigButtonSize = Size(80.0, 48.0);
   static const Size imageTile = Size(88.0, 168.0);

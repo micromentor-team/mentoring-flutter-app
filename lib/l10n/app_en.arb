@@ -60,6 +60,8 @@
     "messagesActionArchive": "Archive chat",
     "messagesActionUnarchive": "Unarchive chat",
     "messagesActionBlock": "Block user",
+    "messagesActionDelete": "Delete",
+    "messagesActionEdit": "Edit",
     "messagesActionReport": "Report user",
     "messagesInputHint": "Write a message...",
     "messagesStatusDeleted": "(deleted)",

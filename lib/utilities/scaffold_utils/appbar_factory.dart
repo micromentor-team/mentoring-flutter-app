@@ -131,7 +131,7 @@ class AppBarFactory {
       listen: false,
     );
     return AppBar(
-      toolbarHeight: 80.0,
+      toolbarHeight: Dimensions.customToolbarHeight,
       leading: IconButton(
         icon: const Icon(Icons.keyboard_arrow_left),
         onPressed: () => router.push(

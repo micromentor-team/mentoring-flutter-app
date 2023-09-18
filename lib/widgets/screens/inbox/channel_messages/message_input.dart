@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 
-import '../../../providers/messages_provider.dart';
+import '../../../../providers/messages_provider.dart';
 import 'reply_message.dart';
 
 class MessageInput extends StatefulWidget {
@@ -15,7 +15,6 @@ class MessageInput extends StatefulWidget {
     this.controller,
     this.replyingTo,
     this.onTapEmptyInput,
-    this.submitIcon,
     this.autoFocus = false,
   }) : super(key: key);
 
@@ -25,7 +24,6 @@ class MessageInput extends StatefulWidget {
   final Function(String messageText, String? replyingToMessageId) onSubmit;
   final Function? onClearReply;
   final ChannelMessage? replyingTo;
-  final IconData? submitIcon;
   final bool? autoFocus;
 
   @override

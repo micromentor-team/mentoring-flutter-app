@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -15,12 +12,10 @@ import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/base/operation_result.dart';
-import '../../../utilities/navigation_mixin.dart';
-import 'message_bubble/message_bubble.dart';
-import 'message_bubble/message_hoverover.dart';
-import 'message_bubble/message_peeker.dart';
-import 'message_details.dart';
+import '../../../../providers/base/operation_result.dart';
+import '../../../../utilities/navigation_mixin.dart';
+import 'message_bubble.dart';
+import 'message_context_menu.dart';
 import 'message_input.dart';
 
 class ChannelMessagesScreen extends StatefulWidget {
@@ -40,14 +35,15 @@ class ChannelMessagesScreen extends StatefulWidget {
 class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
     with NavigationMixin<ChannelMessagesScreen> {
   late final ChannelsProvider _channelsProvider;
-  late final AuthenticatedUser _user;
+  late final AuthenticatedUser _authenticatedUser;
   late Future<OperationResult<ChannelById>> _channel;
 
   @override
   void initState() {
     super.initState();
     _channelsProvider = Provider.of<ChannelsProvider>(context, listen: false);
-    _user = Provider.of<UserProvider>(context, listen: false).user!;
+    _authenticatedUser =
+        Provider.of<UserProvider>(context, listen: false).user!;
   }
 
   @override
@@ -68,7 +64,7 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
           onReady: () {
             ChannelById channel = snapshot.data!.response!;
             final participant = channel.participants
-                .firstWhere((item) => item.user.id != _user.id)
+                .firstWhere((item) => item.user.id != _authenticatedUser.id)
                 .user;
             final String channelName = participant.fullName!;
             final String? avatarUrl = participant.avatarUrl;
@@ -87,7 +83,7 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
               create: (context) => ChatModel(
                 context: context,
                 channelId: channel.id,
-                authenticatedUser: _user,
+                authenticatedUser: _authenticatedUser,
               ),
               child: ChannelChat(
                 channel: channel,
@@ -101,11 +97,12 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
 }
 
 class ChannelChat extends StatefulWidget {
+  final ChannelById channel;
+
   const ChannelChat({
     Key? key,
     required this.channel,
   }) : super(key: key);
-  final ChannelById channel;
 
   @override
   State<ChannelChat> createState() => _ChannelChatState();
@@ -139,10 +136,8 @@ class _ChannelChatState extends State<ChannelChat>
   void _processNewMessages() {
     if (_messageCount < _chatModel.channelMessages.length) {
       _chatModel.markMessagesAsRead();
-      if (_isCurrentUser(
-        userId: _chatModel.channelMessages.last.createdBy,
-        context: context,
-      )) {
+      if (_chatModel.channelMessages.last.createdBy ==
+          _chatModel.authenticatedUser.id) {
         _scrollDown();
       } else if (_unreadMessages != true) {
         _unreadMessages = true;
@@ -170,38 +165,6 @@ class _ChannelChatState extends State<ChannelChat>
     }
   }
 
-  Future<dynamic> _openMessageDetailsModal(
-      BuildContext context, ChannelMessage message) async {
-    setState(() {
-      if (_focusedMessage != null) _focusedMessage = null;
-    });
-    final reply = await Navigator.of(context).push(
-      PageRouteBuilder(
-        opaque: false,
-        pageBuilder: ((context, animation, secondaryAnimation) {
-          return MessageDetailsModal(
-            context: context,
-            channel: widget.channel,
-            message: message,
-          );
-        }),
-        transitionDuration: const Duration(
-          milliseconds: 150,
-        ),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            FadeTransition(opacity: animation, child: child),
-      ),
-    );
-
-    if (reply != null) {
-      setState(() {
-        if (reply == true) {
-          _focusedMessage = message;
-        }
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ChatModel>(
@@ -218,11 +181,10 @@ class _ChannelChatState extends State<ChannelChat>
               Expanded(
                 child: BuildMessageBubbles(
                   channel: widget.channel,
+                  authenticatedUser: chatModel.authenticatedUser,
                   chatMessages: chatModel.channelMessages,
                   participants: widget.channel.participants,
                   listScrollController: listScrollController,
-                  onOpenMessageDetails: (message) =>
-                      _openMessageDetailsModal(context, message),
                   onSetReplyingTo: (message) {
                     setState(() {
                       _focusedMessage = message;
@@ -258,116 +220,82 @@ class _ChannelChatState extends State<ChannelChat>
 }
 
 class BuildMessageBubbles extends StatelessWidget {
-  const BuildMessageBubbles({
-    Key? key,
-    required this.channel,
-    required this.participants,
-    required this.chatMessages,
-    required this.listScrollController,
-    required this.onOpenMessageDetails,
-    required this.onSetReplyingTo,
-  }) : super(key: key);
-
   final ChannelById channel;
+  final AuthenticatedUser authenticatedUser;
   final List<ChannelParticipant> participants;
   final List<ChannelMessage> chatMessages;
   final ScrollController listScrollController;
-  final Function(ChannelMessage message) onOpenMessageDetails;
-  final Function(ChannelMessage message) onSetReplyingTo;
+  final Function(ChannelMessage message)
+      onSetReplyingTo; //TODO - Temporarily disabled.
+
+  const BuildMessageBubbles({
+    Key? key,
+    required this.channel,
+    required this.authenticatedUser,
+    required this.participants,
+    required this.chatMessages,
+    required this.listScrollController,
+    required this.onSetReplyingTo,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     List<ChannelMessage> messages = chatMessages.reversed.toList();
-    return chatMessages.isNotEmpty
-        ? GroupedListView<ChannelMessage, String>(
-            elements: messages,
-            clipBehavior: Clip.none,
-            // We do not want the builder to sort again...
-            sort: false,
-            reverse: true,
-            order: GroupedListOrder.DESC,
-            useStickyGroupSeparators: false,
-            padding: const EdgeInsets.symmetric(
-              horizontal: Insets.paddingMedium,
-            ),
-            groupBy: (message) => DateFormat('yyyy-MM-dd')
-                .format(message.createdAt.toLocal())
-                .toString(),
-            indexedItemBuilder: (context, ChannelMessage message, i) {
-              // return buildMessageBubble(_messages[i]);
-              final message = messages[i];
+    return GroupedListView<ChannelMessage, String>(
+      elements: messages,
+      clipBehavior: Clip.none,
+      // We do not want the builder to sort again...
+      sort: false,
+      reverse: true,
+      order: GroupedListOrder.DESC,
+      useStickyGroupSeparators: false,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Insets.paddingMedium,
+      ),
+      groupBy: (message) => DateFormat('yyyy-MM-dd')
+          .format(message.createdAt.toLocal())
+          .toString(),
+      indexedItemBuilder: (context, ChannelMessage message, i) {
+        // return buildMessageBubble(_messages[i]);
+        final message = messages[i];
 
-              return BuildMessageBubble(
-                key: ObjectKey(message.id),
-                message: message,
-                chatMessages: chatMessages,
-                participants: participants,
-                onSwipeLeft: () => onOpenMessageDetails(message),
-                onSwipeRight: () => onSetReplyingTo(message),
-              );
-            },
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            controller: listScrollController,
-            groupHeaderBuilder: (ChannelMessage message) => Padding(
-              padding: const EdgeInsets.all(Insets.paddingSmall),
-              child: TextDivider(
-                text: DateTime.now().day == message.createdAt.toLocal().day
-                    ? l10n.dateSimpleToday[0].toUpperCase() +
-                        l10n.dateSimpleToday.substring(1)
-                    : DateFormat('EEE. MMM dd')
-                        .format(message.createdAt.toLocal()),
-              ),
-            ),
-          )
-        : Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // ParticipantStack.channel(
-                //   channel: channel,
-                //   participantRadius: 15.0,
-                // ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: const Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.messenger_outline_rounded,
-                          size: 12.0,
-                          color: Colors.grey,
-                        ),
-                        Text(
-                          ' Start the conversation!',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
+        return BuildMessageBubble(
+          key: ObjectKey(message.id),
+          message: message,
+          chatMessages: chatMessages,
+          participants: participants,
+          isSentByAuthenticatedUser: message.createdBy == authenticatedUser.id,
+        );
+      },
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      controller: listScrollController,
+      groupHeaderBuilder: (ChannelMessage message) => Padding(
+        padding: const EdgeInsets.all(Insets.paddingSmall),
+        child: TextDivider(
+          text: DateTime.now().day == message.createdAt.toLocal().day
+              ? l10n.dateSimpleToday[0].toUpperCase() +
+                  l10n.dateSimpleToday.substring(1)
+              : DateFormat('EEE. MMM dd').format(message.createdAt.toLocal()),
+        ),
+      ),
+    );
   }
 }
 
 class BuildMessageBubble extends StatelessWidget {
+  final ChannelMessage message;
+  final List<ChannelParticipant> participants;
+  final List<ChannelMessage> chatMessages;
+  final bool isSentByAuthenticatedUser;
+
   const BuildMessageBubble({
     Key? key,
     required this.message,
     required this.participants,
     required this.chatMessages,
-    this.onSwipeLeft,
-    this.onSwipeRight,
+    required this.isSentByAuthenticatedUser,
   }) : super(key: key);
-  final ChannelMessage message;
-  final List<ChannelParticipant> participants;
-  final List<ChannelMessage> chatMessages;
-  final VoidCallback? onSwipeLeft;
-  final VoidCallback? onSwipeRight;
 
   @override
   Widget build(BuildContext context) {
@@ -385,29 +313,18 @@ class BuildMessageBubble extends StatelessWidget {
       message: message,
       replyingTo: replyingTo,
       participants: participants,
+      isDeleted: message.deletedAt != null,
+      isSentByAuthenticatedUser: isSentByAuthenticatedUser,
     );
     return Row(
-      mainAxisAlignment:
-          _isCurrentUser(userId: message.createdBy, context: context)
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
+      mainAxisAlignment: isSentByAuthenticatedUser
+          ? MainAxisAlignment.end
+          : MainAxisAlignment.start,
       children: [
-        kIsWeb || Platform.isMacOS
-            ? MessageHoverover(
-                message: bubble,
-                onButtonOne: onSwipeRight,
-                onButtonTwo: onSwipeLeft,
-              )
-            : MessagePeeker(
-                onSwipeLeft: onSwipeLeft,
-                onSwipeRight: onSwipeRight,
-                child: bubble,
-              ),
+        MessageContextMenu(
+          messageBubble: bubble,
+        ),
       ],
     );
   }
-}
-
-bool _isCurrentUser({context, userId}) {
-  return Provider.of<UserProvider>(context, listen: false).user?.id == userId;
 }
