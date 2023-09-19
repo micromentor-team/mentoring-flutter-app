@@ -203,65 +203,104 @@ query FindMentorUsers($options: FindObjectsOptions, $filter: UserListFilter, $ma
 }
 
 query FindUserDetailedProfile($userId: String!) {
-    findUserById(id: $userId) {
-        id
-        avatarUrl
-        fullName
-        firstName
-        lastName
-        regionOfResidence
-        cityOfResidence
-        countryOfResidence {
-            translatedValue
+  findUserById(id: $userId) {
+    id
+    firstName
+    lastName
+    fullName
+    email
+    userHandle
+    offersHelp
+    seeksHelp
+    websites {
+        value
+        label # label == "linkedin" for the linkedin button
+    }
+    spokenLanguages {
+      translatedValue
+    }
+    avatarUrl # not yet functional
+    groupMemberships {
+      groupId
+      groupIdent
+      ... on MentorsGroupMembership {
+        expertises {
+          translatedValue
+          # icon not yet defined, coming later
         }
-        jobTitle
-        companies {
-            name
-            websites {
-                value
-            }
-            description
-            isOperational
-            industries
-            companyStage {
+        industries {
+          translatedValue
+          # icon not yet defined, coming later
+        }
+        endorsements # just a number for now, not yet defined as an object
+        expectationsForMentees
+        # TODO: implement mentoring preferences
+      }
+      ... on MenteesGroupMembership {
+            soughtExpertises {
                 translatedValue
             }
-            companyType {
+            industry {
                 translatedValue
             }
-        }
-        educationLevel {
-            translatedValue
-        }
-        offersHelp
-        seeksHelp
-        spokenLanguages {
-            translatedValue
-        }
-        websites {
-            value
-        }
-        groupMemberships {
-            groupIdent
-            ... on MenteesGroupMembership {
-                industry {
-                    translatedValue
-                }
-                soughtExpertises {
-                    translatedValue
-                }
-            }
-            ... on MentorsGroupMembership {
-                industries {
-                    translatedValue
-                }
-                expertises {
-                    translatedValue
-                }
-            }
+            reasonsForStartingBusiness
+            # business mission not defined, use companies[0].description instead
         }
     }
+    jobTitle
+    companies {
+      name # venture name
+      description # "business mission" can be drawn from here for now
+      websites {
+        value # url
+        label # type of website. might not be relevant
+      }
+      companyStage {
+        translatedValue
+      }
+      companyType {
+        translatedValue
+      }
+      # we may need to add city/state/country to this model for the mentee
+    }
+    educationLevel {
+      translatedValue
+    }
+    pronounsDisplay # this handles some display logic, "she/they" for a user with both "they/them" and "she/her" pronouns
+    pronouns {
+      translatedValue # e.g. "she/her"
+    }
+    businessExperiences {
+      businessName
+      jobTitle
+      startDate
+      endDate
+      city
+      state
+      country
+    }
+    academicExperiences {
+      institutionName
+      degreeType
+      fieldOfStudy
+      startDate
+      endDate
+    }
+    cityOfResidence
+    regionOfResidence
+    countryOfResidenceTextId
+    countryOfResidence {
+      translatedValue
+    }
+    cityOfOrigin
+    regionOfOrigin
+    countryOfOriginTextId
+    countryOfOrigin {
+      translatedValue
+    }
+  }
 }
+
 
 query FindMentorUserDetailedProfile($id: String!) {
   findUserById(id: $id) {
