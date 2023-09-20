@@ -56,6 +56,7 @@ class AboutMyBusiness extends StatelessWidget {
                   if (companyInput.city != null || companyInput.country != null)
                     ProfileChipPadded(
                       text: [companyInput.city, companyInput.country]
+                          .nonNulls
                           .join(l10n.listSeparator),
                     ),
                   if (companyInput.industry != null)

@@ -11,30 +11,46 @@ export function generateUser(groups?: any[]) {
     const mockUserHandle = mockFirstName.toLowerCase().charAt(0) + mockLastName.toLowerCase();
     const mockEmail = `${mockUserHandle}@${faker.internet.domainName()}`;
     const mockProfileCompletionPercentage = generateUserProfileCompletionPercentage();
-    const mockCountry = faker.helpers.arrayElement(constants.countries)
+    const mockCountryOfResidence = faker.helpers.arrayElement(constants.countries);
+    const mockCountryOfOrigin = faker.helpers.arrayElement(constants.countries);
     const user: any = {
         __typename: "User",
         id: faker.string.alphanumeric({length: 24}),
         firstName: mockFirstName,
         lastName: mockLastName,
         fullName: mockFullName,
-        userHandle: mockUserHandle,
-        educationLevel: faker.helpers.arrayElement(constants.educationLevels),
         email: mockEmail,
-        avatarUrl: faker.image.urlPicsumPhotos(),
-        jobTitle: faker.person.jobTitle(),
-        profileCompletionPercentage: mockProfileCompletionPercentage,
-        countryOfResidence: mockCountry,
-        countryOfResidenceTextId: mockCountry.textId,
-        cityOfResidence: faker.location.city(),
-        regionOfResidence: faker.location.state(),
-        spokenLanguages: faker.helpers.arrayElements(constants.languages, {min: 1, max: 4}),
-        updatedAt: faker.date.recent(),
-        groupMemberships: [],
-        groupIds: [],
-        companies: [generateCompany()],
+        userHandle: mockUserHandle,
         offersHelp: groups?.some(g => g.ident === "mentors") ?? false,
         seeksHelp: groups?.some(g => g.ident === "mentees") ?? false,
+        websites: faker.helpers.arrayElements([generateWebsite(), generateWebsite()],{min: 0, max: 2}),
+        spokenLanguages: faker.helpers.arrayElements(constants.languages, {min: 1, max: 4}),
+        avatarUrl: faker.image.urlPicsumPhotos(),
+        groupMemberships: [],
+        jobTitle: faker.person.jobTitle(),
+        companies: [generateCompany()],
+        educationLevel: faker.helpers.arrayElement(constants.educationLevels),
+        pronouns: faker.helpers.arrayElements(constants.pronouns, {min: 1, max: 3}),
+        pronounsDisplay: faker.helpers.arrayElement(constants.pronouns).translatedValue,
+        businessExperiences: faker.helpers.arrayElements(
+            [generateBusinessExperience(), generateBusinessExperience(), generateBusinessExperience()],
+            {min: 1, max: 3},
+        ),
+        academicExperiences: faker.helpers.arrayElements(
+            [generateAcademicExperience(), generateAcademicExperience(), generateAcademicExperience()],
+            {min: 1, max: 3},
+        ),
+        cityOfResidence: faker.location.city(),
+        regionOfResidence: faker.location.state(),
+        countryOfResidenceTextId: mockCountryOfResidence.textId,
+        countryOfResidence: mockCountryOfResidence,
+        cityOfOrigin: faker.location.city(),
+        regionOfOrigin: faker.location.state(),
+        countryOfOriginTextId: mockCountryOfOrigin.textId,
+        countryOfOrigin: mockCountryOfOrigin,
+        updatedAt: faker.date.recent(),
+        groupIds: [],
+        profileCompletionPercentage: mockProfileCompletionPercentage,
     }
     if (groups) {
         user.groupMemberships = groups.map(g => generateGroupMembership(user, g));
@@ -58,6 +74,32 @@ export function generateUserProfileCompletionPercentage() {
     // Returns a random integer between 0 and 100
     // TODO: copy logic from backend (once defined) to rely on other field values
     return Math.floor(Math.random() * 100);
+}
+
+export function generateAcademicExperience() {
+    const startDate = faker.date.past({years: 10});
+    return {
+        __typename: "AcademicExperience",
+        institutionName: "University of " + faker.location.city(),
+        degreeType: faker.helpers.arrayElement(constants.educationLevels).translatedValue,
+        fieldOfStudy: faker.person.jobArea(),
+        startDate: startDate,
+        endDate: faker.date.between({from: startDate, to: Date.now()}),
+    }
+}
+
+export function generateBusinessExperience() {
+    const startDate = faker.date.past({years: 15});
+    return {
+        __typename: "BusinessExperience",
+        businessName: faker.company.name(),
+        state: faker.location.state(),
+        city: faker.location.city(),
+        country: faker.location.country(),
+        jobTitle: faker.person.jobTitle(),
+        startDate: startDate,
+        endDate: faker.date.between({from: startDate, to: Date.now()}),
+    }
 }
 
 export function generateCompany() {
@@ -157,15 +199,16 @@ export function generateGroupMembership(user: any, group: any) {
 
     if (membership.groupIdent === "mentors") {
         membership.__typename = "MentorsGroupMembership";
-        membership.expertises = faker.helpers.arrayElements(constants.expertises, 2);
+        membership.expertises = faker.helpers.arrayElements(constants.expertises, {min: 1, max: 3});
         membership.industries = faker.helpers.arrayElements(constants.industries, 2);
         membership.endorsements = faker.number.int(5);
+        membership.expectationsForMentees = faker.lorem.paragraph();
     }
-
     if (membership.groupIdent === "mentees") {
         membership.__typename = "MenteesGroupMembership";
-        membership.soughtExpertises = faker.helpers.arrayElements(constants.expertises, 2);
+        membership.soughtExpertises = faker.helpers.arrayElements(constants.expertises, {min: 1, max: 3});
         membership.industry = faker.helpers.arrayElement(constants.industries);
+        membership.reasonsForStartingBusiness = faker.lorem.paragraph();
     }
 
     return membership;

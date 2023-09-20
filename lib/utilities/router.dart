@@ -22,6 +22,8 @@ import '../widgets/screens/inbox/invitation_detail.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
 import '../widgets/screens/sign_up/mentor_or_entrepreneur.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
+import '../widgets/screens/sign_up/sign_up_verify.dart';
+import '../widgets/screens/sign_up/sign_up_welcome.dart';
 import '../widgets/screens/welcome/welcome_screen.dart';
 
 class AppRouter {
@@ -107,6 +109,26 @@ class AppRouter {
                 key: state.pageKey,
                 maintainState: false,
                 child: const SignUpEmail(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupVerify.path,
+            name: Routes.signupVerify.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpVerify(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupWelcome.path,
+            name: Routes.signupWelcome.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpWelcome(),
               );
             }),
         GoRoute(

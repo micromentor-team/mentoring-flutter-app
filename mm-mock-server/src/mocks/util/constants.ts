@@ -557,6 +557,24 @@ export const genders = [
   },
 ]
 
+export const pronouns = [
+  {
+    "textId": "m",
+    "value": "he/him",
+    "translatedValue": "he/him"
+  },
+  {
+    "textId": "f",
+    "value": "she/her",
+    "translatedValue": "she/her"
+  },
+  {
+    "textId": "x",
+    "value": "they/them",
+    "translatedValue": "they/them"
+  }
+]
+
 // website types taken from Micromentor's django app (subject to change)
 
 export const websiteTypes = [
