@@ -11,30 +11,26 @@ import '../atoms/skill_chip.dart';
  * Profile quick view helper class and functions
  */
 class ProfileQuickViewInfo {
-  final bool isRecommended;
   final String userId;
   final UserType userType;
   final String? avatarUrl;
   final String fullName;
+  final bool? verizonDigitalReady;
   final String location;
   final String? company;
   final String? companyRole;
-  final ProfileChip? ventureStage;
-  final ProfileChip? ventureIndustry;
   final int? endorsements;
   final List<SkillChip> skills;
 
   const ProfileQuickViewInfo({
-    required this.isRecommended,
     required this.userId,
     required this.userType,
     required this.avatarUrl,
     required this.fullName,
     required this.location,
+    this.verizonDigitalReady,
     this.company,
     this.companyRole,
-    this.ventureStage,
-    this.ventureIndustry,
     this.endorsements,
     required this.skills,
   });
@@ -42,12 +38,12 @@ class ProfileQuickViewInfo {
 
 ProfileQuickViewInfo createRecommendedMentorExample() {
   return const ProfileQuickViewInfo(
-      isRecommended: true,
       userId: '',
       userType: UserType.mentor,
       avatarUrl:
           'https://media.istockphoto.com/id/1280371040/photo/confident-stylish-european-mature-middle-aged-woman-standing-at-workplace-stylish-older.jpg?s=612x612&w=0&k=20&c=AntzoG_Z1hN6tYVBXbu58Rvz4jweBYa8669bV75yWRw=',
       fullName: 'Delia Joyce',
+      verizonDigitalReady: true,
       location: 'Shaker Heights, Ohio, USA',
       company: 'SparkNow',
       companyRole: 'Founder',
@@ -67,7 +63,6 @@ ProfileQuickViewInfo createRecommendedMentorExample() {
 
 ProfileQuickViewInfo createRegularMentorExample() {
   return const ProfileQuickViewInfo(
-      isRecommended: false,
       userId: '',
       userType: UserType.mentor,
       avatarUrl:
@@ -92,7 +87,6 @@ ProfileQuickViewInfo createRegularMentorExample() {
 
 ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
   return const ProfileQuickViewInfo(
-      isRecommended: true,
       userId: '',
       userType: UserType.entrepreneur,
       avatarUrl:
@@ -100,11 +94,7 @@ ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
       fullName: 'Azadeh Sana',
       location: 'Memphis, Tennessee, USA',
       company: 'St James Place',
-      ventureStage: ProfileChip(
-        text: 'Operational',
-        icon: Icons.lightbulb_outline,
-      ),
-      ventureIndustry: ProfileChip(text: 'NonProfit/Social Enterprise'),
+      endorsements: 2,
       skills: [
         SkillChip(
           skill: 'Marketing',
@@ -122,16 +112,14 @@ ProfileQuickViewCard createProfileCardFromInfo({
   required ProfileQuickViewInfo info,
 }) {
   return ProfileQuickViewCard(
-    isRecommended: info.isRecommended,
     userId: info.userId,
     userType: info.userType,
     avatarUrl: info.avatarUrl,
     fullName: info.fullName,
+    verizonDigitalReady: info.verizonDigitalReady,
     location: info.location,
     company: info.company,
     companyRole: info.companyRole,
-    ventureStage: info.ventureStage,
-    ventureIndustry: info.ventureIndustry,
     endorsements: info.endorsements,
     skills: info.skills,
   );
@@ -140,31 +128,27 @@ ProfileQuickViewCard createProfileCardFromInfo({
 class ProfileQuickViewCard extends StatelessWidget {
   static int maxSkillChips = 3;
 
-  final bool isRecommended;
   final String userId;
   final UserType userType;
   final String? avatarUrl;
   final String fullName;
+  final bool? verizonDigitalReady;
   final String location;
   final String? company;
   final String? companyRole;
-  final ProfileChip? ventureStage;
-  final ProfileChip? ventureIndustry;
   final int? endorsements;
   final List<SkillChip> skills;
 
   const ProfileQuickViewCard({
     Key? key,
-    this.isRecommended = false,
     required this.userId,
     required this.userType,
     this.avatarUrl,
     required this.fullName,
+    this.verizonDigitalReady,
     required this.location,
     this.company,
     this.companyRole,
-    this.ventureStage,
-    this.ventureIndustry,
     this.endorsements,
     this.skills = const [],
   }) : super(key: key);
@@ -174,40 +158,34 @@ class ProfileQuickViewCard extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final GoRouter router = GoRouter.of(context);
+    final ThemeData theme = Theme.of(context);
     return Card(
       color: colorScheme.surface,
       surfaceTintColor: Colors.transparent,
       elevation: Elevations.level0,
       child: InkWell(
         child: Ink(
-          decoration: isRecommended
-              ? BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    width: Dimensions.highlightBorderWidth,
-                  ),
-                  borderRadius:
-                      BorderRadius.circular(Radii.roundedRectRadiusMedium),
-                )
-              : BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.surfaceVariant,
-                    width: 1.0,
-                  ),
-                  borderRadius:
-                      BorderRadius.circular(Radii.roundedRectRadiusMedium),
-                ),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Theme.of(context).colorScheme.outlineVariant,
+              width: Dimensions.highlightBorderWidth,
+            ),
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
+          ),
           child: Stack(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(Insets.paddingMedium),
+              Padding(
+                padding: const EdgeInsets.all(Insets.paddingLarge),
+                child: Align(
+                  alignment: Alignment.topRight,
                   child: TextButton(
                     onPressed: () {
                       router.push('${Routes.profile.path}/$userId');
                     },
-                    child: const Icon(Icons.arrow_forward),
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: theme.colorScheme.secondary,
+                    ),
                   ),
                 ),
               ),
@@ -216,7 +194,6 @@ class ProfileQuickViewCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (isRecommended) _createRecommendedHeader(context, l10n),
                     _createProfileView(context, l10n),
                     if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
                   ],
@@ -229,105 +206,93 @@ class ProfileQuickViewCard extends StatelessWidget {
     );
   }
 
-  Widget _createRecommendedHeader(
-    BuildContext context,
-    AppLocalizations l10n,
-  ) {
-    final ThemeData theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.only(bottom: Insets.paddingSmall),
-      child: Row(
-        children: [
-          Icon(
-            Icons.star,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          const SizedBox(width: Insets.paddingSmall),
-          Text(
-            l10n.exploreRecommended,
-            style: theme.textTheme.titleMedium?.copyWith(
-              color: theme.colorScheme.primary,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _createProfileView(BuildContext context, AppLocalizations l10n) {
     final ThemeData theme = Theme.of(context);
     final String? companyText = _companyText(l10n);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(
-            Radii.roundedRectRadiusMedium,
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text(
+              fullName,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: Insets.paddingExtraSmall,
+            bottom: Insets.paddingExtraSmall,
           ),
-          child: Image(
-            image: avatarUrl != null
-                ? NetworkImage(avatarUrl!) as ImageProvider<Object>
-                : const AssetImage(Assets.blankAvatar),
-            width: 80.0,
-            height: 80.0, // Height of the avatar
-            fit: BoxFit.cover,
+          child: Divider(
+            color: theme.colorScheme.outlineVariant,
           ),
         ),
-        const SizedBox(width: Insets.paddingMedium),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text.rich(
-                TextSpan(
-                  text: fullName,
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    height: 1.4,
-                    color: theme.colorScheme.onPrimaryContainer,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: ' ${_userTypeTag(l10n)}',
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    )
-                  ],
-                ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(
+                Radii.roundedRectRadiusMedium,
               ),
-              const SizedBox(height: Insets.paddingExtraSmall),
-              if (companyText != null)
-                Text(
-                  companyText,
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: theme.colorScheme.secondary,
-                  ),
-                ),
-              const SizedBox(height: Insets.paddingExtraSmall),
-              Row(
+              child: Image(
+                image: avatarUrl != null
+                    ? NetworkImage(avatarUrl!) as ImageProvider<Object>
+                    : const AssetImage(Assets.blankAvatar),
+                width: 80.0,
+                height: 80.0, // Height of the avatar
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: Insets.paddingMedium),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-                    child: Icon(
-                      Icons.location_on_outlined,
-                      size: Insets.paddingMedium,
-                      color: theme.colorScheme.onBackground,
+                  if (verizonDigitalReady == true)
+                    ProfileChip(
+                      text: l10n.verizonDigitalReady,
+                      verizonChip: true,
                     ),
-                  ),
-                  Text(
-                    location,
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                      fontWeight: FontWeight.w400,
+                  const SizedBox(height: Insets.paddingExtraSmall),
+                  if (companyText != null)
+                    Text(
+                      companyText,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: theme.colorScheme.onBackground,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
+                  const SizedBox(height: Insets.paddingExtraSmall),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+                        child: Icon(
+                          Icons.location_on_outlined,
+                          size: Insets.paddingMedium,
+                          color: theme.colorScheme.onBackground,
+                        ),
+                      ),
+                      Text(
+                        location,
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: theme.colorScheme.onBackground,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
                   ),
+                  _createEndorsements(l10n, theme),
                 ],
               ),
-              _createProfileChips(l10n, theme),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
@@ -343,7 +308,6 @@ class ProfileQuickViewCard extends StatelessWidget {
             top: Insets.paddingExtraSmall,
           ),
           child: Divider(
-            endIndent: Insets.paddingExtraLarge,
             color: theme.colorScheme.outlineVariant,
           ),
         ),
@@ -392,17 +356,6 @@ class ProfileQuickViewCard extends StatelessWidget {
     }
   }
 
-  String _userTypeTag(AppLocalizations l10n) {
-    switch (userType) {
-      case UserType.entrepreneur:
-        return l10n.exploreUserTypeEntrepreneur;
-      case UserType.mentor:
-        return l10n.exploreUserTypeMentor;
-      default:
-        return '';
-    }
-  }
-
   String? _companyText(AppLocalizations l10n) {
     switch (userType) {
       case UserType.entrepreneur:
@@ -414,48 +367,27 @@ class ProfileQuickViewCard extends StatelessWidget {
     }
   }
 
-  Widget _createProfileChips(AppLocalizations l10n, ThemeData theme) {
-    switch (userType) {
-      case UserType.entrepreneur:
-        if (ventureStage == null && ventureIndustry == null) {
-          return const SizedBox(width: 0, height: 0);
-        }
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (ventureStage != null) ventureStage!,
-            if (ventureIndustry != null) ventureIndustry!,
-          ],
-        );
-      case UserType.mentor:
-        if (endorsements == null) {
-          return const SizedBox(width: 0, height: 0);
-        }
-        return Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-              child: Icon(
-                Icons.workspace_premium_outlined,
-                size: Insets.paddingMedium,
-                color: theme.colorScheme.onSurface,
-              ),
-            ),
-            Text(
-              l10n.exploreEndorsements(endorsements!),
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.onSecondaryContainer,
-              ),
-            )
-          ],
-        );
-      // return ProfileChip(
-      //   icon: Icons.verified_outlined,
-      //   text: l10n.exploreEndorsements(endorsements!),
-      // );
-      default:
-        return const SizedBox(width: 0, height: 0);
+  Widget _createEndorsements(AppLocalizations l10n, ThemeData theme) {
+    if (endorsements == null) {
+      return const SizedBox(width: 0, height: 0);
     }
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+          child: Icon(
+            Icons.workspace_premium_outlined,
+            size: Insets.paddingMedium,
+            color: theme.colorScheme.onSurface,
+          ),
+        ),
+        Text(
+          l10n.exploreEndorsements(endorsements!),
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: theme.colorScheme.onSecondaryContainer,
+          ),
+        )
+      ],
+    );
   }
 }
