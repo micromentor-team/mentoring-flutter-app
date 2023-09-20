@@ -121,6 +121,7 @@ class AppBarFactory {
     required String channelName,
     required String channelId,
     required bool isArchivedForUser,
+    required String userId,
     String? avatarUrl,
   }) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -146,13 +147,16 @@ class AppBarFactory {
             borderRadius: BorderRadius.circular(
               Radii.roundedRectRadiusSmall,
             ),
-            child: Image(
-              image: avatarUrl != null
-                  ? NetworkImage(avatarUrl) as ImageProvider<Object>
-                  : const AssetImage(Assets.blankAvatar),
-              width: 48.0,
-              height: 48.0,
-              fit: BoxFit.cover,
+            child: InkWell(
+              onTap: () => router.push('${Routes.profile.path}/$userId'),
+              child: Image(
+                image: avatarUrl != null
+                    ? NetworkImage(avatarUrl) as ImageProvider<Object>
+                    : const AssetImage(Assets.blankAvatar),
+                width: 48.0,
+                height: 48.0,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(
