@@ -7,6 +7,7 @@ class TextFormFieldWidget extends StatefulWidget {
       required this.textController,
       required this.onPressed,
       required this.label,
+      this.maxLength,
       this.validator,
       this.isPassword});
 
@@ -14,6 +15,7 @@ class TextFormFieldWidget extends StatefulWidget {
   final Function onPressed;
   final String label;
   final bool? isPassword;
+  final int? maxLength;
 
   final String? Function(String?)? validator;
 
@@ -34,6 +36,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return TextFormField(
+      maxLength: widget.maxLength,
       controller: widget.textController,
       autofocus: true,
       obscureText: widget.isPassword != null &&

@@ -86,7 +86,7 @@
     "reminderBannerProfileUpdateSubtitle": "Make sure your profile is updated so you get the best matches",
     "reminderBannerProfileUpdateCta": "Update profile",
     "recommendedMentorCardScrollable": "Recommended",
-    "welcome": "Welcome",
+    "welcome": "Welcome!",
     "@_SIGN_IN_PAGE": {
     },
     "signInMessage": "Please sign into your account with",
@@ -240,5 +240,14 @@
     "password": "Password",
     "confirmPassword": "Confirm password",
     "uploadPhoto": "Upload photo",
-    "takePhoto": "Take photo"
+    "takePhoto": "Take photo",
+    "verifyYourAccount": "Verify your account",
+    "verifyAccountLine1": "We’ve sent a code to your email.",
+    "verifyAccountLine2": "Didn’t receive an email? Wait 3 minutes and then check your spam folder.",
+    "enterCode": "Enter 4 digit code",
+    "didntReceiveEmail": "Still didn’t receive an email?",
+    "resendEmail": "Resend email",
+    "tryAnotherEmail": "Try another email address",
+    "submit": "Submit",
+    "signUpWelcomeText": "We have verified your account. We just need a little more info before you can start connecting."
 }
