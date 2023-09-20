@@ -190,7 +190,9 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 userData.offersHelp ? UserType.mentor : UserType.entrepreneur,
             fullName: userData.fullName!,
             avatarUrl: userData.avatarUrl,
-            pronouns: userData.pronounsDisplay,
+            pronouns: userData.pronounsDisplay.isNotEmpty
+                ? userData.pronounsDisplay
+                : null,
             affiliations: const ["Verizon Digital Ready"], //TODO
             company: company.name,
             companyRole: userData.jobTitle,
@@ -261,33 +263,38 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 expectations:
                     maybeMentorGroupMembership?.expectationsForMentees),
           ],
-          const Divider(),
-          ExperienceAndEducation(
-            experience: userData.businessExperiences
-                    ?.map(
-                      (e) => ExperienceInput(
-                        position: e.jobTitle,
-                        companyName: e.businessName,
-                        start: e.startDate,
-                        end: e.endDate,
-                        city: e.city,
-                        state: e.state,
-                        country: e.country,
-                      ),
-                    )
-                    .toList() ??
-                [],
-            education: userData.academicExperiences
-                    ?.map((e) => EducationInput(
-                          schoolName: e.institutionName,
+          if ((userData.businessExperiences != null &&
+                  userData.businessExperiences!.isNotEmpty) ||
+              (userData.academicExperiences != null &&
+                  userData.academicExperiences!.isNotEmpty)) ...[
+            const Divider(),
+            ExperienceAndEducation(
+              experience: userData.businessExperiences
+                      ?.map(
+                        (e) => ExperienceInput(
+                          position: e.jobTitle,
+                          companyName: e.businessName,
                           start: e.startDate,
                           end: e.endDate,
-                          title: e.degreeType,
-                          major: e.fieldOfStudy,
-                        ))
-                    .toList() ??
-                [],
-          ),
+                          city: e.city,
+                          state: e.state,
+                          country: e.country,
+                        ),
+                      )
+                      .toList() ??
+                  [],
+              education: userData.academicExperiences
+                      ?.map((e) => EducationInput(
+                            schoolName: e.institutionName,
+                            start: e.startDate,
+                            end: e.endDate,
+                            title: e.degreeType,
+                            major: e.fieldOfStudy,
+                          ))
+                      .toList() ??
+                  [],
+            ),
+          ],
         ],
       ),
     );
