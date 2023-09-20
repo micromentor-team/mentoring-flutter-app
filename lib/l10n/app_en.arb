@@ -1,4 +1,6 @@
 {
+    "actionCancel": "Cancel",
+    "actionConfirm": "Confirm",
     "bannerActionOpen": "OPEN",
     "bannerActionDismiss": "DISMISS",
     "dateLastMonth": "last month",
@@ -77,6 +79,8 @@
     "overflowActionUnarchive": "Unarchive chat",
     "overflowActionBlock": "Block user",
     "overflowActionReport": "Report user",
+    "popupBlockTitle": "Block {fullName}",
+    "popupBlockSubtitle": "This action would block {fullName}",
     "filters": "Show filters",
     "searchHint": "Search by name or keyword",
     "quickMatchDesc": "Find a mentor",

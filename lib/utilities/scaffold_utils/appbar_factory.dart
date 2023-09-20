@@ -115,7 +115,7 @@ class AppBarFactory {
 
   static AppBar createChannelMessagesAppBar({
     required BuildContext context,
-    required String channelName,
+    required String userFullName,
     required String channelId,
     required bool isArchivedForUser,
     required String userId,
@@ -155,7 +155,7 @@ class AppBarFactory {
             width: Insets.paddingMedium,
           ),
           Text(
-            channelName,
+            userFullName,
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.onPrimaryContainer,
             ),
@@ -166,6 +166,8 @@ class AppBarFactory {
         UserPopupMenuButton(
           includeArchiveOption: !isArchivedForUser,
           includeUnarchiveOption: isArchivedForUser,
+          userFullName: userFullName,
+          userId: userId,
           channelId: channelId,
         ),
       ],
@@ -174,6 +176,8 @@ class AppBarFactory {
 
   static AppBar createInviteReceivedDetailAppBar({
     required BuildContext context,
+    required String userFullName,
+    required String userId,
   }) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final GoRouter router = GoRouter.of(context);
@@ -192,8 +196,11 @@ class AppBarFactory {
         ),
       ),
       centerTitle: false,
-      actions: const [
-        UserPopupMenuButton(),
+      actions: [
+        UserPopupMenuButton(
+          userFullName: userFullName,
+          userId: userId,
+        ),
       ],
     );
   }

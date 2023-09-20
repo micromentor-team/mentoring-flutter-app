@@ -70,7 +70,7 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
               scaffoldModel.setParams(
                 appBar: AppBarFactory.createChannelMessagesAppBar(
                   context: context,
-                  channelName: participant.fullName!,
+                  userFullName: participant.fullName!,
                   channelId: widget.channelId,
                   isArchivedForUser: widget.isArchivedForUser,
                   userId: participant.id,

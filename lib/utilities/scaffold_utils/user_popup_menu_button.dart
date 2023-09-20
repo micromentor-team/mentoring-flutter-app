@@ -12,6 +12,8 @@ class UserPopupMenuButton extends StatelessWidget {
   final bool includeUnarchiveOption;
   final bool includeBlockOption;
   final bool includeReportOption;
+  final String userFullName;
+  final String userId;
   final String? channelId;
 
   const UserPopupMenuButton({
@@ -20,6 +22,8 @@ class UserPopupMenuButton extends StatelessWidget {
     this.includeUnarchiveOption = false,
     this.includeBlockOption = true,
     this.includeReportOption = true,
+    required this.userFullName,
+    required this.userId,
     this.channelId,
   });
 
@@ -27,13 +31,12 @@ class UserPopupMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (includeArchiveOption && includeUnarchiveOption) {
       throw UnexpectedStateError(
-        message:
-            'Cannot show options to archive and unarchive at the same time',
+        message: 'Cannot show options to archive and unarchive simultaneously',
       );
     }
     if ((includeArchiveOption || includeUnarchiveOption) && channelId == null) {
       throw UnexpectedStateError(
-        message: 'ChannelId needed to archive/unarchive chat',
+        message: 'ChannelId needed to archive or unarchive chat',
       );
     }
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -81,7 +84,26 @@ class UserPopupMenuButton extends StatelessWidget {
             router.push(Routes.inboxChats.path);
             break;
           case 2:
-            // TODO(m-rosario): Block user
+            showDialog(
+                context: context,
+                builder: (dialogContext) {
+                  return AlertDialog(
+                    title: Text(l10n.popupBlockTitle(userFullName)),
+                    content: Text(l10n.popupBlockSubtitle(userFullName)),
+                    actions: [
+                      TextButton(
+                        child: Text(l10n.actionCancel),
+                        onPressed: () => Navigator.pop(dialogContext),
+                      ),
+                      OutlinedButton(
+                        child: Text(l10n.actionConfirm),
+                        onPressed: () {
+                          //TODO: Block user
+                        },
+                      ),
+                    ],
+                  );
+                });
             break;
           case 3:
             // TODO(m-rosario): Report user
