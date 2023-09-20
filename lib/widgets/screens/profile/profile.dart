@@ -119,7 +119,16 @@ class ProfileScreenScroll extends StatefulWidget {
 class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
   @override
   Widget build(BuildContext context) {
-    final company = widget.userData.companies.first;
+    final userData = widget.userData;
+    final company = userData.companies.first;
+    final maybeMentorGroupMembership = userData.groupMemberships
+        .where((g) => g.groupIdent == GroupIdent.mentors.name)
+        .firstOrNull
+        ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null);
+    final maybeMenteeGroupMembership = userData.groupMemberships
+        .where((g) => g.groupIdent == GroupIdent.mentees.name)
+        .firstOrNull
+        ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -128,13 +137,13 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
               builder: (context, myChannelInvitationsModel, _) {
                 final invitesFromUser = myChannelInvitationsModel
                     .receivedInvitations
-                    .where((e) => e.sender.id == widget.userData.id)
+                    .where((e) => e.sender.id == userData.id)
                     .toList();
                 final invitesToUser = myChannelInvitationsModel.sentInvitations
-                    .where((e) => e.recipient.id == widget.userData.id)
+                    .where((e) => e.recipient.id == userData.id)
                     .toList();
-                final userId = widget.userData.id;
-                final userFirstName = widget.userData.firstName ?? '';
+                final userId = userData.id;
+                final userFirstName = userData.firstName ?? '';
                 if (invitesFromUser.isEmpty && invitesToUser.isEmpty) {
                   // There is no connection between users
                   return ProfilePageHeader(
@@ -177,36 +186,39 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
               },
             ),
           ProfileBasicInfo(
-            userType: widget.userData.offersHelp
-                ? UserType.mentor
-                : UserType.entrepreneur,
-            fullName: widget.userData.fullName!,
-            avatarUrl: widget.userData.avatarUrl,
-            pronouns: "they/them", //TODO
+            userType:
+                userData.offersHelp ? UserType.mentor : UserType.entrepreneur,
+            fullName: userData.fullName!,
+            avatarUrl: userData.avatarUrl,
+            pronouns: userData.pronounsDisplay,
             affiliations: const ["Verizon Digital Ready"], //TODO
             company: company.name,
-            companyRole: widget.userData.jobTitle,
-            education: widget.userData.educationLevel?.translatedValue,
-            linkedinUrl: "https://www.linkedin.com/in/williamhgates/", //TODO
+            companyRole: userData.jobTitle,
+            education: userData.educationLevel?.translatedValue,
+            linkedinUrl: userData.websites
+                ?.where((e) => e.label == WebsiteLabels.linkedin.name)
+                .firstOrNull
+                ?.value,
             vacationMode: true, //TODO
           ),
           const Divider(),
           ProfileAboutMe(
-            cityOfResidence: widget.userData.cityOfResidence,
-            countryOfResidence:
-                widget.userData.countryOfResidence?.translatedValue,
-            cityFrom: null, //TODO
-            countryFrom: null, //TODO
+            regionOfResidence: userData.regionOfResidence,
+            cityOfResidence: userData.cityOfResidence,
+            countryOfResidence: userData.countryOfResidence?.translatedValue,
+            regionFrom: userData.regionOfOrigin,
+            cityFrom: userData.cityOfOrigin,
+            countryFrom: userData.countryOfOrigin?.translatedValue,
             promptTitle:
                 "The best piece of advice I’ve ever received is:", //TODO
             promptResponse:
                 "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.", //TODO
-            languages: widget.userData.spokenLanguages
+            languages: userData.spokenLanguages
                 .map((e) => e.translatedValue)
                 .nonNulls
                 .toList(),
           ),
-          if (widget.userData.seeksHelp) ...[
+          if (userData.seeksHelp) ...[
             const Divider(),
             AboutMyBusiness(
               companyInput: CompanyInput(
@@ -215,100 +227,74 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 stage: company.companyStage?.translatedValue,
                 city: "Washington D.C.", //TODO
                 country: "USA", //TODO
-                industry: company.industries?.first,
-                expertisesSought: widget.userData.groupMemberships
-                    .firstWhere((g) => g.groupIdent == GroupIdent.mentees)
-                    .maybeWhen(
-                        menteesGroupMembership: (g) => g.soughtExpertises
-                            .map((e) => e.translatedValue!)
-                            .toList(),
-                        orElse: () => []),
+                industry: maybeMenteeGroupMembership?.industry?.translatedValue,
+                expertisesSought: maybeMenteeGroupMembership?.soughtExpertises
+                        .map((e) => e.translatedValue!)
+                        .toList() ??
+                    [],
                 mission: company.description,
                 imageUrls: [
                   "https://st2.depositphotos.com/1326558/7163/i/600/depositphotos_71632883-stock-photo-mexican-tacos-with-meat-vegetables.jpg",
                   "https://st3.depositphotos.com/13349494/32631/i/600/depositphotos_326317470-stock-photo-cropped-view-man-adding-minced.jpg",
-                ],
+                ], //TODO
                 motivation:
-                    'Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend.', //TODO
+                    maybeMenteeGroupMembership?.reasonsForStartingBusiness,
               ),
             ),
           ],
-          if (widget.userData.offersHelp) ...[
+          if (userData.offersHelp) ...[
             const Divider(),
             HowCanIHelpSection(
-              expertises: widget.userData.groupMemberships
-                  .firstWhere((g) => g.groupIdent == GroupIdent.mentors)
-                  .maybeWhen(
-                    mentorsGroupMembership: (g) =>
-                        g.expertises.map((e) => e.translatedValue!).toList(),
-                    orElse: () => [],
-                  ),
-              industries: widget.userData.groupMemberships
-                  .firstWhere((g) => g.groupIdent == GroupIdent.mentors)
-                  .maybeWhen(
-                    mentorsGroupMembership: (g) =>
-                        g.industries.map((e) => e.translatedValue!).toList(),
-                    orElse: () => [],
-                  ),
-              mentoringPreferences: const [
-                "Weekly check-ins",
-                "Monthly check-ins",
-                "Informal chats",
-                "Formal meetings",
-                "Spot mentoring",
-              ], //TODO
-              expectations:
-                  'Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend.', //TODO
+                expertises: maybeMentorGroupMembership?.expertises
+                        .map((e) => e.translatedValue!)
+                        .toList() ??
+                    [],
+                industries: maybeMentorGroupMembership?.industries
+                        .map((e) => e.translatedValue!)
+                        .toList() ??
+                    [],
+                mentoringPreferences: const [
+                  "Weekly check-ins",
+                  "Monthly check-ins",
+                  "Informal chats",
+                  "Formal meetings",
+                  "Spot mentoring",
+                ], //TODO
+                expectations:
+                    maybeMentorGroupMembership?.expectationsForMentees),
+          ],
+          if ((userData.businessExperiences != null &&
+                  userData.businessExperiences!.isNotEmpty) ||
+              (userData.academicExperiences != null &&
+                  userData.academicExperiences!.isNotEmpty)) ...[
+            const Divider(),
+            ExperienceAndEducation(
+              experience: userData.businessExperiences
+                      ?.map(
+                        (e) => ExperienceInput(
+                          position: e.jobTitle,
+                          companyName: e.businessName,
+                          start: e.startDate,
+                          end: e.endDate,
+                          city: e.city,
+                          state: e.state,
+                          country: e.country,
+                        ),
+                      )
+                      .toList() ??
+                  [],
+              education: userData.academicExperiences
+                      ?.map((e) => EducationInput(
+                            schoolName: e.institutionName,
+                            start: e.startDate,
+                            end: e.endDate,
+                            title: e.degreeType,
+                            major: e.fieldOfStudy,
+                          ))
+                      .toList() ??
+                  [],
             ),
           ],
-          const Divider(),
-          ExperienceAndEducation(
-            experience: [
-              ExperienceInput(
-                position: "Marketing director",
-                companyName: "SVK Group",
-                start: DateTime.utc(2021, 12),
-                location: "Cleveland, Ohio, USA",
-              ),
-              ExperienceInput(
-                position: "Senior Marketing Manager",
-                companyName: "SVK Group",
-                start: DateTime.utc(2019, 6),
-                end: DateTime.utc(2021, 11),
-                location: "Cleveland, Ohio, USA",
-              ),
-              ExperienceInput(
-                position: "Founder",
-                companyName: "MC Consulting",
-                start: DateTime.utc(2016, 3),
-                end: DateTime.utc(2019, 5),
-                location: "Cleveland, Ohio, USA",
-                companyUrl: "https://mcconsulting.com",
-              ),
-            ],
-            education: [
-              EducationInput(
-                schoolName: "Case Western Reserve University",
-                start: DateTime.utc(2017),
-                end: DateTime.utc(2019),
-                title: "Master of Business Administration (MBA)",
-              ),
-              EducationInput(
-                schoolName: "Ohio State University",
-                start: DateTime.utc(2007),
-                end: DateTime.utc(2010),
-                title: "Bachelor of Arts (BA)",
-                major: "Marketing and Advertising",
-              ),
-              EducationInput(
-                schoolName: "Columbus State University College",
-                start: DateTime.utc(2005),
-                end: DateTime.utc(2007),
-                title: "Associate of Arts (AA)",
-                major: "Business",
-              ),
-            ],
-          ), //TODO
         ],
       ),
     );

@@ -13,15 +13,18 @@ Future<void> _launchUrl(Uri url) async {
   }
 }
 
-Widget _createFooter(BuildContext context, String company, String? companyRole,
-    String? education, String? linkedinUrl) {
-  String companyAndRole = company;
-
-  final ThemeData theme = Theme.of(context);
-  if (companyRole != null) {
-    companyAndRole = "$companyRole, $company";
-  }
-
+Widget _createFooter(
+  AppLocalizations l10n,
+  ThemeData theme,
+  String company,
+  String? companyRole,
+  String? education,
+  String? linkedinUrl,
+) {
+  final String companyAndRole = [
+    companyRole,
+    company,
+  ].nonNulls.join(l10n.listSeparator);
   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
     Expanded(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -105,11 +108,14 @@ Widget _createFooter(BuildContext context, String company, String? companyRole,
   ]);
 }
 
-Widget _createNameAndBadges(BuildContext context, String fullName,
-    String? pronouns, UserType userType, List<String>? affiliations) {
-  final AppLocalizations l10n = AppLocalizations.of(context)!;
-  final ThemeData theme = Theme.of(context);
-
+Widget _createNameAndBadges(
+  AppLocalizations l10n,
+  ThemeData theme,
+  String fullName,
+  String? pronouns,
+  UserType userType,
+  List<String>? affiliations,
+) {
   List<Widget> widgets = [
     Text(
       fullName,
@@ -117,7 +123,7 @@ Widget _createNameAndBadges(BuildContext context, String fullName,
         color: theme.colorScheme.onSurface,
       ),
     ),
-    if (pronouns != null)
+    if (pronouns != null && pronouns.isNotEmpty)
       Text("($pronouns)",
           style: theme.textTheme.bodySmall
               ?.copyWith(color: theme.colorScheme.secondary)),
@@ -153,9 +159,7 @@ Widget _createNameAndBadges(BuildContext context, String fullName,
   ]));
 }
 
-Widget _createVacationBanner(BuildContext context) {
-  final AppLocalizations l10n = AppLocalizations.of(context)!;
-  final ThemeData theme = Theme.of(context);
+Widget _createVacationBanner(AppLocalizations l10n, ThemeData theme) {
   return Container(
       color: theme.colorScheme.primaryContainer,
       height: 48.0,
@@ -210,9 +214,11 @@ class ProfileBasicInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
     return Column(
       children: [
-        if (vacationMode) _createVacationBanner(context),
+        if (vacationMode) _createVacationBanner(l10n, theme),
         Padding(
           padding: const EdgeInsets.all(Insets.paddingMedium),
           child: Column(
@@ -234,12 +240,24 @@ class ProfileBasicInfo extends StatelessWidget {
                   ),
                   const SizedBox(width: Insets.paddingMedium),
                   _createNameAndBadges(
-                      context, fullName, pronouns, userType, affiliations),
+                    l10n,
+                    theme,
+                    fullName,
+                    pronouns,
+                    userType,
+                    affiliations,
+                  ),
                 ],
               ),
               const SizedBox(height: Insets.paddingMedium),
               _createFooter(
-                  context, company, companyRole, education, linkedinUrl),
+                l10n,
+                theme,
+                company,
+                companyRole,
+                education,
+                linkedinUrl,
+              ),
             ],
           ),
         )
