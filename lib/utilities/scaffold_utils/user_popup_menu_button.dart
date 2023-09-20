@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/utilities/debug_logger.dart';
+import 'package:mm_flutter_app/utilities/scaffold_utils/report_user_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../errors/errors.dart';
@@ -99,6 +101,8 @@ class UserPopupMenuButton extends StatelessWidget {
                         child: Text(l10n.actionConfirm),
                         onPressed: () {
                           //TODO: Block user
+                          DebugLogger.info('TODO: Block user');
+                          Navigator.pop(dialogContext);
                         },
                       ),
                     ],
@@ -106,7 +110,13 @@ class UserPopupMenuButton extends StatelessWidget {
                 });
             break;
           case 3:
-            // TODO(m-rosario): Report user
+            showDialog(
+              context: context,
+              builder: (context) => ReportUserDialog(
+                userId: userId,
+                userFullName: userFullName,
+              ),
+            );
             break;
           default:
             throw UnexpectedStateError(
