@@ -82,7 +82,7 @@ class _SignUpPasswordState extends State<SignUpPassword> {
           },
           rightOnPress: () {
             if (_formKey.currentState!.validate()) {
-              context.push(Routes.entrepreneurOrMentor.path);
+              context.push(Routes.signupVerify.path);
             }
           },
         ));
