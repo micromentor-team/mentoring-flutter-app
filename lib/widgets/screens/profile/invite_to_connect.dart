@@ -95,7 +95,7 @@ class _InviteToConnectState extends State<InviteToConnect>
             final List<SkillChip> expertises;
             if (user.offersHelp) {
               expertises = user.groupMemberships
-                  .firstWhere((e) => e.groupIdent == GroupIdent.mentors)
+                  .firstWhere((e) => e.groupIdent == GroupIdent.mentors.name)
                   .maybeWhen(
                       mentorsGroupMembership: (g) => g.expertises
                           .map((e) => SkillChip(skill: e.translatedValue!))
@@ -103,7 +103,7 @@ class _InviteToConnectState extends State<InviteToConnect>
                       orElse: () => []);
             } else {
               expertises = user.groupMemberships
-                  .firstWhere((e) => e.groupIdent == GroupIdent.mentees)
+                  .firstWhere((e) => e.groupIdent == GroupIdent.mentees.name)
                   .maybeWhen(
                       menteesGroupMembership: (g) => g.soughtExpertises
                           .map((e) => SkillChip(skill: e.translatedValue!))

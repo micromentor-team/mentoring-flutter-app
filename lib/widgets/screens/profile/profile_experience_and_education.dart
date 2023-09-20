@@ -54,7 +54,12 @@ class _Experience extends StatelessWidget {
               "(${exp.dateRange(l10n.present)}) · ${exp.timeRange}",
               style: bodySmallOnSurface,
             ),
-            Text(exp.location, style: bodySmallOnSurface),
+            Text(
+              [exp.city, exp.state, exp.country]
+                  .nonNulls
+                  .join(l10n.listSeparator),
+              style: bodySmallOnSurface,
+            ),
             if (exp.companyUrl != null)
               InkWell(
                 onTap: () => launchUrl(Uri.parse(exp.companyUrl!)),
@@ -97,16 +102,20 @@ class _Education extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final items = education
         .map((edu) => [
-              Row(children: [
-                Text(edu.schoolName,
+              Row(
+                children: [
+                  Text(
+                    edu.schoolName,
                     style: bodySmallOnSurface?.copyWith(
                       fontWeight: FontWeight.bold,
-                    )),
-                Text(" ", style: bodySmallOnSurface),
-                Text(edu.yearRange, style: bodySmallOnSurface)
-              ]),
+                    ),
+                  ),
+                  Text(" ", style: bodySmallOnSurface),
+                  Text(edu.dateRange(l10n.present), style: bodySmallOnSurface)
+                ],
+              ),
               Text(
-                "${edu.title}${(edu.major != null) ? ", ${edu.major}" : ""}",
+                [edu.title, edu.major].nonNulls.join(l10n.listSeparator),
                 style: bodySmallOnSurface,
               ),
               const SizedBox(height: Insets.paddingMedium),
@@ -130,7 +139,9 @@ class ExperienceInput {
   final String companyName;
   final DateTime start;
   final DateTime? end;
-  final String location;
+  final String? city;
+  final String? state;
+  final String? country;
   final String? companyUrl;
 
   const ExperienceInput({
@@ -138,7 +149,9 @@ class ExperienceInput {
     required this.companyName,
     required this.start,
     this.end,
-    required this.location,
+    this.city,
+    this.state,
+    this.country,
     this.companyUrl,
   });
 
@@ -171,8 +184,8 @@ class ExperienceInput {
 class EducationInput {
   final String schoolName;
   final DateTime start;
-  final DateTime end;
-  final String title;
+  final DateTime? end;
+  final String? title;
   final String? major;
 
   const EducationInput({
@@ -183,5 +196,6 @@ class EducationInput {
     this.major,
   });
 
-  String get yearRange => "${start.year} - ${end.year}";
+  String dateRange(String locPresent) =>
+      "${start.year} - ${end?.year ?? locPresent}";
 }

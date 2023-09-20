@@ -68,37 +68,23 @@ class _InvitationDetailState extends State<InvitationDetail>
   Widget _createSenderCard(ChannelInvitationById invitation) {
     final maybeMentorsGroupMembership = invitation.sender.offersHelp
         ? invitation.sender.groupMemberships
-            .where(
-              (element) => element.groupIdent == GroupIdent.mentors,
-            )
+            .where((element) => element.groupIdent == GroupIdent.mentors.name)
             .firstOrNull
-            ?.maybeWhen(
-              mentorsGroupMembership: (g) => g,
-              orElse: () => null,
-            )
+            ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null)
         : null;
     final maybeMenteesGroupMembership = invitation.sender.seeksHelp
         ? invitation.sender.groupMemberships
-            .where(
-              (element) => element.groupIdent == GroupIdent.mentees,
-            )
+            .where((element) => element.groupIdent == GroupIdent.mentees.name)
             .firstOrNull
-            ?.maybeWhen(
-              menteesGroupMembership: (g) => g,
-              orElse: () => null,
-            )
+            ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null)
         : null;
     final List<SkillChip> skills = invitation.sender.offersHelp
         ? maybeMentorsGroupMembership?.expertises
-                .map(
-                  (e) => SkillChip(skill: e.translatedValue!),
-                )
+                .map((e) => SkillChip(skill: e.translatedValue!))
                 .toList() ??
             []
         : maybeMenteesGroupMembership?.soughtExpertises
-                .map(
-                  (e) => SkillChip(skill: e.translatedValue!),
-                )
+                .map((e) => SkillChip(skill: e.translatedValue!))
                 .toList() ??
             [];
     return createProfileCardFromInfo(
@@ -124,37 +110,23 @@ class _InvitationDetailState extends State<InvitationDetail>
   Widget _createRecipientCard(ChannelInvitationById invitation) {
     final maybeMentorsGroupMembership = invitation.recipient.offersHelp
         ? invitation.recipient.groupMemberships
-            .where(
-              (element) => element.groupIdent == GroupIdent.mentors,
-            )
+            .where((element) => element.groupIdent == GroupIdent.mentors.name)
             .firstOrNull
-            ?.maybeWhen(
-              mentorsGroupMembership: (g) => g,
-              orElse: () => null,
-            )
+            ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null)
         : null;
     final maybeMenteesGroupMembership = invitation.recipient.seeksHelp
         ? invitation.recipient.groupMemberships
-            .where(
-              (element) => element.groupIdent == GroupIdent.mentees,
-            )
+            .where((element) => element.groupIdent == GroupIdent.mentees.name)
             .firstOrNull
-            ?.maybeWhen(
-              menteesGroupMembership: (g) => g,
-              orElse: () => null,
-            )
+            ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null)
         : null;
     final List<SkillChip> skills = invitation.recipient.offersHelp
         ? maybeMentorsGroupMembership?.expertises
-                .map(
-                  (e) => SkillChip(skill: e.translatedValue!),
-                )
+                .map((e) => SkillChip(skill: e.translatedValue!))
                 .toList() ??
             []
         : maybeMenteesGroupMembership?.soughtExpertises
-                .map(
-                  (e) => SkillChip(skill: e.translatedValue!),
-                )
+                .map((e) => SkillChip(skill: e.translatedValue!))
                 .toList() ??
             [];
     return createProfileCardFromInfo(

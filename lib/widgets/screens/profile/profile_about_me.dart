@@ -4,8 +4,10 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 
 class ProfileAboutMe extends StatelessWidget {
+  final String? regionOfResidence;
   final String? cityOfResidence;
   final String? countryOfResidence;
+  final String? regionFrom;
   final String? cityFrom;
   final String? countryFrom;
   final String promptTitle;
@@ -14,8 +16,10 @@ class ProfileAboutMe extends StatelessWidget {
 
   const ProfileAboutMe({
     super.key,
+    this.regionOfResidence,
     this.cityOfResidence,
     this.countryOfResidence,
+    this.regionFrom,
     this.cityFrom,
     this.countryFrom,
     required this.promptTitle,
@@ -105,10 +109,12 @@ class ProfileAboutMe extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final String livesInLocation = [
+      regionOfResidence,
       cityOfResidence,
       countryOfResidence,
     ].nonNulls.toList().join(l10n.listSeparator);
     final String fromLocation = [
+      regionFrom,
       cityFrom,
       countryFrom,
     ].nonNulls.join(l10n.listSeparator);

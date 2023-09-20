@@ -16,3 +16,16 @@ enum MessageDirection {
   received,
   unset,
 }
+
+enum GroupIdent {
+  mentors,
+  mentees,
+}
+
+enum WebsiteLabels {
+  facebook,
+  twitter,
+  venture,
+  linkedin,
+  other,
+}
