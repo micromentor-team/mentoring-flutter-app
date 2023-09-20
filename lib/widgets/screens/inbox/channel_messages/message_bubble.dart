@@ -116,8 +116,6 @@ class MessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final sentAt =
         DateFormat.jm().format(message.createdAt.toLocal()).toLowerCase();
-    final isEmoji = EmojiUtils.isOnlyEmoji(message.messageText!) &&
-        message.replyToMessageId == null;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
@@ -129,7 +127,7 @@ class MessageBubble extends StatelessWidget {
           maxWidth: MediaQuery.of(context).size.width * 0.8,
         ),
         child: Material(
-          elevation: isEmoji ? 0 : Elevations.level1,
+          elevation: Elevations.level1,
           borderRadius: BorderRadiusDirectional.only(
             topStart: isSentByAuthenticatedUser
                 ? const Radius.circular(
@@ -148,18 +146,11 @@ class MessageBubble extends StatelessWidget {
               Radii.roundedRectRadiusSmall,
             ),
           ),
-          color: isEmoji
-              ? Colors.transparent
-              : isSentByAuthenticatedUser
-                  ? theme.colorScheme.primaryContainer
-                  : theme.colorScheme.tertiaryContainer,
+          color: isSentByAuthenticatedUser
+              ? theme.colorScheme.primaryContainer
+              : theme.colorScheme.tertiaryContainer,
           child: Padding(
-            padding: EdgeInsets.only(
-              left: Insets.paddingSmall,
-              top: Insets.paddingSmall,
-              right: Insets.paddingSmall,
-              bottom: isEmoji ? 0 : Insets.paddingSmall,
-            ),
+            padding: const EdgeInsets.all(Insets.paddingSmall),
             child: Stack(
               children: [
                 Column(
@@ -202,14 +193,8 @@ class MessageBubble extends StatelessWidget {
                 if (!isDeleted || isSentByAuthenticatedUser)
                   PositionedDirectional(
                     bottom: 0,
-                    end: (isSentByAuthenticatedUser && !isEmoji) ||
-                            (!isSentByAuthenticatedUser && isEmoji)
-                        ? null
-                        : 0,
-                    start: (isSentByAuthenticatedUser && !isEmoji) ||
-                            (!isSentByAuthenticatedUser && isEmoji)
-                        ? 0
-                        : null,
+                    end: isSentByAuthenticatedUser ? null : 0,
+                    start: isSentByAuthenticatedUser ? 0 : null,
                     child: Text(
                       sentAt,
                       style: theme.textTheme.labelSmall?.copyWith(
