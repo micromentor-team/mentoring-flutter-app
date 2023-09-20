@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/providers/channels_provider.dart';
-import 'package:mm_flutter_app/utilities/errors/errors.dart';
-import 'package:mm_flutter_app/utilities/scaffold_utils/report_or_block_menu_button.dart';
-import 'package:provider/provider.dart';
+import 'package:mm_flutter_app/utilities/scaffold_utils/user_popup_menu_button.dart';
 
 import '../../constants/app_constants.dart';
 import '../../widgets/atoms/notification_bubble.dart';
@@ -124,13 +121,8 @@ class AppBarFactory {
     required String userId,
     String? avatarUrl,
   }) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
     final GoRouter router = GoRouter.of(context);
-    final ChannelsProvider channelsProvider = Provider.of<ChannelsProvider>(
-      context,
-      listen: false,
-    );
     return AppBar(
       toolbarHeight: Dimensions.customToolbarHeight,
       leading: IconButton(
@@ -171,50 +163,10 @@ class AppBarFactory {
         ],
       ),
       actions: [
-        PopupMenuButton(
-          icon: const Icon(Icons.more_vert),
-          itemBuilder: (context) => [
-            PopupMenuItem(
-              value: 0,
-              child: isArchivedForUser
-                  ? Text(l10n.messagesActionUnarchive)
-                  : Text(l10n.messagesActionArchive),
-            ),
-            PopupMenuItem(
-              value: 1,
-              child: Text(l10n.messagesActionBlock),
-            ),
-            PopupMenuItem(
-              value: 2,
-              child: Text(l10n.messagesActionReport),
-            ),
-          ],
-          onSelected: (value) async {
-            switch (value) {
-              case 0:
-                if (isArchivedForUser) {
-                  await channelsProvider.unarchiveChannelForAuthenticatedUser(
-                    channelId: channelId,
-                  );
-                } else {
-                  await channelsProvider.archiveChannelForAuthenticatedUser(
-                    channelId: channelId,
-                  );
-                }
-                router.push(Routes.inboxChats.path);
-                break;
-              case 1:
-                // TODO(m-rosario): Block user
-                break;
-              case 2:
-                // TODO(m-rosario): Report user
-                break;
-              default:
-                throw UnexpectedStateError(
-                  message: 'Invalid PopupMenuItem value: $value ',
-                );
-            }
-          },
+        UserPopupMenuButton(
+          includeArchiveOption: !isArchivedForUser,
+          includeUnarchiveOption: isArchivedForUser,
+          channelId: channelId,
         ),
       ],
     );
@@ -240,8 +192,8 @@ class AppBarFactory {
         ),
       ),
       centerTitle: false,
-      actions: [
-        ReportOrBlockMenuButton(l10n: l10n),
+      actions: const [
+        UserPopupMenuButton(),
       ],
     );
   }

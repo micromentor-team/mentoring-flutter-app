@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/utilities/scaffold_utils/report_or_block_menu_button.dart';
+import 'package:mm_flutter_app/utilities/scaffold_utils/user_popup_menu_button.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -149,9 +149,10 @@ Widget _createNameAndBadges(
   }
   return Expanded(
       child: Stack(children: [
-    Align(
-        alignment: Alignment.topRight,
-        child: ReportOrBlockMenuButton(l10n: l10n)),
+    const Align(
+      alignment: Alignment.topRight,
+      child: UserPopupMenuButton(),
+    ),
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: widgets,
