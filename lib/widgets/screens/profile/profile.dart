@@ -190,9 +190,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 userData.offersHelp ? UserType.mentor : UserType.entrepreneur,
             fullName: userData.fullName!,
             avatarUrl: userData.avatarUrl,
-            pronouns: userData.pronounsDisplay.isNotEmpty
-                ? userData.pronounsDisplay
-                : null,
+            pronouns: userData.pronounsDisplay,
             affiliations: const ["Verizon Digital Ready"], //TODO
             company: company.name,
             companyRole: userData.jobTitle,
@@ -205,8 +203,10 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
           ),
           const Divider(),
           ProfileAboutMe(
+            regionOfResidence: userData.regionOfResidence,
             cityOfResidence: userData.cityOfResidence,
             countryOfResidence: userData.countryOfResidence?.translatedValue,
+            regionFrom: userData.regionOfOrigin,
             cityFrom: userData.cityOfOrigin,
             countryFrom: userData.countryOfOrigin?.translatedValue,
             promptTitle:
@@ -237,8 +237,8 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                   "https://st2.depositphotos.com/1326558/7163/i/600/depositphotos_71632883-stock-photo-mexican-tacos-with-meat-vegetables.jpg",
                   "https://st3.depositphotos.com/13349494/32631/i/600/depositphotos_326317470-stock-photo-cropped-view-man-adding-minced.jpg",
                 ], //TODO
-                motivation: //TODO
-                    'Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend.',
+                motivation:
+                    maybeMenteeGroupMembership?.reasonsForStartingBusiness,
               ),
             ),
           ],
