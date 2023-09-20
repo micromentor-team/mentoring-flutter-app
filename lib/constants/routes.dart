@@ -37,6 +37,14 @@ class Routes {
     name: 'signupPassword',
     path: '${signup.path}/password',
   );
+  static Route signupVerify = Route(
+    name: 'signupVerify',
+    path: '${signup.path}/verify',
+  );
+  static Route signupWelcome = Route(
+    name: 'signupWelcome',
+    path: '${signup.path}/welcome',
+  );
   static Route entrepreneurOrMentor = Route(
     name: 'entrepreneurOrMentor',
     path: '${signup.path}/userrole',
