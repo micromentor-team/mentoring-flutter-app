@@ -55,15 +55,12 @@ ProfileQuickViewInfo createRecommendedMentorExample() {
       skills: [
         SkillChip(
           skill: 'Marketing',
-          icon: Icon(Icons.people_alt_outlined),
         ),
         SkillChip(
           skill: 'Operations',
-          icon: Icon(Icons.settings_applications_outlined),
         ),
         SkillChip(
           skill: 'Starting Up',
-          icon: Icon(Icons.rocket_outlined),
         ),
       ]);
 }
@@ -83,15 +80,12 @@ ProfileQuickViewInfo createRegularMentorExample() {
       skills: [
         SkillChip(
           skill: 'Marketing',
-          icon: Icon(Icons.people_alt_outlined),
         ),
         SkillChip(
           skill: 'Operations',
-          icon: Icon(Icons.settings_applications_outlined),
         ),
         SkillChip(
           skill: 'Starting Up',
-          icon: Icon(Icons.rocket_outlined),
         ),
       ]);
 }
@@ -114,15 +108,12 @@ ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
       skills: [
         SkillChip(
           skill: 'Marketing',
-          icon: Icon(Icons.people_alt_outlined),
         ),
         SkillChip(
           skill: 'Operations',
-          icon: Icon(Icons.settings_applications_outlined),
         ),
         SkillChip(
           skill: 'Starting Up',
-          icon: Icon(Icons.rocket_outlined),
         ),
       ]);
 }
@@ -307,16 +298,6 @@ class ProfileQuickViewCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: Insets.paddingExtraSmall),
-              Text(
-                location,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.secondary,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const Divider(
-                endIndent: Insets.paddingExtraLarge,
-              ),
               if (companyText != null)
                 Text(
                   companyText,
@@ -325,7 +306,26 @@ class ProfileQuickViewCard extends StatelessWidget {
                   ),
                 ),
               const SizedBox(height: Insets.paddingExtraSmall),
-              _createProfileChips(l10n),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+                    child: Icon(
+                      Icons.location_on_outlined,
+                      size: Insets.paddingMedium,
+                      color: theme.colorScheme.onBackground,
+                    ),
+                  ),
+                  Text(
+                    location,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onBackground,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+              _createProfileChips(l10n, theme),
             ],
           ),
         ),
@@ -340,12 +340,23 @@ class ProfileQuickViewCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-            top: Insets.paddingMedium,
+            top: Insets.paddingExtraSmall,
+          ),
+          child: Divider(
+            endIndent: Insets.paddingExtraLarge,
+            color: theme.colorScheme.outlineVariant,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: Insets.paddingExtraSmall,
             bottom: Insets.paddingExtraSmall,
           ),
           child: Text(
             _expertiseText(l10n)!,
-            style: theme.textTheme.labelSmall,
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: theme.colorScheme.onBackground,
+            ),
             textAlign: TextAlign.start,
           ),
         ),
@@ -403,7 +414,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     }
   }
 
-  Widget _createProfileChips(AppLocalizations l10n) {
+  Widget _createProfileChips(AppLocalizations l10n, ThemeData theme) {
     switch (userType) {
       case UserType.entrepreneur:
         if (ventureStage == null && ventureIndustry == null) {
@@ -421,10 +432,28 @@ class ProfileQuickViewCard extends StatelessWidget {
         if (endorsements == null) {
           return const SizedBox(width: 0, height: 0);
         }
-        return ProfileChip(
-          icon: Icons.verified_outlined,
-          text: l10n.exploreEndorsements(endorsements!),
+        return Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+              child: Icon(
+                Icons.workspace_premium_outlined,
+                size: Insets.paddingMedium,
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+            Text(
+              l10n.exploreEndorsements(endorsements!),
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
+              ),
+            )
+          ],
         );
+      // return ProfileChip(
+      //   icon: Icons.verified_outlined,
+      //   text: l10n.exploreEndorsements(endorsements!),
+      // );
       default:
         return const SizedBox(width: 0, height: 0);
     }

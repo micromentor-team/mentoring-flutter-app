@@ -9,7 +9,10 @@ class SkillChip extends StatelessWidget {
   const SkillChip({
     super.key,
     required this.skill,
-    this.icon,
+    this.icon = const Icon(
+      Icons.campaign_outlined,
+      color: Color(0xFF1D192B),
+    ),
   });
 
   @override
@@ -20,11 +23,11 @@ class SkillChip extends StatelessWidget {
       label: Text(
         skill,
         style: theme.textTheme.labelSmall?.copyWith(
-          color: theme.colorScheme.secondary,
+          color: theme.colorScheme.onSecondaryContainer,
         ),
         overflow: TextOverflow.ellipsis,
       ),
-      backgroundColor: theme.colorScheme.onInverseSurface,
+      backgroundColor: theme.colorScheme.secondaryContainer,
       side: BorderSide.none,
       visualDensity: const VisualDensity(
         horizontal: VisualDensity.minimumDensity,
