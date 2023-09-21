@@ -65,7 +65,7 @@
     "messagesInputHint": "Write a message...",
     "messagesStatusDeletedByMe": "You deleted this message.",
     "messagesStatusDeletedByOther": "This message was deleted.",
-    "messagesStatusEdited": "(edited)",
+    "messagesStatusEdited": "Edited {timestamp}",
     "navHomeText": "Home",
     "navExploreText": "Explore",
     "navInboxText": "Inbox",

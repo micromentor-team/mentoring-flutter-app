@@ -82,7 +82,7 @@ class MessageBubble extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: Insets.paddingExtraSmall),
       child: Container(
         constraints: BoxConstraints(
-          minWidth: 80,
+          minWidth: 120,
           maxWidth: MediaQuery.of(context).size.width * 0.8,
         ),
         child: Material(
@@ -137,7 +137,9 @@ class MessageBubble extends StatelessWidget {
                   end: isSentByAuthenticatedUser ? null : 0,
                   start: isSentByAuthenticatedUser ? 0 : null,
                   child: Text(
-                    sentAt,
+                    message.editedAt != null
+                        ? l10n.messagesStatusEdited(sentAt)
+                        : sentAt,
                     style: theme.textTheme.labelSmall?.copyWith(
                       color: theme.colorScheme.outline,
                     ),
