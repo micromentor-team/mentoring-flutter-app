@@ -27,15 +27,19 @@ LoginRadioButtonCards createBusinessStageCards(BuildContext context) {
     "Idea stage",
     "Operational",
     "Revenue earning",
+    "Profitable and Scaling"
   ], subtitle: [
     "I do not yet have a working prototype or customers and am not operational.",
     "I have a product or service offering but I have not yet earned revenue. ",
     "I am earning revenue but I am not yet profitable",
+    "I am making a profit and am ready to grow my business"
   ], titleIcon: [
     Icon(Icons.lightbulb_outlined),
-    Icon(Icons.lightbulb_outlined),
-    Icon(Icons.lightbulb_outlined),
+    Icon(Icons.storefront_outlined),
+    Icon(Icons.attach_money_outlined),
+    Icon(Icons.auto_graph_outlined)
   ], imageAssetName: [
+    null,
     null,
     null,
     null

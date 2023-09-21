@@ -56,7 +56,8 @@ class _SignUpEmailState extends State<SignUpEmail> {
           },
           rightOnPress: () {
             if (_formKey.currentState!.validate()) {
-              context.push(Routes.signupPassword.path);
+              // context.push(Routes.signupPassword.path);
+              context.push(Routes.signupEntrepreneurOrMentor.path);
             }
           },
         ));

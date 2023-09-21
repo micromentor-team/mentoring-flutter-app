@@ -21,7 +21,11 @@ import '../widgets/screens/inbox/channel_messages/channel_messages_screen.dart';
 import '../widgets/screens/inbox/inbox_chat_list.dart';
 import '../widgets/screens/inbox/invitation_detail.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
-import '../widgets/screens/sign_up/mentor_or_entrepreneur.dart';
+import '../widgets/screens/sign_up/sign_up_add_profile_pic.dart';
+import '../widgets/screens/sign_up/sign_up_business_help_selection.dart';
+import '../widgets/screens/sign_up/sign_up_business_more_info.dart';
+import '../widgets/screens/sign_up/sign_up_business_stage.dart';
+import '../widgets/screens/sign_up/sign_up_entrepreneur_or_mentor.dart';
 import '../widgets/screens/sign_up/sign_up_permissions.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
 import '../widgets/screens/sign_up/sign_up_verify.dart';
@@ -94,13 +98,53 @@ class AppRouter {
               );
             }),
         GoRoute(
-            path: Routes.entrepreneurOrMentor.path,
-            name: Routes.entrepreneurOrMentor.name,
+            path: Routes.signupEntrepreneurOrMentor.path,
+            name: Routes.signupEntrepreneurOrMentor.name,
             pageBuilder: (BuildContext context, GoRouterState state) {
               return MaterialPage(
                 key: state.pageKey,
                 maintainState: false,
-                child: const MentorOrEntrepreneurScreen(),
+                child: const SignUpEntrepreneurOrMentorScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupBusinessStage.path,
+            name: Routes.signupBusinessStage.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessStageScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupBusinessHelpSelection.path,
+            name: Routes.signupBusinessHelpSelection.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessHelpSelectionScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMoreInfo.path,
+            name: Routes.signupMoreInfo.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessMoreInfoScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.addProfilePicture.path,
+            name: Routes.addProfilePicture.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupAddProfilePicScreen(),
               );
             }),
         GoRoute(
