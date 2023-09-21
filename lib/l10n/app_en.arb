@@ -263,5 +263,20 @@
     "resendEmail": "Resend email",
     "tryAnotherEmail": "Try another email address",
     "submit": "Submit",
-    "signUpWelcomeText": "We have verified your account. We just need a little more info before you can start connecting."
+    "signUpWelcomeText": "We have verified your account. We just need a little more info before you can start connecting.",
+    "howCanWeGetInTouch": "How can we get in touch?",
+    "pushNotificationsEnabled": "Push notifications enabled",
+    "recieveUpdates": "Receive updates and news from MicroMentor",
+    "ourCommunityGuidelines": "Our community guidelines",
+    "guidelinesTextTitle" : "Welcome! We are excited to be part of your mentoring journey.",
+    "guidelinesTextContent1" : "MicroMentor is a global community and we welcome users from all walks of life. Here are some ground rules we ask you to follow to keep MicroMentor a safe and inclusive community:",
+    "guidelinesTextList1": "MicroMentor is a 100% free service and the following behaviors will not be tolerated:",
+    "guidelinesTextList1_1": "Entrepreneurs may not ask for money.",
+    "guidelinesTextList1_2": "Mentors may not charge for services.",
+    "guidelinesTextList2": "We are here to ensure MicroMentor is a safe and supportive space. Inappropriate, offensive, and bullying behavior will result in account deactivation.",
+    "guidelinesTextContent2_1" : "As a valued community member, we’ve always got your back. Our entire Code of Conduct can be found ",
+    "here" : "here",
+    "guidelinesTextContent2_2" : ". Please report any concerns to support@micromentor.org.",
+    "guidelinesSignature": "—The MicroMentor Team",
+    "iagree" : "I agree"
 }

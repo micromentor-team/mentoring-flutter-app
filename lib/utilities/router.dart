@@ -7,6 +7,7 @@ import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_community_guidelines.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_email.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_password.dart';
 import 'package:mm_flutter_app/widgets/screens/welcome/select_language.dart';
@@ -21,6 +22,7 @@ import '../widgets/screens/inbox/inbox_chat_list.dart';
 import '../widgets/screens/inbox/invitation_detail.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
 import '../widgets/screens/sign_up/mentor_or_entrepreneur.dart';
+import '../widgets/screens/sign_up/sign_up_permissions.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
 import '../widgets/screens/sign_up/sign_up_verify.dart';
 import '../widgets/screens/sign_up/sign_up_welcome.dart';
@@ -119,6 +121,26 @@ class AppRouter {
                 key: state.pageKey,
                 maintainState: false,
                 child: const SignUpVerify(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupPermissions.path,
+            name: Routes.signupPermissions.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpPermissions(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupGuidelines.path,
+            name: Routes.signupGuidelines.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpGuidelines(),
               );
             }),
         GoRoute(
