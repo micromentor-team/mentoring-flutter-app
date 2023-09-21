@@ -131,7 +131,7 @@ class AppBarFactory {
       listen: false,
     );
     return AppBar(
-      toolbarHeight: 80.0,
+      toolbarHeight: Dimensions.customToolbarHeight,
       leading: IconButton(
         icon: const Icon(Icons.keyboard_arrow_left),
         onPressed: () => router.push(
@@ -185,20 +185,19 @@ class AppBarFactory {
               child: Text(l10n.messagesActionReport),
             ),
           ],
-          onSelected: (value) {
+          onSelected: (value) async {
             switch (value) {
               case 0:
                 if (isArchivedForUser) {
-                  channelsProvider.unarchiveChannelForAuthenticatedUser(
+                  await channelsProvider.unarchiveChannelForAuthenticatedUser(
                     channelId: channelId,
                   );
-                  router.push('${Routes.inboxChats.path}/$channelId');
                 } else {
-                  channelsProvider.archiveChannelForAuthenticatedUser(
+                  await channelsProvider.archiveChannelForAuthenticatedUser(
                     channelId: channelId,
                   );
-                  router.push('${Routes.inboxArchived.path}/$channelId');
                 }
+                router.push(Routes.inboxChats.path);
                 break;
               case 1:
                 // TODO(m-rosario): Block user
