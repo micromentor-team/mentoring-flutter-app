@@ -6,7 +6,7 @@ class ProfileChip extends StatelessWidget {
   final IconData? icon;
   final bool? usePrimaryColor;
   final bool? applyIconColor;
-  final bool? verizonChip;
+  final bool? groupMemberChip;
 
   const ProfileChip({
     super.key,
@@ -14,7 +14,7 @@ class ProfileChip extends StatelessWidget {
     this.icon,
     this.usePrimaryColor,
     this.applyIconColor,
-    this.verizonChip = false,
+    this.groupMemberChip = false,
   });
 
   @override
@@ -29,7 +29,7 @@ class ProfileChip extends StatelessWidget {
           ? theme.colorScheme.onSurfaceVariant
           : theme.colorScheme.onSecondaryContainer;
     }
-    if (verizonChip == true) {
+    if (groupMemberChip == true) {
       chipTextStyle = theme.textTheme.labelMedium?.copyWith(
         color: theme.colorScheme.onBackground,
         fontWeight: FontWeight.w400,

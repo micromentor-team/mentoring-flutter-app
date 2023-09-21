@@ -15,7 +15,7 @@ class ProfileQuickViewInfo {
   final UserType userType;
   final String? avatarUrl;
   final String fullName;
-  final bool? verizonDigitalReady;
+  final String? groupMembership;
   final String location;
   final String? company;
   final String? companyRole;
@@ -28,7 +28,7 @@ class ProfileQuickViewInfo {
     required this.avatarUrl,
     required this.fullName,
     required this.location,
-    this.verizonDigitalReady,
+    this.groupMembership,
     this.company,
     this.companyRole,
     this.endorsements,
@@ -43,7 +43,7 @@ ProfileQuickViewInfo createRecommendedMentorExample() {
       avatarUrl:
           'https://media.istockphoto.com/id/1280371040/photo/confident-stylish-european-mature-middle-aged-woman-standing-at-workplace-stylish-older.jpg?s=612x612&w=0&k=20&c=AntzoG_Z1hN6tYVBXbu58Rvz4jweBYa8669bV75yWRw=',
       fullName: 'Delia Joyce',
-      verizonDigitalReady: true,
+      groupMembership: "Verizon Digital Ready",
       location: 'Shaker Heights, Ohio, USA',
       company: 'SparkNow',
       companyRole: 'Founder',
@@ -116,7 +116,7 @@ ProfileQuickViewCard createProfileCardFromInfo({
     userType: info.userType,
     avatarUrl: info.avatarUrl,
     fullName: info.fullName,
-    verizonDigitalReady: info.verizonDigitalReady,
+    groupMembership: info.groupMembership,
     location: info.location,
     company: info.company,
     companyRole: info.companyRole,
@@ -132,7 +132,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   final UserType userType;
   final String? avatarUrl;
   final String fullName;
-  final bool? verizonDigitalReady;
+  final String? groupMembership;
   final String location;
   final String? company;
   final String? companyRole;
@@ -145,7 +145,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     required this.userType,
     this.avatarUrl,
     required this.fullName,
-    this.verizonDigitalReady,
+    this.groupMembership,
     required this.location,
     this.company,
     this.companyRole,
@@ -254,10 +254,10 @@ class ProfileQuickViewCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (verizonDigitalReady == true)
+                  if (groupMembership != null)
                     ProfileChip(
-                      text: l10n.verizonDigitalReady,
-                      verizonChip: true,
+                      text: groupMembership!,
+                      groupMemberChip: true,
                     ),
                   const SizedBox(height: Insets.paddingExtraSmall),
                   if (companyText != null)
