@@ -66,16 +66,15 @@ class _ChannelMessagesScreenState extends State<ChannelMessagesScreen>
             final participant = channel.participants
                 .firstWhere((item) => item.user.id != _authenticatedUser.id)
                 .user;
-            final String channelName = participant.fullName!;
-            final String? avatarUrl = participant.avatarUrl;
             buildPageRouteScaffold((scaffoldModel) {
               scaffoldModel.setParams(
                 appBar: AppBarFactory.createChannelMessagesAppBar(
                   context: context,
-                  channelName: channelName,
+                  userFullName: participant.fullName!,
                   channelId: widget.channelId,
                   isArchivedForUser: widget.isArchivedForUser,
-                  avatarUrl: avatarUrl,
+                  userId: participant.id,
+                  avatarUrl: participant.avatarUrl,
                 ),
               );
             });

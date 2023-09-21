@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/providers/channels_provider.dart';
-import 'package:mm_flutter_app/utilities/errors/errors.dart';
-import 'package:mm_flutter_app/utilities/scaffold_utils/report_or_block_menu_button.dart';
-import 'package:provider/provider.dart';
+import 'package:mm_flutter_app/utilities/scaffold_utils/user_popup_menu_button.dart';
 
 import '../../constants/app_constants.dart';
 import '../../widgets/atoms/notification_bubble.dart';
@@ -118,18 +115,14 @@ class AppBarFactory {
 
   static AppBar createChannelMessagesAppBar({
     required BuildContext context,
-    required String channelName,
+    required String userFullName,
     required String channelId,
     required bool isArchivedForUser,
+    required String userId,
     String? avatarUrl,
   }) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
     final GoRouter router = GoRouter.of(context);
-    final ChannelsProvider channelsProvider = Provider.of<ChannelsProvider>(
-      context,
-      listen: false,
-    );
     return AppBar(
       toolbarHeight: Dimensions.customToolbarHeight,
       leading: IconButton(
@@ -146,20 +139,23 @@ class AppBarFactory {
             borderRadius: BorderRadius.circular(
               Radii.roundedRectRadiusSmall,
             ),
-            child: Image(
-              image: avatarUrl != null
-                  ? NetworkImage(avatarUrl) as ImageProvider<Object>
-                  : const AssetImage(Assets.blankAvatar),
-              width: 48.0,
-              height: 48.0,
-              fit: BoxFit.cover,
+            child: InkWell(
+              onTap: () => router.push('${Routes.profile.path}/$userId'),
+              child: Image(
+                image: avatarUrl != null
+                    ? NetworkImage(avatarUrl) as ImageProvider<Object>
+                    : const AssetImage(Assets.blankAvatar),
+                width: 48.0,
+                height: 48.0,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(
             width: Insets.paddingMedium,
           ),
           Text(
-            channelName,
+            userFullName,
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.onPrimaryContainer,
             ),
@@ -167,50 +163,12 @@ class AppBarFactory {
         ],
       ),
       actions: [
-        PopupMenuButton(
-          icon: const Icon(Icons.more_vert),
-          itemBuilder: (context) => [
-            PopupMenuItem(
-              value: 0,
-              child: isArchivedForUser
-                  ? Text(l10n.messagesActionUnarchive)
-                  : Text(l10n.messagesActionArchive),
-            ),
-            PopupMenuItem(
-              value: 1,
-              child: Text(l10n.messagesActionBlock),
-            ),
-            PopupMenuItem(
-              value: 2,
-              child: Text(l10n.messagesActionReport),
-            ),
-          ],
-          onSelected: (value) async {
-            switch (value) {
-              case 0:
-                if (isArchivedForUser) {
-                  await channelsProvider.unarchiveChannelForAuthenticatedUser(
-                    channelId: channelId,
-                  );
-                } else {
-                  await channelsProvider.archiveChannelForAuthenticatedUser(
-                    channelId: channelId,
-                  );
-                }
-                router.push(Routes.inboxChats.path);
-                break;
-              case 1:
-                // TODO(m-rosario): Block user
-                break;
-              case 2:
-                // TODO(m-rosario): Report user
-                break;
-              default:
-                throw UnexpectedStateError(
-                  message: 'Invalid PopupMenuItem value: $value ',
-                );
-            }
-          },
+        UserPopupMenuButton(
+          includeArchiveOption: !isArchivedForUser,
+          includeUnarchiveOption: isArchivedForUser,
+          userFullName: userFullName,
+          userId: userId,
+          channelId: channelId,
         ),
       ],
     );
@@ -218,6 +176,8 @@ class AppBarFactory {
 
   static AppBar createInviteReceivedDetailAppBar({
     required BuildContext context,
+    required String userFullName,
+    required String userId,
   }) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final GoRouter router = GoRouter.of(context);
@@ -237,7 +197,10 @@ class AppBarFactory {
       ),
       centerTitle: false,
       actions: [
-        ReportOrBlockMenuButton(l10n: l10n),
+        UserPopupMenuButton(
+          userFullName: userFullName,
+          userId: userId,
+        ),
       ],
     );
   }
