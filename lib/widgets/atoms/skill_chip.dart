@@ -4,22 +4,29 @@ import '../../constants/app_constants.dart';
 
 class SkillChip extends StatelessWidget {
   final String skill;
-  final Widget? icon;
+  final Icon? icon;
 
   const SkillChip({
     super.key,
     required this.skill,
-    this.icon = const Icon(
-      Icons.campaign_outlined,
-      color: Color(0xFF1D192B),
-    ),
+    this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    // ignore: non_constant_identifier_names
+    final Icon ChipIcon;
+    if (icon == null) {
+      ChipIcon = Icon(
+        Icons.campaign_outlined,
+        color: theme.colorScheme.onSecondaryContainer,
+      );
+    } else {
+      ChipIcon = icon!;
+    }
     return Chip(
-      avatar: icon,
+      avatar: ChipIcon,
       label: Text(
         skill,
         style: theme.textTheme.labelSmall?.copyWith(
