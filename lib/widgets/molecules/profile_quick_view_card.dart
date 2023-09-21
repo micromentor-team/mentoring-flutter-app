@@ -157,8 +157,6 @@ class ProfileQuickViewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final GoRouter router = GoRouter.of(context);
-    final ThemeData theme = Theme.of(context);
     return Card(
       color: colorScheme.surface,
       surfaceTintColor: Colors.transparent,
@@ -172,34 +170,15 @@ class ProfileQuickViewCard extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
           ),
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(Insets.paddingLarge),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: TextButton(
-                    onPressed: () {
-                      router.push('${Routes.profile.path}/$userId');
-                    },
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: theme.colorScheme.secondary,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(Insets.paddingLarge),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _createProfileView(context, l10n),
-                    if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
-                  ],
-                ),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(Insets.paddingLarge),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _createProfileView(context, l10n),
+                if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
+              ],
+            ),
           ),
         ),
       ),
@@ -209,15 +188,29 @@ class ProfileQuickViewCard extends StatelessWidget {
   Widget _createProfileView(BuildContext context, AppLocalizations l10n) {
     final ThemeData theme = Theme.of(context);
     final String? companyText = _companyText(l10n);
+    final GoRouter router = GoRouter.of(context);
     return Column(
       children: [
         Row(
           mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               fullName,
               style: theme.textTheme.titleMedium?.copyWith(
                 color: theme.colorScheme.onSurface,
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: TextButton(
+                onPressed: () {
+                  router.push('${Routes.profile.path}/$userId');
+                },
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: theme.colorScheme.secondary,
+                ),
               ),
             ),
           ],
