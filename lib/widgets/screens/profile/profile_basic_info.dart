@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/utilities/scaffold_utils/report_or_block_menu_button.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -115,6 +114,7 @@ Widget _createNameAndBadges(
   String? pronouns,
   UserType userType,
   List<String>? affiliations,
+  Widget popupMenu,
 ) {
   List<Widget> widgets = [
     Text(
@@ -148,15 +148,19 @@ Widget _createNameAndBadges(
     }
   }
   return Expanded(
-      child: Stack(children: [
-    Align(
-        alignment: Alignment.topRight,
-        child: ReportOrBlockMenuButton(l10n: l10n)),
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: widgets,
-    )
-  ]));
+    child: Stack(
+      children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: popupMenu,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: widgets,
+        )
+      ],
+    ),
+  );
 }
 
 Widget _createVacationBanner(AppLocalizations l10n, ThemeData theme) {
@@ -197,6 +201,7 @@ class ProfileBasicInfo extends StatelessWidget {
   final String? education;
   final String? linkedinUrl;
   final bool vacationMode;
+  final Widget popupMenu;
 
   const ProfileBasicInfo({
     Key? key,
@@ -210,6 +215,7 @@ class ProfileBasicInfo extends StatelessWidget {
     this.education,
     this.linkedinUrl,
     required this.vacationMode,
+    required this.popupMenu,
   }) : super(key: key);
 
   @override
@@ -246,6 +252,7 @@ class ProfileBasicInfo extends StatelessWidget {
                     pronouns,
                     userType,
                     affiliations,
+                    popupMenu,
                   ),
                 ],
               ),

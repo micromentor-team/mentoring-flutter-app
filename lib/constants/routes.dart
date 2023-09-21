@@ -45,6 +45,14 @@ class Routes {
     name: 'signupWelcome',
     path: '${signup.path}/welcome',
   );
+  static Route signupPermissions = Route(
+    name: 'signupPermissions',
+    path: '${signup.path}/permissions',
+  );
+  static Route signupGuidelines = Route(
+    name: 'signupGuidelines',
+    path: '${signup.path}/guidelines',
+  );
   static Route entrepreneurOrMentor = Route(
     name: 'entrepreneurOrMentor',
     path: '${signup.path}/userrole',

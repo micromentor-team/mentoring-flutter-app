@@ -169,7 +169,7 @@ class InvitationsProvider extends BaseProvider {
         fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Mutation$DeleteChannelInvitation(
           channelInvitationId: channelInvitationId,
-          deletePhysically: false,
+          deletePhysically: true,
         ).toJson(),
       ),
     );

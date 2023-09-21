@@ -305,33 +305,7 @@ class _InvitationDetailState extends State<InvitationDetail>
   @override
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
-    buildPageRouteScaffold((scaffoldModel) {
-      AppBar? appBar;
-      switch (widget.invitationDirection) {
-        case MessageDirection.received:
-          appBar =
-              AppBarFactory.createInviteReceivedDetailAppBar(context: context);
-          break;
-        case MessageDirection.sent:
-          appBar = AppBarFactory.createInviteSentDetailAppBar(context: context);
-          break;
-        default:
-          break;
-      }
-      scaffoldModel.setParams(appBar: appBar);
-    });
     final ThemeData theme = Theme.of(context);
-    Widget Function(ChannelInvitationById)? userCardCreateFunction;
-    switch (widget.invitationDirection) {
-      case MessageDirection.received:
-        userCardCreateFunction = _createSenderCard;
-        break;
-      case MessageDirection.sent:
-        userCardCreateFunction = _createRecipientCard;
-        break;
-      default:
-        break;
-    }
     return FutureBuilder(
       future: _invitation,
       builder: (context, snapshot) {
@@ -340,6 +314,29 @@ class _InvitationDetailState extends State<InvitationDetail>
           onReady: () {
             final ChannelInvitationById invitationResult =
                 snapshot.data!.response!;
+            Widget Function(ChannelInvitationById)? userCardCreateFunction;
+            AppBar? appBar;
+            switch (widget.invitationDirection) {
+              case MessageDirection.received:
+                userCardCreateFunction = _createSenderCard;
+                appBar = AppBarFactory.createInviteReceivedDetailAppBar(
+                  context: context,
+                  userId: invitationResult.sender.id,
+                  userFullName: invitationResult.sender.fullName!,
+                );
+                break;
+              case MessageDirection.sent:
+                userCardCreateFunction = _createRecipientCard;
+                appBar = AppBarFactory.createInviteSentDetailAppBar(
+                  context: context,
+                );
+                break;
+              default:
+                break;
+            }
+            buildPageRouteScaffold((scaffoldModel) {
+              scaffoldModel.setParams(appBar: appBar);
+            });
             return Column(
               children: [
                 Expanded(

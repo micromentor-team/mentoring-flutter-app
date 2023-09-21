@@ -15,6 +15,7 @@ import 'package:mm_flutter_app/widgets/screens/profile/profile_page_header.dart'
 import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';
+import '../../../utilities/scaffold_utils/user_popup_menu_button.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String? userId;
@@ -200,6 +201,10 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 .firstOrNull
                 ?.value,
             vacationMode: true, //TODO
+            popupMenu: UserPopupMenuButton(
+              userFullName: userData.fullName!,
+              userId: userData.id,
+            ),
           ),
           const Divider(),
           ProfileAboutMe(
