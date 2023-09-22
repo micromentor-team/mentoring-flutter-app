@@ -132,7 +132,7 @@ class SignUpGuidelines extends StatelessWidget {
             context.pop();
           },
           rightOnPress: () {
-            // context.push(Routes.entrepreneurOrMentor.path);
+            context.push(Routes.signupEntrepreneurOrMentor.path);
           },
         ));
   }
