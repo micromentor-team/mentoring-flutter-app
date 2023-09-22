@@ -25,16 +25,14 @@ class _SignupBusinessMoreInfoScreenState
       progress: SignUpProgress.one,
       title: l10n.needLittleMoreInfo,
       bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
+          leftButtonText: l10n.findMentors,
+          rightButtonText: l10n.continueButton,
           leftOnPress: () {
             context.pop();
           },
           rightOnPress: () {
             context.push(Routes.addProfilePicture.path);
           }),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

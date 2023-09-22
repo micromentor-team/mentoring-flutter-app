@@ -286,5 +286,7 @@
     "here" : "here",
     "guidelinesTextContent2_2" : ". Please report any concerns to support@micromentor.org.",
     "guidelinesSignature": "—The MicroMentor Team",
-    "iagree" : "I agree"
+    "iagree" : "I agree",
+    "continueButton": "Continue",
+    "findMentors": "Find Mentors"
 }
