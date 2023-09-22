@@ -9,6 +9,8 @@ import 'package:mm_flutter_app/widgets/screens/inbox/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';
+import '../../../utilities/scaffold_utils/appbar_factory.dart';
+import '../../../utilities/scaffold_utils/drawer_factory.dart';
 
 class InboxInvitesReceivedScreen extends StatefulWidget {
   const InboxInvitesReceivedScreen({super.key});
@@ -104,7 +106,12 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
     buildPageRouteScaffold((scaffoldModel) {
-      scaffoldModel.setInboxScaffold(router: router);
+      scaffoldModel.setParams(
+        appBar: AppBarFactory.createInboxAppBar(
+          router: router,
+        ),
+        drawer: DrawerFactory.createInboxDrawer(),
+      );
     });
     _refreshTabIndex(context);
     return Consumer<MyChannelInvitationsModel>(

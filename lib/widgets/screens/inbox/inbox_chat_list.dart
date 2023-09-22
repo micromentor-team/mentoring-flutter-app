@@ -15,6 +15,8 @@ import 'package:provider/provider.dart';
 import '../../../providers/channels_provider.dart';
 import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
+import '../../../utilities/scaffold_utils/appbar_factory.dart';
+import '../../../utilities/scaffold_utils/drawer_factory.dart';
 
 class InboxChatListScreen extends StatefulWidget {
   final bool isArchivedForUser;
@@ -186,7 +188,12 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
     buildPageRouteScaffold((scaffoldModel) {
-      scaffoldModel.setInboxScaffold(router: router);
+      scaffoldModel.setParams(
+        appBar: AppBarFactory.createInboxAppBar(
+          router: router,
+        ),
+        drawer: DrawerFactory.createInboxDrawer(),
+      );
     });
     return FutureBuilder(
       future: _userChannels,

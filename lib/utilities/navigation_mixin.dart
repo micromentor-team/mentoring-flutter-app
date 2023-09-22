@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/models/notifications_model.dart';
 
 mixin NavigationMixin<T extends StatefulWidget> on State<T>
     implements RouteAware {
   late final ScaffoldModel _scaffoldModel;
+  late final NotificationsModel _notificationsModel;
   late GoRouter _router;
   late final RouteObserver<PageRoute> _routeObserver;
   PageRoute? _pageRoute;
 
-  AsyncState get navigationState => _scaffoldModel.state;
   PageRoute get pageRoute => _pageRoute!;
   GoRouter get router => _router;
 
@@ -19,6 +20,10 @@ mixin NavigationMixin<T extends StatefulWidget> on State<T>
   void initState() {
     super.initState();
     _scaffoldModel = Provider.of<ScaffoldModel>(
+      context,
+      listen: false,
+    );
+    _notificationsModel = Provider.of<NotificationsModel>(
       context,
       listen: false,
     );
@@ -58,9 +63,13 @@ mixin NavigationMixin<T extends StatefulWidget> on State<T>
   void didPushNext() {}
 
   void buildPageRouteScaffold(
-      void Function(ScaffoldModel scaffoldModel) build) {
+      void Function(
+        ScaffoldModel scaffoldModel,
+      ) build) {
     if (_pageRoute!.isCurrent) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        //TODO: Use subscriptions to auto-refresh on relevant channel events
+        _notificationsModel.refreshInboxNotifications();
         build(_scaffoldModel);
       });
     }

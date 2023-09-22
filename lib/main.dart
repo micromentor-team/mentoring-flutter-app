@@ -15,6 +15,7 @@ import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/models/locale_model.dart';
 import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
+import 'package:mm_flutter_app/providers/models/notifications_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
@@ -59,6 +60,16 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   late Future<OperationResult<AuthenticatedUser?>> _authenticatedUser;
+  late final NotificationsModel _notificationsModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationsModel = Provider.of<NotificationsModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   void didChangeDependencies() {
@@ -67,6 +78,7 @@ class _StartScreenState extends State<StartScreen> {
         Provider.of<UserProvider>(context).getAuthenticatedUser(
       logFailures: false, // Error is expected when user is not logged in.
     );
+    _notificationsModel.refreshInboxNotifications();
   }
 
   @override
@@ -163,6 +175,9 @@ void main() async {
               ),
               Provider<MessagesProvider>.value(
                 value: MessagesProvider(client: client),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => NotificationsModel(context: context),
               ),
               ChangeNotifierProvider(
                 create: (context) => ScaffoldModel(context: context),
