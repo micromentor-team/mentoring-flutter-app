@@ -19,7 +19,6 @@ class _SignupBusinessHelpSelectionScreenState
     extends State<SignupBusinessHelpSelectionScreen> {
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
