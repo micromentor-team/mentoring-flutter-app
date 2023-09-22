@@ -130,6 +130,10 @@ class _LoginRadioButtonCardsState extends State<LoginRadioButtonCards> {
                             //the code snippet below checks if the titleIcon is null, and if it is not null, presents it
                             if (widget.titleIcon[i] != null)
                               widget.titleIcon[i]!,
+                            if (widget.titleIcon[i] != null)
+                              const SizedBox(
+                                width: Insets.paddingExtraSmall,
+                              ),
                             Text(
                               widget.title[i],
                               style: theme.textTheme.titleMedium,
