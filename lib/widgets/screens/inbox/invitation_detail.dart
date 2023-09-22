@@ -9,7 +9,6 @@ import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_divider.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
@@ -90,7 +89,6 @@ class _InvitationDetailState extends State<InvitationDetail>
             [];
     return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
-        isRecommended: false,
         userId: invitation.sender.id,
         userType: invitation.sender.offersHelp
             ? UserType.mentor
@@ -101,21 +99,6 @@ class _InvitationDetailState extends State<InvitationDetail>
             _l10n.defaultValueLocation,
         company: invitation.sender.companies.firstOrNull?.name,
         companyRole: invitation.sender.jobTitle,
-        ventureStage: invitation.sender.seeksHelp &&
-                invitation.sender.companies.firstOrNull?.companyStage
-                        ?.translatedValue !=
-                    null
-            ? ProfileChip(
-                text: invitation
-                    .sender.companies.first.companyStage!.translatedValue!,
-              )
-            : null,
-        ventureIndustry: invitation.sender.seeksHelp &&
-                maybeMenteesGroupMembership?.industry?.translatedValue != null
-            ? ProfileChip(
-                text: maybeMenteesGroupMembership!.industry!.translatedValue!,
-              )
-            : null,
         endorsements: invitation.sender.offersHelp
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
@@ -148,7 +131,6 @@ class _InvitationDetailState extends State<InvitationDetail>
             [];
     return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
-        isRecommended: false,
         userId: invitation.recipient.id,
         userType: invitation.recipient.offersHelp
             ? UserType.mentor
@@ -159,21 +141,6 @@ class _InvitationDetailState extends State<InvitationDetail>
             _l10n.defaultValueLocation,
         company: invitation.recipient.companies.firstOrNull?.name,
         companyRole: invitation.recipient.jobTitle,
-        ventureStage: invitation.recipient.seeksHelp &&
-                invitation.recipient.companies.firstOrNull?.companyStage
-                        ?.translatedValue !=
-                    null
-            ? ProfileChip(
-                text: invitation
-                    .sender.companies.first.companyStage!.translatedValue!,
-              )
-            : null,
-        ventureIndustry: invitation.recipient.seeksHelp &&
-                maybeMenteesGroupMembership?.industry?.translatedValue != null
-            ? ProfileChip(
-                text: maybeMenteesGroupMembership!.industry!.translatedValue!,
-              )
-            : null,
         endorsements: invitation.recipient.offersHelp
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
