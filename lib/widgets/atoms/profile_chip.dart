@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../constants/app_constants.dart';
 
 class ProfileChip extends StatelessWidget {
@@ -7,6 +6,7 @@ class ProfileChip extends StatelessWidget {
   final IconData? icon;
   final bool? usePrimaryColor;
   final bool? applyIconColor;
+  final bool? groupMemberChip;
 
   const ProfileChip({
     super.key,
@@ -14,32 +14,46 @@ class ProfileChip extends StatelessWidget {
     this.icon,
     this.usePrimaryColor,
     this.applyIconColor,
+    this.groupMemberChip = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     Color iconColor = Color(theme.colorScheme.outline.value);
+    TextStyle? chipTextStyle;
+    Color chipBackgroundColor;
+
     if (applyIconColor != null && applyIconColor!) {
       iconColor = (usePrimaryColor != null && usePrimaryColor!)
           ? theme.colorScheme.onSurfaceVariant
           : theme.colorScheme.onSecondaryContainer;
+    }
+    if (groupMemberChip == true) {
+      chipTextStyle = theme.textTheme.labelMedium?.copyWith(
+        color: theme.colorScheme.onBackground,
+        fontWeight: FontWeight.w400,
+      );
+      chipBackgroundColor = theme.colorScheme.tertiaryContainer;
+    } else {
+      chipTextStyle = theme.textTheme.labelSmall?.copyWith(
+        color: (usePrimaryColor != null && usePrimaryColor!)
+            ? theme.colorScheme.onSurfaceVariant
+            : theme.colorScheme.onSecondaryContainer,
+      );
+      chipBackgroundColor = (usePrimaryColor != null && usePrimaryColor!)
+          ? theme.colorScheme.inversePrimary
+          : theme.colorScheme.secondaryContainer;
     }
 
     return Chip(
       avatar: icon != null ? Icon(icon, color: iconColor) : null,
       label: Text(
         text,
-        style: theme.textTheme.labelSmall?.copyWith(
-          color: (usePrimaryColor != null && usePrimaryColor!)
-              ? theme.colorScheme.onSurfaceVariant
-              : theme.colorScheme.onSecondaryContainer,
-        ),
+        style: chipTextStyle,
         overflow: TextOverflow.ellipsis,
       ),
-      backgroundColor: (usePrimaryColor != null && usePrimaryColor!)
-          ? theme.colorScheme.inversePrimary
-          : theme.colorScheme.secondaryContainer,
+      backgroundColor: chipBackgroundColor,
       side: BorderSide.none,
       visualDensity: const VisualDensity(
         horizontal: VisualDensity.minimumDensity,

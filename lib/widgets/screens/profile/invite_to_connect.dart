@@ -135,7 +135,6 @@ class _InviteToConnectState extends State<InviteToConnect>
                           ),
                           child: createProfileCardFromInfo(
                             info: ProfileQuickViewInfo(
-                              isRecommended: false,
                               userId: user.id,
                               userType: userType,
                               avatarUrl: user.avatarUrl,
