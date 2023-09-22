@@ -62,10 +62,11 @@ class AppWrapper extends StatelessWidget {
                         alignment: AlignmentDirectional.topEnd,
                         children: [
                           child!,
-                          NotificationBubble(
-                            notifications:
-                                notificationsModel.inboxNotifications,
-                          ),
+                          if (notificationsModel.inboxNotifications > 0)
+                            NotificationBubble(
+                              notifications:
+                                  notificationsModel.inboxNotifications,
+                            ),
                         ],
                       );
                     },

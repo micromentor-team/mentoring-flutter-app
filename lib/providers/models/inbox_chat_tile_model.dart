@@ -6,6 +6,7 @@ import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
+import 'package:mm_flutter_app/providers/models/notifications_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/app_constants.dart';
@@ -19,6 +20,7 @@ class InboxChatTileModel extends ChangeNotifier {
   final bool isArchivedChannel;
   final MessagesProvider _messagesProvider;
   final ChannelsProvider _channelsProvider;
+  final NotificationsModel _notificationsModel;
 
   StreamSubscription<QueryResult<Object?>>? _streamSubscription;
   ChannelLatestMessage? _lastMessage;
@@ -41,6 +43,10 @@ class InboxChatTileModel extends ChangeNotifier {
           listen: false,
         ),
         _channelsProvider = Provider.of<ChannelsProvider>(
+          context,
+          listen: false,
+        ),
+        _notificationsModel = Provider.of<NotificationsModel>(
           context,
           listen: false,
         );
@@ -89,6 +95,7 @@ class InboxChatTileModel extends ChangeNotifier {
     if (hasListeners) {
       notifyListeners();
     }
+    _notificationsModel.refreshInboxNotifications();
   }
 
   void createChannelSubscription() {
