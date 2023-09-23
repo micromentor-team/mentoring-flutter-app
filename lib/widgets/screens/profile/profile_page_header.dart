@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
-import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -32,17 +31,12 @@ class ProfilePageHeader extends StatefulWidget {
 
 class _ProfilePageHeaderState extends State<ProfilePageHeader> {
   late final InvitationsProvider _invitationsProvider;
-  late final MyChannelInvitationsModel _myChannelInvitationsModel;
   late final InboxModel _inboxModel;
 
   @override
   void initState() {
     super.initState();
     _invitationsProvider = Provider.of<InvitationsProvider>(
-      context,
-      listen: false,
-    );
-    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
       context,
       listen: false,
     );
@@ -70,9 +64,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
             await _invitationsProvider.declineChannelInvitation(
               channelInvitationId: widget.invitationId!,
             );
-            _myChannelInvitationsModel.refreshReceivedInvitations(
-              onlyPending: false,
-            );
+            _inboxModel.refreshReceivedInvitations(onlyPending: false);
           },
           child: Text(
             l10n.decline,
@@ -163,7 +155,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
         await _invitationsProvider.withdrawChannelInvitation(
           channelInvitationId: widget.invitationId!,
         );
-        _myChannelInvitationsModel.refreshSentInvitations(onlyPending: false);
+        _inboxModel.refreshSentInvitations(onlyPending: false);
       },
       child: Text(
         l10n.profileHeaderWithdraw,

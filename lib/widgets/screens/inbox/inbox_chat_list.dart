@@ -196,7 +196,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
       ),
       builder: (_, __, ___) {
         return AppUtility.widgetForAsyncState(
-          state: _inboxModel.state,
+          state: _inboxModel.channelsState,
           onReady: () {
             final channels = _inboxModel.activeChannels.where(
               (element) {

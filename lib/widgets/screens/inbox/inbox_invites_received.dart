@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
-import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_list_tile.dart';
@@ -22,7 +22,7 @@ class InboxInvitesReceivedScreen extends StatefulWidget {
 
 class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     with NavigationMixin<InboxInvitesReceivedScreen> {
-  late final MyChannelInvitationsModel _myChannelInvitationsModel;
+  late final InboxModel _inboxModel;
   late AppLocalizations _l10n;
 
   static const int tabBarIndex = 0;
@@ -30,17 +30,14 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   @override
   void initState() {
     super.initState();
-    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
-      context,
-      listen: false,
-    );
+    _inboxModel = Provider.of<InboxModel>(context, listen: false);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!pageRoute.isCurrent) return;
-    _myChannelInvitationsModel.refreshReceivedInvitations(onlyPending: true);
+    _inboxModel.refreshReceivedInvitations(onlyPending: true);
     _l10n = AppLocalizations.of(context)!;
   }
 
@@ -114,12 +111,13 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
       );
     });
     _refreshTabIndex(context);
-    return Consumer<MyChannelInvitationsModel>(
-      builder: (context, myChannelInvitationsModel, _) {
+    return Selector<InboxModel, List<ReceivedChannelInvitation>?>(
+      selector: (_, inboxModel) => inboxModel.pendingReceivedInvitations,
+      builder: (_, pendingReceivedInvitations, __) {
         return AppUtility.widgetForAsyncState(
-          state: myChannelInvitationsModel.state,
+          state: _inboxModel.invitesReceivedState,
           onReady: () {
-            if (myChannelInvitationsModel.receivedInvitations.isEmpty) {
+            if (pendingReceivedInvitations?.isEmpty ?? true) {
               return EmptyStateMessage(
                 icon: Icons.mail,
                 text: _l10n.emptyStateInvites,
@@ -133,7 +131,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
               child: ListView(
                 children: _createContentList(
                   _createTileList(
-                    myChannelInvitationsModel.receivedInvitations,
+                    pendingReceivedInvitations!,
                   ),
                 ),
               ),

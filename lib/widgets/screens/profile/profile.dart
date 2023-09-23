@@ -3,7 +3,7 @@ import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
-import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
+import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/about_my_business.dart';
@@ -13,7 +13,9 @@ import 'package:mm_flutter_app/widgets/screens/profile/profile_basic_info.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile_experience_and_education.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile_page_header.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
+import '../../../providers/models/inbox_model.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../../utilities/scaffold_utils/user_popup_menu_button.dart';
 
@@ -33,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   late final bool _isMyProfile;
   late final UserProvider _userProvider;
   late final AuthenticatedUser _authenticatedUser;
-  late final MyChannelInvitationsModel _myChannelInvitationsModel;
+  late final InboxModel _inboxModel;
   late Future<OperationResult<UserDetailedProfile>> _userDetailedProfile;
 
   @override
@@ -44,10 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       context,
       listen: false,
     );
-    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
-      context,
-      listen: false,
-    );
+    _inboxModel = Provider.of<InboxModel>(context, listen: false);
     _authenticatedUser = _userProvider.user!;
   }
 
@@ -59,8 +58,8 @@ class _ProfileScreenState extends State<ProfileScreen>
       userId: _isMyProfile ? _authenticatedUser.id : widget.userId!,
     );
     if (!_isMyProfile) {
-      _myChannelInvitationsModel.refreshReceivedInvitations(onlyPending: false);
-      _myChannelInvitationsModel.refreshSentInvitations(onlyPending: false);
+      _inboxModel.refreshReceivedInvitations(onlyPending: false);
+      _inboxModel.refreshSentInvitations(onlyPending: false);
     }
   }
 
@@ -76,18 +75,29 @@ class _ProfileScreenState extends State<ProfileScreen>
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onReady: () {
-            return Consumer<MyChannelInvitationsModel>(
-              builder: (_, myChannelInvitationsModel, ___) {
+            return Selector<
+                InboxModel,
+                Tuple2<List<ReceivedChannelInvitation>?,
+                    List<SentChannelInvitation>?>>(
+              selector: (_, inboxModel) => Tuple2(
+                inboxModel.receivedInvitations,
+                inboxModel.sentInvitations,
+              ),
+              builder: (_, tuple2, ___) {
+                final receivedInvitations = tuple2.item1;
+                final sentInvitations = tuple2.item2;
                 return AppUtility.widgetForAsyncState(
                   state: _isMyProfile
                       ? AsyncState.ready
-                      : myChannelInvitationsModel.state,
+                      : _inboxModel.invitesState,
                   onReady: () {
                     return SafeArea(
                       child: ProfileScreenScroll(
                         userData: snapshot.data!.response!,
                         isMyProfile: _isMyProfile,
                         authenticatedUser: _authenticatedUser,
+                        receivedInvitations: receivedInvitations ?? [],
+                        sentInvitations: sentInvitations ?? [],
                       ),
                     );
                   },
@@ -105,12 +115,16 @@ class ProfileScreenScroll extends StatefulWidget {
   final UserDetailedProfile userData;
   final bool isMyProfile;
   final AuthenticatedUser authenticatedUser;
+  final List<ReceivedChannelInvitation> receivedInvitations;
+  final List<SentChannelInvitation> sentInvitations;
 
   const ProfileScreenScroll({
     Key? key,
     required this.userData,
     required this.isMyProfile,
     required this.authenticatedUser,
+    required this.receivedInvitations,
+    required this.sentInvitations,
   }) : super(key: key);
 
   @override
@@ -134,13 +148,12 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
       child: Column(
         children: [
           if (!widget.isMyProfile)
-            Consumer<MyChannelInvitationsModel>(
-              builder: (context, myChannelInvitationsModel, _) {
-                final invitesFromUser = myChannelInvitationsModel
-                    .receivedInvitations
+            Builder(
+              builder: (context) {
+                final invitesFromUser = widget.receivedInvitations
                     .where((e) => e.sender.id == userData.id)
                     .toList();
-                final invitesToUser = myChannelInvitationsModel.sentInvitations
+                final invitesToUser = widget.sentInvitations
                     .where((e) => e.recipient.id == userData.id)
                     .toList();
                 final userId = userData.id;
@@ -181,7 +194,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                     invitationDirection: MessageDirection.sent,
                   );
                 } else {
-                  // Either the users are already connected, or they declined
+                  // Users are already connected
                   return const SizedBox(width: 0, height: 0);
                 }
               },

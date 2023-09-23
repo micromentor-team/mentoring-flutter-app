@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/invitation_tile.dart';
@@ -12,6 +11,7 @@ import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/invitations_provider.dart';
+import '../../providers/models/inbox_model.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 2;
@@ -26,23 +26,20 @@ class InvitationSection extends StatefulWidget {
 }
 
 class _InvitationSectionState extends State<InvitationSection> {
-  late final MyChannelInvitationsModel _myChannelInvitationsModel;
+  late final InboxModel _inboxModel;
   late AppLocalizations _l10n;
 
   @override
   void initState() {
     super.initState();
-    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
-      context,
-      listen: false,
-    );
+    _inboxModel = Provider.of<InboxModel>(context, listen: false);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _l10n = AppLocalizations.of(context)!;
-    _myChannelInvitationsModel.refreshReceivedInvitations(onlyPending: true);
+    _inboxModel.refreshReceivedInvitations(onlyPending: true);
   }
 
   InvitationTile _createInvitationTile(
@@ -88,12 +85,13 @@ class _InvitationSectionState extends State<InvitationSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MyChannelInvitationsModel>(
-      builder: (context, myChannelInvitationsModel, _) {
+    return Selector<InboxModel, List<ReceivedChannelInvitation>?>(
+      selector: (_, inboxModel) => inboxModel.pendingReceivedInvitations,
+      builder: (context, pendingReceivedInvitations, _) {
         return AppUtility.widgetForAsyncState(
-          state: myChannelInvitationsModel.state,
+          state: _inboxModel.invitesReceivedState,
           onReady: () {
-            if (myChannelInvitationsModel.receivedInvitations.isEmpty) {
+            if (pendingReceivedInvitations?.isEmpty ?? true) {
               return const SizedBox(width: 0, height: 0);
             }
             return SectionTile(
@@ -103,7 +101,7 @@ class _InvitationSectionState extends State<InvitationSection> {
               seeAllOnPressed: () =>
                   context.push(Routes.inboxInvitesReceived.path),
               child: _createInvitationList(
-                myChannelInvitationsModel.receivedInvitations,
+                pendingReceivedInvitations!,
               ),
             );
           },

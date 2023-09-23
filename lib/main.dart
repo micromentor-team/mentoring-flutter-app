@@ -15,7 +15,6 @@ import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/providers/models/locale_model.dart';
-import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
@@ -189,10 +188,6 @@ void main() async {
               ),
               ChangeNotifierProvider(
                 create: (context) => ExploreCardFiltersModel(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) =>
-                    MyChannelInvitationsModel(context: context),
               ),
               ChangeNotifierProvider(
                 create: (context) => LocaleModel(),
