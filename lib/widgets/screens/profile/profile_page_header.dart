@@ -8,6 +8,7 @@ import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/channels_provider.dart';
+import '../../../providers/models/inbox_model.dart';
 
 class ProfilePageHeader extends StatefulWidget {
   final AuthenticatedUser authenticatedUser;
@@ -31,8 +32,8 @@ class ProfilePageHeader extends StatefulWidget {
 
 class _ProfilePageHeaderState extends State<ProfilePageHeader> {
   late final InvitationsProvider _invitationsProvider;
-  late final ChannelsProvider _channelsProvider;
   late final MyChannelInvitationsModel _myChannelInvitationsModel;
+  late final InboxModel _inboxModel;
 
   @override
   void initState() {
@@ -41,11 +42,11 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
       context,
       listen: false,
     );
-    _channelsProvider = Provider.of<ChannelsProvider>(
+    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
       context,
       listen: false,
     );
-    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
+    _inboxModel = Provider.of<InboxModel>(
       context,
       listen: false,
     );
@@ -91,10 +92,9 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
             await _invitationsProvider.acceptChannelInvitation(
               channelInvitationId: widget.invitationId!,
             );
-            final userChannels = await _channelsProvider.queryUserChannels(
-              userId: widget.authenticatedUser.id,
-            );
-            for (ChannelForUser channel in userChannels.response!) {
+            await _inboxModel.refreshInboxInviteNotifications();
+            await _inboxModel.refreshActiveChannels();
+            for (ChannelForUser channel in _inboxModel.activeChannels) {
               if (channel.participants
                       .any((c) => c.user.id == widget.authenticatedUser.id) &&
                   channel.participants.any((c) => c.user.id == widget.userId)) {

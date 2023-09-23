@@ -1,22 +1,22 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/models/inbox_chat_tile_model.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
-import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_chat_list_tile.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../../providers/channels_provider.dart';
+import '../../../providers/messages_provider.dart';
+import '../../../providers/models/inbox_model.dart';
 import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../../utilities/scaffold_utils/appbar_factory.dart';
 import '../../../utilities/scaffold_utils/drawer_factory.dart';
+import '../../../utilities/utility.dart';
 
 class InboxChatListScreen extends StatefulWidget {
   final bool isArchivedForUser;
@@ -34,7 +34,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
     with NavigationMixin<InboxChatListScreen> {
   late final AuthenticatedUser? _authenticatedUser;
   late final ChannelsProvider _channelsProvider;
-  late Future<List<ChannelForUser>> _userChannels;
+  late final InboxModel _inboxModel;
   late AppLocalizations _l10n;
   late List<SwipeActionCell> _tiles;
 
@@ -46,6 +46,10 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
       context,
       listen: false,
     );
+    _inboxModel = Provider.of<InboxModel>(
+      context,
+      listen: false,
+    );
   }
 
   @override
@@ -53,20 +57,6 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
     super.didChangeDependencies();
     if (!pageRoute.isCurrent) return;
     _l10n = AppLocalizations.of(context)!;
-    _queryUserChannels();
-  }
-
-  void _queryUserChannels() {
-    _userChannels = _channelsProvider
-        .queryUserChannels(userId: _authenticatedUser!.id)
-        .then((result) {
-      return result.response?.where(
-            (element) {
-              return widget.isArchivedForUser == element.isArchivedForMe;
-            },
-          ).toList() ??
-          [];
-    });
   }
 
   List<Widget> _createContentList(
@@ -107,22 +97,21 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
               color: theme.colorScheme.primaryContainer,
             ),
           ],
-          child: ChangeNotifierProvider(
-            create: (context) => InboxChatTileModel(
-              context: context,
+          child: Padding(
+            padding: const EdgeInsetsDirectional.only(
+              start: Insets.paddingSmall,
+              end: Insets.paddingMedium,
+            ),
+            child: InboxChatListTile(
+              isArchivedForUser: widget.isArchivedForUser,
               channelId: channels[i].id,
               channelName: channelName,
               channelAvatarUrl: channelAvatarUrl,
-              authenticatedUserId: _authenticatedUser!.id,
-              isArchivedChannel: widget.isArchivedForUser,
-            ),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.only(
-                start: Insets.paddingSmall,
-                end: Insets.paddingMedium,
-              ),
-              child: InboxChatListTile(
-                isArchivedForUser: widget.isArchivedForUser,
+              latestMessageDate: channel.latestMessage.createdAt.toLocal(),
+              latestMessageText: channel.latestMessage.messageText ?? '',
+              unseenMessageCount: _inboxModel.getUnseenMessageCount(
+                channelId: channels[i].id,
+                isArchivedChannel: widget.isArchivedForUser,
               ),
             ),
           ),
@@ -179,7 +168,11 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
       logFailures: false,
     );
     if (updateCompleted) {
-      _queryUserChannels();
+      _inboxModel.setChannelArchived(
+        channelId: channelId,
+        isArchivedForMe: !widget.isArchivedForUser,
+      );
+      await _inboxModel.refreshInboxChatNotifications();
       setState(() {});
     }
   }
@@ -195,13 +188,21 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
         drawer: DrawerFactory.createInboxDrawer(),
       );
     });
-    return FutureBuilder(
-      future: _userChannels,
-      builder: (context, snapshot) {
-        return AppUtility.widgetForAsyncSnapshot(
-          snapshot: snapshot,
+    return Selector<InboxModel,
+        Tuple2<ChannelMessageInbox, List<ChannelForUser>>>(
+      selector: (_, inboxModel) => Tuple2(
+        inboxModel.unseenMessages!,
+        inboxModel.activeChannels,
+      ),
+      builder: (_, __, ___) {
+        return AppUtility.widgetForAsyncState(
+          state: _inboxModel.state,
           onReady: () {
-            final List<ChannelForUser> channels = snapshot.data ?? [];
+            final channels = _inboxModel.activeChannels.where(
+              (element) {
+                return widget.isArchivedForUser == element.isArchivedForMe;
+              },
+            ).toList();
             if (channels.isEmpty) {
               return EmptyStateMessage(
                 icon: Icons.chat,

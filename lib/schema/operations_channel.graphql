@@ -8,6 +8,8 @@ query FindChannelsForUser ($userId: String!, $options: FindObjectsOptions) {
         isArchivedForMe
         latestMessage {
             createdAt
+            createdBy
+            messageText
         }
         participants {
             user {

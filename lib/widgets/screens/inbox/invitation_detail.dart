@@ -6,6 +6,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
@@ -33,8 +34,8 @@ class InvitationDetail extends StatefulWidget {
 class _InvitationDetailState extends State<InvitationDetail>
     with NavigationMixin<InvitationDetail> {
   late final InvitationsProvider _invitationsProvider;
-  late final ChannelsProvider _channelsProvider;
   late final UserProvider _userProvider;
+  late final InboxModel _inboxModel;
   late Future<OperationResult<ChannelInvitationById>> _invitation;
   late AppLocalizations _l10n;
 
@@ -45,11 +46,11 @@ class _InvitationDetailState extends State<InvitationDetail>
       context,
       listen: false,
     );
-    _channelsProvider = Provider.of<ChannelsProvider>(
+    _userProvider = Provider.of<UserProvider>(
       context,
       listen: false,
     );
-    _userProvider = Provider.of<UserProvider>(
+    _inboxModel = Provider.of<InboxModel>(
       context,
       listen: false,
     );
@@ -241,10 +242,9 @@ class _InvitationDetailState extends State<InvitationDetail>
             await _invitationsProvider.acceptChannelInvitation(
               channelInvitationId: widget.channelInvitationId,
             );
-            final userChannels = await _channelsProvider.queryUserChannels(
-              userId: _userProvider.user!.id,
-            );
-            for (ChannelForUser channel in userChannels.response!) {
+            await _inboxModel.refreshInboxInviteNotifications();
+            await _inboxModel.refreshActiveChannels();
+            for (ChannelForUser channel in _inboxModel.activeChannels) {
               if (channel.participants.any(
                     (c) => c.user.id == _userProvider.user!.id,
                   ) &&

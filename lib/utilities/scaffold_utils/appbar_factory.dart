@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/providers/models/notifications_model.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/user_popup_menu_button.dart';
 import 'package:provider/provider.dart';
 
@@ -29,9 +29,10 @@ class AppBarFactory {
               );
             },
           ),
-          Consumer<NotificationsModel>(
-            builder: (context, notificationsModel, _) {
-              if (notificationsModel.inboxNotifications == 0) {
+          Selector<InboxModel, int>(
+            selector: (_, inboxModel) => inboxModel.inboxNotifications,
+            builder: (_, inboxNotifications, __) {
+              if (inboxNotifications == 0) {
                 return const SizedBox.shrink();
               }
               return Padding(
@@ -42,7 +43,7 @@ class AppBarFactory {
                 child: Align(
                   alignment: AlignmentDirectional.topEnd,
                   child: NotificationBubble(
-                    notifications: notificationsModel.inboxNotifications,
+                    notifications: inboxNotifications,
                   ),
                 ),
               );

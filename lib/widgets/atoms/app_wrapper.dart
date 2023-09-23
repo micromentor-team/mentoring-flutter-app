@@ -6,7 +6,7 @@ import 'package:mm_flutter_app/utilities/errors/errors.dart';
 import 'package:mm_flutter_app/widgets/atoms/notification_bubble.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/models/notifications_model.dart';
+import '../../providers/models/inbox_model.dart';
 import '../../providers/models/scaffold_model.dart';
 
 /*
@@ -56,16 +56,16 @@ class AppWrapper extends StatelessWidget {
                   label: AppLocalizations.of(context)!.navExploreText,
                 ),
                 NavigationDestination(
-                  icon: Consumer<NotificationsModel>(
-                    builder: (context, notificationsModel, child) {
+                  icon: Selector<InboxModel, int>(
+                    selector: (_, inboxModel) => inboxModel.inboxNotifications,
+                    builder: (context, inboxNotifications, child) {
                       return Stack(
                         alignment: AlignmentDirectional.topEnd,
                         children: [
                           child!,
-                          if (notificationsModel.inboxNotifications > 0)
+                          if (inboxNotifications > 0)
                             NotificationBubble(
-                              notifications:
-                                  notificationsModel.inboxNotifications,
+                              notifications: inboxNotifications,
                             ),
                         ],
                       );
