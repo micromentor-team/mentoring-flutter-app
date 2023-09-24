@@ -57,10 +57,6 @@ class _ProfileScreenState extends State<ProfileScreen>
     _userDetailedProfile = _userProvider.findUserDetailedProfile(
       userId: _isMyProfile ? _authenticatedUser.id : widget.userId!,
     );
-    if (!_isMyProfile) {
-      _inboxModel.refreshReceivedInvitations(onlyPending: false);
-      _inboxModel.refreshSentInvitations(onlyPending: false);
-    }
   }
 
   @override
@@ -80,12 +76,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                 Tuple2<List<ReceivedChannelInvitation>?,
                     List<SentChannelInvitation>?>>(
               selector: (_, inboxModel) => Tuple2(
-                inboxModel.receivedInvitations,
-                inboxModel.sentInvitations,
+                inboxModel.pendingReceivedInvitations,
+                inboxModel.pendingSentInvitations,
               ),
-              builder: (_, tuple2, ___) {
-                final receivedInvitations = tuple2.item1;
-                final sentInvitations = tuple2.item2;
+              builder: (_, __, ___) {
                 return AppUtility.widgetForAsyncState(
                   state: _isMyProfile
                       ? AsyncState.ready
@@ -96,8 +90,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                         userData: snapshot.data!.response!,
                         isMyProfile: _isMyProfile,
                         authenticatedUser: _authenticatedUser,
-                        receivedInvitations: receivedInvitations ?? [],
-                        sentInvitations: sentInvitations ?? [],
                       ),
                     );
                   },
@@ -115,23 +107,27 @@ class ProfileScreenScroll extends StatefulWidget {
   final UserDetailedProfile userData;
   final bool isMyProfile;
   final AuthenticatedUser authenticatedUser;
-  final List<ReceivedChannelInvitation> receivedInvitations;
-  final List<SentChannelInvitation> sentInvitations;
 
   const ProfileScreenScroll({
-    Key? key,
+    super.key,
     required this.userData,
     required this.isMyProfile,
     required this.authenticatedUser,
-    required this.receivedInvitations,
-    required this.sentInvitations,
-  }) : super(key: key);
+  });
 
   @override
   State<ProfileScreenScroll> createState() => _ProfileScreenScrollState();
 }
 
 class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
+  late final InboxModel _inboxModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _inboxModel = Provider.of<InboxModel>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final userData = widget.userData;
@@ -150,24 +146,20 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
           if (!widget.isMyProfile)
             Builder(
               builder: (context) {
-                final invitesFromUser = widget.receivedInvitations
-                    .where((e) => e.sender.id == userData.id)
-                    .toList();
-                final invitesToUser = widget.sentInvitations
-                    .where((e) => e.recipient.id == userData.id)
-                    .toList();
+                final invitesFromUser = _inboxModel.pendingReceivedInvitations
+                        ?.where((e) => e.sender.id == userData.id)
+                        .toList() ??
+                    [];
+                final invitesToUser = _inboxModel.pendingSentInvitations
+                        ?.where((e) => e.recipient.id == userData.id)
+                        .toList() ??
+                    [];
                 final userId = userData.id;
                 final userFirstName = userData.firstName ?? '';
-                if (invitesFromUser.isEmpty && invitesToUser.isEmpty) {
-                  // There is no connection between users
-                  return ProfilePageHeader(
-                    authenticatedUser: widget.authenticatedUser,
-                    userId: userId,
-                    userFirstName: userFirstName,
-                  );
-                } else if (invitesFromUser.isNotEmpty &&
-                    invitesFromUser.any((e) =>
-                        e.status == Enum$ChannelInvitationStatus.created)) {
+                if (_inboxModel.hasChannelWithUser(widget.userData.id)) {
+                  // Users are already connected
+                  return const SizedBox(width: 0, height: 0);
+                } else if (invitesFromUser.isNotEmpty) {
                   // There is a pending invitation received from this user
                   return ProfilePageHeader(
                     authenticatedUser: widget.authenticatedUser,
@@ -179,9 +171,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                         .id,
                     invitationDirection: MessageDirection.received,
                   );
-                } else if (invitesToUser.isNotEmpty &&
-                    invitesToUser.any((e) =>
-                        e.status == Enum$ChannelInvitationStatus.created)) {
+                } else if (invitesToUser.isNotEmpty) {
                   // There is a pending invitation sent to this user
                   return ProfilePageHeader(
                     authenticatedUser: widget.authenticatedUser,
@@ -194,8 +184,12 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                     invitationDirection: MessageDirection.sent,
                   );
                 } else {
-                  // Users are already connected
-                  return const SizedBox(width: 0, height: 0);
+                  // There is no connection between users
+                  return ProfilePageHeader(
+                    authenticatedUser: widget.authenticatedUser,
+                    userId: userId,
+                    userFirstName: userFirstName,
+                  );
                 }
               },
             ),

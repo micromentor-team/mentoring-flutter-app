@@ -64,7 +64,8 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
             await _invitationsProvider.declineChannelInvitation(
               channelInvitationId: widget.invitationId!,
             );
-            _inboxModel.refreshReceivedInvitations(onlyPending: false);
+            await _inboxModel.refreshPendingReceivedInvitations();
+            _inboxModel.refreshInboxInviteNotifications();
           },
           child: Text(
             l10n.decline,
@@ -84,17 +85,19 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
             await _invitationsProvider.acceptChannelInvitation(
               channelInvitationId: widget.invitationId!,
             );
+            await _inboxModel.refreshPendingReceivedInvitations();
             await _inboxModel.refreshInboxInviteNotifications();
             await _inboxModel.refreshActiveChannels();
-            for (ChannelForUser channel in _inboxModel.activeChannels) {
-              if (channel.participants
-                      .any((c) => c.user.id == widget.authenticatedUser.id) &&
-                  channel.participants.any((c) => c.user.id == widget.userId)) {
-                router.push('${Routes.inboxChats.path}/${channel.id}');
-                return;
-              }
+            final ChannelForUser? newChannel = _inboxModel.activeChannels
+                .where(
+                  (e) => e.participants.any((p) => p.user.id == widget.userId),
+                )
+                .firstOrNull;
+            if (newChannel != null) {
+              router.push('${Routes.inboxChats.path}/${newChannel.id}');
+            } else {
+              router.push(Routes.inboxChats.path);
             }
-            router.push(Routes.inboxChats.path);
           },
           child: Text(
             l10n.accept,
@@ -155,7 +158,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
         await _invitationsProvider.withdrawChannelInvitation(
           channelInvitationId: widget.invitationId!,
         );
-        _inboxModel.refreshSentInvitations(onlyPending: false);
+        _inboxModel.refreshPendingSentInvitations();
       },
       child: Text(
         l10n.profileHeaderWithdraw,

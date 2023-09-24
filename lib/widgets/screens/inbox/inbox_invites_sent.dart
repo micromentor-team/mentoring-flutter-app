@@ -36,7 +36,6 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!pageRoute.isCurrent) return;
-    _inboxModel.refreshSentInvitations(onlyPending: true);
     _l10n = AppLocalizations.of(context)!;
   }
 
@@ -112,7 +111,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
       selector: (_, inboxModel) => inboxModel.pendingSentInvitations,
       builder: (_, pendingSentInvitations, __) {
         return AppUtility.widgetForAsyncState(
-          state: _inboxModel.invitesSentState,
+          state: _inboxModel.sentInvitationsState,
           onReady: () {
             if (pendingSentInvitations?.isEmpty ?? true) {
               return EmptyStateMessage(

@@ -39,7 +39,6 @@ class _InvitationSectionState extends State<InvitationSection> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _l10n = AppLocalizations.of(context)!;
-    _inboxModel.refreshReceivedInvitations(onlyPending: true);
   }
 
   InvitationTile _createInvitationTile(
@@ -89,7 +88,7 @@ class _InvitationSectionState extends State<InvitationSection> {
       selector: (_, inboxModel) => inboxModel.pendingReceivedInvitations,
       builder: (context, pendingReceivedInvitations, _) {
         return AppUtility.widgetForAsyncState(
-          state: _inboxModel.invitesReceivedState,
+          state: _inboxModel.receivedInvitationsState,
           onReady: () {
             if (pendingReceivedInvitations?.isEmpty ?? true) {
               return const SizedBox(width: 0, height: 0);

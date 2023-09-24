@@ -14,53 +14,55 @@ import '../invitations_provider.dart';
 import '../messages_provider.dart';
 
 class InboxModel extends ChangeNotifier {
+  // Providers
   final MessagesProvider _messagesProvider;
   final ChannelsProvider _channelsProvider;
   final InvitationsProvider _invitationsProvider;
   final UserProvider _userProvider;
+
+  // Notification counters
   int _inboxChatNotifications = 0;
   int _inboxArchivedNotifications = 0;
   int _inboxInvitesNotifications = 0;
-  ChannelMessageInbox? _unseenMessages;
-  List<ChannelForUser>? _activeChannels;
-  List<ReceivedChannelInvitation>? _receivedInvitations;
-  List<ReceivedChannelInvitation>? _pendingReceivedInvitations;
-  List<SentChannelInvitation>? _sentInvitations;
-  List<SentChannelInvitation>? _pendingSentInvitations;
-  List<StreamSubscription<QueryResult<Object?>>>? _streamSubscriptions;
-  AsyncState _invitesReceivedState = AsyncState.ready;
-  AsyncState _invitesSentState = AsyncState.ready;
-  AsyncState _channelsState = AsyncState.ready;
-
   int get inboxChatNotifications => _inboxChatNotifications;
   int get inboxArchivedNotifications => _inboxArchivedNotifications;
   int get inboxInvitesNotifications => _inboxInvitesNotifications;
   int get inboxNotifications =>
       _inboxChatNotifications + _inboxInvitesNotifications;
-  List<ChannelForUser> get activeChannels => _activeChannels!;
-  ChannelMessageInbox? get unseenMessages => _unseenMessages;
-  List<ReceivedChannelInvitation>? get receivedInvitations =>
-      _receivedInvitations;
+
+  // Invitations
+  List<ReceivedChannelInvitation>? _pendingReceivedInvitations;
+  List<SentChannelInvitation>? _pendingSentInvitations;
   List<ReceivedChannelInvitation>? get pendingReceivedInvitations =>
       _pendingReceivedInvitations;
-  List<SentChannelInvitation>? get sentInvitations => _sentInvitations;
   List<SentChannelInvitation>? get pendingSentInvitations =>
       _pendingSentInvitations;
-  AsyncState get invitesReceivedState => _invitesReceivedState;
-  AsyncState get invitesSentState => _invitesSentState;
+
+  // Channels
+  List<ChannelForUser>? _activeChannels;
+  ChannelMessageInbox? _unseenMessages;
+  List<ChannelForUser> get activeChannels => _activeChannels!;
+  ChannelMessageInbox? get unseenMessages => _unseenMessages;
+  List<StreamSubscription<QueryResult<Object?>>>? _streamSubscriptions;
+
+  // AsyncState
+  AsyncState _channelsState = AsyncState.ready;
+  AsyncState _receivedInvitationsState = AsyncState.ready;
+  AsyncState _sentInvitationsState = AsyncState.ready;
+  AsyncState get channelsState => _channelsState;
+  AsyncState get receivedInvitationsState => _receivedInvitationsState;
+  AsyncState get sentInvitationsState => _sentInvitationsState;
   AsyncState get invitesState {
-    if (_invitesReceivedState == AsyncState.error ||
-        _invitesSentState == AsyncState.error) {
+    if (_receivedInvitationsState == AsyncState.error ||
+        _sentInvitationsState == AsyncState.error) {
       return AsyncState.error;
-    } else if (_invitesReceivedState == AsyncState.loading ||
-        _invitesSentState == AsyncState.loading) {
+    } else if (_receivedInvitationsState == AsyncState.loading ||
+        _sentInvitationsState == AsyncState.loading) {
       return AsyncState.loading;
     } else {
       return AsyncState.ready;
     }
   }
-
-  AsyncState get channelsState => _channelsState;
 
   InboxModel({required BuildContext context})
       : _messagesProvider = Provider.of<MessagesProvider>(
@@ -115,15 +117,22 @@ class InboxModel extends ChangeNotifier {
     }
   }
 
-  Future<void> refreshAllNotifications() async {
-    await refreshInboxChatNotifications(notify: false);
-    await refreshInboxInviteNotifications(notify: false);
-    if (hasListeners) {
-      notifyListeners();
-    }
+  bool hasChannelWithUser(String userId) {
+    return _activeChannels?.any(
+          (e) => e.participants.any((p) => p.user.id == userId),
+        ) ??
+        false;
   }
 
-  Future<void> refreshInboxChatNotifications({bool notify = true}) async {
+  Future<void> refreshAll() async {
+    await refreshActiveChannels();
+    refreshInboxChatNotifications();
+    refreshInboxInviteNotifications();
+    refreshPendingReceivedInvitations();
+    refreshPendingSentInvitations();
+  }
+
+  Future<void> refreshInboxChatNotifications() async {
     final allUnseenMessagesResult = await _messagesProvider.allUnseenMessages();
     if (allUnseenMessagesResult.gqlQueryResult.hasException) {
       final String e =
@@ -136,13 +145,13 @@ class InboxModel extends ChangeNotifier {
       _inboxChatNotifications = _unseenMessages?.unseenMessages?.length ?? 0;
       _inboxArchivedNotifications =
           _unseenMessages?.unseenArchivedMessages?.length ?? 0;
-      if (hasListeners && notify) {
+      if (hasListeners) {
         notifyListeners();
       }
     }
   }
 
-  Future<void> refreshInboxInviteNotifications({bool notify = true}) async {
+  Future<void> refreshInboxInviteNotifications() async {
     final receivedInvitationsResult =
         await _invitationsProvider.getReceivedInvitations(onlyPending: true);
     if (receivedInvitationsResult.gqlQueryResult.hasException) {
@@ -155,70 +164,52 @@ class InboxModel extends ChangeNotifier {
       // TODO: Filter for unread invites
       _inboxInvitesNotifications =
           receivedInvitationsResult.response?.length ?? 0;
-      if (hasListeners && notify) {
+      if (hasListeners) {
         notifyListeners();
       }
     }
   }
 
-  Future<void> refreshReceivedInvitations({required bool onlyPending}) async {
-    if (onlyPending) {
-      _pendingReceivedInvitations = null;
-    } else {
-      _receivedInvitations = null;
-    }
-    _invitesReceivedState = AsyncState.loading;
+  Future<void> refreshPendingReceivedInvitations() async {
+    _pendingReceivedInvitations = null;
+    _receivedInvitationsState = AsyncState.loading;
     final result = await _invitationsProvider.getReceivedInvitations(
-      onlyPending: onlyPending,
+      onlyPending: true,
     );
     if (result.gqlQueryResult.hasException) {
-      _invitesReceivedState = AsyncState.error;
+      _receivedInvitationsState = AsyncState.error;
       final String e = result.gqlQueryResult.exception.toString();
       CrashHandler.logCrashReport(
-          'Could not retrieve received invitations: $e');
+        'Could not retrieve received invitations: $e',
+      );
       return;
     } else {
-      if (onlyPending) {
-        _pendingReceivedInvitations = result.response ?? [];
-        _pendingReceivedInvitations
-            ?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-      } else {
-        _receivedInvitations = result.response ?? [];
-        _receivedInvitations
-            ?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-      }
-      _invitesReceivedState = AsyncState.ready;
+      _pendingReceivedInvitations = result.response ?? [];
+      _pendingReceivedInvitations
+          ?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      _receivedInvitationsState = AsyncState.ready;
     }
     if (hasListeners) {
       notifyListeners();
     }
   }
 
-  Future<void> refreshSentInvitations({required bool onlyPending}) async {
-    if (onlyPending) {
-      _pendingSentInvitations = null;
-    } else {
-      _sentInvitations = null;
-    }
-    _invitesSentState = AsyncState.loading;
+  Future<void> refreshPendingSentInvitations() async {
+    _pendingSentInvitations = null;
+    _sentInvitationsState = AsyncState.loading;
     final result = await _invitationsProvider.getSentInvitations(
-      onlyPending: onlyPending,
+      onlyPending: true,
     );
     if (result.gqlQueryResult.hasException) {
-      _invitesSentState = AsyncState.error;
+      _sentInvitationsState = AsyncState.error;
       final String e = result.gqlQueryResult.exception.toString();
       CrashHandler.logCrashReport('Could not retrieve sent invitations: $e');
       return;
     } else {
-      if (onlyPending) {
-        _pendingSentInvitations = result.response ?? [];
-        _pendingSentInvitations
-            ?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-      } else {
-        _sentInvitations = result.response ?? [];
-        _sentInvitations?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-      }
-      _invitesSentState = AsyncState.ready;
+      _pendingSentInvitations = result.response ?? [];
+      _pendingSentInvitations
+          ?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      _sentInvitationsState = AsyncState.ready;
     }
     if (hasListeners) {
       notifyListeners();
@@ -286,20 +277,27 @@ class InboxModel extends ChangeNotifier {
     }
     _streamSubscriptions = [];
     for (ChannelForUser channel in _activeChannels!) {
-      _streamSubscriptions!.add(_createChannelSubscription(channel.id));
+      _streamSubscriptions!.add(
+        _createChannelSubscription(
+          channelId: channel.id,
+        ),
+      );
     }
   }
 
-  StreamSubscription<QueryResult<Object?>> _createChannelSubscription(
-      String channelId) {
+  StreamSubscription<QueryResult<Object?>> _createChannelSubscription({
+    required String channelId,
+  }) {
     return _channelsProvider.subscribeToChannel(
       channelId: channelId,
       onSubscriptionEvent: (event) async {
+        // TODO: Subscribe to invites to know when a sent invitation was accepted/declined by other user, and refresh channels/invites accordingly
+        // TODO: Subscribe to know when a new invitation is received and refresh pending invites accordingly
         switch (event.eventType) {
           case Enum$ChannelChangedEventType.messageCreated:
             if (event.channelId == channelId) {
               await _refreshLatestMessage(channelId);
-              await refreshInboxChatNotifications();
+              refreshInboxChatNotifications();
             }
             return;
           default:

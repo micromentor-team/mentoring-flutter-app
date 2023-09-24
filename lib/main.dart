@@ -80,8 +80,7 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   void _initializeUser() async {
-    await _inboxModel.refreshActiveChannels();
-    _inboxModel.refreshAllNotifications();
+    await _inboxModel.refreshAll();
   }
 
   @override

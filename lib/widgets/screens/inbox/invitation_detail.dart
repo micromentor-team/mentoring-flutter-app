@@ -7,7 +7,6 @@ import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/models/inbox_model.dart';
-import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
@@ -34,7 +33,6 @@ class InvitationDetail extends StatefulWidget {
 class _InvitationDetailState extends State<InvitationDetail>
     with NavigationMixin<InvitationDetail> {
   late final InvitationsProvider _invitationsProvider;
-  late final UserProvider _userProvider;
   late final InboxModel _inboxModel;
   late Future<OperationResult<ChannelInvitationById>> _invitation;
   late AppLocalizations _l10n;
@@ -43,10 +41,6 @@ class _InvitationDetailState extends State<InvitationDetail>
   void initState() {
     super.initState();
     _invitationsProvider = Provider.of<InvitationsProvider>(
-      context,
-      listen: false,
-    );
-    _userProvider = Provider.of<UserProvider>(
       context,
       listen: false,
     );
@@ -222,7 +216,8 @@ class _InvitationDetailState extends State<InvitationDetail>
             await _invitationsProvider.declineChannelInvitation(
               channelInvitationId: widget.channelInvitationId,
             );
-            router.push(Routes.inboxInvitesReceived.path);
+            await _inboxModel.refreshPendingReceivedInvitations();
+            _inboxModel.refreshInboxInviteNotifications();
           },
           child: Text(
             _l10n.decline,
@@ -242,20 +237,17 @@ class _InvitationDetailState extends State<InvitationDetail>
             await _invitationsProvider.acceptChannelInvitation(
               channelInvitationId: widget.channelInvitationId,
             );
+            await _inboxModel.refreshPendingReceivedInvitations();
             await _inboxModel.refreshInboxInviteNotifications();
             await _inboxModel.refreshActiveChannels();
-            for (ChannelForUser channel in _inboxModel.activeChannels) {
-              if (channel.participants.any(
-                    (c) => c.user.id == _userProvider.user!.id,
-                  ) &&
-                  channel.participants.any(
-                    (c) => c.user.id == senderId,
-                  )) {
-                router.push('${Routes.inboxChats.path}/${channel.id}');
-                return;
-              }
+            final ChannelForUser? newChannel = _inboxModel.activeChannels
+                .where((e) => e.participants.any((p) => p.user.id == senderId))
+                .firstOrNull;
+            if (newChannel != null) {
+              router.push('${Routes.inboxChats.path}/${newChannel.id}');
+            } else {
+              router.push(Routes.inboxChats.path);
             }
-            router.push(Routes.inboxChats.path);
           },
           child: Text(
             _l10n.accept,
@@ -289,6 +281,7 @@ class _InvitationDetailState extends State<InvitationDetail>
             await _invitationsProvider.withdrawChannelInvitation(
               channelInvitationId: widget.channelInvitationId,
             );
+            await _inboxModel.refreshPendingSentInvitations();
             router.push(Routes.inboxInvitesSent.path);
           },
           child: Text(
