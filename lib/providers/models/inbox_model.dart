@@ -171,8 +171,8 @@ class InboxModel extends ChangeNotifier {
   }
 
   Future<void> refreshPendingReceivedInvitations() async {
-    _pendingReceivedInvitations = null;
     _receivedInvitationsState = AsyncState.loading;
+    _pendingReceivedInvitations = null;
     final result = await _invitationsProvider.getReceivedInvitations(
       onlyPending: true,
     );
@@ -195,8 +195,8 @@ class InboxModel extends ChangeNotifier {
   }
 
   Future<void> refreshPendingSentInvitations() async {
-    _pendingSentInvitations = null;
     _sentInvitationsState = AsyncState.loading;
+    _pendingSentInvitations = null;
     final result = await _invitationsProvider.getSentInvitations(
       onlyPending: true,
     );
@@ -217,8 +217,8 @@ class InboxModel extends ChangeNotifier {
   }
 
   Future<void> refreshActiveChannels() async {
-    _activeChannels = null;
     _channelsState = AsyncState.loading;
+    _activeChannels = null;
     final previousActiveChannelsCount = _activeChannels?.length ?? 0;
     final result = await _channelsProvider.queryUserChannels(
       userId: _userProvider.user!.id,
