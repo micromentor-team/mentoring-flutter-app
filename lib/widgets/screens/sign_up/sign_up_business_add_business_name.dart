@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 import '../../../constants/app_constants.dart';
+import '../../atoms/text_form_field_widget.dart';
 import 'sign_up_bottom_buttons.dart';
 
 class SignupBusinessAddBusinessNameScreen extends StatefulWidget {
@@ -19,11 +20,10 @@ class _SignupBusinessAddBusinessNameScreenState
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
-      title: "What is the name of your business?",
+      title: l10n.whatIsTheNameOfYourBusiness,
       bottomButtons: SignUpBottomButtons(
           leftButtonText: l10n.previous,
           rightButtonText: l10n.next,
@@ -35,30 +35,12 @@ class _SignupBusinessAddBusinessNameScreenState
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.moreInfoPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.readyToBrowseMentorsPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: Form(
+          child: TextFormFieldWidget(
+        label: l10n.businessName,
+        onPressed: (value) {},
+        textController: null,
+      )),
     );
   }
 }

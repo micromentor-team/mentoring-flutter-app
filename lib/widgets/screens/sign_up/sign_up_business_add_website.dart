@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 import '../../../constants/app_constants.dart';
+import '../../atoms/text_form_field_widget.dart';
 import 'sign_up_bottom_buttons.dart';
 
 class SignupBusinessAddWebsiteScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SignupBusinessAddWebsiteScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
-      title: "Do you have a website?",
+      title: l10n.doYouHaveAWebsite,
       bottomButtons: SignUpBottomButtons(
           leftButtonText: l10n.previous,
           rightButtonText: l10n.next,
@@ -35,29 +36,12 @@ class _SignupBusinessAddWebsiteScreenState
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.moreInfoPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.readyToBrowseMentorsPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
-        ],
+      body: Form(
+        child: TextFormFieldWidget(
+          label: l10n.websiteURL,
+          onPressed: (value) {},
+          textController: null,
+        ),
       ),
     );
   }

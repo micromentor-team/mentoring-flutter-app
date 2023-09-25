@@ -22,7 +22,7 @@ class _SignupBusinessCompletedScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.four,
-      title: "Amazing!",
+      title: l10n.amazing,
       bottomButtons: SignUpBottomButtons(
           leftButtonText: l10n.previous,
           rightButtonText: l10n.findMentors,
@@ -33,26 +33,35 @@ class _SignupBusinessCompletedScreenState
             context.push(Routes.completedEntrepreneurSignup.path);
           }),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.moreInfoPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
+          SizedBox(
+            height: 240,
+            child: ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                  theme.colorScheme.onSurface,
+                  BlendMode.srcATop,
+                ),
+                child: const Image(
+                  image: AssetImage(Assets.signUpCompletedScreenStockImage),
+                )),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.readyToBrowseMentorsPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
+          const SizedBox(
+            height: Insets.paddingMedium,
+          ),
+          Text(
+            l10n.signUpCompletedTextOne,
+            style: theme.textTheme.bodyMedium!
+                .copyWith(color: theme.colorScheme.outline),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: Insets.paddingSmall,
+          ),
+          Text(
+            l10n.signUpCompletedTextTwo,
+            style: theme.textTheme.bodyMedium!
+                .copyWith(color: theme.colorScheme.outline),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

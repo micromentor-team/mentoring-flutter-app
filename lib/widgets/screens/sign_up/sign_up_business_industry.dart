@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 import '../../../constants/app_constants.dart';
+import '../../molecules/multi_select_chips.dart';
 import 'sign_up_bottom_buttons.dart';
 
 class SignupBusinessIndustryScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SignupBusinessIndustryScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.three,
-      title: "What is your industry?",
+      title: l10n.whatIsYourIndustry,
       bottomButtons: SignUpBottomButtons(
           leftButtonText: l10n.previous,
           rightButtonText: l10n.next,
@@ -39,24 +40,7 @@ class _SignupBusinessIndustryScreenState
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.moreInfoPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.readyToBrowseMentorsPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
+          createMultiSelectChipsIndustry(),
         ],
       ),
     );

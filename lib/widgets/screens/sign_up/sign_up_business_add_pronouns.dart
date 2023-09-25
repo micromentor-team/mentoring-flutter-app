@@ -23,7 +23,7 @@ class _SignupBusinessAddPronounsScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
-      title: "What are your pronouns?",
+      title: l10n.whatAreYourPronouns,
       bottomButtons: SignUpBottomButtons(
           leftButtonText: l10n.previous,
           rightButtonText: l10n.next,

@@ -62,6 +62,46 @@ CreateMultiSelectChips createMultiSelectChipsExampleWithIcon() {
   );
 }
 
+CreateMultiSelectChips createMultiSelectChipsIndustry() {
+  return CreateMultiSelectChips(
+    chips: [
+      Chip(
+          chipName: 'Administrative Services',
+          textId: 'administrativeServices',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Agriculture & Forestry',
+          textId: 'agricultureAndForestry',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Architecture & Engineering',
+          textId: 'architectureAndEngineering',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Arts, Entertainment, & Recreation',
+          textId: 'artsEntertainmentAndRecreation',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Beauty, Hair, & Cosmetics',
+          textId: 'beautyHairAndCosmetics',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Building & Grounds Maintenance',
+          textId: 'buildingAndGroundsMaintenance',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Construction',
+          textId: 'construction',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Digital Marketing & eCommerce',
+          textId: 'digitalMarketingAndeCommerce',
+          icon: Icons.work_outline),
+    ],
+    maxSelection: 1,
+  );
+}
+
 //build
 class CreateMultiSelectChips extends StatefulWidget {
   final List<Chip> chips;
@@ -123,7 +163,9 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     String textString = widget.maxSelection != null
-        ? l10n.profileChipsSelectUpTo(widget.maxSelection!)
+        ? widget.maxSelection == 1
+            ? l10n.profileChipSelectOne
+            : l10n.profileChipsSelectUpTo(widget.maxSelection!)
         : l10n.profileChipsSelectAllThatApply;
 
     List<Widget> chipListWithPadding = [];

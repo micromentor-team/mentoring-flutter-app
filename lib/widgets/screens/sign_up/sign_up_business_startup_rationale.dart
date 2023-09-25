@@ -23,7 +23,7 @@ class _SignupBusinessStartupRationaleScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
-      title: "Why did you start your business?",
+      title: l10n.whatDidYouStartYourBusiness,
       bottomButtons: SignUpBottomButtons(
           leftButtonText: l10n.previous,
           rightButtonText: l10n.next,
@@ -35,30 +35,7 @@ class _SignupBusinessStartupRationaleScreenState
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.moreInfoPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.readyToBrowseMentorsPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: const Placeholder(),
     );
   }
 }
