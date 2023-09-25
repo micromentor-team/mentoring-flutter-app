@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/app_constants.dart';
+
 class SignUpIconFooter extends StatelessWidget {
   final IconData icon;
   final String text;
@@ -15,8 +17,12 @@ class SignUpIconFooter extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(icon, color: theme.colorScheme.outline),
+        const SizedBox(
+          width: Insets.paddingSmall,
+        ),
         Expanded(
           // fit: BoxFit.contain,
           child: Text(

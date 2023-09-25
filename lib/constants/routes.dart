@@ -53,9 +53,25 @@ class Routes {
     name: 'signupGuidelines',
     path: '${signup.path}/guidelines',
   );
-  static Route entrepreneurOrMentor = Route(
-    name: 'entrepreneurOrMentor',
+  static Route signupEntrepreneurOrMentor = Route(
+    name: 'signupEntrepreneurOrMentor',
     path: '${signup.path}/userrole',
+  );
+  static Route signupBusinessStage = Route(
+    name: 'signupBusinessStage',
+    path: '${signup.path}/businessstage',
+  );
+  static Route signupBusinessHelpSelection = Route(
+    name: 'signupBusinessHelpSelection',
+    path: '${signup.path}/businesshelp',
+  );
+  static Route signupMoreInfo = Route(
+    name: 'signupMoreInfo',
+    path: '${signup.path}/moreinfo',
+  );
+  static Route addProfilePicture = Route(
+    name: 'addProfilePicture',
+    path: '${signup.path}/addProfilePicture',
   );
   static Route loading = Route(
     name: 'loading',
