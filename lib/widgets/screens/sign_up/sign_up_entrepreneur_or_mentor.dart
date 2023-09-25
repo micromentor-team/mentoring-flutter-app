@@ -56,5 +56,3 @@ class _SignUpEntrepreneurOrMentorScreenState
     );
   }
 }
-
-enum UserRole { mentor, entrepreneur }

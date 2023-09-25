@@ -30,7 +30,9 @@ class _SignupAddProfilePicScreenState extends State<SignupAddProfilePicScreen> {
           leftOnPress: () {
             context.pop();
           },
-          rightOnPress: () {}),
+          rightOnPress: () {
+            context.push(Routes.addPronouns.path);
+          }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(

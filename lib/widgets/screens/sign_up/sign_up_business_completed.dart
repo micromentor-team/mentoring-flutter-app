@@ -5,32 +5,32 @@ import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 import '../../../constants/app_constants.dart';
 import 'sign_up_bottom_buttons.dart';
 
-class SignupBusinessMoreInfoScreen extends StatefulWidget {
-  const SignupBusinessMoreInfoScreen({Key? key}) : super(key: key);
+class SignupBusinessCompletedScreen extends StatefulWidget {
+  const SignupBusinessCompletedScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupBusinessMoreInfoScreen> createState() =>
-      _SignupBusinessMoreInfoScreenState();
+  State<SignupBusinessCompletedScreen> createState() =>
+      _SignupBusinessCompletedScreenState();
 }
 
-class _SignupBusinessMoreInfoScreenState
-    extends State<SignupBusinessMoreInfoScreen> {
+class _SignupBusinessCompletedScreenState
+    extends State<SignupBusinessCompletedScreen> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
-      progress: SignUpProgress.one,
-      title: l10n.needLittleMoreInfo,
+      progress: SignUpProgress.four,
+      title: "Amazing!",
       bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.findMentors,
-          rightButtonText: l10n.continueButton,
+          leftButtonText: l10n.previous,
+          rightButtonText: l10n.findMentors,
           leftOnPress: () {
             context.pop();
           },
           rightOnPress: () {
-            context.push(Routes.addProfilePicture.path);
+            context.push(Routes.completedEntrepreneurSignup.path);
           }),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

@@ -73,6 +73,30 @@ class Routes {
     name: 'addProfilePicture',
     path: '${signup.path}/addProfilePicture',
   );
+  static Route addPronouns = Route(
+    name: 'addPronouns',
+    path: '${signup.path}/addPronouns',
+  );
+  static Route addBusinessName = Route(
+    name: 'addBusinessName',
+    path: '${signup.path}/addBusinessName',
+  );
+  static Route addWebsite = Route(
+    name: 'addWebsite',
+    path: '${signup.path}/addWebsite',
+  );
+  static Route startupRationale = Route(
+    name: 'startupRationale',
+    path: '${signup.path}/startupRationale',
+  );
+  static Route industry = Route(
+    name: 'industry',
+    path: '${signup.path}/industry',
+  );
+  static Route completedEntrepreneurSignup = Route(
+    name: 'completedEntrepreneurSignup',
+    path: '${signup.path}/completedEntrepreneurSignup',
+  );
   static Route loading = Route(
     name: 'loading',
     path: '/loading',
