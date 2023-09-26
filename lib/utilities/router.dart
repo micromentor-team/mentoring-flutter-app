@@ -22,7 +22,9 @@ import '../widgets/screens/inbox/inbox_chat_list.dart';
 import '../widgets/screens/inbox/invitation_detail.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
 import '../widgets/screens/sign_up/mentor_or_entrepreneur.dart';
+import '../widgets/screens/sign_up/sign_up_name.dart';
 import '../widgets/screens/sign_up/sign_up_permissions.dart';
+import '../widgets/screens/sign_up/sign_up_phone_number.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
 import '../widgets/screens/sign_up/sign_up_verify.dart';
 import '../widgets/screens/sign_up/sign_up_welcome.dart';
@@ -131,6 +133,26 @@ class AppRouter {
                 key: state.pageKey,
                 maintainState: false,
                 child: const SignUpPermissions(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupName.path,
+            name: Routes.signupName.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpName(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupPhoneNumber.path,
+            name: Routes.signupPhoneNumber.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpPhoneNumber(),
               );
             }),
         GoRoute(

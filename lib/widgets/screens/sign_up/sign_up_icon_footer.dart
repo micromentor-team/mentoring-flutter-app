@@ -18,7 +18,6 @@ class SignUpIconFooter extends StatelessWidget {
       children: [
         Icon(icon, color: theme.colorScheme.outline),
         Expanded(
-          // fit: BoxFit.contain,
           child: Text(
             text,
             softWrap: true,

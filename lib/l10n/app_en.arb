@@ -278,5 +278,11 @@
     "here" : "here",
     "guidelinesTextContent2_2" : ". Please report any concerns to support@micromentor.org.",
     "guidelinesSignature": "—The MicroMentor Team",
-    "iagree" : "I agree"
+    "iagree" : "I agree",
+    "whatIsYourName" : "What is your name?",
+    "whatIsYourPhoneNumber" : "What is your phone number?",
+    "firstName" : "First name",
+    "lastName" : "Last name",
+    "signUpVisibleInfoDesc" : "This will be shown on your profile.",
+    "phoneNumber" : "Phone number"
 }
