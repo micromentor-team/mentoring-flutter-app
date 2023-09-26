@@ -11,6 +11,7 @@ import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
+import '../../../providers/models/inbox_model.dart';
 import '../../../providers/user_provider.dart';
 
 class InviteToConnect extends StatefulWidget {
@@ -182,6 +183,7 @@ class MessageBox extends StatefulWidget {
 
 class _MessageBoxState extends State<MessageBox> {
   late final InvitationsProvider _invitationsProvider;
+  late final InboxModel _inboxModel;
   late final GoRouter _router;
   final TextEditingController _textEditingController = TextEditingController();
 
@@ -192,6 +194,7 @@ class _MessageBoxState extends State<MessageBox> {
       context,
       listen: false,
     );
+    _inboxModel = Provider.of<InboxModel>(context, listen: false);
     _router = GoRouter.of(context);
   }
 
@@ -273,6 +276,7 @@ class _MessageBoxState extends State<MessageBox> {
                     messageText: _textEditingController.value.text,
                   ))
                           .response!;
+                  await _inboxModel.refreshPendingSentInvitations();
                   _router.pushReplacement(
                     '${Routes.inboxInvitesSent.path}/${createdInvitation.id}',
                   );

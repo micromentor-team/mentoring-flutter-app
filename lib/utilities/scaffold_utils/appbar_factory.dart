@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/user_popup_menu_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/app_constants.dart';
 import '../../widgets/atoms/notification_bubble.dart';
@@ -15,16 +17,7 @@ class AppBarFactory {
 
   static AppBar? createInboxAppBar({
     required GoRouter router,
-    required int chatsNotifications,
-    required int invitesNotifications,
   }) {
-    int totalNotifications = 0;
-    if (!router.location.startsWith(Routes.inboxChats.path)) {
-      totalNotifications += chatsNotifications;
-    }
-    if (!router.location.startsWith(Routes.inboxInvites.path)) {
-      totalNotifications += invitesNotifications;
-    }
     return AppBar(
       leading: Stack(
         children: [
@@ -36,19 +29,26 @@ class AppBarFactory {
               );
             },
           ),
-          if (totalNotifications > 0)
-            Padding(
-              padding: const EdgeInsetsDirectional.only(
-                top: Insets.paddingSmall,
-                start: Insets.paddingSmall,
-              ),
-              child: Align(
-                alignment: AlignmentDirectional.topStart,
-                child: NotificationBubble(
-                  notifications: totalNotifications,
+          Selector<InboxModel, int>(
+            selector: (_, inboxModel) => inboxModel.inboxNotifications,
+            builder: (_, inboxNotifications, __) {
+              if (inboxNotifications == 0) {
+                return const SizedBox.shrink();
+              }
+              return Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  top: Insets.paddingExtraSmall,
+                  end: Insets.paddingSmall,
                 ),
-              ),
-            ),
+                child: Align(
+                  alignment: AlignmentDirectional.topEnd,
+                  child: NotificationBubble(
+                    notifications: inboxNotifications,
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
       title: Builder(

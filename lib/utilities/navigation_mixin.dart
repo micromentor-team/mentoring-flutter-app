@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +10,6 @@ mixin NavigationMixin<T extends StatefulWidget> on State<T>
   late final RouteObserver<PageRoute> _routeObserver;
   PageRoute? _pageRoute;
 
-  AsyncState get navigationState => _scaffoldModel.state;
   PageRoute get pageRoute => _pageRoute!;
   GoRouter get router => _router;
 
@@ -58,7 +56,9 @@ mixin NavigationMixin<T extends StatefulWidget> on State<T>
   void didPushNext() {}
 
   void buildPageRouteScaffold(
-      void Function(ScaffoldModel scaffoldModel) build) {
+      void Function(
+        ScaffoldModel scaffoldModel,
+      ) build) {
     if (_pageRoute!.isCurrent) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         build(_scaffoldModel);
