@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 import '../../../constants/app_constants.dart';
+import '../../molecules/checkbox_list_and_form.dart';
 import 'sign_up_bottom_buttons.dart';
 
 class SignupBusinessAddPronounsScreen extends StatefulWidget {
@@ -35,29 +36,19 @@ class _SignupBusinessAddPronounsScreenState
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.moreInfoPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
+      body: Padding(
+        padding: const EdgeInsets.all(Insets.paddingSmall),
+        child: Column(
+          children: [
+            Text(
+              l10n.pronounsDescription,
+              style: theme.textTheme.bodyMedium!
+                  .copyWith(color: theme.colorScheme.outline),
+              textAlign: TextAlign.center,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: Insets.paddingMedium),
-            child: Text(
-              l10n.readyToBrowseMentorsPrompt,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.secondary,
-              ),
-            ),
-          ),
-        ],
+            const PronounExample(),
+          ],
+        ),
       ),
     );
   }
