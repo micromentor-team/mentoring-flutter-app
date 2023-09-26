@@ -7,16 +7,16 @@ import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 import '../../molecules/login_radio_button_cards.dart';
 import 'sign_up_bottom_buttons.dart';
 
-class MentorOrEntrepreneurScreen extends StatefulWidget {
-  const MentorOrEntrepreneurScreen({Key? key}) : super(key: key);
+class SignUpEntrepreneurOrMentorScreen extends StatefulWidget {
+  const SignUpEntrepreneurOrMentorScreen({Key? key}) : super(key: key);
 
   @override
-  State<MentorOrEntrepreneurScreen> createState() =>
-      _MentorOrEntrepreneurScreenState();
+  State<SignUpEntrepreneurOrMentorScreen> createState() =>
+      _SignUpEntrepreneurOrMentorScreenState();
 }
 
-class _MentorOrEntrepreneurScreenState
-    extends State<MentorOrEntrepreneurScreen> {
+class _SignUpEntrepreneurOrMentorScreenState
+    extends State<SignUpEntrepreneurOrMentorScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -31,9 +31,11 @@ class _MentorOrEntrepreneurScreenState
           leftOnPress: () {
             context.pop();
           },
-          rightOnPress: () {}),
+          rightOnPress: () {
+            context.push(Routes.signupBusinessStage.path);
+          }),
       footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+          icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
         children: [
           createEntrepreneurMentorCards(context),

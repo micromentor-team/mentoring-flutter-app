@@ -96,7 +96,7 @@ class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
           },
           rightOnPress: () {
             if (_formKey.currentState!.validate()) {
-              context.push(Routes.entrepreneurOrMentor.path);
+              context.push(Routes.signupEntrepreneurOrMentor.path);
             }
           },
         ));
