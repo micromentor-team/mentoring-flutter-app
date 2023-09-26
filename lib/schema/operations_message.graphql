@@ -59,26 +59,6 @@ query InboxAllUnseenMessages {
     }
 }
 
-query InboxUnseenArchivedMessages {
-    myInbox {
-        channels {
-            unseenArchivedMessages {
-                channelId
-            }
-        }
-    }
-}
-
-query InboxUnseenUnarchivedMessages {
-    myInbox {
-        channels {
-            unseenMessages {
-                channelId
-            }
-        }
-    }
-}
-
 mutation CreateChannelMessage ($input: ChannelMessageInput!) {
     createChannelMessage(input: $input) {
         id

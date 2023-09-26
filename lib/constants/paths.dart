@@ -15,6 +15,8 @@ class Assets {
   static const String startScreenStockImage = "assets/images/StockImage5.png";
   static const String signUpWelcomeScreenStockImage =
       "assets/images/StockImage6.png";
+  static const String signUpCompletedScreenStockImage =
+      "assets/images/StockImage7.png";
   static const String googleIcon = "assets/images/google.png";
   static const String facebookIcon = "assets/images/facebook.png";
   static const String linkedInIcon = "assets/images/linkedin.png";

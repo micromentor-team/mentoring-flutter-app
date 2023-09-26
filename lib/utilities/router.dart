@@ -22,12 +22,18 @@ import '../widgets/screens/inbox/channel_messages/channel_messages_screen.dart';
 import '../widgets/screens/inbox/inbox_chat_list.dart';
 import '../widgets/screens/inbox/invitation_detail.dart';
 import '../widgets/screens/sign_in/sign_in_screen.dart';
-import '../widgets/screens/sign_up/sign_up_name.dart';
-import '../widgets/screens/sign_up/sign_up_add_profile_pic.dart';
+import '../widgets/screens/sign_up/sign_up_business_add_business_name.dart';
+import '../widgets/screens/sign_up/sign_up_business_add_profile_pic.dart';
+import '../widgets/screens/sign_up/sign_up_business_add_pronouns.dart';
+import '../widgets/screens/sign_up/sign_up_business_add_website.dart';
+import '../widgets/screens/sign_up/sign_up_business_completed.dart';
 import '../widgets/screens/sign_up/sign_up_business_help_selection.dart';
+import '../widgets/screens/sign_up/sign_up_business_industry.dart';
 import '../widgets/screens/sign_up/sign_up_business_more_info.dart';
 import '../widgets/screens/sign_up/sign_up_business_stage.dart';
+import '../widgets/screens/sign_up/sign_up_business_startup_rationale.dart';
 import '../widgets/screens/sign_up/sign_up_entrepreneur_or_mentor.dart';
+import '../widgets/screens/sign_up/sign_up_name.dart';
 import '../widgets/screens/sign_up/sign_up_permissions.dart';
 import '../widgets/screens/sign_up/sign_up_phone_number.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
@@ -148,6 +154,66 @@ class AppRouter {
                 key: state.pageKey,
                 maintainState: false,
                 child: const SignupAddProfilePicScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.addPronouns.path,
+            name: Routes.addPronouns.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessAddPronounsScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.addBusinessName.path,
+            name: Routes.addBusinessName.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessAddBusinessNameScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.addWebsite.path,
+            name: Routes.addWebsite.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessAddWebsiteScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.startupRationale.path,
+            name: Routes.startupRationale.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessStartupRationaleScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.industry.path,
+            name: Routes.industry.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessIndustryScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.completedEntrepreneurSignup.path,
+            name: Routes.completedEntrepreneurSignup.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupBusinessCompletedScreen(),
               );
             }),
         GoRoute(

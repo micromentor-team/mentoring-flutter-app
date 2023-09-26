@@ -42,5 +42,3 @@ class _SignupBusinessStageScreenState extends State<SignupBusinessStageScreen> {
     );
   }
 }
-
-enum UserRole { mentor, entrepreneur }

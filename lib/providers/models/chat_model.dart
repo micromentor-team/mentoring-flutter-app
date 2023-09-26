@@ -5,6 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ class ChatModel extends ChangeNotifier {
   final AuthenticatedUser authenticatedUser;
   final MessagesProvider _messagesProvider;
   final ChannelsProvider _channelsProvider;
+  final InboxModel _inboxModel;
   List<ChannelMessage> _channelMessages = [];
   StreamSubscription<QueryResult<Object?>>? _streamSubscription;
   AsyncState _state = AsyncState.ready;
@@ -32,6 +34,10 @@ class ChatModel extends ChangeNotifier {
           listen: false,
         ),
         _channelsProvider = Provider.of<ChannelsProvider>(
+          context,
+          listen: false,
+        ),
+        _inboxModel = Provider.of<InboxModel>(
           context,
           listen: false,
         );
@@ -83,6 +89,7 @@ class ChatModel extends ChangeNotifier {
       CrashHandler.logCrashReport('Could not mark messages as read: $e');
       return;
     }
+    _inboxModel.refreshInboxChatNotifications();
   }
 
   Future<void> _refreshSingleChannelMessage({
