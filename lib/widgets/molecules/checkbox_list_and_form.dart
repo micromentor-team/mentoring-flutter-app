@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
-class CheckboxListAndForm extends StatelessWidget {
-  const CheckboxListAndForm({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Placeholder();
-  }
-}
-
 class LabeledCheckbox extends StatelessWidget {
   const LabeledCheckbox({
     super.key,

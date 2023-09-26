@@ -20,7 +20,6 @@ class _SignupBusinessAddWebsiteScreenState
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
