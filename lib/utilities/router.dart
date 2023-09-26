@@ -10,6 +10,7 @@ import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_community_guidelines.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_email.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_password.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_year_of_birth.dart';
 import 'package:mm_flutter_app/widgets/screens/welcome/select_language.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,9 @@ import '../widgets/screens/sign_up/sign_up_business_more_info.dart';
 import '../widgets/screens/sign_up/sign_up_business_stage.dart';
 import '../widgets/screens/sign_up/sign_up_business_startup_rationale.dart';
 import '../widgets/screens/sign_up/sign_up_entrepreneur_or_mentor.dart';
+import '../widgets/screens/sign_up/sign_up_name.dart';
 import '../widgets/screens/sign_up/sign_up_permissions.dart';
+import '../widgets/screens/sign_up/sign_up_phone_number.dart';
 import '../widgets/screens/sign_up/sign_up_screen.dart';
 import '../widgets/screens/sign_up/sign_up_verify.dart';
 import '../widgets/screens/sign_up/sign_up_welcome.dart';
@@ -244,6 +247,26 @@ class AppRouter {
               );
             }),
         GoRoute(
+            path: Routes.signupName.path,
+            name: Routes.signupName.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpName(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupPhoneNumber.path,
+            name: Routes.signupPhoneNumber.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpPhoneNumber(),
+              );
+            }),
+        GoRoute(
             path: Routes.signupGuidelines.path,
             name: Routes.signupGuidelines.name,
             pageBuilder: (BuildContext context, GoRouterState state) {
@@ -270,6 +293,16 @@ class AppRouter {
               return MaterialPage(
                 key: state.pageKey,
                 child: const SignUpPassword(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupYearOfBirth.path,
+            name: Routes.signupYearOfBirth.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpYearOfBirth(),
               );
             }),
         GoRoute(

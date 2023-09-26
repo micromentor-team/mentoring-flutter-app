@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextFormFieldWidget extends StatefulWidget {
@@ -9,15 +10,20 @@ class TextFormFieldWidget extends StatefulWidget {
       required this.label,
       this.maxLength,
       this.validator,
-      this.isPassword});
+      this.isPassword,
+      this.keyboardType,
+      this.inputFormatters,
+      this.suffixIcon});
 
   final TextEditingController? textController;
   final Function onPressed;
   final String label;
   final bool? isPassword;
   final int? maxLength;
-
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
+  final Widget? suffixIcon;
 
   @override
   State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
@@ -44,6 +50,8 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
           _passwordVisible != null &&
           _passwordVisible == false,
       validator: widget.validator,
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         labelText: widget.label,
         suffixIcon: widget.isPassword != null
@@ -60,7 +68,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
                   });
                 },
               )
-            : null,
+            : widget.suffixIcon,
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0x00000000),

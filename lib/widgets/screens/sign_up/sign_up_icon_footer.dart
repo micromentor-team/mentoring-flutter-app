@@ -24,7 +24,6 @@ class SignUpIconFooter extends StatelessWidget {
           width: Insets.paddingSmall,
         ),
         Expanded(
-          // fit: BoxFit.contain,
           child: Text(
             text,
             softWrap: true,

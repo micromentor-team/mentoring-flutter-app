@@ -55,11 +55,7 @@ class SignUpTemplate extends StatelessWidget {
               const SizedBox(height: Insets.paddingMedium),
               body,
               const Spacer(),
-              if (footer != null)
-                Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Insets.paddingExtraLarge * 2),
-                    child: footer),
+              if (footer != null) SizedBox(width: 240, child: footer),
               if (bottomButtons != null) bottomButtons!,
             ],
           ),

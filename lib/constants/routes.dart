@@ -33,6 +33,14 @@ class Routes {
     name: 'signupEmail',
     path: '${signup.path}/email',
   );
+  static Route signupName = Route(
+    name: 'signupName',
+    path: '${signup.path}/name',
+  );
+  static Route signupPhoneNumber = Route(
+    name: 'signupPhoneNumber',
+    path: '${signup.path}/phoneNumber',
+  );
   static Route signupPassword = Route(
     name: 'signupPassword',
     path: '${signup.path}/password',
@@ -52,6 +60,10 @@ class Routes {
   static Route signupGuidelines = Route(
     name: 'signupGuidelines',
     path: '${signup.path}/guidelines',
+  );
+  static Route signupYearOfBirth = Route(
+    name: 'signupYearOfBirth',
+    path: '${signup.path}/yearOfBirth',
   );
   static Route signupEntrepreneurOrMentor = Route(
     name: 'signupEntrepreneurOrMentor',
