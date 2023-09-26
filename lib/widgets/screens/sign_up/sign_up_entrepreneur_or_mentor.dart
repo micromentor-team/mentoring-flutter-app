@@ -17,10 +17,25 @@ class SignUpEntrepreneurOrMentorScreen extends StatefulWidget {
 
 class _SignUpEntrepreneurOrMentorScreenState
     extends State<SignUpEntrepreneurOrMentorScreen> {
+  void handleRadioButtonChange(int value) {
+    widget.selectedNumber[i] = value;
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final LoginRadioButtons = LoginRadioButtonCards(
+      title: [l10n.iAmAnEntrepreneur, l10n.iAmAMentor],
+      subtitle: [l10n.entrepreneurDescription, l10n.mentorDescription],
+      imageAssetName: const [
+        Image(image: AssetImage(Assets.entrepreneurIcon)),
+        Image(image: AssetImage(Assets.mentorIcon))
+      ],
+      titleIcon: const [null, null],
+      rebuildParentWidget: handleRadioButtonChange,
+    );
+    int selectedNumber = LoginRadioButtons.selectedNumber;
 
     return SignUpTemplate(
       progress: SignUpProgress.one,
@@ -38,7 +53,7 @@ class _SignUpEntrepreneurOrMentorScreenState
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
         children: [
-          createEntrepreneurMentorCards(context),
+          LoginRadioButtons,
           const SizedBox(height: Insets.paddingMedium),
           Padding(
             padding: const EdgeInsets.all(Insets.paddingSmall),
@@ -51,6 +66,7 @@ class _SignUpEntrepreneurOrMentorScreenState
               onTap: () {},
             ),
           ),
+          Text("Selected number is: $selectedNumber")
         ],
       ),
     );
