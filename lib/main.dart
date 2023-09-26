@@ -13,8 +13,8 @@ import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
 import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/providers/models/locale_model.dart';
-import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
@@ -59,6 +59,16 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   late Future<OperationResult<AuthenticatedUser?>> _authenticatedUser;
+  late final InboxModel _inboxModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _inboxModel = Provider.of<InboxModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   void didChangeDependencies() {
@@ -67,6 +77,10 @@ class _StartScreenState extends State<StartScreen> {
         Provider.of<UserProvider>(context).getAuthenticatedUser(
       logFailures: false, // Error is expected when user is not logged in.
     );
+  }
+
+  void _initializeUser() async {
+    await _inboxModel.refreshAll();
   }
 
   @override
@@ -86,6 +100,7 @@ class _StartScreenState extends State<StartScreen> {
                   : SignInScreen(nextRouteName: widget.nextRouteName);
             }
             WidgetsBinding.instance.addPostFrameCallback((_) {
+              _initializeUser();
               context.goNamed(widget.nextRouteName);
             });
             return const LoadingScreen();
@@ -165,14 +180,13 @@ void main() async {
                 value: MessagesProvider(client: client),
               ),
               ChangeNotifierProvider(
+                create: (context) => InboxModel(context: context),
+              ),
+              ChangeNotifierProvider(
                 create: (context) => ScaffoldModel(context: context),
               ),
               ChangeNotifierProvider(
                 create: (context) => ExploreCardFiltersModel(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) =>
-                    MyChannelInvitationsModel(context: context),
               ),
               ChangeNotifierProvider(
                 create: (context) => LocaleModel(),

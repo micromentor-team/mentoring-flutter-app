@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/invitations_provider.dart';
-import 'package:mm_flutter_app/providers/models/my_channel_invitations_model.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/empty_state_message.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_list_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';
+import '../../../utilities/scaffold_utils/appbar_factory.dart';
+import '../../../utilities/scaffold_utils/drawer_factory.dart';
 
 class InboxInvitesSentScreen extends StatefulWidget {
   const InboxInvitesSentScreen({super.key});
@@ -19,7 +21,7 @@ class InboxInvitesSentScreen extends StatefulWidget {
 
 class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
     with NavigationMixin<InboxInvitesSentScreen> {
-  late final MyChannelInvitationsModel _myChannelInvitationsModel;
+  late final InboxModel _inboxModel;
   late AppLocalizations _l10n;
 
   static const int tabBarIndex = 1;
@@ -27,17 +29,13 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
   @override
   void initState() {
     super.initState();
-    _myChannelInvitationsModel = Provider.of<MyChannelInvitationsModel>(
-      context,
-      listen: false,
-    );
+    _inboxModel = Provider.of<InboxModel>(context, listen: false);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!pageRoute.isCurrent) return;
-    _myChannelInvitationsModel.refreshSentInvitations(onlyPending: true);
     _l10n = AppLocalizations.of(context)!;
   }
 
@@ -101,15 +99,21 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
     buildPageRouteScaffold((scaffoldModel) {
-      scaffoldModel.setInboxScaffold(router: router);
+      scaffoldModel.setParams(
+        appBar: AppBarFactory.createInboxAppBar(
+          router: router,
+        ),
+        drawer: DrawerFactory.createInboxDrawer(),
+      );
     });
     _refreshTabIndex(context);
-    return Consumer<MyChannelInvitationsModel>(
-      builder: (context, myChannelInvitationsModel, _) {
+    return Selector<InboxModel, List<SentChannelInvitation>?>(
+      selector: (_, inboxModel) => inboxModel.pendingSentInvitations,
+      builder: (_, pendingSentInvitations, __) {
         return AppUtility.widgetForAsyncState(
-          state: myChannelInvitationsModel.state,
+          state: _inboxModel.sentInvitationsState,
           onReady: () {
-            if (myChannelInvitationsModel.sentInvitations.isEmpty) {
+            if (pendingSentInvitations?.isEmpty ?? true) {
               return EmptyStateMessage(
                 icon: Icons.mail,
                 text: _l10n.emptyStateInvites,
@@ -123,7 +127,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
               child: ListView(
                 children: _createContentList(
                   _createTileList(
-                    myChannelInvitationsModel.sentInvitations,
+                    pendingSentInvitations!,
                   ),
                 ),
               ),

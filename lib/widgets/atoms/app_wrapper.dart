@@ -3,8 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/errors/errors.dart';
+import 'package:mm_flutter_app/widgets/atoms/notification_bubble.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/models/inbox_model.dart';
 import '../../providers/models/scaffold_model.dart';
 
 /*
@@ -54,7 +56,28 @@ class AppWrapper extends StatelessWidget {
                   label: AppLocalizations.of(context)!.navExploreText,
                 ),
                 NavigationDestination(
-                  icon: const Icon(Icons.mail_outline),
+                  icon: Selector<InboxModel, int>(
+                    selector: (_, inboxModel) => inboxModel.inboxNotifications,
+                    builder: (context, inboxNotifications, child) {
+                      return Stack(
+                        alignment: AlignmentDirectional.topEnd,
+                        children: [
+                          child!,
+                          if (inboxNotifications > 0)
+                            NotificationBubble(
+                              notifications: inboxNotifications,
+                            ),
+                        ],
+                      );
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: Insets.paddingExtraSmall,
+                        horizontal: Insets.paddingMedium,
+                      ),
+                      child: Icon(Icons.mail_outline),
+                    ),
+                  ),
                   label: AppLocalizations.of(context)!.navInboxText,
                 ),
                 NavigationDestination(

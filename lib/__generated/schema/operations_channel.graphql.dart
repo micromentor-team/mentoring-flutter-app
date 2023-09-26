@@ -398,6 +398,20 @@ const documentNodeQueryFindChannelsForUser = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'createdBy'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'messageText'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: '__typename'),
                 alias: null,
                 arguments: [],
@@ -815,20 +829,30 @@ class _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
 class Query$FindChannelsForUser$findChannelsForUser$latestMessage {
   Query$FindChannelsForUser$findChannelsForUser$latestMessage({
     required this.createdAt,
+    this.createdBy,
+    this.messageText,
     this.$__typename = 'ChannelMessage',
   });
 
   factory Query$FindChannelsForUser$findChannelsForUser$latestMessage.fromJson(
       Map<String, dynamic> json) {
     final l$createdAt = json['createdAt'];
+    final l$createdBy = json['createdBy'];
+    final l$messageText = json['messageText'];
     final l$$__typename = json['__typename'];
     return Query$FindChannelsForUser$findChannelsForUser$latestMessage(
       createdAt: DateTime.parse((l$createdAt as String)),
+      createdBy: (l$createdBy as String?),
+      messageText: (l$messageText as String?),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime createdAt;
+
+  final String? createdBy;
+
+  final String? messageText;
 
   final String $__typename;
 
@@ -836,6 +860,10 @@ class Query$FindChannelsForUser$findChannelsForUser$latestMessage {
     final _resultData = <String, dynamic>{};
     final l$createdAt = createdAt;
     _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$createdBy = createdBy;
+    _resultData['createdBy'] = l$createdBy;
+    final l$messageText = messageText;
+    _resultData['messageText'] = l$messageText;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -844,9 +872,13 @@ class Query$FindChannelsForUser$findChannelsForUser$latestMessage {
   @override
   int get hashCode {
     final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$messageText = messageText;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$createdAt,
+      l$createdBy,
+      l$messageText,
       l$$__typename,
     ]);
   }
@@ -864,6 +896,16 @@ class Query$FindChannelsForUser$findChannelsForUser$latestMessage {
     final l$createdAt = createdAt;
     final lOther$createdAt = other.createdAt;
     if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$messageText = messageText;
+    final lOther$messageText = other.messageText;
+    if (l$messageText != lOther$messageText) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -900,6 +942,8 @@ abstract class CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMess
 
   TRes call({
     DateTime? createdAt,
+    String? createdBy,
+    String? messageText,
     String? $__typename,
   });
 }
@@ -923,12 +967,20 @@ class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser$latestMessage<
 
   TRes call({
     Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? messageText = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindChannelsForUser$findChannelsForUser$latestMessage(
         createdAt: createdAt == _undefined || createdAt == null
             ? _instance.createdAt
             : (createdAt as DateTime),
+        createdBy: createdBy == _undefined
+            ? _instance.createdBy
+            : (createdBy as String?),
+        messageText: messageText == _undefined
+            ? _instance.messageText
+            : (messageText as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -947,6 +999,8 @@ class _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser$latestMess
 
   call({
     DateTime? createdAt,
+    String? createdBy,
+    String? messageText,
     String? $__typename,
   }) =>
       _res;

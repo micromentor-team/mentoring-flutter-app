@@ -38,57 +38,17 @@ class MessageBubble extends StatelessWidget {
     }
   }
 
-  String _participantName({userId}) {
-    final ChannelParticipant? participant =
-        participants.where((item) => item.user.id == userId).firstOrNull;
-    if (participant != null) {
-      return participant.user.fullName!
-          .trim()
-          .split(RegExp(' +'))
-          .take(1)
-          .join();
-    }
-    return '';
-  }
-
-  Widget _buildMessageStatus(
-      AppLocalizations l10n, ThemeData theme, bool isUser) {
-    String? status;
-    if (isDeleted) {
-      if (isUser) {
-        status = l10n.messagesStatusDeleted;
-      }
-    } else if (message.editedAt != null) {
-      status = l10n.messagesStatusEdited;
-    }
-
-    if (status != null) {
-      return Padding(
-        padding: const EdgeInsets.only(
-          bottom: Insets.paddingSmall,
-        ),
-        child: Text(
-          status,
-          style: theme.textTheme.labelSmall?.copyWith(
-            fontStyle: FontStyle.italic,
-            color: theme.colorScheme.outline,
-          ),
-        ),
-      );
-    } else {
-      return const SizedBox();
-    }
-  }
-
-  Widget _buildMessageText(AppLocalizations l10n, ThemeData theme, isUser) {
+  Widget _buildMessageText(AppLocalizations l10n, ThemeData theme) {
     final isEmoji = EmojiUtils.isOnlyEmoji(message.messageText!) &&
         message.replyToMessageId == null;
-    if (isDeleted && !isUser) {
+    if (isDeleted) {
       return Text(
-        l10n.messagesStatusDeleted,
+        isSentByAuthenticatedUser
+            ? l10n.messagesStatusDeletedByMe
+            : l10n.messagesStatusDeletedByOther,
         style: theme.textTheme.bodyMedium?.copyWith(
           fontStyle: FontStyle.italic,
-          color: theme.colorScheme.outline,
+          color: theme.disabledColor,
         ),
       );
     } else {
@@ -96,15 +56,14 @@ class MessageBubble extends StatelessWidget {
         text: message.messageText!,
         onOpen: (link) => _onOpenLink(link),
         linkStyle: theme.textTheme.bodyMedium?.copyWith(
-          color: isUser
+          color: isSentByAuthenticatedUser
               ? theme.colorScheme.onPrimaryContainer
               : theme.colorScheme.onTertiaryContainer,
         ),
-        textAlign: isEmoji && isUser ? TextAlign.end : null,
+        textAlign: isEmoji && isSentByAuthenticatedUser ? TextAlign.end : null,
         style: theme.textTheme.bodyMedium?.copyWith(
           fontSize: isEmoji ? theme.textTheme.displayMedium?.fontSize : null,
-          decoration: isDeleted ? TextDecoration.lineThrough : null,
-          color: isUser
+          color: isSentByAuthenticatedUser
               ? theme.colorScheme.onPrimaryContainer
               : theme.colorScheme.onTertiaryContainer,
         ),
@@ -116,8 +75,6 @@ class MessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final sentAt =
         DateFormat.jm().format(message.createdAt.toLocal()).toLowerCase();
-    final isEmoji = EmojiUtils.isOnlyEmoji(message.messageText!) &&
-        message.replyToMessageId == null;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
@@ -125,11 +82,11 @@ class MessageBubble extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: Insets.paddingExtraSmall),
       child: Container(
         constraints: BoxConstraints(
-          minWidth: 80,
+          minWidth: 120,
           maxWidth: MediaQuery.of(context).size.width * 0.8,
         ),
         child: Material(
-          elevation: isEmoji ? 0 : Elevations.level1,
+          elevation: Elevations.level1,
           borderRadius: BorderRadiusDirectional.only(
             topStart: isSentByAuthenticatedUser
                 ? const Radius.circular(
@@ -148,40 +105,17 @@ class MessageBubble extends StatelessWidget {
               Radii.roundedRectRadiusSmall,
             ),
           ),
-          color: isEmoji
-              ? Colors.transparent
-              : isSentByAuthenticatedUser
-                  ? theme.colorScheme.primaryContainer
-                  : theme.colorScheme.tertiaryContainer,
+          color: isSentByAuthenticatedUser
+              ? theme.colorScheme.primaryContainer
+              : theme.colorScheme.tertiaryContainer,
           child: Padding(
-            padding: EdgeInsets.only(
-              left: Insets.paddingSmall,
-              top: Insets.paddingSmall,
-              right: Insets.paddingSmall,
-              bottom: isEmoji ? 0 : Insets.paddingSmall,
-            ),
+            padding: const EdgeInsets.all(Insets.paddingSmall),
             child: Stack(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (participants.length > 2)
-                          Text(
-                            _participantName(userId: message.createdBy),
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              overflow: TextOverflow.ellipsis,
-                              fontWeight: FontWeight.bold,
-                              color: theme.colorScheme.outline,
-                            ),
-                          ),
-                        _buildMessageStatus(
-                            l10n, theme, isSentByAuthenticatedUser),
-                      ],
-                    ),
                     if (replyingTo != null && !isDeleted)
                       Padding(
                         padding: const EdgeInsets.only(
@@ -192,31 +126,25 @@ class MessageBubble extends StatelessWidget {
                           participants: participants,
                         ),
                       ),
-                    _buildMessageText(l10n, theme, isSentByAuthenticatedUser),
-                    if (!isDeleted || isSentByAuthenticatedUser)
-                      const SizedBox(
-                        height: Insets.paddingLarge,
-                      ),
+                    _buildMessageText(l10n, theme),
+                    const SizedBox(
+                      height: Insets.paddingLarge,
+                    ),
                   ],
                 ),
-                if (!isDeleted || isSentByAuthenticatedUser)
-                  PositionedDirectional(
-                    bottom: 0,
-                    end: (isSentByAuthenticatedUser && !isEmoji) ||
-                            (!isSentByAuthenticatedUser && isEmoji)
-                        ? null
-                        : 0,
-                    start: (isSentByAuthenticatedUser && !isEmoji) ||
-                            (!isSentByAuthenticatedUser && isEmoji)
-                        ? 0
-                        : null,
-                    child: Text(
-                      sentAt,
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: theme.colorScheme.outline,
-                      ),
+                PositionedDirectional(
+                  bottom: 0,
+                  end: isSentByAuthenticatedUser ? null : 0,
+                  start: isSentByAuthenticatedUser ? 0 : null,
+                  child: Text(
+                    message.editedAt != null
+                        ? l10n.messagesStatusEdited(sentAt)
+                        : sentAt,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.outline,
                     ),
                   ),
+                ),
               ],
             ),
           ),
