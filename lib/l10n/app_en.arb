@@ -293,5 +293,7 @@
     "signUpVisibleInfoDesc" : "This will be shown on your profile.",
     "phoneNumber" : "Phone number",
     "continueButton": "Continue",
-    "findMentors": "Find Mentors"
+    "findMentors": "Find Mentors",
+    "yearOfBirth": "Year of birth",
+    "whatYearWereYouBorn": "What year were you born?"
 }

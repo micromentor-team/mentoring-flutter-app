@@ -19,7 +19,7 @@ class SignUpPhoneNumber extends StatefulWidget {
 }
 
 class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
-  TextEditingController? emailTextController;
+  TextEditingController? phoneTextController;
   final _formKey = GlobalKey<FormState>();
   String? phoneNumber;
   String? selectedCountryCode = _countryCode[0];
@@ -74,7 +74,7 @@ class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
               Expanded(
                   child: TextFormFieldWidget(
                 keyboardType: TextInputType.phone,
-                textController: emailTextController,
+                textController: phoneTextController,
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.digitsOnly,
                 ],
@@ -96,7 +96,7 @@ class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
           },
           rightOnPress: () {
             if (_formKey.currentState!.validate()) {
-              context.push(Routes.signupEntrepreneurOrMentor.path);
+              context.push(Routes.signupYearOfBirth.path);
             }
           },
         ));

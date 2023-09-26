@@ -12,7 +12,8 @@ class TextFormFieldWidget extends StatefulWidget {
       this.validator,
       this.isPassword,
       this.keyboardType,
-      this.inputFormatters});
+      this.inputFormatters,
+      this.suffixIcon});
 
   final TextEditingController? textController;
   final Function onPressed;
@@ -22,6 +23,7 @@ class TextFormFieldWidget extends StatefulWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
+  final Widget? suffixIcon;
 
   @override
   State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
@@ -66,7 +68,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
                   });
                 },
               )
-            : null,
+            : widget.suffixIcon,
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0x00000000),

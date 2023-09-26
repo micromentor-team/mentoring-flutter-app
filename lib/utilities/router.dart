@@ -10,6 +10,7 @@ import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_community_guidelines.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_email.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_password.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_year_of_birth.dart';
 import 'package:mm_flutter_app/widgets/screens/welcome/select_language.dart';
 import 'package:provider/provider.dart';
 
@@ -226,6 +227,16 @@ class AppRouter {
               return MaterialPage(
                 key: state.pageKey,
                 child: const SignUpPassword(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupYearOfBirth.path,
+            name: Routes.signupYearOfBirth.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignUpYearOfBirth(),
               );
             }),
         GoRoute(

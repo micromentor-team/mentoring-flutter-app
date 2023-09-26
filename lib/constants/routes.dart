@@ -61,6 +61,10 @@ class Routes {
     name: 'signupGuidelines',
     path: '${signup.path}/guidelines',
   );
+  static Route signupYearOfBirth = Route(
+    name: 'signupYearOfBirth',
+    path: '${signup.path}/yearOfBirth',
+  );
   static Route signupEntrepreneurOrMentor = Route(
     name: 'signupEntrepreneurOrMentor',
     path: '${signup.path}/userrole',
