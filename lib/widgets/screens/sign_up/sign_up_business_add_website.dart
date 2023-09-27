@@ -18,29 +18,37 @@ class SignupBusinessAddWebsiteScreen extends StatefulWidget {
 
 class _SignupBusinessAddWebsiteScreenState
     extends State<SignupBusinessAddWebsiteScreen> {
+  String? _website;
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
-      title: l10n.doYouHaveAWebsite,
+      title: l10n.signupBusinessWebsiteTitle,
       bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            context.push(Routes.startupRationale.path);
-          }),
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: _website?.isNotEmpty ?? false
+            ? () {
+                context.push(Routes.startupRationale.path);
+              }
+            : null,
+      ),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Form(
         child: TextFormFieldWidget(
-          label: l10n.websiteURL,
-          onChanged: (value) {},
-          textController: null,
+          label: l10n.signupBusinessWebsiteInputLabel,
+          hint: l10n.signupBusinessWebsiteInputHint,
+          onChanged: (value) {
+            setState(() {
+              _website = value;
+            });
+          },
         ),
       ),
     );
