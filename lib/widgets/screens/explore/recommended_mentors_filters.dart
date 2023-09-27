@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
@@ -24,6 +25,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
   late final TextfieldTagsController _countriesController;
   late final TextfieldTagsController _languagesController;
   late final ExploreCardFiltersModel _filtersModel;
+  late final ContentProvider _contentProvider;
   Set<String> _selectedSkills = {};
 
   @override
@@ -33,6 +35,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     _languagesController = TextfieldTagsController();
     _filtersModel =
         Provider.of<ExploreCardFiltersModel>(context, listen: false);
+    _contentProvider = Provider.of<ContentProvider>(context, listen: false);
     _selectedSkills = _filtersModel.selectedSkills;
   }
 
@@ -59,19 +62,25 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
       child: Column(
         children: [
           Column(children: [
-            _Expertise(skills: _selectedSkills),
+            _Expertise(
+              skills: _filtersModel.skills,
+              selectedSkills: _selectedSkills,
+              skillTranslate: _contentProvider.translateExpertise,
+            ),
             AutocompletePicker(
               fieldName: l10n.exploreSearchFilterHeadingLanguage,
               controller: _languagesController,
-              options: ExploreCardFiltersModel.languages,
-              optionsTranslations: l10n.exploreSearchFilterLanguages,
+              options: _filtersModel.languages,
+              optionsTranslations: (id) =>
+                  _contentProvider.translateLanguages(id) ?? id,
               selectedOptions: _filtersModel.selectedLanguages,
             ),
             AutocompletePicker(
               fieldName: l10n.exploreSearchFilterHeadingCountries,
               controller: _countriesController,
-              options: ExploreCardFiltersModel.countries,
-              optionsTranslations: l10n.exploreSearchFilterCountries,
+              options: _filtersModel.countries,
+              optionsTranslations: (id) =>
+                  _contentProvider.translateCountry(id) ?? id,
               selectedOptions: _filtersModel.selectedCountries,
             ),
           ]),
@@ -106,9 +115,15 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
 }
 
 class _Expertise extends StatefulWidget {
-  final Set<String> skills;
+  final List<String> skills;
+  final Set<String> selectedSkills;
+  final String? Function(String id) skillTranslate;
 
-  const _Expertise({required this.skills});
+  const _Expertise({
+    required this.skills,
+    required this.selectedSkills,
+    required this.skillTranslate,
+  });
 
   @override
   State<StatefulWidget> createState() => _ExpertiseState();
@@ -121,17 +136,17 @@ class _ExpertiseState extends State<_Expertise> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     var skillButtons = [];
-    for (int i = 0; i < ExploreCardFiltersModel.skills.length; i++) {
-      var skill = ExploreCardFiltersModel.skills[i];
-      var isSelected = widget.skills.contains(skill);
+    for (int i = 0; i < widget.skills.length; i++) {
+      var skill = widget.skills[i];
+      var isSelected = widget.selectedSkills.contains(skill);
 
       skillButtons.add(OutlinedButton(
         onPressed: () {
           setState(() {
             if (isSelected) {
-              widget.skills.remove(skill);
+              widget.selectedSkills.remove(skill);
             } else {
-              widget.skills.add(skill);
+              widget.selectedSkills.add(skill);
             }
           });
         },
@@ -140,16 +155,16 @@ class _ExpertiseState extends State<_Expertise> {
               ? theme.colorScheme.onInverseSurface
               : theme.colorScheme.surface),
         ),
-        child: Text(l10n.exploreSearchFilterSkills(skill),
+        child: Text(widget.skillTranslate(skill) ?? skill,
             style: TextStyle(color: theme.colorScheme.primary)),
       ));
-      if (i != ExploreCardFiltersModel.skills.length - 1) {
+      if (i != widget.skills.length - 1) {
         skillButtons.add(const SizedBox(width: Insets.paddingExtraSmall));
       }
     }
 
     bool allSkillsSelected =
-        setEquals(widget.skills, ExploreCardFiltersModel.skills.toSet());
+        setEquals(widget.selectedSkills, widget.skills.toSet());
 
     return Row(
       children: [
@@ -168,11 +183,10 @@ class _ExpertiseState extends State<_Expertise> {
                         onPressed: () {
                           setState(() {
                             if (allSkillsSelected) {
-                              widget.skills.clear();
+                              widget.selectedSkills.clear();
                             } else {
-                              widget.skills.clear();
-                              widget.skills
-                                  .addAll(ExploreCardFiltersModel.skills);
+                              widget.selectedSkills.clear();
+                              widget.selectedSkills.addAll(widget.skills);
                             }
                           });
                         },

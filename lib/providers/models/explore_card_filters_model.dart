@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 
 class ExploreCardFiltersModel extends ChangeNotifier {
-  static const List<String> countries = ['USA'];
-  static const List<String> languages = ['English', 'Urdu', 'Hindi'];
-  static const List<String> skills = ['Marketing', 'Operations', 'StartingUp'];
+  final List<String> countries;
+  final List<String> languages;
+  final List<String> skills;
 
-  static const List<String> industries = ['Programming', 'Farming', 'Plumbing'];
-  static const List<String> userTypes = ['Mentor', 'Mentee'];
+  final List<String> industries;
+  final List<String> userTypes =  ['Mentor', 'Mentee'];
+
+  ExploreCardFiltersModel.empty()
+      : countries = [],
+        languages = [],
+        skills = [],
+        industries = [];
+
+  ExploreCardFiltersModel({
+    required this.countries,
+    required this.languages,
+    required this.skills,
+    required this.industries,
+  });
 
   Set<String> _selectedCountries = {};
   Set<String> _selectedLanguages = {};

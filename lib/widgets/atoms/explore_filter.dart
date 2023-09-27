@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:provider/provider.dart';
 
@@ -42,28 +43,33 @@ class ExploreFilter extends StatelessWidget {
     );
   }
 
-  Text _createSkillsTextHeader(
-      AppLocalizations l10n, BuildContext context, Set<String>? skills) {
-    var skillsText =
-        joinFirstThree(skills?.map(l10n.exploreSearchFilterSkills).toList());
+  Text _createSkillsTextHeader(BuildContext context, Set<String>? skills) {
+    final contentProvider = Provider.of<ContentProvider>(context);
+    var skillsText = joinFirstThree(skills
+        ?.map((s) => contentProvider.translateExpertise(s) ?? s)
+        .toList());
     return Text(
       skillsText,
       style: Theme.of(context).textTheme.labelMedium,
     );
   }
 
-  Text _createLanguageLocationSubHeader(AppLocalizations l10n,
-      BuildContext context, Set<String>? countries, Set<String>? languages) {
+  Text _createLanguageLocationSubHeader(
+    BuildContext context,
+    Set<String>? countries,
+    Set<String>? languages,
+  ) {
     final ThemeData theme = Theme.of(context);
     //handling scenarios where countries and languages may be null
     Set<String> countryLanguageText = {};
+    final contentProvider = Provider.of<ContentProvider>(context);
     if (countries != null) {
-      countryLanguageText
-          .addAll(countries.map(l10n.exploreSearchFilterCountries));
+      countryLanguageText.addAll(
+          countries.map((c) => contentProvider.translateCountry(c) ?? c));
     }
     if (languages != null) {
-      countryLanguageText
-          .addAll(languages.map(l10n.exploreSearchFilterLanguages));
+      countryLanguageText.addAll(
+          languages.map((l) => contentProvider.translateLanguages(l) ?? l));
     }
     var joinedCountryLanguageText =
         joinFirstThree(countryLanguageText.toList());
@@ -133,7 +139,7 @@ class ExploreFilter extends StatelessWidget {
                                 if (filters.userFiltersSelected &&
                                     filters.skillFilterSelected)
                                   _createSkillsTextHeader(
-                                      l10n, context, filters.selectedSkills),
+                                      context, filters.selectedSkills),
                               ],
                             ),
                             Row(
@@ -146,7 +152,6 @@ class ExploreFilter extends StatelessWidget {
                                       l10n, context),
                                 if (filters.userFiltersSelected)
                                   _createLanguageLocationSubHeader(
-                                      l10n,
                                       context,
                                       filters.selectedCountries,
                                       filters.selectedLanguages),

@@ -177,6 +177,14 @@ void main() async {
               Provider<ContentProvider>.value(
                 value: ContentProvider(client: client),
               ),
+              FutureProvider(
+                initialData: ContentProvider(client: client),
+                create: (context) async {
+                  final provider = ContentProvider(client: client);
+                  await provider.findAllOptionsByType();
+                  return provider;
+                },
+              ),
               Provider<ChannelsProvider>.value(
                 value: ChannelsProvider(client: client),
               ),
@@ -192,8 +200,19 @@ void main() async {
               ChangeNotifierProvider(
                 create: (context) => ScaffoldModel(context: context),
               ),
-              ChangeNotifierProvider(
-                create: (context) => ExploreCardFiltersModel(),
+              FutureProvider(
+                initialData: ExploreCardFiltersModel.empty(),
+                create: (context) async {
+                  final contentProvider = ContentProvider(client: client);
+                  await contentProvider.findAllOptionsByType();
+
+                  return ExploreCardFiltersModel(
+                    countries: contentProvider.countryIds,
+                    languages: contentProvider.languageIds,
+                    skills: contentProvider.expertiseIds,
+                    industries: contentProvider.industryIds,
+                  );
+                },
               ),
               ChangeNotifierProvider(
                 create: (context) => LocaleModel(),
