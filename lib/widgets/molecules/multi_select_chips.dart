@@ -24,7 +24,7 @@ CreateMultiSelectChips createMultiSelectChipsExample() {
       Chip(chipName: 'One-off sessions', textId: 'oneOffSessions'),
       Chip(chipName: 'Informal chats', textId: 'informalChats'),
       Chip(chipName: 'Formal meetings', textId: 'formatMeetings'),
-      Chip(chipName: 'Long term', textId: 'longTerm'),
+      Chip(chipName: 'Long term mentoring', textId: 'longTermMentoring'),
     ],
   );
 }
