@@ -16,9 +16,12 @@ class SignupMentorInternationallyScreen extends StatefulWidget {
 
 class _SignupMentorInternationallyScreenState
     extends State<SignupMentorInternationallyScreen> {
+  String? _selection;
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
       progress: SignUpProgress.three,
@@ -33,8 +36,55 @@ class _SignupMentorInternationallyScreenState
             context.push(Routes.signupMentorCompleted.path);
           }),
       footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
-      body: const Placeholder(),
+          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+      body: Column(
+        children: [
+          Text(
+            l10n.openToMentorInternationally,
+            style: theme.textTheme.bodyMedium!.copyWith(
+              color: theme.colorScheme.secondary,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: Insets.paddingLarge),
+          Column(
+            children: [
+              ListTile(
+                  title: Text(
+                    l10n.openToTalkingToAnyone,
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      color: theme.colorScheme.secondary,
+                    ),
+                  ),
+                  trailing: Radio<String>(
+                    value: l10n.openToTalkingToAnyone,
+                    groupValue: _selection,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _selection = value;
+                      });
+                    },
+                  )),
+              ListTile(
+                  title: Text(
+                    l10n.onlyTalkToSameCountryEntrepreneurs,
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      color: theme.colorScheme.secondary,
+                    ),
+                  ),
+                  trailing: Radio<String>(
+                    value: l10n.onlyTalkToSameCountryEntrepreneurs,
+                    groupValue: _selection,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _selection = value;
+                      });
+                    },
+                  )),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
