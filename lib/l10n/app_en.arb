@@ -267,6 +267,7 @@
     "mentorDescription": "I am an experienced professional and I want to share my knowledge",
     "addProfilePicPrompt": "Add a profile photo",
     "whyAddProfilePic": "Users with profile photos are more likely to match with a mentor.",
+    "whyProfilePicMentor": "Users with profile photos are 5x more  likely to connect. (optional)",
     "invalidEmailSnackBar": "Please enter a valid email address",
     "profileChipsSelectAllThatApply": "Select all that apply (optional)",
     "profileChipsSelectUpTo": "Select up to {maxSelection}. You can add additional areas later.",
