@@ -19,6 +19,7 @@ class _SignupMentorMoreInfoScreenState
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
       progress: SignUpProgress.one,
@@ -34,7 +35,30 @@ class _SignupMentorMoreInfoScreenState
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
-      body: Placeholder(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: Insets.paddingMedium),
+            child: Text(
+              l10n.moreInfoPrompt,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: Insets.paddingMedium),
+            child: Text(
+              l10n.readyToBrowseEntrepreneursPrompt,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

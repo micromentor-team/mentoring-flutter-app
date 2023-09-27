@@ -263,6 +263,7 @@
     "needLittleMoreInfo": "We just need a little more information",
     "moreInfoPrompt": "Continue adding more details to build out a richer profile.",
     "readyToBrowseMentorsPrompt": "Ready to browse mentors? Great! We can collect this information later.",
+    "readyToBrowseEntrepreneursPrompt": "Ready to browse entrepreneurs? Great! We can collect this information later.",
     "mentorDescription": "I am an experienced professional and I want to share my knowledge",
     "addProfilePicPrompt": "Add a profile photo",
     "whyAddProfilePic": "Users with profile photos are more likely to match with a mentor.",
