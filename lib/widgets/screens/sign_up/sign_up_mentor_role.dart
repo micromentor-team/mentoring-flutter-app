@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import '../../atoms/text_form_field_widget.dart';
 import 'sign_up_bottom_buttons.dart';
 
 class SignupMentorRoleScreen extends StatefulWidget {
@@ -32,7 +33,25 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
-      body: const Placeholder(),
+      body: Column(
+        children: [
+          Form(
+              child: TextFormFieldWidget(
+            label: l10n.title,
+            onChanged: (value) {},
+            textController: null,
+          )),
+          const SizedBox(
+            height: Insets.paddingMedium,
+          ),
+          Form(
+              child: TextFormFieldWidget(
+            label: l10n.companyOrOrganizationName,
+            onChanged: (value) {},
+            textController: null,
+          )),
+        ],
+      ),
     );
   }
 }

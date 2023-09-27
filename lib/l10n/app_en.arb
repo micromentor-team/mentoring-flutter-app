@@ -288,6 +288,8 @@
     "businessName": "Business name",
     "websiteURL": "Website URL (optional)",
     "pronounsDescription": "This helps other users know how you would like to be referred to. Select up to 3. (optional)",
+    "title": "Title",
+    "companyOrOrganizationName": "Company or organization name",
     "createAPassword": "Create a password",
     "password": "Password",
     "confirmPassword": "Confirm password",
