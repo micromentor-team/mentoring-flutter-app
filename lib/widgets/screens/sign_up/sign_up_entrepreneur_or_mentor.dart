@@ -17,8 +17,13 @@ class SignUpEntrepreneurOrMentorScreen extends StatefulWidget {
 
 class _SignUpEntrepreneurOrMentorScreenState
     extends State<SignUpEntrepreneurOrMentorScreen> {
+  int? selectedNumber;
+
   void handleRadioButtonChange(int value) {
-    widget.selectedNumber[i] = value;
+    setState(() {
+      selectedNumber = value;
+      print(selectedNumber);
+    });
   }
 
   @override
