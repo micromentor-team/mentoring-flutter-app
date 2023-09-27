@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import '../../molecules/checkbox_list_and_form.dart';
 import 'sign_up_bottom_buttons.dart';
 
 class SignupMentorPronounsScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class _SignupMentorPronounsScreenState
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
@@ -34,7 +36,17 @@ class _SignupMentorPronounsScreenState
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
-      body: const Placeholder(),
+      body: Column(
+        children: [
+          Text(
+            l10n.pronounsDescription,
+            style: theme.textTheme.bodyMedium!
+                .copyWith(color: theme.colorScheme.outline),
+            textAlign: TextAlign.center,
+          ),
+          const PronounExample(),
+        ],
+      ),
     );
   }
 }

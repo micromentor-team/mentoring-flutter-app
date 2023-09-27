@@ -39,7 +39,7 @@ import '../widgets/screens/sign_up/sign_up_mentor_industry_screen.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_internationally.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_more_info.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_preferences.dart';
-import '../widgets/screens/sign_up/sign_up_mentor_profile.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_pronouns.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_profile_pic.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_role.dart';
 import '../widgets/screens/sign_up/sign_up_gender.dart';
