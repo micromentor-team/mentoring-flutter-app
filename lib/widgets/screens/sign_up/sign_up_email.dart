@@ -33,7 +33,7 @@ class _SignUpEmailState extends State<SignUpEmail> {
             child: TextFormFieldWidget(
               textController: emailTextController,
               label: l10n.emailAddress,
-              onPressed: (value) {
+              onChanged: (value) {
                 setState(() {
                   email = value;
                 });

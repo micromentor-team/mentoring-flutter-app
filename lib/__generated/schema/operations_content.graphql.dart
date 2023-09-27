@@ -3,6 +3,7 @@
 // ignore_for_file: type=lint
 
 import 'package:gql/ast.dart';
+
 import 'schema.graphql.dart';
 
 class Query$FindAllOptionsByType {
@@ -750,13 +751,6 @@ const documentNodeQueryFindAllOptionsByType = DocumentNode(definitions: [
           ),
           FieldNode(
             name: NameNode(value: 'translatedValue'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'isUiLanguage'),
             alias: null,
             arguments: [],
             directives: [],
@@ -1850,7 +1844,6 @@ class Query$FindAllOptionsByType$findLanguages {
   Query$FindAllOptionsByType$findLanguages({
     required this.textId,
     this.translatedValue,
-    required this.isUiLanguage,
     this.shortLangCode,
     this.longLangCode,
     this.$__typename = 'Language',
@@ -1860,14 +1853,12 @@ class Query$FindAllOptionsByType$findLanguages {
       Map<String, dynamic> json) {
     final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
-    final l$isUiLanguage = json['isUiLanguage'];
     final l$shortLangCode = json['shortLangCode'];
     final l$longLangCode = json['longLangCode'];
     final l$$__typename = json['__typename'];
     return Query$FindAllOptionsByType$findLanguages(
       textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
-      isUiLanguage: (l$isUiLanguage as bool),
       shortLangCode: (l$shortLangCode as String?),
       longLangCode: (l$longLangCode as String?),
       $__typename: (l$$__typename as String),
@@ -1877,8 +1868,6 @@ class Query$FindAllOptionsByType$findLanguages {
   final String textId;
 
   final String? translatedValue;
-
-  final bool isUiLanguage;
 
   final String? shortLangCode;
 
@@ -1892,8 +1881,6 @@ class Query$FindAllOptionsByType$findLanguages {
     _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
-    final l$isUiLanguage = isUiLanguage;
-    _resultData['isUiLanguage'] = l$isUiLanguage;
     final l$shortLangCode = shortLangCode;
     _resultData['shortLangCode'] = l$shortLangCode;
     final l$longLangCode = longLangCode;
@@ -1907,14 +1894,12 @@ class Query$FindAllOptionsByType$findLanguages {
   int get hashCode {
     final l$textId = textId;
     final l$translatedValue = translatedValue;
-    final l$isUiLanguage = isUiLanguage;
     final l$shortLangCode = shortLangCode;
     final l$longLangCode = longLangCode;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$textId,
       l$translatedValue,
-      l$isUiLanguage,
       l$shortLangCode,
       l$longLangCode,
       l$$__typename,
@@ -1938,11 +1923,6 @@ class Query$FindAllOptionsByType$findLanguages {
     final l$translatedValue = translatedValue;
     final lOther$translatedValue = other.translatedValue;
     if (l$translatedValue != lOther$translatedValue) {
-      return false;
-    }
-    final l$isUiLanguage = isUiLanguage;
-    final lOther$isUiLanguage = other.isUiLanguage;
-    if (l$isUiLanguage != lOther$isUiLanguage) {
       return false;
     }
     final l$shortLangCode = shortLangCode;
@@ -1986,7 +1966,6 @@ abstract class CopyWith$Query$FindAllOptionsByType$findLanguages<TRes> {
   TRes call({
     String? textId,
     String? translatedValue,
-    bool? isUiLanguage,
     String? shortLangCode,
     String? longLangCode,
     String? $__typename,
@@ -2009,7 +1988,6 @@ class _CopyWithImpl$Query$FindAllOptionsByType$findLanguages<TRes>
   TRes call({
     Object? textId = _undefined,
     Object? translatedValue = _undefined,
-    Object? isUiLanguage = _undefined,
     Object? shortLangCode = _undefined,
     Object? longLangCode = _undefined,
     Object? $__typename = _undefined,
@@ -2021,9 +1999,6 @@ class _CopyWithImpl$Query$FindAllOptionsByType$findLanguages<TRes>
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
-        isUiLanguage: isUiLanguage == _undefined || isUiLanguage == null
-            ? _instance.isUiLanguage
-            : (isUiLanguage as bool),
         shortLangCode: shortLangCode == _undefined
             ? _instance.shortLangCode
             : (shortLangCode as String?),
@@ -2045,7 +2020,6 @@ class _CopyWithStubImpl$Query$FindAllOptionsByType$findLanguages<TRes>
   call({
     String? textId,
     String? translatedValue,
-    bool? isUiLanguage,
     String? shortLangCode,
     String? longLangCode,
     String? $__typename,
@@ -5200,13 +5174,6 @@ const documentNodeQueryFindLanguages = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'isUiLanguage'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
             name: NameNode(value: 'shortLangCode'),
             alias: null,
             arguments: [],
@@ -5244,7 +5211,6 @@ class Query$FindLanguages$findLanguages {
   Query$FindLanguages$findLanguages({
     required this.textId,
     this.translatedValue,
-    required this.isUiLanguage,
     this.shortLangCode,
     this.longLangCode,
     this.$__typename = 'Language',
@@ -5254,14 +5220,12 @@ class Query$FindLanguages$findLanguages {
       Map<String, dynamic> json) {
     final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
-    final l$isUiLanguage = json['isUiLanguage'];
     final l$shortLangCode = json['shortLangCode'];
     final l$longLangCode = json['longLangCode'];
     final l$$__typename = json['__typename'];
     return Query$FindLanguages$findLanguages(
       textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
-      isUiLanguage: (l$isUiLanguage as bool),
       shortLangCode: (l$shortLangCode as String?),
       longLangCode: (l$longLangCode as String?),
       $__typename: (l$$__typename as String),
@@ -5271,8 +5235,6 @@ class Query$FindLanguages$findLanguages {
   final String textId;
 
   final String? translatedValue;
-
-  final bool isUiLanguage;
 
   final String? shortLangCode;
 
@@ -5286,8 +5248,6 @@ class Query$FindLanguages$findLanguages {
     _resultData['textId'] = l$textId;
     final l$translatedValue = translatedValue;
     _resultData['translatedValue'] = l$translatedValue;
-    final l$isUiLanguage = isUiLanguage;
-    _resultData['isUiLanguage'] = l$isUiLanguage;
     final l$shortLangCode = shortLangCode;
     _resultData['shortLangCode'] = l$shortLangCode;
     final l$longLangCode = longLangCode;
@@ -5301,14 +5261,12 @@ class Query$FindLanguages$findLanguages {
   int get hashCode {
     final l$textId = textId;
     final l$translatedValue = translatedValue;
-    final l$isUiLanguage = isUiLanguage;
     final l$shortLangCode = shortLangCode;
     final l$longLangCode = longLangCode;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$textId,
       l$translatedValue,
-      l$isUiLanguage,
       l$shortLangCode,
       l$longLangCode,
       l$$__typename,
@@ -5332,11 +5290,6 @@ class Query$FindLanguages$findLanguages {
     final l$translatedValue = translatedValue;
     final lOther$translatedValue = other.translatedValue;
     if (l$translatedValue != lOther$translatedValue) {
-      return false;
-    }
-    final l$isUiLanguage = isUiLanguage;
-    final lOther$isUiLanguage = other.isUiLanguage;
-    if (l$isUiLanguage != lOther$isUiLanguage) {
       return false;
     }
     final l$shortLangCode = shortLangCode;
@@ -5379,7 +5332,6 @@ abstract class CopyWith$Query$FindLanguages$findLanguages<TRes> {
   TRes call({
     String? textId,
     String? translatedValue,
-    bool? isUiLanguage,
     String? shortLangCode,
     String? longLangCode,
     String? $__typename,
@@ -5402,7 +5354,6 @@ class _CopyWithImpl$Query$FindLanguages$findLanguages<TRes>
   TRes call({
     Object? textId = _undefined,
     Object? translatedValue = _undefined,
-    Object? isUiLanguage = _undefined,
     Object? shortLangCode = _undefined,
     Object? longLangCode = _undefined,
     Object? $__typename = _undefined,
@@ -5414,9 +5365,6 @@ class _CopyWithImpl$Query$FindLanguages$findLanguages<TRes>
         translatedValue: translatedValue == _undefined
             ? _instance.translatedValue
             : (translatedValue as String?),
-        isUiLanguage: isUiLanguage == _undefined || isUiLanguage == null
-            ? _instance.isUiLanguage
-            : (isUiLanguage as bool),
         shortLangCode: shortLangCode == _undefined
             ? _instance.shortLangCode
             : (shortLangCode as String?),
@@ -5438,7 +5386,6 @@ class _CopyWithStubImpl$Query$FindLanguages$findLanguages<TRes>
   call({
     String? textId,
     String? translatedValue,
-    bool? isUiLanguage,
     String? shortLangCode,
     String? longLangCode,
     String? $__typename,

@@ -35,7 +35,7 @@ class _SignUpNameState extends State<SignUpName> {
                 textController: emailTextController,
                 label: l10n.lastName,
                 maxLength: 50,
-                onPressed: (value) {
+                onChanged: (value) {
                   setState(() {
                     lastName = value;
                   });
@@ -48,7 +48,7 @@ class _SignUpNameState extends State<SignUpName> {
                 textController: emailTextController,
                 label: l10n.firstName,
                 maxLength: 50,
-                onPressed: (value) {
+                onChanged: (value) {
                   setState(() {
                     firstName = value;
                   });
