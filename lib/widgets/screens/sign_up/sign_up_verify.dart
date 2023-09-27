@@ -50,7 +50,7 @@ class _SignUpVerifyState extends State<SignUpVerify> {
                 maxLength: 4,
                 textController: _fourDigitCode,
                 label: l10n.enterCode,
-                onPressed: (value) {
+                onChanged: (value) {
                   setState(() {
                     fourDigitCode = value;
                   });

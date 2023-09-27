@@ -42,7 +42,7 @@ class _SignUpYearOfBirthState extends State<SignUpYearOfBirth> {
                   icon: const Icon(Icons.today),
                   onPressed: () {},
                 ),
-                onPressed: (value) {
+                onChanged: (value) {
                   setState(() {
                     year = value;
                   });
@@ -59,7 +59,7 @@ class _SignUpYearOfBirthState extends State<SignUpYearOfBirth> {
           },
           rightOnPress: () {
             if (_formKey.currentState!.validate()) {
-              context.push(Routes.signupEntrepreneurOrMentor.path);
+              context.push(Routes.signupGender.path);
             }
           },
         ));

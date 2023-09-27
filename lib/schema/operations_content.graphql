@@ -31,7 +31,6 @@ query FindAllOptionsByType {
   findLanguages {
     textId
     translatedValue
-    isUiLanguage
     shortLangCode
     longLangCode
   }
@@ -99,7 +98,6 @@ query FindLanguages {
   findLanguages {
     textId
     translatedValue
-    isUiLanguage
     shortLangCode
     longLangCode
   }

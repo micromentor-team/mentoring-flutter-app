@@ -16,7 +16,7 @@ double _signUpProgressToDouble(SignUpProgress signUpProgress) {
   }
 }
 
-class SignUpTemplate extends StatelessWidget {
+class SignUpTemplate extends StatefulWidget {
   final SignUpProgress progress;
   final String title;
   final Widget body;
@@ -32,32 +32,48 @@ class SignUpTemplate extends StatelessWidget {
       this.bottomButtons});
 
   @override
+  State<SignUpTemplate> createState() => _SignUpTemplateState();
+}
+
+class _SignUpTemplateState extends State<SignUpTemplate> {
+  @override
+  void initState() {
+    super.initState();
+    // Close keyboard from previous page
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(Insets.paddingExtraLarge),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              LinearProgressIndicator(value: _signUpProgressToDouble(progress)),
-              const SizedBox(height: Insets.paddingMedium),
-              Text(
-                title,
-                softWrap: true,
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  color: theme.colorScheme.primary,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(Insets.paddingExtraLarge),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LinearProgressIndicator(
+                    value: _signUpProgressToDouble(widget.progress)),
+                const SizedBox(height: Insets.paddingMedium),
+                Text(
+                  widget.title,
+                  softWrap: true,
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
                 ),
-              ),
-              const SizedBox(height: Insets.paddingMedium),
-              body,
-              const Spacer(),
-              if (footer != null) SizedBox(width: 240, child: footer),
-              if (bottomButtons != null) bottomButtons!,
-            ],
+                const SizedBox(height: Insets.paddingMedium),
+                widget.body,
+                const Spacer(),
+                if (widget.footer != null)
+                  SizedBox(width: 240, child: widget.footer),
+                if (widget.bottomButtons != null) widget.bottomButtons!,
+              ],
+            ),
           ),
         ),
       ),

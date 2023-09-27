@@ -79,7 +79,7 @@ class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
                   FilteringTextInputFormatter.digitsOnly,
                 ],
                 label: l10n.phoneNumber,
-                onPressed: (value) {
+                onChanged: (value) {
                   setState(() {
                     phoneNumber = value;
                   });

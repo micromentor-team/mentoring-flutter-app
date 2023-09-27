@@ -44,7 +44,7 @@ class _SignUpPasswordState extends State<SignUpPassword> {
                   return null;
                 },
                 label: l10n.password,
-                onPressed: (value) {
+                onChanged: (value) {
                   setState(() {
                     password = value;
                   });
@@ -57,7 +57,7 @@ class _SignUpPasswordState extends State<SignUpPassword> {
                   isPassword: true,
                   textController: _confirmPass,
                   label: l10n.confirmPassword,
-                  onPressed: (value) {
+                  onChanged: (value) {
                     setState(() {
                       confirmPassword = value;
                     });

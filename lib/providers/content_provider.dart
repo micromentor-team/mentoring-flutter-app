@@ -14,6 +14,7 @@ typedef PresetGender = Query$FindGenders$findGenders;
 typedef Industry = Query$FindIndustries$findIndustries;
 typedef Language = Query$FindLanguages$findLanguages;
 typedef OptionByType = Query$FindAllOptions$findOptions;
+typedef AllOptionsByType = Query$FindAllOptionsByType;
 
 class ContentProvider extends BaseProvider {
   List<CompanyStage>? _companyStages;
@@ -298,8 +299,7 @@ class ContentProvider extends BaseProvider {
     return result;
   }
 
-  Future<OperationResult<Query$FindAllOptionsByType>>
-      findAllOptionsByType() async {
+  Future<OperationResult<AllOptionsByType>> findAllOptionsByType() async {
     final QueryResult queryResult = await asyncQuery(
       queryOptions: QueryOptions(
         document: documentNodeQueryFindAllOptionsByType,

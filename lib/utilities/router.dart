@@ -42,6 +42,9 @@ import '../widgets/screens/sign_up/sign_up_mentor_preferences.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_profile.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_profile_pic.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_role.dart';
+import '../widgets/screens/sign_up/sign_up_gender.dart';
+import '../widgets/screens/sign_up/sign_up_languages.dart';
+import '../widgets/screens/sign_up/sign_up_location.dart';
 import '../widgets/screens/sign_up/sign_up_name.dart';
 import '../widgets/screens/sign_up/sign_up_permissions.dart';
 import '../widgets/screens/sign_up/sign_up_phone_number.dart';
@@ -67,8 +70,9 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: StartScreen(
-                  nextRouteName: state.queryParameters['nextRouteName'] ??
-                      Routes.home.name),
+                nextRouteName:
+                    state.queryParameters['nextRouteName'] ?? Routes.home.name,
+              ),
             );
           },
         ),
@@ -404,6 +408,39 @@ class AppRouter {
                 child: const SignUpYearOfBirth(),
               );
             }),
+        GoRoute(
+          path: Routes.signupGender.path,
+          name: Routes.signupGender.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const SignUpGender(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.signupLocation.path,
+          name: Routes.signupLocation.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const SignUpLocation(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.signupLanguages.path,
+          name: Routes.signupLanguages.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const SignUpLanguages(),
+            );
+          },
+        ),
         GoRoute(
           path: Routes.loading.path,
           name: Routes.loading.name,

@@ -65,6 +65,18 @@ class Routes {
     name: 'signupYearOfBirth',
     path: '${signup.path}/yearOfBirth',
   );
+  static Route signupGender = Route(
+    name: 'signupGender',
+    path: '${signup.path}/gender',
+  );
+  static Route signupLocation = Route(
+    name: 'signupLocation',
+    path: '${signup.path}/locations',
+  );
+  static Route signupLanguages = Route(
+    name: 'signupLanguages',
+    path: '${signup.path}/languages',
+  );
   static Route signupEntrepreneurOrMentor = Route(
     name: 'signupEntrepreneurOrMentor',
     path: '${signup.path}/userrole',
