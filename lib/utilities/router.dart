@@ -33,6 +33,15 @@ import '../widgets/screens/sign_up/sign_up_business_more_info.dart';
 import '../widgets/screens/sign_up/sign_up_business_stage.dart';
 import '../widgets/screens/sign_up/sign_up_business_startup_rationale.dart';
 import '../widgets/screens/sign_up/sign_up_entrepreneur_or_mentor.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_completed.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_help_selection.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_industry_screen.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_internationally.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_more_info.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_preferences.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_profile.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_profile_pic.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_role.dart';
 import '../widgets/screens/sign_up/sign_up_name.dart';
 import '../widgets/screens/sign_up/sign_up_permissions.dart';
 import '../widgets/screens/sign_up/sign_up_phone_number.dart';
@@ -214,6 +223,96 @@ class AppRouter {
                 key: state.pageKey,
                 maintainState: false,
                 child: const SignupBusinessCompletedScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorHelpSelection.path,
+            name: Routes.signupMentorHelpSelection.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorHelpScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorMoreInfo.path,
+            name: Routes.signupMentorMoreInfo.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorMoreInfoScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorProfilePic.path,
+            name: Routes.signupMentorProfilePic.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorProfilePicScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorPronouns.path,
+            name: Routes.signupMentorPronouns.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorPronounsScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorRole.path,
+            name: Routes.signupMentorRole.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorRoleScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorIndustry.path,
+            name: Routes.signupMentorIndustry.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorIndustryScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorPreferences.path,
+            name: Routes.signupMentorPreferences.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorPreferencesScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorInternationally.path,
+            name: Routes.signupMentorInternationally.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorInternationallyScreen(),
+              );
+            }),
+        GoRoute(
+            path: Routes.signupMentorCompleted.path,
+            name: Routes.signupMentorCompleted.name,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return MaterialPage(
+                key: state.pageKey,
+                maintainState: false,
+                child: const SignupMentorCompletedScreen(),
               );
             }),
         GoRoute(

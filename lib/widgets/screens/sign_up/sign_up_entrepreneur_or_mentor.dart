@@ -32,7 +32,8 @@ class _SignUpEntrepreneurOrMentorScreenState
             context.pop();
           },
           rightOnPress: () {
-            context.push(Routes.signupBusinessStage.path);
+            // context.push(Routes.signupBusinessStage.path);
+            context.push(Routes.signupMentorHelpSelection.path);
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
