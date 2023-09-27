@@ -24,7 +24,7 @@ CreateMultiSelectChips createMultiSelectChipsExample() {
       Chip(chipName: 'One-off sessions', textId: 'oneOffSessions'),
       Chip(chipName: 'Informal chats', textId: 'informalChats'),
       Chip(chipName: 'Formal meetings', textId: 'formatMeetings'),
-      Chip(chipName: 'Long term', textId: 'longTerm'),
+      Chip(chipName: 'Long term mentoring', textId: 'longTermMentoring'),
     ],
   );
 }
@@ -62,6 +62,44 @@ CreateMultiSelectChips createMultiSelectChipsExampleWithIcon() {
   );
 }
 
+//example 3:
+CreateMultiSelectChips createHelpExampleWithIcon() {
+  return CreateMultiSelectChips(
+    chips: [
+      Chip(
+          chipName: 'Accounting & Finance',
+          textId: 'accountingAndFinance',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Advertising & Promotion',
+          textId: 'advertisingAndPromotion',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Branding & Identity',
+          textId: 'brandingAndIdentity',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Business Development',
+          textId: 'businessDevelopment',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Business Planning',
+          textId: 'businessPlanning',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'E-Commerce',
+          textId: 'eCommerce',
+          icon: Icons.work_outline),
+      Chip(
+          chipName: 'Financial Planning',
+          textId: 'financialPlanning',
+          icon: Icons.work_outline),
+    ],
+    maxSelection: 3,
+  );
+}
+
+//example 4:
 CreateMultiSelectChips createMultiSelectChipsIndustry() {
   return CreateMultiSelectChips(
     chips: [

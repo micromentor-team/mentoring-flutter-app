@@ -4,27 +4,27 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
-import '../../molecules/login_radio_button_cards.dart';
+import '../../molecules/upload_photo_button.dart';
 import 'sign_up_bottom_buttons.dart';
 
-class SignUpEntrepreneurOrMentorScreen extends StatefulWidget {
-  const SignUpEntrepreneurOrMentorScreen({Key? key}) : super(key: key);
+class SignupMentorProfilePicScreen extends StatefulWidget {
+  const SignupMentorProfilePicScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpEntrepreneurOrMentorScreen> createState() =>
-      _SignUpEntrepreneurOrMentorScreenState();
+  State<SignupMentorProfilePicScreen> createState() =>
+      _SignupMentorProfilePicScreenState();
 }
 
-class _SignUpEntrepreneurOrMentorScreenState
-    extends State<SignUpEntrepreneurOrMentorScreen> {
+class _SignupMentorProfilePicScreenState
+    extends State<SignupMentorProfilePicScreen> {
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.roleMicroMentor,
+      title: l10n.addProfilePicPrompt,
       bottomButtons: SignUpBottomButtons(
           leftButtonText: l10n.previous,
           rightButtonText: l10n.next,
@@ -32,26 +32,22 @@ class _SignUpEntrepreneurOrMentorScreenState
             context.pop();
           },
           rightOnPress: () {
-            // context.push(Routes.signupBusinessStage.path);
-            context.push(Routes.signupMentorHelpSelection.path);
+            context.push(Routes.signupMentorPronouns.path);
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
         children: [
-          createEntrepreneurMentorCards(context),
-          const SizedBox(height: Insets.paddingMedium),
           Padding(
-            padding: const EdgeInsets.all(Insets.paddingSmall),
-            child: InkWell(
-              child: Text(l10n.learnMoreAboutMentoring,
-                  style: TextStyle(
-                    color: theme.colorScheme.primary,
-                    decoration: TextDecoration.underline,
-                  )),
-              onTap: () {},
+            padding: const EdgeInsets.only(bottom: Insets.paddingMedium),
+            child: Text(
+              l10n.whyProfilePicMentor,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
             ),
           ),
+          const UploadPhotoButton(),
         ],
       ),
     );
