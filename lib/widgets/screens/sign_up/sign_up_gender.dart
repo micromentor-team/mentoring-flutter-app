@@ -16,7 +16,7 @@ class SignUpGender extends StatefulWidget {
 
 class _SignUpGenderState extends State<SignUpGender> {
   final _formKey = GlobalKey<FormState>();
-  String? _selection;
+  String? _gender;
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +50,10 @@ class _SignUpGenderState extends State<SignUpGender> {
                   trailing: Radio<String>(
                     value: l10n
                         .signupGenderOptionWoman, //TODO - use content provider textID
-                    groupValue: _selection,
+                    groupValue: _gender,
                     onChanged: (String? value) {
                       setState(() {
-                        _selection = value;
+                        _gender = value;
                       });
                     },
                   ),
@@ -69,10 +69,10 @@ class _SignUpGenderState extends State<SignUpGender> {
                   trailing: Radio<String>(
                     value: l10n
                         .signupGenderOptionMan, //TODO - use content provider textID
-                    groupValue: _selection,
+                    groupValue: _gender,
                     onChanged: (String? value) {
                       setState(() {
-                        _selection = value;
+                        _gender = value;
                       });
                     },
                   ),
@@ -88,10 +88,10 @@ class _SignUpGenderState extends State<SignUpGender> {
                   trailing: Radio<String>(
                     value: l10n
                         .signupGenderOptionOther, //TODO - use content provider textID
-                    groupValue: _selection,
+                    groupValue: _gender,
                     onChanged: (String? value) {
                       setState(() {
-                        _selection = value;
+                        _gender = value;
                       });
                     },
                   ),
@@ -109,7 +109,7 @@ class _SignUpGenderState extends State<SignUpGender> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: _selection == null
+        rightOnPress: _gender == null
             ? null
             : () {
                 if (_formKey.currentState!.validate()) {
