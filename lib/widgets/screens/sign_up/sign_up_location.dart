@@ -15,14 +15,7 @@ class SignUpLocation extends StatefulWidget {
 }
 
 class _SignUpLocationState extends State<SignUpLocation> {
-  final TextEditingController _controller = TextEditingController();
-  String? _selection;
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  String? _location;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +27,10 @@ class _SignUpLocationState extends State<SignUpLocation> {
         //TODO - Set up with Autocomplete
         child: TextFormFieldWidget(
           prefixIcon: const Icon(Icons.search),
-          textController: _controller,
-          label: l10n.signupLocationInputField,
+          label: l10n.signupLocationInputLabel,
+          hint: l10n.signupLocationInputHint,
           onChanged: (value) => setState(() {
-            _selection = value;
+            _location = value;
           }),
         ),
       ),
@@ -51,9 +44,9 @@ class _SignUpLocationState extends State<SignUpLocation> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: _selection == null
-            ? null
-            : () => context.push(Routes.signupLanguages.path),
+        rightOnPress: _location?.isNotEmpty ?? false
+            ? () => context.push(Routes.signupLanguages.path)
+            : null,
       ),
     );
   }

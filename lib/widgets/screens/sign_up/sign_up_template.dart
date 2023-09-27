@@ -65,6 +65,7 @@ class _SignUpTemplateState extends State<SignUpTemplate> {
                   style: theme.textTheme.headlineSmall?.copyWith(
                     color: theme.colorScheme.primary,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: Insets.paddingMedium),
                 widget.body,

@@ -17,51 +17,53 @@ class SignUpYearOfBirth extends StatefulWidget {
 }
 
 class _SignUpYearOfBirthState extends State<SignUpYearOfBirth> {
-  TextEditingController? yearTextController;
   final _formKey = GlobalKey<FormState>();
-  String? year;
+  String? _year;
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
-        progress: SignUpProgress.one,
-        title: l10n.whatYearWereYouBorn,
-        body: Form(
-            key: _formKey,
-            child: Stack(children: [
-              TextFormFieldWidget(
-                textController: yearTextController,
-                label: l10n.yearOfBirth,
-                keyboardType: TextInputType.phone,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.today),
-                  onPressed: () {},
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    year = value;
-                  });
-                },
+      progress: SignUpProgress.one,
+      title: l10n.signupBirthTitle,
+      body: Form(
+          key: _formKey,
+          child: Stack(children: [
+            TextFormFieldWidget(
+              label: l10n.signupBirthInputLabel,
+              hint: l10n.signupBirthInputHint,
+              keyboardType: TextInputType.phone,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly,
+              ],
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.today),
+                onPressed: () {},
               ),
-            ])),
-        footer: SignUpIconFooter(
-            icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
-        bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            if (_formKey.currentState!.validate()) {
-              context.push(Routes.signupGender.path);
-            }
-          },
-        ));
+              onChanged: (value) {
+                setState(() {
+                  _year = value;
+                });
+              },
+            ),
+          ])),
+      footer: SignUpIconFooter(
+          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+      bottomButtons: SignUpBottomButtons(
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: _year?.isNotEmpty ?? false
+            ? () {
+                if (_formKey.currentState!.validate()) {
+                  context.push(Routes.signupGender.path);
+                }
+              }
+            : null,
+      ),
+    );
   }
 }

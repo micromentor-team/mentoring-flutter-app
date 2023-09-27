@@ -4,9 +4,11 @@ import 'package:flutter/services.dart';
 class TextFormFieldWidget extends StatefulWidget {
   final TextEditingController? textController;
   final Function(String) onChanged;
-  final String label;
+  final String? label;
+  final String? hint;
   final bool? isPassword;
   final int? maxLength;
+  final int maxLines;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
@@ -15,10 +17,12 @@ class TextFormFieldWidget extends StatefulWidget {
 
   const TextFormFieldWidget({
     super.key,
-    required this.textController,
+    this.textController,
     required this.onChanged,
-    required this.label,
+    this.label,
+    this.hint,
     this.maxLength,
+    this.maxLines = 1,
     this.validator,
     this.isPassword,
     this.keyboardType,
@@ -54,10 +58,15 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
       validator: widget.validator,
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
+      maxLines: widget.maxLines,
       decoration: InputDecoration(
         labelText: widget.label,
         labelStyle: TextStyle(
           color: theme.colorScheme.onSurface,
+        ),
+        hintText: widget.hint,
+        hintStyle: theme.textTheme.bodyLarge?.copyWith(
+          color: theme.colorScheme.outline,
         ),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword != null

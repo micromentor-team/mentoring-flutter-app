@@ -18,30 +18,40 @@ class SignupBusinessAddBusinessNameScreen extends StatefulWidget {
 
 class _SignupBusinessAddBusinessNameScreenState
     extends State<SignupBusinessAddBusinessNameScreen> {
+  String? _businessName;
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
-      title: l10n.whatIsTheNameOfYourBusiness,
+      title: l10n.signupBusinessNameTitle,
       bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            context.push(Routes.addWebsite.path);
-          }),
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: _businessName?.isNotEmpty ?? false
+            ? () {
+                context.push(Routes.addWebsite.path);
+              }
+            : null,
+      ),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Form(
-          child: TextFormFieldWidget(
-        label: l10n.businessName,
-        onChanged: (value) {},
-        textController: null,
-      )),
+        child: TextFormFieldWidget(
+          label: l10n.signupBusinessNameInputLabel,
+          hint: l10n.signupBusinessNameInputHint,
+          onChanged: (value) {
+            setState(() {
+              _businessName = value;
+            });
+          },
+        ),
+      ),
     );
   }
 }

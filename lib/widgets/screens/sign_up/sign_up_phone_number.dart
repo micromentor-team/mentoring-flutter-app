@@ -19,10 +19,9 @@ class SignUpPhoneNumber extends StatefulWidget {
 }
 
 class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
-  TextEditingController? phoneTextController;
   final _formKey = GlobalKey<FormState>();
-  String? phoneNumber;
-  String? selectedCountryCode = _countryCode[0];
+  String? _phoneNumber;
+  String? _selectedCountryCode = _countryCode[0];
 
   @override
   Widget build(BuildContext context) {
@@ -30,75 +29,84 @@ class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
 
     final ThemeData theme = Theme.of(context);
     return SignUpTemplate(
-        progress: SignUpProgress.one,
-        title: l10n.whatIsYourPhoneNumber,
-        body: Form(
-            key: _formKey,
-            child: Row(children: [
-              SizedBox(
-                  width: 100,
-                  child: DropdownButtonFormField(
-                    isExpanded: false,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: theme.colorScheme.outline, width: 1),
+      progress: SignUpProgress.one,
+      title: l10n.signupPhoneTitle,
+      body: Form(
+        key: _formKey,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 100,
+              child: DropdownButtonFormField(
+                isExpanded: false,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: theme.colorScheme.outline, width: 1),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: theme.colorScheme.outline, width: 1),
+                  ),
+                  filled: true,
+                  fillColor: theme.colorScheme.surface,
+                ),
+                dropdownColor: theme.colorScheme.surface,
+                value: _selectedCountryCode,
+                onChanged: (country) => setState(() {
+                  _selectedCountryCode = country;
+                }),
+                items: _countryCode.map<DropdownMenuItem<String>>(
+                  (String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: theme.textTheme.bodyLarge!
+                            .copyWith(color: theme.colorScheme.outline),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: theme.colorScheme.outline, width: 1),
-                      ),
-                      filled: true,
-                      fillColor: theme.colorScheme.surface,
-                    ),
-                    dropdownColor: theme.colorScheme.surface,
-                    value: selectedCountryCode,
-                    onChanged: (country) => setState(() {
-                      selectedCountryCode = country;
-                    }),
-                    items: _countryCode
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: theme.textTheme.bodyLarge!
-                              .copyWith(color: theme.colorScheme.outline),
-                        ),
-                      );
-                    }).toList(),
-                  )),
-              const SizedBox(
-                width: Insets.paddingExtraSmall,
+                    );
+                  },
+                ).toList(),
               ),
-              Expanded(
-                  child: TextFormFieldWidget(
+            ),
+            const SizedBox(
+              width: Insets.paddingExtraSmall,
+            ),
+            Expanded(
+              child: TextFormFieldWidget(
                 keyboardType: TextInputType.phone,
-                textController: phoneTextController,
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.digitsOnly,
                 ],
-                label: l10n.phoneNumber,
+                label: l10n.signupPhoneInputLabel,
+                hint: l10n.signupPhoneInputHint,
                 onChanged: (value) {
                   setState(() {
-                    phoneNumber = value;
+                    _phoneNumber = value;
                   });
                 },
-              ))
-            ])),
-        footer: SignUpIconFooter(
-            icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
-        bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            if (_formKey.currentState!.validate()) {
-              context.push(Routes.signupYearOfBirth.path);
-            }
-          },
-        ));
+              ),
+            ),
+          ],
+        ),
+      ),
+      footer: SignUpIconFooter(
+          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+      bottomButtons: SignUpBottomButtons(
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: _phoneNumber?.isNotEmpty ?? false
+            ? () {
+                if (_formKey.currentState!.validate()) {
+                  context.push(Routes.signupYearOfBirth.path);
+                }
+              }
+            : null,
+      ),
+    );
   }
 }
