@@ -65,7 +65,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: ElevatedButton(
                     style: ButtonStyles.primaryRoundedRectangleButton(context),
                     onPressed: () {
-                      context.push(Routes.signupEntrepreneurOrMentor.path);
+                      context.push(Routes.signup.path);
                     },
                     child: Padding(
                         padding: const EdgeInsets.symmetric(
