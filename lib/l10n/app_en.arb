@@ -334,5 +334,6 @@
     "whatYearWereYouBorn": "What year were you born?",
     "findMentors": "Find Mentors",
     "signUpCompletedTextOne": "You can view and edit your profile any time and even fill out additional fields.",
-    "signUpCompletedTextTwo": "Next, start connecting with mentors. We recommend you reach out to at least 3 mentors for your best chances of finding a good match."
+    "signUpCompletedTextTwo": "Next, start connecting with mentors. We recommend you reach out to at least 3 mentors for your best chances of finding a good match.",
+    "signUpCompletedTextTwoMentor": "Next, start connecting with entrepreneurs. We recommend you reach out to at least 3 entrepreneurs for your best chances of finding a good match."
 }
