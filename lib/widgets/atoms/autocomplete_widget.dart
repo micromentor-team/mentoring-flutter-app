@@ -23,43 +23,6 @@ class AutocompleteWidget extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return Autocomplete<String>(
-      optionsViewBuilder: (context, onSelected, options) {
-        return Align(
-          alignment: Alignment.topCenter,
-          child: Material(
-            elevation: Elevations.level2,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 200),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: options.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final dynamic option = options.elementAt(index);
-                  return TextButton(
-                    onPressed: () {
-                      onSelected(option);
-                    },
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: Insets.paddingMedium),
-                        child: Text(
-                          optionsTranslations?.call(option) ?? option,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: theme.colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        );
-      },
       optionsBuilder: (TextEditingValue textEditingValue) {
         var filteredOptions = options.where(
             (option) => !(controller.getTags?.contains(option) ?? false));
@@ -95,14 +58,18 @@ class AutocompleteWidget extends StatelessWidget {
                 focusNode: fn,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: theme.colorScheme.outline, width: 3.0),
+                    borderSide: BorderSide(color: theme.colorScheme.outline),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: theme.colorScheme.outline, width: 3.0),
+                    borderSide: BorderSide(color: theme.colorScheme.outline),
                   ),
                   errorText: error,
+                  suffixIcon: tags.isEmpty
+                      ? Icon(
+                          Icons.arrow_drop_down,
+                          color: theme.colorScheme.onSurfaceVariant,
+                        )
+                      : null,
                   prefixIcon: tags.isNotEmpty
                       ? Padding(
                           padding:
@@ -114,21 +81,20 @@ class AutocompleteWidget extends StatelessWidget {
                                 children: tags.map((String tag) {
                               return Container(
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: Dimensions.highlightBorderWidth,
-                                      color: theme.colorScheme.primary),
+                                  color: theme.colorScheme.primaryContainer,
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(
                                       Radii.roundedRectRadiusSmall,
                                     ),
                                   ),
-                                  color: theme.colorScheme.surface,
                                 ),
                                 margin: const EdgeInsets.only(
-                                    right: Insets.paddingSmall),
+                                  right: Insets.paddingSmall,
+                                ),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: Insets.paddingSmall,
-                                    vertical: Insets.paddingExtraSmall),
+                                  horizontal: Insets.paddingSmall,
+                                  vertical: Insets.paddingExtraSmall,
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -137,17 +103,21 @@ class AutocompleteWidget extends StatelessWidget {
                                       child: Text(
                                         optionsTranslations?.call(tag) ?? tag,
                                         style: TextStyle(
-                                            color: theme.colorScheme.primary),
+                                          color: theme
+                                              .colorScheme.onPrimaryContainer,
+                                        ),
                                       ),
                                       onTap: () => onTagDelete(tag),
                                     ),
                                     const SizedBox(
-                                        width: Insets.paddingExtraSmall),
+                                      width: Insets.paddingExtraSmall,
+                                    ),
                                     InkWell(
                                       child: Icon(
                                         Icons.close,
                                         size: 20.0,
-                                        color: theme.colorScheme.primary,
+                                        color: theme
+                                            .colorScheme.onPrimaryContainer,
                                       ),
                                       onTap: () => onTagDelete(tag),
                                     )

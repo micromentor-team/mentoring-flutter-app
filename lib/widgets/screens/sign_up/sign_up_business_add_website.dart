@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+
 import '../../../constants/app_constants.dart';
 import '../../atoms/text_form_field_widget.dart';
 import 'sign_up_bottom_buttons.dart';
@@ -38,7 +39,7 @@ class _SignupBusinessAddWebsiteScreenState
       body: Form(
         child: TextFormFieldWidget(
           label: l10n.websiteURL,
-          onPressed: (value) {},
+          onChanged: (value) {},
           textController: null,
         ),
       ),
