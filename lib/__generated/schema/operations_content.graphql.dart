@@ -3,7 +3,6 @@
 // ignore_for_file: type=lint
 
 import 'package:gql/ast.dart';
-
 import 'schema.graphql.dart';
 
 class Query$FindAllOptionsByType {

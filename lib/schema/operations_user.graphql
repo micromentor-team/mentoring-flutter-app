@@ -128,6 +128,43 @@ query FindUserSearch($userSearchId: String!) {
   }
 }
 
+query FindUserSearchResults($userSearchId: String!, $options: FindObjectsOptions) {
+  findUserSearchResults(userSearchId: $userSearchId, options: $options) {
+    id
+    email
+    firstName
+    lastName
+    fullName
+    avatarUrl
+    userHandle
+    offersHelp
+    seeksHelp
+    jobTitle
+    cityOfResidence
+    regionOfResidence
+    countryOfResidence {
+        translatedValue
+    }
+    groupMemberships {
+        groupIdent
+        ... on MentorsGroupMembership {
+            expertises {
+                translatedValue
+            }
+            endorsements
+        }
+        ... on MenteesGroupMembership {
+            soughtExpertises {
+                translatedValue
+            }
+        }
+    }
+    companies {
+        name
+    }
+  }
+}
+
 query FindMenteeUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
     findUsers(options: $options, filter: $filter, match: $match) {
         id
