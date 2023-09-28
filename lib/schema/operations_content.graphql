@@ -94,6 +94,13 @@ query FindGenders {
   }
 }
 
+query FindPronouns($optionType: OptionType!) {
+  findOptions(optionType: $optionType) {
+    textId
+    translatedValue
+  }
+}
+
 query FindLanguages {
   findLanguages {
     textId
