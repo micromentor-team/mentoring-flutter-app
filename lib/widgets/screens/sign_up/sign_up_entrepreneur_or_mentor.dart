@@ -17,12 +17,11 @@ class SignUpEntrepreneurOrMentorScreen extends StatefulWidget {
 
 class _SignUpEntrepreneurOrMentorScreenState
     extends State<SignUpEntrepreneurOrMentorScreen> {
-  int? selectedNumber;
+  int? selectedNumber = 0;
 
   void handleRadioButtonChange(int value) {
     setState(() {
       selectedNumber = value;
-      print(selectedNumber);
     });
   }
 
@@ -40,7 +39,6 @@ class _SignUpEntrepreneurOrMentorScreenState
       titleIcon: const [null, null],
       rebuildParentWidget: handleRadioButtonChange,
     );
-    int selectedNumber = LoginRadioButtons.selectedNumber;
 
     return SignUpTemplate(
       progress: SignUpProgress.one,
@@ -52,7 +50,11 @@ class _SignUpEntrepreneurOrMentorScreenState
             context.pop();
           },
           rightOnPress: () {
-            context.push(Routes.signupBusinessStage.path);
+            if (selectedNumber == 0) {
+              context.push(Routes.signupBusinessStage.path);
+            } else {
+              context.push(Routes.signupBusinessHelpSelection.path);
+            }
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
