@@ -15,7 +15,7 @@ class SelectChip {
   });
 }
 
-//example 1
+//examples
 CreateMultiSelectChips createMultiSelectChipsExample() {
   return CreateMultiSelectChips(
     chips: [
@@ -26,6 +26,114 @@ CreateMultiSelectChips createMultiSelectChipsExample() {
       SelectChip(chipName: 'Formal meetings', textId: 'formatMeetings'),
       SelectChip(chipName: 'Long term', textId: 'longTerm'),
     ],
+  );
+}
+
+CreateMultiSelectChips createMultiSelectChipsExampleWithIcon() {
+  return CreateMultiSelectChips(
+    chips: [
+      SelectChip(
+          chipName: 'Administrative Services',
+          textId: 'administrativeServices',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Agriculture & Forestry',
+          textId: 'agricultureAndForestry',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Architecture & Engineering',
+          textId: 'architectureAndEngineering',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Arts, Entertainment, & Recreation',
+          textId: 'artsEntertainmentAndRecreation',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Beauty, Hair, & Cosmetics',
+          textId: 'beautyHairAndCosmetics',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Building & Grounds Maintenance',
+          textId: 'buildingAndGroundsMaintenance',
+          icon: Icons.work_outline),
+    ],
+    maxSelection: 3,
+  );
+}
+
+CreateMultiSelectChips createHelpExampleWithIcon() {
+  return CreateMultiSelectChips(
+    chips: [
+      SelectChip(
+          chipName: 'Accounting & Finance',
+          textId: 'accountingAndFinance',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Advertising & Promotion',
+          textId: 'advertisingAndPromotion',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Branding & Identity',
+          textId: 'brandingAndIdentity',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Business Development',
+          textId: 'businessDevelopment',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Business Planning',
+          textId: 'businessPlanning',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'E-Commerce',
+          textId: 'eCommerce',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Financial Planning',
+          textId: 'financialPlanning',
+          icon: Icons.work_outline),
+    ],
+    maxSelection: 3,
+  );
+}
+
+CreateMultiSelectChips createMultiSelectChipsIndustry() {
+  return CreateMultiSelectChips(
+    chips: [
+      SelectChip(
+          chipName: 'Administrative Services',
+          textId: 'administrativeServices',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Agriculture & Forestry',
+          textId: 'agricultureAndForestry',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Architecture & Engineering',
+          textId: 'architectureAndEngineering',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Arts, Entertainment, & Recreation',
+          textId: 'artsEntertainmentAndRecreation',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Beauty, Hair, & Cosmetics',
+          textId: 'beautyHairAndCosmetics',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Building & Grounds Maintenance',
+          textId: 'buildingAndGroundsMaintenance',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Construction',
+          textId: 'construction',
+          icon: Icons.work_outline),
+      SelectChip(
+          chipName: 'Digital Marketing & eCommerce',
+          textId: 'digitalMarketingAndeCommerce',
+          icon: Icons.work_outline),
+    ],
+    maxSelection: 1,
   );
 }
 
