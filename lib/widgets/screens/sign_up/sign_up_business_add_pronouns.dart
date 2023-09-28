@@ -3,7 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
+
 import '../../../constants/app_constants.dart';
+import '../../../providers/content_provider.dart';
 import '../../molecules/checkbox_list_and_form.dart';
 import 'sign_up_bottom_buttons.dart';
 
@@ -17,6 +20,41 @@ class SignupBusinessAddPronounsScreen extends StatefulWidget {
 
 class _SignupBusinessAddPronounsScreenState
     extends State<SignupBusinessAddPronounsScreen> {
+  late final ContentProvider _contentProvider;
+  final List<String> _selections = List.empty(growable: true);
+
+  @override
+  void initState() {
+    super.initState();
+    _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+  }
+
+  List<LabeledCheckbox> _createCheckboxes() {
+    return _contentProvider.presetPronounOptions!
+        .map(
+          (e) => _createLabeledCheckbox(e.translatedValue!, e.textId),
+        )
+        .toList();
+  }
+
+  LabeledCheckbox _createLabeledCheckbox(String label, String textId) {
+    return LabeledCheckbox(
+      label: label,
+      id: textId,
+      value: _selections.contains(textId),
+      selectionOrder: _selections.indexOf(textId) + 1,
+      onChanged: (bool isSelected) {
+        setState(() {
+          if (isSelected) {
+            _selections.add(textId);
+          } else {
+            _selections.remove(textId);
+          }
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -46,7 +84,7 @@ class _SignupBusinessAddPronounsScreenState
                   .copyWith(color: theme.colorScheme.outline),
               textAlign: TextAlign.center,
             ),
-            const PronounExample(),
+            ..._createCheckboxes(),
           ],
         ),
       ),

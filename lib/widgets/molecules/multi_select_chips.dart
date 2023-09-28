@@ -1,59 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 //class chip
-class Chip {
+class SelectChip {
   final String chipName;
   final String textId;
   final IconData? icon;
 
-  Chip({
+  SelectChip({
     required this.chipName,
     required this.textId,
     this.icon,
   });
 }
 
-//example 1
+//examples
 CreateMultiSelectChips createMultiSelectChipsExample() {
   return CreateMultiSelectChips(
     chips: [
-      Chip(chipName: 'Weekly check-ins', textId: 'weeklyCheckIn'),
-      Chip(chipName: 'Monthly check-ins', textId: 'monthlyCheckIn'),
-      Chip(chipName: 'One-off sessions', textId: 'oneOffSessions'),
-      Chip(chipName: 'Informal chats', textId: 'informalChats'),
-      Chip(chipName: 'Formal meetings', textId: 'formatMeetings'),
-      Chip(chipName: 'Long term mentoring', textId: 'longTermMentoring'),
+      SelectChip(chipName: 'Weekly check-ins', textId: 'weeklyCheckIn'),
+      SelectChip(chipName: 'Monthly check-ins', textId: 'monthlyCheckIn'),
+      SelectChip(chipName: 'One-off sessions', textId: 'oneOffSessions'),
+      SelectChip(chipName: 'Informal chats', textId: 'informalChats'),
+      SelectChip(chipName: 'Formal meetings', textId: 'formatMeetings'),
+      SelectChip(chipName: 'Long term', textId: 'longTerm'),
     ],
   );
 }
 
-//example 2
 CreateMultiSelectChips createMultiSelectChipsExampleWithIcon() {
   return CreateMultiSelectChips(
     chips: [
-      Chip(
+      SelectChip(
           chipName: 'Administrative Services',
           textId: 'administrativeServices',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Agriculture & Forestry',
           textId: 'agricultureAndForestry',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Architecture & Engineering',
           textId: 'architectureAndEngineering',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Arts, Entertainment, & Recreation',
           textId: 'artsEntertainmentAndRecreation',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Beauty, Hair, & Cosmetics',
           textId: 'beautyHairAndCosmetics',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Building & Grounds Maintenance',
           textId: 'buildingAndGroundsMaintenance',
           icon: Icons.work_outline),
@@ -62,35 +61,34 @@ CreateMultiSelectChips createMultiSelectChipsExampleWithIcon() {
   );
 }
 
-//example 3:
 CreateMultiSelectChips createHelpExampleWithIcon() {
   return CreateMultiSelectChips(
     chips: [
-      Chip(
+      SelectChip(
           chipName: 'Accounting & Finance',
           textId: 'accountingAndFinance',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Advertising & Promotion',
           textId: 'advertisingAndPromotion',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Branding & Identity',
           textId: 'brandingAndIdentity',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Business Development',
           textId: 'businessDevelopment',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Business Planning',
           textId: 'businessPlanning',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'E-Commerce',
           textId: 'eCommerce',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Financial Planning',
           textId: 'financialPlanning',
           icon: Icons.work_outline),
@@ -99,39 +97,38 @@ CreateMultiSelectChips createHelpExampleWithIcon() {
   );
 }
 
-//example 4:
 CreateMultiSelectChips createMultiSelectChipsIndustry() {
   return CreateMultiSelectChips(
     chips: [
-      Chip(
+      SelectChip(
           chipName: 'Administrative Services',
           textId: 'administrativeServices',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Agriculture & Forestry',
           textId: 'agricultureAndForestry',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Architecture & Engineering',
           textId: 'architectureAndEngineering',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Arts, Entertainment, & Recreation',
           textId: 'artsEntertainmentAndRecreation',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Beauty, Hair, & Cosmetics',
           textId: 'beautyHairAndCosmetics',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Building & Grounds Maintenance',
           textId: 'buildingAndGroundsMaintenance',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Construction',
           textId: 'construction',
           icon: Icons.work_outline),
-      Chip(
+      SelectChip(
           chipName: 'Digital Marketing & eCommerce',
           textId: 'digitalMarketingAndeCommerce',
           icon: Icons.work_outline),
@@ -142,7 +139,7 @@ CreateMultiSelectChips createMultiSelectChipsIndustry() {
 
 //build
 class CreateMultiSelectChips extends StatefulWidget {
-  final List<Chip> chips;
+  final List<SelectChip> chips;
   final int? maxSelection;
 
   const CreateMultiSelectChips({
