@@ -59,7 +59,7 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   late Future<OperationResult<AuthenticatedUser?>> _authenticatedUser;
-  late Future<OperationResult<AllOptionsByType>> _optionsByType;
+  late Future<OperationResult> _content;
   late final InboxModel _inboxModel;
   late final ContentProvider _contentProvider;
 
@@ -73,7 +73,9 @@ class _StartScreenState extends State<StartScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _optionsByType = _contentProvider.findAllOptionsByType();
+    _content = _contentProvider.findAllOptionsByType().then(
+          (value) => _contentProvider.findPresetPronouns(),
+        );
     _authenticatedUser =
         Provider.of<UserProvider>(context).getAuthenticatedUser(
       logFailures: false, // Error is expected when user is not logged in.
@@ -87,7 +89,7 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _optionsByType,
+      future: _content,
       builder: (_, optionsSnapshot) => AppUtility.widgetForAsyncSnapshot(
         snapshot: optionsSnapshot,
         onReady: () => FutureBuilder(

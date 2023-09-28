@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 
 import '../__generated/schema/operations_content.graphql.dart';
 import 'base/base_provider.dart';
@@ -11,6 +12,7 @@ typedef Country = Query$FindCountries$findCountries;
 typedef EducationLevel = Query$FindEducationLevels$findEducationLevels;
 typedef Expertise = Query$FindExpertises$findExpertises;
 typedef PresetGender = Query$FindGenders$findGenders;
+typedef PresetPronoun = Query$FindPronouns$findOptions;
 typedef Industry = Query$FindIndustries$findIndustries;
 typedef Language = Query$FindLanguages$findLanguages;
 typedef OptionByType = Query$FindAllOptions$findOptions;
@@ -23,6 +25,7 @@ class ContentProvider extends BaseProvider {
   List<EducationLevel>? _educationLevels;
   List<Expertise>? _expertises;
   List<PresetGender>? _presetGenders;
+  List<PresetPronoun>? _presetPronouns;
   List<Industry>? _industries;
   List<Language>? _languages;
 
@@ -101,6 +104,11 @@ class ContentProvider extends BaseProvider {
     debugPrint('Updated content provider preset gender values: ${toString()}');
   }
 
+  void _setPresetPronounOptions(List<PresetPronoun> presetPronoun) {
+    _presetPronouns = presetPronoun;
+    debugPrint('Updated content provider preset pronoun values: ${toString()}');
+  }
+
   void _setIndustryOptions(List<Industry> industries) {
     _industries = industries;
     debugPrint('Updated content provider industry values: ${toString()}');
@@ -135,6 +143,10 @@ class ContentProvider extends BaseProvider {
 
   List<PresetGender>? get presetGenderOptions {
     return _presetGenders;
+  }
+
+  List<PresetPronoun>? get presetPronounOptions {
+    return _presetPronouns;
   }
 
   List<Industry>? get industryOptions {
@@ -296,6 +308,28 @@ class ContentProvider extends BaseProvider {
           : null,
     );
     if (result.response != null) _setPresetGenderOptions(result.response!);
+    return result;
+  }
+
+  Future<OperationResult<List<PresetPronoun>>> findPresetPronouns() async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindPronouns,
+        fetchPolicy: FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindPronouns(
+          optionType: Enum$OptionType.pronoun,
+        ).toJson(),
+      ),
+    );
+    final result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindPronouns.fromJson(
+              queryResult.data!,
+            ).findOptions
+          : null,
+    );
+    if (result.response != null) _setPresetPronounOptions(result.response!);
     return result;
   }
 

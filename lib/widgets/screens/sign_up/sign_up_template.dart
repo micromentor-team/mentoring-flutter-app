@@ -23,13 +23,14 @@ class SignUpTemplate extends StatefulWidget {
   final Widget? footer;
   final Widget? bottomButtons;
 
-  const SignUpTemplate(
-      {super.key,
-      required this.progress,
-      required this.title,
-      required this.body,
-      this.footer,
-      this.bottomButtons});
+  const SignUpTemplate({
+    super.key,
+    required this.progress,
+    required this.title,
+    required this.body,
+    this.footer,
+    this.bottomButtons,
+  });
 
   @override
   State<SignUpTemplate> createState() => _SignUpTemplateState();
@@ -68,8 +69,11 @@ class _SignUpTemplateState extends State<SignUpTemplate> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: Insets.paddingMedium),
-                widget.body,
-                const Spacer(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: widget.body,
+                  ),
+                ),
                 if (widget.footer != null)
                   SizedBox(width: 240, child: widget.footer),
                 if (widget.bottomButtons != null) widget.bottomButtons!,
