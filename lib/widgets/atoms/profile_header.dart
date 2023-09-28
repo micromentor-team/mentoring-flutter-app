@@ -18,52 +18,44 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    var backgroundImage = avatarUrl != null
+        ? NetworkImage(avatarUrl!) as ImageProvider<Object>
+        : const AssetImage(Assets.blankAvatar);
+
     return Padding(
       padding: const EdgeInsets.all(Insets.paddingExtraLarge),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-              child: Text(
-                profileMessage,
-                textAlign: TextAlign.start,
-                softWrap: true,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+            child: Image(
+              image: backgroundImage,
+              width: Insets.paddingExtraLarge,
+              height: Insets.paddingExtraLarge,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(Insets.paddingSmall),
+            child: Text(
+              profileMessage,
+              textAlign: TextAlign.start,
+              softWrap: true,
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: theme.colorScheme.onSurface,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),
-          Stack(
-            children: [
-              if (profileCompletionPercentage != null)
-                SizedBox(
-                  width: Radii.avatarRadiusSmall * 2,
-                  height: Radii.avatarRadiusSmall * 2,
-                  child: CircularProgressIndicator(
-                    value: profileCompletionPercentage! / 100,
-                  ),
-                ),
-              InkWell(
-                onTap: () {
-                  //TODO(m-rosario): Remove this once the real logout flow is defined by UX
-                  Provider.of<ScaffoldModel>(
-                    context,
-                    listen: false,
-                  ).setTestHomeScaffold();
-                  Scaffold.of(context).openDrawer();
-                },
-                child: CircleAvatar(
-                  radius: Radii.avatarRadiusSmall,
-                  backgroundImage: avatarUrl != null
-                      ? NetworkImage(avatarUrl!) as ImageProvider<Object>
-                      : const AssetImage(Assets.blankAvatar),
-                ),
-              ),
-            ],
+          const Spacer(),
+          InkWell(
+            onTap: () {},
+            child: Icon(
+              Icons.more_vert,
+              color: theme.colorScheme.primary,
+            ),
           ),
         ],
       ),
