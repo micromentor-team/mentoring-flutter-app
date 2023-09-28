@@ -17,6 +17,14 @@ class SignUpEntrepreneurOrMentorScreen extends StatefulWidget {
 
 class _SignUpEntrepreneurOrMentorScreenState
     extends State<SignUpEntrepreneurOrMentorScreen> {
+  int? selectedNumber = 0;
+
+  void handleRadioButtonChange(int value) {
+    setState(() {
+      selectedNumber = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -32,14 +40,17 @@ class _SignUpEntrepreneurOrMentorScreenState
             context.pop();
           },
           rightOnPress: () {
-            // context.push(Routes.signupBusinessStage.path);
-            context.push(Routes.signupMentorHelpSelection.path);
+            if (selectedNumber == 0) {
+              context.push(Routes.signupBusinessStage.path);
+            } else {
+              context.push(Routes.signupMentorHelpSelection.path);
+            }
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
         children: [
-          createEntrepreneurMentorCards(context),
+          createEntrepreneurMentorCards(context, handleRadioButtonChange),
           const SizedBox(height: Insets.paddingMedium),
           Padding(
             padding: const EdgeInsets.all(Insets.paddingSmall),

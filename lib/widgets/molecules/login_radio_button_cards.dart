@@ -5,7 +5,8 @@ import '../../constants/app_constants.dart';
 ///////////////////////This is multiple cards///////////////////////////////////
 
 //////Example1////////
-LoginRadioButtonCards createEntrepreneurMentorCards(BuildContext context) {
+LoginRadioButtonCards createEntrepreneurMentorCards(
+    BuildContext context, handleRadioButtonChange) {
   final AppLocalizations l10n = AppLocalizations.of(context)!;
 
   return LoginRadioButtonCards(
@@ -16,6 +17,7 @@ LoginRadioButtonCards createEntrepreneurMentorCards(BuildContext context) {
       Image(image: AssetImage(Assets.mentorIcon))
     ],
     titleIcon: const [null, null],
+    rebuildParentWidget: handleRadioButtonChange,
   );
 }
 
@@ -23,27 +25,27 @@ LoginRadioButtonCards createEntrepreneurMentorCards(BuildContext context) {
 LoginRadioButtonCards createBusinessStageCards(BuildContext context) {
   // final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-  return const LoginRadioButtonCards(title: [
-    "Idea stage",
-    "Operational",
-    "Revenue earning",
-    "Profitable and Scaling"
-  ], subtitle: [
-    "I do not yet have a working prototype or customers and am not operational.",
-    "I have a product or service offering but I have not yet earned revenue. ",
-    "I am earning revenue but I am not yet profitable",
-    "I am making a profit and am ready to grow my business"
-  ], titleIcon: [
-    Icon(Icons.lightbulb_outlined),
-    Icon(Icons.storefront_outlined),
-    Icon(Icons.attach_money_outlined),
-    Icon(Icons.auto_graph_outlined)
-  ], imageAssetName: [
-    null,
-    null,
-    null,
-    null
-  ]);
+  return const LoginRadioButtonCards(
+    title: [
+      "Idea stage",
+      "Operational",
+      "Revenue earning",
+      "Profitable and Scaling"
+    ],
+    subtitle: [
+      "I do not yet have a working prototype or customers and am not operational.",
+      "I have a product or service offering but I have not yet earned revenue. ",
+      "I am earning revenue but I am not yet profitable",
+      "I am making a profit and am ready to grow my business"
+    ],
+    titleIcon: [
+      Icon(Icons.lightbulb_outlined),
+      Icon(Icons.storefront_outlined),
+      Icon(Icons.attach_money_outlined),
+      Icon(Icons.auto_graph_outlined)
+    ],
+    imageAssetName: [null, null, null, null],
+  );
 }
 
 //////Implementation////////
@@ -52,12 +54,14 @@ class LoginRadioButtonCards extends StatefulWidget {
   final List<String> subtitle;
   final List<Image?> imageAssetName;
   final List<Icon?> titleIcon;
+  final Function(int)? rebuildParentWidget;
 
   const LoginRadioButtonCards({
     required this.title,
     required this.subtitle,
     required this.imageAssetName,
     required this.titleIcon,
+    this.rebuildParentWidget,
     Key? key,
   }) : super(key: key);
 
@@ -66,9 +70,7 @@ class LoginRadioButtonCards extends StatefulWidget {
 }
 
 class _LoginRadioButtonCardsState extends State<LoginRadioButtonCards> {
-  int? _character = 0;
-
-  UserRole radioValue = UserRole.selected;
+  int _character = 0;
 
   @override
   Column build(BuildContext context) {
@@ -104,7 +106,10 @@ class _LoginRadioButtonCardsState extends State<LoginRadioButtonCards> {
                     groupValue: _character,
                     onChanged: (int? value) {
                       setState(() {
-                        _character = value;
+                        _character = value!;
+                        if (widget.rebuildParentWidget != null) {
+                          widget.rebuildParentWidget!(_character);
+                        }
                       });
                     },
                   ),
@@ -160,5 +165,3 @@ class _LoginRadioButtonCardsState extends State<LoginRadioButtonCards> {
     );
   }
 }
-
-enum UserRole { unselected, selected }
