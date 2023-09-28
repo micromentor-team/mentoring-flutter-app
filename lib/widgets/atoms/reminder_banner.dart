@@ -8,13 +8,53 @@ class ReminderBanner extends StatelessWidget {
   final String titleText;
   final String subtitleText;
   final String ctaText;
+  final int profileCompletionPercentage;
 
   const ReminderBanner(
       {Key? key,
       required this.titleText,
       required this.subtitleText,
-      required this.ctaText})
+      required this.ctaText,
+      required this.profileCompletionPercentage})
       : super(key: key);
+
+  Widget _buildProgressCircleColumn(context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.only(right: Insets.paddingLarge),
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              SizedBox(
+                width: Radii.avatarRadiusSmall * 2,
+                height: Radii.avatarRadiusSmall * 2,
+                child: CircularProgressIndicator(
+                  value: profileCompletionPercentage / 100,
+                ),
+              ),
+              SizedBox(
+                width: Radii.avatarRadiusSmall * 2,
+                height: Radii.avatarRadiusSmall * 2,
+                child: Center(
+                  child: Text(
+                    l10n.percentageProfileCompletion(
+                        profileCompletionPercentage),
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildTextColumn(context) {
     final ThemeData theme = Theme.of(context);
@@ -30,58 +70,71 @@ class ReminderBanner extends StatelessWidget {
                 softWrap: true),
             const SizedBox(height: Insets.paddingExtraSmall),
             Text(subtitleText,
-                style: theme.textTheme.bodySmall,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
                 textAlign: TextAlign.start,
                 softWrap: true),
+            InkWell(
+              onTap: () => {debugPrint("hi")},
+              child: Padding(
+                padding: const EdgeInsets.only(top: Insets.paddingMedium),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      ctaText,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: theme.colorScheme.onSecondaryContainer,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: Insets.paddingSmall,
+                    ),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: theme.colorScheme.onSecondaryContainer,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ));
   }
 
-  Widget _buildImageAndButtonColumn(context) {
-    final ThemeData theme = Theme.of(context);
-    return Expanded(
-      flex: 1,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const SizedBox(
-              child: Image(
-            image: AssetImage(Assets.reminderBannerStockImage),
-            height: 80.0,
-          )),
-          InkWell(
-            onTap: () => {debugPrint("hi")},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.arrow_forward),
-                Text(
-                  ctaText,
-                  style: theme.textTheme.labelLarge,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: Insets.paddingMedium,
         vertical: Insets.paddingExtraSmall,
       ),
       child: Card(
-        surfaceTintColor: Theme.of(context).colorScheme.inverseSurface,
+        elevation: 0,
+        color: Theme.of(context).colorScheme.onInverseSurface,
         child: Padding(
           padding: const EdgeInsets.all(Insets.paddingMedium),
-          child: Row(
-            children: <Widget>[
-              _buildTextColumn(context),
-              _buildImageAndButtonColumn(context)
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(
+                    Icons.close,
+                    color: theme.colorScheme.outline,
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  _buildProgressCircleColumn(context),
+                  _buildTextColumn(context),
+                ],
+              ),
             ],
           ),
         ),
@@ -105,17 +158,19 @@ class MaybeReminderBanner extends StatelessWidget {
     DateTime? updatedAt = authenticatedUser.updatedAt?.toLocal();
     if (profileCompletionPercentage < 50) {
       return ReminderBanner(
-        titleText: l10n
-            .reminderBannerProfileCompleteTitle(profileCompletionPercentage),
+        titleText: l10n.reminderBannerProfileCompleteTitle,
         subtitleText: l10n.reminderBannerProfileCompleteSubtitle,
         ctaText: l10n.reminderBannerProfileCompleteCta,
+        profileCompletionPercentage: profileCompletionPercentage,
       );
     } else if (updatedAt != null &&
         DateTime.now().difference(updatedAt.toLocal()).inDays > 30 * 6) {
       return ReminderBanner(
-          titleText: l10n.reminderBannerProfileUpdateTitle,
-          subtitleText: l10n.reminderBannerProfileUpdateSubtitle,
-          ctaText: l10n.reminderBannerProfileUpdateCta);
+        titleText: l10n.reminderBannerProfileUpdateTitle,
+        subtitleText: l10n.reminderBannerProfileUpdateSubtitle,
+        ctaText: l10n.reminderBannerProfileUpdateCta,
+        profileCompletionPercentage: profileCompletionPercentage,
+      );
     } else {
       return const SizedBox(width: 0.0, height: 0.0);
     }

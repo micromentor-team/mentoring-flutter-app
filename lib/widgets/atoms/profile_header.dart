@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
-import 'package:provider/provider.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String? avatarUrl;
@@ -23,10 +21,10 @@ class ProfileHeader extends StatelessWidget {
         : const AssetImage(Assets.blankAvatar);
 
     return Padding(
-      padding: const EdgeInsets.all(Insets.paddingExtraLarge),
+      padding: const EdgeInsets.fromLTRB(Insets.paddingExtraLarge,
+          Insets.paddingExtraLarge, Insets.paddingExtraLarge, 0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
