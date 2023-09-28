@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
 import '../../atoms/text_form_field_widget.dart';
 
@@ -18,7 +20,18 @@ class SignUpEmail extends StatefulWidget {
 
 class _SignUpEmailState extends State<SignUpEmail> {
   final _formKey = GlobalKey<FormState>();
+  late final UserRegistrationModel _registrationModel;
   String? _email;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+    _registrationModel.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +67,10 @@ class _SignUpEmailState extends State<SignUpEmail> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: _email != null && _email!.isNotEmpty
+        rightOnPress: _email?.isNotEmpty ?? false
             ? () {
                 if (_formKey.currentState!.validate()) {
+                  _registrationModel.signUpUserInput.email = _email;
                   context.push(Routes.signupPassword.path);
                 }
               }

@@ -15,20 +15,23 @@ class SignUpScreen extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
-        title: l10n.signUp,
-        progress: SignUpProgress.one,
-        body: Column(children: [
+      title: l10n.signUp,
+      progress: SignUpProgress.one,
+      body: Column(
+        children: [
           Padding(
-              padding: const EdgeInsets.all(Insets.paddingMedium),
-              child: SizedBox(
-                  width: 320,
-                  child: Text(
-                    l10n.signUpDesc,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.outline,
-                    ),
-                  ))),
+            padding: const EdgeInsets.all(Insets.paddingMedium),
+            child: SizedBox(
+              width: 320,
+              child: Text(
+                l10n.signUpDesc,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.outline,
+                ),
+              ),
+            ),
+          ),
           Text(
             l10n.continueWith,
             style: theme.textTheme.titleMedium?.copyWith(
@@ -92,6 +95,8 @@ class SignUpScreen extends StatelessWidget {
                   context.push(Routes.signupEmail.path);
                 },
               )),
-        ]));
+        ],
+      ),
+    );
   }
 }

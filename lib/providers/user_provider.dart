@@ -379,18 +379,22 @@ class UserProvider extends BaseProvider with ChangeNotifier {
 
   // Mutations
   Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser({
-    required Input$UserSignUpInput input,
+    required String email,
+    required String password,
   }) async {
-    debugPrint('UserProvider: signUpUser: ${input.fullName}');
-
     await _resetUser();
-    await _setDeviceUuid();
+    final uuid = await _setDeviceUuid();
 
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
         document: documentNodeMutationSignUpUser,
         fetchPolicy: FetchPolicy.noCache,
-        variables: Variables$Mutation$SignUpUser(input: input).toJson(),
+        variables: Variables$Mutation$SignUpUser(
+            input: Input$UserSignUpInput(
+          email: email,
+          password: password,
+          deviceUuid: uuid,
+        )).toJson(),
       ),
     );
 
@@ -418,18 +422,24 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   }
 
   Future<OperationResult<Mutation$SignInUser$signInUser>> signInUser({
-    required Input$UserSignInInput input,
+    required String email,
+    required String password,
   }) async {
-    debugPrint('UserProvider: signInUser: ${input.ident}');
-
     await _resetUser();
-    await _setDeviceUuid();
+    final uuid = await _setDeviceUuid();
 
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
         document: documentNodeMutationSignInUser,
         fetchPolicy: FetchPolicy.noCache,
-        variables: Variables$Mutation$SignInUser(input: input).toJson(),
+        variables: Variables$Mutation$SignInUser(
+          input: Input$UserSignInInput(
+            ident: email,
+            identType: Enum$UserIdentType.email,
+            password: password,
+            deviceUuid: uuid,
+          ),
+        ).toJson(),
       ),
     );
 

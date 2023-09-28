@@ -33,18 +33,18 @@ import '../widgets/screens/sign_up/sign_up_business_more_info.dart';
 import '../widgets/screens/sign_up/sign_up_business_stage.dart';
 import '../widgets/screens/sign_up/sign_up_business_startup_rationale.dart';
 import '../widgets/screens/sign_up/sign_up_entrepreneur_or_mentor.dart';
+import '../widgets/screens/sign_up/sign_up_gender.dart';
+import '../widgets/screens/sign_up/sign_up_languages.dart';
+import '../widgets/screens/sign_up/sign_up_location.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_completed.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_help_selection.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_industry_screen.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_internationally.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_more_info.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_preferences.dart';
-import '../widgets/screens/sign_up/sign_up_mentor_pronouns.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_profile_pic.dart';
+import '../widgets/screens/sign_up/sign_up_mentor_pronouns.dart';
 import '../widgets/screens/sign_up/sign_up_mentor_role.dart';
-import '../widgets/screens/sign_up/sign_up_gender.dart';
-import '../widgets/screens/sign_up/sign_up_languages.dart';
-import '../widgets/screens/sign_up/sign_up_location.dart';
 import '../widgets/screens/sign_up/sign_up_name.dart';
 import '../widgets/screens/sign_up/sign_up_permissions.dart';
 import '../widgets/screens/sign_up/sign_up_phone_number.dart';
@@ -109,6 +109,34 @@ class AppRouter {
             );
           },
         ),
+        GoRoute(
+          path: Routes.loading.path,
+          name: Routes.loading.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const LoadingScreen(),
+            );
+          },
+        ),
+        _createSignUpShellRoute(context),
+        _createNavigationShellRoute(context),
+      ],
+    );
+  }
+
+  static ShellRoute _createSignUpShellRoute(BuildContext context) {
+    return ShellRoute(
+      observers: [Provider.of<RouteObserver<PageRoute>>(context)],
+      pageBuilder: (BuildContext context, GoRouterState state, child) {
+        return MaterialPage(
+          key: state.pageKey,
+          maintainState: true,
+          child: child,
+        );
+      },
+      routes: <RouteBase>[
         GoRoute(
             path: Routes.signup.path,
             name: Routes.signup.name,
@@ -441,218 +469,210 @@ class AppRouter {
             );
           },
         ),
+      ],
+    );
+  }
+
+  static ShellRoute _createNavigationShellRoute(BuildContext context) {
+    return ShellRoute(
+      observers: [Provider.of<RouteObserver<PageRoute>>(context)],
+      pageBuilder: (BuildContext context, GoRouterState state, child) {
+        return MaterialPage(
+          key: state.pageKey,
+          maintainState: true,
+          child: AppWrapper(child: child),
+        );
+      },
+      routes: <RouteBase>[
         GoRoute(
-          path: Routes.loading.path,
-          name: Routes.loading.name,
+          path: Routes.home.path,
+          name: Routes.home.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const LoadingScreen(),
+              child: const DashboardScreen(),
             );
           },
         ),
-        ShellRoute(
-          observers: [Provider.of<RouteObserver<PageRoute>>(context)],
-          pageBuilder: (BuildContext context, GoRouterState state, child) {
+        GoRoute(
+          path: Routes.explore.path,
+          name: Routes.explore.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
               maintainState: true,
-              child: AppWrapper(child: child),
+              child: const ExploreScreen(),
             );
           },
-          routes: <RouteBase>[
-            GoRoute(
-              path: Routes.home.path,
-              name: Routes.home.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: const DashboardScreen(),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.explore.path,
-              name: Routes.explore.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: true,
-                  child: const ExploreScreen(),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.exploreFilters.path,
-              name: Routes.exploreFilters.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: true,
-                  child: const RecommendedMentorsFilters(),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.exploreFiltersAdvanced.path,
-              name: Routes.exploreFiltersAdvanced.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: true,
-                  child: const RecommendedMentorsFiltersAdvanced(),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxChats.path,
-              name: Routes.inboxChats.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: const InboxChatListScreen(isArchivedForUser: false),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxChatsChannelId.path,
-              name: Routes.inboxChatsChannelId.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                final String channelId =
-                    state.pathParameters[RouteParams.channelId]!;
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: ChannelMessagesScreen(
-                    channelId: channelId,
-                    isArchivedForUser: false,
-                  ),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxInvitesReceived.path,
-              name: Routes.inboxInvitesReceived.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: const InboxInvitesReceivedScreen(),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxInvitesReceivedId.path,
-              name: Routes.inboxInvitesReceivedId.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                final String channelInvitationId =
-                    state.pathParameters[RouteParams.channelInvitationId]!;
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: InvitationDetail(
-                    channelInvitationId: channelInvitationId,
-                    invitationDirection: MessageDirection.received,
-                  ),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxInvitesSent.path,
-              name: Routes.inboxInvitesSent.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: const InboxInvitesSentScreen(),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxInvitesSentId.path,
-              name: Routes.inboxInvitesSentId.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                final String channelInvitationId =
-                    state.pathParameters[RouteParams.channelInvitationId]!;
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: InvitationDetail(
-                    channelInvitationId: channelInvitationId,
-                    invitationDirection: MessageDirection.sent,
-                  ),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxArchived.path,
-              name: Routes.inboxArchived.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: const InboxChatListScreen(isArchivedForUser: true),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.inboxArchivedChannelId.path,
-              name: Routes.inboxArchivedChannelId.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                final String channelId =
-                    state.pathParameters[RouteParams.channelId]!;
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: ChannelMessagesScreen(
-                    channelId: channelId,
-                    isArchivedForUser: true,
-                  ),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.profile.path,
-              name: Routes.profile.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: const ProfileScreen(),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.profileId.path,
-              name: Routes.profileId.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                final String userId = state.pathParameters[RouteParams.userId]!;
-                return MaterialPage(
-                  key: state.pageKey,
-                  child: ProfileScreen(
-                    userId: userId,
-                  ),
-                );
-              },
-            ),
-            GoRoute(
-              path: Routes.profileInviteId.path,
-              name: Routes.profileInviteId.name,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                final String userId = state.pathParameters[RouteParams.userId]!;
-                return MaterialPage(
-                  key: state.pageKey,
-                  maintainState: false,
-                  child: InviteToConnect(
-                    userId: userId,
-                  ),
-                );
-              },
-            ),
-          ],
+        ),
+        GoRoute(
+          path: Routes.exploreFilters.path,
+          name: Routes.exploreFilters.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: true,
+              child: const RecommendedMentorsFilters(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.exploreFiltersAdvanced.path,
+          name: Routes.exploreFiltersAdvanced.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: true,
+              child: const RecommendedMentorsFiltersAdvanced(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.inboxChats.path,
+          name: Routes.inboxChats.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const InboxChatListScreen(isArchivedForUser: false),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.inboxChatsChannelId.path,
+          name: Routes.inboxChatsChannelId.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            final String channelId =
+                state.pathParameters[RouteParams.channelId]!;
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: ChannelMessagesScreen(
+                channelId: channelId,
+                isArchivedForUser: false,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.inboxInvitesReceived.path,
+          name: Routes.inboxInvitesReceived.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const InboxInvitesReceivedScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.inboxInvitesReceivedId.path,
+          name: Routes.inboxInvitesReceivedId.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            final String channelInvitationId =
+                state.pathParameters[RouteParams.channelInvitationId]!;
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: InvitationDetail(
+                channelInvitationId: channelInvitationId,
+                invitationDirection: MessageDirection.received,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.inboxInvitesSent.path,
+          name: Routes.inboxInvitesSent.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const InboxInvitesSentScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.inboxInvitesSentId.path,
+          name: Routes.inboxInvitesSentId.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            final String channelInvitationId =
+                state.pathParameters[RouteParams.channelInvitationId]!;
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: InvitationDetail(
+                channelInvitationId: channelInvitationId,
+                invitationDirection: MessageDirection.sent,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.inboxArchived.path,
+          name: Routes.inboxArchived.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const InboxChatListScreen(isArchivedForUser: true),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.inboxArchivedChannelId.path,
+          name: Routes.inboxArchivedChannelId.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            final String channelId =
+                state.pathParameters[RouteParams.channelId]!;
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: ChannelMessagesScreen(
+                channelId: channelId,
+                isArchivedForUser: true,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profile.path,
+          name: Routes.profile.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const ProfileScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileId.path,
+          name: Routes.profileId.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            final String userId = state.pathParameters[RouteParams.userId]!;
+            return MaterialPage(
+              key: state.pageKey,
+              child: ProfileScreen(
+                userId: userId,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileInviteId.path,
+          name: Routes.profileInviteId.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            final String userId = state.pathParameters[RouteParams.userId]!;
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: InviteToConnect(
+                userId: userId,
+              ),
+            );
+          },
         ),
       ],
     );

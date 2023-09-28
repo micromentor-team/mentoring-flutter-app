@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_form_field_widget.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPassword extends StatefulWidget {
   const SignUpPassword({super.key});
@@ -18,13 +20,22 @@ class _SignUpPasswordState extends State<SignUpPassword> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
+  late final UserRegistrationModel _registrationModel;
   String? _password;
   String? _confirmPassword;
 
   @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.createAPassword,
@@ -88,6 +99,7 @@ class _SignUpPasswordState extends State<SignUpPassword> {
                 (_confirmPassword?.isNotEmpty ?? false)
             ? () {
                 if (_formKey.currentState!.validate()) {
+                  _registrationModel.signUpUserInput.password = _password;
                   context.push(Routes.signupVerify.path);
                 }
               }

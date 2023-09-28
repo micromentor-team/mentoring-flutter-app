@@ -13,9 +13,10 @@ class SignUpWelcome extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
-        progress: SignUpProgress.one,
-        title: l10n.welcome,
-        body: Column(children: [
+      progress: SignUpProgress.one,
+      title: l10n.welcome,
+      body: Column(
+        children: [
           Text(
             l10n.signUpWelcomeText,
             style: theme.textTheme.bodyMedium!
@@ -28,33 +29,36 @@ class SignUpWelcome extends StatelessWidget {
           SizedBox(
             height: 240,
             child: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  theme.colorScheme.onSurface,
-                  BlendMode.srcATop,
-                ),
-                child: const Image(
-                  image: AssetImage(Assets.signUpWelcomeScreenStockImage),
-                )),
-          ),
-        ]),
-        bottomButtons: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              minimumSize: Dimensions.bigButtonSize,
-              backgroundColor: theme.colorScheme.primary,
-              textStyle: theme.textTheme.labelLarge,
-            ),
-            onPressed: () {
-              context.push(Routes.signupPermissions.path);
-            },
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
-              child: Text(
-                l10n.next,
-                style: theme.textTheme.labelLarge?.copyWith(
-                  color: theme.colorScheme.onPrimary,
-                ),
+              colorFilter: ColorFilter.mode(
+                theme.colorScheme.onSurface,
+                BlendMode.srcATop,
               ),
-            )));
+              child: const Image(
+                image: AssetImage(Assets.signUpWelcomeScreenStockImage),
+              ),
+            ),
+          ),
+        ],
+      ),
+      bottomButtons: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Dimensions.bigButtonSize,
+          backgroundColor: theme.colorScheme.primary,
+          textStyle: theme.textTheme.labelLarge,
+        ),
+        onPressed: () {
+          context.push(Routes.signupPermissions.path);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
+          child: Text(
+            l10n.next,
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: theme.colorScheme.onPrimary,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
