@@ -5,46 +5,48 @@ import '../../constants/app_constants.dart';
 ///////////////////////This is multiple cards///////////////////////////////////
 
 //////Example1////////
-// LoginRadioButtonCards createEntrepreneurMentorCards(BuildContext context) {
-//   final AppLocalizations l10n = AppLocalizations.of(context)!;
-//
-//   return LoginRadioButtonCards(
-//     title: [l10n.iAmAnEntrepreneur, l10n.iAmAMentor],
-//     subtitle: [l10n.entrepreneurDescription, l10n.mentorDescription],
-//     imageAssetName: const [
-//       Image(image: AssetImage(Assets.entrepreneurIcon)),
-//       Image(image: AssetImage(Assets.mentorIcon))
-//     ],
-//     titleIcon: const [null, null],
-//   );
-// }
+LoginRadioButtonCards createEntrepreneurMentorCards(
+    BuildContext context, handleRadioButtonChange) {
+  final AppLocalizations l10n = AppLocalizations.of(context)!;
+
+  return LoginRadioButtonCards(
+    title: [l10n.iAmAnEntrepreneur, l10n.iAmAMentor],
+    subtitle: [l10n.entrepreneurDescription, l10n.mentorDescription],
+    imageAssetName: const [
+      Image(image: AssetImage(Assets.entrepreneurIcon)),
+      Image(image: AssetImage(Assets.mentorIcon))
+    ],
+    titleIcon: const [null, null],
+    rebuildParentWidget: handleRadioButtonChange,
+  );
+}
 
 //////Example2////////
-// LoginRadioButtonCards createBusinessStageCards(BuildContext context) {
-//   // final AppLocalizations l10n = AppLocalizations.of(context)!;
-//
-//   return LoginRadioButtonCards(
-//     title: [
-//       "Idea stage",
-//       "Operational",
-//       "Revenue earning",
-//       "Profitable and Scaling"
-//     ],
-//     subtitle: [
-//       "I do not yet have a working prototype or customers and am not operational.",
-//       "I have a product or service offering but I have not yet earned revenue. ",
-//       "I am earning revenue but I am not yet profitable",
-//       "I am making a profit and am ready to grow my business"
-//     ],
-//     titleIcon: [
-//       Icon(Icons.lightbulb_outlined),
-//       Icon(Icons.storefront_outlined),
-//       Icon(Icons.attach_money_outlined),
-//       Icon(Icons.auto_graph_outlined)
-//     ],
-//     imageAssetName: [null, null, null, null],
-//   );
-// }
+LoginRadioButtonCards createBusinessStageCards(BuildContext context) {
+  // final AppLocalizations l10n = AppLocalizations.of(context)!;
+
+  return LoginRadioButtonCards(
+    title: const [
+      "Idea stage",
+      "Operational",
+      "Revenue earning",
+      "Profitable and Scaling"
+    ],
+    subtitle: const [
+      "I do not yet have a working prototype or customers and am not operational.",
+      "I have a product or service offering but I have not yet earned revenue. ",
+      "I am earning revenue but I am not yet profitable",
+      "I am making a profit and am ready to grow my business"
+    ],
+    titleIcon: const [
+      Icon(Icons.lightbulb_outlined),
+      Icon(Icons.storefront_outlined),
+      Icon(Icons.attach_money_outlined),
+      Icon(Icons.auto_graph_outlined)
+    ],
+    imageAssetName: const [null, null, null, null],
+  );
+}
 
 //////Implementation////////
 class LoginRadioButtonCards extends StatefulWidget {
@@ -52,16 +54,14 @@ class LoginRadioButtonCards extends StatefulWidget {
   final List<String> subtitle;
   final List<Image?> imageAssetName;
   final List<Icon?> titleIcon;
-  final Function(int) rebuildParentWidget;
-  int selectedNumber;
+  Function(int)? rebuildParentWidget;
 
   LoginRadioButtonCards({
     required this.title,
     required this.subtitle,
     required this.imageAssetName,
     required this.titleIcon,
-    required this.rebuildParentWidget,
-    this.selectedNumber = 0,
+    this.rebuildParentWidget,
     Key? key,
   }) : super(key: key);
 
@@ -107,8 +107,9 @@ class _LoginRadioButtonCardsState extends State<LoginRadioButtonCards> {
                     onChanged: (int? value) {
                       setState(() {
                         _character = value!;
-                        widget.selectedNumber = _character;
-                        widget.rebuildParentWidget(_character);
+                        if (widget.rebuildParentWidget != null) {
+                          widget.rebuildParentWidget!(_character);
+                        }
                       });
                     },
                   ),

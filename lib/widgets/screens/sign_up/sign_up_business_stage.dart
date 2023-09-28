@@ -36,7 +36,7 @@ class _SignupBusinessStageScreenState extends State<SignupBusinessStageScreen> {
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
         children: [
-          // createBusinessStageCards(context),
+          createBusinessStageCards(context),
         ],
       ),
     );
