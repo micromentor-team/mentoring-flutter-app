@@ -65,6 +65,18 @@ class Routes {
     name: 'signupYearOfBirth',
     path: '${signup.path}/yearOfBirth',
   );
+  static Route signupGender = Route(
+    name: 'signupGender',
+    path: '${signup.path}/gender',
+  );
+  static Route signupLocation = Route(
+    name: 'signupLocation',
+    path: '${signup.path}/locations',
+  );
+  static Route signupLanguages = Route(
+    name: 'signupLanguages',
+    path: '${signup.path}/languages',
+  );
   static Route signupEntrepreneurOrMentor = Route(
     name: 'signupEntrepreneurOrMentor',
     path: '${signup.path}/userrole',
@@ -108,6 +120,42 @@ class Routes {
   static Route completedEntrepreneurSignup = Route(
     name: 'completedEntrepreneurSignup',
     path: '${signup.path}/completedEntrepreneurSignup',
+  );
+  static Route signupMentorHelpSelection = Route(
+    name: 'signupMentorHelpSelection',
+    path: '${signup.path}/signupMentorHelpSelection',
+  );
+  static Route signupMentorMoreInfo = Route(
+    name: 'signupMentorMoreInfo',
+    path: '${signup.path}/signupMentorMoreInfo',
+  );
+  static Route signupMentorProfilePic = Route(
+    name: 'signupMentorProfilePic',
+    path: '${signup.path}/signupMentorProfilePic',
+  );
+  static Route signupMentorPronouns = Route(
+    name: 'signupMentorPronouns',
+    path: '${signup.path}/signupMentorPronouns',
+  );
+  static Route signupMentorRole = Route(
+    name: 'signupMentorRole',
+    path: '${signup.path}/signupMentorRole',
+  );
+  static Route signupMentorIndustry = Route(
+    name: 'signupMentorIndustry',
+    path: '${signup.path}/signupMentorIndustry',
+  );
+  static Route signupMentorPreferences = Route(
+    name: 'signupMentorPreferences',
+    path: '${signup.path}/signupMentorPreferences',
+  );
+  static Route signupMentorInternationally = Route(
+    name: 'signupMentorInternationally',
+    path: '${signup.path}/signupMentorInternationally',
+  );
+  static Route signupMentorCompleted = Route(
+    name: 'signupMentorCompleted',
+    path: '${signup.path}/signupMentorCompleted',
   );
   static Route loading = Route(
     name: 'loading',

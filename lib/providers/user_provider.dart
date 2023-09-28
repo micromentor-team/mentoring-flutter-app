@@ -24,7 +24,7 @@ typedef MentorUser = Query$FindMentorUsers$findUsers;
 // UserSearch queries and mutation
 typedef CreateUserSearchResponse = Mutation$CreateUserSearch$createUserSearch;
 typedef UserSearch = Query$FindUserSearch$findUserSearchById;
-typedef TopFoundUser = Query$FindUserSearch$findUserSearchById$topFoundUsers;
+typedef UserSearchResult = Query$FindUserSearchResults$findUserSearchResults;
 
 class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? _user;
@@ -108,6 +108,32 @@ class UserProvider extends BaseProvider with ChangeNotifier {
           ? Query$FindUserSearch.fromJson(
               queryResult.data!,
             ).findUserSearchById
+          : null,
+    );
+  }
+
+  Future<OperationResult<List<UserSearchResult>>> findUserSearchResults({
+    required String userSearchId,
+    required Input$FindObjectsOptions optionsInput,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindUserSearchResults,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindUserSearchResults(
+                userSearchId: userSearchId, options: optionsInput)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindUserSearchResults.fromJson(
+              queryResult.data!,
+            ).findUserSearchResults
           : null,
     );
   }

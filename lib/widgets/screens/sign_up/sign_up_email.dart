@@ -17,48 +17,51 @@ class SignUpEmail extends StatefulWidget {
 }
 
 class _SignUpEmailState extends State<SignUpEmail> {
-  TextEditingController? emailTextController;
   final _formKey = GlobalKey<FormState>();
-  String? email;
+  String? _email;
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
-        progress: SignUpProgress.one,
-        title: l10n.whatIsYourEmailAddress,
-        body: Form(
-            key: _formKey,
-            child: TextFormFieldWidget(
-              textController: emailTextController,
-              label: l10n.emailAddress,
-              onPressed: (value) {
-                setState(() {
-                  email = value;
-                });
-              },
-              validator: (value) {
-                bool validEmail = EmailValidator.validate(value!);
-                if (validEmail != true) {
-                  return l10n.invalidEmailSnackBar;
-                }
-                return null;
-              },
-            )),
-        footer: SignUpIconFooter(
-            icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
-        bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
+      progress: SignUpProgress.one,
+      title: l10n.signupEmailTitle,
+      body: Form(
+        key: _formKey,
+        child: TextFormFieldWidget(
+          label: l10n.signupEmailInputLabel,
+          hint: l10n.signupEmailInputHint,
+          onChanged: (value) {
+            setState(() {
+              _email = value;
+            });
           },
-          rightOnPress: () {
-            if (_formKey.currentState!.validate()) {
-              context.push(Routes.signupPassword.path);
+          validator: (value) {
+            bool validEmail = EmailValidator.validate(value!);
+            if (validEmail != true) {
+              return l10n.invalidEmailSnackBar;
             }
+            return null;
           },
-        ));
+        ),
+      ),
+      footer: SignUpIconFooter(
+          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+      bottomButtons: SignUpBottomButtons(
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: _email != null && _email!.isNotEmpty
+            ? () {
+                if (_formKey.currentState!.validate()) {
+                  context.push(Routes.signupPassword.path);
+                }
+              }
+            : null,
+      ),
+    );
   }
 }

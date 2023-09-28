@@ -14,8 +14,7 @@ class SignUpVerify extends StatefulWidget {
 
 class _SignUpVerifyState extends State<SignUpVerify> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _fourDigitCode = TextEditingController();
-  String? fourDigitCode;
+  String? _fourDigitCode;
 
   @override
   Widget build(BuildContext context) {
@@ -23,104 +22,112 @@ class _SignUpVerifyState extends State<SignUpVerify> {
     final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
-        progress: SignUpProgress.one,
-        title: l10n.verifyYourAccount,
-        body: Form(
-            key: _formKey,
-            child: Column(children: [
-              Text(
-                l10n.verifyAccountLine1,
-                style: theme.textTheme.bodyMedium!
-                    .copyWith(color: theme.colorScheme.outline),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: Insets.paddingSmall,
-              ),
-              Text(
-                l10n.verifyAccountLine2,
-                style: theme.textTheme.bodyMedium!
-                    .copyWith(color: theme.colorScheme.outline),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: Insets.paddingSmall,
-              ),
-              TextFormFieldWidget(
-                maxLength: 4,
-                textController: _fourDigitCode,
-                label: l10n.enterCode,
-                onPressed: (value) {
-                  setState(() {
-                    fourDigitCode = value;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: Insets.paddingSmall,
-              ),
-              Text(
-                l10n.didntReceiveEmail,
-                style: theme.textTheme.bodyMedium!
-                    .copyWith(color: theme.colorScheme.outline),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: Insets.paddingMedium,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Dimensions.bigButtonSize,
-                  backgroundColor: theme.colorScheme.surface,
-                  textStyle: theme.textTheme.labelLarge,
-                  side: BorderSide(color: theme.colorScheme.outline, width: 1),
-                ),
-                onPressed: () {},
-                child: Text(
-                  l10n.resendEmail,
-                  style: theme.textTheme.labelLarge?.copyWith(
-                    color: theme.colorScheme.primary,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: Insets.paddingMedium,
-              ),
-              Padding(
-                  padding: const EdgeInsets.all(Insets.paddingSmall),
-                  child: InkWell(
-                    child: Text(l10n.tryAnotherEmail,
-                        style: TextStyle(
-                          color: theme.colorScheme.primary,
-                          decoration: TextDecoration.underline,
-                        )),
-                    onTap: () {
-                      context.push(Routes.signupEmail.path);
-                    },
-                  )),
-            ])),
-        bottomButtons: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              minimumSize: Dimensions.bigButtonSize,
-              backgroundColor: theme.colorScheme.primary,
-              textStyle: theme.textTheme.labelLarge,
+      progress: SignUpProgress.one,
+      title: l10n.verifyYourAccount,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Text(
+              l10n.verifyAccountLine1,
+              style: theme.textTheme.bodyMedium!
+                  .copyWith(color: theme.colorScheme.outline),
+              textAlign: TextAlign.center,
             ),
-            onPressed: () {
-              context.push(Routes.signupWelcome.path);
-            },
-            child: Wrap(children: [
-              Icon(
-                Icons.check,
-                color: theme.colorScheme.onPrimary,
-                size: 20,
+            const SizedBox(
+              height: Insets.paddingSmall,
+            ),
+            Text(
+              l10n.verifyAccountLine2,
+              style: theme.textTheme.bodyMedium!
+                  .copyWith(color: theme.colorScheme.outline),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: Insets.paddingSmall,
+            ),
+            TextFormFieldWidget(
+              maxLength: 4,
+              label: l10n.enterCode,
+              onChanged: (value) {
+                setState(() {
+                  _fourDigitCode = value;
+                });
+              },
+            ),
+            const SizedBox(
+              height: Insets.paddingSmall,
+            ),
+            Text(
+              l10n.didntReceiveEmail,
+              style: theme.textTheme.bodyMedium!
+                  .copyWith(color: theme.colorScheme.outline),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: Insets.paddingMedium,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: Dimensions.bigButtonSize,
+                backgroundColor: theme.colorScheme.surface,
+                textStyle: theme.textTheme.labelLarge,
+                side: BorderSide(color: theme.colorScheme.outline, width: 1),
               ),
-              const SizedBox(width: Insets.paddingExtraSmall),
-              Text(
-                l10n.submit,
+              onPressed: () {},
+              child: Text(
+                l10n.resendEmail,
                 style: theme.textTheme.labelLarge?.copyWith(
-                  color: theme.colorScheme.onPrimary,
+                  color: theme.colorScheme.primary,
                 ),
               ),
-            ])));
+            ),
+            const SizedBox(
+              height: Insets.paddingMedium,
+            ),
+            Padding(
+                padding: const EdgeInsets.all(Insets.paddingSmall),
+                child: InkWell(
+                  child: Text(l10n.tryAnotherEmail,
+                      style: TextStyle(
+                        color: theme.colorScheme.primary,
+                        decoration: TextDecoration.underline,
+                      )),
+                  onTap: () {
+                    context.push(Routes.signupEmail.path);
+                  },
+                )),
+          ],
+        ),
+      ),
+      bottomButtons: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Dimensions.bigButtonSize,
+          backgroundColor: theme.colorScheme.primary,
+          textStyle: theme.textTheme.labelLarge,
+        ),
+        onPressed: _fourDigitCode?.length == 4
+            ? () {
+                context.push(Routes.signupWelcome.path);
+              }
+            : null,
+        child: Wrap(
+          children: [
+            Icon(
+              Icons.check,
+              color: theme.colorScheme.onPrimary,
+              size: 20,
+            ),
+            const SizedBox(width: Insets.paddingExtraSmall),
+            Text(
+              l10n.submit,
+              style: theme.textTheme.labelLarge?.copyWith(
+                color: theme.colorScheme.onPrimary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

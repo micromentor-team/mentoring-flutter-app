@@ -18,73 +18,81 @@ class _SignUpPasswordState extends State<SignUpPassword> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
-  String? password;
-  String? confirmPassword;
+  String? _password;
+  String? _confirmPassword;
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
-        progress: SignUpProgress.one,
-        title: l10n.createAPassword,
-        body: Form(
-            key: _formKey,
-            child: Column(children: [
-              TextFormFieldWidget(
-                isPassword: true,
-                textController: _pass,
-                validator: (val) {
-                  if (val == null) {
-                    return 'Empty';
-                  }
-                  if (val != _confirmPass.text) {
-                    return 'Not Match';
-                  }
-                  return null;
-                },
-                label: l10n.password,
-                onPressed: (value) {
-                  setState(() {
-                    password = value;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: Insets.paddingSmall,
-              ),
-              TextFormFieldWidget(
-                  isPassword: true,
-                  textController: _confirmPass,
-                  label: l10n.confirmPassword,
-                  onPressed: (value) {
-                    setState(() {
-                      confirmPassword = value;
-                    });
-                  },
-                  validator: (val) {
-                    if (val == null) {
-                      return 'Empty';
-                    }
-                    if (val != _pass.text) {
-                      return 'Not Match';
-                    }
-                    return null;
-                  }),
-            ])),
-        footer: SignUpIconFooter(
-            icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
-        bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            if (_formKey.currentState!.validate()) {
-              context.push(Routes.signupVerify.path);
-            }
-          },
-        ));
+      progress: SignUpProgress.one,
+      title: l10n.createAPassword,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            TextFormFieldWidget(
+              isPassword: true,
+              textController: _pass,
+              validator: (val) {
+                if (val == null) {
+                  return 'Empty';
+                }
+                if (val != _confirmPass.text) {
+                  return 'Not Match';
+                }
+                return null;
+              },
+              label: l10n.password,
+              onChanged: (value) {
+                setState(() {
+                  _password = value;
+                });
+              },
+            ),
+            const SizedBox(
+              height: Insets.paddingSmall,
+            ),
+            TextFormFieldWidget(
+              isPassword: true,
+              textController: _confirmPass,
+              label: l10n.confirmPassword,
+              onChanged: (value) {
+                setState(() {
+                  _confirmPassword = value;
+                });
+              },
+              validator: (val) {
+                if (val == null) {
+                  return 'Empty';
+                }
+                if (val != _pass.text) {
+                  return 'Not Match';
+                }
+                return null;
+              },
+            ),
+          ],
+        ),
+      ),
+      footer: SignUpIconFooter(
+          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+      bottomButtons: SignUpBottomButtons(
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: (_password?.isNotEmpty ?? false) &&
+                (_confirmPassword?.isNotEmpty ?? false)
+            ? () {
+                if (_formKey.currentState!.validate()) {
+                  context.push(Routes.signupVerify.path);
+                }
+              }
+            : null,
+      ),
+    );
   }
 }

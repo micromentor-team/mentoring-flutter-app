@@ -31,7 +31,6 @@ query FindAllOptionsByType {
   findLanguages {
     textId
     translatedValue
-    isUiLanguage
     shortLangCode
     longLangCode
   }
@@ -95,11 +94,17 @@ query FindGenders {
   }
 }
 
+query FindPronouns($optionType: OptionType!) {
+  findOptions(optionType: $optionType) {
+    textId
+    translatedValue
+  }
+}
+
 query FindLanguages {
   findLanguages {
     textId
     translatedValue
-    isUiLanguage
     shortLangCode
     longLangCode
   }

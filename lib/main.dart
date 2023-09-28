@@ -59,20 +59,23 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   late Future<OperationResult<AuthenticatedUser?>> _authenticatedUser;
+  late Future<OperationResult> _content;
   late final InboxModel _inboxModel;
+  late final ContentProvider _contentProvider;
 
   @override
   void initState() {
     super.initState();
-    _inboxModel = Provider.of<InboxModel>(
-      context,
-      listen: false,
-    );
+    _inboxModel = Provider.of<InboxModel>(context, listen: false);
+    _contentProvider = Provider.of<ContentProvider>(context, listen: false);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _content = _contentProvider.findAllOptionsByType().then(
+          (value) => _contentProvider.findPresetPronouns(),
+        );
     _authenticatedUser =
         Provider.of<UserProvider>(context).getAuthenticatedUser(
       logFailures: false, // Error is expected when user is not logged in.
@@ -86,27 +89,31 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _authenticatedUser,
-      builder: (context, snapshot) {
-        return AppUtility.widgetForAsyncSnapshot(
-          snapshot: snapshot,
-          onLoading: () => const LoadingScreen(),
-          onError: () => const WelcomeScreen(),
-          onReady: () {
-            if (snapshot.data?.response == null) {
-              // Empty result means that the user not signed in.
-              return widget.nextRouteName == Routes.home.name
-                  ? const WelcomeScreen()
-                  : SignInScreen(nextRouteName: widget.nextRouteName);
-            }
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              _initializeUser();
-              context.goNamed(widget.nextRouteName);
-            });
-            return const LoadingScreen();
-          },
-        );
-      },
+      future: _content,
+      builder: (_, optionsSnapshot) => AppUtility.widgetForAsyncSnapshot(
+        snapshot: optionsSnapshot,
+        onReady: () => FutureBuilder(
+          future: _authenticatedUser,
+          builder: (context, userSnapshot) => AppUtility.widgetForAsyncSnapshot(
+            snapshot: userSnapshot,
+            onLoading: () => const LoadingScreen(),
+            onError: () => const WelcomeScreen(),
+            onReady: () {
+              if (userSnapshot.data?.response == null) {
+                // Empty result means that the user not signed in.
+                return widget.nextRouteName == Routes.home.name
+                    ? const WelcomeScreen()
+                    : SignInScreen(nextRouteName: widget.nextRouteName);
+              }
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _initializeUser();
+                context.goNamed(widget.nextRouteName);
+              });
+              return const LoadingScreen();
+            },
+          ),
+        ),
+      ),
     );
   }
 }

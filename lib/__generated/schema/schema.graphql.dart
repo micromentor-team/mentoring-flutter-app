@@ -6824,6 +6824,7 @@ class _CopyWithStubImpl$Input$AcademicExperienceInput<TRes>
 class Input$UserListFilter {
   factory Input$UserListFilter({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -6834,9 +6835,11 @@ class Input$UserListFilter {
     List<Enum$UserRole>? rolesIn,
     String? companyId,
     bool? syncedWithMm2,
+    bool? isMm2User,
   }) =>
       Input$UserListFilter._({
         if (ids != null) r'ids': ids,
+        if (excludeIds != null) r'excludeIds': excludeIds,
         if (searchText != null) r'searchText': searchText,
         if (caseSensitive != null) r'caseSensitive': caseSensitive,
         if (textSearchFields != null) r'textSearchFields': textSearchFields,
@@ -6847,6 +6850,7 @@ class Input$UserListFilter {
         if (rolesIn != null) r'rolesIn': rolesIn,
         if (companyId != null) r'companyId': companyId,
         if (syncedWithMm2 != null) r'syncedWithMm2': syncedWithMm2,
+        if (isMm2User != null) r'isMm2User': isMm2User,
       });
 
   Input$UserListFilter._(this._$data);
@@ -6857,6 +6861,11 @@ class Input$UserListFilter {
       final l$ids = data['ids'];
       result$data['ids'] =
           (l$ids as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('excludeIds')) {
+      final l$excludeIds = data['excludeIds'];
+      result$data['excludeIds'] =
+          (l$excludeIds as List<dynamic>?)?.map((e) => (e as String)).toList();
     }
     if (data.containsKey('searchText')) {
       final l$searchText = data['searchText'];
@@ -6910,12 +6919,17 @@ class Input$UserListFilter {
       final l$syncedWithMm2 = data['syncedWithMm2'];
       result$data['syncedWithMm2'] = (l$syncedWithMm2 as bool?);
     }
+    if (data.containsKey('isMm2User')) {
+      final l$isMm2User = data['isMm2User'];
+      result$data['isMm2User'] = (l$isMm2User as bool?);
+    }
     return Input$UserListFilter._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
+  List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
   String? get searchText => (_$data['searchText'] as String?);
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
   List<String>? get textSearchFields =>
@@ -6928,11 +6942,16 @@ class Input$UserListFilter {
       (_$data['rolesIn'] as List<Enum$UserRole>?);
   String? get companyId => (_$data['companyId'] as String?);
   bool? get syncedWithMm2 => (_$data['syncedWithMm2'] as bool?);
+  bool? get isMm2User => (_$data['isMm2User'] as bool?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ids')) {
       final l$ids = ids;
       result$data['ids'] = l$ids?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('excludeIds')) {
+      final l$excludeIds = excludeIds;
+      result$data['excludeIds'] = l$excludeIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('searchText')) {
       final l$searchText = searchText;
@@ -6976,6 +6995,10 @@ class Input$UserListFilter {
       final l$syncedWithMm2 = syncedWithMm2;
       result$data['syncedWithMm2'] = l$syncedWithMm2;
     }
+    if (_$data.containsKey('isMm2User')) {
+      final l$isMm2User = isMm2User;
+      result$data['isMm2User'] = l$isMm2User;
+    }
     return result$data;
   }
 
@@ -7009,6 +7032,26 @@ class Input$UserListFilter {
         }
       }
     } else if (l$ids != lOther$ids) {
+      return false;
+    }
+    final l$excludeIds = excludeIds;
+    final lOther$excludeIds = other.excludeIds;
+    if (_$data.containsKey('excludeIds') !=
+        other._$data.containsKey('excludeIds')) {
+      return false;
+    }
+    if (l$excludeIds != null && lOther$excludeIds != null) {
+      if (l$excludeIds.length != lOther$excludeIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$excludeIds.length; i++) {
+        final l$excludeIds$entry = l$excludeIds[i];
+        final lOther$excludeIds$entry = lOther$excludeIds[i];
+        if (l$excludeIds$entry != lOther$excludeIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$excludeIds != lOther$excludeIds) {
       return false;
     }
     final l$searchText = searchText;
@@ -7122,12 +7165,22 @@ class Input$UserListFilter {
     if (l$syncedWithMm2 != lOther$syncedWithMm2) {
       return false;
     }
+    final l$isMm2User = isMm2User;
+    final lOther$isMm2User = other.isMm2User;
+    if (_$data.containsKey('isMm2User') !=
+        other._$data.containsKey('isMm2User')) {
+      return false;
+    }
+    if (l$isMm2User != lOther$isMm2User) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$ids = ids;
+    final l$excludeIds = excludeIds;
     final l$searchText = searchText;
     final l$caseSensitive = caseSensitive;
     final l$textSearchFields = textSearchFields;
@@ -7138,11 +7191,17 @@ class Input$UserListFilter {
     final l$rolesIn = rolesIn;
     final l$companyId = companyId;
     final l$syncedWithMm2 = syncedWithMm2;
+    final l$isMm2User = isMm2User;
     return Object.hashAll([
       _$data.containsKey('ids')
           ? l$ids == null
               ? null
               : Object.hashAll(l$ids.map((v) => v))
+          : const {},
+      _$data.containsKey('excludeIds')
+          ? l$excludeIds == null
+              ? null
+              : Object.hashAll(l$excludeIds.map((v) => v))
           : const {},
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('caseSensitive') ? l$caseSensitive : const {},
@@ -7162,6 +7221,7 @@ class Input$UserListFilter {
           : const {},
       _$data.containsKey('companyId') ? l$companyId : const {},
       _$data.containsKey('syncedWithMm2') ? l$syncedWithMm2 : const {},
+      _$data.containsKey('isMm2User') ? l$isMm2User : const {},
     ]);
   }
 }
@@ -7177,6 +7237,7 @@ abstract class CopyWith$Input$UserListFilter<TRes> {
 
   TRes call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -7187,6 +7248,7 @@ abstract class CopyWith$Input$UserListFilter<TRes> {
     List<Enum$UserRole>? rolesIn,
     String? companyId,
     bool? syncedWithMm2,
+    bool? isMm2User,
   });
 }
 
@@ -7205,6 +7267,7 @@ class _CopyWithImpl$Input$UserListFilter<TRes>
 
   TRes call({
     Object? ids = _undefined,
+    Object? excludeIds = _undefined,
     Object? searchText = _undefined,
     Object? caseSensitive = _undefined,
     Object? textSearchFields = _undefined,
@@ -7215,10 +7278,13 @@ class _CopyWithImpl$Input$UserListFilter<TRes>
     Object? rolesIn = _undefined,
     Object? companyId = _undefined,
     Object? syncedWithMm2 = _undefined,
+    Object? isMm2User = _undefined,
   }) =>
       _then(Input$UserListFilter._({
         ..._instance._$data,
         if (ids != _undefined) 'ids': (ids as List<String>?),
+        if (excludeIds != _undefined)
+          'excludeIds': (excludeIds as List<String>?),
         if (searchText != _undefined) 'searchText': (searchText as String?),
         if (caseSensitive != _undefined)
           'caseSensitive': (caseSensitive as bool?),
@@ -7236,6 +7302,7 @@ class _CopyWithImpl$Input$UserListFilter<TRes>
         if (companyId != _undefined) 'companyId': (companyId as String?),
         if (syncedWithMm2 != _undefined)
           'syncedWithMm2': (syncedWithMm2 as bool?),
+        if (isMm2User != _undefined) 'isMm2User': (isMm2User as bool?),
       }));
 }
 
@@ -7247,6 +7314,7 @@ class _CopyWithStubImpl$Input$UserListFilter<TRes>
 
   call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -7257,6 +7325,7 @@ class _CopyWithStubImpl$Input$UserListFilter<TRes>
     List<Enum$UserRole>? rolesIn,
     String? companyId,
     bool? syncedWithMm2,
+    bool? isMm2User,
   }) =>
       _res;
 }
@@ -8545,6 +8614,7 @@ class _CopyWithStubImpl$Input$UserDeviceInput<TRes>
 class Input$SidUserDeviceListFilter {
   factory Input$SidUserDeviceListFilter({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -8555,6 +8625,7 @@ class Input$SidUserDeviceListFilter {
   }) =>
       Input$SidUserDeviceListFilter._({
         if (ids != null) r'ids': ids,
+        if (excludeIds != null) r'excludeIds': excludeIds,
         if (searchText != null) r'searchText': searchText,
         if (caseSensitive != null) r'caseSensitive': caseSensitive,
         if (textSearchFields != null) r'textSearchFields': textSearchFields,
@@ -8572,6 +8643,11 @@ class Input$SidUserDeviceListFilter {
       final l$ids = data['ids'];
       result$data['ids'] =
           (l$ids as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('excludeIds')) {
+      final l$excludeIds = data['excludeIds'];
+      result$data['excludeIds'] =
+          (l$excludeIds as List<dynamic>?)?.map((e) => (e as String)).toList();
     }
     if (data.containsKey('searchText')) {
       final l$searchText = data['searchText'];
@@ -8617,6 +8693,7 @@ class Input$SidUserDeviceListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
+  List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
   String? get searchText => (_$data['searchText'] as String?);
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
   List<String>? get textSearchFields =>
@@ -8630,6 +8707,10 @@ class Input$SidUserDeviceListFilter {
     if (_$data.containsKey('ids')) {
       final l$ids = ids;
       result$data['ids'] = l$ids?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('excludeIds')) {
+      final l$excludeIds = excludeIds;
+      result$data['excludeIds'] = l$excludeIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('searchText')) {
       final l$searchText = searchText;
@@ -8694,6 +8775,26 @@ class Input$SidUserDeviceListFilter {
         }
       }
     } else if (l$ids != lOther$ids) {
+      return false;
+    }
+    final l$excludeIds = excludeIds;
+    final lOther$excludeIds = other.excludeIds;
+    if (_$data.containsKey('excludeIds') !=
+        other._$data.containsKey('excludeIds')) {
+      return false;
+    }
+    if (l$excludeIds != null && lOther$excludeIds != null) {
+      if (l$excludeIds.length != lOther$excludeIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$excludeIds.length; i++) {
+        final l$excludeIds$entry = l$excludeIds[i];
+        final lOther$excludeIds$entry = lOther$excludeIds[i];
+        if (l$excludeIds$entry != lOther$excludeIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$excludeIds != lOther$excludeIds) {
       return false;
     }
     final l$searchText = searchText;
@@ -8776,6 +8877,7 @@ class Input$SidUserDeviceListFilter {
   @override
   int get hashCode {
     final l$ids = ids;
+    final l$excludeIds = excludeIds;
     final l$searchText = searchText;
     final l$caseSensitive = caseSensitive;
     final l$textSearchFields = textSearchFields;
@@ -8788,6 +8890,11 @@ class Input$SidUserDeviceListFilter {
           ? l$ids == null
               ? null
               : Object.hashAll(l$ids.map((v) => v))
+          : const {},
+      _$data.containsKey('excludeIds')
+          ? l$excludeIds == null
+              ? null
+              : Object.hashAll(l$excludeIds.map((v) => v))
           : const {},
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('caseSensitive') ? l$caseSensitive : const {},
@@ -8815,6 +8922,7 @@ abstract class CopyWith$Input$SidUserDeviceListFilter<TRes> {
 
   TRes call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -8840,6 +8948,7 @@ class _CopyWithImpl$Input$SidUserDeviceListFilter<TRes>
 
   TRes call({
     Object? ids = _undefined,
+    Object? excludeIds = _undefined,
     Object? searchText = _undefined,
     Object? caseSensitive = _undefined,
     Object? textSearchFields = _undefined,
@@ -8851,6 +8960,8 @@ class _CopyWithImpl$Input$SidUserDeviceListFilter<TRes>
       _then(Input$SidUserDeviceListFilter._({
         ..._instance._$data,
         if (ids != _undefined) 'ids': (ids as List<String>?),
+        if (excludeIds != _undefined)
+          'excludeIds': (excludeIds as List<String>?),
         if (searchText != _undefined) 'searchText': (searchText as String?),
         if (caseSensitive != _undefined)
           'caseSensitive': (caseSensitive as bool?),
@@ -8875,6 +8986,7 @@ class _CopyWithStubImpl$Input$SidUserDeviceListFilter<TRes>
 
   call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -9916,6 +10028,7 @@ class _CopyWithStubImpl$Input$BgChannelStatusInput<TRes>
 class Input$ChannelListFilter {
   factory Input$ChannelListFilter({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -9926,6 +10039,7 @@ class Input$ChannelListFilter {
   }) =>
       Input$ChannelListFilter._({
         if (ids != null) r'ids': ids,
+        if (excludeIds != null) r'excludeIds': excludeIds,
         if (searchText != null) r'searchText': searchText,
         if (caseSensitive != null) r'caseSensitive': caseSensitive,
         if (textSearchFields != null) r'textSearchFields': textSearchFields,
@@ -9943,6 +10057,11 @@ class Input$ChannelListFilter {
       final l$ids = data['ids'];
       result$data['ids'] =
           (l$ids as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('excludeIds')) {
+      final l$excludeIds = data['excludeIds'];
+      result$data['excludeIds'] =
+          (l$excludeIds as List<dynamic>?)?.map((e) => (e as String)).toList();
     }
     if (data.containsKey('searchText')) {
       final l$searchText = data['searchText'];
@@ -9988,6 +10107,7 @@ class Input$ChannelListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
+  List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
   String? get searchText => (_$data['searchText'] as String?);
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
   List<String>? get textSearchFields =>
@@ -10001,6 +10121,10 @@ class Input$ChannelListFilter {
     if (_$data.containsKey('ids')) {
       final l$ids = ids;
       result$data['ids'] = l$ids?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('excludeIds')) {
+      final l$excludeIds = excludeIds;
+      result$data['excludeIds'] = l$excludeIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('searchText')) {
       final l$searchText = searchText;
@@ -10065,6 +10189,26 @@ class Input$ChannelListFilter {
         }
       }
     } else if (l$ids != lOther$ids) {
+      return false;
+    }
+    final l$excludeIds = excludeIds;
+    final lOther$excludeIds = other.excludeIds;
+    if (_$data.containsKey('excludeIds') !=
+        other._$data.containsKey('excludeIds')) {
+      return false;
+    }
+    if (l$excludeIds != null && lOther$excludeIds != null) {
+      if (l$excludeIds.length != lOther$excludeIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$excludeIds.length; i++) {
+        final l$excludeIds$entry = l$excludeIds[i];
+        final lOther$excludeIds$entry = lOther$excludeIds[i];
+        if (l$excludeIds$entry != lOther$excludeIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$excludeIds != lOther$excludeIds) {
       return false;
     }
     final l$searchText = searchText;
@@ -10147,6 +10291,7 @@ class Input$ChannelListFilter {
   @override
   int get hashCode {
     final l$ids = ids;
+    final l$excludeIds = excludeIds;
     final l$searchText = searchText;
     final l$caseSensitive = caseSensitive;
     final l$textSearchFields = textSearchFields;
@@ -10159,6 +10304,11 @@ class Input$ChannelListFilter {
           ? l$ids == null
               ? null
               : Object.hashAll(l$ids.map((v) => v))
+          : const {},
+      _$data.containsKey('excludeIds')
+          ? l$excludeIds == null
+              ? null
+              : Object.hashAll(l$excludeIds.map((v) => v))
           : const {},
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('caseSensitive') ? l$caseSensitive : const {},
@@ -10186,6 +10336,7 @@ abstract class CopyWith$Input$ChannelListFilter<TRes> {
 
   TRes call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -10211,6 +10362,7 @@ class _CopyWithImpl$Input$ChannelListFilter<TRes>
 
   TRes call({
     Object? ids = _undefined,
+    Object? excludeIds = _undefined,
     Object? searchText = _undefined,
     Object? caseSensitive = _undefined,
     Object? textSearchFields = _undefined,
@@ -10222,6 +10374,8 @@ class _CopyWithImpl$Input$ChannelListFilter<TRes>
       _then(Input$ChannelListFilter._({
         ..._instance._$data,
         if (ids != _undefined) 'ids': (ids as List<String>?),
+        if (excludeIds != _undefined)
+          'excludeIds': (excludeIds as List<String>?),
         if (searchText != _undefined) 'searchText': (searchText as String?),
         if (caseSensitive != _undefined)
           'caseSensitive': (caseSensitive as bool?),
@@ -10246,6 +10400,7 @@ class _CopyWithStubImpl$Input$ChannelListFilter<TRes>
 
   call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -11089,6 +11244,7 @@ class _CopyWithStubImpl$Input$ChannelMessageStatusInput<TRes>
 class Input$ChannelMessageListFilter {
   factory Input$ChannelMessageListFilter({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -11105,6 +11261,7 @@ class Input$ChannelMessageListFilter {
   }) =>
       Input$ChannelMessageListFilter._({
         if (ids != null) r'ids': ids,
+        if (excludeIds != null) r'excludeIds': excludeIds,
         if (searchText != null) r'searchText': searchText,
         if (caseSensitive != null) r'caseSensitive': caseSensitive,
         if (textSearchFields != null) r'textSearchFields': textSearchFields,
@@ -11129,6 +11286,11 @@ class Input$ChannelMessageListFilter {
       final l$ids = data['ids'];
       result$data['ids'] =
           (l$ids as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('excludeIds')) {
+      final l$excludeIds = data['excludeIds'];
+      result$data['excludeIds'] =
+          (l$excludeIds as List<dynamic>?)?.map((e) => (e as String)).toList();
     }
     if (data.containsKey('searchText')) {
       final l$searchText = data['searchText'];
@@ -11201,6 +11363,7 @@ class Input$ChannelMessageListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
+  List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
   String? get searchText => (_$data['searchText'] as String?);
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
   List<String>? get textSearchFields =>
@@ -11221,6 +11384,10 @@ class Input$ChannelMessageListFilter {
     if (_$data.containsKey('ids')) {
       final l$ids = ids;
       result$data['ids'] = l$ids?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('excludeIds')) {
+      final l$excludeIds = excludeIds;
+      result$data['excludeIds'] = l$excludeIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('searchText')) {
       final l$searchText = searchText;
@@ -11311,6 +11478,26 @@ class Input$ChannelMessageListFilter {
         }
       }
     } else if (l$ids != lOther$ids) {
+      return false;
+    }
+    final l$excludeIds = excludeIds;
+    final lOther$excludeIds = other.excludeIds;
+    if (_$data.containsKey('excludeIds') !=
+        other._$data.containsKey('excludeIds')) {
+      return false;
+    }
+    if (l$excludeIds != null && lOther$excludeIds != null) {
+      if (l$excludeIds.length != lOther$excludeIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$excludeIds.length; i++) {
+        final l$excludeIds$entry = l$excludeIds[i];
+        final lOther$excludeIds$entry = lOther$excludeIds[i];
+        if (l$excludeIds$entry != lOther$excludeIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$excludeIds != lOther$excludeIds) {
       return false;
     }
     final l$searchText = searchText;
@@ -11463,6 +11650,7 @@ class Input$ChannelMessageListFilter {
   @override
   int get hashCode {
     final l$ids = ids;
+    final l$excludeIds = excludeIds;
     final l$searchText = searchText;
     final l$caseSensitive = caseSensitive;
     final l$textSearchFields = textSearchFields;
@@ -11481,6 +11669,11 @@ class Input$ChannelMessageListFilter {
           ? l$ids == null
               ? null
               : Object.hashAll(l$ids.map((v) => v))
+          : const {},
+      _$data.containsKey('excludeIds')
+          ? l$excludeIds == null
+              ? null
+              : Object.hashAll(l$excludeIds.map((v) => v))
           : const {},
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('caseSensitive') ? l$caseSensitive : const {},
@@ -11518,6 +11711,7 @@ abstract class CopyWith$Input$ChannelMessageListFilter<TRes> {
 
   TRes call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -11549,6 +11743,7 @@ class _CopyWithImpl$Input$ChannelMessageListFilter<TRes>
 
   TRes call({
     Object? ids = _undefined,
+    Object? excludeIds = _undefined,
     Object? searchText = _undefined,
     Object? caseSensitive = _undefined,
     Object? textSearchFields = _undefined,
@@ -11566,6 +11761,8 @@ class _CopyWithImpl$Input$ChannelMessageListFilter<TRes>
       _then(Input$ChannelMessageListFilter._({
         ..._instance._$data,
         if (ids != _undefined) 'ids': (ids as List<String>?),
+        if (excludeIds != _undefined)
+          'excludeIds': (excludeIds as List<String>?),
         if (searchText != _undefined) 'searchText': (searchText as String?),
         if (caseSensitive != _undefined)
           'caseSensitive': (caseSensitive as bool?),
@@ -11600,6 +11797,7 @@ class _CopyWithStubImpl$Input$ChannelMessageListFilter<TRes>
 
   call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -11620,6 +11818,7 @@ class _CopyWithStubImpl$Input$ChannelMessageListFilter<TRes>
 class Input$GroupMembershipListFilter {
   factory Input$GroupMembershipListFilter({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -11633,6 +11832,7 @@ class Input$GroupMembershipListFilter {
   }) =>
       Input$GroupMembershipListFilter._({
         if (ids != null) r'ids': ids,
+        if (excludeIds != null) r'excludeIds': excludeIds,
         if (searchText != null) r'searchText': searchText,
         if (caseSensitive != null) r'caseSensitive': caseSensitive,
         if (textSearchFields != null) r'textSearchFields': textSearchFields,
@@ -11653,6 +11853,11 @@ class Input$GroupMembershipListFilter {
       final l$ids = data['ids'];
       result$data['ids'] =
           (l$ids as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('excludeIds')) {
+      final l$excludeIds = data['excludeIds'];
+      result$data['excludeIds'] =
+          (l$excludeIds as List<dynamic>?)?.map((e) => (e as String)).toList();
     }
     if (data.containsKey('searchText')) {
       final l$searchText = data['searchText'];
@@ -11712,6 +11917,7 @@ class Input$GroupMembershipListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
+  List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
   String? get searchText => (_$data['searchText'] as String?);
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
   List<String>? get textSearchFields =>
@@ -11729,6 +11935,10 @@ class Input$GroupMembershipListFilter {
     if (_$data.containsKey('ids')) {
       final l$ids = ids;
       result$data['ids'] = l$ids?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('excludeIds')) {
+      final l$excludeIds = excludeIds;
+      result$data['excludeIds'] = l$excludeIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('searchText')) {
       final l$searchText = searchText;
@@ -11806,6 +12016,26 @@ class Input$GroupMembershipListFilter {
         }
       }
     } else if (l$ids != lOther$ids) {
+      return false;
+    }
+    final l$excludeIds = excludeIds;
+    final lOther$excludeIds = other.excludeIds;
+    if (_$data.containsKey('excludeIds') !=
+        other._$data.containsKey('excludeIds')) {
+      return false;
+    }
+    if (l$excludeIds != null && lOther$excludeIds != null) {
+      if (l$excludeIds.length != lOther$excludeIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$excludeIds.length; i++) {
+        final l$excludeIds$entry = l$excludeIds[i];
+        final lOther$excludeIds$entry = lOther$excludeIds[i];
+        if (l$excludeIds$entry != lOther$excludeIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$excludeIds != lOther$excludeIds) {
       return false;
     }
     final l$searchText = searchText;
@@ -11924,6 +12154,7 @@ class Input$GroupMembershipListFilter {
   @override
   int get hashCode {
     final l$ids = ids;
+    final l$excludeIds = excludeIds;
     final l$searchText = searchText;
     final l$caseSensitive = caseSensitive;
     final l$textSearchFields = textSearchFields;
@@ -11939,6 +12170,11 @@ class Input$GroupMembershipListFilter {
           ? l$ids == null
               ? null
               : Object.hashAll(l$ids.map((v) => v))
+          : const {},
+      _$data.containsKey('excludeIds')
+          ? l$excludeIds == null
+              ? null
+              : Object.hashAll(l$excludeIds.map((v) => v))
           : const {},
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('caseSensitive') ? l$caseSensitive : const {},
@@ -11973,6 +12209,7 @@ abstract class CopyWith$Input$GroupMembershipListFilter<TRes> {
 
   TRes call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -12001,6 +12238,7 @@ class _CopyWithImpl$Input$GroupMembershipListFilter<TRes>
 
   TRes call({
     Object? ids = _undefined,
+    Object? excludeIds = _undefined,
     Object? searchText = _undefined,
     Object? caseSensitive = _undefined,
     Object? textSearchFields = _undefined,
@@ -12015,6 +12253,8 @@ class _CopyWithImpl$Input$GroupMembershipListFilter<TRes>
       _then(Input$GroupMembershipListFilter._({
         ..._instance._$data,
         if (ids != _undefined) 'ids': (ids as List<String>?),
+        if (excludeIds != _undefined)
+          'excludeIds': (excludeIds as List<String>?),
         if (searchText != _undefined) 'searchText': (searchText as String?),
         if (caseSensitive != _undefined)
           'caseSensitive': (caseSensitive as bool?),
@@ -12043,6 +12283,7 @@ class _CopyWithStubImpl$Input$GroupMembershipListFilter<TRes>
 
   call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -13408,6 +13649,7 @@ class _CopyWithStubImpl$Input$GroupRuleBaseConfigInput<TRes>
 class Input$GroupListFilter {
   factory Input$GroupListFilter({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -13420,6 +13662,7 @@ class Input$GroupListFilter {
   }) =>
       Input$GroupListFilter._({
         if (ids != null) r'ids': ids,
+        if (excludeIds != null) r'excludeIds': excludeIds,
         if (searchText != null) r'searchText': searchText,
         if (caseSensitive != null) r'caseSensitive': caseSensitive,
         if (textSearchFields != null) r'textSearchFields': textSearchFields,
@@ -13439,6 +13682,11 @@ class Input$GroupListFilter {
       final l$ids = data['ids'];
       result$data['ids'] =
           (l$ids as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('excludeIds')) {
+      final l$excludeIds = data['excludeIds'];
+      result$data['excludeIds'] =
+          (l$excludeIds as List<dynamic>?)?.map((e) => (e as String)).toList();
     }
     if (data.containsKey('searchText')) {
       final l$searchText = data['searchText'];
@@ -13492,6 +13740,7 @@ class Input$GroupListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
+  List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
   String? get searchText => (_$data['searchText'] as String?);
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
   List<String>? get textSearchFields =>
@@ -13507,6 +13756,10 @@ class Input$GroupListFilter {
     if (_$data.containsKey('ids')) {
       final l$ids = ids;
       result$data['ids'] = l$ids?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('excludeIds')) {
+      final l$excludeIds = excludeIds;
+      result$data['excludeIds'] = l$excludeIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('searchText')) {
       final l$searchText = searchText;
@@ -13578,6 +13831,26 @@ class Input$GroupListFilter {
         }
       }
     } else if (l$ids != lOther$ids) {
+      return false;
+    }
+    final l$excludeIds = excludeIds;
+    final lOther$excludeIds = other.excludeIds;
+    if (_$data.containsKey('excludeIds') !=
+        other._$data.containsKey('excludeIds')) {
+      return false;
+    }
+    if (l$excludeIds != null && lOther$excludeIds != null) {
+      if (l$excludeIds.length != lOther$excludeIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$excludeIds.length; i++) {
+        final l$excludeIds$entry = l$excludeIds[i];
+        final lOther$excludeIds$entry = lOther$excludeIds[i];
+        if (l$excludeIds$entry != lOther$excludeIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$excludeIds != lOther$excludeIds) {
       return false;
     }
     final l$searchText = searchText;
@@ -13678,6 +13951,7 @@ class Input$GroupListFilter {
   @override
   int get hashCode {
     final l$ids = ids;
+    final l$excludeIds = excludeIds;
     final l$searchText = searchText;
     final l$caseSensitive = caseSensitive;
     final l$textSearchFields = textSearchFields;
@@ -13692,6 +13966,11 @@ class Input$GroupListFilter {
           ? l$ids == null
               ? null
               : Object.hashAll(l$ids.map((v) => v))
+          : const {},
+      _$data.containsKey('excludeIds')
+          ? l$excludeIds == null
+              ? null
+              : Object.hashAll(l$excludeIds.map((v) => v))
           : const {},
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('caseSensitive') ? l$caseSensitive : const {},
@@ -13721,6 +14000,7 @@ abstract class CopyWith$Input$GroupListFilter<TRes> {
 
   TRes call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -13748,6 +14028,7 @@ class _CopyWithImpl$Input$GroupListFilter<TRes>
 
   TRes call({
     Object? ids = _undefined,
+    Object? excludeIds = _undefined,
     Object? searchText = _undefined,
     Object? caseSensitive = _undefined,
     Object? textSearchFields = _undefined,
@@ -13761,6 +14042,8 @@ class _CopyWithImpl$Input$GroupListFilter<TRes>
       _then(Input$GroupListFilter._({
         ..._instance._$data,
         if (ids != _undefined) 'ids': (ids as List<String>?),
+        if (excludeIds != _undefined)
+          'excludeIds': (excludeIds as List<String>?),
         if (searchText != _undefined) 'searchText': (searchText as String?),
         if (caseSensitive != _undefined)
           'caseSensitive': (caseSensitive as bool?),
@@ -13788,6 +14071,7 @@ class _CopyWithStubImpl$Input$GroupListFilter<TRes>
 
   call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -14809,6 +15093,7 @@ class _CopyWithStubImpl$Input$UserSearchInput<TRes>
 class Input$UserSearchListFilter {
   factory Input$UserSearchListFilter({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -14819,6 +15104,7 @@ class Input$UserSearchListFilter {
   }) =>
       Input$UserSearchListFilter._({
         if (ids != null) r'ids': ids,
+        if (excludeIds != null) r'excludeIds': excludeIds,
         if (searchText != null) r'searchText': searchText,
         if (caseSensitive != null) r'caseSensitive': caseSensitive,
         if (textSearchFields != null) r'textSearchFields': textSearchFields,
@@ -14836,6 +15122,11 @@ class Input$UserSearchListFilter {
       final l$ids = data['ids'];
       result$data['ids'] =
           (l$ids as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    if (data.containsKey('excludeIds')) {
+      final l$excludeIds = data['excludeIds'];
+      result$data['excludeIds'] =
+          (l$excludeIds as List<dynamic>?)?.map((e) => (e as String)).toList();
     }
     if (data.containsKey('searchText')) {
       final l$searchText = data['searchText'];
@@ -14881,6 +15172,7 @@ class Input$UserSearchListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
+  List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
   String? get searchText => (_$data['searchText'] as String?);
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
   List<String>? get textSearchFields =>
@@ -14894,6 +15186,10 @@ class Input$UserSearchListFilter {
     if (_$data.containsKey('ids')) {
       final l$ids = ids;
       result$data['ids'] = l$ids?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('excludeIds')) {
+      final l$excludeIds = excludeIds;
+      result$data['excludeIds'] = l$excludeIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('searchText')) {
       final l$searchText = searchText;
@@ -14958,6 +15254,26 @@ class Input$UserSearchListFilter {
         }
       }
     } else if (l$ids != lOther$ids) {
+      return false;
+    }
+    final l$excludeIds = excludeIds;
+    final lOther$excludeIds = other.excludeIds;
+    if (_$data.containsKey('excludeIds') !=
+        other._$data.containsKey('excludeIds')) {
+      return false;
+    }
+    if (l$excludeIds != null && lOther$excludeIds != null) {
+      if (l$excludeIds.length != lOther$excludeIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$excludeIds.length; i++) {
+        final l$excludeIds$entry = l$excludeIds[i];
+        final lOther$excludeIds$entry = lOther$excludeIds[i];
+        if (l$excludeIds$entry != lOther$excludeIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$excludeIds != lOther$excludeIds) {
       return false;
     }
     final l$searchText = searchText;
@@ -15040,6 +15356,7 @@ class Input$UserSearchListFilter {
   @override
   int get hashCode {
     final l$ids = ids;
+    final l$excludeIds = excludeIds;
     final l$searchText = searchText;
     final l$caseSensitive = caseSensitive;
     final l$textSearchFields = textSearchFields;
@@ -15052,6 +15369,11 @@ class Input$UserSearchListFilter {
           ? l$ids == null
               ? null
               : Object.hashAll(l$ids.map((v) => v))
+          : const {},
+      _$data.containsKey('excludeIds')
+          ? l$excludeIds == null
+              ? null
+              : Object.hashAll(l$excludeIds.map((v) => v))
           : const {},
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('caseSensitive') ? l$caseSensitive : const {},
@@ -15079,6 +15401,7 @@ abstract class CopyWith$Input$UserSearchListFilter<TRes> {
 
   TRes call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -15104,6 +15427,7 @@ class _CopyWithImpl$Input$UserSearchListFilter<TRes>
 
   TRes call({
     Object? ids = _undefined,
+    Object? excludeIds = _undefined,
     Object? searchText = _undefined,
     Object? caseSensitive = _undefined,
     Object? textSearchFields = _undefined,
@@ -15115,6 +15439,8 @@ class _CopyWithImpl$Input$UserSearchListFilter<TRes>
       _then(Input$UserSearchListFilter._({
         ..._instance._$data,
         if (ids != _undefined) 'ids': (ids as List<String>?),
+        if (excludeIds != _undefined)
+          'excludeIds': (excludeIds as List<String>?),
         if (searchText != _undefined) 'searchText': (searchText as String?),
         if (caseSensitive != _undefined)
           'caseSensitive': (caseSensitive as bool?),
@@ -15139,6 +15465,7 @@ class _CopyWithStubImpl$Input$UserSearchListFilter<TRes>
 
   call({
     List<String>? ids,
+    List<String>? excludeIds,
     String? searchText,
     bool? caseSensitive,
     List<String>? textSearchFields,
@@ -16112,6 +16439,225 @@ class _CopyWithStubImpl$Input$UserSignUpInput<TRes>
   events(_fn) => _res;
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
+}
+
+class Input$UserBlockInput {
+  factory Input$UserBlockInput({
+    String? blockedByUserId,
+    String? userId,
+    String? reasonTextId,
+    String? notes,
+    String? adminNotes,
+  }) =>
+      Input$UserBlockInput._({
+        if (blockedByUserId != null) r'blockedByUserId': blockedByUserId,
+        if (userId != null) r'userId': userId,
+        if (reasonTextId != null) r'reasonTextId': reasonTextId,
+        if (notes != null) r'notes': notes,
+        if (adminNotes != null) r'adminNotes': adminNotes,
+      });
+
+  Input$UserBlockInput._(this._$data);
+
+  factory Input$UserBlockInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('blockedByUserId')) {
+      final l$blockedByUserId = data['blockedByUserId'];
+      result$data['blockedByUserId'] = (l$blockedByUserId as String);
+    }
+    if (data.containsKey('userId')) {
+      final l$userId = data['userId'];
+      result$data['userId'] = (l$userId as String);
+    }
+    if (data.containsKey('reasonTextId')) {
+      final l$reasonTextId = data['reasonTextId'];
+      result$data['reasonTextId'] = (l$reasonTextId as String);
+    }
+    if (data.containsKey('notes')) {
+      final l$notes = data['notes'];
+      result$data['notes'] = (l$notes as String);
+    }
+    if (data.containsKey('adminNotes')) {
+      final l$adminNotes = data['adminNotes'];
+      result$data['adminNotes'] = (l$adminNotes as String);
+    }
+    return Input$UserBlockInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get blockedByUserId => (_$data['blockedByUserId'] as String?);
+  String? get userId => (_$data['userId'] as String?);
+  String? get reasonTextId => (_$data['reasonTextId'] as String?);
+  String? get notes => (_$data['notes'] as String?);
+  String? get adminNotes => (_$data['adminNotes'] as String?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blockedByUserId')) {
+      final l$blockedByUserId = blockedByUserId;
+      result$data['blockedByUserId'] = (l$blockedByUserId as String);
+    }
+    if (_$data.containsKey('userId')) {
+      final l$userId = userId;
+      result$data['userId'] = (l$userId as String);
+    }
+    if (_$data.containsKey('reasonTextId')) {
+      final l$reasonTextId = reasonTextId;
+      result$data['reasonTextId'] = (l$reasonTextId as String);
+    }
+    if (_$data.containsKey('notes')) {
+      final l$notes = notes;
+      result$data['notes'] = (l$notes as String);
+    }
+    if (_$data.containsKey('adminNotes')) {
+      final l$adminNotes = adminNotes;
+      result$data['adminNotes'] = (l$adminNotes as String);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$UserBlockInput<Input$UserBlockInput> get copyWith =>
+      CopyWith$Input$UserBlockInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$UserBlockInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blockedByUserId = blockedByUserId;
+    final lOther$blockedByUserId = other.blockedByUserId;
+    if (_$data.containsKey('blockedByUserId') !=
+        other._$data.containsKey('blockedByUserId')) {
+      return false;
+    }
+    if (l$blockedByUserId != lOther$blockedByUserId) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (_$data.containsKey('userId') != other._$data.containsKey('userId')) {
+      return false;
+    }
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$reasonTextId = reasonTextId;
+    final lOther$reasonTextId = other.reasonTextId;
+    if (_$data.containsKey('reasonTextId') !=
+        other._$data.containsKey('reasonTextId')) {
+      return false;
+    }
+    if (l$reasonTextId != lOther$reasonTextId) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
+      return false;
+    }
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$adminNotes = adminNotes;
+    final lOther$adminNotes = other.adminNotes;
+    if (_$data.containsKey('adminNotes') !=
+        other._$data.containsKey('adminNotes')) {
+      return false;
+    }
+    if (l$adminNotes != lOther$adminNotes) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$blockedByUserId = blockedByUserId;
+    final l$userId = userId;
+    final l$reasonTextId = reasonTextId;
+    final l$notes = notes;
+    final l$adminNotes = adminNotes;
+    return Object.hashAll([
+      _$data.containsKey('blockedByUserId') ? l$blockedByUserId : const {},
+      _$data.containsKey('userId') ? l$userId : const {},
+      _$data.containsKey('reasonTextId') ? l$reasonTextId : const {},
+      _$data.containsKey('notes') ? l$notes : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$UserBlockInput<TRes> {
+  factory CopyWith$Input$UserBlockInput(
+    Input$UserBlockInput instance,
+    TRes Function(Input$UserBlockInput) then,
+  ) = _CopyWithImpl$Input$UserBlockInput;
+
+  factory CopyWith$Input$UserBlockInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$UserBlockInput;
+
+  TRes call({
+    String? blockedByUserId,
+    String? userId,
+    String? reasonTextId,
+    String? notes,
+    String? adminNotes,
+  });
+}
+
+class _CopyWithImpl$Input$UserBlockInput<TRes>
+    implements CopyWith$Input$UserBlockInput<TRes> {
+  _CopyWithImpl$Input$UserBlockInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$UserBlockInput _instance;
+
+  final TRes Function(Input$UserBlockInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? blockedByUserId = _undefined,
+    Object? userId = _undefined,
+    Object? reasonTextId = _undefined,
+    Object? notes = _undefined,
+    Object? adminNotes = _undefined,
+  }) =>
+      _then(Input$UserBlockInput._({
+        ..._instance._$data,
+        if (blockedByUserId != _undefined && blockedByUserId != null)
+          'blockedByUserId': (blockedByUserId as String),
+        if (userId != _undefined && userId != null)
+          'userId': (userId as String),
+        if (reasonTextId != _undefined && reasonTextId != null)
+          'reasonTextId': (reasonTextId as String),
+        if (notes != _undefined && notes != null) 'notes': (notes as String),
+        if (adminNotes != _undefined && adminNotes != null)
+          'adminNotes': (adminNotes as String),
+      }));
+}
+
+class _CopyWithStubImpl$Input$UserBlockInput<TRes>
+    implements CopyWith$Input$UserBlockInput<TRes> {
+  _CopyWithStubImpl$Input$UserBlockInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? blockedByUserId,
+    String? userId,
+    String? reasonTextId,
+    String? notes,
+    String? adminNotes,
+  }) =>
+      _res;
 }
 
 class Input$ChannelInvitationInput {
@@ -25038,11 +25584,13 @@ enum Enum$OptionType {
   expertise,
   gender,
   pronoun,
+  userRelationshipType,
   country,
   industry,
   language,
   unset,
   contentTagType,
+  blockUserReason,
   $unknown
 }
 
@@ -25060,6 +25608,8 @@ String toJson$Enum$OptionType(Enum$OptionType e) {
       return r'gender';
     case Enum$OptionType.pronoun:
       return r'pronoun';
+    case Enum$OptionType.userRelationshipType:
+      return r'userRelationshipType';
     case Enum$OptionType.country:
       return r'country';
     case Enum$OptionType.industry:
@@ -25070,6 +25620,8 @@ String toJson$Enum$OptionType(Enum$OptionType e) {
       return r'unset';
     case Enum$OptionType.contentTagType:
       return r'contentTagType';
+    case Enum$OptionType.blockUserReason:
+      return r'blockUserReason';
     case Enum$OptionType.$unknown:
       return r'$unknown';
   }
@@ -25089,6 +25641,8 @@ Enum$OptionType fromJson$Enum$OptionType(String value) {
       return Enum$OptionType.gender;
     case r'pronoun':
       return Enum$OptionType.pronoun;
+    case r'userRelationshipType':
+      return Enum$OptionType.userRelationshipType;
     case r'country':
       return Enum$OptionType.country;
     case r'industry':
@@ -25099,6 +25653,8 @@ Enum$OptionType fromJson$Enum$OptionType(String value) {
       return Enum$OptionType.unset;
     case r'contentTagType':
       return Enum$OptionType.contentTagType;
+    case r'blockUserReason':
+      return Enum$OptionType.blockUserReason;
     default:
       return Enum$OptionType.$unknown;
   }
@@ -25419,6 +25975,7 @@ enum Enum$ModelType {
   Mm2Synchronization,
   Mm2SynchronizationResultItem,
   MultiStepAction,
+  UserRelationship,
   ServiceRequest,
   User,
   UserDevice,
@@ -25490,6 +26047,8 @@ String toJson$Enum$ModelType(Enum$ModelType e) {
       return r'Mm2SynchronizationResultItem';
     case Enum$ModelType.MultiStepAction:
       return r'MultiStepAction';
+    case Enum$ModelType.UserRelationship:
+      return r'UserRelationship';
     case Enum$ModelType.ServiceRequest:
       return r'ServiceRequest';
     case Enum$ModelType.User:
@@ -25567,6 +26126,8 @@ Enum$ModelType fromJson$Enum$ModelType(String value) {
       return Enum$ModelType.Mm2SynchronizationResultItem;
     case r'MultiStepAction':
       return Enum$ModelType.MultiStepAction;
+    case r'UserRelationship':
+      return Enum$ModelType.UserRelationship;
     case r'ServiceRequest':
       return Enum$ModelType.ServiceRequest;
     case r'User':
@@ -26151,8 +26712,6 @@ Enum$MultiStepActionResult fromJson$Enum$MultiStepActionResult(String value) {
 }
 
 enum Enum$ServiceRequestType {
-  graphQlQueryUserInbox,
-  graphQlQueryUserUserSearches,
   graphQlMutationCreateAcademicExperience,
   graphQlMutationDeleteAcademicExperience,
   graphQlMutationUpdateAcademicExperience,
@@ -26162,6 +26721,9 @@ enum Enum$ServiceRequestType {
   graphQlMutationCreateCompany,
   graphQlMutationDeleteCompany,
   graphQlMutationUpdateCompany,
+  graphQlQueryFindAndUpdateAllMm2Users,
+  graphQlQueryUserInbox,
+  graphQlQueryUserUserSearches,
   graphQlMutationAddChannelMessageEvent,
   graphQlMutationArchiveChannelForUserByMe,
   graphQlMutationCreateChannel,
@@ -26182,7 +26744,6 @@ enum Enum$ServiceRequestType {
   graphQlQueryChannelInvitations,
   graphQlQueryChannelParticipants,
   graphQlQueryFindChannelInvitationById,
-  graphQlQueryFindChannelInvitationsBetweenUsers,
   graphQlQueryFindChannelInvitationsForUser,
   graphQlQueryFindChannelMessageById,
   graphQlQueryFindChannelMessages,
@@ -26247,32 +26808,34 @@ enum Enum$ServiceRequestType {
   graphQlMutationRunMm2Synchronization,
   graphQlQueryFindMm2SynchronizationById,
   graphQlQueryGetMm2Integration,
+  graphQlMutationBlockUser,
   graphQlMutationCreateMultiStepAction,
   graphQlMutationCreateUserDevice,
+  graphQlMutationCreateUserRelationship,
   graphQlMutationDeleteUser,
   graphQlMutationSignInUser,
   graphQlMutationSignMeOut,
   graphQlMutationSignUpUser,
+  graphQlMutationUnblockUser,
   graphQlMutationUpdateUser,
   graphQlMutationUpdateUserDevice,
+  graphQlMutationUpdateUserRelationship,
   graphQlMutationVerifyMultiStepActionToken,
   graphQlQueryFindUserById,
   graphQlQueryFindUserByIdent,
   graphQlQueryFindUserDeviceById,
+  graphQlQueryFindUserRelationshipById,
   graphQlQueryFindUsers,
   graphQlQueryGetAuthenticatedUser,
   graphQlQueryGetMultiStepActionProgress,
   graphQlQueryLatestUserDevice,
   graphQlQueryUserUserDevices,
+  graphQlQueryUserUserRelationships,
   $unknown
 }
 
 String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
   switch (e) {
-    case Enum$ServiceRequestType.graphQlQueryUserInbox:
-      return r'graphQlQueryUserInbox';
-    case Enum$ServiceRequestType.graphQlQueryUserUserSearches:
-      return r'graphQlQueryUserUserSearches';
     case Enum$ServiceRequestType.graphQlMutationCreateAcademicExperience:
       return r'graphQlMutationCreateAcademicExperience';
     case Enum$ServiceRequestType.graphQlMutationDeleteAcademicExperience:
@@ -26291,6 +26854,12 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlMutationDeleteCompany';
     case Enum$ServiceRequestType.graphQlMutationUpdateCompany:
       return r'graphQlMutationUpdateCompany';
+    case Enum$ServiceRequestType.graphQlQueryFindAndUpdateAllMm2Users:
+      return r'graphQlQueryFindAndUpdateAllMm2Users';
+    case Enum$ServiceRequestType.graphQlQueryUserInbox:
+      return r'graphQlQueryUserInbox';
+    case Enum$ServiceRequestType.graphQlQueryUserUserSearches:
+      return r'graphQlQueryUserUserSearches';
     case Enum$ServiceRequestType.graphQlMutationAddChannelMessageEvent:
       return r'graphQlMutationAddChannelMessageEvent';
     case Enum$ServiceRequestType.graphQlMutationArchiveChannelForUserByMe:
@@ -26331,8 +26900,6 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlQueryChannelParticipants';
     case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationById:
       return r'graphQlQueryFindChannelInvitationById';
-    case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsBetweenUsers:
-      return r'graphQlQueryFindChannelInvitationsBetweenUsers';
     case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsForUser:
       return r'graphQlQueryFindChannelInvitationsForUser';
     case Enum$ServiceRequestType.graphQlQueryFindChannelMessageById:
@@ -26462,10 +27029,14 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlQueryFindMm2SynchronizationById';
     case Enum$ServiceRequestType.graphQlQueryGetMm2Integration:
       return r'graphQlQueryGetMm2Integration';
+    case Enum$ServiceRequestType.graphQlMutationBlockUser:
+      return r'graphQlMutationBlockUser';
     case Enum$ServiceRequestType.graphQlMutationCreateMultiStepAction:
       return r'graphQlMutationCreateMultiStepAction';
     case Enum$ServiceRequestType.graphQlMutationCreateUserDevice:
       return r'graphQlMutationCreateUserDevice';
+    case Enum$ServiceRequestType.graphQlMutationCreateUserRelationship:
+      return r'graphQlMutationCreateUserRelationship';
     case Enum$ServiceRequestType.graphQlMutationDeleteUser:
       return r'graphQlMutationDeleteUser';
     case Enum$ServiceRequestType.graphQlMutationSignInUser:
@@ -26474,10 +27045,14 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlMutationSignMeOut';
     case Enum$ServiceRequestType.graphQlMutationSignUpUser:
       return r'graphQlMutationSignUpUser';
+    case Enum$ServiceRequestType.graphQlMutationUnblockUser:
+      return r'graphQlMutationUnblockUser';
     case Enum$ServiceRequestType.graphQlMutationUpdateUser:
       return r'graphQlMutationUpdateUser';
     case Enum$ServiceRequestType.graphQlMutationUpdateUserDevice:
       return r'graphQlMutationUpdateUserDevice';
+    case Enum$ServiceRequestType.graphQlMutationUpdateUserRelationship:
+      return r'graphQlMutationUpdateUserRelationship';
     case Enum$ServiceRequestType.graphQlMutationVerifyMultiStepActionToken:
       return r'graphQlMutationVerifyMultiStepActionToken';
     case Enum$ServiceRequestType.graphQlQueryFindUserById:
@@ -26486,6 +27061,8 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlQueryFindUserByIdent';
     case Enum$ServiceRequestType.graphQlQueryFindUserDeviceById:
       return r'graphQlQueryFindUserDeviceById';
+    case Enum$ServiceRequestType.graphQlQueryFindUserRelationshipById:
+      return r'graphQlQueryFindUserRelationshipById';
     case Enum$ServiceRequestType.graphQlQueryFindUsers:
       return r'graphQlQueryFindUsers';
     case Enum$ServiceRequestType.graphQlQueryGetAuthenticatedUser:
@@ -26496,6 +27073,8 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlQueryLatestUserDevice';
     case Enum$ServiceRequestType.graphQlQueryUserUserDevices:
       return r'graphQlQueryUserUserDevices';
+    case Enum$ServiceRequestType.graphQlQueryUserUserRelationships:
+      return r'graphQlQueryUserUserRelationships';
     case Enum$ServiceRequestType.$unknown:
       return r'$unknown';
   }
@@ -26503,10 +27082,6 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
 
 Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
   switch (value) {
-    case r'graphQlQueryUserInbox':
-      return Enum$ServiceRequestType.graphQlQueryUserInbox;
-    case r'graphQlQueryUserUserSearches':
-      return Enum$ServiceRequestType.graphQlQueryUserUserSearches;
     case r'graphQlMutationCreateAcademicExperience':
       return Enum$ServiceRequestType.graphQlMutationCreateAcademicExperience;
     case r'graphQlMutationDeleteAcademicExperience':
@@ -26525,6 +27100,12 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlMutationDeleteCompany;
     case r'graphQlMutationUpdateCompany':
       return Enum$ServiceRequestType.graphQlMutationUpdateCompany;
+    case r'graphQlQueryFindAndUpdateAllMm2Users':
+      return Enum$ServiceRequestType.graphQlQueryFindAndUpdateAllMm2Users;
+    case r'graphQlQueryUserInbox':
+      return Enum$ServiceRequestType.graphQlQueryUserInbox;
+    case r'graphQlQueryUserUserSearches':
+      return Enum$ServiceRequestType.graphQlQueryUserUserSearches;
     case r'graphQlMutationAddChannelMessageEvent':
       return Enum$ServiceRequestType.graphQlMutationAddChannelMessageEvent;
     case r'graphQlMutationArchiveChannelForUserByMe':
@@ -26566,9 +27147,6 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlQueryChannelParticipants;
     case r'graphQlQueryFindChannelInvitationById':
       return Enum$ServiceRequestType.graphQlQueryFindChannelInvitationById;
-    case r'graphQlQueryFindChannelInvitationsBetweenUsers':
-      return Enum$ServiceRequestType
-          .graphQlQueryFindChannelInvitationsBetweenUsers;
     case r'graphQlQueryFindChannelInvitationsForUser':
       return Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsForUser;
     case r'graphQlQueryFindChannelMessageById':
@@ -26699,10 +27277,14 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlQueryFindMm2SynchronizationById;
     case r'graphQlQueryGetMm2Integration':
       return Enum$ServiceRequestType.graphQlQueryGetMm2Integration;
+    case r'graphQlMutationBlockUser':
+      return Enum$ServiceRequestType.graphQlMutationBlockUser;
     case r'graphQlMutationCreateMultiStepAction':
       return Enum$ServiceRequestType.graphQlMutationCreateMultiStepAction;
     case r'graphQlMutationCreateUserDevice':
       return Enum$ServiceRequestType.graphQlMutationCreateUserDevice;
+    case r'graphQlMutationCreateUserRelationship':
+      return Enum$ServiceRequestType.graphQlMutationCreateUserRelationship;
     case r'graphQlMutationDeleteUser':
       return Enum$ServiceRequestType.graphQlMutationDeleteUser;
     case r'graphQlMutationSignInUser':
@@ -26711,10 +27293,14 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlMutationSignMeOut;
     case r'graphQlMutationSignUpUser':
       return Enum$ServiceRequestType.graphQlMutationSignUpUser;
+    case r'graphQlMutationUnblockUser':
+      return Enum$ServiceRequestType.graphQlMutationUnblockUser;
     case r'graphQlMutationUpdateUser':
       return Enum$ServiceRequestType.graphQlMutationUpdateUser;
     case r'graphQlMutationUpdateUserDevice':
       return Enum$ServiceRequestType.graphQlMutationUpdateUserDevice;
+    case r'graphQlMutationUpdateUserRelationship':
+      return Enum$ServiceRequestType.graphQlMutationUpdateUserRelationship;
     case r'graphQlMutationVerifyMultiStepActionToken':
       return Enum$ServiceRequestType.graphQlMutationVerifyMultiStepActionToken;
     case r'graphQlQueryFindUserById':
@@ -26723,6 +27309,8 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlQueryFindUserByIdent;
     case r'graphQlQueryFindUserDeviceById':
       return Enum$ServiceRequestType.graphQlQueryFindUserDeviceById;
+    case r'graphQlQueryFindUserRelationshipById':
+      return Enum$ServiceRequestType.graphQlQueryFindUserRelationshipById;
     case r'graphQlQueryFindUsers':
       return Enum$ServiceRequestType.graphQlQueryFindUsers;
     case r'graphQlQueryGetAuthenticatedUser':
@@ -26733,6 +27321,8 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlQueryLatestUserDevice;
     case r'graphQlQueryUserUserDevices':
       return Enum$ServiceRequestType.graphQlQueryUserUserDevices;
+    case r'graphQlQueryUserUserRelationships':
+      return Enum$ServiceRequestType.graphQlQueryUserUserRelationships;
     default:
       return Enum$ServiceRequestType.$unknown;
   }

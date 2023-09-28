@@ -53,7 +53,7 @@ class _SignUpEntrepreneurOrMentorScreenState
             if (selectedNumber == 0) {
               context.push(Routes.signupBusinessStage.path);
             } else {
-              context.push(Routes.signupBusinessHelpSelection.path);
+              context.push(Routes.signupMentorHelpSelection.path);
             }
           }),
       footer: SignUpIconFooter(

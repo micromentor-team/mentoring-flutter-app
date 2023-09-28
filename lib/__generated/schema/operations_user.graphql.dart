@@ -7799,6 +7799,2479 @@ class _CopyWithStubImpl$Query$FindUserSearch$findUserSearchById$runInfos<TRes>
       _res;
 }
 
+class Variables$Query$FindUserSearchResults {
+  factory Variables$Query$FindUserSearchResults({
+    required String userSearchId,
+    Input$FindObjectsOptions? options,
+  }) =>
+      Variables$Query$FindUserSearchResults._({
+        r'userSearchId': userSearchId,
+        if (options != null) r'options': options,
+      });
+
+  Variables$Query$FindUserSearchResults._(this._$data);
+
+  factory Variables$Query$FindUserSearchResults.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$userSearchId = data['userSearchId'];
+    result$data['userSearchId'] = (l$userSearchId as String);
+    if (data.containsKey('options')) {
+      final l$options = data['options'];
+      result$data['options'] = l$options == null
+          ? null
+          : Input$FindObjectsOptions.fromJson(
+              (l$options as Map<String, dynamic>));
+    }
+    return Variables$Query$FindUserSearchResults._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get userSearchId => (_$data['userSearchId'] as String);
+  Input$FindObjectsOptions? get options =>
+      (_$data['options'] as Input$FindObjectsOptions?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$userSearchId = userSearchId;
+    result$data['userSearchId'] = l$userSearchId;
+    if (_$data.containsKey('options')) {
+      final l$options = options;
+      result$data['options'] = l$options?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$FindUserSearchResults<
+          Variables$Query$FindUserSearchResults>
+      get copyWith => CopyWith$Variables$Query$FindUserSearchResults(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$FindUserSearchResults) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userSearchId = userSearchId;
+    final lOther$userSearchId = other.userSearchId;
+    if (l$userSearchId != lOther$userSearchId) {
+      return false;
+    }
+    final l$options = options;
+    final lOther$options = other.options;
+    if (_$data.containsKey('options') != other._$data.containsKey('options')) {
+      return false;
+    }
+    if (l$options != lOther$options) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$userSearchId = userSearchId;
+    final l$options = options;
+    return Object.hashAll([
+      l$userSearchId,
+      _$data.containsKey('options') ? l$options : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$FindUserSearchResults<TRes> {
+  factory CopyWith$Variables$Query$FindUserSearchResults(
+    Variables$Query$FindUserSearchResults instance,
+    TRes Function(Variables$Query$FindUserSearchResults) then,
+  ) = _CopyWithImpl$Variables$Query$FindUserSearchResults;
+
+  factory CopyWith$Variables$Query$FindUserSearchResults.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$FindUserSearchResults;
+
+  TRes call({
+    String? userSearchId,
+    Input$FindObjectsOptions? options,
+  });
+}
+
+class _CopyWithImpl$Variables$Query$FindUserSearchResults<TRes>
+    implements CopyWith$Variables$Query$FindUserSearchResults<TRes> {
+  _CopyWithImpl$Variables$Query$FindUserSearchResults(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$FindUserSearchResults _instance;
+
+  final TRes Function(Variables$Query$FindUserSearchResults) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userSearchId = _undefined,
+    Object? options = _undefined,
+  }) =>
+      _then(Variables$Query$FindUserSearchResults._({
+        ..._instance._$data,
+        if (userSearchId != _undefined && userSearchId != null)
+          'userSearchId': (userSearchId as String),
+        if (options != _undefined)
+          'options': (options as Input$FindObjectsOptions?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$FindUserSearchResults<TRes>
+    implements CopyWith$Variables$Query$FindUserSearchResults<TRes> {
+  _CopyWithStubImpl$Variables$Query$FindUserSearchResults(this._res);
+
+  TRes _res;
+
+  call({
+    String? userSearchId,
+    Input$FindObjectsOptions? options,
+  }) =>
+      _res;
+}
+
+class Query$FindUserSearchResults {
+  Query$FindUserSearchResults({
+    required this.findUserSearchResults,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$FindUserSearchResults.fromJson(Map<String, dynamic> json) {
+    final l$findUserSearchResults = json['findUserSearchResults'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserSearchResults(
+      findUserSearchResults: (l$findUserSearchResults as List<dynamic>)
+          .map((e) =>
+              Query$FindUserSearchResults$findUserSearchResults.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$FindUserSearchResults$findUserSearchResults>
+      findUserSearchResults;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$findUserSearchResults = findUserSearchResults;
+    _resultData['findUserSearchResults'] =
+        l$findUserSearchResults.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$findUserSearchResults = findUserSearchResults;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$findUserSearchResults.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindUserSearchResults) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$findUserSearchResults = findUserSearchResults;
+    final lOther$findUserSearchResults = other.findUserSearchResults;
+    if (l$findUserSearchResults.length != lOther$findUserSearchResults.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findUserSearchResults.length; i++) {
+      final l$findUserSearchResults$entry = l$findUserSearchResults[i];
+      final lOther$findUserSearchResults$entry =
+          lOther$findUserSearchResults[i];
+      if (l$findUserSearchResults$entry != lOther$findUserSearchResults$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults
+    on Query$FindUserSearchResults {
+  CopyWith$Query$FindUserSearchResults<Query$FindUserSearchResults>
+      get copyWith => CopyWith$Query$FindUserSearchResults(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults<TRes> {
+  factory CopyWith$Query$FindUserSearchResults(
+    Query$FindUserSearchResults instance,
+    TRes Function(Query$FindUserSearchResults) then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults;
+
+  factory CopyWith$Query$FindUserSearchResults.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults;
+
+  TRes call({
+    List<Query$FindUserSearchResults$findUserSearchResults>?
+        findUserSearchResults,
+    String? $__typename,
+  });
+  TRes findUserSearchResults(
+      Iterable<Query$FindUserSearchResults$findUserSearchResults> Function(
+              Iterable<
+                  CopyWith$Query$FindUserSearchResults$findUserSearchResults<
+                      Query$FindUserSearchResults$findUserSearchResults>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults<TRes>
+    implements CopyWith$Query$FindUserSearchResults<TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults _instance;
+
+  final TRes Function(Query$FindUserSearchResults) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? findUserSearchResults = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserSearchResults(
+        findUserSearchResults:
+            findUserSearchResults == _undefined || findUserSearchResults == null
+                ? _instance.findUserSearchResults
+                : (findUserSearchResults
+                    as List<Query$FindUserSearchResults$findUserSearchResults>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  TRes findUserSearchResults(
+          Iterable<Query$FindUserSearchResults$findUserSearchResults> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserSearchResults$findUserSearchResults<
+                          Query$FindUserSearchResults$findUserSearchResults>>)
+              _fn) =>
+      call(
+          findUserSearchResults: _fn(_instance.findUserSearchResults.map(
+              (e) => CopyWith$Query$FindUserSearchResults$findUserSearchResults(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults<TRes>
+    implements CopyWith$Query$FindUserSearchResults<TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$FindUserSearchResults$findUserSearchResults>?
+        findUserSearchResults,
+    String? $__typename,
+  }) =>
+      _res;
+  findUserSearchResults(_fn) => _res;
+}
+
+const documentNodeQueryFindUserSearchResults = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'FindUserSearchResults'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'userSearchId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'options')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'FindObjectsOptions'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'findUserSearchResults'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'userSearchId'),
+            value: VariableNode(name: NameNode(value: 'userSearchId')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'options'),
+            value: VariableNode(name: NameNode(value: 'options')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'email'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'firstName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'lastName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'fullName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'avatarUrl'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'userHandle'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'offersHelp'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'seeksHelp'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'jobTitle'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'cityOfResidence'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'regionOfResidence'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'countryOfResidence'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'translatedValue'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'groupMemberships'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'groupIdent'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              InlineFragmentNode(
+                typeCondition: TypeConditionNode(
+                    on: NamedTypeNode(
+                  name: NameNode(value: 'MentorsGroupMembership'),
+                  isNonNull: false,
+                )),
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'expertises'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'translatedValue'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'endorsements'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              InlineFragmentNode(
+                typeCondition: TypeConditionNode(
+                    on: NamedTypeNode(
+                  name: NameNode(value: 'MenteesGroupMembership'),
+                  isNonNull: false,
+                )),
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'soughtExpertises'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'translatedValue'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'companies'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$FindUserSearchResults$findUserSearchResults {
+  Query$FindUserSearchResults$findUserSearchResults({
+    required this.id,
+    this.email,
+    this.firstName,
+    this.lastName,
+    this.fullName,
+    this.avatarUrl,
+    this.userHandle,
+    required this.offersHelp,
+    required this.seeksHelp,
+    this.jobTitle,
+    this.cityOfResidence,
+    this.regionOfResidence,
+    this.countryOfResidence,
+    required this.groupMemberships,
+    required this.companies,
+    this.$__typename = 'User',
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$email = json['email'];
+    final l$firstName = json['firstName'];
+    final l$lastName = json['lastName'];
+    final l$fullName = json['fullName'];
+    final l$avatarUrl = json['avatarUrl'];
+    final l$userHandle = json['userHandle'];
+    final l$offersHelp = json['offersHelp'];
+    final l$seeksHelp = json['seeksHelp'];
+    final l$jobTitle = json['jobTitle'];
+    final l$cityOfResidence = json['cityOfResidence'];
+    final l$regionOfResidence = json['regionOfResidence'];
+    final l$countryOfResidence = json['countryOfResidence'];
+    final l$groupMemberships = json['groupMemberships'];
+    final l$companies = json['companies'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserSearchResults$findUserSearchResults(
+      id: (l$id as String),
+      email: (l$email as String?),
+      firstName: (l$firstName as String?),
+      lastName: (l$lastName as String?),
+      fullName: (l$fullName as String?),
+      avatarUrl: (l$avatarUrl as String?),
+      userHandle: (l$userHandle as String?),
+      offersHelp: (l$offersHelp as bool),
+      seeksHelp: (l$seeksHelp as bool),
+      jobTitle: (l$jobTitle as String?),
+      cityOfResidence: (l$cityOfResidence as String?),
+      regionOfResidence: (l$regionOfResidence as String?),
+      countryOfResidence: l$countryOfResidence == null
+          ? null
+          : Query$FindUserSearchResults$findUserSearchResults$countryOfResidence
+              .fromJson((l$countryOfResidence as Map<String, dynamic>)),
+      groupMemberships: (l$groupMemberships as List<dynamic>)
+          .map((e) =>
+              Query$FindUserSearchResults$findUserSearchResults$groupMemberships
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      companies: (l$companies as List<dynamic>)
+          .map((e) =>
+              Query$FindUserSearchResults$findUserSearchResults$companies
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String? email;
+
+  final String? firstName;
+
+  final String? lastName;
+
+  final String? fullName;
+
+  final String? avatarUrl;
+
+  final String? userHandle;
+
+  final bool offersHelp;
+
+  final bool seeksHelp;
+
+  final String? jobTitle;
+
+  final String? cityOfResidence;
+
+  final String? regionOfResidence;
+
+  final Query$FindUserSearchResults$findUserSearchResults$countryOfResidence?
+      countryOfResidence;
+
+  final List<Query$FindUserSearchResults$findUserSearchResults$groupMemberships>
+      groupMemberships;
+
+  final List<Query$FindUserSearchResults$findUserSearchResults$companies>
+      companies;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$email = email;
+    _resultData['email'] = l$email;
+    final l$firstName = firstName;
+    _resultData['firstName'] = l$firstName;
+    final l$lastName = lastName;
+    _resultData['lastName'] = l$lastName;
+    final l$fullName = fullName;
+    _resultData['fullName'] = l$fullName;
+    final l$avatarUrl = avatarUrl;
+    _resultData['avatarUrl'] = l$avatarUrl;
+    final l$userHandle = userHandle;
+    _resultData['userHandle'] = l$userHandle;
+    final l$offersHelp = offersHelp;
+    _resultData['offersHelp'] = l$offersHelp;
+    final l$seeksHelp = seeksHelp;
+    _resultData['seeksHelp'] = l$seeksHelp;
+    final l$jobTitle = jobTitle;
+    _resultData['jobTitle'] = l$jobTitle;
+    final l$cityOfResidence = cityOfResidence;
+    _resultData['cityOfResidence'] = l$cityOfResidence;
+    final l$regionOfResidence = regionOfResidence;
+    _resultData['regionOfResidence'] = l$regionOfResidence;
+    final l$countryOfResidence = countryOfResidence;
+    _resultData['countryOfResidence'] = l$countryOfResidence?.toJson();
+    final l$groupMemberships = groupMemberships;
+    _resultData['groupMemberships'] =
+        l$groupMemberships.map((e) => e.toJson()).toList();
+    final l$companies = companies;
+    _resultData['companies'] = l$companies.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$email = email;
+    final l$firstName = firstName;
+    final l$lastName = lastName;
+    final l$fullName = fullName;
+    final l$avatarUrl = avatarUrl;
+    final l$userHandle = userHandle;
+    final l$offersHelp = offersHelp;
+    final l$seeksHelp = seeksHelp;
+    final l$jobTitle = jobTitle;
+    final l$cityOfResidence = cityOfResidence;
+    final l$regionOfResidence = regionOfResidence;
+    final l$countryOfResidence = countryOfResidence;
+    final l$groupMemberships = groupMemberships;
+    final l$companies = companies;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$email,
+      l$firstName,
+      l$lastName,
+      l$fullName,
+      l$avatarUrl,
+      l$userHandle,
+      l$offersHelp,
+      l$seeksHelp,
+      l$jobTitle,
+      l$cityOfResidence,
+      l$regionOfResidence,
+      l$countryOfResidence,
+      Object.hashAll(l$groupMemberships.map((v) => v)),
+      Object.hashAll(l$companies.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindUserSearchResults$findUserSearchResults) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$firstName = firstName;
+    final lOther$firstName = other.firstName;
+    if (l$firstName != lOther$firstName) {
+      return false;
+    }
+    final l$lastName = lastName;
+    final lOther$lastName = other.lastName;
+    if (l$lastName != lOther$lastName) {
+      return false;
+    }
+    final l$fullName = fullName;
+    final lOther$fullName = other.fullName;
+    if (l$fullName != lOther$fullName) {
+      return false;
+    }
+    final l$avatarUrl = avatarUrl;
+    final lOther$avatarUrl = other.avatarUrl;
+    if (l$avatarUrl != lOther$avatarUrl) {
+      return false;
+    }
+    final l$userHandle = userHandle;
+    final lOther$userHandle = other.userHandle;
+    if (l$userHandle != lOther$userHandle) {
+      return false;
+    }
+    final l$offersHelp = offersHelp;
+    final lOther$offersHelp = other.offersHelp;
+    if (l$offersHelp != lOther$offersHelp) {
+      return false;
+    }
+    final l$seeksHelp = seeksHelp;
+    final lOther$seeksHelp = other.seeksHelp;
+    if (l$seeksHelp != lOther$seeksHelp) {
+      return false;
+    }
+    final l$jobTitle = jobTitle;
+    final lOther$jobTitle = other.jobTitle;
+    if (l$jobTitle != lOther$jobTitle) {
+      return false;
+    }
+    final l$cityOfResidence = cityOfResidence;
+    final lOther$cityOfResidence = other.cityOfResidence;
+    if (l$cityOfResidence != lOther$cityOfResidence) {
+      return false;
+    }
+    final l$regionOfResidence = regionOfResidence;
+    final lOther$regionOfResidence = other.regionOfResidence;
+    if (l$regionOfResidence != lOther$regionOfResidence) {
+      return false;
+    }
+    final l$countryOfResidence = countryOfResidence;
+    final lOther$countryOfResidence = other.countryOfResidence;
+    if (l$countryOfResidence != lOther$countryOfResidence) {
+      return false;
+    }
+    final l$groupMemberships = groupMemberships;
+    final lOther$groupMemberships = other.groupMemberships;
+    if (l$groupMemberships.length != lOther$groupMemberships.length) {
+      return false;
+    }
+    for (int i = 0; i < l$groupMemberships.length; i++) {
+      final l$groupMemberships$entry = l$groupMemberships[i];
+      final lOther$groupMemberships$entry = lOther$groupMemberships[i];
+      if (l$groupMemberships$entry != lOther$groupMemberships$entry) {
+        return false;
+      }
+    }
+    final l$companies = companies;
+    final lOther$companies = other.companies;
+    if (l$companies.length != lOther$companies.length) {
+      return false;
+    }
+    for (int i = 0; i < l$companies.length; i++) {
+      final l$companies$entry = l$companies[i];
+      final lOther$companies$entry = lOther$companies[i];
+      if (l$companies$entry != lOther$companies$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults
+    on Query$FindUserSearchResults$findUserSearchResults {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults<
+          Query$FindUserSearchResults$findUserSearchResults>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults(
+    Query$FindUserSearchResults$findUserSearchResults instance,
+    TRes Function(Query$FindUserSearchResults$findUserSearchResults) then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults;
+
+  TRes call({
+    String? id,
+    String? email,
+    String? firstName,
+    String? lastName,
+    String? fullName,
+    String? avatarUrl,
+    String? userHandle,
+    bool? offersHelp,
+    bool? seeksHelp,
+    String? jobTitle,
+    String? cityOfResidence,
+    String? regionOfResidence,
+    Query$FindUserSearchResults$findUserSearchResults$countryOfResidence?
+        countryOfResidence,
+    List<Query$FindUserSearchResults$findUserSearchResults$groupMemberships>?
+        groupMemberships,
+    List<Query$FindUserSearchResults$findUserSearchResults$companies>?
+        companies,
+    String? $__typename,
+  });
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+      TRes> get countryOfResidence;
+  TRes groupMemberships(
+      Iterable<Query$FindUserSearchResults$findUserSearchResults$groupMemberships> Function(
+              Iterable<
+                  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships<
+                      Query$FindUserSearchResults$findUserSearchResults$groupMemberships>>)
+          _fn);
+  TRes companies(
+      Iterable<Query$FindUserSearchResults$findUserSearchResults$companies> Function(
+              Iterable<
+                  CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies<
+                      Query$FindUserSearchResults$findUserSearchResults$companies>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults<TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults<TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults _instance;
+
+  final TRes Function(Query$FindUserSearchResults$findUserSearchResults) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? email = _undefined,
+    Object? firstName = _undefined,
+    Object? lastName = _undefined,
+    Object? fullName = _undefined,
+    Object? avatarUrl = _undefined,
+    Object? userHandle = _undefined,
+    Object? offersHelp = _undefined,
+    Object? seeksHelp = _undefined,
+    Object? jobTitle = _undefined,
+    Object? cityOfResidence = _undefined,
+    Object? regionOfResidence = _undefined,
+    Object? countryOfResidence = _undefined,
+    Object? groupMemberships = _undefined,
+    Object? companies = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserSearchResults$findUserSearchResults(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        email: email == _undefined ? _instance.email : (email as String?),
+        firstName: firstName == _undefined
+            ? _instance.firstName
+            : (firstName as String?),
+        lastName:
+            lastName == _undefined ? _instance.lastName : (lastName as String?),
+        fullName:
+            fullName == _undefined ? _instance.fullName : (fullName as String?),
+        avatarUrl: avatarUrl == _undefined
+            ? _instance.avatarUrl
+            : (avatarUrl as String?),
+        userHandle: userHandle == _undefined
+            ? _instance.userHandle
+            : (userHandle as String?),
+        offersHelp: offersHelp == _undefined || offersHelp == null
+            ? _instance.offersHelp
+            : (offersHelp as bool),
+        seeksHelp: seeksHelp == _undefined || seeksHelp == null
+            ? _instance.seeksHelp
+            : (seeksHelp as bool),
+        jobTitle:
+            jobTitle == _undefined ? _instance.jobTitle : (jobTitle as String?),
+        cityOfResidence: cityOfResidence == _undefined
+            ? _instance.cityOfResidence
+            : (cityOfResidence as String?),
+        regionOfResidence: regionOfResidence == _undefined
+            ? _instance.regionOfResidence
+            : (regionOfResidence as String?),
+        countryOfResidence: countryOfResidence == _undefined
+            ? _instance.countryOfResidence
+            : (countryOfResidence
+                as Query$FindUserSearchResults$findUserSearchResults$countryOfResidence?),
+        groupMemberships: groupMemberships == _undefined ||
+                groupMemberships == null
+            ? _instance.groupMemberships
+            : (groupMemberships as List<
+                Query$FindUserSearchResults$findUserSearchResults$groupMemberships>),
+        companies: companies == _undefined || companies == null
+            ? _instance.companies
+            : (companies as List<
+                Query$FindUserSearchResults$findUserSearchResults$companies>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+      TRes> get countryOfResidence {
+    final local$countryOfResidence = _instance.countryOfResidence;
+    return local$countryOfResidence == null
+        ? CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence
+            .stub(_then(_instance))
+        : CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence(
+            local$countryOfResidence, (e) => call(countryOfResidence: e));
+  }
+
+  TRes groupMemberships(
+          Iterable<Query$FindUserSearchResults$findUserSearchResults$groupMemberships> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships<
+                          Query$FindUserSearchResults$findUserSearchResults$groupMemberships>>)
+              _fn) =>
+      call(
+          groupMemberships: _fn(_instance.groupMemberships.map((e) =>
+              CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships(
+                e,
+                (i) => i,
+              ))).toList());
+  TRes companies(
+          Iterable<Query$FindUserSearchResults$findUserSearchResults$companies> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies<
+                          Query$FindUserSearchResults$findUserSearchResults$companies>>)
+              _fn) =>
+      call(
+          companies: _fn(_instance.companies.map((e) =>
+              CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults<TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults<TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? email,
+    String? firstName,
+    String? lastName,
+    String? fullName,
+    String? avatarUrl,
+    String? userHandle,
+    bool? offersHelp,
+    bool? seeksHelp,
+    String? jobTitle,
+    String? cityOfResidence,
+    String? regionOfResidence,
+    Query$FindUserSearchResults$findUserSearchResults$countryOfResidence?
+        countryOfResidence,
+    List<Query$FindUserSearchResults$findUserSearchResults$groupMemberships>?
+        groupMemberships,
+    List<Query$FindUserSearchResults$findUserSearchResults$companies>?
+        companies,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+          TRes>
+      get countryOfResidence =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence
+              .stub(_res);
+  groupMemberships(_fn) => _res;
+  companies(_fn) => _res;
+}
+
+class Query$FindUserSearchResults$findUserSearchResults$countryOfResidence {
+  Query$FindUserSearchResults$findUserSearchResults$countryOfResidence({
+    this.translatedValue,
+    this.$__typename = 'Country',
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults$countryOfResidence.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserSearchResults$findUserSearchResults$countryOfResidence(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserSearchResults$findUserSearchResults$countryOfResidence) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence
+    on Query$FindUserSearchResults$findUserSearchResults$countryOfResidence {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+          Query$FindUserSearchResults$findUserSearchResults$countryOfResidence>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence(
+    Query$FindUserSearchResults$findUserSearchResults$countryOfResidence
+        instance,
+    TRes Function(
+            Query$FindUserSearchResults$findUserSearchResults$countryOfResidence)
+        then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+            TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults$countryOfResidence
+      _instance;
+
+  final TRes Function(
+          Query$FindUserSearchResults$findUserSearchResults$countryOfResidence)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindUserSearchResults$findUserSearchResults$countryOfResidence(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserSearchResults$findUserSearchResults$groupMemberships {
+  Query$FindUserSearchResults$findUserSearchResults$groupMemberships({
+    required this.groupIdent,
+    required this.$__typename,
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults$groupMemberships.fromJson(
+      Map<String, dynamic> json) {
+    switch (json["__typename"] as String) {
+      case "MentorsGroupMembership":
+        return Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership
+            .fromJson(json);
+
+      case "MenteesGroupMembership":
+        return Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership
+            .fromJson(json);
+
+      case "GroupMembership":
+        return Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership
+            .fromJson(json);
+
+      default:
+        final l$groupIdent = json['groupIdent'];
+        final l$$__typename = json['__typename'];
+        return Query$FindUserSearchResults$findUserSearchResults$groupMemberships(
+          groupIdent: (l$groupIdent as String),
+          $__typename: (l$$__typename as String),
+        );
+    }
+  }
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserSearchResults$findUserSearchResults$groupMemberships) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults$groupMemberships
+    on Query$FindUserSearchResults$findUserSearchResults$groupMemberships {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships<
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships(
+            this,
+            (i) => i,
+          );
+  _T when<_T>({
+    required _T Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership)
+        mentorsGroupMembership,
+    required _T Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership)
+        menteesGroupMembership,
+    required _T Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership)
+        groupMembership,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "MentorsGroupMembership":
+        return mentorsGroupMembership(this
+            as Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership);
+
+      case "MenteesGroupMembership":
+        return menteesGroupMembership(this
+            as Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership);
+
+      case "GroupMembership":
+        return groupMembership(this
+            as Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership);
+
+      default:
+        return orElse();
+    }
+  }
+
+  _T maybeWhen<_T>({
+    _T Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership)?
+        mentorsGroupMembership,
+    _T Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership)?
+        menteesGroupMembership,
+    _T Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership)?
+        groupMembership,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "MentorsGroupMembership":
+        if (mentorsGroupMembership != null) {
+          return mentorsGroupMembership(this
+              as Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership);
+        } else {
+          return orElse();
+        }
+
+      case "MenteesGroupMembership":
+        if (menteesGroupMembership != null) {
+          return menteesGroupMembership(this
+              as Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership);
+        } else {
+          return orElse();
+        }
+
+      case "GroupMembership":
+        if (groupMembership != null) {
+          return groupMembership(this
+              as Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership);
+        } else {
+          return orElse();
+        }
+
+      default:
+        return orElse();
+    }
+  }
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships(
+    Query$FindUserSearchResults$findUserSearchResults$groupMemberships instance,
+    TRes Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships)
+        then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships;
+
+  TRes call({
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships<
+            TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults$groupMemberships
+      _instance;
+
+  final TRes Function(
+      Query$FindUserSearchResults$findUserSearchResults$groupMemberships) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserSearchResults$findUserSearchResults$groupMemberships(
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership
+    implements
+        Query$FindUserSearchResults$findUserSearchResults$groupMemberships {
+  Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership({
+    required this.expertises,
+    this.endorsements,
+    this.$__typename = 'MentorsGroupMembership',
+    required this.groupIdent,
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$expertises = json['expertises'];
+    final l$endorsements = json['endorsements'];
+    final l$$__typename = json['__typename'];
+    final l$groupIdent = json['groupIdent'];
+    return Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership(
+      expertises: (l$expertises as List<dynamic>)
+          .map((e) =>
+              Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      endorsements: (l$endorsements as int?),
+      $__typename: (l$$__typename as String),
+      groupIdent: (l$groupIdent as String),
+    );
+  }
+
+  final List<
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises>
+      expertises;
+
+  final int? endorsements;
+
+  final String $__typename;
+
+  final String groupIdent;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$expertises = expertises;
+    _resultData['expertises'] = l$expertises.map((e) => e.toJson()).toList();
+    final l$endorsements = endorsements;
+    _resultData['endorsements'] = l$endorsements;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$expertises = expertises;
+    final l$endorsements = endorsements;
+    final l$$__typename = $__typename;
+    final l$groupIdent = groupIdent;
+    return Object.hashAll([
+      Object.hashAll(l$expertises.map((v) => v)),
+      l$endorsements,
+      l$$__typename,
+      l$groupIdent,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$expertises = expertises;
+    final lOther$expertises = other.expertises;
+    if (l$expertises.length != lOther$expertises.length) {
+      return false;
+    }
+    for (int i = 0; i < l$expertises.length; i++) {
+      final l$expertises$entry = l$expertises[i];
+      final lOther$expertises$entry = lOther$expertises[i];
+      if (l$expertises$entry != lOther$expertises$entry) {
+        return false;
+      }
+    }
+    final l$endorsements = endorsements;
+    final lOther$endorsements = other.endorsements;
+    if (l$endorsements != lOther$endorsements) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership
+    on Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership<
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership(
+    Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership
+        instance,
+    TRes Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership;
+
+  TRes call({
+    List<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises>?
+        expertises,
+    int? endorsements,
+    String? $__typename,
+    String? groupIdent,
+  });
+  TRes expertises(
+      Iterable<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises> Function(
+              Iterable<
+                  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises<
+                      Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? expertises = _undefined,
+    Object? endorsements = _undefined,
+    Object? $__typename = _undefined,
+    Object? groupIdent = _undefined,
+  }) =>
+      _then(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership(
+        expertises: expertises == _undefined || expertises == null
+            ? _instance.expertises
+            : (expertises as List<
+                Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises>),
+        endorsements: endorsements == _undefined
+            ? _instance.endorsements
+            : (endorsements as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+      ));
+  TRes expertises(
+          Iterable<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises<
+                          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises>>)
+              _fn) =>
+      call(
+          expertises: _fn(_instance.expertises.map((e) =>
+              CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises>?
+        expertises,
+    int? endorsements,
+    String? $__typename,
+    String? groupIdent,
+  }) =>
+      _res;
+  expertises(_fn) => _res;
+}
+
+class Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises {
+  Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises({
+    this.translatedValue,
+    this.$__typename = 'Expertise',
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises
+    on Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises<
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises(
+    Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises
+        instance,
+    TRes Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises)
+        then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises<
+            TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises
+      _instance;
+
+  final TRes Function(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership
+    implements
+        Query$FindUserSearchResults$findUserSearchResults$groupMemberships {
+  Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership({
+    required this.soughtExpertises,
+    this.$__typename = 'MenteesGroupMembership',
+    required this.groupIdent,
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$soughtExpertises = json['soughtExpertises'];
+    final l$$__typename = json['__typename'];
+    final l$groupIdent = json['groupIdent'];
+    return Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership(
+      soughtExpertises: (l$soughtExpertises as List<dynamic>)
+          .map((e) =>
+              Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+      groupIdent: (l$groupIdent as String),
+    );
+  }
+
+  final List<
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises>
+      soughtExpertises;
+
+  final String $__typename;
+
+  final String groupIdent;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$soughtExpertises = soughtExpertises;
+    _resultData['soughtExpertises'] =
+        l$soughtExpertises.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$soughtExpertises = soughtExpertises;
+    final l$$__typename = $__typename;
+    final l$groupIdent = groupIdent;
+    return Object.hashAll([
+      Object.hashAll(l$soughtExpertises.map((v) => v)),
+      l$$__typename,
+      l$groupIdent,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$soughtExpertises = soughtExpertises;
+    final lOther$soughtExpertises = other.soughtExpertises;
+    if (l$soughtExpertises.length != lOther$soughtExpertises.length) {
+      return false;
+    }
+    for (int i = 0; i < l$soughtExpertises.length; i++) {
+      final l$soughtExpertises$entry = l$soughtExpertises[i];
+      final lOther$soughtExpertises$entry = lOther$soughtExpertises[i];
+      if (l$soughtExpertises$entry != lOther$soughtExpertises$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership
+    on Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership<
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership(
+    Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership
+        instance,
+    TRes Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership;
+
+  TRes call({
+    List<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises>?
+        soughtExpertises,
+    String? $__typename,
+    String? groupIdent,
+  });
+  TRes soughtExpertises(
+      Iterable<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises> Function(
+              Iterable<
+                  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+                      Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? soughtExpertises = _undefined,
+    Object? $__typename = _undefined,
+    Object? groupIdent = _undefined,
+  }) =>
+      _then(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership(
+        soughtExpertises: soughtExpertises == _undefined ||
+                soughtExpertises == null
+            ? _instance.soughtExpertises
+            : (soughtExpertises as List<
+                Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+      ));
+  TRes soughtExpertises(
+          Iterable<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises> Function(
+                  Iterable<
+                      CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+                          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises>>)
+              _fn) =>
+      call(
+          soughtExpertises: _fn(_instance.soughtExpertises.map((e) =>
+              CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises>?
+        soughtExpertises,
+    String? $__typename,
+    String? groupIdent,
+  }) =>
+      _res;
+  soughtExpertises(_fn) => _res;
+}
+
+class Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises {
+  Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises({
+    this.translatedValue,
+    this.$__typename = 'Expertise',
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises
+    on Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+    Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises
+        instance,
+    TRes Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises)
+        then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+            TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises
+      _instance;
+
+  final TRes Function(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership
+    implements
+        Query$FindUserSearchResults$findUserSearchResults$groupMemberships {
+  Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership({
+    required this.groupIdent,
+    this.$__typename = 'GroupMembership',
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$groupIdent = json['groupIdent'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership(
+      groupIdent: (l$groupIdent as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership
+    on Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership<
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership(
+    Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership
+        instance,
+    TRes Function(
+            Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership;
+
+  TRes call({
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership(
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$GroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserSearchResults$findUserSearchResults$companies {
+  Query$FindUserSearchResults$findUserSearchResults$companies({
+    required this.name,
+    this.$__typename = 'Company',
+  });
+
+  factory Query$FindUserSearchResults$findUserSearchResults$companies.fromJson(
+      Map<String, dynamic> json) {
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserSearchResults$findUserSearchResults$companies(
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserSearchResults$findUserSearchResults$companies) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserSearchResults$findUserSearchResults$companies
+    on Query$FindUserSearchResults$findUserSearchResults$companies {
+  CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies<
+          Query$FindUserSearchResults$findUserSearchResults$companies>
+      get copyWith =>
+          CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies<
+    TRes> {
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies(
+    Query$FindUserSearchResults$findUserSearchResults$companies instance,
+    TRes Function(Query$FindUserSearchResults$findUserSearchResults$companies)
+        then,
+  ) = _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$companies;
+
+  factory CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$companies;
+
+  TRes call({
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$companies<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies<
+            TRes> {
+  _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$companies(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserSearchResults$findUserSearchResults$companies _instance;
+
+  final TRes Function(
+      Query$FindUserSearchResults$findUserSearchResults$companies) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserSearchResults$findUserSearchResults$companies(
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$companies<
+        TRes>
+    implements
+        CopyWith$Query$FindUserSearchResults$findUserSearchResults$companies<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$companies(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables$Query$FindMenteeUsers {
   factory Variables$Query$FindMenteeUsers({
     Input$FindObjectsOptions? options,
