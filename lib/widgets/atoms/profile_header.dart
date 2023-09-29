@@ -35,15 +35,18 @@ class ProfileHeader extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(Insets.paddingSmall),
-            child: Text(
-              profileMessage,
-              textAlign: TextAlign.start,
-              softWrap: true,
-              style: theme.textTheme.titleLarge?.copyWith(
-                color: theme.colorScheme.onSurface,
-                fontWeight: FontWeight.w400,
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.all(Insets.paddingSmall),
+              child: Text(
+                // profileMessage,
+                "Good morning",
+                textAlign: TextAlign.start,
+                softWrap: true,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ),
