@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
+import 'notification_bubble.dart';
+
 class SectionTile extends StatefulWidget {
   final String title;
-  final Widget child;
+  final List<Widget> child;
   final bool addTopDivider;
   final bool removeBottomPadding;
   final void Function()? seeAllOnPressed;
@@ -30,6 +32,7 @@ class _SectionTileState extends State<SectionTile> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final num_of_invites = widget.child.length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,11 +53,23 @@ class _SectionTileState extends State<SectionTile> {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text(
-                widget.title,
-                style: theme.textTheme.titleSmall?.copyWith(
-                  color: theme.colorScheme.primary,
-                ),
+              Row(
+                children: [
+                  Text(
+                    widget.title,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(Insets.paddingSmall),
+                    child: NotificationBubble(
+                      notifications: num_of_invites,
+                      enlarge: false,
+                    ),
+                  )
+                ],
               ),
               if (widget.seeAllOnPressed != null &&
                   (!_isExpanded || widget.seeLessOnPressed == null))
@@ -82,7 +97,9 @@ class _SectionTileState extends State<SectionTile> {
             bottom: widget.removeBottomPadding ? 0 : Insets.paddingMedium,
           ),
           child: Center(
-            child: widget.child,
+            child: Column(
+              children: widget.child,
+            ),
           ),
         ),
       ],

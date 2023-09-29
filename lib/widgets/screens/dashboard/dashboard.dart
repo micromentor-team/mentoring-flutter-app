@@ -68,10 +68,10 @@ class _DashboardScreenState extends State<DashboardScreen>
                 MaybeReminderBanner(
                   authenticatedUser: _authenticatedUser,
                 ),
-                RecommendedSection(
+                InvitationSection(
                   authenticatedUser: _authenticatedUser,
                 ),
-                InvitationSection(
+                RecommendedSection(
                   authenticatedUser: _authenticatedUser,
                 ),
                 const ResourcesSection(),

@@ -38,18 +38,21 @@ class ResourcesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     List<Widget> resourceTiles = _createResourceTiles(l10n);
-    return SectionTile(
-      title: l10n.homeResourcesSectionTitle,
-      addTopDivider: true,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Insets.paddingSmall),
-          child: Row(
-            children: resourceTiles,
-          ),
-        ),
-      ),
-    );
+    return const Placeholder();
+    // SectionTile(
+    // title: l10n.homeResourcesSectionTitle,
+    // addTopDivider: true,
+    // child: ,
+    // SingleChildScrollView(
+    //   scrollDirection: Axis.horizontal,
+    //   child: resourceTiles
+    //     Padding(
+    //     padding: const EdgeInsets.symmetric(horizontal: Insets.paddingSmall),
+    //     child: Row(
+    //       children: resourceTiles,
+    //     ),
+    //   ),
+    // ),
+    // );
   }
 }

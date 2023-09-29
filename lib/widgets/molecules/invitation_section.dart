@@ -57,7 +57,7 @@ class _InvitationSectionState extends State<InvitationSection> {
     );
   }
 
-  Widget _createInvitationList(
+  List<Widget> _createInvitationList(
     List<ReceivedChannelInvitation> receivedInvitations,
   ) {
     List<Widget> invitationWidgets = [];
@@ -78,9 +78,7 @@ class _InvitationSectionState extends State<InvitationSection> {
         _createInvitationTile(context, receivedInvitations[i]),
       );
     }
-    return Column(
-      children: invitationWidgets,
-    );
+    return invitationWidgets;
   }
 
   @override
@@ -100,7 +98,7 @@ class _InvitationSectionState extends State<InvitationSection> {
             }
             return SectionTile(
               title: _l10n.homeInvitationSectionTitle,
-              addTopDivider: true,
+              addTopDivider: false,
               removeBottomPadding: true,
               seeAllOnPressed: () =>
                   context.push(Routes.inboxInvitesReceived.path),
