@@ -3,18 +3,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
-class SignUpPermissions extends StatefulWidget {
-  const SignUpPermissions({super.key});
+class SignupPermissionsScreen extends StatefulWidget {
+  const SignupPermissionsScreen({super.key});
 
   @override
-  State<SignUpPermissions> createState() => _SignUpPermissionsState();
+  State<SignupPermissionsScreen> createState() =>
+      _SignupPermissionsScreenState();
 }
 
-class _SignUpPermissionsState extends State<SignUpPermissions> {
+class _SignupPermissionsScreenState extends State<SignupPermissionsScreen> {
   late final UserRegistrationModel _registrationModel;
   bool _notificationsEnabled = true;
   bool _updatesEnabled = true;

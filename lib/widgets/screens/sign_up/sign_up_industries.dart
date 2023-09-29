@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/content_provider.dart';
 import '../../../providers/models/user_registration_model.dart';
 import '../../molecules/multi_select_chips.dart';
-import 'sign_up_bottom_buttons.dart';
+import 'components/sign_up_bottom_buttons.dart';
 
-class SignupBusinessIndustryScreen extends StatefulWidget {
-  const SignupBusinessIndustryScreen({Key? key}) : super(key: key);
+class SignupIndustriesScreen extends StatefulWidget {
+  const SignupIndustriesScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupBusinessIndustryScreen> createState() =>
-      _SignupBusinessIndustryScreenState();
+  State<SignupIndustriesScreen> createState() => _SignupIndustriesScreenState();
 }
 
-class _SignupBusinessIndustryScreenState
-    extends State<SignupBusinessIndustryScreen> {
+class _SignupIndustriesScreenState extends State<SignupIndustriesScreen> {
   late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;
   late final List<SelectChip> _industryChips;
-  String? _selectedIndustry;
+  late final bool _isEntrepreneur;
+  List<SelectChip>? _selectedIndustries;
 
   @override
   void initState() {
@@ -34,6 +33,8 @@ class _SignupBusinessIndustryScreenState
       context,
       listen: false,
     );
+    _isEntrepreneur =
+        _registrationModel.updateUserInput.userType == UserType.entrepreneur;
     _industryChips = _contentProvider.industryOptions!
         .map(
           (e) => SelectChip(
@@ -52,18 +53,27 @@ class _SignupBusinessIndustryScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.three,
-      title: l10n.whatIsYourIndustry,
+      title: _isEntrepreneur
+          ? l10n.signupIndustryEntrepreneurTitle
+          : l10n.signupIndustryMentorTitle,
       bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: () {
+          if (_isEntrepreneur) {
             _registrationModel.updateUserInput.menteeIndustryTextId =
-                _selectedIndustry;
-            context.push(Routes.completedEntrepreneurSignup.path);
-          }),
+                _selectedIndustries?.first.textId;
+            context.push(Routes.signupCompleted.path);
+          } else {
+            _registrationModel.updateUserInput.mentorIndustriesTextIds =
+                _selectedIndustries?.map((e) => e.textId).toList();
+            context.push(Routes.signupMentorPreferences.path);
+          }
+        },
+      ),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
@@ -71,10 +81,12 @@ class _SignupBusinessIndustryScreenState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CreateMultiSelectChips(
+            label: _isEntrepreneur
+                ? l10n.signupIndustrySubtitleSingle
+                : l10n.signupIndustrySubtitleMultiple(3),
             chips: _industryChips,
-            maxSelection: 1,
-            onSelectedChipsChanged: (chips) =>
-                _selectedIndustry = chips.firstOrNull?.textId,
+            maxSelection: _isEntrepreneur ? 1 : 3,
+            onSelectedChipsChanged: (chips) => _selectedIndustries = chips,
           ),
         ],
       ),

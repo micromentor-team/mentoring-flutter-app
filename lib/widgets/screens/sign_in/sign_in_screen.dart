@@ -7,7 +7,7 @@ import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../atoms/social_sign_in_button.dart';
-import '../sign_up/sign_up_screen.dart';
+import '../sign_up/sign_up_method.dart';
 
 class SignInScreen extends StatefulWidget {
   final String nextRouteName;
@@ -50,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
-          return const SignUpScreen();
+          return const SignupMethodScreen();
         },
       ),
     );

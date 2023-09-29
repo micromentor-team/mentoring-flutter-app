@@ -3,27 +3,27 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/molecules/multi_select_chips.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/content_provider.dart';
 import '../../../providers/models/user_registration_model.dart';
-import 'sign_up_bottom_buttons.dart';
+import 'components/sign_up_bottom_buttons.dart';
 
-class SignupBusinessHelpSelectionScreen extends StatefulWidget {
-  const SignupBusinessHelpSelectionScreen({Key? key}) : super(key: key);
+class SignupExpertisesScreen extends StatefulWidget {
+  const SignupExpertisesScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupBusinessHelpSelectionScreen> createState() =>
-      _SignupBusinessHelpSelectionScreenState();
+  State<SignupExpertisesScreen> createState() => _SignupExpertisesScreenState();
 }
 
-class _SignupBusinessHelpSelectionScreenState
-    extends State<SignupBusinessHelpSelectionScreen> {
+class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
   late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;
   late final List<SelectChip> _expertiseChips;
+  late final bool _isEntrepreneur;
+  final int maxSelections = 3;
 
   List<SelectChip> _selectedChips = [];
 
@@ -35,6 +35,8 @@ class _SignupBusinessHelpSelectionScreenState
       context,
       listen: false,
     );
+    _isEntrepreneur =
+        _registrationModel.updateUserInput.userType == UserType.entrepreneur;
     _expertiseChips = _contentProvider.expertiseOptions!
         .map(
           (e) => SelectChip(
@@ -52,7 +54,9 @@ class _SignupBusinessHelpSelectionScreenState
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.lookingForHelp,
+      title: _isEntrepreneur
+          ? l10n.signupExpertisesEntrepreneurTitle
+          : l10n.signupExpertisesMentorTitle,
       bottomButtons: SignUpBottomButtons(
         leftButtonText: l10n.previous,
         rightButtonText: l10n.next,
@@ -60,8 +64,13 @@ class _SignupBusinessHelpSelectionScreenState
           context.pop();
         },
         rightOnPress: () {
-          _registrationModel.updateUserInput.menteeSoughtExpertisesTextIds =
-              _selectedChips.map((e) => e.textId).toList();
+          if (_isEntrepreneur) {
+            _registrationModel.updateUserInput.menteeSoughtExpertisesTextIds =
+                _selectedChips.map((e) => e.textId).toList();
+          } else {
+            _registrationModel.updateUserInput.mentorExpertisesTextIds =
+                _selectedChips.map((e) => e.textId).toList();
+          }
           context.push(Routes.signupMoreInfo.path);
         },
       ),
@@ -72,8 +81,11 @@ class _SignupBusinessHelpSelectionScreenState
       body: Column(
         children: [
           CreateMultiSelectChips(
+            label: _isEntrepreneur
+                ? l10n.signupExpertisesEntrepreneurSubtitle(maxSelections)
+                : l10n.signupExpertisesMentorSubtitle(maxSelections),
             chips: _expertiseChips,
-            maxSelection: 3,
+            maxSelection: maxSelections,
             onSelectedChipsChanged: (chips) => _selectedChips = chips,
           ),
         ],

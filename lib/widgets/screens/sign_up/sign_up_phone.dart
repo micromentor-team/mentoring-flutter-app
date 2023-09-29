@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/user_registration_model.dart';
@@ -13,14 +13,14 @@ import '../../atoms/text_form_field_widget.dart';
 
 List<String> _countryCode = ["US +1", "CA +1"];
 
-class SignUpPhoneNumber extends StatefulWidget {
-  const SignUpPhoneNumber({super.key});
+class SignupPhoneScreen extends StatefulWidget {
+  const SignupPhoneScreen({super.key});
 
   @override
-  State<SignUpPhoneNumber> createState() => _SignUpPhoneNumberState();
+  State<SignupPhoneScreen> createState() => _SignupPhoneScreenState();
 }
 
-class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
+class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
   final _formKey = GlobalKey<FormState>();
   late final UserRegistrationModel _registrationModel;
   String? _phoneNumber;
@@ -116,7 +116,7 @@ class _SignUpPhoneNumberState extends State<SignUpPhoneNumber> {
                 if (_formKey.currentState!.validate()) {
                   _registrationModel.updateUserInput.phoneNumber =
                       '$_selectedCountryCode $_phoneNumber';
-                  context.push(Routes.signupYearOfBirth.path);
+                  context.push(Routes.signupBirthYear.path);
                 }
               }
             : null,

@@ -3,19 +3,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/user_registration_model.dart';
 
-class SignUpWelcome extends StatefulWidget {
-  const SignUpWelcome({super.key});
+class SignupWelcomeScreen extends StatefulWidget {
+  const SignupWelcomeScreen({super.key});
 
   @override
-  State<SignUpWelcome> createState() => _SignUpWelcomeState();
+  State<SignupWelcomeScreen> createState() => _SignupWelcomeScreenState();
 }
 
-class _SignUpWelcomeState extends State<SignUpWelcome> {
+class _SignupWelcomeScreenState extends State<SignupWelcomeScreen> {
   late final UserProvider _userProvider;
   late final UserRegistrationModel _registrationModel;
 

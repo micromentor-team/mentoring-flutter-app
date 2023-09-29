@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
 
-class SignUpGender extends StatefulWidget {
-  const SignUpGender({super.key});
+class SignupGenderScreen extends StatefulWidget {
+  const SignupGenderScreen({super.key});
 
   @override
-  State<SignUpGender> createState() => _SignUpGenderState();
+  State<SignupGenderScreen> createState() => _SignupGenderScreenState();
 }
 
-class _SignUpGenderState extends State<SignUpGender> {
+class _SignupGenderScreenState extends State<SignupGenderScreen> {
   final _formKey = GlobalKey<FormState>();
   late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;

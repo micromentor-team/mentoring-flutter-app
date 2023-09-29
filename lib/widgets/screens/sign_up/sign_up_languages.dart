@@ -4,22 +4,22 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../providers/models/user_registration_model.dart';
 
-class SignUpLanguages extends StatefulWidget {
-  const SignUpLanguages({super.key});
+class SignupLanguagesScreen extends StatefulWidget {
+  const SignupLanguagesScreen({super.key});
 
   @override
-  State<SignUpLanguages> createState() => _SignUpLanguagesState();
+  State<SignupLanguagesScreen> createState() => _SignupLanguagesScreenState();
 }
 
-class _SignUpLanguagesState extends State<SignUpLanguages> {
+class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
   final _preferredLanguagesController = TextfieldTagsController();
   final _fluentLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
@@ -108,7 +108,7 @@ class _SignUpLanguagesState extends State<SignUpLanguages> {
                       .firstWhere((o) => o.translatedValue! == t)
                       .textId)
                   .toList();
-          context.push(Routes.signupEntrepreneurOrMentor.path);
+          context.push(Routes.signupUserType.path);
         },
       ),
     );

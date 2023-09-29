@@ -4,21 +4,21 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../atoms/text_form_field_widget.dart';
 
-class SignUpEmail extends StatefulWidget {
-  const SignUpEmail({super.key});
+class SignupEmailScreen extends StatefulWidget {
+  const SignupEmailScreen({super.key});
 
   @override
-  State<SignUpEmail> createState() => _SignUpEmailState();
+  State<SignupEmailScreen> createState() => _SignupEmailScreenState();
 }
 
-class _SignUpEmailState extends State<SignUpEmail> {
+class _SignupEmailScreenState extends State<SignupEmailScreen> {
   final _formKey = GlobalKey<FormState>();
   late final UserRegistrationModel _registrationModel;
   String? _email;

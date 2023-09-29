@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
 import '../../atoms/text_form_field_widget.dart';
-import 'sign_up_bottom_buttons.dart';
+import 'components/sign_up_bottom_buttons.dart';
 
-class SignupBusinessAddWebsiteScreen extends StatefulWidget {
-  const SignupBusinessAddWebsiteScreen({Key? key}) : super(key: key);
+class SignupEntrepreneurWebsiteScreen extends StatefulWidget {
+  const SignupEntrepreneurWebsiteScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupBusinessAddWebsiteScreen> createState() =>
-      _SignupBusinessAddWebsiteScreenState();
+  State<SignupEntrepreneurWebsiteScreen> createState() =>
+      _SignupEntrepreneurWebsiteScreenState();
 }
 
-class _SignupBusinessAddWebsiteScreenState
-    extends State<SignupBusinessAddWebsiteScreen> {
+class _SignupEntrepreneurWebsiteScreenState
+    extends State<SignupEntrepreneurWebsiteScreen> {
   late final UserRegistrationModel _registrationModel;
   String? _website;
 
@@ -48,7 +48,7 @@ class _SignupBusinessAddWebsiteScreenState
         rightOnPress: _website?.isNotEmpty ?? false
             ? () {
                 _registrationModel.updateUserInput.companyWebsite = _website;
-                context.push(Routes.startupRationale.path);
+                context.push(Routes.signupEntrepreneurCompanyReason.path);
               }
             : null,
       ),

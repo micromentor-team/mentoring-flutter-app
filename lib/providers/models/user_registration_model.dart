@@ -98,20 +98,36 @@ class UpdateUserInput {
   List<String>? pronounsTextIds;
   String? companyName;
   UserType? userType;
-  String? companyStageTextId;
-  String? companyWebsite;
-  String? jobTitle;
 
   // Entrepreneur
+  String? companyStageTextId;
+  String? companyWebsite;
   List<String>? menteeSoughtExpertisesTextIds;
   String? menteeReasonForStartingBusiness;
   String? menteeIndustryTextId;
 
   // Mentor
+  String? jobTitle;
   List<String>? mentorExpertisesTextIds;
   List<String>? mentorIndustriesTextIds;
   List<String>? mentoringPreferences; // TODO add to backend
   bool? mentorInternationally; // TODO add to backend
+
+  void clearEntrepreneurFields() {
+    companyStageTextId = null;
+    companyWebsite = null;
+    menteeSoughtExpertisesTextIds = null;
+    menteeReasonForStartingBusiness = null;
+    menteeIndustryTextId = null;
+  }
+
+  void clearMentorFields() {
+    jobTitle = null;
+    mentorExpertisesTextIds = null;
+    mentorIndustriesTextIds = null;
+    mentoringPreferences = null;
+    mentorInternationally = null;
+  }
 
   Input$UserInput toUserInput() {
     return Input$UserInput(

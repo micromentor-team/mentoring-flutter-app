@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
 import '../../atoms/text_form_field_widget.dart';
-import 'sign_up_bottom_buttons.dart';
+import 'components/sign_up_bottom_buttons.dart';
 
-class SignupBusinessAddBusinessNameScreen extends StatefulWidget {
-  const SignupBusinessAddBusinessNameScreen({Key? key}) : super(key: key);
+class SignupEntrepreneurCompanyNameScreen extends StatefulWidget {
+  const SignupEntrepreneurCompanyNameScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupBusinessAddBusinessNameScreen> createState() =>
-      _SignupBusinessAddBusinessNameScreenState();
+  State<SignupEntrepreneurCompanyNameScreen> createState() =>
+      _SignupEntrepreneurCompanyNameScreenState();
 }
 
-class _SignupBusinessAddBusinessNameScreenState
-    extends State<SignupBusinessAddBusinessNameScreen> {
+class _SignupEntrepreneurCompanyNameScreenState
+    extends State<SignupEntrepreneurCompanyNameScreen> {
   late final UserRegistrationModel _registrationModel;
   String? _businessName;
 
@@ -48,7 +48,7 @@ class _SignupBusinessAddBusinessNameScreenState
         rightOnPress: _businessName?.isNotEmpty ?? false
             ? () {
                 _registrationModel.updateUserInput.companyName = _businessName;
-                context.push(Routes.addWebsite.path);
+                context.push(Routes.signupEntrepreneurCompanyWebsite.path);
               }
             : null,
       ),

@@ -2,25 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
-import 'sign_up_bottom_buttons.dart';
+import 'components/sign_up_bottom_buttons.dart';
 
-class SignupBusinessCompletedScreen extends StatefulWidget {
-  const SignupBusinessCompletedScreen({Key? key}) : super(key: key);
+class SignupMoreInfoScreen extends StatefulWidget {
+  const SignupMoreInfoScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupBusinessCompletedScreen> createState() =>
-      _SignupBusinessCompletedScreenState();
+  State<SignupMoreInfoScreen> createState() => _SignupMoreInfoScreenState();
 }
 
-class _SignupBusinessCompletedScreenState
-    extends State<SignupBusinessCompletedScreen> {
+class _SignupMoreInfoScreenState extends State<SignupMoreInfoScreen> {
   late final UserProvider _userProvider;
   late final UserRegistrationModel _registrationModel;
+  late final _isEntrepreneur;
   bool _processing = false;
 
   @override
@@ -31,6 +30,8 @@ class _SignupBusinessCompletedScreenState
       context,
       listen: false,
     );
+    _isEntrepreneur =
+        _registrationModel.updateUserInput.userType == UserType.entrepreneur;
   }
 
   @override
@@ -39,19 +40,18 @@ class _SignupBusinessCompletedScreenState
     final ThemeData theme = Theme.of(context);
     final GoRouter router = GoRouter.of(context);
     return SignUpTemplate(
-      progress: SignUpProgress.four,
-      title: l10n.amazing,
+      progress: SignUpProgress.one,
+      title: l10n.signupMoreInfoTitle,
       bottomButtons: _processing
           ? const CircularProgressIndicator(
               strokeWidth: 4,
             )
           : SignUpBottomButtons(
-              leftButtonText: l10n.previous,
-              rightButtonText: l10n.findMentors,
-              leftOnPress: () {
-                context.pop();
-              },
-              rightOnPress: () async {
+              leftButtonText: _isEntrepreneur
+                  ? l10n.signupMoreInfoEntrepreneurAction
+                  : l10n.signupMoreInfoMentorAction,
+              rightButtonText: l10n.continueButton,
+              leftOnPress: () async {
                 setState(() => _processing = true);
                 if (await _registrationModel.updateUser(_userProvider)) {
                   router.pushNamed(
@@ -66,37 +66,32 @@ class _SignupBusinessCompletedScreenState
                   );
                 }
               },
-            ),
+              rightOnPress: () {
+                context.push(Routes.signupProfilePhoto.path);
+              }),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 240,
-            child: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  theme.colorScheme.onSurface,
-                  BlendMode.srcATop,
-                ),
-                child: const Image(
-                  image: AssetImage(Assets.signUpCompletedScreenStockImage),
-                )),
+          Padding(
+            padding: const EdgeInsets.only(top: Insets.paddingMedium),
+            child: Text(
+              l10n.signupMoreInfoSubtitle,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
+            ),
           ),
-          const SizedBox(
-            height: Insets.paddingMedium,
-          ),
-          Text(
-            l10n.signUpCompletedTextOne,
-            style: theme.textTheme.bodyMedium!
-                .copyWith(color: theme.colorScheme.outline),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: Insets.paddingSmall,
-          ),
-          Text(
-            l10n.signUpCompletedTextTwo,
-            style: theme.textTheme.bodyMedium!
-                .copyWith(color: theme.colorScheme.outline),
-            textAlign: TextAlign.center,
+          Padding(
+            padding: const EdgeInsets.only(top: Insets.paddingMedium),
+            child: Text(
+              _isEntrepreneur
+                  ? l10n.signupMoreInfoEntrepreneurPrompt
+                  : l10n.signupMoreInfoMentorPrompt,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
+            ),
           ),
         ],
       ),

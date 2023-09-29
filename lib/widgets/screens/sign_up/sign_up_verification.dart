@@ -5,17 +5,18 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/text_form_field_widget.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
-class SignUpVerify extends StatefulWidget {
-  const SignUpVerify({super.key});
+class SignupVerificationScreen extends StatefulWidget {
+  const SignupVerificationScreen({super.key});
 
   @override
-  State<SignUpVerify> createState() => _SignUpVerifyState();
+  State<SignupVerificationScreen> createState() =>
+      _SignupVerificationScreenState();
 }
 
-class _SignUpVerifyState extends State<SignUpVerify> {
+class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late final UserProvider _userProvider;
   late final UserRegistrationModel _registrationModel;

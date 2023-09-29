@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
 import '../../atoms/text_form_field_widget.dart';
-import 'sign_up_bottom_buttons.dart';
+import 'components/sign_up_bottom_buttons.dart';
 
-class SignupBusinessStartupRationaleScreen extends StatefulWidget {
-  const SignupBusinessStartupRationaleScreen({Key? key}) : super(key: key);
+class SignupEntrepreneurCompanyReasonScreen extends StatefulWidget {
+  const SignupEntrepreneurCompanyReasonScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupBusinessStartupRationaleScreen> createState() =>
-      _SignupBusinessStartupRationaleScreenState();
+  State<SignupEntrepreneurCompanyReasonScreen> createState() =>
+      _SignupEntrepreneurCompanyReasonScreenState();
 }
 
-class _SignupBusinessStartupRationaleScreenState
-    extends State<SignupBusinessStartupRationaleScreen> {
+class _SignupEntrepreneurCompanyReasonScreenState
+    extends State<SignupEntrepreneurCompanyReasonScreen> {
   late final UserRegistrationModel _registrationModel;
   String? _text;
 
@@ -49,7 +49,7 @@ class _SignupBusinessStartupRationaleScreenState
             ? () {
                 _registrationModel
                     .updateUserInput.menteeReasonForStartingBusiness = _text;
-                context.push(Routes.industry.path);
+                context.push(Routes.signupIndustries.path);
               }
             : null,
       ),

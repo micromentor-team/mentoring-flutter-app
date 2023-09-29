@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/user_registration_model.dart';
 import '../../atoms/text_form_field_widget.dart';
 
-class SignUpName extends StatefulWidget {
-  const SignUpName({super.key});
+class SignupFullNameScreen extends StatefulWidget {
+  const SignupFullNameScreen({super.key});
 
   @override
-  State<SignUpName> createState() => _SignUpNameState();
+  State<SignupFullNameScreen> createState() => _SignupFullNameScreenState();
 }
 
-class _SignUpNameState extends State<SignUpName> {
+class _SignupFullNameScreenState extends State<SignupFullNameScreen> {
   final _formKey = GlobalKey<FormState>();
   late final UserRegistrationModel _registrationModel;
   String? _firstName;
@@ -83,7 +83,7 @@ class _SignUpNameState extends State<SignUpName> {
                 if (_formKey.currentState!.validate()) {
                   _registrationModel.updateUserInput.firstName = _firstName;
                   _registrationModel.updateUserInput.lastName = _lastName;
-                  context.push(Routes.signupPhoneNumber.path);
+                  context.push(Routes.signupPhone.path);
                 }
               }
             : null,

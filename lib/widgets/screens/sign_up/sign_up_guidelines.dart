@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> _launchUrl(Uri url) async {
@@ -38,8 +38,8 @@ class BulletPointText extends StatelessWidget {
   }
 }
 
-class SignUpGuidelines extends StatelessWidget {
-  const SignUpGuidelines({super.key});
+class SignupGuidelinesScreen extends StatelessWidget {
+  const SignupGuidelinesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +132,7 @@ class SignUpGuidelines extends StatelessWidget {
             context.pop();
           },
           rightOnPress: () {
-            context.push(Routes.signupName.path);
+            context.push(Routes.signupFullName.path);
           },
         ));
   }
