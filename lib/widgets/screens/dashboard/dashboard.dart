@@ -6,7 +6,6 @@ import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/molecules/invitation_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_scroll.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
-import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';
@@ -72,7 +71,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 RecommendedSection(
                   authenticatedUser: _authenticatedUser,
                 ),
-                const UpcomingSection(),
                 InvitationSection(
                   authenticatedUser: _authenticatedUser,
                 ),
