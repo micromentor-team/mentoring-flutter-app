@@ -3,8 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../atoms/text_form_field_widget.dart';
 import 'sign_up_bottom_buttons.dart';
 
@@ -18,7 +20,17 @@ class SignupBusinessStartupRationaleScreen extends StatefulWidget {
 
 class _SignupBusinessStartupRationaleScreenState
     extends State<SignupBusinessStartupRationaleScreen> {
+  late final UserRegistrationModel _registrationModel;
   String? _text;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +47,8 @@ class _SignupBusinessStartupRationaleScreenState
         },
         rightOnPress: _text?.isNotEmpty ?? false
             ? () {
+                _registrationModel
+                    .updateUserInput.menteeReasonForStartingBusiness = _text;
                 context.push(Routes.industry.path);
               }
             : null,

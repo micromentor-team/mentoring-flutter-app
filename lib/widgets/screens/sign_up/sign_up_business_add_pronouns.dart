@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/content_provider.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../molecules/checkbox_list_and_form.dart';
 import 'sign_up_bottom_buttons.dart';
 
@@ -21,12 +22,17 @@ class SignupBusinessAddPronounsScreen extends StatefulWidget {
 class _SignupBusinessAddPronounsScreenState
     extends State<SignupBusinessAddPronounsScreen> {
   late final ContentProvider _contentProvider;
+  late final UserRegistrationModel _registrationModel;
   final List<String> _selections = List.empty(growable: true);
 
   @override
   void initState() {
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
   }
 
   List<LabeledCheckbox> _createCheckboxes() {
@@ -70,6 +76,7 @@ class _SignupBusinessAddPronounsScreenState
             context.pop();
           },
           rightOnPress: () {
+            _registrationModel.updateUserInput.pronounsTextIds = _selections;
             context.push(Routes.addBusinessName.path);
           }),
       footer: SignUpIconFooter(

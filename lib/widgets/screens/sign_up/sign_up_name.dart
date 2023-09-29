@@ -5,7 +5,9 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/models/user_registration_model.dart';
 import '../../atoms/text_form_field_widget.dart';
 
 class SignUpName extends StatefulWidget {
@@ -17,8 +19,18 @@ class SignUpName extends StatefulWidget {
 
 class _SignUpNameState extends State<SignUpName> {
   final _formKey = GlobalKey<FormState>();
+  late final UserRegistrationModel _registrationModel;
   String? _firstName;
   String? _lastName;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +81,8 @@ class _SignUpNameState extends State<SignUpName> {
                 (_lastName?.isNotEmpty ?? false)
             ? () {
                 if (_formKey.currentState!.validate()) {
+                  _registrationModel.updateUserInput.firstName = _firstName;
+                  _registrationModel.updateUserInput.lastName = _lastName;
                   context.push(Routes.signupPhoneNumber.path);
                 }
               }

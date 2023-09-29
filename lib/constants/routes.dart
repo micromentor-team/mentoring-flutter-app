@@ -240,4 +240,5 @@ class RouteParams {
   static const String channelId = 'channelId';
   static const String channelInvitationId = 'channelInvitationId';
   static const String userId = 'userId';
+  static const String nextRouteName = 'nextRouteName';
 }

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPermissions extends StatefulWidget {
   const SignUpPermissions({super.key});
@@ -13,8 +15,18 @@ class SignUpPermissions extends StatefulWidget {
 }
 
 class _SignUpPermissionsState extends State<SignUpPermissions> {
-  bool check1 = true;
-  bool check2 = true;
+  late final UserRegistrationModel _registrationModel;
+  bool _notificationsEnabled = true;
+  bool _updatesEnabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
 
   final MaterialStateProperty<Icon?> thumbIcon =
       MaterialStateProperty.resolveWith<Icon?>(
@@ -32,60 +44,74 @@ class _SignUpPermissionsState extends State<SignUpPermissions> {
     final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
-        progress: SignUpProgress.one,
-        title: l10n.howCanWeGetInTouch,
-        body: Column(children: [
-          Row(children: [
-            Switch(
+      progress: SignUpProgress.one,
+      title: l10n.howCanWeGetInTouch,
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Switch(
                 thumbIcon: thumbIcon,
-                value: check1,
+                value: _notificationsEnabled,
                 onChanged: (val) {
                   setState(() {
-                    check1 = val;
+                    _notificationsEnabled = val;
                   });
-                }),
-            const SizedBox(
-              width: Insets.paddingSmall,
-            ),
-            Expanded(
+                },
+              ),
+              const SizedBox(
+                width: Insets.paddingSmall,
+              ),
+              Expanded(
                 child: Text(
-              l10n.pushNotificationsEnabled,
-              style: theme.textTheme.bodyMedium!
-                  .copyWith(color: theme.colorScheme.outline),
-            )),
-          ]),
+                  l10n.pushNotificationsEnabled,
+                  style: theme.textTheme.bodyMedium!
+                      .copyWith(color: theme.colorScheme.outline),
+                ),
+              ),
+            ],
+          ),
           const SizedBox(
             height: Insets.paddingSmall,
           ),
-          Row(children: [
-            Switch(
-                thumbIcon: thumbIcon,
-                value: check2,
-                onChanged: (val) {
-                  setState(() {
-                    check2 = val;
-                  });
-                }),
-            const SizedBox(
-              width: Insets.paddingSmall,
-            ),
-            Expanded(
+          Row(
+            children: [
+              Switch(
+                  thumbIcon: thumbIcon,
+                  value: _updatesEnabled,
+                  onChanged: (val) {
+                    setState(() {
+                      _updatesEnabled = val;
+                    });
+                  }),
+              const SizedBox(
+                width: Insets.paddingSmall,
+              ),
+              Expanded(
                 child: Text(
-              l10n.recieveUpdates,
-              style: theme.textTheme.bodyMedium!
-                  .copyWith(color: theme.colorScheme.outline),
-            )),
-          ]),
-        ]),
-        bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            context.push(Routes.signupGuidelines.path);
-          },
-        ));
+                  l10n.recieveUpdates,
+                  style: theme.textTheme.bodyMedium!
+                      .copyWith(color: theme.colorScheme.outline),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      bottomButtons: SignUpBottomButtons(
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: () {
+          _registrationModel.appUserSettingsInput.pushNotificationEnabled =
+              _notificationsEnabled;
+          _registrationModel.appUserSettingsInput.receivedUpdatesEnabled =
+              _updatesEnabled;
+          context.push(Routes.signupGuidelines.path);
+        },
+      ),
+    );
   }
 }

@@ -3,8 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../atoms/text_form_field_widget.dart';
 import 'sign_up_bottom_buttons.dart';
 
@@ -18,7 +20,17 @@ class SignupBusinessAddBusinessNameScreen extends StatefulWidget {
 
 class _SignupBusinessAddBusinessNameScreenState
     extends State<SignupBusinessAddBusinessNameScreen> {
+  late final UserRegistrationModel _registrationModel;
   String? _businessName;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +47,15 @@ class _SignupBusinessAddBusinessNameScreenState
         },
         rightOnPress: _businessName?.isNotEmpty ?? false
             ? () {
+                _registrationModel.updateUserInput.companyName = _businessName;
                 context.push(Routes.addWebsite.path);
               }
             : null,
       ),
       footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
+        icon: Icons.visibility_outlined,
+        text: l10n.signUpShownOnProfileInfo,
+      ),
       body: Form(
         child: TextFormFieldWidget(
           label: l10n.signupBusinessNameInputLabel,

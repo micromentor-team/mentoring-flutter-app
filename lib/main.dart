@@ -106,14 +106,15 @@ class _StartScreenState extends State<StartScreen> {
             onLoading: () => const LoadingScreen(),
             onError: () => const WelcomeScreen(),
             onReady: () {
-              if (userSnapshot.data?.response == null) {
+              final user = userSnapshot.data?.response;
+              if (user == null) {
                 // Empty result means that the user not signed in.
                 return widget.nextRouteName == Routes.home.name
                     ? const WelcomeScreen()
                     : SignInScreen(nextRouteName: widget.nextRouteName);
               }
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (userSnapshot.data?.response?.fullName == null) {
+                if (!user.offersHelp && !user.seeksHelp) {
                   // User is created, but lacks basic information.
                   // Route to signup flow to complete profile.
                   context.go(Routes.signupWelcome.path);

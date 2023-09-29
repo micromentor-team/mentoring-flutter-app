@@ -10,6 +10,8 @@ import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
+import '../../../providers/models/user_registration_model.dart';
+
 class SignUpLanguages extends StatefulWidget {
   const SignUpLanguages({super.key});
 
@@ -21,11 +23,16 @@ class _SignUpLanguagesState extends State<SignUpLanguages> {
   final _preferredLanguagesController = TextfieldTagsController();
   final _fluentLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
+  late final UserRegistrationModel _registrationModel;
 
   @override
   void initState() {
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
   }
 
   @override
@@ -89,6 +96,18 @@ class _SignUpLanguagesState extends State<SignUpLanguages> {
           context.pop();
         },
         rightOnPress: () {
+          _registrationModel.updateUserInput.preferredLanguageTextIds =
+              _preferredLanguagesController.getTags
+                  ?.map((t) => _contentProvider.languageOptions!
+                      .firstWhere((o) => o.translatedValue! == t)
+                      .textId)
+                  .toList();
+          _registrationModel.updateUserInput.spokenLanguagesTextIds =
+              _fluentLanguagesController.getTags
+                  ?.map((t) => _contentProvider.languageOptions!
+                      .firstWhere((o) => o.translatedValue! == t)
+                      .textId)
+                  .toList();
           context.push(Routes.signupEntrepreneurOrMentor.path);
         },
       ),

@@ -141,11 +141,13 @@ CreateMultiSelectChips createMultiSelectChipsIndustry() {
 class CreateMultiSelectChips extends StatefulWidget {
   final List<SelectChip> chips;
   final int? maxSelection;
+  final Function(List<SelectChip>)? onSelectedChipsChanged;
 
   const CreateMultiSelectChips({
     Key? key,
     required this.chips,
     this.maxSelection,
+    this.onSelectedChipsChanged,
   }) : super(key: key);
 
   @override
@@ -168,6 +170,11 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
         _childIsSelected.add(chipId);
       }
     });
+    if (widget.onSelectedChipsChanged != null) {
+      widget.onSelectedChipsChanged!(
+        _childIsSelected.map((i) => widget.chips[i]).toList(),
+      );
+    }
   }
 
   //Helper2: input the list of all chips and returns a list of selected chips

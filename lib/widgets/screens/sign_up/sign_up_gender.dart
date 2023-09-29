@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
+import '../../../providers/models/user_registration_model.dart';
 
 class SignUpGender extends StatefulWidget {
   const SignUpGender({super.key});
@@ -16,7 +18,18 @@ class SignUpGender extends StatefulWidget {
 
 class _SignUpGenderState extends State<SignUpGender> {
   final _formKey = GlobalKey<FormState>();
+  late final UserRegistrationModel _registrationModel;
   String? _gender;
+  String? _genderTextId;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +61,12 @@ class _SignUpGenderState extends State<SignUpGender> {
                     ),
                   ),
                   trailing: Radio<String>(
-                    value: l10n
-                        .signupGenderOptionWoman, //TODO - use content provider textID
+                    value: l10n.signupGenderOptionWoman,
                     groupValue: _gender,
                     onChanged: (String? value) {
                       setState(() {
                         _gender = value;
+                        _genderTextId = PresetGenderTextIds.female;
                       });
                     },
                   ),
@@ -67,12 +80,12 @@ class _SignUpGenderState extends State<SignUpGender> {
                     ),
                   ),
                   trailing: Radio<String>(
-                    value: l10n
-                        .signupGenderOptionMan, //TODO - use content provider textID
+                    value: l10n.signupGenderOptionMan,
                     groupValue: _gender,
                     onChanged: (String? value) {
                       setState(() {
                         _gender = value;
+                        _genderTextId = PresetGenderTextIds.male;
                       });
                     },
                   ),
@@ -86,12 +99,12 @@ class _SignUpGenderState extends State<SignUpGender> {
                     ),
                   ),
                   trailing: Radio<String>(
-                    value: l10n
-                        .signupGenderOptionOther, //TODO - use content provider textID
+                    value: l10n.signupGenderOptionOther,
                     groupValue: _gender,
                     onChanged: (String? value) {
                       setState(() {
                         _gender = value;
+                        _genderTextId = PresetGenderTextIds.other;
                       });
                     },
                   ),
@@ -113,6 +126,8 @@ class _SignUpGenderState extends State<SignUpGender> {
             ? null
             : () {
                 if (_formKey.currentState!.validate()) {
+                  _registrationModel.updateUserInput.genderTextId =
+                      _genderTextId;
                   context.push(Routes.signupLocation.path);
                 }
               },

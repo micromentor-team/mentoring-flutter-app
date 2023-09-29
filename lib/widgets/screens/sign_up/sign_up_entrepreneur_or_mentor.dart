@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/models/user_registration_model.dart';
 import '../../molecules/login_radio_button_cards.dart';
 import 'sign_up_bottom_buttons.dart';
 
@@ -17,12 +20,16 @@ class SignUpEntrepreneurOrMentorScreen extends StatefulWidget {
 
 class _SignUpEntrepreneurOrMentorScreenState
     extends State<SignUpEntrepreneurOrMentorScreen> {
+  late final UserRegistrationModel _registrationModel;
   int? selectedNumber = 0;
 
-  void handleRadioButtonChange(int value) {
-    setState(() {
-      selectedNumber = value;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
   }
 
   @override
@@ -41,8 +48,12 @@ class _SignUpEntrepreneurOrMentorScreenState
           },
           rightOnPress: () {
             if (selectedNumber == 0) {
+              _registrationModel.updateUserInput.userType =
+                  UserType.entrepreneur;
               context.push(Routes.signupBusinessStage.path);
             } else {
+              _registrationModel.updateUserInput.userType =
+                  UserType.entrepreneur;
               context.push(Routes.signupMentorHelpSelection.path);
             }
           }),
@@ -50,7 +61,17 @@ class _SignUpEntrepreneurOrMentorScreenState
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
         children: [
-          createEntrepreneurMentorCards(context, handleRadioButtonChange),
+          LoginRadioButtonCards(
+            title: [l10n.iAmAnEntrepreneur, l10n.iAmAMentor],
+            subtitle: [l10n.entrepreneurDescription, l10n.mentorDescription],
+            imageAssetName: const [
+              Image(image: AssetImage(Assets.entrepreneurIcon)),
+              Image(image: AssetImage(Assets.mentorIcon))
+            ],
+            titleIcon: const [null, null],
+            onSelectedCardChanged: (value) =>
+                setState(() => selectedNumber = value),
+          ),
           const SizedBox(height: Insets.paddingMedium),
           Padding(
             padding: const EdgeInsets.all(Insets.paddingSmall),

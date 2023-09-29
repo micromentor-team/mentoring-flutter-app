@@ -31,13 +31,6 @@ class UserProvider extends BaseProvider with ChangeNotifier {
 
   UserProvider({required super.client});
 
-  void _setUser(AuthenticatedUser authenticatedUser) {
-    if (_user == null) {
-      _user = authenticatedUser;
-      debugPrint('Got this user from the server userId: ${_user!.id}');
-    }
-  }
-
   Future<void> _resetUser() async {
     _user = null;
 
@@ -370,7 +363,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
       );
     }
     if (operationResult.response != null) {
-      _setUser(operationResult.response!);
+      _user = operationResult.response!;
     } else {
       _resetUser();
     }
@@ -490,6 +483,42 @@ class UserProvider extends BaseProvider with ChangeNotifier {
         document: documentNodeMutationUpdateUser,
         fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
+  Future<OperationResult<void>> updateMenteesGroupMembership({
+    required Input$MenteesGroupMembershipInput input,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateMenteesGroupMembership,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateMenteesGroupMembership(input: input)
+            .toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
+  Future<OperationResult<void>> updateMentorsGroupMembership({
+    required Input$MentorsGroupMembershipInput input,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateMentorsGroupMembership,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateMentorsGroupMembership(input: input)
+            .toJson(),
       ),
     );
     notifyListeners();

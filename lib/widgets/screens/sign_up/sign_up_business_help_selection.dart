@@ -8,6 +8,7 @@ import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/content_provider.dart';
+import '../../../providers/models/user_registration_model.dart';
 import 'sign_up_bottom_buttons.dart';
 
 class SignupBusinessHelpSelectionScreen extends StatefulWidget {
@@ -21,12 +22,19 @@ class SignupBusinessHelpSelectionScreen extends StatefulWidget {
 class _SignupBusinessHelpSelectionScreenState
     extends State<SignupBusinessHelpSelectionScreen> {
   late final ContentProvider _contentProvider;
+  late final UserRegistrationModel _registrationModel;
   late final List<SelectChip> _expertiseChips;
+
+  List<SelectChip> _selectedChips = [];
 
   @override
   void initState() {
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
     _expertiseChips = _contentProvider.expertiseOptions!
         .map(
           (e) => SelectChip(
@@ -52,6 +60,8 @@ class _SignupBusinessHelpSelectionScreenState
           context.pop();
         },
         rightOnPress: () {
+          _registrationModel.updateUserInput.menteeSoughtExpertisesTextIds =
+              _selectedChips.map((e) => e.textId).toList();
           context.push(Routes.signupMoreInfo.path);
         },
       ),
@@ -64,6 +74,7 @@ class _SignupBusinessHelpSelectionScreenState
           CreateMultiSelectChips(
             chips: _expertiseChips,
             maxSelection: 3,
+            onSelectedChipsChanged: (chips) => _selectedChips = chips,
           ),
         ],
       ),

@@ -6,6 +6,9 @@ import 'package:mm_flutter_app/widgets/atoms/text_form_field_widget.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/models/user_registration_model.dart';
 
 class SignUpLocation extends StatefulWidget {
   const SignUpLocation({super.key});
@@ -15,7 +18,17 @@ class SignUpLocation extends StatefulWidget {
 }
 
 class _SignUpLocationState extends State<SignUpLocation> {
+  late final UserRegistrationModel _registrationModel;
   String? _location;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +58,11 @@ class _SignUpLocationState extends State<SignUpLocation> {
           context.pop();
         },
         rightOnPress: _location?.isNotEmpty ?? false
-            ? () => context.push(Routes.signupLanguages.path)
+            ? () {
+                // TODO - also set region and country
+                _registrationModel.updateUserInput.cityOfResidence = _location;
+                context.push(Routes.signupLanguages.path);
+              }
             : null,
       ),
     );

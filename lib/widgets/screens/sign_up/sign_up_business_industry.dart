@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/content_provider.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../molecules/multi_select_chips.dart';
 import 'sign_up_bottom_buttons.dart';
 
@@ -21,12 +22,18 @@ class SignupBusinessIndustryScreen extends StatefulWidget {
 class _SignupBusinessIndustryScreenState
     extends State<SignupBusinessIndustryScreen> {
   late final ContentProvider _contentProvider;
+  late final UserRegistrationModel _registrationModel;
   late final List<SelectChip> _industryChips;
+  String? _selectedIndustry;
 
   @override
   void initState() {
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
     _industryChips = _contentProvider.industryOptions!
         .map(
           (e) => SelectChip(
@@ -53,6 +60,8 @@ class _SignupBusinessIndustryScreenState
             context.pop();
           },
           rightOnPress: () {
+            _registrationModel.updateUserInput.menteeIndustryTextId =
+                _selectedIndustry;
             context.push(Routes.completedEntrepreneurSignup.path);
           }),
       footer: SignUpIconFooter(
@@ -64,6 +73,8 @@ class _SignupBusinessIndustryScreenState
           CreateMultiSelectChips(
             chips: _industryChips,
             maxSelection: 1,
+            onSelectedChipsChanged: (chips) =>
+                _selectedIndustry = chips.firstOrNull?.textId,
           ),
         ],
       ),

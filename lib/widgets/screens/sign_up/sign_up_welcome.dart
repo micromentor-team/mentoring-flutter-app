@@ -2,10 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
-class SignUpWelcome extends StatelessWidget {
+import '../../../providers/models/user_registration_model.dart';
+
+class SignUpWelcome extends StatefulWidget {
   const SignUpWelcome({super.key});
+
+  @override
+  State<SignUpWelcome> createState() => _SignUpWelcomeState();
+}
+
+class _SignUpWelcomeState extends State<SignUpWelcome> {
+  late final UserProvider _userProvider;
+  late final UserRegistrationModel _registrationModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _registrationModel.updateUserInput.id = _userProvider.user!.id;
+  }
 
   @override
   Widget build(BuildContext context) {

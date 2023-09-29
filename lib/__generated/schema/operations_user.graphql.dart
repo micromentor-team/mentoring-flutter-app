@@ -215,6 +215,49 @@ const documentNodeQueryGetAuthenticatedUser = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'seeksHelp'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'offersHelp'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'groupMemberships'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'groupIdent'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -244,6 +287,9 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     required this.profileCompletionPercentage,
     this.updatedAt,
     required this.createdAt,
+    required this.seeksHelp,
+    required this.offersHelp,
+    required this.groupMemberships,
     this.$__typename = 'User',
   });
 
@@ -257,6 +303,9 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     final l$profileCompletionPercentage = json['profileCompletionPercentage'];
     final l$updatedAt = json['updatedAt'];
     final l$createdAt = json['createdAt'];
+    final l$seeksHelp = json['seeksHelp'];
+    final l$offersHelp = json['offersHelp'];
+    final l$groupMemberships = json['groupMemberships'];
     final l$$__typename = json['__typename'];
     return Query$GetAuthenticatedUser$getAuthenticatedUser(
       id: (l$id as String),
@@ -268,6 +317,13 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       updatedAt:
           l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
       createdAt: DateTime.parse((l$createdAt as String)),
+      seeksHelp: (l$seeksHelp as bool),
+      offersHelp: (l$offersHelp as bool),
+      groupMemberships: (l$groupMemberships as List<dynamic>)
+          .map((e) =>
+              Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
@@ -287,6 +343,13 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
   final DateTime? updatedAt;
 
   final DateTime createdAt;
+
+  final bool seeksHelp;
+
+  final bool offersHelp;
+
+  final List<Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships>
+      groupMemberships;
 
   final String $__typename;
 
@@ -308,6 +371,13 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     _resultData['updatedAt'] = l$updatedAt?.toIso8601String();
     final l$createdAt = createdAt;
     _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$seeksHelp = seeksHelp;
+    _resultData['seeksHelp'] = l$seeksHelp;
+    final l$offersHelp = offersHelp;
+    _resultData['offersHelp'] = l$offersHelp;
+    final l$groupMemberships = groupMemberships;
+    _resultData['groupMemberships'] =
+        l$groupMemberships.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -323,6 +393,9 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     final l$profileCompletionPercentage = profileCompletionPercentage;
     final l$updatedAt = updatedAt;
     final l$createdAt = createdAt;
+    final l$seeksHelp = seeksHelp;
+    final l$offersHelp = offersHelp;
+    final l$groupMemberships = groupMemberships;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -333,6 +406,9 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
       l$profileCompletionPercentage,
       l$updatedAt,
       l$createdAt,
+      l$seeksHelp,
+      l$offersHelp,
+      Object.hashAll(l$groupMemberships.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -387,6 +463,28 @@ class Query$GetAuthenticatedUser$getAuthenticatedUser {
     if (l$createdAt != lOther$createdAt) {
       return false;
     }
+    final l$seeksHelp = seeksHelp;
+    final lOther$seeksHelp = other.seeksHelp;
+    if (l$seeksHelp != lOther$seeksHelp) {
+      return false;
+    }
+    final l$offersHelp = offersHelp;
+    final lOther$offersHelp = other.offersHelp;
+    if (l$offersHelp != lOther$offersHelp) {
+      return false;
+    }
+    final l$groupMemberships = groupMemberships;
+    final lOther$groupMemberships = other.groupMemberships;
+    if (l$groupMemberships.length != lOther$groupMemberships.length) {
+      return false;
+    }
+    for (int i = 0; i < l$groupMemberships.length; i++) {
+      final l$groupMemberships$entry = l$groupMemberships[i];
+      final lOther$groupMemberships$entry = lOther$groupMemberships[i];
+      if (l$groupMemberships$entry != lOther$groupMemberships$entry) {
+        return false;
+      }
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -425,8 +523,18 @@ abstract class CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes> {
     int? profileCompletionPercentage,
     DateTime? updatedAt,
     DateTime? createdAt,
+    bool? seeksHelp,
+    bool? offersHelp,
+    List<Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships>?
+        groupMemberships,
     String? $__typename,
   });
+  TRes groupMemberships(
+      Iterable<Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships> Function(
+              Iterable<
+                  CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships<
+                      Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships>>)
+          _fn);
 }
 
 class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
@@ -451,6 +559,9 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
     Object? profileCompletionPercentage = _undefined,
     Object? updatedAt = _undefined,
     Object? createdAt = _undefined,
+    Object? seeksHelp = _undefined,
+    Object? offersHelp = _undefined,
+    Object? groupMemberships = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetAuthenticatedUser$getAuthenticatedUser(
@@ -475,10 +586,33 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
         createdAt: createdAt == _undefined || createdAt == null
             ? _instance.createdAt
             : (createdAt as DateTime),
+        seeksHelp: seeksHelp == _undefined || seeksHelp == null
+            ? _instance.seeksHelp
+            : (seeksHelp as bool),
+        offersHelp: offersHelp == _undefined || offersHelp == null
+            ? _instance.offersHelp
+            : (offersHelp as bool),
+        groupMemberships: groupMemberships == _undefined ||
+                groupMemberships == null
+            ? _instance.groupMemberships
+            : (groupMemberships as List<
+                Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
+  TRes groupMemberships(
+          Iterable<Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships> Function(
+                  Iterable<
+                      CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships<
+                          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships>>)
+              _fn) =>
+      call(
+          groupMemberships: _fn(_instance.groupMemberships.map((e) =>
+              CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships(
+                e,
+                (i) => i,
+              ))).toList());
 }
 
 class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
@@ -496,6 +630,752 @@ class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
     int? profileCompletionPercentage,
     DateTime? updatedAt,
     DateTime? createdAt,
+    bool? seeksHelp,
+    bool? offersHelp,
+    List<Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships>?
+        groupMemberships,
+    String? $__typename,
+  }) =>
+      _res;
+  groupMemberships(_fn) => _res;
+}
+
+class Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships {
+  Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships({
+    required this.id,
+    required this.groupIdent,
+    required this.$__typename,
+  });
+
+  factory Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships.fromJson(
+      Map<String, dynamic> json) {
+    switch (json["__typename"] as String) {
+      case "GroupMembership":
+        return Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership
+            .fromJson(json);
+
+      case "MenteesGroupMembership":
+        return Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership
+            .fromJson(json);
+
+      case "MentorsGroupMembership":
+        return Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership
+            .fromJson(json);
+
+      default:
+        final l$id = json['id'];
+        final l$groupIdent = json['groupIdent'];
+        final l$$__typename = json['__typename'];
+        return Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships(
+          id: (l$id as String),
+          groupIdent: (l$groupIdent as String),
+          $__typename: (l$$__typename as String),
+        );
+    }
+  }
+
+  final String id;
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships
+    on Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships {
+  CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships<
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships>
+      get copyWith =>
+          CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships(
+            this,
+            (i) => i,
+          );
+  _T when<_T>({
+    required _T Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership)
+        groupMembership,
+    required _T Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership)
+        menteesGroupMembership,
+    required _T Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership)
+        mentorsGroupMembership,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "GroupMembership":
+        return groupMembership(this
+            as Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership);
+
+      case "MenteesGroupMembership":
+        return menteesGroupMembership(this
+            as Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership);
+
+      case "MentorsGroupMembership":
+        return mentorsGroupMembership(this
+            as Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership);
+
+      default:
+        return orElse();
+    }
+  }
+
+  _T maybeWhen<_T>({
+    _T Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership)?
+        groupMembership,
+    _T Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership)?
+        menteesGroupMembership,
+    _T Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership)?
+        mentorsGroupMembership,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "GroupMembership":
+        if (groupMembership != null) {
+          return groupMembership(this
+              as Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership);
+        } else {
+          return orElse();
+        }
+
+      case "MenteesGroupMembership":
+        if (menteesGroupMembership != null) {
+          return menteesGroupMembership(this
+              as Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership);
+        } else {
+          return orElse();
+        }
+
+      case "MentorsGroupMembership":
+        if (mentorsGroupMembership != null) {
+          return mentorsGroupMembership(this
+              as Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership);
+        } else {
+          return orElse();
+        }
+
+      default:
+        return orElse();
+    }
+  }
+}
+
+abstract class CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships<
+    TRes> {
+  factory CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships(
+    Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships instance,
+    TRes Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships)
+        then,
+  ) = _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships;
+
+  factory CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships;
+
+  TRes call({
+    String? id,
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships<
+        TRes>
+    implements
+        CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships<
+            TRes> {
+  _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships
+      _instance;
+
+  final TRes Function(
+      Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships<
+        TRes>
+    implements
+        CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships<
+            TRes> {
+  _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership
+    implements
+        Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships {
+  Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership({
+    required this.id,
+    required this.groupIdent,
+    this.$__typename = 'GroupMembership',
+  });
+
+  factory Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$groupIdent = json['groupIdent'];
+    final l$$__typename = json['__typename'];
+    return Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership(
+      id: (l$id as String),
+      groupIdent: (l$groupIdent as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership
+    on Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership {
+  CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership<
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership>
+      get copyWith =>
+          CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership<
+    TRes> {
+  factory CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership(
+    Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership
+        instance,
+    TRes Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership;
+
+  factory CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership;
+
+  TRes call({
+    String? id,
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$GroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership
+    implements
+        Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships {
+  Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership({
+    required this.id,
+    required this.groupIdent,
+    this.$__typename = 'MenteesGroupMembership',
+  });
+
+  factory Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$groupIdent = json['groupIdent'];
+    final l$$__typename = json['__typename'];
+    return Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership(
+      id: (l$id as String),
+      groupIdent: (l$groupIdent as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership
+    on Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership {
+  CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership<
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership>
+      get copyWith =>
+          CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership<
+    TRes> {
+  factory CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership(
+    Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership
+        instance,
+    TRes Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership;
+
+  factory CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership;
+
+  TRes call({
+    String? id,
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MenteesGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? groupIdent,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership
+    implements
+        Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships {
+  Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership({
+    required this.id,
+    required this.groupIdent,
+    this.$__typename = 'MentorsGroupMembership',
+  });
+
+  factory Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$groupIdent = json['groupIdent'];
+    final l$$__typename = json['__typename'];
+    return Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership(
+      id: (l$id as String),
+      groupIdent: (l$groupIdent as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String groupIdent;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$groupIdent = groupIdent;
+    _resultData['groupIdent'] = l$groupIdent;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$groupIdent = groupIdent;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$groupIdent,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$groupIdent = groupIdent;
+    final lOther$groupIdent = other.groupIdent;
+    if (l$groupIdent != lOther$groupIdent) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership
+    on Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership {
+  CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership<
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership>
+      get copyWith =>
+          CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership<
+    TRes> {
+  factory CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership(
+    Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership
+        instance,
+    TRes Function(
+            Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership)
+        then,
+  ) = _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership;
+
+  factory CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership;
+
+  TRes call({
+    String? id,
+    String? groupIdent,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership<
+            TRes> {
+  _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership
+      _instance;
+
+  final TRes Function(
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? groupIdent = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        groupIdent: groupIdent == _undefined || groupIdent == null
+            ? _instance.groupIdent
+            : (groupIdent as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships$$MentorsGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? groupIdent,
     String? $__typename,
   }) =>
       _res;
@@ -34364,3 +35244,905 @@ const documentNodeMutationUpdateUser = DocumentNode(definitions: [
     ]),
   ),
 ]);
+
+class Variables$Mutation$UpdateMenteesGroupMembership {
+  factory Variables$Mutation$UpdateMenteesGroupMembership(
+          {required Input$MenteesGroupMembershipInput input}) =>
+      Variables$Mutation$UpdateMenteesGroupMembership._({
+        r'input': input,
+      });
+
+  Variables$Mutation$UpdateMenteesGroupMembership._(this._$data);
+
+  factory Variables$Mutation$UpdateMenteesGroupMembership.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$MenteesGroupMembershipInput.fromJson(
+        (l$input as Map<String, dynamic>));
+    return Variables$Mutation$UpdateMenteesGroupMembership._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$MenteesGroupMembershipInput get input =>
+      (_$data['input'] as Input$MenteesGroupMembershipInput);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$UpdateMenteesGroupMembership<
+          Variables$Mutation$UpdateMenteesGroupMembership>
+      get copyWith => CopyWith$Variables$Mutation$UpdateMenteesGroupMembership(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$UpdateMenteesGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$UpdateMenteesGroupMembership<TRes> {
+  factory CopyWith$Variables$Mutation$UpdateMenteesGroupMembership(
+    Variables$Mutation$UpdateMenteesGroupMembership instance,
+    TRes Function(Variables$Mutation$UpdateMenteesGroupMembership) then,
+  ) = _CopyWithImpl$Variables$Mutation$UpdateMenteesGroupMembership;
+
+  factory CopyWith$Variables$Mutation$UpdateMenteesGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$UpdateMenteesGroupMembership;
+
+  TRes call({Input$MenteesGroupMembershipInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$UpdateMenteesGroupMembership<TRes>
+    implements CopyWith$Variables$Mutation$UpdateMenteesGroupMembership<TRes> {
+  _CopyWithImpl$Variables$Mutation$UpdateMenteesGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$UpdateMenteesGroupMembership _instance;
+
+  final TRes Function(Variables$Mutation$UpdateMenteesGroupMembership) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) =>
+      _then(Variables$Mutation$UpdateMenteesGroupMembership._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$MenteesGroupMembershipInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$UpdateMenteesGroupMembership<TRes>
+    implements CopyWith$Variables$Mutation$UpdateMenteesGroupMembership<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$UpdateMenteesGroupMembership(this._res);
+
+  TRes _res;
+
+  call({Input$MenteesGroupMembershipInput? input}) => _res;
+}
+
+class Mutation$UpdateMenteesGroupMembership {
+  Mutation$UpdateMenteesGroupMembership({
+    required this.updateMenteesGroupMembership,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$UpdateMenteesGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$updateMenteesGroupMembership = json['updateMenteesGroupMembership'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateMenteesGroupMembership(
+      updateMenteesGroupMembership:
+          Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership
+              .fromJson(
+                  (l$updateMenteesGroupMembership as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership
+      updateMenteesGroupMembership;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateMenteesGroupMembership = updateMenteesGroupMembership;
+    _resultData['updateMenteesGroupMembership'] =
+        l$updateMenteesGroupMembership.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateMenteesGroupMembership = updateMenteesGroupMembership;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$updateMenteesGroupMembership,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateMenteesGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateMenteesGroupMembership = updateMenteesGroupMembership;
+    final lOther$updateMenteesGroupMembership =
+        other.updateMenteesGroupMembership;
+    if (l$updateMenteesGroupMembership != lOther$updateMenteesGroupMembership) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateMenteesGroupMembership
+    on Mutation$UpdateMenteesGroupMembership {
+  CopyWith$Mutation$UpdateMenteesGroupMembership<
+          Mutation$UpdateMenteesGroupMembership>
+      get copyWith => CopyWith$Mutation$UpdateMenteesGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$UpdateMenteesGroupMembership<TRes> {
+  factory CopyWith$Mutation$UpdateMenteesGroupMembership(
+    Mutation$UpdateMenteesGroupMembership instance,
+    TRes Function(Mutation$UpdateMenteesGroupMembership) then,
+  ) = _CopyWithImpl$Mutation$UpdateMenteesGroupMembership;
+
+  factory CopyWith$Mutation$UpdateMenteesGroupMembership.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateMenteesGroupMembership;
+
+  TRes call({
+    Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership?
+        updateMenteesGroupMembership,
+    String? $__typename,
+  });
+  CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+      TRes> get updateMenteesGroupMembership;
+}
+
+class _CopyWithImpl$Mutation$UpdateMenteesGroupMembership<TRes>
+    implements CopyWith$Mutation$UpdateMenteesGroupMembership<TRes> {
+  _CopyWithImpl$Mutation$UpdateMenteesGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateMenteesGroupMembership _instance;
+
+  final TRes Function(Mutation$UpdateMenteesGroupMembership) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateMenteesGroupMembership = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateMenteesGroupMembership(
+        updateMenteesGroupMembership: updateMenteesGroupMembership ==
+                    _undefined ||
+                updateMenteesGroupMembership == null
+            ? _instance.updateMenteesGroupMembership
+            : (updateMenteesGroupMembership
+                as Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+      TRes> get updateMenteesGroupMembership {
+    final local$updateMenteesGroupMembership =
+        _instance.updateMenteesGroupMembership;
+    return CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership(
+        local$updateMenteesGroupMembership,
+        (e) => call(updateMenteesGroupMembership: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$UpdateMenteesGroupMembership<TRes>
+    implements CopyWith$Mutation$UpdateMenteesGroupMembership<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateMenteesGroupMembership(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership?
+        updateMenteesGroupMembership,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+          TRes>
+      get updateMenteesGroupMembership =>
+          CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership
+              .stub(_res);
+}
+
+const documentNodeMutationUpdateMenteesGroupMembership =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'UpdateMenteesGroupMembership'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'MenteesGroupMembershipInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'updateMenteesGroupMembership'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership {
+  Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership({
+    required this.id,
+    this.$__typename = 'ServiceRequest',
+  });
+
+  factory Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership(
+      id: (l$id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership
+    on Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership {
+  CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+          Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership>
+      get copyWith =>
+          CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+    TRes> {
+  factory CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership(
+    Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership instance,
+    TRes Function(
+            Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership)
+        then,
+  ) = _CopyWithImpl$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership;
+
+  factory CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership;
+
+  TRes call({
+    String? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+            TRes> {
+  _CopyWithImpl$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership
+      _instance;
+
+  final TRes Function(
+      Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+        TRes>
+    implements
+        CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Mutation$UpdateMentorsGroupMembership {
+  factory Variables$Mutation$UpdateMentorsGroupMembership(
+          {required Input$MentorsGroupMembershipInput input}) =>
+      Variables$Mutation$UpdateMentorsGroupMembership._({
+        r'input': input,
+      });
+
+  Variables$Mutation$UpdateMentorsGroupMembership._(this._$data);
+
+  factory Variables$Mutation$UpdateMentorsGroupMembership.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$MentorsGroupMembershipInput.fromJson(
+        (l$input as Map<String, dynamic>));
+    return Variables$Mutation$UpdateMentorsGroupMembership._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$MentorsGroupMembershipInput get input =>
+      (_$data['input'] as Input$MentorsGroupMembershipInput);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$UpdateMentorsGroupMembership<
+          Variables$Mutation$UpdateMentorsGroupMembership>
+      get copyWith => CopyWith$Variables$Mutation$UpdateMentorsGroupMembership(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$UpdateMentorsGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$UpdateMentorsGroupMembership<TRes> {
+  factory CopyWith$Variables$Mutation$UpdateMentorsGroupMembership(
+    Variables$Mutation$UpdateMentorsGroupMembership instance,
+    TRes Function(Variables$Mutation$UpdateMentorsGroupMembership) then,
+  ) = _CopyWithImpl$Variables$Mutation$UpdateMentorsGroupMembership;
+
+  factory CopyWith$Variables$Mutation$UpdateMentorsGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$UpdateMentorsGroupMembership;
+
+  TRes call({Input$MentorsGroupMembershipInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$UpdateMentorsGroupMembership<TRes>
+    implements CopyWith$Variables$Mutation$UpdateMentorsGroupMembership<TRes> {
+  _CopyWithImpl$Variables$Mutation$UpdateMentorsGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$UpdateMentorsGroupMembership _instance;
+
+  final TRes Function(Variables$Mutation$UpdateMentorsGroupMembership) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) =>
+      _then(Variables$Mutation$UpdateMentorsGroupMembership._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$MentorsGroupMembershipInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$UpdateMentorsGroupMembership<TRes>
+    implements CopyWith$Variables$Mutation$UpdateMentorsGroupMembership<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$UpdateMentorsGroupMembership(this._res);
+
+  TRes _res;
+
+  call({Input$MentorsGroupMembershipInput? input}) => _res;
+}
+
+class Mutation$UpdateMentorsGroupMembership {
+  Mutation$UpdateMentorsGroupMembership({
+    required this.updateMentorsGroupMembership,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$UpdateMentorsGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$updateMentorsGroupMembership = json['updateMentorsGroupMembership'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateMentorsGroupMembership(
+      updateMentorsGroupMembership:
+          Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership
+              .fromJson(
+                  (l$updateMentorsGroupMembership as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership
+      updateMentorsGroupMembership;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateMentorsGroupMembership = updateMentorsGroupMembership;
+    _resultData['updateMentorsGroupMembership'] =
+        l$updateMentorsGroupMembership.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateMentorsGroupMembership = updateMentorsGroupMembership;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$updateMentorsGroupMembership,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateMentorsGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateMentorsGroupMembership = updateMentorsGroupMembership;
+    final lOther$updateMentorsGroupMembership =
+        other.updateMentorsGroupMembership;
+    if (l$updateMentorsGroupMembership != lOther$updateMentorsGroupMembership) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateMentorsGroupMembership
+    on Mutation$UpdateMentorsGroupMembership {
+  CopyWith$Mutation$UpdateMentorsGroupMembership<
+          Mutation$UpdateMentorsGroupMembership>
+      get copyWith => CopyWith$Mutation$UpdateMentorsGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$UpdateMentorsGroupMembership<TRes> {
+  factory CopyWith$Mutation$UpdateMentorsGroupMembership(
+    Mutation$UpdateMentorsGroupMembership instance,
+    TRes Function(Mutation$UpdateMentorsGroupMembership) then,
+  ) = _CopyWithImpl$Mutation$UpdateMentorsGroupMembership;
+
+  factory CopyWith$Mutation$UpdateMentorsGroupMembership.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateMentorsGroupMembership;
+
+  TRes call({
+    Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership?
+        updateMentorsGroupMembership,
+    String? $__typename,
+  });
+  CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+      TRes> get updateMentorsGroupMembership;
+}
+
+class _CopyWithImpl$Mutation$UpdateMentorsGroupMembership<TRes>
+    implements CopyWith$Mutation$UpdateMentorsGroupMembership<TRes> {
+  _CopyWithImpl$Mutation$UpdateMentorsGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateMentorsGroupMembership _instance;
+
+  final TRes Function(Mutation$UpdateMentorsGroupMembership) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateMentorsGroupMembership = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateMentorsGroupMembership(
+        updateMentorsGroupMembership: updateMentorsGroupMembership ==
+                    _undefined ||
+                updateMentorsGroupMembership == null
+            ? _instance.updateMentorsGroupMembership
+            : (updateMentorsGroupMembership
+                as Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+      TRes> get updateMentorsGroupMembership {
+    final local$updateMentorsGroupMembership =
+        _instance.updateMentorsGroupMembership;
+    return CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership(
+        local$updateMentorsGroupMembership,
+        (e) => call(updateMentorsGroupMembership: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$UpdateMentorsGroupMembership<TRes>
+    implements CopyWith$Mutation$UpdateMentorsGroupMembership<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateMentorsGroupMembership(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership?
+        updateMentorsGroupMembership,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+          TRes>
+      get updateMentorsGroupMembership =>
+          CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership
+              .stub(_res);
+}
+
+const documentNodeMutationUpdateMentorsGroupMembership =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'UpdateMentorsGroupMembership'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'MentorsGroupMembershipInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'updateMentorsGroupMembership'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership {
+  Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership({
+    required this.id,
+    this.$__typename = 'ServiceRequest',
+  });
+
+  factory Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership(
+      id: (l$id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership
+    on Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership {
+  CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+          Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership>
+      get copyWith =>
+          CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+    TRes> {
+  factory CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership(
+    Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership instance,
+    TRes Function(
+            Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership)
+        then,
+  ) = _CopyWithImpl$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership;
+
+  factory CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership.stub(
+          TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership;
+
+  TRes call({
+    String? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+            TRes> {
+  _CopyWithImpl$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership
+      _instance;
+
+  final TRes Function(
+      Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+        TRes>
+    implements
+        CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
+            TRes> {
+  _CopyWithStubImpl$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? $__typename,
+  }) =>
+      _res;
+}

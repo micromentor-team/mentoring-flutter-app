@@ -3,7 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:provider/provider.dart';
+
 import '../../../constants/app_constants.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../molecules/login_radio_button_cards.dart';
 import 'sign_up_bottom_buttons.dart';
 
@@ -16,13 +19,24 @@ class SignupBusinessStageScreen extends StatefulWidget {
 }
 
 class _SignupBusinessStageScreenState extends State<SignupBusinessStageScreen> {
+  late final UserRegistrationModel _registrationModel;
+  int _selectedStageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.businessStage,
+      title: l10n.signupBusinessStageTitle,
       bottomButtons: SignUpBottomButtons(
           leftButtonText: l10n.previous,
           rightButtonText: l10n.next,
@@ -30,13 +44,55 @@ class _SignupBusinessStageScreenState extends State<SignupBusinessStageScreen> {
             context.pop();
           },
           rightOnPress: () {
+            switch (_selectedStageIndex) {
+              case 0:
+                _registrationModel.updateUserInput.companyStageTextId =
+                    CompanyStageTextId.idea.name;
+                break;
+              case 1:
+                _registrationModel.updateUserInput.companyStageTextId =
+                    CompanyStageTextId.operational.name;
+                break;
+              case 2:
+                _registrationModel.updateUserInput.companyStageTextId =
+                    CompanyStageTextId.earning.name;
+                break;
+              case 3:
+                _registrationModel.updateUserInput.companyStageTextId =
+                    CompanyStageTextId.profitable.name;
+                break;
+              default:
+                _registrationModel.updateUserInput.companyStageTextId = null;
+                break;
+            }
             context.push(Routes.signupBusinessHelpSelection.path);
           }),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Column(
         children: [
-          createBusinessStageCards(context),
+          LoginRadioButtonCards(
+            title: [
+              l10n.signupBusinessStageCard1Title,
+              l10n.signupBusinessStageCard2Title,
+              l10n.signupBusinessStageCard3Title,
+              l10n.signupBusinessStageCard4Title,
+            ],
+            subtitle: [
+              l10n.signupBusinessStageCard1Description,
+              l10n.signupBusinessStageCard2Description,
+              l10n.signupBusinessStageCard3Description,
+              l10n.signupBusinessStageCard4Description,
+            ],
+            titleIcon: const [
+              Icon(Icons.lightbulb_outlined),
+              Icon(Icons.storefront_outlined),
+              Icon(Icons.attach_money_outlined),
+              Icon(Icons.auto_graph_outlined)
+            ],
+            imageAssetName: const [null, null, null, null],
+            onSelectedCardChanged: (index) => _selectedStageIndex = index,
+          ),
         ],
       ),
     );

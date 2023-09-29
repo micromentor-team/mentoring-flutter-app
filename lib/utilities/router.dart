@@ -71,7 +71,8 @@ class AppRouter {
               maintainState: false,
               child: StartScreen(
                 nextRouteName:
-                    state.queryParameters['nextRouteName'] ?? Routes.home.name,
+                    state.queryParameters[RouteParams.nextRouteName] ??
+                        Routes.home.name,
               ),
             );
           },
