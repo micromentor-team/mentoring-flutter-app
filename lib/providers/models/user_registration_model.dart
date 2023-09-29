@@ -141,14 +141,16 @@ class UpdateUserInput {
       regionOfResidence: regionOfResidence,
       cityOfResidence: cityOfResidence,
       countryOfResidenceTextId: countryOfResidenceTextId,
-      preferredLanguageTextId: preferredLanguageTextIds?.first,
+      preferredLanguageTextId: preferredLanguageTextIds?.firstOrNull,
       spokenLanguagesTextIds: spokenLanguagesTextIds,
       avatarUrl: avatarUrl,
       pronounsTextIds: pronounsTextIds,
       company: Input$CompanyInput(
         name: companyName,
         companyStageTextId: companyStageTextId,
-        websites: [Input$LabeledStringValueInput(value: companyWebsite)],
+        websites: companyWebsite?.isNotEmpty ?? false
+            ? [Input$LabeledStringValueInput(value: companyWebsite)]
+            : null,
       ),
       seeksHelp: userType == UserType.entrepreneur,
       offersHelp: userType == UserType.mentor,

@@ -63,16 +63,19 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: () {
-          if (_isEntrepreneur) {
-            _registrationModel.updateUserInput.menteeSoughtExpertisesTextIds =
-                _selectedChips.map((e) => e.textId).toList();
-          } else {
-            _registrationModel.updateUserInput.mentorExpertisesTextIds =
-                _selectedChips.map((e) => e.textId).toList();
-          }
-          context.push(Routes.signupMoreInfo.path);
-        },
+        rightOnPress: _selectedChips.isNotEmpty
+            ? () {
+                if (_isEntrepreneur) {
+                  _registrationModel
+                          .updateUserInput.menteeSoughtExpertisesTextIds =
+                      _selectedChips.map((e) => e.textId).toList();
+                } else {
+                  _registrationModel.updateUserInput.mentorExpertisesTextIds =
+                      _selectedChips.map((e) => e.textId).toList();
+                }
+                context.push(Routes.signupMoreInfo.path);
+              }
+            : null,
       ),
       footer: SignUpIconFooter(
         icon: Icons.visibility_outlined,
@@ -86,7 +89,8 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
                 : l10n.signupExpertisesMentorSubtitle(maxSelections),
             chips: _expertiseChips,
             maxSelection: maxSelections,
-            onSelectedChipsChanged: (chips) => _selectedChips = chips,
+            onSelectedChipsChanged: (chips) =>
+                setState(() => _selectedChips = chips),
           ),
         ],
       ),

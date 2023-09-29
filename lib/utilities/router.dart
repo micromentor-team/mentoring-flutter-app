@@ -123,7 +123,6 @@ class AppRouter {
 
   static ShellRoute _createSignUpShellRoute(BuildContext context) {
     return ShellRoute(
-      observers: [Provider.of<RouteObserver<PageRoute>>(context)],
       pageBuilder: (BuildContext context, GoRouterState state, child) {
         return MaterialPage(
           key: state.pageKey,

@@ -24,6 +24,7 @@ class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
   final _fluentLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;
+  bool _selectedPreferredLanguage = false;
 
   @override
   void initState() {
@@ -33,6 +34,11 @@ class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
       context,
       listen: false,
     );
+    _preferredLanguagesController.addListener(() {
+      setState(() {
+        _selectedPreferredLanguage = _preferredLanguagesController.hasTags;
+      });
+    });
   }
 
   @override
@@ -95,21 +101,23 @@ class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: () {
-          _registrationModel.updateUserInput.preferredLanguageTextIds =
-              _preferredLanguagesController.getTags
-                  ?.map((t) => _contentProvider.languageOptions!
-                      .firstWhere((o) => o.translatedValue! == t)
-                      .textId)
-                  .toList();
-          _registrationModel.updateUserInput.spokenLanguagesTextIds =
-              _fluentLanguagesController.getTags
-                  ?.map((t) => _contentProvider.languageOptions!
-                      .firstWhere((o) => o.translatedValue! == t)
-                      .textId)
-                  .toList();
-          context.push(Routes.signupUserType.path);
-        },
+        rightOnPress: _selectedPreferredLanguage
+            ? () {
+                _registrationModel.updateUserInput.preferredLanguageTextIds =
+                    _preferredLanguagesController.getTags
+                        ?.map((t) => _contentProvider.languageOptions!
+                            .firstWhere((o) => o.translatedValue! == t)
+                            .textId)
+                        .toList();
+                _registrationModel.updateUserInput.spokenLanguagesTextIds =
+                    _fluentLanguagesController.getTags
+                        ?.map((t) => _contentProvider.languageOptions!
+                            .firstWhere((o) => o.translatedValue! == t)
+                            .textId)
+                        .toList();
+                context.push(Routes.signupUserType.path);
+              }
+            : null,
       ),
     );
   }

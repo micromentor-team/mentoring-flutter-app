@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/models/user_registration_model.dart';
 import 'components/sign_up_bottom_buttons.dart';
 
 class SignupMentorInternationallyScreen extends StatefulWidget {
@@ -17,7 +19,18 @@ class SignupMentorInternationallyScreen extends StatefulWidget {
 
 class _SignupMentorInternationallyScreenState
     extends State<SignupMentorInternationallyScreen> {
+  late final UserRegistrationModel _registrationModel;
   String? _selection;
+  bool? _mentorInternationally;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +46,13 @@ class _SignupMentorInternationallyScreenState
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: () {
-          context.push(Routes.signupCompleted.path);
-        },
+        rightOnPress: _mentorInternationally != null
+            ? () {
+                _registrationModel.updateUserInput.mentorInternationally =
+                    _mentorInternationally;
+                context.push(Routes.signupCompleted.path);
+              }
+            : null,
       ),
       footer: SignUpIconFooter(
           icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
@@ -64,6 +81,7 @@ class _SignupMentorInternationallyScreenState
                   onChanged: (String? value) {
                     setState(() {
                       _selection = value;
+                      _mentorInternationally = true;
                     });
                   },
                 ),
@@ -81,6 +99,7 @@ class _SignupMentorInternationallyScreenState
                   onChanged: (String? value) {
                     setState(() {
                       _selection = value;
+                      _mentorInternationally = false;
                     });
                   },
                 ),

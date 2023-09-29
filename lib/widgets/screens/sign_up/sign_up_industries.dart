@@ -23,7 +23,7 @@ class _SignupIndustriesScreenState extends State<SignupIndustriesScreen> {
   late final UserRegistrationModel _registrationModel;
   late final List<SelectChip> _industryChips;
   late final bool _isEntrepreneur;
-  List<SelectChip>? _selectedIndustries;
+  List<SelectChip> _selectedChips = [];
 
   @override
   void initState() {
@@ -62,17 +62,19 @@ class _SignupIndustriesScreenState extends State<SignupIndustriesScreen> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: () {
-          if (_isEntrepreneur) {
-            _registrationModel.updateUserInput.menteeIndustryTextId =
-                _selectedIndustries?.first.textId;
-            context.push(Routes.signupCompleted.path);
-          } else {
-            _registrationModel.updateUserInput.mentorIndustriesTextIds =
-                _selectedIndustries?.map((e) => e.textId).toList();
-            context.push(Routes.signupMentorPreferences.path);
-          }
-        },
+        rightOnPress: _selectedChips.isNotEmpty
+            ? () {
+                if (_isEntrepreneur) {
+                  _registrationModel.updateUserInput.menteeIndustryTextId =
+                      _selectedChips.firstOrNull?.textId;
+                  context.push(Routes.signupCompleted.path);
+                } else {
+                  _registrationModel.updateUserInput.mentorIndustriesTextIds =
+                      _selectedChips.map((e) => e.textId).toList();
+                  context.push(Routes.signupMentorPreferences.path);
+                }
+              }
+            : null,
       ),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
@@ -86,7 +88,8 @@ class _SignupIndustriesScreenState extends State<SignupIndustriesScreen> {
                 : l10n.signupIndustrySubtitleMultiple(3),
             chips: _industryChips,
             maxSelection: _isEntrepreneur ? 1 : 3,
-            onSelectedChipsChanged: (chips) => _selectedIndustries = chips,
+            onSelectedChipsChanged: (chips) =>
+                setState(() => _selectedChips = chips),
           ),
         ],
       ),
