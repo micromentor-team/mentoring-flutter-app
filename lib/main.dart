@@ -209,7 +209,7 @@ void main() async {
                   return ExploreCardFiltersModel(
                     countries: contentProvider.countryIds,
                     languages: contentProvider.languageIds,
-                    skills: contentProvider.expertiseIds,
+                    expertises: contentProvider.expertiseIds,
                     industries: contentProvider.industryIds,
                   );
                 },

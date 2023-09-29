@@ -26,7 +26,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
   late final TextfieldTagsController _languagesController;
   late final ExploreCardFiltersModel _filtersModel;
   late final ContentProvider _contentProvider;
-  Set<String> _selectedSkills = {};
+  Set<String> _selectedExpertises = {};
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     _filtersModel =
         Provider.of<ExploreCardFiltersModel>(context, listen: false);
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
-    _selectedSkills = _filtersModel.selectedSkills;
+    _selectedExpertises = _filtersModel.selectedExpertises;
   }
 
   @override
@@ -63,9 +63,9 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
         children: [
           Column(children: [
             _Expertise(
-              skills: _filtersModel.skills,
-              selectedSkills: _selectedSkills,
-              skillTranslate: _contentProvider.translateExpertise,
+              expertises: _filtersModel.expertises,
+              selectedExpertises: _selectedExpertises,
+              expertiseTranslate: _contentProvider.translateExpertise,
             ),
             AutocompletePicker(
               fieldName: l10n.exploreSearchFilterHeadingLanguage,
@@ -96,13 +96,13 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
             onClear: () => setState(() {
               _countriesController.clearTags();
               _languagesController.clearTags();
-              _selectedSkills.clear();
+              _selectedExpertises.clear();
             }),
             onApply: () {
               _filtersModel.setFilters(
                 selectedCountries: _countriesController.getTags?.toSet(),
                 selectedLanguages: _languagesController.getTags?.toSet(),
-                selectedSkills: _selectedSkills,
+                selectedExpertises: _selectedExpertises,
               );
 
               context.pop();
@@ -115,14 +115,14 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
 }
 
 class _Expertise extends StatefulWidget {
-  final List<String> skills;
-  final Set<String> selectedSkills;
-  final String? Function(String id) skillTranslate;
+  final List<String> expertises;
+  final Set<String> selectedExpertises;
+  final String? Function(String id) expertiseTranslate;
 
   const _Expertise({
-    required this.skills,
-    required this.selectedSkills,
-    required this.skillTranslate,
+    required this.expertises,
+    required this.selectedExpertises,
+    required this.expertiseTranslate,
   });
 
   @override
@@ -135,18 +135,18 @@ class _ExpertiseState extends State<_Expertise> {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    var skillButtons = [];
-    for (int i = 0; i < widget.skills.length; i++) {
-      var skill = widget.skills[i];
-      var isSelected = widget.selectedSkills.contains(skill);
+    var expertiseButtons = [];
+    for (int i = 0; i < widget.expertises.length; i++) {
+      var expertise = widget.expertises[i];
+      var isSelected = widget.selectedExpertises.contains(expertise);
 
-      skillButtons.add(OutlinedButton(
+      expertiseButtons.add(OutlinedButton(
         onPressed: () {
           setState(() {
             if (isSelected) {
-              widget.selectedSkills.remove(skill);
+              widget.selectedExpertises.remove(expertise);
             } else {
-              widget.selectedSkills.add(skill);
+              widget.selectedExpertises.add(expertise);
             }
           });
         },
@@ -155,16 +155,16 @@ class _ExpertiseState extends State<_Expertise> {
               ? theme.colorScheme.onInverseSurface
               : theme.colorScheme.surface),
         ),
-        child: Text(widget.skillTranslate(skill) ?? skill,
+        child: Text(widget.expertiseTranslate(expertise) ?? expertise,
             style: TextStyle(color: theme.colorScheme.primary)),
       ));
-      if (i != widget.skills.length - 1) {
-        skillButtons.add(const SizedBox(width: Insets.paddingExtraSmall));
+      if (i != widget.expertises.length - 1) {
+        expertiseButtons.add(const SizedBox(width: Insets.paddingExtraSmall));
       }
     }
 
-    bool allSkillsSelected =
-        setEquals(widget.selectedSkills, widget.skills.toSet());
+    bool allExpertisesSelected =
+        setEquals(widget.selectedExpertises, widget.expertises.toSet());
 
     return Row(
       children: [
@@ -182,11 +182,11 @@ class _ExpertiseState extends State<_Expertise> {
                       OutlinedButton(
                         onPressed: () {
                           setState(() {
-                            if (allSkillsSelected) {
-                              widget.selectedSkills.clear();
+                            if (allExpertisesSelected) {
+                              widget.selectedExpertises.clear();
                             } else {
-                              widget.selectedSkills.clear();
-                              widget.selectedSkills.addAll(widget.skills);
+                              widget.selectedExpertises.clear();
+                              widget.selectedExpertises.addAll(widget.expertises);
                             }
                           });
                         },
@@ -194,7 +194,7 @@ class _ExpertiseState extends State<_Expertise> {
                             ButtonStyles.primaryRoundedRectangleButton(context)
                                 .copyWith(
                           backgroundColor: MaterialStatePropertyAll(
-                            (allSkillsSelected)
+                            (allExpertisesSelected)
                                 ? theme.colorScheme.onInverseSurface
                                 : theme.colorScheme.surface,
                           ),
@@ -203,7 +203,7 @@ class _ExpertiseState extends State<_Expertise> {
                             style: TextStyle(color: theme.colorScheme.primary)),
                       ),
                       const VerticalDivider(),
-                      ...skillButtons,
+                      ...expertiseButtons,
                     ],
                   ),
                 ),

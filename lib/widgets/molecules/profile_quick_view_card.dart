@@ -20,7 +20,7 @@ class ProfileQuickViewInfo {
   final String? company;
   final String? companyRole;
   final int? endorsements;
-  final List<SkillChip> skills;
+  final List<ExpertiseChip> expertises;
 
   const ProfileQuickViewInfo({
     required this.userId,
@@ -32,7 +32,7 @@ class ProfileQuickViewInfo {
     this.company,
     this.companyRole,
     this.endorsements,
-    required this.skills,
+    required this.expertises,
   });
 }
 
@@ -49,12 +49,12 @@ ProfileQuickViewCard createProfileCardFromInfo({
     company: info.company,
     companyRole: info.companyRole,
     endorsements: info.endorsements,
-    skills: info.skills,
+    expertises: info.expertises,
   );
 }
 
 class ProfileQuickViewCard extends StatelessWidget {
-  static int maxSkillChips = 3;
+  static int maxExpertiseChips = 3;
 
   final String userId;
   final UserType userType;
@@ -65,7 +65,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   final String? company;
   final String? companyRole;
   final int? endorsements;
-  final List<SkillChip> skills;
+  final List<ExpertiseChip> expertises;
 
   const ProfileQuickViewCard({
     Key? key,
@@ -78,7 +78,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     this.company,
     this.companyRole,
     this.endorsements,
-    this.skills = const [],
+    this.expertises = const [],
   }) : super(key: key);
 
   @override
@@ -104,7 +104,7 @@ class ProfileQuickViewCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _createProfileView(context, l10n),
-                if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
+                if (expertises.isNotEmpty) _createSkillsFooter(context, l10n),
               ],
             ),
           ),
@@ -253,7 +253,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   }
 
   List<Widget> _createSkillChips(l10n) {
-    final List<SkillChip> topSkills = skills.take(maxSkillChips).toList();
+    final List<ExpertiseChip> topSkills = expertises.take(maxExpertiseChips).toList();
     List<Widget> rowChildren = [topSkills.first];
     for (int i = 1; i < topSkills.length; i++) {
       rowChildren.addAll(

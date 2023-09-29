@@ -64,7 +64,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                   }
                   return acc;
                 }),
-                skills: [],
+                expertises: [],
               ),
             ))
         .toList();

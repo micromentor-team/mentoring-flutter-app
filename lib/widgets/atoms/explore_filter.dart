@@ -43,13 +43,13 @@ class ExploreFilter extends StatelessWidget {
     );
   }
 
-  Text _createSkillsTextHeader(BuildContext context, Set<String>? skills) {
+  Text _createExpertisesTextHeader(BuildContext context, Set<String>? expertises) {
     final contentProvider = Provider.of<ContentProvider>(context);
-    var skillsText = joinFirstThree(skills
+    var expertisesText = joinFirstThree(expertises
         ?.map((s) => contentProvider.translateExpertise(s) ?? s)
         .toList());
     return Text(
-      skillsText,
+      expertisesText,
       style: Theme.of(context).textTheme.labelMedium,
     );
   }
@@ -134,12 +134,12 @@ class ExploreFilter extends StatelessWidget {
                               children: [
                                 if (!filters.userFiltersSelected ||
                                     (filters.userFiltersSelected &&
-                                        !filters.skillFilterSelected))
+                                        !filters.expertiseFilterSelected))
                                   _createHelpTextHeader(l10n, context),
                                 if (filters.userFiltersSelected &&
-                                    filters.skillFilterSelected)
-                                  _createSkillsTextHeader(
-                                      context, filters.selectedSkills),
+                                    filters.expertiseFilterSelected)
+                                  _createExpertisesTextHeader(
+                                      context, filters.selectedExpertises),
                               ],
                             ),
                             Row(

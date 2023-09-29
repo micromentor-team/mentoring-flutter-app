@@ -74,7 +74,7 @@ class _RecommendedMentorsFiltersAdvanced
                     const SizedBox(height: Insets.paddingExtraSmall),
                     DropdownButton<String>(
                       isExpanded: true,
-                      items: _filtersModel.skills
+                      items: _filtersModel.expertises
                           .map((industry) => DropdownMenuItem(
                                 value: _contentProvider
                                     .translateExpertise(industry),
