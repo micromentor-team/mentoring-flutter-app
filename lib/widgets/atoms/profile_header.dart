@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/models/scaffold_model.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String? avatarUrl;
@@ -39,8 +42,7 @@ class ProfileHeader extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(Insets.paddingSmall),
               child: Text(
-                // profileMessage,
-                "Good morning",
+                profileMessage,
                 textAlign: TextAlign.start,
                 softWrap: true,
                 style: theme.textTheme.titleLarge?.copyWith(
@@ -52,7 +54,13 @@ class ProfileHeader extends StatelessWidget {
           ),
           const Spacer(),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Provider.of<ScaffoldModel>(
+                context,
+                listen: false,
+              ).setTestHomeScaffold();
+              Scaffold.of(context).openDrawer();
+            },
             child: Icon(
               Icons.more_vert,
               color: theme.colorScheme.primary,
