@@ -63,7 +63,7 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
         children: [
           Column(children: [
             _Expertise(
-              expertises: _filtersModel.expertises,
+              expertiseIds: _filtersModel.expertises,
               selectedExpertises: _selectedExpertises,
               expertiseTranslate: _contentProvider.translateExpertise,
             ),
@@ -115,12 +115,12 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
 }
 
 class _Expertise extends StatefulWidget {
-  final List<String> expertises;
+  final List<String> expertiseIds;
   final Set<String> selectedExpertises;
   final String? Function(String id) expertiseTranslate;
 
   const _Expertise({
-    required this.expertises,
+    required this.expertiseIds,
     required this.selectedExpertises,
     required this.expertiseTranslate,
   });
@@ -136,8 +136,8 @@ class _ExpertiseState extends State<_Expertise> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     var expertiseButtons = [];
-    for (int i = 0; i < widget.expertises.length; i++) {
-      var expertise = widget.expertises[i];
+    for (int i = 0; i < widget.expertiseIds.length; i++) {
+      var expertise = widget.expertiseIds[i];
       var isSelected = widget.selectedExpertises.contains(expertise);
 
       expertiseButtons.add(OutlinedButton(
@@ -158,13 +158,13 @@ class _ExpertiseState extends State<_Expertise> {
         child: Text(widget.expertiseTranslate(expertise) ?? expertise,
             style: TextStyle(color: theme.colorScheme.primary)),
       ));
-      if (i != widget.expertises.length - 1) {
+      if (i != widget.expertiseIds.length - 1) {
         expertiseButtons.add(const SizedBox(width: Insets.paddingExtraSmall));
       }
     }
 
     bool allExpertisesSelected =
-        setEquals(widget.selectedExpertises, widget.expertises.toSet());
+        setEquals(widget.selectedExpertises, widget.expertiseIds.toSet());
 
     return Row(
       children: [
@@ -186,7 +186,8 @@ class _ExpertiseState extends State<_Expertise> {
                               widget.selectedExpertises.clear();
                             } else {
                               widget.selectedExpertises.clear();
-                              widget.selectedExpertises.addAll(widget.expertises);
+                              widget.selectedExpertises
+                                  .addAll(widget.expertiseIds);
                             }
                           });
                         },

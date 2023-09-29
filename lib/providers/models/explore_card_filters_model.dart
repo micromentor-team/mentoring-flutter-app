@@ -45,7 +45,9 @@ class ExploreCardFiltersModel extends ChangeNotifier {
   bool get languageFilterSelected => _selectedLanguages.isNotEmpty;
   bool get expertiseFilterSelected => _selectedExpertises.isNotEmpty;
   bool get userFiltersSelected =>
-      expertiseFilterSelected || languageFilterSelected || countryFilterSelected;
+      expertiseFilterSelected ||
+      languageFilterSelected ||
+      countryFilterSelected;
 
   void setFilters({
     Set<String>? selectedCountries,

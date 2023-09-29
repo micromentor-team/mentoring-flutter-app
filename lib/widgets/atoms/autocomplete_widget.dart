@@ -5,7 +5,7 @@ import 'package:textfield_tags/textfield_tags.dart';
 
 class AutocompleteWidget extends StatelessWidget {
   final List<String> options;
-  final String Function(String)? optionsTranslations;
+  final String Function(String) optionsTranslations;
   final List<String> selectedOptions;
   final TextfieldTagsController controller;
 
@@ -14,7 +14,7 @@ class AutocompleteWidget extends StatelessWidget {
     required this.options,
     required this.selectedOptions,
     required this.controller,
-    this.optionsTranslations,
+    required this.optionsTranslations,
   });
 
   @override
@@ -33,6 +33,7 @@ class AutocompleteWidget extends StatelessWidget {
         return filteredOptions.where((option) =>
             option.toLowerCase().contains(textEditingValue.text.toLowerCase()));
       },
+      displayStringForOption: optionsTranslations,
       onSelected: (String selectedTag) {
         controller.addTag = selectedTag;
       },
@@ -101,7 +102,7 @@ class AutocompleteWidget extends StatelessWidget {
                                   children: [
                                     InkWell(
                                       child: Text(
-                                        optionsTranslations?.call(tag) ?? tag,
+                                        optionsTranslations.call(tag),
                                         style: TextStyle(
                                           color: theme
                                               .colorScheme.onPrimaryContainer,

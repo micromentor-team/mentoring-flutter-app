@@ -76,9 +76,12 @@ class _RecommendedMentorsFiltersAdvanced
                       isExpanded: true,
                       items: _filtersModel.expertises
                           .map((industry) => DropdownMenuItem(
-                                value: _contentProvider
-                                    .translateExpertise(industry),
-                                child: Text(industry),
+                                value: industry,
+                                child: Text(
+                                  _contentProvider
+                                          .translateExpertise(industry) ??
+                                      "",
+                                ),
                               ))
                           .toList(),
                       onChanged: (industry) => setState(() {

@@ -253,7 +253,8 @@ class ProfileQuickViewCard extends StatelessWidget {
   }
 
   List<Widget> _createSkillChips(l10n) {
-    final List<ExpertiseChip> topSkills = expertises.take(maxExpertiseChips).toList();
+    final List<ExpertiseChip> topSkills =
+        expertises.take(maxExpertiseChips).toList();
     List<Widget> rowChildren = [topSkills.first];
     for (int i = 1; i < topSkills.length; i++) {
       rowChildren.addAll(

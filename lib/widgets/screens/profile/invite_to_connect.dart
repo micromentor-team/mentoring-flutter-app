@@ -99,7 +99,8 @@ class _InviteToConnectState extends State<InviteToConnect>
                   .firstWhere((e) => e.groupIdent == GroupIdent.mentors.name)
                   .maybeWhen(
                       mentorsGroupMembership: (g) => g.expertises
-                          .map((e) => ExpertiseChip(expertise: e.translatedValue!))
+                          .map((e) =>
+                              ExpertiseChip(expertise: e.translatedValue!))
                           .toList(),
                       orElse: () => []);
             } else {
@@ -107,7 +108,8 @@ class _InviteToConnectState extends State<InviteToConnect>
                   .firstWhere((e) => e.groupIdent == GroupIdent.mentees.name)
                   .maybeWhen(
                       menteesGroupMembership: (g) => g.soughtExpertises
-                          .map((e) => ExpertiseChip(expertise: e.translatedValue!))
+                          .map((e) =>
+                              ExpertiseChip(expertise: e.translatedValue!))
                           .toList(),
                       orElse: () => []);
             }

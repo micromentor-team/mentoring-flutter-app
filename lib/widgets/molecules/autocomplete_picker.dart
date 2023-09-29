@@ -33,7 +33,7 @@ class AutocompletePicker extends StatelessWidget {
               ],
               AutocompleteWidget(
                 options: options.toList(),
-                optionsTranslations: optionsTranslations,
+                optionsTranslations: optionsTranslations ?? (s) => s,
                 selectedOptions: selectedOptions?.toList() ?? [],
                 controller: controller,
               ),

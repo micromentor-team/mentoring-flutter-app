@@ -43,7 +43,8 @@ class ExploreFilter extends StatelessWidget {
     );
   }
 
-  Text _createExpertisesTextHeader(BuildContext context, Set<String>? expertises) {
+  Text _createExpertisesTextHeader(
+      BuildContext context, Set<String>? expertises) {
     final contentProvider = Provider.of<ContentProvider>(context);
     var expertisesText = joinFirstThree(expertises
         ?.map((s) => contentProvider.translateExpertise(s) ?? s)
