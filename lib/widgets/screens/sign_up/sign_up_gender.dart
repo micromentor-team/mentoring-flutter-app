@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
@@ -18,16 +19,39 @@ class SignUpGender extends StatefulWidget {
 
 class _SignUpGenderState extends State<SignUpGender> {
   final _formKey = GlobalKey<FormState>();
+  late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;
-  String? _gender;
+  String? _genderValue;
   String? _genderTextId;
 
   @override
   void initState() {
     super.initState();
+    _contentProvider = Provider.of<ContentProvider>(context, listen: false);
     _registrationModel = Provider.of<UserRegistrationModel>(
       context,
       listen: false,
+    );
+  }
+
+  Widget _createGenderOption(ThemeData theme, String value, String textId) {
+    return ListTile(
+      title: Text(
+        value,
+        style: theme.textTheme.bodyMedium!.copyWith(
+          color: theme.colorScheme.secondary,
+        ),
+      ),
+      trailing: Radio<String>(
+        value: value,
+        groupValue: _genderValue,
+        onChanged: (String? value) {
+          setState(() {
+            _genderValue = value;
+            _genderTextId = textId;
+          });
+        },
+      ),
     );
   }
 
@@ -43,74 +67,21 @@ class _SignUpGenderState extends State<SignUpGender> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              l10n.signupGenderSubtitle,
-              style: theme.textTheme.bodyMedium!.copyWith(
-                color: theme.colorScheme.secondary,
+            for (int i = 0;
+                i < _contentProvider.presetGenderOptions!.length;
+                i++)
+              Padding(
+                padding: i == 0
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.only(
+                        top: Insets.paddingLarge,
+                      ),
+                child: _createGenderOption(
+                  theme,
+                  _contentProvider.presetGenderOptions![i].translatedValue!,
+                  _contentProvider.presetGenderOptions![i].textId,
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: Insets.paddingLarge),
-            Column(
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                    l10n.signupGenderOptionWoman,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: theme.colorScheme.secondary,
-                    ),
-                  ),
-                  trailing: Radio<String>(
-                    value: l10n.signupGenderOptionWoman,
-                    groupValue: _gender,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _gender = value;
-                        _genderTextId = PresetGenderTextIds.female;
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(height: Insets.paddingLarge),
-                ListTile(
-                  title: Text(
-                    l10n.signupGenderOptionMan,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: theme.colorScheme.secondary,
-                    ),
-                  ),
-                  trailing: Radio<String>(
-                    value: l10n.signupGenderOptionMan,
-                    groupValue: _gender,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _gender = value;
-                        _genderTextId = PresetGenderTextIds.male;
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(height: Insets.paddingLarge),
-                ListTile(
-                  title: Text(
-                    l10n.signupGenderOptionOther,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: theme.colorScheme.secondary,
-                    ),
-                  ),
-                  trailing: Radio<String>(
-                    value: l10n.signupGenderOptionOther,
-                    groupValue: _gender,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _gender = value;
-                        _genderTextId = PresetGenderTextIds.other;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
@@ -122,7 +93,7 @@ class _SignUpGenderState extends State<SignUpGender> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: _gender == null
+        rightOnPress: _genderTextId == null
             ? null
             : () {
                 if (_formKey.currentState!.validate()) {
