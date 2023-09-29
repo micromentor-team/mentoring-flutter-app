@@ -19,7 +19,7 @@ class SignupMoreInfoScreen extends StatefulWidget {
 class _SignupMoreInfoScreenState extends State<SignupMoreInfoScreen> {
   late final UserProvider _userProvider;
   late final UserRegistrationModel _registrationModel;
-  late final _isEntrepreneur;
+  late final bool _isEntrepreneur;
   bool _processing = false;
 
   @override
