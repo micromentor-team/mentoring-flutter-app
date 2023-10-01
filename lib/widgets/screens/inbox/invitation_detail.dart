@@ -217,6 +217,7 @@ class _InvitationDetailState extends State<InvitationDetail>
               channelInvitationId: widget.channelInvitationId,
             );
             await _inboxModel.refreshPendingReceivedInvitations();
+            router.push(Routes.inboxInvitesReceived.path);
           },
           child: Text(
             _l10n.decline,

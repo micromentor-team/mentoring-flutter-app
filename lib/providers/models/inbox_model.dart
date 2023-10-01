@@ -238,7 +238,6 @@ class InboxModel extends ChangeNotifier {
   }
 
   Future<void> _refreshLatestMessage(String channelId) async {
-    // TODO: Possible race condition here if the query executes before the mutation completes, consider polling result
     final latestMessageResult =
         await _messagesProvider.findChannelLatestMessage(
       channelId: channelId,
