@@ -172,7 +172,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
         channelId: channelId,
         isArchivedForMe: !widget.isArchivedForUser,
       );
-      await _inboxModel.refreshInboxChatNotifications();
+      await _inboxModel.refreshUnseenMessages();
       setState(() {});
     }
   }

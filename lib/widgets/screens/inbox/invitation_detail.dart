@@ -217,7 +217,6 @@ class _InvitationDetailState extends State<InvitationDetail>
               channelInvitationId: widget.channelInvitationId,
             );
             await _inboxModel.refreshPendingReceivedInvitations();
-            _inboxModel.refreshInboxInviteNotifications();
           },
           child: Text(
             _l10n.decline,
@@ -238,7 +237,6 @@ class _InvitationDetailState extends State<InvitationDetail>
               channelInvitationId: widget.channelInvitationId,
             );
             await _inboxModel.refreshPendingReceivedInvitations();
-            await _inboxModel.refreshInboxInviteNotifications();
             await _inboxModel.refreshActiveChannels();
             final ChannelForUser? newChannel = _inboxModel.activeChannels
                 .where((e) => e.participants.any((p) => p.user.id == senderId))
