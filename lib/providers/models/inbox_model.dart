@@ -14,6 +14,9 @@ import '../invitations_provider.dart';
 import '../messages_provider.dart';
 
 class InboxModel extends ChangeNotifier {
+  static const Duration dataPollInterval = Duration(seconds: 15);
+  Timer? _dataPollingTimer;
+
   // Providers
   final MessagesProvider _messagesProvider;
   final ChannelsProvider _channelsProvider;
@@ -81,6 +84,21 @@ class InboxModel extends ChangeNotifier {
           context,
           listen: false,
         );
+
+  void initializeDataPolling() {
+    if (_dataPollingTimer != null && _dataPollingTimer!.isActive) {
+      cancelDataPolling();
+    }
+    _dataPollingTimer = Timer.periodic(dataPollInterval, (_) {
+      // TODO: Fetch only the most recent data
+      refreshAll();
+    });
+  }
+
+  void cancelDataPolling() {
+    _dataPollingTimer?.cancel();
+    _dataPollingTimer = null;
+  }
 
   int getUnseenMessageCount({
     required String channelId,
@@ -152,7 +170,6 @@ class InboxModel extends ChangeNotifier {
 
   Future<void> refreshPendingReceivedInvitations() async {
     _receivedInvitationsState = AsyncState.loading;
-    _pendingReceivedInvitations = null;
     final result = await _invitationsProvider.getReceivedInvitations(
       onlyPending: true,
     );
@@ -178,7 +195,6 @@ class InboxModel extends ChangeNotifier {
 
   Future<void> refreshPendingSentInvitations() async {
     _sentInvitationsState = AsyncState.loading;
-    _pendingSentInvitations = null;
     final result = await _invitationsProvider.getSentInvitations(
       onlyPending: true,
     );
@@ -200,7 +216,6 @@ class InboxModel extends ChangeNotifier {
 
   Future<void> refreshActiveChannels() async {
     _channelsState = AsyncState.loading;
-    _activeChannels = null;
     final previousActiveChannelsCount = _activeChannels?.length ?? 0;
     final result = await _channelsProvider.queryUserChannels(
       userId: _userProvider.user!.id,
