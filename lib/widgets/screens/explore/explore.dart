@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';
 
@@ -14,9 +17,11 @@ class ExploreCardScroll extends StatefulWidget {
 }
 
 class _ExploreCardScrollState extends State<ExploreCardScroll> {
+  late final AuthenticatedUser _authenticatedUser;
   final int requestSize = 5;
   List<bool> isSelected = [];
   List<ProfileQuickViewInfo> cardInfo = [];
+  bool _showTips = false;
 
   void _loadMoreRecommendations() {
     // future todo:  load the actual backend request into cardInfo here instead
@@ -51,81 +56,108 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 
   @override
   void initState() {
+    super.initState();
     if (isSelected.isEmpty) {
       _loadMoreRecommendations();
     }
-    super.initState();
+    _authenticatedUser = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    ).user!;
+    final registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+    _showTips = registrationModel.isNewUser;
+    registrationModel.clearNewUserFlag();
+  }
+
+  void _showTipsSnackBar(
+    BuildContext context,
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
+    final bool isEntrepreneur = _authenticatedUser.seeksHelp;
+    _showTips = false;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: theme.colorScheme.primaryContainer,
+        duration: const Duration(minutes: 5),
+        content: Padding(
+          padding: const EdgeInsets.all(Insets.paddingMedium),
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  isEntrepreneur
+                      ? l10n.exploreTipsEntrepreneurTitle
+                      : l10n.exploreTipsMentorTitle,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  isEntrepreneur
+                      ? l10n.exploreTipsEntrepreneurSubtitle
+                      : l10n.exploreTipsMentorSubtitle,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        showCloseIcon: true,
+        closeIconColor: theme.colorScheme.onSurfaceVariant,
+        padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-
+    if (_showTips) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showTipsSnackBar(context, theme, l10n);
+      });
+    }
     return SafeArea(
       child: Column(
         children: [
           Expanded(
-              child: ListView(
-            children: _createFilter(context) +
-                _createCards() +
-                [
-                  TextButton(
+            child: ListView(
+              children: _createFilter(context) +
+                  _createCards() +
+                  [
+                    TextButton(
                       onPressed: () {
                         setState(() {
                           _loadMoreRecommendations();
                         });
                       },
-                      child: Column(children: [
-                        Text(
-                          l10n.exploreSeeMore,
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color:
-                              Color(theme.colorScheme.onSurfaceVariant.value),
-                        ),
-                      ]))
-                ],
-          )),
-          TextButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: theme.colorScheme.primaryContainer,
-                  content: Padding(
-                    padding: const EdgeInsets.all(Insets.paddingMedium),
-                    child: Center(
                       child: Column(
                         children: [
                           Text(
-                            l10n.maximizeYourImpact,
+                            l10n.exploreSeeMore,
                             style: theme.textTheme.labelLarge?.copyWith(
-                              color: theme.colorScheme.secondary,
+                              color: theme.colorScheme.onSurfaceVariant,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            l10n.connectWithThreeEntrepreneurs,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.colorScheme.secondary,
-                            ),
-                            textAlign: TextAlign.center,
+                          Icon(
+                            Icons.arrow_drop_down,
+                            color:
+                                Color(theme.colorScheme.onSurfaceVariant.value),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  showCloseIcon: true,
-                  closeIconColor: theme.colorScheme.onSurfaceVariant,
-                  padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-                ),
-              );
-            },
-            child: const Text("Show some tips on a SnackBar"),
+                  ],
+            ),
           ),
         ],
       ),

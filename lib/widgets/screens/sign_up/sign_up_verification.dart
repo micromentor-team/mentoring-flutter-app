@@ -33,21 +33,6 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
     );
   }
 
-  Future<bool> _registerUser() async {
-    final signUpResult = await _userProvider.signUpUser(
-      email: _registrationModel.signUpUserInput.email!,
-      password: _registrationModel.signUpUserInput.password!,
-    );
-    if (signUpResult.gqlQueryResult.hasException) {
-      return false;
-    }
-    final userResult = await _userProvider.getAuthenticatedUser();
-    if (userResult.gqlQueryResult.hasException) {
-      return false;
-    }
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -148,7 +133,8 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
                       setState(() {
                         processing = true;
                       });
-                      if (await _registerUser()) {
+                      if (await _registrationModel
+                          .registerUser(_userProvider)) {
                         router.push(Routes.signupWelcome.path);
                       }
                       WidgetsBinding.instance.addPostFrameCallback((_) {

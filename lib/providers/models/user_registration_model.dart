@@ -10,15 +10,36 @@ class UserRegistrationModel {
   SignUpUserInput _signUpUserInput = SignUpUserInput();
   UpdateUserInput _updateUserInput = UpdateUserInput();
   AppUserSettingsInput _appUserSettingsInput = AppUserSettingsInput();
+  bool _isNewUser = false;
 
   SignUpUserInput get signUpUserInput => _signUpUserInput;
   UpdateUserInput get updateUserInput => _updateUserInput;
   AppUserSettingsInput get appUserSettingsInput => _appUserSettingsInput;
+  bool get isNewUser => _isNewUser;
+
+  void clearNewUserFlag() {
+    _isNewUser = false;
+  }
 
   void clear() {
     _signUpUserInput = SignUpUserInput();
     _updateUserInput = UpdateUserInput();
     _appUserSettingsInput = AppUserSettingsInput();
+  }
+
+  Future<bool> registerUser(UserProvider userProvider) async {
+    final signUpResult = await userProvider.signUpUser(
+      email: signUpUserInput.email!,
+      password: signUpUserInput.password!,
+    );
+    if (signUpResult.gqlQueryResult.hasException) {
+      return false;
+    }
+    final userResult = await userProvider.getAuthenticatedUser();
+    if (userResult.gqlQueryResult.hasException) {
+      return false;
+    }
+    return true;
   }
 
   Future<bool> updateUser(UserProvider userProvider) async {
@@ -73,6 +94,7 @@ class UserRegistrationModel {
     if (groupUpdateResult?.gqlQueryResult.hasException ?? false) {
       return false;
     }
+    _isNewUser = true;
     return true;
   }
 }
