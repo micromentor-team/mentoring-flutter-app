@@ -1,9 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/providers/base/operation_result.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
@@ -27,18 +27,9 @@ class ExploreCardScroll extends StatefulWidget {
 }
 
 class _ExploreCardScrollState extends State<ExploreCardScroll> {
-  static const int profileIncrement = 5;
+  static const refreshInterval = Duration(seconds: 1);
 
-  int _profiles = 0;
-  Future<OperationResult<Mutation$CreateUserSearch$createUserSearch>>?
-      _recommendedUsers;
-
-  void _loadMoreRecommendations() {
-    _profiles += profileIncrement;
-    _recommendedUsers = widget.userProvider.createUserSearch(
-      searchInput: widget.exploreCardFilters.toUserSearchInput(_profiles),
-    );
-  }
+  String? _searchId;
 
   List<Widget> _createCards(
       List<Query$FindUserSearch$findUserSearchById$topFoundUsers> response) {
@@ -86,9 +77,12 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 
   @override
   void initState() {
-    if (_profiles == 0) {
-      _loadMoreRecommendations();
-    }
+    widget.userProvider
+        .createUserSearch(
+          searchInput: widget.exploreCardFilters.toUserSearchInput(15),
+        )
+        .then((r) => setState(() => _searchId = r.response!.id));
+
     super.initState();
   }
 
@@ -97,48 +91,49 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    return FutureBuilder(
-      future: _recommendedUsers,
-      builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
-        snapshot: snapshot,
-        onReady: () {
-          final id = snapshot.data?.response?.id;
-          if (id == null) {
-            return const SizedBox.shrink();
-          }
+    if (_searchId == null) {
+      return const SizedBox.shrink();
+    }
 
-          return FutureBuilder(
-            future: widget.userProvider.getUserSearch(userSearchId: id),
-            builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
-                snapshot: snapshot,
-                onReady: () {
-                  return Column(
-                    children: [
-                      ..._createCards(
-                          snapshot.data?.response?.topFoundUsers ?? []),
-                      TextButton(
-                          onPressed: () {
-                            setState(_loadMoreRecommendations);
-                          },
-                          child: Column(children: [
-                            Text(
-                              l10n.exploreSeeMore,
-                              style: theme.textTheme.labelLarge?.copyWith(
-                                color: theme.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              color: Color(
-                                  theme.colorScheme.onSurfaceVariant.value),
-                            ),
-                          ]))
-                    ],
-                  );
-                }),
-          );
-        },
-      ),
+    return FutureBuilder(
+      future: widget.userProvider.getUserSearch(userSearchId: _searchId!),
+      builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
+          snapshot: snapshot,
+          onReady: () {
+            final isFinished = snapshot.data?.response?.runInfos
+                    ?.any((i) => i.finishedAt != null) ??
+                false;
+
+            if (!isFinished) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                sleep(refreshInterval);
+                setState(() {});
+              });
+              return const SizedBox.shrink();
+            }
+
+            return Column(
+              children: [
+                ..._createCards(snapshot.data?.response?.topFoundUsers ?? []),
+                TextButton(
+                    onPressed: () {
+                      // TODO: pagination
+                    },
+                    child: Column(children: [
+                      Text(
+                        l10n.exploreSeeMore,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: Color(theme.colorScheme.onSurfaceVariant.value),
+                      ),
+                    ]))
+              ],
+            );
+          }),
     );
   }
 }
