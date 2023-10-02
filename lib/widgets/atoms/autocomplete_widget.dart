@@ -30,8 +30,9 @@ class AutocompleteWidget extends StatelessWidget {
         if (textEditingValue.text == '') {
           return filteredOptions;
         }
-        return filteredOptions.where((option) =>
-            option.toLowerCase().contains(textEditingValue.text.toLowerCase()));
+        return filteredOptions.where((option) => optionsTranslations(option)
+            .toLowerCase()
+            .contains(textEditingValue.text.toLowerCase()));
       },
       displayStringForOption: optionsTranslations,
       onSelected: (String selectedTag) {
