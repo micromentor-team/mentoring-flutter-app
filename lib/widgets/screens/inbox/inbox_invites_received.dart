@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
@@ -112,6 +113,10 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
     _refreshTabIndex(context);
     return Selector<InboxModel, List<ReceivedChannelInvitation>?>(
       selector: (_, inboxModel) => inboxModel.pendingReceivedInvitations,
+      shouldRebuild: (oldValue, newValue) =>
+          !(const DeepCollectionEquality.unordered()
+              .equals(oldValue, newValue)) ||
+          _inboxModel.receivedInvitationsState != AsyncState.loading,
       builder: (_, pendingReceivedInvitations, __) {
         return AppUtility.widgetForAsyncState(
           state: _inboxModel.receivedInvitationsState,

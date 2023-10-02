@@ -15,7 +15,7 @@ Future<void> _launchUrl(Uri url) async {
 Widget _createFooter(
   AppLocalizations l10n,
   ThemeData theme,
-  String company,
+  String? company,
   String? companyRole,
   String? education,
   String? linkedinUrl,
@@ -27,27 +27,28 @@ Widget _createFooter(
   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
     Expanded(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              Icons.work_outline,
-              size: _inlineIconSize,
-              color: theme.colorScheme.secondary,
-            ),
-            const SizedBox(width: Insets.paddingExtraSmall),
-            Expanded(
-              child: Text(
-                companyAndRole,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.labelSmall!.copyWith(
-                  color: theme.colorScheme.secondary,
+        if (companyAndRole.isNotEmpty)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.work_outline,
+                size: _inlineIconSize,
+                color: theme.colorScheme.secondary,
+              ),
+              const SizedBox(width: Insets.paddingExtraSmall),
+              Expanded(
+                child: Text(
+                  companyAndRole,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelSmall!.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
         if (education != null) const SizedBox(height: Insets.paddingExtraSmall),
         if (education != null)
           Row(
@@ -195,7 +196,7 @@ class ProfileBasicInfo extends StatelessWidget {
   final String? avatarUrl;
   final String fullName;
   final String? pronouns;
-  final String company;
+  final String? company;
   final String? companyRole;
   final List<String>? affiliations;
   final String? education;

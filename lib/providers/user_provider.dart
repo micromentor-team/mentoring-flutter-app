@@ -20,6 +20,7 @@ typedef UserQuickViewProfile = Query$FindUserQuickViewProfile$findUserById;
 typedef UserWithFilterResult = Query$FindUsersWithFilter$findUsers;
 typedef MenteeUser = Query$FindMenteeUsers$findUsers;
 typedef MentorUser = Query$FindMentorUsers$findUsers;
+typedef RecommendedUser = Query$FindRecommendedUsers$findUsers;
 
 // UserSearch queries and mutation
 typedef CreateUserSearchResponse = Mutation$CreateUserSearch$createUserSearch;
@@ -31,12 +32,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
 
   UserProvider({required super.client});
 
-  void _setUser(AuthenticatedUser authenticatedUser) {
-    if (_user == null) {
-      _user = authenticatedUser;
-      debugPrint('Got this user from the server userId: ${_user!.id}');
-    }
-  }
+  bool? get isMentor => _user?.seeksHelp;
 
   Future<void> _resetUser() async {
     _user = null;
@@ -191,6 +187,38 @@ class UserProvider extends BaseProvider with ChangeNotifier {
       gqlQueryResult: queryResult,
       response: queryResult.data != null
           ? Query$FindMentorUsers.fromJson(
+              queryResult.data!,
+            ).findUsers.map((element) {
+              if (element.avatarUrl == "") {
+                return element.copyWith(avatarUrl: null);
+              }
+              return element;
+            }).toList()
+          : null,
+    );
+  }
+
+  Future<OperationResult<List<RecommendedUser>>> findRecommendedUsers({
+    required Input$FindObjectsOptions optionsInput,
+    required Input$UserListFilter filterInput,
+    required Input$UserInput matchInput,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindRecommendedUsers,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Query$FindRecommendedUsers(
+                filter: filterInput, options: optionsInput, match: matchInput)
+            .toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindRecommendedUsers.fromJson(
               queryResult.data!,
             ).findUsers.map((element) {
               if (element.avatarUrl == "") {
@@ -370,7 +398,7 @@ class UserProvider extends BaseProvider with ChangeNotifier {
       );
     }
     if (operationResult.response != null) {
-      _setUser(operationResult.response!);
+      _user = operationResult.response!;
     } else {
       _resetUser();
     }
@@ -379,18 +407,22 @@ class UserProvider extends BaseProvider with ChangeNotifier {
 
   // Mutations
   Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser({
-    required Input$UserSignUpInput input,
+    required String email,
+    required String password,
   }) async {
-    debugPrint('UserProvider: signUpUser: ${input.fullName}');
-
     await _resetUser();
-    await _setDeviceUuid();
+    final uuid = await _setDeviceUuid();
 
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
         document: documentNodeMutationSignUpUser,
         fetchPolicy: FetchPolicy.noCache,
-        variables: Variables$Mutation$SignUpUser(input: input).toJson(),
+        variables: Variables$Mutation$SignUpUser(
+            input: Input$UserSignUpInput(
+          email: email,
+          password: password,
+          deviceUuid: uuid,
+        )).toJson(),
       ),
     );
 
@@ -418,18 +450,24 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   }
 
   Future<OperationResult<Mutation$SignInUser$signInUser>> signInUser({
-    required Input$UserSignInInput input,
+    required String email,
+    required String password,
   }) async {
-    debugPrint('UserProvider: signInUser: ${input.ident}');
-
     await _resetUser();
-    await _setDeviceUuid();
+    final uuid = await _setDeviceUuid();
 
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
         document: documentNodeMutationSignInUser,
         fetchPolicy: FetchPolicy.noCache,
-        variables: Variables$Mutation$SignInUser(input: input).toJson(),
+        variables: Variables$Mutation$SignInUser(
+          input: Input$UserSignInInput(
+            ident: email,
+            identType: Enum$UserIdentType.email,
+            password: password,
+            deviceUuid: uuid,
+          ),
+        ).toJson(),
       ),
     );
 
@@ -480,6 +518,42 @@ class UserProvider extends BaseProvider with ChangeNotifier {
         document: documentNodeMutationUpdateUser,
         fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
+  Future<OperationResult<void>> updateMenteesGroupMembership({
+    required Input$MenteesGroupMembershipInput input,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateMenteesGroupMembership,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateMenteesGroupMembership(input: input)
+            .toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
+  Future<OperationResult<void>> updateMentorsGroupMembership({
+    required Input$MentorsGroupMembershipInput input,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateMentorsGroupMembership,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateMentorsGroupMembership(input: input)
+            .toJson(),
       ),
     );
     notifyListeners();

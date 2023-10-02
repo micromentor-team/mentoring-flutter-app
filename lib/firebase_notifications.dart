@@ -13,8 +13,10 @@ class FirebaseNotifications {
     String? targetRoute = message.data['routeName'];
 
     // Pass the nextRoute as query parameter to the root route.
-    navigatorKey.currentState?.context.goNamed(Routes.root.name,
-        queryParameters: {'nextRouteName': targetRoute});
+    navigatorKey.currentState?.context.goNamed(
+      Routes.root.name,
+      queryParameters: {RouteParams.nextRouteName: targetRoute},
+    );
   }
 
   Future<void> initialize() async {

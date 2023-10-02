@@ -3,22 +3,34 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/models/user_registration_model.dart';
 import '../../atoms/text_form_field_widget.dart';
 
-class SignUpYearOfBirth extends StatefulWidget {
-  const SignUpYearOfBirth({super.key});
+class SignupBirthYearScreen extends StatefulWidget {
+  const SignupBirthYearScreen({super.key});
 
   @override
-  State<SignUpYearOfBirth> createState() => _SignUpYearOfBirthState();
+  State<SignupBirthYearScreen> createState() => _SignupBirthYearScreenState();
 }
 
-class _SignUpYearOfBirthState extends State<SignUpYearOfBirth> {
+class _SignupBirthYearScreenState extends State<SignupBirthYearScreen> {
   final _formKey = GlobalKey<FormState>();
+  late final UserRegistrationModel _registrationModel;
   String? _year;
+
+  @override
+  void initState() {
+    super.initState();
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +71,8 @@ class _SignUpYearOfBirthState extends State<SignUpYearOfBirth> {
         rightOnPress: _year?.isNotEmpty ?? false
             ? () {
                 if (_formKey.currentState!.validate()) {
+                  _registrationModel.updateUserInput.birthYear =
+                      int.parse(_year!);
                   context.push(Routes.signupGender.path);
                 }
               }

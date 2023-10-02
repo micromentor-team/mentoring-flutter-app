@@ -29,3 +29,10 @@ enum WebsiteLabels {
   linkedin,
   other,
 }
+
+enum CompanyStageTextId {
+  idea,
+  operational,
+  earning,
+  profitable,
+}

@@ -6,10 +6,8 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../__generated/schema/schema.graphql.dart';
-import '../../../utilities/utility.dart';
 import '../../atoms/social_sign_in_button.dart';
-import '../sign_up/sign_up_screen.dart';
+import '../sign_up/sign_up_method.dart';
 
 class SignInScreen extends StatefulWidget {
   final String nextRouteName;
@@ -52,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
-          return const SignUpScreen();
+          return const SignupMethodScreen();
         },
       ),
     );
@@ -176,14 +174,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 if (_formKey.currentState!.validate()) {
                                   final signInResult =
                                       await userProvider.signInUser(
-                                    input: Input$UserSignInInput(
-                                      // TODO: This generates a new UUID for the device every time the user signs in.
-                                      // it should be relying on the uuid stored on the device instead.
-                                      deviceUuid: await AppUtility.getUuid(),
-                                      ident: emailController.text,
-                                      identType: Enum$UserIdentType.email,
-                                      password: passwordController.text,
-                                    ),
+                                    email: emailController.text,
+                                    password: passwordController.text,
                                   );
                                   final signInError = signInResult
                                       .gqlQueryResult
@@ -212,10 +204,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                       passwordController.text = '';
                                     }
                                   } else {
-                                    router.pushNamed(Routes.root.name,
-                                        queryParameters: {
-                                          'nextRouteName': widget.nextRouteName
-                                        });
+                                    router.pushNamed(
+                                      Routes.root.name,
+                                      queryParameters: {
+                                        RouteParams.nextRouteName:
+                                            widget.nextRouteName
+                                      },
+                                    );
                                   }
                                 }
                               },

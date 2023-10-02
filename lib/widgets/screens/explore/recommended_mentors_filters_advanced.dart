@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
@@ -24,6 +25,7 @@ class _RecommendedMentorsFiltersAdvanced
   String? _selectedIndustry;
   late final TextfieldTagsController _userTypesController;
   late final ExploreCardFiltersModel _filtersModel;
+  late final ContentProvider _contentProvider;
   late final TextEditingController _keywordController;
 
   @override
@@ -32,6 +34,7 @@ class _RecommendedMentorsFiltersAdvanced
     _userTypesController = TextfieldTagsController();
     _filtersModel =
         Provider.of<ExploreCardFiltersModel>(context, listen: false);
+    _contentProvider = Provider.of<ContentProvider>(context, listen: false);
     _selectedIndustry = _filtersModel.selectedIndustry;
     _keywordController =
         TextEditingController(text: _filtersModel.selectedKeyword);
@@ -71,11 +74,14 @@ class _RecommendedMentorsFiltersAdvanced
                     const SizedBox(height: Insets.paddingExtraSmall),
                     DropdownButton<String>(
                       isExpanded: true,
-                      items: ExploreCardFiltersModel.industries
+                      items: _filtersModel.expertises
                           .map((industry) => DropdownMenuItem(
-                                value: l10n
-                                    .exploreSearchFilterIndustries(industry),
-                                child: Text(industry),
+                                value: industry,
+                                child: Text(
+                                  _contentProvider
+                                          .translateExpertise(industry) ??
+                                      "",
+                                ),
                               ))
                           .toList(),
                       onChanged: (industry) => setState(() {
@@ -92,7 +98,7 @@ class _RecommendedMentorsFiltersAdvanced
           AutocompletePicker(
             fieldName: l10n.exploreSearchFilterUserType,
             controller: _userTypesController,
-            options: ExploreCardFiltersModel.userTypes,
+            options: _filtersModel.userTypes,
             optionsTranslations: l10n.exploreSearchFilterUserTypes,
             selectedOptions: _filtersModel.selectedUserTypes,
           ),
