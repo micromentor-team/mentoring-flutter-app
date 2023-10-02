@@ -31,6 +31,45 @@ mutation CreateUserSearch($input: UserSearchInput!) {
             finishedAt
             matchCount
         }
+        topFoundUsers {
+            id
+            email
+            firstName
+            lastName
+            fullName
+            avatarUrl
+            userHandle
+            cityOfResidence
+            regionOfResidence
+            offersHelp
+            seeksHelp
+            companies {
+                name
+                companyStage {
+                    translatedValue
+                }
+                industries
+            }
+            countryOfResidence {
+                textId
+                translatedValue
+            }
+            jobTitle
+            groupMemberships {
+                groupId
+                ... on MentorsGroupMembership {
+                    expertises {
+                        textId
+                        translatedValue
+                    }
+                    industries {
+                        textId
+                        translatedValue
+                    }
+                    endorsements
+                }
+            }
+        }
     }
 }
 
@@ -241,6 +280,48 @@ query FindMentorUsers($options: FindObjectsOptions, $filter: UserListFilter, $ma
         }
         companies {
             name
+        }
+    }
+}
+
+query FindRecommendedUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
+    findUsers(options: $options, filter: $filter, match: $match) {
+        id
+        email
+        firstName
+        lastName
+        fullName
+        avatarUrl
+        userHandle
+        cityOfResidence
+        regionOfResidence
+        offersHelp
+        seeksHelp
+        companies {
+            name
+            companyStage {
+                translatedValue
+            }
+            industries
+        }
+        countryOfResidence {
+            textId
+            translatedValue
+        }
+        jobTitle
+        groupMemberships {
+            groupId
+            ... on MentorsGroupMembership {
+                expertises {
+                    textId
+                    translatedValue
+                }
+                industries {
+                    textId
+                    translatedValue
+                }
+                endorsements
+            }
         }
     }
 }

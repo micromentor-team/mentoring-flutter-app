@@ -204,6 +204,8 @@ export function mockMutations(serverState: MockServerState) {
             const response = JSON.parse(JSON.stringify(search));
             response.runInfos = null;
             response.updatedAt = null;
+            response.topFoundUsers =
+                serverState.otherUsers.concat([serverState.loggedInUser]);
             return response;
         }
     }

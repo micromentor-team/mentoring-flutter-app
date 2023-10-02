@@ -73,13 +73,13 @@ class _InvitationDetailState extends State<InvitationDetail>
             .firstOrNull
             ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null)
         : null;
-    final List<SkillChip> skills = invitation.sender.offersHelp
+    final List<ExpertiseChip> skills = invitation.sender.offersHelp
         ? maybeMentorsGroupMembership?.expertises
-                .map((e) => SkillChip(skill: e.translatedValue!))
+                .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
             []
         : maybeMenteesGroupMembership?.soughtExpertises
-                .map((e) => SkillChip(skill: e.translatedValue!))
+                .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
             [];
     return createProfileCardFromInfo(
@@ -97,7 +97,7 @@ class _InvitationDetailState extends State<InvitationDetail>
         endorsements: invitation.sender.offersHelp
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
-        skills: skills,
+        expertises: skills,
       ),
     );
   }
@@ -115,13 +115,13 @@ class _InvitationDetailState extends State<InvitationDetail>
             .firstOrNull
             ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null)
         : null;
-    final List<SkillChip> skills = invitation.recipient.offersHelp
+    final List<ExpertiseChip> skills = invitation.recipient.offersHelp
         ? maybeMentorsGroupMembership?.expertises
-                .map((e) => SkillChip(skill: e.translatedValue!))
+                .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
             []
         : maybeMenteesGroupMembership?.soughtExpertises
-                .map((e) => SkillChip(skill: e.translatedValue!))
+                .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
             [];
     return createProfileCardFromInfo(
@@ -139,7 +139,7 @@ class _InvitationDetailState extends State<InvitationDetail>
         endorsements: invitation.recipient.offersHelp
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
-        skills: skills,
+        expertises: skills,
       ),
     );
   }

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../constants/app_constants.dart';
 
-class SkillChip extends StatelessWidget {
-  final String skill;
+class ExpertiseChip extends StatelessWidget {
+  final String expertise;
   final Icon? icon;
 
-  const SkillChip({
+  const ExpertiseChip({
     super.key,
-    required this.skill,
+    required this.expertise,
     this.icon,
   });
 
@@ -28,7 +28,7 @@ class SkillChip extends StatelessWidget {
     return Chip(
       avatar: ChipIcon,
       label: Text(
-        skill,
+        expertise,
         style: theme.textTheme.labelSmall?.copyWith(
           color: theme.colorScheme.onSecondaryContainer,
         ),
