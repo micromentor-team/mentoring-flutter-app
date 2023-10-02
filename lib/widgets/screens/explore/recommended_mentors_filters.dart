@@ -41,8 +41,10 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
 
   @override
   void dispose() {
-    _countriesController.dispose();
-    _languagesController.dispose();
+    try {
+      _countriesController.dispose();
+      _languagesController.dispose();
+    } catch (_) {}
     super.dispose();
   }
 

@@ -56,6 +56,8 @@ class AutocompleteWidget extends StatelessWidget {
           inputfieldBuilder: (context, tec, fn, error, onChanged, onSubmitted) {
             return ((context, sc, tags, onTagDelete) {
               return TextField(
+                onTapOutside: (_) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
                 controller: tec,
                 focusNode: fn,
                 decoration: InputDecoration(

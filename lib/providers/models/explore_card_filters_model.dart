@@ -25,8 +25,7 @@ class ExploreCardFiltersModel extends ChangeNotifier {
   Set<String> _selectedCountries = {};
   Set<String> _selectedLanguages = {};
   Set<String> _selectedExpertises = {};
-
-  String? _selectedIndustry;
+  Set<String> _selectedIndustries = {};
   Set<String> _selectedUserTypes = {};
   String? _selectedKeyword;
 
@@ -34,7 +33,7 @@ class ExploreCardFiltersModel extends ChangeNotifier {
   Set<String> get selectedLanguages => _selectedLanguages;
   Set<String> get selectedExpertises => _selectedExpertises;
 
-  String? get selectedIndustry => _selectedIndustry;
+  Set<String> get selectedIndustries => _selectedIndustries;
   Set<String> get selectedUserTypes => _selectedUserTypes;
   String? get selectedKeyword =>
       (_selectedKeyword == null || (_selectedKeyword?.isEmpty ?? false))
@@ -61,11 +60,11 @@ class ExploreCardFiltersModel extends ChangeNotifier {
   }
 
   void setAdvancedFilters({
-    String? selectedIndustry,
+    Set<String>? selectedIndustries,
     Set<String>? selectedUserTypes,
     String? selectedKeyword,
   }) {
-    _selectedIndustry = selectedIndustry;
+    _selectedIndustries = selectedIndustries ?? {};
     _selectedUserTypes = selectedUserTypes ?? {};
     _selectedKeyword = selectedKeyword;
     notifyListeners();
@@ -80,6 +79,8 @@ class ExploreCardFiltersModel extends ChangeNotifier {
       maxResultCount: maxResultsCount,
       languagesTextIds:
           _selectedLanguages.isEmpty ? null : _selectedLanguages.toList(),
+      industriesTextIds:
+          _selectedIndustries.isEmpty ? null : _selectedIndustries.toList(),
       offersHelp: _selectedUserTypes.contains("Mentor")
           ? Enum$UserSearchFieldPreference.isTrue
           : Enum$UserSearchFieldPreference.any,

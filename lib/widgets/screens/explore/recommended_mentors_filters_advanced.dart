@@ -22,28 +22,32 @@ class RecommendedMentorsFiltersAdvanced extends StatefulWidget {
 class _RecommendedMentorsFiltersAdvanced
     extends State<RecommendedMentorsFiltersAdvanced>
     with NavigationMixin<RecommendedMentorsFiltersAdvanced> {
-  String? _selectedIndustry;
-  late final TextfieldTagsController _userTypesController;
-  late final ExploreCardFiltersModel _filtersModel;
   late final ContentProvider _contentProvider;
+  late final TextfieldTagsController _userTypesController;
+  late final TextfieldTagsController _industriesController;
+  late final ExploreCardFiltersModel _filtersModel;
   late final TextEditingController _keywordController;
 
   @override
   void initState() {
     super.initState();
-    _userTypesController = TextfieldTagsController();
-    _filtersModel =
-        Provider.of<ExploreCardFiltersModel>(context, listen: false);
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
-    _selectedIndustry = _filtersModel.selectedIndustry;
+    _filtersModel = Provider.of<ExploreCardFiltersModel>(
+      context,
+      listen: false,
+    );
+    _userTypesController = TextfieldTagsController();
+    _industriesController = TextfieldTagsController();
     _keywordController =
         TextEditingController(text: _filtersModel.selectedKeyword);
   }
 
   @override
   void dispose() {
-    _userTypesController.dispose();
-    _keywordController.dispose();
+    try {
+      _userTypesController.dispose();
+      _keywordController.dispose();
+    } catch (_) {}
     super.dispose();
   }
 
@@ -64,36 +68,14 @@ class _RecommendedMentorsFiltersAdvanced
       padding: const EdgeInsets.all(Insets.paddingMedium),
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(l10n.exploreSearchFilterIndustry),
-                    const SizedBox(height: Insets.paddingExtraSmall),
-                    DropdownButton<String>(
-                      isExpanded: true,
-                      items: _filtersModel.expertises
-                          .map((industry) => DropdownMenuItem(
-                                value: industry,
-                                child: Text(
-                                  _contentProvider
-                                          .translateExpertise(industry) ??
-                                      "",
-                                ),
-                              ))
-                          .toList(),
-                      onChanged: (industry) => setState(() {
-                        _selectedIndustry = industry;
-                      }),
-                      value: _selectedIndustry,
-                    ),
-                    const SizedBox(height: Insets.paddingSmall),
-                  ],
-                ),
-              )
-            ],
+          AutocompletePicker(
+            fieldName: l10n.exploreSearchFilterIndustry,
+            controller: _industriesController,
+            options: _filtersModel.industries,
+            optionsTranslations: (textId) => _contentProvider.industryOptions!
+                .firstWhere((e) => e.textId == textId)
+                .translatedValue!,
+            selectedOptions: _filtersModel.selectedIndustries,
           ),
           AutocompletePicker(
             fieldName: l10n.exploreSearchFilterUserType,
@@ -131,12 +113,12 @@ class _RecommendedMentorsFiltersAdvanced
           ),
           ClearApplyButtons(
             onClear: () => setState(() {
-              _selectedIndustry = null;
+              _industriesController.clearTags();
               _userTypesController.clearTags();
             }),
             onApply: () {
               _filtersModel.setAdvancedFilters(
-                selectedIndustry: _selectedIndustry,
+                selectedIndustries: _industriesController.getTags?.toSet(),
                 selectedUserTypes: _userTypesController.getTags?.toSet(),
                 selectedKeyword: _keywordController.text,
               );
