@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 
 import '../__generated/schema/operations_content.graphql.dart';
 import 'base/base_provider.dart';
