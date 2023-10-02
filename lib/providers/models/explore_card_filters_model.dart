@@ -81,14 +81,14 @@ class ExploreCardFiltersModel extends ChangeNotifier {
       languagesTextIds:
           _selectedLanguages.isEmpty ? null : _selectedLanguages.toList(),
       offersHelp:
-          (_selectedUserTypes.contains("Mentor") || _selectedUserTypes.isEmpty)
+          _selectedUserTypes.contains("Mentor")
               ? Enum$UserSearchFieldPreference.isTrue
-              : Enum$UserSearchFieldPreference.isFalse,
+              : Enum$UserSearchFieldPreference.any,
       searchText: selectedKeyword,
       seeksHelp:
           (_selectedUserTypes.contains("Mentee") || _selectedUserTypes.isEmpty)
               ? Enum$UserSearchFieldPreference.isTrue
-              : Enum$UserSearchFieldPreference.isFalse,
+              : Enum$UserSearchFieldPreference.any,
     );
   }
 }

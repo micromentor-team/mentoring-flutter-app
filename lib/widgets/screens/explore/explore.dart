@@ -41,7 +41,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   }
 
   List<Widget> _createCards(
-      List<Mutation$CreateUserSearch$createUserSearch$topFoundUsers> response) {
+      List<Query$FindUserSearch$findUserSearchById$topFoundUsers> response) {
     return response
         .map((user) => createProfileCardFromInfo(
               info: ProfileQuickViewInfo(
@@ -58,10 +58,10 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                 companyRole: user.jobTitle,
                 endorsements:
                     user.groupMemberships.fold<int>(0, (acc, membership) {
-                  if (membership
-                      is Mutation$CreateUserSearch$createUserSearch$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
-                    return acc + (membership.endorsements ?? 0);
-                  }
+                  // if (membership
+                  //     is Mutation$CreateUserSearch$createUserSearch$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
+                  //   return acc + (membership.endorsements ?? 0);
+                  // }
                   return acc;
                 }),
                 expertises: [],
@@ -101,27 +101,43 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
       future: _recommendedUsers,
       builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
         snapshot: snapshot,
-        onReady: () => Column(
-          children: [
-            ..._createCards(snapshot.data?.response?.topFoundUsers ?? []),
-            TextButton(
-                onPressed: () {
-                  setState(_loadMoreRecommendations);
-                },
-                child: Column(children: [
-                  Text(
-                    l10n.exploreSeeMore,
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_drop_down,
-                    color: Color(theme.colorScheme.onSurfaceVariant.value),
-                  ),
-                ]))
-          ],
-        ),
+        onReady: () {
+          final id = snapshot.data?.response?.id;
+          if (id == null) {
+            return const SizedBox.shrink();
+          }
+
+          return FutureBuilder(
+            future: widget.userProvider.getUserSearch(userSearchId: id),
+            builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
+                snapshot: snapshot,
+                onReady: () {
+                  return Column(
+                    children: [
+                      ..._createCards(
+                          snapshot.data?.response?.topFoundUsers ?? []),
+                      TextButton(
+                          onPressed: () {
+                            setState(_loadMoreRecommendations);
+                          },
+                          child: Column(children: [
+                            Text(
+                              l10n.exploreSeeMore,
+                              style: theme.textTheme.labelLarge?.copyWith(
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_drop_down,
+                              color: Color(
+                                  theme.colorScheme.onSurfaceVariant.value),
+                            ),
+                          ]))
+                    ],
+                  );
+                }),
+          );
+        },
       ),
     );
   }
