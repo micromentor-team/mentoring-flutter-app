@@ -65,7 +65,6 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
               channelInvitationId: widget.invitationId!,
             );
             await _inboxModel.refreshPendingReceivedInvitations();
-            _inboxModel.refreshInboxInviteNotifications();
           },
           child: Text(
             l10n.decline,
@@ -86,7 +85,6 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
               channelInvitationId: widget.invitationId!,
             );
             await _inboxModel.refreshPendingReceivedInvitations();
-            await _inboxModel.refreshInboxInviteNotifications();
             await _inboxModel.refreshActiveChannels();
             final ChannelForUser? newChannel = _inboxModel.activeChannels
                 .where(

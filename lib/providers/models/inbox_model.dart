@@ -14,6 +14,9 @@ import '../invitations_provider.dart';
 import '../messages_provider.dart';
 
 class InboxModel extends ChangeNotifier {
+  static const Duration dataPollInterval = Duration(seconds: 15);
+  Timer? _dataPollingTimer;
+
   // Providers
   final MessagesProvider _messagesProvider;
   final ChannelsProvider _channelsProvider;
@@ -82,6 +85,21 @@ class InboxModel extends ChangeNotifier {
           listen: false,
         );
 
+  void initializeDataPolling() {
+    if (_dataPollingTimer != null && _dataPollingTimer!.isActive) {
+      cancelDataPolling();
+    }
+    _dataPollingTimer = Timer.periodic(dataPollInterval, (_) {
+      // TODO: Fetch only the most recent data
+      refreshAll();
+    });
+  }
+
+  void cancelDataPolling() {
+    _dataPollingTimer?.cancel();
+    _dataPollingTimer = null;
+  }
+
   int getUnseenMessageCount({
     required String channelId,
     required bool isArchivedChannel,
@@ -126,13 +144,12 @@ class InboxModel extends ChangeNotifier {
 
   Future<void> refreshAll() async {
     await refreshActiveChannels();
-    refreshInboxChatNotifications();
-    refreshInboxInviteNotifications();
+    refreshUnseenMessages();
     refreshPendingReceivedInvitations();
     refreshPendingSentInvitations();
   }
 
-  Future<void> refreshInboxChatNotifications() async {
+  Future<void> refreshUnseenMessages() async {
     final allUnseenMessagesResult = await _messagesProvider.allUnseenMessages();
     if (allUnseenMessagesResult.gqlQueryResult.hasException) {
       final String e =
@@ -151,28 +168,8 @@ class InboxModel extends ChangeNotifier {
     }
   }
 
-  Future<void> refreshInboxInviteNotifications() async {
-    final receivedInvitationsResult =
-        await _invitationsProvider.getReceivedInvitations(onlyPending: true);
-    if (receivedInvitationsResult.gqlQueryResult.hasException) {
-      final String e =
-          receivedInvitationsResult.gqlQueryResult.exception.toString();
-      CrashHandler.logCrashReport(
-          'Could not retrieve inbox invite notifications: $e');
-      return;
-    } else {
-      // TODO: Filter for unread invites
-      _inboxInvitesNotifications =
-          receivedInvitationsResult.response?.length ?? 0;
-      if (hasListeners) {
-        notifyListeners();
-      }
-    }
-  }
-
   Future<void> refreshPendingReceivedInvitations() async {
     _receivedInvitationsState = AsyncState.loading;
-    _pendingReceivedInvitations = null;
     final result = await _invitationsProvider.getReceivedInvitations(
       onlyPending: true,
     );
@@ -185,6 +182,8 @@ class InboxModel extends ChangeNotifier {
       return;
     } else {
       _pendingReceivedInvitations = result.response ?? [];
+      _inboxInvitesNotifications = _pendingReceivedInvitations!
+          .length; // TODO: Filter for only unread invites
       _pendingReceivedInvitations
           ?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       _receivedInvitationsState = AsyncState.ready;
@@ -196,7 +195,6 @@ class InboxModel extends ChangeNotifier {
 
   Future<void> refreshPendingSentInvitations() async {
     _sentInvitationsState = AsyncState.loading;
-    _pendingSentInvitations = null;
     final result = await _invitationsProvider.getSentInvitations(
       onlyPending: true,
     );
@@ -218,7 +216,6 @@ class InboxModel extends ChangeNotifier {
 
   Future<void> refreshActiveChannels() async {
     _channelsState = AsyncState.loading;
-    _activeChannels = null;
     final previousActiveChannelsCount = _activeChannels?.length ?? 0;
     final result = await _channelsProvider.queryUserChannels(
       userId: _userProvider.user!.id,
@@ -241,7 +238,6 @@ class InboxModel extends ChangeNotifier {
   }
 
   Future<void> _refreshLatestMessage(String channelId) async {
-    // TODO: Possible race condition here if the query executes before the mutation completes, consider polling result
     final latestMessageResult =
         await _messagesProvider.findChannelLatestMessage(
       channelId: channelId,
@@ -297,7 +293,7 @@ class InboxModel extends ChangeNotifier {
           case Enum$ChannelChangedEventType.messageCreated:
             if (event.channelId == channelId) {
               await _refreshLatestMessage(channelId);
-              refreshInboxChatNotifications();
+              refreshUnseenMessages();
             }
             return;
           default:

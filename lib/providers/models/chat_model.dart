@@ -89,7 +89,7 @@ class ChatModel extends ChangeNotifier {
       CrashHandler.logCrashReport('Could not mark messages as read: $e');
       return;
     }
-    _inboxModel.refreshInboxChatNotifications();
+    _inboxModel.refreshUnseenMessages();
   }
 
   Future<void> _refreshSingleChannelMessage({
