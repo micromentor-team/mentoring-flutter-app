@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -54,6 +55,10 @@ class ScaffoldModel extends ChangeNotifier {
                     ).signOutUser().then(
                       (void future) {
                         try {
+                          Provider.of<InboxModel>(
+                            context,
+                            listen: false,
+                          ).cancelDataPolling();
                           Navigator.of(context).pop();
                           router.goNamed(Routes.root.name);
                         } catch (_) {}

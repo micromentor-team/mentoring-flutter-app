@@ -77,6 +77,12 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   @override
+  void dispose() {
+    _inboxModel.cancelDataPolling();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _content = _contentProvider.findAllOptionsByType().then(
@@ -91,6 +97,7 @@ class _StartScreenState extends State<StartScreen> {
   void _initializeUser() async {
     _registrationModel.clear();
     await _inboxModel.refreshAll();
+    _inboxModel.initializeDataPolling();
   }
 
   @override

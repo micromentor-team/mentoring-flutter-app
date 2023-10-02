@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
@@ -79,6 +80,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                 inboxModel.pendingReceivedInvitations,
                 inboxModel.pendingSentInvitations,
               ),
+              shouldRebuild: (oldValue, newValue) =>
+                  !(const DeepCollectionEquality.unordered()
+                      .equals(oldValue, newValue)) ||
+                  _inboxModel.invitesState != AsyncState.loading,
               builder: (_, __, ___) {
                 return AppUtility.widgetForAsyncState(
                   state: _isMyProfile
