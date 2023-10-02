@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
@@ -172,7 +173,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
         channelId: channelId,
         isArchivedForMe: !widget.isArchivedForUser,
       );
-      await _inboxModel.refreshInboxChatNotifications();
+      await _inboxModel.refreshUnseenMessages();
       setState(() {});
     }
   }
@@ -194,6 +195,10 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
         inboxModel.unseenMessages!,
         inboxModel.activeChannels,
       ),
+      shouldRebuild: (oldValue, newValue) =>
+          !(const DeepCollectionEquality.unordered()
+              .equals(oldValue, newValue)) ||
+          _inboxModel.channelsState != AsyncState.loading,
       builder: (_, __, ___) {
         return AppUtility.widgetForAsyncState(
           state: _inboxModel.channelsState,
