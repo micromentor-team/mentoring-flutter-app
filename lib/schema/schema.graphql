@@ -270,8 +270,10 @@ type Query {
   findEducationLevels(fallbackUiLanguage: UiLanguage): [EducationLevel!]!
   findExpertises(fallbackUiLanguage: UiLanguage, isParent: Boolean, parentTextId: String): [Expertise!]!
   findGenders(fallbackUiLanguage: UiLanguage): [Gender!]!
+  findPronouns(fallbackUiLanguage: UiLanguage): [Pronoun!]!
   myInbox(refresh: Boolean): UserInbox!
   findChannelInvitationById(id: String!): ChannelInvitation!
+  findChannelInvitationsBetweenUsers(options: FindObjectsOptions, onlyPending: Boolean, userIds: [String!]!): [ChannelInvitation!]!
   findChannelInvitationsForUser(options: FindObjectsOptions, onlyPending: Boolean, direction: ChannelInvitationDirection, userId: String!): [ChannelInvitation!]!
   myChannelInvitations(options: FindObjectsOptions, onlyPending: Boolean, direction: ChannelInvitationDirection): [ChannelInvitation!]!
   findPendingChannelInvitationsForUser(options: FindObjectsOptions, userId: String!): [ChannelInvitation!]!
@@ -1476,7 +1478,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTimeISO! = "2023-09-28T05:07:06.736Z"
+  time: DateTimeISO! = "2023-10-02T21:29:33.195Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -2267,6 +2269,7 @@ enum ServiceRequestType {
   graphQlQueryChannelInvitations
   graphQlQueryChannelParticipants
   graphQlQueryFindChannelInvitationById
+  graphQlQueryFindChannelInvitationsBetweenUsers
   graphQlQueryFindChannelInvitationsForUser
   graphQlQueryFindChannelMessageById
   graphQlQueryFindChannelMessages

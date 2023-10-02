@@ -26744,6 +26744,7 @@ enum Enum$ServiceRequestType {
   graphQlQueryChannelInvitations,
   graphQlQueryChannelParticipants,
   graphQlQueryFindChannelInvitationById,
+  graphQlQueryFindChannelInvitationsBetweenUsers,
   graphQlQueryFindChannelInvitationsForUser,
   graphQlQueryFindChannelMessageById,
   graphQlQueryFindChannelMessages,
@@ -26900,6 +26901,8 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlQueryChannelParticipants';
     case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationById:
       return r'graphQlQueryFindChannelInvitationById';
+    case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsBetweenUsers:
+      return r'graphQlQueryFindChannelInvitationsBetweenUsers';
     case Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsForUser:
       return r'graphQlQueryFindChannelInvitationsForUser';
     case Enum$ServiceRequestType.graphQlQueryFindChannelMessageById:
@@ -27147,6 +27150,9 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlQueryChannelParticipants;
     case r'graphQlQueryFindChannelInvitationById':
       return Enum$ServiceRequestType.graphQlQueryFindChannelInvitationById;
+    case r'graphQlQueryFindChannelInvitationsBetweenUsers':
+      return Enum$ServiceRequestType
+          .graphQlQueryFindChannelInvitationsBetweenUsers;
     case r'graphQlQueryFindChannelInvitationsForUser':
       return Enum$ServiceRequestType.graphQlQueryFindChannelInvitationsForUser;
     case r'graphQlQueryFindChannelMessageById':
