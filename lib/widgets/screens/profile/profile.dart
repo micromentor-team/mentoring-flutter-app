@@ -136,7 +136,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
   @override
   Widget build(BuildContext context) {
     final userData = widget.userData;
-    final company = userData.companies.first;
+    final company = userData.companies.firstOrNull;
     final maybeMentorGroupMembership = userData.groupMemberships
         .where((g) => g.groupIdent == GroupIdent.mentors.name)
         .firstOrNull
@@ -205,7 +205,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             avatarUrl: userData.avatarUrl,
             pronouns: userData.pronounsDisplay,
             affiliations: const ["Verizon Digital Ready"], //TODO
-            company: company.name,
+            company: company?.name,
             companyRole: userData.jobTitle,
             education: userData.educationLevel?.translatedValue,
             linkedinUrl: userData.websites
@@ -235,7 +235,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 .nonNulls
                 .toList(),
           ),
-          if (userData.seeksHelp) ...[
+          if (userData.seeksHelp && company != null) ...[
             const Divider(),
             AboutMyBusiness(
               companyInput: CompanyInput(

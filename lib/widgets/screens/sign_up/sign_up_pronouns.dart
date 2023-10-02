@@ -1,32 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/content_provider.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../molecules/checkbox_list_and_form.dart';
-import 'sign_up_bottom_buttons.dart';
+import 'components/sign_up_bottom_buttons.dart';
 
-class SignupBusinessAddPronounsScreen extends StatefulWidget {
-  const SignupBusinessAddPronounsScreen({Key? key}) : super(key: key);
+class SignupPronounsScreen extends StatefulWidget {
+  const SignupPronounsScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupBusinessAddPronounsScreen> createState() =>
-      _SignupBusinessAddPronounsScreenState();
+  State<SignupPronounsScreen> createState() => _SignupPronounsScreenState();
 }
 
-class _SignupBusinessAddPronounsScreenState
-    extends State<SignupBusinessAddPronounsScreen> {
+class _SignupPronounsScreenState extends State<SignupPronounsScreen> {
   late final ContentProvider _contentProvider;
+  late final UserRegistrationModel _registrationModel;
+  late final bool _isEntrepreneur;
   final List<String> _selections = List.empty(growable: true);
 
   @override
   void initState() {
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+    _isEntrepreneur =
+        _registrationModel.updateUserInput.userType == UserType.entrepreneur;
   }
 
   List<LabeledCheckbox> _createCheckboxes() {
@@ -62,16 +69,22 @@ class _SignupBusinessAddPronounsScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.two,
-      title: l10n.whatAreYourPronouns,
+      title: l10n.signupPronounsTitle,
       bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            context.push(Routes.addBusinessName.path);
-          }),
+        leftButtonText: l10n.previous,
+        rightButtonText: l10n.next,
+        leftOnPress: () {
+          context.pop();
+        },
+        rightOnPress: () {
+          _registrationModel.updateUserInput.pronounsTextIds = _selections;
+          if (_isEntrepreneur) {
+            context.push(Routes.signupEntrepreneurCompanyName.path);
+          } else {
+            context.push(Routes.signupMentorRole.path);
+          }
+        },
+      ),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
       body: Padding(
@@ -79,7 +92,7 @@ class _SignupBusinessAddPronounsScreenState
         child: Column(
           children: [
             Text(
-              l10n.pronounsDescription,
+              l10n.signupPronounsSubtitle,
               style: theme.textTheme.bodyMedium!
                   .copyWith(color: theme.colorScheme.outline),
               textAlign: TextAlign.center,

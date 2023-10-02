@@ -10,6 +10,10 @@ query GetAuthenticatedUser {
         createdAt
         seeksHelp
         offersHelp
+        groupMemberships {
+            id
+            groupIdent
+        }
     }
 }
 
@@ -652,4 +656,16 @@ mutation DeleteUser ($userId: String!, $deletePhysically: Boolean!) {
 
 mutation UpdateUser ($input: UserInput!) {
     updateUser(input: $input)
+}
+
+mutation UpdateMenteesGroupMembership($input: MenteesGroupMembershipInput!) {
+    updateMenteesGroupMembership(input: $input) {
+        id
+    }
+}
+
+mutation UpdateMentorsGroupMembership($input: MentorsGroupMembershipInput!) {
+    updateMentorsGroupMembership(input: $input) {
+        id
+    }
 }

@@ -4,28 +4,41 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
-class SignUpLanguages extends StatefulWidget {
-  const SignUpLanguages({super.key});
+import '../../../providers/models/user_registration_model.dart';
+
+class SignupLanguagesScreen extends StatefulWidget {
+  const SignupLanguagesScreen({super.key});
 
   @override
-  State<SignUpLanguages> createState() => _SignUpLanguagesState();
+  State<SignupLanguagesScreen> createState() => _SignupLanguagesScreenState();
 }
 
-class _SignUpLanguagesState extends State<SignUpLanguages> {
+class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
   final _preferredLanguagesController = TextfieldTagsController();
   final _fluentLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
+  late final UserRegistrationModel _registrationModel;
+  bool _selectedPreferredLanguage = false;
 
   @override
   void initState() {
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+    _preferredLanguagesController.addListener(() {
+      setState(() {
+        _selectedPreferredLanguage = _preferredLanguagesController.hasTags;
+      });
+    });
   }
 
   @override
@@ -88,9 +101,23 @@ class _SignUpLanguagesState extends State<SignUpLanguages> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: () {
-          context.push(Routes.signupEntrepreneurOrMentor.path);
-        },
+        rightOnPress: _selectedPreferredLanguage
+            ? () {
+                _registrationModel.updateUserInput.preferredLanguageTextIds =
+                    _preferredLanguagesController.getTags
+                        ?.map((t) => _contentProvider.languageOptions!
+                            .firstWhere((o) => o.translatedValue! == t)
+                            .textId)
+                        .toList();
+                _registrationModel.updateUserInput.spokenLanguagesTextIds =
+                    _fluentLanguagesController.getTags
+                        ?.map((t) => _contentProvider.languageOptions!
+                            .firstWhere((o) => o.translatedValue! == t)
+                            .textId)
+                        .toList();
+                context.push(Routes.signupUserType.path);
+              }
+            : null,
       ),
     );
   }

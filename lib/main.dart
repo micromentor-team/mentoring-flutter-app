@@ -16,6 +16,7 @@ import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart'
 import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/providers/models/locale_model.dart';
 import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
+import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
 import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
@@ -62,12 +63,17 @@ class _StartScreenState extends State<StartScreen> {
   late Future<OperationResult> _content;
   late final InboxModel _inboxModel;
   late final ContentProvider _contentProvider;
+  late final UserRegistrationModel _registrationModel;
 
   @override
   void initState() {
     super.initState();
     _inboxModel = Provider.of<InboxModel>(context, listen: false);
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
   }
 
   @override
@@ -89,6 +95,7 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   void _initializeUser() async {
+    _registrationModel.clear();
     await _inboxModel.refreshAll();
     _inboxModel.initializeDataPolling();
   }
@@ -106,15 +113,22 @@ class _StartScreenState extends State<StartScreen> {
             onLoading: () => const LoadingScreen(),
             onError: () => const WelcomeScreen(),
             onReady: () {
-              if (userSnapshot.data?.response == null) {
+              final user = userSnapshot.data?.response;
+              if (user == null) {
                 // Empty result means that the user not signed in.
                 return widget.nextRouteName == Routes.home.name
                     ? const WelcomeScreen()
                     : SignInScreen(nextRouteName: widget.nextRouteName);
               }
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                _initializeUser();
-                context.goNamed(widget.nextRouteName);
+                if (!user.offersHelp && !user.seeksHelp) {
+                  // User is created, but lacks basic information.
+                  // Route to signup flow to complete profile.
+                  context.go(Routes.signupWelcome.path);
+                } else {
+                  _initializeUser();
+                  context.goNamed(widget.nextRouteName);
+                }
               });
               return const LoadingScreen();
             },
@@ -226,6 +240,9 @@ void main() async {
               ),
               Provider<RouteObserver<PageRoute>>.value(
                 value: RouteObserver<PageRoute>(),
+              ),
+              Provider<UserRegistrationModel>.value(
+                value: UserRegistrationModel(),
               ),
             ],
             child: const MainApp(),

@@ -1,10 +1,12 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
+import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
@@ -28,7 +30,8 @@ class ExploreCardScroll extends StatefulWidget {
 
 class _ExploreCardScrollState extends State<ExploreCardScroll> {
   static const refreshInterval = Duration(seconds: 1);
-
+  late final AuthenticatedUser _authenticatedUser;
+  bool _showTips = false;
   String? _searchId;
 
   List<Widget> _createCards(
@@ -77,19 +80,78 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 
   @override
   void initState() {
+    super.initState();
     widget.userProvider
         .createUserSearch(
           searchInput: widget.exploreCardFilters.toUserSearchInput(15),
         )
         .then((r) => setState(() => _searchId = r.response!.id));
+    _authenticatedUser = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    ).user!;
+    final registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+    _showTips = registrationModel.isNewUser;
+    registrationModel.clearNewUserFlag();
+  }
 
-    super.initState();
+  void _showTipsSnackBar(
+    BuildContext context,
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
+    final bool isEntrepreneur = _authenticatedUser.seeksHelp;
+    _showTips = false;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: theme.colorScheme.primaryContainer,
+        duration: const Duration(minutes: 5),
+        content: Padding(
+          padding: const EdgeInsets.all(Insets.paddingMedium),
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  isEntrepreneur
+                      ? l10n.exploreTipsEntrepreneurTitle
+                      : l10n.exploreTipsMentorTitle,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  isEntrepreneur
+                      ? l10n.exploreTipsEntrepreneurSubtitle
+                      : l10n.exploreTipsMentorSubtitle,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        showCloseIcon: true,
+        closeIconColor: theme.colorScheme.onSurfaceVariant,
+        padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    if (_showTips) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showTipsSnackBar(context, theme, l10n);
+      });
+    }
 
     if (_searchId == null) {
       return const SizedBox.shrink();
@@ -154,9 +216,6 @@ class _ExploreScreenState extends State<ExploreScreen>
       scaffoldModel.clear();
     });
 
-    final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return SafeArea(
@@ -177,42 +236,6 @@ class _ExploreScreenState extends State<ExploreScreen>
                 ),
               ],
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: theme.colorScheme.primaryContainer,
-                  content: Padding(
-                    padding: const EdgeInsets.all(Insets.paddingMedium),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            l10n.maximizeYourImpact,
-                            style: theme.textTheme.labelLarge?.copyWith(
-                              color: theme.colorScheme.secondary,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Text(
-                            l10n.connectWithThreeEntrepreneurs,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.colorScheme.secondary,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  showCloseIcon: true,
-                  closeIconColor: theme.colorScheme.onSurfaceVariant,
-                  padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-                ),
-              );
-            },
-            child: const Text("Show some tips on a SnackBar"),
           ),
         ],
       ),
