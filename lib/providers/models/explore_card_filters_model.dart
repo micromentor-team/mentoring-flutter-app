@@ -80,10 +80,9 @@ class ExploreCardFiltersModel extends ChangeNotifier {
       maxResultCount: maxResultsCount,
       languagesTextIds:
           _selectedLanguages.isEmpty ? null : _selectedLanguages.toList(),
-      offersHelp:
-          _selectedUserTypes.contains("Mentor")
-              ? Enum$UserSearchFieldPreference.isTrue
-              : Enum$UserSearchFieldPreference.any,
+      offersHelp: _selectedUserTypes.contains("Mentor")
+          ? Enum$UserSearchFieldPreference.isTrue
+          : Enum$UserSearchFieldPreference.any,
       searchText: selectedKeyword,
       seeksHelp:
           (_selectedUserTypes.contains("Mentee") || _selectedUserTypes.isEmpty)
