@@ -93,13 +93,14 @@ class _InviteToConnectState extends State<InviteToConnect>
               user.cityOfResidence,
               user.countryOfResidence?.translatedValue,
             ].nonNulls.join(_l10n.listSeparator);
-            final List<SkillChip> expertises;
+            final List<ExpertiseChip> expertises;
             if (user.offersHelp) {
               expertises = user.groupMemberships
                   .firstWhere((e) => e.groupIdent == GroupIdent.mentors.name)
                   .maybeWhen(
                       mentorsGroupMembership: (g) => g.expertises
-                          .map((e) => SkillChip(skill: e.translatedValue!))
+                          .map((e) =>
+                              ExpertiseChip(expertise: e.translatedValue!))
                           .toList(),
                       orElse: () => []);
             } else {
@@ -107,7 +108,8 @@ class _InviteToConnectState extends State<InviteToConnect>
                   .firstWhere((e) => e.groupIdent == GroupIdent.mentees.name)
                   .maybeWhen(
                       menteesGroupMembership: (g) => g.soughtExpertises
-                          .map((e) => SkillChip(skill: e.translatedValue!))
+                          .map((e) =>
+                              ExpertiseChip(expertise: e.translatedValue!))
                           .toList(),
                       orElse: () => []);
             }
@@ -141,7 +143,7 @@ class _InviteToConnectState extends State<InviteToConnect>
                               avatarUrl: user.avatarUrl,
                               fullName: user.fullName!,
                               location: location,
-                              skills: expertises,
+                              expertises: expertises,
                               company: user.companies.firstOrNull?.name,
                               companyRole: user.jobTitle,
                             ),

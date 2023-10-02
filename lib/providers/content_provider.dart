@@ -29,6 +29,32 @@ class ContentProvider extends BaseProvider {
   List<Industry>? _industries;
   List<Language>? _languages;
 
+  List<String> get countryIds =>
+      (_countries ?? []).map((c) => c.textId).toList();
+  List<String> get languageIds =>
+      (_languages ?? []).map((l) => l.textId).toList();
+  List<String> get expertiseIds =>
+      (_expertises ?? []).map((e) => e.textId).toList();
+  List<String> get industryIds =>
+      (_industries ?? []).map((i) => i.textId).toList();
+
+  String? translateCountry(String id) => (_countries ?? [])
+      .where((c) => c.textId == id)
+      .firstOrNull
+      ?.translatedValue;
+  String? translateLanguages(String id) => (_languages ?? [])
+      .where((l) => l.textId == id)
+      .firstOrNull
+      ?.translatedValue;
+  String? translateExpertise(String id) => (_expertises ?? [])
+      .where((e) => e.textId == id)
+      .firstOrNull
+      ?.translatedValue;
+  String? translateIndustry(String id) => (_industries ?? [])
+      .where((i) => i.textId == id)
+      .firstOrNull
+      ?.translatedValue;
+
   ContentProvider({required super.client}) {
     debugPrint('ContentProvider initialized');
   }
