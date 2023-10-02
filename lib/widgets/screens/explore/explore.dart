@@ -1,13 +1,13 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
-import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
@@ -99,10 +99,10 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   }
 
   void _showTipsSnackBar(
-      BuildContext context,
-      ThemeData theme,
-      AppLocalizations l10n,
-      ) {
+    BuildContext context,
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
     final bool isEntrepreneur = _authenticatedUser.seeksHelp;
     _showTips = false;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -216,9 +216,6 @@ class _ExploreScreenState extends State<ExploreScreen>
       scaffoldModel.clear();
     });
 
-    final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return SafeArea(
@@ -243,24 +240,5 @@ class _ExploreScreenState extends State<ExploreScreen>
         ],
       ),
     );
-  }
-}
-
-class ExploreScreen extends StatefulWidget {
-  const ExploreScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ExploreScreen> createState() => _ExploreScreenState();
-}
-
-class _ExploreScreenState extends State<ExploreScreen>
-    with NavigationMixin<ExploreScreen> {
-  @override
-  Widget build(BuildContext context) {
-    if (!pageRoute.isCurrent) return const SizedBox.shrink();
-    buildPageRouteScaffold((scaffoldModel) {
-      scaffoldModel.clear();
-    });
-    return const ExploreCardScroll();
   }
 }
