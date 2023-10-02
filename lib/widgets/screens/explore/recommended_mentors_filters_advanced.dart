@@ -71,7 +71,9 @@ class _RecommendedMentorsFiltersAdvanced
     buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.setParams(
         appBar: AppBarFactory.createTitleOnlyAppBar(
+          context: context,
           title: AppLocalizations.of(context)!.exploreSearchFilterAdvancedTitle,
+          withBackButton: true,
         ),
       );
     });

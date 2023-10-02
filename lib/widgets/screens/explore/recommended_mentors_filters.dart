@@ -54,7 +54,9 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.setParams(
         appBar: AppBarFactory.createTitleOnlyAppBar(
+          context: context,
           title: AppLocalizations.of(context)!.exploreSearchFilterTitle,
+          withCloseButton: true,
         ),
       );
     });
