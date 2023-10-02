@@ -84,6 +84,26 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     );
   }
 
+  Widget _noResultsView(AppLocalizations l10n, ThemeData theme) {
+    return Column(
+      children: [
+        const SizedBox(height: Insets.paddingExtraLarge),
+        Text(
+          l10n.exploreSearchNoResultsTitle,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+        Text(
+          l10n.exploreSearchNoResultsSubtitle,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        )
+      ],
+    );
+  }
+
   List<Widget> _createCards(
       List<Query$FindUserSearch$findUserSearchById$topFoundUsers> response) {
     return response
@@ -190,9 +210,13 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
       builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
         snapshot: snapshot,
         onReady: () {
+          final results = snapshot.data?.response?.topFoundUsers ?? [];
+          if (results.isEmpty) {
+            return _noResultsView(l10n, theme);
+          }
           return Column(
             children: [
-              ..._createCards(snapshot.data?.response?.topFoundUsers ?? []),
+              ..._createCards(results),
               TextButton(
                 onPressed: () {
                   // TODO: pagination

@@ -200,6 +200,8 @@
         }
     },
     "exploreSearchFilterAdvancedTitle": "Advanced filters",
+    "exploreSearchNoResultsTitle": "No results found",
+    "exploreSearchNoResultsSubtitle": "Try removing some filters to expand your search",
     "exploreTipsEntrepreneurTitle": "Supercharge your success!",
     "exploreTipsEntrepreneurSubtitle": "Connect with 3+ mentors for your best chance at finding the right match.",
     "exploreTipsMentorTitle": "Maximize your impact!",
