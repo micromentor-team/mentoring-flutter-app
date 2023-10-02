@@ -15,6 +15,7 @@ class Query$FindAllOptionsByType {
     required this.findIndustries,
     required this.findGenders,
     required this.findLanguages,
+    required this.findPronouns,
     this.$__typename = 'Query',
   });
 
@@ -27,6 +28,7 @@ class Query$FindAllOptionsByType {
     final l$findIndustries = json['findIndustries'];
     final l$findGenders = json['findGenders'];
     final l$findLanguages = json['findLanguages'];
+    final l$findPronouns = json['findPronouns'];
     final l$$__typename = json['__typename'];
     return Query$FindAllOptionsByType(
       findCompanyStages: (l$findCompanyStages as List<dynamic>)
@@ -61,6 +63,10 @@ class Query$FindAllOptionsByType {
           .map((e) => Query$FindAllOptionsByType$findLanguages.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
+      findPronouns: (l$findPronouns as List<dynamic>)
+          .map((e) => Query$FindAllOptionsByType$findPronouns.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
@@ -81,6 +87,8 @@ class Query$FindAllOptionsByType {
   final List<Query$FindAllOptionsByType$findGenders> findGenders;
 
   final List<Query$FindAllOptionsByType$findLanguages> findLanguages;
+
+  final List<Query$FindAllOptionsByType$findPronouns> findPronouns;
 
   final String $__typename;
 
@@ -109,6 +117,9 @@ class Query$FindAllOptionsByType {
     final l$findLanguages = findLanguages;
     _resultData['findLanguages'] =
         l$findLanguages.map((e) => e.toJson()).toList();
+    final l$findPronouns = findPronouns;
+    _resultData['findPronouns'] =
+        l$findPronouns.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -124,6 +135,7 @@ class Query$FindAllOptionsByType {
     final l$findIndustries = findIndustries;
     final l$findGenders = findGenders;
     final l$findLanguages = findLanguages;
+    final l$findPronouns = findPronouns;
     final l$$__typename = $__typename;
     return Object.hashAll([
       Object.hashAll(l$findCompanyStages.map((v) => v)),
@@ -134,6 +146,7 @@ class Query$FindAllOptionsByType {
       Object.hashAll(l$findIndustries.map((v) => v)),
       Object.hashAll(l$findGenders.map((v) => v)),
       Object.hashAll(l$findLanguages.map((v) => v)),
+      Object.hashAll(l$findPronouns.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -243,6 +256,18 @@ class Query$FindAllOptionsByType {
         return false;
       }
     }
+    final l$findPronouns = findPronouns;
+    final lOther$findPronouns = other.findPronouns;
+    if (l$findPronouns.length != lOther$findPronouns.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findPronouns.length; i++) {
+      final l$findPronouns$entry = l$findPronouns[i];
+      final lOther$findPronouns$entry = lOther$findPronouns[i];
+      if (l$findPronouns$entry != lOther$findPronouns$entry) {
+        return false;
+      }
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -279,6 +304,7 @@ abstract class CopyWith$Query$FindAllOptionsByType<TRes> {
     List<Query$FindAllOptionsByType$findIndustries>? findIndustries,
     List<Query$FindAllOptionsByType$findGenders>? findGenders,
     List<Query$FindAllOptionsByType$findLanguages>? findLanguages,
+    List<Query$FindAllOptionsByType$findPronouns>? findPronouns,
     String? $__typename,
   });
   TRes findCompanyStages(
@@ -329,6 +355,12 @@ abstract class CopyWith$Query$FindAllOptionsByType<TRes> {
                   CopyWith$Query$FindAllOptionsByType$findLanguages<
                       Query$FindAllOptionsByType$findLanguages>>)
           _fn);
+  TRes findPronouns(
+      Iterable<Query$FindAllOptionsByType$findPronouns> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findPronouns<
+                      Query$FindAllOptionsByType$findPronouns>>)
+          _fn);
 }
 
 class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
@@ -353,6 +385,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
     Object? findIndustries = _undefined,
     Object? findGenders = _undefined,
     Object? findLanguages = _undefined,
+    Object? findPronouns = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindAllOptionsByType(
@@ -388,6 +421,9 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
         findLanguages: findLanguages == _undefined || findLanguages == null
             ? _instance.findLanguages
             : (findLanguages as List<Query$FindAllOptionsByType$findLanguages>),
+        findPronouns: findPronouns == _undefined || findPronouns == null
+            ? _instance.findPronouns
+            : (findPronouns as List<Query$FindAllOptionsByType$findPronouns>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -488,6 +524,18 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+  TRes findPronouns(
+          Iterable<Query$FindAllOptionsByType$findPronouns> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findPronouns<
+                          Query$FindAllOptionsByType$findPronouns>>)
+              _fn) =>
+      call(
+          findPronouns: _fn(_instance.findPronouns
+              .map((e) => CopyWith$Query$FindAllOptionsByType$findPronouns(
+                    e,
+                    (i) => i,
+                  ))).toList());
 }
 
 class _CopyWithStubImpl$Query$FindAllOptionsByType<TRes>
@@ -505,6 +553,7 @@ class _CopyWithStubImpl$Query$FindAllOptionsByType<TRes>
     List<Query$FindAllOptionsByType$findIndustries>? findIndustries,
     List<Query$FindAllOptionsByType$findGenders>? findGenders,
     List<Query$FindAllOptionsByType$findLanguages>? findLanguages,
+    List<Query$FindAllOptionsByType$findPronouns>? findPronouns,
     String? $__typename,
   }) =>
       _res;
@@ -516,6 +565,7 @@ class _CopyWithStubImpl$Query$FindAllOptionsByType<TRes>
   findIndustries(_fn) => _res;
   findGenders(_fn) => _res;
   findLanguages(_fn) => _res;
+  findPronouns(_fn) => _res;
 }
 
 const documentNodeQueryFindAllOptionsByType = DocumentNode(definitions: [
@@ -764,6 +814,35 @@ const documentNodeQueryFindAllOptionsByType = DocumentNode(definitions: [
           ),
           FieldNode(
             name: NameNode(value: 'longLangCode'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findPronouns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2021,6 +2100,153 @@ class _CopyWithStubImpl$Query$FindAllOptionsByType$findLanguages<TRes>
     String? translatedValue,
     String? shortLangCode,
     String? longLangCode,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findPronouns {
+  Query$FindAllOptionsByType$findPronouns({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'Pronoun',
+  });
+
+  factory Query$FindAllOptionsByType$findPronouns.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findPronouns(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindAllOptionsByType$findPronouns) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findPronouns
+    on Query$FindAllOptionsByType$findPronouns {
+  CopyWith$Query$FindAllOptionsByType$findPronouns<
+          Query$FindAllOptionsByType$findPronouns>
+      get copyWith => CopyWith$Query$FindAllOptionsByType$findPronouns(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findPronouns<TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findPronouns(
+    Query$FindAllOptionsByType$findPronouns instance,
+    TRes Function(Query$FindAllOptionsByType$findPronouns) then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findPronouns;
+
+  factory CopyWith$Query$FindAllOptionsByType$findPronouns.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findPronouns;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findPronouns<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findPronouns<TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findPronouns(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findPronouns _instance;
+
+  final TRes Function(Query$FindAllOptionsByType$findPronouns) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findPronouns(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findPronouns<TRes>
+    implements CopyWith$Query$FindAllOptionsByType$findPronouns<TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findPronouns(this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
     String? $__typename,
   }) =>
       _res;
@@ -4992,129 +5218,33 @@ class _CopyWithStubImpl$Query$FindGenders$findGenders<TRes>
       _res;
 }
 
-class Variables$Query$FindPronouns {
-  factory Variables$Query$FindPronouns({required Enum$OptionType optionType}) =>
-      Variables$Query$FindPronouns._({
-        r'optionType': optionType,
-      });
-
-  Variables$Query$FindPronouns._(this._$data);
-
-  factory Variables$Query$FindPronouns.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$optionType = data['optionType'];
-    result$data['optionType'] =
-        fromJson$Enum$OptionType((l$optionType as String));
-    return Variables$Query$FindPronouns._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum$OptionType get optionType => (_$data['optionType'] as Enum$OptionType);
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$optionType = optionType;
-    result$data['optionType'] = toJson$Enum$OptionType(l$optionType);
-    return result$data;
-  }
-
-  CopyWith$Variables$Query$FindPronouns<Variables$Query$FindPronouns>
-      get copyWith => CopyWith$Variables$Query$FindPronouns(
-            this,
-            (i) => i,
-          );
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Variables$Query$FindPronouns) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$optionType = optionType;
-    final lOther$optionType = other.optionType;
-    if (l$optionType != lOther$optionType) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$optionType = optionType;
-    return Object.hashAll([l$optionType]);
-  }
-}
-
-abstract class CopyWith$Variables$Query$FindPronouns<TRes> {
-  factory CopyWith$Variables$Query$FindPronouns(
-    Variables$Query$FindPronouns instance,
-    TRes Function(Variables$Query$FindPronouns) then,
-  ) = _CopyWithImpl$Variables$Query$FindPronouns;
-
-  factory CopyWith$Variables$Query$FindPronouns.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$FindPronouns;
-
-  TRes call({Enum$OptionType? optionType});
-}
-
-class _CopyWithImpl$Variables$Query$FindPronouns<TRes>
-    implements CopyWith$Variables$Query$FindPronouns<TRes> {
-  _CopyWithImpl$Variables$Query$FindPronouns(
-    this._instance,
-    this._then,
-  );
-
-  final Variables$Query$FindPronouns _instance;
-
-  final TRes Function(Variables$Query$FindPronouns) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? optionType = _undefined}) =>
-      _then(Variables$Query$FindPronouns._({
-        ..._instance._$data,
-        if (optionType != _undefined && optionType != null)
-          'optionType': (optionType as Enum$OptionType),
-      }));
-}
-
-class _CopyWithStubImpl$Variables$Query$FindPronouns<TRes>
-    implements CopyWith$Variables$Query$FindPronouns<TRes> {
-  _CopyWithStubImpl$Variables$Query$FindPronouns(this._res);
-
-  TRes _res;
-
-  call({Enum$OptionType? optionType}) => _res;
-}
-
 class Query$FindPronouns {
   Query$FindPronouns({
-    required this.findOptions,
+    required this.findPronouns,
     this.$__typename = 'Query',
   });
 
   factory Query$FindPronouns.fromJson(Map<String, dynamic> json) {
-    final l$findOptions = json['findOptions'];
+    final l$findPronouns = json['findPronouns'];
     final l$$__typename = json['__typename'];
     return Query$FindPronouns(
-      findOptions: (l$findOptions as List<dynamic>)
-          .map((e) => Query$FindPronouns$findOptions.fromJson(
+      findPronouns: (l$findPronouns as List<dynamic>)
+          .map((e) => Query$FindPronouns$findPronouns.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$FindPronouns$findOptions> findOptions;
+  final List<Query$FindPronouns$findPronouns> findPronouns;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$findOptions = findOptions;
-    _resultData['findOptions'] = l$findOptions.map((e) => e.toJson()).toList();
+    final l$findPronouns = findPronouns;
+    _resultData['findPronouns'] =
+        l$findPronouns.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5122,10 +5252,10 @@ class Query$FindPronouns {
 
   @override
   int get hashCode {
-    final l$findOptions = findOptions;
+    final l$findPronouns = findPronouns;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      Object.hashAll(l$findOptions.map((v) => v)),
+      Object.hashAll(l$findPronouns.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -5138,15 +5268,15 @@ class Query$FindPronouns {
     if (!(other is Query$FindPronouns) || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$findOptions = findOptions;
-    final lOther$findOptions = other.findOptions;
-    if (l$findOptions.length != lOther$findOptions.length) {
+    final l$findPronouns = findPronouns;
+    final lOther$findPronouns = other.findPronouns;
+    if (l$findPronouns.length != lOther$findPronouns.length) {
       return false;
     }
-    for (int i = 0; i < l$findOptions.length; i++) {
-      final l$findOptions$entry = l$findOptions[i];
-      final lOther$findOptions$entry = lOther$findOptions[i];
-      if (l$findOptions$entry != lOther$findOptions$entry) {
+    for (int i = 0; i < l$findPronouns.length; i++) {
+      final l$findPronouns$entry = l$findPronouns[i];
+      final lOther$findPronouns$entry = lOther$findPronouns[i];
+      if (l$findPronouns$entry != lOther$findPronouns$entry) {
         return false;
       }
     }
@@ -5177,14 +5307,14 @@ abstract class CopyWith$Query$FindPronouns<TRes> {
       _CopyWithStubImpl$Query$FindPronouns;
 
   TRes call({
-    List<Query$FindPronouns$findOptions>? findOptions,
+    List<Query$FindPronouns$findPronouns>? findPronouns,
     String? $__typename,
   });
-  TRes findOptions(
-      Iterable<Query$FindPronouns$findOptions> Function(
+  TRes findPronouns(
+      Iterable<Query$FindPronouns$findPronouns> Function(
               Iterable<
-                  CopyWith$Query$FindPronouns$findOptions<
-                      Query$FindPronouns$findOptions>>)
+                  CopyWith$Query$FindPronouns$findPronouns<
+                      Query$FindPronouns$findPronouns>>)
           _fn);
 }
 
@@ -5202,26 +5332,26 @@ class _CopyWithImpl$Query$FindPronouns<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? findOptions = _undefined,
+    Object? findPronouns = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$FindPronouns(
-        findOptions: findOptions == _undefined || findOptions == null
-            ? _instance.findOptions
-            : (findOptions as List<Query$FindPronouns$findOptions>),
+        findPronouns: findPronouns == _undefined || findPronouns == null
+            ? _instance.findPronouns
+            : (findPronouns as List<Query$FindPronouns$findPronouns>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  TRes findOptions(
-          Iterable<Query$FindPronouns$findOptions> Function(
+  TRes findPronouns(
+          Iterable<Query$FindPronouns$findPronouns> Function(
                   Iterable<
-                      CopyWith$Query$FindPronouns$findOptions<
-                          Query$FindPronouns$findOptions>>)
+                      CopyWith$Query$FindPronouns$findPronouns<
+                          Query$FindPronouns$findPronouns>>)
               _fn) =>
       call(
-          findOptions: _fn(_instance.findOptions
-              .map((e) => CopyWith$Query$FindPronouns$findOptions(
+          findPronouns: _fn(_instance.findPronouns
+              .map((e) => CopyWith$Query$FindPronouns$findPronouns(
                     e,
                     (i) => i,
                   ))).toList());
@@ -5234,39 +5364,24 @@ class _CopyWithStubImpl$Query$FindPronouns<TRes>
   TRes _res;
 
   call({
-    List<Query$FindPronouns$findOptions>? findOptions,
+    List<Query$FindPronouns$findPronouns>? findPronouns,
     String? $__typename,
   }) =>
       _res;
-  findOptions(_fn) => _res;
+  findPronouns(_fn) => _res;
 }
 
 const documentNodeQueryFindPronouns = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
     name: NameNode(value: 'FindPronouns'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'optionType')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'OptionType'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
+    variableDefinitions: [],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'findOptions'),
+        name: NameNode(value: 'findPronouns'),
         alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'optionType'),
-            value: VariableNode(name: NameNode(value: 'optionType')),
-          )
-        ],
+        arguments: [],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
@@ -5303,18 +5418,18 @@ const documentNodeQueryFindPronouns = DocumentNode(definitions: [
   ),
 ]);
 
-class Query$FindPronouns$findOptions {
-  Query$FindPronouns$findOptions({
+class Query$FindPronouns$findPronouns {
+  Query$FindPronouns$findPronouns({
     required this.textId,
     this.translatedValue,
-    this.$__typename = 'Option',
+    this.$__typename = 'Pronoun',
   });
 
-  factory Query$FindPronouns$findOptions.fromJson(Map<String, dynamic> json) {
+  factory Query$FindPronouns$findPronouns.fromJson(Map<String, dynamic> json) {
     final l$textId = json['textId'];
     final l$translatedValue = json['translatedValue'];
     final l$$__typename = json['__typename'];
-    return Query$FindPronouns$findOptions(
+    return Query$FindPronouns$findPronouns(
       textId: (l$textId as String),
       translatedValue: (l$translatedValue as String?),
       $__typename: (l$$__typename as String),
@@ -5355,7 +5470,7 @@ class Query$FindPronouns$findOptions {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$FindPronouns$findOptions) ||
+    if (!(other is Query$FindPronouns$findPronouns) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5378,23 +5493,23 @@ class Query$FindPronouns$findOptions {
   }
 }
 
-extension UtilityExtension$Query$FindPronouns$findOptions
-    on Query$FindPronouns$findOptions {
-  CopyWith$Query$FindPronouns$findOptions<Query$FindPronouns$findOptions>
-      get copyWith => CopyWith$Query$FindPronouns$findOptions(
+extension UtilityExtension$Query$FindPronouns$findPronouns
+    on Query$FindPronouns$findPronouns {
+  CopyWith$Query$FindPronouns$findPronouns<Query$FindPronouns$findPronouns>
+      get copyWith => CopyWith$Query$FindPronouns$findPronouns(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$FindPronouns$findOptions<TRes> {
-  factory CopyWith$Query$FindPronouns$findOptions(
-    Query$FindPronouns$findOptions instance,
-    TRes Function(Query$FindPronouns$findOptions) then,
-  ) = _CopyWithImpl$Query$FindPronouns$findOptions;
+abstract class CopyWith$Query$FindPronouns$findPronouns<TRes> {
+  factory CopyWith$Query$FindPronouns$findPronouns(
+    Query$FindPronouns$findPronouns instance,
+    TRes Function(Query$FindPronouns$findPronouns) then,
+  ) = _CopyWithImpl$Query$FindPronouns$findPronouns;
 
-  factory CopyWith$Query$FindPronouns$findOptions.stub(TRes res) =
-      _CopyWithStubImpl$Query$FindPronouns$findOptions;
+  factory CopyWith$Query$FindPronouns$findPronouns.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindPronouns$findPronouns;
 
   TRes call({
     String? textId,
@@ -5403,16 +5518,16 @@ abstract class CopyWith$Query$FindPronouns$findOptions<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$FindPronouns$findOptions<TRes>
-    implements CopyWith$Query$FindPronouns$findOptions<TRes> {
-  _CopyWithImpl$Query$FindPronouns$findOptions(
+class _CopyWithImpl$Query$FindPronouns$findPronouns<TRes>
+    implements CopyWith$Query$FindPronouns$findPronouns<TRes> {
+  _CopyWithImpl$Query$FindPronouns$findPronouns(
     this._instance,
     this._then,
   );
 
-  final Query$FindPronouns$findOptions _instance;
+  final Query$FindPronouns$findPronouns _instance;
 
-  final TRes Function(Query$FindPronouns$findOptions) _then;
+  final TRes Function(Query$FindPronouns$findPronouns) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5421,7 +5536,7 @@ class _CopyWithImpl$Query$FindPronouns$findOptions<TRes>
     Object? translatedValue = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$FindPronouns$findOptions(
+      _then(Query$FindPronouns$findPronouns(
         textId: textId == _undefined || textId == null
             ? _instance.textId
             : (textId as String),
@@ -5434,9 +5549,9 @@ class _CopyWithImpl$Query$FindPronouns$findOptions<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$FindPronouns$findOptions<TRes>
-    implements CopyWith$Query$FindPronouns$findOptions<TRes> {
-  _CopyWithStubImpl$Query$FindPronouns$findOptions(this._res);
+class _CopyWithStubImpl$Query$FindPronouns$findPronouns<TRes>
+    implements CopyWith$Query$FindPronouns$findPronouns<TRes> {
+  _CopyWithStubImpl$Query$FindPronouns$findPronouns(this._res);
 
   TRes _res;
 
