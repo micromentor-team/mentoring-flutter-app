@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
-import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
@@ -16,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:retry/retry.dart';
 
 import '../../../providers/base/operation_result.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../../utilities/navigation_mixin.dart';
 
 class ExploreCardScroll extends StatefulWidget {
