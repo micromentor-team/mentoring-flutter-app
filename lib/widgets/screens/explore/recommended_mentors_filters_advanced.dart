@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
@@ -23,10 +24,11 @@ class _RecommendedMentorsFiltersAdvanced
     extends State<RecommendedMentorsFiltersAdvanced>
     with NavigationMixin<RecommendedMentorsFiltersAdvanced> {
   late final ContentProvider _contentProvider;
-  late final TextfieldTagsController _userTypesController;
   late final TextfieldTagsController _industriesController;
+  late final TextfieldTagsController _companyStageController;
   late final ExploreCardFiltersModel _filtersModel;
   late final TextEditingController _keywordController;
+  late UserType _userType;
 
   @override
   void initState() {
@@ -36,17 +38,29 @@ class _RecommendedMentorsFiltersAdvanced
       context,
       listen: false,
     );
-    _userTypesController = TextfieldTagsController();
     _industriesController = TextfieldTagsController();
+    _companyStageController = TextfieldTagsController();
     _keywordController =
         TextEditingController(text: _filtersModel.selectedKeyword);
+    if (_filtersModel.selectedUserType != null) {
+      _userType = _filtersModel.selectedUserType!;
+    } else {
+      // Set the default user type to be the opposite of this user's type
+      final authenticatedUser = Provider.of<UserProvider>(
+        context,
+        listen: false,
+      ).user!;
+      _userType = authenticatedUser.offersHelp
+          ? UserType.entrepreneur
+          : UserType.mentor;
+    }
   }
 
   @override
   void dispose() {
     try {
-      _userTypesController.dispose();
       _keywordController.dispose();
+      _companyStageController.dispose();
     } catch (_) {}
     super.dispose();
   }
@@ -66,67 +80,138 @@ class _RecommendedMentorsFiltersAdvanced
 
     return Padding(
       padding: const EdgeInsets.all(Insets.paddingMedium),
-      child: Column(
-        children: [
-          AutocompletePicker(
-            fieldName: l10n.exploreSearchFilterIndustry,
-            controller: _industriesController,
-            options: _filtersModel.industries,
-            optionsTranslations: (textId) => _contentProvider.industryOptions!
-                .firstWhere((e) => e.textId == textId)
-                .translatedValue!,
-            selectedOptions: _filtersModel.selectedIndustries,
-          ),
-          AutocompletePicker(
-            fieldName: l10n.exploreSearchFilterUserType,
-            controller: _userTypesController,
-            options: _filtersModel.userTypes,
-            optionsTranslations: l10n.exploreSearchFilterUserTypes,
-            selectedOptions: _filtersModel.selectedUserTypes,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            AutocompletePicker(
+              fieldName: l10n.exploreSearchFilterIndustry,
+              controller: _industriesController,
+              options: _filtersModel.industries,
+              optionsTranslations: (textId) => _contentProvider.industryOptions!
+                  .firstWhere((e) => e.textId == textId)
+                  .translatedValue!,
+              selectedOptions: _filtersModel.selectedIndustries,
+            ),
+            const SizedBox(height: Insets.paddingExtraLarge),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.exploreSearchFilterUserType,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: theme.colorScheme.outline,
+                  ),
+                ),
+                const SizedBox(height: Insets.paddingExtraSmall),
+                Row(
                   children: [
-                    Text(l10n.exploreSearchFilterKeyword),
-                    const SizedBox(height: Insets.paddingExtraSmall),
-                    TextFormField(
-                      controller: _keywordController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: theme.colorScheme.outline, width: 3.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: theme.colorScheme.outline, width: 3.0),
-                        ),
+                    Text(
+                      l10n.exploreSearchFilterUserTypes(
+                          UserType.entrepreneur.name),
+                      style: theme.textTheme.labelLarge!.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
                       ),
                     ),
-                    const SizedBox(height: Insets.paddingSmall),
+                    const Spacer(),
+                    Radio<String>(
+                      value: UserType.entrepreneur.name,
+                      groupValue: _userType.name,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _userType = UserType.entrepreneur;
+                        });
+                      },
+                    ),
                   ],
                 ),
-              )
+                Row(
+                  children: [
+                    Text(
+                      l10n.exploreSearchFilterUserTypes(UserType.mentor.name),
+                      style: theme.textTheme.labelLarge!.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const Spacer(),
+                    Radio<String>(
+                      value: UserType.mentor.name,
+                      groupValue: _userType.name,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _userType = UserType.mentor;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: Insets.paddingLarge),
+            if (_userType == UserType.entrepreneur) ...[
+              AutocompletePicker(
+                fieldName: l10n.exploreSearchFilterBusinessStage,
+                controller: _companyStageController,
+                options: _filtersModel.companyStages,
+                optionsTranslations: (textId) => _contentProvider
+                    .companyStageOptions!
+                    .firstWhere((e) => e.textId == textId)
+                    .translatedValue!,
+                selectedOptions: _filtersModel.selectedStages,
+              ),
+              const SizedBox(height: Insets.paddingLarge),
             ],
-          ),
-          ClearApplyButtons(
-            onClear: () => setState(() {
-              _industriesController.clearTags();
-              _userTypesController.clearTags();
-            }),
-            onApply: () {
-              _filtersModel.setAdvancedFilters(
-                selectedIndustries: _industriesController.getTags?.toSet(),
-                selectedUserTypes: _userTypesController.getTags?.toSet(),
-                selectedKeyword: _keywordController.text,
-              );
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.exploreSearchFilterKeyword,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: theme.colorScheme.outline,
+                        ),
+                      ),
+                      const SizedBox(height: Insets.paddingExtraSmall),
+                      TextFormField(
+                        controller: _keywordController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: theme.colorScheme.outline, width: 3.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: theme.colorScheme.outline, width: 3.0),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: Insets.paddingSmall),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: Insets.paddingLarge),
+            ClearApplyButtons(
+              onClear: () => setState(() {
+                _industriesController.clearTags();
+              }),
+              onApply: () {
+                _filtersModel.setAdvancedFilters(
+                  selectedIndustries: _industriesController.getTags?.toSet(),
+                  selectedStages: _userType == UserType.entrepreneur
+                      ? _companyStageController.getTags?.toSet()
+                      : null,
+                  selectedUserType: _userType,
+                  selectedKeyword: _keywordController.text,
+                );
 
-              context.pop();
-            },
-          ),
-        ],
+                context.pop();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

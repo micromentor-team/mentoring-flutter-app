@@ -232,6 +232,7 @@ void main() async {
                     languages: contentProvider.languageIds,
                     expertises: contentProvider.expertiseIds,
                     industries: contentProvider.industryIds,
+                    companyStages: contentProvider.companyStageIds,
                   );
                 },
               ),

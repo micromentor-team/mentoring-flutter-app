@@ -37,6 +37,8 @@ class ContentProvider extends BaseProvider {
       (_expertises ?? []).map((e) => e.textId).toList();
   List<String> get industryIds =>
       (_industries ?? []).map((i) => i.textId).toList();
+  List<String> get companyStageIds =>
+      (_companyStages ?? []).map((i) => i.textId).toList();
 
   String? translateCountry(String id) => (_countries ?? [])
       .where((c) => c.textId == id)
