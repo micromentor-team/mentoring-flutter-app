@@ -34,6 +34,10 @@ query FindAllOptionsByType {
     shortLangCode
     longLangCode
   }
+  findPronouns {
+    textId
+    translatedValue
+  }
 }
 
 query FindCompanyStages {
@@ -94,8 +98,8 @@ query FindGenders {
   }
 }
 
-query FindPronouns($optionType: OptionType!) {
-  findOptions(optionType: $optionType) {
+query FindPronouns {
+  findPronouns {
     textId
     translatedValue
   }
