@@ -28,42 +28,57 @@ class ProfileHeader extends StatelessWidget {
           Insets.paddingExtraLarge, Insets.paddingExtraLarge, 0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
-            child: Image(
-              image: backgroundImage,
-              width: Insets.paddingExtraLarge,
-              height: Insets.paddingExtraLarge,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.all(Insets.paddingSmall),
-              child: Text(
-                profileMessage,
-                textAlign: TextAlign.start,
-                softWrap: true,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onSurface,
-                  fontWeight: FontWeight.w400,
+          Stack(
+            children: [
+              Positioned(
+                top: Insets.paddingExtraSmall,
+                child: ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(Radii.roundedRectRadiusSmall),
+                  child: Image(
+                    image: backgroundImage,
+                    width: Insets.paddingExtraLarge,
+                    height: Insets.paddingExtraLarge,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                      Insets.paddingSmall + Insets.paddingExtraLarge,
+                      Insets.paddingSmall,
+                      Insets.paddingSmall,
+                      Insets.paddingSmall),
+                  child: Text(
+                    profileMessage,
+                    textAlign: TextAlign.start,
+                    softWrap: true,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: theme.colorScheme.onSurface,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          const Spacer(),
-          InkWell(
-            onTap: () {
-              Provider.of<ScaffoldModel>(
-                context,
-                listen: false,
-              ).setTestHomeScaffold();
-              Scaffold.of(context).openDrawer();
-            },
-            child: Icon(
-              Icons.more_vert,
-              color: theme.colorScheme.primary,
+          Align(
+            alignment: Alignment.centerRight,
+            child: InkWell(
+              onTap: () {
+                Provider.of<ScaffoldModel>(
+                  context,
+                  listen: false,
+                ).setTestHomeScaffold();
+                Scaffold.of(context).openDrawer();
+              },
+              child: Icon(
+                Icons.more_vert,
+                color: theme.colorScheme.primary,
+              ),
             ),
           ),
         ],
