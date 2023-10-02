@@ -49,10 +49,10 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                 companyRole: user.jobTitle,
                 endorsements:
                     user.groupMemberships.fold<int>(0, (acc, membership) {
-                  // if (membership
-                  //     is Mutation$CreateUserSearch$createUserSearch$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
-                  //   return acc + (membership.endorsements ?? 0);
-                  // }
+                  if (membership
+                      is Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
+                    return acc + (membership.endorsements ?? 0);
+                  }
                   return acc;
                 }),
                 expertises: [],
