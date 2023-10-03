@@ -27,7 +27,7 @@ class ResourceImage extends StatelessWidget {
             padding: const EdgeInsets.only(top: Insets.paddingSmall),
             child: Text(subheading,
                 style: theme.textTheme.titleSmall?.copyWith(
-                  color: Colors.black,
+                  color: theme.colorScheme.onSurface,
                 )),
           ),
         ],
@@ -46,7 +46,7 @@ class ResourcesSection extends StatelessWidget {
       Text(
         l10n.moreResources,
         style: theme.textTheme.titleLarge?.copyWith(
-          color: Colors.black,
+          color: theme.colorScheme.onSurface,
         ),
       ),
       ResourceImage(

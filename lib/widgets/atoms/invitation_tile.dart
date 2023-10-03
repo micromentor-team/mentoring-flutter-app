@@ -40,7 +40,7 @@ class InvitationTile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       titleTextStyle: theme.textTheme.titleSmall?.copyWith(
-        color: Colors.black,
+        color: theme.colorScheme.onSurface,
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,9 +65,9 @@ class InvitationTile extends StatelessWidget {
         height: Radii.avatarRadiusSmall * 2,
         child: TextButton(
           onPressed: buttonOnPressed,
-          child: const Icon(
+          child: Icon(
             Icons.arrow_forward_ios,
-            color: Colors.black,
+            color: theme.colorScheme.onSurface,
           ),
         ),
       ),

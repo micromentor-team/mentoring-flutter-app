@@ -58,7 +58,7 @@ class _SectionTileState extends State<SectionTile> {
                   Text(
                     widget.title,
                     style: theme.textTheme.titleMedium?.copyWith(
-                      color: Colors.black,
+                      color: theme.colorScheme.onSurface,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -125,7 +125,7 @@ class _SectionExpandToggle extends StatelessWidget {
         child: Text(
           text,
           style: theme.textTheme.labelMedium?.copyWith(
-            color: Colors.black,
+            color: theme.colorScheme.onSurface,
           ),
         ),
       ),
