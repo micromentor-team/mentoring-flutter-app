@@ -61,13 +61,15 @@ class _InviteToConnectState extends State<InviteToConnect>
           child: ListTile(
             title: Text(
               _l10n.inviteMessageTips,
-              style: theme.textTheme.titleMedium,
+              style: theme.textTheme.titleMedium!
+                  .copyWith(color: theme.colorScheme.onTertiaryContainer),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(Insets.paddingSmall),
               child: Text(
                 _l10n.inviteMessageTipsContent,
-                style: theme.textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium!
+                    .copyWith(color: theme.colorScheme.onTertiaryContainer),
               ),
             ),
           ),
@@ -114,7 +116,10 @@ class _InviteToConnectState extends State<InviteToConnect>
             return Scaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
-                title: Text(_l10n.inviteToConnect),
+                title: Text(
+                  _l10n.inviteToConnect,
+                ),
+                centerTitle: false,
                 actions: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.close),
@@ -224,15 +229,17 @@ class _MessageBoxState extends State<MessageBox> {
             padding: const EdgeInsets.symmetric(vertical: Insets.paddingSmall),
             child: TextField(
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.outline,
+                color: theme.colorScheme.onBackground,
               ),
               controller: _textEditingController..text = defaultText,
               keyboardType: TextInputType.multiline,
               minLines: 5,
               maxLines: 5,
               decoration: InputDecoration(
+                filled: true,
+                fillColor: theme.colorScheme.background,
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: theme.colorScheme.primary),
+                    borderSide: BorderSide(color: theme.colorScheme.outline),
                     borderRadius:
                         BorderRadius.circular(Radii.roundedRectRadiusMedium)),
                 border: OutlineInputBorder(

@@ -342,5 +342,12 @@
     "findMentors": "Find Mentors",
     "signUpCompletedTextOne": "You can view and edit your profile any time and even fill out additional fields.",
     "signUpCompletedTextTwo": "Next, start connecting with mentors. We recommend you reach out to at least 3 mentors for your best chances of finding a good match.",
-    "signUpCompletedTextTwoMentor": "Next, start connecting with entrepreneurs. We recommend you reach out to at least 3 entrepreneurs for your best chances of finding a good match."
+    "signUpCompletedTextTwoMentor": "Next, start connecting with entrepreneurs. We recommend you reach out to at least 3 entrepreneurs for your best chances of finding a good match.",
+    "whyDecline": "Why would you like to decline?",
+    "whyDeclineSubtitle": "Your reason is private and will not be shared with {name}.",
+    "declineReasonNotGoodFit": "I'm not a good fit",
+    "declineReasonTooBusy": "I'm too busy right now",
+    "declineReasonNoReason": "No reason",
+    "declineReasonFakeProfile": "Profile is fake, spam, or a scammer",
+    "declineReasonInappropriate": "Inappropriate behavior or content"
 }
