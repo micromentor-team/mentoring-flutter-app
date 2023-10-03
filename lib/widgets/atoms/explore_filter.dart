@@ -136,11 +136,17 @@ class ExploreFilter extends StatelessWidget {
                                 if (!filters.userFiltersSelected ||
                                     (filters.userFiltersSelected &&
                                         !filters.expertiseFilterSelected))
-                                  _createHelpTextHeader(l10n, context),
+                                  Flexible(
+                                    child: _createHelpTextHeader(l10n, context),
+                                  ),
                                 if (filters.userFiltersSelected &&
                                     filters.expertiseFilterSelected)
-                                  _createExpertisesTextHeader(
-                                      context, filters.selectedExpertises),
+                                  Flexible(
+                                    child: _createExpertisesTextHeader(
+                                      context,
+                                      filters.selectedExpertises,
+                                    ),
+                                  ),
                               ],
                             ),
                             Row(
@@ -149,13 +155,21 @@ class ExploreFilter extends StatelessWidget {
                                     (filters.userFiltersSelected &&
                                         !filters.languageFilterSelected &&
                                         !filters.countryFilterSelected))
-                                  _createInsertLanguageLocationSubHeader(
-                                      l10n, context),
+                                  Flexible(
+                                    child:
+                                        _createInsertLanguageLocationSubHeader(
+                                      l10n,
+                                      context,
+                                    ),
+                                  ),
                                 if (filters.userFiltersSelected)
-                                  _createLanguageLocationSubHeader(
+                                  Flexible(
+                                    child: _createLanguageLocationSubHeader(
                                       context,
                                       filters.selectedCountries,
-                                      filters.selectedLanguages),
+                                      filters.selectedLanguages,
+                                    ),
+                                  ),
                               ],
                             ),
                           ],

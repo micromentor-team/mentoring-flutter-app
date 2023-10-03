@@ -64,6 +64,7 @@ class _StartScreenState extends State<StartScreen> {
   late final InboxModel _inboxModel;
   late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;
+  late final ExploreCardFiltersModel _filtersModel;
 
   @override
   void initState() {
@@ -71,6 +72,10 @@ class _StartScreenState extends State<StartScreen> {
     _inboxModel = Provider.of<InboxModel>(context, listen: false);
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
     _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+    _filtersModel = Provider.of<ExploreCardFiltersModel>(
       context,
       listen: false,
     );
@@ -94,6 +99,8 @@ class _StartScreenState extends State<StartScreen> {
 
   void _initializeUser() async {
     _registrationModel.clear();
+    _filtersModel.setFilters();
+    _filtersModel.setAdvancedFilters();
     await _inboxModel.refreshAll();
     _inboxModel.initializeDataPolling();
   }
@@ -230,6 +237,7 @@ void main() async {
                     languages: contentProvider.languageIds,
                     expertises: contentProvider.expertiseIds,
                     industries: contentProvider.industryIds,
+                    companyStages: contentProvider.companyStageIds,
                   );
                 },
               ),

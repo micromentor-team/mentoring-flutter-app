@@ -144,8 +144,9 @@
     "autocompleteInvalidChoice": "Invalid choice",
     "exploreSearchFilterTitle": "Search filters",
     "exploreSearchFilterHeadingLanguage": "Language",
-    "exploreSearchFilterHeadingCountries": "Countries",
+    "exploreSearchFilterHeadingCountries": "Country",
     "exploreSearchFilterAdvancedFilters": "Advanced filters",
+    "exploreSearchFilterBusinessStage": "Business Stage",
     "exploreSearchFilterIndustry": "Industry",
     "exploreSearchFilterIndustries": "{industry, select, Programming{Programming} Farming{Farming} Plumbing{Plumbing} other{Unknown}}",
     "@exploreSearchFilterIndustries": {
@@ -156,8 +157,8 @@
             }
         }
     },
-    "exploreSearchFilterUserType": "User types",
-    "exploreSearchFilterUserTypes": "{userType, select, Mentor{Mentor} Mentee{Mentee} other{Unknown}}",
+    "exploreSearchFilterUserType": "User type",
+    "exploreSearchFilterUserTypes": "{userType, select, mentor{Mentor} entrepreneur{Entrepreneur} other{Unknown}}",
     "@exploreSearchFilterUserTypes": {
         "description": "Selected user type",
         "placeholders": {
@@ -197,6 +198,8 @@
         }
     },
     "exploreSearchFilterAdvancedTitle": "Advanced filters",
+    "exploreSearchNoResultsTitle": "No results found",
+    "exploreSearchNoResultsSubtitle": "Try removing some filters to expand your search",
     "exploreTipsEntrepreneurTitle": "Supercharge your success!",
     "exploreTipsEntrepreneurSubtitle": "Connect with 3+ mentors for your best chance at finding the right match.",
     "exploreTipsMentorTitle": "Maximize your impact!",

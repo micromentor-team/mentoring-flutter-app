@@ -21,6 +21,7 @@ class AutocompletePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Row(
       children: [
         Expanded(
@@ -28,7 +29,12 @@ class AutocompletePicker extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (fieldName != null) ...[
-                Text(fieldName!),
+                Text(
+                  fieldName!,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: theme.colorScheme.outline,
+                  ),
+                ),
                 const SizedBox(height: Insets.paddingExtraSmall),
               ],
               AutocompleteWidget(

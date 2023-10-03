@@ -32,8 +32,6 @@ class UserProvider extends BaseProvider with ChangeNotifier {
 
   UserProvider({required super.client});
 
-  bool? get isMentor => _user?.seeksHelp;
-
   Future<void> _resetUser() async {
     _user = null;
 
@@ -120,8 +118,9 @@ class UserProvider extends BaseProvider with ChangeNotifier {
             ? FetchPolicy.networkOnly
             : FetchPolicy.cacheFirst,
         variables: Variables$Query$FindUserSearchResults(
-                userSearchId: userSearchId, options: optionsInput)
-            .toJson(),
+          userSearchId: userSearchId,
+          options: optionsInput,
+        ).toJson(),
       ),
     );
     return OperationResult(
@@ -418,11 +417,12 @@ class UserProvider extends BaseProvider with ChangeNotifier {
         document: documentNodeMutationSignUpUser,
         fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Mutation$SignUpUser(
-            input: Input$UserSignUpInput(
-          email: email,
-          password: password,
-          deviceUuid: uuid,
-        )).toJson(),
+          input: Input$UserSignUpInput(
+            email: email,
+            password: password,
+            deviceUuid: uuid,
+          ),
+        ).toJson(),
       ),
     );
 
