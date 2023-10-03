@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ExploreCardFiltersModel extends ChangeNotifier {
   final List<String> countries;
@@ -7,35 +8,38 @@ class ExploreCardFiltersModel extends ChangeNotifier {
   final List<String> expertises;
 
   final List<String> industries;
-  final List<String> userTypes = ['Mentor', 'Mentee'];
+  final List<String> companyStages;
 
   ExploreCardFiltersModel.empty()
       : countries = [],
         languages = [],
         expertises = [],
-        industries = [];
+        industries = [],
+        companyStages = [];
 
   ExploreCardFiltersModel({
     required this.countries,
     required this.languages,
     required this.expertises,
     required this.industries,
+    required this.companyStages,
   });
 
   Set<String> _selectedCountries = {};
   Set<String> _selectedLanguages = {};
   Set<String> _selectedExpertises = {};
-
-  String? _selectedIndustry;
-  Set<String> _selectedUserTypes = {};
+  Set<String> _selectedIndustries = {};
+  Set<String> _selectedStages = {};
+  UserType? _selectedUserType;
   String? _selectedKeyword;
 
   Set<String> get selectedCountries => _selectedCountries;
   Set<String> get selectedLanguages => _selectedLanguages;
   Set<String> get selectedExpertises => _selectedExpertises;
 
-  String? get selectedIndustry => _selectedIndustry;
-  Set<String> get selectedUserTypes => _selectedUserTypes;
+  Set<String> get selectedIndustries => _selectedIndustries;
+  Set<String> get selectedStages => _selectedStages;
+  UserType? get selectedUserType => _selectedUserType;
   String? get selectedKeyword =>
       (_selectedKeyword == null || (_selectedKeyword?.isEmpty ?? false))
           ? null
@@ -61,12 +65,14 @@ class ExploreCardFiltersModel extends ChangeNotifier {
   }
 
   void setAdvancedFilters({
-    String? selectedIndustry,
-    Set<String>? selectedUserTypes,
+    Set<String>? selectedIndustries,
+    Set<String>? selectedStages,
+    UserType? selectedUserType,
     String? selectedKeyword,
   }) {
-    _selectedIndustry = selectedIndustry;
-    _selectedUserTypes = selectedUserTypes ?? {};
+    _selectedIndustries = selectedIndustries ?? {};
+    _selectedStages = selectedStages ?? {};
+    _selectedUserType = selectedUserType;
     _selectedKeyword = selectedKeyword;
     notifyListeners();
   }
@@ -80,14 +86,17 @@ class ExploreCardFiltersModel extends ChangeNotifier {
       maxResultCount: maxResultsCount,
       languagesTextIds:
           _selectedLanguages.isEmpty ? null : _selectedLanguages.toList(),
-      offersHelp: _selectedUserTypes.contains("Mentor")
+      industriesTextIds:
+          _selectedIndustries.isEmpty ? null : _selectedIndustries.toList(),
+      companyStagesTextIds:
+          _selectedStages.isEmpty ? null : _selectedStages.toList(),
+      offersHelp: _selectedUserType == UserType.mentor
           ? Enum$UserSearchFieldPreference.isTrue
-          : Enum$UserSearchFieldPreference.any,
+          : Enum$UserSearchFieldPreference.isFalse,
       searchText: selectedKeyword,
-      seeksHelp:
-          (_selectedUserTypes.contains("Mentee") || _selectedUserTypes.isEmpty)
-              ? Enum$UserSearchFieldPreference.isTrue
-              : Enum$UserSearchFieldPreference.any,
+      seeksHelp: _selectedUserType == UserType.entrepreneur
+          ? Enum$UserSearchFieldPreference.isTrue
+          : Enum$UserSearchFieldPreference.isFalse,
     );
   }
 }

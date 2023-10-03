@@ -1,26 +1,28 @@
-import 'dart:io';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
-import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
+import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
+import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
+import 'package:retry/retry.dart';
 
+import '../../../providers/base/operation_result.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../../utilities/navigation_mixin.dart';
 
 class ExploreCardScroll extends StatefulWidget {
-  final UserProvider userProvider;
   final ExploreCardFiltersModel exploreCardFilters;
 
   const ExploreCardScroll({
     super.key,
-    required this.userProvider,
     required this.exploreCardFilters,
   });
 
@@ -29,38 +31,108 @@ class ExploreCardScroll extends StatefulWidget {
 }
 
 class _ExploreCardScrollState extends State<ExploreCardScroll> {
-  static const refreshInterval = Duration(seconds: 1);
-  late final AuthenticatedUser _authenticatedUser;
+  late final UserProvider _userProvider;
+  late Future<OperationResult<UserSearch>> _userSearch;
   bool _showTips = false;
-  String? _searchId;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _userSearch = _userProvider
+        .createUserSearch(
+          searchInput: widget.exploreCardFilters.toUserSearchInput(
+            Limits.searchResultsBatchSize,
+          ),
+        )
+        .then((r) => _pollUserSearch(r.response!.id));
+
+    final registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+    _showTips = registrationModel.isNewUser;
+    registrationModel.clearNewUserFlag();
+  }
+
+  FutureOr<OperationResult<UserSearch>> _pollUserSearch(String userSearchId) {
+    return CrashHandler.retryOnException<OperationResult<UserSearch>>(
+      () async {
+        final userSearchResult = await _userProvider.getUserSearch(
+          userSearchId: userSearchId,
+          fetchFromNetworkOnly: true,
+        );
+        if (userSearchResult.gqlQueryResult.hasException) {
+          String e = userSearchResult.gqlQueryResult.exception.toString();
+          CrashHandler.logCrashReport('Failed to retrieve user search: $e');
+        }
+        final bool isCompleted = userSearchResult.response?.runInfos
+                ?.any((i) => i.finishedAt != null) ??
+            false;
+        if (!isCompleted) {
+          throw RetryException(
+            message: 'Waiting for user search to complete...',
+          );
+        }
+        return userSearchResult;
+      },
+      retryOptions: const RetryOptions(
+        maxAttempts: 10,
+        maxDelay: Duration(seconds: 1),
+      ),
+      logFailures: false,
+    );
+  }
+
+  Widget _noResultsView(AppLocalizations l10n, ThemeData theme) {
+    return Column(
+      children: [
+        const SizedBox(height: Insets.paddingExtraLarge),
+        Text(
+          l10n.exploreSearchNoResultsTitle,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+        Text(
+          l10n.exploreSearchNoResultsSubtitle,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        )
+      ],
+    );
+  }
 
   List<Widget> _createCards(
       List<Query$FindUserSearch$findUserSearchById$topFoundUsers> response) {
     return response
-        .map((user) => createProfileCardFromInfo(
-              info: ProfileQuickViewInfo(
-                userId: user.id,
-                userType: // offersHelp ^ seeksHelp == true
-                    user.offersHelp ? UserType.mentor : UserType.entrepreneur,
-                avatarUrl: user.avatarUrl,
-                fullName: user.fullName ?? "Unknown",
-                location: _location(
-                    user.cityOfResidence,
-                    user.regionOfResidence,
-                    user.countryOfResidence?.translatedValue),
-                company: user.companies.firstOrNull?.name,
-                companyRole: user.jobTitle,
-                endorsements:
-                    user.groupMemberships.fold<int>(0, (acc, membership) {
+        .map(
+          (user) => createProfileCardFromInfo(
+            info: ProfileQuickViewInfo(
+              userId: user.id,
+              userType:
+                  user.offersHelp ? UserType.mentor : UserType.entrepreneur,
+              avatarUrl: user.avatarUrl,
+              fullName: user.fullName!,
+              location: _location(user.cityOfResidence, user.regionOfResidence,
+                  user.countryOfResidence?.translatedValue),
+              company: user.companies.firstOrNull?.name,
+              companyRole: user.jobTitle,
+              endorsements: user.groupMemberships.fold<int>(
+                0,
+                (acc, membership) {
                   if (membership
                       is Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
                     return acc + (membership.endorsements ?? 0);
                   }
                   return acc;
-                }),
-                expertises: [],
+                },
               ),
-            ))
+              expertises: [],
+            ),
+          ),
+        )
         .toList();
   }
 
@@ -78,32 +150,12 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     return buffer.toString();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    widget.userProvider
-        .createUserSearch(
-          searchInput: widget.exploreCardFilters.toUserSearchInput(15),
-        )
-        .then((r) => setState(() => _searchId = r.response!.id));
-    _authenticatedUser = Provider.of<UserProvider>(
-      context,
-      listen: false,
-    ).user!;
-    final registrationModel = Provider.of<UserRegistrationModel>(
-      context,
-      listen: false,
-    );
-    _showTips = registrationModel.isNewUser;
-    registrationModel.clearNewUserFlag();
-  }
-
   void _showTipsSnackBar(
     BuildContext context,
     ThemeData theme,
     AppLocalizations l10n,
   ) {
-    final bool isEntrepreneur = _authenticatedUser.seeksHelp;
+    final bool isEntrepreneur = _userProvider.user!.seeksHelp;
     _showTips = false;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -153,49 +205,41 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
       });
     }
 
-    if (_searchId == null) {
-      return const SizedBox.shrink();
-    }
-
     return FutureBuilder(
-      future: widget.userProvider.getUserSearch(userSearchId: _searchId!),
+      future: _userSearch,
       builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
-          snapshot: snapshot,
-          onReady: () {
-            final isFinished = snapshot.data?.response?.runInfos
-                    ?.any((i) => i.finishedAt != null) ??
-                false;
-
-            if (!isFinished) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                sleep(refreshInterval);
-                setState(() {});
-              });
-              return const SizedBox.shrink();
-            }
-
-            return Column(
-              children: [
-                ..._createCards(snapshot.data?.response?.topFoundUsers ?? []),
-                TextButton(
-                    onPressed: () {
-                      // TODO: pagination
-                    },
-                    child: Column(children: [
-                      Text(
-                        l10n.exploreSeeMore,
-                        style: theme.textTheme.labelLarge?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
+        snapshot: snapshot,
+        onReady: () {
+          final results = snapshot.data?.response?.topFoundUsers ?? [];
+          if (results.isEmpty) {
+            return _noResultsView(l10n, theme);
+          }
+          return Column(
+            children: [
+              ..._createCards(results),
+              TextButton(
+                onPressed: () {
+                  // TODO: pagination
+                },
+                child: Column(
+                  children: [
+                    Text(
+                      l10n.exploreSeeMore,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
                       ),
-                      Icon(
-                        Icons.arrow_drop_down,
-                        color: Color(theme.colorScheme.onSurfaceVariant.value),
-                      ),
-                    ]))
-              ],
-            );
-          }),
+                    ),
+                    Icon(
+                      Icons.arrow_drop_down,
+                      color: Color(theme.colorScheme.onSurfaceVariant.value),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          );
+        },
+      ),
     );
   }
 }
@@ -209,14 +253,20 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreenState extends State<ExploreScreen>
     with NavigationMixin<ExploreScreen> {
+  late final UserProvider _userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
     buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.clear();
     });
-
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return SafeArea(
       child: Column(
@@ -225,14 +275,24 @@ class _ExploreScreenState extends State<ExploreScreen>
             child: ListView(
               children: [
                 ExploreFilter(
-                    userType: (userProvider.isMentor ?? false)
-                        ? UserType.mentor
-                        : UserType.entrepreneur),
+                  userType: _userProvider.user!.seeksHelp
+                      ? UserType.mentor
+                      : UserType.entrepreneur,
+                ),
                 Consumer<ExploreCardFiltersModel>(
-                  builder: (context, filters, _) => ExploreCardScroll(
-                    exploreCardFilters: filters,
-                    userProvider: userProvider,
-                  ),
+                  builder: (context, filters, _) {
+                    if (filters.selectedUserType == null) {
+                      // Set the default user type to be the opposite type
+                      filters.setAdvancedFilters(
+                        selectedUserType: _userProvider.user!.seeksHelp
+                            ? UserType.mentor
+                            : UserType.entrepreneur,
+                      );
+                    }
+                    return ExploreCardScroll(
+                      exploreCardFilters: filters,
+                    );
+                  },
                 ),
               ],
             ),

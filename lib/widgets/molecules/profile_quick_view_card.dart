@@ -170,7 +170,7 @@ class ProfileQuickViewCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: Insets.paddingMedium),
-            Expanded(
+            Flexible(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,6 +184,9 @@ class ProfileQuickViewCard extends StatelessWidget {
                   if (companyText != null)
                     Text(
                       companyText,
+                      softWrap: true,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.labelMedium?.copyWith(
                         color: theme.colorScheme.onBackground,
                         fontWeight: FontWeight.w400,
@@ -200,11 +203,16 @@ class ProfileQuickViewCard extends StatelessWidget {
                           color: theme.colorScheme.onBackground,
                         ),
                       ),
-                      Text(
-                        location,
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onBackground,
-                          fontWeight: FontWeight.w400,
+                      Flexible(
+                        child: Text(
+                          location,
+                          softWrap: true,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: theme.colorScheme.onBackground,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ],
@@ -303,10 +311,15 @@ class ProfileQuickViewCard extends StatelessWidget {
             color: theme.colorScheme.onSurface,
           ),
         ),
-        Text(
-          l10n.exploreEndorsements(endorsements!),
-          style: theme.textTheme.labelSmall?.copyWith(
-            color: theme.colorScheme.onSecondaryContainer,
+        Flexible(
+          child: Text(
+            l10n.exploreEndorsements(endorsements!),
+            softWrap: true,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: theme.colorScheme.onSecondaryContainer,
+            ),
           ),
         )
       ],

@@ -41,8 +41,10 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
 
   @override
   void dispose() {
-    _countriesController.dispose();
-    _languagesController.dispose();
+    try {
+      _countriesController.dispose();
+      _languagesController.dispose();
+    } catch (_) {}
     super.dispose();
   }
 
@@ -52,63 +54,71 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.setParams(
         appBar: AppBarFactory.createTitleOnlyAppBar(
+          context: context,
           title: AppLocalizations.of(context)!.exploreSearchFilterTitle,
+          withCloseButton: true,
         ),
       );
     });
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(Insets.paddingMedium),
-      child: Column(
-        children: [
-          Column(children: [
-            _Expertise(
-              expertiseIds: _filtersModel.expertises,
-              selectedExpertises: _selectedExpertises,
-              expertiseTranslate: _contentProvider.translateExpertise,
-            ),
-            AutocompletePicker(
-              fieldName: l10n.exploreSearchFilterHeadingLanguage,
-              controller: _languagesController,
-              options: _filtersModel.languages,
-              optionsTranslations: (id) =>
-                  _contentProvider.translateLanguages(id) ?? id,
-              selectedOptions: _filtersModel.selectedLanguages,
-            ),
-            AutocompletePicker(
-              fieldName: l10n.exploreSearchFilterHeadingCountries,
-              controller: _countriesController,
-              options: _filtersModel.countries,
-              optionsTranslations: (id) =>
-                  _contentProvider.translateCountry(id) ?? id,
-              selectedOptions: _filtersModel.selectedCountries,
-            ),
-          ]),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              icon: const Icon(Icons.tune),
-              label: Text(l10n.exploreSearchFilterAdvancedFilters),
-              onPressed: () => context.push(Routes.exploreFiltersAdvanced.path),
-            ),
-          ),
-          ClearApplyButtons(
-            onClear: () => setState(() {
-              _countriesController.clearTags();
-              _languagesController.clearTags();
-              _selectedExpertises.clear();
-            }),
-            onApply: () {
-              _filtersModel.setFilters(
-                selectedCountries: _countriesController.getTags?.toSet(),
-                selectedLanguages: _languagesController.getTags?.toSet(),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(children: [
+              _Expertise(
+                expertiseIds: _filtersModel.expertises,
                 selectedExpertises: _selectedExpertises,
-              );
-
-              context.pop();
-            },
-          ),
-        ],
+                expertiseTranslate: _contentProvider.translateExpertise,
+              ),
+              const SizedBox(height: Insets.paddingLarge),
+              AutocompletePicker(
+                fieldName: l10n.exploreSearchFilterHeadingLanguage,
+                controller: _languagesController,
+                options: _filtersModel.languages,
+                optionsTranslations: (id) =>
+                    _contentProvider.translateLanguages(id) ?? id,
+                selectedOptions: _filtersModel.selectedLanguages,
+              ),
+              const SizedBox(height: Insets.paddingMedium),
+              AutocompletePicker(
+                fieldName: l10n.exploreSearchFilterHeadingCountries,
+                controller: _countriesController,
+                options: _filtersModel.countries,
+                optionsTranslations: (id) =>
+                    _contentProvider.translateCountry(id) ?? id,
+                selectedOptions: _filtersModel.selectedCountries,
+              ),
+            ]),
+            const SizedBox(height: Insets.paddingLarge),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                icon: const Icon(Icons.tune),
+                label: Text(l10n.exploreSearchFilterAdvancedFilters),
+                onPressed: () =>
+                    context.push(Routes.exploreFiltersAdvanced.path),
+              ),
+            ),
+            const SizedBox(height: Insets.paddingLarge),
+            ClearApplyButtons(
+              onClear: () => setState(() {
+                _countriesController.clearTags();
+                _languagesController.clearTags();
+                _selectedExpertises.clear();
+              }),
+              onApply: () {
+                _filtersModel.setFilters(
+                  selectedCountries: _countriesController.getTags?.toSet(),
+                  selectedLanguages: _languagesController.getTags?.toSet(),
+                  selectedExpertises: _selectedExpertises,
+                );
+                context.pop();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -172,7 +182,12 @@ class _ExpertiseState extends State<_Expertise> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(l10n.exploreSearchFilterExpertise),
+              Text(
+                l10n.exploreSearchFilterExpertise,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: theme.colorScheme.outline,
+                ),
+              ),
               const SizedBox(height: Insets.paddingExtraSmall),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
