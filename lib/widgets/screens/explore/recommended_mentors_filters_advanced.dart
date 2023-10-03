@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
-import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
 import 'package:mm_flutter_app/widgets/molecules/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
@@ -42,18 +41,7 @@ class _RecommendedMentorsFiltersAdvanced
     _companyStageController = TextfieldTagsController();
     _keywordController =
         TextEditingController(text: _filtersModel.selectedKeyword);
-    if (_filtersModel.selectedUserType != null) {
-      _userType = _filtersModel.selectedUserType!;
-    } else {
-      // Set the default user type to be the opposite of this user's type
-      final authenticatedUser = Provider.of<UserProvider>(
-        context,
-        listen: false,
-      ).user!;
-      _userType = authenticatedUser.offersHelp
-          ? UserType.entrepreneur
-          : UserType.mentor;
-    }
+    _userType = _filtersModel.selectedUserType ?? UserType.mentor;
   }
 
   @override

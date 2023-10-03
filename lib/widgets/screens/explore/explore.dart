@@ -280,9 +280,19 @@ class _ExploreScreenState extends State<ExploreScreen>
                       : UserType.entrepreneur,
                 ),
                 Consumer<ExploreCardFiltersModel>(
-                  builder: (context, filters, _) => ExploreCardScroll(
-                    exploreCardFilters: filters,
-                  ),
+                  builder: (context, filters, _) {
+                    if (filters.selectedUserType == null) {
+                      // Set the default user type to be the opposite type
+                      filters.setAdvancedFilters(
+                        selectedUserType: _userProvider.user!.seeksHelp
+                            ? UserType.mentor
+                            : UserType.entrepreneur,
+                      );
+                    }
+                    return ExploreCardScroll(
+                      exploreCardFilters: filters,
+                    );
+                  },
                 ),
               ],
             ),
