@@ -45,12 +45,10 @@ class _SignupEntrepreneurWebsiteScreenState
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: _website?.isNotEmpty ?? false
-            ? () {
-                _registrationModel.updateUserInput.companyWebsite = _website;
-                context.push(Routes.signupEntrepreneurCompanyReason.path);
-              }
-            : null,
+        rightOnPress: () {
+          _registrationModel.updateUserInput.companyWebsite = _website;
+          context.push(Routes.signupEntrepreneurCompanyReason.path);
+        },
       ),
       footer: SignUpIconFooter(
           icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
