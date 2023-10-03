@@ -32,7 +32,7 @@ class _SectionTileState extends State<SectionTile> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final num_of_invites = widget.child.length;
+    final numOfInvites = widget.child.length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -45,7 +45,7 @@ class _SectionTileState extends State<SectionTile> {
           ),
         Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: Insets.paddingMedium,
+            vertical: Insets.paddingSmall,
             horizontal: AppEdgeInsets.paddingCompact,
           ),
           child: Row(
@@ -65,7 +65,7 @@ class _SectionTileState extends State<SectionTile> {
                   Padding(
                     padding: const EdgeInsets.all(Insets.paddingSmall),
                     child: NotificationBubble(
-                      notifications: num_of_invites,
+                      notifications: numOfInvites,
                       enlarge: false,
                     ),
                   )
@@ -124,8 +124,8 @@ class _SectionExpandToggle extends StatelessWidget {
         padding: const EdgeInsets.all(Insets.paddingExtraSmall),
         child: Text(
           text,
-          style: theme.textTheme.labelSmall?.copyWith(
-            color: theme.colorScheme.primary,
+          style: theme.textTheme.labelMedium?.copyWith(
+            color: Colors.black,
           ),
         ),
       ),

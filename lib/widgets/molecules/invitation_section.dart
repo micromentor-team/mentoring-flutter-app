@@ -15,7 +15,7 @@ import '../../providers/invitations_provider.dart';
 import '../../providers/models/inbox_model.dart';
 
 class InvitationSection extends StatefulWidget {
-  static const maxTilesToShow = 2;
+  static const maxTilesToShow = 3;
   final AuthenticatedUser authenticatedUser;
   const InvitationSection({
     Key? key,
@@ -64,16 +64,6 @@ class _InvitationSectionState extends State<InvitationSection> {
     for (int i = 0;
         i < min(InvitationSection.maxTilesToShow, receivedInvitations.length);
         i++) {
-      if (invitationWidgets.isNotEmpty) {
-        invitationWidgets.add(
-          const Divider(
-            thickness: 1,
-            height: 0,
-            indent: Insets.paddingMedium,
-            endIndent: Insets.paddingMedium,
-          ),
-        );
-      }
       invitationWidgets.add(
         _createInvitationTile(context, receivedInvitations[i]),
       );

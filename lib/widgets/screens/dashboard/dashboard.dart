@@ -4,7 +4,6 @@ import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/molecules/invitation_section.dart';
-import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_scroll.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:provider/provider.dart';
 
@@ -69,9 +68,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                   authenticatedUser: _authenticatedUser,
                 ),
                 InvitationSection(
-                  authenticatedUser: _authenticatedUser,
-                ),
-                RecommendedSection(
                   authenticatedUser: _authenticatedUser,
                 ),
                 const ResourcesSection(),
