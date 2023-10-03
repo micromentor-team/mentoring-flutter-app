@@ -85,9 +85,7 @@ class _StartScreenState extends State<StartScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _content = _contentProvider.findAllOptionsByType().then(
-          (value) => _contentProvider.findPresetPronouns(),
-        );
+    _content = _contentProvider.findAllOptionsByType();
     _authenticatedUser =
         Provider.of<UserProvider>(context).getAuthenticatedUser(
       logFailures: false, // Error is expected when user is not logged in.
