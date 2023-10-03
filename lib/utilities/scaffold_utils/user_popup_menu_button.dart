@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
+import 'package:mm_flutter_app/providers/models/inbox_model.dart';
 import 'package:mm_flutter_app/utilities/debug_logger.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/report_user_dialog.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,10 @@ class UserPopupMenuButton extends StatelessWidget {
       context,
       listen: false,
     );
+    final inboxModel = Provider.of<InboxModel>(
+      context,
+      listen: false,
+    );
     final GoRouter router = GoRouter.of(context);
     return PopupMenuButton(
       icon: const Icon(Icons.more_vert),
@@ -77,12 +82,22 @@ class UserPopupMenuButton extends StatelessWidget {
             await channelsProvider.archiveChannelForAuthenticatedUser(
               channelId: channelId!,
             );
+            inboxModel.setChannelArchived(
+              channelId: channelId!,
+              isArchivedForMe: true,
+            );
+            await inboxModel.refreshUnseenMessages();
             router.push(Routes.inboxChats.path);
             break;
           case 1:
             await channelsProvider.unarchiveChannelForAuthenticatedUser(
               channelId: channelId!,
             );
+            inboxModel.setChannelArchived(
+              channelId: channelId!,
+              isArchivedForMe: false,
+            );
+            await inboxModel.refreshUnseenMessages();
             router.push(Routes.inboxChats.path);
             break;
           case 2:
