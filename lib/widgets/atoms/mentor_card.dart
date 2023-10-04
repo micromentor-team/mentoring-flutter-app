@@ -28,16 +28,18 @@ class MentorCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(Insets.paddingSmall),
-          child: CircleAvatar(
-            radius: Radii.avatarRadiusLarge,
-            child: CircleAvatar(
-              radius: Radii.avatarRadiusMedium,
-              backgroundImage: avatarUrl != null
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+            child: Image(
+              image: avatarUrl != null
                   ? NetworkImage(avatarUrl!) as ImageProvider<Object>
                   : const AssetImage(Assets.blankAvatar),
+              width: Insets.paddingExtraLarge * 2,
+              height: Insets.paddingExtraLarge * 2,
+              fit: BoxFit.cover,
             ),
           ),
-        ),
+        )
       ],
     );
   }
@@ -50,41 +52,17 @@ class MentorCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Chip for "recommended"
-        Chip(
-          avatar: Icon(
-            Icons.star,
-            color: theme.colorScheme.inversePrimary,
-          ),
-
-          //using ConstrainedBox to prevent Text Overflow beyond the Card
-          label: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: _chipMaxWidth,
-            ),
-            child: Text(
-              l10n.recommendedMentorCardScrollable,
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.onPrimary,
-              ),
-            ),
-          ),
-          visualDensity: const VisualDensity(
-            vertical: -4,
-          ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-        ),
-
         // Text for Mentor's Name
         Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
+          padding: const EdgeInsetsDirectional.only(
+              start: Insets.paddingSmall, end: Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: _mentorCardWidth / 2,
             child: Text(
               mentorName,
               style: theme.textTheme.titleSmall?.copyWith(
-                color: theme.colorScheme.secondary,
+                color: theme.colorScheme.onSurface,
               ),
               softWrap: false,
               maxLines: 1,
@@ -95,14 +73,15 @@ class MentorCard extends StatelessWidget {
 
         // Text for Mentor's Skill
         Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
+          padding: const EdgeInsetsDirectional.only(
+              start: Insets.paddingSmall, end: Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: _mentorCardWidth / 2,
             child: Text(
               mentorBio,
               style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.tertiary,
+                color: theme.colorScheme.onSurface,
               ),
               softWrap: false,
               maxLines: 1,
@@ -165,17 +144,43 @@ class MentorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Column avatarColumn = _getAvatar();
     Column mentorInfoColumn = _getMentorInfo(context);
-    return Card(
-      child: InkWell(
-        onTap: onTap,
-        child: SizedBox(
-          width: _mentorCardWidth,
-          height: _mentorCardHeight,
-          child: Row(
-            children: [
-              avatarColumn,
-              mentorInfoColumn,
-            ],
+    final ThemeData theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(end: Insets.paddingSmall),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: theme.colorScheme.outlineVariant,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Card(
+          elevation: 0,
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            child: SizedBox(
+              width: _mentorCardWidth,
+              height: _mentorCardHeight,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      avatarColumn,
+                      mentorInfoColumn,
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: Insets.paddingSmall, end: Insets.paddingSmall),
+                    child: Divider(
+                      color: theme.colorScheme.outlineVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

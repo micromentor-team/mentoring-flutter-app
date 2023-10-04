@@ -67,30 +67,81 @@ class RecommendedMentorsScroll extends StatelessWidget {
   }
 }
 
-class FindMoreMentorsButton extends StatelessWidget {
-  const FindMoreMentorsButton({Key? key}) : super(key: key);
+class RecommendedMentorsHeading extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final void Function()? seeAllOnPressed;
+  const RecommendedMentorsHeading({
+    Key? key,
+    required this.title,
+    required this.subtitle,
+    this.seeAllOnPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final GoRouter router = GoRouter.of(context);
-
     return Padding(
-      padding: const EdgeInsets.all(Insets.paddingMedium),
-      child: Container(
-        width: 200,
-        alignment: Alignment.center,
-        child: ElevatedButton.icon(
-          icon: const Icon(Icons.search),
-          onPressed: () => {
-            router.push(Routes.explore.path),
-          },
-          label: Text(
-            l10n.homeFindMoreMentors,
-            style: theme.textTheme.labelLarge,
+      padding: const EdgeInsets.symmetric(
+        vertical: Insets.paddingSmall,
+        horizontal: AppEdgeInsets.paddingCompact,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              _SectionExpandToggle(
+                text: "See more",
+                onPressed: () {},
+                //TODO(Implement onPressed functionality)
+              ),
+            ],
           ),
-          style: ButtonStyles.secondaryRoundedRectangleButton(context),
+          Row(
+            children: [
+              Text(
+                subtitle,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.secondary,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionExpandToggle extends StatelessWidget {
+  final void Function() onPressed;
+  final String text;
+  const _SectionExpandToggle({
+    required this.onPressed,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return InkWell(
+      onTap: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+        child: Text(
+          text,
+          style: theme.textTheme.labelMedium?.copyWith(
+            color: theme.colorScheme.onSurface,
+          ),
         ),
       ),
     );
@@ -177,8 +228,11 @@ class _RecommendedSectionState extends State<RecommendedSection> {
       List<MentorUser> mentors, BuildContext context) {
     return Column(
       children: [
+        const RecommendedMentorsHeading(
+          title: 'Entrepreneurs for you',
+          subtitle: 'Recommendations are based on profile',
+        ),
         RecommendedMentorsScroll(mentors: mentors),
-        const FindMoreMentorsButton(),
       ],
     );
   }

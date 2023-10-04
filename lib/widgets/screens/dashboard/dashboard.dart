@@ -8,6 +8,7 @@ import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';
+import '../../molecules/recommended_mentors_scroll.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -68,6 +69,9 @@ class _DashboardScreenState extends State<DashboardScreen>
                   authenticatedUser: _authenticatedUser,
                 ),
                 InvitationSection(
+                  authenticatedUser: _authenticatedUser,
+                ),
+                RecommendedSection(
                   authenticatedUser: _authenticatedUser,
                 ),
                 const ResourcesSection(),
