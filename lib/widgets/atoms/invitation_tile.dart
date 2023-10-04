@@ -22,7 +22,7 @@ class InvitationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return ListTile(
-      minVerticalPadding: Insets.paddingSmall,
+      minVerticalPadding: Insets.paddingExtraSmall,
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
         child: Image(

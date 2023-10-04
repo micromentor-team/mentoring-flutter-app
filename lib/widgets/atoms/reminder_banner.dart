@@ -111,13 +111,14 @@ class ReminderBanner extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: Insets.paddingMedium,
-        vertical: Insets.paddingExtraSmall,
+        vertical: Insets.paddingSmall,
       ),
       child: Card(
         elevation: 0,
         color: Theme.of(context).colorScheme.onInverseSurface,
         child: Padding(
-          padding: const EdgeInsets.all(Insets.paddingMedium),
+          padding: const EdgeInsets.fromLTRB(Insets.paddingMedium,
+              Insets.paddingSmall, Insets.paddingMedium, Insets.paddingMedium),
           child: Column(
             children: [
               Row(
@@ -153,8 +154,11 @@ class MaybeReminderBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    int profileCompletionPercentage =
-        authenticatedUser.profileCompletionPercentage;
+    // int profileCompletionPercentage =
+    //     authenticatedUser.profileCompletionPercentage;
+
+    int profileCompletionPercentage = 40;
+
     DateTime? updatedAt = authenticatedUser.updatedAt?.toLocal();
     if (profileCompletionPercentage < 50) {
       return ReminderBanner(

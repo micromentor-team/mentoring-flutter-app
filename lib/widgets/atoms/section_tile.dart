@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-
 import 'notification_bubble.dart';
 
 class SectionTile extends StatefulWidget {
   final String title;
   final List<Widget> child;
-  final bool addTopDivider;
-  final bool removeBottomPadding;
   final void Function()? seeAllOnPressed;
-  final void Function()? seeLessOnPressed;
 
   const SectionTile({
     Key? key,
     required this.title,
     required this.child,
-    this.addTopDivider = false,
-    this.removeBottomPadding = false,
     this.seeAllOnPressed,
-    this.seeLessOnPressed,
   }) : super(key: key);
 
   @override
@@ -27,22 +20,15 @@ class SectionTile extends StatefulWidget {
 }
 
 class _SectionTileState extends State<SectionTile> {
-  bool _isExpanded = false;
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final numOfInvites = widget.child.length;
+    bool isExpanded = false;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.addTopDivider)
-          const Divider(
-            thickness: 1,
-            height: 0,
-            indent: Insets.paddingSmall,
-            endIndent: Insets.paddingSmall,
-          ),
         Padding(
           padding: const EdgeInsets.symmetric(
             vertical: Insets.paddingSmall,
@@ -63,7 +49,7 @@ class _SectionTileState extends State<SectionTile> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(Insets.paddingSmall),
+                    padding: const EdgeInsets.all(Insets.paddingExtraSmall),
                     child: NotificationBubble(
                       notifications: numOfInvites,
                       enlarge: false,
@@ -71,30 +57,20 @@ class _SectionTileState extends State<SectionTile> {
                   )
                 ],
               ),
-              if (widget.seeAllOnPressed != null &&
-                  (!_isExpanded || widget.seeLessOnPressed == null))
+              if (widget.seeAllOnPressed != null && isExpanded == false)
                 _SectionExpandToggle(
                   onPressed: () => {
                     widget.seeAllOnPressed!(),
-                    setState(() => _isExpanded = true),
+                    setState(() => isExpanded = true),
                   },
                   text: l10n.listSeeAll,
-                ),
-              if (widget.seeLessOnPressed != null &&
-                  (_isExpanded || widget.seeAllOnPressed == null))
-                _SectionExpandToggle(
-                  onPressed: () => {
-                    widget.seeLessOnPressed!(),
-                    setState(() => _isExpanded = false),
-                  },
-                  text: l10n.listSeeLess,
                 ),
             ],
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(
-            bottom: widget.removeBottomPadding ? 0 : Insets.paddingMedium,
+          padding: const EdgeInsets.only(
+            bottom: Insets.paddingSmall,
           ),
           child: Center(
             child: Column(

@@ -8,11 +8,11 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/invitation_tile.dart';
-import 'package:mm_flutter_app/widgets/atoms/section_tile.dart';
 import 'package:provider/provider.dart';
-
 import '../../providers/invitations_provider.dart';
 import '../../providers/models/inbox_model.dart';
+import '../atoms/notification_bubble.dart';
+import '../atoms/section_tile.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 3;
@@ -88,8 +88,6 @@ class _InvitationSectionState extends State<InvitationSection> {
             }
             return SectionTile(
               title: _l10n.homeInvitationSectionTitle,
-              addTopDivider: false,
-              removeBottomPadding: true,
               seeAllOnPressed: () =>
                   context.push(Routes.inboxInvitesReceived.path),
               child: _createInvitationList(

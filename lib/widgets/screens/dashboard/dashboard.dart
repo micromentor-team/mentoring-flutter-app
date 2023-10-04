@@ -62,8 +62,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                   avatarUrl: _authenticatedUser.avatarUrl,
                   profileMessage:
                       _getGreeting(l10n, _authenticatedUser.fullName),
-                  profileCompletionPercentage:
-                      _authenticatedUser.profileCompletionPercentage,
                 ),
                 MaybeReminderBanner(
                   authenticatedUser: _authenticatedUser,

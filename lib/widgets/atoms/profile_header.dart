@@ -7,13 +7,11 @@ import '../../providers/models/scaffold_model.dart';
 class ProfileHeader extends StatelessWidget {
   final String? avatarUrl;
   final String profileMessage;
-  final int? profileCompletionPercentage;
 
   const ProfileHeader({
     Key? key,
     this.avatarUrl,
     required this.profileMessage,
-    this.profileCompletionPercentage,
   }) : super(key: key);
 
   @override
@@ -24,49 +22,42 @@ class ProfileHeader extends StatelessWidget {
         : const AssetImage(Assets.blankAvatar);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(Insets.paddingExtraLarge,
-          Insets.paddingExtraLarge, Insets.paddingExtraLarge, 0),
+      padding: const EdgeInsets.fromLTRB(
+          Insets.paddingLarge, Insets.paddingLarge, 0, 0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
         children: [
-          Stack(
-            children: [
-              Positioned(
-                top: Insets.paddingExtraSmall,
-                child: ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(Radii.roundedRectRadiusSmall),
-                  child: Image(
-                    image: backgroundImage,
-                    width: Insets.paddingExtraLarge,
-                    height: Insets.paddingExtraLarge,
-                    fit: BoxFit.cover,
-                  ),
+          Flexible(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.only(right: Insets.paddingSmall),
+              child: ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(Radii.roundedRectRadiusSmall),
+                child: Image(
+                  image: backgroundImage,
+                  width: Insets.paddingExtraLarge,
+                  height: Insets.paddingExtraLarge,
+                  fit: BoxFit.cover,
                 ),
               ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                      Insets.paddingSmall + Insets.paddingExtraLarge,
-                      Insets.paddingSmall,
-                      Insets.paddingSmall,
-                      Insets.paddingSmall),
-                  child: Text(
-                    profileMessage,
-                    textAlign: TextAlign.start,
-                    softWrap: true,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onSurface,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-          Align(
-            alignment: Alignment.centerRight,
+          Flexible(
+            flex: 14,
+            fit: FlexFit.tight,
+            child: Text(
+              profileMessage,
+              textAlign: TextAlign.start,
+              softWrap: true,
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: theme.colorScheme.onSurface,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
             child: InkWell(
               onTap: () {
                 Provider.of<ScaffoldModel>(
