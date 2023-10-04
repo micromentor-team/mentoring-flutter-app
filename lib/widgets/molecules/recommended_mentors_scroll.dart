@@ -6,6 +6,7 @@ import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_card.dart';
 import 'package:provider/provider.dart';
 
+import '../../__generated/schema/operations_user.graphql.dart';
 import '../../__generated/schema/schema.graphql.dart';
 import '../../providers/base/operation_result.dart';
 import '../../providers/user_provider.dart';
@@ -32,6 +33,7 @@ class RecommendedMentorsScroll extends StatelessWidget {
             onTap: () => router.push('${Routes.profile.path}/${mentor.id}'),
             //TODO: Once these fields come up in the mock server, replace these hardcoded values with the appropriate fields
             mentorBio: mentor.jobTitle ?? 'CEO, Levi Consulting',
+            mentorEndorsements: 2,
             mentorSkill: const []),
       );
     }
@@ -81,6 +83,7 @@ class RecommendedMentorsHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: Insets.paddingSmall,
@@ -99,10 +102,10 @@ class RecommendedMentorsHeading extends StatelessWidget {
                 ),
               ),
               _SectionExpandToggle(
-                text: "See more",
-                onPressed: () {},
-                //TODO(Implement onPressed functionality)
-              ),
+                  text: l10n.seeMore,
+                  onPressed: () {
+                    context.push(Routes.explore.path);
+                  }),
             ],
           ),
           Row(
@@ -226,11 +229,12 @@ class _RecommendedSectionState extends State<RecommendedSection> {
 
   Column _createRecommendedMentorsWidget(
       List<MentorUser> mentors, BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
-        const RecommendedMentorsHeading(
-          title: 'Entrepreneurs for you',
-          subtitle: 'Recommendations are based on profile',
+        RecommendedMentorsHeading(
+          title: l10n.mentorsForYou,
+          subtitle: l10n.recommendationsBasedOnYourProfile,
         ),
         RecommendedMentorsScroll(mentors: mentors),
       ],

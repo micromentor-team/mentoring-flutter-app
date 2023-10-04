@@ -109,9 +109,11 @@ class ReminderBanner extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Insets.paddingMedium,
-        vertical: Insets.paddingSmall,
+      padding: const EdgeInsets.only(
+        right: Insets.paddingMedium,
+        left: Insets.paddingMedium,
+        top: Insets.paddingMedium,
+        bottom: 0,
       ),
       child: Card(
         elevation: 0,

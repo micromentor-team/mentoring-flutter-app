@@ -6,11 +6,12 @@ class MentorCard extends StatelessWidget {
   final String? avatarUrl;
   final String mentorName;
   final String mentorBio;
+  final int? mentorEndorsements;
   final List<String> mentorSkill;
   final void Function()? onTap;
 
-  static const double _mentorCardHeight = 170;
-  static const double _mentorCardWidth = 260;
+  static const double _mentorCardHeight = 240;
+  static const double _mentorCardWidth = 296;
   static const double _chipMaxWidth = 100;
 
   const MentorCard({
@@ -18,6 +19,7 @@ class MentorCard extends StatelessWidget {
     this.avatarUrl,
     required this.mentorName,
     required this.mentorBio,
+    this.mentorEndorsements,
     required this.mentorSkill,
     this.onTap,
   }) : super(key: key);
@@ -34,8 +36,8 @@ class MentorCard extends StatelessWidget {
               image: avatarUrl != null
                   ? NetworkImage(avatarUrl!) as ImageProvider<Object>
                   : const AssetImage(Assets.blankAvatar),
-              width: Insets.paddingExtraLarge * 2,
-              height: Insets.paddingExtraLarge * 2,
+              width: 100,
+              height: 100,
               fit: BoxFit.cover,
             ),
           ),
@@ -45,9 +47,8 @@ class MentorCard extends StatelessWidget {
   }
 
   Column _getMentorInfo(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-    List<Chip> mentorSkills = _getMentorSkillChips(context);
     final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,45 +60,68 @@ class MentorCard extends StatelessWidget {
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: _mentorCardWidth / 2,
-            child: Text(
-              mentorName,
-              style: theme.textTheme.titleSmall?.copyWith(
-                color: theme.colorScheme.onSurface,
+            child: Flexible(
+              child: Text(
+                mentorName,
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                ),
+                softWrap: true,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              softWrap: false,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
 
-        // Text for Mentor's Skill
+        // Text for Mentor's Bio
         Padding(
           padding: const EdgeInsetsDirectional.only(
               start: Insets.paddingSmall, end: Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: _mentorCardWidth / 2,
-            child: Text(
-              mentorBio,
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.onSurface,
+            child: Flexible(
+              child: Text(
+                mentorBio,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                ),
+                softWrap: true,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              softWrap: false,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
 
-        //Assuming that only the first two skills are shown in this card
-        if (mentorSkills.isNotEmpty) mentorSkills[0],
-        if (mentorSkills.length > 1) mentorSkills[1],
+        //Section for mentor's endorsements
+        if (mentorEndorsements != null)
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+                start: Insets.paddingSmall, end: Insets.paddingSmall),
+            //using SizedBox to prevent Text Overflow beyond the Card
+            child: SizedBox(
+              width: _mentorCardWidth / 2,
+              child: Flexible(
+                child: Text(
+                  l10n.exploreEndorsements(mentorEndorsements!),
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.onSurface,
+                  ),
+                  softWrap: true,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }
 
   List<Chip> _getMentorSkillChips(BuildContext context) {
+    //List<Chip> mentorSkills = _getMentorSkillChips(context);
     List<Chip> mentorSkillChips = [];
 
     //if no skills, show nothing
@@ -153,7 +177,7 @@ class MentorCard extends StatelessWidget {
           border: Border.all(
             color: theme.colorScheme.outlineVariant,
           ),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
         ),
         child: Card(
           elevation: 0,
