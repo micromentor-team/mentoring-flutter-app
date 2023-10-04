@@ -1,133 +1,244 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
+import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
+import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
+import 'package:provider/provider.dart';
+import 'package:retry/retry.dart';
 
+import '../../../providers/base/operation_result.dart';
+import '../../../providers/models/user_registration_model.dart';
 import '../../../utilities/navigation_mixin.dart';
 
 class ExploreCardScroll extends StatefulWidget {
-  const ExploreCardScroll({super.key});
+  final ExploreCardFiltersModel exploreCardFilters;
+
+  const ExploreCardScroll({
+    super.key,
+    required this.exploreCardFilters,
+  });
 
   @override
   State<ExploreCardScroll> createState() => _ExploreCardScrollState();
 }
 
 class _ExploreCardScrollState extends State<ExploreCardScroll> {
-  final int requestSize = 5;
-  List<bool> isSelected = [];
-  List<ProfileQuickViewInfo> cardInfo = [];
-
-  void _loadMoreRecommendations() {
-    // future todo:  load the actual backend request into cardInfo here instead
-    for (int i = 0; i < requestSize; i++) {
-      isSelected.add(false);
-      if (cardInfo.isEmpty) {
-        cardInfo.add(createRecommendedMentorExample());
-      } else if (cardInfo.length == 1) {
-        cardInfo.add(createRecommendedEntrepreneurExample());
-      } else {
-        cardInfo.add(createRegularMentorExample());
-      }
-    }
-  }
-
-  List<Widget> _createCards() {
-    List<Widget> exploreCards = [];
-    for (int i = 0; i < isSelected.length; i++) {
-      exploreCards.add(createProfileCardFromInfo(
-        info: cardInfo[i],
-      ));
-    }
-    return exploreCards;
-  }
-
-  List<Widget> _createFilter(context) {
-    List<Widget> filterMenu = [
-      const ExploreFilter(userType: UserType.entrepreneur)
-    ];
-    return filterMenu;
-  }
+  late final UserProvider _userProvider;
+  late Future<OperationResult<UserSearch>> _userSearch;
+  bool _showTips = false;
 
   @override
   void initState() {
-    if (isSelected.isEmpty) {
-      _loadMoreRecommendations();
-    }
     super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _userSearch = _userProvider
+        .createUserSearch(
+          searchInput: widget.exploreCardFilters.toUserSearchInput(
+            Limits.searchResultsBatchSize,
+          ),
+        )
+        .then((r) => _pollUserSearch(r.response!.id));
+
+    final registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+    _showTips = registrationModel.isNewUser;
+    registrationModel.clearNewUserFlag();
+  }
+
+  FutureOr<OperationResult<UserSearch>> _pollUserSearch(String userSearchId) {
+    return CrashHandler.retryOnException<OperationResult<UserSearch>>(
+      () async {
+        final userSearchResult = await _userProvider.getUserSearch(
+          userSearchId: userSearchId,
+          fetchFromNetworkOnly: true,
+        );
+        if (userSearchResult.gqlQueryResult.hasException) {
+          String e = userSearchResult.gqlQueryResult.exception.toString();
+          CrashHandler.logCrashReport('Failed to retrieve user search: $e');
+        }
+        final bool isCompleted = userSearchResult.response?.runInfos
+                ?.any((i) => i.finishedAt != null) ??
+            false;
+        if (!isCompleted) {
+          throw RetryException(
+            message: 'Waiting for user search to complete...',
+          );
+        }
+        return userSearchResult;
+      },
+      retryOptions: const RetryOptions(
+        maxAttempts: 10,
+        maxDelay: Duration(seconds: 1),
+      ),
+      logFailures: false,
+    );
+  }
+
+  Widget _noResultsView(AppLocalizations l10n, ThemeData theme) {
+    return Column(
+      children: [
+        const SizedBox(height: Insets.paddingExtraLarge),
+        Text(
+          l10n.exploreSearchNoResultsTitle,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+        Text(
+          l10n.exploreSearchNoResultsSubtitle,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        )
+      ],
+    );
+  }
+
+  List<Widget> _createCards(
+      List<Query$FindUserSearch$findUserSearchById$topFoundUsers> response) {
+    return response
+        .map(
+          (user) => createProfileCardFromInfo(
+            info: ProfileQuickViewInfo(
+              userId: user.id,
+              userType:
+                  user.offersHelp ? UserType.mentor : UserType.entrepreneur,
+              avatarUrl: user.avatarUrl,
+              fullName: user.fullName!,
+              location: _location(user.cityOfResidence, user.regionOfResidence,
+                  user.countryOfResidence?.translatedValue),
+              company: user.companies.firstOrNull?.name,
+              companyRole: user.jobTitle,
+              endorsements: user.groupMemberships.fold<int>(
+                0,
+                (acc, membership) {
+                  if (membership
+                      is Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
+                    return acc + (membership.endorsements ?? 0);
+                  }
+                  return acc;
+                },
+              ),
+              expertises: [],
+            ),
+          ),
+        )
+        .toList();
+  }
+
+  String _location(String? city, String? region, String? country) {
+    final locs = [city, region, country].nonNulls.toList();
+    final buffer = StringBuffer();
+
+    for (int i = 0; i < locs.length - 1; i++) {
+      buffer.write("${locs[i]}, ");
+    }
+    if (locs.isNotEmpty) {
+      buffer.write(locs.last);
+    }
+
+    return buffer.toString();
+  }
+
+  void _showTipsSnackBar(
+    BuildContext context,
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
+    final bool isEntrepreneur = _userProvider.user!.seeksHelp;
+    _showTips = false;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: theme.colorScheme.primaryContainer,
+        duration: const Duration(minutes: 5),
+        content: Padding(
+          padding: const EdgeInsets.all(Insets.paddingMedium),
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  isEntrepreneur
+                      ? l10n.exploreTipsEntrepreneurTitle
+                      : l10n.exploreTipsMentorTitle,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  isEntrepreneur
+                      ? l10n.exploreTipsEntrepreneurSubtitle
+                      : l10n.exploreTipsMentorSubtitle,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        showCloseIcon: true,
+        closeIconColor: theme.colorScheme.onSurfaceVariant,
+        padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    if (_showTips) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showTipsSnackBar(context, theme, l10n);
+      });
+    }
 
-    return SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-              child: ListView(
-            children: _createFilter(context) +
-                _createCards() +
-                [
-                  TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _loadMoreRecommendations();
-                        });
-                      },
-                      child: Column(children: [
-                        Text(
-                          l10n.exploreSeeMore,
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color:
-                              Color(theme.colorScheme.onSurfaceVariant.value),
-                        ),
-                      ]))
-                ],
-          )),
-          TextButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: theme.colorScheme.primaryContainer,
-                  content: Padding(
-                    padding: const EdgeInsets.all(Insets.paddingMedium),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            l10n.maximizeYourImpact,
-                            style: theme.textTheme.labelLarge?.copyWith(
-                              color: theme.colorScheme.secondary,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Text(
-                            l10n.connectWithThreeEntrepreneurs,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.colorScheme.secondary,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+    return FutureBuilder(
+      future: _userSearch,
+      builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
+        snapshot: snapshot,
+        onReady: () {
+          final results = snapshot.data?.response?.topFoundUsers ?? [];
+          if (results.isEmpty) {
+            return _noResultsView(l10n, theme);
+          }
+          return Column(
+            children: [
+              ..._createCards(results),
+              TextButton(
+                onPressed: () {
+                  // TODO: pagination
+                },
+                child: Column(
+                  children: [
+                    Text(
+                      l10n.exploreSeeMore,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
                       ),
                     ),
-                  ),
-                  showCloseIcon: true,
-                  closeIconColor: theme.colorScheme.onSurfaceVariant,
-                  padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+                    Icon(
+                      Icons.arrow_drop_down,
+                      color: Color(theme.colorScheme.onSurfaceVariant.value),
+                    ),
+                  ],
                 ),
-              );
-            },
-            child: const Text("Show some tips on a SnackBar"),
-          ),
-        ],
+              )
+            ],
+          );
+        },
       ),
     );
   }
@@ -142,12 +253,52 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreenState extends State<ExploreScreen>
     with NavigationMixin<ExploreScreen> {
+  late final UserProvider _userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
     buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.clear();
     });
-    return const ExploreCardScroll();
+
+    return SafeArea(
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              children: [
+                ExploreFilter(
+                  userType: _userProvider.user!.seeksHelp
+                      ? UserType.mentor
+                      : UserType.entrepreneur,
+                ),
+                Consumer<ExploreCardFiltersModel>(
+                  builder: (context, filters, _) {
+                    if (filters.selectedUserType == null) {
+                      // Set the default user type to be the opposite type
+                      filters.setAdvancedFilters(
+                        selectedUserType: _userProvider.user!.seeksHelp
+                            ? UserType.mentor
+                            : UserType.entrepreneur,
+                      );
+                    }
+                    return ExploreCardScroll(
+                      exploreCardFilters: filters,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

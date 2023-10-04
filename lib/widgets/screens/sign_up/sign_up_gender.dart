@@ -1,22 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_icon_footer.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/providers/content_provider.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_bottom_buttons.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_icon_footer.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
+import '../../../providers/models/user_registration_model.dart';
 
-class SignUpGender extends StatefulWidget {
-  const SignUpGender({super.key});
+class SignupGenderScreen extends StatefulWidget {
+  const SignupGenderScreen({super.key});
 
   @override
-  State<SignUpGender> createState() => _SignUpGenderState();
+  State<SignupGenderScreen> createState() => _SignupGenderScreenState();
 }
 
-class _SignUpGenderState extends State<SignUpGender> {
+class _SignupGenderScreenState extends State<SignupGenderScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? _gender;
+  late final ContentProvider _contentProvider;
+  late final UserRegistrationModel _registrationModel;
+  String? _genderValue;
+  String? _genderTextId;
+
+  @override
+  void initState() {
+    super.initState();
+    _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _registrationModel = Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    );
+  }
+
+  Widget _createGenderOption(ThemeData theme, String value, String textId) {
+    return ListTile(
+      title: Text(
+        value,
+        style: theme.textTheme.bodyMedium!.copyWith(
+          color: theme.colorScheme.secondary,
+        ),
+      ),
+      trailing: Radio<String>(
+        value: value,
+        groupValue: _genderValue,
+        onChanged: (String? value) {
+          setState(() {
+            _genderValue = value;
+            _genderTextId = textId;
+          });
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,74 +67,21 @@ class _SignUpGenderState extends State<SignUpGender> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              l10n.signupGenderSubtitle,
-              style: theme.textTheme.bodyMedium!.copyWith(
-                color: theme.colorScheme.secondary,
+            for (int i = 0;
+                i < _contentProvider.presetGenderOptions!.length;
+                i++)
+              Padding(
+                padding: i == 0
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.only(
+                        top: Insets.paddingLarge,
+                      ),
+                child: _createGenderOption(
+                  theme,
+                  _contentProvider.presetGenderOptions![i].translatedValue!,
+                  _contentProvider.presetGenderOptions![i].textId,
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: Insets.paddingLarge),
-            Column(
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                    l10n.signupGenderOptionWoman,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: theme.colorScheme.secondary,
-                    ),
-                  ),
-                  trailing: Radio<String>(
-                    value: l10n
-                        .signupGenderOptionWoman, //TODO - use content provider textID
-                    groupValue: _gender,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _gender = value;
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(height: Insets.paddingLarge),
-                ListTile(
-                  title: Text(
-                    l10n.signupGenderOptionMan,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: theme.colorScheme.secondary,
-                    ),
-                  ),
-                  trailing: Radio<String>(
-                    value: l10n
-                        .signupGenderOptionMan, //TODO - use content provider textID
-                    groupValue: _gender,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _gender = value;
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(height: Insets.paddingLarge),
-                ListTile(
-                  title: Text(
-                    l10n.signupGenderOptionOther,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: theme.colorScheme.secondary,
-                    ),
-                  ),
-                  trailing: Radio<String>(
-                    value: l10n
-                        .signupGenderOptionOther, //TODO - use content provider textID
-                    groupValue: _gender,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _gender = value;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
@@ -109,10 +93,12 @@ class _SignUpGenderState extends State<SignUpGender> {
         leftOnPress: () {
           context.pop();
         },
-        rightOnPress: _gender == null
+        rightOnPress: _genderTextId == null
             ? null
             : () {
                 if (_formKey.currentState!.validate()) {
+                  _registrationModel.updateUserInput.genderTextId =
+                      _genderTextId;
                   context.push(Routes.signupLocation.path);
                 }
               },

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/screens/sign_up/components/sign_up_template.dart';
 
 import '../../atoms/social_sign_in_button.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SignupMethodScreen extends StatelessWidget {
+  const SignupMethodScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,20 +15,23 @@ class SignUpScreen extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
-        title: l10n.signUp,
-        progress: SignUpProgress.one,
-        body: Column(children: [
+      title: l10n.signUp,
+      progress: SignUpProgress.one,
+      body: Column(
+        children: [
           Padding(
-              padding: const EdgeInsets.all(Insets.paddingMedium),
-              child: SizedBox(
-                  width: 320,
-                  child: Text(
-                    l10n.signUpDesc,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.outline,
-                    ),
-                  ))),
+            padding: const EdgeInsets.all(Insets.paddingMedium),
+            child: SizedBox(
+              width: 320,
+              child: Text(
+                l10n.signUpDesc,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.outline,
+                ),
+              ),
+            ),
+          ),
           Text(
             l10n.continueWith,
             style: theme.textTheme.titleMedium?.copyWith(
@@ -92,6 +95,8 @@ class SignUpScreen extends StatelessWidget {
                   context.push(Routes.signupEmail.path);
                 },
               )),
-        ]));
+        ],
+      ),
+    );
   }
 }

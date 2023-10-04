@@ -20,7 +20,7 @@ class ProfileQuickViewInfo {
   final String? company;
   final String? companyRole;
   final int? endorsements;
-  final List<SkillChip> skills;
+  final List<ExpertiseChip> expertises;
 
   const ProfileQuickViewInfo({
     required this.userId,
@@ -32,80 +32,8 @@ class ProfileQuickViewInfo {
     this.company,
     this.companyRole,
     this.endorsements,
-    required this.skills,
+    required this.expertises,
   });
-}
-
-ProfileQuickViewInfo createRecommendedMentorExample() {
-  return const ProfileQuickViewInfo(
-      userId: '',
-      userType: UserType.mentor,
-      avatarUrl:
-          'https://media.istockphoto.com/id/1280371040/photo/confident-stylish-european-mature-middle-aged-woman-standing-at-workplace-stylish-older.jpg?s=612x612&w=0&k=20&c=AntzoG_Z1hN6tYVBXbu58Rvz4jweBYa8669bV75yWRw=',
-      fullName: 'Delia Joyce',
-      groupMembership: "Verizon Digital Ready",
-      location: 'Shaker Heights, Ohio, USA',
-      company: 'SparkNow',
-      companyRole: 'Founder',
-      endorsements: 7,
-      skills: [
-        SkillChip(
-          skill: 'Marketing',
-        ),
-        SkillChip(
-          skill: 'Operations',
-        ),
-        SkillChip(
-          skill: 'Starting Up',
-        ),
-      ]);
-}
-
-ProfileQuickViewInfo createRegularMentorExample() {
-  return const ProfileQuickViewInfo(
-      userId: '',
-      userType: UserType.mentor,
-      avatarUrl:
-          'https://media.istockphoto.com/id/1307694427/photo/portrait-of-businessman-in-glasses-holding-smartphone-in-hand.jpg?s=612x612&w=0&k=20&c=P4FDNemdXlXQi3O_yLePrJVzuTYmJx84-iIySj91fGQ=',
-      fullName: 'Jenika Chua',
-      location: 'Shaker Heights, Ohio, USA',
-      company: 'SparkNow',
-      companyRole: 'Founder',
-      endorsements: 7,
-      skills: [
-        SkillChip(
-          skill: 'Marketing',
-        ),
-        SkillChip(
-          skill: 'Operations',
-        ),
-        SkillChip(
-          skill: 'Starting Up',
-        ),
-      ]);
-}
-
-ProfileQuickViewInfo createRecommendedEntrepreneurExample() {
-  return const ProfileQuickViewInfo(
-      userId: '',
-      userType: UserType.entrepreneur,
-      avatarUrl:
-          'https://st4.depositphotos.com/9999814/39958/i/600/depositphotos_399584092-stock-photo-attractive-young-woman-profile-portrait.jpg',
-      fullName: 'Azadeh Sana',
-      location: 'Memphis, Tennessee, USA',
-      company: 'St James Place',
-      endorsements: 2,
-      skills: [
-        SkillChip(
-          skill: 'Marketing',
-        ),
-        SkillChip(
-          skill: 'Operations',
-        ),
-        SkillChip(
-          skill: 'Starting Up',
-        ),
-      ]);
 }
 
 ProfileQuickViewCard createProfileCardFromInfo({
@@ -121,12 +49,12 @@ ProfileQuickViewCard createProfileCardFromInfo({
     company: info.company,
     companyRole: info.companyRole,
     endorsements: info.endorsements,
-    skills: info.skills,
+    expertises: info.expertises,
   );
 }
 
 class ProfileQuickViewCard extends StatelessWidget {
-  static int maxSkillChips = 3;
+  static int maxExpertiseChips = 3;
 
   final String userId;
   final UserType userType;
@@ -137,7 +65,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   final String? company;
   final String? companyRole;
   final int? endorsements;
-  final List<SkillChip> skills;
+  final List<ExpertiseChip> expertises;
 
   const ProfileQuickViewCard({
     Key? key,
@@ -150,7 +78,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     this.company,
     this.companyRole,
     this.endorsements,
-    this.skills = const [],
+    this.expertises = const [],
   }) : super(key: key);
 
   @override
@@ -176,7 +104,7 @@ class ProfileQuickViewCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _createProfileView(context, l10n),
-                if (skills.isNotEmpty) _createSkillsFooter(context, l10n),
+                if (expertises.isNotEmpty) _createSkillsFooter(context, l10n),
               ],
             ),
           ),
@@ -242,7 +170,7 @@ class ProfileQuickViewCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: Insets.paddingMedium),
-            Expanded(
+            Flexible(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -256,6 +184,9 @@ class ProfileQuickViewCard extends StatelessWidget {
                   if (companyText != null)
                     Text(
                       companyText,
+                      softWrap: true,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.labelMedium?.copyWith(
                         color: theme.colorScheme.onBackground,
                         fontWeight: FontWeight.w400,
@@ -272,11 +203,16 @@ class ProfileQuickViewCard extends StatelessWidget {
                           color: theme.colorScheme.onBackground,
                         ),
                       ),
-                      Text(
-                        location,
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onBackground,
-                          fontWeight: FontWeight.w400,
+                      Flexible(
+                        child: Text(
+                          location,
+                          softWrap: true,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: theme.colorScheme.onBackground,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ],
@@ -325,7 +261,8 @@ class ProfileQuickViewCard extends StatelessWidget {
   }
 
   List<Widget> _createSkillChips(l10n) {
-    final List<SkillChip> topSkills = skills.take(maxSkillChips).toList();
+    final List<ExpertiseChip> topSkills =
+        expertises.take(maxExpertiseChips).toList();
     List<Widget> rowChildren = [topSkills.first];
     for (int i = 1; i < topSkills.length; i++) {
       rowChildren.addAll(
@@ -361,7 +298,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   }
 
   Widget _createEndorsements(AppLocalizations l10n, ThemeData theme) {
-    if (endorsements == null) {
+    if (endorsements == null || endorsements == 0) {
       return const SizedBox(width: 0, height: 0);
     }
     return Row(
@@ -374,10 +311,15 @@ class ProfileQuickViewCard extends StatelessWidget {
             color: theme.colorScheme.onSurface,
           ),
         ),
-        Text(
-          l10n.exploreEndorsements(endorsements!),
-          style: theme.textTheme.labelSmall?.copyWith(
-            color: theme.colorScheme.onSecondaryContainer,
+        Flexible(
+          child: Text(
+            l10n.exploreEndorsements(endorsements!),
+            softWrap: true,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: theme.colorScheme.onSecondaryContainer,
+            ),
           ),
         )
       ],

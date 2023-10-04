@@ -74,13 +74,13 @@ class _InvitationDetailState extends State<InvitationDetail>
             .firstOrNull
             ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null)
         : null;
-    final List<SkillChip> skills = invitation.sender.offersHelp
+    final List<ExpertiseChip> skills = invitation.sender.offersHelp
         ? maybeMentorsGroupMembership?.expertises
-                .map((e) => SkillChip(skill: e.translatedValue!))
+                .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
             []
         : maybeMenteesGroupMembership?.soughtExpertises
-                .map((e) => SkillChip(skill: e.translatedValue!))
+                .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
             [];
     return createProfileCardFromInfo(
@@ -98,7 +98,7 @@ class _InvitationDetailState extends State<InvitationDetail>
         endorsements: invitation.sender.offersHelp
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
-        skills: skills,
+        expertises: skills,
       ),
     );
   }
@@ -116,13 +116,13 @@ class _InvitationDetailState extends State<InvitationDetail>
             .firstOrNull
             ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null)
         : null;
-    final List<SkillChip> skills = invitation.recipient.offersHelp
+    final List<ExpertiseChip> skills = invitation.recipient.offersHelp
         ? maybeMentorsGroupMembership?.expertises
-                .map((e) => SkillChip(skill: e.translatedValue!))
+                .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
             []
         : maybeMenteesGroupMembership?.soughtExpertises
-                .map((e) => SkillChip(skill: e.translatedValue!))
+                .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
             [];
     return createProfileCardFromInfo(
@@ -140,7 +140,7 @@ class _InvitationDetailState extends State<InvitationDetail>
         endorsements: invitation.recipient.offersHelp
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
-        skills: skills,
+        expertises: skills,
       ),
     );
   }
@@ -226,7 +226,7 @@ class _InvitationDetailState extends State<InvitationDetail>
                           channelInvitationId: widget.channelInvitationId,
                         );
                         await _inboxModel.refreshPendingReceivedInvitations();
-                        _inboxModel.refreshInboxInviteNotifications();
+                        router.push(Routes.inboxInvitesReceived.path);
                       });
                 });
           },
@@ -249,7 +249,6 @@ class _InvitationDetailState extends State<InvitationDetail>
               channelInvitationId: widget.channelInvitationId,
             );
             await _inboxModel.refreshPendingReceivedInvitations();
-            await _inboxModel.refreshInboxInviteNotifications();
             await _inboxModel.refreshActiveChannels();
             final ChannelForUser? newChannel = _inboxModel.activeChannels
                 .where((e) => e.participants.any((p) => p.user.id == senderId))

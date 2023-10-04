@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 
 import '../__generated/schema/operations_content.graphql.dart';
 import 'base/base_provider.dart';
@@ -12,7 +11,7 @@ typedef Country = Query$FindCountries$findCountries;
 typedef EducationLevel = Query$FindEducationLevels$findEducationLevels;
 typedef Expertise = Query$FindExpertises$findExpertises;
 typedef PresetGender = Query$FindGenders$findGenders;
-typedef PresetPronoun = Query$FindPronouns$findOptions;
+typedef PresetPronoun = Query$FindPronouns$findPronouns;
 typedef Industry = Query$FindIndustries$findIndustries;
 typedef Language = Query$FindLanguages$findLanguages;
 typedef OptionByType = Query$FindAllOptions$findOptions;
@@ -29,6 +28,34 @@ class ContentProvider extends BaseProvider {
   List<Industry>? _industries;
   List<Language>? _languages;
 
+  List<String> get countryIds =>
+      (_countries ?? []).map((c) => c.textId).toList();
+  List<String> get languageIds =>
+      (_languages ?? []).map((l) => l.textId).toList();
+  List<String> get expertiseIds =>
+      (_expertises ?? []).map((e) => e.textId).toList();
+  List<String> get industryIds =>
+      (_industries ?? []).map((i) => i.textId).toList();
+  List<String> get companyStageIds =>
+      (_companyStages ?? []).map((i) => i.textId).toList();
+
+  String? translateCountry(String id) => (_countries ?? [])
+      .where((c) => c.textId == id)
+      .firstOrNull
+      ?.translatedValue;
+  String? translateLanguages(String id) => (_languages ?? [])
+      .where((l) => l.textId == id)
+      .firstOrNull
+      ?.translatedValue;
+  String? translateExpertise(String id) => (_expertises ?? [])
+      .where((e) => e.textId == id)
+      .firstOrNull
+      ?.translatedValue;
+  String? translateIndustry(String id) => (_industries ?? [])
+      .where((i) => i.textId == id)
+      .firstOrNull
+      ?.translatedValue;
+
   ContentProvider({required super.client}) {
     debugPrint('ContentProvider initialized');
   }
@@ -41,6 +68,7 @@ class ContentProvider extends BaseProvider {
     List<EducationLevel>? educationLevels,
     List<Expertise>? expertises,
     List<PresetGender>? presetGenders,
+    List<PresetPronoun>? presetPronouns,
     List<Industry>? industries,
     List<Language>? languages,
   }) {
@@ -61,6 +89,9 @@ class ContentProvider extends BaseProvider {
     }
     if (presetGenders != null) {
       _presetGenders = presetGenders;
+    }
+    if (presetPronouns != null) {
+      _presetPronouns = presetPronouns;
     }
     if (industries != null) {
       _industries = industries;
@@ -316,9 +347,6 @@ class ContentProvider extends BaseProvider {
       queryOptions: QueryOptions(
         document: documentNodeQueryFindPronouns,
         fetchPolicy: FetchPolicy.cacheFirst,
-        variables: Variables$Query$FindPronouns(
-          optionType: Enum$OptionType.pronoun,
-        ).toJson(),
       ),
     );
     final result = OperationResult(
@@ -326,7 +354,7 @@ class ContentProvider extends BaseProvider {
       response: queryResult.data != null
           ? Query$FindPronouns.fromJson(
               queryResult.data!,
-            ).findOptions
+            ).findPronouns
           : null,
     );
     if (result.response != null) _setPresetPronounOptions(result.response!);
@@ -378,6 +406,9 @@ class ContentProvider extends BaseProvider {
             .toList(),
         presetGenders: result.response?.findGenders
             .map((e) => Query$FindGenders$findGenders.fromJson(e.toJson()))
+            .toList(),
+        presetPronouns: result.response?.findPronouns
+            .map((e) => Query$FindPronouns$findPronouns.fromJson(e.toJson()))
             .toList(),
       );
     }

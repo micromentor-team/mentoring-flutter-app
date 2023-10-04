@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/widgets/atoms/clear_apply_buttons.dart';
@@ -24,7 +25,8 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
   late final TextfieldTagsController _countriesController;
   late final TextfieldTagsController _languagesController;
   late final ExploreCardFiltersModel _filtersModel;
-  Set<String> _selectedSkills = {};
+  late final ContentProvider _contentProvider;
+  Set<String> _selectedExpertises = {};
 
   @override
   void initState() {
@@ -33,13 +35,16 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     _languagesController = TextfieldTagsController();
     _filtersModel =
         Provider.of<ExploreCardFiltersModel>(context, listen: false);
-    _selectedSkills = _filtersModel.selectedSkills;
+    _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _selectedExpertises = _filtersModel.selectedExpertises;
   }
 
   @override
   void dispose() {
-    _countriesController.dispose();
-    _languagesController.dispose();
+    try {
+      _countriesController.dispose();
+      _languagesController.dispose();
+    } catch (_) {}
     super.dispose();
   }
 
@@ -49,66 +54,86 @@ class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
     buildPageRouteScaffold((scaffoldModel) {
       scaffoldModel.setParams(
         appBar: AppBarFactory.createTitleOnlyAppBar(
+          context: context,
           title: AppLocalizations.of(context)!.exploreSearchFilterTitle,
+          withCloseButton: true,
         ),
       );
     });
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(Insets.paddingMedium),
-      child: Column(
-        children: [
-          Column(children: [
-            _Expertise(skills: _selectedSkills),
-            AutocompletePicker(
-              fieldName: l10n.exploreSearchFilterHeadingLanguage,
-              controller: _languagesController,
-              options: ExploreCardFiltersModel.languages,
-              optionsTranslations: l10n.exploreSearchFilterLanguages,
-              selectedOptions: _filtersModel.selectedLanguages,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(children: [
+              _Expertise(
+                expertiseIds: _filtersModel.expertises,
+                selectedExpertises: _selectedExpertises,
+                expertiseTranslate: _contentProvider.translateExpertise,
+              ),
+              const SizedBox(height: Insets.paddingLarge),
+              AutocompletePicker(
+                fieldName: l10n.exploreSearchFilterHeadingLanguage,
+                controller: _languagesController,
+                options: _filtersModel.languages,
+                optionsTranslations: (id) =>
+                    _contentProvider.translateLanguages(id) ?? id,
+                selectedOptions: _filtersModel.selectedLanguages,
+              ),
+              const SizedBox(height: Insets.paddingMedium),
+              AutocompletePicker(
+                fieldName: l10n.exploreSearchFilterHeadingCountries,
+                controller: _countriesController,
+                options: _filtersModel.countries,
+                optionsTranslations: (id) =>
+                    _contentProvider.translateCountry(id) ?? id,
+                selectedOptions: _filtersModel.selectedCountries,
+              ),
+            ]),
+            const SizedBox(height: Insets.paddingLarge),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                icon: const Icon(Icons.tune),
+                label: Text(l10n.exploreSearchFilterAdvancedFilters),
+                onPressed: () =>
+                    context.push(Routes.exploreFiltersAdvanced.path),
+              ),
             ),
-            AutocompletePicker(
-              fieldName: l10n.exploreSearchFilterHeadingCountries,
-              controller: _countriesController,
-              options: ExploreCardFiltersModel.countries,
-              optionsTranslations: l10n.exploreSearchFilterCountries,
-              selectedOptions: _filtersModel.selectedCountries,
+            const SizedBox(height: Insets.paddingLarge),
+            ClearApplyButtons(
+              onClear: () => setState(() {
+                _countriesController.clearTags();
+                _languagesController.clearTags();
+                _selectedExpertises.clear();
+              }),
+              onApply: () {
+                _filtersModel.setFilters(
+                  selectedCountries: _countriesController.getTags?.toSet(),
+                  selectedLanguages: _languagesController.getTags?.toSet(),
+                  selectedExpertises: _selectedExpertises,
+                );
+                context.pop();
+              },
             ),
-          ]),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              icon: const Icon(Icons.tune),
-              label: Text(l10n.exploreSearchFilterAdvancedFilters),
-              onPressed: () => context.push(Routes.exploreFiltersAdvanced.path),
-            ),
-          ),
-          ClearApplyButtons(
-            onClear: () => setState(() {
-              _countriesController.clearTags();
-              _languagesController.clearTags();
-              _selectedSkills.clear();
-            }),
-            onApply: () {
-              _filtersModel.setFilters(
-                selectedCountries: _countriesController.getTags?.toSet(),
-                selectedLanguages: _languagesController.getTags?.toSet(),
-                selectedSkills: _selectedSkills,
-              );
-
-              context.pop();
-            },
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
 class _Expertise extends StatefulWidget {
-  final Set<String> skills;
+  final List<String> expertiseIds;
+  final Set<String> selectedExpertises;
+  final String? Function(String id) expertiseTranslate;
 
-  const _Expertise({required this.skills});
+  const _Expertise({
+    required this.expertiseIds,
+    required this.selectedExpertises,
+    required this.expertiseTranslate,
+  });
 
   @override
   State<StatefulWidget> createState() => _ExpertiseState();
@@ -120,18 +145,18 @@ class _ExpertiseState extends State<_Expertise> {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    var skillButtons = [];
-    for (int i = 0; i < ExploreCardFiltersModel.skills.length; i++) {
-      var skill = ExploreCardFiltersModel.skills[i];
-      var isSelected = widget.skills.contains(skill);
+    var expertiseButtons = [];
+    for (int i = 0; i < widget.expertiseIds.length; i++) {
+      var expertise = widget.expertiseIds[i];
+      var isSelected = widget.selectedExpertises.contains(expertise);
 
-      skillButtons.add(OutlinedButton(
+      expertiseButtons.add(OutlinedButton(
         onPressed: () {
           setState(() {
             if (isSelected) {
-              widget.skills.remove(skill);
+              widget.selectedExpertises.remove(expertise);
             } else {
-              widget.skills.add(skill);
+              widget.selectedExpertises.add(expertise);
             }
           });
         },
@@ -140,16 +165,16 @@ class _ExpertiseState extends State<_Expertise> {
               ? theme.colorScheme.onInverseSurface
               : theme.colorScheme.surface),
         ),
-        child: Text(l10n.exploreSearchFilterSkills(skill),
+        child: Text(widget.expertiseTranslate(expertise) ?? expertise,
             style: TextStyle(color: theme.colorScheme.primary)),
       ));
-      if (i != ExploreCardFiltersModel.skills.length - 1) {
-        skillButtons.add(const SizedBox(width: Insets.paddingExtraSmall));
+      if (i != widget.expertiseIds.length - 1) {
+        expertiseButtons.add(const SizedBox(width: Insets.paddingExtraSmall));
       }
     }
 
-    bool allSkillsSelected =
-        setEquals(widget.skills, ExploreCardFiltersModel.skills.toSet());
+    bool allExpertisesSelected =
+        setEquals(widget.selectedExpertises, widget.expertiseIds.toSet());
 
     return Row(
       children: [
@@ -157,7 +182,12 @@ class _ExpertiseState extends State<_Expertise> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(l10n.exploreSearchFilterExpertise),
+              Text(
+                l10n.exploreSearchFilterExpertise,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: theme.colorScheme.outline,
+                ),
+              ),
               const SizedBox(height: Insets.paddingExtraSmall),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -167,12 +197,12 @@ class _ExpertiseState extends State<_Expertise> {
                       OutlinedButton(
                         onPressed: () {
                           setState(() {
-                            if (allSkillsSelected) {
-                              widget.skills.clear();
+                            if (allExpertisesSelected) {
+                              widget.selectedExpertises.clear();
                             } else {
-                              widget.skills.clear();
-                              widget.skills
-                                  .addAll(ExploreCardFiltersModel.skills);
+                              widget.selectedExpertises.clear();
+                              widget.selectedExpertises
+                                  .addAll(widget.expertiseIds);
                             }
                           });
                         },
@@ -180,7 +210,7 @@ class _ExpertiseState extends State<_Expertise> {
                             ButtonStyles.primaryRoundedRectangleButton(context)
                                 .copyWith(
                           backgroundColor: MaterialStatePropertyAll(
-                            (allSkillsSelected)
+                            (allExpertisesSelected)
                                 ? theme.colorScheme.onInverseSurface
                                 : theme.colorScheme.surface,
                           ),
@@ -189,7 +219,7 @@ class _ExpertiseState extends State<_Expertise> {
                             style: TextStyle(color: theme.colorScheme.primary)),
                       ),
                       const VerticalDivider(),
-                      ...skillButtons,
+                      ...expertiseButtons,
                     ],
                   ),
                 ),

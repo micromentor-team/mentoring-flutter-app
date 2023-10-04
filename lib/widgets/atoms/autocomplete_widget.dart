@@ -5,7 +5,7 @@ import 'package:textfield_tags/textfield_tags.dart';
 
 class AutocompleteWidget extends StatelessWidget {
   final List<String> options;
-  final String Function(String)? optionsTranslations;
+  final String Function(String) optionsTranslations;
   final List<String> selectedOptions;
   final TextfieldTagsController controller;
 
@@ -14,7 +14,7 @@ class AutocompleteWidget extends StatelessWidget {
     required this.options,
     required this.selectedOptions,
     required this.controller,
-    this.optionsTranslations,
+    required this.optionsTranslations,
   });
 
   @override
@@ -30,9 +30,11 @@ class AutocompleteWidget extends StatelessWidget {
         if (textEditingValue.text == '') {
           return filteredOptions;
         }
-        return filteredOptions.where((option) =>
-            option.toLowerCase().contains(textEditingValue.text.toLowerCase()));
+        return filteredOptions.where((option) => optionsTranslations(option)
+            .toLowerCase()
+            .contains(textEditingValue.text.toLowerCase()));
       },
+      displayStringForOption: optionsTranslations,
       onSelected: (String selectedTag) {
         controller.addTag = selectedTag;
       },
@@ -54,6 +56,8 @@ class AutocompleteWidget extends StatelessWidget {
           inputfieldBuilder: (context, tec, fn, error, onChanged, onSubmitted) {
             return ((context, sc, tags, onTagDelete) {
               return TextField(
+                onTapOutside: (_) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
                 controller: tec,
                 focusNode: fn,
                 decoration: InputDecoration(
@@ -101,7 +105,7 @@ class AutocompleteWidget extends StatelessWidget {
                                   children: [
                                     InkWell(
                                       child: Text(
-                                        optionsTranslations?.call(tag) ?? tag,
+                                        optionsTranslations.call(tag),
                                         style: TextStyle(
                                           color: theme
                                               .colorScheme.onPrimaryContainer,

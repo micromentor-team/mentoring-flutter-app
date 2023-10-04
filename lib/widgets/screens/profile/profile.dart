@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
@@ -79,6 +80,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                 inboxModel.pendingReceivedInvitations,
                 inboxModel.pendingSentInvitations,
               ),
+              shouldRebuild: (oldValue, newValue) =>
+                  !(const DeepCollectionEquality.unordered()
+                      .equals(oldValue, newValue)) ||
+                  _inboxModel.invitesState != AsyncState.loading,
               builder: (_, __, ___) {
                 return AppUtility.widgetForAsyncState(
                   state: _isMyProfile
@@ -131,7 +136,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
   @override
   Widget build(BuildContext context) {
     final userData = widget.userData;
-    final company = userData.companies.first;
+    final company = userData.companies.firstOrNull;
     final maybeMentorGroupMembership = userData.groupMemberships
         .where((g) => g.groupIdent == GroupIdent.mentors.name)
         .firstOrNull
@@ -200,7 +205,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             avatarUrl: userData.avatarUrl,
             pronouns: userData.pronounsDisplay,
             affiliations: const ["Verizon Digital Ready"], //TODO
-            company: company.name,
+            company: company?.name,
             companyRole: userData.jobTitle,
             education: userData.educationLevel?.translatedValue,
             linkedinUrl: userData.websites
@@ -230,7 +235,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 .nonNulls
                 .toList(),
           ),
-          if (userData.seeksHelp) ...[
+          if (userData.seeksHelp && company != null) ...[
             const Divider(),
             AboutMyBusiness(
               companyInput: CompanyInput(
