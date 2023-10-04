@@ -412,10 +412,7 @@ class _DeclineReasonState extends State<DeclineReason> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    debugPrint("ashley ${widget.name}");
-    String subtitle = widget.name != null
-        ? l10n.whyDeclineSubtitle(widget.name!)
-        : l10n.whyDeclineSubtitle("");
+    String subtitle = l10n.whyDeclineSubtitle(widget.name ?? '');
 
     List<String> reasons = [
       l10n.declineReasonNotGoodFit,
@@ -457,12 +454,7 @@ class _DeclineReasonState extends State<DeclineReason> {
         context.pop();
       },
     );
-    Widget reportButton = ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        minimumSize: Dimensions.bigButtonSize,
-        backgroundColor: theme.colorScheme.primary,
-        textStyle: theme.textTheme.labelLarge,
-      ),
+    Widget reportButton = OutlinedButton(
       onPressed: () async {
         widget.continueAction();
         context.pop();
@@ -470,47 +462,52 @@ class _DeclineReasonState extends State<DeclineReason> {
       child: Text(
         l10n.actionReport,
         style: theme.textTheme.labelLarge?.copyWith(
-          color: theme.colorScheme.onPrimary,
+          color: theme.colorScheme.primary,
         ),
       ),
     );
 
     return AlertDialog(
-        actions: [
-          cancelButton,
-          reportButton,
-        ],
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Insets.paddingSmall)),
-        backgroundColor: HSLColor.fromColor(theme.colorScheme.secondary)
-            .withLightness(0.95)
-            .toColor(),
-        contentPadding: EdgeInsets.zero,
-        content: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: Insets.paddingLarge),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                      const SizedBox(height: Insets.paddingLarge),
-                      Text(
-                        l10n.whyDecline,
-                        style: theme.textTheme.headlineSmall!
-                            .copyWith(color: theme.colorScheme.onBackground),
-                      ),
-                      const SizedBox(height: Insets.paddingSmall),
-                      Text(
-                        subtitle,
-                        style: theme.textTheme.bodyMedium!.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant),
-                      ),
-                      const SizedBox(height: Insets.paddingSmall),
-                    ] +
-                    reasonWidgets +
-                    [
-                      const SizedBox(height: Insets.paddingLarge),
-                    ])));
+      actions: [
+        cancelButton,
+        reportButton,
+      ],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Insets.paddingSmall),
+      ),
+      backgroundColor: HSLColor.fromColor(theme.colorScheme.secondary)
+          .withLightness(0.95)
+          .toColor(),
+      contentPadding: EdgeInsets.zero,
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Insets.paddingLarge),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+                const SizedBox(height: Insets.paddingLarge),
+                Text(
+                  l10n.whyDecline,
+                  style: theme.textTheme.headlineSmall!.copyWith(
+                    color: theme.colorScheme.onBackground,
+                  ),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+                Text(
+                  subtitle,
+                  style: theme.textTheme.bodyMedium!.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ] +
+              reasonWidgets +
+              [
+                const SizedBox(height: Insets.paddingLarge),
+              ],
+        ),
+      ),
+    );
   }
 }
