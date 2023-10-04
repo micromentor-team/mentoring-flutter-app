@@ -360,5 +360,12 @@
     "guidelinesSignature": "—The MicroMentor Team",
     "iagree" : "I agree",
     "signUpVisibleInfoDesc" : "This will be shown on your profile.",
-    "continueButton": "Continue"
+    "continueButton": "Continue",
+    "whyDecline": "Why would you like to decline?",
+    "whyDeclineSubtitle": "Your reason is private and will not be shared with {name}.",
+    "declineReasonNotGoodFit": "I'm not a good fit",
+    "declineReasonTooBusy": "I'm too busy right now",
+    "declineReasonNoReason": "No reason",
+    "declineReasonFakeProfile": "Profile is fake, spam, or a scammer",
+    "declineReasonInappropriate": "Inappropriate behavior or content"
 }
