@@ -212,7 +212,6 @@ class _InvitationDetailState extends State<InvitationDetail>
         TextButton(
           style: ElevatedButton.styleFrom(
             minimumSize: Dimensions.bigButtonSize,
-            backgroundColor: theme.colorScheme.surface,
             textStyle: theme.textTheme.labelLarge,
           ),
           onPressed: () async {

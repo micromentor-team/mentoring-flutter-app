@@ -257,7 +257,6 @@ class _MessageBoxState extends State<MessageBox> {
               TextButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: Dimensions.bigButtonSize,
-                  backgroundColor: theme.colorScheme.surface,
                   textStyle: theme.textTheme.labelLarge,
                 ),
                 onPressed: () {
