@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_invitation.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
@@ -201,7 +202,9 @@ class _InvitationDetailState extends State<InvitationDetail>
 
   Widget _createDeclineAcceptButtons(
     ThemeData theme,
+    AppLocalizations l10n,
     String senderId,
+    String? senderName,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -209,15 +212,22 @@ class _InvitationDetailState extends State<InvitationDetail>
         TextButton(
           style: ElevatedButton.styleFrom(
             minimumSize: Dimensions.bigButtonSize,
-            backgroundColor: theme.colorScheme.surface,
             textStyle: theme.textTheme.labelLarge,
           ),
           onPressed: () async {
-            await _invitationsProvider.declineChannelInvitation(
-              channelInvitationId: widget.channelInvitationId,
-            );
-            await _inboxModel.refreshPendingReceivedInvitations();
-            router.push(Routes.inboxInvitesReceived.path);
+            await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return DeclineReason(
+                      name: senderName,
+                      continueAction: () async {
+                        await _invitationsProvider.declineChannelInvitation(
+                          channelInvitationId: widget.channelInvitationId,
+                        );
+                        await _inboxModel.refreshPendingReceivedInvitations();
+                        router.push(Routes.inboxInvitesReceived.path);
+                      });
+                });
           },
           child: Text(
             _l10n.decline,
@@ -298,6 +308,7 @@ class _InvitationDetailState extends State<InvitationDetail>
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
     final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return FutureBuilder(
       future: _invitation,
       builder: (context, snapshot) {
@@ -359,8 +370,9 @@ class _InvitationDetailState extends State<InvitationDetail>
                       widget.invitationDirection == MessageDirection.received
                           ? _createDeclineAcceptButtons(
                               theme,
+                              l10n,
                               invitationResult.sender.id,
-                            )
+                              invitationResult.sender.fullName)
                           : widget.invitationDirection == MessageDirection.sent
                               ? _createWithdrawButton(theme)
                               : const SizedBox(height: 0, width: 0),
@@ -372,6 +384,129 @@ class _InvitationDetailState extends State<InvitationDetail>
           },
         );
       },
+    );
+  }
+}
+
+class DeclineReason extends StatefulWidget {
+  final String? name;
+  final Function continueAction;
+  const DeclineReason(
+      {super.key, required this.name, required this.continueAction});
+
+  @override
+  State<DeclineReason> createState() => _DeclineReasonState();
+}
+
+class _DeclineReasonState extends State<DeclineReason> {
+  int selectedReason = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedReason = 0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    String subtitle = l10n.whyDeclineSubtitle(widget.name ?? '');
+
+    List<String> reasons = [
+      l10n.declineReasonNotGoodFit,
+      l10n.declineReasonTooBusy,
+      l10n.declineReasonNoReason,
+      l10n.declineReasonFakeProfile,
+      l10n.declineReasonInappropriate
+    ];
+
+    List<Widget> reasonWidgets = [];
+    for (int i = 0; i < reasons.length; i++) {
+      String reason = reasons[i];
+      reasonWidgets.add(
+        RadioListTile(
+          controlAffinity: ListTileControlAffinity.trailing,
+          value: i,
+          groupValue: selectedReason,
+          title: Text(reason),
+          selected: i == selectedReason,
+          onChanged: (currentUser) {
+            setState(() {
+              selectedReason = i;
+            });
+          },
+          activeColor: theme.colorScheme.primary,
+        ),
+      );
+
+      if (i < reasons.length - 1) {
+        reasonWidgets.add(const Divider());
+      }
+    }
+
+    Widget cancelButton = TextButton(
+      child: Text(
+        l10n.actionCancel,
+      ),
+      onPressed: () {
+        context.pop();
+      },
+    );
+    Widget reportButton = OutlinedButton(
+      onPressed: () async {
+        widget.continueAction();
+        context.pop();
+      },
+      child: Text(
+        l10n.actionReport,
+        style: theme.textTheme.labelLarge?.copyWith(
+          color: theme.colorScheme.primary,
+        ),
+      ),
+    );
+
+    return AlertDialog(
+      actions: [
+        cancelButton,
+        reportButton,
+      ],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Insets.paddingSmall),
+      ),
+      backgroundColor: HSLColor.fromColor(theme.colorScheme.secondary)
+          .withLightness(0.95)
+          .toColor(),
+      contentPadding: EdgeInsets.zero,
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Insets.paddingLarge),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+                const SizedBox(height: Insets.paddingLarge),
+                Text(
+                  l10n.whyDecline,
+                  style: theme.textTheme.headlineSmall!.copyWith(
+                    color: theme.colorScheme.onBackground,
+                  ),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+                Text(
+                  subtitle,
+                  style: theme.textTheme.bodyMedium!.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(height: Insets.paddingSmall),
+              ] +
+              reasonWidgets +
+              [
+                const SizedBox(height: Insets.paddingLarge),
+              ],
+        ),
+      ),
     );
   }
 }
