@@ -3,5 +3,6 @@ part of 'app_constants.dart';
 class Limits {
   Limits._private();
   static const maxNotificationsDisplayed = 99;
-  static const searchResultsBatchSize = 15;
+  static const searchResultsBatchSize = 100;
+  static const searchResultsPageSize = 5;
 }
