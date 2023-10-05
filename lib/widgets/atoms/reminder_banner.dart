@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-
+import 'package:go_router/go_router.dart';
 import '../../providers/user_provider.dart';
 
 class ReminderBanner extends StatelessWidget {
@@ -58,6 +58,8 @@ class ReminderBanner extends StatelessWidget {
 
   Widget _buildTextColumn(context) {
     final ThemeData theme = Theme.of(context);
+    final GoRouter router = GoRouter.of(context);
+
     return Expanded(
         flex: 1,
         child: Column(
@@ -76,11 +78,14 @@ class ReminderBanner extends StatelessWidget {
                 textAlign: TextAlign.start,
                 softWrap: true),
             InkWell(
-              onTap: () => {debugPrint("hi")},
+              onTap: () {
+                router.push(Routes.profile.path);
+              },
               child: Padding(
                 padding: const EdgeInsets.only(top: Insets.paddingMedium),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       ctaText,
