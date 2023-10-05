@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,7 +12,6 @@ import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
-import 'package:mm_flutter_app/widgets/atoms/loading.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
 import 'package:retry/retry.dart';
@@ -34,29 +34,31 @@ class ExploreCardScroll extends StatefulWidget {
 
 class _ExploreCardScrollState extends State<ExploreCardScroll> {
   late final UserProvider _userProvider;
+  final List<UserSearchResult> _results = [];
+  late Future<OperationResult<List<UserSearchResult>>> _createUserSearch;
+  late int _resultsAvailable;
   bool _showTips = false;
+  bool _loadingNextPage = false;
+  bool _endOfResults = false;
 
   String? _searchId;
-  int _maxResults = Limits.searchResultsBatchSize;
-  List<Query$FindUserSearchResults$findUserSearchResults> _results = [];
 
   @override
   void initState() {
     super.initState();
 
     _userProvider = Provider.of<UserProvider>(context, listen: false);
-    _userProvider
+    _createUserSearch = _userProvider
         .createUserSearch(
       searchInput: widget.exploreCardFilters.toUserSearchInput(
-        Limits.searchResultsBatchSize * 10,
+        Limits.searchResultsBatchSize,
       ),
     )
         .then((r) async {
-      final searchId = r.response!.id;
-      await _pollUserSearch(searchId);
-      setState(() {
-        _searchId = searchId;
-      });
+      _searchId = r.response!.id;
+      await _pollUserSearch(_searchId!);
+      // Search results ready
+      return _addSearchResults();
     });
 
     final registrationModel = Provider.of<UserRegistrationModel>(
@@ -67,8 +69,8 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     registrationModel.clearNewUserFlag();
   }
 
-  FutureOr<OperationResult<UserSearch>> _pollUserSearch(String userSearchId) {
-    return CrashHandler.retryOnException<OperationResult<UserSearch>>(
+  FutureOr<void> _pollUserSearch(String userSearchId) {
+    return CrashHandler.retryOnException<void>(
       () async {
         final userSearchResult = await _userProvider.getUserSearch(
           userSearchId: userSearchId,
@@ -78,22 +80,46 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
           String e = userSearchResult.gqlQueryResult.exception.toString();
           CrashHandler.logCrashReport('Failed to retrieve user search: $e');
         }
-        final bool isCompleted = userSearchResult.response?.runInfos
-                ?.any((i) => i.finishedAt != null) ??
-            false;
+        final bool isCompleted =
+            userSearchResult.response?.runInfos?.last.finishedAt != null;
         if (!isCompleted) {
           throw RetryException(
             message: 'Waiting for user search to complete...',
           );
         }
-        return userSearchResult;
+        // The max number of results that can be shown is the smallest between
+        // the UserSearch batch size and the number of actual matches found
+        _resultsAvailable = min(
+          Limits.searchResultsBatchSize,
+          userSearchResult.response!.runInfos!.last.matchCount,
+        );
       },
       retryOptions: const RetryOptions(
-        maxAttempts: 10,
-        maxDelay: Duration(seconds: 1),
+        maxAttempts: 8,
+        maxDelay: Duration(seconds: 2),
       ),
       logFailures: false,
     );
+  }
+
+  Future<OperationResult<List<UserSearchResult>>> _addSearchResults() async {
+    final result = await _userProvider.findUserSearchResults(
+      userSearchId: _searchId!,
+      optionsInput: Input$FindObjectsOptions(
+        limit: Limits.searchResultsPageSize,
+        skip: _results.length,
+      ),
+      fetchFromNetworkOnly: true,
+    );
+    if (!result.gqlQueryResult.hasException &&
+        result.response != null &&
+        result.response!.isNotEmpty) {
+      _results.addAll(result.response!);
+    }
+    if (_results.length >= _resultsAvailable) {
+      _endOfResults = true;
+    }
+    return result;
   }
 
   Widget _noResultsView(AppLocalizations l10n, ThemeData theme) {
@@ -211,30 +237,17 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
 
-    if (_searchId == null) {
-      return const Center(child: Loading());
-    }
-
     if (_showTips) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showTipsSnackBar(context, theme, l10n);
       });
     }
 
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
     return FutureBuilder(
-      future: userProvider.findUserSearchResults(
-        userSearchId: _searchId!,
-        optionsInput: Input$FindObjectsOptions(
-          limit: _maxResults,
-          skip: _results.length,
-        ),
-      ),
+      future: _createUserSearch,
       builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
         snapshot: snapshot,
         onReady: () {
-          _results += snapshot.data?.response ?? [];
-
           if (_results.isEmpty) {
             return _noResultsView(l10n, theme);
           }
@@ -242,27 +255,37 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
           return Column(
             children: [
               ..._createCards(),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    _maxResults += Limits.searchResultsBatchSize;
-                  });
-                },
-                child: Column(
-                  children: [
-                    Text(
-                      l10n.exploreSeeMore,
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_drop_down,
-                      color: Color(theme.colorScheme.onSurfaceVariant.value),
-                    ),
-                  ],
-                ),
-              )
+              _loadingNextPage
+                  ? const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: Insets.paddingMedium),
+                      child: CircularProgressIndicator(),
+                    )
+                  : _endOfResults
+                      ? const SizedBox.shrink()
+                      : TextButton(
+                          onPressed: () async {
+                            setState(() => _loadingNextPage = true);
+                            await _addSearchResults();
+                            setState(() => _loadingNextPage = false);
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                l10n.exploreSeeMore,
+                                style: theme.textTheme.labelLarge?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_drop_down,
+                                color: Color(
+                                  theme.colorScheme.onSurfaceVariant.value,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
             ],
           );
         },
