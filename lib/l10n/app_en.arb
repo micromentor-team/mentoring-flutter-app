@@ -376,6 +376,6 @@
     "declineReasonTooBusy": "I'm too busy right now",
     "declineReasonNoReason": "No reason",
     "declineReasonFakeProfile": "Profile is fake, spam, or a scammer",
-    "declineReasonInappropriate": "Inappropriate behavior or content"
+    "declineReasonInappropriate": "Inappropriate behavior or content",
     "expertises": "Expertises:"
 }
