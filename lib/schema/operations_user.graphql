@@ -19,56 +19,10 @@ query GetAuthenticatedUser {
 
 mutation CreateUserSearch($input: UserSearchInput!) {
     createUserSearch(input: $input) {
-        name
-        seeksHelp
-        offersHelp
-        searchText
         id
-        expiresAt
-        userId
-        updatedAt
         runInfos {
             finishedAt
             matchCount
-        }
-        topFoundUsers {
-            id
-            email
-            firstName
-            lastName
-            fullName
-            avatarUrl
-            userHandle
-            cityOfResidence
-            regionOfResidence
-            offersHelp
-            seeksHelp
-            companies {
-                name
-                companyStage {
-                    translatedValue
-                }
-                industries
-            }
-            countryOfResidence {
-                textId
-                translatedValue
-            }
-            jobTitle
-            groupMemberships {
-                groupId
-                ... on MentorsGroupMembership {
-                    expertises {
-                        textId
-                        translatedValue
-                    }
-                    industries {
-                        textId
-                        translatedValue
-                    }
-                    endorsements
-                }
-            }
         }
     }
 }
