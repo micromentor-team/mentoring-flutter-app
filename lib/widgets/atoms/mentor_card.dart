@@ -12,7 +12,6 @@ class MentorCard extends StatelessWidget {
 
   static const double _mentorCardHeight = 240;
   static const double _mentorCardWidth = 296;
-  static const double _chipMaxWidth = 100;
 
   const MentorCard({
     Key? key,
@@ -103,16 +102,28 @@ class MentorCard extends StatelessWidget {
             //using SizedBox to prevent Text Overflow beyond the Card
             child: SizedBox(
               width: _mentorCardWidth / 2,
-              child: Flexible(
-                child: Text(
-                  l10n.exploreEndorsements(mentorEndorsements!),
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: theme.colorScheme.onSurface,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+                    child: Icon(
+                      Icons.workspace_premium_outlined,
+                      size: Insets.paddingMedium,
+                      color: theme.colorScheme.onSurface,
+                    ),
                   ),
-                  softWrap: true,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                  Flexible(
+                    child: Text(
+                      l10n.exploreEndorsements(mentorEndorsements!),
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                      softWrap: true,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -120,47 +131,26 @@ class MentorCard extends StatelessWidget {
     );
   }
 
-  List<Chip> _getMentorSkillChips(BuildContext context) {
-    //List<Chip> mentorSkills = _getMentorSkillChips(context);
-    List<Chip> mentorSkillChips = [];
-
-    //if no skills, show nothing
-    if (mentorSkill.isEmpty) {
-      return mentorSkillChips;
-    }
-    //dynamically add skill chips
-    for (int i = 0; i < mentorSkill.length; i++) {
-      mentorSkillChips.add(
-        _createSkillChip(
-          mentorSkill[i],
-          context,
-        ),
-      );
-    }
-    return mentorSkillChips;
-  }
-
-  //TODO(guptarupal): Make the chip "style" defined in styles.dart
-  Chip _createSkillChip(String skill, BuildContext context) {
+  Column _getMentorExpertiseColumn(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Chip(
-      //using ConstrainedBox to prevent Text Overflow beyond the Card
-      label: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: _chipMaxWidth,
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(Insets.paddingSmall),
+          child: Text(
+            l10n.expertises,
+            style: theme.textTheme.titleSmall?.copyWith(
+              color: theme.colorScheme.onSurface,
+            ),
+            softWrap: true,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
-        child: Text(
-          skill,
-          style: theme.textTheme.labelSmall
-              ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
-      visualDensity: const VisualDensity(
-        vertical: -4,
-      ),
-      backgroundColor: theme.colorScheme.tertiaryContainer,
-      side: BorderSide.none,
+      ],
     );
   }
 
@@ -168,6 +158,7 @@ class MentorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Column avatarColumn = _getAvatar();
     Column mentorInfoColumn = _getMentorInfo(context);
+    Column mentorExpertiseColumn = _getMentorExpertiseColumn(context);
     final ThemeData theme = Theme.of(context);
 
     return Padding(
@@ -197,10 +188,15 @@ class MentorCard extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsetsDirectional.only(
-                        start: Insets.paddingSmall, end: Insets.paddingSmall),
+                        start: Insets.paddingMedium, end: Insets.paddingMedium),
                     child: Divider(
                       color: theme.colorScheme.outlineVariant,
                     ),
+                  ),
+                  Row(
+                    children: [
+                      mentorExpertiseColumn,
+                    ],
                   ),
                 ],
               ),

@@ -377,4 +377,5 @@
     "declineReasonNoReason": "No reason",
     "declineReasonFakeProfile": "Profile is fake, spam, or a scammer",
     "declineReasonInappropriate": "Inappropriate behavior or content"
+    "expertises": "Expertises:"
 }

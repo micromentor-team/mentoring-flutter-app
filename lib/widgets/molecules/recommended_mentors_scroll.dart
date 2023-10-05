@@ -5,8 +5,6 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_card.dart';
 import 'package:provider/provider.dart';
-
-import '../../__generated/schema/operations_user.graphql.dart';
 import '../../__generated/schema/schema.graphql.dart';
 import '../../providers/base/operation_result.dart';
 import '../../providers/user_provider.dart';
@@ -34,7 +32,11 @@ class RecommendedMentorsScroll extends StatelessWidget {
             //TODO: Once these fields come up in the mock server, replace these hardcoded values with the appropriate fields
             mentorBio: mentor.jobTitle ?? 'CEO, Levi Consulting',
             mentorEndorsements: 2,
-            mentorSkill: const []),
+            mentorSkill: const [
+              "Law and Legal",
+              "International Trade",
+              "Human Resources"
+            ]),
       );
     }
     return recommendedMentors;
