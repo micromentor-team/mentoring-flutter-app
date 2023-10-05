@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
@@ -10,6 +11,7 @@ import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/explore_filter.dart';
+import 'package:mm_flutter_app/widgets/atoms/loading.dart';
 import 'package:mm_flutter_app/widgets/molecules/profile_quick_view_card.dart';
 import 'package:provider/provider.dart';
 import 'package:retry/retry.dart';
@@ -32,20 +34,28 @@ class ExploreCardScroll extends StatefulWidget {
 
 class _ExploreCardScrollState extends State<ExploreCardScroll> {
   late final UserProvider _userProvider;
-  late Future<OperationResult<UserSearch>> _userSearch;
   bool _showTips = false;
+
+  String? _searchId;
+  int _maxResults = Limits.searchResultsBatchSize;
 
   @override
   void initState() {
     super.initState();
     _userProvider = Provider.of<UserProvider>(context, listen: false);
-    _userSearch = _userProvider
+    _userProvider
         .createUserSearch(
-          searchInput: widget.exploreCardFilters.toUserSearchInput(
-            Limits.searchResultsBatchSize,
-          ),
-        )
-        .then((r) => _pollUserSearch(r.response!.id));
+      searchInput: widget.exploreCardFilters.toUserSearchInput(
+        Limits.searchResultsBatchSize * 10,
+      ),
+    )
+        .then((r) async {
+      final searchId = r.response!.id;
+      await _pollUserSearch(searchId);
+      setState(() {
+        _searchId = searchId;
+      });
+    });
 
     final registrationModel = Provider.of<UserRegistrationModel>(
       context,
@@ -105,7 +115,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
   }
 
   List<Widget> _createCards(
-      List<Query$FindUserSearch$findUserSearchById$topFoundUsers> response) {
+      List<Query$FindUserSearchResults$findUserSearchResults> response) {
     return response
         .map(
           (user) => createProfileCardFromInfo(
@@ -123,7 +133,8 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                 0,
                 (acc, membership) {
                   if (membership
-                      is Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
+                      // is Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
+                      is Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership) {
                     return acc + (membership.endorsements ?? 0);
                   }
                   return acc;
@@ -197,20 +208,32 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    if (_searchId == null) {
+      return const Center(child: Loading());
+    }
+
     if (_showTips) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showTipsSnackBar(context, theme, l10n);
       });
     }
 
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     return FutureBuilder(
-      future: _userSearch,
+      future: userProvider.findUserSearchResults(
+        userSearchId: _searchId!,
+        optionsInput: Input$FindObjectsOptions(
+          limit: _maxResults,
+        ),
+      ),
       builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
         snapshot: snapshot,
         onReady: () {
-          final results = snapshot.data?.response?.topFoundUsers ?? [];
+          // For some reason the backend adds new entries at the beginning of response
+          final results = (snapshot.data?.response ?? []).reversed.toList();
           if (results.isEmpty) {
             return _noResultsView(l10n, theme);
           }
@@ -219,7 +242,9 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
               ..._createCards(results),
               TextButton(
                 onPressed: () {
-                  // TODO: pagination
+                  setState(() {
+                    _maxResults += Limits.searchResultsBatchSize;
+                  });
                 },
                 child: Column(
                   children: [
