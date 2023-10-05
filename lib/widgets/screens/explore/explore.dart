@@ -38,10 +38,12 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 
   String? _searchId;
   int _maxResults = Limits.searchResultsBatchSize;
+  List<Query$FindUserSearchResults$findUserSearchResults> _results = [];
 
   @override
   void initState() {
     super.initState();
+
     _userProvider = Provider.of<UserProvider>(context, listen: false);
     _userProvider
         .createUserSearch(
@@ -114,9 +116,8 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     );
   }
 
-  List<Widget> _createCards(
-      List<Query$FindUserSearchResults$findUserSearchResults> response) {
-    return response
+  List<Widget> _createCards() {
+    return _results
         .map(
           (user) => createProfileCardFromInfo(
             info: ProfileQuickViewInfo(
@@ -227,19 +228,21 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
         userSearchId: _searchId!,
         optionsInput: Input$FindObjectsOptions(
           limit: _maxResults,
+          skip: _results.length,
         ),
       ),
       builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
         snapshot: snapshot,
         onReady: () {
-          // For some reason the backend adds new entries at the beginning of response
-          final results = (snapshot.data?.response ?? []).reversed.toList();
-          if (results.isEmpty) {
+          _results += snapshot.data?.response ?? [];
+
+          if (_results.isEmpty) {
             return _noResultsView(l10n, theme);
           }
+
           return Column(
             children: [
-              ..._createCards(results),
+              ..._createCards(),
               TextButton(
                 onPressed: () {
                   setState(() {
