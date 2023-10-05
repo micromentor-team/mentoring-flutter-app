@@ -134,7 +134,6 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                 0,
                 (acc, membership) {
                   if (membership
-                      // is Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
                       is Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership) {
                     return acc + (membership.endorsements ?? 0);
                   }
