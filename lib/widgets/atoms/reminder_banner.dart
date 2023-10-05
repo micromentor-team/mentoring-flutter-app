@@ -4,19 +4,20 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:go_router/go_router.dart';
 import '../../providers/user_provider.dart';
 
-class ReminderBanner extends StatelessWidget {
+class ReminderBanner extends StatefulWidget {
   final String titleText;
   final String subtitleText;
   final String ctaText;
   final int profileCompletionPercentage;
-
-  const ReminderBanner(
-      {Key? key,
-      required this.titleText,
-      required this.subtitleText,
-      required this.ctaText,
-      required this.profileCompletionPercentage})
-      : super(key: key);
+  const ReminderBanner({
+    Key? key,
+    required this.titleText,
+    required this.subtitleText,
+    required this.ctaText,
+    required this.profileCompletionPercentage,
+  }) : super(
+          key: key,
+        );
 
   Widget _buildProgressCircleColumn(context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -71,38 +72,38 @@ class ReminderBanner extends StatelessWidget {
                 textAlign: TextAlign.start,
                 softWrap: true),
             const SizedBox(height: Insets.paddingExtraSmall),
-            Text(subtitleText,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSecondaryContainer,
-                ),
-                textAlign: TextAlign.start,
-                softWrap: true),
+            Padding(
+              padding: const EdgeInsets.only(bottom: Insets.paddingMedium),
+              child: Text(subtitleText,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+                  textAlign: TextAlign.start,
+                  softWrap: true),
+            ),
             InkWell(
               onTap: () {
                 router.push(Routes.profile.path);
               },
-              child: Padding(
-                padding: const EdgeInsets.only(top: Insets.paddingMedium),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      ctaText,
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onSecondaryContainer,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: Insets.paddingSmall,
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    ctaText,
+                    style: theme.textTheme.labelLarge?.copyWith(
                       color: theme.colorScheme.onSecondaryContainer,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    width: Insets.paddingSmall,
+                  ),
+                  Icon(
+                    Icons.arrow_forward,
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+                ],
               ),
             ),
           ],
@@ -110,44 +111,65 @@ class ReminderBanner extends StatelessWidget {
   }
 
   @override
+  State<ReminderBanner> createState() => _ReminderBannerState();
+}
+
+class _ReminderBannerState extends State<ReminderBanner> {
+  bool showCard = true;
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    return Padding(
-      padding: const EdgeInsets.only(
-        right: Insets.paddingMedium,
-        left: Insets.paddingMedium,
-        top: Insets.paddingMedium,
-        bottom: 0,
-      ),
-      child: Card(
-        elevation: 0,
-        color: Theme.of(context).colorScheme.onInverseSurface,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(Insets.paddingMedium,
-              Insets.paddingSmall, Insets.paddingMedium, Insets.paddingMedium),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(
-                    Icons.close,
-                    color: theme.colorScheme.outline,
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  _buildProgressCircleColumn(context),
-                  _buildTextColumn(context),
-                ],
-              ),
-            ],
+    if (showCard == false) {
+      return const SizedBox();
+    } else {
+      return Padding(
+        padding: const EdgeInsets.only(
+          right: Insets.paddingMedium,
+          left: Insets.paddingMedium,
+          top: Insets.paddingMedium,
+          bottom: 0,
+        ),
+        child: Card(
+          elevation: 0,
+          color: Theme.of(context).colorScheme.onInverseSurface,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(
+                Insets.paddingMedium,
+                Insets.paddingSmall,
+                Insets.paddingMedium,
+                Insets.paddingMedium),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          showCard = false;
+                        });
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: theme.colorScheme.outline,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    widget._buildProgressCircleColumn(context),
+                    widget._buildTextColumn(context),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 }
 
