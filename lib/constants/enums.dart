@@ -15,6 +15,7 @@ enum MessageDirection {
   sent,
   received,
   unset,
+  self,
 }
 
 enum GroupIdent {
