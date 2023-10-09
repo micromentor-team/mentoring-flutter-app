@@ -18,12 +18,15 @@ class ChatModel extends ChangeNotifier {
   final MessagesProvider _messagesProvider;
   final ChannelsProvider _channelsProvider;
   final InboxModel _inboxModel;
-  List<ChannelMessage> _channelMessages = [];
+  VoidCallback? onNewMessage;
+  final List<ChannelMessage> _channelMessages = List.empty(growable: true);
   StreamSubscription<QueryResult<Object?>>? _streamSubscription;
-  AsyncState _state = AsyncState.ready;
+  AsyncState _fetchOldMessagesState = AsyncState.ready;
+  AsyncState _hasAnyMessagesState = AsyncState.loading;
 
   List<ChannelMessage> get channelMessages => _channelMessages;
-  AsyncState get state => _state;
+  AsyncState get fetchOldMessagesState => _fetchOldMessagesState;
+  AsyncState get hasAnyMessagesState => _hasAnyMessagesState;
 
   ChatModel({
     required BuildContext context,
@@ -42,22 +45,29 @@ class ChatModel extends ChangeNotifier {
           listen: false,
         );
 
-  Future<void> refreshChannelMessages() async {
-    _state = AsyncState.loading;
+  Future<void> addOldChannelMessages() async {
+    _fetchOldMessagesState = AsyncState.loading;
     final result = await _messagesProvider.findChannelMessages(
       fetchFromNetworkOnly: true,
+      fetchSkip: _channelMessages.length,
       input: Input$ChannelMessageListFilter(channelId: channelId),
     );
     if (result.gqlQueryResult.hasException) {
-      _state = AsyncState.error;
+      _fetchOldMessagesState = AsyncState.error;
     } else {
-      _channelMessages = result.response ?? [];
-      _state = AsyncState.ready;
+      final fetchedMessages = result.response ?? [];
+
+      _channelMessages.addAll(fetchedMessages);
+      _channelMessages.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      _fetchOldMessagesState = AsyncState.ready;
+      _hasAnyMessagesState = AsyncState.ready;
     }
-    notifyListeners();
+    if (hasListeners) {
+      notifyListeners();
+    }
   }
 
-  Future<void> addChannelMessage({
+  Future<void> addNewChannelMessage({
     required String channelId,
     required String messageText,
     required replyToMessageId,
@@ -77,7 +87,9 @@ class ChatModel extends ChangeNotifier {
     // Responses for CreatedMessage and ChannelMessage have the same fields,
     // so it is possible to convert one to the other through JSON.
     _channelMessages.add(ChannelMessage.fromJson(result.response!.toJson()));
-    notifyListeners();
+    if (hasListeners) {
+      notifyListeners();
+    }
   }
 
   Future<void> markMessagesAsRead() async {
@@ -96,7 +108,6 @@ class ChatModel extends ChangeNotifier {
     required String channelMessageId,
     required bool isNewMessage,
   }) async {
-    // TODO: Possible race condition here if the query executes before the mutation completes, consider polling result
     final result = await _messagesProvider.findChannelMessageById(
       channelMessageId: channelMessageId,
     );
@@ -126,7 +137,9 @@ class ChatModel extends ChangeNotifier {
         );
       }
     }
-    notifyListeners();
+    if (hasListeners) {
+      notifyListeners();
+    }
   }
 
   void createChannelSubscription() {
@@ -141,6 +154,9 @@ class ChatModel extends ChangeNotifier {
         }
         switch (event.eventType) {
           case Enum$ChannelChangedEventType.messageCreated:
+            if (onNewMessage != null) {
+              onNewMessage!();
+            }
             if (_channelMessages.any(
               (element) => element.id == event.messageId!,
             )) {

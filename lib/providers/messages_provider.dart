@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_message.graphql.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
@@ -43,6 +44,7 @@ class MessagesProvider extends BaseProvider {
 
   Future<OperationResult<List<ChannelMessage>>> findChannelMessages({
     required Input$ChannelMessageListFilter input,
+    required int fetchSkip,
     bool fetchFromNetworkOnly = false,
   }) async {
     final QueryResult queryResult = await asyncQuery(
@@ -55,6 +57,14 @@ class MessagesProvider extends BaseProvider {
           filter: input,
           options: Input$FindObjectsOptions(
             includeDeleted: Enum$IncludeFilterOption.include,
+            limit: Limits.chatMessagesPageSize,
+            sort: [
+              Input$SortItem(
+                field: "createdAt",
+                direction: Enum$SortDirection.desc,
+              ),
+            ],
+            skip: fetchSkip,
           ),
         ).toJson(),
       ),
