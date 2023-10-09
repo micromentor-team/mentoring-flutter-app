@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
@@ -32,20 +34,32 @@ class ExploreCardScroll extends StatefulWidget {
 
 class _ExploreCardScrollState extends State<ExploreCardScroll> {
   late final UserProvider _userProvider;
-  late Future<OperationResult<UserSearch>> _userSearch;
+  final List<UserSearchResult> _results = [];
+  late Future<OperationResult<List<UserSearchResult>>> _createUserSearch;
+  late int _resultsAvailable;
   bool _showTips = false;
+  bool _loadingNextPage = false;
+  bool _endOfResults = false;
+
+  String? _searchId;
 
   @override
   void initState() {
     super.initState();
+
     _userProvider = Provider.of<UserProvider>(context, listen: false);
-    _userSearch = _userProvider
+    _createUserSearch = _userProvider
         .createUserSearch(
-          searchInput: widget.exploreCardFilters.toUserSearchInput(
-            Limits.searchResultsBatchSize,
-          ),
-        )
-        .then((r) => _pollUserSearch(r.response!.id));
+      searchInput: widget.exploreCardFilters.toUserSearchInput(
+        Limits.searchResultsBatchSize,
+      ),
+    )
+        .then((r) async {
+      _searchId = r.response!.id;
+      await _pollUserSearch(_searchId!);
+      // Search results ready
+      return _addSearchResults();
+    });
 
     final registrationModel = Provider.of<UserRegistrationModel>(
       context,
@@ -55,8 +69,8 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     registrationModel.clearNewUserFlag();
   }
 
-  FutureOr<OperationResult<UserSearch>> _pollUserSearch(String userSearchId) {
-    return CrashHandler.retryOnException<OperationResult<UserSearch>>(
+  FutureOr<void> _pollUserSearch(String userSearchId) {
+    return CrashHandler.retryOnException<void>(
       () async {
         final userSearchResult = await _userProvider.getUserSearch(
           userSearchId: userSearchId,
@@ -66,22 +80,46 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
           String e = userSearchResult.gqlQueryResult.exception.toString();
           CrashHandler.logCrashReport('Failed to retrieve user search: $e');
         }
-        final bool isCompleted = userSearchResult.response?.runInfos
-                ?.any((i) => i.finishedAt != null) ??
-            false;
+        final bool isCompleted =
+            userSearchResult.response?.runInfos?.last.finishedAt != null;
         if (!isCompleted) {
           throw RetryException(
             message: 'Waiting for user search to complete...',
           );
         }
-        return userSearchResult;
+        // The max number of results that can be shown is the smallest between
+        // the UserSearch batch size and the number of actual matches found
+        _resultsAvailable = min(
+          Limits.searchResultsBatchSize,
+          userSearchResult.response!.runInfos!.last.matchCount,
+        );
       },
       retryOptions: const RetryOptions(
-        maxAttempts: 10,
-        maxDelay: Duration(seconds: 1),
+        maxAttempts: 8,
+        maxDelay: Duration(seconds: 2),
       ),
       logFailures: false,
     );
+  }
+
+  Future<OperationResult<List<UserSearchResult>>> _addSearchResults() async {
+    final result = await _userProvider.findUserSearchResults(
+      userSearchId: _searchId!,
+      optionsInput: Input$FindObjectsOptions(
+        limit: Limits.searchResultsPageSize,
+        skip: _results.length,
+      ),
+      fetchFromNetworkOnly: true,
+    );
+    if (!result.gqlQueryResult.hasException &&
+        result.response != null &&
+        result.response!.isNotEmpty) {
+      _results.addAll(result.response!);
+    }
+    if (_results.length >= _resultsAvailable) {
+      _endOfResults = true;
+    }
+    return result;
   }
 
   Widget _noResultsView(AppLocalizations l10n, ThemeData theme) {
@@ -104,9 +142,8 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     );
   }
 
-  List<Widget> _createCards(
-      List<Query$FindUserSearch$findUserSearchById$topFoundUsers> response) {
-    return response
+  List<Widget> _createCards() {
+    return _results
         .map(
           (user) => createProfileCardFromInfo(
             info: ProfileQuickViewInfo(
@@ -123,7 +160,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                 0,
                 (acc, membership) {
                   if (membership
-                      is Query$FindUserSearch$findUserSearchById$topFoundUsers$groupMemberships$$MentorsGroupMembership) {
+                      is Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership) {
                     return acc + (membership.endorsements ?? 0);
                   }
                   return acc;
@@ -197,8 +234,9 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
     if (_showTips) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showTipsSnackBar(context, theme, l10n);
@@ -206,36 +244,48 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     }
 
     return FutureBuilder(
-      future: _userSearch,
+      future: _createUserSearch,
       builder: (context, snapshot) => AppUtility.widgetForAsyncSnapshot(
         snapshot: snapshot,
         onReady: () {
-          final results = snapshot.data?.response?.topFoundUsers ?? [];
-          if (results.isEmpty) {
+          if (_results.isEmpty) {
             return _noResultsView(l10n, theme);
           }
+
           return Column(
             children: [
-              ..._createCards(results),
-              TextButton(
-                onPressed: () {
-                  // TODO: pagination
-                },
-                child: Column(
-                  children: [
-                    Text(
-                      l10n.exploreSeeMore,
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_drop_down,
-                      color: Color(theme.colorScheme.onSurfaceVariant.value),
-                    ),
-                  ],
-                ),
-              )
+              ..._createCards(),
+              _loadingNextPage
+                  ? const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: Insets.paddingMedium),
+                      child: CircularProgressIndicator(),
+                    )
+                  : _endOfResults
+                      ? const SizedBox.shrink()
+                      : TextButton(
+                          onPressed: () async {
+                            setState(() => _loadingNextPage = true);
+                            await _addSearchResults();
+                            setState(() => _loadingNextPage = false);
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                l10n.exploreSeeMore,
+                                style: theme.textTheme.labelLarge?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_drop_down,
+                                color: Color(
+                                  theme.colorScheme.onSurfaceVariant.value,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
             ],
           );
         },
