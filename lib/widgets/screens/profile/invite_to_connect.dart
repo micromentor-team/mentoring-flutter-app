@@ -14,20 +14,20 @@ import '../../../constants/app_constants.dart';
 import '../../../providers/models/inbox_model.dart';
 import '../../../providers/user_provider.dart';
 
-class InviteToConnect extends StatefulWidget {
+class InviteToConnectScreen extends StatefulWidget {
   final String userId;
 
-  const InviteToConnect({
+  const InviteToConnectScreen({
     Key? key,
     required this.userId,
   }) : super(key: key);
 
   @override
-  State<InviteToConnect> createState() => _InviteToConnectState();
+  State<InviteToConnectScreen> createState() => _InviteToConnectScreenState();
 }
 
-class _InviteToConnectState extends State<InviteToConnect>
-    with NavigationMixin<InviteToConnect> {
+class _InviteToConnectScreenState extends State<InviteToConnectScreen>
+    with NavigationMixin<InviteToConnectScreen> {
   late final UserProvider _userProvider;
   late final Future<OperationResult<UserQuickViewProfile>> _userQuickView;
   late AppLocalizations _l10n;

@@ -8,7 +8,7 @@ import 'package:mm_flutter_app/utilities/emoji_utils/emoji_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../providers/messages_provider.dart';
-import 'reply_message.dart';
+import 'message_reply.dart';
 
 class MessageBubble extends StatelessWidget {
   final List<ChannelParticipant> participants;
@@ -121,7 +121,7 @@ class MessageBubble extends StatelessWidget {
                         padding: const EdgeInsets.only(
                           bottom: Insets.paddingSmall,
                         ),
-                        child: ReplyMessage(
+                        child: MessageReply(
                           replyMessage: replyingTo!,
                           participants: participants,
                         ),

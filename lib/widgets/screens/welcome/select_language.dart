@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/locale_model.dart';
 import 'package:provider/provider.dart';
 
-class SelectLanguage extends StatelessWidget {
-  const SelectLanguage({Key? key}) : super(key: key);
+class SelectLanguageScreen extends StatelessWidget {
+  const SelectLanguageScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -17,22 +17,24 @@ import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';
 
-class InvitationDetail extends StatefulWidget {
+class InboxInvitationDetailScreen extends StatefulWidget {
   final String channelInvitationId;
   final MessageDirection invitationDirection;
 
-  const InvitationDetail({
+  const InboxInvitationDetailScreen({
     super.key,
     required this.channelInvitationId,
     required this.invitationDirection,
   });
 
   @override
-  State<InvitationDetail> createState() => _InvitationDetailState();
+  State<InboxInvitationDetailScreen> createState() =>
+      _InboxInvitationDetailScreenState();
 }
 
-class _InvitationDetailState extends State<InvitationDetail>
-    with NavigationMixin<InvitationDetail> {
+class _InboxInvitationDetailScreenState
+    extends State<InboxInvitationDetailScreen>
+    with NavigationMixin<InboxInvitationDetailScreen> {
   late final InvitationsProvider _invitationsProvider;
   late final InboxModel _inboxModel;
   late Future<OperationResult<ChannelInvitationById>> _invitation;

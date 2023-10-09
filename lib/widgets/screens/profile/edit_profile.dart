@@ -10,15 +10,15 @@ import '../../../utilities/navigation_mixin.dart';
 import '../../../utilities/utility.dart';
 import 'edit_profile_about_me.dart';
 
-class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _EditProfileState extends State<EditProfile>
-    with NavigationMixin<EditProfile> {
+class _EditProfileScreenState extends State<EditProfileScreen>
+    with NavigationMixin<EditProfileScreen> {
   late final UserProvider _userProvider;
   late final AuthenticatedUser _authenticatedUser;
   late Future<OperationResult<UserDetailedProfile>> _userDetailedProfile;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters_advanced.dart';
+import 'package:mm_flutter_app/widgets/screens/explore/explore_advanced_filters.dart';
+import 'package:mm_flutter_app/widgets/screens/explore/explore_filters.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/edit_profile.dart';
@@ -19,10 +19,10 @@ import '../main.dart';
 import '../widgets/atoms/app_wrapper.dart';
 import '../widgets/screens/explore/explore.dart';
 import '../widgets/screens/home/home.dart';
-import '../widgets/screens/inbox/channel_messages/channel_messages_screen.dart';
+import '../widgets/screens/inbox/channel_messages/channel_messages.dart';
 import '../widgets/screens/inbox/inbox_chat_list.dart';
-import '../widgets/screens/inbox/invitation_detail.dart';
-import '../widgets/screens/sign_in/sign_in_screen.dart';
+import '../widgets/screens/inbox/inbox_invitation_detail.dart';
+import '../widgets/screens/sign_in/sign_in.dart';
 import '../widgets/screens/sign_up/sign_up_completed.dart';
 import '../widgets/screens/sign_up/sign_up_entrepreneur_company_name.dart';
 import '../widgets/screens/sign_up/sign_up_entrepreneur_company_reason.dart';
@@ -46,7 +46,7 @@ import '../widgets/screens/sign_up/sign_up_profile_photo.dart';
 import '../widgets/screens/sign_up/sign_up_pronouns.dart';
 import '../widgets/screens/sign_up/sign_up_verification.dart';
 import '../widgets/screens/sign_up/sign_up_welcome.dart';
-import '../widgets/screens/welcome/welcome_screen.dart';
+import '../widgets/screens/welcome/welcome.dart';
 
 class AppRouter {
   AppRouter._private();
@@ -90,7 +90,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const SelectLanguage(),
+              child: const SelectLanguageScreen(),
             );
           },
         ),
@@ -448,7 +448,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: true,
-              child: const RecommendedMentorsFilters(),
+              child: const ExploreFiltersScreen(),
             );
           },
         ),
@@ -459,7 +459,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: true,
-              child: const RecommendedMentorsFiltersAdvanced(),
+              child: const ExploreAdvancedFiltersScreen(),
             );
           },
         ),
@@ -510,7 +510,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: InvitationDetail(
+              child: InboxInvitationDetailScreen(
                 channelInvitationId: channelInvitationId,
                 invitationDirection: MessageDirection.received,
               ),
@@ -537,7 +537,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: InvitationDetail(
+              child: InboxInvitationDetailScreen(
                 channelInvitationId: channelInvitationId,
                 invitationDirection: MessageDirection.sent,
               ),
@@ -589,7 +589,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditProfile(),
+              child: const EditProfileScreen(),
             );
           },
         ),
@@ -614,7 +614,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: InviteToConnect(
+              child: InviteToConnectScreen(
                 userId: userId,
               ),
             );

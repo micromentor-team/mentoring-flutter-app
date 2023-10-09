@@ -13,15 +13,15 @@ import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../utilities/navigation_mixin.dart';
 
-class RecommendedMentorsFilters extends StatefulWidget {
-  const RecommendedMentorsFilters({super.key});
+class ExploreFiltersScreen extends StatefulWidget {
+  const ExploreFiltersScreen({super.key});
 
   @override
   State<StatefulWidget> createState() => _RecommendedMentorsFilters();
 }
 
-class _RecommendedMentorsFilters extends State<RecommendedMentorsFilters>
-    with NavigationMixin<RecommendedMentorsFilters> {
+class _RecommendedMentorsFilters extends State<ExploreFiltersScreen>
+    with NavigationMixin<ExploreFiltersScreen> {
   late final TextfieldTagsController _countriesController;
   late final TextfieldTagsController _languagesController;
   late final ExploreCardFiltersModel _filtersModel;

@@ -4,7 +4,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/channels_provider.dart';
 
 import '../../../../providers/messages_provider.dart';
-import 'reply_message.dart';
+import 'message_reply.dart';
 
 class MessageInput extends StatefulWidget {
   const MessageInput({
@@ -100,7 +100,7 @@ class _MessageInputState extends State<MessageInput> {
                     if (_replyingTo != null)
                       Padding(
                         padding: const EdgeInsets.all(Insets.paddingSmall),
-                        child: ReplyMessage(
+                        child: MessageReply(
                           replyMessage: _replyingTo!,
                           participants: widget.participants,
                           onClose: () {

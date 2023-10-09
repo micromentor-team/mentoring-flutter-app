@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 
 import '../../../../providers/messages_provider.dart';
 
-class ReplyMessage extends StatelessWidget {
-  const ReplyMessage({
+class MessageReply extends StatelessWidget {
+  const MessageReply({
     super.key,
     required this.replyMessage,
     required this.participants,

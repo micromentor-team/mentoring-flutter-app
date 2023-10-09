@@ -12,16 +12,16 @@ import 'package:textfield_tags/textfield_tags.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../../utilities/scaffold_utils/appbar_factory.dart';
 
-class RecommendedMentorsFiltersAdvanced extends StatefulWidget {
-  const RecommendedMentorsFiltersAdvanced({super.key});
+class ExploreAdvancedFiltersScreen extends StatefulWidget {
+  const ExploreAdvancedFiltersScreen({super.key});
 
   @override
   State<StatefulWidget> createState() => _RecommendedMentorsFiltersAdvanced();
 }
 
 class _RecommendedMentorsFiltersAdvanced
-    extends State<RecommendedMentorsFiltersAdvanced>
-    with NavigationMixin<RecommendedMentorsFiltersAdvanced> {
+    extends State<ExploreAdvancedFiltersScreen>
+    with NavigationMixin<ExploreAdvancedFiltersScreen> {
   late final ContentProvider _contentProvider;
   late final TextfieldTagsController _industriesController;
   late final TextfieldTagsController _companyStageController;
