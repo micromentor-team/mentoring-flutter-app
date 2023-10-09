@@ -6,7 +6,7 @@ import 'package:mm_flutter_app/utilities/scaffold_utils/user_popup_menu_button.d
 import 'package:provider/provider.dart';
 
 import '../../constants/app_constants.dart';
-import '../../widgets/atoms/notification_bubble.dart';
+import '../../widgets/shared/notification_bubble.dart';
 
 class AppBarFactory {
   AppBarFactory._private();
