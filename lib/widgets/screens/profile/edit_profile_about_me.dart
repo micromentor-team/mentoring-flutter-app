@@ -14,7 +14,8 @@ class EditProfileAboutMe extends StatelessWidget {
   final String? linkedinUrl;
   final String? promptTitle;
   final String? promptResponse;
-  final List<String> languages;
+  final String? preferredLanguage;
+  final List<String> spokenLanguages;
 
   const EditProfileAboutMe({
     super.key,
@@ -28,7 +29,8 @@ class EditProfileAboutMe extends StatelessWidget {
     this.linkedinUrl,
     this.promptTitle,
     this.promptResponse,
-    this.languages = const [],
+    this.preferredLanguage,
+    this.spokenLanguages = const [],
   });
 
   Widget _createListTileSection(
@@ -125,38 +127,39 @@ class EditProfileAboutMe extends StatelessWidget {
       cityFrom,
       countryFrom,
     ].nonNulls.join(l10n.listSeparator);
-    final String preferredLanguage = languages[0];
-    String otherLanguages = "";
-    for (int i = 1; i < languages.length; i++) {
-      if (i > 1) otherLanguages += ",";
-      otherLanguages += languages[i];
-    }
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      ListTile(
+    final String otherLanguages = spokenLanguages.join(l10n.listSeparator);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListTile(
           title: Text(
-        l10n.profileAboutMe,
-        style: theme.textTheme.titleLarge!
-            .copyWith(color: theme.colorScheme.onBackground),
-      )),
-      _createListTileSection(context, l10n.pronouns, pronouns, null),
-      const Divider(),
-      _createLinkedInSection(context, linkedinUrl),
-      const Divider(),
-      _createListTileSection(context, l10n.currentCity, livesInLocation, null),
-      const Divider(),
-      _createListTileSection(context, l10n.whereAreYouFrom, fromLocation, null),
-      const Divider(),
-      _createListTileSection(
-          context, l10n.preferredLanguage, preferredLanguage, null),
-      const Divider(),
-      _createListTileSection(
-          context, l10n.otherLanguages, otherLanguages, null),
-      const Divider(),
-      if (promptTitle != null)
-        _createPromptSection(context, promptTitle!, promptResponse!, null),
-      if (promptTitle == null)
-        _createPromptSection(
-            context, l10n.selectPrompt, l10n.andRecordAnswer, null),
-    ]);
+            l10n.profileAboutMe,
+            style: theme.textTheme.titleLarge!
+                .copyWith(color: theme.colorScheme.onBackground),
+          ),
+        ),
+        _createListTileSection(context, l10n.pronouns, pronouns, null),
+        const Divider(),
+        _createLinkedInSection(context, linkedinUrl),
+        const Divider(),
+        _createListTileSection(
+            context, l10n.currentCity, livesInLocation, null),
+        const Divider(),
+        _createListTileSection(
+            context, l10n.whereAreYouFrom, fromLocation, null),
+        const Divider(),
+        _createListTileSection(
+            context, l10n.preferredLanguage, preferredLanguage, null),
+        const Divider(),
+        _createListTileSection(
+            context, l10n.otherLanguages, otherLanguages, null),
+        const Divider(),
+        if (promptTitle != null)
+          _createPromptSection(context, promptTitle!, promptResponse!, null),
+        if (promptTitle == null)
+          _createPromptSection(
+              context, l10n.selectPrompt, l10n.andRecordAnswer, null),
+      ],
+    );
   }
 }

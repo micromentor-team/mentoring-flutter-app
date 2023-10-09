@@ -93,23 +93,25 @@ class EditProfileContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EditProfileAboutMe(
-        pronouns: userData.pronounsDisplay,
-        regionOfResidence: userData.regionOfResidence,
-        cityOfResidence: userData.cityOfResidence,
-        countryOfResidence: userData.countryOfResidence?.translatedValue,
-        regionFrom: userData.regionOfOrigin,
-        cityFrom: userData.cityOfOrigin,
-        countryFrom: userData.countryOfOrigin?.translatedValue,
-        linkedinUrl: userData.websites
-            ?.where((e) => e.label == WebsiteLabels.linkedin.name)
-            .firstOrNull
-            ?.value,
-        promptTitle: "The best piece of advice I’ve ever received is:", //TODO
-        promptResponse:
-            "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.", //TODO
-        languages: userData.spokenLanguages
-            .map((e) => e.translatedValue)
-            .nonNulls
-            .toList());
+      pronouns: userData.pronounsDisplay,
+      regionOfResidence: userData.regionOfResidence,
+      cityOfResidence: userData.cityOfResidence,
+      countryOfResidence: userData.countryOfResidence?.translatedValue,
+      regionFrom: userData.regionOfOrigin,
+      cityFrom: userData.cityOfOrigin,
+      countryFrom: userData.countryOfOrigin?.translatedValue,
+      linkedinUrl: userData.websites
+          ?.where((e) => e.label == WebsiteLabels.linkedin.name)
+          .firstOrNull
+          ?.value,
+      promptTitle: "The best piece of advice I’ve ever received is:", //TODO
+      promptResponse:
+          "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.", //TODO
+      preferredLanguage: userData.preferredLanguage.translatedValue,
+      spokenLanguages: userData.spokenLanguages
+          .map((e) => e.translatedValue)
+          .nonNulls
+          .toList(),
+    );
   }
 }

@@ -294,6 +294,9 @@ query FindUserDetailedProfile($userId: String!) {
         value
         label # label == "linkedin" for the linkedin button
     }
+    preferredLanguage {
+      translatedValue
+    }
     spokenLanguages {
       translatedValue
     }

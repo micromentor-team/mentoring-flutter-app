@@ -145,6 +145,10 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
         .where((g) => g.groupIdent == GroupIdent.mentees.name)
         .firstOrNull
         ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
+    final Set<String> languages = {
+      userData.preferredLanguage.translatedValue!,
+      ...userData.spokenLanguages.nonNulls.map((e) => e.translatedValue!),
+    };
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -237,10 +241,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 "The best piece of advice I’ve ever received is:", //TODO
             promptResponse:
                 "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.", //TODO
-            languages: userData.spokenLanguages
-                .map((e) => e.translatedValue)
-                .nonNulls
-                .toList(),
+            languages: languages.toList(growable: false),
           ),
           if (userData.seeksHelp && company != null) ...[
             const Divider(),
