@@ -113,8 +113,6 @@ class _ChannelChatState extends State<ChannelChat>
   final ScrollController listScrollController = ScrollController();
   final Duration _animationDuration = const Duration(milliseconds: 250);
   late final ChatModel _chatModel;
-  int _messageCount = 0;
-  bool _unreadMessages = false; // Non-local Message exists outside of viewport
   ChannelMessage? _focusedMessage; // Intended reply Message
 
   @override
@@ -123,56 +121,61 @@ class _ChannelChatState extends State<ChannelChat>
     _chatModel = Provider.of<ChatModel>(context, listen: false);
     _chatModel.markMessagesAsRead();
     _chatModel.createChannelSubscription();
-    _messageCount = _chatModel.channelMessages.length;
+    _chatModel.onNewMessage = _processNewMessages;
+    listScrollController.addListener(_fetchOlderMessages);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _chatModel.refreshChannelMessages();
+    _chatModel.addOldChannelMessages();
   }
 
   void _processNewMessages() {
-    if (_messageCount < _chatModel.channelMessages.length) {
-      _chatModel.markMessagesAsRead();
-      if (_chatModel.channelMessages.last.createdBy ==
-          _chatModel.authenticatedUser.id) {
-        _scrollDown();
-      } else if (_unreadMessages != true) {
-        _unreadMessages = true;
-      }
+    _chatModel.markMessagesAsRead();
+    if (_chatModel.channelMessages.last.createdBy ==
+        _chatModel.authenticatedUser.id) {
+      _scrollDown();
     }
-    _messageCount = _chatModel.channelMessages.length;
+  }
+
+  void _fetchOlderMessages() {
+    final extentAfter = listScrollController.position.extentAfter;
+    if (extentAfter < 300 &&
+        _chatModel.fetchOldMessagesState != AsyncState.loading) {
+      _chatModel.addOldChannelMessages();
+    }
   }
 
   @override
   void dispose() {
     _chatModel.cancelChannelSubscription();
+    _chatModel.onNewMessage = null;
     messageTextController.dispose();
     listScrollController.dispose();
     super.dispose();
   }
 
   void _scrollDown() {
-    if (listScrollController.hasClients &&
-        _chatModel.channelMessages.isNotEmpty) {
-      listScrollController.animateTo(
-        listScrollController.position.minScrollExtent,
-        duration: _animationDuration,
-        curve: Curves.easeInOutBack,
+    if (listScrollController.hasClients) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => listScrollController.animateTo(
+          listScrollController.position.minScrollExtent,
+          duration: _animationDuration,
+          curve: Curves.easeInOutBack,
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ChatModel>(
-      builder: (context, chatModel, child) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _processNewMessages();
-        });
+    return Selector<ChatModel, List<ChannelMessage>>(
+      selector: (_, chatModel) => chatModel.channelMessages,
+      shouldRebuild: (_, __) => true,
+      builder: (_, __, child) {
         return AppUtility.widgetForAsyncState(
-          state: chatModel.state,
+          state: _chatModel.hasAnyMessagesState,
           onReady: () => Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -180,8 +183,8 @@ class _ChannelChatState extends State<ChannelChat>
               Expanded(
                 child: BuildMessageBubbles(
                   channel: widget.channel,
-                  authenticatedUser: chatModel.authenticatedUser,
-                  chatMessages: chatModel.channelMessages,
+                  authenticatedUser: _chatModel.authenticatedUser,
+                  chatMessages: _chatModel.channelMessages,
                   participants: widget.channel.participants,
                   listScrollController: listScrollController,
                   onSetReplyingTo: (message) {
@@ -191,29 +194,30 @@ class _ChannelChatState extends State<ChannelChat>
                   },
                 ),
               ),
-              MessageInput(
-                replyingTo: _focusedMessage,
-                participants: widget.channel.participants,
-                onSubmit: (val, replyToMessageId) {
-                  _chatModel.addChannelMessage(
-                    channelId: widget.channel.id,
-                    messageText: val,
-                    replyToMessageId: replyToMessageId,
-                  );
-                  setState(() {
-                    _focusedMessage = null;
-                  });
-                },
-                onClearReply: () {
-                  setState(() {
-                    _focusedMessage = null;
-                  });
-                },
-              ),
+              child!,
             ],
           ),
         );
       },
+      child: MessageInput(
+        replyingTo: _focusedMessage,
+        participants: widget.channel.participants,
+        onSubmit: (val, replyToMessageId) {
+          _chatModel.addNewChannelMessage(
+            channelId: widget.channel.id,
+            messageText: val,
+            replyToMessageId: replyToMessageId,
+          );
+          setState(() {
+            _focusedMessage = null;
+          });
+        },
+        onClearReply: () {
+          setState(() {
+            _focusedMessage = null;
+          });
+        },
+      ),
     );
   }
 }
@@ -241,6 +245,7 @@ class BuildMessageBubbles extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     List<ChannelMessage> messages = chatMessages.reversed.toList();
+
     return GroupedListView<ChannelMessage, String>(
       elements: messages,
       clipBehavior: Clip.none,
