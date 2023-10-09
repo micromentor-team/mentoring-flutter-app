@@ -10,21 +10,21 @@ import '../../__generated/schema/schema.graphql.dart';
 import '../../providers/base/operation_result.dart';
 import '../../providers/user_provider.dart';
 
-class RecommendedMentorsScroll extends StatelessWidget {
-  final List<MentorUser> mentors;
+class RecommendedUsersScroll extends StatelessWidget {
+  final List<RecommendedUser> recommendedUsers;
 
-  const RecommendedMentorsScroll({
+  const RecommendedUsersScroll({
     Key? key,
-    required this.mentors,
+    required this.recommendedUsers,
   }) : super(key: key);
 
   List<Widget> _createMentorCards(GoRouter router) {
-    int numberOfMentors = mentors.length;
+    int numberOfMentors = recommendedUsers.length;
     List<MentorCard> recommendedMentors = [];
     int i;
 
     for (i = 0; i < numberOfMentors; i++) {
-      final mentor = mentors[i];
+      final mentor = recommendedUsers[i];
       recommendedMentors.add(
         MentorCard(
             avatarUrl: mentor.avatarUrl,
@@ -110,7 +110,7 @@ class RecommendedSection extends StatefulWidget {
 
 class _RecommendedSectionState extends State<RecommendedSection> {
   late final UserProvider _userProvider;
-  late Future<OperationResult<List<MentorUser>>> _recommendedMentors;
+  late Future<OperationResult<List<RecommendedUser>>> _recommendedUsers;
 
   @override
   void initState() {
@@ -121,7 +121,7 @@ class _RecommendedSectionState extends State<RecommendedSection> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _recommendedMentors = _userProvider.findMentorUsers(
+    _recommendedUsers = _userProvider.findRecommendedUsers(
       optionsInput: Input$FindObjectsOptions(limit: 20),
       filterInput: Input$UserListFilter(
         ids: [
@@ -155,29 +155,29 @@ class _RecommendedSectionState extends State<RecommendedSection> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _recommendedMentors,
+      future: _recommendedUsers,
       builder: (context, snapshot) {
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onReady: () {
-            List<MentorUser> mentors = snapshot.data?.response != null
+            List<RecommendedUser> users = snapshot.data?.response != null
                 ? snapshot.data!.response!
                     .where(
                         (element) => element.id != widget.authenticatedUser.id)
                     .toList()
                 : [];
-            return _createRecommendedMentorsWidget(mentors, context);
+            return _createRecommendedUsersWidget(users, context);
           },
         );
       },
     );
   }
 
-  Column _createRecommendedMentorsWidget(
-      List<MentorUser> mentors, BuildContext context) {
+  Column _createRecommendedUsersWidget(
+      List<RecommendedUser> users, BuildContext context) {
     return Column(
       children: [
-        RecommendedMentorsScroll(mentors: mentors),
+        RecommendedUsersScroll(recommendedUsers: users),
         const FindMoreMentorsButton(),
       ],
     );

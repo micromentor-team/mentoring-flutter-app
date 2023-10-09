@@ -651,6 +651,926 @@ class _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById$latestMes
       _res;
 }
 
+class Variables$Query$FindChannelMessageById {
+  factory Variables$Query$FindChannelMessageById(
+          {required String channelMessageId}) =>
+      Variables$Query$FindChannelMessageById._({
+        r'channelMessageId': channelMessageId,
+      });
+
+  Variables$Query$FindChannelMessageById._(this._$data);
+
+  factory Variables$Query$FindChannelMessageById.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$channelMessageId = data['channelMessageId'];
+    result$data['channelMessageId'] = (l$channelMessageId as String);
+    return Variables$Query$FindChannelMessageById._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get channelMessageId => (_$data['channelMessageId'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$channelMessageId = channelMessageId;
+    result$data['channelMessageId'] = l$channelMessageId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$FindChannelMessageById<
+          Variables$Query$FindChannelMessageById>
+      get copyWith => CopyWith$Variables$Query$FindChannelMessageById(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$FindChannelMessageById) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelMessageId = channelMessageId;
+    final lOther$channelMessageId = other.channelMessageId;
+    if (l$channelMessageId != lOther$channelMessageId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelMessageId = channelMessageId;
+    return Object.hashAll([l$channelMessageId]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$FindChannelMessageById<TRes> {
+  factory CopyWith$Variables$Query$FindChannelMessageById(
+    Variables$Query$FindChannelMessageById instance,
+    TRes Function(Variables$Query$FindChannelMessageById) then,
+  ) = _CopyWithImpl$Variables$Query$FindChannelMessageById;
+
+  factory CopyWith$Variables$Query$FindChannelMessageById.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$FindChannelMessageById;
+
+  TRes call({String? channelMessageId});
+}
+
+class _CopyWithImpl$Variables$Query$FindChannelMessageById<TRes>
+    implements CopyWith$Variables$Query$FindChannelMessageById<TRes> {
+  _CopyWithImpl$Variables$Query$FindChannelMessageById(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$FindChannelMessageById _instance;
+
+  final TRes Function(Variables$Query$FindChannelMessageById) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelMessageId = _undefined}) =>
+      _then(Variables$Query$FindChannelMessageById._({
+        ..._instance._$data,
+        if (channelMessageId != _undefined && channelMessageId != null)
+          'channelMessageId': (channelMessageId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$FindChannelMessageById<TRes>
+    implements CopyWith$Variables$Query$FindChannelMessageById<TRes> {
+  _CopyWithStubImpl$Variables$Query$FindChannelMessageById(this._res);
+
+  TRes _res;
+
+  call({String? channelMessageId}) => _res;
+}
+
+class Query$FindChannelMessageById {
+  Query$FindChannelMessageById({
+    required this.findChannelMessageById,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$FindChannelMessageById.fromJson(Map<String, dynamic> json) {
+    final l$findChannelMessageById = json['findChannelMessageById'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelMessageById(
+      findChannelMessageById:
+          Query$FindChannelMessageById$findChannelMessageById.fromJson(
+              (l$findChannelMessageById as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$FindChannelMessageById$findChannelMessageById
+      findChannelMessageById;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$findChannelMessageById = findChannelMessageById;
+    _resultData['findChannelMessageById'] = l$findChannelMessageById.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$findChannelMessageById = findChannelMessageById;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$findChannelMessageById,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindChannelMessageById) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$findChannelMessageById = findChannelMessageById;
+    final lOther$findChannelMessageById = other.findChannelMessageById;
+    if (l$findChannelMessageById != lOther$findChannelMessageById) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelMessageById
+    on Query$FindChannelMessageById {
+  CopyWith$Query$FindChannelMessageById<Query$FindChannelMessageById>
+      get copyWith => CopyWith$Query$FindChannelMessageById(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelMessageById<TRes> {
+  factory CopyWith$Query$FindChannelMessageById(
+    Query$FindChannelMessageById instance,
+    TRes Function(Query$FindChannelMessageById) then,
+  ) = _CopyWithImpl$Query$FindChannelMessageById;
+
+  factory CopyWith$Query$FindChannelMessageById.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindChannelMessageById;
+
+  TRes call({
+    Query$FindChannelMessageById$findChannelMessageById? findChannelMessageById,
+    String? $__typename,
+  });
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
+      get findChannelMessageById;
+}
+
+class _CopyWithImpl$Query$FindChannelMessageById<TRes>
+    implements CopyWith$Query$FindChannelMessageById<TRes> {
+  _CopyWithImpl$Query$FindChannelMessageById(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelMessageById _instance;
+
+  final TRes Function(Query$FindChannelMessageById) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? findChannelMessageById = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelMessageById(
+        findChannelMessageById: findChannelMessageById == _undefined ||
+                findChannelMessageById == null
+            ? _instance.findChannelMessageById
+            : (findChannelMessageById
+                as Query$FindChannelMessageById$findChannelMessageById),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
+      get findChannelMessageById {
+    final local$findChannelMessageById = _instance.findChannelMessageById;
+    return CopyWith$Query$FindChannelMessageById$findChannelMessageById(
+        local$findChannelMessageById, (e) => call(findChannelMessageById: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$FindChannelMessageById<TRes>
+    implements CopyWith$Query$FindChannelMessageById<TRes> {
+  _CopyWithStubImpl$Query$FindChannelMessageById(this._res);
+
+  TRes _res;
+
+  call({
+    Query$FindChannelMessageById$findChannelMessageById? findChannelMessageById,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
+      get findChannelMessageById =>
+          CopyWith$Query$FindChannelMessageById$findChannelMessageById.stub(
+              _res);
+}
+
+const documentNodeQueryFindChannelMessageById = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'FindChannelMessageById'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelMessageId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'findChannelMessageById'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'channelMessageId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdBy'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'channelId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'messageText'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'replyToMessageId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'deletedBy'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'updatedAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'deletedAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'editedAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'statuses'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'seenAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'userId'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$FindChannelMessageById$findChannelMessageById {
+  Query$FindChannelMessageById$findChannelMessageById({
+    required this.id,
+    this.createdBy,
+    required this.channelId,
+    this.messageText,
+    required this.createdAt,
+    this.replyToMessageId,
+    this.deletedBy,
+    this.updatedAt,
+    this.deletedAt,
+    this.editedAt,
+    this.statuses,
+    this.$__typename = 'ChannelMessage',
+  });
+
+  factory Query$FindChannelMessageById$findChannelMessageById.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$createdBy = json['createdBy'];
+    final l$channelId = json['channelId'];
+    final l$messageText = json['messageText'];
+    final l$createdAt = json['createdAt'];
+    final l$replyToMessageId = json['replyToMessageId'];
+    final l$deletedBy = json['deletedBy'];
+    final l$updatedAt = json['updatedAt'];
+    final l$deletedAt = json['deletedAt'];
+    final l$editedAt = json['editedAt'];
+    final l$statuses = json['statuses'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelMessageById$findChannelMessageById(
+      id: (l$id as String),
+      createdBy: (l$createdBy as String?),
+      channelId: (l$channelId as String),
+      messageText: (l$messageText as String?),
+      createdAt: DateTime.parse((l$createdAt as String)),
+      replyToMessageId: (l$replyToMessageId as String?),
+      deletedBy: (l$deletedBy as String?),
+      updatedAt:
+          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
+      deletedAt:
+          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String)),
+      editedAt:
+          l$editedAt == null ? null : DateTime.parse((l$editedAt as String)),
+      statuses: (l$statuses as List<dynamic>?)
+          ?.map((e) =>
+              Query$FindChannelMessageById$findChannelMessageById$statuses
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String? createdBy;
+
+  final String channelId;
+
+  final String? messageText;
+
+  final DateTime createdAt;
+
+  final String? replyToMessageId;
+
+  final String? deletedBy;
+
+  final DateTime? updatedAt;
+
+  final DateTime? deletedAt;
+
+  final DateTime? editedAt;
+
+  final List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
+      statuses;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$createdBy = createdBy;
+    _resultData['createdBy'] = l$createdBy;
+    final l$channelId = channelId;
+    _resultData['channelId'] = l$channelId;
+    final l$messageText = messageText;
+    _resultData['messageText'] = l$messageText;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt.toIso8601String();
+    final l$replyToMessageId = replyToMessageId;
+    _resultData['replyToMessageId'] = l$replyToMessageId;
+    final l$deletedBy = deletedBy;
+    _resultData['deletedBy'] = l$deletedBy;
+    final l$updatedAt = updatedAt;
+    _resultData['updatedAt'] = l$updatedAt?.toIso8601String();
+    final l$deletedAt = deletedAt;
+    _resultData['deletedAt'] = l$deletedAt?.toIso8601String();
+    final l$editedAt = editedAt;
+    _resultData['editedAt'] = l$editedAt?.toIso8601String();
+    final l$statuses = statuses;
+    _resultData['statuses'] = l$statuses?.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$createdBy = createdBy;
+    final l$channelId = channelId;
+    final l$messageText = messageText;
+    final l$createdAt = createdAt;
+    final l$replyToMessageId = replyToMessageId;
+    final l$deletedBy = deletedBy;
+    final l$updatedAt = updatedAt;
+    final l$deletedAt = deletedAt;
+    final l$editedAt = editedAt;
+    final l$statuses = statuses;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$createdBy,
+      l$channelId,
+      l$messageText,
+      l$createdAt,
+      l$replyToMessageId,
+      l$deletedBy,
+      l$updatedAt,
+      l$deletedAt,
+      l$editedAt,
+      l$statuses == null ? null : Object.hashAll(l$statuses.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindChannelMessageById$findChannelMessageById) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$channelId = channelId;
+    final lOther$channelId = other.channelId;
+    if (l$channelId != lOther$channelId) {
+      return false;
+    }
+    final l$messageText = messageText;
+    final lOther$messageText = other.messageText;
+    if (l$messageText != lOther$messageText) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$replyToMessageId = replyToMessageId;
+    final lOther$replyToMessageId = other.replyToMessageId;
+    if (l$replyToMessageId != lOther$replyToMessageId) {
+      return false;
+    }
+    final l$deletedBy = deletedBy;
+    final lOther$deletedBy = other.deletedBy;
+    if (l$deletedBy != lOther$deletedBy) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$deletedAt = deletedAt;
+    final lOther$deletedAt = other.deletedAt;
+    if (l$deletedAt != lOther$deletedAt) {
+      return false;
+    }
+    final l$editedAt = editedAt;
+    final lOther$editedAt = other.editedAt;
+    if (l$editedAt != lOther$editedAt) {
+      return false;
+    }
+    final l$statuses = statuses;
+    final lOther$statuses = other.statuses;
+    if (l$statuses != null && lOther$statuses != null) {
+      if (l$statuses.length != lOther$statuses.length) {
+        return false;
+      }
+      for (int i = 0; i < l$statuses.length; i++) {
+        final l$statuses$entry = l$statuses[i];
+        final lOther$statuses$entry = lOther$statuses[i];
+        if (l$statuses$entry != lOther$statuses$entry) {
+          return false;
+        }
+      }
+    } else if (l$statuses != lOther$statuses) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelMessageById$findChannelMessageById
+    on Query$FindChannelMessageById$findChannelMessageById {
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById<
+          Query$FindChannelMessageById$findChannelMessageById>
+      get copyWith =>
+          CopyWith$Query$FindChannelMessageById$findChannelMessageById(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelMessageById$findChannelMessageById<
+    TRes> {
+  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById(
+    Query$FindChannelMessageById$findChannelMessageById instance,
+    TRes Function(Query$FindChannelMessageById$findChannelMessageById) then,
+  ) = _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById;
+
+  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById;
+
+  TRes call({
+    String? id,
+    String? createdBy,
+    String? channelId,
+    String? messageText,
+    DateTime? createdAt,
+    String? replyToMessageId,
+    String? deletedBy,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
+    DateTime? editedAt,
+    List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
+        statuses,
+    String? $__typename,
+  });
+  TRes statuses(
+      Iterable<Query$FindChannelMessageById$findChannelMessageById$statuses>? Function(
+              Iterable<
+                  CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+                      Query$FindChannelMessageById$findChannelMessageById$statuses>>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById<TRes>
+    implements
+        CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes> {
+  _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelMessageById$findChannelMessageById _instance;
+
+  final TRes Function(Query$FindChannelMessageById$findChannelMessageById)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? createdBy = _undefined,
+    Object? channelId = _undefined,
+    Object? messageText = _undefined,
+    Object? createdAt = _undefined,
+    Object? replyToMessageId = _undefined,
+    Object? deletedBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? deletedAt = _undefined,
+    Object? editedAt = _undefined,
+    Object? statuses = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelMessageById$findChannelMessageById(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        createdBy: createdBy == _undefined
+            ? _instance.createdBy
+            : (createdBy as String?),
+        channelId: channelId == _undefined || channelId == null
+            ? _instance.channelId
+            : (channelId as String),
+        messageText: messageText == _undefined
+            ? _instance.messageText
+            : (messageText as String?),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as DateTime),
+        replyToMessageId: replyToMessageId == _undefined
+            ? _instance.replyToMessageId
+            : (replyToMessageId as String?),
+        deletedBy: deletedBy == _undefined
+            ? _instance.deletedBy
+            : (deletedBy as String?),
+        updatedAt: updatedAt == _undefined
+            ? _instance.updatedAt
+            : (updatedAt as DateTime?),
+        deletedAt: deletedAt == _undefined
+            ? _instance.deletedAt
+            : (deletedAt as DateTime?),
+        editedAt: editedAt == _undefined
+            ? _instance.editedAt
+            : (editedAt as DateTime?),
+        statuses: statuses == _undefined
+            ? _instance.statuses
+            : (statuses as List<
+                Query$FindChannelMessageById$findChannelMessageById$statuses>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  TRes statuses(
+          Iterable<Query$FindChannelMessageById$findChannelMessageById$statuses>? Function(
+                  Iterable<
+                      CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+                          Query$FindChannelMessageById$findChannelMessageById$statuses>>?)
+              _fn) =>
+      call(
+          statuses: _fn(_instance.statuses?.map((e) =>
+              CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
+                e,
+                (i) => i,
+              )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes> {
+  _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? createdBy,
+    String? channelId,
+    String? messageText,
+    DateTime? createdAt,
+    String? replyToMessageId,
+    String? deletedBy,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
+    DateTime? editedAt,
+    List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
+        statuses,
+    String? $__typename,
+  }) =>
+      _res;
+  statuses(_fn) => _res;
+}
+
+class Query$FindChannelMessageById$findChannelMessageById$statuses {
+  Query$FindChannelMessageById$findChannelMessageById$statuses({
+    this.seenAt,
+    required this.userId,
+    this.$__typename = 'ChannelMessageStatus',
+  });
+
+  factory Query$FindChannelMessageById$findChannelMessageById$statuses.fromJson(
+      Map<String, dynamic> json) {
+    final l$seenAt = json['seenAt'];
+    final l$userId = json['userId'];
+    final l$$__typename = json['__typename'];
+    return Query$FindChannelMessageById$findChannelMessageById$statuses(
+      seenAt: l$seenAt == null ? null : DateTime.parse((l$seenAt as String)),
+      userId: (l$userId as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime? seenAt;
+
+  final String userId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$seenAt = seenAt;
+    _resultData['seenAt'] = l$seenAt?.toIso8601String();
+    final l$userId = userId;
+    _resultData['userId'] = l$userId;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$seenAt = seenAt;
+    final l$userId = userId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$seenAt,
+      l$userId,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindChannelMessageById$findChannelMessageById$statuses) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$seenAt = seenAt;
+    final lOther$seenAt = other.seenAt;
+    if (l$seenAt != lOther$seenAt) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindChannelMessageById$findChannelMessageById$statuses
+    on Query$FindChannelMessageById$findChannelMessageById$statuses {
+  CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+          Query$FindChannelMessageById$findChannelMessageById$statuses>
+      get copyWith =>
+          CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+    TRes> {
+  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
+    Query$FindChannelMessageById$findChannelMessageById$statuses instance,
+    TRes Function(Query$FindChannelMessageById$findChannelMessageById$statuses)
+        then,
+  ) = _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses;
+
+  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses;
+
+  TRes call({
+    DateTime? seenAt,
+    String? userId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+            TRes> {
+  _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindChannelMessageById$findChannelMessageById$statuses _instance;
+
+  final TRes Function(
+      Query$FindChannelMessageById$findChannelMessageById$statuses) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? seenAt = _undefined,
+    Object? userId = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindChannelMessageById$findChannelMessageById$statuses(
+        seenAt: seenAt == _undefined ? _instance.seenAt : (seenAt as DateTime?),
+        userId: userId == _undefined || userId == null
+            ? _instance.userId
+            : (userId as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses<
+        TRes>
+    implements
+        CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
+            TRes> {
+  _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses(
+      this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? seenAt,
+    String? userId,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables$Query$FindChannelMessages {
   factory Variables$Query$FindChannelMessages({
     Input$ChannelMessageListFilter? filter,
@@ -1623,926 +2543,6 @@ class _CopyWithStubImpl$Query$FindChannelMessages$findChannelMessages$statuses<
     implements
         CopyWith$Query$FindChannelMessages$findChannelMessages$statuses<TRes> {
   _CopyWithStubImpl$Query$FindChannelMessages$findChannelMessages$statuses(
-      this._res);
-
-  TRes _res;
-
-  call({
-    DateTime? seenAt,
-    String? userId,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Variables$Query$FindChannelMessageById {
-  factory Variables$Query$FindChannelMessageById(
-          {required String channelMessageId}) =>
-      Variables$Query$FindChannelMessageById._({
-        r'channelMessageId': channelMessageId,
-      });
-
-  Variables$Query$FindChannelMessageById._(this._$data);
-
-  factory Variables$Query$FindChannelMessageById.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$channelMessageId = data['channelMessageId'];
-    result$data['channelMessageId'] = (l$channelMessageId as String);
-    return Variables$Query$FindChannelMessageById._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String get channelMessageId => (_$data['channelMessageId'] as String);
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$channelMessageId = channelMessageId;
-    result$data['channelMessageId'] = l$channelMessageId;
-    return result$data;
-  }
-
-  CopyWith$Variables$Query$FindChannelMessageById<
-          Variables$Query$FindChannelMessageById>
-      get copyWith => CopyWith$Variables$Query$FindChannelMessageById(
-            this,
-            (i) => i,
-          );
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Variables$Query$FindChannelMessageById) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$channelMessageId = channelMessageId;
-    final lOther$channelMessageId = other.channelMessageId;
-    if (l$channelMessageId != lOther$channelMessageId) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$channelMessageId = channelMessageId;
-    return Object.hashAll([l$channelMessageId]);
-  }
-}
-
-abstract class CopyWith$Variables$Query$FindChannelMessageById<TRes> {
-  factory CopyWith$Variables$Query$FindChannelMessageById(
-    Variables$Query$FindChannelMessageById instance,
-    TRes Function(Variables$Query$FindChannelMessageById) then,
-  ) = _CopyWithImpl$Variables$Query$FindChannelMessageById;
-
-  factory CopyWith$Variables$Query$FindChannelMessageById.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$FindChannelMessageById;
-
-  TRes call({String? channelMessageId});
-}
-
-class _CopyWithImpl$Variables$Query$FindChannelMessageById<TRes>
-    implements CopyWith$Variables$Query$FindChannelMessageById<TRes> {
-  _CopyWithImpl$Variables$Query$FindChannelMessageById(
-    this._instance,
-    this._then,
-  );
-
-  final Variables$Query$FindChannelMessageById _instance;
-
-  final TRes Function(Variables$Query$FindChannelMessageById) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? channelMessageId = _undefined}) =>
-      _then(Variables$Query$FindChannelMessageById._({
-        ..._instance._$data,
-        if (channelMessageId != _undefined && channelMessageId != null)
-          'channelMessageId': (channelMessageId as String),
-      }));
-}
-
-class _CopyWithStubImpl$Variables$Query$FindChannelMessageById<TRes>
-    implements CopyWith$Variables$Query$FindChannelMessageById<TRes> {
-  _CopyWithStubImpl$Variables$Query$FindChannelMessageById(this._res);
-
-  TRes _res;
-
-  call({String? channelMessageId}) => _res;
-}
-
-class Query$FindChannelMessageById {
-  Query$FindChannelMessageById({
-    required this.findChannelMessageById,
-    this.$__typename = 'Query',
-  });
-
-  factory Query$FindChannelMessageById.fromJson(Map<String, dynamic> json) {
-    final l$findChannelMessageById = json['findChannelMessageById'];
-    final l$$__typename = json['__typename'];
-    return Query$FindChannelMessageById(
-      findChannelMessageById:
-          Query$FindChannelMessageById$findChannelMessageById.fromJson(
-              (l$findChannelMessageById as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final Query$FindChannelMessageById$findChannelMessageById
-      findChannelMessageById;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$findChannelMessageById = findChannelMessageById;
-    _resultData['findChannelMessageById'] = l$findChannelMessageById.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$findChannelMessageById = findChannelMessageById;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$findChannelMessageById,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$FindChannelMessageById) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$findChannelMessageById = findChannelMessageById;
-    final lOther$findChannelMessageById = other.findChannelMessageById;
-    if (l$findChannelMessageById != lOther$findChannelMessageById) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$FindChannelMessageById
-    on Query$FindChannelMessageById {
-  CopyWith$Query$FindChannelMessageById<Query$FindChannelMessageById>
-      get copyWith => CopyWith$Query$FindChannelMessageById(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$FindChannelMessageById<TRes> {
-  factory CopyWith$Query$FindChannelMessageById(
-    Query$FindChannelMessageById instance,
-    TRes Function(Query$FindChannelMessageById) then,
-  ) = _CopyWithImpl$Query$FindChannelMessageById;
-
-  factory CopyWith$Query$FindChannelMessageById.stub(TRes res) =
-      _CopyWithStubImpl$Query$FindChannelMessageById;
-
-  TRes call({
-    Query$FindChannelMessageById$findChannelMessageById? findChannelMessageById,
-    String? $__typename,
-  });
-  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
-      get findChannelMessageById;
-}
-
-class _CopyWithImpl$Query$FindChannelMessageById<TRes>
-    implements CopyWith$Query$FindChannelMessageById<TRes> {
-  _CopyWithImpl$Query$FindChannelMessageById(
-    this._instance,
-    this._then,
-  );
-
-  final Query$FindChannelMessageById _instance;
-
-  final TRes Function(Query$FindChannelMessageById) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? findChannelMessageById = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$FindChannelMessageById(
-        findChannelMessageById: findChannelMessageById == _undefined ||
-                findChannelMessageById == null
-            ? _instance.findChannelMessageById
-            : (findChannelMessageById
-                as Query$FindChannelMessageById$findChannelMessageById),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
-      get findChannelMessageById {
-    final local$findChannelMessageById = _instance.findChannelMessageById;
-    return CopyWith$Query$FindChannelMessageById$findChannelMessageById(
-        local$findChannelMessageById, (e) => call(findChannelMessageById: e));
-  }
-}
-
-class _CopyWithStubImpl$Query$FindChannelMessageById<TRes>
-    implements CopyWith$Query$FindChannelMessageById<TRes> {
-  _CopyWithStubImpl$Query$FindChannelMessageById(this._res);
-
-  TRes _res;
-
-  call({
-    Query$FindChannelMessageById$findChannelMessageById? findChannelMessageById,
-    String? $__typename,
-  }) =>
-      _res;
-  CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
-      get findChannelMessageById =>
-          CopyWith$Query$FindChannelMessageById$findChannelMessageById.stub(
-              _res);
-}
-
-const documentNodeQueryFindChannelMessageById = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'FindChannelMessageById'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'channelMessageId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'String'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'findChannelMessageById'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'channelMessageId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'createdBy'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'channelId'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'messageText'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'createdAt'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'replyToMessageId'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'deletedBy'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'updatedAt'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'deletedAt'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'editedAt'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'statuses'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'seenAt'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'userId'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-]);
-
-class Query$FindChannelMessageById$findChannelMessageById {
-  Query$FindChannelMessageById$findChannelMessageById({
-    required this.id,
-    this.createdBy,
-    required this.channelId,
-    this.messageText,
-    required this.createdAt,
-    this.replyToMessageId,
-    this.deletedBy,
-    this.updatedAt,
-    this.deletedAt,
-    this.editedAt,
-    this.statuses,
-    this.$__typename = 'ChannelMessage',
-  });
-
-  factory Query$FindChannelMessageById$findChannelMessageById.fromJson(
-      Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$createdBy = json['createdBy'];
-    final l$channelId = json['channelId'];
-    final l$messageText = json['messageText'];
-    final l$createdAt = json['createdAt'];
-    final l$replyToMessageId = json['replyToMessageId'];
-    final l$deletedBy = json['deletedBy'];
-    final l$updatedAt = json['updatedAt'];
-    final l$deletedAt = json['deletedAt'];
-    final l$editedAt = json['editedAt'];
-    final l$statuses = json['statuses'];
-    final l$$__typename = json['__typename'];
-    return Query$FindChannelMessageById$findChannelMessageById(
-      id: (l$id as String),
-      createdBy: (l$createdBy as String?),
-      channelId: (l$channelId as String),
-      messageText: (l$messageText as String?),
-      createdAt: DateTime.parse((l$createdAt as String)),
-      replyToMessageId: (l$replyToMessageId as String?),
-      deletedBy: (l$deletedBy as String?),
-      updatedAt:
-          l$updatedAt == null ? null : DateTime.parse((l$updatedAt as String)),
-      deletedAt:
-          l$deletedAt == null ? null : DateTime.parse((l$deletedAt as String)),
-      editedAt:
-          l$editedAt == null ? null : DateTime.parse((l$editedAt as String)),
-      statuses: (l$statuses as List<dynamic>?)
-          ?.map((e) =>
-              Query$FindChannelMessageById$findChannelMessageById$statuses
-                  .fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String? createdBy;
-
-  final String channelId;
-
-  final String? messageText;
-
-  final DateTime createdAt;
-
-  final String? replyToMessageId;
-
-  final String? deletedBy;
-
-  final DateTime? updatedAt;
-
-  final DateTime? deletedAt;
-
-  final DateTime? editedAt;
-
-  final List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
-      statuses;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$createdBy = createdBy;
-    _resultData['createdBy'] = l$createdBy;
-    final l$channelId = channelId;
-    _resultData['channelId'] = l$channelId;
-    final l$messageText = messageText;
-    _resultData['messageText'] = l$messageText;
-    final l$createdAt = createdAt;
-    _resultData['createdAt'] = l$createdAt.toIso8601String();
-    final l$replyToMessageId = replyToMessageId;
-    _resultData['replyToMessageId'] = l$replyToMessageId;
-    final l$deletedBy = deletedBy;
-    _resultData['deletedBy'] = l$deletedBy;
-    final l$updatedAt = updatedAt;
-    _resultData['updatedAt'] = l$updatedAt?.toIso8601String();
-    final l$deletedAt = deletedAt;
-    _resultData['deletedAt'] = l$deletedAt?.toIso8601String();
-    final l$editedAt = editedAt;
-    _resultData['editedAt'] = l$editedAt?.toIso8601String();
-    final l$statuses = statuses;
-    _resultData['statuses'] = l$statuses?.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$createdBy = createdBy;
-    final l$channelId = channelId;
-    final l$messageText = messageText;
-    final l$createdAt = createdAt;
-    final l$replyToMessageId = replyToMessageId;
-    final l$deletedBy = deletedBy;
-    final l$updatedAt = updatedAt;
-    final l$deletedAt = deletedAt;
-    final l$editedAt = editedAt;
-    final l$statuses = statuses;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$createdBy,
-      l$channelId,
-      l$messageText,
-      l$createdAt,
-      l$replyToMessageId,
-      l$deletedBy,
-      l$updatedAt,
-      l$deletedAt,
-      l$editedAt,
-      l$statuses == null ? null : Object.hashAll(l$statuses.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$FindChannelMessageById$findChannelMessageById) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$createdBy = createdBy;
-    final lOther$createdBy = other.createdBy;
-    if (l$createdBy != lOther$createdBy) {
-      return false;
-    }
-    final l$channelId = channelId;
-    final lOther$channelId = other.channelId;
-    if (l$channelId != lOther$channelId) {
-      return false;
-    }
-    final l$messageText = messageText;
-    final lOther$messageText = other.messageText;
-    if (l$messageText != lOther$messageText) {
-      return false;
-    }
-    final l$createdAt = createdAt;
-    final lOther$createdAt = other.createdAt;
-    if (l$createdAt != lOther$createdAt) {
-      return false;
-    }
-    final l$replyToMessageId = replyToMessageId;
-    final lOther$replyToMessageId = other.replyToMessageId;
-    if (l$replyToMessageId != lOther$replyToMessageId) {
-      return false;
-    }
-    final l$deletedBy = deletedBy;
-    final lOther$deletedBy = other.deletedBy;
-    if (l$deletedBy != lOther$deletedBy) {
-      return false;
-    }
-    final l$updatedAt = updatedAt;
-    final lOther$updatedAt = other.updatedAt;
-    if (l$updatedAt != lOther$updatedAt) {
-      return false;
-    }
-    final l$deletedAt = deletedAt;
-    final lOther$deletedAt = other.deletedAt;
-    if (l$deletedAt != lOther$deletedAt) {
-      return false;
-    }
-    final l$editedAt = editedAt;
-    final lOther$editedAt = other.editedAt;
-    if (l$editedAt != lOther$editedAt) {
-      return false;
-    }
-    final l$statuses = statuses;
-    final lOther$statuses = other.statuses;
-    if (l$statuses != null && lOther$statuses != null) {
-      if (l$statuses.length != lOther$statuses.length) {
-        return false;
-      }
-      for (int i = 0; i < l$statuses.length; i++) {
-        final l$statuses$entry = l$statuses[i];
-        final lOther$statuses$entry = lOther$statuses[i];
-        if (l$statuses$entry != lOther$statuses$entry) {
-          return false;
-        }
-      }
-    } else if (l$statuses != lOther$statuses) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$FindChannelMessageById$findChannelMessageById
-    on Query$FindChannelMessageById$findChannelMessageById {
-  CopyWith$Query$FindChannelMessageById$findChannelMessageById<
-          Query$FindChannelMessageById$findChannelMessageById>
-      get copyWith =>
-          CopyWith$Query$FindChannelMessageById$findChannelMessageById(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$FindChannelMessageById$findChannelMessageById<
-    TRes> {
-  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById(
-    Query$FindChannelMessageById$findChannelMessageById instance,
-    TRes Function(Query$FindChannelMessageById$findChannelMessageById) then,
-  ) = _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById;
-
-  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById.stub(
-          TRes res) =
-      _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById;
-
-  TRes call({
-    String? id,
-    String? createdBy,
-    String? channelId,
-    String? messageText,
-    DateTime? createdAt,
-    String? replyToMessageId,
-    String? deletedBy,
-    DateTime? updatedAt,
-    DateTime? deletedAt,
-    DateTime? editedAt,
-    List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
-        statuses,
-    String? $__typename,
-  });
-  TRes statuses(
-      Iterable<Query$FindChannelMessageById$findChannelMessageById$statuses>? Function(
-              Iterable<
-                  CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
-                      Query$FindChannelMessageById$findChannelMessageById$statuses>>?)
-          _fn);
-}
-
-class _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById<TRes>
-    implements
-        CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes> {
-  _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById(
-    this._instance,
-    this._then,
-  );
-
-  final Query$FindChannelMessageById$findChannelMessageById _instance;
-
-  final TRes Function(Query$FindChannelMessageById$findChannelMessageById)
-      _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? createdBy = _undefined,
-    Object? channelId = _undefined,
-    Object? messageText = _undefined,
-    Object? createdAt = _undefined,
-    Object? replyToMessageId = _undefined,
-    Object? deletedBy = _undefined,
-    Object? updatedAt = _undefined,
-    Object? deletedAt = _undefined,
-    Object? editedAt = _undefined,
-    Object? statuses = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$FindChannelMessageById$findChannelMessageById(
-        id: id == _undefined || id == null ? _instance.id : (id as String),
-        createdBy: createdBy == _undefined
-            ? _instance.createdBy
-            : (createdBy as String?),
-        channelId: channelId == _undefined || channelId == null
-            ? _instance.channelId
-            : (channelId as String),
-        messageText: messageText == _undefined
-            ? _instance.messageText
-            : (messageText as String?),
-        createdAt: createdAt == _undefined || createdAt == null
-            ? _instance.createdAt
-            : (createdAt as DateTime),
-        replyToMessageId: replyToMessageId == _undefined
-            ? _instance.replyToMessageId
-            : (replyToMessageId as String?),
-        deletedBy: deletedBy == _undefined
-            ? _instance.deletedBy
-            : (deletedBy as String?),
-        updatedAt: updatedAt == _undefined
-            ? _instance.updatedAt
-            : (updatedAt as DateTime?),
-        deletedAt: deletedAt == _undefined
-            ? _instance.deletedAt
-            : (deletedAt as DateTime?),
-        editedAt: editedAt == _undefined
-            ? _instance.editedAt
-            : (editedAt as DateTime?),
-        statuses: statuses == _undefined
-            ? _instance.statuses
-            : (statuses as List<
-                Query$FindChannelMessageById$findChannelMessageById$statuses>?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  TRes statuses(
-          Iterable<Query$FindChannelMessageById$findChannelMessageById$statuses>? Function(
-                  Iterable<
-                      CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
-                          Query$FindChannelMessageById$findChannelMessageById$statuses>>?)
-              _fn) =>
-      call(
-          statuses: _fn(_instance.statuses?.map((e) =>
-              CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
-                e,
-                (i) => i,
-              )))?.toList());
-}
-
-class _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById<
-        TRes>
-    implements
-        CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes> {
-  _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById(
-      this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? createdBy,
-    String? channelId,
-    String? messageText,
-    DateTime? createdAt,
-    String? replyToMessageId,
-    String? deletedBy,
-    DateTime? updatedAt,
-    DateTime? deletedAt,
-    DateTime? editedAt,
-    List<Query$FindChannelMessageById$findChannelMessageById$statuses>?
-        statuses,
-    String? $__typename,
-  }) =>
-      _res;
-  statuses(_fn) => _res;
-}
-
-class Query$FindChannelMessageById$findChannelMessageById$statuses {
-  Query$FindChannelMessageById$findChannelMessageById$statuses({
-    this.seenAt,
-    required this.userId,
-    this.$__typename = 'ChannelMessageStatus',
-  });
-
-  factory Query$FindChannelMessageById$findChannelMessageById$statuses.fromJson(
-      Map<String, dynamic> json) {
-    final l$seenAt = json['seenAt'];
-    final l$userId = json['userId'];
-    final l$$__typename = json['__typename'];
-    return Query$FindChannelMessageById$findChannelMessageById$statuses(
-      seenAt: l$seenAt == null ? null : DateTime.parse((l$seenAt as String)),
-      userId: (l$userId as String),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final DateTime? seenAt;
-
-  final String userId;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$seenAt = seenAt;
-    _resultData['seenAt'] = l$seenAt?.toIso8601String();
-    final l$userId = userId;
-    _resultData['userId'] = l$userId;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$seenAt = seenAt;
-    final l$userId = userId;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$seenAt,
-      l$userId,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other
-            is Query$FindChannelMessageById$findChannelMessageById$statuses) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$seenAt = seenAt;
-    final lOther$seenAt = other.seenAt;
-    if (l$seenAt != lOther$seenAt) {
-      return false;
-    }
-    final l$userId = userId;
-    final lOther$userId = other.userId;
-    if (l$userId != lOther$userId) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$FindChannelMessageById$findChannelMessageById$statuses
-    on Query$FindChannelMessageById$findChannelMessageById$statuses {
-  CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
-          Query$FindChannelMessageById$findChannelMessageById$statuses>
-      get copyWith =>
-          CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
-    TRes> {
-  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses(
-    Query$FindChannelMessageById$findChannelMessageById$statuses instance,
-    TRes Function(Query$FindChannelMessageById$findChannelMessageById$statuses)
-        then,
-  ) = _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses;
-
-  factory CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses.stub(
-          TRes res) =
-      _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses;
-
-  TRes call({
-    DateTime? seenAt,
-    String? userId,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses<
-        TRes>
-    implements
-        CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
-            TRes> {
-  _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById$statuses(
-    this._instance,
-    this._then,
-  );
-
-  final Query$FindChannelMessageById$findChannelMessageById$statuses _instance;
-
-  final TRes Function(
-      Query$FindChannelMessageById$findChannelMessageById$statuses) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? seenAt = _undefined,
-    Object? userId = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$FindChannelMessageById$findChannelMessageById$statuses(
-        seenAt: seenAt == _undefined ? _instance.seenAt : (seenAt as DateTime?),
-        userId: userId == _undefined || userId == null
-            ? _instance.userId
-            : (userId as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses<
-        TRes>
-    implements
-        CopyWith$Query$FindChannelMessageById$findChannelMessageById$statuses<
-            TRes> {
-  _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById$statuses(
       this._res);
 
   TRes _res;
@@ -5207,460 +5207,3 @@ const documentNodeMutationUpdateChannelMessage = DocumentNode(definitions: [
     ]),
   ),
 ]);
-
-class Variables$Subscription$ObjectChanged {
-  factory Variables$Subscription$ObjectChanged({required String objectId}) =>
-      Variables$Subscription$ObjectChanged._({
-        r'objectId': objectId,
-      });
-
-  Variables$Subscription$ObjectChanged._(this._$data);
-
-  factory Variables$Subscription$ObjectChanged.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$objectId = data['objectId'];
-    result$data['objectId'] = (l$objectId as String);
-    return Variables$Subscription$ObjectChanged._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String get objectId => (_$data['objectId'] as String);
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$objectId = objectId;
-    result$data['objectId'] = l$objectId;
-    return result$data;
-  }
-
-  CopyWith$Variables$Subscription$ObjectChanged<
-          Variables$Subscription$ObjectChanged>
-      get copyWith => CopyWith$Variables$Subscription$ObjectChanged(
-            this,
-            (i) => i,
-          );
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Variables$Subscription$ObjectChanged) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$objectId = objectId;
-    final lOther$objectId = other.objectId;
-    if (l$objectId != lOther$objectId) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$objectId = objectId;
-    return Object.hashAll([l$objectId]);
-  }
-}
-
-abstract class CopyWith$Variables$Subscription$ObjectChanged<TRes> {
-  factory CopyWith$Variables$Subscription$ObjectChanged(
-    Variables$Subscription$ObjectChanged instance,
-    TRes Function(Variables$Subscription$ObjectChanged) then,
-  ) = _CopyWithImpl$Variables$Subscription$ObjectChanged;
-
-  factory CopyWith$Variables$Subscription$ObjectChanged.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Subscription$ObjectChanged;
-
-  TRes call({String? objectId});
-}
-
-class _CopyWithImpl$Variables$Subscription$ObjectChanged<TRes>
-    implements CopyWith$Variables$Subscription$ObjectChanged<TRes> {
-  _CopyWithImpl$Variables$Subscription$ObjectChanged(
-    this._instance,
-    this._then,
-  );
-
-  final Variables$Subscription$ObjectChanged _instance;
-
-  final TRes Function(Variables$Subscription$ObjectChanged) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? objectId = _undefined}) =>
-      _then(Variables$Subscription$ObjectChanged._({
-        ..._instance._$data,
-        if (objectId != _undefined && objectId != null)
-          'objectId': (objectId as String),
-      }));
-}
-
-class _CopyWithStubImpl$Variables$Subscription$ObjectChanged<TRes>
-    implements CopyWith$Variables$Subscription$ObjectChanged<TRes> {
-  _CopyWithStubImpl$Variables$Subscription$ObjectChanged(this._res);
-
-  TRes _res;
-
-  call({String? objectId}) => _res;
-}
-
-class Subscription$ObjectChanged {
-  Subscription$ObjectChanged({required this.objectChanged});
-
-  factory Subscription$ObjectChanged.fromJson(Map<String, dynamic> json) {
-    final l$objectChanged = json['objectChanged'];
-    return Subscription$ObjectChanged(
-        objectChanged: Subscription$ObjectChanged$objectChanged.fromJson(
-            (l$objectChanged as Map<String, dynamic>)));
-  }
-
-  final Subscription$ObjectChanged$objectChanged objectChanged;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$objectChanged = objectChanged;
-    _resultData['objectChanged'] = l$objectChanged.toJson();
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$objectChanged = objectChanged;
-    return Object.hashAll([l$objectChanged]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Subscription$ObjectChanged) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$objectChanged = objectChanged;
-    final lOther$objectChanged = other.objectChanged;
-    if (l$objectChanged != lOther$objectChanged) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Subscription$ObjectChanged
-    on Subscription$ObjectChanged {
-  CopyWith$Subscription$ObjectChanged<Subscription$ObjectChanged>
-      get copyWith => CopyWith$Subscription$ObjectChanged(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Subscription$ObjectChanged<TRes> {
-  factory CopyWith$Subscription$ObjectChanged(
-    Subscription$ObjectChanged instance,
-    TRes Function(Subscription$ObjectChanged) then,
-  ) = _CopyWithImpl$Subscription$ObjectChanged;
-
-  factory CopyWith$Subscription$ObjectChanged.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$ObjectChanged;
-
-  TRes call({Subscription$ObjectChanged$objectChanged? objectChanged});
-  CopyWith$Subscription$ObjectChanged$objectChanged<TRes> get objectChanged;
-}
-
-class _CopyWithImpl$Subscription$ObjectChanged<TRes>
-    implements CopyWith$Subscription$ObjectChanged<TRes> {
-  _CopyWithImpl$Subscription$ObjectChanged(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription$ObjectChanged _instance;
-
-  final TRes Function(Subscription$ObjectChanged) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? objectChanged = _undefined}) =>
-      _then(Subscription$ObjectChanged(
-          objectChanged: objectChanged == _undefined || objectChanged == null
-              ? _instance.objectChanged
-              : (objectChanged as Subscription$ObjectChanged$objectChanged)));
-  CopyWith$Subscription$ObjectChanged$objectChanged<TRes> get objectChanged {
-    final local$objectChanged = _instance.objectChanged;
-    return CopyWith$Subscription$ObjectChanged$objectChanged(
-        local$objectChanged, (e) => call(objectChanged: e));
-  }
-}
-
-class _CopyWithStubImpl$Subscription$ObjectChanged<TRes>
-    implements CopyWith$Subscription$ObjectChanged<TRes> {
-  _CopyWithStubImpl$Subscription$ObjectChanged(this._res);
-
-  TRes _res;
-
-  call({Subscription$ObjectChanged$objectChanged? objectChanged}) => _res;
-  CopyWith$Subscription$ObjectChanged$objectChanged<TRes> get objectChanged =>
-      CopyWith$Subscription$ObjectChanged$objectChanged.stub(_res);
-}
-
-const documentNodeSubscriptionObjectChanged = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'ObjectChanged'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'objectId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'objectChanged'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'objectId'),
-            value: VariableNode(name: NameNode(value: 'objectId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'objectId'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'messageType'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'modelType'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'ownerUserId'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
-
-class Subscription$ObjectChanged$objectChanged {
-  Subscription$ObjectChanged$objectChanged({
-    required this.objectId,
-    required this.messageType,
-    required this.modelType,
-    this.ownerUserId,
-    this.$__typename = 'ObjectChangedEvent',
-  });
-
-  factory Subscription$ObjectChanged$objectChanged.fromJson(
-      Map<String, dynamic> json) {
-    final l$objectId = json['objectId'];
-    final l$messageType = json['messageType'];
-    final l$modelType = json['modelType'];
-    final l$ownerUserId = json['ownerUserId'];
-    final l$$__typename = json['__typename'];
-    return Subscription$ObjectChanged$objectChanged(
-      objectId: (l$objectId as String),
-      messageType:
-          fromJson$Enum$ObjectChangedEventType((l$messageType as String)),
-      modelType: fromJson$Enum$ModelType((l$modelType as String)),
-      ownerUserId: (l$ownerUserId as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String objectId;
-
-  final Enum$ObjectChangedEventType messageType;
-
-  final Enum$ModelType modelType;
-
-  final String? ownerUserId;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$objectId = objectId;
-    _resultData['objectId'] = l$objectId;
-    final l$messageType = messageType;
-    _resultData['messageType'] =
-        toJson$Enum$ObjectChangedEventType(l$messageType);
-    final l$modelType = modelType;
-    _resultData['modelType'] = toJson$Enum$ModelType(l$modelType);
-    final l$ownerUserId = ownerUserId;
-    _resultData['ownerUserId'] = l$ownerUserId;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$objectId = objectId;
-    final l$messageType = messageType;
-    final l$modelType = modelType;
-    final l$ownerUserId = ownerUserId;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$objectId,
-      l$messageType,
-      l$modelType,
-      l$ownerUserId,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Subscription$ObjectChanged$objectChanged) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$objectId = objectId;
-    final lOther$objectId = other.objectId;
-    if (l$objectId != lOther$objectId) {
-      return false;
-    }
-    final l$messageType = messageType;
-    final lOther$messageType = other.messageType;
-    if (l$messageType != lOther$messageType) {
-      return false;
-    }
-    final l$modelType = modelType;
-    final lOther$modelType = other.modelType;
-    if (l$modelType != lOther$modelType) {
-      return false;
-    }
-    final l$ownerUserId = ownerUserId;
-    final lOther$ownerUserId = other.ownerUserId;
-    if (l$ownerUserId != lOther$ownerUserId) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Subscription$ObjectChanged$objectChanged
-    on Subscription$ObjectChanged$objectChanged {
-  CopyWith$Subscription$ObjectChanged$objectChanged<
-          Subscription$ObjectChanged$objectChanged>
-      get copyWith => CopyWith$Subscription$ObjectChanged$objectChanged(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Subscription$ObjectChanged$objectChanged<TRes> {
-  factory CopyWith$Subscription$ObjectChanged$objectChanged(
-    Subscription$ObjectChanged$objectChanged instance,
-    TRes Function(Subscription$ObjectChanged$objectChanged) then,
-  ) = _CopyWithImpl$Subscription$ObjectChanged$objectChanged;
-
-  factory CopyWith$Subscription$ObjectChanged$objectChanged.stub(TRes res) =
-      _CopyWithStubImpl$Subscription$ObjectChanged$objectChanged;
-
-  TRes call({
-    String? objectId,
-    Enum$ObjectChangedEventType? messageType,
-    Enum$ModelType? modelType,
-    String? ownerUserId,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Subscription$ObjectChanged$objectChanged<TRes>
-    implements CopyWith$Subscription$ObjectChanged$objectChanged<TRes> {
-  _CopyWithImpl$Subscription$ObjectChanged$objectChanged(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription$ObjectChanged$objectChanged _instance;
-
-  final TRes Function(Subscription$ObjectChanged$objectChanged) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? objectId = _undefined,
-    Object? messageType = _undefined,
-    Object? modelType = _undefined,
-    Object? ownerUserId = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription$ObjectChanged$objectChanged(
-        objectId: objectId == _undefined || objectId == null
-            ? _instance.objectId
-            : (objectId as String),
-        messageType: messageType == _undefined || messageType == null
-            ? _instance.messageType
-            : (messageType as Enum$ObjectChangedEventType),
-        modelType: modelType == _undefined || modelType == null
-            ? _instance.modelType
-            : (modelType as Enum$ModelType),
-        ownerUserId: ownerUserId == _undefined
-            ? _instance.ownerUserId
-            : (ownerUserId as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Subscription$ObjectChanged$objectChanged<TRes>
-    implements CopyWith$Subscription$ObjectChanged$objectChanged<TRes> {
-  _CopyWithStubImpl$Subscription$ObjectChanged$objectChanged(this._res);
-
-  TRes _res;
-
-  call({
-    String? objectId,
-    Enum$ObjectChangedEventType? messageType,
-    Enum$ModelType? modelType,
-    String? ownerUserId,
-    String? $__typename,
-  }) =>
-      _res;
-}

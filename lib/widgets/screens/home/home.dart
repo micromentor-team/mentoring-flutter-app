@@ -4,22 +4,22 @@ import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_header.dart';
 import 'package:mm_flutter_app/widgets/atoms/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/molecules/invitation_section.dart';
-import 'package:mm_flutter_app/widgets/molecules/recommended_mentors_scroll.dart';
+import 'package:mm_flutter_app/widgets/molecules/recommended_users_scroll.dart';
 import 'package:mm_flutter_app/widgets/molecules/resources_section.dart';
 import 'package:mm_flutter_app/widgets/molecules/upcoming_section.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';
 
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen>
-    with NavigationMixin<DashboardScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with NavigationMixin<HomeScreen> {
   late AuthenticatedUser _authenticatedUser;
 
   String _getGreeting(AppLocalizations l10n, String? fullName) {

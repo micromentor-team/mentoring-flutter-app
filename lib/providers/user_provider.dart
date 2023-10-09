@@ -10,16 +10,11 @@ import 'base/operation_result.dart';
 
 typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 
-typedef MentorUserDetailedProfile
-    = Query$FindMentorUserDetailedProfile$findUserById;
-typedef MenteeUserDetailedProfile
-    = Query$FindMenteeUserDetailedProfile$findUserById;
+// User profile
 typedef UserDetailedProfile = Query$FindUserDetailedProfile$findUserById;
 typedef UserQuickViewProfile = Query$FindUserQuickViewProfile$findUserById;
-// findAllUsers queries
-typedef UserWithFilterResult = Query$FindUsersWithFilter$findUsers;
-typedef MenteeUser = Query$FindMenteeUsers$findUsers;
-typedef MentorUser = Query$FindMentorUsers$findUsers;
+
+// Recommended users
 typedef RecommendedUser = Query$FindRecommendedUsers$findUsers;
 
 // UserSearch queries and mutation
@@ -54,33 +49,36 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     return _user;
   }
 
-  // userSearch mutation
-  Future<OperationResult<CreateUserSearchResponse>> createUserSearch({
-    required Input$UserSearchInput searchInput,
-    bool fetchFromNetworkOnly = false,
+  Future<OperationResult<AuthenticatedUser>> getAuthenticatedUser({
+    bool logFailures = true,
   }) async {
-    final QueryResult queryResult = await asyncMutation(
-      mutationOptions: MutationOptions(
-        document: documentNodeMutationCreateUserSearch,
-        fetchPolicy: fetchFromNetworkOnly
-            // use cache to prevent executing the same searches multiple times
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
-        variables:
-            Variables$Mutation$CreateUserSearch(input: searchInput).toJson(),
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryGetAuthenticatedUser,
+        fetchPolicy: FetchPolicy.networkOnly,
       ),
+      logFailures: logFailures,
     );
-    return OperationResult(
+    final operationResult = OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
-          ? Mutation$CreateUserSearch.fromJson(
+          ? Query$GetAuthenticatedUser.fromJson(
               queryResult.data!,
-            ).createUserSearch
+            ).getAuthenticatedUser
           : null,
     );
+    if (operationResult.response?.avatarUrl == "") {
+      operationResult.response = operationResult.response!.copyWith(
+        avatarUrl: null,
+      );
+    }
+    if (operationResult.response != null) {
+      _user = operationResult.response!;
+    } else {
+      _resetUser();
+    }
+    return operationResult;
   }
-
-  // userSearch queries
 
   Future<OperationResult<UserSearch>> getUserSearch({
     required String userSearchId,
@@ -133,70 +131,6 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     );
   }
 
-  Future<OperationResult<List<MenteeUser>>> findMenteeUsers({
-    required Input$FindObjectsOptions optionsInput,
-    required Input$UserListFilter filterInput,
-    required Input$UserInput matchInput,
-    bool fetchFromNetworkOnly = false,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindMenteeUsers,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
-        variables: Variables$Query$FindMenteeUsers(
-                filter: filterInput, options: optionsInput, match: matchInput)
-            .toJson(),
-      ),
-    );
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Query$FindMenteeUsers.fromJson(
-              queryResult.data!,
-            ).findUsers.map((element) {
-              if (element.avatarUrl == "") {
-                return element.copyWith(avatarUrl: null);
-              }
-              return element;
-            }).toList()
-          : null,
-    );
-  }
-
-  Future<OperationResult<List<MentorUser>>> findMentorUsers({
-    required Input$FindObjectsOptions optionsInput,
-    required Input$UserListFilter filterInput,
-    required Input$UserInput matchInput,
-    bool fetchFromNetworkOnly = false,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindMentorUsers,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
-        variables: Variables$Query$FindMentorUsers(
-                filter: filterInput, options: optionsInput, match: matchInput)
-            .toJson(),
-      ),
-    );
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Query$FindMentorUsers.fromJson(
-              queryResult.data!,
-            ).findUsers.map((element) {
-              if (element.avatarUrl == "") {
-                return element.copyWith(avatarUrl: null);
-              }
-              return element;
-            }).toList()
-          : null,
-    );
-  }
-
   Future<OperationResult<List<RecommendedUser>>> findRecommendedUsers({
     required Input$FindObjectsOptions optionsInput,
     required Input$UserListFilter filterInput,
@@ -227,66 +161,6 @@ class UserProvider extends BaseProvider with ChangeNotifier {
             }).toList()
           : null,
     );
-  }
-
-  Future<OperationResult<MenteeUserDetailedProfile>>
-      findMenteeUserDetailedProfile({
-    required String userId,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindMenteeUserDetailedProfile,
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Query$FindMenteeUserDetailedProfile(
-          id: userId,
-        ).toJson(),
-      ),
-    );
-
-    final operationResult = OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data == null
-          ? null
-          : Query$FindMenteeUserDetailedProfile.fromJson(
-              queryResult.data!,
-            ).findUserById,
-    );
-    if (operationResult.response?.avatarUrl == "") {
-      operationResult.response = operationResult.response!.copyWith(
-        avatarUrl: null,
-      );
-    }
-    return operationResult;
-  }
-
-  Future<OperationResult<MentorUserDetailedProfile>>
-      findMentorUserDetailedProfile({
-    required String userId,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindMentorUserDetailedProfile,
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Query$FindMentorUserDetailedProfile(
-          id: userId,
-        ).toJson(),
-      ),
-    );
-
-    final operationResult = OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data == null
-          ? null
-          : Query$FindMentorUserDetailedProfile.fromJson(
-              queryResult.data!,
-            ).findUserById,
-    );
-    if (operationResult.response?.avatarUrl == "") {
-      operationResult.response = operationResult.response!.copyWith(
-        avatarUrl: null,
-      );
-    }
-    return operationResult;
   }
 
   Future<OperationResult<UserDetailedProfile>> findUserDetailedProfile({
@@ -347,106 +221,30 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     return operationResult;
   }
 
-  Future<OperationResult<List<UserWithFilterResult>>> findUsersWithFilter({
-    required Input$UserListFilter input,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindUsersWithFilter,
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Query$FindUsersWithFilter(filter: input).toJson(),
-      ),
-    );
-
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data == null
-          ? null
-          : Query$FindUsersWithFilter.fromJson(
-              queryResult.data!,
-            ).findUsers.map((element) {
-              if (element.avatarUrl == "") {
-                return element.copyWith(avatarUrl: null);
-              }
-              return element;
-            }).toList(),
-    );
-  }
-
-  Future<OperationResult<AuthenticatedUser>> getAuthenticatedUser({
-    bool logFailures = true,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryGetAuthenticatedUser,
-        fetchPolicy: FetchPolicy.networkOnly,
-      ),
-      logFailures: logFailures,
-    );
-    final operationResult = OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Query$GetAuthenticatedUser.fromJson(
-              queryResult.data!,
-            ).getAuthenticatedUser
-          : null,
-    );
-    if (operationResult.response?.avatarUrl == "") {
-      operationResult.response = operationResult.response!.copyWith(
-        avatarUrl: null,
-      );
-    }
-    if (operationResult.response != null) {
-      _user = operationResult.response!;
-    } else {
-      _resetUser();
-    }
-    return operationResult;
-  }
-
   // Mutations
-  Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser({
-    required String email,
-    required String password,
+  Future<OperationResult<CreateUserSearchResponse>> createUserSearch({
+    required Input$UserSearchInput searchInput,
+    bool fetchFromNetworkOnly = false,
   }) async {
-    await _resetUser();
-    final uuid = await _setDeviceUuid();
-
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
-        document: documentNodeMutationSignUpUser,
-        fetchPolicy: FetchPolicy.noCache,
-        variables: Variables$Mutation$SignUpUser(
-          input: Input$UserSignUpInput(
-            email: email,
-            password: password,
-            deviceUuid: uuid,
-          ),
-        ).toJson(),
+        document: documentNodeMutationCreateUserSearch,
+        fetchPolicy: fetchFromNetworkOnly
+            // use cache to prevent executing the same searches multiple times
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables:
+            Variables$Mutation$CreateUserSearch(input: searchInput).toJson(),
       ),
     );
-
-    final OperationResult<Mutation$SignUpUser$signUpUser> result =
-        OperationResult(
+    return OperationResult(
       gqlQueryResult: queryResult,
       response: queryResult.data != null
-          ? Mutation$SignUpUser.fromJson(
+          ? Mutation$CreateUserSearch.fromJson(
               queryResult.data!,
-            ).signUpUser
+            ).createUserSearch
           : null,
     );
-
-    if (result.response != null) {
-      final pref = await SharedPreferences.getInstance();
-      pref.setString('userId', result.response!.userId);
-      pref.setString('deviceId', result.response!.deviceId);
-      pref.setString('authToken', result.response!.authToken);
-
-      debugPrint('userId: ${result.response!.userId}');
-      debugPrint('deviceId: ${result.response!.deviceId}');
-      debugPrint('authToken: ${result.response!.authToken}');
-    }
-    return result;
   }
 
   Future<OperationResult<Mutation$SignInUser$signInUser>> signInUser({
@@ -510,21 +308,48 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     );
   }
 
-  Future<OperationResult<void>> updateUserData({
-    required Input$UserInput input,
+  Future<OperationResult<Mutation$SignUpUser$signUpUser>> signUpUser({
+    required String email,
+    required String password,
   }) async {
+    await _resetUser();
+    final uuid = await _setDeviceUuid();
+
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
-        document: documentNodeMutationUpdateUser,
+        document: documentNodeMutationSignUpUser,
         fetchPolicy: FetchPolicy.noCache,
-        variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+        variables: Variables$Mutation$SignUpUser(
+          input: Input$UserSignUpInput(
+            email: email,
+            password: password,
+            deviceUuid: uuid,
+          ),
+        ).toJson(),
       ),
     );
-    notifyListeners();
-    return OperationResult(
+
+    final OperationResult<Mutation$SignUpUser$signUpUser> result =
+        OperationResult(
       gqlQueryResult: queryResult,
-      response: null,
+      response: queryResult.data != null
+          ? Mutation$SignUpUser.fromJson(
+              queryResult.data!,
+            ).signUpUser
+          : null,
     );
+
+    if (result.response != null) {
+      final pref = await SharedPreferences.getInstance();
+      pref.setString('userId', result.response!.userId);
+      pref.setString('deviceId', result.response!.deviceId);
+      pref.setString('authToken', result.response!.authToken);
+
+      debugPrint('userId: ${result.response!.userId}');
+      debugPrint('deviceId: ${result.response!.deviceId}');
+      debugPrint('authToken: ${result.response!.authToken}');
+    }
+    return result;
   }
 
   Future<OperationResult<void>> updateMenteesGroupMembership({
@@ -563,21 +388,16 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     );
   }
 
-  Future<OperationResult<void>> deleteUser() async {
-    final pref = await SharedPreferences.getInstance();
-    String? userId = pref.getString('userId');
-
+  Future<OperationResult<void>> updateUserData({
+    required Input$UserInput input,
+  }) async {
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
         document: documentNodeMutationUpdateUser,
         fetchPolicy: FetchPolicy.noCache,
-        variables: Variables$Mutation$DeleteUser(
-          userId: userId!,
-          deletePhysically: true,
-        ).toJson(),
+        variables: Variables$Mutation$UpdateUser(input: input).toJson(),
       ),
     );
-    _resetUser();
     notifyListeners();
     return OperationResult(
       gqlQueryResult: queryResult,
