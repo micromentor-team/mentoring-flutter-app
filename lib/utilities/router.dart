@@ -5,6 +5,7 @@ import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filte
 import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters_advanced.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
+import 'package:mm_flutter_app/widgets/screens/profile/edit_profile.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_birth_year.dart';
@@ -578,6 +579,17 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const ProfileScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEdit.path,
+          name: Routes.profileEdit.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditProfile(),
             );
           },
         ),

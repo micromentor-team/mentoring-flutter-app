@@ -145,59 +145,70 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
         .where((g) => g.groupIdent == GroupIdent.mentees.name)
         .firstOrNull
         ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
+    final Set<String> languages = {
+      userData.preferredLanguage.translatedValue!,
+      ...userData.spokenLanguages.nonNulls.map((e) => e.translatedValue!),
+    };
     return SingleChildScrollView(
       child: Column(
         children: [
-          if (!widget.isMyProfile)
-            Builder(
-              builder: (context) {
-                final invitesFromUser = _inboxModel.pendingReceivedInvitations
-                        ?.where((e) => e.sender.id == userData.id)
-                        .toList() ??
-                    [];
-                final invitesToUser = _inboxModel.pendingSentInvitations
-                        ?.where((e) => e.recipient.id == userData.id)
-                        .toList() ??
-                    [];
-                final userId = userData.id;
-                final userFirstName = userData.firstName ?? '';
-                if (_inboxModel.hasChannelWithUser(widget.userData.id)) {
-                  // Users are already connected
-                  return const SizedBox(width: 0, height: 0);
-                } else if (invitesFromUser.isNotEmpty) {
-                  // There is a pending invitation received from this user
-                  return ProfilePageHeader(
-                    authenticatedUser: widget.authenticatedUser,
-                    userId: userId,
-                    userFirstName: userFirstName,
-                    invitationId: invitesFromUser
-                        .firstWhere((e) =>
-                            e.status == Enum$ChannelInvitationStatus.created)
-                        .id,
-                    invitationDirection: MessageDirection.received,
-                  );
-                } else if (invitesToUser.isNotEmpty) {
-                  // There is a pending invitation sent to this user
-                  return ProfilePageHeader(
-                    authenticatedUser: widget.authenticatedUser,
-                    userId: userId,
-                    userFirstName: userFirstName,
-                    invitationId: invitesToUser
-                        .firstWhere((e) =>
-                            e.status == Enum$ChannelInvitationStatus.created)
-                        .id,
-                    invitationDirection: MessageDirection.sent,
-                  );
-                } else {
-                  // There is no connection between users
-                  return ProfilePageHeader(
-                    authenticatedUser: widget.authenticatedUser,
-                    userId: userId,
-                    userFirstName: userFirstName,
-                  );
-                }
-              },
-            ),
+          Builder(
+            builder: (context) {
+              final invitesFromUser = _inboxModel.pendingReceivedInvitations
+                      ?.where((e) => e.sender.id == userData.id)
+                      .toList() ??
+                  [];
+              final invitesToUser = _inboxModel.pendingSentInvitations
+                      ?.where((e) => e.recipient.id == userData.id)
+                      .toList() ??
+                  [];
+              final userId = userData.id;
+              final userFirstName = userData.firstName ?? '';
+
+              if (widget.isMyProfile) {
+                return ProfilePageHeader(
+                  authenticatedUser: widget.authenticatedUser,
+                  userId: userId,
+                  userFirstName: userFirstName,
+                  invitationDirection: MessageDirection.self,
+                );
+              } else if (_inboxModel.hasChannelWithUser(widget.userData.id)) {
+                // Users are already connected
+                return const SizedBox(width: 0, height: 0);
+              } else if (invitesFromUser.isNotEmpty) {
+                // There is a pending invitation received from this user
+                return ProfilePageHeader(
+                  authenticatedUser: widget.authenticatedUser,
+                  userId: userId,
+                  userFirstName: userFirstName,
+                  invitationId: invitesFromUser
+                      .firstWhere((e) =>
+                          e.status == Enum$ChannelInvitationStatus.created)
+                      .id,
+                  invitationDirection: MessageDirection.received,
+                );
+              } else if (invitesToUser.isNotEmpty) {
+                // There is a pending invitation sent to this user
+                return ProfilePageHeader(
+                  authenticatedUser: widget.authenticatedUser,
+                  userId: userId,
+                  userFirstName: userFirstName,
+                  invitationId: invitesToUser
+                      .firstWhere((e) =>
+                          e.status == Enum$ChannelInvitationStatus.created)
+                      .id,
+                  invitationDirection: MessageDirection.sent,
+                );
+              } else {
+                // There is no connection between users
+                return ProfilePageHeader(
+                  authenticatedUser: widget.authenticatedUser,
+                  userId: userId,
+                  userFirstName: userFirstName,
+                );
+              }
+            },
+          ),
           ProfileBasicInfo(
             userType:
                 userData.offersHelp ? UserType.mentor : UserType.entrepreneur,
@@ -230,10 +241,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 "The best piece of advice I’ve ever received is:", //TODO
             promptResponse:
                 "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.", //TODO
-            languages: userData.spokenLanguages
-                .map((e) => e.translatedValue)
-                .nonNulls
-                .toList(),
+            languages: languages.toList(growable: false),
           ),
           if (userData.seeksHelp && company != null) ...[
             const Divider(),

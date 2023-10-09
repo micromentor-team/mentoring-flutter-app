@@ -367,5 +367,14 @@
     "declineReasonTooBusy": "I'm too busy right now",
     "declineReasonNoReason": "No reason",
     "declineReasonFakeProfile": "Profile is fake, spam, or a scammer",
-    "declineReasonInappropriate": "Inappropriate behavior or content"
+    "declineReasonInappropriate": "Inappropriate behavior or content",
+    "editProfile": "Edit Profile",
+    "pronouns": "Pronouns",
+    "currentCity":"Current city",
+    "whereAreYouFrom":"Where are you from",
+    "preferredLanguage":"Preferred language",
+    "selectPrompt": "Select a prompt",
+    "andRecordAnswer": "And record your answer",
+    "linkedinConnected": "LinkedIn connected",
+    "connectLinkedIn": "Connect LinkedIn"
 }

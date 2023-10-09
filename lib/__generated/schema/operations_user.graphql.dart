@@ -19039,6 +19039,28 @@ const documentNodeQueryFindUserDetailedProfile = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'preferredLanguage'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'translatedValue'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: 'spokenLanguages'),
             alias: null,
             arguments: [],
@@ -19630,6 +19652,7 @@ class Query$FindUserDetailedProfile$findUserById {
     required this.offersHelp,
     required this.seeksHelp,
     this.websites,
+    required this.preferredLanguage,
     required this.spokenLanguages,
     this.avatarUrl,
     required this.groupMemberships,
@@ -19662,6 +19685,7 @@ class Query$FindUserDetailedProfile$findUserById {
     final l$offersHelp = json['offersHelp'];
     final l$seeksHelp = json['seeksHelp'];
     final l$websites = json['websites'];
+    final l$preferredLanguage = json['preferredLanguage'];
     final l$spokenLanguages = json['spokenLanguages'];
     final l$avatarUrl = json['avatarUrl'];
     final l$groupMemberships = json['groupMemberships'];
@@ -19695,6 +19719,9 @@ class Query$FindUserDetailedProfile$findUserById {
               Query$FindUserDetailedProfile$findUserById$websites.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
+      preferredLanguage:
+          Query$FindUserDetailedProfile$findUserById$preferredLanguage.fromJson(
+              (l$preferredLanguage as Map<String, dynamic>)),
       spokenLanguages: (l$spokenLanguages as List<dynamic>)
           .map((e) => Query$FindUserDetailedProfile$findUserById$spokenLanguages
               .fromJson((e as Map<String, dynamic>)))
@@ -19767,6 +19794,9 @@ class Query$FindUserDetailedProfile$findUserById {
 
   final List<Query$FindUserDetailedProfile$findUserById$websites>? websites;
 
+  final Query$FindUserDetailedProfile$findUserById$preferredLanguage
+      preferredLanguage;
+
   final List<Query$FindUserDetailedProfile$findUserById$spokenLanguages>
       spokenLanguages;
 
@@ -19832,6 +19862,8 @@ class Query$FindUserDetailedProfile$findUserById {
     _resultData['seeksHelp'] = l$seeksHelp;
     final l$websites = websites;
     _resultData['websites'] = l$websites?.map((e) => e.toJson()).toList();
+    final l$preferredLanguage = preferredLanguage;
+    _resultData['preferredLanguage'] = l$preferredLanguage.toJson();
     final l$spokenLanguages = spokenLanguages;
     _resultData['spokenLanguages'] =
         l$spokenLanguages.map((e) => e.toJson()).toList();
@@ -19888,6 +19920,7 @@ class Query$FindUserDetailedProfile$findUserById {
     final l$offersHelp = offersHelp;
     final l$seeksHelp = seeksHelp;
     final l$websites = websites;
+    final l$preferredLanguage = preferredLanguage;
     final l$spokenLanguages = spokenLanguages;
     final l$avatarUrl = avatarUrl;
     final l$groupMemberships = groupMemberships;
@@ -19917,6 +19950,7 @@ class Query$FindUserDetailedProfile$findUserById {
       l$offersHelp,
       l$seeksHelp,
       l$websites == null ? null : Object.hashAll(l$websites.map((v) => v)),
+      l$preferredLanguage,
       Object.hashAll(l$spokenLanguages.map((v) => v)),
       l$avatarUrl,
       Object.hashAll(l$groupMemberships.map((v) => v)),
@@ -20006,6 +20040,11 @@ class Query$FindUserDetailedProfile$findUserById {
         }
       }
     } else if (l$websites != lOther$websites) {
+      return false;
+    }
+    final l$preferredLanguage = preferredLanguage;
+    final lOther$preferredLanguage = other.preferredLanguage;
+    if (l$preferredLanguage != lOther$preferredLanguage) {
       return false;
     }
     final l$spokenLanguages = spokenLanguages;
@@ -20186,6 +20225,8 @@ abstract class CopyWith$Query$FindUserDetailedProfile$findUserById<TRes> {
     bool? offersHelp,
     bool? seeksHelp,
     List<Query$FindUserDetailedProfile$findUserById$websites>? websites,
+    Query$FindUserDetailedProfile$findUserById$preferredLanguage?
+        preferredLanguage,
     List<Query$FindUserDetailedProfile$findUserById$spokenLanguages>?
         spokenLanguages,
     String? avatarUrl,
@@ -20217,6 +20258,8 @@ abstract class CopyWith$Query$FindUserDetailedProfile$findUserById<TRes> {
                   CopyWith$Query$FindUserDetailedProfile$findUserById$websites<
                       Query$FindUserDetailedProfile$findUserById$websites>>?)
           _fn);
+  CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<TRes>
+      get preferredLanguage;
   TRes spokenLanguages(
       Iterable<Query$FindUserDetailedProfile$findUserById$spokenLanguages> Function(
               Iterable<
@@ -20284,6 +20327,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
     Object? offersHelp = _undefined,
     Object? seeksHelp = _undefined,
     Object? websites = _undefined,
+    Object? preferredLanguage = _undefined,
     Object? spokenLanguages = _undefined,
     Object? avatarUrl = _undefined,
     Object? groupMemberships = _undefined,
@@ -20327,6 +20371,11 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
             ? _instance.websites
             : (websites
                 as List<Query$FindUserDetailedProfile$findUserById$websites>?),
+        preferredLanguage: preferredLanguage == _undefined ||
+                preferredLanguage == null
+            ? _instance.preferredLanguage
+            : (preferredLanguage
+                as Query$FindUserDetailedProfile$findUserById$preferredLanguage),
         spokenLanguages: spokenLanguages == _undefined ||
                 spokenLanguages == null
             ? _instance.spokenLanguages
@@ -20408,6 +20457,13 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+  CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<TRes>
+      get preferredLanguage {
+    final local$preferredLanguage = _instance.preferredLanguage;
+    return CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage(
+        local$preferredLanguage, (e) => call(preferredLanguage: e));
+  }
+
   TRes spokenLanguages(
           Iterable<Query$FindUserDetailedProfile$findUserById$spokenLanguages> Function(
                   Iterable<
@@ -20527,6 +20583,8 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById<TRes>
     bool? offersHelp,
     bool? seeksHelp,
     List<Query$FindUserDetailedProfile$findUserById$websites>? websites,
+    Query$FindUserDetailedProfile$findUserById$preferredLanguage?
+        preferredLanguage,
     List<Query$FindUserDetailedProfile$findUserById$spokenLanguages>?
         spokenLanguages,
     String? avatarUrl,
@@ -20554,6 +20612,10 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById<TRes>
   }) =>
       _res;
   websites(_fn) => _res;
+  CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<TRes>
+      get preferredLanguage =>
+          CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage
+              .stub(_res);
   spokenLanguages(_fn) => _res;
   groupMemberships(_fn) => _res;
   companies(_fn) => _res;
@@ -20722,6 +20784,146 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$websites<
   call({
     String? value,
     String? label,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindUserDetailedProfile$findUserById$preferredLanguage {
+  Query$FindUserDetailedProfile$findUserById$preferredLanguage({
+    this.translatedValue,
+    this.$__typename = 'Language',
+  });
+
+  factory Query$FindUserDetailedProfile$findUserById$preferredLanguage.fromJson(
+      Map<String, dynamic> json) {
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindUserDetailedProfile$findUserById$preferredLanguage(
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindUserDetailedProfile$findUserById$preferredLanguage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindUserDetailedProfile$findUserById$preferredLanguage
+    on Query$FindUserDetailedProfile$findUserById$preferredLanguage {
+  CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<
+          Query$FindUserDetailedProfile$findUserById$preferredLanguage>
+      get copyWith =>
+          CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<
+    TRes> {
+  factory CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage(
+    Query$FindUserDetailedProfile$findUserById$preferredLanguage instance,
+    TRes Function(Query$FindUserDetailedProfile$findUserById$preferredLanguage)
+        then,
+  ) = _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$preferredLanguage;
+
+  factory CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$preferredLanguage;
+
+  TRes call({
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$preferredLanguage<
+        TRes>
+    implements
+        CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<
+            TRes> {
+  _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$preferredLanguage(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindUserDetailedProfile$findUserById$preferredLanguage _instance;
+
+  final TRes Function(
+      Query$FindUserDetailedProfile$findUserById$preferredLanguage) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindUserDetailedProfile$findUserById$preferredLanguage(
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$preferredLanguage<
+        TRes>
+    implements
+        CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<
+            TRes> {
+  _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$preferredLanguage(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? translatedValue,
     String? $__typename,
   }) =>
       _res;
