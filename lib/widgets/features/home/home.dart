@@ -6,7 +6,6 @@ import 'package:mm_flutter_app/widgets/features/home/components/profile_header.d
 import 'package:mm_flutter_app/widgets/features/home/components/recommended_users_scroll.dart';
 import 'package:mm_flutter_app/widgets/features/home/components/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/features/home/components/resources_section.dart';
-import 'package:mm_flutter_app/widgets/features/home/components/upcoming_section.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utilities/navigation_mixin.dart';

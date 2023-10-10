@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 import '../../../../providers/user_provider.dart';
-import 'package:go_router/go_router.dart';
 
 class ReminderBanner extends StatefulWidget {
   final String titleText;

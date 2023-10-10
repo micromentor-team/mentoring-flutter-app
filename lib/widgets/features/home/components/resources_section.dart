@@ -17,16 +17,20 @@ class ResourceImage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.only(
-          top: Insets.paddingSmall, bottom: Insets.paddingSmall,),
+        top: Insets.paddingSmall,
+        bottom: Insets.paddingSmall,
+      ),
       child: Column(
         children: [
           Image(image: resource_image),
           Padding(
             padding: const EdgeInsets.only(top: Insets.paddingSmall),
-            child: Text(subheading,
-                style: theme.textTheme.titleSmall?.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),),
+            child: Text(
+              subheading,
+              style: theme.textTheme.titleSmall?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
           ),
         ],
       ),

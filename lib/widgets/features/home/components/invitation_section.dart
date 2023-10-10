@@ -7,14 +7,12 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/features/home/components/section_tile.dart';
 import 'package:mm_flutter_app/widgets/features/inbox/components/inbox_invitation_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../atoms/notification_bubble.dart';
-
 import '../../../../providers/invitations_provider.dart';
 import '../../../../providers/models/inbox_model.dart';
+import '../../../shared/notification_bubble.dart';
 
 class InvitationSection extends StatefulWidget {
   static const maxTilesToShow = 3;
