@@ -63,17 +63,14 @@ class _HomeScreenState extends State<HomeScreen>
                   avatarUrl: _authenticatedUser.avatarUrl,
                   profileMessage:
                       _getGreeting(l10n, _authenticatedUser.fullName),
-                  profileCompletionPercentage:
-                      _authenticatedUser.profileCompletionPercentage,
                 ),
                 MaybeReminderBanner(
                   authenticatedUser: _authenticatedUser,
                 ),
-                RecommendedSection(
+                InvitationSection(
                   authenticatedUser: _authenticatedUser,
                 ),
-                const UpcomingSection(),
-                InvitationSection(
+                RecommendedSection(
                   authenticatedUser: _authenticatedUser,
                 ),
                 const ResourcesSection(),

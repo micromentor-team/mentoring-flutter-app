@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
 
 class MentorCard extends StatelessWidget {
   final String? avatarUrl;
   final String mentorName;
   final String mentorBio;
+  final int? mentorEndorsements;
   final List<String> mentorSkill;
   final void Function()? onTap;
 
-  static const double _mentorCardHeight = 170;
-  static const double _mentorCardWidth = 260;
-  static const double _chipMaxWidth = 100;
+  static const double _mentorCardWidth = 296;
 
   const MentorCard({
     Key? key,
     this.avatarUrl,
     required this.mentorName,
     required this.mentorBio,
+    this.mentorEndorsements,
     required this.mentorSkill,
     this.onTap,
   }) : super(key: key);
@@ -28,154 +29,199 @@ class MentorCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(Insets.paddingSmall),
-          child: CircleAvatar(
-            radius: Radii.avatarRadiusLarge,
-            child: CircleAvatar(
-              radius: Radii.avatarRadiusMedium,
-              backgroundImage: avatarUrl != null
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+            child: Image(
+              image: avatarUrl != null
                   ? NetworkImage(avatarUrl!) as ImageProvider<Object>
                   : const AssetImage(Assets.blankAvatar),
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
             ),
           ),
-        ),
+        )
       ],
     );
   }
 
   Column _getMentorInfo(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-    List<Chip> mentorSkills = _getMentorSkillChips(context);
     final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Chip for "recommended"
-        Chip(
-          avatar: Icon(
-            Icons.star,
-            color: theme.colorScheme.inversePrimary,
-          ),
-
-          //using ConstrainedBox to prevent Text Overflow beyond the Card
-          label: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: _chipMaxWidth,
-            ),
-            child: Text(
-              l10n.recommendedMentorCardScrollable,
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.onPrimary,
-              ),
-            ),
-          ),
-          visualDensity: const VisualDensity(
-            vertical: -4,
-          ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-        ),
-
         // Text for Mentor's Name
         Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
+          padding: const EdgeInsetsDirectional.only(
+              start: Insets.paddingSmall, end: Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: _mentorCardWidth / 2,
             child: Text(
               mentorName,
               style: theme.textTheme.titleSmall?.copyWith(
-                color: theme.colorScheme.secondary,
+                color: theme.colorScheme.onSurface,
               ),
-              softWrap: false,
-              maxLines: 1,
+              softWrap: true,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
 
-        // Text for Mentor's Skill
+        // Text for Mentor's Bio
         Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
+          padding: const EdgeInsetsDirectional.only(
+              start: Insets.paddingSmall, end: Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: _mentorCardWidth / 2,
             child: Text(
               mentorBio,
               style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.tertiary,
+                color: theme.colorScheme.onSurface,
               ),
-              softWrap: false,
-              maxLines: 1,
+              softWrap: true,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
 
-        //Assuming that only the first two skills are shown in this card
-        if (mentorSkills.isNotEmpty) mentorSkills[0],
-        if (mentorSkills.length > 1) mentorSkills[1],
+        //Section for mentor's endorsements
+        if (mentorEndorsements != null)
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+                start: Insets.paddingSmall, end: Insets.paddingSmall),
+            //using SizedBox to prevent Text Overflow beyond the Card
+            child: SizedBox(
+              width: _mentorCardWidth / 2,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+                    child: Icon(
+                      Icons.workspace_premium_outlined,
+                      size: Insets.paddingMedium,
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  Text(
+                    l10n.exploreEndorsements(mentorEndorsements!),
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onSurface,
+                    ),
+                    softWrap: true,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ),
       ],
     );
   }
 
-  List<Chip> _getMentorSkillChips(BuildContext context) {
-    List<Chip> mentorSkillChips = [];
+  Column _getMentorExpertiseColumn(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    //if no skills, show nothing
-    if (mentorSkill.isEmpty) {
-      return mentorSkillChips;
-    }
-    //dynamically add skill chips
-    for (int i = 0; i < mentorSkill.length; i++) {
-      mentorSkillChips.add(
-        _createSkillChip(
-          mentorSkill[i],
-          context,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(Insets.paddingSmall),
+          child: Text(
+            l10n.expertises,
+            style: theme.textTheme.titleSmall?.copyWith(
+              color: theme.colorScheme.onSurface,
+            ),
+            softWrap: true,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
-      );
-    }
-    return mentorSkillChips;
+        Padding(
+          padding: const EdgeInsets.fromLTRB(Insets.paddingSmall, 0,
+              Insets.paddingSmall, Insets.paddingMedium),
+          child: SizedBox(
+            width: _mentorCardWidth,
+            child: Wrap(
+              children: _createSkillChips(context),
+            ),
+          ),
+        )
+      ],
+    );
   }
 
-  //TODO(guptarupal): Make the chip "style" defined in styles.dart
-  Chip _createSkillChip(String skill, BuildContext context) {
+  List<Widget> _createSkillChips(context) {
     final ThemeData theme = Theme.of(context);
-    return Chip(
-      //using ConstrainedBox to prevent Text Overflow beyond the Card
-      label: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: _chipMaxWidth,
+
+    List<Widget> rowChildren = [];
+    for (String expertise in mentorSkill) {
+      rowChildren.addAll([
+        ExpertiseChip(
+          expertise: expertise,
+          icon: Icon(
+            Icons.campaign_outlined,
+            color: theme.colorScheme.onSecondaryContainer,
+          ),
         ),
-        child: Text(
-          skill,
-          style: theme.textTheme.labelSmall
-              ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
-      visualDensity: const VisualDensity(
-        vertical: -4,
-      ),
-      backgroundColor: theme.colorScheme.tertiaryContainer,
-      side: BorderSide.none,
-    );
+        const SizedBox(width: Insets.paddingExtraSmall),
+      ]);
+    }
+    return rowChildren;
   }
 
   @override
   Widget build(BuildContext context) {
-    Column avatarColumn = _getAvatar();
-    Column mentorInfoColumn = _getMentorInfo(context);
+    Column mentorExpertiseColumn = _getMentorExpertiseColumn(context);
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Card(
+      elevation: Elevations.level0,
+      surfaceTintColor: Colors.transparent,
+      color: colorScheme.surface,
       child: InkWell(
         onTap: onTap,
-        child: SizedBox(
-          width: _mentorCardWidth,
-          height: _mentorCardHeight,
-          child: Row(
-            children: [
-              avatarColumn,
-              mentorInfoColumn,
-            ],
+        child: Ink(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: theme.colorScheme.outlineVariant,
+              width: Dimensions.highlightBorderWidth,
+            ),
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    _getAvatar(),
+                    _getMentorInfo(context),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                      start: Insets.paddingMedium, end: Insets.paddingMedium),
+                  child: Divider(
+                    color: theme.colorScheme.outlineVariant,
+                  ),
+                ),
+                Row(
+                  children: [
+                    mentorExpertiseColumn,
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

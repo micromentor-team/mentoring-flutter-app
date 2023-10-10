@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
@@ -22,12 +21,18 @@ class InboxInvitationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return ListTile(
-      minVerticalPadding: Insets.paddingLarge,
-      leading: CircleAvatar(
-        radius: Radii.avatarRadiusSmall,
-        backgroundImage: avatarUrl != null ? NetworkImage(avatarUrl!) : null,
+      minVerticalPadding: Insets.paddingExtraSmall,
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+        child: Image(
+          image: avatarUrl != null
+              ? NetworkImage(avatarUrl!) as ImageProvider<Object>
+              : const AssetImage(Assets.blankAvatar),
+          width: Insets.paddingExtraLarge * 2,
+          height: Insets.paddingExtraLarge * 2,
+          fit: BoxFit.cover,
+        ),
       ),
       title: Text(
         userName,
@@ -35,7 +40,7 @@ class InboxInvitationTile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       titleTextStyle: theme.textTheme.titleSmall?.copyWith(
-        color: theme.colorScheme.secondary,
+        color: theme.colorScheme.onSurface,
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,52 +51,26 @@ class InboxInvitationTile extends StatelessWidget {
             ),
             child: Text(
               userJobTitle,
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.tertiary,
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: theme.colorScheme.secondary,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-          ),
-          Text(
-            _invitationText(l10n),
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
       trailing: SizedBox(
         width: Radii.avatarRadiusSmall * 2,
         height: Radii.avatarRadiusSmall * 2,
-        child: ElevatedButton(
+        child: TextButton(
           onPressed: buttonOnPressed,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: theme.colorScheme.secondaryContainer,
-            padding: const EdgeInsets.all(0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(Radii.avatarRadiusSmall),
-            ),
-          ),
           child: Icon(
-            Icons.navigate_next,
-            color: Color(theme.colorScheme.onSecondaryContainer.value),
+            Icons.arrow_forward_ios,
+            color: theme.colorScheme.onSurface,
           ),
         ),
       ),
     );
-  }
-
-  String _invitationText(AppLocalizations l10n) {
-    switch (invitationStatus) {
-      case Enum$ChannelInvitationStatus.created:
-        return l10n.homeInvitationRequested;
-      case Enum$ChannelInvitationStatus.accepted:
-        return l10n.homeInvitationAccepted;
-      default:
-        return 'UNDEFINED';
-    }
   }
 }
