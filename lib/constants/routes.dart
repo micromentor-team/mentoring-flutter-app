@@ -197,6 +197,10 @@ class Routes {
     name: 'profile',
     path: '/profile',
   );
+  static Route profileEdit = Route(
+    name: 'profileEdit',
+    path: '${profile.path}/edit',
+  );
   static Route profileId = Route(
     name: 'profileId',
     path: '${profile.path}/:${RouteParams.userId}',

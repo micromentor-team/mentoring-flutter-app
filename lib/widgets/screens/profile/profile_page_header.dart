@@ -167,6 +167,28 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
     );
   }
 
+  Widget _createEditProfileButton(
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: Dimensions.bigButtonSize,
+        backgroundColor: theme.colorScheme.primary,
+        textStyle: theme.textTheme.labelLarge,
+      ),
+      onPressed: () {
+        context.push(Routes.profileEdit.path);
+      },
+      child: Text(
+        l10n.editProfile,
+        style: theme.textTheme.labelLarge?.copyWith(
+          color: theme.colorScheme.onPrimary,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -182,6 +204,9 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
         break;
       case MessageDirection.sent:
         actions = _createWithdrawInviteButton(theme, l10n);
+        break;
+      case MessageDirection.self:
+        actions = _createEditProfileButton(theme, l10n);
         break;
     }
     return Container(
