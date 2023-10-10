@@ -3,12 +3,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class ResourceImage extends StatelessWidget {
-  final AssetImage resource_image;
+  final AssetImage resourceImage;
   final String subheading;
 
   const ResourceImage({
     Key? key,
-    required this.resource_image,
+    required this.resourceImage,
     required this.subheading,
   }) : super(key: key);
 
@@ -22,7 +22,7 @@ class ResourceImage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Image(image: resource_image),
+          Image(image: resourceImage),
           Padding(
             padding: const EdgeInsets.only(top: Insets.paddingSmall),
             child: Text(
@@ -52,15 +52,15 @@ class ResourcesSection extends StatelessWidget {
         ),
       ),
       ResourceImage(
-        resource_image: const AssetImage(Assets.trainingHomePageImage),
+        resourceImage: const AssetImage(Assets.trainingHomePageImage),
         subheading: l10n.trainingMentoringFirstSteps,
       ),
       ResourceImage(
-        resource_image: const AssetImage(Assets.trainingHomePageImageTwo),
+        resourceImage: const AssetImage(Assets.trainingHomePageImageTwo),
         subheading: l10n.trainingBuildingFuture,
       ),
       ResourceImage(
-        resource_image: const AssetImage(Assets.trainingHomePageImageThree),
+        resourceImage: const AssetImage(Assets.trainingHomePageImageThree),
         subheading: l10n.trainingMarketingBusiness,
       ),
     ];
