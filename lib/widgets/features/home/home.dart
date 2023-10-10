@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/features/home/components/invitation_section.dart';
 import 'package:mm_flutter_app/widgets/features/home/components/profile_header.dart';
-import 'package:mm_flutter_app/widgets/features/home/components/recommended_users_scroll.dart';
+import 'package:mm_flutter_app/widgets/features/home/components/recommended_section.dart';
 import 'package:mm_flutter_app/widgets/features/home/components/reminder_banner.dart';
 import 'package:mm_flutter_app/widgets/features/home/components/resources_section.dart';
 import 'package:provider/provider.dart';
@@ -69,9 +69,7 @@ class _HomeScreenState extends State<HomeScreen>
                 InvitationSection(
                   authenticatedUser: _authenticatedUser,
                 ),
-                RecommendedSection(
-                  authenticatedUser: _authenticatedUser,
-                ),
+                const RecommendedSection(),
                 const ResourcesSection(),
               ],
             ),

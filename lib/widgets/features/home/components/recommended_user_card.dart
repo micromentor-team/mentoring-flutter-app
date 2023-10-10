@@ -4,23 +4,23 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 
 import '../../../shared/expertise_chip.dart';
 
-class MentorCard extends StatelessWidget {
+class RecommendedUserCard extends StatelessWidget {
   final String? avatarUrl;
-  final String mentorName;
-  final String mentorBio;
-  final int? mentorEndorsements;
-  final List<String> mentorSkill;
+  final String fullName;
+  final String company;
+  final int? endorsements;
+  final List<String> expertises;
   final void Function()? onTap;
 
-  static const double _mentorCardWidth = 296;
+  static const double _recommendedUserCardWidth = 296;
 
-  const MentorCard({
+  const RecommendedUserCard({
     Key? key,
     this.avatarUrl,
-    required this.mentorName,
-    required this.mentorBio,
-    this.mentorEndorsements,
-    required this.mentorSkill,
+    required this.fullName,
+    required this.company,
+    this.endorsements,
+    required this.expertises,
     this.onTap,
   }) : super(key: key);
 
@@ -36,8 +36,8 @@ class MentorCard extends StatelessWidget {
               image: avatarUrl != null
                   ? NetworkImage(avatarUrl!) as ImageProvider<Object>
                   : const AssetImage(Assets.blankAvatar),
-              width: 100,
-              height: 100,
+              width: 96,
+              height: 96,
               fit: BoxFit.cover,
             ),
           ),
@@ -46,22 +46,21 @@ class MentorCard extends StatelessWidget {
     );
   }
 
-  Column _getMentorInfo(BuildContext context) {
+  Column _getUserInfo(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text for Mentor's Name
         Padding(
           padding: const EdgeInsetsDirectional.only(
               start: Insets.paddingSmall, end: Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
-            width: _mentorCardWidth / 2,
+            width: _recommendedUserCardWidth / 2,
             child: Text(
-              mentorName,
+              fullName,
               style: theme.textTheme.titleSmall?.copyWith(
                 color: theme.colorScheme.onSurface,
               ),
@@ -71,16 +70,14 @@ class MentorCard extends StatelessWidget {
             ),
           ),
         ),
-
-        // Text for Mentor's Bio
         Padding(
           padding: const EdgeInsetsDirectional.only(
               start: Insets.paddingSmall, end: Insets.paddingSmall),
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
-            width: _mentorCardWidth / 2,
+            width: _recommendedUserCardWidth / 2,
             child: Text(
-              mentorBio,
+              company,
               style: theme.textTheme.labelSmall?.copyWith(
                 color: theme.colorScheme.onSurface,
               ),
@@ -90,15 +87,13 @@ class MentorCard extends StatelessWidget {
             ),
           ),
         ),
-
-        //Section for mentor's endorsements
-        if (mentorEndorsements != null)
+        if (endorsements != null)
           Padding(
             padding: const EdgeInsetsDirectional.only(
                 start: Insets.paddingSmall, end: Insets.paddingSmall),
             //using SizedBox to prevent Text Overflow beyond the Card
             child: SizedBox(
-              width: _mentorCardWidth / 2,
+              width: _recommendedUserCardWidth / 2,
               child: Row(
                 children: [
                   Padding(
@@ -110,7 +105,7 @@ class MentorCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    l10n.exploreEndorsements(mentorEndorsements!),
+                    l10n.exploreEndorsements(endorsements!),
                     style: theme.textTheme.labelSmall?.copyWith(
                       color: theme.colorScheme.onSurface,
                     ),
@@ -126,7 +121,7 @@ class MentorCard extends StatelessWidget {
     );
   }
 
-  Column _getMentorExpertiseColumn(BuildContext context) {
+  Column _createExpertiseColumn(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
@@ -149,9 +144,9 @@ class MentorCard extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(Insets.paddingSmall, 0,
               Insets.paddingSmall, Insets.paddingMedium),
           child: SizedBox(
-            width: _mentorCardWidth,
+            width: _recommendedUserCardWidth,
             child: Wrap(
-              children: _createSkillChips(context),
+              children: _createExpertiseChips(context),
             ),
           ),
         )
@@ -159,28 +154,30 @@ class MentorCard extends StatelessWidget {
     );
   }
 
-  List<Widget> _createSkillChips(context) {
+  List<Widget> _createExpertiseChips(context) {
     final ThemeData theme = Theme.of(context);
 
     List<Widget> rowChildren = [];
-    for (String expertise in mentorSkill) {
-      rowChildren.addAll([
-        ExpertiseChip(
-          expertise: expertise,
-          icon: Icon(
-            Icons.campaign_outlined,
-            color: theme.colorScheme.onSecondaryContainer,
+    for (String expertise in expertises) {
+      rowChildren.addAll(
+        [
+          ExpertiseChip(
+            expertise: expertise,
+            icon: Icon(
+              Icons.campaign_outlined,
+              color: theme.colorScheme.onSecondaryContainer,
+            ),
           ),
-        ),
-        const SizedBox(width: Insets.paddingExtraSmall),
-      ]);
+          const SizedBox(width: Insets.paddingExtraSmall),
+        ],
+      );
     }
     return rowChildren;
   }
 
   @override
   Widget build(BuildContext context) {
-    Column mentorExpertiseColumn = _getMentorExpertiseColumn(context);
+    Column expertiseColumn = _createExpertiseColumn(context);
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
@@ -206,7 +203,7 @@ class MentorCard extends StatelessWidget {
                 Row(
                   children: [
                     _getAvatar(),
-                    _getMentorInfo(context),
+                    _getUserInfo(context),
                   ],
                 ),
                 Padding(
@@ -218,7 +215,7 @@ class MentorCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    mentorExpertiseColumn,
+                    expertiseColumn,
                   ],
                 ),
               ],
