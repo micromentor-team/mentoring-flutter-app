@@ -6,4 +6,5 @@ class Limits {
   static const chatMessagesPageSize = 25;
   static const searchResultsBatchSize = 100;
   static const searchResultsPageSize = 5;
+  static const homeRecommendedUsersMaxSize = 4;
 }

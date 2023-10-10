@@ -14,9 +14,6 @@ typedef AuthenticatedUser = Query$GetAuthenticatedUser$getAuthenticatedUser;
 typedef UserDetailedProfile = Query$FindUserDetailedProfile$findUserById;
 typedef UserQuickViewProfile = Query$FindUserQuickViewProfile$findUserById;
 
-// Recommended users
-typedef RecommendedUser = Query$FindRecommendedUsers$findUsers;
-
 // UserSearch queries and mutation
 typedef CreateUserSearchResponse = Mutation$CreateUserSearch$createUserSearch;
 typedef UserSearch = Query$FindUserSearch$findUserSearchById;
@@ -127,38 +124,6 @@ class UserProvider extends BaseProvider with ChangeNotifier {
           ? Query$FindUserSearchResults.fromJson(
               queryResult.data!,
             ).findUserSearchResults
-          : null,
-    );
-  }
-
-  Future<OperationResult<List<RecommendedUser>>> findRecommendedUsers({
-    required Input$FindObjectsOptions optionsInput,
-    required Input$UserListFilter filterInput,
-    required Input$UserInput matchInput,
-    bool fetchFromNetworkOnly = false,
-  }) async {
-    final QueryResult queryResult = await asyncQuery(
-      queryOptions: QueryOptions(
-        document: documentNodeQueryFindRecommendedUsers,
-        fetchPolicy: fetchFromNetworkOnly
-            ? FetchPolicy.networkOnly
-            : FetchPolicy.cacheFirst,
-        variables: Variables$Query$FindRecommendedUsers(
-                filter: filterInput, options: optionsInput, match: matchInput)
-            .toJson(),
-      ),
-    );
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Query$FindRecommendedUsers.fromJson(
-              queryResult.data!,
-            ).findUsers.map((element) {
-              if (element.avatarUrl == "") {
-                return element.copyWith(avatarUrl: null);
-              }
-              return element;
-            }).toList()
           : null,
     );
   }

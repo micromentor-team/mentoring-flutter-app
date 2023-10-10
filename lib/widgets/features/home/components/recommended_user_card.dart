@@ -7,149 +7,116 @@ import '../../../shared/expertise_chip.dart';
 class RecommendedUserCard extends StatelessWidget {
   final String? avatarUrl;
   final String fullName;
-  final String company;
+  final String? jobTitle;
+  final String? company;
   final int? endorsements;
   final List<String> expertises;
+  final UserType userType;
   final void Function()? onTap;
 
   static const double _recommendedUserCardWidth = 296;
 
   const RecommendedUserCard({
-    Key? key,
+    super.key,
     this.avatarUrl,
     required this.fullName,
+    this.jobTitle,
     required this.company,
     this.endorsements,
     required this.expertises,
+    required this.userType,
     this.onTap,
-  }) : super(key: key);
+  });
 
-  Column _getAvatar() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
-            child: Image(
-              image: avatarUrl != null
-                  ? NetworkImage(avatarUrl!) as ImageProvider<Object>
-                  : const AssetImage(Assets.blankAvatar),
-              width: 96,
-              height: 96,
-              fit: BoxFit.cover,
-            ),
-          ),
-        )
-      ],
+  Widget _getAvatar() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+      child: Image(
+        image: avatarUrl != null
+            ? NetworkImage(avatarUrl!) as ImageProvider<Object>
+            : const AssetImage(Assets.blankAvatar),
+        width: 96,
+        height: 96,
+        fit: BoxFit.cover,
+      ),
     );
   }
 
-  Column _getUserInfo(BuildContext context) {
+  Widget _getUserInfo(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsetsDirectional.only(
-              start: Insets.paddingSmall, end: Insets.paddingSmall),
-          //using SizedBox to prevent Text Overflow beyond the Card
-          child: SizedBox(
-            width: _recommendedUserCardWidth / 2,
-            child: Text(
-              fullName,
-              style: theme.textTheme.titleSmall?.copyWith(
-                color: theme.colorScheme.onSurface,
-              ),
-              softWrap: true,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+        Text(
+          fullName,
+          style: theme.textTheme.titleSmall?.copyWith(
+            color: theme.colorScheme.onSurface,
           ),
+          softWrap: true,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
-        Padding(
-          padding: const EdgeInsetsDirectional.only(
-              start: Insets.paddingSmall, end: Insets.paddingSmall),
-          //using SizedBox to prevent Text Overflow beyond the Card
-          child: SizedBox(
-            width: _recommendedUserCardWidth / 2,
-            child: Text(
-              company,
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.onSurface,
-              ),
-              softWrap: true,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ),
-        if (endorsements != null)
-          Padding(
-            padding: const EdgeInsetsDirectional.only(
-                start: Insets.paddingSmall, end: Insets.paddingSmall),
-            //using SizedBox to prevent Text Overflow beyond the Card
-            child: SizedBox(
-              width: _recommendedUserCardWidth / 2,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-                    child: Icon(
-                      Icons.workspace_premium_outlined,
-                      size: Insets.paddingMedium,
-                      color: theme.colorScheme.onSurface,
-                    ),
-                  ),
-                  Text(
-                    l10n.exploreEndorsements(endorsements!),
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: theme.colorScheme.onSurface,
-                    ),
-                    softWrap: true,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          ),
-      ],
-    );
-  }
-
-  Column _createExpertiseColumn(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
-          child: Text(
-            l10n.expertises,
-            style: theme.textTheme.titleSmall?.copyWith(
+        if (company != null)
+          Text(
+            _companyText(l10n),
+            style: theme.textTheme.labelSmall?.copyWith(
               color: theme.colorScheme.onSurface,
             ),
             softWrap: true,
-            maxLines: 1,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(Insets.paddingSmall, 0,
-              Insets.paddingSmall, Insets.paddingMedium),
-          child: SizedBox(
-            width: _recommendedUserCardWidth,
-            child: Wrap(
-              children: _createExpertiseChips(context),
-            ),
+        if (endorsements != null && endorsements! > 0)
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+                child: Icon(
+                  Icons.workspace_premium_outlined,
+                  size: Insets.paddingMedium,
+                  color: theme.colorScheme.onSurface,
+                ),
+              ),
+              Text(
+                l10n.exploreEndorsements(endorsements!),
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                ),
+                softWrap: true,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
           ),
-        )
+      ],
+    );
+  }
+
+  Widget _createExpertisesWidget(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final bool isEntrepreneur = userType == UserType.entrepreneur;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          isEntrepreneur
+              ? l10n.homeRecommendedExpertiseEntrepreneur
+              : l10n.homeRecommendedExpertiseMentor,
+          style: theme.textTheme.titleSmall?.copyWith(
+            color: theme.colorScheme.onSurface,
+          ),
+          softWrap: true,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: Insets.paddingSmall),
+        Wrap(
+          children: _createExpertiseChips(context),
+        ),
       ],
     );
   }
@@ -175,9 +142,19 @@ class RecommendedUserCard extends StatelessWidget {
     return rowChildren;
   }
 
+  String _companyText(AppLocalizations l10n) {
+    switch (userType) {
+      case UserType.entrepreneur:
+        return '${l10n.exploreEntrepreneurVenture} $company';
+      case UserType.mentor:
+        return [jobTitle, company].nonNulls.join(l10n.listSeparator);
+      default:
+        return "";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    Column expertiseColumn = _createExpertiseColumn(context);
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
@@ -195,30 +172,43 @@ class RecommendedUserCard extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    _getAvatar(),
-                    _getUserInfo(context),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(
-                      start: Insets.paddingMedium, end: Insets.paddingMedium),
-                  child: Divider(
-                    color: theme.colorScheme.outlineVariant,
+          child: SizedBox(
+            width: _recommendedUserCardWidth,
+            child: Padding(
+              padding: const EdgeInsets.all(Insets.paddingMedium),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      _getAvatar(),
+                      const SizedBox(width: Insets.paddingMedium),
+                      Expanded(
+                        child: _getUserInfo(context),
+                      ),
+                    ],
                   ),
-                ),
-                Row(
-                  children: [
-                    expertiseColumn,
+                  if (expertises.isNotEmpty) ...[
+                    const SizedBox(height: Insets.paddingMedium),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            color: theme.colorScheme.outlineVariant,
+                            height: 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: Insets.paddingSmall),
+                    Wrap(
+                      children: [
+                        _createExpertisesWidget(context),
+                      ],
+                    ),
                   ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
