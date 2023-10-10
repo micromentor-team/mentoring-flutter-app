@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/widgets/atoms/skill_chip.dart';
 
 class MentorCard extends StatelessWidget {
   final String? avatarUrl;
@@ -10,7 +11,6 @@ class MentorCard extends StatelessWidget {
   final List<String> mentorSkill;
   final void Function()? onTap;
 
-  static const double _mentorCardHeight = 240;
   static const double _mentorCardWidth = 296;
 
   const MentorCard({
@@ -59,16 +59,14 @@ class MentorCard extends StatelessWidget {
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: _mentorCardWidth / 2,
-            child: Flexible(
-              child: Text(
-                mentorName,
-                style: theme.textTheme.titleSmall?.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),
-                softWrap: true,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+            child: Text(
+              mentorName,
+              style: theme.textTheme.titleSmall?.copyWith(
+                color: theme.colorScheme.onSurface,
               ),
+              softWrap: true,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
@@ -80,16 +78,14 @@ class MentorCard extends StatelessWidget {
           //using SizedBox to prevent Text Overflow beyond the Card
           child: SizedBox(
             width: _mentorCardWidth / 2,
-            child: Flexible(
-              child: Text(
-                mentorBio,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),
-                softWrap: true,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+            child: Text(
+              mentorBio,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurface,
               ),
+              softWrap: true,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
@@ -112,16 +108,14 @@ class MentorCard extends StatelessWidget {
                       color: theme.colorScheme.onSurface,
                     ),
                   ),
-                  Flexible(
-                    child: Text(
-                      l10n.exploreEndorsements(mentorEndorsements!),
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: theme.colorScheme.onSurface,
-                      ),
-                      softWrap: true,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                  Text(
+                    l10n.exploreEndorsements(mentorEndorsements!),
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onSurface,
                     ),
+                    softWrap: true,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -136,7 +130,7 @@ class MentorCard extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.all(Insets.paddingSmall),
@@ -150,56 +144,83 @@ class MentorCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(Insets.paddingSmall, 0,
+              Insets.paddingSmall, Insets.paddingMedium),
+          child: SizedBox(
+            width: _mentorCardWidth,
+            child: Wrap(
+              children: _createSkillChips(context),
+            ),
+          ),
+        )
       ],
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    Column avatarColumn = _getAvatar();
-    Column mentorInfoColumn = _getMentorInfo(context);
-    Column mentorExpertiseColumn = _getMentorExpertiseColumn(context);
+  List<Widget> _createSkillChips(context) {
     final ThemeData theme = Theme.of(context);
 
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(end: Insets.paddingSmall),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: theme.colorScheme.outlineVariant,
+    List<Widget> rowChildren = [];
+    for (String expertise in mentorSkill) {
+      rowChildren.addAll([
+        ExpertiseChip(
+          expertise: expertise,
+          icon: Icon(
+            Icons.campaign_outlined,
+            color: theme.colorScheme.onSecondaryContainer,
           ),
-          borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
         ),
-        child: Card(
-          elevation: 0,
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onTap,
-            child: SizedBox(
-              width: _mentorCardWidth,
-              height: _mentorCardHeight,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      avatarColumn,
-                      mentorInfoColumn,
-                    ],
+        const SizedBox(width: Insets.paddingExtraSmall),
+      ]);
+    }
+    return rowChildren;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Column mentorExpertiseColumn = _getMentorExpertiseColumn(context);
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return Card(
+      elevation: Elevations.level0,
+      surfaceTintColor: Colors.transparent,
+      color: colorScheme.surface,
+      child: InkWell(
+        onTap: onTap,
+        child: Ink(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: theme.colorScheme.outlineVariant,
+              width: Dimensions.highlightBorderWidth,
+            ),
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    _getAvatar(),
+                    _getMentorInfo(context),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                      start: Insets.paddingMedium, end: Insets.paddingMedium),
+                  child: Divider(
+                    color: theme.colorScheme.outlineVariant,
                   ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: Insets.paddingMedium, end: Insets.paddingMedium),
-                    child: Divider(
-                      color: theme.colorScheme.outlineVariant,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      mentorExpertiseColumn,
-                    ],
-                  ),
-                ],
-              ),
+                ),
+                Row(
+                  children: [
+                    mentorExpertiseColumn,
+                  ],
+                ),
+              ],
             ),
           ),
         ),
