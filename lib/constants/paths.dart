@@ -23,4 +23,9 @@ class Assets {
   static const String whatsappIcon = "assets/images/whatsapp.png";
   static const String entrepreneurIcon = "assets/images/Entrepreneur.png";
   static const String mentorIcon = "assets/images/Mentor.png";
+  static const String trainingHomePageImage = "assets/images/StockImage8.png";
+  static const String trainingHomePageImageTwo =
+      "assets/images/StockImage9.png";
+  static const String trainingHomePageImageThree =
+      "assets/images/StockImage10.png";
 }

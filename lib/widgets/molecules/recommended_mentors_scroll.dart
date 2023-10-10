@@ -5,97 +5,9 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/atoms/mentor_card.dart';
 import 'package:provider/provider.dart';
-
 import '../../__generated/schema/schema.graphql.dart';
 import '../../providers/base/operation_result.dart';
 import '../../providers/user_provider.dart';
-
-class RecommendedMentorsScroll extends StatelessWidget {
-  final List<MentorUser> mentors;
-
-  const RecommendedMentorsScroll({
-    Key? key,
-    required this.mentors,
-  }) : super(key: key);
-
-  List<Widget> _createMentorCards(GoRouter router) {
-    int numberOfMentors = mentors.length;
-    List<MentorCard> recommendedMentors = [];
-    int i;
-
-    for (i = 0; i < numberOfMentors; i++) {
-      final mentor = mentors[i];
-      recommendedMentors.add(
-        MentorCard(
-            avatarUrl: mentor.avatarUrl,
-            mentorName: mentor.fullName.toString(),
-            onTap: () => router.push('${Routes.profile.path}/${mentor.id}'),
-            //TODO: Once these fields come up in the mock server, replace these hardcoded values with the appropriate fields
-            mentorBio: mentor.jobTitle ?? 'CEO, Levi Consulting',
-            mentorSkill: const []),
-      );
-    }
-    return recommendedMentors;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> recommendedMentorCards = _createMentorCards(
-      GoRouter.of(context),
-    );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
-          child: Center(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.paddingSmall,
-                ),
-                child: Row(
-                  children: recommendedMentorCards,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class FindMoreMentorsButton extends StatelessWidget {
-  const FindMoreMentorsButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final GoRouter router = GoRouter.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.all(Insets.paddingMedium),
-      child: Container(
-        width: 200,
-        alignment: Alignment.center,
-        child: ElevatedButton.icon(
-          icon: const Icon(Icons.search),
-          onPressed: () => {
-            router.push(Routes.explore.path),
-          },
-          label: Text(
-            l10n.homeFindMoreMentors,
-            style: theme.textTheme.labelLarge,
-          ),
-          style: ButtonStyles.secondaryRoundedRectangleButton(context),
-        ),
-      ),
-    );
-  }
-}
 
 class RecommendedSection extends StatefulWidget {
   final AuthenticatedUser authenticatedUser;
@@ -175,11 +87,159 @@ class _RecommendedSectionState extends State<RecommendedSection> {
 
   Column _createRecommendedMentorsWidget(
       List<MentorUser> mentors, BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
+        RecommendedMentorsHeading(
+          title: l10n.mentorsForYou,
+          subtitle: l10n.recommendationsBasedOnYourProfile,
+        ),
         RecommendedMentorsScroll(mentors: mentors),
-        const FindMoreMentorsButton(),
       ],
+    );
+  }
+}
+
+class RecommendedMentorsScroll extends StatelessWidget {
+  final List<MentorUser> mentors;
+
+  const RecommendedMentorsScroll({
+    Key? key,
+    required this.mentors,
+  }) : super(key: key);
+
+  List<Widget> _createMentorCards(GoRouter router) {
+    int numberOfMentors = mentors.length;
+    List<MentorCard> recommendedMentors = [];
+    int i;
+
+    for (i = 0; i < numberOfMentors; i++) {
+      final mentor = mentors[i];
+      recommendedMentors.add(
+        MentorCard(
+            avatarUrl: mentor.avatarUrl,
+            mentorName: mentor.fullName.toString(),
+            onTap: () => router.push('${Routes.profile.path}/${mentor.id}'),
+            //TODO: Once these fields come up in the mock server, replace these hardcoded values with the appropriate fields
+            mentorBio: mentor.jobTitle ?? 'CEO, Levi Consulting',
+            mentorEndorsements: 2,
+            mentorSkill: const [
+              "Law and Legal",
+              "International Trade",
+              "Human Resources"
+            ]),
+      );
+    }
+    return recommendedMentors;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> recommendedMentorCards = _createMentorCards(
+      GoRouter.of(context),
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(Insets.paddingSmall),
+          child: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Insets.paddingSmall,
+                ),
+                child: Row(
+                  children: recommendedMentorCards,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class RecommendedMentorsHeading extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final void Function()? seeAllOnPressed;
+  const RecommendedMentorsHeading({
+    Key? key,
+    required this.title,
+    required this.subtitle,
+    this.seeAllOnPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: Insets.paddingSmall,
+        horizontal: AppEdgeInsets.paddingCompact,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              _SectionExpandToggle(
+                  text: l10n.seeMore,
+                  onPressed: () {
+                    context.push(Routes.explore.path);
+                  }),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                subtitle,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.secondary,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionExpandToggle extends StatelessWidget {
+  final void Function() onPressed;
+  final String text;
+  const _SectionExpandToggle({
+    required this.onPressed,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return InkWell(
+      onTap: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+        child: Text(
+          text,
+          style: theme.textTheme.labelMedium?.copyWith(
+            color: theme.colorScheme.onSurface,
+          ),
+        ),
+      ),
     );
   }
 }
