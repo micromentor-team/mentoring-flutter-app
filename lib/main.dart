@@ -21,9 +21,9 @@ import 'package:mm_flutter_app/services/graphql/graphql.dart';
 import 'package:mm_flutter_app/utilities/errors/crash_handler.dart';
 import 'package:mm_flutter_app/utilities/router.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/atoms/loading.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_in/sign_in_screen.dart';
-import 'package:mm_flutter_app/widgets/screens/welcome/welcome_screen.dart';
+import 'package:mm_flutter_app/widgets/features/sign_in/sign_in.dart';
+import 'package:mm_flutter_app/widgets/features/welcome/welcome.dart';
+import 'package:mm_flutter_app/widgets/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';

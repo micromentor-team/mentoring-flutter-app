@@ -14,7 +14,6 @@ typedef PresetGender = Query$FindGenders$findGenders;
 typedef PresetPronoun = Query$FindPronouns$findPronouns;
 typedef Industry = Query$FindIndustries$findIndustries;
 typedef Language = Query$FindLanguages$findLanguages;
-typedef OptionByType = Query$FindAllOptions$findOptions;
 typedef AllOptionsByType = Query$FindAllOptionsByType;
 
 class ContentProvider extends BaseProvider {

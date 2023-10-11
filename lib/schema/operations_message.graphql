@@ -8,8 +8,8 @@ query FindChannelLatestMessage ($channelId: String!) {
     }
 }
 
-query FindChannelMessages ($filter: ChannelMessageListFilter, $options: FindObjectsOptions) {
-    findChannelMessages(filter: $filter, options: $options) {
+query FindChannelMessageById($channelMessageId: String!) {
+    findChannelMessageById(id: $channelMessageId) {
         id
         createdBy
         channelId
@@ -27,8 +27,8 @@ query FindChannelMessages ($filter: ChannelMessageListFilter, $options: FindObje
     }
 }
 
-query FindChannelMessageById($channelMessageId: String!) {
-    findChannelMessageById(id: $channelMessageId) {
+query FindChannelMessages ($filter: ChannelMessageListFilter, $options: FindObjectsOptions) {
+    findChannelMessages(filter: $filter, options: $options) {
         id
         createdBy
         channelId
@@ -88,13 +88,4 @@ mutation MarkChannelMessagesAsSeenByMe ($channelId: String!) {
 
 mutation UpdateChannelMessage ($input: ChannelMessageInput!) {
     updateChannelMessage(input: $input)
-}
-
-subscription ObjectChanged ($objectId: ID!) {
-    objectChanged(objectId: $objectId) {
-        objectId
-        messageType
-        modelType
-        ownerUserId
-    }
 }
