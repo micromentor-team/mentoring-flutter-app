@@ -15,7 +15,6 @@ import '../../../../providers/models/inbox_model.dart';
 import '../../../shared/notification_bubble.dart';
 
 class InvitationSection extends StatefulWidget {
-  static const maxTilesToShow = 3;
   final AuthenticatedUser authenticatedUser;
   const InvitationSection({
     Key? key,
@@ -62,7 +61,7 @@ class _InvitationSectionState extends State<InvitationSection> {
   ) {
     List<Widget> invitationWidgets = [];
     for (int i = 0;
-        i < min(InvitationSection.maxTilesToShow, receivedInvitations.length);
+        i < min(Limits.homeInvitationsListMaxSize, receivedInvitations.length);
         i++) {
       invitationWidgets.add(
         _createInvitationTile(context, receivedInvitations[i]),

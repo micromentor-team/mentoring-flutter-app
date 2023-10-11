@@ -7,4 +7,6 @@ class Limits {
   static const searchResultsBatchSize = 100;
   static const searchResultsPageSize = 5;
   static const homeRecommendedUsersMaxSize = 4;
+  static const homeInvitationsListMaxSize = 3;
+  static const expertisesQuickViewMaxChips = 3;
 }

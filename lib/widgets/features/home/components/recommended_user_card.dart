@@ -14,7 +14,7 @@ class RecommendedUserCard extends StatelessWidget {
   final UserType userType;
   final void Function()? onTap;
 
-  static const double _recommendedUserCardWidth = 312;
+  static const double _recommendedUserCardWidth = 320;
   static const double _minimumRecommendedUserCardHeight = 252;
 
   const RecommendedUserCard({
@@ -128,7 +128,9 @@ class RecommendedUserCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     List<Widget> rowChildren = [];
-    for (String expertise in expertises) {
+    for (String expertise in expertises.take(
+      Limits.expertisesQuickViewMaxChips,
+    )) {
       rowChildren.addAll(
         [
           ExpertiseChip(
