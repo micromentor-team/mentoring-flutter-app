@@ -14,7 +14,7 @@ class RecommendedUserCard extends StatelessWidget {
   final UserType userType;
   final void Function()? onTap;
 
-  static const double _recommendedUserCardWidth = 296;
+  static const double _recommendedUserCardWidth = 312;
 
   const RecommendedUserCard({
     super.key,
@@ -58,7 +58,8 @@ class RecommendedUserCard extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        if (company != null)
+        if (company != null) ...[
+          const SizedBox(height: Insets.paddingSmall),
           Text(
             _companyText(l10n),
             style: theme.textTheme.labelSmall?.copyWith(
@@ -68,17 +69,17 @@ class RecommendedUserCard extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-        if (endorsements != null && endorsements! > 0)
+        ],
+        if (endorsements != null && endorsements! > 0) ...[
+          const SizedBox(height: Insets.paddingSmall),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-                child: Icon(
-                  Icons.workspace_premium_outlined,
-                  size: Insets.paddingMedium,
-                  color: theme.colorScheme.onSurface,
-                ),
+              Icon(
+                Icons.workspace_premium_outlined,
+                size: Insets.paddingMedium,
+                color: theme.colorScheme.onSurface,
               ),
+              const SizedBox(width: Insets.paddingSmall),
               Text(
                 l10n.exploreEndorsements(endorsements!),
                 style: theme.textTheme.labelSmall?.copyWith(
@@ -90,6 +91,7 @@ class RecommendedUserCard extends StatelessWidget {
               ),
             ],
           ),
+        ],
       ],
     );
   }
@@ -200,7 +202,7 @@ class RecommendedUserCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: Insets.paddingSmall),
+                    const SizedBox(height: Insets.paddingMedium),
                     Wrap(
                       children: [
                         _createExpertisesWidget(context),

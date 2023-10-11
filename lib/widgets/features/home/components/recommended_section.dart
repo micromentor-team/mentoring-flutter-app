@@ -237,11 +237,12 @@ class RecommendedUsersScroll extends StatelessWidget {
             .firstOrNull
             ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
         return RecommendedUserCard(
+          avatarUrl: e.avatarUrl,
           fullName: e.fullName!,
           jobTitle: e.jobTitle,
           company: e.companies.firstOrNull?.name,
-          userType: isEntrepreneur ? UserType.entrepreneur : UserType.mentor,
-          expertises: isEntrepreneur
+          userType: e.seeksHelp ? UserType.entrepreneur : UserType.mentor,
+          expertises: e.seeksHelp
               ? maybeMenteeGroupMembership?.soughtExpertises
                       .map((e) => e.translatedValue!)
                       .toList() ??
