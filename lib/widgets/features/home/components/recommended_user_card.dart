@@ -15,6 +15,7 @@ class RecommendedUserCard extends StatelessWidget {
   final void Function()? onTap;
 
   static const double _recommendedUserCardWidth = 312;
+  static const double _minimumRecommendedUserCardHeight = 252;
 
   const RecommendedUserCard({
     super.key,
@@ -174,8 +175,12 @@ class RecommendedUserCard extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium),
           ),
-          child: SizedBox(
-            width: _recommendedUserCardWidth,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minHeight: _minimumRecommendedUserCardHeight,
+              minWidth: _recommendedUserCardWidth,
+              maxWidth: _recommendedUserCardWidth,
+            ),
             child: Padding(
               padding: const EdgeInsets.all(Insets.paddingMedium),
               child: Column(
