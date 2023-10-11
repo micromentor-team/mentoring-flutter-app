@@ -1,139 +1,139 @@
 query FindChannelInvitationById($channelInvitationId: String!) {
-  findChannelInvitationById(id: $channelInvitationId) {
-    createdAt
-    messageText
-    status
-    sender {
-        id
-        fullName
-        avatarUrl
-        jobTitle
-        offersHelp
-        seeksHelp
-        companies {
+    findChannelInvitationById(id: $channelInvitationId) {
+        createdAt
+        messageText
+        status
+        sender {
             id
-            name
-            companyStage {
+            fullName
+            avatarUrl
+            jobTitle
+            offersHelp
+            seeksHelp
+            companies {
+                id
+                name
+                companyStage {
+                    translatedValue
+                }
+                companyType {
+                    translatedValue
+                }
+            }
+            countryOfResidence {
                 translatedValue
             }
-            companyType {
+            groupMemberships {
+                groupIdent
+                ... on MentorsGroupMembership {
+                    endorsements
+                    industries {
+                        translatedValue
+                    }
+                    expertises {
+                        translatedValue
+                    }
+                }
+                ... on MenteesGroupMembership {
+                    industry {
+                        translatedValue
+                    }
+                    soughtExpertises {
+                        translatedValue
+                    }
+                }
+            }
+        }
+        recipient {
+            id
+            fullName
+            avatarUrl
+            jobTitle
+            offersHelp
+            seeksHelp
+            companies {
+                id
+                name
+                companyStage {
+                    translatedValue
+                }
+                companyType {
+                    translatedValue
+                }
+            }
+            countryOfResidence {
                 translatedValue
             }
-        }
-        countryOfResidence {
-            translatedValue
-        }
-        groupMemberships {
-            groupIdent
-            ... on MentorsGroupMembership {
-                endorsements
-                industries {
-                    translatedValue
+            groupMemberships {
+                groupIdent
+                ... on MentorsGroupMembership {
+                    endorsements
+                    industries {
+                        translatedValue
+                    }
+                    expertises {
+                        translatedValue
+                    }
                 }
-                expertises {
-                    translatedValue
-                }
-            }
-            ... on MenteesGroupMembership {
-                industry {
-                    translatedValue
-                }
-                soughtExpertises {
-                    translatedValue
+                ... on MenteesGroupMembership {
+                    industry {
+                        translatedValue
+                    }
+                    soughtExpertises {
+                        translatedValue
+                    }
                 }
             }
         }
     }
-    recipient {
-        id
-        fullName
-        avatarUrl
-        jobTitle
-        offersHelp
-        seeksHelp
-        companies {
-            id
-            name
-            companyStage {
-                translatedValue
-            }
-            companyType {
-                translatedValue
-            }
-        }
-        countryOfResidence {
-            translatedValue
-        }
-        groupMemberships {
-            groupIdent
-            ... on MentorsGroupMembership {
-                endorsements
-                industries {
-                    translatedValue
-                }
-                expertises {
-                    translatedValue
-                }
-            }
-            ... on MenteesGroupMembership {
-                industry {
-                    translatedValue
-                }
-                soughtExpertises {
-                    translatedValue
-                }
-            }
-        }
-    }
-  }
 }
 
 query MyReceivedChannelInvitations($direction: ChannelInvitationDirection, $onlyPending: Boolean) {
-  myChannelInvitations(direction: $direction, onlyPending: $onlyPending) {
-    channelId
-    createdAt
-    id
-    messageText
-    status
-    sender {
-      avatarUrl
-      fullName
-      jobTitle
-      id
+    myChannelInvitations(direction: $direction, onlyPending: $onlyPending) {
+        channelId
+        createdAt
+        id
+        messageText
+        status
+        sender {
+            avatarUrl
+            fullName
+            jobTitle
+            id
+        }
     }
-  }
 }
 
 query MySentChannelInvitations($direction: ChannelInvitationDirection, $onlyPending: Boolean) {
-  myChannelInvitations(direction: $direction, onlyPending: $onlyPending) {
-    channelId
-    createdAt
-    id
-    messageText
-    status
-    recipient {
-      avatarUrl
-      fullName
-      jobTitle
-      id
+    myChannelInvitations(direction: $direction, onlyPending: $onlyPending) {
+        channelId
+        createdAt
+        id
+        messageText
+        status
+        recipient {
+            avatarUrl
+            fullName
+            jobTitle
+            id
+        }
     }
-  }
 }
 
 mutation AcceptChannelInvitation($channelInvitationId: String!) {
-  acceptChannelInvitation(channelInvitationId: $channelInvitationId)
+    acceptChannelInvitation(channelInvitationId: $channelInvitationId)
 }
 
 mutation CreateChannelInvitation($channelInvitationInput: ChannelInvitationInput!) {
-  createChannelInvitation(input: $channelInvitationInput) {
-    id
-  }
+    createChannelInvitation(input: $channelInvitationInput) {
+        id
+    }
 }
 
 mutation DeclineChannelInvitation($channelInvitationId: String!) {
-  declineChannelInvitation(channelInvitationId: $channelInvitationId)
+    declineChannelInvitation(channelInvitationId: $channelInvitationId)
 }
 
 mutation DeleteChannelInvitation($deletePhysically: Boolean!, $channelInvitationId: String!) {
-  deleteChannelInvitation(deletePhysically: $deletePhysically, channelInvitationId: $channelInvitationId)
+    deleteChannelInvitation(deletePhysically: $deletePhysically, channelInvitationId: $channelInvitationId)
 }

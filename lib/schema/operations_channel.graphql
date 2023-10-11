@@ -1,3 +1,22 @@
+query FindChannelById ($channelId: String!) {
+    findChannelById(id: $channelId) {
+        id
+        name
+        userIds
+        createdBy
+        createdAt
+        isArchivedForMe
+        participants {
+            user {
+                id
+                fullName
+                avatarUrl
+                userHandle
+            }
+        }
+    }
+}
+
 query FindChannelsForUser ($userId: String!, $options: FindObjectsOptions) {
     findChannelsForUser(userId: $userId, options: $options) {
         id
@@ -22,77 +41,21 @@ query FindChannelsForUser ($userId: String!, $options: FindObjectsOptions) {
     }
 }
 
-query FindChannelById ($channelId: String!) {
-    findChannelById(id: $channelId) {
-        id
-        name
-        userIds
-        createdBy
-        createdAt
-        isArchivedForMe
-        participants {
-            user {
-                id
-                fullName
-                avatarUrl
-                userHandle
-            }
-        }
-    }
-}
-
-query GetChannelsList {
-    findChannels {
-        id
-        name
-        createdBy
-        createdAt
-        description
-        updatedBy
-        updatedAt
-        participants {
-            id
-        }
-    }
-}
-
 mutation ArchiveChannelForMe($channelId: String!) {
-  archiveChannelForMe(channelId: $channelId)
-}
-
-mutation CreateChannel ($input: ChannelInput!) {
-    createChannel(input: $input) {
-        id
-        name
-        userIds
-        createdBy
-        createdAt
-        participants {
-            user {
-                id
-                fullName
-                avatarUrl
-                userHandle
-            }
-        }
-    }
-}
-
-mutation DeleteChannel ($deletePhysically: Boolean!, $channelId: String!) {
-    deleteChannel(deletePhysically: $deletePhysically, channelId: $channelId)
+    archiveChannelForMe(channelId: $channelId)
 }
 
 mutation UnarchiveChannelForMe($channelId: String!) {
-  unarchiveChannelForMe(channelId: $channelId)
+    unarchiveChannelForMe(channelId: $channelId)
 }
 
 subscription ChannelChanged($channelId: ID!) {
-  channelChanged(channelId: $channelId) {
-    channelId
-    invitationId
-    messageId
-    participantId
-    eventType
-    requestId
-  }
+    channelChanged(channelId: $channelId) {
+        channelId
+        invitationId
+        messageId
+        participantId
+        eventType
+        requestId
+    }
 }

@@ -1,52 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters.dart';
-import 'package:mm_flutter_app/widgets/screens/explore/recommended_mentors_filters_advanced.dart';
-import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_received.dart';
-import 'package:mm_flutter_app/widgets/screens/inbox/inbox_invites_sent.dart';
-import 'package:mm_flutter_app/widgets/screens/profile/edit_profile.dart';
-import 'package:mm_flutter_app/widgets/screens/profile/invite_to_connect.dart';
-import 'package:mm_flutter_app/widgets/screens/profile/profile.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_birth_year.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_email.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_guidelines.dart';
-import 'package:mm_flutter_app/widgets/screens/sign_up/sign_up_password.dart';
-import 'package:mm_flutter_app/widgets/screens/welcome/select_language.dart';
+import 'package:mm_flutter_app/widgets/features/explore/explore_advanced_filters.dart';
+import 'package:mm_flutter_app/widgets/features/explore/explore_filters.dart';
+import 'package:mm_flutter_app/widgets/features/inbox/inbox_invites_received.dart';
+import 'package:mm_flutter_app/widgets/features/inbox/inbox_invites_sent.dart';
+import 'package:mm_flutter_app/widgets/features/profile/edit_profile.dart';
+import 'package:mm_flutter_app/widgets/features/profile/invite_to_connect.dart';
+import 'package:mm_flutter_app/widgets/features/profile/profile.dart';
+import 'package:mm_flutter_app/widgets/features/sign_up/sign_up_birth_year.dart';
+import 'package:mm_flutter_app/widgets/features/sign_up/sign_up_email.dart';
+import 'package:mm_flutter_app/widgets/features/sign_up/sign_up_guidelines.dart';
+import 'package:mm_flutter_app/widgets/features/sign_up/sign_up_password.dart';
+import 'package:mm_flutter_app/widgets/features/welcome/select_language.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
-import '../widgets/atoms/app_wrapper.dart';
-import '../widgets/screens/dashboard/dashboard.dart';
-import '../widgets/screens/explore/explore.dart';
-import '../widgets/screens/inbox/channel_messages/channel_messages_screen.dart';
-import '../widgets/screens/inbox/inbox_chat_list.dart';
-import '../widgets/screens/inbox/invitation_detail.dart';
-import '../widgets/screens/sign_in/sign_in_screen.dart';
-import '../widgets/screens/sign_up/sign_up_completed.dart';
-import '../widgets/screens/sign_up/sign_up_entrepreneur_company_name.dart';
-import '../widgets/screens/sign_up/sign_up_entrepreneur_company_reason.dart';
-import '../widgets/screens/sign_up/sign_up_entrepreneur_company_stage.dart';
-import '../widgets/screens/sign_up/sign_up_entrepreneur_website.dart';
-import '../widgets/screens/sign_up/sign_up_expertises.dart';
-import '../widgets/screens/sign_up/sign_up_full_name.dart';
-import '../widgets/screens/sign_up/sign_up_gender.dart';
-import '../widgets/screens/sign_up/sign_up_group_membership.dart';
-import '../widgets/screens/sign_up/sign_up_industries.dart';
-import '../widgets/screens/sign_up/sign_up_languages.dart';
-import '../widgets/screens/sign_up/sign_up_location.dart';
-import '../widgets/screens/sign_up/sign_up_mentor_internationally.dart';
-import '../widgets/screens/sign_up/sign_up_mentor_preferences.dart';
-import '../widgets/screens/sign_up/sign_up_mentor_role.dart';
-import '../widgets/screens/sign_up/sign_up_method.dart';
-import '../widgets/screens/sign_up/sign_up_more_info.dart';
-import '../widgets/screens/sign_up/sign_up_permissions.dart';
-import '../widgets/screens/sign_up/sign_up_phone.dart';
-import '../widgets/screens/sign_up/sign_up_profile_photo.dart';
-import '../widgets/screens/sign_up/sign_up_pronouns.dart';
-import '../widgets/screens/sign_up/sign_up_verification.dart';
-import '../widgets/screens/sign_up/sign_up_welcome.dart';
-import '../widgets/screens/welcome/welcome_screen.dart';
+import '../widgets/features/explore/explore.dart';
+import '../widgets/features/home/home.dart';
+import '../widgets/features/inbox/inbox_chat_list.dart';
+import '../widgets/features/inbox/inbox_chat_messages.dart';
+import '../widgets/features/inbox/inbox_invitation_detail.dart';
+import '../widgets/features/sign_in/sign_in.dart';
+import '../widgets/features/sign_up/sign_up_completed.dart';
+import '../widgets/features/sign_up/sign_up_entrepreneur_company_name.dart';
+import '../widgets/features/sign_up/sign_up_entrepreneur_company_reason.dart';
+import '../widgets/features/sign_up/sign_up_entrepreneur_company_stage.dart';
+import '../widgets/features/sign_up/sign_up_entrepreneur_website.dart';
+import '../widgets/features/sign_up/sign_up_expertises.dart';
+import '../widgets/features/sign_up/sign_up_full_name.dart';
+import '../widgets/features/sign_up/sign_up_gender.dart';
+import '../widgets/features/sign_up/sign_up_group_membership.dart';
+import '../widgets/features/sign_up/sign_up_industries.dart';
+import '../widgets/features/sign_up/sign_up_languages.dart';
+import '../widgets/features/sign_up/sign_up_location.dart';
+import '../widgets/features/sign_up/sign_up_mentor_internationally.dart';
+import '../widgets/features/sign_up/sign_up_mentor_preferences.dart';
+import '../widgets/features/sign_up/sign_up_mentor_role.dart';
+import '../widgets/features/sign_up/sign_up_method.dart';
+import '../widgets/features/sign_up/sign_up_more_info.dart';
+import '../widgets/features/sign_up/sign_up_permissions.dart';
+import '../widgets/features/sign_up/sign_up_phone.dart';
+import '../widgets/features/sign_up/sign_up_profile_photo.dart';
+import '../widgets/features/sign_up/sign_up_pronouns.dart';
+import '../widgets/features/sign_up/sign_up_verification.dart';
+import '../widgets/features/sign_up/sign_up_welcome.dart';
+import '../widgets/features/welcome/welcome.dart';
+import '../widgets/shared/app_wrapper.dart';
 
 class AppRouter {
   AppRouter._private();
@@ -90,7 +90,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const SelectLanguage(),
+              child: const SelectLanguageScreen(),
             );
           },
         ),
@@ -426,7 +426,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const DashboardScreen(),
+              child: const HomeScreen(),
             );
           },
         ),
@@ -448,7 +448,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: true,
-              child: const RecommendedMentorsFilters(),
+              child: const ExploreFiltersScreen(),
             );
           },
         ),
@@ -459,7 +459,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: true,
-              child: const RecommendedMentorsFiltersAdvanced(),
+              child: const ExploreAdvancedFiltersScreen(),
             );
           },
         ),
@@ -483,7 +483,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: ChannelMessagesScreen(
+              child: InboxChatMessages(
                 channelId: channelId,
                 isArchivedForUser: false,
               ),
@@ -510,7 +510,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: InvitationDetail(
+              child: InboxInvitationDetailScreen(
                 channelInvitationId: channelInvitationId,
                 invitationDirection: MessageDirection.received,
               ),
@@ -537,7 +537,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: InvitationDetail(
+              child: InboxInvitationDetailScreen(
                 channelInvitationId: channelInvitationId,
                 invitationDirection: MessageDirection.sent,
               ),
@@ -564,7 +564,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: ChannelMessagesScreen(
+              child: InboxChatMessages(
                 channelId: channelId,
                 isArchivedForUser: true,
               ),
@@ -589,7 +589,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditProfile(),
+              child: const EditProfileScreen(),
             );
           },
         ),
@@ -614,7 +614,7 @@ class AppRouter {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: InviteToConnect(
+              child: InviteToConnectScreen(
                 userId: userId,
               ),
             );

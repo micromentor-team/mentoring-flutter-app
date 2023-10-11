@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../constants/app_constants.dart';
-import '../../widgets/atoms/notification_bubble.dart';
+import '../../widgets/shared/notification_bubble.dart';
 
 class DrawerFactory {
   DrawerFactory._private();

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 
@@ -11,7 +10,6 @@ import 'base/operation_result.dart';
 
 typedef ChannelById = Query$FindChannelById$findChannelById;
 typedef ChannelChangedEvent = Subscription$ChannelChanged$channelChanged;
-typedef ChannelCreated = Mutation$CreateChannel$createChannel;
 typedef ChannelForUser = Query$FindChannelsForUser$findChannelsForUser;
 typedef ChannelForUserParticipant
     = Query$FindChannelsForUser$findChannelsForUser$participants;
@@ -68,88 +66,6 @@ class ChannelsProvider extends BaseProvider {
   }
 
   // Mutations
-  Future<OperationResult<ChannelCreated>> createChannel({
-    required Input$ChannelInput input,
-  }) async {
-    final QueryResult queryResult = await asyncMutation(
-      mutationOptions: MutationOptions(
-        document: documentNodeMutationCreateChannel,
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Mutation$CreateChannel(input: input).toJson(),
-        update: (cache, result) {
-          final req = QueryOptions(
-            document: documentNodeQueryFindChannelsForUser,
-            variables:
-                Variables$Query$FindChannelsForUser(userId: input.createdBy!)
-                    .toJson(),
-          ).asRequest;
-          final response = cache.readQuery(req);
-          debugPrint('Channels cache response');
-          List channelsData = response?['findChannelsForUser'];
-          debugPrint('Channels in cache: ${channelsData.length}');
-          response?['findChannelsForUser'].add(result?.data?['createChannel']);
-          if (response != null) {
-            cache.writeQuery(
-              req,
-              broadcast: true,
-              data: response,
-            );
-          }
-        },
-      ),
-    );
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Mutation$CreateChannel.fromJson(
-              queryResult.data!,
-            ).createChannel
-          : null,
-    );
-  }
-
-  Future<OperationResult<String>> deleteChannel({
-    required bool deletePhysically,
-    required String channelId,
-  }) async {
-    final QueryResult queryResult = await asyncMutation(
-      mutationOptions: MutationOptions(
-        document: documentNodeMutationDeleteChannel,
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Mutation$DeleteChannel(
-          deletePhysically: deletePhysically,
-          channelId: channelId,
-        ).toJson(),
-        update: (cache, result) {
-          final req = QueryOptions(
-            document: documentNodeQueryGetChannelsList,
-          ).asRequest;
-          // read the channels cache
-          final response = cache.readQuery(req);
-          // debugPrint('deleteChannel result');
-          // debugPrint(result);
-          // remove the channel from the cache
-          response?['channels'].removeWhere((item) => item['id'] == channelId);
-          if (response != null) {
-            cache.writeQuery(
-              req,
-              broadcast: true,
-              data: response,
-            );
-          }
-        },
-      ),
-    );
-    return OperationResult(
-      gqlQueryResult: queryResult,
-      response: queryResult.data != null
-          ? Mutation$DeleteChannel.fromJson(
-              queryResult.data!,
-            ).deleteChannel
-          : null,
-    );
-  }
-
   Future<OperationResult<String>> archiveChannelForAuthenticatedUser({
     required String channelId,
   }) async {

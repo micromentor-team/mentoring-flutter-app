@@ -6,7 +6,7 @@ import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
-import '../widgets/atoms/loading.dart';
+import '../widgets/shared/loading.dart';
 
 class AppUtility {
   AppUtility._private();
