@@ -5,13 +5,22 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-
+import 'package:material_color_utilities/material_color_utilities.dart';
 import '../widgets/atoms/loading.dart';
 
 class AppUtility {
   AppUtility._private();
   static String generateUuid() {
     return const Uuid().v1();
+  }
+
+  static Color changeColorTone(Color keyColor, int tonalValue) {
+    // Returns the color given base color and tonal value
+    // https://m3.material.io/styles/color/the-color-system/key-colors-tones#a828e350-1551-45e5-8430-eb643e6a7713
+    final hctColor = Hct.fromInt(keyColor.value);
+    int newColorValue =
+        TonalPalette.of(hctColor.hue, hctColor.chroma).get(tonalValue);
+    return Color(newColorValue);
   }
 
   // Uuid on mobile only lasts until the user deletes the app. Reinstalling the app will generate a new Uuid.

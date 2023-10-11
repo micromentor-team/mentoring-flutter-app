@@ -4,6 +4,7 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/atoms/profile_chip.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../utilities/utility.dart';
 import '../../molecules/upload_photo_button.dart';
 
 const double _inlineIconSize = 16.0;
@@ -168,7 +169,7 @@ Widget _createNameAndBadges(
 
 Widget _createVacationBanner(AppLocalizations l10n, ThemeData theme) {
   return Container(
-      color: theme.colorScheme.primaryContainer,
+      color: AppUtility.changeColorTone(theme.colorScheme.primary, 95),
       height: 48.0,
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Padding(
