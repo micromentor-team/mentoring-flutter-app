@@ -22,30 +22,26 @@ class ProfileHeader extends StatelessWidget {
         : const AssetImage(Assets.blankAvatar);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-          Insets.paddingLarge, Insets.paddingLarge, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(
+        Insets.paddingMedium,
+        Insets.paddingLarge,
+        Insets.paddingSmall,
+        0,
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Flexible(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.only(right: Insets.paddingSmall),
-              child: ClipRRect(
-                borderRadius:
-                    BorderRadius.circular(Radii.roundedRectRadiusSmall),
-                child: Image(
-                  image: backgroundImage,
-                  width: Insets.paddingExtraLarge,
-                  height: Insets.paddingExtraLarge,
-                  fit: BoxFit.cover,
-                ),
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+            child: Image(
+              image: backgroundImage,
+              width: 32,
+              height: 32,
+              fit: BoxFit.cover,
             ),
           ),
+          const SizedBox(width: Insets.paddingMedium),
           Flexible(
-            flex: 14,
-            fit: FlexFit.tight,
             child: Text(
               profileMessage,
               textAlign: TextAlign.start,
@@ -56,20 +52,18 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-          Flexible(
-            flex: 1,
-            child: InkWell(
-              onTap: () {
-                Provider.of<ScaffoldModel>(
-                  context,
-                  listen: false,
-                ).setTestHomeScaffold();
-                Scaffold.of(context).openDrawer();
-              },
-              child: Icon(
-                Icons.more_vert,
-                color: theme.colorScheme.primary,
-              ),
+          const SizedBox(width: Insets.paddingMedium),
+          IconButton(
+            onPressed: () {
+              Provider.of<ScaffoldModel>(
+                context,
+                listen: false,
+              ).setTestHomeScaffold();
+              Scaffold.of(context).openDrawer();
+            },
+            icon: Icon(
+              Icons.more_vert,
+              color: theme.colorScheme.primary,
             ),
           ),
         ],

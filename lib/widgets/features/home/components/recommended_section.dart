@@ -150,8 +150,8 @@ class RecommendedUsersHeading extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: Insets.paddingSmall,
         horizontal: AppEdgeInsets.paddingCompact,
+        vertical: Insets.paddingSmall,
       ),
       child: Column(
         children: [
@@ -265,13 +265,13 @@ class RecommendedUsersScroll extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
+          padding: const EdgeInsets.symmetric(vertical: Insets.paddingSmall),
           child: Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.paddingSmall,
+                  horizontal: AppEdgeInsets.paddingCompact,
                 ),
                 child: Row(
                   children: _createUserCards(l10n, router),
