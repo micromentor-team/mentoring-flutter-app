@@ -59,6 +59,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
       fullName: invitation.sender.fullName ?? '',
       date: invitation.createdAt.toLocal(),
       message: invitation.messageText ?? _l10n.inboxInvitesReceivedMessage,
+      showPlainNotificationBubble: isUnseenByMe,
       highlightTileTitle: isUnseenByMe,
       highlightTileText: isUnseenByMe,
       simplifyDate: true,
