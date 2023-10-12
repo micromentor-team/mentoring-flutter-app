@@ -329,5 +329,6 @@ export function generateChannelInvitation(sender: any, recipient: any, messageTe
         senderId: sender.id,
         sender: sender,
         status: status,
+        readByRecipientAt: null,
     }
 }

@@ -118,6 +118,14 @@ export function mockMutations(serverState: MockServerState) {
             });
             return channelInvitation.id;
         },
+        updateChannelInvitation: (_: any, args: { input: { id: string, readByRecipientAt: Date | null } }) => {
+            const channelInvitation = serverState.channelInvitations.find((e) => e.id == args.input.id);
+            if(args.input.readByRecipientAt) {
+                channelInvitation.readByRecipientAt = args.input.readByRecipientAt;
+            }
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: channelInvitation.id }});
+            return channelInvitation.id;
+        },
         deleteChannelMessage: (_: any, args: { channelMessageId: string, deletePhysically: boolean }) => {
             var channelMessage = serverState.channelMessages.find((element) => element.id == args.channelMessageId);
             const currentTime : string = new Date().toISOString();
