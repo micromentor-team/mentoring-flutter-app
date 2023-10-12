@@ -86,8 +86,12 @@ export function mockQueries(serverState: MockServerState) {
             return serverState.groups;
         },
         // user searches
-        findUserSearchById: (_: any, userSearchId: string) => {
-            return serverState.userSearches.find((element) => element.id == userSearchId);
+        findUserSearchById: (_: any, args: { userSearchId: string }) => {
+            return serverState.userSearches.find((element) => element.id == args.userSearchId);
+        },
+        findUserSearchResults: (_: any, args: { userSearchId: string }) => {
+            const search = serverState.userSearches.find((element) => element.id == args.userSearchId);
+            return search.topFoundUsers;
         },
     }
 }
