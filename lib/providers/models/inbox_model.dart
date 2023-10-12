@@ -40,6 +40,10 @@ class InboxModel extends ChangeNotifier {
       _pendingReceivedInvitations;
   List<SentChannelInvitation>? get pendingSentInvitations =>
       _pendingSentInvitations;
+  List<ReceivedChannelInvitation>? get unseenPendingReceivedInvitations =>
+      _pendingReceivedInvitations
+          ?.where((e) => e.readByRecipientAt == null)
+          .toList();
 
   // Channels
   List<ChannelForUser>? _activeChannels;
@@ -182,8 +186,8 @@ class InboxModel extends ChangeNotifier {
       return;
     } else {
       _pendingReceivedInvitations = result.response ?? [];
-      _inboxInvitesNotifications = _pendingReceivedInvitations!
-          .length; // TODO: Filter for only unread invites
+      _inboxInvitesNotifications =
+          unseenPendingReceivedInvitations?.length ?? 0;
       _pendingReceivedInvitations
           ?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       _receivedInvitationsState = AsyncState.ready;

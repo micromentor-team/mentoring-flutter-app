@@ -3,6 +3,7 @@ query FindChannelInvitationById($channelInvitationId: String!) {
         createdAt
         messageText
         status
+        readByRecipientAt
         sender {
             id
             fullName
@@ -95,6 +96,7 @@ query MyReceivedChannelInvitations($direction: ChannelInvitationDirection, $only
         id
         messageText
         status
+        readByRecipientAt
         sender {
             avatarUrl
             fullName
@@ -136,4 +138,8 @@ mutation DeclineChannelInvitation($channelInvitationId: String!) {
 
 mutation DeleteChannelInvitation($deletePhysically: Boolean!, $channelInvitationId: String!) {
     deleteChannelInvitation(deletePhysically: $deletePhysically, channelInvitationId: $channelInvitationId)
+}
+
+mutation MarkChannelInvitationAsSeenByMe($channelInvitationInput: ChannelInvitationInput!) {
+    updateChannelInvitation(input: $channelInvitationInput)
 }
