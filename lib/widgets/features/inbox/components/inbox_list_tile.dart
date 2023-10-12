@@ -145,13 +145,11 @@ class InboxListTile extends StatelessWidget {
                 message,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: highlightTileText
-                    ? theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onBackground,
-                      )
-                    : theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.hintColor,
-                      ),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: highlightTileText
+                      ? theme.colorScheme.onBackground
+                      : theme.hintColor,
+                ),
               ),
             ),
           ],
