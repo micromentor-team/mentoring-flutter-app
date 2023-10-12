@@ -41,7 +41,7 @@ class ProfileHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(width: Insets.paddingMedium),
-          Flexible(
+          Expanded(
             child: Text(
               profileMessage,
               textAlign: TextAlign.start,
