@@ -300,6 +300,13 @@ const documentNodeQueryFindChannelInvitationById = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'readByRecipientAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'sender'),
             alias: null,
             arguments: [],
@@ -930,6 +937,7 @@ class Query$FindChannelInvitationById$findChannelInvitationById {
     required this.createdAt,
     this.messageText,
     required this.status,
+    this.readByRecipientAt,
     required this.sender,
     required this.recipient,
     this.$__typename = 'ChannelInvitation',
@@ -940,6 +948,7 @@ class Query$FindChannelInvitationById$findChannelInvitationById {
     final l$createdAt = json['createdAt'];
     final l$messageText = json['messageText'];
     final l$status = json['status'];
+    final l$readByRecipientAt = json['readByRecipientAt'];
     final l$sender = json['sender'];
     final l$recipient = json['recipient'];
     final l$$__typename = json['__typename'];
@@ -947,6 +956,9 @@ class Query$FindChannelInvitationById$findChannelInvitationById {
       createdAt: DateTime.parse((l$createdAt as String)),
       messageText: (l$messageText as String?),
       status: fromJson$Enum$ChannelInvitationStatus((l$status as String)),
+      readByRecipientAt: l$readByRecipientAt == null
+          ? null
+          : DateTime.parse((l$readByRecipientAt as String)),
       sender: Query$FindChannelInvitationById$findChannelInvitationById$sender
           .fromJson((l$sender as Map<String, dynamic>)),
       recipient:
@@ -961,6 +973,8 @@ class Query$FindChannelInvitationById$findChannelInvitationById {
   final String? messageText;
 
   final Enum$ChannelInvitationStatus status;
+
+  final DateTime? readByRecipientAt;
 
   final Query$FindChannelInvitationById$findChannelInvitationById$sender sender;
 
@@ -977,6 +991,8 @@ class Query$FindChannelInvitationById$findChannelInvitationById {
     _resultData['messageText'] = l$messageText;
     final l$status = status;
     _resultData['status'] = toJson$Enum$ChannelInvitationStatus(l$status);
+    final l$readByRecipientAt = readByRecipientAt;
+    _resultData['readByRecipientAt'] = l$readByRecipientAt?.toIso8601String();
     final l$sender = sender;
     _resultData['sender'] = l$sender.toJson();
     final l$recipient = recipient;
@@ -991,6 +1007,7 @@ class Query$FindChannelInvitationById$findChannelInvitationById {
     final l$createdAt = createdAt;
     final l$messageText = messageText;
     final l$status = status;
+    final l$readByRecipientAt = readByRecipientAt;
     final l$sender = sender;
     final l$recipient = recipient;
     final l$$__typename = $__typename;
@@ -998,6 +1015,7 @@ class Query$FindChannelInvitationById$findChannelInvitationById {
       l$createdAt,
       l$messageText,
       l$status,
+      l$readByRecipientAt,
       l$sender,
       l$recipient,
       l$$__typename,
@@ -1026,6 +1044,11 @@ class Query$FindChannelInvitationById$findChannelInvitationById {
     final l$status = status;
     final lOther$status = other.status;
     if (l$status != lOther$status) {
+      return false;
+    }
+    final l$readByRecipientAt = readByRecipientAt;
+    final lOther$readByRecipientAt = other.readByRecipientAt;
+    if (l$readByRecipientAt != lOther$readByRecipientAt) {
       return false;
     }
     final l$sender = sender;
@@ -1074,6 +1097,7 @@ abstract class CopyWith$Query$FindChannelInvitationById$findChannelInvitationByI
     DateTime? createdAt,
     String? messageText,
     Enum$ChannelInvitationStatus? status,
+    DateTime? readByRecipientAt,
     Query$FindChannelInvitationById$findChannelInvitationById$sender? sender,
     Query$FindChannelInvitationById$findChannelInvitationById$recipient?
         recipient,
@@ -1106,6 +1130,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById<
     Object? createdAt = _undefined,
     Object? messageText = _undefined,
     Object? status = _undefined,
+    Object? readByRecipientAt = _undefined,
     Object? sender = _undefined,
     Object? recipient = _undefined,
     Object? $__typename = _undefined,
@@ -1120,6 +1145,9 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById<
         status: status == _undefined || status == null
             ? _instance.status
             : (status as Enum$ChannelInvitationStatus),
+        readByRecipientAt: readByRecipientAt == _undefined
+            ? _instance.readByRecipientAt
+            : (readByRecipientAt as DateTime?),
         sender: sender == _undefined || sender == null
             ? _instance.sender
             : (sender
@@ -1161,6 +1189,7 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     DateTime? createdAt,
     String? messageText,
     Enum$ChannelInvitationStatus? status,
+    DateTime? readByRecipientAt,
     Query$FindChannelInvitationById$findChannelInvitationById$sender? sender,
     Query$FindChannelInvitationById$findChannelInvitationById$recipient?
         recipient,
@@ -6694,6 +6723,13 @@ const documentNodeQueryMyReceivedChannelInvitations =
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'readByRecipientAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'sender'),
             alias: null,
             arguments: [],
@@ -6763,6 +6799,7 @@ class Query$MyReceivedChannelInvitations$myChannelInvitations {
     required this.id,
     this.messageText,
     required this.status,
+    this.readByRecipientAt,
     required this.sender,
     this.$__typename = 'ChannelInvitation',
   });
@@ -6774,6 +6811,7 @@ class Query$MyReceivedChannelInvitations$myChannelInvitations {
     final l$id = json['id'];
     final l$messageText = json['messageText'];
     final l$status = json['status'];
+    final l$readByRecipientAt = json['readByRecipientAt'];
     final l$sender = json['sender'];
     final l$$__typename = json['__typename'];
     return Query$MyReceivedChannelInvitations$myChannelInvitations(
@@ -6782,6 +6820,9 @@ class Query$MyReceivedChannelInvitations$myChannelInvitations {
       id: (l$id as String),
       messageText: (l$messageText as String?),
       status: fromJson$Enum$ChannelInvitationStatus((l$status as String)),
+      readByRecipientAt: l$readByRecipientAt == null
+          ? null
+          : DateTime.parse((l$readByRecipientAt as String)),
       sender: Query$MyReceivedChannelInvitations$myChannelInvitations$sender
           .fromJson((l$sender as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
@@ -6797,6 +6838,8 @@ class Query$MyReceivedChannelInvitations$myChannelInvitations {
   final String? messageText;
 
   final Enum$ChannelInvitationStatus status;
+
+  final DateTime? readByRecipientAt;
 
   final Query$MyReceivedChannelInvitations$myChannelInvitations$sender sender;
 
@@ -6814,6 +6857,8 @@ class Query$MyReceivedChannelInvitations$myChannelInvitations {
     _resultData['messageText'] = l$messageText;
     final l$status = status;
     _resultData['status'] = toJson$Enum$ChannelInvitationStatus(l$status);
+    final l$readByRecipientAt = readByRecipientAt;
+    _resultData['readByRecipientAt'] = l$readByRecipientAt?.toIso8601String();
     final l$sender = sender;
     _resultData['sender'] = l$sender.toJson();
     final l$$__typename = $__typename;
@@ -6828,6 +6873,7 @@ class Query$MyReceivedChannelInvitations$myChannelInvitations {
     final l$id = id;
     final l$messageText = messageText;
     final l$status = status;
+    final l$readByRecipientAt = readByRecipientAt;
     final l$sender = sender;
     final l$$__typename = $__typename;
     return Object.hashAll([
@@ -6836,6 +6882,7 @@ class Query$MyReceivedChannelInvitations$myChannelInvitations {
       l$id,
       l$messageText,
       l$status,
+      l$readByRecipientAt,
       l$sender,
       l$$__typename,
     ]);
@@ -6873,6 +6920,11 @@ class Query$MyReceivedChannelInvitations$myChannelInvitations {
     final l$status = status;
     final lOther$status = other.status;
     if (l$status != lOther$status) {
+      return false;
+    }
+    final l$readByRecipientAt = readByRecipientAt;
+    final lOther$readByRecipientAt = other.readByRecipientAt;
+    if (l$readByRecipientAt != lOther$readByRecipientAt) {
       return false;
     }
     final l$sender = sender;
@@ -6917,6 +6969,7 @@ abstract class CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations<
     String? id,
     String? messageText,
     Enum$ChannelInvitationStatus? status,
+    DateTime? readByRecipientAt,
     Query$MyReceivedChannelInvitations$myChannelInvitations$sender? sender,
     String? $__typename,
   });
@@ -6946,6 +6999,7 @@ class _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations<
     Object? id = _undefined,
     Object? messageText = _undefined,
     Object? status = _undefined,
+    Object? readByRecipientAt = _undefined,
     Object? sender = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -6963,6 +7017,9 @@ class _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations<
         status: status == _undefined || status == null
             ? _instance.status
             : (status as Enum$ChannelInvitationStatus),
+        readByRecipientAt: readByRecipientAt == _undefined
+            ? _instance.readByRecipientAt
+            : (readByRecipientAt as DateTime?),
         sender: sender == _undefined || sender == null
             ? _instance.sender
             : (sender
@@ -6994,6 +7051,7 @@ class _CopyWithStubImpl$Query$MyReceivedChannelInvitations$myChannelInvitations<
     String? id,
     String? messageText,
     Enum$ChannelInvitationStatus? status,
+    DateTime? readByRecipientAt,
     Query$MyReceivedChannelInvitations$myChannelInvitations$sender? sender,
     String? $__typename,
   }) =>
@@ -9357,6 +9415,286 @@ const documentNodeMutationDeleteChannelInvitation = DocumentNode(definitions: [
             name: NameNode(value: 'channelInvitationId'),
             value: VariableNode(name: NameNode(value: 'channelInvitationId')),
           ),
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Variables$Mutation$MarkChannelInvitationAsSeenByMe {
+  factory Variables$Mutation$MarkChannelInvitationAsSeenByMe(
+          {required Input$ChannelInvitationInput channelInvitationInput}) =>
+      Variables$Mutation$MarkChannelInvitationAsSeenByMe._({
+        r'channelInvitationInput': channelInvitationInput,
+      });
+
+  Variables$Mutation$MarkChannelInvitationAsSeenByMe._(this._$data);
+
+  factory Variables$Mutation$MarkChannelInvitationAsSeenByMe.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$channelInvitationInput = data['channelInvitationInput'];
+    result$data['channelInvitationInput'] =
+        Input$ChannelInvitationInput.fromJson(
+            (l$channelInvitationInput as Map<String, dynamic>));
+    return Variables$Mutation$MarkChannelInvitationAsSeenByMe._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$ChannelInvitationInput get channelInvitationInput =>
+      (_$data['channelInvitationInput'] as Input$ChannelInvitationInput);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$channelInvitationInput = channelInvitationInput;
+    result$data['channelInvitationInput'] = l$channelInvitationInput.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$MarkChannelInvitationAsSeenByMe<
+          Variables$Mutation$MarkChannelInvitationAsSeenByMe>
+      get copyWith =>
+          CopyWith$Variables$Mutation$MarkChannelInvitationAsSeenByMe(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$MarkChannelInvitationAsSeenByMe) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$channelInvitationInput = channelInvitationInput;
+    final lOther$channelInvitationInput = other.channelInvitationInput;
+    if (l$channelInvitationInput != lOther$channelInvitationInput) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$channelInvitationInput = channelInvitationInput;
+    return Object.hashAll([l$channelInvitationInput]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$MarkChannelInvitationAsSeenByMe<
+    TRes> {
+  factory CopyWith$Variables$Mutation$MarkChannelInvitationAsSeenByMe(
+    Variables$Mutation$MarkChannelInvitationAsSeenByMe instance,
+    TRes Function(Variables$Mutation$MarkChannelInvitationAsSeenByMe) then,
+  ) = _CopyWithImpl$Variables$Mutation$MarkChannelInvitationAsSeenByMe;
+
+  factory CopyWith$Variables$Mutation$MarkChannelInvitationAsSeenByMe.stub(
+          TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$MarkChannelInvitationAsSeenByMe;
+
+  TRes call({Input$ChannelInvitationInput? channelInvitationInput});
+}
+
+class _CopyWithImpl$Variables$Mutation$MarkChannelInvitationAsSeenByMe<TRes>
+    implements
+        CopyWith$Variables$Mutation$MarkChannelInvitationAsSeenByMe<TRes> {
+  _CopyWithImpl$Variables$Mutation$MarkChannelInvitationAsSeenByMe(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$MarkChannelInvitationAsSeenByMe _instance;
+
+  final TRes Function(Variables$Mutation$MarkChannelInvitationAsSeenByMe) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? channelInvitationInput = _undefined}) =>
+      _then(Variables$Mutation$MarkChannelInvitationAsSeenByMe._({
+        ..._instance._$data,
+        if (channelInvitationInput != _undefined &&
+            channelInvitationInput != null)
+          'channelInvitationInput':
+              (channelInvitationInput as Input$ChannelInvitationInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$MarkChannelInvitationAsSeenByMe<TRes>
+    implements
+        CopyWith$Variables$Mutation$MarkChannelInvitationAsSeenByMe<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$MarkChannelInvitationAsSeenByMe(
+      this._res);
+
+  TRes _res;
+
+  call({Input$ChannelInvitationInput? channelInvitationInput}) => _res;
+}
+
+class Mutation$MarkChannelInvitationAsSeenByMe {
+  Mutation$MarkChannelInvitationAsSeenByMe({
+    required this.updateChannelInvitation,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$MarkChannelInvitationAsSeenByMe.fromJson(
+      Map<String, dynamic> json) {
+    final l$updateChannelInvitation = json['updateChannelInvitation'];
+    final l$$__typename = json['__typename'];
+    return Mutation$MarkChannelInvitationAsSeenByMe(
+      updateChannelInvitation: (l$updateChannelInvitation as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String updateChannelInvitation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateChannelInvitation = updateChannelInvitation;
+    _resultData['updateChannelInvitation'] = l$updateChannelInvitation;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateChannelInvitation = updateChannelInvitation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$updateChannelInvitation,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$MarkChannelInvitationAsSeenByMe) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateChannelInvitation = updateChannelInvitation;
+    final lOther$updateChannelInvitation = other.updateChannelInvitation;
+    if (l$updateChannelInvitation != lOther$updateChannelInvitation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$MarkChannelInvitationAsSeenByMe
+    on Mutation$MarkChannelInvitationAsSeenByMe {
+  CopyWith$Mutation$MarkChannelInvitationAsSeenByMe<
+          Mutation$MarkChannelInvitationAsSeenByMe>
+      get copyWith => CopyWith$Mutation$MarkChannelInvitationAsSeenByMe(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$MarkChannelInvitationAsSeenByMe<TRes> {
+  factory CopyWith$Mutation$MarkChannelInvitationAsSeenByMe(
+    Mutation$MarkChannelInvitationAsSeenByMe instance,
+    TRes Function(Mutation$MarkChannelInvitationAsSeenByMe) then,
+  ) = _CopyWithImpl$Mutation$MarkChannelInvitationAsSeenByMe;
+
+  factory CopyWith$Mutation$MarkChannelInvitationAsSeenByMe.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$MarkChannelInvitationAsSeenByMe;
+
+  TRes call({
+    String? updateChannelInvitation,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$MarkChannelInvitationAsSeenByMe<TRes>
+    implements CopyWith$Mutation$MarkChannelInvitationAsSeenByMe<TRes> {
+  _CopyWithImpl$Mutation$MarkChannelInvitationAsSeenByMe(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$MarkChannelInvitationAsSeenByMe _instance;
+
+  final TRes Function(Mutation$MarkChannelInvitationAsSeenByMe) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateChannelInvitation = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$MarkChannelInvitationAsSeenByMe(
+        updateChannelInvitation: updateChannelInvitation == _undefined ||
+                updateChannelInvitation == null
+            ? _instance.updateChannelInvitation
+            : (updateChannelInvitation as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$MarkChannelInvitationAsSeenByMe<TRes>
+    implements CopyWith$Mutation$MarkChannelInvitationAsSeenByMe<TRes> {
+  _CopyWithStubImpl$Mutation$MarkChannelInvitationAsSeenByMe(this._res);
+
+  TRes _res;
+
+  call({
+    String? updateChannelInvitation,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationMarkChannelInvitationAsSeenByMe =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'MarkChannelInvitationAsSeenByMe'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'channelInvitationInput')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ChannelInvitationInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'updateChannelInvitation'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value:
+                VariableNode(name: NameNode(value: 'channelInvitationInput')),
+          )
         ],
         directives: [],
         selectionSet: null,

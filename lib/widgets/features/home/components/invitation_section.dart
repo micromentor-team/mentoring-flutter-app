@@ -73,16 +73,16 @@ class _InvitationSectionState extends State<InvitationSection> {
   @override
   Widget build(BuildContext context) {
     return Selector<InboxModel, List<ReceivedChannelInvitation>?>(
-      selector: (_, inboxModel) => inboxModel.pendingReceivedInvitations,
+      selector: (_, inboxModel) => inboxModel.unseenPendingReceivedInvitations,
       shouldRebuild: (oldValue, newValue) =>
           !(const DeepCollectionEquality.unordered()
               .equals(oldValue, newValue)) ||
           _inboxModel.receivedInvitationsState != AsyncState.loading,
-      builder: (context, pendingReceivedInvitations, _) {
+      builder: (context, unseenPendingReceivedInvitations, _) {
         return AppUtility.widgetForAsyncState(
           state: _inboxModel.receivedInvitationsState,
           onReady: () {
-            if (pendingReceivedInvitations?.isEmpty ?? true) {
+            if (unseenPendingReceivedInvitations?.isEmpty ?? true) {
               return const SizedBox(width: 0, height: 0);
             }
             final ThemeData theme = Theme.of(context);
@@ -112,25 +112,28 @@ class _InvitationSectionState extends State<InvitationSection> {
                             ),
                             const SizedBox(width: Insets.paddingSmall),
                             NotificationBubble(
-                              notifications: pendingReceivedInvitations!.length,
+                              notifications:
+                                  unseenPendingReceivedInvitations!.length,
                             )
                           ],
                         ),
-                        InkWell(
-                          onTap: () => context.push(
-                            Routes.inboxInvitesReceived.path,
-                          ),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.all(Insets.paddingExtraSmall),
-                            child: Text(
-                              _l10n.listSeeAll,
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                color: theme.colorScheme.onSurface,
+                        if (unseenPendingReceivedInvitations.length >
+                            Limits.homeInvitationsListMaxSize)
+                          InkWell(
+                            onTap: () => context.push(
+                              Routes.inboxInvitesReceived.path,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(
+                                  Insets.paddingExtraSmall),
+                              child: Text(
+                                _l10n.listSeeAll,
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                  color: theme.colorScheme.onSurface,
+                                ),
                               ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   ),
@@ -141,7 +144,7 @@ class _InvitationSectionState extends State<InvitationSection> {
                     child: Center(
                       child: Column(
                         children: _createInvitationList(
-                          pendingReceivedInvitations,
+                          unseenPendingReceivedInvitations,
                         ),
                       ),
                     ),

@@ -906,6 +906,7 @@ class Input$UserInput {
     DateTime? latestActivityAt,
     DateTime? inactivatedAt,
     String? inactivatedBy,
+    DateTime? termsAndConditionsAcceptedAt,
     List<String>? companyIds,
     List<String>? groupIds,
     List<String>? parentGroupIds,
@@ -987,6 +988,8 @@ class Input$UserInput {
         if (latestActivityAt != null) r'latestActivityAt': latestActivityAt,
         if (inactivatedAt != null) r'inactivatedAt': inactivatedAt,
         if (inactivatedBy != null) r'inactivatedBy': inactivatedBy,
+        if (termsAndConditionsAcceptedAt != null)
+          r'termsAndConditionsAcceptedAt': termsAndConditionsAcceptedAt,
         if (companyIds != null) r'companyIds': companyIds,
         if (groupIds != null) r'groupIds': groupIds,
         if (parentGroupIds != null) r'parentGroupIds': parentGroupIds,
@@ -1257,6 +1260,14 @@ class Input$UserInput {
       final l$inactivatedBy = data['inactivatedBy'];
       result$data['inactivatedBy'] = (l$inactivatedBy as String?);
     }
+    if (data.containsKey('termsAndConditionsAcceptedAt')) {
+      final l$termsAndConditionsAcceptedAt =
+          data['termsAndConditionsAcceptedAt'];
+      result$data['termsAndConditionsAcceptedAt'] =
+          l$termsAndConditionsAcceptedAt == null
+              ? null
+              : DateTime.parse((l$termsAndConditionsAcceptedAt as String));
+    }
     if (data.containsKey('companyIds')) {
       final l$companyIds = data['companyIds'];
       result$data['companyIds'] =
@@ -1458,6 +1469,8 @@ class Input$UserInput {
   DateTime? get latestActivityAt => (_$data['latestActivityAt'] as DateTime?);
   DateTime? get inactivatedAt => (_$data['inactivatedAt'] as DateTime?);
   String? get inactivatedBy => (_$data['inactivatedBy'] as String?);
+  DateTime? get termsAndConditionsAcceptedAt =>
+      (_$data['termsAndConditionsAcceptedAt'] as DateTime?);
   List<String>? get companyIds => (_$data['companyIds'] as List<String>?);
   List<String>? get groupIds => (_$data['groupIds'] as List<String>?);
   List<String>? get parentGroupIds =>
@@ -1693,6 +1706,11 @@ class Input$UserInput {
     if (_$data.containsKey('inactivatedBy')) {
       final l$inactivatedBy = inactivatedBy;
       result$data['inactivatedBy'] = l$inactivatedBy;
+    }
+    if (_$data.containsKey('termsAndConditionsAcceptedAt')) {
+      final l$termsAndConditionsAcceptedAt = termsAndConditionsAcceptedAt;
+      result$data['termsAndConditionsAcceptedAt'] =
+          l$termsAndConditionsAcceptedAt?.toIso8601String();
     }
     if (_$data.containsKey('companyIds')) {
       final l$companyIds = companyIds;
@@ -2290,6 +2308,16 @@ class Input$UserInput {
     if (l$inactivatedBy != lOther$inactivatedBy) {
       return false;
     }
+    final l$termsAndConditionsAcceptedAt = termsAndConditionsAcceptedAt;
+    final lOther$termsAndConditionsAcceptedAt =
+        other.termsAndConditionsAcceptedAt;
+    if (_$data.containsKey('termsAndConditionsAcceptedAt') !=
+        other._$data.containsKey('termsAndConditionsAcceptedAt')) {
+      return false;
+    }
+    if (l$termsAndConditionsAcceptedAt != lOther$termsAndConditionsAcceptedAt) {
+      return false;
+    }
     final l$companyIds = companyIds;
     final lOther$companyIds = other.companyIds;
     if (_$data.containsKey('companyIds') !=
@@ -2713,6 +2741,7 @@ class Input$UserInput {
     final l$latestActivityAt = latestActivityAt;
     final l$inactivatedAt = inactivatedAt;
     final l$inactivatedBy = inactivatedBy;
+    final l$termsAndConditionsAcceptedAt = termsAndConditionsAcceptedAt;
     final l$companyIds = companyIds;
     final l$groupIds = groupIds;
     final l$parentGroupIds = parentGroupIds;
@@ -2818,6 +2847,9 @@ class Input$UserInput {
       _$data.containsKey('latestActivityAt') ? l$latestActivityAt : const {},
       _$data.containsKey('inactivatedAt') ? l$inactivatedAt : const {},
       _$data.containsKey('inactivatedBy') ? l$inactivatedBy : const {},
+      _$data.containsKey('termsAndConditionsAcceptedAt')
+          ? l$termsAndConditionsAcceptedAt
+          : const {},
       _$data.containsKey('companyIds')
           ? l$companyIds == null
               ? null
@@ -2962,6 +2994,7 @@ abstract class CopyWith$Input$UserInput<TRes> {
     DateTime? latestActivityAt,
     DateTime? inactivatedAt,
     String? inactivatedBy,
+    DateTime? termsAndConditionsAcceptedAt,
     List<String>? companyIds,
     List<String>? groupIds,
     List<String>? parentGroupIds,
@@ -3082,6 +3115,7 @@ class _CopyWithImpl$Input$UserInput<TRes>
     Object? latestActivityAt = _undefined,
     Object? inactivatedAt = _undefined,
     Object? inactivatedBy = _undefined,
+    Object? termsAndConditionsAcceptedAt = _undefined,
     Object? companyIds = _undefined,
     Object? groupIds = _undefined,
     Object? parentGroupIds = _undefined,
@@ -3181,6 +3215,9 @@ class _CopyWithImpl$Input$UserInput<TRes>
           'inactivatedAt': (inactivatedAt as DateTime?),
         if (inactivatedBy != _undefined)
           'inactivatedBy': (inactivatedBy as String?),
+        if (termsAndConditionsAcceptedAt != _undefined)
+          'termsAndConditionsAcceptedAt':
+              (termsAndConditionsAcceptedAt as DateTime?),
         if (companyIds != _undefined)
           'companyIds': (companyIds as List<String>?),
         if (groupIds != _undefined) 'groupIds': (groupIds as List<String>?),
@@ -3366,6 +3403,7 @@ class _CopyWithStubImpl$Input$UserInput<TRes>
     DateTime? latestActivityAt,
     DateTime? inactivatedAt,
     String? inactivatedBy,
+    DateTime? termsAndConditionsAcceptedAt,
     List<String>? companyIds,
     List<String>? groupIds,
     List<String>? parentGroupIds,
@@ -16680,6 +16718,7 @@ class Input$ChannelInvitationInput {
     String? messageText,
     DateTime? dismissedFromInboxBySenderAt,
     DateTime? dismissedFromInboxByRecipientAt,
+    DateTime? readByRecipientAt,
     Enum$ChannelInvitationStatus? status,
   }) =>
       Input$ChannelInvitationInput._({
@@ -16703,6 +16742,7 @@ class Input$ChannelInvitationInput {
           r'dismissedFromInboxBySenderAt': dismissedFromInboxBySenderAt,
         if (dismissedFromInboxByRecipientAt != null)
           r'dismissedFromInboxByRecipientAt': dismissedFromInboxByRecipientAt,
+        if (readByRecipientAt != null) r'readByRecipientAt': readByRecipientAt,
         if (status != null) r'status': status,
       });
 
@@ -16799,6 +16839,12 @@ class Input$ChannelInvitationInput {
               ? null
               : DateTime.parse((l$dismissedFromInboxByRecipientAt as String));
     }
+    if (data.containsKey('readByRecipientAt')) {
+      final l$readByRecipientAt = data['readByRecipientAt'];
+      result$data['readByRecipientAt'] = l$readByRecipientAt == null
+          ? null
+          : DateTime.parse((l$readByRecipientAt as String));
+    }
     if (data.containsKey('status')) {
       final l$status = data['status'];
       result$data['status'] = l$status == null
@@ -16832,6 +16878,7 @@ class Input$ChannelInvitationInput {
       (_$data['dismissedFromInboxBySenderAt'] as DateTime?);
   DateTime? get dismissedFromInboxByRecipientAt =>
       (_$data['dismissedFromInboxByRecipientAt'] as DateTime?);
+  DateTime? get readByRecipientAt => (_$data['readByRecipientAt'] as DateTime?);
   Enum$ChannelInvitationStatus? get status =>
       (_$data['status'] as Enum$ChannelInvitationStatus?);
   Map<String, dynamic> toJson() {
@@ -16909,6 +16956,10 @@ class Input$ChannelInvitationInput {
       final l$dismissedFromInboxByRecipientAt = dismissedFromInboxByRecipientAt;
       result$data['dismissedFromInboxByRecipientAt'] =
           l$dismissedFromInboxByRecipientAt?.toIso8601String();
+    }
+    if (_$data.containsKey('readByRecipientAt')) {
+      final l$readByRecipientAt = readByRecipientAt;
+      result$data['readByRecipientAt'] = l$readByRecipientAt?.toIso8601String();
     }
     if (_$data.containsKey('status')) {
       final l$status = status;
@@ -17107,6 +17158,15 @@ class Input$ChannelInvitationInput {
         lOther$dismissedFromInboxByRecipientAt) {
       return false;
     }
+    final l$readByRecipientAt = readByRecipientAt;
+    final lOther$readByRecipientAt = other.readByRecipientAt;
+    if (_$data.containsKey('readByRecipientAt') !=
+        other._$data.containsKey('readByRecipientAt')) {
+      return false;
+    }
+    if (l$readByRecipientAt != lOther$readByRecipientAt) {
+      return false;
+    }
     final l$status = status;
     final lOther$status = other.status;
     if (_$data.containsKey('status') != other._$data.containsKey('status')) {
@@ -17138,6 +17198,7 @@ class Input$ChannelInvitationInput {
     final l$messageText = messageText;
     final l$dismissedFromInboxBySenderAt = dismissedFromInboxBySenderAt;
     final l$dismissedFromInboxByRecipientAt = dismissedFromInboxByRecipientAt;
+    final l$readByRecipientAt = readByRecipientAt;
     final l$status = status;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
@@ -17166,6 +17227,7 @@ class Input$ChannelInvitationInput {
       _$data.containsKey('dismissedFromInboxByRecipientAt')
           ? l$dismissedFromInboxByRecipientAt
           : const {},
+      _$data.containsKey('readByRecipientAt') ? l$readByRecipientAt : const {},
       _$data.containsKey('status') ? l$status : const {},
     ]);
   }
@@ -17199,6 +17261,7 @@ abstract class CopyWith$Input$ChannelInvitationInput<TRes> {
     String? messageText,
     DateTime? dismissedFromInboxBySenderAt,
     DateTime? dismissedFromInboxByRecipientAt,
+    DateTime? readByRecipientAt,
     Enum$ChannelInvitationStatus? status,
   });
   TRes events(
@@ -17240,6 +17303,7 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
     Object? messageText = _undefined,
     Object? dismissedFromInboxBySenderAt = _undefined,
     Object? dismissedFromInboxByRecipientAt = _undefined,
+    Object? readByRecipientAt = _undefined,
     Object? status = _undefined,
   }) =>
       _then(Input$ChannelInvitationInput._({
@@ -17269,6 +17333,8 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
         if (dismissedFromInboxByRecipientAt != _undefined)
           'dismissedFromInboxByRecipientAt':
               (dismissedFromInboxByRecipientAt as DateTime?),
+        if (readByRecipientAt != _undefined)
+          'readByRecipientAt': (readByRecipientAt as DateTime?),
         if (status != _undefined)
           'status': (status as Enum$ChannelInvitationStatus?),
       }));
@@ -17317,6 +17383,7 @@ class _CopyWithStubImpl$Input$ChannelInvitationInput<TRes>
     String? messageText,
     DateTime? dismissedFromInboxBySenderAt,
     DateTime? dismissedFromInboxByRecipientAt,
+    DateTime? readByRecipientAt,
     Enum$ChannelInvitationStatus? status,
   }) =>
       _res;
@@ -23311,6 +23378,585 @@ class _CopyWithStubImpl$Input$Mm2SynchronizationInput<TRes>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
 
+class Input$NlpConversationInput {
+  factory Input$NlpConversationInput({
+    String? id,
+    required String label,
+    List<Input$NlpLabelInput>? labels,
+  }) =>
+      Input$NlpConversationInput._({
+        if (id != null) r'id': id,
+        r'label': label,
+        if (labels != null) r'labels': labels,
+      });
+
+  Input$NlpConversationInput._(this._$data);
+
+  factory Input$NlpConversationInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String);
+    }
+    final l$label = data['label'];
+    result$data['label'] = (l$label as String);
+    if (data.containsKey('labels')) {
+      final l$labels = data['labels'];
+      result$data['labels'] = (l$labels as List<dynamic>)
+          .map((e) => Input$NlpLabelInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Input$NlpConversationInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String get label => (_$data['label'] as String);
+  List<Input$NlpLabelInput>? get labels =>
+      (_$data['labels'] as List<Input$NlpLabelInput>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = (l$id as String);
+    }
+    final l$label = label;
+    result$data['label'] = l$label;
+    if (_$data.containsKey('labels')) {
+      final l$labels = labels;
+      result$data['labels'] = (l$labels as List<Input$NlpLabelInput>)
+          .map((e) => e.toJson())
+          .toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$NlpConversationInput<Input$NlpConversationInput>
+      get copyWith => CopyWith$Input$NlpConversationInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$NlpConversationInput) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$labels = labels;
+    final lOther$labels = other.labels;
+    if (_$data.containsKey('labels') != other._$data.containsKey('labels')) {
+      return false;
+    }
+    if (l$labels != null && lOther$labels != null) {
+      if (l$labels.length != lOther$labels.length) {
+        return false;
+      }
+      for (int i = 0; i < l$labels.length; i++) {
+        final l$labels$entry = l$labels[i];
+        final lOther$labels$entry = lOther$labels[i];
+        if (l$labels$entry != lOther$labels$entry) {
+          return false;
+        }
+      }
+    } else if (l$labels != lOther$labels) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$label = label;
+    final l$labels = labels;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      l$label,
+      _$data.containsKey('labels')
+          ? l$labels == null
+              ? null
+              : Object.hashAll(l$labels.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$NlpConversationInput<TRes> {
+  factory CopyWith$Input$NlpConversationInput(
+    Input$NlpConversationInput instance,
+    TRes Function(Input$NlpConversationInput) then,
+  ) = _CopyWithImpl$Input$NlpConversationInput;
+
+  factory CopyWith$Input$NlpConversationInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$NlpConversationInput;
+
+  TRes call({
+    String? id,
+    String? label,
+    List<Input$NlpLabelInput>? labels,
+  });
+  TRes labels(
+      Iterable<Input$NlpLabelInput> Function(
+              Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>)
+          _fn);
+}
+
+class _CopyWithImpl$Input$NlpConversationInput<TRes>
+    implements CopyWith$Input$NlpConversationInput<TRes> {
+  _CopyWithImpl$Input$NlpConversationInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$NlpConversationInput _instance;
+
+  final TRes Function(Input$NlpConversationInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? label = _undefined,
+    Object? labels = _undefined,
+  }) =>
+      _then(Input$NlpConversationInput._({
+        ..._instance._$data,
+        if (id != _undefined && id != null) 'id': (id as String),
+        if (label != _undefined && label != null) 'label': (label as String),
+        if (labels != _undefined && labels != null)
+          'labels': (labels as List<Input$NlpLabelInput>),
+      }));
+  TRes labels(
+          Iterable<Input$NlpLabelInput> Function(
+                  Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>)
+              _fn) =>
+      call(
+          labels: _instance.labels != null
+              ? _fn(_instance.labels!.map((e) => CopyWith$Input$NlpLabelInput(
+                    e,
+                    (i) => i,
+                  ))).toList()
+              : null);
+}
+
+class _CopyWithStubImpl$Input$NlpConversationInput<TRes>
+    implements CopyWith$Input$NlpConversationInput<TRes> {
+  _CopyWithStubImpl$Input$NlpConversationInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? label,
+    List<Input$NlpLabelInput>? labels,
+  }) =>
+      _res;
+  labels(_fn) => _res;
+}
+
+class Input$NlpLabelInput {
+  factory Input$NlpLabelInput({
+    Enum$NlpLabelName? name,
+    int? probability,
+    String? createdBy,
+    DateTime? createdAt,
+  }) =>
+      Input$NlpLabelInput._({
+        if (name != null) r'name': name,
+        if (probability != null) r'probability': probability,
+        if (createdBy != null) r'createdBy': createdBy,
+        if (createdAt != null) r'createdAt': createdAt,
+      });
+
+  Input$NlpLabelInput._(this._$data);
+
+  factory Input$NlpLabelInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = fromJson$Enum$NlpLabelName((l$name as String));
+    }
+    if (data.containsKey('probability')) {
+      final l$probability = data['probability'];
+      result$data['probability'] = (l$probability as int);
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = (l$createdBy as String?);
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] =
+          l$createdAt == null ? null : DateTime.parse((l$createdAt as String));
+    }
+    return Input$NlpLabelInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum$NlpLabelName? get name => (_$data['name'] as Enum$NlpLabelName?);
+  int? get probability => (_$data['probability'] as int?);
+  String? get createdBy => (_$data['createdBy'] as String?);
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] =
+          toJson$Enum$NlpLabelName((l$name as Enum$NlpLabelName));
+    }
+    if (_$data.containsKey('probability')) {
+      final l$probability = probability;
+      result$data['probability'] = (l$probability as int);
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy;
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toIso8601String();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$NlpLabelInput<Input$NlpLabelInput> get copyWith =>
+      CopyWith$Input$NlpLabelInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$NlpLabelInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$probability = probability;
+    final lOther$probability = other.probability;
+    if (_$data.containsKey('probability') !=
+        other._$data.containsKey('probability')) {
+      return false;
+    }
+    if (l$probability != lOther$probability) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$probability = probability;
+    final l$createdBy = createdBy;
+    final l$createdAt = createdAt;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('probability') ? l$probability : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$NlpLabelInput<TRes> {
+  factory CopyWith$Input$NlpLabelInput(
+    Input$NlpLabelInput instance,
+    TRes Function(Input$NlpLabelInput) then,
+  ) = _CopyWithImpl$Input$NlpLabelInput;
+
+  factory CopyWith$Input$NlpLabelInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$NlpLabelInput;
+
+  TRes call({
+    Enum$NlpLabelName? name,
+    int? probability,
+    String? createdBy,
+    DateTime? createdAt,
+  });
+}
+
+class _CopyWithImpl$Input$NlpLabelInput<TRes>
+    implements CopyWith$Input$NlpLabelInput<TRes> {
+  _CopyWithImpl$Input$NlpLabelInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$NlpLabelInput _instance;
+
+  final TRes Function(Input$NlpLabelInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? probability = _undefined,
+    Object? createdBy = _undefined,
+    Object? createdAt = _undefined,
+  }) =>
+      _then(Input$NlpLabelInput._({
+        ..._instance._$data,
+        if (name != _undefined && name != null)
+          'name': (name as Enum$NlpLabelName),
+        if (probability != _undefined && probability != null)
+          'probability': (probability as int),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+      }));
+}
+
+class _CopyWithStubImpl$Input$NlpLabelInput<TRes>
+    implements CopyWith$Input$NlpLabelInput<TRes> {
+  _CopyWithStubImpl$Input$NlpLabelInput(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$NlpLabelName? name,
+    int? probability,
+    String? createdBy,
+    DateTime? createdAt,
+  }) =>
+      _res;
+}
+
+class Input$NlpMessageInput {
+  factory Input$NlpMessageInput({
+    String? id,
+    required String label,
+    List<Input$NlpLabelInput>? labels,
+  }) =>
+      Input$NlpMessageInput._({
+        if (id != null) r'id': id,
+        r'label': label,
+        if (labels != null) r'labels': labels,
+      });
+
+  Input$NlpMessageInput._(this._$data);
+
+  factory Input$NlpMessageInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String);
+    }
+    final l$label = data['label'];
+    result$data['label'] = (l$label as String);
+    if (data.containsKey('labels')) {
+      final l$labels = data['labels'];
+      result$data['labels'] = (l$labels as List<dynamic>)
+          .map((e) => Input$NlpLabelInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Input$NlpMessageInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get id => (_$data['id'] as String?);
+  String get label => (_$data['label'] as String);
+  List<Input$NlpLabelInput>? get labels =>
+      (_$data['labels'] as List<Input$NlpLabelInput>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = (l$id as String);
+    }
+    final l$label = label;
+    result$data['label'] = l$label;
+    if (_$data.containsKey('labels')) {
+      final l$labels = labels;
+      result$data['labels'] = (l$labels as List<Input$NlpLabelInput>)
+          .map((e) => e.toJson())
+          .toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$NlpMessageInput<Input$NlpMessageInput> get copyWith =>
+      CopyWith$Input$NlpMessageInput(
+        this,
+        (i) => i,
+      );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$NlpMessageInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$labels = labels;
+    final lOther$labels = other.labels;
+    if (_$data.containsKey('labels') != other._$data.containsKey('labels')) {
+      return false;
+    }
+    if (l$labels != null && lOther$labels != null) {
+      if (l$labels.length != lOther$labels.length) {
+        return false;
+      }
+      for (int i = 0; i < l$labels.length; i++) {
+        final l$labels$entry = l$labels[i];
+        final lOther$labels$entry = lOther$labels[i];
+        if (l$labels$entry != lOther$labels$entry) {
+          return false;
+        }
+      }
+    } else if (l$labels != lOther$labels) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$label = label;
+    final l$labels = labels;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      l$label,
+      _$data.containsKey('labels')
+          ? l$labels == null
+              ? null
+              : Object.hashAll(l$labels.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$NlpMessageInput<TRes> {
+  factory CopyWith$Input$NlpMessageInput(
+    Input$NlpMessageInput instance,
+    TRes Function(Input$NlpMessageInput) then,
+  ) = _CopyWithImpl$Input$NlpMessageInput;
+
+  factory CopyWith$Input$NlpMessageInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$NlpMessageInput;
+
+  TRes call({
+    String? id,
+    String? label,
+    List<Input$NlpLabelInput>? labels,
+  });
+  TRes labels(
+      Iterable<Input$NlpLabelInput> Function(
+              Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>)
+          _fn);
+}
+
+class _CopyWithImpl$Input$NlpMessageInput<TRes>
+    implements CopyWith$Input$NlpMessageInput<TRes> {
+  _CopyWithImpl$Input$NlpMessageInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$NlpMessageInput _instance;
+
+  final TRes Function(Input$NlpMessageInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? label = _undefined,
+    Object? labels = _undefined,
+  }) =>
+      _then(Input$NlpMessageInput._({
+        ..._instance._$data,
+        if (id != _undefined && id != null) 'id': (id as String),
+        if (label != _undefined && label != null) 'label': (label as String),
+        if (labels != _undefined && labels != null)
+          'labels': (labels as List<Input$NlpLabelInput>),
+      }));
+  TRes labels(
+          Iterable<Input$NlpLabelInput> Function(
+                  Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>)
+              _fn) =>
+      call(
+          labels: _instance.labels != null
+              ? _fn(_instance.labels!.map((e) => CopyWith$Input$NlpLabelInput(
+                    e,
+                    (i) => i,
+                  ))).toList()
+              : null);
+}
+
+class _CopyWithStubImpl$Input$NlpMessageInput<TRes>
+    implements CopyWith$Input$NlpMessageInput<TRes> {
+  _CopyWithStubImpl$Input$NlpMessageInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? label,
+    List<Input$NlpLabelInput>? labels,
+  }) =>
+      _res;
+  labels(_fn) => _res;
+}
+
 class Input$SidMultiStepActionInput {
   factory Input$SidMultiStepActionInput({
     String? id,
@@ -26416,6 +27062,149 @@ Enum$ChannelInvitationDirection fromJson$Enum$ChannelInvitationDirection(
       return Enum$ChannelInvitationDirection.received;
     default:
       return Enum$ChannelInvitationDirection.$unknown;
+  }
+}
+
+enum Enum$NlpLabelName {
+  askingForEmailForDoc,
+  blocked,
+  concern,
+  confirmedMentoring,
+  error,
+  exit,
+  exitCalendly,
+  exitEmail,
+  exitGoogleMeet,
+  exitLinkedin,
+  exitPhone,
+  exitSkype,
+  exitTeams,
+  exitWhatsapp,
+  exitZoom,
+  genericMentoring,
+  ghosting,
+  negative,
+  notMatch,
+  noMatchCountry,
+  notMatchExpertise,
+  notSet,
+  personalizedMentoring,
+  positive,
+  spam,
+  $unknown
+}
+
+String toJson$Enum$NlpLabelName(Enum$NlpLabelName e) {
+  switch (e) {
+    case Enum$NlpLabelName.askingForEmailForDoc:
+      return r'askingForEmailForDoc';
+    case Enum$NlpLabelName.blocked:
+      return r'blocked';
+    case Enum$NlpLabelName.concern:
+      return r'concern';
+    case Enum$NlpLabelName.confirmedMentoring:
+      return r'confirmedMentoring';
+    case Enum$NlpLabelName.error:
+      return r'error';
+    case Enum$NlpLabelName.exit:
+      return r'exit';
+    case Enum$NlpLabelName.exitCalendly:
+      return r'exitCalendly';
+    case Enum$NlpLabelName.exitEmail:
+      return r'exitEmail';
+    case Enum$NlpLabelName.exitGoogleMeet:
+      return r'exitGoogleMeet';
+    case Enum$NlpLabelName.exitLinkedin:
+      return r'exitLinkedin';
+    case Enum$NlpLabelName.exitPhone:
+      return r'exitPhone';
+    case Enum$NlpLabelName.exitSkype:
+      return r'exitSkype';
+    case Enum$NlpLabelName.exitTeams:
+      return r'exitTeams';
+    case Enum$NlpLabelName.exitWhatsapp:
+      return r'exitWhatsapp';
+    case Enum$NlpLabelName.exitZoom:
+      return r'exitZoom';
+    case Enum$NlpLabelName.genericMentoring:
+      return r'genericMentoring';
+    case Enum$NlpLabelName.ghosting:
+      return r'ghosting';
+    case Enum$NlpLabelName.negative:
+      return r'negative';
+    case Enum$NlpLabelName.notMatch:
+      return r'notMatch';
+    case Enum$NlpLabelName.noMatchCountry:
+      return r'noMatchCountry';
+    case Enum$NlpLabelName.notMatchExpertise:
+      return r'notMatchExpertise';
+    case Enum$NlpLabelName.notSet:
+      return r'notSet';
+    case Enum$NlpLabelName.personalizedMentoring:
+      return r'personalizedMentoring';
+    case Enum$NlpLabelName.positive:
+      return r'positive';
+    case Enum$NlpLabelName.spam:
+      return r'spam';
+    case Enum$NlpLabelName.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$NlpLabelName fromJson$Enum$NlpLabelName(String value) {
+  switch (value) {
+    case r'askingForEmailForDoc':
+      return Enum$NlpLabelName.askingForEmailForDoc;
+    case r'blocked':
+      return Enum$NlpLabelName.blocked;
+    case r'concern':
+      return Enum$NlpLabelName.concern;
+    case r'confirmedMentoring':
+      return Enum$NlpLabelName.confirmedMentoring;
+    case r'error':
+      return Enum$NlpLabelName.error;
+    case r'exit':
+      return Enum$NlpLabelName.exit;
+    case r'exitCalendly':
+      return Enum$NlpLabelName.exitCalendly;
+    case r'exitEmail':
+      return Enum$NlpLabelName.exitEmail;
+    case r'exitGoogleMeet':
+      return Enum$NlpLabelName.exitGoogleMeet;
+    case r'exitLinkedin':
+      return Enum$NlpLabelName.exitLinkedin;
+    case r'exitPhone':
+      return Enum$NlpLabelName.exitPhone;
+    case r'exitSkype':
+      return Enum$NlpLabelName.exitSkype;
+    case r'exitTeams':
+      return Enum$NlpLabelName.exitTeams;
+    case r'exitWhatsapp':
+      return Enum$NlpLabelName.exitWhatsapp;
+    case r'exitZoom':
+      return Enum$NlpLabelName.exitZoom;
+    case r'genericMentoring':
+      return Enum$NlpLabelName.genericMentoring;
+    case r'ghosting':
+      return Enum$NlpLabelName.ghosting;
+    case r'negative':
+      return Enum$NlpLabelName.negative;
+    case r'notMatch':
+      return Enum$NlpLabelName.notMatch;
+    case r'noMatchCountry':
+      return Enum$NlpLabelName.noMatchCountry;
+    case r'notMatchExpertise':
+      return Enum$NlpLabelName.notMatchExpertise;
+    case r'notSet':
+      return Enum$NlpLabelName.notSet;
+    case r'personalizedMentoring':
+      return Enum$NlpLabelName.personalizedMentoring;
+    case r'positive':
+      return Enum$NlpLabelName.positive;
+    case r'spam':
+      return Enum$NlpLabelName.spam;
+    default:
+      return Enum$NlpLabelName.$unknown;
   }
 }
 

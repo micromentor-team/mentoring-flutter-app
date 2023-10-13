@@ -53,18 +53,19 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
   InboxListTile _createTile(
     ReceivedChannelInvitation invitation,
   ) {
+    final bool isUnseenByMe = invitation.readByRecipientAt == null;
     return InboxListTile(
       avatarUrl: invitation.sender.avatarUrl,
       fullName: invitation.sender.fullName ?? '',
       date: invitation.createdAt.toLocal(),
       message: invitation.messageText ?? _l10n.inboxInvitesReceivedMessage,
-      highlightTileTitle:
-          true, // TODO - Highlight and show notification bubble only if unseen
-      highlightTileText: true,
+      showPlainNotificationBubble: isUnseenByMe,
+      highlightTileTitle: isUnseenByMe,
+      highlightTileText: isUnseenByMe,
       simplifyDate: true,
-      onPressed: () => router.push(
-        '${Routes.inboxInvitesReceived.path}/${invitation.id}',
-      ),
+      onPressed: () {
+        router.push('${Routes.inboxInvitesReceived.path}/${invitation.id}');
+      },
     );
   }
 

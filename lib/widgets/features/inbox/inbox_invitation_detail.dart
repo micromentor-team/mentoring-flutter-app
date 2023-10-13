@@ -39,6 +39,7 @@ class _InboxInvitationDetailScreenState
   late final InboxModel _inboxModel;
   late Future<OperationResult<ChannelInvitationById>> _invitation;
   late AppLocalizations _l10n;
+  bool _isMarkedAsRead = false;
 
   @override
   void initState() {
@@ -306,6 +307,14 @@ class _InboxInvitationDetailScreenState
     );
   }
 
+  Future<void> _markReceivedInvitationAsRead() async {
+    await _invitationsProvider.markChannelInvitationAsSeenByMe(
+      channelInvitationId: widget.channelInvitationId,
+    );
+    await _inboxModel.refreshPendingReceivedInvitations();
+    _isMarkedAsRead = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
@@ -329,6 +338,10 @@ class _InboxInvitationDetailScreenState
                   userId: invitationResult.sender.id,
                   userFullName: invitationResult.sender.fullName!,
                 );
+                if (!_isMarkedAsRead &&
+                    invitationResult.readByRecipientAt == null) {
+                  _markReceivedInvitationAsRead();
+                }
                 break;
               case MessageDirection.sent:
                 userCardCreateFunction = _createRecipientCard;
