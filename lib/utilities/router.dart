@@ -21,6 +21,7 @@ import '../widgets/features/home/home.dart';
 import '../widgets/features/inbox/inbox_chat_list.dart';
 import '../widgets/features/inbox/inbox_chat_messages.dart';
 import '../widgets/features/inbox/inbox_invitation_detail.dart';
+import '../widgets/features/profile/edit_profile_pronoun.dart';
 import '../widgets/features/sign_in/sign_in.dart';
 import '../widgets/features/sign_up/sign_up_completed.dart';
 import '../widgets/features/sign_up/sign_up_entrepreneur_company_name.dart';
@@ -590,6 +591,17 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const EditProfileScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editPronouns.path,
+          name: Routes.editPronouns.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditProfilePronounScreen(),
             );
           },
         ),

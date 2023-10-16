@@ -382,5 +382,6 @@
     "editProfileSelectAdditionalTopics": "Select up to 3 additional topics",
     "editProfileMyIndustries": "My industries",
     "editProfileMyMentoringPreferences": "My mentoring preferences",
-    "editProfileMyExpectations": "My expectations"
+    "editProfileMyExpectations": "My expectations",
+    "editPronounsSubtitle": "This helps other users know how you would like to be referred to. Select all that apply. (optional)"
 }

@@ -138,7 +138,8 @@ class EditProfileAboutMe extends StatelessWidget {
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
         ),
-        _createListTileSection(context, l10n.pronouns, pronouns, null),
+        _createListTileSection(
+            context, l10n.pronouns, pronouns, Routes.editPronouns.path),
         const Divider(),
         _createLinkedInSection(context, linkedinUrl),
         const Divider(),

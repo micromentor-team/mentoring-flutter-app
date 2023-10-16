@@ -201,6 +201,10 @@ class Routes {
     name: 'profileEdit',
     path: '${profile.path}/edit',
   );
+  static Route editPronouns = Route(
+    name: 'editPronouns',
+    path: '/pronouns',
+  );
   static Route profileId = Route(
     name: 'profileId',
     path: '${profile.path}/:${RouteParams.userId}',
