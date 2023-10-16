@@ -88,7 +88,7 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
             if (verificationFailed)
               SizedBox(
                 child: Text(
-                  'Oops! Something is not quite right. Please double check your verification code and try again.',
+                  l10n.verificationFailed,
                   style: theme.textTheme.bodyMedium!
                       .copyWith(color: theme.colorScheme.error, fontSize: 20),
                   textAlign: TextAlign.center,

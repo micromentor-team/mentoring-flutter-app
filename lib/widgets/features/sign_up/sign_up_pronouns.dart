@@ -120,9 +120,9 @@ class _SignupPronounsScreenState extends State<SignupPronounsScreen> {
                 minLines: 1,
                 maxLines: 5,
                 readOnly: true,
-                decoration: const InputDecoration(
-                    labelText: "Shown on your profile as",
-                    border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                    labelText: l10n.shownOnYourProfilePronouns,
+                    border: const OutlineInputBorder(),
                     floatingLabelBehavior: FloatingLabelBehavior.always),
               ),
             )
