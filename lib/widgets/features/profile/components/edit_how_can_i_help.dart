@@ -46,7 +46,6 @@ class EditProfileHowCanIHelp extends StatelessWidget {
   Widget _createChipsListTile(BuildContext context, Widget titleWidget,
       List<BigProfileChip> chips, String? nextPath) {
     final ThemeData theme = Theme.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return ListTile(
       title: titleWidget,

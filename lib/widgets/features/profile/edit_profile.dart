@@ -100,10 +100,6 @@ class EditProfileContent extends StatelessWidget {
         .where((g) => g.groupIdent == GroupIdent.mentors.name)
         .firstOrNull
         ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null);
-    final maybeMenteeGroupMembership = userData.groupMemberships
-        .where((g) => g.groupIdent == GroupIdent.mentees.name)
-        .firstOrNull
-        ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
 
     return Column(children: [
       EditProfileAboutMe(
