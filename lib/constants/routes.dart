@@ -205,6 +205,22 @@ class Routes {
     name: 'editPronouns',
     path: '/pronouns',
   );
+  static Route editCity = Route(
+    name: 'editCity',
+    path: '/city',
+  );
+  static Route editWhereYouAreFrom = Route(
+    name: 'editWhereYouAreFrom',
+    path: '/whereYouAreFrom',
+  );
+  static Route editPreferredLanguage = Route(
+    name: 'editPreferredLanguage',
+    path: '/preferredLanguage',
+  );
+  static Route editOtherLanguages = Route(
+    name: 'editOtherLanguages',
+    path: '/otherLanguages',
+  );
   static Route profileId = Route(
     name: 'profileId',
     path: '${profile.path}/:${RouteParams.userId}',

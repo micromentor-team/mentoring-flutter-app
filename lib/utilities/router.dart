@@ -21,7 +21,11 @@ import '../widgets/features/home/home.dart';
 import '../widgets/features/inbox/inbox_chat_list.dart';
 import '../widgets/features/inbox/inbox_chat_messages.dart';
 import '../widgets/features/inbox/inbox_invitation_detail.dart';
+import '../widgets/features/profile/edit_profile_city.dart';
+import '../widgets/features/profile/edit_profile_other_languages.dart';
+import '../widgets/features/profile/edit_profile_preferred_language.dart';
 import '../widgets/features/profile/edit_profile_pronoun.dart';
+import '../widgets/features/profile/edit_profile_where_from.dart';
 import '../widgets/features/sign_in/sign_in.dart';
 import '../widgets/features/sign_up/sign_up_completed.dart';
 import '../widgets/features/sign_up/sign_up_entrepreneur_company_name.dart';
@@ -602,6 +606,50 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const EditProfilePronounScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editCity.path,
+          name: Routes.editCity.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditCityScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editWhereYouAreFrom.path,
+          name: Routes.editWhereYouAreFrom.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditWhereYouAreFromScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editPreferredLanguage.path,
+          name: Routes.editPreferredLanguage.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditPreferredLanguageScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editOtherLanguages.path,
+          name: Routes.editOtherLanguages.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditOtherLanguagesScreen(),
             );
           },
         ),

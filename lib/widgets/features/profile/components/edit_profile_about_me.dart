@@ -144,16 +144,16 @@ class EditProfileAboutMe extends StatelessWidget {
         _createLinkedInSection(context, linkedinUrl),
         const Divider(),
         _createListTileSection(
-            context, l10n.currentCity, livesInLocation, null),
+            context, l10n.currentCity, livesInLocation, Routes.editCity.path),
         const Divider(),
-        _createListTileSection(
-            context, l10n.whereAreYouFrom, fromLocation, null),
+        _createListTileSection(context, l10n.whereAreYouFrom, fromLocation,
+            Routes.editWhereYouAreFrom.path),
         const Divider(),
-        _createListTileSection(
-            context, l10n.preferredLanguage, preferredLanguage, null),
+        _createListTileSection(context, l10n.preferredLanguage,
+            preferredLanguage, Routes.editPreferredLanguage.path),
         const Divider(),
-        _createListTileSection(
-            context, l10n.otherLanguages, otherLanguages, null),
+        _createListTileSection(context, l10n.otherLanguages, otherLanguages,
+            Routes.editOtherLanguages.path),
         const Divider(),
         if (promptTitle != null)
           _createPromptSection(context, promptTitle!, promptResponse!, null),
