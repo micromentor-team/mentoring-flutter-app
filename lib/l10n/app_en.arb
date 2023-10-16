@@ -376,5 +376,11 @@
     "selectPrompt": "Select a prompt",
     "andRecordAnswer": "And record your answer",
     "linkedinConnected": "LinkedIn connected",
-    "connectLinkedIn": "Connect LinkedIn"
+    "connectLinkedIn": "Connect LinkedIn",
+    "editProfileMyExpertises": "My expertises",
+    "editProfileSelectTopics": "Select top 3 topics",
+    "editProfileSelectAdditionalTopics": "Select up to 3 additional topics",
+    "editProfileMyIndustries": "My industries",
+    "editProfileMyMentoringPreferences": "My mentoring preferences",
+    "editProfileMyExpectations": "My expectations"
 }
