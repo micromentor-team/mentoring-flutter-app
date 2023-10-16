@@ -5,10 +5,12 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/edit_experience_and_education.dart';
 import 'package:provider/provider.dart';
 
+import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import '../../../providers/base/operation_result.dart';
 import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../../utilities/utility.dart';
+import 'components/edit_how_can_i_help.dart';
 import 'components/edit_profile_about_me.dart';
 import 'components/profile_experience_and_education.dart';
 
@@ -94,6 +96,15 @@ class EditProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final maybeMentorGroupMembership = userData.groupMemberships
+        .where((g) => g.groupIdent == GroupIdent.mentors.name)
+        .firstOrNull
+        ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null);
+    final maybeMenteeGroupMembership = userData.groupMemberships
+        .where((g) => g.groupIdent == GroupIdent.mentees.name)
+        .firstOrNull
+        ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
+
     return Column(children: [
       EditProfileAboutMe(
         pronouns: userData.pronounsDisplay,
@@ -118,7 +129,25 @@ class EditProfileContent extends StatelessWidget {
             .nonNulls
             .toList(),
       ),
-      Divider(),
+      const Divider(),
+      EditProfileHowCanIHelp(
+          expertises: maybeMentorGroupMembership?.expertises
+                  .map((e) => e.translatedValue!)
+                  .toList() ??
+              [],
+          industries: maybeMentorGroupMembership?.industries
+                  .map((e) => e.translatedValue!)
+                  .toList() ??
+              [],
+          mentoringPreferences: const [
+            "Weekly check-ins",
+            "Monthly check-ins",
+            "Informal chats",
+            "Formal meetings",
+            "Spot mentoring",
+          ], //TODO
+          expectations: maybeMentorGroupMembership?.expectationsForMentees),
+      const Divider(),
       EditProfileExperienceAndEducation(
         experience: userData.businessExperiences
                 ?.map(
