@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/profile/components/profile_chip.dart';
+import 'package:mm_flutter_app/widgets/features/profile/components/big_profile_chip.dart';
 
 class EditProfileHowCanIHelp extends StatelessWidget {
   final List<String> expertises;
@@ -44,7 +44,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
   }
 
   Widget _createChipsListTile(BuildContext context, Widget titleWidget,
-      List<ProfileChip> chips, String? nextPath) {
+      List<BigProfileChip> chips, String? nextPath) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
@@ -128,7 +128,11 @@ class EditProfileHowCanIHelp extends StatelessWidget {
                         .copyWith(color: theme.colorScheme.secondary),
                   ),
                 ]),
-            topThreeExpertises.map((e) => ProfileChip(text: e)).toList(),
+            topThreeExpertises
+                .map((e) => BigProfileChip(
+                      text: e,
+                    ))
+                .toList(),
             null),
         _createChipsListTile(
             context,
@@ -137,7 +141,11 @@ class EditProfileHowCanIHelp extends StatelessWidget {
               style: theme.textTheme.bodyMedium!
                   .copyWith(color: theme.colorScheme.secondary),
             ),
-            additionalExpertises.map((e) => ProfileChip(text: e)).toList(),
+            additionalExpertises
+                .map((e) => BigProfileChip(
+                      text: e,
+                    ))
+                .toList(),
             null),
         const Divider(),
         _createChipsListTile(
@@ -147,7 +155,11 @@ class EditProfileHowCanIHelp extends StatelessWidget {
               style: theme.textTheme.titleMedium!
                   .copyWith(color: theme.colorScheme.primary),
             ),
-            industries.map((e) => ProfileChip(text: e)).toList(),
+            industries
+                .map((e) => BigProfileChip(
+                      text: e,
+                    ))
+                .toList(),
             null),
         const Divider(),
         _createChipsListTile(
@@ -157,7 +169,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
               style: theme.textTheme.titleMedium!
                   .copyWith(color: theme.colorScheme.primary),
             ),
-            mentoringPreferences.map((e) => ProfileChip(text: e)).toList(),
+            mentoringPreferences.map((e) => BigProfileChip(text: e)).toList(),
             null),
         const Divider(),
         _createListTileSection(context, l10n.editProfileMyExpectations,
