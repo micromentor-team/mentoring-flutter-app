@@ -58,6 +58,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
       date: invitation.createdAt.toLocal(),
       message: invitation.messageText ?? '',
       highlightTileTitle: true,
+      highlightTileText: false,
       simplifyDate: true,
       onPressed: () => router.push(
         '${Routes.inboxInvitesSent.path}/${invitation.id}',

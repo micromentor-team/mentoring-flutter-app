@@ -24,37 +24,33 @@ class ReminderBanner extends StatefulWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
 
-    return Padding(
-      padding: const EdgeInsets.only(right: Insets.paddingLarge),
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              SizedBox(
-                width: Radii.avatarRadiusSmall * 2,
-                height: Radii.avatarRadiusSmall * 2,
-                child: CircularProgressIndicator(
-                  value: profileCompletionPercentage / 100,
-                ),
+    return Column(
+      children: [
+        Stack(
+          children: [
+            SizedBox(
+              width: Radii.avatarRadiusSmall * 2,
+              height: Radii.avatarRadiusSmall * 2,
+              child: CircularProgressIndicator(
+                value: profileCompletionPercentage / 100,
               ),
-              SizedBox(
-                width: Radii.avatarRadiusSmall * 2,
-                height: Radii.avatarRadiusSmall * 2,
-                child: Center(
-                  child: Text(
-                    l10n.percentageProfileCompletion(
-                        profileCompletionPercentage),
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      color: theme.colorScheme.primary,
-                    ),
+            ),
+            SizedBox(
+              width: Radii.avatarRadiusSmall * 2,
+              height: Radii.avatarRadiusSmall * 2,
+              child: Center(
+                child: Text(
+                  l10n.percentageProfileCompletion(profileCompletionPercentage),
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: theme.colorScheme.primary,
                   ),
                 ),
-              )
-            ],
-          ),
-        ],
-      ),
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 
@@ -162,6 +158,7 @@ class _ReminderBannerState extends State<ReminderBanner> {
                 Row(
                   children: <Widget>[
                     widget._buildProgressCircleColumn(context),
+                    const SizedBox(width: Insets.paddingLarge),
                     widget._buildTextColumn(context),
                   ],
                 ),
@@ -184,10 +181,8 @@ class MaybeReminderBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    // int profileCompletionPercentage =
-    //     authenticatedUser.profileCompletionPercentage;
-
-    int profileCompletionPercentage = 40;
+    int profileCompletionPercentage =
+        authenticatedUser.profileCompletionPercentage;
 
     DateTime? updatedAt = authenticatedUser.updatedAt?.toLocal();
     if (profileCompletionPercentage < 50) {

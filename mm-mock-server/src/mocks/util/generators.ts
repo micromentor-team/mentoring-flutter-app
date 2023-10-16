@@ -24,6 +24,7 @@ export function generateUser(groups?: any[]) {
         offersHelp: groups?.some(g => g.ident === "mentors") ?? false,
         seeksHelp: groups?.some(g => g.ident === "mentees") ?? false,
         websites: faker.helpers.arrayElements([generateWebsite(), generateWebsite()],{min: 0, max: 2}),
+        preferredLanguage: faker.helpers.arrayElement(constants.languages),
         spokenLanguages: faker.helpers.arrayElements(constants.languages, {min: 1, max: 4}),
         avatarUrl: faker.image.urlPicsumPhotos(),
         groupMemberships: [],
@@ -129,23 +130,23 @@ export function generateWebsite() {
     }
 }
 
-export function generateUserSearch(args: any, users: any) {
+export function generateUserSearch(userSearchInput: any, users: any) {
+    const filterSeeksHelp = userSearchInput.seeksHelp == "isTrue";
+    const filterOffersHelp = userSearchInput.offersHelp == "isTrue";
+    const searchResults = users.filter(
+        (e: any) => (e.seeksHelp && filterSeeksHelp) || (e.offersHelp && filterOffersHelp)
+    );
     return {
         __typename: "UserSearch",
         id: faker.string.alphanumeric({ length: 24 }),
-        "name": null,
-        "seeksHelp": args.seeksHelp,
-        "offersHelp": args.offersHelp,
-        "searchText": args.searchText,
-        "expiresAt": null,
-        "userId": faker.string.alphanumeric({length: 24}),
-        "updatedAt": faker.date.recent(),
-        "runInfos": {
-            "resultsCount": faker.number.int(20),
-            "runAt": faker.date.recent(),
-            "topFoundUsers": users,
-            // TODO verify that this mirrors final backend implementation
-        }
+        topFoundUsers: searchResults,
+        runInfos: [
+            {
+                __typename: "UserSearchRunInfo",
+                finishedAt: faker.date.recent(),
+                matchCount: searchResults.length,
+            },
+        ],
     }
 }
 
@@ -199,14 +200,14 @@ export function generateGroupMembership(user: any, group: any) {
 
     if (membership.groupIdent === "mentors") {
         membership.__typename = "MentorsGroupMembership";
-        membership.expertises = faker.helpers.arrayElements(constants.expertises, {min: 1, max: 3});
-        membership.industries = faker.helpers.arrayElements(constants.industries, 2);
+        membership.expertises = faker.helpers.arrayElements(constants.expertises, 3);
+        membership.industries = faker.helpers.arrayElements(constants.industries, 3);
         membership.endorsements = faker.number.int(5);
         membership.expectationsForMentees = faker.lorem.paragraph();
     }
     if (membership.groupIdent === "mentees") {
         membership.__typename = "MenteesGroupMembership";
-        membership.soughtExpertises = faker.helpers.arrayElements(constants.expertises, {min: 1, max: 3});
+        membership.soughtExpertises = faker.helpers.arrayElements(constants.expertises, 3);
         membership.industry = faker.helpers.arrayElement(constants.industries);
         membership.reasonsForStartingBusiness = faker.lorem.paragraph();
     }
@@ -328,5 +329,6 @@ export function generateChannelInvitation(sender: any, recipient: any, messageTe
         senderId: sender.id,
         sender: sender,
         status: status,
+        readByRecipientAt: null,
     }
 }

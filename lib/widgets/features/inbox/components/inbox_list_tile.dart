@@ -9,6 +9,7 @@ class InboxListTile extends StatelessWidget {
   final DateTime date;
   final String message;
   final int notifications;
+  final bool showPlainNotificationBubble;
   final bool highlightTileTitle;
   final bool highlightTileText;
   final bool simplifyDate;
@@ -22,6 +23,7 @@ class InboxListTile extends StatelessWidget {
     required this.date,
     required this.message,
     this.notifications = 0,
+    this.showPlainNotificationBubble = false,
     this.highlightTileTitle = false,
     this.highlightTileText = false,
     this.simplifyDate = false,
@@ -84,11 +86,28 @@ class InboxListTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    if (notifications > 0)
+                    if (!showPlainNotificationBubble && notifications > 0)
                       Align(
                         alignment: AlignmentDirectional.topStart,
                         child: NotificationBubble(
                           notifications: notifications,
+                        ),
+                      ),
+                    if (showPlainNotificationBubble)
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                            top: Insets.paddingExtraSmall,
+                            start: Insets.paddingExtraSmall,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
+                              color: theme.colorScheme.error,
+                              child: const SizedBox(width: 12, height: 12),
+                            ),
+                          ),
                         ),
                       ),
                   ],
@@ -145,13 +164,11 @@ class InboxListTile extends StatelessWidget {
                 message,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: highlightTileText
-                    ? theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onBackground,
-                      )
-                    : theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.hintColor,
-                      ),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: highlightTileText
+                      ? theme.colorScheme.onBackground
+                      : theme.hintColor,
+                ),
               ),
             ),
           ],

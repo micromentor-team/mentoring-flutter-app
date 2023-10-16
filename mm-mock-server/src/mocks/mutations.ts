@@ -118,6 +118,14 @@ export function mockMutations(serverState: MockServerState) {
             });
             return channelInvitation.id;
         },
+        updateChannelInvitation: (_: any, args: { input: { id: string, readByRecipientAt: Date | null } }) => {
+            const channelInvitation = serverState.channelInvitations.find((e) => e.id == args.input.id);
+            if(args.input.readByRecipientAt) {
+                channelInvitation.readByRecipientAt = args.input.readByRecipientAt;
+            }
+            serverState.pubsub.publish(PUBSUB_OBJECT_CHANGED, { objectChanged: { objectId: channelInvitation.id }});
+            return channelInvitation.id;
+        },
         deleteChannelMessage: (_: any, args: { channelMessageId: string, deletePhysically: boolean }) => {
             var channelMessage = serverState.channelMessages.find((element) => element.id == args.channelMessageId);
             const currentTime : string = new Date().toISOString();
@@ -188,25 +196,10 @@ export function mockMutations(serverState: MockServerState) {
             });
             return channelMessage.id;
         },
-        createUserSearch: (_: any, args: {
-            seeksHelp: string | null,
-            offersHelp: string | null,
-            expertisesTextIds: string[] | null,
-            businessDevelopment: string[] | null,
-            industriesTextIds: string[] | null,
-            countryTextIds: string[] | null,
-            companyStagesTextIds: string[] | null,
-            languagesTextIds: string[] | null,
-        }) => {
-            const search = generators.generateUserSearch(args, serverState.otherUsers);
+        createUserSearch: (_: any, args: { input: any }) => {
+            const search = generators.generateUserSearch(args.input, serverState.otherUsers);
             serverState.userSearches.push(search);
-            // clone search
-            const response = JSON.parse(JSON.stringify(search));
-            response.runInfos = null;
-            response.updatedAt = null;
-            response.topFoundUsers =
-                serverState.otherUsers.concat([serverState.loggedInUser]);
-            return response;
+            return JSON.parse(JSON.stringify(search));
         }
     }
 }

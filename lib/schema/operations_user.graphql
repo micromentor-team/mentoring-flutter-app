@@ -17,61 +17,6 @@ query GetAuthenticatedUser {
     }
 }
 
-query MyUserSearches {
-    myUserSearches {
-        topFoundUsers {
-            id
-            email
-            firstName
-            lastName
-            fullName
-            avatarUrl
-            userHandle
-            offersHelp
-            seeksHelp
-            jobTitle
-            countryOfResidence {
-                translatedValue
-            }
-            groupMemberships {
-                groupIdent
-                ... on MentorsGroupMembership {
-                    expertises {
-                        translatedValue
-                    }
-                    industries {
-                        translatedValue
-                    }
-                    endorsements
-                }
-                ... on MenteesGroupMembership {
-                    soughtExpertises {
-                        translatedValue
-                    }
-                    industry {
-                        translatedValue
-                    }
-                }
-            }
-            companies {
-                name
-                companyStage {
-                    translatedValue
-                }
-                companyType {
-                    translatedValue
-                }
-            }
-        }
-        runInfos {
-        finishedAt
-        matchCount
-        topUserIds
-        }
-        updatedAt
-    }
-}
-
 query FindUserSearch($userSearchId: String!) {
     findUserSearchById(userSearchId: $userSearchId) {
         runInfos {
@@ -114,58 +59,6 @@ query FindUserSearchResults($userSearchId: String!, $options: FindObjectsOptions
         }
         companies {
             name
-        }
-    }
-}
-
-query FindRecommendedUsers($options: FindObjectsOptions, $filter: UserListFilter, $match: UserInput) {
-    findUsers(options: $options, filter: $filter, match: $match) {
-        id
-        email
-        firstName
-        lastName
-        fullName
-        avatarUrl
-        userHandle
-        cityOfResidence
-        regionOfResidence
-        offersHelp
-        seeksHelp
-        companies {
-            name
-            companyStage {
-                translatedValue
-            }
-            industries
-        }
-        countryOfResidence {
-            textId
-            translatedValue
-        }
-        jobTitle
-        groupMemberships {
-            groupId
-            ... on MenteesGroupMembership {
-                soughtExpertises {
-                    textId
-                    translatedValue
-                }
-                industry {
-                    textId
-                    translatedValue
-                }
-            }
-            ... on MentorsGroupMembership {
-                expertises {
-                    textId
-                    translatedValue
-                }
-                industries {
-                    textId
-                    translatedValue
-                }
-                endorsements
-            }
         }
     }
 }
