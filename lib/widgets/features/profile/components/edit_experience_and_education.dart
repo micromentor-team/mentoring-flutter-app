@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'profile_experience_and_education.dart';
 
 class EditProfileExperienceAndEducation extends StatelessWidget {
@@ -30,7 +31,7 @@ String _concatenateExperience(BuildContext context, ExperienceInput exp) {
   final String location =
       [exp.city, exp.state, exp.country].nonNulls.join(l10n.listSeparator);
 
-  return "${exp.companyName}\n(${exp.dateRange(l10n.present)}) · ${exp.timeRange}\n$location";
+  return "${exp.companyName}\n(${exp.dateRange(l10n.datePresent)}) · ${exp.timeRange}\n$location";
 }
 
 Widget _createListTileSection(BuildContext context, String title,
@@ -112,7 +113,7 @@ class _EditExperience extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileExperience,
+            l10n.profileEditExperience,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
@@ -127,7 +128,7 @@ String _concatenateEducation(BuildContext context, EducationInput edu) {
   final l10n = AppLocalizations.of(context)!;
   final String titleAndMajor =
       [edu.title, edu.major].nonNulls.join(l10n.listSeparator);
-  return "${edu.dateRange(l10n.present)}\n$titleAndMajor";
+  return "${edu.dateRange(l10n.datePresent)}\n$titleAndMajor";
 }
 
 class _EditEducation extends StatelessWidget {
@@ -152,7 +153,7 @@ class _EditEducation extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileEducation,
+            l10n.profileEditEducation,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
