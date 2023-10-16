@@ -44,8 +44,8 @@ class MessageBubble extends StatelessWidget {
     if (isDeleted) {
       return Text(
         isSentByAuthenticatedUser
-            ? l10n.messagesStatusDeletedByMe
-            : l10n.messagesStatusDeletedByOther,
+            ? l10n.inboxMessagesStatusDeletedByMe
+            : l10n.inboxMessagesStatusDeletedByOther,
         style: theme.textTheme.bodyMedium?.copyWith(
           fontStyle: FontStyle.italic,
           color: theme.disabledColor,
@@ -138,7 +138,7 @@ class MessageBubble extends StatelessWidget {
                   start: isSentByAuthenticatedUser ? 0 : null,
                   child: Text(
                     message.editedAt != null
-                        ? l10n.messagesStatusEdited(sentAt)
+                        ? l10n.inboxMessagesStatusEdited(sentAt)
                         : sentAt,
                     style: theme.textTheme.labelSmall?.copyWith(
                       color: theme.colorScheme.outline,

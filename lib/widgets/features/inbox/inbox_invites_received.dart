@@ -125,7 +125,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
             if (pendingReceivedInvitations?.isEmpty ?? true) {
               return EmptyStateMessage(
                 icon: Icons.mail,
-                text: _l10n.emptyStateInvites,
+                text: _l10n.inboxInvitesEmptyState,
               );
             }
             return Padding(

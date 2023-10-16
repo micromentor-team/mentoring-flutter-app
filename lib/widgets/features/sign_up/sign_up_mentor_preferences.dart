@@ -40,8 +40,8 @@ class _SignupMentorPreferencesScreenState
       progress: SignUpProgress.three,
       title: l10n.signupMentoringPreferencesTitle,
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },
@@ -54,7 +54,7 @@ class _SignupMentorPreferencesScreenState
             : null,
       ),
       footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
+          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         children: [
           CreateMultiSelectChips(

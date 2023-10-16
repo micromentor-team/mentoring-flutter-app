@@ -86,10 +86,10 @@ class _SignupGenderScreenState extends State<SignupGenderScreen> {
         ),
       ),
       footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },

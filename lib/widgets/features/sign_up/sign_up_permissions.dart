@@ -46,7 +46,7 @@ class _SignupPermissionsScreenState extends State<SignupPermissionsScreen> {
 
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.howCanWeGetInTouch,
+      title: l10n.signupPermissionsTitle,
       body: Column(
         children: [
           Row(
@@ -65,7 +65,7 @@ class _SignupPermissionsScreenState extends State<SignupPermissionsScreen> {
               ),
               Expanded(
                 child: Text(
-                  l10n.pushNotificationsEnabled,
+                  l10n.signupPermissionsNotificationsOption,
                   style: theme.textTheme.bodyMedium!
                       .copyWith(color: theme.colorScheme.outline),
                 ),
@@ -90,7 +90,7 @@ class _SignupPermissionsScreenState extends State<SignupPermissionsScreen> {
               ),
               Expanded(
                 child: Text(
-                  l10n.recieveUpdates,
+                  l10n.signupPermissionsUpdatesOption,
                   style: theme.textTheme.bodyMedium!
                       .copyWith(color: theme.colorScheme.outline),
                 ),
@@ -100,8 +100,8 @@ class _SignupPermissionsScreenState extends State<SignupPermissionsScreen> {
         ],
       ),
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },

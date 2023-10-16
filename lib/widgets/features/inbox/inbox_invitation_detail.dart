@@ -233,7 +233,7 @@ class _InboxInvitationDetailScreenState
                 });
           },
           child: Text(
-            _l10n.decline,
+            _l10n.actionDecline,
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.primary,
             ),
@@ -262,7 +262,7 @@ class _InboxInvitationDetailScreenState
             }
           },
           child: Text(
-            _l10n.accept,
+            _l10n.actionAccept,
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.onPrimary,
             ),
@@ -426,14 +426,14 @@ class _DeclineReasonState extends State<DeclineReason> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    String subtitle = l10n.whyDeclineSubtitle(widget.name ?? '');
+    String subtitle = l10n.inviteDeclineSubtitle(widget.name ?? '');
 
     List<String> reasons = [
-      l10n.declineReasonNotGoodFit,
-      l10n.declineReasonTooBusy,
-      l10n.declineReasonNoReason,
-      l10n.declineReasonFakeProfile,
-      l10n.declineReasonInappropriate
+      l10n.inviteDeclineReasonNotGoodFit,
+      l10n.inviteDeclineReasonTooBusy,
+      l10n.inviteDeclineReasonNoReason,
+      l10n.inviteDeclineReasonFakeProfile,
+      l10n.inviteDeclineReasonInappropriate
     ];
 
     List<Widget> reasonWidgets = [];
@@ -502,7 +502,7 @@ class _DeclineReasonState extends State<DeclineReason> {
           children: <Widget>[
                 const SizedBox(height: Insets.paddingLarge),
                 Text(
-                  l10n.whyDecline,
+                  l10n.inviteDeclineTitle,
                   style: theme.textTheme.headlineSmall!.copyWith(
                     color: theme.colorScheme.onBackground,
                   ),

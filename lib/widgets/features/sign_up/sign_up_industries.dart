@@ -57,8 +57,8 @@ class _SignupIndustriesScreenState extends State<SignupIndustriesScreen> {
           ? l10n.signupIndustryEntrepreneurTitle
           : l10n.signupIndustryMentorTitle,
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },
@@ -77,7 +77,7 @@ class _SignupIndustriesScreenState extends State<SignupIndustriesScreen> {
             : null,
       ),
       footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
+          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

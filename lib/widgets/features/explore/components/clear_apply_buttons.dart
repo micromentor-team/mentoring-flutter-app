@@ -25,7 +25,7 @@ class ClearApplyButtons extends StatelessWidget {
             minimumSize: Dimensions.bigButtonSize,
           ),
           onPressed: onClear,
-          child: Text(l10n.clear, style: theme.textTheme.labelLarge),
+          child: Text(l10n.actionClear, style: theme.textTheme.labelLarge),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -35,7 +35,7 @@ class ClearApplyButtons extends StatelessWidget {
             textStyle: theme.textTheme.labelLarge,
           ),
           onPressed: onApply,
-          child: Text(l10n.apply, style: theme.textTheme.labelLarge),
+          child: Text(l10n.actionApply, style: theme.textTheme.labelLarge),
         ),
       ],
     );

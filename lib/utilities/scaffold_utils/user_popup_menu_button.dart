@@ -58,22 +58,22 @@ class UserPopupMenuButton extends StatelessWidget {
         if (includeArchiveOption)
           PopupMenuItem(
             value: 0,
-            child: Text(l10n.overflowActionArchive),
+            child: Text(l10n.userOverflowActionArchive),
           ),
         if (includeUnarchiveOption)
           PopupMenuItem(
             value: 1,
-            child: Text(l10n.overflowActionUnarchive),
+            child: Text(l10n.userOverflowActionUnarchive),
           ),
         if (includeBlockOption)
           PopupMenuItem(
             value: 2,
-            child: Text(l10n.overflowActionBlock),
+            child: Text(l10n.userOverflowActionBlock),
           ),
         if (includeReportOption)
           PopupMenuItem(
             value: 3,
-            child: Text(l10n.overflowActionReport),
+            child: Text(l10n.userOverflowActionReport),
           ),
       ],
       onSelected: (value) async {
@@ -105,8 +105,8 @@ class UserPopupMenuButton extends StatelessWidget {
                 context: context,
                 builder: (dialogContext) {
                   return AlertDialog(
-                    title: Text(l10n.popupBlockTitle(userFullName)),
-                    content: Text(l10n.popupBlockSubtitle(userFullName)),
+                    title: Text(l10n.userBlockTitle(userFullName)),
+                    content: Text(l10n.userBlockSubtitle(userFullName)),
                     actions: [
                       TextButton(
                         child: Text(l10n.actionCancel),

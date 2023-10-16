@@ -15,87 +15,98 @@ class SelectLanguageScreen extends StatelessWidget {
 
     List<SingleChildRenderObjectWidget> otherLanguageButtons =
         List<SingleChildRenderObjectWidget>.from(
-            localeModel.getOtherSupportedLanguagesInfo().map((localeInfo) {
-      return Padding(
-          padding: const EdgeInsets.all(Insets.paddingSmall),
-          child: TextButton(
-            style: ButtonStyles.secondaryRoundedRectangleButtonLarge(context),
-            onPressed: () {
-              localeModel.set(Locale(localeInfo.code));
-            },
-            child: Text(
-              localeInfo.name,
-              textAlign: TextAlign.center,
-            ),
-          ));
-    }));
+      localeModel.getOtherSupportedLanguagesInfo().map(
+        (localeInfo) {
+          return Padding(
+              padding: const EdgeInsets.all(Insets.paddingSmall),
+              child: TextButton(
+                style:
+                    ButtonStyles.secondaryRoundedRectangleButtonLarge(context),
+                onPressed: () {
+                  localeModel.set(Locale(localeInfo.code));
+                },
+                child: Text(
+                  localeInfo.name,
+                  textAlign: TextAlign.center,
+                ),
+              ));
+        },
+      ),
+    );
 
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: const Icon(Icons.arrow_back_ios, size: 16.0),
-          ),
-          title: Text(l10n.backToSignUp,
-              style: theme.textTheme.labelLarge
-                  ?.copyWith(color: theme.colorScheme.primary)),
-          centerTitle: false,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(Icons.arrow_back_ios, size: 16.0),
         ),
-        body: SafeArea(
-            child: Column(
+        title: Text(l10n.languageSelectBack,
+            style: theme.textTheme.labelLarge
+                ?.copyWith(color: theme.colorScheme.primary)),
+        centerTitle: false,
+      ),
+      body: SafeArea(
+        child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
                 const Center(
-                    child: SizedBox(
-                  height: Insets.paddingLarge,
-                )),
+                  child: SizedBox(
+                    height: Insets.paddingLarge,
+                  ),
+                ),
                 Padding(
-                    padding: const EdgeInsets.all(Insets.paddingSmall),
-                    child: Text(
-                      l10n.changeYourLanguage,
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        color: theme.colorScheme.primary,
-                      ),
-                    )),
+                  padding: const EdgeInsets.all(Insets.paddingSmall),
+                  child: Text(
+                    l10n.languageSelectTitle,
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ),
                 Padding(
-                    padding: const EdgeInsets.all(Insets.paddingSmall),
-                    child: Text(
-                      l10n.currentLanguage,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.outline,
-                      ),
-                    )),
+                  padding: const EdgeInsets.all(Insets.paddingSmall),
+                  child: Text(
+                    l10n.languageSelectCurrent,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.outline,
+                    ),
+                  ),
+                ),
                 Padding(
-                    padding: const EdgeInsets.all(Insets.paddingSmall),
-                    child: TextButton(
-                      style: ButtonStyles.primaryRoundedRectangleButtonLarge(
-                          context),
-                      onPressed: () {},
-                      child: Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Text(
-                            localeModel.getCurrentLanguageName(),
-                          ),
-                          const SizedBox(width: 4.0),
-                          const Icon(Icons.check, size: 16.0),
-                        ],
-                      ),
-                    )),
+                  padding: const EdgeInsets.all(Insets.paddingSmall),
+                  child: TextButton(
+                    style: ButtonStyles.primaryRoundedRectangleButtonLarge(
+                        context),
+                    onPressed: () {},
+                    child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Text(
+                          localeModel.getCurrentLanguageName(),
+                        ),
+                        const SizedBox(width: 4.0),
+                        const Icon(Icons.check, size: 16.0),
+                      ],
+                    ),
+                  ),
+                ),
                 Padding(
-                    padding: const EdgeInsets.all(Insets.paddingSmall),
-                    child: Text(
-                      l10n.otherLanguages,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.outline,
-                      ),
-                    )),
+                  padding: const EdgeInsets.all(Insets.paddingSmall),
+                  child: Text(
+                    l10n.languageSelectOthers,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.outline,
+                    ),
+                  ),
+                ),
               ] +
               otherLanguageButtons,
-        )));
+        ),
+      ),
+    );
   }
 }

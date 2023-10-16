@@ -96,7 +96,7 @@ class MessageReply extends StatelessWidget {
                         Text(
                           replyMessage.deletedAt == null
                               ? replyMessage.messageText!
-                              : l10n.messagesStatusDeletedByOther,
+                              : l10n.inboxMessagesStatusDeletedByOther,
                           maxLines: 1,
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color: isUser

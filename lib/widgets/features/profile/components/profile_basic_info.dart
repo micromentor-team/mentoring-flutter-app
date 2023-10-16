@@ -132,12 +132,12 @@ Widget _createNameAndBadges(
               ?.copyWith(color: theme.colorScheme.secondary)),
     if (userType == UserType.mentor)
       ProfileChip(
-        text: l10n.mentorCapitalized,
+        text: l10n.profileViewUserTypeMentor,
         usePrimaryColor: true,
       ),
     if (userType == UserType.entrepreneur)
       ProfileChip(
-        text: l10n.entrepreneurCapitalized,
+        text: l10n.profileViewUserTypeEntrepreneur,
         usePrimaryColor: true,
       ),
   ];
@@ -183,7 +183,7 @@ Widget _createVacationBanner(AppLocalizations l10n, ThemeData theme) {
               ),
               const SizedBox(width: Insets.paddingExtraSmall),
               Text(
-                l10n.profileVacationBanner,
+                l10n.profileViewVacationBanner,
                 style: theme.textTheme.labelSmall!
                     .copyWith(color: theme.colorScheme.onPrimaryContainer),
               ),

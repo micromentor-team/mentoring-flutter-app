@@ -278,8 +278,7 @@ class BuildMessageBubbles extends StatelessWidget {
         padding: const EdgeInsets.all(Insets.paddingSmall),
         child: TextDivider(
           text: DateTime.now().day == message.createdAt.toLocal().day
-              ? l10n.dateSimpleToday[0].toUpperCase() +
-                  l10n.dateSimpleToday.substring(1)
+              ? l10n.dateToday[0].toUpperCase() + l10n.dateToday.substring(1)
               : DateFormat('EEE. MMM dd').format(message.createdAt.toLocal()),
         ),
       ),

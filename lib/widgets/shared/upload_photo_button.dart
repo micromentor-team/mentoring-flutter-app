@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 
 class UploadPhotoButton extends StatelessWidget {
   const UploadPhotoButton({Key? key}) : super(key: key);
@@ -75,7 +75,7 @@ class UploadPhotoDialog extends StatelessWidget {
                     Icons.insert_photo_outlined,
                   ),
                   const SizedBox(width: Insets.paddingSmall),
-                  Text(l10n.uploadPhoto),
+                  Text(l10n.profilePhotoUpload),
                 ],
               ),
             ),
@@ -100,7 +100,7 @@ class UploadPhotoDialog extends StatelessWidget {
                     Icons.camera_alt_outlined,
                   ),
                   const SizedBox(width: Insets.paddingSmall),
-                  Text(l10n.takePhoto),
+                  Text(l10n.profilePhotoTake),
                 ],
               ),
             ),

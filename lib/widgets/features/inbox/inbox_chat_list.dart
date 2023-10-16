@@ -211,7 +211,7 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
             if (channels.isEmpty) {
               return EmptyStateMessage(
                 icon: Icons.chat,
-                text: _l10n.emptyStateChats,
+                text: _l10n.inboxChatsEmptyState,
               );
             }
             return ListView(

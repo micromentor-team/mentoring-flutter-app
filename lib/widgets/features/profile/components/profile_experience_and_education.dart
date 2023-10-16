@@ -51,7 +51,7 @@ class _Experience extends StatelessWidget {
             ),
             Text(exp.companyName, style: bodySmallOnSurface),
             Text(
-              "(${exp.dateRange(l10n.present)}) · ${exp.timeRange}",
+              "(${exp.dateRange(l10n.datePresent)}) · ${exp.timeRange}",
               style: bodySmallOnSurface,
             ),
             Text(
@@ -80,7 +80,7 @@ class _Experience extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.profileExperience, style: theme.textTheme.titleMedium),
+        Text(l10n.profileViewExperience, style: theme.textTheme.titleMedium),
         const SizedBox(height: Insets.paddingMedium),
         ...items,
       ],
@@ -111,7 +111,8 @@ class _Education extends StatelessWidget {
                     ),
                   ),
                   Text(" ", style: bodySmallOnSurface),
-                  Text(edu.dateRange(l10n.present), style: bodySmallOnSurface)
+                  Text(edu.dateRange(l10n.datePresent),
+                      style: bodySmallOnSurface)
                 ],
               ),
               Text(
@@ -126,7 +127,7 @@ class _Education extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.profileEducation, style: theme.textTheme.titleMedium),
+        Text(l10n.profileViewEducation, style: theme.textTheme.titleMedium),
         const SizedBox(height: Insets.paddingMedium),
         ...items,
       ],
