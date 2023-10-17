@@ -88,7 +88,8 @@ class EditProfileAboutMe extends StatelessWidget {
     );
   }
 
-  Widget _createLinkedInSection(BuildContext context, String? linkedInUrl) {
+  Widget _createLinkedInSection(
+      BuildContext context, String? linkedInUrl, String? nextPath) {
     final theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     String titleText = linkedInUrl != null
@@ -109,7 +110,11 @@ class EditProfileAboutMe extends StatelessWidget {
       ]),
       trailing: IconButton(
         icon: const Icon(Icons.navigate_next),
-        onPressed: () {},
+        onPressed: () {
+          if (nextPath != null) {
+            context.push(nextPath);
+          }
+        },
       ),
     );
   }
@@ -143,26 +148,26 @@ class EditProfileAboutMe extends StatelessWidget {
           context,
           l10n.profileEditPronouns,
           pronouns,
-          null,
+          Routes.editPronouns.path,
         ),
         const Divider(),
-        _createLinkedInSection(context, linkedinUrl),
+        _createLinkedInSection(context, linkedinUrl, Routes.editLinkedin.path),
         const Divider(),
-        _createListTileSection(
-            context, l10n.profileEditCurrentLocation, livesInLocation, null),
+        _createListTileSection(context, l10n.profileEditCurrentLocation,
+            livesInLocation, Routes.editCity.path),
         const Divider(),
-        _createListTileSection(
-            context, l10n.profileEditOriginLocation, fromLocation, null),
+        _createListTileSection(context, l10n.profileEditOriginLocation,
+            fromLocation, Routes.editOriginLocation.path),
         const Divider(),
         _createListTileSection(
           context,
           l10n.profileEditLanguagePreferred,
           preferredLanguage,
-          null,
+          Routes.editPreferredLanguage.path,
         ),
         const Divider(),
-        _createListTileSection(
-            context, l10n.profileEditLanguageOthers, otherLanguages, null),
+        _createListTileSection(context, l10n.profileEditLanguageOthers,
+            otherLanguages, Routes.editOtherLanguages.path),
         const Divider(),
         if (promptTitle != null)
           _createPromptSection(context, promptTitle!, promptResponse!, null),

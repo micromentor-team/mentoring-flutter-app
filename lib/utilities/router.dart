@@ -21,6 +21,8 @@ import '../widgets/features/home/home.dart';
 import '../widgets/features/inbox/inbox_chat_list.dart';
 import '../widgets/features/inbox/inbox_chat_messages.dart';
 import '../widgets/features/inbox/inbox_invitation_detail.dart';
+import '../widgets/features/profile/edit_profile_linkedin.dart';
+import '../widgets/features/profile/edit_profile_pronoun.dart';
 import '../widgets/features/sign_in/sign_in.dart';
 import '../widgets/features/sign_up/sign_up_completed.dart';
 import '../widgets/features/sign_up/sign_up_entrepreneur_company_name.dart';
@@ -593,6 +595,72 @@ class AppRouter {
             );
           },
         ),
+        GoRoute(
+          path: Routes.editPronouns.path,
+          name: Routes.editPronouns.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditProfilePronounScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editLinkedin.path,
+          name: Routes.editLinkedin.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditLinkedInScreen(),
+            );
+          },
+        ),
+        // GoRoute(
+        //   path: Routes.editCity.path,
+        //   name: Routes.editCity.name,
+        //   pageBuilder: (BuildContext context, GoRouterState state) {
+        //     return MaterialPage(
+        //       key: state.pageKey,
+        //       maintainState: false,
+        //       child: const EditCityScreen(),
+        //     );
+        //   },
+        // ),
+        // GoRoute(
+        //   path: Routes.editOriginLocation.path,
+        //   name: Routes.editOriginLocation.name,
+        //   pageBuilder: (BuildContext context, GoRouterState state) {
+        //     return MaterialPage(
+        //       key: state.pageKey,
+        //       maintainState: false,
+        //       child: const EditOriginLocationScreen(),
+        //     );
+        //   },
+        // ),
+        // GoRoute(
+        //   path: Routes.editPreferredLanguage.path,
+        //   name: Routes.editPreferredLanguage.name,
+        //   pageBuilder: (BuildContext context, GoRouterState state) {
+        //     return MaterialPage(
+        //       key: state.pageKey,
+        //       maintainState: false,
+        //       child: const EditPreferredLanguageScreen(),
+        //     );
+        //   },
+        // ),
+        // GoRoute(
+        //   path: Routes.editOtherLanguages.path,
+        //   name: Routes.editOtherLanguages.name,
+        //   pageBuilder: (BuildContext context, GoRouterState state) {
+        //     return MaterialPage(
+        //       key: state.pageKey,
+        //       maintainState: false,
+        //       child: const EditOtherLanguagesScreen(),
+        //     );
+        //   },
+        // ),
         GoRoute(
           path: Routes.profileId.path,
           name: Routes.profileId.name,

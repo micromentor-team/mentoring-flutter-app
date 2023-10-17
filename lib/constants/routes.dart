@@ -201,6 +201,30 @@ class Routes {
     name: 'profileEdit',
     path: '${profile.path}/edit',
   );
+  static Route editPronouns = Route(
+    name: 'editPronouns',
+    path: '/pronouns',
+  );
+  static Route editLinkedin = Route(
+    name: 'editLinkedin',
+    path: '/linkedin',
+  );
+  static Route editCity = Route(
+    name: 'editCity',
+    path: '/city',
+  );
+  static Route editOriginLocation = Route(
+    name: 'editOriginLocation',
+    path: '/originLocation',
+  );
+  static Route editPreferredLanguage = Route(
+    name: 'editPreferredLanguage',
+    path: '/preferredLanguage',
+  );
+  static Route editOtherLanguages = Route(
+    name: 'editOtherLanguages',
+    path: '/otherLanguages',
+  );
   static Route profileId = Route(
     name: 'profileId',
     path: '${profile.path}/:${RouteParams.userId}',
