@@ -20,7 +20,7 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late final UserProvider _userProvider;
   late final UserRegistrationModel _registrationModel;
-  bool processing = false;
+  bool _processing = false;
   String? _fourDigitCode;
 
   @override
@@ -120,47 +120,19 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
           ],
         ),
       ),
-      bottomButtons: processing
-          ? const CircularProgressIndicator(
-              strokeWidth: 4.0,
-            )
-          : ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: Dimensions.bigButtonSize,
-                backgroundColor: theme.colorScheme.primary,
-                textStyle: theme.textTheme.labelLarge,
-              ),
-              onPressed: !processing && _fourDigitCode?.length == 4
-                  ? () async {
-                      setState(() {
-                        processing = true;
-                      });
-                      if (await _registrationModel
-                          .registerUser(_userProvider)) {
-                        router.push(Routes.signupWelcome.path);
-                      }
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        setState(() => processing = false);
-                      });
-                    }
-                  : null,
-              child: Wrap(
-                children: [
-                  Icon(
-                    Icons.check,
-                    color: theme.colorScheme.onPrimary,
-                    size: 20,
-                  ),
-                  const SizedBox(width: Insets.paddingExtraSmall),
-                  Text(
-                    l10n.actionSubmit,
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      color: theme.colorScheme.onPrimary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+      processingState: _processing ? AsyncState.loading : AsyncState.ready,
+      isNextEnabled: !_processing && _fourDigitCode?.length == 4,
+      onNextPressed: () async {
+        setState(() {
+          _processing = true;
+        });
+        if (await _registrationModel.registerUser(_userProvider)) {
+          router.push(Routes.signupWelcome.path);
+        }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          setState(() => _processing = false);
+        });
+      },
     );
   }
 }

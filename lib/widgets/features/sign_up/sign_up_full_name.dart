@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
@@ -69,25 +67,15 @@ class _SignupFullNameScreenState extends State<SignupFullNameScreen> {
           ],
         ),
       ),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: (_firstName?.isNotEmpty ?? false) &&
-                (_lastName?.isNotEmpty ?? false)
-            ? () {
-                if (_formKey.currentState!.validate()) {
-                  _registrationModel.updateUserInput.firstName = _firstName;
-                  _registrationModel.updateUserInput.lastName = _lastName;
-                  context.push(Routes.signupPhone.path);
-                }
-              }
-            : null,
-      ),
+      isNextEnabled:
+          (_firstName?.isNotEmpty ?? false) && (_lastName?.isNotEmpty ?? false),
+      onNextPressed: () {
+        if (_formKey.currentState!.validate()) {
+          _registrationModel.updateUserInput.firstName = _firstName;
+          _registrationModel.updateUserInput.lastName = _lastName;
+          context.push(Routes.signupPhone.path);
+        }
+      },
     );
   }
 }

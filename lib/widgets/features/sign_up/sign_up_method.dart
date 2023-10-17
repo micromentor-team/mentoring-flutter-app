@@ -100,6 +100,7 @@ class SignupMethodScreen extends StatelessWidget {
           ),
         ],
       ),
+      showNavigationButtons: false,
     );
   }
 }

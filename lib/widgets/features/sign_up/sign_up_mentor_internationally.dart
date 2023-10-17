@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/user_registration_model.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupMentorInternationallyScreen extends StatefulWidget {
   const SignupMentorInternationallyScreen({Key? key}) : super(key: key);
@@ -40,22 +38,6 @@ class _SignupMentorInternationallyScreenState
     return SignUpTemplate(
       progress: SignUpProgress.three,
       title: l10n.signupMentoringInternationallyTitle,
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _mentorInternationally != null
-            ? () {
-                _registrationModel.updateUserInput.mentorInternationally =
-                    _mentorInternationally;
-                context.push(Routes.signupCompleted.path);
-              }
-            : null,
-      ),
-      footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
       body: Column(
         children: [
           Text(
@@ -108,6 +90,12 @@ class _SignupMentorInternationallyScreenState
           )
         ],
       ),
+      isNextEnabled: _mentorInternationally != null,
+      onNextPressed: () {
+        _registrationModel.updateUserInput.mentorInternationally =
+            _mentorInternationally;
+        context.push(Routes.signupCompleted.path);
+      },
     );
   }
 }

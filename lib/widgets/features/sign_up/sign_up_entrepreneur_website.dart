@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
 import '../../shared/text_form_field_widget.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupEntrepreneurWebsiteScreen extends StatefulWidget {
   const SignupEntrepreneurWebsiteScreen({Key? key}) : super(key: key);
@@ -39,19 +37,6 @@ class _SignupEntrepreneurWebsiteScreenState
     return SignUpTemplate(
       progress: SignUpProgress.two,
       title: l10n.signupBusinessWebsiteTitle,
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: () {
-          _registrationModel.updateUserInput.companyWebsite = _website;
-          context.push(Routes.signupEntrepreneurCompanyReason.path);
-        },
-      ),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Form(
         child: TextFormFieldWidget(
           label: l10n.signupBusinessWebsiteInputLabel,
@@ -63,6 +48,10 @@ class _SignupEntrepreneurWebsiteScreenState
           },
         ),
       ),
+      onNextPressed: () {
+        _registrationModel.updateUserInput.companyWebsite = _website;
+        context.push(Routes.signupEntrepreneurCompanyReason.path);
+      },
     );
   }
 }

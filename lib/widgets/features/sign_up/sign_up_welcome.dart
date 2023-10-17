@@ -68,25 +68,7 @@ class _SignupWelcomeScreenState extends State<SignupWelcomeScreen> {
           ),
         ],
       ),
-      bottomButtons: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          minimumSize: Dimensions.bigButtonSize,
-          backgroundColor: theme.colorScheme.primary,
-          textStyle: theme.textTheme.labelLarge,
-        ),
-        onPressed: () {
-          context.push(Routes.signupPermissions.path);
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
-          child: Text(
-            l10n.actionNext,
-            style: theme.textTheme.labelLarge?.copyWith(
-              color: theme.colorScheme.onPrimary,
-            ),
-          ),
-        ),
-      ),
+      onNextPressed: () => context.push(Routes.signupPermissions.path),
     );
   }
 }

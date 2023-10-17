@@ -3,8 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:mm_flutter_app/widgets/shared/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
@@ -91,34 +89,22 @@ class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
           ),
         ],
       ),
-      footer: SignUpIconFooter(
-        icon: Icons.visibility_outlined,
-        text: l10n.signupFooterVisible,
-      ),
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _selectedPreferredLanguage
-            ? () {
-                _registrationModel.updateUserInput.preferredLanguageTextIds =
-                    _preferredLanguagesController.getTags
-                        ?.map((t) => _contentProvider.languageOptions!
-                            .firstWhere((o) => o.translatedValue! == t)
-                            .textId)
-                        .toList();
-                _registrationModel.updateUserInput.spokenLanguagesTextIds =
-                    _fluentLanguagesController.getTags
-                        ?.map((t) => _contentProvider.languageOptions!
-                            .firstWhere((o) => o.translatedValue! == t)
-                            .textId)
-                        .toList();
-                context.push(Routes.signupUserType.path);
-              }
-            : null,
-      ),
+      isNextEnabled: _selectedPreferredLanguage,
+      onNextPressed: () {
+        _registrationModel.updateUserInput.preferredLanguageTextIds =
+            _preferredLanguagesController.getTags
+                ?.map((t) => _contentProvider.languageOptions!
+                    .firstWhere((o) => o.translatedValue! == t)
+                    .textId)
+                .toList();
+        _registrationModel.updateUserInput.spokenLanguagesTextIds =
+            _fluentLanguagesController.getTags
+                ?.map((t) => _contentProvider.languageOptions!
+                    .firstWhere((o) => o.translatedValue! == t)
+                    .textId)
+                .toList();
+        context.push(Routes.signupUserType.path);
+      },
     );
   }
 }

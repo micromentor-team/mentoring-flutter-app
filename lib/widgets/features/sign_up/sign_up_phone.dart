@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
@@ -103,24 +101,14 @@ class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
           ],
         ),
       ),
-      footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _phoneNumber?.isNotEmpty ?? false
-            ? () {
-                if (_formKey.currentState!.validate()) {
-                  _registrationModel.updateUserInput.phoneNumber =
-                      '$_selectedCountryCode $_phoneNumber';
-                  context.push(Routes.signupBirthYear.path);
-                }
-              }
-            : null,
-      ),
+      isNextEnabled: _phoneNumber?.isNotEmpty ?? false,
+      onNextPressed: () {
+        if (_formKey.currentState!.validate()) {
+          _registrationModel.updateUserInput.phoneNumber =
+              '$_selectedCountryCode $_phoneNumber';
+          context.push(Routes.signupBirthYear.path);
+        }
+      },
     );
   }
 }

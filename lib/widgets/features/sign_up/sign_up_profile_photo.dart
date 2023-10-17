@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:mm_flutter_app/widgets/shared/upload_photo_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupProfilePhotoScreen extends StatefulWidget {
   const SignupProfilePhotoScreen({Key? key}) : super(key: key);
@@ -41,17 +39,6 @@ class _SignupProfilePhotoScreenState extends State<SignupProfilePhotoScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.two,
       title: l10n.signupPhotoTitle,
-      bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.actionPrevious,
-          rightButtonText: l10n.actionNext,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            context.push(Routes.signupPronouns.path);
-          }),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         children: [
           Padding(
@@ -69,6 +56,7 @@ class _SignupProfilePhotoScreenState extends State<SignupProfilePhotoScreen> {
           const UploadPhotoButton(),
         ],
       ),
+      onNextPressed: () => context.push(Routes.signupPronouns.path),
     );
   }
 }

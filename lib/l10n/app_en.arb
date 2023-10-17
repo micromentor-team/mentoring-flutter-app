@@ -222,8 +222,6 @@
     "signupExpertisesEntrepreneurTitle" :"What are you looking for help with?",
     "signupExpertisesMentorSubtitle": "Select up to {maxSelection}. You can add additional expertises later.",
     "signupExpertisesMentorTitle": "How would you like to help entrepreneurs?",
-    "signupFooterHidden": "We never share this with anyone and it won’t be on your profile.",
-    "signupFooterVisible": "This will be shown on your profile.",
     "signupGenderOptionMan": "Man",
     "signupGenderOptionOther": "Non-binary or other",
     "signupGenderOptionWoman": "Woman",

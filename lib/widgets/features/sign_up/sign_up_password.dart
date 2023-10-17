@@ -3,8 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:mm_flutter_app/widgets/shared/text_form_field_widget.dart';
 import 'package:provider/provider.dart';
@@ -87,24 +85,14 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
           ],
         ),
       ),
-      footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: (_password?.isNotEmpty ?? false) &&
-                (_confirmPassword?.isNotEmpty ?? false)
-            ? () {
-                if (_formKey.currentState!.validate()) {
-                  _registrationModel.signUpUserInput.password = _password;
-                  context.push(Routes.signupVerification.path);
-                }
-              }
-            : null,
-      ),
+      isNextEnabled: (_password?.isNotEmpty ?? false) &&
+          (_confirmPassword?.isNotEmpty ?? false),
+      onNextPressed: () {
+        if (_formKey.currentState!.validate()) {
+          _registrationModel.signUpUserInput.password = _password;
+          context.push(Routes.signupVerification.path);
+        }
+      },
     );
   }
 }

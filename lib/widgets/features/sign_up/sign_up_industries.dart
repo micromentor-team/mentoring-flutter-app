@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +8,6 @@ import '../../../constants/app_constants.dart';
 import '../../../providers/content_provider.dart';
 import '../../../providers/models/user_registration_model.dart';
 import 'components/multi_select_chips.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupIndustriesScreen extends StatefulWidget {
   const SignupIndustriesScreen({Key? key}) : super(key: key);
@@ -56,28 +54,6 @@ class _SignupIndustriesScreenState extends State<SignupIndustriesScreen> {
       title: _isEntrepreneur
           ? l10n.signupIndustryEntrepreneurTitle
           : l10n.signupIndustryMentorTitle,
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _selectedChips.isNotEmpty
-            ? () {
-                if (_isEntrepreneur) {
-                  _registrationModel.updateUserInput.menteeIndustryTextId =
-                      _selectedChips.firstOrNull?.textId;
-                  context.push(Routes.signupCompleted.path);
-                } else {
-                  _registrationModel.updateUserInput.mentorIndustriesTextIds =
-                      _selectedChips.map((e) => e.textId).toList();
-                  context.push(Routes.signupMentorPreferences.path);
-                }
-              }
-            : null,
-      ),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,6 +69,18 @@ class _SignupIndustriesScreenState extends State<SignupIndustriesScreen> {
           ),
         ],
       ),
+      isNextEnabled: _selectedChips.isNotEmpty,
+      onNextPressed: () {
+        if (_isEntrepreneur) {
+          _registrationModel.updateUserInput.menteeIndustryTextId =
+              _selectedChips.firstOrNull?.textId;
+          context.push(Routes.signupCompleted.path);
+        } else {
+          _registrationModel.updateUserInput.mentorIndustriesTextIds =
+              _selectedChips.map((e) => e.textId).toList();
+          context.push(Routes.signupMentorPreferences.path);
+        }
+      },
     );
   }
 }

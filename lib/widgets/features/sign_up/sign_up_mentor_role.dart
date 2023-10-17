@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/user_registration_model.dart';
 import '../../shared/text_form_field_widget.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupMentorRoleScreen extends StatefulWidget {
   const SignupMentorRoleScreen({Key? key}) : super(key: key);
@@ -38,23 +36,6 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.two,
       title: l10n.signupRoleTitle,
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: (_jobTitle?.isNotEmpty ?? false) &&
-                (_companyName?.isNotEmpty ?? false)
-            ? () {
-                _registrationModel.updateUserInput.jobTitle = _jobTitle;
-                _registrationModel.updateUserInput.companyName = _companyName;
-                context.push(Routes.signupIndustries.path);
-              }
-            : null,
-      ),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         children: [
           Form(
@@ -84,6 +65,13 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
           ),
         ],
       ),
+      isNextEnabled: (_jobTitle?.isNotEmpty ?? false) &&
+          (_companyName?.isNotEmpty ?? false),
+      onNextPressed: () {
+        _registrationModel.updateUserInput.jobTitle = _jobTitle;
+        _registrationModel.updateUserInput.companyName = _companyName;
+        context.push(Routes.signupIndustries.path);
+      },
     );
   }
 }

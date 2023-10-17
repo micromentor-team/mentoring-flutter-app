@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../constants/app_constants.dart';
+import '../../../../utilities/utility.dart';
+import 'sign_up_bottom_buttons.dart';
 
 enum SignUpProgress { one, two, three, four }
 
@@ -16,41 +21,33 @@ double _signUpProgressToDouble(SignUpProgress signUpProgress) {
   }
 }
 
-class SignUpTemplate extends StatefulWidget {
+class SignUpTemplate extends StatelessWidget {
   final SignUpProgress progress;
   final String title;
   final Widget body;
-  final Widget? footer;
-  final Widget? bottomButtons;
+  final bool showNavigationButtons;
+  final bool isNextEnabled;
+  final VoidCallback? onNextPressed;
+  final AsyncState processingState;
 
   const SignUpTemplate({
     super.key,
     required this.progress,
     required this.title,
     required this.body,
-    this.footer,
-    this.bottomButtons,
+    this.showNavigationButtons = true,
+    this.isNextEnabled = true,
+    this.onNextPressed,
+    this.processingState = AsyncState.ready,
   });
-
-  @override
-  State<SignUpTemplate> createState() => _SignUpTemplateState();
-}
-
-class _SignUpTemplateState extends State<SignUpTemplate> {
-  @override
-  void initState() {
-    super.initState();
-    // Close keyboard from previous page
-    FocusManager.instance.primaryFocus?.unfocus();
-  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(Insets.paddingExtraLarge),
@@ -58,10 +55,10 @@ class _SignUpTemplateState extends State<SignUpTemplate> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 LinearProgressIndicator(
-                    value: _signUpProgressToDouble(widget.progress)),
+                    value: _signUpProgressToDouble(progress)),
                 const SizedBox(height: Insets.paddingMedium),
                 Text(
-                  widget.title,
+                  title,
                   softWrap: true,
                   style: theme.textTheme.headlineSmall?.copyWith(
                     color: theme.colorScheme.primary,
@@ -71,12 +68,22 @@ class _SignUpTemplateState extends State<SignUpTemplate> {
                 const SizedBox(height: Insets.paddingMedium),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: widget.body,
+                    child: body,
                   ),
                 ),
-                if (widget.footer != null)
-                  SizedBox(width: 240, child: widget.footer),
-                if (widget.bottomButtons != null) widget.bottomButtons!,
+                if (showNavigationButtons)
+                  AppUtility.widgetForAsyncState(
+                    state: processingState,
+                    onReady: () => SignUpBottomButtons(
+                      leftButtonText: l10n.actionPrevious,
+                      rightButtonText: l10n.actionNext,
+                      leftOnPress: () {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        context.pop();
+                      },
+                      rightOnPress: isNextEnabled ? onNextPressed : null,
+                    ),
+                  ),
               ],
             ),
           ),

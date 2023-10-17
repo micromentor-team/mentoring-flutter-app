@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/user_registration_model.dart';
 import 'components/multi_select_chips.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupMentorPreferencesScreen extends StatefulWidget {
   const SignupMentorPreferencesScreen({Key? key}) : super(key: key);
@@ -39,22 +37,6 @@ class _SignupMentorPreferencesScreenState
     return SignUpTemplate(
       progress: SignUpProgress.three,
       title: l10n.signupMentoringPreferencesTitle,
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _selectedChips?.isNotEmpty ?? false
-            ? () {
-                _registrationModel.updateUserInput.mentoringPreferences =
-                    _selectedChips!.map((e) => e.textId).toList();
-                context.push(Routes.signupMentorInternationally.path);
-              }
-            : null,
-      ),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         children: [
           CreateMultiSelectChips(
@@ -76,6 +58,12 @@ class _SignupMentorPreferencesScreenState
           ),
         ],
       ),
+      isNextEnabled: _selectedChips?.isNotEmpty ?? false,
+      onNextPressed: () {
+        _registrationModel.updateUserInput.mentoringPreferences =
+            _selectedChips!.map((e) => e.textId).toList();
+        context.push(Routes.signupMentorInternationally.path);
+      },
     );
   }
 }

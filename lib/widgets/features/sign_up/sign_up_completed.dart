@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupCompletedScreen extends StatefulWidget {
   const SignupCompletedScreen({Key? key}) : super(key: key);
@@ -42,34 +41,6 @@ class _SignupCompletedScreenState extends State<SignupCompletedScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.four,
       title: l10n.signupCompletedTitle,
-      bottomButtons: _processing
-          ? const CircularProgressIndicator(
-              strokeWidth: 4,
-            )
-          : SignUpBottomButtons(
-              leftButtonText: l10n.actionPrevious,
-              rightButtonText: _isEntrepreneur
-                  ? l10n.signupCompletedEntrepreneurAction
-                  : l10n.signupCompletedMentorAction,
-              leftOnPress: () {
-                context.pop();
-              },
-              rightOnPress: () async {
-                setState(() => _processing = true);
-                if (await _registrationModel.updateUser(_userProvider)) {
-                  router.pushNamed(
-                    Routes.root.name,
-                    queryParameters: {
-                      RouteParams.nextRouteName: Routes.explore.name
-                    },
-                  );
-                } else {
-                  WidgetsBinding.instance.addPostFrameCallback(
-                    (_) => setState(() => _processing = false),
-                  );
-                }
-              },
-            ),
       body: Column(
         children: [
           SizedBox(
@@ -105,6 +76,20 @@ class _SignupCompletedScreenState extends State<SignupCompletedScreen> {
           ),
         ],
       ),
+      processingState: _processing ? AsyncState.loading : AsyncState.ready,
+      onNextPressed: () async {
+        setState(() => _processing = true);
+        if (await _registrationModel.updateUser(_userProvider)) {
+          router.pushNamed(
+            Routes.root.name,
+            queryParameters: {RouteParams.nextRouteName: Routes.explore.name},
+          );
+        } else {
+          WidgetsBinding.instance.addPostFrameCallback(
+            (_) => setState(() => _processing = false),
+          );
+        }
+      },
     );
   }
 }

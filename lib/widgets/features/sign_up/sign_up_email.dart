@@ -4,8 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/models/user_registration_model.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
@@ -59,23 +57,13 @@ class _SignupEmailScreenState extends State<SignupEmailScreen> {
           },
         ),
       ),
-      footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _email?.isNotEmpty ?? false
-            ? () {
-                if (_formKey.currentState!.validate()) {
-                  _registrationModel.signUpUserInput.email = _email;
-                  context.push(Routes.signupPassword.path);
-                }
-              }
-            : null,
-      ),
+      isNextEnabled: _email?.isNotEmpty ?? false,
+      onNextPressed: () {
+        if (_formKey.currentState!.validate()) {
+          _registrationModel.signUpUserInput.email = _email;
+          context.push(Routes.signupPassword.path);
+        }
+      },
     );
   }
 }

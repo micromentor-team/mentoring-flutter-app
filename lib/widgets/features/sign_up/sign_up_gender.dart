@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
@@ -85,24 +83,13 @@ class _SignupGenderScreenState extends State<SignupGenderScreen> {
           ],
         ),
       ),
-      footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _genderTextId == null
-            ? null
-            : () {
-                if (_formKey.currentState!.validate()) {
-                  _registrationModel.updateUserInput.genderTextId =
-                      _genderTextId;
-                  context.push(Routes.signupLocation.path);
-                }
-              },
-      ),
+      isNextEnabled: _genderTextId != null,
+      onNextPressed: () {
+        if (_formKey.currentState!.validate()) {
+          _registrationModel.updateUserInput.genderTextId = _genderTextId;
+          context.push(Routes.signupLocation.path);
+        }
+      },
     );
   }
 }

@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/models/user_registration_model.dart';
 import 'components/radio_button_cards.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupGroupMembershipScreen extends StatefulWidget {
   const SignupGroupMembershipScreen({Key? key}) : super(key: key);
@@ -40,26 +38,6 @@ class _SignupGroupMembershipScreenState
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupGroupMembershipTitle,
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: () {
-          if (selectedNumber == 0) {
-            _registrationModel.updateUserInput.userType = UserType.entrepreneur;
-            _registrationModel.updateUserInput.clearMentorFields();
-            context.push(Routes.signupEntrepreneurCompanyStage.path);
-          } else {
-            _registrationModel.updateUserInput.userType = UserType.mentor;
-            _registrationModel.updateUserInput.clearEntrepreneurFields();
-            context.push(Routes.signupExpertises.path);
-          }
-        },
-      ),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         children: [
           RadioButtonCards(
@@ -93,6 +71,17 @@ class _SignupGroupMembershipScreenState
           ),
         ],
       ),
+      onNextPressed: () {
+        if (selectedNumber == 0) {
+          _registrationModel.updateUserInput.userType = UserType.entrepreneur;
+          _registrationModel.updateUserInput.clearMentorFields();
+          context.push(Routes.signupEntrepreneurCompanyStage.path);
+        } else {
+          _registrationModel.updateUserInput.userType = UserType.mentor;
+          _registrationModel.updateUserInput.clearEntrepreneurFields();
+          context.push(Routes.signupExpertises.path);
+        }
+      },
     );
   }
 }

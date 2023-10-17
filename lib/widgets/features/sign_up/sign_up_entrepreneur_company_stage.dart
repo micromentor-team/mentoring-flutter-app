@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
 import 'components/radio_button_cards.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupEntrepreneurCompanyStageScreen extends StatefulWidget {
   const SignupEntrepreneurCompanyStageScreen({Key? key}) : super(key: key);
@@ -38,39 +36,6 @@ class _SignupEntrepreneurCompanyStageScreenState
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupBusinessStageTitle,
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: () {
-          switch (_selectedStageIndex) {
-            case 0:
-              _registrationModel.updateUserInput.companyStageTextId =
-                  CompanyStageTextId.idea.name;
-              break;
-            case 1:
-              _registrationModel.updateUserInput.companyStageTextId =
-                  CompanyStageTextId.operational.name;
-              break;
-            case 2:
-              _registrationModel.updateUserInput.companyStageTextId =
-                  CompanyStageTextId.earning.name;
-              break;
-            case 3:
-              _registrationModel.updateUserInput.companyStageTextId =
-                  CompanyStageTextId.profitable.name;
-              break;
-            default:
-              _registrationModel.updateUserInput.companyStageTextId = null;
-              break;
-          }
-          context.push(Routes.signupExpertises.path);
-        },
-      ),
-      footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         children: [
           RadioButtonCards(
@@ -97,6 +62,30 @@ class _SignupEntrepreneurCompanyStageScreenState
           ),
         ],
       ),
+      onNextPressed: () {
+        switch (_selectedStageIndex) {
+          case 0:
+            _registrationModel.updateUserInput.companyStageTextId =
+                CompanyStageTextId.idea.name;
+            break;
+          case 1:
+            _registrationModel.updateUserInput.companyStageTextId =
+                CompanyStageTextId.operational.name;
+            break;
+          case 2:
+            _registrationModel.updateUserInput.companyStageTextId =
+                CompanyStageTextId.earning.name;
+            break;
+          case 3:
+            _registrationModel.updateUserInput.companyStageTextId =
+                CompanyStageTextId.profitable.name;
+            break;
+          default:
+            _registrationModel.updateUserInput.companyStageTextId = null;
+            break;
+        }
+        context.push(Routes.signupExpertises.path);
+      },
     );
   }
 }

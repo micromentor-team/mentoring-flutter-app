@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,13 +27,15 @@ class BulletPointText extends StatelessWidget {
   Widget build(BuildContext context) {
     double indentation = Insets.paddingMedium * indentLevel;
     return Padding(
-        padding: EdgeInsets.only(left: indentation),
-        child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("• ", style: textStyle),
-              Expanded(child: Text(text, style: textStyle))
-            ]));
+      padding: EdgeInsets.only(left: indentation),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("• ", style: textStyle),
+          Expanded(child: Text(text, style: textStyle))
+        ],
+      ),
+    );
   }
 }
 
@@ -47,9 +48,11 @@ class SignupGuidelinesScreen extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return SignUpTemplate(
-        progress: SignUpProgress.one,
-        title: l10n.signupCommunityGuidelinesTitle,
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      progress: SignUpProgress.one,
+      title: l10n.signupCommunityGuidelinesTitle,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text(
             l10n.signupCommunityGuidelinesSubtitle,
             style: theme.textTheme.bodyLarge!
@@ -103,37 +106,33 @@ class SignupGuidelinesScreen extends StatelessWidget {
                 .copyWith(color: theme.colorScheme.outline),
           ),
           RichText(
-              text: TextSpan(children: [
-            TextSpan(
-                style: theme.textTheme.bodyMedium!
-                    .copyWith(color: theme.colorScheme.outline),
-                text: l10n.signupCommunityGuidelinesContent2_1),
-            TextSpan(
-                style: theme.textTheme.bodyMedium!.copyWith(
-                  color: theme.colorScheme.primary,
-                  decoration: TextDecoration.underline,
-                ),
-                text: l10n.signupCommunityGuidelinesContent2_1_hyperlink,
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () async {
-                    _launchUrl(Uri.parse(
-                        'https://www.micromentor.org/code-of-conduct/'));
-                  }),
-            TextSpan(
-                style: theme.textTheme.bodyMedium!
-                    .copyWith(color: theme.colorScheme.outline),
-                text: l10n.signupCommunityGuidelinesContent2_2),
-          ])),
-        ]),
-        bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.actionPrevious,
-          rightButtonText: l10n.signupCommunityGuidelinesUserAgrees,
-          leftOnPress: () {
-            context.pop();
-          },
-          rightOnPress: () {
-            context.push(Routes.signupFullName.path);
-          },
-        ));
+            text: TextSpan(
+              children: [
+                TextSpan(
+                    style: theme.textTheme.bodyMedium!
+                        .copyWith(color: theme.colorScheme.outline),
+                    text: l10n.signupCommunityGuidelinesContent2_1),
+                TextSpan(
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      color: theme.colorScheme.primary,
+                      decoration: TextDecoration.underline,
+                    ),
+                    text: l10n.signupCommunityGuidelinesContent2_1_hyperlink,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        _launchUrl(Uri.parse(
+                            'https://www.micromentor.org/code-of-conduct/'));
+                      }),
+                TextSpan(
+                    style: theme.textTheme.bodyMedium!
+                        .copyWith(color: theme.colorScheme.outline),
+                    text: l10n.signupCommunityGuidelinesContent2_2),
+              ],
+            ),
+          ),
+        ],
+      ),
+      onNextPressed: () => context.push(Routes.signupFullName.path),
+    );
   }
 }
