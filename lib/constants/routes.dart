@@ -225,6 +225,10 @@ class Routes {
     name: 'editOtherLanguages',
     path: '/otherLanguages',
   );
+  static Route editPrompt = Route(
+    name: 'editPrompt',
+    path: '/prompt',
+  );
   static Route profileId = Route(
     name: 'profileId',
     path: '${profile.path}/:${RouteParams.userId}',

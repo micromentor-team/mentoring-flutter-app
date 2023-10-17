@@ -21,7 +21,12 @@ import '../widgets/features/home/home.dart';
 import '../widgets/features/inbox/inbox_chat_list.dart';
 import '../widgets/features/inbox/inbox_chat_messages.dart';
 import '../widgets/features/inbox/inbox_invitation_detail.dart';
+import '../widgets/features/profile/edit_profile_city.dart';
 import '../widgets/features/profile/edit_profile_linkedin.dart';
+import '../widgets/features/profile/edit_profile_origin_location.dart';
+import '../widgets/features/profile/edit_profile_other_languages.dart';
+import '../widgets/features/profile/edit_profile_preferred_language.dart';
+import '../widgets/features/profile/edit_profile_prompt.dart';
 import '../widgets/features/profile/edit_profile_pronoun.dart';
 import '../widgets/features/sign_in/sign_in.dart';
 import '../widgets/features/sign_up/sign_up_completed.dart';
@@ -617,50 +622,61 @@ class AppRouter {
             );
           },
         ),
-        // GoRoute(
-        //   path: Routes.editCity.path,
-        //   name: Routes.editCity.name,
-        //   pageBuilder: (BuildContext context, GoRouterState state) {
-        //     return MaterialPage(
-        //       key: state.pageKey,
-        //       maintainState: false,
-        //       child: const EditCityScreen(),
-        //     );
-        //   },
-        // ),
-        // GoRoute(
-        //   path: Routes.editOriginLocation.path,
-        //   name: Routes.editOriginLocation.name,
-        //   pageBuilder: (BuildContext context, GoRouterState state) {
-        //     return MaterialPage(
-        //       key: state.pageKey,
-        //       maintainState: false,
-        //       child: const EditOriginLocationScreen(),
-        //     );
-        //   },
-        // ),
-        // GoRoute(
-        //   path: Routes.editPreferredLanguage.path,
-        //   name: Routes.editPreferredLanguage.name,
-        //   pageBuilder: (BuildContext context, GoRouterState state) {
-        //     return MaterialPage(
-        //       key: state.pageKey,
-        //       maintainState: false,
-        //       child: const EditPreferredLanguageScreen(),
-        //     );
-        //   },
-        // ),
-        // GoRoute(
-        //   path: Routes.editOtherLanguages.path,
-        //   name: Routes.editOtherLanguages.name,
-        //   pageBuilder: (BuildContext context, GoRouterState state) {
-        //     return MaterialPage(
-        //       key: state.pageKey,
-        //       maintainState: false,
-        //       child: const EditOtherLanguagesScreen(),
-        //     );
-        //   },
-        // ),
+        GoRoute(
+          path: Routes.editCity.path,
+          name: Routes.editCity.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditCityScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editOriginLocation.path,
+          name: Routes.editOriginLocation.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditOriginLocationScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editPreferredLanguage.path,
+          name: Routes.editPreferredLanguage.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditPreferredLanguageScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editOtherLanguages.path,
+          name: Routes.editOtherLanguages.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditOtherLanguagesScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editPrompt.path,
+          name: Routes.editPrompt.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditPromptScreen(),
+            );
+          },
+        ),
         GoRoute(
           path: Routes.profileId.path,
           name: Routes.profileId.name,

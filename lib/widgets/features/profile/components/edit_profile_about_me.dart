@@ -170,13 +170,18 @@ class EditProfileAboutMe extends StatelessWidget {
             otherLanguages, Routes.editOtherLanguages.path),
         const Divider(),
         if (promptTitle != null)
-          _createPromptSection(context, promptTitle!, promptResponse!, null),
+          _createPromptSection(
+            context,
+            promptTitle!,
+            promptResponse!,
+            Routes.editPrompt.path,
+          ),
         if (promptTitle == null)
           _createPromptSection(
             context,
             l10n.profileEditPromptTitle,
             l10n.profileEditPromptSubtitle,
-            null,
+            Routes.editPrompt.path,
           ),
       ],
     );
