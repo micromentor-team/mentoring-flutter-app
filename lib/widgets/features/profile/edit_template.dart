@@ -16,7 +16,7 @@ class EditTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final modifiedColor = HSLColor.fromColor(theme.colorScheme.secondary)
-        .withLightness(0.97)
+        .withLightness(0.98)
         .toColor();
 
     return Column(
@@ -40,9 +40,13 @@ class EditTemplate extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: body,
+        Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: Insets.paddingExtraLarge),
+          child: Expanded(
+            child: SingleChildScrollView(
+              child: body,
+            ),
           ),
         ),
       ],
