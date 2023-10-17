@@ -49,15 +49,26 @@ class SignUpTemplate extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(Insets.paddingExtraLarge),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                LinearProgressIndicator(
-                    value: _signUpProgressToDouble(progress)),
-                const SizedBox(height: Insets.paddingMedium),
-                Text(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  Insets.paddingExtraLarge,
+                  Insets.paddingExtraLarge,
+                  Insets.paddingExtraLarge,
+                  0,
+                ),
+                child: LinearProgressIndicator(
+                  value: _signUpProgressToDouble(progress),
+                ),
+              ),
+              const SizedBox(height: Insets.paddingMedium),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Insets.paddingExtraLarge,
+                ),
+                child: Text(
                   title,
                   softWrap: true,
                   style: theme.textTheme.headlineSmall?.copyWith(
@@ -65,27 +76,38 @@ class SignUpTemplate extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: Insets.paddingMedium),
-                Expanded(
+              ),
+              const SizedBox(height: Insets.paddingMedium),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Insets.paddingExtraLarge,
+                  ),
                   child: SingleChildScrollView(
                     child: body,
                   ),
                 ),
-                if (showNavigationButtons)
-                  AppUtility.widgetForAsyncState(
-                    state: processingState,
-                    onReady: () => SignUpBottomButtons(
-                      leftButtonText: l10n.actionPrevious,
-                      rightButtonText: l10n.actionNext,
-                      leftOnPress: () {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        context.pop();
-                      },
-                      rightOnPress: isNextEnabled ? onNextPressed : null,
+              ),
+              if (showNavigationButtons)
+                Container(
+                  height: 88,
+                  color: theme.colorScheme.primaryContainer,
+                  child: Center(
+                    child: AppUtility.widgetForAsyncState(
+                      state: processingState,
+                      onReady: () => SignUpBottomButtons(
+                        leftButtonText: l10n.actionPrevious,
+                        rightButtonText: l10n.actionNext,
+                        leftOnPress: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          context.pop();
+                        },
+                        rightOnPress: isNextEnabled ? onNextPressed : null,
+                      ),
                     ),
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
       ),
