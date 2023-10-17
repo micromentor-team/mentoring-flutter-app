@@ -141,6 +141,8 @@
     "profileEditLocationInputHint": "Type to select",
     "profileEditMentoringPreferences": "My mentoring preferences",
     "profileEditOriginLocation":"Where are you from",
+    "profileEditOriginLocationLabel": "Find city you are from",
+    "profileEditOriginLocationHint": "Type to select",
     "profileEditPromptSubtitle": "And record your answer",
     "profileEditPromptTitle": "Select a prompt",
     "profileEditPronouns": "Pronouns",
