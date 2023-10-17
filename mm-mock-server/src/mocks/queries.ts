@@ -81,6 +81,9 @@ export function mockQueries(serverState: MockServerState) {
         findLanguages: () => {
             return constants.languages;
         },
+        findPronouns: () => {
+            return constants.pronouns;
+        },
         // groups
         findGroups: () => {
             return serverState.groups;
