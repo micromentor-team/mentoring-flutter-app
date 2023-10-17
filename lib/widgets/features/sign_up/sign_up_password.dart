@@ -38,36 +38,34 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
     );
   }
 
-
   String measurePasswordStrength(String password) {
-  if (password.length < 8) {
-  return "weak"; // Password is too short
+    if (password.length < 8) {
+      return "weak"; // Password is too short
+    }
+
+    bool containsLowercase = password.contains(RegExp(r'[a-z]'));
+    bool containsUppercase = password.contains(RegExp(r'[A-Z]'));
+    bool containsNumber = password.contains(RegExp(r'[0-9]'));
+    bool containsSpecial = password.contains(RegExp(r'[!@#\$%^&*()]'));
+
+    int criteriaMet = 0;
+
+    if (containsLowercase) criteriaMet++;
+    if (containsUppercase) criteriaMet++;
+    if (containsNumber) criteriaMet++;
+    if (containsSpecial) criteriaMet++;
+
+    if (criteriaMet >= 3) {
+      passWarn = false;
+      return "strong"; // Password meets at least 3 criteria
+    } else if (criteriaMet == 2) {
+      passWarn = false;
+      return 'moderate'; // Password meets 2 criteria
+    } else {
+      passWarn = true;
+      return 'weak'; // Password meets 1 or 0 criteria
+    }
   }
-
-  bool containsLowercase = password.contains(RegExp(r'[a-z]'));
-  bool containsUppercase = password.contains(RegExp(r'[A-Z]'));
-  bool containsNumber = password.contains(RegExp(r'[0-9]'));
-  bool containsSpecial = password.contains(RegExp(r'[!@#\$%^&*()]'));
-
-  int criteriaMet = 0;
-
-  if (containsLowercase) criteriaMet++;
-  if (containsUppercase) criteriaMet++;
-  if (containsNumber) criteriaMet++;
-  if (containsSpecial) criteriaMet++;
-
-  if (criteriaMet >= 3) {
-    passWarn = false;
-  return "strong"; // Password meets at least 3 criteria
-  } else if (criteriaMet == 2) {
-    passWarn = false;
-  return 'moderate'; // Password meets 2 criteria
-  } else {
-    passWarn = true;
-  return 'weak'; // Password meets 1 or 0 criteria
-  }
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +93,6 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
               onChanged: (value) {
                 setState(() {
                   _password = value;
-
                 });
               },
             ),
@@ -121,26 +118,45 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
                 return null;
               },
             ),
-            const SizedBox(height: Insets.paddingExtraLarge,),
-            PasswordWarning(warning: passWarn, warningMessage: "Password strength: ${measurePasswordStrength(_password??"")}",),
+            const SizedBox(
+              height: Insets.paddingExtraLarge,
+            ),
+            PasswordWarning(
+              warning: passWarn,
+              warningMessage:
+                  "Password strength: ${measurePasswordStrength(_password ?? "")}",
+            ),
             const SizedBox(
               height: Insets.paddingSmall,
             ),
-            PasswordWarning(warning: _password!=null?_password!.length<8:true, warningMessage: "Must be atleast 8 characters",),
+            PasswordWarning(
+              warning: _password != null ? _password!.length < 8 : true,
+              warningMessage: "Must be atleast 8 characters",
+            ),
             const SizedBox(
               height: Insets.paddingSmall,
             ),
             // TODO get email for this warning
-            PasswordWarning(warning: _password!=null?_password!.contains('email'):false, warningMessage: "Can't include your email address",),
+            PasswordWarning(
+              warning: _password != null ? _password!.contains('email') : false,
+              warningMessage: "Can't include your email address",
+            ),
             const SizedBox(
               height: Insets.paddingSmall,
             ),
-            PasswordWarning(warning: _password!=null?!symbolOrNumberPattern.hasMatch(_password!):true, warningMessage: "Must include at least 1 symbol or number",),
+            PasswordWarning(
+              warning: _password != null
+                  ? !symbolOrNumberPattern.hasMatch(_password!)
+                  : true,
+              warningMessage: "Must include at least 1 symbol or number",
+            ),
             const SizedBox(
               height: Insets.paddingSmall,
             ),
-            PasswordWarning(warning: _password!=null?_password!.contains(' '):false, warningMessage: "Can't contain spaces",),
-
+            PasswordWarning(
+              warning: _password != null ? _password!.contains(' ') : false,
+              warningMessage: "Can't contain spaces",
+            ),
           ],
         ),
       ),
@@ -165,4 +181,3 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
     );
   }
 }
-
