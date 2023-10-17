@@ -272,7 +272,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
                           child: Column(
                             children: [
                               Text(
-                                l10n.exploreSeeMore,
+                                l10n.exploreSearchSeeMore,
                                 style: theme.textTheme.labelLarge?.copyWith(
                                   color: theme.colorScheme.onSurfaceVariant,
                                 ),

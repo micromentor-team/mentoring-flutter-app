@@ -47,7 +47,7 @@ class _SignupCompletedScreenState extends State<SignupCompletedScreen> {
               strokeWidth: 4,
             )
           : SignUpBottomButtons(
-              leftButtonText: l10n.previous,
+              leftButtonText: l10n.actionPrevious,
               rightButtonText: _isEntrepreneur
                   ? l10n.signupCompletedEntrepreneurAction
                   : l10n.signupCompletedMentorAction,

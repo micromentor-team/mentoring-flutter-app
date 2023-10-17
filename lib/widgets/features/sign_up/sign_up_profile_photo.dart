@@ -42,8 +42,8 @@ class _SignupProfilePhotoScreenState extends State<SignupProfilePhotoScreen> {
       progress: SignUpProgress.two,
       title: l10n.signupPhotoTitle,
       bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.next,
+          leftButtonText: l10n.actionPrevious,
+          rightButtonText: l10n.actionNext,
           leftOnPress: () {
             context.pop();
           },
@@ -51,7 +51,7 @@ class _SignupProfilePhotoScreenState extends State<SignupProfilePhotoScreen> {
             context.push(Routes.signupPronouns.path);
           }),
       footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
+          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         children: [
           Padding(

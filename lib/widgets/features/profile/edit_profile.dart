@@ -51,26 +51,27 @@ class _EditProfileScreenState extends State<EditProfileScreen>
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return FutureBuilder(
-        future: _userDetailedProfile,
-        builder: (context, snapshot) {
-          return AppUtility.widgetForAsyncSnapshot(
-              snapshot: snapshot,
-              onReady: () {
-                return SafeArea(
-                    child: SingleChildScrollView(
-                        child: Column(
+      future: _userDetailedProfile,
+      builder: (context, snapshot) {
+        return AppUtility.widgetForAsyncSnapshot(
+          snapshot: snapshot,
+          onReady: () {
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppBar(
-                        backgroundColor: theme.colorScheme.secondaryContainer,
-                        leading: IconButton(
-                          icon: Icon(
-                            Icons.keyboard_backspace_outlined,
-                            color: theme.colorScheme.secondary,
-                          ),
-                          onPressed: () => context.pop(),
+                      backgroundColor: theme.colorScheme.secondaryContainer,
+                      leading: IconButton(
+                        icon: Icon(
+                          Icons.keyboard_backspace_outlined,
+                          color: theme.colorScheme.secondary,
                         ),
-                        title: Text(l10n.editProfile)),
+                        onPressed: () => context.pop(),
+                      ),
+                      title: Text(l10n.profileEditTitle),
+                    ),
                     Padding(
                         padding: const EdgeInsets.all(Insets.paddingLarge),
                         child: EditProfileContent(
@@ -78,9 +79,13 @@ class _EditProfileScreenState extends State<EditProfileScreen>
                           authenticatedUser: _authenticatedUser,
                         ))
                   ],
-                )));
-              });
-        });
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }
 

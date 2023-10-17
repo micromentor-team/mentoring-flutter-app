@@ -17,9 +17,9 @@ class ExploreFilter extends StatelessWidget {
   String? _helpText(AppLocalizations l10n) {
     switch (userType) {
       case UserType.entrepreneur:
-        return l10n.whatAreYouLookingForHelpWith;
+        return l10n.exploreSearchExpertiseHintEntrepreneur;
       case UserType.mentor:
-        return l10n.whatAreYouLookingToHelpWith;
+        return l10n.exploreSearchExpertiseHintMentor;
       default:
         return null;
     }
@@ -36,7 +36,7 @@ class ExploreFilter extends StatelessWidget {
       AppLocalizations l10n, BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Text(
-      l10n.languageLocationFilter,
+      l10n.exploreSearchLanguageLocationHint,
       style: theme.textTheme.labelSmall?.copyWith(
         color: theme.colorScheme.secondary,
       ),

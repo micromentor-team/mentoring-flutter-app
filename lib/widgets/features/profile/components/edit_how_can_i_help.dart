@@ -105,52 +105,47 @@ class EditProfileHowCanIHelp extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileHowCanIHelp,
+            l10n.profileEditHowCanIHelp,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
         ),
         _createChipsListTile(
-            context,
-            Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.editProfileMyExpertises,
-                    style: theme.textTheme.titleMedium!
-                        .copyWith(color: theme.colorScheme.primary),
-                  ),
-                  Text(
-                    l10n.editProfileSelectTopics,
-                    style: theme.textTheme.bodyMedium!
-                        .copyWith(color: theme.colorScheme.secondary),
-                  ),
-                ]),
-            topThreeExpertises
-                .map((e) => BigProfileChip(
-                      text: e,
-                    ))
-                .toList(),
-            null),
+          context,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.profileEditExpertises,
+                style: theme.textTheme.titleMedium!
+                    .copyWith(color: theme.colorScheme.primary),
+              ),
+              Text(
+                l10n.profileEditExpertisesHint,
+                style: theme.textTheme.bodyMedium!
+                    .copyWith(color: theme.colorScheme.secondary),
+              ),
+            ],
+          ),
+          topThreeExpertises.map((e) => BigProfileChip(text: e)).toList(),
+          null,
+        ),
         _createChipsListTile(
-            context,
-            Text(
-              l10n.editProfileSelectAdditionalTopics,
-              style: theme.textTheme.bodyMedium!
-                  .copyWith(color: theme.colorScheme.secondary),
-            ),
-            additionalExpertises
-                .map((e) => BigProfileChip(
-                      text: e,
-                    ))
-                .toList(),
-            null),
+          context,
+          Text(
+            l10n.profileEditExpertisesAdditionalHint,
+            style: theme.textTheme.bodyMedium!
+                .copyWith(color: theme.colorScheme.secondary),
+          ),
+          additionalExpertises.map((e) => BigProfileChip(text: e)).toList(),
+          null,
+        ),
         const Divider(),
         _createChipsListTile(
             context,
             Text(
-              l10n.editProfileMyIndustries,
+              l10n.profileEditIndustries,
               style: theme.textTheme.titleMedium!
                   .copyWith(color: theme.colorScheme.primary),
             ),
@@ -164,14 +159,14 @@ class EditProfileHowCanIHelp extends StatelessWidget {
         _createChipsListTile(
             context,
             Text(
-              l10n.editProfileMyMentoringPreferences,
+              l10n.profileEditMentoringPreferences,
               style: theme.textTheme.titleMedium!
                   .copyWith(color: theme.colorScheme.primary),
             ),
             mentoringPreferences.map((e) => BigProfileChip(text: e)).toList(),
             null),
         const Divider(),
-        _createListTileSection(context, l10n.editProfileMyExpectations,
+        _createListTileSection(context, l10n.profileEditExpectations,
             (expectations != null) ? expectations! : "", null),
       ],
     );

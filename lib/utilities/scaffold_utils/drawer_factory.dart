@@ -37,7 +37,7 @@ class DrawerFactory {
                   ),
                   ListTile(
                     leading: const Icon(Icons.chat_bubble_outline),
-                    title: Text(l10n.inboxTitleChats),
+                    title: Text(l10n.inboxChatsTitle),
                     trailing: inboxChatNotifications > 0
                         ? NotificationBubble(
                             notifications: inboxChatNotifications,
@@ -52,7 +52,7 @@ class DrawerFactory {
                   ),
                   ListTile(
                     leading: const Icon(Icons.person_add_outlined),
-                    title: Text(l10n.inboxTitleInvites),
+                    title: Text(l10n.inboxInvitesTitle),
                     trailing: inboxInvitesNotifications > 0
                         ? NotificationBubble(
                             notifications: inboxInvitesNotifications,
@@ -67,7 +67,7 @@ class DrawerFactory {
                   ),
                   ListTile(
                     leading: const Icon(Icons.inventory_2_outlined),
-                    title: Text(l10n.inboxTitleArchivedChats),
+                    title: Text(l10n.inboxArchivedChatsTitle),
                     trailing: inboxArchivedNotifications > 0
                         ? NotificationBubble(
                             notifications: inboxArchivedNotifications,

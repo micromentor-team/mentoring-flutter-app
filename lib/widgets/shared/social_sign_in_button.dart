@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/app_constants.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum SignInOptions { facebook, google, telegram, whatsapp, linkedin }
 
@@ -23,19 +22,19 @@ class SocialSignInButton extends StatelessWidget {
     IconData icon_;
     switch (option) {
       case SignInOptions.facebook:
-        text_ = l10n.facebook;
+        text_ = l10n.ssoFacebook;
         icon_ = FontAwesomeIcons.facebook;
       case SignInOptions.google:
-        text_ = l10n.google;
+        text_ = l10n.ssoGoogle;
         icon_ = FontAwesomeIcons.google;
       case SignInOptions.whatsapp:
-        text_ = l10n.whatsapp;
+        text_ = l10n.ssoWhatsapp;
         icon_ = FontAwesomeIcons.whatsapp;
       case SignInOptions.linkedin:
-        text_ = l10n.linkedin;
+        text_ = l10n.ssoLinkedin;
         icon_ = FontAwesomeIcons.linkedin;
       case SignInOptions.telegram:
-        text_ = l10n.telegram;
+        text_ = l10n.ssoTelegram;
         icon_ = FontAwesomeIcons.telegram;
     }
     return TextButton(

@@ -81,7 +81,7 @@ class HowCanIHelpSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.profileHowCanIHelp,
+                l10n.profileViewHowCanIHelp,
                 style: theme.textTheme.titleMedium!
                     .copyWith(color: theme.colorScheme.onSurface),
               ),
@@ -89,7 +89,7 @@ class HowCanIHelpSection extends StatelessWidget {
               if (expertises.isNotEmpty) ...[
                 _createChipsSection(
                   context,
-                  l10n.profileHowCanIHelpExpertises,
+                  l10n.profileViewHowCanIHelpExpertises,
                   expertises.map((e) => ProfileChip(text: e)).toList(),
                 ),
                 const SizedBox(height: Insets.paddingSmall),
@@ -97,7 +97,7 @@ class HowCanIHelpSection extends StatelessWidget {
               if (industries.isNotEmpty) ...[
                 _createChipsSection(
                   context,
-                  l10n.profileHowCanIHelpIndustries,
+                  l10n.profileViewHowCanIHelpIndustries,
                   industries.map((e) => ProfileChip(text: e)).toList(),
                 ),
                 const SizedBox(height: Insets.paddingSmall),
@@ -105,7 +105,7 @@ class HowCanIHelpSection extends StatelessWidget {
               if (mentoringPreferences.isNotEmpty) ...[
                 _createChipsSection(
                   context,
-                  l10n.profileHowCanIHelpPreferences,
+                  l10n.profileViewHowCanIHelpPreferences,
                   mentoringPreferences
                       .map((e) => ProfileChip(text: e))
                       .toList(),
@@ -115,7 +115,7 @@ class HowCanIHelpSection extends StatelessWidget {
               if (expectations != null)
                 _createTextSection(
                   context,
-                  l10n.profileHowCanIHelpExpectations,
+                  l10n.profileViewHowCanIHelpExpectations,
                   expectations!,
                 )
             ],

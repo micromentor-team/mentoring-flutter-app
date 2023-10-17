@@ -60,14 +60,14 @@ class _InviteToConnectScreenState extends State<InviteToConnectScreen>
           padding: const EdgeInsets.all(Insets.paddingSmall),
           child: ListTile(
             title: Text(
-              _l10n.inviteMessageTips,
+              _l10n.inviteCreateMessageTipsTitle,
               style: theme.textTheme.titleMedium!
                   .copyWith(color: theme.colorScheme.onTertiaryContainer),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(Insets.paddingSmall),
               child: Text(
-                _l10n.inviteMessageTipsContent,
+                _l10n.inviteCreateMessageTipsSubtitle,
                 style: theme.textTheme.bodyMedium!
                     .copyWith(color: theme.colorScheme.onTertiaryContainer),
               ),
@@ -119,7 +119,7 @@ class _InviteToConnectScreenState extends State<InviteToConnectScreen>
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 title: Text(
-                  _l10n.inviteToConnect,
+                  _l10n.inviteCreateTitle,
                 ),
                 centerTitle: false,
                 actions: <Widget>[
@@ -211,8 +211,8 @@ class _MessageBoxState extends State<MessageBox> {
     final ThemeData theme = Theme.of(context);
 
     final String defaultText = widget.currentUserType == UserType.mentor
-        ? l10n.inviteDefaultMessageToMentor
-        : l10n.inviteDefaultMessageToEntrepreneur;
+        ? l10n.inviteCreateMessageDefaultToMentor
+        : l10n.inviteCreateMessageDefaultToEntrepreneur;
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -224,7 +224,7 @@ class _MessageBoxState extends State<MessageBox> {
           Align(
             alignment: Alignment.topLeft,
             child: Text(
-              l10n.inviteCustomizeMessagePrompt,
+              l10n.inviteCreateCustomizeMessagePrompt,
             ),
           ),
           Padding(
@@ -247,7 +247,7 @@ class _MessageBoxState extends State<MessageBox> {
                 border: OutlineInputBorder(
                     borderRadius:
                         BorderRadius.circular(Radii.roundedRectRadiusMedium)),
-                hintText: l10n.inviteMessagePlaceholder,
+                hintText: l10n.inviteCreateMessagePlaceholder,
               ),
             ),
           ),
@@ -263,7 +263,7 @@ class _MessageBoxState extends State<MessageBox> {
                   _textEditingController.clear();
                 },
                 child: Text(
-                  l10n.clear,
+                  l10n.actionClear,
                   style: theme.textTheme.labelLarge?.copyWith(
                     color: theme.colorScheme.primary,
                   ),
@@ -290,7 +290,7 @@ class _MessageBoxState extends State<MessageBox> {
                   );
                 },
                 child: Text(
-                  l10n.send,
+                  l10n.actionSend,
                   style: theme.textTheme.labelLarge?.copyWith(
                     color: theme.colorScheme.onPrimary,
                   ),

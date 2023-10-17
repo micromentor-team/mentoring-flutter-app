@@ -48,10 +48,10 @@ class SignupGuidelinesScreen extends StatelessWidget {
 
     return SignUpTemplate(
         progress: SignUpProgress.one,
-        title: l10n.ourCommunityGuidelines,
+        title: l10n.signupCommunityGuidelinesTitle,
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
-            l10n.guidelinesTextTitle,
+            l10n.signupCommunityGuidelinesSubtitle,
             style: theme.textTheme.bodyLarge!
                 .copyWith(color: theme.colorScheme.outline),
           ),
@@ -59,7 +59,7 @@ class SignupGuidelinesScreen extends StatelessWidget {
             height: Insets.paddingSmall,
           ),
           Text(
-            l10n.guidelinesTextContent1,
+            l10n.signupCommunityGuidelinesContent1,
             style: theme.textTheme.bodyMedium!
                 .copyWith(color: theme.colorScheme.outline),
           ),
@@ -68,18 +68,18 @@ class SignupGuidelinesScreen extends StatelessWidget {
           ),
           BulletPointText(
               indentLevel: 1,
-              text: l10n.guidelinesTextList1,
+              text: l10n.signupCommunityGuidelinesList1,
               textStyle: theme.textTheme.bodyMedium!
                   .copyWith(color: theme.colorScheme.outline)),
           BulletPointText(
               indentLevel: 2,
-              text: l10n.guidelinesTextList1_1,
+              text: l10n.signupCommunityGuidelinesList1_1,
               textStyle: theme.textTheme.bodyMedium!.copyWith(
                   color: theme.colorScheme.outline,
                   fontWeight: FontWeight.bold)),
           BulletPointText(
               indentLevel: 2,
-              text: l10n.guidelinesTextList1_2,
+              text: l10n.signupCommunityGuidelinesList1_2,
               textStyle: theme.textTheme.bodyMedium!.copyWith(
                   color: theme.colorScheme.outline,
                   fontWeight: FontWeight.bold)),
@@ -88,7 +88,7 @@ class SignupGuidelinesScreen extends StatelessWidget {
           ),
           BulletPointText(
               indentLevel: 1,
-              text: l10n.guidelinesTextList2,
+              text: l10n.signupCommunityGuidelinesList2,
               textStyle: theme.textTheme.bodyMedium!
                   .copyWith(color: theme.colorScheme.outline)),
           const SizedBox(
@@ -98,7 +98,7 @@ class SignupGuidelinesScreen extends StatelessWidget {
             height: Insets.paddingSmall,
           ),
           Text(
-            l10n.guidelinesSignature,
+            l10n.signupCommunityGuidelinesSignature,
             style: theme.textTheme.bodyMedium!
                 .copyWith(color: theme.colorScheme.outline),
           ),
@@ -107,13 +107,13 @@ class SignupGuidelinesScreen extends StatelessWidget {
             TextSpan(
                 style: theme.textTheme.bodyMedium!
                     .copyWith(color: theme.colorScheme.outline),
-                text: l10n.guidelinesTextContent2_1),
+                text: l10n.signupCommunityGuidelinesContent2_1),
             TextSpan(
                 style: theme.textTheme.bodyMedium!.copyWith(
                   color: theme.colorScheme.primary,
                   decoration: TextDecoration.underline,
                 ),
-                text: l10n.here,
+                text: l10n.signupCommunityGuidelinesContent2_1_hyperlink,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () async {
                     _launchUrl(Uri.parse(
@@ -122,12 +122,12 @@ class SignupGuidelinesScreen extends StatelessWidget {
             TextSpan(
                 style: theme.textTheme.bodyMedium!
                     .copyWith(color: theme.colorScheme.outline),
-                text: l10n.guidelinesTextContent2_2),
+                text: l10n.signupCommunityGuidelinesContent2_2),
           ])),
         ]),
         bottomButtons: SignUpBottomButtons(
-          leftButtonText: l10n.previous,
-          rightButtonText: l10n.iagree,
+          leftButtonText: l10n.actionPrevious,
+          rightButtonText: l10n.signupCommunityGuidelinesUserAgrees,
           leftOnPress: () {
             context.pop();
           },

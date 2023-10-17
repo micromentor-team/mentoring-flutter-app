@@ -82,7 +82,7 @@ class RecommendedUserCard extends StatelessWidget {
               ),
               const SizedBox(width: Insets.paddingSmall),
               Text(
-                l10n.exploreEndorsements(endorsements!),
+                l10n.exploreResultEndorsements(endorsements!),
                 style: theme.textTheme.labelSmall?.copyWith(
                   color: theme.colorScheme.onSurface,
                 ),
@@ -150,7 +150,7 @@ class RecommendedUserCard extends StatelessWidget {
   String _companyText(AppLocalizations l10n) {
     switch (userType) {
       case UserType.entrepreneur:
-        return '${l10n.exploreEntrepreneurVenture} $company';
+        return '${l10n.exploreResultEntrepreneurVenture} $company';
       case UserType.mentor:
         return [jobTitle, company].nonNulls.join(l10n.listSeparator);
       default:

@@ -58,8 +58,8 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
           ? l10n.signupExpertisesEntrepreneurTitle
           : l10n.signupExpertisesMentorTitle,
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },
@@ -79,7 +79,7 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
       ),
       footer: SignUpIconFooter(
         icon: Icons.visibility_outlined,
-        text: l10n.signUpShownOnProfileInfo,
+        text: l10n.signupFooterVisible,
       ),
       body: Column(
         children: [

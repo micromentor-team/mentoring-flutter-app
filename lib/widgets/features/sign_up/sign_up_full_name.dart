@@ -70,10 +70,10 @@ class _SignupFullNameScreenState extends State<SignupFullNameScreen> {
         ),
       ),
       footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signUpVisibleInfoDesc),
+          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },

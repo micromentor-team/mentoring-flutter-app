@@ -49,11 +49,11 @@ class AppWrapper extends StatelessWidget {
               destinations: <Widget>[
                 NavigationDestination(
                   icon: const Icon(Icons.home_outlined),
-                  label: AppLocalizations.of(context)!.navHomeText,
+                  label: AppLocalizations.of(context)!.navTabHome,
                 ),
                 NavigationDestination(
                   icon: const Icon(Icons.search_outlined),
-                  label: AppLocalizations.of(context)!.navExploreText,
+                  label: AppLocalizations.of(context)!.navTabExplore,
                 ),
                 NavigationDestination(
                   icon: Selector<InboxModel, int>(
@@ -78,11 +78,11 @@ class AppWrapper extends StatelessWidget {
                       child: Icon(Icons.mail_outline),
                     ),
                   ),
-                  label: AppLocalizations.of(context)!.navInboxText,
+                  label: AppLocalizations.of(context)!.navTabInbox,
                 ),
                 NavigationDestination(
                   icon: const Icon(Icons.person_outlined),
-                  label: AppLocalizations.of(context)!.navProfileText,
+                  label: AppLocalizations.of(context)!.navTabProfile,
                 ),
               ],
               selectedIndex: _calculateSelectedIndex(context),

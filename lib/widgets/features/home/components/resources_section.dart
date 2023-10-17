@@ -46,22 +46,22 @@ class ResourcesSection extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     List<Widget> resourceTiles = [
       Text(
-        l10n.moreResources,
+        l10n.homeResourcesTitle,
         style: theme.textTheme.titleLarge?.copyWith(
           color: theme.colorScheme.onSurface,
         ),
       ),
       ResourceImage(
         resourceImage: const AssetImage(Assets.trainingHomePageImage),
-        subheading: l10n.trainingMentoringFirstSteps,
+        subheading: l10n.homeResourcesItemMentoringFirstSteps,
       ),
       ResourceImage(
         resourceImage: const AssetImage(Assets.trainingHomePageImageTwo),
-        subheading: l10n.trainingBuildingFuture,
+        subheading: l10n.homeResourcesItemBuildingFuture,
       ),
       ResourceImage(
         resourceImage: const AssetImage(Assets.trainingHomePageImageThree),
-        subheading: l10n.trainingMarketingBusiness,
+        subheading: l10n.homeResourcesItemMarketingBusiness,
       ),
     ];
     return resourceTiles;

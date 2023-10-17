@@ -40,7 +40,8 @@ class ReminderBanner extends StatefulWidget {
               height: Radii.avatarRadiusSmall * 2,
               child: Center(
                 child: Text(
-                  l10n.percentageProfileCompletion(profileCompletionPercentage),
+                  l10n.homePercentageProfileCompletion(
+                      profileCompletionPercentage),
                   textAlign: TextAlign.center,
                   style: theme.textTheme.labelMedium?.copyWith(
                     color: theme.colorScheme.primary,
@@ -187,17 +188,17 @@ class MaybeReminderBanner extends StatelessWidget {
     DateTime? updatedAt = authenticatedUser.updatedAt?.toLocal();
     if (profileCompletionPercentage < 50) {
       return ReminderBanner(
-        titleText: l10n.reminderBannerProfileCompleteTitle,
-        subtitleText: l10n.reminderBannerProfileCompleteSubtitle,
-        ctaText: l10n.reminderBannerProfileCompleteCta,
+        titleText: l10n.homeReminderBannerProfileCompleteTitle,
+        subtitleText: l10n.homeReminderBannerProfileCompleteSubtitle,
+        ctaText: l10n.homeReminderBannerProfileCompletePrompt,
         profileCompletionPercentage: profileCompletionPercentage,
       );
     } else if (updatedAt != null &&
         DateTime.now().difference(updatedAt.toLocal()).inDays > 30 * 6) {
       return ReminderBanner(
-        titleText: l10n.reminderBannerProfileUpdateTitle,
-        subtitleText: l10n.reminderBannerProfileUpdateSubtitle,
-        ctaText: l10n.reminderBannerProfileUpdateCta,
+        titleText: l10n.homeReminderBannerProfileUpdateTitle,
+        subtitleText: l10n.homeReminderBannerProfileUpdateSubtitle,
+        ctaText: l10n.homeReminderBannerProfileUpdatePrompt,
         profileCompletionPercentage: profileCompletionPercentage,
       );
     } else {

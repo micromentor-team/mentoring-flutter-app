@@ -166,10 +166,11 @@ class RecommendedUsersHeading extends StatelessWidget {
                 ),
               ),
               _SectionExpandToggle(
-                  text: l10n.seeMore,
-                  onPressed: () {
-                    context.push(Routes.explore.path);
-                  }),
+                text: l10n.listSeeMore,
+                onPressed: () {
+                  context.push(Routes.explore.path);
+                },
+              ),
             ],
           ),
           Row(

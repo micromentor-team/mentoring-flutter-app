@@ -67,7 +67,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
             await _inboxModel.refreshPendingReceivedInvitations();
           },
           child: Text(
-            l10n.decline,
+            l10n.actionDecline,
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.primary,
             ),
@@ -98,7 +98,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
             }
           },
           child: Text(
-            l10n.accept,
+            l10n.actionAccept,
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.onPrimary,
             ),
@@ -125,7 +125,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
       child: Row(
         children: [
           Text(
-            l10n.profileHeaderInvite(widget.userFirstName),
+            l10n.profileViewHeaderInvite(widget.userFirstName),
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
             ),
@@ -159,7 +159,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
         _inboxModel.refreshPendingSentInvitations();
       },
       child: Text(
-        l10n.profileHeaderWithdraw,
+        l10n.profileViewHeaderWithdraw,
         style: theme.textTheme.labelLarge?.copyWith(
           color: theme.colorScheme.onPrimary,
         ),
@@ -181,7 +181,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
         context.push(Routes.profileEdit.path);
       },
       child: Text(
-        l10n.editProfile,
+        l10n.profileViewEditButtonLabel,
         style: theme.textTheme.labelLarge?.copyWith(
           color: theme.colorScheme.onPrimary,
         ),

@@ -130,7 +130,7 @@ class ProfileAboutMe extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.profileAboutMe,
+                l10n.profileViewAboutMe,
                 style: theme.textTheme.titleMedium!
                     .copyWith(color: theme.colorScheme.onSurface),
               ),
@@ -148,7 +148,7 @@ class ProfileAboutMe extends StatelessWidget {
               if (languages.isNotEmpty) ...[
                 _createChipsSection(
                   context,
-                  l10n.profileMyLanguages,
+                  l10n.profileViewMyLanguages,
                   _createLanguageChips(languages),
                 ),
                 const SizedBox(height: Insets.paddingSmall),
@@ -180,13 +180,13 @@ List<ProfileChip> _createLocationChips(
   List<ProfileChip> example = [
     if (livesInLocation != null && livesInLocation.isNotEmpty)
       ProfileChip(
-        text: l10n.profileAboutLivesIn(livesInLocation),
+        text: l10n.profileViewAboutLivesIn(livesInLocation),
         icon: Icons.flag,
         applyIconColor: true,
       ),
     if (fromLocation != null && fromLocation.isNotEmpty)
       ProfileChip(
-        text: l10n.profileAboutFrom(fromLocation),
+        text: l10n.profileViewAboutFrom(fromLocation),
         icon: Icons.flag,
         applyIconColor: true,
       ),

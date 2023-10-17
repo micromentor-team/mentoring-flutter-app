@@ -217,7 +217,7 @@ class AppBarFactory {
         },
       ),
       title: Text(
-        l10n.inboxTitleInviteReceived,
+        l10n.inboxInvitesReceivedTitle,
         style: theme.textTheme.titleLarge?.copyWith(
           color: theme.colorScheme.onPrimaryContainer,
         ),
@@ -246,7 +246,7 @@ class AppBarFactory {
         },
       ),
       title: Text(
-        l10n.inboxTitleInviteSent,
+        l10n.inboxInvitesSentTitle,
         style: theme.textTheme.titleLarge?.copyWith(
           color: theme.colorScheme.onPrimaryContainer,
         ),
@@ -259,12 +259,12 @@ class AppBarFactory {
       ThemeData theme, AppLocalizations l10n, String targetRoute) {
     final String title;
     if (targetRoute == Routes.inboxArchived.path) {
-      title = l10n.inboxTitleArchivedChats;
+      title = l10n.inboxArchivedChatsTitle;
     } else if (targetRoute == Routes.inboxInvitesReceived.path ||
         targetRoute == Routes.inboxInvitesSent.path) {
-      title = l10n.inboxTitleInvites;
+      title = l10n.inboxInvitesTitle;
     } else {
-      title = l10n.inboxTitleChats;
+      title = l10n.inboxChatsTitle;
     }
     return Text(
       title,
