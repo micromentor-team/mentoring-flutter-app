@@ -22,6 +22,7 @@ import '../widgets/features/inbox/inbox_chat_list.dart';
 import '../widgets/features/inbox/inbox_chat_messages.dart';
 import '../widgets/features/inbox/inbox_invitation_detail.dart';
 import '../widgets/features/profile/edit_profile_city.dart';
+import '../widgets/features/profile/edit_profile_linkedin.dart';
 import '../widgets/features/profile/edit_profile_other_languages.dart';
 import '../widgets/features/profile/edit_profile_preferred_language.dart';
 import '../widgets/features/profile/edit_profile_pronoun.dart';
@@ -606,6 +607,17 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const EditProfilePronounScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.editLinkedin.path,
+          name: Routes.editLinkedin.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditLinkedInScreen(),
             );
           },
         ),

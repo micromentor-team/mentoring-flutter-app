@@ -205,6 +205,10 @@ class Routes {
     name: 'editPronouns',
     path: '/pronouns',
   );
+  static Route editLinkedin = Route(
+    name: 'editLinkedin',
+    path: '/linkedin',
+  );
   static Route editCity = Route(
     name: 'editCity',
     path: '/city',

@@ -88,7 +88,8 @@ class EditProfileAboutMe extends StatelessWidget {
     );
   }
 
-  Widget _createLinkedInSection(BuildContext context, String? linkedInUrl) {
+  Widget _createLinkedInSection(
+      BuildContext context, String? linkedInUrl, String? nextPath) {
     final theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     String titleText =
@@ -108,7 +109,11 @@ class EditProfileAboutMe extends StatelessWidget {
       ]),
       trailing: IconButton(
         icon: const Icon(Icons.navigate_next),
-        onPressed: () {},
+        onPressed: () {
+          if (nextPath != null) {
+            context.push(nextPath);
+          }
+        },
       ),
     );
   }
@@ -141,7 +146,7 @@ class EditProfileAboutMe extends StatelessWidget {
         _createListTileSection(
             context, l10n.pronouns, pronouns, Routes.editPronouns.path),
         const Divider(),
-        _createLinkedInSection(context, linkedinUrl),
+        _createLinkedInSection(context, linkedinUrl, Routes.editLinkedin.path),
         const Divider(),
         _createListTileSection(
             context, l10n.currentCity, livesInLocation, Routes.editCity.path),
