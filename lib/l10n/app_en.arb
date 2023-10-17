@@ -132,6 +132,7 @@
     "profileEditHowCanIHelp": "How can I help",
     "profileEditIndustries": "My industries",
     "profileEditLanguageOthers": "Other languages",
+    "profileEditLanguageOthersSubtitle": "What other languages do you speak fluently? (optional)",
     "profileEditLanguagePreferred":"Preferred language",
     "profileEditLanguagePreferredSubtitle": "What's your preferred language to communicate in? Select 1",
     "profileEditLinkedInConnect": "Connect LinkedIn",
