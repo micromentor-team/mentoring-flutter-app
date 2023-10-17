@@ -137,6 +137,8 @@
     "profileEditLinkedInConnectConfirmation": "LinkedIn connected",
     "profileEditLinkedInUrl": "LinkedIn URL",
     "profileEditLinkedInUrlHint": "ex: www.linkedin.com/in/jperez",
+    "profileEditLocationInputLabel": "Find your current city",
+    "profileEditLocationInputHint": "Type to select",
     "profileEditMentoringPreferences": "My mentoring preferences",
     "profileEditOriginLocation":"Where are you from",
     "profileEditPromptSubtitle": "And record your answer",
