@@ -22,6 +22,9 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
   late final UserRegistrationModel _registrationModel;
   bool processing = false;
   String? _fourDigitCode;
+  String? dummyFourDigitCode = '1234';
+  final _verficationCodeController = TextEditingController();
+  bool verificationFailed = false;
 
   @override
   void initState() {
@@ -64,6 +67,7 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
               height: Insets.paddingSmall,
             ),
             TextFormFieldWidget(
+              textController: _verficationCodeController,
               maxLength: 4,
               label: l10n.signupVerificationInputLabel,
               onChanged: (value) {
@@ -71,7 +75,25 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
                   _fourDigitCode = value;
                 });
               },
+              validator: (value) {
+                if (_fourDigitCode != dummyFourDigitCode) {
+                  setState(() {
+                    verificationFailed = true;
+                  });
+                  return '';
+                }
+                return null;
+              },
             ),
+            if (verificationFailed)
+              SizedBox(
+                child: Text(
+                  l10n.verificationFailed,
+                  style: theme.textTheme.bodyMedium!
+                      .copyWith(color: theme.colorScheme.error, fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             const SizedBox(
               height: Insets.paddingSmall,
             ),
@@ -132,16 +154,18 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
               ),
               onPressed: !processing && _fourDigitCode?.length == 4
                   ? () async {
-                      setState(() {
-                        processing = true;
-                      });
-                      if (await _registrationModel
-                          .registerUser(_userProvider)) {
-                        router.push(Routes.signupWelcome.path);
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          processing = true;
+                        });
+                        if (await _registrationModel
+                            .registerUser(_userProvider)) {
+                          router.push(Routes.signupWelcome.path);
+                        }
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          setState(() => processing = false);
+                        });
                       }
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        setState(() => processing = false);
-                      });
                     }
                   : null,
               child: Wrap(

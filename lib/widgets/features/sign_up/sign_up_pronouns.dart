@@ -23,6 +23,13 @@ class _SignupPronounsScreenState extends State<SignupPronounsScreen> {
   late final UserRegistrationModel _registrationModel;
   late final bool _isEntrepreneur;
   final List<String> _selections = List.empty(growable: true);
+  final _pronounController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pronounController.dispose();
+  }
 
   @override
   void initState() {
@@ -52,10 +59,18 @@ class _SignupPronounsScreenState extends State<SignupPronounsScreen> {
       selectionOrder: _selections.indexOf(textId) + 1,
       onChanged: (bool isSelected) {
         setState(() {
+          _pronounController.clear();
           if (isSelected) {
             _selections.add(textId);
           } else {
             _selections.remove(textId);
+            _pronounController.text = '';
+          }
+          if (_selections.isNotEmpty) {
+            for (String pronoun in _selections) {
+              _pronounController.text =
+                  _pronounController.text.isEmpty ? pronoun : ', $pronoun';
+            }
           }
         });
       },
@@ -98,6 +113,19 @@ class _SignupPronounsScreenState extends State<SignupPronounsScreen> {
               textAlign: TextAlign.center,
             ),
             ..._createCheckboxes(),
+            SizedBox(
+              width: 300,
+              child: TextFormField(
+                controller: _pronounController,
+                minLines: 1,
+                maxLines: 5,
+                readOnly: true,
+                decoration: InputDecoration(
+                    labelText: l10n.shownOnYourProfilePronouns,
+                    border: const OutlineInputBorder(),
+                    floatingLabelBehavior: FloatingLabelBehavior.always),
+              ),
+            )
           ],
         ),
       ),
