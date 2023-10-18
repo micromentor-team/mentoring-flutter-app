@@ -33,7 +33,7 @@ class SignUpBottomButtons extends StatelessWidget {
               leftButtonText,
               style: leftOnPress != null
                   ? theme.textTheme.labelLarge?.copyWith(
-                      color: theme.colorScheme.primary,
+                      color: theme.colorScheme.onPrimaryContainer,
                     )
                   : null,
             ),
