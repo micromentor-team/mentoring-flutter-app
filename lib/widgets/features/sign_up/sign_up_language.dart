@@ -19,7 +19,6 @@ class SignupLanguageScreen extends StatefulWidget {
 
 class _SignupLanguageScreenState extends State<SignupLanguageScreen> {
   final _preferredLanguagesController = TextfieldTagsController();
-  final _fluentLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;
   bool _selectedPreferredLanguage = false;
@@ -43,7 +42,6 @@ class _SignupLanguageScreenState extends State<SignupLanguageScreen> {
   void dispose() {
     try {
       _preferredLanguagesController.dispose();
-      _fluentLanguagesController.dispose();
     } catch (_) {}
     super.dispose();
   }
@@ -51,39 +49,17 @@ class _SignupLanguageScreenState extends State<SignupLanguageScreen> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final ThemeData theme = Theme.of(context);
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupLanguageTitle,
       subtitle: l10n.signupLanguageSubtitle,
       body: Column(
         children: [
-          const SizedBox(height: Insets.paddingMedium),
-          Text(
-            l10n.signupLanguagePreferred,
-            style: theme.textTheme.bodyMedium!.copyWith(
-              color: theme.colorScheme.secondary,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: Insets.paddingMedium),
           AutocompletePicker(
+            singleSelect: true,
+            label: l10n.signupLanguageInputLabel,
+            hint: l10n.signupLanguageInputHint,
             controller: _preferredLanguagesController,
-            options: _contentProvider.languageOptions!
-                .map((e) => e.translatedValue!)
-                .toList(),
-          ),
-          const SizedBox(height: Insets.paddingMedium),
-          Text(
-            l10n.signupLanguageFluent,
-            style: theme.textTheme.bodyMedium!.copyWith(
-              color: theme.colorScheme.secondary,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: Insets.paddingMedium),
-          AutocompletePicker(
-            controller: _fluentLanguagesController,
             options: _contentProvider.languageOptions!
                 .map((e) => e.translatedValue!)
                 .toList(),
@@ -92,18 +68,13 @@ class _SignupLanguageScreenState extends State<SignupLanguageScreen> {
       ),
       isNextEnabled: _selectedPreferredLanguage,
       onNextPressed: () {
-        _registrationModel.updateUserInput.preferredLanguageTextIds =
+        _registrationModel.updateUserInput.preferredLanguageTextId =
             _preferredLanguagesController.getTags
                 ?.map((t) => _contentProvider.languageOptions!
                     .firstWhere((o) => o.translatedValue! == t)
                     .textId)
-                .toList();
-        _registrationModel.updateUserInput.spokenLanguagesTextIds =
-            _fluentLanguagesController.getTags
-                ?.map((t) => _contentProvider.languageOptions!
-                    .firstWhere((o) => o.translatedValue! == t)
-                    .textId)
-                .toList();
+                .toList()
+                .firstOrNull;
         context.push(Routes.signupGroupMembership.path);
       },
     );

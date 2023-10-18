@@ -119,8 +119,7 @@ class UpdateUserInput {
   String? regionOfResidence;
   String? cityOfResidence;
   String? countryOfResidenceTextId;
-  List<String>? preferredLanguageTextIds;
-  List<String>? spokenLanguagesTextIds;
+  String? preferredLanguageTextId;
   String? companyName;
   UserType? userType;
 
@@ -157,8 +156,7 @@ class UpdateUserInput {
       regionOfResidence: regionOfResidence,
       cityOfResidence: cityOfResidence,
       countryOfResidenceTextId: countryOfResidenceTextId,
-      preferredLanguageTextId: preferredLanguageTextIds?.firstOrNull,
-      spokenLanguagesTextIds: spokenLanguagesTextIds,
+      preferredLanguageTextId: preferredLanguageTextId,
       company: Input$CompanyInput(
         name: companyName,
         companyStageTextId: companyStageTextId,
