@@ -10,14 +10,14 @@ import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../providers/models/user_registration_model.dart';
 
-class SignupLanguagesScreen extends StatefulWidget {
-  const SignupLanguagesScreen({super.key});
+class SignupLanguageScreen extends StatefulWidget {
+  const SignupLanguageScreen({super.key});
 
   @override
-  State<SignupLanguagesScreen> createState() => _SignupLanguagesScreenState();
+  State<SignupLanguageScreen> createState() => _SignupLanguageScreenState();
 }
 
-class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
+class _SignupLanguageScreenState extends State<SignupLanguageScreen> {
   final _preferredLanguagesController = TextfieldTagsController();
   final _fluentLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
@@ -54,12 +54,13 @@ class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
     final ThemeData theme = Theme.of(context);
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.signupLanguagesTitle,
+      title: l10n.signupLanguageTitle,
+      subtitle: l10n.signupLanguageSubtitle,
       body: Column(
         children: [
           const SizedBox(height: Insets.paddingMedium),
           Text(
-            l10n.signupLanguagesPreferred,
+            l10n.signupLanguagePreferred,
             style: theme.textTheme.bodyMedium!.copyWith(
               color: theme.colorScheme.secondary,
             ),
@@ -74,7 +75,7 @@ class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
           ),
           const SizedBox(height: Insets.paddingMedium),
           Text(
-            l10n.signupLanguagesFluent,
+            l10n.signupLanguageFluent,
             style: theme.textTheme.bodyMedium!.copyWith(
               color: theme.colorScheme.secondary,
             ),

@@ -37,6 +37,7 @@ class _SignupBirthYearScreenState extends State<SignupBirthYearScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupBirthTitle,
+      subtitle: l10n.signupBirthSubtitle,
       body: Form(
         key: _formKey,
         child: Stack(

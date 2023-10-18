@@ -34,6 +34,7 @@ class _SignupLocationScreenState extends State<SignupLocationScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupLocationTitle,
+      subtitle: l10n.signupLocationSubtitle,
       body: Form(
         //TODO - Set up with Autocomplete
         child: TextFormFieldWidget(
@@ -49,7 +50,7 @@ class _SignupLocationScreenState extends State<SignupLocationScreen> {
       onNextPressed: () {
         // TODO - also set region and country
         _registrationModel.updateUserInput.cityOfResidence = _location;
-        context.push(Routes.signupLanguages.path);
+        context.push(Routes.signupLanguage.path);
       },
     );
   }

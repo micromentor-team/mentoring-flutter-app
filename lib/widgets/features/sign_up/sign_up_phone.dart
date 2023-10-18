@@ -41,6 +41,7 @@ class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupPhoneTitle,
+      subtitle: l10n.signupPhoneSubtitle,
       body: Form(
         key: _formKey,
         child: Row(
@@ -51,12 +52,16 @@ class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
                 isExpanded: false,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: theme.colorScheme.outline, width: 1),
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.outline,
+                      width: 1,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: theme.colorScheme.outline, width: 1),
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.outline,
+                      width: 1,
+                    ),
                   ),
                   filled: true,
                   fillColor: theme.colorScheme.surface,

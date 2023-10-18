@@ -24,6 +24,7 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
   String? _email;
   String? _password;
   String? _confirmPassword;
+  bool _enableUpdatesAndNews = false;
 
   @override
   void initState() {
@@ -37,40 +38,47 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final GoRouter router = GoRouter.of(context);
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.signupCreateAccountTitle,
+      title: l10n.signupCredentialsTitle,
       body: Form(
         key: _formKey,
         child: Column(
           children: [
-            TextFormFieldWidget(
-              label: l10n.signupCreateAccountNameFirstInputLabel,
-              hint: l10n.signupCreateAccountNameFirstInputHint,
-              maxLength: 50,
-              onChanged: (value) {
-                setState(() {
-                  _firstName = value;
-                });
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormFieldWidget(
+                    label: l10n.signupCredentialsNameFirstInputLabel,
+                    hint: l10n.signupCredentialsNameFirstInputHint,
+                    onChanged: (value) {
+                      setState(() {
+                        _firstName = value;
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(width: Insets.paddingMedium),
+                Expanded(
+                  child: TextFormFieldWidget(
+                    label: l10n.signupCredentialsNameLastInputLabel,
+                    hint: l10n.signupCredentialsNameLastInputHint,
+                    onChanged: (value) {
+                      setState(() {
+                        _lastName = value;
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: Insets.paddingSmall),
+            const SizedBox(height: Insets.paddingMedium),
             TextFormFieldWidget(
-              label: l10n.signupCreateAccountNameLastInputLabel,
-              hint: l10n.signupCreateAccountNameLastInputHint,
-              maxLength: 50,
-              onChanged: (value) {
-                setState(() {
-                  _lastName = value;
-                });
-              },
-            ),
-            const SizedBox(height: Insets.paddingSmall),
-            TextFormFieldWidget(
-              label: l10n.signupCreateAccountEmailInputLabel,
-              hint: l10n.signupCreateAccountEmailInputHint,
+              label: l10n.signupCredentialsEmailInputLabel,
+              hint: l10n.signupCredentialsEmailInputHint,
               onChanged: (value) {
                 setState(() {
                   _email = value;
@@ -79,12 +87,12 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
               validator: (value) {
                 bool validEmail = EmailValidator.validate(value!);
                 if (validEmail != true) {
-                  return l10n.signupCreateAccountEmailInputError;
+                  return l10n.signupCredentialsEmailInputError;
                 }
                 return null;
               },
             ),
-            const SizedBox(height: Insets.paddingSmall),
+            const SizedBox(height: Insets.paddingMedium),
             TextFormFieldWidget(
               isPassword: true,
               validator: (val) {
@@ -96,19 +104,17 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
                 }
                 return null;
               },
-              label: l10n.signupCreateAccountPasswordInputLabel,
+              label: l10n.signupCredentialsPasswordInputLabel,
               onChanged: (value) {
                 setState(() {
                   _password = value;
                 });
               },
             ),
-            const SizedBox(
-              height: Insets.paddingSmall,
-            ),
+            const SizedBox(height: Insets.paddingMedium),
             TextFormFieldWidget(
               isPassword: true,
-              label: l10n.signupCreateAccountPasswordConfirmInputLabel,
+              label: l10n.signupCredentialsPasswordConfirmInputLabel,
               onChanged: (value) {
                 setState(() {
                   _confirmPassword = value;
@@ -123,6 +129,21 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
                 }
                 return null;
               },
+            ),
+            const SizedBox(height: Insets.paddingMedium),
+            ListTile(
+              leading: Checkbox(
+                value: _enableUpdatesAndNews,
+                onChanged: (value) => setState(
+                  () => _enableUpdatesAndNews = value ?? false,
+                ),
+              ),
+              title: Text(
+                l10n.signupCredentialsNewsCheckboxLabel,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.secondary,
+                ),
+              ),
             ),
           ],
         ),
@@ -140,6 +161,8 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
         _registrationModel.signUpUserInput.password = _password;
         _registrationModel.updateUserInput.firstName = _firstName;
         _registrationModel.updateUserInput.lastName = _lastName;
+        _registrationModel.userPreferencesInput.enableUpdatesAndNews =
+            _enableUpdatesAndNews;
         router.push(Routes.signupPhone.path);
       },
     );

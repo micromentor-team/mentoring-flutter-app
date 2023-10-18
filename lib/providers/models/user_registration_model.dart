@@ -9,10 +9,12 @@ import '../user_provider.dart';
 class UserRegistrationModel {
   SignUpUserInput _signUpUserInput = SignUpUserInput();
   UpdateUserInput _updateUserInput = UpdateUserInput();
+  UserPreferencesInput _userPreferencesInput = UserPreferencesInput();
   bool _isNewUser = false;
 
   SignUpUserInput get signUpUserInput => _signUpUserInput;
   UpdateUserInput get updateUserInput => _updateUserInput;
+  UserPreferencesInput get userPreferencesInput => _userPreferencesInput;
   bool get isNewUser => _isNewUser;
 
   void clearNewUserFlag() {
@@ -22,6 +24,7 @@ class UserRegistrationModel {
   void clear() {
     _signUpUserInput = SignUpUserInput();
     _updateUserInput = UpdateUserInput();
+    _userPreferencesInput = UserPreferencesInput();
   }
 
   Future<bool> registerUser(UserProvider userProvider) async {
@@ -129,6 +132,7 @@ class UpdateUserInput {
   // Mentor
   String? jobTitle;
   List<String>? mentorExpertisesTextIds;
+  String? mentorReasonForMentoring; //TODO - Implement in backend
 
   void clearEntrepreneurFields() {
     companyStageTextId = null;
@@ -183,4 +187,8 @@ class UpdateUserInput {
       expertisesTextIds: mentorExpertisesTextIds,
     );
   }
+}
+
+class UserPreferencesInput {
+  bool? enableUpdatesAndNews; //TODO - Implement in backend
 }

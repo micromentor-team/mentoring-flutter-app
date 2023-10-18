@@ -37,9 +37,11 @@ class _SignupEntrepreneurCompanyNameScreenState
     return SignUpTemplate(
       progress: SignUpProgress.two,
       title: l10n.signupBusinessNameTitle,
+      subtitle: l10n.signupBusinessNameSubtitle,
       body: Form(
         child: TextFormFieldWidget(
           label: l10n.signupBusinessNameInputLabel,
+          maxLength: 50,
           hint: l10n.signupBusinessNameInputHint,
           onChanged: (value) {
             setState(() {
@@ -51,7 +53,7 @@ class _SignupEntrepreneurCompanyNameScreenState
       isNextEnabled: _businessName?.isNotEmpty ?? false,
       onNextPressed: () {
         _registrationModel.updateUserInput.companyName = _businessName;
-        context.push(Routes.signupEntrepreneurCompanyReason.path);
+        context.push(Routes.signupReason.path);
       },
     );
   }

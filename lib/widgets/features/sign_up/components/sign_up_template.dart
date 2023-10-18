@@ -24,6 +24,7 @@ double _signUpProgressToDouble(SignUpProgress signUpProgress) {
 class SignUpTemplate extends StatelessWidget {
   final SignUpProgress progress;
   final String title;
+  final String? subtitle;
   final Widget body;
   final bool showNavigationButtons;
   final bool isNextEnabled;
@@ -34,6 +35,7 @@ class SignUpTemplate extends StatelessWidget {
     super.key,
     required this.progress,
     required this.title,
+    this.subtitle,
     required this.body,
     this.showNavigationButtons = true,
     this.isNextEnabled = true,
@@ -77,7 +79,22 @@ class SignUpTemplate extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: Insets.paddingMedium),
+              const SizedBox(height: Insets.paddingLarge),
+              if (subtitle != null) ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Insets.paddingExtraLarge,
+                  ),
+                  child: Text(
+                    subtitle!,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.secondary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(height: Insets.paddingMedium),
+              ],
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

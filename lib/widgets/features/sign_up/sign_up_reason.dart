@@ -8,17 +8,16 @@ import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
 import '../../shared/text_form_field_widget.dart';
 
-class SignupEntrepreneurCompanyReasonScreen extends StatefulWidget {
-  const SignupEntrepreneurCompanyReasonScreen({Key? key}) : super(key: key);
+class SignupReasonScreen extends StatefulWidget {
+  const SignupReasonScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignupEntrepreneurCompanyReasonScreen> createState() =>
-      _SignupEntrepreneurCompanyReasonScreenState();
+  State<SignupReasonScreen> createState() => _SignupReasonScreenState();
 }
 
-class _SignupEntrepreneurCompanyReasonScreenState
-    extends State<SignupEntrepreneurCompanyReasonScreen> {
+class _SignupReasonScreenState extends State<SignupReasonScreen> {
   late final UserRegistrationModel _registrationModel;
+  late final bool _isEntrepreneur;
   String? _text;
 
   @override
@@ -28,6 +27,8 @@ class _SignupEntrepreneurCompanyReasonScreenState
       context,
       listen: false,
     );
+    _isEntrepreneur =
+        _registrationModel.updateUserInput.userType == UserType.entrepreneur;
   }
 
   @override
@@ -36,10 +37,17 @@ class _SignupEntrepreneurCompanyReasonScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.three,
-      title: l10n.signupBusinessReasonTitle,
+      title: _isEntrepreneur
+          ? l10n.signupReasonEntrepreneurTitle
+          : l10n.signupReasonMentorTitle,
+      subtitle: _isEntrepreneur
+          ? l10n.signupReasonEntrepreneurSubtitle
+          : l10n.signupReasonMentorSubtitle,
       body: TextFormFieldWidget(
-        hint: l10n.signupBusinessReasonInputHint,
-        maxLength: 280,
+        hint: _isEntrepreneur
+            ? l10n.signupReasonEntrepreneurInputHint
+            : l10n.signupReasonMentorInputHint,
+        maxLength: 1000,
         maxLines: 6,
         onChanged: (value) {
           setState(() {
@@ -49,8 +57,12 @@ class _SignupEntrepreneurCompanyReasonScreenState
       ),
       isNextEnabled: _text?.isNotEmpty ?? false,
       onNextPressed: () {
-        _registrationModel.updateUserInput.menteeReasonForStartingBusiness =
-            _text;
+        if (_isEntrepreneur) {
+          _registrationModel.updateUserInput.menteeReasonForStartingBusiness =
+              _text;
+        } else {
+          _registrationModel.updateUserInput.mentorReasonForMentoring = _text;
+        }
         context.push(Routes.signupCompleted.path);
       },
     );

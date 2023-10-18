@@ -32,7 +32,6 @@ class _SignupGroupMembershipScreenState
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
@@ -56,18 +55,6 @@ class _SignupGroupMembershipScreenState
             titleIcon: const [null, null],
             onSelectedCardChanged: (value) =>
                 setState(() => selectedNumber = value),
-          ),
-          const SizedBox(height: Insets.paddingMedium),
-          Padding(
-            padding: const EdgeInsets.all(Insets.paddingSmall),
-            child: InkWell(
-              child: Text(l10n.signupGroupMembershipLearnMorePrompt,
-                  style: TextStyle(
-                    color: theme.colorScheme.primary,
-                    decoration: TextDecoration.underline,
-                  )),
-              onTap: () {},
-            ),
           ),
         ],
       ),

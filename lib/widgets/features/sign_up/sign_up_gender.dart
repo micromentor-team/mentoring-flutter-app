@@ -60,6 +60,7 @@ class _SignupGenderScreenState extends State<SignupGenderScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupGenderTitle,
+      subtitle: l10n.signupGenderSubtitle,
       body: Form(
         key: _formKey,
         child: Column(

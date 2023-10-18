@@ -36,6 +36,7 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.two,
       title: l10n.signupRoleTitle,
+      subtitle: l10n.signupRoleSubtitle,
       body: Column(
         children: [
           Form(
@@ -70,7 +71,7 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
       onNextPressed: () {
         _registrationModel.updateUserInput.jobTitle = _jobTitle;
         _registrationModel.updateUserInput.companyName = _companyName;
-        context.push(Routes.signupEntrepreneurCompanyReason.path);
+        context.push(Routes.signupReason.path);
       },
     );
   }

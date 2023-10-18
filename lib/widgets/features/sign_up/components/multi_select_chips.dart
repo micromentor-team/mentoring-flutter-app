@@ -14,14 +14,12 @@ class SelectChip {
 }
 
 class CreateMultiSelectChips extends StatefulWidget {
-  final String label;
   final List<SelectChip> chips;
   final int? maxSelection;
   final Function(List<SelectChip>)? onSelectedChipsChanged;
 
   const CreateMultiSelectChips({
     Key? key,
-    required this.label,
     required this.chips,
     this.maxSelection,
     this.onSelectedChipsChanged,
@@ -56,8 +54,6 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
     List<Widget> chipListWithPadding = [];
     List<FilterChipWidget> chipList = [];
     for (int i = 0; i < widget.chips.length; i++) {
@@ -78,23 +74,7 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
     }
 
     return Column(
-      children: [
-        Center(
-          child: Text(
-            widget.label,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.secondary,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        const SizedBox(
-          height: Insets.paddingLarge,
-        ),
-        Column(
-          children: chipListWithPadding,
-        ),
-      ],
+      children: chipListWithPadding,
     );
   }
 }

@@ -49,9 +49,9 @@ class Routes {
     name: 'signupLocation',
     path: '${signup.path}/location',
   );
-  static Route signupLanguages = Route(
-    name: 'signupLanguages',
-    path: '${signup.path}/languages',
+  static Route signupLanguage = Route(
+    name: 'signupLanguage',
+    path: '${signup.path}/language',
   );
   static Route signupGroupMembership = Route(
     name: 'signupGroupMembership',
@@ -69,9 +69,9 @@ class Routes {
     name: 'signupEntrepreneurCompanyName',
     path: '${signup.path}/entrepreneurCompanyName',
   );
-  static Route signupEntrepreneurCompanyReason = Route(
-    name: 'signupEntrepreneurCompanyReason',
-    path: '${signup.path}/entrepreneurCompanyReason',
+  static Route signupReason = Route(
+    name: 'signupReason',
+    path: '${signup.path}/reason',
   );
   static Route signupCompleted = Route(
     name: 'signupCompleted',

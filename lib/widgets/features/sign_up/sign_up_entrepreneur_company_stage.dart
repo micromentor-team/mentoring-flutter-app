@@ -36,6 +36,7 @@ class _SignupEntrepreneurCompanyStageScreenState
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupBusinessStageTitle,
+      subtitle: l10n.signupBusinessStageSubtitle,
       body: Column(
         children: [
           RadioButtonCards(
