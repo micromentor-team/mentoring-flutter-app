@@ -4,7 +4,6 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 import '../../../providers/content_provider.dart';
-import '../../../providers/models/user_registration_model.dart';
 import '../../shared/autocomplete_picker.dart';
 import 'edit_template.dart';
 
@@ -19,16 +18,11 @@ class EditOtherLanguagesScreen extends StatefulWidget {
 class _EditOtherLanguagesScreenState extends State<EditOtherLanguagesScreen> {
   final _fluentLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
-  late final UserRegistrationModel _registrationModel;
 
   @override
   void initState() {
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
-    _registrationModel = Provider.of<UserRegistrationModel>(
-      context,
-      listen: false,
-    );
   }
 
   @override

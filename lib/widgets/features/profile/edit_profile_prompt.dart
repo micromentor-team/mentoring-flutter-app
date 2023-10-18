@@ -11,7 +11,7 @@ class EditPromptScreen extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return EditTemplate(
-      title: "prompt",
+      title: l10n.profileEditPromptTitle,
       body: const Padding(
         padding: EdgeInsets.all(Insets.paddingMedium),
         child: Column(
