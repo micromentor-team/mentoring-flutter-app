@@ -103,7 +103,7 @@ class _SignupLanguagesScreenState extends State<SignupLanguagesScreen> {
                     .firstWhere((o) => o.translatedValue! == t)
                     .textId)
                 .toList();
-        context.push(Routes.signupUserType.path);
+        context.push(Routes.signupGroupMembership.path);
       },
     );
   }

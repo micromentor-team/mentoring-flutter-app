@@ -9,12 +9,10 @@ import '../user_provider.dart';
 class UserRegistrationModel {
   SignUpUserInput _signUpUserInput = SignUpUserInput();
   UpdateUserInput _updateUserInput = UpdateUserInput();
-  AppUserSettingsInput _appUserSettingsInput = AppUserSettingsInput();
   bool _isNewUser = false;
 
   SignUpUserInput get signUpUserInput => _signUpUserInput;
   UpdateUserInput get updateUserInput => _updateUserInput;
-  AppUserSettingsInput get appUserSettingsInput => _appUserSettingsInput;
   bool get isNewUser => _isNewUser;
 
   void clearNewUserFlag() {
@@ -24,10 +22,13 @@ class UserRegistrationModel {
   void clear() {
     _signUpUserInput = SignUpUserInput();
     _updateUserInput = UpdateUserInput();
-    _appUserSettingsInput = AppUserSettingsInput();
   }
 
   Future<bool> registerUser(UserProvider userProvider) async {
+    return await _createUser(userProvider) && await _updateUser(userProvider);
+  }
+
+  Future<bool> _createUser(UserProvider userProvider) async {
     final signUpResult = await userProvider.signUpUser(
       email: signUpUserInput.email!,
       password: signUpUserInput.password!,
@@ -39,10 +40,11 @@ class UserRegistrationModel {
     if (userResult.gqlQueryResult.hasException) {
       return false;
     }
+    _updateUserInput.id = userResult.response!.id;
     return true;
   }
 
-  Future<bool> updateUser(UserProvider userProvider) async {
+  Future<bool> _updateUser(UserProvider userProvider) async {
     final userUpdateResult = await userProvider.updateUserData(
       input: updateUserInput.toUserInput(),
     );
@@ -116,39 +118,27 @@ class UpdateUserInput {
   String? countryOfResidenceTextId;
   List<String>? preferredLanguageTextIds;
   List<String>? spokenLanguagesTextIds;
-  String? avatarUrl;
-  List<String>? pronounsTextIds;
   String? companyName;
   UserType? userType;
 
   // Entrepreneur
   String? companyStageTextId;
-  String? companyWebsite;
   List<String>? menteeSoughtExpertisesTextIds;
   String? menteeReasonForStartingBusiness;
-  String? menteeIndustryTextId;
 
   // Mentor
   String? jobTitle;
   List<String>? mentorExpertisesTextIds;
-  List<String>? mentorIndustriesTextIds;
-  List<String>? mentoringPreferences; // TODO add to backend
-  bool? mentorInternationally; // TODO add to backend
 
   void clearEntrepreneurFields() {
     companyStageTextId = null;
-    companyWebsite = null;
     menteeSoughtExpertisesTextIds = null;
     menteeReasonForStartingBusiness = null;
-    menteeIndustryTextId = null;
   }
 
   void clearMentorFields() {
     jobTitle = null;
     mentorExpertisesTextIds = null;
-    mentorIndustriesTextIds = null;
-    mentoringPreferences = null;
-    mentorInternationally = null;
   }
 
   Input$UserInput toUserInput() {
@@ -165,14 +155,9 @@ class UpdateUserInput {
       countryOfResidenceTextId: countryOfResidenceTextId,
       preferredLanguageTextId: preferredLanguageTextIds?.firstOrNull,
       spokenLanguagesTextIds: spokenLanguagesTextIds,
-      avatarUrl: avatarUrl,
-      pronounsTextIds: pronounsTextIds,
       company: Input$CompanyInput(
         name: companyName,
         companyStageTextId: companyStageTextId,
-        websites: companyWebsite?.isNotEmpty ?? false
-            ? [Input$LabeledStringValueInput(value: companyWebsite)]
-            : null,
       ),
       seeksHelp: userType == UserType.entrepreneur,
       offersHelp: userType == UserType.mentor,
@@ -187,7 +172,6 @@ class UpdateUserInput {
       id: menteeGroupMembershipId,
       soughtExpertisesTextIds: menteeSoughtExpertisesTextIds,
       reasonsForStartingBusiness: menteeReasonForStartingBusiness,
-      industryTextId: menteeIndustryTextId,
     );
   }
 
@@ -197,12 +181,6 @@ class UpdateUserInput {
     return Input$MentorsGroupMembershipInput(
       id: mentorGroupMembershipId,
       expertisesTextIds: mentorExpertisesTextIds,
-      industriesTextIds: mentorIndustriesTextIds,
     );
   }
-}
-
-class AppUserSettingsInput {
-  bool? pushNotificationEnabled;
-  bool? receivedUpdatesEnabled;
 }

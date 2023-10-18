@@ -106,7 +106,7 @@ class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
         if (_formKey.currentState!.validate()) {
           _registrationModel.updateUserInput.phoneNumber =
               '$_selectedCountryCode $_phoneNumber';
-          context.push(Routes.signupBirthYear.path);
+          context.push(Routes.signupGender.path);
         }
       },
     );

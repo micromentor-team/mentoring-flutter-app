@@ -51,7 +51,7 @@ class _SignupEntrepreneurCompanyReasonScreenState
       onNextPressed: () {
         _registrationModel.updateUserInput.menteeReasonForStartingBusiness =
             _text;
-        context.push(Routes.signupIndustries.path);
+        context.push(Routes.signupCompleted.path);
       },
     );
   }

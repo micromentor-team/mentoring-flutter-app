@@ -87,7 +87,7 @@ class _SignupGenderScreenState extends State<SignupGenderScreen> {
       onNextPressed: () {
         if (_formKey.currentState!.validate()) {
           _registrationModel.updateUserInput.genderTextId = _genderTextId;
-          context.push(Routes.signupLocation.path);
+          context.push(Routes.signupBirthYear.path);
         }
       },
     );

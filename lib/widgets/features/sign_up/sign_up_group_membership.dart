@@ -75,12 +75,11 @@ class _SignupGroupMembershipScreenState
         if (selectedNumber == 0) {
           _registrationModel.updateUserInput.userType = UserType.entrepreneur;
           _registrationModel.updateUserInput.clearMentorFields();
-          context.push(Routes.signupEntrepreneurCompanyStage.path);
         } else {
           _registrationModel.updateUserInput.userType = UserType.mentor;
           _registrationModel.updateUserInput.clearEntrepreneurFields();
-          context.push(Routes.signupExpertises.path);
         }
+        context.push(Routes.signupExpertises.path);
       },
     );
   }

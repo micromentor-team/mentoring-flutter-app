@@ -70,7 +70,7 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
       onNextPressed: () {
         _registrationModel.updateUserInput.jobTitle = _jobTitle;
         _registrationModel.updateUserInput.companyName = _companyName;
-        context.push(Routes.signupIndustries.path);
+        context.push(Routes.signupEntrepreneurCompanyReason.path);
       },
     );
   }

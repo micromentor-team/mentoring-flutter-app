@@ -65,7 +65,7 @@ class _SignupBirthYearScreenState extends State<SignupBirthYearScreen> {
       onNextPressed: () {
         if (_formKey.currentState!.validate()) {
           _registrationModel.updateUserInput.birthYear = int.parse(_year!);
-          context.push(Routes.signupGender.path);
+          context.push(Routes.signupLocation.path);
         }
       },
     );

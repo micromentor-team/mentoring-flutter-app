@@ -51,7 +51,7 @@ class _SignupEntrepreneurCompanyNameScreenState
       isNextEnabled: _businessName?.isNotEmpty ?? false,
       onNextPressed: () {
         _registrationModel.updateUserInput.companyName = _businessName;
-        context.push(Routes.signupEntrepreneurCompanyWebsite.path);
+        context.push(Routes.signupEntrepreneurCompanyReason.path);
       },
     );
   }

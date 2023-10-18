@@ -79,7 +79,7 @@ class _SignupCompletedScreenState extends State<SignupCompletedScreen> {
       processingState: _processing ? AsyncState.loading : AsyncState.ready,
       onNextPressed: () async {
         setState(() => _processing = true);
-        if (await _registrationModel.updateUser(_userProvider)) {
+        if (await _registrationModel.registerUser(_userProvider)) {
           router.pushNamed(
             Routes.root.name,
             queryParameters: {RouteParams.nextRouteName: Routes.explore.name},

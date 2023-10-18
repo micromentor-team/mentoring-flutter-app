@@ -84,7 +84,7 @@ class _SignupEntrepreneurCompanyStageScreenState
             _registrationModel.updateUserInput.companyStageTextId = null;
             break;
         }
-        context.push(Routes.signupExpertises.path);
+        context.push(Routes.signupEntrepreneurCompanyName.path);
       },
     );
   }

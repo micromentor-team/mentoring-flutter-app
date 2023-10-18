@@ -73,11 +73,12 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
         if (_isEntrepreneur) {
           _registrationModel.updateUserInput.menteeSoughtExpertisesTextIds =
               _selectedChips.map((e) => e.textId).toList();
+          context.push(Routes.signupEntrepreneurCompanyStage.path);
         } else {
           _registrationModel.updateUserInput.mentorExpertisesTextIds =
               _selectedChips.map((e) => e.textId).toList();
+          context.push(Routes.signupMentorRole.path);
         }
-        context.push(Routes.signupMoreInfo.path);
       },
     );
   }
