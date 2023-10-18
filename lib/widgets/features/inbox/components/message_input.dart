@@ -124,7 +124,7 @@ class _MessageInputState extends State<MessageInput> {
                           vertical: Insets.paddingExtraSmall,
                           horizontal: Insets.paddingMedium,
                         ),
-                        hintText: l10n.messagesInputHint,
+                        hintText: l10n.inboxMessagesInputHint,
                         hintStyle: theme.textTheme.bodyMedium?.copyWith(
                           color: theme.disabledColor,
                         ),

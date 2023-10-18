@@ -299,6 +299,7 @@ type Query {
   findUserSearchResults(options: FindObjectsOptions, userSearchId: String!): [User!]!
   myUserSearches: [UserSearch!]!
   getMm2Integration: Mm2Integration!
+  findNlpConversation(conversationId: String!): NlpConversation!
   findMyActiveMultiStepAction: [SidMultiStepAction!]!
   getMultiStepActionProgress(
     """
@@ -359,6 +360,7 @@ type User {
   relationships: [UserRelationship!]
   inactivatedAt: DateTimeISO
   inactivatedBy: ID
+  termsAndConditionsAcceptedAt: DateTimeISO
   companyIds: [ID!]
   groupIds: [ID!]!
   parentGroupIds: [ID!]!
@@ -819,6 +821,7 @@ type ChannelInvitation {
   messageText: String
   dismissedFromInboxBySenderAt: DateTimeISO
   dismissedFromInboxByRecipientAt: DateTimeISO
+  readByRecipientAt: DateTimeISO
   status: ChannelInvitationStatus!
   channel: Channel!
   recipient: User!
@@ -1437,6 +1440,7 @@ input UserInput {
   latestActivityAt: DateTimeISO
   inactivatedAt: DateTimeISO
   inactivatedBy: ID
+  termsAndConditionsAcceptedAt: DateTimeISO
   companyIds: [ID!]
   groupIds: [ID!]
   parentGroupIds: [ID!]
@@ -1478,7 +1482,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTimeISO! = "2023-10-02T21:29:33.195Z"
+  time: DateTimeISO! = "2023-10-03T22:37:38.888Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -1921,6 +1925,63 @@ type Mm2Integration {
   fullSyncAt: DateTimeISO
 }
 
+type NlpConversation {
+  id: ID!
+  userIds: [ID!]!
+  assumedMentorUserId: ID!
+  messages: [NlpMessage!]!
+  label: String
+  labels: [NlpLabel!]
+  updatedAt: DateTimeISO
+  createdAt: DateTimeISO
+}
+
+type NlpMessage {
+  id: ID!
+  conversationId: ID!
+  messageText: String!
+  senderRole: String!
+  label: String
+  labels: [NlpLabel!]
+  createdBy: ID!
+  createdAt: DateTimeISO
+}
+
+type NlpLabel {
+  name: NlpLabelName!
+  probability: Int!
+  createdBy: String!
+  createdAt: DateTimeISO!
+}
+
+enum NlpLabelName {
+  askingForEmailForDoc
+  blocked
+  concern
+  confirmedMentoring
+  error
+  exit
+  exitCalendly
+  exitEmail
+  exitGoogleMeet
+  exitLinkedin
+  exitPhone
+  exitSkype
+  exitTeams
+  exitWhatsapp
+  exitZoom
+  genericMentoring
+  ghosting
+  negative
+  notMatch
+  noMatchCountry
+  notMatchExpertise
+  notSet
+  personalizedMentoring
+  positive
+  spam
+}
+
 type SidMultiStepAction {
   id: ID!
   adminNotes: String
@@ -2153,6 +2214,12 @@ type Mutation {
   deleteMm2Synchronization(mm2SynchronizationId: String!): Mm2Synchronization!
   findMm2SynchronizationById(mm2SynchronizationId: String!): Mm2Synchronization!
   runMm2Synchronization(runAgain: Boolean, id: String!): Mm2Synchronization!
+
+  """Label a platform conversation for the NLP learning process."""
+  updateNlpConversation(input: NlpConversationInput!): String!
+
+  """Label a platform message for the NLP learning process."""
+  updateNlpMessage(input: NlpMessageInput!): String!
   createMultiStepAction(input: SidMultiStepActionInput!): SidMultiStepActionProgress!
   startResetPassword(deviceUuid: String!, input: UserIdentInput!): SidMultiStepActionProgress!
   startVerifyEmail(email: String!): SidMultiStepActionProgress!
@@ -2451,6 +2518,7 @@ input ChannelInvitationInput {
   messageText: String
   dismissedFromInboxBySenderAt: DateTimeISO
   dismissedFromInboxByRecipientAt: DateTimeISO
+  readByRecipientAt: DateTimeISO
   status: ChannelInvitationStatus
 }
 
@@ -2856,6 +2924,25 @@ input Mm2SynchronizationInput {
   Time this object will be deleted from the DB. Default = 10 days after creation.
   """
   expiresAt: DateTimeISO
+}
+
+input NlpConversationInput {
+  id: ID! = ""
+  label: String!
+  labels: [NlpLabelInput!]! = []
+}
+
+input NlpLabelInput {
+  name: NlpLabelName! = notSet
+  probability: Int! = 0
+  createdBy: ID
+  createdAt: DateTimeISO
+}
+
+input NlpMessageInput {
+  id: ID! = ""
+  label: String!
+  labels: [NlpLabelInput!]! = []
 }
 
 input SidMultiStepActionInput {

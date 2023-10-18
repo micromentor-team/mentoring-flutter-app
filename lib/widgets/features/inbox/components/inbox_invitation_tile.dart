@@ -29,8 +29,8 @@ class InboxInvitationTile extends StatelessWidget {
           image: avatarUrl != null
               ? NetworkImage(avatarUrl!) as ImageProvider<Object>
               : const AssetImage(Assets.blankAvatar),
-          width: Insets.paddingExtraLarge * 2,
-          height: Insets.paddingExtraLarge * 2,
+          width: 56,
+          height: 56,
           fit: BoxFit.cover,
         ),
       ),
@@ -60,15 +60,11 @@ class InboxInvitationTile extends StatelessWidget {
           ),
         ],
       ),
-      trailing: SizedBox(
-        width: Radii.avatarRadiusSmall * 2,
-        height: Radii.avatarRadiusSmall * 2,
-        child: TextButton(
-          onPressed: buttonOnPressed,
-          child: Icon(
-            Icons.arrow_forward_ios,
-            color: theme.colorScheme.onSurface,
-          ),
+      trailing: IconButton(
+        onPressed: buttonOnPressed,
+        icon: Icon(
+          Icons.arrow_forward_ios,
+          color: theme.colorScheme.onSurface,
         ),
       ),
     );

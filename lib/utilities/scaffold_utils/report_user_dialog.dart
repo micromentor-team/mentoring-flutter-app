@@ -40,21 +40,21 @@ class _ReportUserDialogState extends State<ReportUserDialog> {
     return Center(
       child: SingleChildScrollView(
         child: AlertDialog(
-          title: Text(l10n.popupReportTitle(widget.userFullName)),
+          title: Text(l10n.userReportTitle(widget.userFullName)),
           content: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(l10n.popupReportSubtitle),
+                Text(l10n.userReportSubtitle),
                 const SizedBox(height: Insets.paddingLarge),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     ListTile(
-                      title: Text(l10n.popupReportReasonContent),
+                      title: Text(l10n.userReportReasonContent),
                       trailing: Radio<String>(
-                        value: l10n.popupReportReasonContent,
+                        value: l10n.userReportReasonContent,
                         groupValue: _reason,
                         onChanged: (String? value) {
                           setState(() {
@@ -67,9 +67,9 @@ class _ReportUserDialogState extends State<ReportUserDialog> {
                     ),
                     const Divider(),
                     ListTile(
-                      title: Text(l10n.popupReportReasonOffTopic),
+                      title: Text(l10n.userReportReasonOffTopic),
                       trailing: Radio<String>(
-                        value: l10n.popupReportReasonOffTopic,
+                        value: l10n.userReportReasonOffTopic,
                         groupValue: _reason,
                         onChanged: (String? value) {
                           setState(() {
@@ -82,9 +82,9 @@ class _ReportUserDialogState extends State<ReportUserDialog> {
                     ),
                     const Divider(),
                     ListTile(
-                      title: Text(l10n.popupReportReasonSpam),
+                      title: Text(l10n.userReportReasonSpam),
                       trailing: Radio<String>(
-                        value: l10n.popupReportReasonSpam,
+                        value: l10n.userReportReasonSpam,
                         groupValue: _reason,
                         onChanged: (String? value) {
                           setState(() {
@@ -97,9 +97,9 @@ class _ReportUserDialogState extends State<ReportUserDialog> {
                     ),
                     const Divider(),
                     ListTile(
-                      title: Text(l10n.popupReportReasonHarassment),
+                      title: Text(l10n.userReportReasonHarassment),
                       trailing: Radio<String>(
-                        value: l10n.popupReportReasonHarassment,
+                        value: l10n.userReportReasonHarassment,
                         groupValue: _reason,
                         onChanged: (String? value) {
                           setState(() {
@@ -112,9 +112,9 @@ class _ReportUserDialogState extends State<ReportUserDialog> {
                     ),
                     const Divider(),
                     ListTile(
-                      title: Text(l10n.popupReportReasonOther),
+                      title: Text(l10n.userReportReasonOther),
                       trailing: Radio<String>(
-                        value: l10n.popupReportReasonOther,
+                        value: l10n.userReportReasonOther,
                         groupValue: _reason,
                         onChanged: (String? value) {
                           setState(() {
@@ -130,10 +130,10 @@ class _ReportUserDialogState extends State<ReportUserDialog> {
                             filled: true,
                             fillColor:
                                 Theme.of(context).colorScheme.surfaceVariant,
-                            hintText: l10n.popupReportReasonOtherSpecify,
+                            hintText: l10n.userReportReasonOtherSpecify,
                           ),
                           validator: (text) {
-                            if (_reason == l10n.popupReportReasonOther &&
+                            if (_reason == l10n.userReportReasonOther &&
                                 (text?.isEmpty ?? true)) {
                               return l10n.errorEmptyField;
                             }

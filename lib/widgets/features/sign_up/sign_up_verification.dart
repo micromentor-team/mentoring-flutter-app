@@ -43,13 +43,13 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
     final GoRouter router = GoRouter.of(context);
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.verifyYourAccount,
+      title: l10n.signupVerificationTitle,
       body: Form(
         key: _formKey,
         child: Column(
           children: [
             Text(
-              l10n.verifyAccountLine1,
+              l10n.signupVerificationSubtitle1,
               style: theme.textTheme.bodyMedium!
                   .copyWith(color: theme.colorScheme.outline),
               textAlign: TextAlign.center,
@@ -58,7 +58,7 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
               height: Insets.paddingSmall,
             ),
             Text(
-              l10n.verifyAccountLine2,
+              l10n.signupVerificationSubtitle2,
               style: theme.textTheme.bodyMedium!
                   .copyWith(color: theme.colorScheme.outline),
               textAlign: TextAlign.center,
@@ -69,7 +69,7 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
             TextFormFieldWidget(
               textController: _verficationCodeController,
               maxLength: 4,
-              label: l10n.enterCode,
+              label: l10n.signupVerificationInputLabel,
               onChanged: (value) {
                 setState(() {
                   _fourDigitCode = value;
@@ -98,7 +98,7 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
               height: Insets.paddingSmall,
             ),
             Text(
-              l10n.didntReceiveEmail,
+              l10n.signupVerificationResendEmailPrompt,
               style: theme.textTheme.bodyMedium!
                   .copyWith(color: theme.colorScheme.outline),
               textAlign: TextAlign.center,
@@ -115,7 +115,7 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
               ),
               onPressed: () {},
               child: Text(
-                l10n.resendEmail,
+                l10n.signupVerificationResendEmailLabel,
                 style: theme.textTheme.labelLarge?.copyWith(
                   color: theme.colorScheme.primary,
                 ),
@@ -127,11 +127,13 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
             Padding(
               padding: const EdgeInsets.all(Insets.paddingSmall),
               child: InkWell(
-                child: Text(l10n.tryAnotherEmail,
-                    style: TextStyle(
-                      color: theme.colorScheme.primary,
-                      decoration: TextDecoration.underline,
-                    )),
+                child: Text(
+                  l10n.signupVerificationChangeEmailPrompt,
+                  style: TextStyle(
+                    color: theme.colorScheme.primary,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
                 onTap: () {
                   router.push(Routes.signupEmail.path);
                 },
@@ -175,7 +177,7 @@ class _SignupVerificationScreenState extends State<SignupVerificationScreen> {
                   ),
                   const SizedBox(width: Insets.paddingExtraSmall),
                   Text(
-                    l10n.submit,
+                    l10n.actionSubmit,
                     style: theme.textTheme.labelLarge?.copyWith(
                       color: theme.colorScheme.onPrimary,
                     ),

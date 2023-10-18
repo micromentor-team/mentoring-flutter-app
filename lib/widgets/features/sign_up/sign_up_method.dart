@@ -15,7 +15,7 @@ class SignupMethodScreen extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return SignUpTemplate(
-      title: l10n.signUp,
+      title: l10n.signupMethodTitle,
       progress: SignUpProgress.one,
       body: Column(
         children: [
@@ -24,7 +24,7 @@ class SignupMethodScreen extends StatelessWidget {
             child: SizedBox(
               width: 320,
               child: Text(
-                l10n.signUpDesc,
+                l10n.signupMethodSubtitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.outline,
@@ -33,7 +33,7 @@ class SignupMethodScreen extends StatelessWidget {
             ),
           ),
           Text(
-            l10n.continueWith,
+            l10n.signupMethodSsoHeader,
             style: theme.textTheme.titleMedium?.copyWith(
               color: theme.colorScheme.primary,
             ),
@@ -72,7 +72,7 @@ class SignupMethodScreen extends StatelessWidget {
                     child:
                         Divider(color: Theme.of(context).colorScheme.outline)),
                 Text(
-                  l10n.or,
+                  l10n.signupMethodEmailDivider,
                   style: theme.textTheme.labelMedium?.copyWith(
                     color: theme.colorScheme.secondary,
                   ),
@@ -84,17 +84,20 @@ class SignupMethodScreen extends StatelessWidget {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.all(Insets.paddingSmall),
-              child: InkWell(
-                child: Text(l10n.continueWithEmail,
-                    style: TextStyle(
-                      color: theme.colorScheme.primary,
-                      decoration: TextDecoration.underline,
-                    )),
-                onTap: () {
-                  context.push(Routes.signupEmail.path);
-                },
-              )),
+            padding: const EdgeInsets.all(Insets.paddingSmall),
+            child: InkWell(
+              child: Text(
+                l10n.signupMethodEmailPrompt,
+                style: TextStyle(
+                  color: theme.colorScheme.primary,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              onTap: () {
+                context.push(Routes.signupEmail.path);
+              },
+            ),
+          ),
         ],
       ),
     );

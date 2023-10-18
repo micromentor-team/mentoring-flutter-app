@@ -50,7 +50,7 @@ class _SignupMoreInfoScreenState extends State<SignupMoreInfoScreen> {
               leftButtonText: _isEntrepreneur
                   ? l10n.signupMoreInfoEntrepreneurAction
                   : l10n.signupMoreInfoMentorAction,
-              rightButtonText: l10n.continueButton,
+              rightButtonText: l10n.actionContinue,
               leftOnPress: () async {
                 setState(() => _processing = true);
                 if (await _registrationModel.updateUser(_userProvider)) {

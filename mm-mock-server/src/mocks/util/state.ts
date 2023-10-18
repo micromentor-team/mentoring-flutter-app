@@ -16,15 +16,18 @@ export class MockServerState {
 
     constructor() {
         this.pubsub = new PubSub();
-        this.groups = generators.generateCoreGroups()
-            .concat(generators.generateGroup());
+        this.groups = generators.generateCoreGroups();
         this.loggedIn = false;
-        this.loggedInUser = generators.generateUser(this.groups.filter(g => g.ident === "mentees"));
+        this.loggedInUser = generators.generateUser([faker.helpers.arrayElement(this.groups)]);
         this.otherUsers = [
             generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
             generators.generateUser(this.groups.filter(g => g.ident === "mentees")),
             generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
             generators.generateUser(this.groups.filter(g => g.ident === "mentees")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentees")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentees")),
+            generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
             generators.generateUser(this.groups.filter(g => g.ident === "mentees")),
             generators.generateUser(this.groups.filter(g => g.ident === "mentors")),
             generators.generateUser(this.groups.filter(g => g.ident === "mentees")),
@@ -41,17 +44,21 @@ export class MockServerState {
             // pending invitations
             generators.generateChannelInvitation(this.otherUsers[1], this.loggedInUser),
             generators.generateChannelInvitation(this.otherUsers[2], this.loggedInUser),
+            generators.generateChannelInvitation(this.otherUsers[3], this.loggedInUser),
+            generators.generateChannelInvitation(this.otherUsers[4], this.loggedInUser),
             // declined invitation
-            generators.generateChannelInvitation(this.otherUsers[3], this.loggedInUser, undefined, true),
+            generators.generateChannelInvitation(this.otherUsers[5], this.loggedInUser, undefined, true),
 
             // SENT INVITATIONS
             // accepted invitation, channel exists
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[4], undefined, false, true),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[6], undefined, false, true),
             // pending invitations
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[5]),
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[6]),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[7]),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[8]),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[9]),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[10]),
             // declined invitation
-            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[7], undefined, true),
+            generators.generateChannelInvitation(this.loggedInUser, this.otherUsers[11], undefined, true),
         ];
         this.userSearches = [];
         // Messages for first channel

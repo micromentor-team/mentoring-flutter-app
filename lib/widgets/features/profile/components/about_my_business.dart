@@ -30,7 +30,7 @@ class AboutMyBusiness extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.profileAboutBusiness,
+                l10n.profileViewAboutBusiness,
                 style: theme.textTheme.titleMedium,
               ),
               const SizedBox(height: Insets.paddingSmall),
@@ -65,13 +65,14 @@ class AboutMyBusiness extends StatelessWidget {
                     ),
                   if (companyInput.stage != null)
                     ProfileChipPadded(
-                      text: l10n.profileAboutBusinessStage(companyInput.stage!),
+                      text: l10n
+                          .profileViewAboutBusinessStage(companyInput.stage!),
                     ),
                 ],
               ),
               const SizedBox(height: Insets.paddingSmall),
               if (companyInput.expertisesSought.isNotEmpty) ...[
-                Text(l10n.profileHelpWith, style: textContentTheme),
+                Text(l10n.profileViewHelpWith, style: textContentTheme),
                 Wrap(
                   children: [
                     for (final help in companyInput.expertisesSought)
@@ -81,7 +82,7 @@ class AboutMyBusiness extends StatelessWidget {
                 const SizedBox(height: Insets.paddingSmall),
               ],
               if (companyInput.mission != null) ...[
-                Text(l10n.profileMission, style: textContentTheme),
+                Text(l10n.profileViewMission, style: textContentTheme),
                 Text(companyInput.mission!, style: theme.textTheme.bodyMedium),
                 const SizedBox(height: Insets.paddingSmall),
               ],
@@ -105,7 +106,7 @@ class AboutMyBusiness extends StatelessWidget {
               if (companyInput.imageUrls.isNotEmpty)
                 const SizedBox(height: Insets.paddingSmall),
               if (companyInput.motivation != null) ...[
-                Text(l10n.profileMotivation, style: textContentTheme),
+                Text(l10n.profileViewMotivation, style: textContentTheme),
                 Text(companyInput.motivation!,
                     style: theme.textTheme.bodyMedium),
               ],

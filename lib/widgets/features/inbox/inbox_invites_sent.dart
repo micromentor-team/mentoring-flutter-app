@@ -58,6 +58,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
       date: invitation.createdAt.toLocal(),
       message: invitation.messageText ?? '',
       highlightTileTitle: true,
+      highlightTileText: false,
       simplifyDate: true,
       onPressed: () => router.push(
         '${Routes.inboxInvitesSent.path}/${invitation.id}',
@@ -121,7 +122,7 @@ class _InboxInvitesSentScreenState extends State<InboxInvitesSentScreen>
             if (pendingSentInvitations?.isEmpty ?? true) {
               return EmptyStateMessage(
                 icon: Icons.mail,
-                text: _l10n.emptyStateInvites,
+                text: _l10n.inboxInvitesEmptyState,
               );
             }
             return Padding(

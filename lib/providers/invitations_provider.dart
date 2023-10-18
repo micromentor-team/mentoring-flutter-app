@@ -182,4 +182,29 @@ class InvitationsProvider extends BaseProvider {
           : null,
     );
   }
+
+  Future<OperationResult<String>> markChannelInvitationAsSeenByMe({
+    required String channelInvitationId,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationMarkChannelInvitationAsSeenByMe,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$MarkChannelInvitationAsSeenByMe(
+          channelInvitationInput: Input$ChannelInvitationInput(
+            id: channelInvitationId,
+            readByRecipientAt: DateTime.now().toUtc(),
+          ),
+        ).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$MarkChannelInvitationAsSeenByMe.fromJson(
+              queryResult.data!,
+            ).updateChannelInvitation
+          : null,
+    );
+  }
 }

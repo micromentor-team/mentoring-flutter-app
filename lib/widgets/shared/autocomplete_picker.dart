@@ -95,10 +95,10 @@ class AutocompleteWidget extends StatelessWidget {
           initialTags: selectedOptions,
           validator: (String tag) {
             if (controller.getTags?.contains(tag) ?? false) {
-              return l10n.autocompleteAlreadyEntered;
+              return l10n.errorAlreadyEntered;
             }
             if (!options.contains(tag)) {
-              return l10n.autocompleteInvalidChoice;
+              return l10n.errorInvalidChoice;
             }
             return null;
           },

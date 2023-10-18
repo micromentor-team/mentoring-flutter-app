@@ -177,7 +177,7 @@ class _MessageContextMenuState extends State<MessageContextMenu> {
                   padding: const EdgeInsets.all(Insets.paddingSmall),
                   child: Row(
                     children: [
-                      Text(_l10n.messagesActionEdit),
+                      Text(_l10n.inboxMessagesActionEdit),
                       const Spacer(),
                       Icon(
                         Icons.edit_outlined,
@@ -206,7 +206,7 @@ class _MessageContextMenuState extends State<MessageContextMenu> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(_l10n.messagesActionDelete),
+                      Text(_l10n.inboxMessagesActionDelete),
                       const Spacer(),
                       Icon(
                         Icons.delete_outlined,

@@ -39,10 +39,10 @@ class _SignupGroupMembershipScreenState
 
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.roleMicroMentor,
+      title: l10n.signupGroupMembershipTitle,
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },
@@ -59,12 +59,18 @@ class _SignupGroupMembershipScreenState
         },
       ),
       footer: SignUpIconFooter(
-          icon: Icons.visibility_outlined, text: l10n.signUpShownOnProfileInfo),
+          icon: Icons.visibility_outlined, text: l10n.signupFooterVisible),
       body: Column(
         children: [
           RadioButtonCards(
-            title: [l10n.iAmAnEntrepreneur, l10n.iAmAMentor],
-            subtitle: [l10n.entrepreneurDescription, l10n.mentorDescription],
+            title: [
+              l10n.signupGroupMembershipEntrepreneur,
+              l10n.signupGroupMembershipMentor,
+            ],
+            subtitle: [
+              l10n.signupGroupMembershipEntrepreneurDescription,
+              l10n.signupGroupMembershipMentorDescription,
+            ],
             imageAssetName: const [
               Image(image: AssetImage(Assets.entrepreneurIcon)),
               Image(image: AssetImage(Assets.mentorIcon))
@@ -77,7 +83,7 @@ class _SignupGroupMembershipScreenState
           Padding(
             padding: const EdgeInsets.all(Insets.paddingSmall),
             child: InkWell(
-              child: Text(l10n.learnMoreAboutMentoring,
+              child: Text(l10n.signupGroupMembershipLearnMorePrompt,
                   style: TextStyle(
                     color: theme.colorScheme.primary,
                     decoration: TextDecoration.underline,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/profile_chip.dart';
+import 'package:mm_flutter_app/widgets/shared/upload_photo_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const double _inlineIconSize = 16.0;
@@ -130,12 +132,12 @@ Widget _createNameAndBadges(
               ?.copyWith(color: theme.colorScheme.secondary)),
     if (userType == UserType.mentor)
       ProfileChip(
-        text: l10n.mentorCapitalized,
+        text: l10n.profileViewUserTypeMentor,
         usePrimaryColor: true,
       ),
     if (userType == UserType.entrepreneur)
       ProfileChip(
-        text: l10n.entrepreneurCapitalized,
+        text: l10n.profileViewUserTypeEntrepreneur,
         usePrimaryColor: true,
       ),
   ];
@@ -166,7 +168,7 @@ Widget _createNameAndBadges(
 
 Widget _createVacationBanner(AppLocalizations l10n, ThemeData theme) {
   return Container(
-      color: theme.colorScheme.primaryContainer,
+      color: AppUtility.changeColorTone(theme.colorScheme.primary, 95),
       height: 48.0,
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Padding(
@@ -181,7 +183,7 @@ Widget _createVacationBanner(AppLocalizations l10n, ThemeData theme) {
               ),
               const SizedBox(width: Insets.paddingExtraSmall),
               Text(
-                l10n.profileVacationBanner,
+                l10n.profileViewVacationBanner,
                 style: theme.textTheme.labelSmall!
                     .copyWith(color: theme.colorScheme.onPrimaryContainer),
               ),
@@ -191,7 +193,52 @@ Widget _createVacationBanner(AppLocalizations l10n, ThemeData theme) {
       ]));
 }
 
+Widget _createProfilePhoto(
+    BuildContext context, bool isMyProfile, String? avatarUrl) {
+  final ThemeData theme = Theme.of(context);
+
+  final Widget profilePhoto = Stack(children: [
+    ClipRRect(
+      borderRadius: BorderRadius.circular(
+        Radii.roundedRectRadiusMedium,
+      ),
+      child: Image(
+        height: 88.0,
+        width: 88.0,
+        image: avatarUrl != null
+            ? NetworkImage(avatarUrl) as ImageProvider<Object>
+            : const AssetImage(Assets.blankAvatar),
+        fit: BoxFit.cover,
+      ),
+    ),
+    if (isMyProfile)
+      Positioned(
+        right: 4.0,
+        top: 4.0,
+        child: Icon(
+          Icons.edit_outlined,
+          color: theme.colorScheme.surface,
+          size: 14.0,
+        ),
+      ),
+  ]);
+  if (isMyProfile) {
+    return GestureDetector(
+        child: profilePhoto,
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const UploadPhotoDialog();
+            },
+          );
+        });
+  }
+  return profilePhoto;
+}
+
 class ProfileBasicInfo extends StatelessWidget {
+  final bool isMyProfile;
   final UserType userType;
   final String? avatarUrl;
   final String fullName;
@@ -206,6 +253,7 @@ class ProfileBasicInfo extends StatelessWidget {
 
   const ProfileBasicInfo({
     Key? key,
+    required this.isMyProfile,
     required this.userType,
     this.avatarUrl,
     this.pronouns,
@@ -232,19 +280,7 @@ class ProfileBasicInfo extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                      Radii.roundedRectRadiusMedium,
-                    ),
-                    child: Image(
-                      image: avatarUrl != null
-                          ? NetworkImage(avatarUrl!) as ImageProvider<Object>
-                          : const AssetImage(Assets.blankAvatar),
-                      width: 88.0,
-                      height: 88.0, // Height of the avatar
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  _createProfilePhoto(context, isMyProfile, avatarUrl),
                   const SizedBox(width: Insets.paddingMedium),
                   _createNameAndBadges(
                     l10n,

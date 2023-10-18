@@ -278,9 +278,9 @@ class ProfileQuickViewCard extends StatelessWidget {
   String? _expertiseText(AppLocalizations l10n) {
     switch (userType) {
       case UserType.entrepreneur:
-        return l10n.exploreExpertiseSeeking;
+        return l10n.exploreResultExpertiseSeeking;
       case UserType.mentor:
-        return l10n.exploreExpertiseOffering;
+        return l10n.exploreResultExpertiseOffering;
       default:
         return null;
     }
@@ -289,7 +289,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   String? _companyText(AppLocalizations l10n) {
     switch (userType) {
       case UserType.entrepreneur:
-        return '${l10n.exploreEntrepreneurVenture} $company';
+        return '${l10n.exploreResultEntrepreneurVenture} $company';
       case UserType.mentor:
         return companyRole != null ? '$companyRole, $company' : company;
       default:
@@ -313,7 +313,7 @@ class ProfileQuickViewCard extends StatelessWidget {
         ),
         Flexible(
           child: Text(
-            l10n.exploreEndorsements(endorsements!),
+            l10n.exploreResultEndorsements(endorsements!),
             softWrap: true,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

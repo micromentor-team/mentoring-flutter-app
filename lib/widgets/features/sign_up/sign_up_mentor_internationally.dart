@@ -41,8 +41,8 @@ class _SignupMentorInternationallyScreenState
       progress: SignUpProgress.three,
       title: l10n.signupMentoringInternationallyTitle,
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },
@@ -55,7 +55,7 @@ class _SignupMentorInternationallyScreenState
             : null,
       ),
       footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
       body: Column(
         children: [
           Text(

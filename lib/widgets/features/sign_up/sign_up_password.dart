@@ -38,7 +38,7 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.createAPassword,
+      title: l10n.signupPasswordTitle,
       body: Form(
         key: _formKey,
         child: Column(
@@ -55,7 +55,7 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
                 }
                 return null;
               },
-              label: l10n.password,
+              label: l10n.signupPasswordInputLabel,
               onChanged: (value) {
                 setState(() {
                   _password = value;
@@ -68,7 +68,7 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
             TextFormFieldWidget(
               isPassword: true,
               textController: _confirmPass,
-              label: l10n.confirmPassword,
+              label: l10n.signupPasswordConfirmInputLabel,
               onChanged: (value) {
                 setState(() {
                   _confirmPassword = value;
@@ -88,10 +88,10 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> {
         ),
       ),
       footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signUpHiddenInfoDesc),
+          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
       bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.previous,
-        rightButtonText: l10n.next,
+        leftButtonText: l10n.actionPrevious,
+        rightButtonText: l10n.actionNext,
         leftOnPress: () {
           context.pop();
         },

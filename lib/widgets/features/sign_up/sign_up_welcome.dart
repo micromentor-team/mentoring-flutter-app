@@ -42,11 +42,11 @@ class _SignupWelcomeScreenState extends State<SignupWelcomeScreen> {
 
     return SignUpTemplate(
       progress: SignUpProgress.one,
-      title: l10n.welcome,
+      title: l10n.signupWelcomeTitle,
       body: Column(
         children: [
           Text(
-            l10n.signUpWelcomeText,
+            l10n.signupWelcomeSubtitle,
             style: theme.textTheme.bodyMedium!
                 .copyWith(color: theme.colorScheme.outline),
             textAlign: TextAlign.center,
@@ -80,7 +80,7 @@ class _SignupWelcomeScreenState extends State<SignupWelcomeScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
           child: Text(
-            l10n.next,
+            l10n.actionNext,
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.onPrimary,
             ),

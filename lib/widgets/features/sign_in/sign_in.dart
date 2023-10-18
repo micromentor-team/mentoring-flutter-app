@@ -95,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           children: [
                             Center(
                               child: Text(
-                                l10n.welcome,
+                                l10n.signinTitle,
                                 style: theme.textTheme.headlineSmall?.copyWith(
                                   color: theme.colorScheme.primary,
                                 ),
@@ -107,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             Center(
                               child: Text(
-                                l10n.signInMessage,
+                                l10n.signinSubtitle,
                                 style: theme.textTheme.labelMedium?.copyWith(
                                   color: theme.colorScheme.onSurfaceVariant,
                                 ),
@@ -131,13 +131,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                 key: const Key('emailTextField'),
                                 controller: emailController,
                                 decoration: InputDecoration(
-                                  labelText: l10n.emailOrPhoneNumber,
+                                  labelText: l10n.signinEmailOrPhoneInputLabel,
                                   border: const OutlineInputBorder(),
                                 ),
                                 validator: (value) {
                                   bool validEmail = _validateEmail(value!);
                                   if (validEmail != true) {
-                                    return l10n.askForValidCredentials;
+                                    return l10n.signinEmailOrPhoneInputError;
                                   }
                                   return null;
                                 },
@@ -149,12 +149,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                 key: const Key('passwordTextField'),
                                 controller: passwordController,
                                 decoration: InputDecoration(
-                                  labelText: l10n.password,
+                                  labelText: l10n.signinPasswordInputLabel,
                                   border: const OutlineInputBorder(),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return l10n.askForPassword;
+                                    return l10n.signinPasswordInputError;
                                   }
                                   return null;
                                 },
@@ -187,8 +187,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                     if (signInError == 'notFound') {
                                       scaffoldManager.showSnackBar(
                                         SnackBar(
-                                          content:
-                                              Text(l10n.accountNotFoundError),
+                                          content: Text(
+                                              l10n.signinErrorAccountNotFound),
                                         ),
                                       );
                                       if (context.mounted) {
@@ -198,8 +198,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                     } else if (signInError ==
                                         'passwordNoMatch') {
                                       scaffoldManager.showSnackBar(SnackBar(
-                                        content:
-                                            Text(l10n.incorrectPasswordError),
+                                        content: Text(
+                                            l10n.signinErrorIncorrectPassword),
                                       ));
                                       passwordController.text = '';
                                     }
@@ -220,7 +220,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   horizontal: 80.0,
                                 ),
                                 child: Text(
-                                  l10n.logIn,
+                                  l10n.signinLoginButtonLabel,
                                   style: theme.textTheme.labelLarge?.copyWith(
                                     color: theme.colorScheme.onPrimary,
                                   ),
@@ -236,7 +236,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         debugPrint("reset password");
                       },
                       child: Text(
-                        l10n.resetPassword,
+                        l10n.signinResetPasswordPrompt,
                         style: theme.textTheme.labelLarge?.copyWith(
                           color: theme.colorScheme.primary,
                         ),
@@ -248,7 +248,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         _openSignUpScreen(context);
                       },
                       child: Text(
-                        l10n.createNewAccount,
+                        l10n.signinCreateAccountPrompt,
                         style: theme.textTheme.labelLarge?.copyWith(
                           color: theme.colorScheme.primary,
                         ),
@@ -264,7 +264,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   color:
                                       Theme.of(context).colorScheme.outline)),
                           Text(
-                            l10n.orLoginWith,
+                            l10n.signinSsoDivider,
                             style: theme.textTheme.labelMedium?.copyWith(
                               color: theme.colorScheme.secondary,
                             ),

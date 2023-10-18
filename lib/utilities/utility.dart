@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:material_color_utilities/material_color_utilities.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,15 @@ class AppUtility {
   AppUtility._private();
   static String generateUuid() {
     return const Uuid().v1();
+  }
+
+  static Color changeColorTone(Color keyColor, int tonalValue) {
+    // Returns the color given base color and tonal value
+    // https://m3.material.io/styles/color/the-color-system/key-colors-tones#a828e350-1551-45e5-8430-eb643e6a7713
+    final hctColor = Hct.fromInt(keyColor.value);
+    int newColorValue =
+        TonalPalette.of(hctColor.hue, hctColor.chroma).get(tonalValue);
+    return Color(newColorValue);
   }
 
   // Uuid on mobile only lasts until the user deletes the app. Reinstalling the app will generate a new Uuid.
@@ -93,9 +103,8 @@ class AppUtility {
         now.month == date.month &&
         now.year == date.year) {
       final String todayText = capitalize
-          ? l10n.dateSimpleToday[0].toUpperCase() +
-              l10n.dateSimpleToday.substring(1)
-          : l10n.dateSimpleToday;
+          ? l10n.dateToday[0].toUpperCase() + l10n.dateToday.substring(1)
+          : l10n.dateToday;
       return '$todayText ${DateFormat().add_jm().format(date)}';
     } else {
       return DateFormat('MMMM d').add_jm().format(date);
@@ -118,9 +127,9 @@ class AppUtility {
     final String result;
 
     if (pastDate == today) {
-      result = l10n.dateSimpleToday;
+      result = l10n.dateToday;
     } else if (pastDate == yesterday) {
-      result = l10n.dateSimpleYesterday;
+      result = l10n.dateYesterday;
     } else if ((today.difference(pastDate).inDays / 7).floor() == 0) {
       // Within a week
       result = DateFormat('EEEE').format(date); // Day of week

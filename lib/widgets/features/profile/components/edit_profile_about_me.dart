@@ -91,8 +91,9 @@ class EditProfileAboutMe extends StatelessWidget {
   Widget _createLinkedInSection(BuildContext context, String? linkedInUrl) {
     final theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    String titleText =
-        linkedInUrl != null ? l10n.linkedinConnected : l10n.connectLinkedIn;
+    String titleText = linkedInUrl != null
+        ? l10n.profileEditLinkedInConnectConfirmation
+        : l10n.profileEditLinkedInConnect;
 
     return ListTile(
       title: Wrap(children: [
@@ -133,32 +134,45 @@ class EditProfileAboutMe extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileAboutMe,
+            l10n.profileViewAboutMe,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
         ),
-        _createListTileSection(context, l10n.pronouns, pronouns, null),
+        _createListTileSection(
+          context,
+          l10n.profileEditPronouns,
+          pronouns,
+          null,
+        ),
         const Divider(),
         _createLinkedInSection(context, linkedinUrl),
         const Divider(),
         _createListTileSection(
-            context, l10n.currentCity, livesInLocation, null),
+            context, l10n.profileEditCurrentLocation, livesInLocation, null),
         const Divider(),
         _createListTileSection(
-            context, l10n.whereAreYouFrom, fromLocation, null),
+            context, l10n.profileEditOriginLocation, fromLocation, null),
         const Divider(),
         _createListTileSection(
-            context, l10n.preferredLanguage, preferredLanguage, null),
+          context,
+          l10n.profileEditLanguagePreferred,
+          preferredLanguage,
+          null,
+        ),
         const Divider(),
         _createListTileSection(
-            context, l10n.otherLanguages, otherLanguages, null),
+            context, l10n.profileEditLanguageOthers, otherLanguages, null),
         const Divider(),
         if (promptTitle != null)
           _createPromptSection(context, promptTitle!, promptResponse!, null),
         if (promptTitle == null)
           _createPromptSection(
-              context, l10n.selectPrompt, l10n.andRecordAnswer, null),
+            context,
+            l10n.profileEditPromptTitle,
+            l10n.profileEditPromptSubtitle,
+            null,
+          ),
       ],
     );
   }

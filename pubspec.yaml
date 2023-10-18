@@ -68,6 +68,7 @@ dependencies:
   textfield_tags: ^2.0.2
   tuple: ^2.0.2
   collection: 1.17.1
+  material_color_utilities: ^0.2.0
 
 dev_dependencies:
   flutter_test:
