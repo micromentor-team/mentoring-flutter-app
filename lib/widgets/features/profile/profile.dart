@@ -69,6 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     return FutureBuilder(
       future: _userDetailedProfile,
       builder: (context, snapshot) {
+
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onReady: () {
