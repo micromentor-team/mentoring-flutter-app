@@ -74,7 +74,7 @@ class _RecommendedMentorsFilters extends State<ExploreFiltersScreen>
               ),
               const SizedBox(height: Insets.paddingLarge),
               AutocompletePicker(
-                fieldName: l10n.exploreSearchFilterHeadingLanguage,
+                label: l10n.exploreSearchFilterHeadingLanguage,
                 controller: _languagesController,
                 options: _filtersModel.languages,
                 optionsTranslations: (id) =>
@@ -83,7 +83,7 @@ class _RecommendedMentorsFilters extends State<ExploreFiltersScreen>
               ),
               const SizedBox(height: Insets.paddingMedium),
               AutocompletePicker(
-                fieldName: l10n.exploreSearchFilterHeadingCountries,
+                label: l10n.exploreSearchFilterHeadingCountries,
                 controller: _countriesController,
                 options: _filtersModel.countries,
                 optionsTranslations: (id) =>

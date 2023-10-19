@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
@@ -39,9 +37,11 @@ class _SignupBirthYearScreenState extends State<SignupBirthYearScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupBirthTitle,
+      subtitle: l10n.signupBirthSubtitle,
       body: Form(
-          key: _formKey,
-          child: Stack(children: [
+        key: _formKey,
+        child: Stack(
+          children: [
             TextFormFieldWidget(
               label: l10n.signupBirthInputLabel,
               hint: l10n.signupBirthInputHint,
@@ -59,25 +59,16 @@ class _SignupBirthYearScreenState extends State<SignupBirthYearScreen> {
                 });
               },
             ),
-          ])),
-      footer: SignUpIconFooter(
-          icon: Icons.lock_outline, text: l10n.signupFooterHidden),
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _year?.isNotEmpty ?? false
-            ? () {
-                if (_formKey.currentState!.validate()) {
-                  _registrationModel.updateUserInput.birthYear =
-                      int.parse(_year!);
-                  context.push(Routes.signupGender.path);
-                }
-              }
-            : null,
+          ],
+        ),
       ),
+      isNextEnabled: _year?.isNotEmpty ?? false,
+      onNextPressed: () {
+        if (_formKey.currentState!.validate()) {
+          _registrationModel.updateUserInput.birthYear = int.parse(_year!);
+          context.push(Routes.signupLocation.path);
+        }
+      },
     );
   }
 }

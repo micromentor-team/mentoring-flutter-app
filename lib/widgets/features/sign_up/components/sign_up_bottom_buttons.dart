@@ -31,9 +31,11 @@ class SignUpBottomButtons extends StatelessWidget {
             onPressed: leftOnPress,
             child: Text(
               leftButtonText,
-              style: theme.textTheme.labelLarge?.copyWith(
-                color: theme.colorScheme.primary,
-              ),
+              style: leftOnPress != null
+                  ? theme.textTheme.labelLarge?.copyWith(
+                      color: theme.colorScheme.onPrimaryContainer,
+                    )
+                  : null,
             ),
           ),
           // Send invites button
@@ -47,9 +49,11 @@ class SignUpBottomButtons extends StatelessWidget {
             onPressed: rightOnPress,
             child: Text(
               rightButtonText,
-              style: theme.textTheme.labelLarge?.copyWith(
-                color: theme.colorScheme.onPrimary,
-              ),
+              style: rightOnPress != null
+                  ? theme.textTheme.labelLarge?.copyWith(
+                      color: theme.colorScheme.onPrimary,
+                    )
+                  : null,
             ),
           )
         ],

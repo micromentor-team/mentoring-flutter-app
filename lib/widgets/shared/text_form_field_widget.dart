@@ -60,6 +60,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
       inputFormatters: widget.inputFormatters,
       maxLines: widget.maxLines,
       decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         labelText: widget.label,
         labelStyle: TextStyle(
           color: theme.colorScheme.onSurface,

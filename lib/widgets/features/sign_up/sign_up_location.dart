@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:mm_flutter_app/widgets/shared/text_form_field_widget.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +34,7 @@ class _SignupLocationScreenState extends State<SignupLocationScreen> {
     return SignUpTemplate(
       progress: SignUpProgress.one,
       title: l10n.signupLocationTitle,
+      subtitle: l10n.signupLocationSubtitle,
       body: Form(
         //TODO - Set up with Autocomplete
         child: TextFormFieldWidget(
@@ -47,24 +46,12 @@ class _SignupLocationScreenState extends State<SignupLocationScreen> {
           }),
         ),
       ),
-      footer: SignUpIconFooter(
-        icon: Icons.visibility_outlined,
-        text: l10n.signupFooterVisible,
-      ),
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _location?.isNotEmpty ?? false
-            ? () {
-                // TODO - also set region and country
-                _registrationModel.updateUserInput.cityOfResidence = _location;
-                context.push(Routes.signupLanguages.path);
-              }
-            : null,
-      ),
+      isNextEnabled: _location?.isNotEmpty ?? false,
+      onNextPressed: () {
+        // TODO - also set region and country
+        _registrationModel.updateUserInput.cityOfResidence = _location;
+        context.push(Routes.signupLanguage.path);
+      },
     );
   }
 }

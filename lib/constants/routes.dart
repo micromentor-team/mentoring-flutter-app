@@ -29,37 +29,13 @@ class Routes {
     name: 'signup',
     path: '/signup',
   );
-  static Route signupEmail = Route(
-    name: 'signupEmail',
-    path: '${signup.path}/email',
-  );
-  static Route signupFullName = Route(
-    name: 'signupFullName',
-    path: '${signup.path}/fullName',
+  static Route signupCredentials = Route(
+    name: 'signupCredentials',
+    path: '${signup.path}/signupCredentials',
   );
   static Route signupPhone = Route(
     name: 'signupPhone',
     path: '${signup.path}/phone',
-  );
-  static Route signupPassword = Route(
-    name: 'signupPassword',
-    path: '${signup.path}/password',
-  );
-  static Route signupVerification = Route(
-    name: 'signupVerification',
-    path: '${signup.path}/verification',
-  );
-  static Route signupWelcome = Route(
-    name: 'signupWelcome',
-    path: '${signup.path}/welcome',
-  );
-  static Route signupPermissions = Route(
-    name: 'signupPermissions',
-    path: '${signup.path}/permissions',
-  );
-  static Route signupGuidelines = Route(
-    name: 'signupGuidelines',
-    path: '${signup.path}/guidelines',
   );
   static Route signupBirthYear = Route(
     name: 'signupYearOfBirth',
@@ -73,13 +49,13 @@ class Routes {
     name: 'signupLocation',
     path: '${signup.path}/location',
   );
-  static Route signupLanguages = Route(
-    name: 'signupLanguages',
-    path: '${signup.path}/languages',
+  static Route signupLanguage = Route(
+    name: 'signupLanguage',
+    path: '${signup.path}/language',
   );
-  static Route signupUserType = Route(
-    name: 'signupUserType',
-    path: '${signup.path}/userType',
+  static Route signupGroupMembership = Route(
+    name: 'signupGroupMembership',
+    path: '${signup.path}/groupMembership',
   );
   static Route signupEntrepreneurCompanyStage = Route(
     name: 'signupEntrepreneurCompanyStage',
@@ -89,33 +65,13 @@ class Routes {
     name: 'signupExpertises',
     path: '${signup.path}/expertises',
   );
-  static Route signupMoreInfo = Route(
-    name: 'signupMoreInfo',
-    path: '${signup.path}/moreInfo',
-  );
-  static Route signupProfilePhoto = Route(
-    name: 'signupProfilePhoto',
-    path: '${signup.path}/profilePhoto',
-  );
-  static Route signupPronouns = Route(
-    name: 'signupPronouns',
-    path: '${signup.path}/pronouns',
-  );
   static Route signupEntrepreneurCompanyName = Route(
     name: 'signupEntrepreneurCompanyName',
     path: '${signup.path}/entrepreneurCompanyName',
   );
-  static Route signupEntrepreneurCompanyWebsite = Route(
-    name: 'signupEntrepreneurCompanyWebsite',
-    path: '${signup.path}/entrepreneurCompanyWebsite',
-  );
-  static Route signupEntrepreneurCompanyReason = Route(
-    name: 'signupEntrepreneurCompanyReason',
-    path: '${signup.path}/entrepreneurCompanyReason',
-  );
-  static Route signupIndustries = Route(
-    name: 'signupIndustries',
-    path: '${signup.path}/industries',
+  static Route signupReason = Route(
+    name: 'signupReason',
+    path: '${signup.path}/reason',
   );
   static Route signupCompleted = Route(
     name: 'signupCompleted',
@@ -124,14 +80,6 @@ class Routes {
   static Route signupMentorRole = Route(
     name: 'signupMentorRole',
     path: '${signup.path}/mentorRole',
-  );
-  static Route signupMentorPreferences = Route(
-    name: 'signupMentorPreferences',
-    path: '${signup.path}/mentorPreferences',
-  );
-  static Route signupMentorInternationally = Route(
-    name: 'signupMentorInternationally',
-    path: '${signup.path}/mentorInternationally',
   );
   static Route loading = Route(
     name: 'loading',

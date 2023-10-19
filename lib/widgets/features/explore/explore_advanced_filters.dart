@@ -74,7 +74,7 @@ class _RecommendedMentorsFiltersAdvanced
         child: Column(
           children: [
             AutocompletePicker(
-              fieldName: l10n.exploreSearchFilterIndustry,
+              label: l10n.exploreSearchFilterIndustry,
               controller: _industriesController,
               options: _filtersModel.industries,
               optionsTranslations: (textId) => _contentProvider.industryOptions!
@@ -139,7 +139,7 @@ class _RecommendedMentorsFiltersAdvanced
             const SizedBox(height: Insets.paddingLarge),
             if (_userType == UserType.entrepreneur) ...[
               AutocompletePicker(
-                fieldName: l10n.exploreSearchFilterBusinessStage,
+                label: l10n.exploreSearchFilterBusinessStage,
                 controller: _companyStageController,
                 options: _filtersModel.companyStages,
                 optionsTranslations: (textId) => _contentProvider
