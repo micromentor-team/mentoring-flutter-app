@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/widgets/features/profile/components/about_my_business.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/edit_experience_and_education.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,7 @@ import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../../utilities/utility.dart';
 import 'components/edit_how_can_i_help.dart';
+import 'components/edit_about_my_business.dart';
 import 'components/edit_profile_about_me.dart';
 import 'components/profile_experience_and_education.dart';
 
@@ -105,7 +107,12 @@ class EditProfileContent extends StatelessWidget {
         .where((g) => g.groupIdent == GroupIdent.mentors.name)
         .firstOrNull
         ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null);
+    final maybeMenteeGroupMembership = userData.groupMemberships
+        .where((g) => g.groupIdent == GroupIdent.mentees.name)
+        .firstOrNull
+        ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
 
+    final company = userData.companies.firstOrNull;
     return Column(children: [
       EditProfileAboutMe(
         pronouns: userData.pronounsDisplay,
@@ -131,24 +138,48 @@ class EditProfileContent extends StatelessWidget {
             .toList(),
       ),
       const Divider(),
-      EditProfileHowCanIHelp(
-          expertises: maybeMentorGroupMembership?.expertises
+      if (userData.offersHelp) ...[
+        EditProfileHowCanIHelp(
+            expertises: maybeMentorGroupMembership?.expertises
+                    .map((e) => e.translatedValue!)
+                    .toList() ??
+                [],
+            industries: maybeMentorGroupMembership?.industries
+                    .map((e) => e.translatedValue!)
+                    .toList() ??
+                [],
+            mentoringPreferences: const [
+              "Weekly check-ins",
+              "Monthly check-ins",
+              "Informal chats",
+              "Formal meetings",
+              "Spot mentoring",
+            ], //TODO
+            expectations: maybeMentorGroupMembership?.expectationsForMentees),
+        const Divider(),
+      ],
+      if (userData.seeksHelp && company != null) ...[
+        EditProfileAboutMyBusiness(
+            companyInput: CompanyInput(
+          name: company.name,
+          website: company.websites?.first.value,
+          stage: company.companyStage?.translatedValue,
+          city: "Washington D.C.", //TODO
+          country: "USA", //TODO
+          industry: maybeMenteeGroupMembership?.industry?.translatedValue,
+          expertisesSought: maybeMenteeGroupMembership?.soughtExpertises
                   .map((e) => e.translatedValue!)
                   .toList() ??
               [],
-          industries: maybeMentorGroupMembership?.industries
-                  .map((e) => e.translatedValue!)
-                  .toList() ??
-              [],
-          mentoringPreferences: const [
-            "Weekly check-ins",
-            "Monthly check-ins",
-            "Informal chats",
-            "Formal meetings",
-            "Spot mentoring",
+          mission: company.description,
+          imageUrls: [
+            "https://st2.depositphotos.com/1326558/7163/i/600/depositphotos_71632883-stock-photo-mexican-tacos-with-meat-vegetables.jpg",
+            "https://st3.depositphotos.com/13349494/32631/i/600/depositphotos_326317470-stock-photo-cropped-view-man-adding-minced.jpg",
           ], //TODO
-          expectations: maybeMentorGroupMembership?.expectationsForMentees),
-      const Divider(),
+          motivation: maybeMenteeGroupMembership?.reasonsForStartingBusiness,
+        )),
+        const Divider(),
+      ],
       EditProfileExperienceAndEducation(
         experience: userData.businessExperiences
                 ?.map(
