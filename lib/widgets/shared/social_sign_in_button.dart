@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/app_constants.dart';
 
-enum SignInOptions { facebook, google, telegram, whatsapp, linkedin }
+enum SignInOptions { facebook, google, telegram, whatsapp, linkedin, email }
 
 class SocialSignInButton extends StatelessWidget {
   final void Function() onPressed;
   final SignInOptions option;
+  static const double ssoIconSize = 24.0;
 
   const SocialSignInButton(
       {super.key, required this.onPressed, required this.option});
@@ -18,41 +18,72 @@ class SocialSignInButton extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    String text_;
-    IconData icon_;
+    String label;
+    Widget icon;
     switch (option) {
       case SignInOptions.facebook:
-        text_ = l10n.ssoFacebook;
-        icon_ = FontAwesomeIcons.facebook;
+        label = l10n.ssoFacebook;
+        icon = Image.asset(
+          Assets.ssoFacebookIcon,
+          width: ssoIconSize,
+          height: ssoIconSize,
+        );
       case SignInOptions.google:
-        text_ = l10n.ssoGoogle;
-        icon_ = FontAwesomeIcons.google;
+        label = l10n.ssoGoogle;
+        icon = Image.asset(
+          Assets.ssoGoogleIcon,
+          width: ssoIconSize,
+          height: ssoIconSize,
+        );
       case SignInOptions.whatsapp:
-        text_ = l10n.ssoWhatsapp;
-        icon_ = FontAwesomeIcons.whatsapp;
+        label = l10n.ssoWhatsapp;
+        icon = Image.asset(
+          Assets.ssoWhatsAppIcon,
+          width: ssoIconSize,
+          height: ssoIconSize,
+        );
       case SignInOptions.linkedin:
-        text_ = l10n.ssoLinkedin;
-        icon_ = FontAwesomeIcons.linkedin;
+        label = l10n.ssoLinkedin;
+        icon = Image.asset(
+          Assets.ssoLinkedInIcon,
+          width: ssoIconSize,
+          height: ssoIconSize,
+        );
       case SignInOptions.telegram:
-        text_ = l10n.ssoTelegram;
-        icon_ = FontAwesomeIcons.telegram;
+        label = l10n.ssoTelegram;
+        icon = Image.asset(
+          Assets.ssoTelegramIcon,
+          width: ssoIconSize,
+          height: ssoIconSize,
+        );
+      case SignInOptions.email:
+        label = l10n.ssoEmail;
+        icon = Icon(
+          Icons.email_outlined,
+          color: theme.colorScheme.onPrimaryContainer,
+          size: ssoIconSize,
+        );
     }
-    return TextButton(
-      style: ButtonStyles.secondaryRoundedRectangleButtonLarge(context),
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        fixedSize: const Size(144, 56),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+        ),
+        padding: EdgeInsets.zero,
+      ),
       onPressed: onPressed,
       child: Row(
         children: [
-          const SizedBox(
-            width: 88,
+          const SizedBox(width: Insets.paddingMedium),
+          icon,
+          const SizedBox(width: Insets.paddingSmall),
+          Text(
+            label,
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.onPrimaryContainer,
+            ),
           ),
-          FaIcon(icon_, size: 16),
-          const SizedBox(
-            width: Insets.paddingSmall,
-          ),
-          Text(text_,
-              style: theme.textTheme.labelLarge?.copyWith(
-                color: theme.colorScheme.primary,
-              )),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/utility.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/profile_chip.dart';
@@ -86,20 +87,14 @@ Widget _createFooter(
         ),
         child: IconButton(
           style: IconButton.styleFrom(
-              shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
-          )),
-          icon: const ColorFiltered(
-            colorFilter: ColorFilter.mode(
-              Colors.white,
-              BlendMode.saturation,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
             ),
-            child: SizedBox(
-              width: _inlineIconSize,
-              child: Image(
-                image: AssetImage(Assets.linkedInIcon),
-              ),
-            ),
+          ),
+          icon: FaIcon(
+            FontAwesomeIcons.linkedin,
+            size: 24.0,
+            color: theme.colorScheme.secondary,
           ),
           onPressed: () {
             debugPrint(linkedinUrl);
