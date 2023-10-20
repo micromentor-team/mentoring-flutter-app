@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../shared/social_sign_in_button.dart';
 
@@ -12,13 +14,27 @@ class SignupMethodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-
+    final ThemeData theme = Theme.of(context);
     return SignUpTemplate(
       title: l10n.signupMethodTitle,
-      subtitle: l10n.signupMethodSubtitle,
       progress: SignUpProgress.one,
       body: Column(
         children: [
+          MarkdownBody(
+            data: l10n.signupMethodSubtitle,
+            styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
+              p: theme.textTheme.bodyLarge?.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
+              a: theme.textTheme.bodyLarge?.copyWith(
+                color: theme.colorScheme.secondary,
+                decoration: TextDecoration.underline,
+              ),
+              textAlign: WrapAlignment.center,
+            ),
+            onTapLink: (_, url, __) => launchUrl(Uri.parse(url!)),
+          ),
+          const SizedBox(height: Insets.paddingExtraLarge),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
