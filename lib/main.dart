@@ -126,14 +126,8 @@ class _StartScreenState extends State<StartScreen> {
                     : SignInScreen(nextRouteName: widget.nextRouteName);
               }
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (!user.offersHelp && !user.seeksHelp) {
-                  // User is created, but lacks basic information.
-                  // Route to signup flow to complete profile.
-                  context.go(Routes.signupWelcome.path);
-                } else {
-                  _initializeUser();
-                  context.goNamed(widget.nextRouteName);
-                }
+                _initializeUser();
+                context.goNamed(widget.nextRouteName);
               });
               return const LoadingScreen();
             },

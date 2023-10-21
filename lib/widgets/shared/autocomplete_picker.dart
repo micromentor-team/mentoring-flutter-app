@@ -5,14 +5,18 @@ import 'package:textfield_tags/textfield_tags.dart';
 
 class AutocompletePicker extends StatelessWidget {
   final TextfieldTagsController controller;
-  final String? fieldName;
+  final String? label;
+  final String? hint;
+  final bool singleSelect;
   final List<String> options;
   final String Function(String)? optionsTranslations;
   final Set<String>? selectedOptions;
 
   const AutocompletePicker({
     super.key,
-    this.fieldName,
+    this.label,
+    this.hint,
+    this.singleSelect = false,
     required this.controller,
     required this.options,
     this.optionsTranslations,
@@ -21,26 +25,19 @@ class AutocompletePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     return Row(
       children: [
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (fieldName != null) ...[
-                Text(
-                  fieldName!,
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: theme.colorScheme.outline,
-                  ),
-                ),
-                const SizedBox(height: Insets.paddingExtraSmall),
-              ],
               AutocompleteWidget(
+                label: label,
+                hint: hint,
                 options: options.toList(),
                 optionsTranslations: optionsTranslations ?? (s) => s,
                 selectedOptions: selectedOptions?.toList() ?? [],
+                singleSelect: singleSelect,
                 controller: controller,
               ),
               const SizedBox(height: Insets.paddingSmall),
@@ -53,15 +50,21 @@ class AutocompletePicker extends StatelessWidget {
 }
 
 class AutocompleteWidget extends StatelessWidget {
+  final String? label;
+  final String? hint;
   final List<String> options;
   final String Function(String) optionsTranslations;
   final List<String> selectedOptions;
+  final bool singleSelect;
   final TextfieldTagsController controller;
 
   const AutocompleteWidget({
     super.key,
+    this.label,
+    this.hint,
     required this.options,
     required this.selectedOptions,
+    this.singleSelect = false,
     required this.controller,
     required this.optionsTranslations,
   });
@@ -85,6 +88,9 @@ class AutocompleteWidget extends StatelessWidget {
       },
       displayStringForOption: optionsTranslations,
       onSelected: (String selectedTag) {
+        if (singleSelect && controller.hasTags) {
+          controller.clearTags();
+        }
         controller.addTag = selectedTag;
       },
       fieldViewBuilder: (context, ttec, tfn, onFieldSubmitted) {
@@ -110,6 +116,15 @@ class AutocompleteWidget extends StatelessWidget {
                 controller: tec,
                 focusNode: fn,
                 decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  labelText: label,
+                  labelStyle: TextStyle(
+                    color: theme.colorScheme.onSurface,
+                  ),
+                  hintText: tags.isEmpty ? hint : null,
+                  hintStyle: theme.textTheme.bodyLarge?.copyWith(
+                    color: theme.colorScheme.outline,
+                  ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: theme.colorScheme.outline),
                   ),

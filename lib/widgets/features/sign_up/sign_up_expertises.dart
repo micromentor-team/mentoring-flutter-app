@@ -3,13 +3,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/multi_select_chips.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_icon_footer.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/content_provider.dart';
 import '../../../providers/models/user_registration_model.dart';
-import 'components/sign_up_bottom_buttons.dart';
 
 class SignupExpertisesScreen extends StatefulWidget {
   const SignupExpertisesScreen({Key? key}) : super(key: key);
@@ -57,36 +55,12 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
       title: _isEntrepreneur
           ? l10n.signupExpertisesEntrepreneurTitle
           : l10n.signupExpertisesMentorTitle,
-      bottomButtons: SignUpBottomButtons(
-        leftButtonText: l10n.actionPrevious,
-        rightButtonText: l10n.actionNext,
-        leftOnPress: () {
-          context.pop();
-        },
-        rightOnPress: _selectedChips.isNotEmpty
-            ? () {
-                if (_isEntrepreneur) {
-                  _registrationModel
-                          .updateUserInput.menteeSoughtExpertisesTextIds =
-                      _selectedChips.map((e) => e.textId).toList();
-                } else {
-                  _registrationModel.updateUserInput.mentorExpertisesTextIds =
-                      _selectedChips.map((e) => e.textId).toList();
-                }
-                context.push(Routes.signupMoreInfo.path);
-              }
-            : null,
-      ),
-      footer: SignUpIconFooter(
-        icon: Icons.visibility_outlined,
-        text: l10n.signupFooterVisible,
-      ),
+      subtitle: _isEntrepreneur
+          ? l10n.signupExpertisesEntrepreneurSubtitle
+          : l10n.signupExpertisesMentorSubtitle,
       body: Column(
         children: [
           CreateMultiSelectChips(
-            label: _isEntrepreneur
-                ? l10n.signupExpertisesEntrepreneurSubtitle(maxSelections)
-                : l10n.signupExpertisesMentorSubtitle(maxSelections),
             chips: _expertiseChips,
             maxSelection: maxSelections,
             onSelectedChipsChanged: (chips) =>
@@ -94,6 +68,18 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
           ),
         ],
       ),
+      isNextEnabled: _selectedChips.isNotEmpty,
+      onNextPressed: () {
+        if (_isEntrepreneur) {
+          _registrationModel.updateUserInput.menteeSoughtExpertisesTextIds =
+              _selectedChips.map((e) => e.textId).toList();
+          context.push(Routes.signupEntrepreneurCompanyStage.path);
+        } else {
+          _registrationModel.updateUserInput.mentorExpertisesTextIds =
+              _selectedChips.map((e) => e.textId).toList();
+          context.push(Routes.signupMentorRole.path);
+        }
+      },
     );
   }
 }

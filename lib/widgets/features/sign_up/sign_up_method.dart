@@ -94,12 +94,13 @@ class SignupMethodScreen extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                context.push(Routes.signupEmail.path);
+                context.push(Routes.signupCredentials.path);
               },
             ),
           ),
         ],
       ),
+      showNavigationButtons: false,
     );
   }
 }
