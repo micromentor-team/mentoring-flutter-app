@@ -92,7 +92,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topThreeExpertises = expertises.sublist(0, 3);
+    final topThreeExpertises = expertises.take(3);
     final additionalExpertises =
         (expertises.length > 3) ? expertises.sublist(3) : [];
     final AppLocalizations l10n = AppLocalizations.of(context)!;
