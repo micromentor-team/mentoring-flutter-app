@@ -94,20 +94,24 @@ class EditProfileAboutMe extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     String titleText = linkedInUrl != null
         ? l10n.profileEditLinkedInConnectConfirmation
-        : l10n.profileEditLinkedInConnect;
+        : l10n.profileEditLinkedInConnectPrompt;
 
     return ListTile(
-      title: Wrap(children: [
-        Icon(Icons.check_circle_outline, color: theme.colorScheme.primary),
-        const SizedBox(
-          width: Insets.paddingSmall,
-        ),
-        Text(
-          titleText,
-          style: theme.textTheme.titleMedium!
-              .copyWith(color: theme.colorScheme.primary),
-        )
-      ]),
+      title: Wrap(
+        children: [
+          if (linkedinUrl != null) ...[
+            Icon(Icons.check_circle_outline, color: theme.colorScheme.primary),
+            const SizedBox(
+              width: Insets.paddingSmall,
+            ),
+          ],
+          Text(
+            titleText,
+            style: theme.textTheme.titleMedium!
+                .copyWith(color: theme.colorScheme.primary),
+          )
+        ],
+      ),
       trailing: IconButton(
         icon: const Icon(Icons.navigate_next),
         onPressed: () {

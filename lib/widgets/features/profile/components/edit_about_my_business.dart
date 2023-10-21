@@ -3,36 +3,44 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/big_profile_chip.dart';
+
 import 'about_my_business.dart';
 
 class _PhotoWidget extends StatelessWidget {
   final String? imageUrl;
   final double size;
 
-  const _PhotoWidget({this.imageUrl, required this.size});
+  const _PhotoWidget({
+    this.imageUrl,
+    required this.size,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-        padding: const EdgeInsets.all(Insets.paddingExtraSmall),
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
-            child: Container(
-                width: size,
-                height: size,
-                color: theme.colorScheme.secondaryContainer,
-                child: (imageUrl == null)
-                    ? Align(
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.add_circle_outline,
-                          color: theme.colorScheme.onSecondaryContainer,
-                        ))
-                    : Image(
-                        image: NetworkImage(imageUrl!),
-                        height: size,
-                        fit: BoxFit.cover))));
+      padding: const EdgeInsets.all(Insets.paddingExtraSmall),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+        child: Container(
+          width: size,
+          height: size,
+          color: theme.colorScheme.secondaryContainer,
+          child: (imageUrl == null)
+              ? Align(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.add_circle_outline,
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+                )
+              : Image(
+                  image: NetworkImage(imageUrl!),
+                  height: size,
+                  fit: BoxFit.cover),
+        ),
+      ),
+    );
   }
 }
 
@@ -114,12 +122,13 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
           border: Border.all(color: theme.colorScheme.primary, width: 0.4),
           borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
         ),
-        child: Stack(children: [
-          if (chips.isEmpty)
-            const SizedBox(
-              height: 40,
-            ),
-          Padding(
+        child: Stack(
+          children: [
+            if (chips.isEmpty)
+              const SizedBox(
+                height: 40,
+              ),
+            Padding(
               padding: const EdgeInsets.all(Insets.paddingSmall),
               child: Wrap(
                 children: [
@@ -130,23 +139,24 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
                       child: chip,
                     )
                 ],
-              )),
-          Positioned.fill(
-              child: Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              icon: const Icon(Icons.navigate_next),
-              onPressed: () {
-                if (nextPath != null) {
-                  context.push(nextPath);
-                }
-              },
+              ),
             ),
-          ))
-        ]),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: const Icon(Icons.navigate_next),
+                  onPressed: () {
+                    if (nextPath != null) {
+                      context.push(nextPath);
+                    }
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
       ),
-
-      // _cre=
     );
   }
 
@@ -156,107 +166,129 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final String businessLocation =
         (companyInput.city != null || companyInput.country != null)
-            ? [companyInput.city, companyInput.country]
-                .nonNulls
-                .join(l10n.listSeparator)
+            ? [
+                companyInput.city,
+                companyInput.country,
+              ].nonNulls.join(l10n.listSeparator)
             : "";
 
-    final topThreeTopics = companyInput.expertisesSought.sublist(0, 3);
-    final additionalTopics = (companyInput.expertisesSought.length > 3)
-        ? companyInput.expertisesSought.sublist(3)
+    final topThreeTopics = companyInput.expertisesSought.take(
+      Limits.profileExpertiseMaxSize,
+    );
+    final additionalTopics = (companyInput.expertisesSought.length >
+            Limits.profileExpertiseMaxSize)
+        ? companyInput.expertisesSought.sublist(Limits.profileExpertiseMaxSize)
         : [];
 
     return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            title: Text(
-              l10n.profileEditAboutMyBusiness,
-              style: theme.textTheme.titleLarge!
-                  .copyWith(color: theme.colorScheme.onBackground),
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListTile(
+          title: Text(
+            l10n.profileEditAboutMyBusiness,
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: theme.colorScheme.onBackground,
             ),
           ),
-          _createListTileSection(
-              context, l10n.profileEditBusinessName, companyInput.name, null),
-          const Divider(),
-          _createListTileSection(context, l10n.profileEditBusinessWebsite,
-              companyInput.website != null ? companyInput.website! : "", null),
-          const Divider(),
-          _createListTileSection(context, l10n.profileEditBusinessLocation,
-              businessLocation, null),
-          const Divider(),
-          _createChipsListTile(
-            context,
-            Text(
-              l10n.profileEditBusinessIndustry,
-              style: theme.textTheme.titleMedium!
-                  .copyWith(color: theme.colorScheme.primary),
+        ),
+        _createListTileSection(
+          context,
+          l10n.profileEditBusinessName,
+          companyInput.name,
+          null,
+        ),
+        const Divider(),
+        _createListTileSection(
+          context,
+          l10n.profileEditBusinessWebsite,
+          companyInput.website != null ? companyInput.website! : "",
+          null,
+        ),
+        const Divider(),
+        _createListTileSection(
+          context,
+          l10n.profileEditBusinessLocation,
+          businessLocation,
+          null,
+        ),
+        const Divider(),
+        _createChipsListTile(
+          context,
+          Text(
+            l10n.profileEditBusinessIndustry,
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.primary,
             ),
-            [
-              if (companyInput.stage != null)
-                BigProfileChip(text: companyInput.industry!)
+          ),
+          [
+            if (companyInput.industry != null)
+              BigProfileChip(text: companyInput.industry!)
+          ],
+          null,
+        ),
+        const Divider(),
+        _createChipsListTile(
+          context,
+          Text(
+            l10n.profileEditBusinessStage,
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
+          ),
+          [
+            if (companyInput.stage != null)
+              BigProfileChip(text: companyInput.stage!)
+          ],
+          null,
+        ),
+        const Divider(),
+        _createChipsListTile(
+          context,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.profileEditBusinessHelpWith,
+                style: theme.textTheme.titleMedium!
+                    .copyWith(color: theme.colorScheme.primary),
+              ),
+              Text(
+                l10n.profileEditExpertises,
+                style: theme.textTheme.bodyMedium!
+                    .copyWith(color: theme.colorScheme.secondary),
+              ),
             ],
-            null,
           ),
-          const Divider(),
-          _createChipsListTile(
-            context,
-            Text(
-              l10n.profileEditBusinessStage,
-              style: theme.textTheme.titleMedium!
-                  .copyWith(color: theme.colorScheme.primary),
+          topThreeTopics.map((e) => BigProfileChip(text: e)).toList(),
+          null,
+        ),
+        _createChipsListTile(
+          context,
+          Text(
+            l10n.profileEditExpertisesAdditionalHint,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.secondary,
             ),
-            [
-              if (companyInput.stage != null)
-                BigProfileChip(text: companyInput.stage!)
-            ],
-            null,
           ),
-          const Divider(),
-          _createChipsListTile(
-            context,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  l10n.profileEditBusinessHelpWith,
-                  style: theme.textTheme.titleMedium!
-                      .copyWith(color: theme.colorScheme.primary),
-                ),
-                Text(
-                  l10n.profileEditExpertises,
-                  style: theme.textTheme.bodyMedium!
-                      .copyWith(color: theme.colorScheme.secondary),
-                ),
-              ],
-            ),
-            topThreeTopics.map((e) => BigProfileChip(text: e)).toList(),
-            null,
-          ),
-          _createChipsListTile(
-            context,
-            Text(
-              l10n.profileEditExpertisesAdditionalHint,
-              style: theme.textTheme.bodyMedium!
-                  .copyWith(color: theme.colorScheme.secondary),
-            ),
-            additionalTopics.map((e) => BigProfileChip(text: e)).toList(),
-            null,
-          ),
-          const Divider(),
-          _createListTileSection(context, l10n.profileEditBusinessMission,
-              companyInput.mission != null ? companyInput.mission! : "", null),
-          const Divider(),
-          _createPhotosSection(
-              context, l10n.profileEditBusinessPhotos, companyInput.imageUrls),
-          const Divider(),
-          _createListTileSection(
-              context,
-              l10n.profileEditBusinessMotivation,
-              companyInput.motivation != null ? companyInput.motivation! : "",
-              null),
-        ]);
+          additionalTopics.map((e) => BigProfileChip(text: e)).toList(),
+          null,
+        ),
+        const Divider(),
+        _createListTileSection(context, l10n.profileEditBusinessMission,
+            companyInput.mission != null ? companyInput.mission! : "", null),
+        const Divider(),
+        _createPhotosSection(
+            context, l10n.profileEditBusinessPhotos, companyInput.imageUrls),
+        const Divider(),
+        _createListTileSection(
+          context,
+          l10n.profileEditBusinessMotivation,
+          companyInput.motivation != null ? companyInput.motivation! : "",
+          null,
+        ),
+      ],
+    );
   }
 }

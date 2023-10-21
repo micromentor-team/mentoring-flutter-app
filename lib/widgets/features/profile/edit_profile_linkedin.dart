@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+
 import '../../shared/text_form_field_widget.dart';
 import 'edit_template.dart';
 
@@ -20,7 +21,7 @@ class _EditLinkedInScreenState extends State<EditLinkedInScreen> {
     final ThemeData theme = Theme.of(context);
 
     return EditTemplate(
-      title: l10n.profileEditLinkedInConnect,
+      title: l10n.profileEditPageLinkedInConnectTitle,
       body: Padding(
         padding: const EdgeInsets.all(Insets.paddingMedium),
         child: Column(

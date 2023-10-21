@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'profile_experience_and_education.dart';
@@ -19,8 +20,8 @@ class EditProfileExperienceAndEducation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (experience.isNotEmpty) _EditExperience(experience: experience),
-        if (education.isNotEmpty) _EditEducation(education: education),
+        _EditExperience(experience: experience),
+        _EditEducation(education: education),
       ],
     );
   }
@@ -119,6 +120,21 @@ class _EditExperience extends StatelessWidget {
           ),
         ),
         ...items,
+        if (experience.length < Limits.profileExperienceMaxSize) ...[
+          ListTile(
+            title: Text(
+              l10n.profileEditExperienceAdd,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.navigate_next),
+              onPressed: () => {},
+            ),
+          ),
+          const Divider(),
+        ]
       ],
     );
   }
@@ -140,11 +156,13 @@ class _EditEducation extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
     final items = education
-        .map((edu) => [
-              _createListTileSection(context, edu.schoolName,
-                  _concatenateEducation(context, edu), null, null),
-              const Divider()
-            ])
+        .map(
+          (edu) => [
+            _createListTileSection(context, edu.schoolName,
+                _concatenateEducation(context, edu), null, null),
+            const Divider()
+          ],
+        )
         .expand((i) => i)
         .toList();
 
@@ -159,6 +177,21 @@ class _EditEducation extends StatelessWidget {
           ),
         ),
         ...items,
+        if (education.length < Limits.profileEducationMaxSize) ...[
+          ListTile(
+            title: Text(
+              l10n.profileEditEducationAdd,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.navigate_next),
+              onPressed: () => {},
+            ),
+          ),
+          const Divider(),
+        ]
       ],
     );
   }
