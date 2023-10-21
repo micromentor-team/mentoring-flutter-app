@@ -114,7 +114,7 @@ class _EditExperience extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileEditExperience,
+            l10n.profileEditMainExperienceHeader,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
@@ -123,7 +123,7 @@ class _EditExperience extends StatelessWidget {
         if (experience.length < Limits.profileExperienceMaxSize) ...[
           ListTile(
             title: Text(
-              l10n.profileEditExperienceAdd,
+              l10n.profileEditMainExperienceAddSection,
               style: theme.textTheme.titleMedium?.copyWith(
                 color: theme.colorScheme.primary,
               ),
@@ -171,7 +171,7 @@ class _EditEducation extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileEditEducation,
+            l10n.profileEditMainEducationHeader,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
@@ -180,7 +180,7 @@ class _EditEducation extends StatelessWidget {
         if (education.length < Limits.profileEducationMaxSize) ...[
           ListTile(
             title: Text(
-              l10n.profileEditEducationAdd,
+              l10n.profileEditMainEducationAddSection,
               style: theme.textTheme.titleMedium?.copyWith(
                 color: theme.colorScheme.primary,
               ),

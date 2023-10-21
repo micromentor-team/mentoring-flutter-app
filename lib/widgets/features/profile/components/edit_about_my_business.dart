@@ -186,7 +186,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileEditAboutMyBusiness,
+            l10n.profileEditMainBusinessHeader,
             style: theme.textTheme.titleLarge?.copyWith(
               color: theme.colorScheme.onBackground,
             ),
@@ -194,21 +194,21 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
         ),
         _createListTileSection(
           context,
-          l10n.profileEditBusinessName,
+          l10n.profileEditMainBusinessNameSection,
           companyInput.name,
           null,
         ),
         const Divider(),
         _createListTileSection(
           context,
-          l10n.profileEditBusinessWebsite,
+          l10n.profileEditMainBusinessWebsiteSection,
           companyInput.website != null ? companyInput.website! : "",
           null,
         ),
         const Divider(),
         _createListTileSection(
           context,
-          l10n.profileEditBusinessLocation,
+          l10n.profileEditMainBusinessLocationSection,
           businessLocation,
           null,
         ),
@@ -216,7 +216,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
         _createChipsListTile(
           context,
           Text(
-            l10n.profileEditBusinessIndustry,
+            l10n.profileEditMainBusinessIndustrySection,
             style: theme.textTheme.titleMedium?.copyWith(
               color: theme.colorScheme.primary,
             ),
@@ -231,7 +231,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
         _createChipsListTile(
           context,
           Text(
-            l10n.profileEditBusinessStage,
+            l10n.profileEditMainBusinessStageSection,
             style: theme.textTheme.titleMedium?.copyWith(
               color: theme.colorScheme.primary,
             ),
@@ -250,12 +250,12 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.profileEditBusinessHelpWith,
+                l10n.profileEditMainBusinessHelpWithSection,
                 style: theme.textTheme.titleMedium!
                     .copyWith(color: theme.colorScheme.primary),
               ),
               Text(
-                l10n.profileEditExpertises,
+                l10n.profileEditMainMentorExpertisesSection,
                 style: theme.textTheme.bodyMedium!
                     .copyWith(color: theme.colorScheme.secondary),
               ),
@@ -267,7 +267,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
         _createChipsListTile(
           context,
           Text(
-            l10n.profileEditExpertisesAdditionalHint,
+            l10n.profileEditMainMentorExpertisesAdditionalHint,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.secondary,
             ),
@@ -276,15 +276,21 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
           null,
         ),
         const Divider(),
-        _createListTileSection(context, l10n.profileEditBusinessMission,
-            companyInput.mission != null ? companyInput.mission! : "", null),
+        _createListTileSection(
+            context,
+            l10n.profileEditMainBusinessMissionSection,
+            companyInput.mission != null ? companyInput.mission! : "",
+            null),
         const Divider(),
         _createPhotosSection(
-            context, l10n.profileEditBusinessPhotos, companyInput.imageUrls),
+          context,
+          l10n.profileEditMainBusinessPhotosSection,
+          companyInput.imageUrls,
+        ),
         const Divider(),
         _createListTileSection(
           context,
-          l10n.profileEditBusinessMotivation,
+          l10n.profileEditMainBusinessMotivationSection,
           companyInput.motivation != null ? companyInput.motivation! : "",
           null,
         ),

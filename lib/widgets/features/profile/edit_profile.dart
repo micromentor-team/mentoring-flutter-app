@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/about_my_business.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/edit_experience_and_education.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
 import '../../../providers/base/operation_result.dart';
 import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../../utilities/utility.dart';
-import 'components/edit_how_can_i_help.dart';
 import 'components/edit_about_my_business.dart';
+import 'components/edit_how_can_i_help.dart';
 import 'components/edit_profile_about_me.dart';
 import 'components/profile_experience_and_education.dart';
 
@@ -50,38 +50,44 @@ class _EditProfileScreenState extends State<EditProfileScreen>
 
   @override
   Widget build(BuildContext context) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    buildPageRouteScaffold((scaffoldModel) {
+      scaffoldModel.setParams(
+        appBar: AppBar(
+          backgroundColor: theme.colorScheme.secondaryContainer,
+          leading: IconButton(
+            icon: Icon(
+              Icons.keyboard_backspace_outlined,
+              color: theme.colorScheme.secondary,
+            ),
+            onPressed: () => context.pop(),
+          ),
+          title: Text(l10n.profileEditTitle),
+          centerTitle: true,
+        ),
+        drawer: null,
+      );
+    });
     return FutureBuilder(
       future: _userDetailedProfile,
       builder: (context, snapshot) {
         return AppUtility.widgetForAsyncSnapshot(
           snapshot: snapshot,
           onReady: () {
-            return SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppBar(
-                      backgroundColor: theme.colorScheme.secondaryContainer,
-                      leading: IconButton(
-                        icon: Icon(
-                          Icons.keyboard_backspace_outlined,
-                          color: theme.colorScheme.secondary,
-                        ),
-                        onPressed: () => context.pop(),
-                      ),
-                      title: Text(l10n.profileEditTitle),
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(Insets.paddingLarge),
+                    child: EditProfileContent(
+                      userData: snapshot.data!.response!,
+                      authenticatedUser: _authenticatedUser,
                     ),
-                    Padding(
-                        padding: const EdgeInsets.all(Insets.paddingLarge),
-                        child: EditProfileContent(
-                          userData: snapshot.data!.response!,
-                          authenticatedUser: _authenticatedUser,
-                        ))
-                  ],
-                ),
+                  )
+                ],
               ),
             );
           },

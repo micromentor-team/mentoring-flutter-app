@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
+
 import '../../../providers/content_provider.dart';
+import '../../../utilities/navigation_mixin.dart';
 import '../../shared/autocomplete_picker.dart';
-import 'edit_template.dart';
+import 'components/edit_template.dart';
 
 class EditOtherLanguagesScreen extends StatefulWidget {
   const EditOtherLanguagesScreen({Key? key}) : super(key: key);
@@ -15,7 +16,8 @@ class EditOtherLanguagesScreen extends StatefulWidget {
       _EditOtherLanguagesScreenState();
 }
 
-class _EditOtherLanguagesScreenState extends State<EditOtherLanguagesScreen> {
+class _EditOtherLanguagesScreenState extends State<EditOtherLanguagesScreen>
+    with NavigationMixin<EditOtherLanguagesScreen> {
   final _fluentLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
 
@@ -35,32 +37,18 @@ class _EditOtherLanguagesScreenState extends State<EditOtherLanguagesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final ThemeData theme = Theme.of(context);
 
     return EditTemplate(
-      title: l10n.profileEditLanguageOthers,
-      body: Padding(
-        padding: const EdgeInsets.all(Insets.paddingMedium),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(Insets.paddingSmall),
-              child: Text(
-                l10n.profileEditLanguageOthersSubtitle,
-                style: theme.textTheme.bodyMedium!
-                    .copyWith(color: theme.colorScheme.secondary),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            AutocompletePicker(
-              controller: _fluentLanguagesController,
-              options: _contentProvider.languageOptions!
-                  .map((e) => e.translatedValue!)
-                  .toList(),
-            ),
-          ],
-        ),
+      title: l10n.profileEditSectionAboutLanguageOthersTitle,
+      scaffoldBuilder: buildPageRouteScaffold,
+      subtitle: l10n.profileEditSectionAboutLanguageOthersSubtitle,
+      body: AutocompletePicker(
+        controller: _fluentLanguagesController,
+        options: _contentProvider.languageOptions!
+            .map((e) => e.translatedValue!)
+            .toList(),
       ),
     );
   }

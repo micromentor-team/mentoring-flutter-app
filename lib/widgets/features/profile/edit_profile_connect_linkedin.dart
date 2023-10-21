@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
 
-import '../../../utilities/navigation_mixin.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
-class EditOriginLocationScreen extends StatefulWidget {
-  const EditOriginLocationScreen({Key? key}) : super(key: key);
+class EditConnectLinkedInScreen extends StatefulWidget {
+  const EditConnectLinkedInScreen({Key? key}) : super(key: key);
 
   @override
-  State<EditOriginLocationScreen> createState() =>
-      _EditOriginLocationScreenState();
+  State<EditConnectLinkedInScreen> createState() =>
+      _EditConnectLinkedInScreenState();
 }
 
-class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
-    with NavigationMixin<EditOriginLocationScreen> {
+class _EditConnectLinkedInScreenState extends State<EditConnectLinkedInScreen>
+    with NavigationMixin<EditConnectLinkedInScreen> {
   final TextEditingController _textEditingController = TextEditingController();
-  String? _originLocation;
+  String? _linkedInUrl;
 
   @override
   void dispose() {
@@ -30,17 +30,16 @@ class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return EditTemplate(
-      title: l10n.profileEditSectionAboutOriginLocationTitle,
+      title: l10n.profileEditSectionAboutLinkedInTitle,
       scaffoldBuilder: buildPageRouteScaffold,
       body: Form(
         child: TextFormFieldWidget(
-          prefixIcon: const Icon(Icons.search),
-          label: l10n.profileEditSectionAboutOriginLocationInputLabel,
-          hint: l10n.profileEditSectionAboutOriginLocationInputHint,
+          label: l10n.profileEditSectionAboutLinkedInInputLabel,
+          hint: l10n.profileEditSectionAboutLinkedInInputHint,
           textController: _textEditingController,
           onChanged: (value) {
             setState(() {
-              _originLocation = value;
+              _linkedInUrl = value;
             });
           },
         ),

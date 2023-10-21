@@ -93,8 +93,8 @@ class EditProfileAboutMe extends StatelessWidget {
     final theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     String titleText = linkedInUrl != null
-        ? l10n.profileEditLinkedInConnectConfirmation
-        : l10n.profileEditLinkedInConnectPrompt;
+        ? l10n.profileEditMainAboutLinkedInConfirmationSection
+        : l10n.profileEditMainAboutLinkedInPromptSection;
 
     return ListTile(
       title: Wrap(
@@ -143,35 +143,44 @@ class EditProfileAboutMe extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileViewAboutMe,
+            l10n.profileEditMainAboutHeader,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
         ),
         _createListTileSection(
           context,
-          l10n.profileEditPronouns,
+          l10n.profileEditMainAboutPronounsSection,
           pronouns,
           Routes.editPronouns.path,
         ),
         const Divider(),
         _createLinkedInSection(context, linkedinUrl, Routes.editLinkedin.path),
         const Divider(),
-        _createListTileSection(context, l10n.profileEditCurrentLocation,
-            livesInLocation, Routes.editCity.path),
+        _createListTileSection(
+            context,
+            l10n.profileEditMainAboutCurrentLocationSection,
+            livesInLocation,
+            Routes.editCity.path),
         const Divider(),
-        _createListTileSection(context, l10n.profileEditOriginLocation,
-            fromLocation, Routes.editOriginLocation.path),
+        _createListTileSection(
+            context,
+            l10n.profileEditMainAboutOriginLocationSection,
+            fromLocation,
+            Routes.editOriginLocation.path),
         const Divider(),
         _createListTileSection(
           context,
-          l10n.profileEditLanguagePreferred,
+          l10n.profileEditMainAboutLanguagePreferredSection,
           preferredLanguage,
           Routes.editPreferredLanguage.path,
         ),
         const Divider(),
-        _createListTileSection(context, l10n.profileEditLanguageOthers,
-            otherLanguages, Routes.editOtherLanguages.path),
+        _createListTileSection(
+            context,
+            l10n.profileEditMainAboutLanguageOthersSection,
+            otherLanguages,
+            Routes.editOtherLanguages.path),
         const Divider(),
         if (promptTitle != null)
           _createPromptSection(
@@ -183,8 +192,8 @@ class EditProfileAboutMe extends StatelessWidget {
         if (promptTitle == null)
           _createPromptSection(
             context,
-            l10n.profileEditPromptTitle,
-            l10n.profileEditPromptSubtitle,
+            l10n.profileEditMainAboutPromptHintQ,
+            l10n.profileEditMainAboutPromptHintA,
             Routes.editPrompt.path,
           ),
       ],

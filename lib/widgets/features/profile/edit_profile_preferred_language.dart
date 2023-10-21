@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
+
 import '../../../providers/content_provider.dart';
+import '../../../utilities/navigation_mixin.dart';
 import '../../shared/autocomplete_picker.dart';
-import 'edit_template.dart';
+import 'components/edit_template.dart';
 
 class EditPreferredLanguageScreen extends StatefulWidget {
   const EditPreferredLanguageScreen({Key? key}) : super(key: key);
@@ -16,7 +17,8 @@ class EditPreferredLanguageScreen extends StatefulWidget {
 }
 
 class _EditPreferredLanguageScreenState
-    extends State<EditPreferredLanguageScreen> {
+    extends State<EditPreferredLanguageScreen>
+    with NavigationMixin<EditPreferredLanguageScreen> {
   final _preferredLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
 
@@ -36,32 +38,19 @@ class _EditPreferredLanguageScreenState
 
   @override
   Widget build(BuildContext context) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final ThemeData theme = Theme.of(context);
 
     return EditTemplate(
-      title: l10n.profileEditLanguagePreferred,
-      body: Padding(
-        padding: const EdgeInsets.all(Insets.paddingMedium),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(Insets.paddingSmall),
-              child: Text(
-                l10n.profileEditLanguagePreferredSubtitle,
-                style: theme.textTheme.bodyMedium!
-                    .copyWith(color: theme.colorScheme.secondary),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            AutocompletePicker(
-              controller: _preferredLanguagesController,
-              options: _contentProvider.languageOptions!
-                  .map((e) => e.translatedValue!)
-                  .toList(),
-            ),
-          ],
-        ),
+      title: l10n.profileEditSectionAboutLanguagePreferredTitle,
+      subtitle: l10n.profileEditSectionAboutLanguagePreferredSubtitle,
+      scaffoldBuilder: buildPageRouteScaffold,
+      body: AutocompletePicker(
+        singleSelect: true,
+        controller: _preferredLanguagesController,
+        options: _contentProvider.languageOptions!
+            .map((e) => e.translatedValue!)
+            .toList(),
       ),
     );
   }

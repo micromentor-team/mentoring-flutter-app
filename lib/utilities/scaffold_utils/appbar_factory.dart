@@ -11,37 +11,6 @@ import '../../widgets/shared/notification_bubble.dart';
 class AppBarFactory {
   AppBarFactory._private();
 
-  static AppBar? createTitleOnlyAppBar({
-    required BuildContext context,
-    required String title,
-    bool withBackButton = false,
-    bool withCloseButton = false,
-  }) {
-    final ThemeData theme = Theme.of(context);
-    return AppBar(
-        leading: withBackButton
-            ? IconButton(
-                onPressed: () => context.pop(),
-                icon: Icon(
-                  Icons.navigate_before,
-                  color: theme.colorScheme.primary,
-                ),
-              )
-            : null,
-        actions: withCloseButton
-            ? [
-                IconButton(
-                  onPressed: () => context.pop(),
-                  icon: Icon(
-                    Icons.close,
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ]
-            : null,
-        title: Text(title));
-  }
-
   static AppBar? createInboxAppBar({
     required GoRouter router,
   }) {

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/content_provider.dart';
 import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
-import 'package:mm_flutter_app/utilities/scaffold_utils/appbar_factory.dart';
 import 'package:mm_flutter_app/widgets/features/explore/components/clear_apply_buttons.dart';
 import 'package:mm_flutter_app/widgets/shared/autocomplete_picker.dart';
 import 'package:provider/provider.dart';
@@ -51,16 +50,24 @@ class _RecommendedMentorsFilters extends State<ExploreFiltersScreen>
   @override
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
-    buildPageRouteScaffold((scaffoldModel) {
-      scaffoldModel.setParams(
-        appBar: AppBarFactory.createTitleOnlyAppBar(
-          context: context,
-          title: AppLocalizations.of(context)!.exploreSearchFilterTitle,
-          withCloseButton: true,
-        ),
-      );
-    });
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    buildPageRouteScaffold(
+      (scaffoldModel) => scaffoldModel.setParams(
+        appBar: AppBar(
+          title: Text(l10n.exploreSearchFilterTitle),
+          actions: [
+            IconButton(
+              onPressed: () => context.pop(),
+              icon: Icon(
+                Icons.close,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
     return Padding(
       padding: const EdgeInsets.all(Insets.paddingMedium),
       child: SingleChildScrollView(

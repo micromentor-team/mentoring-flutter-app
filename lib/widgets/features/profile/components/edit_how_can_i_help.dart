@@ -106,7 +106,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileEditHowCanIHelp,
+            l10n.profileEditMainMentorHeader,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
@@ -118,12 +118,12 @@ class EditProfileHowCanIHelp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.profileEditExpertises,
+                l10n.profileEditMainMentorExpertisesSection,
                 style: theme.textTheme.titleMedium!
                     .copyWith(color: theme.colorScheme.primary),
               ),
               Text(
-                l10n.profileEditExpertisesHint,
+                l10n.profileEditMainMentorExpertisesHint,
                 style: theme.textTheme.bodyMedium!
                     .copyWith(color: theme.colorScheme.secondary),
               ),
@@ -135,7 +135,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
         _createChipsListTile(
           context,
           Text(
-            l10n.profileEditExpertisesAdditionalHint,
+            l10n.profileEditMainMentorExpertisesAdditionalHint,
             style: theme.textTheme.bodyMedium!
                 .copyWith(color: theme.colorScheme.secondary),
           ),
@@ -146,7 +146,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
         _createChipsListTile(
             context,
             Text(
-              l10n.profileEditIndustries,
+              l10n.profileEditMainMentorIndustriesSection,
               style: theme.textTheme.titleMedium!
                   .copyWith(color: theme.colorScheme.primary),
             ),
@@ -160,15 +160,18 @@ class EditProfileHowCanIHelp extends StatelessWidget {
         _createChipsListTile(
             context,
             Text(
-              l10n.profileEditMentoringPreferences,
+              l10n.profileEditMainMentorPreferencesSection,
               style: theme.textTheme.titleMedium!
                   .copyWith(color: theme.colorScheme.primary),
             ),
             mentoringPreferences.map((e) => BigProfileChip(text: e)).toList(),
             null),
         const Divider(),
-        _createListTileSection(context, l10n.profileEditExpectations,
-            (expectations != null) ? expectations! : "", null),
+        _createListTileSection(
+            context,
+            l10n.profileEditMainMentorExpectationsSection,
+            (expectations != null) ? expectations! : "",
+            null),
       ],
     );
   }
