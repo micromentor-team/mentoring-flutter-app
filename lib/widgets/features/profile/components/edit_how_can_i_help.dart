@@ -95,7 +95,6 @@ class EditProfileHowCanIHelp extends StatelessWidget {
     final topThreeExpertises = expertises.sublist(0, 3);
     final additionalExpertises =
         (expertises.length > 3) ? expertises.sublist(3) : [];
-    // final additionalExpertises = expertises.sublist(0, 2);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     final ThemeData theme = Theme.of(context);
