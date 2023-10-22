@@ -6,7 +6,11 @@ import 'package:mm_flutter_app/widgets/features/explore/explore_filters.dart';
 import 'package:mm_flutter_app/widgets/features/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/features/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/features/profile/edit_profile.dart';
+import 'package:mm_flutter_app/widgets/features/profile/edit_profile_company_location.dart';
+import 'package:mm_flutter_app/widgets/features/profile/edit_profile_company_mission.dart';
+import 'package:mm_flutter_app/widgets/features/profile/edit_profile_company_reason.dart';
 import 'package:mm_flutter_app/widgets/features/profile/edit_profile_company_stage.dart';
+import 'package:mm_flutter_app/widgets/features/profile/edit_profile_company_website.dart';
 import 'package:mm_flutter_app/widgets/features/profile/edit_profile_mentoring_preferences.dart';
 import 'package:mm_flutter_app/widgets/features/profile/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/features/profile/profile.dart';
@@ -20,6 +24,7 @@ import '../widgets/features/home/home.dart';
 import '../widgets/features/inbox/inbox_chat_list.dart';
 import '../widgets/features/inbox/inbox_chat_messages.dart';
 import '../widgets/features/inbox/inbox_invitation_detail.dart';
+import '../widgets/features/profile/edit_profile_company_name.dart';
 import '../widgets/features/profile/edit_profile_connect_linkedin.dart';
 import '../widgets/features/profile/edit_profile_current_location.dart';
 import '../widgets/features/profile/edit_profile_education.dart';
@@ -648,6 +653,61 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const EditCompanyStageScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditCompanyName.path,
+          name: Routes.profileEditCompanyName.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditCompanyNameScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditCompanyWebsite.path,
+          name: Routes.profileEditCompanyWebsite.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditCompanyWebsiteScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditCompanyLocation.path,
+          name: Routes.profileEditCompanyLocation.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditCompanyLocationScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditCompanyMission.path,
+          name: Routes.profileEditCompanyMission.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditCompanyMissionScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditCompanyReason.path,
+          name: Routes.profileEditCompanyReason.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditCompanyReasonScreen(),
             );
           },
         ),

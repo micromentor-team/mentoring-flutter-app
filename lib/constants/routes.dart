@@ -221,6 +221,26 @@ class Routes {
     name: 'profileEditCompanyStage',
     path: '${profileEdit.path}/companyStage',
   );
+  static Route profileEditCompanyName = Route(
+    name: 'profileEditCompanyName',
+    path: '${profileEdit.path}/companyName',
+  );
+  static Route profileEditCompanyWebsite = Route(
+    name: 'profileEditCompanyWebsite',
+    path: '${profileEdit.path}/companyWebsite',
+  );
+  static Route profileEditCompanyLocation = Route(
+    name: 'profileEditCompanyLocation',
+    path: '${profileEdit.path}/companyLocation',
+  );
+  static Route profileEditCompanyMission = Route(
+    name: 'profileEditCompanyMission',
+    path: '${profileEdit.path}/companyMission',
+  );
+  static Route profileEditCompanyReason = Route(
+    name: 'profileEditCompanyReason',
+    path: '${profileEdit.path}/companyReason',
+  );
 }
 
 class RouteParams {
