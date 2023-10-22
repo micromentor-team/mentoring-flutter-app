@@ -34,7 +34,6 @@ import '../widgets/features/profile/edit_profile_industries.dart';
 import '../widgets/features/profile/edit_profile_origin_location.dart';
 import '../widgets/features/profile/edit_profile_other_languages.dart';
 import '../widgets/features/profile/edit_profile_preferred_language.dart';
-import '../widgets/features/profile/edit_profile_prompt.dart';
 import '../widgets/features/profile/edit_profile_pronouns.dart';
 import '../widgets/features/sign_in/sign_in.dart';
 import '../widgets/features/sign_up/sign_up_completed.dart';
@@ -531,17 +530,6 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const EditOtherLanguagesScreen(),
-            );
-          },
-        ),
-        GoRoute(
-          path: Routes.profileEditPrompt.path,
-          name: Routes.profileEditPrompt.name,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return MaterialPage(
-              key: state.pageKey,
-              maintainState: false,
-              child: const EditPromptScreen(),
             );
           },
         ),

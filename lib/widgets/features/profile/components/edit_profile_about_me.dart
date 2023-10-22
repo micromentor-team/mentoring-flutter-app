@@ -12,8 +12,6 @@ class EditProfileAboutMe extends StatelessWidget {
   final String? cityFrom;
   final String? countryFrom;
   final String? linkedinUrl;
-  final String? promptTitle;
-  final String? promptResponse;
   final String? preferredLanguage;
   final List<String> spokenLanguages;
 
@@ -27,8 +25,6 @@ class EditProfileAboutMe extends StatelessWidget {
     this.cityFrom,
     this.countryFrom,
     this.linkedinUrl,
-    this.promptTitle,
-    this.promptResponse,
     this.preferredLanguage,
     this.spokenLanguages = const [],
   });
@@ -58,34 +54,6 @@ class EditProfileAboutMe extends StatelessWidget {
             ),
           )
         : const SizedBox(height: 0, width: 0);
-  }
-
-  Widget _createPromptSection(
-      BuildContext context, String title, String? content, String? nextPath) {
-    final theme = Theme.of(context);
-    return ListTile(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Radii.roundedRectRadiusMedium)),
-      tileColor: theme.colorScheme.primaryContainer,
-      title: Text(
-        title,
-        style: theme.textTheme.titleMedium!
-            .copyWith(color: theme.colorScheme.onPrimaryContainer),
-      ),
-      subtitle: Text(
-        content ?? "",
-        style: theme.textTheme.bodyMedium!
-            .copyWith(color: theme.colorScheme.onPrimaryContainer),
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.navigate_next),
-        onPressed: () {
-          if (nextPath != null) {
-            context.push(nextPath);
-          }
-        },
-      ),
-    );
   }
 
   Widget _createLinkedInSection(
@@ -182,21 +150,6 @@ class EditProfileAboutMe extends StatelessWidget {
             l10n.profileEditMainAboutLanguageOthersSection,
             otherLanguages,
             Routes.profileEditLanguageOthers.path),
-        const Divider(),
-        if (promptTitle != null)
-          _createPromptSection(
-            context,
-            promptTitle!,
-            promptResponse!,
-            Routes.profileEditPrompt.path,
-          ),
-        if (promptTitle == null)
-          _createPromptSection(
-            context,
-            l10n.profileEditMainAboutPromptHintQ,
-            l10n.profileEditMainAboutPromptHintA,
-            Routes.profileEditPrompt.path,
-          ),
       ],
     );
   }

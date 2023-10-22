@@ -181,10 +181,6 @@ class Routes {
     name: 'profileEditLanguageOthers',
     path: '${profileEdit.path}/otherLanguages',
   );
-  static Route profileEditPrompt = Route(
-    name: 'profileEditPrompt',
-    path: '${profileEdit.path}/prompt',
-  );
   static Route profileEditEducation = Route(
     name: 'profileEditEducation',
     path: '${profileEdit.path}/education',

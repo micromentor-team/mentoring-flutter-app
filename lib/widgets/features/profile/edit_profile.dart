@@ -132,11 +132,6 @@ class EditProfileContent extends StatelessWidget {
             ?.where((e) => e.label == WebsiteLabels.linkedin.name)
             .firstOrNull
             ?.value,
-        promptTitle: "The best piece of advice I’ve ever received is:",
-        //TODO
-        promptResponse:
-            "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.",
-        //TODO
         preferredLanguage: userData.preferredLanguage.translatedValue,
         spokenLanguages: userData.spokenLanguages
             .map((e) => e.translatedValue)
