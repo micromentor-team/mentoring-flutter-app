@@ -159,14 +159,15 @@ class EditProfileHowCanIHelp extends StatelessWidget {
         ),
         const Divider(),
         _createChipsListTile(
-            context,
-            Text(
-              l10n.profileEditMainMentorPreferencesSection,
-              style: theme.textTheme.titleMedium!
-                  .copyWith(color: theme.colorScheme.primary),
-            ),
-            mentoringPreferences.map((e) => BigProfileChip(text: e)).toList(),
-            null),
+          context,
+          Text(
+            l10n.profileEditMainMentorPreferencesSection,
+            style: theme.textTheme.titleMedium!
+                .copyWith(color: theme.colorScheme.primary),
+          ),
+          mentoringPreferences.map((e) => BigProfileChip(text: e)).toList(),
+          Routes.profileEditMentoringPreferences.path,
+        ),
         const Divider(),
         _createListTileSection(
             context,
