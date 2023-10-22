@@ -201,6 +201,14 @@ class Routes {
     name: 'profileEditExperienceNew',
     path: '${profileEdit.path}/newExperience',
   );
+  static Route profileEditExpertisesTop = Route(
+    name: 'profileEditExpertisesTop',
+    path: '${profileEdit.path}/topExpertises',
+  );
+  static Route profileEditExpertisesAdditional = Route(
+    name: 'profileEditExpertisesAdditional',
+    path: '${profileEdit.path}/additionalExpertises',
+  );
 }
 
 class RouteParams {

@@ -130,7 +130,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
             ],
           ),
           topThreeExpertises.map((e) => BigProfileChip(text: e)).toList(),
-          null,
+          Routes.profileEditExpertisesTop.path,
         ),
         _createChipsListTile(
           context,
@@ -140,7 +140,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
                 .copyWith(color: theme.colorScheme.secondary),
           ),
           additionalExpertises.map((e) => BigProfileChip(text: e)).toList(),
-          null,
+          Routes.profileEditExpertisesAdditional.path,
         ),
         const Divider(),
         _createChipsListTile(

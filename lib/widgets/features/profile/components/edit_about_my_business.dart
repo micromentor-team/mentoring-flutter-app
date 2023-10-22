@@ -250,7 +250,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.profileEditMainBusinessHelpWithSection,
+                l10n.profileEditMainBusinessTopicsSection,
                 style: theme.textTheme.titleMedium!
                     .copyWith(color: theme.colorScheme.primary),
               ),
@@ -262,7 +262,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
             ],
           ),
           topThreeTopics.map((e) => BigProfileChip(text: e)).toList(),
-          null,
+          Routes.profileEditExpertisesTop.path,
         ),
         _createChipsListTile(
           context,
@@ -273,7 +273,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
             ),
           ),
           additionalTopics.map((e) => BigProfileChip(text: e)).toList(),
-          null,
+          Routes.profileEditExpertisesAdditional.path,
         ),
         const Divider(),
         _createListTileSection(

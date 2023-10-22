@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/sign_up/components/multi_select_chips.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_template.dart';
+import 'package:mm_flutter_app/widgets/shared/multi_select_chips.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/content_provider.dart';
@@ -40,7 +40,6 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
           (e) => SelectChip(
             chipName: e.translatedValue!,
             textId: e.textId,
-            icon: Icons.work_outline,
           ),
         )
         .toList();

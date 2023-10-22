@@ -4,12 +4,10 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 class SelectChip {
   final String chipName;
   final String textId;
-  final IconData? icon;
 
   SelectChip({
     required this.chipName,
     required this.textId,
-    this.icon,
   });
 }
 

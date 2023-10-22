@@ -22,6 +22,7 @@ import '../widgets/features/profile/edit_profile_connect_linkedin.dart';
 import '../widgets/features/profile/edit_profile_current_location.dart';
 import '../widgets/features/profile/edit_profile_education.dart';
 import '../widgets/features/profile/edit_profile_experience.dart';
+import '../widgets/features/profile/edit_profile_expertises.dart';
 import '../widgets/features/profile/edit_profile_origin_location.dart';
 import '../widgets/features/profile/edit_profile_other_languages.dart';
 import '../widgets/features/profile/edit_profile_preferred_language.dart';
@@ -584,6 +585,32 @@ class AppRouter {
               maintainState: false,
               child: const EditExperienceScreen(
                 isNewExperience: true,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditExpertisesTop.path,
+          name: Routes.profileEditExpertisesTop.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditExpertisesScreen(
+                isTopExpertises: true,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditExpertisesAdditional.path,
+          name: Routes.profileEditExpertisesAdditional.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditExpertisesScreen(
+                isTopExpertises: false,
               ),
             );
           },
