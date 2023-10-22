@@ -185,6 +185,22 @@ class Routes {
     name: 'profileEditPrompt',
     path: '${profileEdit.path}/prompt',
   );
+  static Route profileEditEducation = Route(
+    name: 'profileEditEducation',
+    path: '${profileEdit.path}/education',
+  );
+  static Route profileEditEducationNew = Route(
+    name: 'profileEditEducationNew',
+    path: '${profileEdit.path}/newEducation',
+  );
+  static Route profileEditExperience = Route(
+    name: 'profileEditExperience',
+    path: '${profileEdit.path}/experience',
+  );
+  static Route profileEditExperienceNew = Route(
+    name: 'profileEditExperienceNew',
+    path: '${profileEdit.path}/newExperience',
+  );
 }
 
 class RouteParams {

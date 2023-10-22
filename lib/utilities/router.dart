@@ -20,6 +20,8 @@ import '../widgets/features/inbox/inbox_chat_messages.dart';
 import '../widgets/features/inbox/inbox_invitation_detail.dart';
 import '../widgets/features/profile/edit_profile_connect_linkedin.dart';
 import '../widgets/features/profile/edit_profile_current_location.dart';
+import '../widgets/features/profile/edit_profile_education.dart';
+import '../widgets/features/profile/edit_profile_experience.dart';
 import '../widgets/features/profile/edit_profile_origin_location.dart';
 import '../widgets/features/profile/edit_profile_other_languages.dart';
 import '../widgets/features/profile/edit_profile_preferred_language.dart';
@@ -531,6 +533,58 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const EditPromptScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditEducation.path,
+          name: Routes.profileEditEducation.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditEducationScreen(
+                isNewEducation: false,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditEducationNew.path,
+          name: Routes.profileEditEducationNew.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditEducationScreen(
+                isNewEducation: true,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditExperience.path,
+          name: Routes.profileEditExperience.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditExperienceScreen(
+                isNewExperience: false,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditExperienceNew.path,
+          name: Routes.profileEditExperienceNew.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditExperienceScreen(
+                isNewExperience: true,
+              ),
             );
           },
         ),

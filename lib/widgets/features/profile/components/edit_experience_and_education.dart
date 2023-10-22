@@ -87,22 +87,23 @@ class _EditExperience extends StatelessWidget {
         .map((exp) {
           return [
             _createListTileSection(
-                context,
-                exp.position,
-                _concatenateExperience(context, exp),
-                (exp.companyUrl != null)
-                    ? InkWell(
-                        onTap: () => launchUrl(Uri.parse(exp.companyUrl!)),
-                        child: Text(
-                          exp.companyUrl!,
-                          style: bodySmallOnSurface?.copyWith(
-                            decoration: TextDecoration.underline,
-                            color: theme.colorScheme.primary,
-                          ),
+              context,
+              exp.position,
+              _concatenateExperience(context, exp),
+              (exp.companyUrl != null)
+                  ? InkWell(
+                      onTap: () => launchUrl(Uri.parse(exp.companyUrl!)),
+                      child: Text(
+                        exp.companyUrl!,
+                        style: bodySmallOnSurface?.copyWith(
+                          decoration: TextDecoration.underline,
+                          color: theme.colorScheme.primary,
                         ),
-                      )
-                    : null,
-                null),
+                      ),
+                    )
+                  : null,
+              Routes.profileEditExperience.path,
+            ),
             const Divider()
           ];
         })
@@ -130,7 +131,9 @@ class _EditExperience extends StatelessWidget {
             ),
             trailing: IconButton(
               icon: const Icon(Icons.navigate_next),
-              onPressed: () => {},
+              onPressed: () => context.push(
+                Routes.profileEditExperienceNew.path,
+              ),
             ),
           ),
           const Divider(),
@@ -158,8 +161,13 @@ class _EditEducation extends StatelessWidget {
     final items = education
         .map(
           (edu) => [
-            _createListTileSection(context, edu.schoolName,
-                _concatenateEducation(context, edu), null, null),
+            _createListTileSection(
+              context,
+              edu.schoolName,
+              _concatenateEducation(context, edu),
+              null,
+              Routes.profileEditEducation.path,
+            ),
             const Divider()
           ],
         )
@@ -187,7 +195,9 @@ class _EditEducation extends StatelessWidget {
             ),
             trailing: IconButton(
               icon: const Icon(Icons.navigate_next),
-              onPressed: () => {},
+              onPressed: () => context.push(
+                Routes.profileEditEducationNew.path,
+              ),
             ),
           ),
           const Divider(),
