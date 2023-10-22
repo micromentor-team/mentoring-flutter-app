@@ -209,6 +209,10 @@ class Routes {
     name: 'profileEditExpertisesAdditional',
     path: '${profileEdit.path}/additionalExpertises',
   );
+  static Route profileEditIndustries = Route(
+    name: 'profileEditIndustries',
+    path: '${profileEdit.path}/industries',
+  );
 }
 
 class RouteParams {

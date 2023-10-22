@@ -225,7 +225,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
             if (companyInput.industry != null)
               BigProfileChip(text: companyInput.industry!)
           ],
-          null,
+          Routes.profileEditIndustries.path,
         ),
         const Divider(),
         _createChipsListTile(
@@ -255,7 +255,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
                     .copyWith(color: theme.colorScheme.primary),
               ),
               Text(
-                l10n.profileEditMainMentorExpertisesSection,
+                l10n.profileEditMainBusinessTopicsHint,
                 style: theme.textTheme.bodyMedium!
                     .copyWith(color: theme.colorScheme.secondary),
               ),
@@ -267,7 +267,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
         _createChipsListTile(
           context,
           Text(
-            l10n.profileEditMainMentorExpertisesAdditionalHint,
+            l10n.profileEditMainBusinessTopicsAdditionalHint,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.secondary,
             ),

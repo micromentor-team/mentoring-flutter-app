@@ -23,6 +23,7 @@ import '../widgets/features/profile/edit_profile_current_location.dart';
 import '../widgets/features/profile/edit_profile_education.dart';
 import '../widgets/features/profile/edit_profile_experience.dart';
 import '../widgets/features/profile/edit_profile_expertises.dart';
+import '../widgets/features/profile/edit_profile_industries.dart';
 import '../widgets/features/profile/edit_profile_origin_location.dart';
 import '../widgets/features/profile/edit_profile_other_languages.dart';
 import '../widgets/features/profile/edit_profile_preferred_language.dart';
@@ -612,6 +613,17 @@ class AppRouter {
               child: const EditExpertisesScreen(
                 isTopExpertises: false,
               ),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditIndustries.path,
+          name: Routes.profileEditIndustries.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditIndustriesScreen(),
             );
           },
         ),

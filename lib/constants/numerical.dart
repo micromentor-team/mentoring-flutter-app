@@ -12,4 +12,6 @@ class Limits {
   static const profileEducationMaxSize = 3;
   static const profileExperienceMaxSize = 3;
   static const profileExpertiseMaxSize = 3;
+  static const profileEntrepreneurIndustryMaxSize = 1;
+  static const profileMentorIndustryMaxSize = 3;
 }
