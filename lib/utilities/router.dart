@@ -458,19 +458,19 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: Routes.editPronouns.path,
-          name: Routes.editPronouns.name,
+          path: Routes.profileEditPronouns.path,
+          name: Routes.profileEditPronouns.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditProfilePronounScreen(),
+              child: const EditProfilePronounsScreen(),
             );
           },
         ),
         GoRoute(
-          path: Routes.editLinkedin.path,
-          name: Routes.editLinkedin.name,
+          path: Routes.profileEditLinkedin.path,
+          name: Routes.profileEditLinkedin.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
@@ -480,8 +480,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: Routes.editCity.path,
-          name: Routes.editCity.name,
+          path: Routes.profileEditCurrentLocation.path,
+          name: Routes.profileEditCurrentLocation.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
@@ -491,8 +491,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: Routes.editOriginLocation.path,
-          name: Routes.editOriginLocation.name,
+          path: Routes.profileEditOriginLocation.path,
+          name: Routes.profileEditOriginLocation.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
@@ -502,8 +502,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: Routes.editPreferredLanguage.path,
-          name: Routes.editPreferredLanguage.name,
+          path: Routes.profileEditLanguagePreferred.path,
+          name: Routes.profileEditLanguagePreferred.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
@@ -513,8 +513,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: Routes.editOtherLanguages.path,
-          name: Routes.editOtherLanguages.name,
+          path: Routes.profileEditLanguageOthers.path,
+          name: Routes.profileEditLanguageOthers.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
@@ -524,8 +524,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: Routes.editPrompt.path,
-          name: Routes.editPrompt.name,
+          path: Routes.profileEditPrompt.path,
+          name: Routes.profileEditPrompt.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,

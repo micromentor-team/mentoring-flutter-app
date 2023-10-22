@@ -7,16 +7,16 @@ import '../../../utilities/navigation_mixin.dart';
 import '../sign_up/components/checkbox_list_and_form.dart';
 import 'components/edit_template.dart';
 
-class EditProfilePronounScreen extends StatefulWidget {
-  const EditProfilePronounScreen({Key? key}) : super(key: key);
+class EditProfilePronounsScreen extends StatefulWidget {
+  const EditProfilePronounsScreen({Key? key}) : super(key: key);
 
   @override
-  State<EditProfilePronounScreen> createState() =>
-      _EditProfilePronounScreenState();
+  State<EditProfilePronounsScreen> createState() =>
+      _EditProfilePronounsScreenState();
 }
 
-class _EditProfilePronounScreenState extends State<EditProfilePronounScreen>
-    with NavigationMixin<EditProfilePronounScreen> {
+class _EditProfilePronounsScreenState extends State<EditProfilePronounsScreen>
+    with NavigationMixin<EditProfilePronounsScreen> {
   late final ContentProvider _contentProvider;
   final List<String> _selections = List.empty(growable: true);
 

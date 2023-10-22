@@ -152,49 +152,50 @@ class EditProfileAboutMe extends StatelessWidget {
           context,
           l10n.profileEditMainAboutPronounsSection,
           pronouns,
-          Routes.editPronouns.path,
+          Routes.profileEditPronouns.path,
         ),
         const Divider(),
-        _createLinkedInSection(context, linkedinUrl, Routes.editLinkedin.path),
+        _createLinkedInSection(
+            context, linkedinUrl, Routes.profileEditLinkedin.path),
         const Divider(),
         _createListTileSection(
             context,
             l10n.profileEditMainAboutCurrentLocationSection,
             livesInLocation,
-            Routes.editCity.path),
+            Routes.profileEditCurrentLocation.path),
         const Divider(),
         _createListTileSection(
             context,
             l10n.profileEditMainAboutOriginLocationSection,
             fromLocation,
-            Routes.editOriginLocation.path),
+            Routes.profileEditOriginLocation.path),
         const Divider(),
         _createListTileSection(
           context,
           l10n.profileEditMainAboutLanguagePreferredSection,
           preferredLanguage,
-          Routes.editPreferredLanguage.path,
+          Routes.profileEditLanguagePreferred.path,
         ),
         const Divider(),
         _createListTileSection(
             context,
             l10n.profileEditMainAboutLanguageOthersSection,
             otherLanguages,
-            Routes.editOtherLanguages.path),
+            Routes.profileEditLanguageOthers.path),
         const Divider(),
         if (promptTitle != null)
           _createPromptSection(
             context,
             promptTitle!,
             promptResponse!,
-            Routes.editPrompt.path,
+            Routes.profileEditPrompt.path,
           ),
         if (promptTitle == null)
           _createPromptSection(
             context,
             l10n.profileEditMainAboutPromptHintQ,
             l10n.profileEditMainAboutPromptHintA,
-            Routes.editPrompt.path,
+            Routes.profileEditPrompt.path,
           ),
       ],
     );
