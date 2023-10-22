@@ -240,7 +240,7 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
             if (companyInput.stage != null)
               BigProfileChip(text: companyInput.stage!)
           ],
-          null,
+          Routes.profileEditCompanyStage.path,
         ),
         const Divider(),
         _createChipsListTile(

@@ -217,6 +217,10 @@ class Routes {
     name: 'profileEditMentoringPreferences',
     path: '${profileEdit.path}/mentoringPreferences',
   );
+  static Route profileEditCompanyStage = Route(
+    name: 'profileEditCompanyStage',
+    path: '${profileEdit.path}/companyStage',
+  );
 }
 
 class RouteParams {

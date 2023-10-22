@@ -6,6 +6,7 @@ import 'package:mm_flutter_app/widgets/features/explore/explore_filters.dart';
 import 'package:mm_flutter_app/widgets/features/inbox/inbox_invites_received.dart';
 import 'package:mm_flutter_app/widgets/features/inbox/inbox_invites_sent.dart';
 import 'package:mm_flutter_app/widgets/features/profile/edit_profile.dart';
+import 'package:mm_flutter_app/widgets/features/profile/edit_profile_company_stage.dart';
 import 'package:mm_flutter_app/widgets/features/profile/edit_profile_mentoring_preferences.dart';
 import 'package:mm_flutter_app/widgets/features/profile/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/features/profile/profile.dart';
@@ -636,6 +637,17 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const EditMentoringPreferencesScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.profileEditCompanyStage.path,
+          name: Routes.profileEditCompanyStage.name,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              key: state.pageKey,
+              maintainState: false,
+              child: const EditCompanyStageScreen(),
             );
           },
         ),
