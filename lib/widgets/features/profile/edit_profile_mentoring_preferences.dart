@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../utilities/debug_logger.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/multi_select_chips.dart';
 import 'components/edit_template.dart';
@@ -46,9 +47,10 @@ class _EditMentoringPreferencesScreenState
       scaffoldBuilder: buildPageRouteScaffold,
       body: CreateMultiSelectChips(
         chips: createPreferenceChips(l10n),
-        onSelectedChipsChanged: (chips) => setState(
-          () => _selectedChips = chips,
-        ),
+        onSelectedChipsChanged: (chips) {
+          setState(() => _selectedChips = chips);
+          DebugLogger.info(_selectedChips.toString()); //TODO
+        },
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../utilities/debug_logger.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
@@ -42,6 +43,7 @@ class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
             setState(() {
               _originLocation = value;
             });
+            DebugLogger.info(_originLocation ?? ""); //TODO
           },
         ),
       ),

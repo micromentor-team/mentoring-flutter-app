@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
 
+import '../../../utilities/debug_logger.dart';
 import '../../shared/radio_button_cards.dart';
 import 'components/edit_template.dart';
 
@@ -47,7 +48,10 @@ class _EditCompanyStageScreenState extends State<EditCompanyStageScreen>
               Icon(Icons.auto_graph_outlined)
             ],
             imageAssetName: const [null, null, null, null],
-            onSelectedCardChanged: (index) => _selectedStageIndex = index,
+            onSelectedCardChanged: (index) {
+              _selectedStageIndex = index;
+              DebugLogger.info(_selectedStageIndex.toString()); //TODO
+            },
           ),
         ],
       ),

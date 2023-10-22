@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
 
+import '../../../utilities/debug_logger.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
@@ -41,6 +42,7 @@ class _EditConnectLinkedInScreenState extends State<EditConnectLinkedInScreen>
             setState(() {
               _linkedInUrl = value;
             });
+            DebugLogger.info(_linkedInUrl ?? ""); //TODO
           },
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../utilities/debug_logger.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
@@ -16,7 +17,7 @@ class EditCurrentLocationScreen extends StatefulWidget {
 class _EditCurrentLocationScreenState extends State<EditCurrentLocationScreen>
     with NavigationMixin<EditCurrentLocationScreen> {
   final TextEditingController _textEditingController = TextEditingController();
-  String? _city;
+  String? _currentLocation;
 
   @override
   void dispose() {
@@ -40,8 +41,9 @@ class _EditCurrentLocationScreenState extends State<EditCurrentLocationScreen>
           textController: _textEditingController,
           onChanged: (value) {
             setState(() {
-              _city = value;
+              _currentLocation = value;
             });
+            DebugLogger.info(_currentLocation ?? ""); //TODO
           },
         ),
       ),

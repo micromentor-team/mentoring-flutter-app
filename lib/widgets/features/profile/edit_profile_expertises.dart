@@ -4,6 +4,7 @@ import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/content_provider.dart';
+import '../../../utilities/debug_logger.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/multi_select_chips.dart';
 import 'components/edit_template.dart';
@@ -77,9 +78,10 @@ class _EditExpertisesScreenState extends State<EditExpertisesScreen>
       body: CreateMultiSelectChips(
         chips: _expertiseChips,
         maxSelection: _maxSelections,
-        onSelectedChipsChanged: (chips) => setState(
-          () => _selectedChips = chips,
-        ),
+        onSelectedChipsChanged: (chips) {
+          setState(() => _selectedChips = chips);
+          DebugLogger.info(_selectedChips.toString()); //TODO
+        },
       ),
     );
   }
