@@ -2,170 +2,6 @@
 // DO NOT MODIFY
 // ignore_for_file: type=lint
 
-class Input$FindUserByIdentOptions {
-  factory Input$FindUserByIdentOptions({
-    bool? includeDeleted,
-    List<String>? includeGroupProfiles,
-  }) =>
-      Input$FindUserByIdentOptions._({
-        if (includeDeleted != null) r'includeDeleted': includeDeleted,
-        if (includeGroupProfiles != null)
-          r'includeGroupProfiles': includeGroupProfiles,
-      });
-
-  Input$FindUserByIdentOptions._(this._$data);
-
-  factory Input$FindUserByIdentOptions.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('includeDeleted')) {
-      final l$includeDeleted = data['includeDeleted'];
-      result$data['includeDeleted'] = (l$includeDeleted as bool?);
-    }
-    if (data.containsKey('includeGroupProfiles')) {
-      final l$includeGroupProfiles = data['includeGroupProfiles'];
-      result$data['includeGroupProfiles'] =
-          (l$includeGroupProfiles as List<dynamic>?)
-              ?.map((e) => (e as String))
-              .toList();
-    }
-    return Input$FindUserByIdentOptions._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get includeDeleted => (_$data['includeDeleted'] as bool?);
-  List<String>? get includeGroupProfiles =>
-      (_$data['includeGroupProfiles'] as List<String>?);
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('includeDeleted')) {
-      final l$includeDeleted = includeDeleted;
-      result$data['includeDeleted'] = l$includeDeleted;
-    }
-    if (_$data.containsKey('includeGroupProfiles')) {
-      final l$includeGroupProfiles = includeGroupProfiles;
-      result$data['includeGroupProfiles'] =
-          l$includeGroupProfiles?.map((e) => e).toList();
-    }
-    return result$data;
-  }
-
-  CopyWith$Input$FindUserByIdentOptions<Input$FindUserByIdentOptions>
-      get copyWith => CopyWith$Input$FindUserByIdentOptions(
-            this,
-            (i) => i,
-          );
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Input$FindUserByIdentOptions) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$includeDeleted = includeDeleted;
-    final lOther$includeDeleted = other.includeDeleted;
-    if (_$data.containsKey('includeDeleted') !=
-        other._$data.containsKey('includeDeleted')) {
-      return false;
-    }
-    if (l$includeDeleted != lOther$includeDeleted) {
-      return false;
-    }
-    final l$includeGroupProfiles = includeGroupProfiles;
-    final lOther$includeGroupProfiles = other.includeGroupProfiles;
-    if (_$data.containsKey('includeGroupProfiles') !=
-        other._$data.containsKey('includeGroupProfiles')) {
-      return false;
-    }
-    if (l$includeGroupProfiles != null && lOther$includeGroupProfiles != null) {
-      if (l$includeGroupProfiles.length != lOther$includeGroupProfiles.length) {
-        return false;
-      }
-      for (int i = 0; i < l$includeGroupProfiles.length; i++) {
-        final l$includeGroupProfiles$entry = l$includeGroupProfiles[i];
-        final lOther$includeGroupProfiles$entry =
-            lOther$includeGroupProfiles[i];
-        if (l$includeGroupProfiles$entry != lOther$includeGroupProfiles$entry) {
-          return false;
-        }
-      }
-    } else if (l$includeGroupProfiles != lOther$includeGroupProfiles) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$includeDeleted = includeDeleted;
-    final l$includeGroupProfiles = includeGroupProfiles;
-    return Object.hashAll([
-      _$data.containsKey('includeDeleted') ? l$includeDeleted : const {},
-      _$data.containsKey('includeGroupProfiles')
-          ? l$includeGroupProfiles == null
-              ? null
-              : Object.hashAll(l$includeGroupProfiles.map((v) => v))
-          : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith$Input$FindUserByIdentOptions<TRes> {
-  factory CopyWith$Input$FindUserByIdentOptions(
-    Input$FindUserByIdentOptions instance,
-    TRes Function(Input$FindUserByIdentOptions) then,
-  ) = _CopyWithImpl$Input$FindUserByIdentOptions;
-
-  factory CopyWith$Input$FindUserByIdentOptions.stub(TRes res) =
-      _CopyWithStubImpl$Input$FindUserByIdentOptions;
-
-  TRes call({
-    bool? includeDeleted,
-    List<String>? includeGroupProfiles,
-  });
-}
-
-class _CopyWithImpl$Input$FindUserByIdentOptions<TRes>
-    implements CopyWith$Input$FindUserByIdentOptions<TRes> {
-  _CopyWithImpl$Input$FindUserByIdentOptions(
-    this._instance,
-    this._then,
-  );
-
-  final Input$FindUserByIdentOptions _instance;
-
-  final TRes Function(Input$FindUserByIdentOptions) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? includeDeleted = _undefined,
-    Object? includeGroupProfiles = _undefined,
-  }) =>
-      _then(Input$FindUserByIdentOptions._({
-        ..._instance._$data,
-        if (includeDeleted != _undefined)
-          'includeDeleted': (includeDeleted as bool?),
-        if (includeGroupProfiles != _undefined)
-          'includeGroupProfiles': (includeGroupProfiles as List<String>?),
-      }));
-}
-
-class _CopyWithStubImpl$Input$FindUserByIdentOptions<TRes>
-    implements CopyWith$Input$FindUserByIdentOptions<TRes> {
-  _CopyWithStubImpl$Input$FindUserByIdentOptions(this._res);
-
-  TRes _res;
-
-  call({
-    bool? includeDeleted,
-    List<String>? includeGroupProfiles,
-  }) =>
-      _res;
-}
-
 class Input$FindObjectsOptions {
   factory Input$FindObjectsOptions({
     int? limit,
@@ -854,6 +690,170 @@ class _CopyWithStubImpl$Input$SortItem<TRes>
   call({
     String? field,
     Enum$SortDirection? direction,
+  }) =>
+      _res;
+}
+
+class Input$FindUserByIdentOptions {
+  factory Input$FindUserByIdentOptions({
+    bool? includeDeleted,
+    List<String>? includeGroupProfiles,
+  }) =>
+      Input$FindUserByIdentOptions._({
+        if (includeDeleted != null) r'includeDeleted': includeDeleted,
+        if (includeGroupProfiles != null)
+          r'includeGroupProfiles': includeGroupProfiles,
+      });
+
+  Input$FindUserByIdentOptions._(this._$data);
+
+  factory Input$FindUserByIdentOptions.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('includeDeleted')) {
+      final l$includeDeleted = data['includeDeleted'];
+      result$data['includeDeleted'] = (l$includeDeleted as bool?);
+    }
+    if (data.containsKey('includeGroupProfiles')) {
+      final l$includeGroupProfiles = data['includeGroupProfiles'];
+      result$data['includeGroupProfiles'] =
+          (l$includeGroupProfiles as List<dynamic>?)
+              ?.map((e) => (e as String))
+              .toList();
+    }
+    return Input$FindUserByIdentOptions._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get includeDeleted => (_$data['includeDeleted'] as bool?);
+  List<String>? get includeGroupProfiles =>
+      (_$data['includeGroupProfiles'] as List<String>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('includeDeleted')) {
+      final l$includeDeleted = includeDeleted;
+      result$data['includeDeleted'] = l$includeDeleted;
+    }
+    if (_$data.containsKey('includeGroupProfiles')) {
+      final l$includeGroupProfiles = includeGroupProfiles;
+      result$data['includeGroupProfiles'] =
+          l$includeGroupProfiles?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$FindUserByIdentOptions<Input$FindUserByIdentOptions>
+      get copyWith => CopyWith$Input$FindUserByIdentOptions(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$FindUserByIdentOptions) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$includeDeleted = includeDeleted;
+    final lOther$includeDeleted = other.includeDeleted;
+    if (_$data.containsKey('includeDeleted') !=
+        other._$data.containsKey('includeDeleted')) {
+      return false;
+    }
+    if (l$includeDeleted != lOther$includeDeleted) {
+      return false;
+    }
+    final l$includeGroupProfiles = includeGroupProfiles;
+    final lOther$includeGroupProfiles = other.includeGroupProfiles;
+    if (_$data.containsKey('includeGroupProfiles') !=
+        other._$data.containsKey('includeGroupProfiles')) {
+      return false;
+    }
+    if (l$includeGroupProfiles != null && lOther$includeGroupProfiles != null) {
+      if (l$includeGroupProfiles.length != lOther$includeGroupProfiles.length) {
+        return false;
+      }
+      for (int i = 0; i < l$includeGroupProfiles.length; i++) {
+        final l$includeGroupProfiles$entry = l$includeGroupProfiles[i];
+        final lOther$includeGroupProfiles$entry =
+            lOther$includeGroupProfiles[i];
+        if (l$includeGroupProfiles$entry != lOther$includeGroupProfiles$entry) {
+          return false;
+        }
+      }
+    } else if (l$includeGroupProfiles != lOther$includeGroupProfiles) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$includeDeleted = includeDeleted;
+    final l$includeGroupProfiles = includeGroupProfiles;
+    return Object.hashAll([
+      _$data.containsKey('includeDeleted') ? l$includeDeleted : const {},
+      _$data.containsKey('includeGroupProfiles')
+          ? l$includeGroupProfiles == null
+              ? null
+              : Object.hashAll(l$includeGroupProfiles.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$FindUserByIdentOptions<TRes> {
+  factory CopyWith$Input$FindUserByIdentOptions(
+    Input$FindUserByIdentOptions instance,
+    TRes Function(Input$FindUserByIdentOptions) then,
+  ) = _CopyWithImpl$Input$FindUserByIdentOptions;
+
+  factory CopyWith$Input$FindUserByIdentOptions.stub(TRes res) =
+      _CopyWithStubImpl$Input$FindUserByIdentOptions;
+
+  TRes call({
+    bool? includeDeleted,
+    List<String>? includeGroupProfiles,
+  });
+}
+
+class _CopyWithImpl$Input$FindUserByIdentOptions<TRes>
+    implements CopyWith$Input$FindUserByIdentOptions<TRes> {
+  _CopyWithImpl$Input$FindUserByIdentOptions(
+    this._instance,
+    this._then,
+  );
+
+  final Input$FindUserByIdentOptions _instance;
+
+  final TRes Function(Input$FindUserByIdentOptions) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? includeDeleted = _undefined,
+    Object? includeGroupProfiles = _undefined,
+  }) =>
+      _then(Input$FindUserByIdentOptions._({
+        ..._instance._$data,
+        if (includeDeleted != _undefined)
+          'includeDeleted': (includeDeleted as bool?),
+        if (includeGroupProfiles != _undefined)
+          'includeGroupProfiles': (includeGroupProfiles as List<String>?),
+      }));
+}
+
+class _CopyWithStubImpl$Input$FindUserByIdentOptions<TRes>
+    implements CopyWith$Input$FindUserByIdentOptions<TRes> {
+  _CopyWithStubImpl$Input$FindUserByIdentOptions(this._res);
+
+  TRes _res;
+
+  call({
+    bool? includeDeleted,
+    List<String>? includeGroupProfiles,
   }) =>
       _res;
 }
@@ -14137,17 +14137,10 @@ class Input$UserSearchInput {
     String? deletedBy,
     String? userId,
     String? matchingEngineId,
+    Enum$UserSearchType? userSearchType,
     String? name,
-    Enum$ProfileType? profileType,
-    Enum$ProfileType? viewerProfileType,
-    String? searchText,
-    Enum$UserSearchFieldPreference? seeksHelp,
-    Enum$UserSearchFieldPreference? offersHelp,
-    List<String>? languagesTextIds,
-    List<String>? expertisesTextIds,
-    List<String>? industriesTextIds,
-    List<String>? countryTextIds,
-    List<String>? companyStagesTextIds,
+    Input$UserSearchFilterInput? filter,
+    List<String>? excludeUserIds,
     int? maxResultCount,
     Enum$UserSearchSubscriptionType? subscription,
     DateTime? expiresAt,
@@ -14167,18 +14160,10 @@ class Input$UserSearchInput {
         if (deletedBy != null) r'deletedBy': deletedBy,
         if (userId != null) r'userId': userId,
         if (matchingEngineId != null) r'matchingEngineId': matchingEngineId,
+        if (userSearchType != null) r'userSearchType': userSearchType,
         if (name != null) r'name': name,
-        if (profileType != null) r'profileType': profileType,
-        if (viewerProfileType != null) r'viewerProfileType': viewerProfileType,
-        if (searchText != null) r'searchText': searchText,
-        if (seeksHelp != null) r'seeksHelp': seeksHelp,
-        if (offersHelp != null) r'offersHelp': offersHelp,
-        if (languagesTextIds != null) r'languagesTextIds': languagesTextIds,
-        if (expertisesTextIds != null) r'expertisesTextIds': expertisesTextIds,
-        if (industriesTextIds != null) r'industriesTextIds': industriesTextIds,
-        if (countryTextIds != null) r'countryTextIds': countryTextIds,
-        if (companyStagesTextIds != null)
-          r'companyStagesTextIds': companyStagesTextIds,
+        if (filter != null) r'filter': filter,
+        if (excludeUserIds != null) r'excludeUserIds': excludeUserIds,
         if (maxResultCount != null) r'maxResultCount': maxResultCount,
         if (subscription != null) r'subscription': subscription,
         if (expiresAt != null) r'expiresAt': expiresAt,
@@ -14247,72 +14232,32 @@ class Input$UserSearchInput {
       final l$matchingEngineId = data['matchingEngineId'];
       result$data['matchingEngineId'] = (l$matchingEngineId as String?);
     }
+    if (data.containsKey('userSearchType')) {
+      final l$userSearchType = data['userSearchType'];
+      result$data['userSearchType'] = l$userSearchType == null
+          ? null
+          : fromJson$Enum$UserSearchType((l$userSearchType as String));
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
-    if (data.containsKey('profileType')) {
-      final l$profileType = data['profileType'];
-      result$data['profileType'] = l$profileType == null
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
           ? null
-          : fromJson$Enum$ProfileType((l$profileType as String));
+          : Input$UserSearchFilterInput.fromJson(
+              (l$filter as Map<String, dynamic>));
     }
-    if (data.containsKey('viewerProfileType')) {
-      final l$viewerProfileType = data['viewerProfileType'];
-      result$data['viewerProfileType'] = l$viewerProfileType == null
-          ? null
-          : fromJson$Enum$ProfileType((l$viewerProfileType as String));
-    }
-    if (data.containsKey('searchText')) {
-      final l$searchText = data['searchText'];
-      result$data['searchText'] = (l$searchText as String?);
-    }
-    if (data.containsKey('seeksHelp')) {
-      final l$seeksHelp = data['seeksHelp'];
-      result$data['seeksHelp'] = l$seeksHelp == null
-          ? null
-          : fromJson$Enum$UserSearchFieldPreference((l$seeksHelp as String));
-    }
-    if (data.containsKey('offersHelp')) {
-      final l$offersHelp = data['offersHelp'];
-      result$data['offersHelp'] = l$offersHelp == null
-          ? null
-          : fromJson$Enum$UserSearchFieldPreference((l$offersHelp as String));
-    }
-    if (data.containsKey('languagesTextIds')) {
-      final l$languagesTextIds = data['languagesTextIds'];
-      result$data['languagesTextIds'] = (l$languagesTextIds as List<dynamic>)
-          .map((e) => (e as String))
+    if (data.containsKey('excludeUserIds')) {
+      final l$excludeUserIds = data['excludeUserIds'];
+      result$data['excludeUserIds'] = (l$excludeUserIds as List<dynamic>?)
+          ?.map((e) => (e as String))
           .toList();
-    }
-    if (data.containsKey('expertisesTextIds')) {
-      final l$expertisesTextIds = data['expertisesTextIds'];
-      result$data['expertisesTextIds'] = (l$expertisesTextIds as List<dynamic>)
-          .map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('industriesTextIds')) {
-      final l$industriesTextIds = data['industriesTextIds'];
-      result$data['industriesTextIds'] = (l$industriesTextIds as List<dynamic>)
-          .map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('countryTextIds')) {
-      final l$countryTextIds = data['countryTextIds'];
-      result$data['countryTextIds'] = (l$countryTextIds as List<dynamic>)
-          .map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('companyStagesTextIds')) {
-      final l$companyStagesTextIds = data['companyStagesTextIds'];
-      result$data['companyStagesTextIds'] =
-          (l$companyStagesTextIds as List<dynamic>)
-              .map((e) => (e as String))
-              .toList();
     }
     if (data.containsKey('maxResultCount')) {
       final l$maxResultCount = data['maxResultCount'];
-      result$data['maxResultCount'] = (l$maxResultCount as int);
+      result$data['maxResultCount'] = (l$maxResultCount as int?);
     }
     if (data.containsKey('subscription')) {
       final l$subscription = data['subscription'];
@@ -14355,26 +14300,13 @@ class Input$UserSearchInput {
   String? get deletedBy => (_$data['deletedBy'] as String?);
   String? get userId => (_$data['userId'] as String?);
   String? get matchingEngineId => (_$data['matchingEngineId'] as String?);
+  Enum$UserSearchType? get userSearchType =>
+      (_$data['userSearchType'] as Enum$UserSearchType?);
   String? get name => (_$data['name'] as String?);
-  Enum$ProfileType? get profileType =>
-      (_$data['profileType'] as Enum$ProfileType?);
-  Enum$ProfileType? get viewerProfileType =>
-      (_$data['viewerProfileType'] as Enum$ProfileType?);
-  String? get searchText => (_$data['searchText'] as String?);
-  Enum$UserSearchFieldPreference? get seeksHelp =>
-      (_$data['seeksHelp'] as Enum$UserSearchFieldPreference?);
-  Enum$UserSearchFieldPreference? get offersHelp =>
-      (_$data['offersHelp'] as Enum$UserSearchFieldPreference?);
-  List<String>? get languagesTextIds =>
-      (_$data['languagesTextIds'] as List<String>?);
-  List<String>? get expertisesTextIds =>
-      (_$data['expertisesTextIds'] as List<String>?);
-  List<String>? get industriesTextIds =>
-      (_$data['industriesTextIds'] as List<String>?);
-  List<String>? get countryTextIds =>
-      (_$data['countryTextIds'] as List<String>?);
-  List<String>? get companyStagesTextIds =>
-      (_$data['companyStagesTextIds'] as List<String>?);
+  Input$UserSearchFilterInput? get filter =>
+      (_$data['filter'] as Input$UserSearchFilterInput?);
+  List<String>? get excludeUserIds =>
+      (_$data['excludeUserIds'] as List<String>?);
   int? get maxResultCount => (_$data['maxResultCount'] as int?);
   Enum$UserSearchSubscriptionType? get subscription =>
       (_$data['subscription'] as Enum$UserSearchSubscriptionType?);
@@ -14431,65 +14363,27 @@ class Input$UserSearchInput {
       final l$matchingEngineId = matchingEngineId;
       result$data['matchingEngineId'] = l$matchingEngineId;
     }
+    if (_$data.containsKey('userSearchType')) {
+      final l$userSearchType = userSearchType;
+      result$data['userSearchType'] = l$userSearchType == null
+          ? null
+          : toJson$Enum$UserSearchType(l$userSearchType);
+    }
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name;
     }
-    if (_$data.containsKey('profileType')) {
-      final l$profileType = profileType;
-      result$data['profileType'] =
-          l$profileType == null ? null : toJson$Enum$ProfileType(l$profileType);
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
     }
-    if (_$data.containsKey('viewerProfileType')) {
-      final l$viewerProfileType = viewerProfileType;
-      result$data['viewerProfileType'] = l$viewerProfileType == null
-          ? null
-          : toJson$Enum$ProfileType(l$viewerProfileType);
-    }
-    if (_$data.containsKey('searchText')) {
-      final l$searchText = searchText;
-      result$data['searchText'] = l$searchText;
-    }
-    if (_$data.containsKey('seeksHelp')) {
-      final l$seeksHelp = seeksHelp;
-      result$data['seeksHelp'] = l$seeksHelp == null
-          ? null
-          : toJson$Enum$UserSearchFieldPreference(l$seeksHelp);
-    }
-    if (_$data.containsKey('offersHelp')) {
-      final l$offersHelp = offersHelp;
-      result$data['offersHelp'] = l$offersHelp == null
-          ? null
-          : toJson$Enum$UserSearchFieldPreference(l$offersHelp);
-    }
-    if (_$data.containsKey('languagesTextIds')) {
-      final l$languagesTextIds = languagesTextIds;
-      result$data['languagesTextIds'] =
-          (l$languagesTextIds as List<String>).map((e) => e).toList();
-    }
-    if (_$data.containsKey('expertisesTextIds')) {
-      final l$expertisesTextIds = expertisesTextIds;
-      result$data['expertisesTextIds'] =
-          (l$expertisesTextIds as List<String>).map((e) => e).toList();
-    }
-    if (_$data.containsKey('industriesTextIds')) {
-      final l$industriesTextIds = industriesTextIds;
-      result$data['industriesTextIds'] =
-          (l$industriesTextIds as List<String>).map((e) => e).toList();
-    }
-    if (_$data.containsKey('countryTextIds')) {
-      final l$countryTextIds = countryTextIds;
-      result$data['countryTextIds'] =
-          (l$countryTextIds as List<String>).map((e) => e).toList();
-    }
-    if (_$data.containsKey('companyStagesTextIds')) {
-      final l$companyStagesTextIds = companyStagesTextIds;
-      result$data['companyStagesTextIds'] =
-          (l$companyStagesTextIds as List<String>).map((e) => e).toList();
+    if (_$data.containsKey('excludeUserIds')) {
+      final l$excludeUserIds = excludeUserIds;
+      result$data['excludeUserIds'] = l$excludeUserIds?.map((e) => e).toList();
     }
     if (_$data.containsKey('maxResultCount')) {
       final l$maxResultCount = maxResultCount;
-      result$data['maxResultCount'] = (l$maxResultCount as int);
+      result$data['maxResultCount'] = l$maxResultCount;
     }
     if (_$data.containsKey('subscription')) {
       final l$subscription = subscription;
@@ -14641,6 +14535,15 @@ class Input$UserSearchInput {
     if (l$matchingEngineId != lOther$matchingEngineId) {
       return false;
     }
+    final l$userSearchType = userSearchType;
+    final lOther$userSearchType = other.userSearchType;
+    if (_$data.containsKey('userSearchType') !=
+        other._$data.containsKey('userSearchType')) {
+      return false;
+    }
+    if (l$userSearchType != lOther$userSearchType) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -14649,22 +14552,466 @@ class Input$UserSearchInput {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$profileType = profileType;
-    final lOther$profileType = other.profileType;
-    if (_$data.containsKey('profileType') !=
-        other._$data.containsKey('profileType')) {
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
       return false;
     }
-    if (l$profileType != lOther$profileType) {
+    if (l$filter != lOther$filter) {
       return false;
     }
-    final l$viewerProfileType = viewerProfileType;
-    final lOther$viewerProfileType = other.viewerProfileType;
-    if (_$data.containsKey('viewerProfileType') !=
-        other._$data.containsKey('viewerProfileType')) {
+    final l$excludeUserIds = excludeUserIds;
+    final lOther$excludeUserIds = other.excludeUserIds;
+    if (_$data.containsKey('excludeUserIds') !=
+        other._$data.containsKey('excludeUserIds')) {
       return false;
     }
-    if (l$viewerProfileType != lOther$viewerProfileType) {
+    if (l$excludeUserIds != null && lOther$excludeUserIds != null) {
+      if (l$excludeUserIds.length != lOther$excludeUserIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$excludeUserIds.length; i++) {
+        final l$excludeUserIds$entry = l$excludeUserIds[i];
+        final lOther$excludeUserIds$entry = lOther$excludeUserIds[i];
+        if (l$excludeUserIds$entry != lOther$excludeUserIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$excludeUserIds != lOther$excludeUserIds) {
+      return false;
+    }
+    final l$maxResultCount = maxResultCount;
+    final lOther$maxResultCount = other.maxResultCount;
+    if (_$data.containsKey('maxResultCount') !=
+        other._$data.containsKey('maxResultCount')) {
+      return false;
+    }
+    if (l$maxResultCount != lOther$maxResultCount) {
+      return false;
+    }
+    final l$subscription = subscription;
+    final lOther$subscription = other.subscription;
+    if (_$data.containsKey('subscription') !=
+        other._$data.containsKey('subscription')) {
+      return false;
+    }
+    if (l$subscription != lOther$subscription) {
+      return false;
+    }
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
+      return false;
+    }
+    final l$resultExpiresAt = resultExpiresAt;
+    final lOther$resultExpiresAt = other.resultExpiresAt;
+    if (_$data.containsKey('resultExpiresAt') !=
+        other._$data.containsKey('resultExpiresAt')) {
+      return false;
+    }
+    if (l$resultExpiresAt != lOther$resultExpiresAt) {
+      return false;
+    }
+    final l$startSearch = startSearch;
+    final lOther$startSearch = other.startSearch;
+    if (_$data.containsKey('startSearch') !=
+        other._$data.containsKey('startSearch')) {
+      return false;
+    }
+    if (l$startSearch != lOther$startSearch) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$adminNotes = adminNotes;
+    final l$events = events;
+    final l$metadata = metadata;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$updatedAt = updatedAt;
+    final l$updatedBy = updatedBy;
+    final l$deletedAt = deletedAt;
+    final l$deletedBy = deletedBy;
+    final l$userId = userId;
+    final l$matchingEngineId = matchingEngineId;
+    final l$userSearchType = userSearchType;
+    final l$name = name;
+    final l$filter = filter;
+    final l$excludeUserIds = excludeUserIds;
+    final l$maxResultCount = maxResultCount;
+    final l$subscription = subscription;
+    final l$expiresAt = expiresAt;
+    final l$resultExpiresAt = resultExpiresAt;
+    final l$startSearch = startSearch;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
+      _$data.containsKey('events')
+          ? l$events == null
+              ? null
+              : Object.hashAll(l$events.map((v) => v))
+          : const {},
+      _$data.containsKey('metadata') ? l$metadata : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
+      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
+      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
+      _$data.containsKey('userId') ? l$userId : const {},
+      _$data.containsKey('matchingEngineId') ? l$matchingEngineId : const {},
+      _$data.containsKey('userSearchType') ? l$userSearchType : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('excludeUserIds')
+          ? l$excludeUserIds == null
+              ? null
+              : Object.hashAll(l$excludeUserIds.map((v) => v))
+          : const {},
+      _$data.containsKey('maxResultCount') ? l$maxResultCount : const {},
+      _$data.containsKey('subscription') ? l$subscription : const {},
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
+      _$data.containsKey('resultExpiresAt') ? l$resultExpiresAt : const {},
+      _$data.containsKey('startSearch') ? l$startSearch : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$UserSearchInput<TRes> {
+  factory CopyWith$Input$UserSearchInput(
+    Input$UserSearchInput instance,
+    TRes Function(Input$UserSearchInput) then,
+  ) = _CopyWithImpl$Input$UserSearchInput;
+
+  factory CopyWith$Input$UserSearchInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$UserSearchInput;
+
+  TRes call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? userId,
+    String? matchingEngineId,
+    Enum$UserSearchType? userSearchType,
+    String? name,
+    Input$UserSearchFilterInput? filter,
+    List<String>? excludeUserIds,
+    int? maxResultCount,
+    Enum$UserSearchSubscriptionType? subscription,
+    DateTime? expiresAt,
+    DateTime? resultExpiresAt,
+    bool? startSearch,
+  });
+  TRes events(
+      Iterable<Input$ModelEventInput>? Function(
+              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+          _fn);
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
+  CopyWith$Input$UserSearchFilterInput<TRes> get filter;
+}
+
+class _CopyWithImpl$Input$UserSearchInput<TRes>
+    implements CopyWith$Input$UserSearchInput<TRes> {
+  _CopyWithImpl$Input$UserSearchInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$UserSearchInput _instance;
+
+  final TRes Function(Input$UserSearchInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? adminNotes = _undefined,
+    Object? events = _undefined,
+    Object? metadata = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? updatedAt = _undefined,
+    Object? updatedBy = _undefined,
+    Object? deletedAt = _undefined,
+    Object? deletedBy = _undefined,
+    Object? userId = _undefined,
+    Object? matchingEngineId = _undefined,
+    Object? userSearchType = _undefined,
+    Object? name = _undefined,
+    Object? filter = _undefined,
+    Object? excludeUserIds = _undefined,
+    Object? maxResultCount = _undefined,
+    Object? subscription = _undefined,
+    Object? expiresAt = _undefined,
+    Object? resultExpiresAt = _undefined,
+    Object? startSearch = _undefined,
+  }) =>
+      _then(Input$UserSearchInput._({
+        ..._instance._$data,
+        if (id != _undefined) 'id': (id as String?),
+        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
+        if (events != _undefined)
+          'events': (events as List<Input$ModelEventInput>?),
+        if (metadata != _undefined)
+          'metadata': (metadata as Input$BaseModelMetadataInput?),
+        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
+        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
+        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
+        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
+        if (userId != _undefined) 'userId': (userId as String?),
+        if (matchingEngineId != _undefined)
+          'matchingEngineId': (matchingEngineId as String?),
+        if (userSearchType != _undefined)
+          'userSearchType': (userSearchType as Enum$UserSearchType?),
+        if (name != _undefined) 'name': (name as String?),
+        if (filter != _undefined)
+          'filter': (filter as Input$UserSearchFilterInput?),
+        if (excludeUserIds != _undefined)
+          'excludeUserIds': (excludeUserIds as List<String>?),
+        if (maxResultCount != _undefined)
+          'maxResultCount': (maxResultCount as int?),
+        if (subscription != _undefined)
+          'subscription': (subscription as Enum$UserSearchSubscriptionType?),
+        if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
+        if (resultExpiresAt != _undefined)
+          'resultExpiresAt': (resultExpiresAt as DateTime?),
+        if (startSearch != _undefined && startSearch != null)
+          'startSearch': (startSearch as bool),
+      }));
+  TRes events(
+          Iterable<Input$ModelEventInput>? Function(
+                  Iterable<
+                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
+              _fn) =>
+      call(
+          events:
+              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
+    final local$metadata = _instance.metadata;
+    return local$metadata == null
+        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
+        : CopyWith$Input$BaseModelMetadataInput(
+            local$metadata, (e) => call(metadata: e));
+  }
+
+  CopyWith$Input$UserSearchFilterInput<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith$Input$UserSearchFilterInput.stub(_then(_instance))
+        : CopyWith$Input$UserSearchFilterInput(
+            local$filter, (e) => call(filter: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$UserSearchInput<TRes>
+    implements CopyWith$Input$UserSearchInput<TRes> {
+  _CopyWithStubImpl$Input$UserSearchInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? adminNotes,
+    List<Input$ModelEventInput>? events,
+    Input$BaseModelMetadataInput? metadata,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    DateTime? deletedAt,
+    String? deletedBy,
+    String? userId,
+    String? matchingEngineId,
+    Enum$UserSearchType? userSearchType,
+    String? name,
+    Input$UserSearchFilterInput? filter,
+    List<String>? excludeUserIds,
+    int? maxResultCount,
+    Enum$UserSearchSubscriptionType? subscription,
+    DateTime? expiresAt,
+    DateTime? resultExpiresAt,
+    bool? startSearch,
+  }) =>
+      _res;
+  events(_fn) => _res;
+  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
+      CopyWith$Input$BaseModelMetadataInput.stub(_res);
+  CopyWith$Input$UserSearchFilterInput<TRes> get filter =>
+      CopyWith$Input$UserSearchFilterInput.stub(_res);
+}
+
+class Input$UserSearchFilterInput {
+  factory Input$UserSearchFilterInput({
+    String? searchText,
+    Enum$UserSearchFieldPreference? seeksHelp,
+    Enum$UserSearchFieldPreference? offersHelp,
+    List<String>? languagesTextIds,
+    List<String>? expertisesTextIds,
+    List<String>? industriesTextIds,
+    List<String>? countryTextIds,
+    List<String>? companyStagesTextIds,
+  }) =>
+      Input$UserSearchFilterInput._({
+        if (searchText != null) r'searchText': searchText,
+        if (seeksHelp != null) r'seeksHelp': seeksHelp,
+        if (offersHelp != null) r'offersHelp': offersHelp,
+        if (languagesTextIds != null) r'languagesTextIds': languagesTextIds,
+        if (expertisesTextIds != null) r'expertisesTextIds': expertisesTextIds,
+        if (industriesTextIds != null) r'industriesTextIds': industriesTextIds,
+        if (countryTextIds != null) r'countryTextIds': countryTextIds,
+        if (companyStagesTextIds != null)
+          r'companyStagesTextIds': companyStagesTextIds,
+      });
+
+  Input$UserSearchFilterInput._(this._$data);
+
+  factory Input$UserSearchFilterInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('searchText')) {
+      final l$searchText = data['searchText'];
+      result$data['searchText'] = (l$searchText as String?);
+    }
+    if (data.containsKey('seeksHelp')) {
+      final l$seeksHelp = data['seeksHelp'];
+      result$data['seeksHelp'] = l$seeksHelp == null
+          ? null
+          : fromJson$Enum$UserSearchFieldPreference((l$seeksHelp as String));
+    }
+    if (data.containsKey('offersHelp')) {
+      final l$offersHelp = data['offersHelp'];
+      result$data['offersHelp'] = l$offersHelp == null
+          ? null
+          : fromJson$Enum$UserSearchFieldPreference((l$offersHelp as String));
+    }
+    if (data.containsKey('languagesTextIds')) {
+      final l$languagesTextIds = data['languagesTextIds'];
+      result$data['languagesTextIds'] = (l$languagesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('expertisesTextIds')) {
+      final l$expertisesTextIds = data['expertisesTextIds'];
+      result$data['expertisesTextIds'] = (l$expertisesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('industriesTextIds')) {
+      final l$industriesTextIds = data['industriesTextIds'];
+      result$data['industriesTextIds'] = (l$industriesTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('countryTextIds')) {
+      final l$countryTextIds = data['countryTextIds'];
+      result$data['countryTextIds'] = (l$countryTextIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('companyStagesTextIds')) {
+      final l$companyStagesTextIds = data['companyStagesTextIds'];
+      result$data['companyStagesTextIds'] =
+          (l$companyStagesTextIds as List<dynamic>)
+              .map((e) => (e as String))
+              .toList();
+    }
+    return Input$UserSearchFilterInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get searchText => (_$data['searchText'] as String?);
+  Enum$UserSearchFieldPreference? get seeksHelp =>
+      (_$data['seeksHelp'] as Enum$UserSearchFieldPreference?);
+  Enum$UserSearchFieldPreference? get offersHelp =>
+      (_$data['offersHelp'] as Enum$UserSearchFieldPreference?);
+  List<String>? get languagesTextIds =>
+      (_$data['languagesTextIds'] as List<String>?);
+  List<String>? get expertisesTextIds =>
+      (_$data['expertisesTextIds'] as List<String>?);
+  List<String>? get industriesTextIds =>
+      (_$data['industriesTextIds'] as List<String>?);
+  List<String>? get countryTextIds =>
+      (_$data['countryTextIds'] as List<String>?);
+  List<String>? get companyStagesTextIds =>
+      (_$data['companyStagesTextIds'] as List<String>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('searchText')) {
+      final l$searchText = searchText;
+      result$data['searchText'] = l$searchText;
+    }
+    if (_$data.containsKey('seeksHelp')) {
+      final l$seeksHelp = seeksHelp;
+      result$data['seeksHelp'] = l$seeksHelp == null
+          ? null
+          : toJson$Enum$UserSearchFieldPreference(l$seeksHelp);
+    }
+    if (_$data.containsKey('offersHelp')) {
+      final l$offersHelp = offersHelp;
+      result$data['offersHelp'] = l$offersHelp == null
+          ? null
+          : toJson$Enum$UserSearchFieldPreference(l$offersHelp);
+    }
+    if (_$data.containsKey('languagesTextIds')) {
+      final l$languagesTextIds = languagesTextIds;
+      result$data['languagesTextIds'] =
+          (l$languagesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('expertisesTextIds')) {
+      final l$expertisesTextIds = expertisesTextIds;
+      result$data['expertisesTextIds'] =
+          (l$expertisesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('industriesTextIds')) {
+      final l$industriesTextIds = industriesTextIds;
+      result$data['industriesTextIds'] =
+          (l$industriesTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('countryTextIds')) {
+      final l$countryTextIds = countryTextIds;
+      result$data['countryTextIds'] =
+          (l$countryTextIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('companyStagesTextIds')) {
+      final l$companyStagesTextIds = companyStagesTextIds;
+      result$data['companyStagesTextIds'] =
+          (l$companyStagesTextIds as List<String>).map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$UserSearchFilterInput<Input$UserSearchFilterInput>
+      get copyWith => CopyWith$Input$UserSearchFilterInput(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$UserSearchFilterInput) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$searchText = searchText;
@@ -14795,71 +15142,11 @@ class Input$UserSearchInput {
     } else if (l$companyStagesTextIds != lOther$companyStagesTextIds) {
       return false;
     }
-    final l$maxResultCount = maxResultCount;
-    final lOther$maxResultCount = other.maxResultCount;
-    if (_$data.containsKey('maxResultCount') !=
-        other._$data.containsKey('maxResultCount')) {
-      return false;
-    }
-    if (l$maxResultCount != lOther$maxResultCount) {
-      return false;
-    }
-    final l$subscription = subscription;
-    final lOther$subscription = other.subscription;
-    if (_$data.containsKey('subscription') !=
-        other._$data.containsKey('subscription')) {
-      return false;
-    }
-    if (l$subscription != lOther$subscription) {
-      return false;
-    }
-    final l$expiresAt = expiresAt;
-    final lOther$expiresAt = other.expiresAt;
-    if (_$data.containsKey('expiresAt') !=
-        other._$data.containsKey('expiresAt')) {
-      return false;
-    }
-    if (l$expiresAt != lOther$expiresAt) {
-      return false;
-    }
-    final l$resultExpiresAt = resultExpiresAt;
-    final lOther$resultExpiresAt = other.resultExpiresAt;
-    if (_$data.containsKey('resultExpiresAt') !=
-        other._$data.containsKey('resultExpiresAt')) {
-      return false;
-    }
-    if (l$resultExpiresAt != lOther$resultExpiresAt) {
-      return false;
-    }
-    final l$startSearch = startSearch;
-    final lOther$startSearch = other.startSearch;
-    if (_$data.containsKey('startSearch') !=
-        other._$data.containsKey('startSearch')) {
-      return false;
-    }
-    if (l$startSearch != lOther$startSearch) {
-      return false;
-    }
     return true;
   }
 
   @override
   int get hashCode {
-    final l$id = id;
-    final l$adminNotes = adminNotes;
-    final l$events = events;
-    final l$metadata = metadata;
-    final l$createdAt = createdAt;
-    final l$createdBy = createdBy;
-    final l$updatedAt = updatedAt;
-    final l$updatedBy = updatedBy;
-    final l$deletedAt = deletedAt;
-    final l$deletedBy = deletedBy;
-    final l$userId = userId;
-    final l$matchingEngineId = matchingEngineId;
-    final l$name = name;
-    final l$profileType = profileType;
-    final l$viewerProfileType = viewerProfileType;
     final l$searchText = searchText;
     final l$seeksHelp = seeksHelp;
     final l$offersHelp = offersHelp;
@@ -14868,31 +15155,7 @@ class Input$UserSearchInput {
     final l$industriesTextIds = industriesTextIds;
     final l$countryTextIds = countryTextIds;
     final l$companyStagesTextIds = companyStagesTextIds;
-    final l$maxResultCount = maxResultCount;
-    final l$subscription = subscription;
-    final l$expiresAt = expiresAt;
-    final l$resultExpiresAt = resultExpiresAt;
-    final l$startSearch = startSearch;
     return Object.hashAll([
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('adminNotes') ? l$adminNotes : const {},
-      _$data.containsKey('events')
-          ? l$events == null
-              ? null
-              : Object.hashAll(l$events.map((v) => v))
-          : const {},
-      _$data.containsKey('metadata') ? l$metadata : const {},
-      _$data.containsKey('createdAt') ? l$createdAt : const {},
-      _$data.containsKey('createdBy') ? l$createdBy : const {},
-      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
-      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
-      _$data.containsKey('deletedAt') ? l$deletedAt : const {},
-      _$data.containsKey('deletedBy') ? l$deletedBy : const {},
-      _$data.containsKey('userId') ? l$userId : const {},
-      _$data.containsKey('matchingEngineId') ? l$matchingEngineId : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('profileType') ? l$profileType : const {},
-      _$data.containsKey('viewerProfileType') ? l$viewerProfileType : const {},
       _$data.containsKey('searchText') ? l$searchText : const {},
       _$data.containsKey('seeksHelp') ? l$seeksHelp : const {},
       _$data.containsKey('offersHelp') ? l$offersHelp : const {},
@@ -14921,40 +15184,20 @@ class Input$UserSearchInput {
               ? null
               : Object.hashAll(l$companyStagesTextIds.map((v) => v))
           : const {},
-      _$data.containsKey('maxResultCount') ? l$maxResultCount : const {},
-      _$data.containsKey('subscription') ? l$subscription : const {},
-      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
-      _$data.containsKey('resultExpiresAt') ? l$resultExpiresAt : const {},
-      _$data.containsKey('startSearch') ? l$startSearch : const {},
     ]);
   }
 }
 
-abstract class CopyWith$Input$UserSearchInput<TRes> {
-  factory CopyWith$Input$UserSearchInput(
-    Input$UserSearchInput instance,
-    TRes Function(Input$UserSearchInput) then,
-  ) = _CopyWithImpl$Input$UserSearchInput;
+abstract class CopyWith$Input$UserSearchFilterInput<TRes> {
+  factory CopyWith$Input$UserSearchFilterInput(
+    Input$UserSearchFilterInput instance,
+    TRes Function(Input$UserSearchFilterInput) then,
+  ) = _CopyWithImpl$Input$UserSearchFilterInput;
 
-  factory CopyWith$Input$UserSearchInput.stub(TRes res) =
-      _CopyWithStubImpl$Input$UserSearchInput;
+  factory CopyWith$Input$UserSearchFilterInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$UserSearchFilterInput;
 
   TRes call({
-    String? id,
-    String? adminNotes,
-    List<Input$ModelEventInput>? events,
-    Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
-    String? createdBy,
-    DateTime? updatedAt,
-    String? updatedBy,
-    DateTime? deletedAt,
-    String? deletedBy,
-    String? userId,
-    String? matchingEngineId,
-    String? name,
-    Enum$ProfileType? profileType,
-    Enum$ProfileType? viewerProfileType,
     String? searchText,
     Enum$UserSearchFieldPreference? seeksHelp,
     Enum$UserSearchFieldPreference? offersHelp,
@@ -14963,48 +15206,23 @@ abstract class CopyWith$Input$UserSearchInput<TRes> {
     List<String>? industriesTextIds,
     List<String>? countryTextIds,
     List<String>? companyStagesTextIds,
-    int? maxResultCount,
-    Enum$UserSearchSubscriptionType? subscription,
-    DateTime? expiresAt,
-    DateTime? resultExpiresAt,
-    bool? startSearch,
   });
-  TRes events(
-      Iterable<Input$ModelEventInput>? Function(
-              Iterable<CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
-          _fn);
-  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata;
 }
 
-class _CopyWithImpl$Input$UserSearchInput<TRes>
-    implements CopyWith$Input$UserSearchInput<TRes> {
-  _CopyWithImpl$Input$UserSearchInput(
+class _CopyWithImpl$Input$UserSearchFilterInput<TRes>
+    implements CopyWith$Input$UserSearchFilterInput<TRes> {
+  _CopyWithImpl$Input$UserSearchFilterInput(
     this._instance,
     this._then,
   );
 
-  final Input$UserSearchInput _instance;
+  final Input$UserSearchFilterInput _instance;
 
-  final TRes Function(Input$UserSearchInput) _then;
+  final TRes Function(Input$UserSearchFilterInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? id = _undefined,
-    Object? adminNotes = _undefined,
-    Object? events = _undefined,
-    Object? metadata = _undefined,
-    Object? createdAt = _undefined,
-    Object? createdBy = _undefined,
-    Object? updatedAt = _undefined,
-    Object? updatedBy = _undefined,
-    Object? deletedAt = _undefined,
-    Object? deletedBy = _undefined,
-    Object? userId = _undefined,
-    Object? matchingEngineId = _undefined,
-    Object? name = _undefined,
-    Object? profileType = _undefined,
-    Object? viewerProfileType = _undefined,
     Object? searchText = _undefined,
     Object? seeksHelp = _undefined,
     Object? offersHelp = _undefined,
@@ -15013,34 +15231,9 @@ class _CopyWithImpl$Input$UserSearchInput<TRes>
     Object? industriesTextIds = _undefined,
     Object? countryTextIds = _undefined,
     Object? companyStagesTextIds = _undefined,
-    Object? maxResultCount = _undefined,
-    Object? subscription = _undefined,
-    Object? expiresAt = _undefined,
-    Object? resultExpiresAt = _undefined,
-    Object? startSearch = _undefined,
   }) =>
-      _then(Input$UserSearchInput._({
+      _then(Input$UserSearchFilterInput._({
         ..._instance._$data,
-        if (id != _undefined) 'id': (id as String?),
-        if (adminNotes != _undefined) 'adminNotes': (adminNotes as String?),
-        if (events != _undefined)
-          'events': (events as List<Input$ModelEventInput>?),
-        if (metadata != _undefined)
-          'metadata': (metadata as Input$BaseModelMetadataInput?),
-        if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
-        if (createdBy != _undefined) 'createdBy': (createdBy as String?),
-        if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
-        if (updatedBy != _undefined) 'updatedBy': (updatedBy as String?),
-        if (deletedAt != _undefined) 'deletedAt': (deletedAt as DateTime?),
-        if (deletedBy != _undefined) 'deletedBy': (deletedBy as String?),
-        if (userId != _undefined) 'userId': (userId as String?),
-        if (matchingEngineId != _undefined)
-          'matchingEngineId': (matchingEngineId as String?),
-        if (name != _undefined) 'name': (name as String?),
-        if (profileType != _undefined)
-          'profileType': (profileType as Enum$ProfileType?),
-        if (viewerProfileType != _undefined)
-          'viewerProfileType': (viewerProfileType as Enum$ProfileType?),
         if (searchText != _undefined) 'searchText': (searchText as String?),
         if (seeksHelp != _undefined)
           'seeksHelp': (seeksHelp as Enum$UserSearchFieldPreference?),
@@ -15056,58 +15249,16 @@ class _CopyWithImpl$Input$UserSearchInput<TRes>
           'countryTextIds': (countryTextIds as List<String>),
         if (companyStagesTextIds != _undefined && companyStagesTextIds != null)
           'companyStagesTextIds': (companyStagesTextIds as List<String>),
-        if (maxResultCount != _undefined && maxResultCount != null)
-          'maxResultCount': (maxResultCount as int),
-        if (subscription != _undefined)
-          'subscription': (subscription as Enum$UserSearchSubscriptionType?),
-        if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
-        if (resultExpiresAt != _undefined)
-          'resultExpiresAt': (resultExpiresAt as DateTime?),
-        if (startSearch != _undefined && startSearch != null)
-          'startSearch': (startSearch as bool),
       }));
-  TRes events(
-          Iterable<Input$ModelEventInput>? Function(
-                  Iterable<
-                      CopyWith$Input$ModelEventInput<Input$ModelEventInput>>?)
-              _fn) =>
-      call(
-          events:
-              _fn(_instance.events?.map((e) => CopyWith$Input$ModelEventInput(
-                    e,
-                    (i) => i,
-                  )))?.toList());
-  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
-    final local$metadata = _instance.metadata;
-    return local$metadata == null
-        ? CopyWith$Input$BaseModelMetadataInput.stub(_then(_instance))
-        : CopyWith$Input$BaseModelMetadataInput(
-            local$metadata, (e) => call(metadata: e));
-  }
 }
 
-class _CopyWithStubImpl$Input$UserSearchInput<TRes>
-    implements CopyWith$Input$UserSearchInput<TRes> {
-  _CopyWithStubImpl$Input$UserSearchInput(this._res);
+class _CopyWithStubImpl$Input$UserSearchFilterInput<TRes>
+    implements CopyWith$Input$UserSearchFilterInput<TRes> {
+  _CopyWithStubImpl$Input$UserSearchFilterInput(this._res);
 
   TRes _res;
 
   call({
-    String? id,
-    String? adminNotes,
-    List<Input$ModelEventInput>? events,
-    Input$BaseModelMetadataInput? metadata,
-    DateTime? createdAt,
-    String? createdBy,
-    DateTime? updatedAt,
-    String? updatedBy,
-    DateTime? deletedAt,
-    String? deletedBy,
-    String? userId,
-    String? matchingEngineId,
-    String? name,
-    Enum$ProfileType? profileType,
-    Enum$ProfileType? viewerProfileType,
     String? searchText,
     Enum$UserSearchFieldPreference? seeksHelp,
     Enum$UserSearchFieldPreference? offersHelp,
@@ -15116,16 +15267,8 @@ class _CopyWithStubImpl$Input$UserSearchInput<TRes>
     List<String>? industriesTextIds,
     List<String>? countryTextIds,
     List<String>? companyStagesTextIds,
-    int? maxResultCount,
-    Enum$UserSearchSubscriptionType? subscription,
-    DateTime? expiresAt,
-    DateTime? resultExpiresAt,
-    bool? startSearch,
   }) =>
       _res;
-  events(_fn) => _res;
-  CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
-      CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
 
 class Input$UserSearchListFilter {
@@ -26840,35 +26983,36 @@ Enum$GroupRuleEventType fromJson$Enum$GroupRuleEventType(String value) {
   }
 }
 
-enum Enum$ProfileType { mentee, mentor, both, none, $unknown }
+enum Enum$UserSearchType {
+  search,
+  mentorRecommendation,
+  menteeRecommendation,
+  $unknown
+}
 
-String toJson$Enum$ProfileType(Enum$ProfileType e) {
+String toJson$Enum$UserSearchType(Enum$UserSearchType e) {
   switch (e) {
-    case Enum$ProfileType.mentee:
-      return r'mentee';
-    case Enum$ProfileType.mentor:
-      return r'mentor';
-    case Enum$ProfileType.both:
-      return r'both';
-    case Enum$ProfileType.none:
-      return r'none';
-    case Enum$ProfileType.$unknown:
+    case Enum$UserSearchType.search:
+      return r'search';
+    case Enum$UserSearchType.mentorRecommendation:
+      return r'mentorRecommendation';
+    case Enum$UserSearchType.menteeRecommendation:
+      return r'menteeRecommendation';
+    case Enum$UserSearchType.$unknown:
       return r'$unknown';
   }
 }
 
-Enum$ProfileType fromJson$Enum$ProfileType(String value) {
+Enum$UserSearchType fromJson$Enum$UserSearchType(String value) {
   switch (value) {
-    case r'mentee':
-      return Enum$ProfileType.mentee;
-    case r'mentor':
-      return Enum$ProfileType.mentor;
-    case r'both':
-      return Enum$ProfileType.both;
-    case r'none':
-      return Enum$ProfileType.none;
+    case r'search':
+      return Enum$UserSearchType.search;
+    case r'mentorRecommendation':
+      return Enum$UserSearchType.mentorRecommendation;
+    case r'menteeRecommendation':
+      return Enum$UserSearchType.menteeRecommendation;
     default:
-      return Enum$ProfileType.$unknown;
+      return Enum$UserSearchType.$unknown;
   }
 }
 
@@ -26939,54 +27083,6 @@ Enum$UserSearchSubscriptionType fromJson$Enum$UserSearchSubscriptionType(
   }
 }
 
-enum Enum$UserIdentType {
-  any,
-  authToken,
-  email,
-  id,
-  phoneNumber,
-  userHandle,
-  $unknown
-}
-
-String toJson$Enum$UserIdentType(Enum$UserIdentType e) {
-  switch (e) {
-    case Enum$UserIdentType.any:
-      return r'any';
-    case Enum$UserIdentType.authToken:
-      return r'authToken';
-    case Enum$UserIdentType.email:
-      return r'email';
-    case Enum$UserIdentType.id:
-      return r'id';
-    case Enum$UserIdentType.phoneNumber:
-      return r'phoneNumber';
-    case Enum$UserIdentType.userHandle:
-      return r'userHandle';
-    case Enum$UserIdentType.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum$UserIdentType fromJson$Enum$UserIdentType(String value) {
-  switch (value) {
-    case r'any':
-      return Enum$UserIdentType.any;
-    case r'authToken':
-      return Enum$UserIdentType.authToken;
-    case r'email':
-      return Enum$UserIdentType.email;
-    case r'id':
-      return Enum$UserIdentType.id;
-    case r'phoneNumber':
-      return Enum$UserIdentType.phoneNumber;
-    case r'userHandle':
-      return Enum$UserIdentType.userHandle;
-    default:
-      return Enum$UserIdentType.$unknown;
-  }
-}
-
 enum Enum$SortDirection { asc, desc, $unknown }
 
 String toJson$Enum$SortDirection(Enum$SortDirection e) {
@@ -27036,6 +27132,54 @@ Enum$IncludeFilterOption fromJson$Enum$IncludeFilterOption(String value) {
       return Enum$IncludeFilterOption.only;
     default:
       return Enum$IncludeFilterOption.$unknown;
+  }
+}
+
+enum Enum$UserIdentType {
+  any,
+  authToken,
+  email,
+  id,
+  phoneNumber,
+  userHandle,
+  $unknown
+}
+
+String toJson$Enum$UserIdentType(Enum$UserIdentType e) {
+  switch (e) {
+    case Enum$UserIdentType.any:
+      return r'any';
+    case Enum$UserIdentType.authToken:
+      return r'authToken';
+    case Enum$UserIdentType.email:
+      return r'email';
+    case Enum$UserIdentType.id:
+      return r'id';
+    case Enum$UserIdentType.phoneNumber:
+      return r'phoneNumber';
+    case Enum$UserIdentType.userHandle:
+      return r'userHandle';
+    case Enum$UserIdentType.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$UserIdentType fromJson$Enum$UserIdentType(String value) {
+  switch (value) {
+    case r'any':
+      return Enum$UserIdentType.any;
+    case r'authToken':
+      return Enum$UserIdentType.authToken;
+    case r'email':
+      return Enum$UserIdentType.email;
+    case r'id':
+      return Enum$UserIdentType.id;
+    case r'phoneNumber':
+      return Enum$UserIdentType.phoneNumber;
+    case r'userHandle':
+      return Enum$UserIdentType.userHandle;
+    default:
+      return Enum$UserIdentType.$unknown;
   }
 }
 
@@ -27603,9 +27747,11 @@ enum Enum$ServiceRequestType {
   graphQlMutationCreateUserDevice,
   graphQlMutationCreateUserRelationship,
   graphQlMutationDeleteUser,
+  graphQlMutationEndMySession,
   graphQlMutationSignInUser,
   graphQlMutationSignMeOut,
   graphQlMutationSignUpUser,
+  graphQlMutationStartMySession,
   graphQlMutationUnblockUser,
   graphQlMutationUpdateUser,
   graphQlMutationUpdateUserDevice,
@@ -27831,12 +27977,16 @@ String toJson$Enum$ServiceRequestType(Enum$ServiceRequestType e) {
       return r'graphQlMutationCreateUserRelationship';
     case Enum$ServiceRequestType.graphQlMutationDeleteUser:
       return r'graphQlMutationDeleteUser';
+    case Enum$ServiceRequestType.graphQlMutationEndMySession:
+      return r'graphQlMutationEndMySession';
     case Enum$ServiceRequestType.graphQlMutationSignInUser:
       return r'graphQlMutationSignInUser';
     case Enum$ServiceRequestType.graphQlMutationSignMeOut:
       return r'graphQlMutationSignMeOut';
     case Enum$ServiceRequestType.graphQlMutationSignUpUser:
       return r'graphQlMutationSignUpUser';
+    case Enum$ServiceRequestType.graphQlMutationStartMySession:
+      return r'graphQlMutationStartMySession';
     case Enum$ServiceRequestType.graphQlMutationUnblockUser:
       return r'graphQlMutationUnblockUser';
     case Enum$ServiceRequestType.graphQlMutationUpdateUser:
@@ -28082,12 +28232,16 @@ Enum$ServiceRequestType fromJson$Enum$ServiceRequestType(String value) {
       return Enum$ServiceRequestType.graphQlMutationCreateUserRelationship;
     case r'graphQlMutationDeleteUser':
       return Enum$ServiceRequestType.graphQlMutationDeleteUser;
+    case r'graphQlMutationEndMySession':
+      return Enum$ServiceRequestType.graphQlMutationEndMySession;
     case r'graphQlMutationSignInUser':
       return Enum$ServiceRequestType.graphQlMutationSignInUser;
     case r'graphQlMutationSignMeOut':
       return Enum$ServiceRequestType.graphQlMutationSignMeOut;
     case r'graphQlMutationSignUpUser':
       return Enum$ServiceRequestType.graphQlMutationSignUpUser;
+    case r'graphQlMutationStartMySession':
+      return Enum$ServiceRequestType.graphQlMutationStartMySession;
     case r'graphQlMutationUnblockUser':
       return Enum$ServiceRequestType.graphQlMutationUnblockUser;
     case r'graphQlMutationUpdateUser':

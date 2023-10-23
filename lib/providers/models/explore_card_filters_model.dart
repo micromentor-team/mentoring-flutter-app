@@ -79,24 +79,26 @@ class ExploreCardFiltersModel extends ChangeNotifier {
 
   Input$UserSearchInput toUserSearchInput(int maxResultsCount) {
     return Input$UserSearchInput(
-      countryTextIds:
-          _selectedCountries.isEmpty ? null : _selectedCountries.toList(),
-      expertisesTextIds:
-          _selectedExpertises.isEmpty ? null : _selectedExpertises.toList(),
+      filter: Input$UserSearchFilterInput(
+        countryTextIds:
+            _selectedCountries.isEmpty ? null : _selectedCountries.toList(),
+        expertisesTextIds:
+            _selectedExpertises.isEmpty ? null : _selectedExpertises.toList(),
+        languagesTextIds:
+            _selectedLanguages.isEmpty ? null : _selectedLanguages.toList(),
+        industriesTextIds:
+            _selectedIndustries.isEmpty ? null : _selectedIndustries.toList(),
+        companyStagesTextIds:
+            _selectedStages.isEmpty ? null : _selectedStages.toList(),
+        offersHelp: _selectedUserType == UserType.mentor
+            ? Enum$UserSearchFieldPreference.isTrue
+            : Enum$UserSearchFieldPreference.isFalse,
+        searchText: selectedKeyword,
+        seeksHelp: _selectedUserType == UserType.entrepreneur
+            ? Enum$UserSearchFieldPreference.isTrue
+            : Enum$UserSearchFieldPreference.isFalse,
+      ),
       maxResultCount: maxResultsCount,
-      languagesTextIds:
-          _selectedLanguages.isEmpty ? null : _selectedLanguages.toList(),
-      industriesTextIds:
-          _selectedIndustries.isEmpty ? null : _selectedIndustries.toList(),
-      companyStagesTextIds:
-          _selectedStages.isEmpty ? null : _selectedStages.toList(),
-      offersHelp: _selectedUserType == UserType.mentor
-          ? Enum$UserSearchFieldPreference.isTrue
-          : Enum$UserSearchFieldPreference.isFalse,
-      searchText: selectedKeyword,
-      seeksHelp: _selectedUserType == UserType.entrepreneur
-          ? Enum$UserSearchFieldPreference.isTrue
-          : Enum$UserSearchFieldPreference.isFalse,
     );
   }
 }
