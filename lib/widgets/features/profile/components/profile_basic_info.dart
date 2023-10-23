@@ -20,62 +20,71 @@ Widget _createFooter(
   ThemeData theme,
   String? company,
   String? companyRole,
-  String? education,
+  String? school,
+  String? degreeType,
   String? linkedinUrl,
 ) {
   final String companyAndRole = [
     companyRole,
     company,
   ].nonNulls.join(l10n.listSeparator);
+  final String schoolAndDegree = [
+    school,
+    degreeType,
+  ].nonNulls.join(l10n.listSeparator);
   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
     Expanded(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        if (companyAndRole.isNotEmpty)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                Icons.work_outline,
-                size: _inlineIconSize,
-                color: theme.colorScheme.secondary,
-              ),
-              const SizedBox(width: Insets.paddingExtraSmall),
-              Expanded(
-                child: Text(
-                  companyAndRole,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelSmall!.copyWith(
-                    color: theme.colorScheme.secondary,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (companyAndRole.isNotEmpty)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.work_outline,
+                  size: _inlineIconSize,
+                  color: theme.colorScheme.secondary,
+                ),
+                const SizedBox(width: Insets.paddingExtraSmall),
+                Expanded(
+                  child: Text(
+                    companyAndRole,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.labelSmall!.copyWith(
+                      color: theme.colorScheme.secondary,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        if (education != null) const SizedBox(height: Insets.paddingExtraSmall),
-        if (education != null)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                Icons.school_outlined,
-                size: _inlineIconSize,
-                color: theme.colorScheme.secondary,
-              ),
-              const SizedBox(width: Insets.paddingExtraSmall),
-              Expanded(
-                child: Text(
-                  education,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelSmall!.copyWith(
-                    color: theme.colorScheme.secondary,
+              ],
+            ),
+          if (schoolAndDegree.isNotEmpty) ...[
+            const SizedBox(height: Insets.paddingExtraSmall),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.school_outlined,
+                  size: _inlineIconSize,
+                  color: theme.colorScheme.secondary,
+                ),
+                const SizedBox(width: Insets.paddingExtraSmall),
+                Expanded(
+                  child: Text(
+                    schoolAndDegree,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.labelSmall!.copyWith(
+                      color: theme.colorScheme.secondary,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-      ]),
+              ],
+            ),
+          ],
+        ],
+      ),
     ),
     if (linkedinUrl != null)
       Container(
@@ -241,7 +250,8 @@ class ProfileBasicInfo extends StatelessWidget {
   final String? company;
   final String? companyRole;
   final List<String>? affiliations;
-  final String? education;
+  final String? school;
+  final String? degreeType;
   final String? linkedinUrl;
   final bool vacationMode;
   final Widget popupMenu;
@@ -256,7 +266,8 @@ class ProfileBasicInfo extends StatelessWidget {
     required this.fullName,
     required this.company,
     this.companyRole,
-    this.education,
+    this.school,
+    this.degreeType,
     this.linkedinUrl,
     required this.vacationMode,
     required this.popupMenu,
@@ -294,7 +305,8 @@ class ProfileBasicInfo extends StatelessWidget {
                 theme,
                 company,
                 companyRole,
-                education,
+                school,
+                degreeType,
                 linkedinUrl,
               ),
             ],

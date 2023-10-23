@@ -120,28 +120,32 @@ class UpdateUserInput {
   String? cityOfResidence;
   String? countryOfResidenceTextId;
   String? preferredLanguageTextId;
-  String? companyName;
   UserType? userType;
 
   // Entrepreneur
+  String? companyName;
   String? companyStageTextId;
   List<String>? menteeSoughtExpertisesTextIds;
   String? menteeReasonForStartingBusiness;
 
   // Mentor
-  String? jobTitle;
+  String? experienceBusinessName;
+  String? experienceJobTitle;
   List<String>? mentorExpertisesTextIds;
   String? mentorReasonForMentoring; //TODO - Implement in backend
 
   void clearEntrepreneurFields() {
+    companyName = null;
     companyStageTextId = null;
     menteeSoughtExpertisesTextIds = null;
     menteeReasonForStartingBusiness = null;
   }
 
   void clearMentorFields() {
-    jobTitle = null;
+    experienceBusinessName = null;
+    experienceJobTitle = null;
     mentorExpertisesTextIds = null;
+    mentorReasonForMentoring = null;
   }
 
   Input$UserInput toUserInput() {
@@ -157,13 +161,22 @@ class UpdateUserInput {
       cityOfResidence: cityOfResidence,
       countryOfResidenceTextId: countryOfResidenceTextId,
       preferredLanguageTextId: preferredLanguageTextId,
-      company: Input$CompanyInput(
-        name: companyName,
-        companyStageTextId: companyStageTextId,
-      ),
+      company: companyName != null
+          ? Input$CompanyInput(
+              name: companyName,
+              companyStageTextId: companyStageTextId,
+            )
+          : null,
       seeksHelp: userType == UserType.entrepreneur,
       offersHelp: userType == UserType.mentor,
-      jobTitle: jobTitle,
+      businessExperiences: experienceJobTitle != null
+          ? [
+              Input$BusinessExperienceInput(
+                jobTitle: experienceJobTitle,
+                businessName: experienceBusinessName,
+              ),
+            ]
+          : null,
     );
   }
 

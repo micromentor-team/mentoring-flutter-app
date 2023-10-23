@@ -132,10 +132,6 @@ query FindUserDetailedProfile($userId: String!) {
             }
             # we may need to add city/state/country to this model for the mentee
         }
-        educationLevel {
-            textId
-            translatedValue
-        }
         pronounsDisplay # this handles some display logic, "she/they" for a user with both "they/them" and "she/her" pronouns
         pronouns {
             textId

@@ -5186,35 +5186,6 @@ const documentNodeQueryFindUserDetailedProfile = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
-            name: NameNode(value: 'educationLevel'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'textId'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'translatedValue'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
             name: NameNode(value: 'pronounsDisplay'),
             alias: null,
             arguments: [],
@@ -5515,7 +5486,6 @@ class Query$FindUserDetailedProfile$findUserById {
     required this.groupMemberships,
     this.jobTitle,
     required this.companies,
-    this.educationLevel,
     required this.pronounsDisplay,
     required this.pronouns,
     this.businessExperiences,
@@ -5548,7 +5518,6 @@ class Query$FindUserDetailedProfile$findUserById {
     final l$groupMemberships = json['groupMemberships'];
     final l$jobTitle = json['jobTitle'];
     final l$companies = json['companies'];
-    final l$educationLevel = json['educationLevel'];
     final l$pronounsDisplay = json['pronounsDisplay'];
     final l$pronouns = json['pronouns'];
     final l$businessExperiences = json['businessExperiences'];
@@ -5595,10 +5564,6 @@ class Query$FindUserDetailedProfile$findUserById {
               Query$FindUserDetailedProfile$findUserById$companies.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
-      educationLevel: l$educationLevel == null
-          ? null
-          : Query$FindUserDetailedProfile$findUserById$educationLevel.fromJson(
-              (l$educationLevel as Map<String, dynamic>)),
       pronounsDisplay: (l$pronounsDisplay as String),
       pronouns: (l$pronouns as List<dynamic>)
           .map((e) =>
@@ -5666,9 +5631,6 @@ class Query$FindUserDetailedProfile$findUserById {
 
   final List<Query$FindUserDetailedProfile$findUserById$companies> companies;
 
-  final Query$FindUserDetailedProfile$findUserById$educationLevel?
-      educationLevel;
-
   final String pronounsDisplay;
 
   final List<Query$FindUserDetailedProfile$findUserById$pronouns> pronouns;
@@ -5733,8 +5695,6 @@ class Query$FindUserDetailedProfile$findUserById {
     _resultData['jobTitle'] = l$jobTitle;
     final l$companies = companies;
     _resultData['companies'] = l$companies.map((e) => e.toJson()).toList();
-    final l$educationLevel = educationLevel;
-    _resultData['educationLevel'] = l$educationLevel?.toJson();
     final l$pronounsDisplay = pronounsDisplay;
     _resultData['pronounsDisplay'] = l$pronounsDisplay;
     final l$pronouns = pronouns;
@@ -5783,7 +5743,6 @@ class Query$FindUserDetailedProfile$findUserById {
     final l$groupMemberships = groupMemberships;
     final l$jobTitle = jobTitle;
     final l$companies = companies;
-    final l$educationLevel = educationLevel;
     final l$pronounsDisplay = pronounsDisplay;
     final l$pronouns = pronouns;
     final l$businessExperiences = businessExperiences;
@@ -5813,7 +5772,6 @@ class Query$FindUserDetailedProfile$findUserById {
       Object.hashAll(l$groupMemberships.map((v) => v)),
       l$jobTitle,
       Object.hashAll(l$companies.map((v) => v)),
-      l$educationLevel,
       l$pronounsDisplay,
       Object.hashAll(l$pronouns.map((v) => v)),
       l$businessExperiences == null
@@ -5949,11 +5907,6 @@ class Query$FindUserDetailedProfile$findUserById {
       if (l$companies$entry != lOther$companies$entry) {
         return false;
       }
-    }
-    final l$educationLevel = educationLevel;
-    final lOther$educationLevel = other.educationLevel;
-    if (l$educationLevel != lOther$educationLevel) {
-      return false;
     }
     final l$pronounsDisplay = pronounsDisplay;
     final lOther$pronounsDisplay = other.pronounsDisplay;
@@ -6091,7 +6044,6 @@ abstract class CopyWith$Query$FindUserDetailedProfile$findUserById<TRes> {
         groupMemberships,
     String? jobTitle,
     List<Query$FindUserDetailedProfile$findUserById$companies>? companies,
-    Query$FindUserDetailedProfile$findUserById$educationLevel? educationLevel,
     String? pronounsDisplay,
     List<Query$FindUserDetailedProfile$findUserById$pronouns>? pronouns,
     List<Query$FindUserDetailedProfile$findUserById$businessExperiences>?
@@ -6135,8 +6087,6 @@ abstract class CopyWith$Query$FindUserDetailedProfile$findUserById<TRes> {
                   CopyWith$Query$FindUserDetailedProfile$findUserById$companies<
                       Query$FindUserDetailedProfile$findUserById$companies>>)
           _fn);
-  CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel<TRes>
-      get educationLevel;
   TRes pronouns(
       Iterable<Query$FindUserDetailedProfile$findUserById$pronouns> Function(
               Iterable<
@@ -6190,7 +6140,6 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
     Object? groupMemberships = _undefined,
     Object? jobTitle = _undefined,
     Object? companies = _undefined,
-    Object? educationLevel = _undefined,
     Object? pronounsDisplay = _undefined,
     Object? pronouns = _undefined,
     Object? businessExperiences = _undefined,
@@ -6252,10 +6201,6 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
             ? _instance.companies
             : (companies
                 as List<Query$FindUserDetailedProfile$findUserById$companies>),
-        educationLevel: educationLevel == _undefined
-            ? _instance.educationLevel
-            : (educationLevel
-                as Query$FindUserDetailedProfile$findUserById$educationLevel?),
         pronounsDisplay:
             pronounsDisplay == _undefined || pronounsDisplay == null
                 ? _instance.pronounsDisplay
@@ -6357,16 +6302,6 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               ))).toList());
-  CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel<TRes>
-      get educationLevel {
-    final local$educationLevel = _instance.educationLevel;
-    return local$educationLevel == null
-        ? CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel
-            .stub(_then(_instance))
-        : CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel(
-            local$educationLevel, (e) => call(educationLevel: e));
-  }
-
   TRes pronouns(
           Iterable<Query$FindUserDetailedProfile$findUserById$pronouns> Function(
                   Iterable<
@@ -6449,7 +6384,6 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById<TRes>
         groupMemberships,
     String? jobTitle,
     List<Query$FindUserDetailedProfile$findUserById$companies>? companies,
-    Query$FindUserDetailedProfile$findUserById$educationLevel? educationLevel,
     String? pronounsDisplay,
     List<Query$FindUserDetailedProfile$findUserById$pronouns>? pronouns,
     List<Query$FindUserDetailedProfile$findUserById$businessExperiences>?
@@ -6476,10 +6410,6 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById<TRes>
   spokenLanguages(_fn) => _res;
   groupMemberships(_fn) => _res;
   companies(_fn) => _res;
-  CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel<TRes>
-      get educationLevel =>
-          CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel
-              .stub(_res);
   pronouns(_fn) => _res;
   businessExperiences(_fn) => _res;
   academicExperiences(_fn) => _res;
@@ -9214,165 +9144,6 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$companies$com
         CopyWith$Query$FindUserDetailedProfile$findUserById$companies$companyStage<
             TRes> {
   _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$companies$companyStage(
-      this._res);
-
-  TRes _res;
-
-  call({
-    String? textId,
-    String? translatedValue,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$FindUserDetailedProfile$findUserById$educationLevel {
-  Query$FindUserDetailedProfile$findUserById$educationLevel({
-    required this.textId,
-    this.translatedValue,
-    this.$__typename = 'EducationLevel',
-  });
-
-  factory Query$FindUserDetailedProfile$findUserById$educationLevel.fromJson(
-      Map<String, dynamic> json) {
-    final l$textId = json['textId'];
-    final l$translatedValue = json['translatedValue'];
-    final l$$__typename = json['__typename'];
-    return Query$FindUserDetailedProfile$findUserById$educationLevel(
-      textId: (l$textId as String),
-      translatedValue: (l$translatedValue as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String textId;
-
-  final String? translatedValue;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$textId = textId;
-    _resultData['textId'] = l$textId;
-    final l$translatedValue = translatedValue;
-    _resultData['translatedValue'] = l$translatedValue;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$textId = textId;
-    final l$translatedValue = translatedValue;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$textId,
-      l$translatedValue,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$FindUserDetailedProfile$findUserById$educationLevel) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$textId = textId;
-    final lOther$textId = other.textId;
-    if (l$textId != lOther$textId) {
-      return false;
-    }
-    final l$translatedValue = translatedValue;
-    final lOther$translatedValue = other.translatedValue;
-    if (l$translatedValue != lOther$translatedValue) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$FindUserDetailedProfile$findUserById$educationLevel
-    on Query$FindUserDetailedProfile$findUserById$educationLevel {
-  CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel<
-          Query$FindUserDetailedProfile$findUserById$educationLevel>
-      get copyWith =>
-          CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel<
-    TRes> {
-  factory CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel(
-    Query$FindUserDetailedProfile$findUserById$educationLevel instance,
-    TRes Function(Query$FindUserDetailedProfile$findUserById$educationLevel)
-        then,
-  ) = _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$educationLevel;
-
-  factory CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel.stub(
-          TRes res) =
-      _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$educationLevel;
-
-  TRes call({
-    String? textId,
-    String? translatedValue,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$educationLevel<
-        TRes>
-    implements
-        CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel<
-            TRes> {
-  _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$educationLevel(
-    this._instance,
-    this._then,
-  );
-
-  final Query$FindUserDetailedProfile$findUserById$educationLevel _instance;
-
-  final TRes Function(Query$FindUserDetailedProfile$findUserById$educationLevel)
-      _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? textId = _undefined,
-    Object? translatedValue = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$FindUserDetailedProfile$findUserById$educationLevel(
-        textId: textId == _undefined || textId == null
-            ? _instance.textId
-            : (textId as String),
-        translatedValue: translatedValue == _undefined
-            ? _instance.translatedValue
-            : (translatedValue as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$educationLevel<
-        TRes>
-    implements
-        CopyWith$Query$FindUserDetailedProfile$findUserById$educationLevel<
-            TRes> {
-  _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$educationLevel(
       this._res);
 
   TRes _res;

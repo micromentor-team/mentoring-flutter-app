@@ -149,6 +149,9 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
       userData.preferredLanguage.translatedValue!,
       ...userData.spokenLanguages.nonNulls.map((e) => e.translatedValue!),
     };
+    // TODO - Business and academic experiences to show in header must be marked as such in the backend
+    final headerBusinessExperience = userData.businessExperiences?.firstOrNull;
+    final headerAcademicExperience = userData.academicExperiences?.firstOrNull;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,14 +221,15 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             avatarUrl: userData.avatarUrl,
             pronouns: userData.pronounsDisplay,
             affiliations: null, //TODO
-            company: company?.name,
-            companyRole: userData.jobTitle,
-            education: userData.educationLevel?.translatedValue,
+            company: headerBusinessExperience?.businessName,
+            companyRole: headerBusinessExperience?.jobTitle,
+            school: headerAcademicExperience?.institutionName,
+            degreeType: headerAcademicExperience?.degreeType,
             linkedinUrl: userData.websites
                 ?.where((e) => e.label == WebsiteLabels.linkedin.name)
                 .firstOrNull
                 ?.value,
-            vacationMode: true, //TODO
+            vacationMode: true, //TODO - Implement in backend
             popupMenu: UserPopupMenuButton(
               userFullName: userData.fullName!,
               userId: userData.id,
@@ -276,13 +280,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                         .map((e) => e.translatedValue!)
                         .toList() ??
                     [],
-                mentoringPreferences: const [
-                  "Weekly check-ins",
-                  "Monthly check-ins",
-                  "Informal chats",
-                  "Formal meetings",
-                  "Spot mentoring",
-                ], //TODO
+                // TODO - Mentoring preferences
                 expectations:
                     maybeMentorGroupMembership?.expectationsForMentees),
           ],
