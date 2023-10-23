@@ -277,30 +277,41 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SocialSignInButton(
-                          option: SignInOptions.facebook,
-                          onPressed: () {},
+                        const SizedBox(height: Insets.paddingMedium),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SocialSignInButton(
+                              option: SignInOptions.facebook,
+                              onPressed: () {},
+                            ),
+                            const SizedBox(width: Insets.paddingMedium),
+                            SocialSignInButton(
+                              option: SignInOptions.google,
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SocialSignInButton(
+                              option: SignInOptions.linkedin,
+                              onPressed: () {},
+                            ),
+                            const SizedBox(width: Insets.paddingMedium),
+                            SocialSignInButton(
+                              option: SignInOptions.telegram,
+                              onPressed: () {},
+                            ),
+                          ],
                         ),
                         const SizedBox(height: Insets.paddingMedium),
                         SocialSignInButton(
                           option: SignInOptions.whatsapp,
-                          onPressed: () {},
-                        ),
-                        const SizedBox(height: Insets.paddingMedium),
-                        SocialSignInButton(
-                          option: SignInOptions.linkedin,
-                          onPressed: () {},
-                        ),
-                        const SizedBox(height: Insets.paddingMedium),
-                        SocialSignInButton(
-                          option: SignInOptions.telegram,
-                          onPressed: () {},
-                        ),
-                        const SizedBox(height: Insets.paddingMedium),
-                        SocialSignInButton(
-                          option: SignInOptions.google,
                           onPressed: () {},
                         ),
                       ],

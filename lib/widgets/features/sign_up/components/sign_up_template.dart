@@ -31,6 +31,8 @@ class SignUpTemplate extends StatelessWidget {
   final VoidCallback? onNextPressed;
   final AsyncState processingState;
 
+  static const double navigationBarHeight = 88.0;
+
   const SignUpTemplate({
     super.key,
     required this.progress,
@@ -50,64 +52,71 @@ class SignUpTemplate extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Insets.paddingExtraLarge,
-                  Insets.paddingExtraLarge,
-                  Insets.paddingExtraLarge,
-                  0,
-                ),
-                child: LinearProgressIndicator(
-                  value: _signUpProgressToDouble(progress),
-                ),
-              ),
-              const SizedBox(height: Insets.paddingMedium),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.paddingExtraLarge,
-                ),
-                child: Text(
-                  title,
-                  softWrap: true,
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    color: theme.colorScheme.primary,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              const SizedBox(height: Insets.paddingLarge),
-              if (subtitle != null) ...[
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Insets.paddingExtraLarge,
-                  ),
-                  child: Text(
-                    subtitle!,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.secondary,
+        resizeToAvoidBottomInset: true,
+        body: Stack(
+          children: [
+            Positioned(
+              left: 0,
+              top: 0,
+              right: 0,
+              bottom: navigationBarHeight,
+              child: ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return LinearGradient(
+                    begin: const Alignment(0, -0.92),
+                    end: const Alignment(0, -0.87),
+                    colors: [
+                      theme.colorScheme.surface,
+                      Colors.transparent,
+                    ],
+                  ).createShader(bounds);
+                },
+                blendMode: BlendMode.dstOut,
+                child: SingleChildScrollView(
+                  clipBehavior: Clip.none,
+                  child: Padding(
+                    padding: const EdgeInsets.all(Insets.paddingExtraLarge),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: Insets.paddingLarge),
+                        LinearProgressIndicator(
+                          value: _signUpProgressToDouble(progress),
+                        ),
+                        const SizedBox(height: Insets.paddingMedium),
+                        Text(
+                          title,
+                          softWrap: true,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            color: theme.colorScheme.primary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: Insets.paddingLarge),
+                        if (subtitle != null) ...[
+                          Text(
+                            subtitle!,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              color: theme.colorScheme.secondary,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: Insets.paddingMedium),
+                        ],
+                        body,
+                      ],
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                const SizedBox(height: Insets.paddingMedium),
-              ],
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Insets.paddingExtraLarge,
-                  ),
-                  child: SingleChildScrollView(
-                    child: body,
                   ),
                 ),
               ),
-              if (showNavigationButtons)
-                Container(
-                  height: 88,
+            ),
+            if (showNavigationButtons)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  height: navigationBarHeight,
                   color: theme.colorScheme.primaryContainer,
                   child: Center(
                     child: AppUtility.widgetForAsyncState(
@@ -124,8 +133,8 @@ class SignUpTemplate extends StatelessWidget {
                     ),
                   ),
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );

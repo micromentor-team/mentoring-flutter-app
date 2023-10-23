@@ -55,25 +55,27 @@ class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
   @override
   Widget build(BuildContext context) {
     List<Widget> chipListWithPadding = [];
-    List<FilterChipWidget> chipList = [];
+
     for (int i = 0; i < widget.chips.length; i++) {
-      var chip = FilterChipWidget(
-        id: i,
-        selected: _childIsSelected.contains(i),
-        chipName: widget.chips[i].chipName,
-        textId: widget.chips[i].textId,
-        icon: widget.chips[i].icon,
-        onSelectionChanged: handleChildSelection,
+      final bool isSelected = _childIsSelected.contains(i);
+      var chip = Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Insets.paddingExtraSmall,
+        ),
+        child: FilterChipWidget(
+          id: i,
+          selected: isSelected,
+          chipName: widget.chips[i].chipName,
+          textId: widget.chips[i].textId,
+          icon: isSelected ? Icons.check_box_outlined : null,
+          onSelectionChanged: handleChildSelection,
+        ),
       );
-      chipList.add(chip);
       chipListWithPadding.add(chip);
-      var padding = const SizedBox(
-        height: Insets.paddingMedium,
-      );
-      chipListWithPadding.add(padding);
     }
 
-    return Column(
+    return Wrap(
+      alignment: WrapAlignment.center,
       children: chipListWithPadding,
     );
   }
@@ -87,15 +89,15 @@ class FilterChipWidget extends StatelessWidget {
   final bool selected;
   final Function(int chipId) onSelectionChanged;
 
-  const FilterChipWidget(
-      {Key? key,
-      required this.id,
-      required this.textId,
-      required this.chipName,
-      this.icon,
-      this.selected = false,
-      required this.onSelectionChanged})
-      : super(key: key);
+  const FilterChipWidget({
+    super.key,
+    required this.id,
+    required this.textId,
+    required this.chipName,
+    this.icon,
+    this.selected = false,
+    required this.onSelectionChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -106,15 +108,15 @@ class FilterChipWidget extends StatelessWidget {
           ? Icon(
               icon!,
               color: selected
-                  ? theme.colorScheme.onSurfaceVariant
-                  : theme.colorScheme.onSecondaryContainer,
+                  ? theme.colorScheme.onSecondaryContainer
+                  : theme.colorScheme.onSurfaceVariant,
             )
           : null,
       label: Text(chipName),
       labelStyle: theme.textTheme.labelLarge?.copyWith(
         color: selected
-            ? theme.colorScheme.onSurfaceVariant
-            : theme.colorScheme.onSecondaryContainer,
+            ? theme.colorScheme.onSecondaryContainer
+            : theme.colorScheme.onSurfaceVariant,
       ),
       selectedColor: theme.colorScheme.secondaryContainer,
       selected: selected,

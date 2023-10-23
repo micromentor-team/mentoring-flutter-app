@@ -10,7 +10,6 @@ import 'package:mm_flutter_app/widgets/features/profile/invite_to_connect.dart';
 import 'package:mm_flutter_app/widgets/features/profile/profile.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/sign_up_birth_year.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/sign_up_credentials.dart';
-import 'package:mm_flutter_app/widgets/features/welcome/select_language.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
@@ -74,17 +73,6 @@ class AppRouter {
               key: state.pageKey,
               maintainState: false,
               child: const WelcomeScreen(),
-            );
-          },
-        ),
-        GoRoute(
-          path: Routes.selectLanguage.path,
-          name: Routes.selectLanguage.name,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return MaterialPage(
-              key: state.pageKey,
-              maintainState: false,
-              child: const SelectLanguageScreen(),
             );
           },
         ),

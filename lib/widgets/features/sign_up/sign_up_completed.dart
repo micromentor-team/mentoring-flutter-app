@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/features/sign_up/components/sign_up_bottom_buttons.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
@@ -135,10 +137,19 @@ class _SignupCompletedScreenState extends State<SignupCompletedScreen> {
                           () => _acceptedTerms = value ?? false,
                         ),
                       ),
-                      title: Text(
-                        l10n.signupCompletedTerms,
-                        style: contentTextStyle?.copyWith(
-                            fontWeight: FontWeight.bold),
+                      title: MarkdownBody(
+                        data: l10n.signupMethodSubtitle,
+                        styleSheet:
+                            MarkdownStyleSheet.fromTheme(theme).copyWith(
+                          p: contentTextStyle?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          a: contentTextStyle?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        onTapLink: (_, url, __) => launchUrl(Uri.parse(url!)),
                       ),
                     ),
                     const SizedBox(height: Insets.paddingExtraLarge),

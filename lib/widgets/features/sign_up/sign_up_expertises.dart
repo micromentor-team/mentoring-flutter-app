@@ -58,15 +58,11 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
       subtitle: _isEntrepreneur
           ? l10n.signupExpertisesEntrepreneurSubtitle
           : l10n.signupExpertisesMentorSubtitle,
-      body: Column(
-        children: [
-          CreateMultiSelectChips(
-            chips: _expertiseChips,
-            maxSelection: maxSelections,
-            onSelectedChipsChanged: (chips) =>
-                setState(() => _selectedChips = chips),
-          ),
-        ],
+      body: CreateMultiSelectChips(
+        chips: _expertiseChips,
+        maxSelection: maxSelections,
+        onSelectedChipsChanged: (chips) =>
+            setState(() => _selectedChips = chips),
       ),
       isNextEnabled: _selectedChips.isNotEmpty,
       onNextPressed: () {
