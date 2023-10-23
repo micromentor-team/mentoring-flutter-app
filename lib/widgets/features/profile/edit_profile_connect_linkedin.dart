@@ -69,12 +69,14 @@ class _EditConnectLinkedInScreenState extends State<EditConnectLinkedInScreen>
       editUserProfile: () => _userProvider.updateUserData(
         input: Input$UserInput(
           id: widget.userData.id,
-          websites: [
-            Input$LabeledStringValueInput(
-              label: WebsiteLabels.linkedin.name,
-              value: _linkedInUrl,
-            ),
-          ],
+          websites: _linkedInUrl != null
+              ? [
+                  Input$LabeledStringValueInput(
+                    label: WebsiteLabels.linkedin.name,
+                    value: _linkedInUrl,
+                  ),
+                ]
+              : null,
         ),
       ),
     );

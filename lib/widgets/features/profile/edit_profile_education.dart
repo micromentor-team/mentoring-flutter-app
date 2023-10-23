@@ -156,12 +156,31 @@ class _EditEducationScreenState extends State<EditEducationScreen>
           ],
         ),
       ),
-      editUserProfile: widget.experienceIndex == null
-          ? () => _userProvider.updateUserData(
-                input: Input$UserInput(
-                  id: widget.userData.id,
-                  academicExperiences: [
-                    Input$AcademicExperienceInput(
+      editUserProfile: _schoolController.text.isEmpty
+          ? null
+          : widget.experienceIndex == null
+              ? () => _userProvider.updateUserData(
+                    input: Input$UserInput(
+                      id: widget.userData.id,
+                      academicExperiences: [
+                        Input$AcademicExperienceInput(
+                          institutionName: _school,
+                          degreeType: _degree,
+                          fieldOfStudy: _field,
+                          startDate: _startDate?.isNotEmpty ?? false
+                              ? DateTime(int.parse(_startDate!)).toUtc()
+                              : null,
+                          endDate: _endDate?.isNotEmpty ?? false
+                              ? DateTime(int.parse(_endDate!)).toUtc()
+                              : null,
+                        ),
+                      ],
+                    ),
+                  )
+              : () => _userProvider.updateAcademicExperience(
+                    input: Input$AcademicExperienceInput(
+                      id: widget.userData
+                          .academicExperiences![widget.experienceIndex!].id,
                       institutionName: _school,
                       degreeType: _degree,
                       fieldOfStudy: _field,
@@ -172,24 +191,7 @@ class _EditEducationScreenState extends State<EditEducationScreen>
                           ? DateTime(int.parse(_endDate!)).toUtc()
                           : null,
                     ),
-                  ],
-                ),
-              )
-          : () => _userProvider.updateAcademicExperience(
-                input: Input$AcademicExperienceInput(
-                  id: widget.userData
-                      .businessExperiences![widget.experienceIndex!].id,
-                  institutionName: _school,
-                  degreeType: _degree,
-                  fieldOfStudy: _field,
-                  startDate: _startDate?.isNotEmpty ?? false
-                      ? DateTime(int.parse(_startDate!)).toUtc()
-                      : null,
-                  endDate: _endDate?.isNotEmpty ?? false
-                      ? DateTime(int.parse(_endDate!)).toUtc()
-                      : null,
-                ),
-              ),
+                  ),
     );
   }
 }

@@ -9,7 +9,7 @@ class EditTemplate extends StatelessWidget {
   final String? subtitle;
   final Widget body;
   final void Function(void Function(ScaffoldModel)) scaffoldBuilder;
-  final Future Function() editUserProfile;
+  final Future Function()? editUserProfile;
 
   const EditTemplate({
     super.key,
@@ -17,7 +17,7 @@ class EditTemplate extends StatelessWidget {
     this.subtitle,
     required this.body,
     required this.scaffoldBuilder,
-    required this.editUserProfile,
+    this.editUserProfile,
   });
 
   @override
@@ -29,7 +29,9 @@ class EditTemplate extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () async {
-              await editUserProfile();
+              if (editUserProfile != null) {
+                await editUserProfile!();
+              }
               router.pop();
             },
             icon: Icon(

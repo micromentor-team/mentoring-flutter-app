@@ -170,12 +170,33 @@ class _EditExperienceScreenState extends State<EditExperienceScreen>
           ],
         ),
       ),
-      editUserProfile: widget.experienceIndex == null
-          ? () => _userProvider.updateUserData(
-                input: Input$UserInput(
-                  id: widget.userData.id,
-                  businessExperiences: [
-                    Input$BusinessExperienceInput(
+      editUserProfile: _roleController.text.isEmpty ||
+              _companyController.text.isEmpty
+          ? null
+          : widget.experienceIndex == null
+              ? () => _userProvider.updateUserData(
+                    input: Input$UserInput(
+                      id: widget.userData.id,
+                      businessExperiences: [
+                        Input$BusinessExperienceInput(
+                          jobTitle: _role,
+                          businessName: _company,
+                          city: _location, //TODO - Set state too
+                          startDate: _startDate?.isNotEmpty ?? false
+                              ? DateTime(int.parse(_startDate!)).toUtc()
+                              : null,
+                          endDate:
+                              (_endDate?.isNotEmpty ?? false) && !_isCurrentRole
+                                  ? DateTime(int.parse(_endDate!)).toUtc()
+                                  : null,
+                        ),
+                      ],
+                    ),
+                  )
+              : () => _userProvider.updateBusinessExperience(
+                    input: Input$BusinessExperienceInput(
+                      id: widget.userData
+                          .businessExperiences![widget.experienceIndex!].id,
                       jobTitle: _role,
                       businessName: _company,
                       city: _location, //TODO - Set state too
@@ -187,24 +208,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen>
                               ? DateTime(int.parse(_endDate!)).toUtc()
                               : null,
                     ),
-                  ],
-                ),
-              )
-          : () => _userProvider.updateBusinessExperience(
-                input: Input$BusinessExperienceInput(
-                  id: widget.userData
-                      .businessExperiences![widget.experienceIndex!].id,
-                  jobTitle: _role,
-                  businessName: _company,
-                  city: _location, //TODO - Set state too
-                  startDate: _startDate?.isNotEmpty ?? false
-                      ? DateTime(int.parse(_startDate!)).toUtc()
-                      : null,
-                  endDate: (_endDate?.isNotEmpty ?? false) && !_isCurrentRole
-                      ? DateTime(int.parse(_endDate!)).toUtc()
-                      : null,
-                ),
-              ),
+                  ),
     );
   }
 }
