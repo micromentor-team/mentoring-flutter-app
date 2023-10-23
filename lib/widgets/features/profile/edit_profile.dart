@@ -152,13 +152,7 @@ class EditProfileContent extends StatelessWidget {
                     .map((e) => e.translatedValue!)
                     .toList() ??
                 [],
-            mentoringPreferences: const [
-              "Weekly check-ins",
-              "Monthly check-ins",
-              "Informal chats",
-              "Formal meetings",
-              "Spot mentoring",
-            ], //TODO
+            mentoringPreferences: const [], //TODO
           ),
           const Divider(),
         ],
@@ -169,8 +163,8 @@ class EditProfileContent extends StatelessWidget {
               name: company.name,
               website: company.websites?.first.value,
               stage: company.companyStage?.translatedValue,
-              city: "Washington D.C.", //TODO
-              country: "USA", //TODO
+              city: null, //TODO
+              country: null, //TODO
               industry: maybeMenteeGroupMembership?.industry?.translatedValue,
               expertisesSought: maybeMenteeGroupMembership?.soughtExpertises
                       .map((e) => e.translatedValue!)

@@ -252,8 +252,8 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 name: company.name,
                 website: company.websites?.first.value,
                 stage: company.companyStage?.translatedValue,
-                city: "Washington D.C.", //TODO
-                country: "USA", //TODO
+                city: null, //TODO
+                country: null, //TODO
                 industry: maybeMenteeGroupMembership?.industry?.translatedValue,
                 expertisesSought: maybeMenteeGroupMembership?.soughtExpertises
                         .map((e) => e.translatedValue!)
