@@ -1,10 +1,18 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  double _dotIndicatorIndex = 0; //TODO: Use this to change picture and text
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Text(
                 l10n.welcomeSubtitle,
-                style: theme.textTheme.titleSmall?.copyWith(
+                style: theme.textTheme.titleMedium?.copyWith(
                   color: theme.colorScheme.outline,
                 ),
               ),
@@ -57,61 +65,60 @@ class WelcomeScreen extends StatelessWidget {
                   child: Text(
                     l10n.welcomePreviewSlide1,
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium?.copyWith(
+                    style: theme.textTheme.bodyLarge?.copyWith(
                       color: theme.colorScheme.outline,
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: Insets.paddingMedium),
-              Padding(
-                padding: const EdgeInsets.all(Insets.paddingSmall),
-                child: ElevatedButton(
-                  style: ButtonStyles.primaryRoundedRectangleButton(context),
-                  onPressed: () {
-                    context.push(Routes.signup.path);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0, vertical: 4.0),
-                    child: Text(
-                      l10n.welcomeButtonLabel,
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onPrimary,
-                      ),
+              DotsIndicator(
+                dotsCount: 3,
+                position: _dotIndicatorIndex,
+                decorator: DotsDecorator(
+                  activeColor: theme.colorScheme.primary,
+                  color: theme.colorScheme.outline,
+                  activeSize: const Size.fromRadius(6),
+                ),
+                onTap: (position) =>
+                    setState(() => _dotIndicatorIndex = position),
+              ),
+              const SizedBox(height: Insets.paddingMedium),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: Insets.paddingMedium,
+                    horizontal: Insets.paddingExtraLarge,
+                  ),
+                ),
+                onPressed: () {
+                  context.push(Routes.signup.path);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Insets.paddingExtraLarge,
+                  ),
+                  child: Text(
+                    l10n.welcomeButtonLabel,
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: theme.colorScheme.onPrimary,
                     ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(Insets.paddingSmall),
-                child: InkWell(
-                  child: Text(
-                    l10n.welcomeLoginPrompt,
-                    style: TextStyle(
-                      color: theme.colorScheme.primary,
-                      decoration: TextDecoration.underline,
-                    ),
+              const SizedBox(height: Insets.paddingExtraLarge),
+              InkWell(
+                child: Text(
+                  l10n.welcomeLoginPrompt,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: theme.colorScheme.primary,
+                    decoration: TextDecoration.underline,
                   ),
-                  onTap: () {
-                    context.push(Routes.signin.path);
-                  },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(Insets.paddingSmall),
-                child: InkWell(
-                  child: Text(
-                    l10n.welcomeChangeLanguagePrompt,
-                    style: TextStyle(
-                      color: theme.colorScheme.primary,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                  onTap: () {
-                    context.push(Routes.selectLanguage.path);
-                  },
-                ),
+                onTap: () {
+                  context.push(Routes.signin.path);
+                },
               ),
             ],
           ),
