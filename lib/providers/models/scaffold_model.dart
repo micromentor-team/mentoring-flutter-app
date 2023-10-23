@@ -9,15 +9,18 @@ import '../../constants/app_constants.dart';
 class ScaffoldModel extends ChangeNotifier {
   AppBar? _appBar;
   Drawer? _drawer;
+  bool _hideNavBar = false;
 
   AppBar? get appBar => _appBar;
   Drawer? get drawer => _drawer;
+  bool get hideNavBar => _hideNavBar;
 
   ScaffoldModel({required BuildContext context});
 
-  void setParams({AppBar? appBar, Drawer? drawer}) {
+  void setParams({AppBar? appBar, Drawer? drawer, bool hideNavBar = false}) {
     _appBar = appBar;
     _drawer = drawer;
+    _hideNavBar = hideNavBar;
     if (hasListeners) {
       notifyListeners();
     }
@@ -26,6 +29,7 @@ class ScaffoldModel extends ChangeNotifier {
   void clear() {
     _appBar = null;
     _drawer = null;
+    _hideNavBar = false;
     if (hasListeners) {
       notifyListeners();
     }

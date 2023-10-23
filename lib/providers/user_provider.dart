@@ -317,6 +317,59 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     return result;
   }
 
+  Future<OperationResult<void>> updateAcademicExperience({
+    required Input$AcademicExperienceInput input,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateAcademicExperience,
+        fetchPolicy: FetchPolicy.noCache,
+        variables:
+            Variables$Mutation$UpdateAcademicExperience(input: input).toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
+  Future<OperationResult<void>> updateBusinessExperience({
+    required Input$BusinessExperienceInput input,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateBusinessExperience,
+        fetchPolicy: FetchPolicy.noCache,
+        variables:
+            Variables$Mutation$UpdateBusinessExperience(input: input).toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
+  Future<OperationResult<void>> updateCompany({
+    required Input$CompanyInput input,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateCompany,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateCompany(input: input).toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
   Future<OperationResult<void>> updateMenteesGroupMembership({
     required Input$MenteesGroupMembershipInput input,
   }) async {

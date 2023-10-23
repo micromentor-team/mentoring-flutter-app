@@ -185,6 +185,10 @@ class Routes {
     name: 'profileEditEducation',
     path: '${profileEdit.path}/education',
   );
+  static Route profileEditEducationIndex = Route(
+    name: 'profileEditEducationIndex',
+    path: '${profileEdit.path}/education/:${RouteParams.experienceIndex}',
+  );
   static Route profileEditEducationNew = Route(
     name: 'profileEditEducationNew',
     path: '${profileEdit.path}/newEducation',
@@ -192,6 +196,10 @@ class Routes {
   static Route profileEditExperience = Route(
     name: 'profileEditExperience',
     path: '${profileEdit.path}/experience',
+  );
+  static Route profileEditExperienceIndex = Route(
+    name: 'profileEditExperienceIndex',
+    path: '${profileEdit.path}/experience/:${RouteParams.experienceIndex}',
   );
   static Route profileEditExperienceNew = Route(
     name: 'profileEditExperienceNew',
@@ -245,4 +253,5 @@ class RouteParams {
   static const String channelInvitationId = 'channelInvitationId';
   static const String userId = 'userId';
   static const String nextRouteName = 'nextRouteName';
+  static const String experienceIndex = 'experienceIndex';
 }

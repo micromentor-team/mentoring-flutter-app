@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:provider/provider.dart';
 
-import '../../../utilities/debug_logger.dart';
+import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
 class EditCurrentLocationScreen extends StatefulWidget {
-  const EditCurrentLocationScreen({Key? key}) : super(key: key);
+  final UserDetailedProfile userData;
+
+  const EditCurrentLocationScreen({
+    super.key,
+    required this.userData,
+  });
 
   @override
   State<EditCurrentLocationScreen> createState() =>
@@ -16,8 +23,18 @@ class EditCurrentLocationScreen extends StatefulWidget {
 
 class _EditCurrentLocationScreenState extends State<EditCurrentLocationScreen>
     with NavigationMixin<EditCurrentLocationScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
+  late final UserProvider _userProvider;
+  late final TextEditingController _textEditingController;
   String? _currentLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _textEditingController = TextEditingController(
+      text: widget.userData.cityOfResidence, //TODO - Use region and country too
+    );
+  }
 
   @override
   void dispose() {
@@ -43,8 +60,13 @@ class _EditCurrentLocationScreenState extends State<EditCurrentLocationScreen>
             setState(() {
               _currentLocation = value;
             });
-            DebugLogger.info(_currentLocation ?? ""); //TODO
           },
+        ),
+      ),
+      editUserProfile: () => _userProvider.updateUserData(
+        input: Input$UserInput(
+          id: widget.userData.id,
+          cityOfResidence: _currentLocation, //TODO - Use region and country too
         ),
       ),
     );

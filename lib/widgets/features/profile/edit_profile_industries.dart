@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/content_provider.dart';
-import '../../../utilities/debug_logger.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/multi_select_chips.dart';
 import 'components/edit_template.dart';
 
 class EditIndustriesScreen extends StatefulWidget {
+  final UserDetailedProfile userData;
+
   const EditIndustriesScreen({
     super.key,
+    required this.userData,
   });
 
   @override
@@ -26,6 +30,7 @@ class _EditIndustriesScreenState extends State<EditIndustriesScreen>
   late final List<SelectChip> _industryChips;
   late final bool _isEntrepreneur;
   late final int _maxSelections;
+  late final List<SelectChip> _initialValues;
 
   List<SelectChip> _selectedChips = [];
 
@@ -47,6 +52,32 @@ class _EditIndustriesScreenState extends State<EditIndustriesScreen>
     _maxSelections = _isEntrepreneur
         ? Limits.profileEntrepreneurIndustryMaxSize
         : Limits.profileMentorIndustryMaxSize;
+
+    // Set preselected industries
+    final maybeMentorGroupMembership = widget.userData.groupMemberships
+        .where((g) => g.groupIdent == GroupIdent.mentors.name)
+        .firstOrNull
+        ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null);
+    final maybeMenteeGroupMembership = widget.userData.groupMemberships
+        .where((g) => g.groupIdent == GroupIdent.mentees.name)
+        .firstOrNull
+        ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
+    if (_isEntrepreneur) {
+      _initialValues = maybeMenteeGroupMembership!.industry != null
+          ? [
+              SelectChip(
+                chipName: maybeMenteeGroupMembership.industry!.translatedValue!,
+                textId: maybeMenteeGroupMembership.industry!.textId,
+              )
+            ]
+          : [];
+    } else {
+      _initialValues = maybeMentorGroupMembership!.industries
+          .map(
+            (e) => SelectChip(chipName: e.translatedValue!, textId: e.textId),
+          )
+          .toList();
+    }
   }
 
   @override
@@ -66,9 +97,28 @@ class _EditIndustriesScreenState extends State<EditIndustriesScreen>
         maxSelection: _maxSelections,
         onSelectedChipsChanged: (chips) {
           setState(() => _selectedChips = chips);
-          DebugLogger.info(_selectedChips.toString()); //TODO
         },
+        initialSelection: _initialValues,
       ),
+      editUserProfile: _isEntrepreneur
+          ? () => _userProvider.updateMenteesGroupMembership(
+                input: Input$MenteesGroupMembershipInput(
+                  id: widget.userData.groupMemberships
+                      .firstWhere(
+                          (g) => g.groupIdent == GroupIdent.mentees.name)
+                      .id,
+                  industryTextId: _selectedChips.firstOrNull?.textId,
+                ),
+              )
+          : () => _userProvider.updateMentorsGroupMembership(
+                input: Input$MentorsGroupMembershipInput(
+                    id: widget.userData.groupMemberships
+                        .firstWhere(
+                            (g) => g.groupIdent == GroupIdent.mentors.name)
+                        .id,
+                    industriesTextIds:
+                        _selectedChips.map((e) => e.textId).toList()),
+              ),
     );
   }
 }

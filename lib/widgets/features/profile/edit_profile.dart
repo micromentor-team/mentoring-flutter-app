@@ -119,28 +119,31 @@ class EditProfileContent extends StatelessWidget {
         ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
 
     final company = userData.companies.firstOrNull;
-    return Column(children: [
-      EditProfileAboutMe(
-        pronouns: userData.pronounsDisplay,
-        regionOfResidence: userData.regionOfResidence,
-        cityOfResidence: userData.cityOfResidence,
-        countryOfResidence: userData.countryOfResidence?.translatedValue,
-        regionFrom: userData.regionOfOrigin,
-        cityFrom: userData.cityOfOrigin,
-        countryFrom: userData.countryOfOrigin?.translatedValue,
-        linkedinUrl: userData.websites
-            ?.where((e) => e.label == WebsiteLabels.linkedin.name)
-            .firstOrNull
-            ?.value,
-        preferredLanguage: userData.preferredLanguage.translatedValue,
-        spokenLanguages: userData.spokenLanguages
-            .map((e) => e.translatedValue)
-            .nonNulls
-            .toList(),
-      ),
-      const Divider(),
-      if (userData.offersHelp) ...[
-        EditProfileHowCanIHelp(
+    return Column(
+      children: [
+        EditProfileAboutMe(
+          userData: userData,
+          pronouns: userData.pronounsDisplay,
+          regionOfResidence: userData.regionOfResidence,
+          cityOfResidence: userData.cityOfResidence,
+          countryOfResidence: userData.countryOfResidence?.translatedValue,
+          regionFrom: userData.regionOfOrigin,
+          cityFrom: userData.cityOfOrigin,
+          countryFrom: userData.countryOfOrigin?.translatedValue,
+          linkedinUrl: userData.websites
+              ?.where((e) => e.label == WebsiteLabels.linkedin.name)
+              .firstOrNull
+              ?.value,
+          preferredLanguage: userData.preferredLanguage.translatedValue,
+          spokenLanguages: userData.spokenLanguages
+              .map((e) => e.translatedValue)
+              .nonNulls
+              .toList(),
+        ),
+        const Divider(),
+        if (userData.offersHelp) ...[
+          EditProfileHowCanIHelp(
+            userData: userData,
             expertises: maybeMentorGroupMembership?.expertises
                     .map((e) => e.translatedValue!)
                     .toList() ??
@@ -156,57 +159,62 @@ class EditProfileContent extends StatelessWidget {
               "Formal meetings",
               "Spot mentoring",
             ], //TODO
-            expectations: maybeMentorGroupMembership?.expectationsForMentees),
-        const Divider(),
-      ],
-      if (userData.seeksHelp && company != null) ...[
-        EditProfileAboutMyBusiness(
+          ),
+          const Divider(),
+        ],
+        if (userData.seeksHelp && company != null) ...[
+          EditProfileAboutMyBusiness(
+            userData: userData,
             companyInput: CompanyInput(
-          name: company.name,
-          website: company.websites?.first.value,
-          stage: company.companyStage?.translatedValue,
-          city: "Washington D.C.", //TODO
-          country: "USA", //TODO
-          industry: maybeMenteeGroupMembership?.industry?.translatedValue,
-          expertisesSought: maybeMenteeGroupMembership?.soughtExpertises
-                  .map((e) => e.translatedValue!)
-                  .toList() ??
-              [],
-          mission: company.description,
-          imageUrls: [
-            "https://st2.depositphotos.com/1326558/7163/i/600/depositphotos_71632883-stock-photo-mexican-tacos-with-meat-vegetables.jpg",
-            "https://st3.depositphotos.com/13349494/32631/i/600/depositphotos_326317470-stock-photo-cropped-view-man-adding-minced.jpg",
-          ], //TODO
-          motivation: maybeMenteeGroupMembership?.reasonsForStartingBusiness,
-        )),
-        const Divider(),
-      ],
-      EditProfileExperienceAndEducation(
-        experience: userData.businessExperiences
-                ?.map(
-                  (e) => ExperienceInput(
-                    position: e.jobTitle,
-                    companyName: e.businessName,
-                    start: e.startDate,
-                    end: e.endDate,
-                    city: e.city,
-                    state: e.state,
-                    country: e.country,
-                  ),
-                )
-                .toList() ??
-            [],
-        education: userData.academicExperiences
-                ?.map((e) => EducationInput(
-                      schoolName: e.institutionName,
+              name: company.name,
+              website: company.websites?.first.value,
+              stage: company.companyStage?.translatedValue,
+              city: "Washington D.C.", //TODO
+              country: "USA", //TODO
+              industry: maybeMenteeGroupMembership?.industry?.translatedValue,
+              expertisesSought: maybeMenteeGroupMembership?.soughtExpertises
+                      .map((e) => e.translatedValue!)
+                      .toList() ??
+                  [],
+              mission: company.description,
+              imageUrls: [
+                "https://st2.depositphotos.com/1326558/7163/i/600/depositphotos_71632883-stock-photo-mexican-tacos-with-meat-vegetables.jpg",
+                "https://st3.depositphotos.com/13349494/32631/i/600/depositphotos_326317470-stock-photo-cropped-view-man-adding-minced.jpg",
+              ], //TODO
+              motivation:
+                  maybeMenteeGroupMembership?.reasonsForStartingBusiness,
+            ),
+          ),
+          const Divider(),
+        ],
+        EditProfileExperienceAndEducation(
+          userData: userData,
+          experience: userData.businessExperiences
+                  ?.map(
+                    (e) => ExperienceInput(
+                      position: e.jobTitle,
+                      companyName: e.businessName,
                       start: e.startDate,
                       end: e.endDate,
-                      title: e.degreeType,
-                      major: e.fieldOfStudy,
-                    ))
-                .toList() ??
-            [],
-      ),
-    ]);
+                      city: e.city,
+                      state: e.state,
+                      country: e.country,
+                    ),
+                  )
+                  .toList() ??
+              [],
+          education: userData.academicExperiences
+                  ?.map((e) => EducationInput(
+                        schoolName: e.institutionName,
+                        start: e.startDate,
+                        end: e.endDate,
+                        title: e.degreeType,
+                        major: e.fieldOfStudy,
+                      ))
+                  .toList() ??
+              [],
+        ),
+      ],
+    );
   }
 }

@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
+import 'package:provider/provider.dart';
 
-import '../../../utilities/debug_logger.dart';
+import '../../../providers/user_provider.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
 class EditCompanyMissionScreen extends StatefulWidget {
-  const EditCompanyMissionScreen({Key? key}) : super(key: key);
+  final UserDetailedProfile userData;
+
+  const EditCompanyMissionScreen({
+    super.key,
+    required this.userData,
+  });
 
   @override
   State<EditCompanyMissionScreen> createState() =>
@@ -16,8 +23,18 @@ class EditCompanyMissionScreen extends StatefulWidget {
 
 class _EditCompanyMissionScreenState extends State<EditCompanyMissionScreen>
     with NavigationMixin<EditCompanyMissionScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
+  late final UserProvider _userProvider;
+  late final TextEditingController _textEditingController;
   String? _companyMission;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _textEditingController = TextEditingController(
+      text: widget.userData.companies.firstOrNull?.description,
+    );
+  }
 
   @override
   void dispose() {
@@ -43,8 +60,13 @@ class _EditCompanyMissionScreenState extends State<EditCompanyMissionScreen>
             setState(() {
               _companyMission = value;
             });
-            DebugLogger.info(_companyMission ?? ""); //TODO
           },
+        ),
+      ),
+      editUserProfile: () => _userProvider.updateCompany(
+        input: Input$CompanyInput(
+          id: widget.userData.companies.firstOrNull?.id,
+          description: _companyMission,
         ),
       ),
     );

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/content_provider.dart';
+import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../sign_up/components/checkbox_list_and_form.dart';
 import 'components/edit_template.dart';
 
 class EditProfilePronounsScreen extends StatefulWidget {
-  const EditProfilePronounsScreen({Key? key}) : super(key: key);
+  final UserDetailedProfile userData;
+
+  const EditProfilePronounsScreen({
+    super.key,
+    required this.userData,
+  });
 
   @override
   State<EditProfilePronounsScreen> createState() =>
@@ -17,13 +24,16 @@ class EditProfilePronounsScreen extends StatefulWidget {
 
 class _EditProfilePronounsScreenState extends State<EditProfilePronounsScreen>
     with NavigationMixin<EditProfilePronounsScreen> {
+  late final UserProvider _userProvider;
   late final ContentProvider _contentProvider;
   final List<String> _selections = List.empty(growable: true);
 
   @override
   void initState() {
     super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _selections.addAll(widget.userData.pronouns.map((e) => e.textId));
   }
 
   List<LabeledCheckbox> _createCheckboxes() {
@@ -65,6 +75,12 @@ class _EditProfilePronounsScreenState extends State<EditProfilePronounsScreen>
         children: [
           ..._createCheckboxes(),
         ],
+      ),
+      editUserProfile: () => _userProvider.updateUserData(
+        input: Input$UserInput(
+          id: widget.userData.id,
+          pronounsTextIds: _selections,
+        ),
       ),
     );
   }

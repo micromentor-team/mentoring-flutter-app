@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 
 class EditProfileAboutMe extends StatelessWidget {
+  final UserDetailedProfile userData;
   final String? pronouns;
   final String? regionOfResidence;
   final String? cityOfResidence;
@@ -17,6 +19,7 @@ class EditProfileAboutMe extends StatelessWidget {
 
   const EditProfileAboutMe({
     super.key,
+    required this.userData,
     this.pronouns,
     this.regionOfResidence,
     this.cityOfResidence,
@@ -48,7 +51,10 @@ class EditProfileAboutMe extends StatelessWidget {
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
                 if (nextPath != null) {
-                  context.push(nextPath);
+                  context.push(
+                    nextPath,
+                    extra: userData,
+                  );
                 }
               },
             ),
@@ -84,7 +90,10 @@ class EditProfileAboutMe extends StatelessWidget {
         icon: const Icon(Icons.navigate_next),
         onPressed: () {
           if (nextPath != null) {
-            context.push(nextPath);
+            context.push(
+              nextPath,
+              extra: userData,
+            );
           }
         },
       ),

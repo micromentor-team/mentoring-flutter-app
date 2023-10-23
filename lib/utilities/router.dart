@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/features/explore/explore_advanced_filters.dart';
 import 'package:mm_flutter_app/widgets/features/explore/explore_filters.dart';
 import 'package:mm_flutter_app/widgets/features/inbox/inbox_invites_received.dart';
@@ -471,10 +472,13 @@ class AppRouter {
           path: Routes.profileEditPronouns.path,
           name: Routes.profileEditPronouns.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditProfilePronounsScreen(),
+              child: EditProfilePronounsScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -482,10 +486,13 @@ class AppRouter {
           path: Routes.profileEditLinkedin.path,
           name: Routes.profileEditLinkedin.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditConnectLinkedInScreen(),
+              child: EditConnectLinkedInScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -493,10 +500,13 @@ class AppRouter {
           path: Routes.profileEditCurrentLocation.path,
           name: Routes.profileEditCurrentLocation.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditCurrentLocationScreen(),
+              child: EditCurrentLocationScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -504,10 +514,13 @@ class AppRouter {
           path: Routes.profileEditOriginLocation.path,
           name: Routes.profileEditOriginLocation.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditOriginLocationScreen(),
+              child: EditOriginLocationScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -515,10 +528,13 @@ class AppRouter {
           path: Routes.profileEditLanguagePreferred.path,
           name: Routes.profileEditLanguagePreferred.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditPreferredLanguageScreen(),
+              child: EditPreferredLanguageScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -526,22 +542,30 @@ class AppRouter {
           path: Routes.profileEditLanguageOthers.path,
           name: Routes.profileEditLanguageOthers.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditOtherLanguagesScreen(),
+              child: EditOtherLanguagesScreen(
+                userData: userData,
+              ),
             );
           },
         ),
         GoRoute(
-          path: Routes.profileEditEducation.path,
-          name: Routes.profileEditEducation.name,
+          path: Routes.profileEditEducationIndex.path,
+          name: Routes.profileEditEducationIndex.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
+            final int experienceIndex = int.parse(
+              state.pathParameters[RouteParams.experienceIndex]!,
+            );
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditEducationScreen(
-                isNewEducation: false,
+              child: EditEducationScreen(
+                userData: userData,
+                experienceIndex: experienceIndex,
               ),
             );
           },
@@ -550,24 +574,30 @@ class AppRouter {
           path: Routes.profileEditEducationNew.path,
           name: Routes.profileEditEducationNew.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditEducationScreen(
-                isNewEducation: true,
+              child: EditEducationScreen(
+                userData: userData,
               ),
             );
           },
         ),
         GoRoute(
-          path: Routes.profileEditExperience.path,
-          name: Routes.profileEditExperience.name,
+          path: Routes.profileEditExperienceIndex.path,
+          name: Routes.profileEditExperienceIndex.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
+            final int experienceIndex = int.parse(
+              state.pathParameters[RouteParams.experienceIndex]!,
+            );
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditExperienceScreen(
-                isNewExperience: false,
+              child: EditExperienceScreen(
+                userData: userData,
+                experienceIndex: experienceIndex,
               ),
             );
           },
@@ -576,11 +606,12 @@ class AppRouter {
           path: Routes.profileEditExperienceNew.path,
           name: Routes.profileEditExperienceNew.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditExperienceScreen(
-                isNewExperience: true,
+              child: EditExperienceScreen(
+                userData: userData,
               ),
             );
           },
@@ -589,10 +620,12 @@ class AppRouter {
           path: Routes.profileEditExpertisesTop.path,
           name: Routes.profileEditExpertisesTop.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditExpertisesScreen(
+              child: EditExpertisesScreen(
+                userData: userData,
                 isTopExpertises: true,
               ),
             );
@@ -602,10 +635,12 @@ class AppRouter {
           path: Routes.profileEditExpertisesAdditional.path,
           name: Routes.profileEditExpertisesAdditional.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditExpertisesScreen(
+              child: EditExpertisesScreen(
+                userData: userData,
                 isTopExpertises: false,
               ),
             );
@@ -615,10 +650,13 @@ class AppRouter {
           path: Routes.profileEditIndustries.path,
           name: Routes.profileEditIndustries.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditIndustriesScreen(),
+              child: EditIndustriesScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -626,10 +664,13 @@ class AppRouter {
           path: Routes.profileEditMentoringPreferences.path,
           name: Routes.profileEditMentoringPreferences.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditMentoringPreferencesScreen(),
+              child: EditMentoringPreferencesScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -637,10 +678,13 @@ class AppRouter {
           path: Routes.profileEditCompanyStage.path,
           name: Routes.profileEditCompanyStage.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditCompanyStageScreen(),
+              child: EditCompanyStageScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -648,10 +692,13 @@ class AppRouter {
           path: Routes.profileEditCompanyName.path,
           name: Routes.profileEditCompanyName.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditCompanyNameScreen(),
+              child: EditCompanyNameScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -659,10 +706,13 @@ class AppRouter {
           path: Routes.profileEditCompanyWebsite.path,
           name: Routes.profileEditCompanyWebsite.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditCompanyWebsiteScreen(),
+              child: EditCompanyWebsiteScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -670,10 +720,13 @@ class AppRouter {
           path: Routes.profileEditCompanyLocation.path,
           name: Routes.profileEditCompanyLocation.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditCompanyLocationScreen(),
+              child: EditCompanyLocationScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -681,10 +734,13 @@ class AppRouter {
           path: Routes.profileEditCompanyMission.path,
           name: Routes.profileEditCompanyMission.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditCompanyMissionScreen(),
+              child: EditCompanyMissionScreen(
+                userData: userData,
+              ),
             );
           },
         ),
@@ -692,10 +748,13 @@ class AppRouter {
           path: Routes.profileEditCompanyReason.path,
           name: Routes.profileEditCompanyReason.name,
           pageBuilder: (BuildContext context, GoRouterState state) {
+            final userData = state.extra as UserDetailedProfile;
             return MaterialPage(
               key: state.pageKey,
               maintainState: false,
-              child: const EditCompanyReasonScreen(),
+              child: EditCompanyReasonScreen(
+                userData: userData,
+              ),
             );
           },
         ),

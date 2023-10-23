@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
+import 'package:provider/provider.dart';
 
-import '../../../utilities/debug_logger.dart';
+import '../../../providers/user_provider.dart';
 import '../../shared/radio_button_cards.dart';
 import 'components/edit_template.dart';
 
 class EditCompanyStageScreen extends StatefulWidget {
+  final UserDetailedProfile userData;
+
   const EditCompanyStageScreen({
     super.key,
+    required this.userData,
   });
 
   @override
@@ -17,7 +23,26 @@ class EditCompanyStageScreen extends StatefulWidget {
 
 class _EditCompanyStageScreenState extends State<EditCompanyStageScreen>
     with NavigationMixin<EditCompanyStageScreen> {
+  late final UserProvider _userProvider;
+  final List<String> _stageTextIds = [
+    CompanyStageTextId.idea.name,
+    CompanyStageTextId.operational.name,
+    CompanyStageTextId.earning.name,
+    CompanyStageTextId.profitable.name,
+  ];
+  late final int _initialValue;
   int _selectedStageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    if (widget.userData.companies.firstOrNull?.companyStage?.textId != null) {
+      _initialValue = _stageTextIds.indexOf(
+        widget.userData.companies.firstOrNull!.companyStage!.textId,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +75,16 @@ class _EditCompanyStageScreenState extends State<EditCompanyStageScreen>
             imageAssetName: const [null, null, null, null],
             onSelectedCardChanged: (index) {
               _selectedStageIndex = index;
-              DebugLogger.info(_selectedStageIndex.toString()); //TODO
             },
+            initialSelection: _initialValue,
           ),
         ],
+      ),
+      editUserProfile: () => _userProvider.updateCompany(
+        input: Input$CompanyInput(
+          id: widget.userData.companies.firstOrNull?.id,
+          companyStageTextId: _stageTextIds[_selectedStageIndex],
+        ),
       ),
     );
   }

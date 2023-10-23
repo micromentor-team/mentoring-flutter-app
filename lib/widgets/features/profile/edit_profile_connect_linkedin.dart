@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
+import 'package:provider/provider.dart';
 
-import '../../../utilities/debug_logger.dart';
+import '../../../providers/user_provider.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
 class EditConnectLinkedInScreen extends StatefulWidget {
-  const EditConnectLinkedInScreen({Key? key}) : super(key: key);
+  final UserDetailedProfile userData;
+
+  const EditConnectLinkedInScreen({
+    super.key,
+    required this.userData,
+  });
 
   @override
   State<EditConnectLinkedInScreen> createState() =>
@@ -16,8 +24,21 @@ class EditConnectLinkedInScreen extends StatefulWidget {
 
 class _EditConnectLinkedInScreenState extends State<EditConnectLinkedInScreen>
     with NavigationMixin<EditConnectLinkedInScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
+  late final UserProvider _userProvider;
+  late final TextEditingController _textEditingController;
   String? _linkedInUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _textEditingController = TextEditingController(
+      text: widget.userData.websites
+          ?.where((e) => e.label == WebsiteLabels.linkedin.name)
+          .firstOrNull
+          ?.value,
+    );
+  }
 
   @override
   void dispose() {
@@ -42,8 +63,18 @@ class _EditConnectLinkedInScreenState extends State<EditConnectLinkedInScreen>
             setState(() {
               _linkedInUrl = value;
             });
-            DebugLogger.info(_linkedInUrl ?? ""); //TODO
           },
+        ),
+      ),
+      editUserProfile: () => _userProvider.updateUserData(
+        input: Input$UserInput(
+          id: widget.userData.id,
+          websites: [
+            Input$LabeledStringValueInput(
+              label: WebsiteLabels.linkedin.name,
+              value: _linkedInUrl,
+            ),
+          ],
         ),
       ),
     );

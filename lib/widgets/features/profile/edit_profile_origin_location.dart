@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:provider/provider.dart';
 
-import '../../../utilities/debug_logger.dart';
+import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
 class EditOriginLocationScreen extends StatefulWidget {
-  const EditOriginLocationScreen({Key? key}) : super(key: key);
+  final UserDetailedProfile userData;
+
+  const EditOriginLocationScreen({
+    super.key,
+    required this.userData,
+  });
 
   @override
   State<EditOriginLocationScreen> createState() =>
@@ -16,8 +23,18 @@ class EditOriginLocationScreen extends StatefulWidget {
 
 class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
     with NavigationMixin<EditOriginLocationScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
+  late final UserProvider _userProvider;
+  late final TextEditingController _textEditingController;
   String? _originLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _textEditingController = TextEditingController(
+      text: widget.userData.cityOfOrigin, //TODO - Use region and country too
+    );
+  }
 
   @override
   void dispose() {
@@ -43,8 +60,13 @@ class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
             setState(() {
               _originLocation = value;
             });
-            DebugLogger.info(_originLocation ?? ""); //TODO
           },
+        ),
+      ),
+      editUserProfile: () => _userProvider.updateUserData(
+        input: Input$UserInput(
+          id: widget.userData.id,
+          cityOfOrigin: _originLocation, //TODO - Use region and country too
         ),
       ),
     );

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/user_provider.dart';
 import '../../../utilities/debug_logger.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/multi_select_chips.dart';
 import 'components/edit_template.dart';
 
 class EditMentoringPreferencesScreen extends StatefulWidget {
+  final UserDetailedProfile userData;
+
   const EditMentoringPreferencesScreen({
     super.key,
+    required this.userData,
   });
 
   @override
@@ -19,9 +26,17 @@ class EditMentoringPreferencesScreen extends StatefulWidget {
 class _EditMentoringPreferencesScreenState
     extends State<EditMentoringPreferencesScreen>
     with NavigationMixin<EditMentoringPreferencesScreen> {
+  late final UserProvider _userProvider;
   List<SelectChip> _selectedChips = [];
 
-  List<SelectChip> createPreferenceChips(AppLocalizations l10n) {
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    // TODO - Set preselected values from userData
+  }
+
+  List<SelectChip> _createPreferenceChips(AppLocalizations l10n) {
     // TODO: Implement in backend and return with content provider
     List<String> translations = [
       l10n.profileEditSectionMentorPreferencesOption1,
@@ -46,11 +61,19 @@ class _EditMentoringPreferencesScreenState
       subtitle: l10n.profileEditSectionMentorPreferencesSubtitle,
       scaffoldBuilder: buildPageRouteScaffold,
       body: CreateMultiSelectChips(
-        chips: createPreferenceChips(l10n),
+        chips: _createPreferenceChips(l10n),
         onSelectedChipsChanged: (chips) {
           setState(() => _selectedChips = chips);
-          DebugLogger.info(_selectedChips.toString()); //TODO
+          DebugLogger.info(_selectedChips.toString()); //TODO - Use value
         },
+      ),
+      editUserProfile: () => _userProvider.updateMentorsGroupMembership(
+        input: Input$MentorsGroupMembershipInput(
+          id: widget.userData.groupMemberships
+              .firstWhere((g) => g.groupIdent == GroupIdent.mentors.name)
+              .id,
+          // TODO - update mentoring preferences
+        ),
       ),
     );
   }

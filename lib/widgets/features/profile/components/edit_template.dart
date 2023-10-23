@@ -9,6 +9,7 @@ class EditTemplate extends StatelessWidget {
   final String? subtitle;
   final Widget body;
   final void Function(void Function(ScaffoldModel)) scaffoldBuilder;
+  final Future Function() editUserProfile;
 
   const EditTemplate({
     super.key,
@@ -16,16 +17,21 @@ class EditTemplate extends StatelessWidget {
     this.subtitle,
     required this.body,
     required this.scaffoldBuilder,
+    required this.editUserProfile,
   });
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final GoRouter router = GoRouter.of(context);
     scaffoldBuilder(
       (scaffoldModel) => scaffoldModel.setParams(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () => context.pop(),
+            onPressed: () async {
+              await editUserProfile();
+              router.pop();
+            },
             icon: Icon(
               Icons.navigate_before,
               color: theme.colorScheme.primary,
@@ -39,6 +45,7 @@ class EditTemplate extends StatelessWidget {
           ),
           centerTitle: true,
         ),
+        hideNavBar: true,
       ),
     );
     return SingleChildScrollView(

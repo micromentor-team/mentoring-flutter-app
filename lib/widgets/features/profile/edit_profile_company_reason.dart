@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
+import 'package:provider/provider.dart';
 
-import '../../../utilities/debug_logger.dart';
+import '../../../constants/app_constants.dart';
+import '../../../providers/user_provider.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
 class EditCompanyReasonScreen extends StatefulWidget {
-  const EditCompanyReasonScreen({Key? key}) : super(key: key);
+  final UserDetailedProfile userData;
+
+  const EditCompanyReasonScreen({
+    super.key,
+    required this.userData,
+  });
 
   @override
   State<EditCompanyReasonScreen> createState() =>
@@ -16,8 +25,24 @@ class EditCompanyReasonScreen extends StatefulWidget {
 
 class _EditCompanyReasonScreenState extends State<EditCompanyReasonScreen>
     with NavigationMixin<EditCompanyReasonScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
+  late final UserProvider _userProvider;
+  late final TextEditingController _textEditingController;
+  late final String _menteeGroupMembershipId;
   String? _companyReason;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    final maybeMenteeGroupMembership = widget.userData.groupMemberships
+        .where((g) => g.groupIdent == GroupIdent.mentees.name)
+        .firstOrNull
+        ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null);
+    _menteeGroupMembershipId = maybeMenteeGroupMembership!.id;
+    _textEditingController = TextEditingController(
+      text: maybeMenteeGroupMembership.reasonsForStartingBusiness,
+    );
+  }
 
   @override
   void dispose() {
@@ -43,8 +68,13 @@ class _EditCompanyReasonScreenState extends State<EditCompanyReasonScreen>
             setState(() {
               _companyReason = value;
             });
-            DebugLogger.info(_companyReason ?? ""); //TODO
           },
+        ),
+      ),
+      editUserProfile: () => _userProvider.updateMenteesGroupMembership(
+        input: Input$MenteesGroupMembershipInput(
+          id: _menteeGroupMembershipId,
+          reasonsForStartingBusiness: _companyReason,
         ),
       ),
     );

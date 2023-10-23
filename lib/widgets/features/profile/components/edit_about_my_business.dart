@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/big_profile_chip.dart';
 
 import 'about_my_business.dart';
@@ -45,10 +46,12 @@ class _PhotoWidget extends StatelessWidget {
 }
 
 class EditProfileAboutMyBusiness extends StatelessWidget {
+  final UserDetailedProfile userData;
   final CompanyInput companyInput;
 
   const EditProfileAboutMyBusiness({
     super.key,
+    required this.userData,
     required this.companyInput,
   });
 
@@ -70,7 +73,10 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
         icon: const Icon(Icons.navigate_next),
         onPressed: () {
           if (nextPath != null) {
-            context.push(nextPath);
+            context.push(
+              nextPath,
+              extra: userData,
+            );
           }
         },
       ),
@@ -148,7 +154,10 @@ class EditProfileAboutMyBusiness extends StatelessWidget {
                   icon: const Icon(Icons.navigate_next),
                   onPressed: () {
                     if (nextPath != null) {
-                      context.push(nextPath);
+                      context.push(
+                        nextPath,
+                        extra: userData,
+                      );
                     }
                   },
                 ),

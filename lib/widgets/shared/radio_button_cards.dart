@@ -8,15 +8,17 @@ class RadioButtonCards extends StatefulWidget {
   final List<Image?> imageAssetName;
   final List<Icon?> titleIcon;
   final Function(int)? onSelectedCardChanged;
+  final int initialSelection;
 
   const RadioButtonCards({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.imageAssetName,
     required this.titleIcon,
     this.onSelectedCardChanged,
-    Key? key,
-  }) : super(key: key);
+    this.initialSelection = 0,
+  });
 
   @override
   State<RadioButtonCards> createState() => _RadioButtonCardsState();
@@ -24,6 +26,12 @@ class RadioButtonCards extends StatefulWidget {
 
 class _RadioButtonCardsState extends State<RadioButtonCards> {
   int _character = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _character = widget.initialSelection;
+  }
 
   @override
   Column build(BuildContext context) {

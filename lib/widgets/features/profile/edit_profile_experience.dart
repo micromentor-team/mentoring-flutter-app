@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/user_provider.dart';
 import '../../../utilities/navigation_mixin.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
 class EditExperienceScreen extends StatefulWidget {
-  final bool isNewExperience;
+  final UserDetailedProfile userData;
+  final int? experienceIndex;
 
   const EditExperienceScreen({
     super.key,
-    required this.isNewExperience,
+    required this.userData,
+    this.experienceIndex,
   });
 
   @override
@@ -20,13 +25,52 @@ class EditExperienceScreen extends StatefulWidget {
 
 class _EditExperienceScreenState extends State<EditExperienceScreen>
     with NavigationMixin<EditExperienceScreen> {
-  final TextEditingController _roleController = TextEditingController();
-  final TextEditingController _companyController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _startDateController = TextEditingController();
-  final TextEditingController _endDateController = TextEditingController();
+  late final UserProvider _userProvider;
+  late final TextEditingController _roleController;
+  late final TextEditingController _companyController;
+  late final TextEditingController _locationController;
+  late final TextEditingController _startDateController;
+  late final TextEditingController _endDateController;
+  String? _role;
+  String? _company;
+  String? _location;
+  String? _startDate;
+  String? _endDate;
   bool _isCurrentRole = false;
   bool _showInHeader = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    if (widget.experienceIndex == null) {
+      // New experience
+      _roleController = TextEditingController();
+      _companyController = TextEditingController();
+      _locationController = TextEditingController();
+      _startDateController = TextEditingController();
+      _endDateController = TextEditingController();
+    } else {
+      // Edit existing entry
+      final experience =
+          widget.userData.businessExperiences![widget.experienceIndex!];
+      _roleController = TextEditingController(
+        text: experience.jobTitle,
+      );
+      _companyController = TextEditingController(
+        text: experience.businessName,
+      );
+      _locationController = TextEditingController(
+        text: experience.city, //TODO - Use state too
+      );
+      _startDateController = TextEditingController(
+        text: experience.startDate.year.toString(),
+      );
+      _endDateController = TextEditingController(
+        text: experience.endDate?.year.toString(),
+      );
+    }
+  }
 
   @override
   void dispose() {
@@ -45,7 +89,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen>
     final ThemeData theme = Theme.of(context);
 
     return EditTemplate(
-      title: widget.isNewExperience
+      title: widget.experienceIndex == null
           ? l10n.profileEditSectionExperienceAddTitle
           : l10n.profileEditSectionExperienceEditTitle,
       scaffoldBuilder: buildPageRouteScaffold,
@@ -57,11 +101,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen>
               hint: l10n.profileEditSectionExperienceRoleInputHint,
               textController: _roleController,
               maxLength: 50,
-              onChanged: (value) {
-                setState(() {
-                  //TODO - Validate and set user field
-                });
-              },
+              onChanged: (value) => setState(() => _role = value),
             ),
             const SizedBox(height: Insets.paddingLarge),
             TextFormFieldWidget(
@@ -69,22 +109,14 @@ class _EditExperienceScreenState extends State<EditExperienceScreen>
               hint: l10n.profileEditSectionExperienceCompanyInputHint,
               textController: _companyController,
               maxLength: 50,
-              onChanged: (value) {
-                setState(() {
-                  //TODO - Validate and set user field
-                });
-              },
+              onChanged: (value) => setState(() => _company = value),
             ),
             const SizedBox(height: Insets.paddingLarge),
             TextFormFieldWidget(
               label: l10n.profileEditSectionExperienceLocationInputLabel,
               hint: l10n.profileEditSectionExperienceLocationInputHint,
               textController: _locationController,
-              onChanged: (value) {
-                setState(() {
-                  //TODO - Validate and set user field
-                });
-              },
+              onChanged: (value) => setState(() => _location = value),
             ),
             const SizedBox(height: Insets.paddingExtraLarge),
             TextFormFieldWidget(
@@ -92,11 +124,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen>
               hint: l10n.profileEditSectionExperienceDateInputHint,
               textController: _startDateController,
               keyboardType: TextInputType.number,
-              onChanged: (value) {
-                setState(() {
-                  //TODO - Validate and set user field
-                });
-              },
+              onChanged: (value) => setState(() => _startDate = value),
             ),
             const SizedBox(height: Insets.paddingLarge),
             CheckboxListTile(
@@ -117,11 +145,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen>
               textController: _endDateController,
               keyboardType: TextInputType.number,
               enabled: !_isCurrentRole,
-              onChanged: (value) {
-                setState(() {
-                  //TODO - Validate and set user field
-                });
-              },
+              onChanged: (value) => setState(() => _endDate = value),
             ),
             const SizedBox(height: Insets.paddingLarge),
             InkWell(
@@ -146,6 +170,41 @@ class _EditExperienceScreenState extends State<EditExperienceScreen>
           ],
         ),
       ),
+      editUserProfile: widget.experienceIndex == null
+          ? () => _userProvider.updateUserData(
+                input: Input$UserInput(
+                  id: widget.userData.id,
+                  businessExperiences: [
+                    Input$BusinessExperienceInput(
+                      jobTitle: _role,
+                      businessName: _company,
+                      city: _location, //TODO - Set state too
+                      startDate: _startDate?.isNotEmpty ?? false
+                          ? DateTime(int.parse(_startDate!)).toUtc()
+                          : null,
+                      endDate:
+                          (_endDate?.isNotEmpty ?? false) && !_isCurrentRole
+                              ? DateTime(int.parse(_endDate!)).toUtc()
+                              : null,
+                    ),
+                  ],
+                ),
+              )
+          : () => _userProvider.updateBusinessExperience(
+                input: Input$BusinessExperienceInput(
+                  id: widget.userData
+                      .businessExperiences![widget.experienceIndex!].id,
+                  jobTitle: _role,
+                  businessName: _company,
+                  city: _location, //TODO - Set state too
+                  startDate: _startDate?.isNotEmpty ?? false
+                      ? DateTime(int.parse(_startDate!)).toUtc()
+                      : null,
+                  endDate: (_endDate?.isNotEmpty ?? false) && !_isCurrentRole
+                      ? DateTime(int.parse(_endDate!)).toUtc()
+                      : null,
+                ),
+              ),
     );
   }
 }

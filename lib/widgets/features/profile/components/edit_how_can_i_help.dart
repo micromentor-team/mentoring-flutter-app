@@ -2,46 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/big_profile_chip.dart';
 
 class EditProfileHowCanIHelp extends StatelessWidget {
+  final UserDetailedProfile userData;
   final List<String> expertises;
   final List<String> industries;
   final List<String> mentoringPreferences;
-  final String? expectations;
 
   const EditProfileHowCanIHelp({
     super.key,
+    required this.userData,
     this.expertises = const [],
     this.industries = const [],
     this.mentoringPreferences = const [],
-    this.expectations,
   });
-
-  Widget _createListTileSection(
-      BuildContext context, String title, String content, String? nextPath) {
-    final theme = Theme.of(context);
-    return ListTile(
-      title: Text(
-        title,
-        style: theme.textTheme.titleMedium!
-            .copyWith(color: theme.colorScheme.primary),
-      ),
-      subtitle: Text(
-        content,
-        style: theme.textTheme.bodyLarge!
-            .copyWith(color: theme.colorScheme.onBackground),
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.navigate_next),
-        onPressed: () {
-          if (nextPath != null) {
-            context.push(nextPath);
-          }
-        },
-      ),
-    );
-  }
 
   Widget _createChipsListTile(BuildContext context, Widget titleWidget,
       List<BigProfileChip> chips, String? nextPath) {
@@ -78,7 +54,10 @@ class EditProfileHowCanIHelp extends StatelessWidget {
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
                 if (nextPath != null) {
-                  context.push(nextPath);
+                  context.push(
+                    nextPath,
+                    extra: userData,
+                  );
                 }
               },
             ),
@@ -168,12 +147,6 @@ class EditProfileHowCanIHelp extends StatelessWidget {
           mentoringPreferences.map((e) => BigProfileChip(text: e)).toList(),
           Routes.profileEditMentoringPreferences.path,
         ),
-        const Divider(),
-        _createListTileSection(
-            context,
-            l10n.profileEditMainMentorExpectationsSection,
-            (expectations != null) ? expectations! : "",
-            null),
       ],
     );
   }
