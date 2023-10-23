@@ -151,6 +151,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
     };
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Builder(
             builder: (context) {
@@ -216,7 +217,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             fullName: userData.fullName!,
             avatarUrl: userData.avatarUrl,
             pronouns: userData.pronounsDisplay,
-            affiliations: const ["Verizon Digital Ready"], //TODO
+            affiliations: null, //TODO
             company: company?.name,
             companyRole: userData.jobTitle,
             education: userData.educationLevel?.translatedValue,
@@ -238,10 +239,6 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             regionFrom: userData.regionOfOrigin,
             cityFrom: userData.cityOfOrigin,
             countryFrom: userData.countryOfOrigin?.translatedValue,
-            promptTitle:
-                "The best piece of advice I’ve ever received is:", //TODO
-            promptResponse:
-                "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.", //TODO
             languages: languages.toList(growable: false),
           ),
           if (userData.seeksHelp && company != null) ...[
