@@ -45,12 +45,14 @@ class _RecommendedSectionState extends State<RecommendedSection> {
     _recommendedUsers = _userProvider
         .createUserSearch(
       searchInput: Input$UserSearchInput(
-        seeksHelp: _isEntrepreneur
-            ? Enum$UserSearchFieldPreference.isFalse
-            : Enum$UserSearchFieldPreference.isTrue,
-        offersHelp: _isEntrepreneur
-            ? Enum$UserSearchFieldPreference.isTrue
-            : Enum$UserSearchFieldPreference.isFalse,
+        filter: Input$UserSearchFilterInput(
+          seeksHelp: _isEntrepreneur
+              ? Enum$UserSearchFieldPreference.isFalse
+              : Enum$UserSearchFieldPreference.isTrue,
+          offersHelp: _isEntrepreneur
+              ? Enum$UserSearchFieldPreference.isTrue
+              : Enum$UserSearchFieldPreference.isFalse,
+        ),
         maxResultCount: Limits.homeRecommendedUsersMaxSize,
       ),
     )

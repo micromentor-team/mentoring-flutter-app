@@ -2615,7 +2615,7 @@ class Query$FindUserSearchResults$findUserSearchResults {
     this.countryOfResidence,
     required this.groupMemberships,
     required this.companies,
-    this.$__typename = 'User',
+    this.$__typename = 'UserWithScore',
   });
 
   factory Query$FindUserSearchResults$findUserSearchResults.fromJson(

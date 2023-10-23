@@ -257,13 +257,14 @@ type MentorsGroupMembership implements IGroupMembership {
 }
 
 type Query {
-  findUserById(id: String!): User!
+  findUserById(options: FindObjectsOptions, id: String!): User!
   findUserByIdent(options: FindUserByIdentOptions, identType: UserIdentType, ident: String!): User!
+  isUserIdentAvailable(identType: UserIdentType, ident: String!): Boolean!
   findUsers(options: FindObjectsOptions, match: UserInput, filter: UserListFilter): [User!]!
   getAvailableUserHandleField(startValue: String!): User!
   getAuthenticatedUser: User!
   getMyUser: User!
-  findUserDeviceById(id: String!): UserDevice!
+  findUserDeviceById(options: FindObjectsOptions, id: String!): UserDevice!
   findUserDevices(options: FindObjectsOptions, match: UserDeviceInput, filter: SidUserDeviceListFilter): [UserDevice!]!
   findCompanyStages(fallbackUiLanguage: UiLanguage): [CompanyStage!]!
   findCompanyTypes(fallbackUiLanguage: UiLanguage): [CompanyType!]!
@@ -294,9 +295,9 @@ type Query {
   findGroupMemberships(options: FindObjectsOptions, match: GroupMembershipInput, filter: GroupMembershipListFilter): [IGroupMembership!]!
   findGroupById(id: String!): Group!
   findGroups(options: FindObjectsOptions, match: GroupInput, filter: GroupListFilter): [Group!]!
-  findUserSearchById(userSearchId: String!): UserSearch!
+  findUserSearchById(options: FindObjectsOptions, userSearchId: String!): UserSearch!
   findUserSearches(options: FindObjectsOptions, match: UserSearchInput, filter: UserSearchListFilter): [UserSearch!]!
-  findUserSearchResults(options: FindObjectsOptions, userSearchId: String!): [User!]!
+  findUserSearchResults(options: FindObjectsOptions, runIndex: Int, userSearchId: String!): [UserWithScore!]!
   myUserSearches: [UserSearch!]!
   getMm2Integration: Mm2Integration!
   findNlpConversation(conversationId: String!): NlpConversation!
@@ -1291,23 +1292,15 @@ type UserSearch {
 
   """The ID of the user that is searching and owns this object"""
   userId: ID!
+  matchingEngineId: ID
+  userSearchType: UserSearchType!
+  name: String
+  filter: UserSearchFilter
 
   """
   A list of user IDs of users that should not be included into the search results, i.e. blocked users.
   """
   excludeUserIds: [ID!]
-  matchingEngineId: ID
-  name: String
-  profileType: ProfileType
-  viewerProfileType: ProfileType
-  searchText: String
-  seeksHelp: UserSearchFieldPreference
-  offersHelp: UserSearchFieldPreference
-  languagesTextIds: [String!]
-  expertisesTextIds: [String!]
-  industriesTextIds: [String!]
-  countryTextIds: [String!]
-  companyStagesTextIds: [String!]
   maxResultCount: Int!
   subscription: UserSearchSubscriptionType
   expiresAt: DateTimeISO
@@ -1316,11 +1309,21 @@ type UserSearch {
   topFoundUsers: [User!]!
 }
 
-enum ProfileType {
-  mentee
-  mentor
-  both
-  none
+enum UserSearchType {
+  search
+  mentorRecommendation
+  menteeRecommendation
+}
+
+type UserSearchFilter {
+  searchText: String
+  seeksHelp: UserSearchFieldPreference
+  offersHelp: UserSearchFieldPreference
+  languagesTextIds: [String!]
+  expertisesTextIds: [String!]
+  industriesTextIds: [String!]
+  countryTextIds: [String!]
+  companyStagesTextIds: [String!]
 }
 
 enum UserSearchFieldPreference {
@@ -1342,20 +1345,6 @@ type UserSearchRunInfo {
   matchCount: Int!
   startedAt: DateTimeISO
   finishedAt: DateTimeISO
-}
-
-input FindUserByIdentOptions {
-  includeDeleted: Boolean
-  includeGroupProfiles: [String!]
-}
-
-enum UserIdentType {
-  any
-  authToken
-  email
-  id
-  phoneNumber
-  userHandle
 }
 
 input FindObjectsOptions {
@@ -1391,6 +1380,20 @@ enum IncludeFilterOption {
   include
   exclude
   only
+}
+
+input FindUserByIdentOptions {
+  includeDeleted: Boolean
+  includeGroupProfiles: [String!]
+}
+
+enum UserIdentType {
+  any
+  authToken
+  email
+  id
+  phoneNumber
+  userHandle
 }
 
 input UserInput {
@@ -1482,7 +1485,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTimeISO! = "2023-10-03T22:37:38.888Z"
+  time: DateTimeISO! = "2023-10-23T20:22:09.216Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -1879,11 +1882,26 @@ input UserSearchInput {
   updatedBy: ID
   deletedAt: DateTimeISO
   deletedBy: ID
+
+  """The ID of the user that is searching and owns this object"""
   userId: ID
   matchingEngineId: ID
+  userSearchType: UserSearchType
   name: String
-  profileType: ProfileType
-  viewerProfileType: ProfileType
+  filter: UserSearchFilterInput
+
+  """
+  A list of user IDs of users that should not be included into the search results, i.e. blocked users.
+  """
+  excludeUserIds: [ID!]
+  maxResultCount: Int
+  subscription: UserSearchSubscriptionType
+  expiresAt: DateTimeISO
+  resultExpiresAt: DateTimeISO
+  startSearch: Boolean! = true
+}
+
+input UserSearchFilterInput {
   searchText: String
   seeksHelp: UserSearchFieldPreference
   offersHelp: UserSearchFieldPreference
@@ -1892,11 +1910,6 @@ input UserSearchInput {
   industriesTextIds: [String!]! = []
   countryTextIds: [String!]! = []
   companyStagesTextIds: [String!]! = []
-  maxResultCount: Int! = 10
-  subscription: UserSearchSubscriptionType
-  expiresAt: DateTimeISO
-  resultExpiresAt: DateTimeISO
-  startSearch: Boolean! = true
 }
 
 input UserSearchListFilter {
@@ -1909,6 +1922,117 @@ input UserSearchListFilter {
   createdAtUntil: DateTimeISO
   updatedAtFrom: DateTimeISO
   updatedAtUntil: DateTimeISO
+}
+
+type UserWithScore {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: UserMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  firstName: String
+  lastName: String
+  fullName: String
+  userHandle: String
+  phoneNumber: String
+  phoneNumberUpdatedAt: DateTimeISO
+  isPhoneNumberVerified: Boolean!
+  email: String
+  emailUpdatedAt: DateTimeISO
+  isEmailVerified: Boolean!
+  genderTextId: String
+  cityOfResidence: String
+  regionOfResidence: String
+  countryOfResidenceTextId: String
+  postalCode: String
+  avatarUrl: String
+  jobTitle: String
+  websites: [LabeledStringValue!]
+  authType: AuthType
+  tfaBackupCodes: String
+  passwordUpdatedAt: DateTimeISO
+  preferredLanguageTextId: String
+  spokenLanguagesTextIds: [String!]!
+  selectedUiLanguageTextId: UiLanguage
+  fallbackUiLanguageTextId: UiLanguage
+  roles: [UserRole!]!
+  appFeatures: [AppFeature!]
+  source: String
+  timezone: String
+  preferences: UserPreferences
+  trustLevel: Int!
+  signedInAt: DateTimeISO
+  signedOutAt: DateTimeISO
+  latestActivityAt: DateTimeISO
+  userDevices: [UserDevice!]!
+  userBlocks: [UserBlock!]
+  relationships: [UserRelationship!]
+  inactivatedAt: DateTimeISO
+  inactivatedBy: ID
+  termsAndConditionsAcceptedAt: DateTimeISO
+  companyIds: [ID!]
+  groupIds: [ID!]!
+  parentGroupIds: [ID!]!
+  externalGroupIds: [ID!]!
+  groupMemberships: [IGroupMembership!]!
+  seeksHelp: Boolean!
+  offersHelp: Boolean!
+  birthYear: Int
+  genderSelfDescribed: String
+  ethnicity: String
+  educationLevelTextId: String
+  personalBio: String
+  yearsManagementExperience: Int
+  yearsOwnershipExperience: Int
+  ssoIdp: String
+  pronounsTextIds: [String!]
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTimeISO
+
+  """This is the MM2 password hash."""
+  mm2PasswordHash: String
+  businessExperienceIds: [ID!]
+  academicExperienceIds: [ID!]
+  businessExperiences: [BusinessExperience!]
+  academicExperiences: [AcademicExperience!]
+  cityOfOrigin: String
+  regionOfOrigin: String
+  countryOfOriginTextId: String
+  countryOfResidence: Country
+  gender: Gender
+  latestUserDevice: UserDevice!
+  spokenLanguages: [Language!]!
+  preferredLanguage: Language!
+  fallbackUiLanguage: Language!
+  preferredUiLanguage: Language!
+  unreadInAppMessages: [Notification!]!
+  user: User!
+  channels: [Channel!]!
+  channelInvitations: [ChannelInvitation!]!
+  channelParticipants: [ChannelParticipant!]!
+  companies: [Company!]!
+  countryOfOrigin: Country
+  educationLevel: EducationLevel
+  endorsements: [EndorsementWithTypes!]
+  groupMembers: [GroupMembership!]!
+  groups: [Group!]!
+  inbox: UserInbox!
+  profileCompletionPercentage: Int!
+  pronouns: [Pronoun!]!
+  pronounsDisplay: String!
+  userSearches: [UserSearch!]!
+
+  """The score value that the matching engine assigned to this user."""
+  score: Float
 }
 
 type Mm2Integration {
@@ -2144,6 +2268,8 @@ type Mutation {
   blockUser(input: UserBlockInput!): String!
   blockUserForMe(notes: String, reasonTextId: String, userId: String!): String!
   deleteUser(deletePhysically: Boolean!, userId: String!): String!
+  endMySession(deviceUuid: String!): String!
+  startMySession(pushNotificationToken: String, deviceUuid: String!): String!
   unblockUser(userId: String!, blockedByUserId: String!): String!
   unblockUserForMe(userId: String!): String!
   updateUser(input: UserInput!): String!
@@ -2406,9 +2532,11 @@ enum ServiceRequestType {
   graphQlMutationCreateUserDevice
   graphQlMutationCreateUserRelationship
   graphQlMutationDeleteUser
+  graphQlMutationEndMySession
   graphQlMutationSignInUser
   graphQlMutationSignMeOut
   graphQlMutationSignUpUser
+  graphQlMutationStartMySession
   graphQlMutationUnblockUser
   graphQlMutationUpdateUser
   graphQlMutationUpdateUserDevice
