@@ -122,6 +122,7 @@ Widget _createNameAndBadges(
   UserType userType,
   List<String>? affiliations,
   Widget popupMenu,
+  bool isMyProfile,
 ) {
   List<Widget> widgets = [
     Text(
@@ -157,10 +158,11 @@ Widget _createNameAndBadges(
   return Expanded(
     child: Stack(
       children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: popupMenu,
-        ),
+        if (!isMyProfile)
+          Align(
+            alignment: Alignment.topRight,
+            child: popupMenu,
+          ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: widgets,
@@ -296,6 +298,7 @@ class ProfileBasicInfo extends StatelessWidget {
                     userType,
                     affiliations,
                     popupMenu,
+                    isMyProfile,
                   ),
                 ],
               ),
