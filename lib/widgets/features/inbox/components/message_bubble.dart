@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:intl/intl.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/channels_provider.dart';
-import 'package:mm_flutter_app/utilities/emoji_utils/emoji_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../providers/messages_provider.dart';
+import '../../../../constants/constants.dart';
+import '../../../../services/graphql/providers/channels_provider.dart';
+import '../../../../services/graphql/providers/messages_provider.dart';
+import '../../../../utilities/emoji_utils/emoji_utils.dart';
 import 'message_reply.dart';
 
 class MessageBubble extends StatelessWidget {

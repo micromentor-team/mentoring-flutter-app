@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 
-import '../../../../providers/models/scaffold_model.dart';
+import '../../../../constants/constants.dart';
+import '../../../../models/scaffold_model.dart';
 
 class EditTemplate extends StatelessWidget {
   final String title;

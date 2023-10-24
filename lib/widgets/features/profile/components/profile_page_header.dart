@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/invitations_provider.dart';
-import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/channels_provider.dart';
-import '../../../../providers/models/inbox_model.dart';
+import '../../../../constants/constants.dart';
+import '../../../../models/inbox_model.dart';
+import '../../../../services/graphql/providers/channels_provider.dart';
+import '../../../../services/graphql/providers/invitations_provider.dart';
+import '../../../../services/graphql/providers/user_provider.dart';
 
 class ProfilePageHeader extends StatefulWidget {
   final AuthenticatedUser authenticatedUser;

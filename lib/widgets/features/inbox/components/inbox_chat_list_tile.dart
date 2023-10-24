@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/features/inbox/components/inbox_list_tile.dart';
 
-import '../../../../constants/app_constants.dart';
+import '../../../../constants/constants.dart';
+import 'inbox_list_tile.dart';
 
 class InboxChatListTile extends StatefulWidget {
   final String channelId;

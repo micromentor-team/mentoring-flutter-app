@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:textfield_tags/textfield_tags.dart';
+
+import '../../constants/constants.dart';
 
 class AutocompletePicker extends StatelessWidget {
   final TextfieldTagsController controller;

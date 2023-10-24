@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/content_provider.dart';
-import 'package:mm_flutter_app/providers/models/explore_card_filters_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../constants/constants.dart';
+import '../../../../models/explore_card_filters_model.dart';
+import '../../../../services/graphql/providers/content_provider.dart';
 
 class ExploreFilter extends StatelessWidget {
   final UserType userType;

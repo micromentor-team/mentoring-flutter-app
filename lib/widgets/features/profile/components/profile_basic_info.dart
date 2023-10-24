@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/features/profile/components/profile_chip.dart';
-import 'package:mm_flutter_app/widgets/shared/upload_photo_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../constants/constants.dart';
+import '../../../../utilities/utility.dart';
+import '../../../shared/upload_photo_button.dart';
+import 'profile_chip.dart';
 
 const double _inlineIconSize = 16.0;
 

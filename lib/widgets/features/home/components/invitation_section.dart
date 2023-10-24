@@ -4,15 +4,15 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/features/inbox/components/inbox_invitation_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/invitations_provider.dart';
-import '../../../../providers/models/inbox_model.dart';
+import '../../../../constants/constants.dart';
+import '../../../../models/inbox_model.dart';
+import '../../../../services/graphql/providers/invitations_provider.dart';
+import '../../../../services/graphql/providers/user_provider.dart';
+import '../../../../utilities/utility.dart';
 import '../../../shared/notification_bubble.dart';
+import '../../inbox/components/inbox_invitation_tile.dart';
 
 class InvitationSection extends StatefulWidget {
   final AuthenticatedUser authenticatedUser;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/widgets/features/profile/components/profile_chip.dart';
 
-import '../../constants/app_constants.dart';
+import '../../constants/constants.dart';
+import '../features/profile/components/profile_chip.dart';
 import 'expertise_chip.dart';
 
 /*

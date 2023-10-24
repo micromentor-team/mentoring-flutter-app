@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/providers/models/scaffold_model.dart';
 import 'package:provider/provider.dart';
+
+import '../models/scaffold_model.dart';
 
 mixin NavigationMixin<T extends StatefulWidget> on State<T>
     implements RouteAware {

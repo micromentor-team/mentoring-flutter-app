@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/user_provider.dart';
-import 'package:mm_flutter_app/widgets/features/profile/components/big_profile_chip.dart';
+
+import '../../../../constants/constants.dart';
+import '../../../../services/graphql/providers/user_provider.dart';
+import 'big_profile_chip.dart';
 
 class EditProfileHowCanIHelp extends StatelessWidget {
   final UserDetailedProfile userData;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
+
+import '../../../../__generated/schema/schema.graphql.dart';
+import '../../../../constants/constants.dart';
 
 class InboxInvitationTile extends StatelessWidget {
   final String userName;

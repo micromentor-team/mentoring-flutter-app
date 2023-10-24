@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/shared/notification_bubble.dart';
+
+import '../../../../constants/constants.dart';
+import '../../../../utilities/utility.dart';
+import '../../../shared/notification_bubble.dart';
 
 class InboxListTile extends StatelessWidget {
   final String? avatarUrl;
