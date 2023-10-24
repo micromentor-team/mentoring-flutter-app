@@ -4,12 +4,10 @@ import 'package:mm_flutter_app/constants/app_constants.dart';
 class SelectChip {
   final String chipName;
   final String textId;
-  final IconData? icon;
 
   SelectChip({
     required this.chipName,
     required this.textId,
-    this.icon,
   });
 }
 
@@ -17,12 +15,14 @@ class CreateMultiSelectChips extends StatefulWidget {
   final List<SelectChip> chips;
   final int? maxSelection;
   final Function(List<SelectChip>)? onSelectedChipsChanged;
+  final List<SelectChip> initialSelection;
 
   const CreateMultiSelectChips({
     Key? key,
     required this.chips,
     this.maxSelection,
     this.onSelectedChipsChanged,
+    this.initialSelection = const [],
   }) : super(key: key);
 
   @override
@@ -31,6 +31,18 @@ class CreateMultiSelectChips extends StatefulWidget {
 
 class _CreateMultiSelectChipsState extends State<CreateMultiSelectChips> {
   final Set<int> _childIsSelected = {};
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize with preselected values
+    for (int i = 0; i < widget.chips.length; i++) {
+      if (widget.initialSelection
+          .any((e) => e.textId == widget.chips[i].textId)) {
+        _childIsSelected.add(i);
+      }
+    }
+  }
 
   // Callback function to be called by the child widget when selected
   void handleChildSelection(int chipId) {

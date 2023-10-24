@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'profile_experience_and_education.dart';
 
 class EditProfileExperienceAndEducation extends StatelessWidget {
+  final UserDetailedProfile userData;
   final List<ExperienceInput> experience;
   final List<EducationInput> education;
 
   const EditProfileExperienceAndEducation({
     super.key,
+    required this.userData,
     this.experience = const [],
     this.education = const [],
   });
@@ -19,8 +23,14 @@ class EditProfileExperienceAndEducation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (experience.isNotEmpty) _EditExperience(experience: experience),
-        if (education.isNotEmpty) _EditEducation(education: education),
+        _EditExperience(
+          experience: experience,
+          userData: userData,
+        ),
+        _EditEducation(
+          education: education,
+          userData: userData,
+        ),
       ],
     );
   }
@@ -34,8 +44,13 @@ String _concatenateExperience(BuildContext context, ExperienceInput exp) {
   return "${exp.companyName}\n(${exp.dateRange(l10n.datePresent)}) · ${exp.timeRange}\n$location";
 }
 
-Widget _createListTileSection(BuildContext context, String title,
-    String content, Widget? extra, String? nextPath) {
+Widget _createListTileSection(
+    BuildContext context,
+    String title,
+    String content,
+    Widget? extra,
+    String? nextPath,
+    UserDetailedProfile userData) {
   final theme = Theme.of(context);
   return ListTile(
     title: Text(
@@ -63,7 +78,10 @@ Widget _createListTileSection(BuildContext context, String title,
       icon: const Icon(Icons.navigate_next),
       onPressed: () {
         if (nextPath != null) {
-          context.push(nextPath);
+          context.push(
+            nextPath,
+            extra: userData,
+          );
         }
       },
     ),
@@ -71,8 +89,12 @@ Widget _createListTileSection(BuildContext context, String title,
 }
 
 class _EditExperience extends StatelessWidget {
+  final UserDetailedProfile userData;
   final List<ExperienceInput> experience;
-  const _EditExperience({required this.experience});
+  const _EditExperience({
+    required this.experience,
+    required this.userData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,43 +104,64 @@ class _EditExperience extends StatelessWidget {
     );
     final l10n = AppLocalizations.of(context)!;
 
-    final items = experience
-        .map((exp) {
-          return [
-            _createListTileSection(
-                context,
-                exp.position,
-                _concatenateExperience(context, exp),
-                (exp.companyUrl != null)
-                    ? InkWell(
-                        onTap: () => launchUrl(Uri.parse(exp.companyUrl!)),
-                        child: Text(
-                          exp.companyUrl!,
-                          style: bodySmallOnSurface?.copyWith(
-                            decoration: TextDecoration.underline,
-                            color: theme.colorScheme.primary,
-                          ),
-                        ),
-                      )
-                    : null,
-                null),
-            const Divider()
-          ];
-        })
-        .expand((i) => i)
-        .toList();
+    final List<Widget> items = [];
+    for (int i = 0; i < experience.length; i++) {
+      final exp = experience[i];
+      items.addAll(
+        [
+          _createListTileSection(
+            context,
+            exp.position,
+            _concatenateExperience(context, exp),
+            (exp.companyUrl != null)
+                ? InkWell(
+                    onTap: () => launchUrl(Uri.parse(exp.companyUrl!)),
+                    child: Text(
+                      exp.companyUrl!,
+                      style: bodySmallOnSurface?.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                  )
+                : null,
+            '${Routes.profileEditExperience.path}/$i',
+            userData,
+          ),
+          const Divider()
+        ],
+      );
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
           title: Text(
-            l10n.profileEditExperience,
+            l10n.profileEditMainExperienceHeader,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
         ),
         ...items,
+        if (experience.length < Limits.profileExperienceMaxSize) ...[
+          ListTile(
+            title: Text(
+              l10n.profileEditMainExperienceAddSection,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.navigate_next),
+              onPressed: () => context.push(
+                Routes.profileEditExperienceNew.path,
+                extra: userData,
+              ),
+            ),
+          ),
+          const Divider(),
+        ]
       ],
     );
   }
@@ -132,33 +175,64 @@ String _concatenateEducation(BuildContext context, EducationInput edu) {
 }
 
 class _EditEducation extends StatelessWidget {
+  final UserDetailedProfile userData;
   final List<EducationInput> education;
-  const _EditEducation({required this.education});
+  const _EditEducation({
+    required this.education,
+    required this.userData,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
-    final items = education
-        .map((edu) => [
-              _createListTileSection(context, edu.schoolName,
-                  _concatenateEducation(context, edu), null, null),
-              const Divider()
-            ])
-        .expand((i) => i)
-        .toList();
+    final List<Widget> items = [];
+    for (int i = 0; i < education.length; i++) {
+      final edu = education[i];
+      items.addAll(
+        [
+          _createListTileSection(
+            context,
+            edu.schoolName,
+            _concatenateEducation(context, edu),
+            null,
+            '${Routes.profileEditEducation.path}/$i',
+            userData,
+          ),
+          const Divider()
+        ],
+      );
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
           title: Text(
-            l10n.profileEditEducation,
+            l10n.profileEditMainEducationHeader,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
         ),
         ...items,
+        if (education.length < Limits.profileEducationMaxSize) ...[
+          ListTile(
+            title: Text(
+              l10n.profileEditMainEducationAddSection,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.navigate_next),
+              onPressed: () => context.push(
+                Routes.profileEditEducationNew.path,
+                extra: userData,
+              ),
+            ),
+          ),
+          const Divider(),
+        ]
       ],
     );
   }

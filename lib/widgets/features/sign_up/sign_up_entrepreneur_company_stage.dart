@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
-import 'components/radio_button_cards.dart';
+import '../../shared/radio_button_cards.dart';
 
 class SignupEntrepreneurCompanyStageScreen extends StatefulWidget {
   const SignupEntrepreneurCompanyStageScreen({Key? key}) : super(key: key);

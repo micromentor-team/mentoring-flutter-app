@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../utilities/navigation_mixin.dart';
-import '../../../utilities/scaffold_utils/appbar_factory.dart';
 
 class ExploreAdvancedFiltersScreen extends StatefulWidget {
   const ExploreAdvancedFiltersScreen({super.key});
@@ -56,17 +55,22 @@ class _RecommendedMentorsFiltersAdvanced
   @override
   Widget build(BuildContext context) {
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
-    buildPageRouteScaffold((scaffoldModel) {
-      scaffoldModel.setParams(
-        appBar: AppBarFactory.createTitleOnlyAppBar(
-          context: context,
-          title: AppLocalizations.of(context)!.exploreSearchFilterAdvancedTitle,
-          withBackButton: true,
-        ),
-      );
-    });
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    buildPageRouteScaffold(
+      (scaffoldModel) => scaffoldModel.setParams(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => context.pop(),
+            icon: Icon(
+              Icons.navigate_before,
+              color: theme.colorScheme.primary,
+            ),
+          ),
+          title: Text(l10n.exploreSearchFilterAdvancedTitle),
+        ),
+      ),
+    );
 
     return Padding(
       padding: const EdgeInsets.all(Insets.paddingMedium),

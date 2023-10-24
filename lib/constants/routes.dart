@@ -141,38 +141,6 @@ class Routes {
     name: 'profile',
     path: '/profile',
   );
-  static Route profileEdit = Route(
-    name: 'profileEdit',
-    path: '${profile.path}/edit',
-  );
-  static Route editPronouns = Route(
-    name: 'editPronouns',
-    path: '/pronouns',
-  );
-  static Route editLinkedin = Route(
-    name: 'editLinkedin',
-    path: '/linkedin',
-  );
-  static Route editCity = Route(
-    name: 'editCity',
-    path: '/city',
-  );
-  static Route editOriginLocation = Route(
-    name: 'editOriginLocation',
-    path: '/originLocation',
-  );
-  static Route editPreferredLanguage = Route(
-    name: 'editPreferredLanguage',
-    path: '/preferredLanguage',
-  );
-  static Route editOtherLanguages = Route(
-    name: 'editOtherLanguages',
-    path: '/otherLanguages',
-  );
-  static Route editPrompt = Route(
-    name: 'editPrompt',
-    path: '/prompt',
-  );
   static Route profileId = Route(
     name: 'profileId',
     path: '${profile.path}/:${RouteParams.userId}',
@@ -185,6 +153,98 @@ class Routes {
     name: 'profileInviteId',
     path: '${profileInvite.path}/:${RouteParams.userId}',
   );
+  static Route profileEdit = Route(
+    name: 'profileEdit',
+    path: '${profile.path}/edit',
+  );
+  static Route profileEditPronouns = Route(
+    name: 'profileEditPronouns',
+    path: '${profileEdit.path}/pronouns',
+  );
+  static Route profileEditLinkedin = Route(
+    name: 'profileEditLinkedin',
+    path: '${profileEdit.path}/linkedin',
+  );
+  static Route profileEditCurrentLocation = Route(
+    name: 'profileEditCity',
+    path: '${profileEdit.path}/city',
+  );
+  static Route profileEditOriginLocation = Route(
+    name: 'profileEditOriginLocation',
+    path: '${profileEdit.path}/originLocation',
+  );
+  static Route profileEditLanguagePreferred = Route(
+    name: 'profileEditLanguagePreferred',
+    path: '${profileEdit.path}/preferredLanguage',
+  );
+  static Route profileEditLanguageOthers = Route(
+    name: 'profileEditLanguageOthers',
+    path: '${profileEdit.path}/otherLanguages',
+  );
+  static Route profileEditEducation = Route(
+    name: 'profileEditEducation',
+    path: '${profileEdit.path}/education',
+  );
+  static Route profileEditEducationIndex = Route(
+    name: 'profileEditEducationIndex',
+    path: '${profileEdit.path}/education/:${RouteParams.experienceIndex}',
+  );
+  static Route profileEditEducationNew = Route(
+    name: 'profileEditEducationNew',
+    path: '${profileEdit.path}/newEducation',
+  );
+  static Route profileEditExperience = Route(
+    name: 'profileEditExperience',
+    path: '${profileEdit.path}/experience',
+  );
+  static Route profileEditExperienceIndex = Route(
+    name: 'profileEditExperienceIndex',
+    path: '${profileEdit.path}/experience/:${RouteParams.experienceIndex}',
+  );
+  static Route profileEditExperienceNew = Route(
+    name: 'profileEditExperienceNew',
+    path: '${profileEdit.path}/newExperience',
+  );
+  static Route profileEditExpertisesTop = Route(
+    name: 'profileEditExpertisesTop',
+    path: '${profileEdit.path}/topExpertises',
+  );
+  static Route profileEditExpertisesAdditional = Route(
+    name: 'profileEditExpertisesAdditional',
+    path: '${profileEdit.path}/additionalExpertises',
+  );
+  static Route profileEditIndustries = Route(
+    name: 'profileEditIndustries',
+    path: '${profileEdit.path}/industries',
+  );
+  static Route profileEditMentoringPreferences = Route(
+    name: 'profileEditMentoringPreferences',
+    path: '${profileEdit.path}/mentoringPreferences',
+  );
+  static Route profileEditCompanyStage = Route(
+    name: 'profileEditCompanyStage',
+    path: '${profileEdit.path}/companyStage',
+  );
+  static Route profileEditCompanyName = Route(
+    name: 'profileEditCompanyName',
+    path: '${profileEdit.path}/companyName',
+  );
+  static Route profileEditCompanyWebsite = Route(
+    name: 'profileEditCompanyWebsite',
+    path: '${profileEdit.path}/companyWebsite',
+  );
+  static Route profileEditCompanyLocation = Route(
+    name: 'profileEditCompanyLocation',
+    path: '${profileEdit.path}/companyLocation',
+  );
+  static Route profileEditCompanyMission = Route(
+    name: 'profileEditCompanyMission',
+    path: '${profileEdit.path}/companyMission',
+  );
+  static Route profileEditCompanyReason = Route(
+    name: 'profileEditCompanyReason',
+    path: '${profileEdit.path}/companyReason',
+  );
 }
 
 class RouteParams {
@@ -193,4 +253,5 @@ class RouteParams {
   static const String channelInvitationId = 'channelInvitationId';
   static const String userId = 'userId';
   static const String nextRouteName = 'nextRouteName';
+  static const String experienceIndex = 'experienceIndex';
 }

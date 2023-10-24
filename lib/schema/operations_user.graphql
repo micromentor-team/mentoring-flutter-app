@@ -78,21 +78,25 @@ query FindUserDetailedProfile($userId: String!) {
             label # label == "linkedin" for the linkedin button
         }
         preferredLanguage {
+            textId
             translatedValue
         }
         spokenLanguages {
+            textId
             translatedValue
         }
         avatarUrl # not yet functional
         groupMemberships {
-            groupId
+            id
             groupIdent
             ... on MentorsGroupMembership {
                 expertises {
+                    textId
                     translatedValue
                     # icon not yet defined, coming later
                 }
                 industries {
+                    textId
                     translatedValue
                     # icon not yet defined, coming later
                 }
@@ -102,9 +106,11 @@ query FindUserDetailedProfile($userId: String!) {
             }
             ... on MenteesGroupMembership {
                 soughtExpertises {
+                    textId
                     translatedValue
                 }
                 industry {
+                    textId
                     translatedValue
                 }
                 reasonsForStartingBusiness
@@ -113,6 +119,7 @@ query FindUserDetailedProfile($userId: String!) {
         }
         jobTitle
         companies {
+            id
             name # venture name
             description # "business mission" can be drawn from here for now
             websites {
@@ -120,21 +127,18 @@ query FindUserDetailedProfile($userId: String!) {
                 label # type of website. might not be relevant
             }
             companyStage {
-                translatedValue
-            }
-            companyType {
+                textId
                 translatedValue
             }
             # we may need to add city/state/country to this model for the mentee
         }
-        educationLevel {
-            translatedValue
-        }
         pronounsDisplay # this handles some display logic, "she/they" for a user with both "they/them" and "she/her" pronouns
         pronouns {
+            textId
             translatedValue # e.g. "she/her"
         }
         businessExperiences {
+            id
             businessName
             jobTitle
             startDate
@@ -144,6 +148,7 @@ query FindUserDetailedProfile($userId: String!) {
             country
         }
         academicExperiences {
+            id
             institutionName
             degreeType
             fieldOfStudy
@@ -154,12 +159,14 @@ query FindUserDetailedProfile($userId: String!) {
         regionOfResidence
         countryOfResidenceTextId
         countryOfResidence {
+            textId
             translatedValue
         }
         cityOfOrigin
         regionOfOrigin
         countryOfOriginTextId
         countryOfOrigin {
+            textId
             translatedValue
         }
     }
@@ -220,6 +227,24 @@ mutation SignUpUser ($input: UserSignUpInput!) {
         userId
         deviceId
         authToken
+    }
+}
+
+mutation UpdateAcademicExperience($input: AcademicExperienceInput!) {
+    updateAcademicExperience(input: $input) {
+        id
+    }
+}
+
+mutation UpdateBusinessExperience($input: BusinessExperienceInput!) {
+    updateBusinessExperience(input: $input) {
+        id
+    }
+}
+
+mutation UpdateCompany($input: CompanyInput!) {
+    updateCompany(input: $input) {
+        id
     }
 }
 

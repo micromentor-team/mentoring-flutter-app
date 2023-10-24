@@ -10,8 +10,6 @@ class ProfileAboutMe extends StatelessWidget {
   final String? regionFrom;
   final String? cityFrom;
   final String? countryFrom;
-  final String promptTitle;
-  final String promptResponse;
   final List<String> languages;
 
   const ProfileAboutMe({
@@ -22,8 +20,6 @@ class ProfileAboutMe extends StatelessWidget {
     this.regionFrom,
     this.cityFrom,
     this.countryFrom,
-    required this.promptTitle,
-    required this.promptResponse,
     this.languages = const [],
   });
 
@@ -60,48 +56,6 @@ class ProfileAboutMe extends StatelessWidget {
             ],
           )
         : const SizedBox(height: 0, width: 0);
-  }
-
-  Widget _createPromptSection(
-    BuildContext context,
-    String title,
-    String content,
-  ) {
-    final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: theme.colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.paddingMedium,
-                  vertical: Insets.paddingSmall,
-                ),
-                child: Text(
-                  title,
-                  style: theme.textTheme.titleMedium!
-                      .copyWith(color: theme.colorScheme.onSurface),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.paddingMedium,
-                  vertical: Insets.paddingSmall,
-                ),
-                child: Text(content, style: theme.textTheme.bodyMedium),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
   }
 
   @override
@@ -154,17 +108,6 @@ class ProfileAboutMe extends StatelessWidget {
                 const SizedBox(height: Insets.paddingSmall),
               ],
             ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Insets.paddingSmall,
-            vertical: Insets.paddingSmall,
-          ),
-          child: _createPromptSection(
-            context,
-            promptTitle,
-            promptResponse,
           ),
         ),
       ],

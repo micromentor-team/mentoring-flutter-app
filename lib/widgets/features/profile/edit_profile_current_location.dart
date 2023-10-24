@@ -8,31 +8,31 @@ import '../../../utilities/navigation_mixin.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
-class EditOriginLocationScreen extends StatefulWidget {
+class EditCurrentLocationScreen extends StatefulWidget {
   final UserDetailedProfile userData;
 
-  const EditOriginLocationScreen({
+  const EditCurrentLocationScreen({
     super.key,
     required this.userData,
   });
 
   @override
-  State<EditOriginLocationScreen> createState() =>
-      _EditOriginLocationScreenState();
+  State<EditCurrentLocationScreen> createState() =>
+      _EditCurrentLocationScreenState();
 }
 
-class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
-    with NavigationMixin<EditOriginLocationScreen> {
+class _EditCurrentLocationScreenState extends State<EditCurrentLocationScreen>
+    with NavigationMixin<EditCurrentLocationScreen> {
   late final UserProvider _userProvider;
   late final TextEditingController _textEditingController;
-  String? _originLocation;
+  String? _currentLocation;
 
   @override
   void initState() {
     super.initState();
     _userProvider = Provider.of<UserProvider>(context, listen: false);
     _textEditingController = TextEditingController(
-      text: widget.userData.cityOfOrigin, //TODO - Use region and country too
+      text: widget.userData.cityOfResidence, //TODO - Use region and country too
     );
   }
 
@@ -48,17 +48,17 @@ class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return EditTemplate(
-      title: l10n.profileEditSectionAboutOriginLocationTitle,
+      title: l10n.profileEditSectionAboutCurrentLocationTitle,
       scaffoldBuilder: buildPageRouteScaffold,
       body: Form(
         child: TextFormFieldWidget(
           prefixIcon: const Icon(Icons.search),
-          label: l10n.profileEditSectionAboutOriginLocationInputLabel,
-          hint: l10n.profileEditSectionAboutOriginLocationInputHint,
+          label: l10n.profileEditSectionAboutCurrentLocationInputLabel,
+          hint: l10n.profileEditSectionAboutCurrentLocationInputHint,
           textController: _textEditingController,
           onChanged: (value) {
             setState(() {
-              _originLocation = value;
+              _currentLocation = value;
             });
           },
         ),
@@ -66,7 +66,7 @@ class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
       editUserProfile: () => _userProvider.updateUserData(
         input: Input$UserInput(
           id: widget.userData.id,
-          cityOfOrigin: _originLocation, //TODO - Use region and country too
+          cityOfResidence: _currentLocation, //TODO - Use region and country too
         ),
       ),
     );

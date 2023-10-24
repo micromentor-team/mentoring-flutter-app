@@ -18,11 +18,10 @@ class ExperienceAndEducation extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(Insets.paddingMedium),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (experience.isNotEmpty)
-            Row(children: [_Experience(experience: experience)]),
-          if (education.isNotEmpty)
-            Row(children: [_Education(education: education)]),
+          if (experience.isNotEmpty) _Experience(experience: experience),
+          if (education.isNotEmpty) _Education(education: education),
         ],
       ),
     );
@@ -48,17 +47,26 @@ class _Experience extends StatelessWidget {
               style: bodySmallOnSurface?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
+              maxLines: 2,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
             ),
             Text(exp.companyName, style: bodySmallOnSurface),
             Text(
               "(${exp.dateRange(l10n.datePresent)}) · ${exp.timeRange}",
               style: bodySmallOnSurface,
+              maxLines: 2,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
             ),
             Text(
               [exp.city, exp.state, exp.country]
                   .nonNulls
                   .join(l10n.listSeparator),
               style: bodySmallOnSurface,
+              maxLines: 2,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
             ),
             if (exp.companyUrl != null)
               InkWell(
@@ -69,6 +77,9 @@ class _Experience extends StatelessWidget {
                     decoration: TextDecoration.underline,
                     color: theme.colorScheme.primary,
                   ),
+                  maxLines: 2,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             const SizedBox(height: Insets.paddingMedium),
@@ -101,26 +112,37 @@ class _Education extends StatelessWidget {
     );
     final l10n = AppLocalizations.of(context)!;
     final items = education
-        .map((edu) => [
-              Row(
-                children: [
-                  Text(
-                    edu.schoolName,
-                    style: bodySmallOnSurface?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+        .map(
+          (edu) => [
+            Row(
+              children: [
+                Text(
+                  edu.schoolName,
+                  style: bodySmallOnSurface?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(" ", style: bodySmallOnSurface),
-                  Text(edu.dateRange(l10n.datePresent),
-                      style: bodySmallOnSurface)
-                ],
-              ),
-              Text(
-                [edu.title, edu.major].nonNulls.join(l10n.listSeparator),
-                style: bodySmallOnSurface,
-              ),
-              const SizedBox(height: Insets.paddingMedium),
-            ])
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(" ", style: bodySmallOnSurface),
+                Text(
+                  edu.dateRange(l10n.datePresent),
+                  style: bodySmallOnSurface,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                )
+              ],
+            ),
+            Text(
+              [edu.title, edu.major].nonNulls.join(l10n.listSeparator),
+              style: bodySmallOnSurface,
+              maxLines: 2,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: Insets.paddingMedium),
+          ],
+        )
         .expand((i) => i)
         .toList();
 

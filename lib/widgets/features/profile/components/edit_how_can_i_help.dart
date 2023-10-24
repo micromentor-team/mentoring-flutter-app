@@ -2,46 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/providers/user_provider.dart';
 import 'package:mm_flutter_app/widgets/features/profile/components/big_profile_chip.dart';
 
 class EditProfileHowCanIHelp extends StatelessWidget {
+  final UserDetailedProfile userData;
   final List<String> expertises;
   final List<String> industries;
   final List<String> mentoringPreferences;
-  final String? expectations;
 
   const EditProfileHowCanIHelp({
     super.key,
+    required this.userData,
     this.expertises = const [],
     this.industries = const [],
     this.mentoringPreferences = const [],
-    this.expectations,
   });
-
-  Widget _createListTileSection(
-      BuildContext context, String title, String content, String? nextPath) {
-    final theme = Theme.of(context);
-    return ListTile(
-      title: Text(
-        title,
-        style: theme.textTheme.titleMedium!
-            .copyWith(color: theme.colorScheme.primary),
-      ),
-      subtitle: Text(
-        content,
-        style: theme.textTheme.bodyLarge!
-            .copyWith(color: theme.colorScheme.onBackground),
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.navigate_next),
-        onPressed: () {
-          if (nextPath != null) {
-            context.push(nextPath);
-          }
-        },
-      ),
-    );
-  }
 
   Widget _createChipsListTile(BuildContext context, Widget titleWidget,
       List<BigProfileChip> chips, String? nextPath) {
@@ -78,7 +54,10 @@ class EditProfileHowCanIHelp extends StatelessWidget {
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
                 if (nextPath != null) {
-                  context.push(nextPath);
+                  context.push(
+                    nextPath,
+                    extra: userData,
+                  );
                 }
               },
             ),
@@ -92,9 +71,11 @@ class EditProfileHowCanIHelp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topThreeExpertises = expertises.sublist(0, 3);
+    final topThreeExpertises = expertises.take(Limits.profileExpertiseMaxSize);
     final additionalExpertises =
-        (expertises.length > 3) ? expertises.sublist(3) : [];
+        (expertises.length > Limits.profileExpertiseMaxSize)
+            ? expertises.sublist(Limits.profileExpertiseMaxSize)
+            : [];
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     final ThemeData theme = Theme.of(context);
@@ -104,7 +85,7 @@ class EditProfileHowCanIHelp extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            l10n.profileEditHowCanIHelp,
+            l10n.profileEditMainMentorHeader,
             style: theme.textTheme.titleLarge!
                 .copyWith(color: theme.colorScheme.onBackground),
           ),
@@ -116,57 +97,56 @@ class EditProfileHowCanIHelp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.profileEditExpertises,
+                l10n.profileEditMainMentorExpertisesSection,
                 style: theme.textTheme.titleMedium!
                     .copyWith(color: theme.colorScheme.primary),
               ),
               Text(
-                l10n.profileEditExpertisesHint,
+                l10n.profileEditMainMentorExpertisesHint,
                 style: theme.textTheme.bodyMedium!
                     .copyWith(color: theme.colorScheme.secondary),
               ),
             ],
           ),
           topThreeExpertises.map((e) => BigProfileChip(text: e)).toList(),
-          null,
+          Routes.profileEditExpertisesTop.path,
         ),
         _createChipsListTile(
           context,
           Text(
-            l10n.profileEditExpertisesAdditionalHint,
+            l10n.profileEditMainMentorExpertisesAdditionalHint,
             style: theme.textTheme.bodyMedium!
                 .copyWith(color: theme.colorScheme.secondary),
           ),
           additionalExpertises.map((e) => BigProfileChip(text: e)).toList(),
-          null,
+          Routes.profileEditExpertisesAdditional.path,
         ),
         const Divider(),
         _createChipsListTile(
-            context,
-            Text(
-              l10n.profileEditIndustries,
-              style: theme.textTheme.titleMedium!
-                  .copyWith(color: theme.colorScheme.primary),
-            ),
-            industries
-                .map((e) => BigProfileChip(
-                      text: e,
-                    ))
-                .toList(),
-            null),
+          context,
+          Text(
+            l10n.profileEditMainMentorIndustriesSection,
+            style: theme.textTheme.titleMedium!
+                .copyWith(color: theme.colorScheme.primary),
+          ),
+          industries
+              .map((e) => BigProfileChip(
+                    text: e,
+                  ))
+              .toList(),
+          Routes.profileEditIndustries.path,
+        ),
         const Divider(),
         _createChipsListTile(
-            context,
-            Text(
-              l10n.profileEditMentoringPreferences,
-              style: theme.textTheme.titleMedium!
-                  .copyWith(color: theme.colorScheme.primary),
-            ),
-            mentoringPreferences.map((e) => BigProfileChip(text: e)).toList(),
-            null),
-        const Divider(),
-        _createListTileSection(context, l10n.profileEditExpectations,
-            (expectations != null) ? expectations! : "", null),
+          context,
+          Text(
+            l10n.profileEditMainMentorPreferencesSection,
+            style: theme.textTheme.titleMedium!
+                .copyWith(color: theme.colorScheme.primary),
+          ),
+          mentoringPreferences.map((e) => BigProfileChip(text: e)).toList(),
+          Routes.profileEditMentoringPreferences.path,
+        ),
       ],
     );
   }

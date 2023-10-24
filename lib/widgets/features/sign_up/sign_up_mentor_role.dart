@@ -69,8 +69,9 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
       isNextEnabled: (_jobTitle?.isNotEmpty ?? false) &&
           (_companyName?.isNotEmpty ?? false),
       onNextPressed: () {
-        _registrationModel.updateUserInput.jobTitle = _jobTitle;
-        _registrationModel.updateUserInput.companyName = _companyName;
+        _registrationModel.updateUserInput.experienceJobTitle = _jobTitle;
+        _registrationModel.updateUserInput.experienceBusinessName =
+            _companyName;
         context.push(Routes.signupReason.path);
       },
     );

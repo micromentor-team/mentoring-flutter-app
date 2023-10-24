@@ -14,6 +14,7 @@ class TextFormFieldWidget extends StatefulWidget {
   final String? Function(String?)? validator;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final bool enabled;
 
   const TextFormFieldWidget({
     super.key,
@@ -29,6 +30,7 @@ class TextFormFieldWidget extends StatefulWidget {
     this.inputFormatters,
     this.prefixIcon,
     this.suffixIcon,
+    this.enabled = true,
   });
 
   @override
@@ -51,6 +53,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
       maxLength: widget.maxLength,
       controller: widget.textController,
       autofocus: false,
+      enabled: widget.enabled,
       obscureText: widget.isPassword != null &&
           widget.isPassword == true &&
           _passwordVisible != null &&
@@ -63,11 +66,15 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         labelText: widget.label,
         labelStyle: TextStyle(
-          color: theme.colorScheme.onSurface,
+          color: widget.enabled
+              ? theme.colorScheme.onSurface
+              : theme.colorScheme.onSurface.withOpacity(0.3),
         ),
         hintText: widget.hint,
         hintStyle: theme.textTheme.bodyLarge?.copyWith(
-          color: theme.colorScheme.outline,
+          color: widget.enabled
+              ? theme.colorScheme.outline
+              : theme.colorScheme.outline.withOpacity(0.3),
         ),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword != null
@@ -87,6 +94,11 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
             : widget.suffixIcon,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: theme.colorScheme.outline),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: theme.colorScheme.outline.withOpacity(0.3),
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: theme.colorScheme.outline),

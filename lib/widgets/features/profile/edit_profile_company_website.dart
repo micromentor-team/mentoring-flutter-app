@@ -1,39 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/utilities/navigation_mixin.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
-import '../../../utilities/navigation_mixin.dart';
 import '../../shared/text_form_field_widget.dart';
 import 'components/edit_template.dart';
 
-class EditOriginLocationScreen extends StatefulWidget {
+class EditCompanyWebsiteScreen extends StatefulWidget {
   final UserDetailedProfile userData;
 
-  const EditOriginLocationScreen({
+  const EditCompanyWebsiteScreen({
     super.key,
     required this.userData,
   });
 
   @override
-  State<EditOriginLocationScreen> createState() =>
-      _EditOriginLocationScreenState();
+  State<EditCompanyWebsiteScreen> createState() =>
+      _EditCompanyWebsiteScreenState();
 }
 
-class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
-    with NavigationMixin<EditOriginLocationScreen> {
+class _EditCompanyWebsiteScreenState extends State<EditCompanyWebsiteScreen>
+    with NavigationMixin<EditCompanyWebsiteScreen> {
   late final UserProvider _userProvider;
   late final TextEditingController _textEditingController;
-  String? _originLocation;
+  String? _companyWebsite;
 
   @override
   void initState() {
     super.initState();
     _userProvider = Provider.of<UserProvider>(context, listen: false);
     _textEditingController = TextEditingController(
-      text: widget.userData.cityOfOrigin, //TODO - Use region and country too
-    );
+        text: widget.userData.companies.firstOrNull?.websites?.first.value);
   }
 
   @override
@@ -48,25 +47,26 @@ class _EditOriginLocationScreenState extends State<EditOriginLocationScreen>
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return EditTemplate(
-      title: l10n.profileEditSectionAboutOriginLocationTitle,
+      title: l10n.profileEditSectionBusinessWebsiteTitle,
       scaffoldBuilder: buildPageRouteScaffold,
       body: Form(
         child: TextFormFieldWidget(
-          prefixIcon: const Icon(Icons.search),
-          label: l10n.profileEditSectionAboutOriginLocationInputLabel,
-          hint: l10n.profileEditSectionAboutOriginLocationInputHint,
+          label: l10n.profileEditSectionBusinessWebsiteInputLabel,
+          hint: l10n.profileEditSectionBusinessWebsiteInputHint,
           textController: _textEditingController,
           onChanged: (value) {
             setState(() {
-              _originLocation = value;
+              _companyWebsite = value;
             });
           },
         ),
       ),
-      editUserProfile: () => _userProvider.updateUserData(
-        input: Input$UserInput(
-          id: widget.userData.id,
-          cityOfOrigin: _originLocation, //TODO - Use region and country too
+      editUserProfile: () => _userProvider.updateCompany(
+        input: Input$CompanyInput(
+          id: widget.userData.companies.firstOrNull?.id,
+          websites: _companyWebsite?.isNotEmpty ?? false
+              ? [Input$LabeledStringValueInput(value: _companyWebsite)]
+              : null,
         ),
       ),
     );

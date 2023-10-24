@@ -149,8 +149,12 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
       userData.preferredLanguage.translatedValue!,
       ...userData.spokenLanguages.nonNulls.map((e) => e.translatedValue!),
     };
+    // TODO - Business and academic experiences to show in header must be marked as such in the backend
+    final headerBusinessExperience = userData.businessExperiences?.firstOrNull;
+    final headerAcademicExperience = userData.academicExperiences?.firstOrNull;
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Builder(
             builder: (context) {
@@ -216,15 +220,16 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             fullName: userData.fullName!,
             avatarUrl: userData.avatarUrl,
             pronouns: userData.pronounsDisplay,
-            affiliations: const ["Verizon Digital Ready"], //TODO
-            company: company?.name,
-            companyRole: userData.jobTitle,
-            education: userData.educationLevel?.translatedValue,
+            affiliations: null, //TODO
+            company: headerBusinessExperience?.businessName,
+            companyRole: headerBusinessExperience?.jobTitle,
+            school: headerAcademicExperience?.institutionName,
+            degreeType: headerAcademicExperience?.degreeType,
             linkedinUrl: userData.websites
                 ?.where((e) => e.label == WebsiteLabels.linkedin.name)
                 .firstOrNull
                 ?.value,
-            vacationMode: true, //TODO
+            vacationMode: true, //TODO - Implement in backend
             popupMenu: UserPopupMenuButton(
               userFullName: userData.fullName!,
               userId: userData.id,
@@ -238,10 +243,6 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             regionFrom: userData.regionOfOrigin,
             cityFrom: userData.cityOfOrigin,
             countryFrom: userData.countryOfOrigin?.translatedValue,
-            promptTitle:
-                "The best piece of advice I’ve ever received is:", //TODO
-            promptResponse:
-                "Sit amet justo donec enim diam vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.", //TODO
             languages: languages.toList(growable: false),
           ),
           if (userData.seeksHelp && company != null) ...[
@@ -251,8 +252,8 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 name: company.name,
                 website: company.websites?.first.value,
                 stage: company.companyStage?.translatedValue,
-                city: "Washington D.C.", //TODO
-                country: "USA", //TODO
+                city: null, //TODO
+                country: null, //TODO
                 industry: maybeMenteeGroupMembership?.industry?.translatedValue,
                 expertisesSought: maybeMenteeGroupMembership?.soughtExpertises
                         .map((e) => e.translatedValue!)
@@ -279,13 +280,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                         .map((e) => e.translatedValue!)
                         .toList() ??
                     [],
-                mentoringPreferences: const [
-                  "Weekly check-ins",
-                  "Monthly check-ins",
-                  "Informal chats",
-                  "Formal meetings",
-                  "Spot mentoring",
-                ], //TODO
+                // TODO - Mentoring preferences
                 expectations:
                     maybeMentorGroupMembership?.expectationsForMentees),
           ],

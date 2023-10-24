@@ -1,27 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/content_provider.dart';
-import '../sign_up/components/checkbox_list_and_form.dart';
-import 'edit_template.dart';
 
-class EditProfilePronounScreen extends StatefulWidget {
-  const EditProfilePronounScreen({Key? key}) : super(key: key);
+import '../../../providers/content_provider.dart';
+import '../../../providers/user_provider.dart';
+import '../../../utilities/navigation_mixin.dart';
+import '../sign_up/components/checkbox_list_and_form.dart';
+import 'components/edit_template.dart';
+
+class EditProfilePronounsScreen extends StatefulWidget {
+  final UserDetailedProfile userData;
+
+  const EditProfilePronounsScreen({
+    super.key,
+    required this.userData,
+  });
 
   @override
-  State<EditProfilePronounScreen> createState() =>
-      _EditProfilePronounScreenState();
+  State<EditProfilePronounsScreen> createState() =>
+      _EditProfilePronounsScreenState();
 }
 
-class _EditProfilePronounScreenState extends State<EditProfilePronounScreen> {
+class _EditProfilePronounsScreenState extends State<EditProfilePronounsScreen>
+    with NavigationMixin<EditProfilePronounsScreen> {
+  late final UserProvider _userProvider;
   late final ContentProvider _contentProvider;
   final List<String> _selections = List.empty(growable: true);
 
   @override
   void initState() {
     super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
+    _selections.addAll(widget.userData.pronouns.map((e) => e.textId));
   }
 
   List<LabeledCheckbox> _createCheckboxes() {
@@ -52,26 +64,22 @@ class _EditProfilePronounScreenState extends State<EditProfilePronounScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
 
     return EditTemplate(
-      title: l10n.profileEditPronouns,
-      body: Padding(
-        padding: const EdgeInsets.all(Insets.paddingMedium),
-        child: Column(
-          children: [
-            Text(
-              l10n.profileEditPronounsSubtitle,
-              style: theme.textTheme.bodyMedium!
-                  .copyWith(color: theme.colorScheme.outline),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: Insets.paddingMedium,
-            ),
-            ..._createCheckboxes(),
-          ],
+      title: l10n.profileEditSectionAboutPronounsTitle,
+      subtitle: l10n.profileEditSectionAboutPronounsSubtitle,
+      scaffoldBuilder: buildPageRouteScaffold,
+      body: Column(
+        children: [
+          ..._createCheckboxes(),
+        ],
+      ),
+      editUserProfile: () => _userProvider.updateUserData(
+        input: Input$UserInput(
+          id: widget.userData.id,
+          pronounsTextIds: _selections,
         ),
       ),
     );

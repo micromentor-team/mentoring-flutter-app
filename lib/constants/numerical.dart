@@ -9,4 +9,9 @@ class Limits {
   static const homeRecommendedUsersMaxSize = 4;
   static const homeInvitationsListMaxSize = 3;
   static const expertisesQuickViewMaxChips = 3;
+  static const profileEducationMaxSize = 3;
+  static const profileExperienceMaxSize = 3;
+  static const profileExpertiseMaxSize = 3;
+  static const profileEntrepreneurIndustryMaxSize = 1;
+  static const profileMentorIndustryMaxSize = 3;
 }

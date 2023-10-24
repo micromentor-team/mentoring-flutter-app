@@ -44,70 +44,73 @@ class AppWrapper extends StatelessWidget {
           body: child,
           appBar: scaffoldModel.appBar,
           drawer: scaffoldModel.drawer,
-          bottomNavigationBar: Builder(builder: (context) {
-            return NavigationBar(
-              destinations: <Widget>[
-                NavigationDestination(
-                  icon: const Icon(Icons.home_outlined),
-                  label: AppLocalizations.of(context)!.navTabHome,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.search_outlined),
-                  label: AppLocalizations.of(context)!.navTabExplore,
-                ),
-                NavigationDestination(
-                  icon: Selector<InboxModel, int>(
-                    selector: (_, inboxModel) => inboxModel.inboxNotifications,
-                    builder: (context, inboxNotifications, child) {
-                      return Stack(
-                        alignment: AlignmentDirectional.topEnd,
-                        children: [
-                          child!,
-                          if (inboxNotifications > 0)
-                            NotificationBubble(
-                              notifications: inboxNotifications,
-                            ),
-                        ],
-                      );
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: Insets.paddingExtraSmall,
-                        horizontal: Insets.paddingMedium,
+          bottomNavigationBar: scaffoldModel.hideNavBar
+              ? null
+              : Builder(builder: (context) {
+                  return NavigationBar(
+                    destinations: <Widget>[
+                      NavigationDestination(
+                        icon: const Icon(Icons.home_outlined),
+                        label: AppLocalizations.of(context)!.navTabHome,
                       ),
-                      child: Icon(Icons.mail_outline),
-                    ),
-                  ),
-                  label: AppLocalizations.of(context)!.navTabInbox,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.person_outlined),
-                  label: AppLocalizations.of(context)!.navTabProfile,
-                ),
-              ],
-              selectedIndex: _calculateSelectedIndex(context),
-              onDestinationSelected: (int index) {
-                switch (index) {
-                  case 0:
-                    context.push(Routes.home.path);
-                    break;
-                  case 1:
-                    context.push(Routes.explore.path);
-                    break;
-                  case 2:
-                    context.push(Routes.inboxChats.path);
-                    break;
-                  case 3:
-                    context.push(Routes.profile.path);
-                    break;
-                  default:
-                    throw UnexpectedStateError(
-                      message: 'Invalid navBar tab index',
-                    );
-                }
-              },
-            );
-          }),
+                      NavigationDestination(
+                        icon: const Icon(Icons.search_outlined),
+                        label: AppLocalizations.of(context)!.navTabExplore,
+                      ),
+                      NavigationDestination(
+                        icon: Selector<InboxModel, int>(
+                          selector: (_, inboxModel) =>
+                              inboxModel.inboxNotifications,
+                          builder: (context, inboxNotifications, child) {
+                            return Stack(
+                              alignment: AlignmentDirectional.topEnd,
+                              children: [
+                                child!,
+                                if (inboxNotifications > 0)
+                                  NotificationBubble(
+                                    notifications: inboxNotifications,
+                                  ),
+                              ],
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: Insets.paddingExtraSmall,
+                              horizontal: Insets.paddingMedium,
+                            ),
+                            child: Icon(Icons.mail_outline),
+                          ),
+                        ),
+                        label: AppLocalizations.of(context)!.navTabInbox,
+                      ),
+                      NavigationDestination(
+                        icon: const Icon(Icons.person_outlined),
+                        label: AppLocalizations.of(context)!.navTabProfile,
+                      ),
+                    ],
+                    selectedIndex: _calculateSelectedIndex(context),
+                    onDestinationSelected: (int index) {
+                      switch (index) {
+                        case 0:
+                          context.push(Routes.home.path);
+                          break;
+                        case 1:
+                          context.push(Routes.explore.path);
+                          break;
+                        case 2:
+                          context.push(Routes.inboxChats.path);
+                          break;
+                        case 3:
+                          context.push(Routes.profile.path);
+                          break;
+                        default:
+                          throw UnexpectedStateError(
+                            message: 'Invalid navBar tab index',
+                          );
+                      }
+                    },
+                  );
+                }),
         );
         TabBar? navBarTabBar;
         try {
