@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../utilities/debug_logger.dart';
@@ -26,15 +23,15 @@ class EditMentoringPreferencesScreen extends StatefulWidget {
 class _EditMentoringPreferencesScreenState
     extends State<EditMentoringPreferencesScreen>
     with NavigationMixin<EditMentoringPreferencesScreen> {
-  late final UserProvider _userProvider;
+  //late final UserProvider _userProvider;
   List<SelectChip> _selectedChips = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _userProvider = Provider.of<UserProvider>(context, listen: false);
-    // TODO - Set preselected values from userData
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _userProvider = Provider.of<UserProvider>(context, listen: false);
+  //   // TODO - Set preselected values from userData
+  // }
 
   List<SelectChip> _createPreferenceChips(AppLocalizations l10n) {
     // TODO: Implement in backend and return with content provider
@@ -67,14 +64,7 @@ class _EditMentoringPreferencesScreenState
           DebugLogger.info(_selectedChips.toString()); //TODO - Use value
         },
       ),
-      editUserProfile: () => _userProvider.updateMentorsGroupMembership(
-        input: Input$MentorsGroupMembershipInput(
-          id: widget.userData.groupMemberships
-              .firstWhere((g) => g.groupIdent == GroupIdent.mentors.name)
-              .id,
-          // TODO - update mentoring preferences
-        ),
-      ),
+      editUserProfile: null, // TODO - update mentoring preferences
     );
   }
 }

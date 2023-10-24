@@ -36,20 +36,6 @@ class _EditCompanyNameScreenState extends State<EditCompanyNameScreen>
   }
 
   @override
-  void didPop() async {
-    await _userProvider.updateUserData(
-      input: Input$UserInput(
-        id: widget.userData.id,
-        company: Input$CompanyInput(
-          id: widget.userData.companies.firstOrNull?.id,
-          name: _companyName,
-        ),
-      ),
-    );
-    super.didPop();
-  }
-
-  @override
   void dispose() {
     _textEditingController.dispose();
     super.dispose();

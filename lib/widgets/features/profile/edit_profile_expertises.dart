@@ -109,26 +109,28 @@ class _EditExpertisesScreenState extends State<EditExpertisesScreen>
         },
         initialSelection: _initialValues,
       ),
-      editUserProfile: _isEntrepreneur
-          ? () => _userProvider.updateMenteesGroupMembership(
-                input: Input$MenteesGroupMembershipInput(
-                    id: widget.userData.groupMemberships
-                        .firstWhere(
-                            (g) => g.groupIdent == GroupIdent.mentees.name)
-                        .id,
-                    soughtExpertisesTextIds:
-                        _selectedChips.map((e) => e.textId).toList()),
-              )
-          : () => _userProvider.updateMentorsGroupMembership(
-                input: Input$MentorsGroupMembershipInput(
-                  id: widget.userData.groupMemberships
-                      .firstWhere(
-                          (g) => g.groupIdent == GroupIdent.mentors.name)
-                      .id,
-                  expertisesTextIds:
-                      _selectedChips.map((e) => e.textId).toList(),
-                ),
-              ),
+      editUserProfile: !widget.isTopExpertises
+          ? null
+          : _isEntrepreneur // TODO - implement query for additional expertises
+              ? () => _userProvider.updateMenteesGroupMembership(
+                    input: Input$MenteesGroupMembershipInput(
+                        id: widget.userData.groupMemberships
+                            .firstWhere(
+                                (g) => g.groupIdent == GroupIdent.mentees.name)
+                            .id,
+                        soughtExpertisesTextIds:
+                            _selectedChips.map((e) => e.textId).toList()),
+                  )
+              : () => _userProvider.updateMentorsGroupMembership(
+                    input: Input$MentorsGroupMembershipInput(
+                      id: widget.userData.groupMemberships
+                          .firstWhere(
+                              (g) => g.groupIdent == GroupIdent.mentors.name)
+                          .id,
+                      expertisesTextIds:
+                          _selectedChips.map((e) => e.textId).toList(),
+                    ),
+                  ),
     );
   }
 }

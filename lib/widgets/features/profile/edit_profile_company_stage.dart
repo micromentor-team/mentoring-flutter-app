@@ -46,6 +46,7 @@ class _EditCompanyStageScreenState extends State<EditCompanyStageScreen>
 
   @override
   Widget build(BuildContext context) {
+    if (!pageRoute.isCurrent) return const SizedBox.shrink();
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return EditTemplate(
       title: l10n.profileEditSectionBusinessStageTitle,
