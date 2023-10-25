@@ -11,10 +11,8 @@ abstract class AppException implements Exception {
 
 class RetryException extends AppException {
   static const int id = 1;
-  RetryException({required String message, dynamic originalException})
-      : super(
-          message: message,
-          exceptionId: id,
-          originalException: originalException,
-        );
+  RetryException({
+    required super.message,
+    super.originalException,
+  }) : super(exceptionId: id);
 }
