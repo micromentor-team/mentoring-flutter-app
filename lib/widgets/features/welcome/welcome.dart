@@ -12,7 +12,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  double _dotIndicatorIndex = 0; //TODO: Use this to change picture and text
+  int _dotIndicatorIndex = 0; //TODO: Use this to change picture and text
 
   @override
   Widget build(BuildContext context) {

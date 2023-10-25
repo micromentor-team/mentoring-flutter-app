@@ -107,6 +107,7 @@ class _InboxInvitesReceivedScreenState extends State<InboxInvitesReceivedScreen>
       scaffoldModel.setParams(
         appBar: AppBarFactory.createInboxAppBar(
           router: router,
+          currentRoute: Routes.inboxInvitesReceived.path,
         ),
         drawer: DrawerFactory.createInboxDrawer(),
       );
