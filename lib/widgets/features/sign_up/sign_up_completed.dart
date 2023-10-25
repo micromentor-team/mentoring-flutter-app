@@ -11,7 +11,7 @@ import '../../../constants/app_constants.dart';
 import '../../../providers/models/user_registration_model.dart';
 
 class SignupCompletedScreen extends StatefulWidget {
-  const SignupCompletedScreen({Key? key}) : super(key: key);
+  const SignupCompletedScreen({super.key});
 
   @override
   State<SignupCompletedScreen> createState() => _SignupCompletedScreenState();

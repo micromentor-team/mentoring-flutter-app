@@ -18,12 +18,12 @@ class CreateMultiSelectChips extends StatefulWidget {
   final List<SelectChip> initialSelection;
 
   const CreateMultiSelectChips({
-    Key? key,
+    super.key,
     required this.chips,
     this.maxSelection,
     this.onSelectedChipsChanged,
     this.initialSelection = const [],
-  }) : super(key: key);
+  });
 
   @override
   State<CreateMultiSelectChips> createState() => _CreateMultiSelectChipsState();

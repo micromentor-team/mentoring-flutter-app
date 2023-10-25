@@ -7,10 +7,10 @@ class ResourceImage extends StatelessWidget {
   final String subheading;
 
   const ResourceImage({
-    Key? key,
+    super.key,
     required this.resourceImage,
     required this.subheading,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class ResourceImage extends StatelessWidget {
 }
 
 class ResourcesSection extends StatelessWidget {
-  const ResourcesSection({Key? key}) : super(key: key);
+  const ResourcesSection({super.key});
 
   List<Widget> _createResourceTiles(BuildContext context) {
     final ThemeData theme = Theme.of(context);

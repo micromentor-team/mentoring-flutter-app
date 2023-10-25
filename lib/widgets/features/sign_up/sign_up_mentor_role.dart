@@ -9,7 +9,7 @@ import '../../../providers/models/user_registration_model.dart';
 import '../../shared/text_form_field_widget.dart';
 
 class SignupMentorRoleScreen extends StatefulWidget {
-  const SignupMentorRoleScreen({Key? key}) : super(key: key);
+  const SignupMentorRoleScreen({super.key});
 
   @override
   State<SignupMentorRoleScreen> createState() => _SignupMentorRoleScreenState();

@@ -8,12 +8,12 @@ class ImageTile extends StatelessWidget {
   final bool isCircle;
 
   const ImageTile({
-    Key? key,
+    super.key,
     required this.image,
     required this.title,
     required this.subtitle,
     required this.isCircle,
-  }) : super(key: key);
+  });
 
   Widget _makeImage() {
     if (isCircle) {

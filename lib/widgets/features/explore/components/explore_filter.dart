@@ -10,9 +10,9 @@ class ExploreFilter extends StatelessWidget {
   final UserType userType;
 
   const ExploreFilter({
-    Key? key,
+    super.key,
     required this.userType,
-  }) : super(key: key);
+  });
 
   String? _helpText(AppLocalizations l10n) {
     switch (userType) {

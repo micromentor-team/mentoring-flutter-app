@@ -9,10 +9,10 @@ class ProfileHeader extends StatelessWidget {
   final String profileMessage;
 
   const ProfileHeader({
-    Key? key,
+    super.key,
     this.avatarUrl,
     required this.profileMessage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

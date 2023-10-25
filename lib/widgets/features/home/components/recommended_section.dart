@@ -18,8 +18,8 @@ import '../../../../utilities/errors/exceptions.dart';
 
 class RecommendedSection extends StatefulWidget {
   const RecommendedSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<RecommendedSection> createState() => _RecommendedSectionState();
@@ -139,12 +139,13 @@ class RecommendedUsersHeading extends StatelessWidget {
   final String title;
   final String subtitle;
   final void Function()? seeAllOnPressed;
+
   const RecommendedUsersHeading({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     this.seeAllOnPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

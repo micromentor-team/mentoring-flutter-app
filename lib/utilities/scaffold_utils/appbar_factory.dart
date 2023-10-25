@@ -13,6 +13,7 @@ class AppBarFactory {
 
   static AppBar? createInboxAppBar({
     required GoRouter router,
+    required String currentRoute,
   }) {
     return AppBar(
       leading: Stack(
@@ -52,12 +53,12 @@ class AppBarFactory {
           return _getInboxAppBarTitle(
             Theme.of(context),
             AppLocalizations.of(context)!,
-            router.location,
+            currentRoute,
           );
         },
       ),
       centerTitle: true,
-      bottom: router.location.startsWith(Routes.inboxInvites.path)
+      bottom: currentRoute.startsWith(Routes.inboxInvites.path)
           ? TabBar(
               tabs: [
                 Tab(

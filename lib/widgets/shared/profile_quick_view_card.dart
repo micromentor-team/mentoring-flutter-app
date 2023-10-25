@@ -68,7 +68,7 @@ class ProfileQuickViewCard extends StatelessWidget {
   final List<ExpertiseChip> expertises;
 
   const ProfileQuickViewCard({
-    Key? key,
+    super.key,
     required this.userId,
     required this.userType,
     this.avatarUrl,
@@ -79,7 +79,7 @@ class ProfileQuickViewCard extends StatelessWidget {
     this.companyRole,
     this.endorsements,
     this.expertises = const [],
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

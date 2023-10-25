@@ -8,12 +8,12 @@ class SignUpBottomButtons extends StatelessWidget {
   final Function()? rightOnPress;
 
   const SignUpBottomButtons({
-    Key? key,
+    super.key,
     required this.leftButtonText,
     required this.rightButtonText,
     this.leftOnPress,
     this.rightOnPress,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

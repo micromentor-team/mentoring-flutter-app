@@ -295,7 +295,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
 }
 
 class ExploreScreen extends StatefulWidget {
-  const ExploreScreen({Key? key}) : super(key: key);
+  const ExploreScreen({super.key});
 
   @override
   State<ExploreScreen> createState() => _ExploreScreenState();

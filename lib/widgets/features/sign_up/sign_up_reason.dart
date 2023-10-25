@@ -9,7 +9,7 @@ import '../../../providers/models/user_registration_model.dart';
 import '../../shared/text_form_field_widget.dart';
 
 class SignupReasonScreen extends StatefulWidget {
-  const SignupReasonScreen({Key? key}) : super(key: key);
+  const SignupReasonScreen({super.key});
 
   @override
   State<SignupReasonScreen> createState() => _SignupReasonScreenState();

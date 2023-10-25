@@ -18,9 +18,9 @@ class InviteToConnectScreen extends StatefulWidget {
   final String userId;
 
   const InviteToConnectScreen({
-    Key? key,
+    super.key,
     required this.userId,
-  }) : super(key: key);
+  });
 
   @override
   State<InviteToConnectScreen> createState() => _InviteToConnectScreenState();
