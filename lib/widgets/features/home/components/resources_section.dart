@@ -7,10 +7,10 @@ class ResourceImage extends StatelessWidget {
   final String subheading;
 
   const ResourceImage({
-    Key? key,
+    super.key,
     required this.resourceImage,
     required this.subheading,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

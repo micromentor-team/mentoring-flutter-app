@@ -52,7 +52,10 @@ class MainApp extends StatelessWidget {
 
 class StartScreen extends StatefulWidget {
   final String nextRouteName;
-  const StartScreen({Key? key, required this.nextRouteName}) : super(key: key);
+  const StartScreen({
+    super.key,
+    required this.nextRouteName,
+  });
 
   @override
   State<StartScreen> createState() => _StartScreenState();

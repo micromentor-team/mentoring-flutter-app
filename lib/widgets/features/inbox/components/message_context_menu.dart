@@ -13,9 +13,9 @@ class MessageContextMenu extends StatefulWidget {
   final MessageBubble messageBubble;
 
   const MessageContextMenu({
-    Key? key,
+    super.key,
     required this.messageBubble,
-  }) : super(key: key);
+  });
 
   @override
   State<MessageContextMenu> createState() => _MessageContextMenuState();

@@ -17,9 +17,9 @@ import '../../../shared/notification_bubble.dart';
 class InvitationSection extends StatefulWidget {
   final AuthenticatedUser authenticatedUser;
   const InvitationSection({
-    Key? key,
+    super.key,
     required this.authenticatedUser,
-  }) : super(key: key);
+  });
 
   @override
   State<InvitationSection> createState() => _InvitationSectionState();
