@@ -210,6 +210,10 @@ mutation CreateUserSearch($input: UserSearchInput!) {
     }
 }
 
+mutation EndMySession ($deviceUuid: String!) {
+    endMySession(deviceUuid: $deviceUuid)
+}
+
 mutation SignInUser ($input: UserSignInInput!) {
     signInUser(input: $input) {
         userId
@@ -228,6 +232,10 @@ mutation SignUpUser ($input: UserSignUpInput!) {
         deviceId
         authToken
     }
+}
+
+mutation StartMySession ($deviceUuid: String!, $pushNotificationToken: String) {
+    startMySession(deviceUuid: $deviceUuid, pushNotificationToken: $pushNotificationToken)
 }
 
 mutation UpdateAcademicExperience($input: AcademicExperienceInput!) {

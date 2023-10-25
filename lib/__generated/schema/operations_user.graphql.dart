@@ -12799,6 +12799,265 @@ class _CopyWithStubImpl$Mutation$CreateUserSearch$createUserSearch<TRes>
       _res;
 }
 
+class Variables$Mutation$EndMySession {
+  factory Variables$Mutation$EndMySession({required String deviceUuid}) =>
+      Variables$Mutation$EndMySession._({
+        r'deviceUuid': deviceUuid,
+      });
+
+  Variables$Mutation$EndMySession._(this._$data);
+
+  factory Variables$Mutation$EndMySession.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$deviceUuid = data['deviceUuid'];
+    result$data['deviceUuid'] = (l$deviceUuid as String);
+    return Variables$Mutation$EndMySession._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get deviceUuid => (_$data['deviceUuid'] as String);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$deviceUuid = deviceUuid;
+    result$data['deviceUuid'] = l$deviceUuid;
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$EndMySession<Variables$Mutation$EndMySession>
+      get copyWith => CopyWith$Variables$Mutation$EndMySession(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$EndMySession) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$deviceUuid = deviceUuid;
+    final lOther$deviceUuid = other.deviceUuid;
+    if (l$deviceUuid != lOther$deviceUuid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$deviceUuid = deviceUuid;
+    return Object.hashAll([l$deviceUuid]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$EndMySession<TRes> {
+  factory CopyWith$Variables$Mutation$EndMySession(
+    Variables$Mutation$EndMySession instance,
+    TRes Function(Variables$Mutation$EndMySession) then,
+  ) = _CopyWithImpl$Variables$Mutation$EndMySession;
+
+  factory CopyWith$Variables$Mutation$EndMySession.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$EndMySession;
+
+  TRes call({String? deviceUuid});
+}
+
+class _CopyWithImpl$Variables$Mutation$EndMySession<TRes>
+    implements CopyWith$Variables$Mutation$EndMySession<TRes> {
+  _CopyWithImpl$Variables$Mutation$EndMySession(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$EndMySession _instance;
+
+  final TRes Function(Variables$Mutation$EndMySession) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? deviceUuid = _undefined}) =>
+      _then(Variables$Mutation$EndMySession._({
+        ..._instance._$data,
+        if (deviceUuid != _undefined && deviceUuid != null)
+          'deviceUuid': (deviceUuid as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$EndMySession<TRes>
+    implements CopyWith$Variables$Mutation$EndMySession<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$EndMySession(this._res);
+
+  TRes _res;
+
+  call({String? deviceUuid}) => _res;
+}
+
+class Mutation$EndMySession {
+  Mutation$EndMySession({
+    required this.endMySession,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$EndMySession.fromJson(Map<String, dynamic> json) {
+    final l$endMySession = json['endMySession'];
+    final l$$__typename = json['__typename'];
+    return Mutation$EndMySession(
+      endMySession: (l$endMySession as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String endMySession;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$endMySession = endMySession;
+    _resultData['endMySession'] = l$endMySession;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$endMySession = endMySession;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$endMySession,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$EndMySession) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$endMySession = endMySession;
+    final lOther$endMySession = other.endMySession;
+    if (l$endMySession != lOther$endMySession) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$EndMySession on Mutation$EndMySession {
+  CopyWith$Mutation$EndMySession<Mutation$EndMySession> get copyWith =>
+      CopyWith$Mutation$EndMySession(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$EndMySession<TRes> {
+  factory CopyWith$Mutation$EndMySession(
+    Mutation$EndMySession instance,
+    TRes Function(Mutation$EndMySession) then,
+  ) = _CopyWithImpl$Mutation$EndMySession;
+
+  factory CopyWith$Mutation$EndMySession.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$EndMySession;
+
+  TRes call({
+    String? endMySession,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$EndMySession<TRes>
+    implements CopyWith$Mutation$EndMySession<TRes> {
+  _CopyWithImpl$Mutation$EndMySession(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$EndMySession _instance;
+
+  final TRes Function(Mutation$EndMySession) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? endMySession = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$EndMySession(
+        endMySession: endMySession == _undefined || endMySession == null
+            ? _instance.endMySession
+            : (endMySession as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$EndMySession<TRes>
+    implements CopyWith$Mutation$EndMySession<TRes> {
+  _CopyWithStubImpl$Mutation$EndMySession(this._res);
+
+  TRes _res;
+
+  call({
+    String? endMySession,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationEndMySession = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'EndMySession'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'deviceUuid')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'endMySession'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'deviceUuid'),
+            value: VariableNode(name: NameNode(value: 'deviceUuid')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
 class Variables$Mutation$SignInUser {
   factory Variables$Mutation$SignInUser(
           {required Input$UserSignInInput input}) =>
@@ -13874,6 +14133,323 @@ class _CopyWithStubImpl$Mutation$SignUpUser$signUpUser<TRes>
   }) =>
       _res;
 }
+
+class Variables$Mutation$StartMySession {
+  factory Variables$Mutation$StartMySession({
+    required String deviceUuid,
+    String? pushNotificationToken,
+  }) =>
+      Variables$Mutation$StartMySession._({
+        r'deviceUuid': deviceUuid,
+        if (pushNotificationToken != null)
+          r'pushNotificationToken': pushNotificationToken,
+      });
+
+  Variables$Mutation$StartMySession._(this._$data);
+
+  factory Variables$Mutation$StartMySession.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$deviceUuid = data['deviceUuid'];
+    result$data['deviceUuid'] = (l$deviceUuid as String);
+    if (data.containsKey('pushNotificationToken')) {
+      final l$pushNotificationToken = data['pushNotificationToken'];
+      result$data['pushNotificationToken'] =
+          (l$pushNotificationToken as String?);
+    }
+    return Variables$Mutation$StartMySession._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get deviceUuid => (_$data['deviceUuid'] as String);
+  String? get pushNotificationToken =>
+      (_$data['pushNotificationToken'] as String?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$deviceUuid = deviceUuid;
+    result$data['deviceUuid'] = l$deviceUuid;
+    if (_$data.containsKey('pushNotificationToken')) {
+      final l$pushNotificationToken = pushNotificationToken;
+      result$data['pushNotificationToken'] = l$pushNotificationToken;
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$StartMySession<Variables$Mutation$StartMySession>
+      get copyWith => CopyWith$Variables$Mutation$StartMySession(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$StartMySession) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$deviceUuid = deviceUuid;
+    final lOther$deviceUuid = other.deviceUuid;
+    if (l$deviceUuid != lOther$deviceUuid) {
+      return false;
+    }
+    final l$pushNotificationToken = pushNotificationToken;
+    final lOther$pushNotificationToken = other.pushNotificationToken;
+    if (_$data.containsKey('pushNotificationToken') !=
+        other._$data.containsKey('pushNotificationToken')) {
+      return false;
+    }
+    if (l$pushNotificationToken != lOther$pushNotificationToken) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$deviceUuid = deviceUuid;
+    final l$pushNotificationToken = pushNotificationToken;
+    return Object.hashAll([
+      l$deviceUuid,
+      _$data.containsKey('pushNotificationToken')
+          ? l$pushNotificationToken
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$StartMySession<TRes> {
+  factory CopyWith$Variables$Mutation$StartMySession(
+    Variables$Mutation$StartMySession instance,
+    TRes Function(Variables$Mutation$StartMySession) then,
+  ) = _CopyWithImpl$Variables$Mutation$StartMySession;
+
+  factory CopyWith$Variables$Mutation$StartMySession.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$StartMySession;
+
+  TRes call({
+    String? deviceUuid,
+    String? pushNotificationToken,
+  });
+}
+
+class _CopyWithImpl$Variables$Mutation$StartMySession<TRes>
+    implements CopyWith$Variables$Mutation$StartMySession<TRes> {
+  _CopyWithImpl$Variables$Mutation$StartMySession(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$StartMySession _instance;
+
+  final TRes Function(Variables$Mutation$StartMySession) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? deviceUuid = _undefined,
+    Object? pushNotificationToken = _undefined,
+  }) =>
+      _then(Variables$Mutation$StartMySession._({
+        ..._instance._$data,
+        if (deviceUuid != _undefined && deviceUuid != null)
+          'deviceUuid': (deviceUuid as String),
+        if (pushNotificationToken != _undefined)
+          'pushNotificationToken': (pushNotificationToken as String?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$StartMySession<TRes>
+    implements CopyWith$Variables$Mutation$StartMySession<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$StartMySession(this._res);
+
+  TRes _res;
+
+  call({
+    String? deviceUuid,
+    String? pushNotificationToken,
+  }) =>
+      _res;
+}
+
+class Mutation$StartMySession {
+  Mutation$StartMySession({
+    required this.startMySession,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$StartMySession.fromJson(Map<String, dynamic> json) {
+    final l$startMySession = json['startMySession'];
+    final l$$__typename = json['__typename'];
+    return Mutation$StartMySession(
+      startMySession: (l$startMySession as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String startMySession;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$startMySession = startMySession;
+    _resultData['startMySession'] = l$startMySession;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$startMySession = startMySession;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$startMySession,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$StartMySession) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$startMySession = startMySession;
+    final lOther$startMySession = other.startMySession;
+    if (l$startMySession != lOther$startMySession) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$StartMySession on Mutation$StartMySession {
+  CopyWith$Mutation$StartMySession<Mutation$StartMySession> get copyWith =>
+      CopyWith$Mutation$StartMySession(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$StartMySession<TRes> {
+  factory CopyWith$Mutation$StartMySession(
+    Mutation$StartMySession instance,
+    TRes Function(Mutation$StartMySession) then,
+  ) = _CopyWithImpl$Mutation$StartMySession;
+
+  factory CopyWith$Mutation$StartMySession.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$StartMySession;
+
+  TRes call({
+    String? startMySession,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$StartMySession<TRes>
+    implements CopyWith$Mutation$StartMySession<TRes> {
+  _CopyWithImpl$Mutation$StartMySession(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$StartMySession _instance;
+
+  final TRes Function(Mutation$StartMySession) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? startMySession = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$StartMySession(
+        startMySession: startMySession == _undefined || startMySession == null
+            ? _instance.startMySession
+            : (startMySession as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$StartMySession<TRes>
+    implements CopyWith$Mutation$StartMySession<TRes> {
+  _CopyWithStubImpl$Mutation$StartMySession(this._res);
+
+  TRes _res;
+
+  call({
+    String? startMySession,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationStartMySession = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'StartMySession'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'deviceUuid')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'pushNotificationToken')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'startMySession'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'deviceUuid'),
+            value: VariableNode(name: NameNode(value: 'deviceUuid')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'pushNotificationToken'),
+            value: VariableNode(name: NameNode(value: 'pushNotificationToken')),
+          ),
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
 
 class Variables$Mutation$UpdateAcademicExperience {
   factory Variables$Mutation$UpdateAcademicExperience(

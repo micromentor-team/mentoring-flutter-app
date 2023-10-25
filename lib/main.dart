@@ -1,20 +1,18 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mm_flutter_app/services/firebase/firebase_service.dart';
 import 'package:provider/provider.dart';
 
+import '__generated/schema/schema.graphql.dart';
 import 'constants/constants.dart';
 import 'models/explore_card_filters_model.dart';
 import 'models/inbox_model.dart';
 import 'models/locale_model.dart';
 import 'models/scaffold_model.dart';
 import 'models/user_registration_model.dart';
-import 'services/firebase/firebase_notifications.dart';
-import 'services/firebase/firebase_options.dart';
 import 'services/graphql/graphql.dart';
 import 'services/graphql/providers/base/operation_result.dart';
 import 'services/graphql/providers/channels_provider.dart';
@@ -22,7 +20,6 @@ import 'services/graphql/providers/content_provider.dart';
 import 'services/graphql/providers/invitations_provider.dart';
 import 'services/graphql/providers/messages_provider.dart';
 import 'services/graphql/providers/user_provider.dart';
-import 'utilities/errors/crash_handler.dart';
 import 'utilities/router.dart';
 import 'utilities/utility.dart';
 import 'widgets/features/sign_in/screens/sign_in.dart';
@@ -30,6 +27,7 @@ import 'widgets/features/welcome/screens/welcome.dart';
 import 'widgets/shared/loading.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
+final FirebaseService firebaseService = FirebaseService();
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -61,17 +59,23 @@ class StartScreen extends StatefulWidget {
   State<StartScreen> createState() => _StartScreenState();
 }
 
-class _StartScreenState extends State<StartScreen> {
+class _StartScreenState extends State<StartScreen> with FirebaseServiceOwner {
   late Future<OperationResult<AuthenticatedUser?>> _authenticatedUser;
   late Future<OperationResult> _content;
+  late final AppLifecycleListener _appLifeCycleListener;
   late final InboxModel _inboxModel;
   late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;
   late final ExploreCardFiltersModel _filtersModel;
+  bool _didReportSessionStarted = false;
 
   @override
   void initState() {
     super.initState();
+    _appLifeCycleListener = AppLifecycleListener(
+      onStateChange: _onStateChanged,
+    );
+
     _inboxModel = Provider.of<InboxModel>(context, listen: false);
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
     _registrationModel = Provider.of<UserRegistrationModel>(
@@ -86,8 +90,45 @@ class _StartScreenState extends State<StartScreen> {
 
   @override
   void dispose() {
+    _appLifeCycleListener.dispose();
     _inboxModel.cancelDataPolling();
+    firebaseService.shutDownService();
     super.dispose();
+  }
+
+  void _onStateChanged(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.detached:
+        debugPrint('App detached');
+      case AppLifecycleState.resumed:
+        debugPrint('App resumed');
+        _reportSessionStarted();
+      case AppLifecycleState.inactive:
+        debugPrint('App inactive');
+        _reportSessionEnded();
+      case AppLifecycleState.hidden:
+        debugPrint('App hidden');
+      case AppLifecycleState.paused:
+        debugPrint('App paused');
+    }
+  }
+
+  void _reportSessionStarted() {
+    _didReportSessionStarted = true;
+    if (firebaseService.firebaseToken == null) {
+      debugPrint('_reportSessionStarted called without having firebaseToken.');
+    }
+    Provider.of<UserProvider>(context, listen: false).startMySession(
+      deviceUuid: firebaseService.deviceUuid,
+      pushNotificationToken: firebaseService.firebaseToken,
+    );
+  }
+
+  void _reportSessionEnded() {
+    _didReportSessionStarted = true;
+    Provider.of<UserProvider>(context, listen: false).endMySession(
+      deviceUuid: firebaseService.deviceUuid,
+    );
   }
 
   @override
@@ -98,6 +139,20 @@ class _StartScreenState extends State<StartScreen> {
         Provider.of<UserProvider>(context).getAuthenticatedUser(
       logFailures: false, // Error is expected when user is not logged in.
     );
+  }
+
+  @override
+  void onNewFirebaseTokenReceived(String deviceUuid, String firebaseToken) {
+    // If we haven't yet reported the starting of the session, we'll send
+    // the Firebase token together with that, instead of here.
+    if (_didReportSessionStarted) {
+      Provider.of<UserProvider>(context).updateUserDevice(
+        input: Input$UserDeviceInput(
+          deviceUuid: deviceUuid,
+          pushNotificationToken: firebaseToken,
+        ),
+      );
+    }
   }
 
   void _initializeUser() async {
@@ -132,6 +187,8 @@ class _StartScreenState extends State<StartScreen> {
                 _initializeUser();
                 context.goNamed(widget.nextRouteName);
               });
+
+              firebaseService.setOwner(this);
               return const LoadingScreen();
             },
           ),
@@ -152,24 +209,8 @@ class LoadingScreen extends StatelessWidget {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    name: Identifiers.appName,
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 
-  if (!kIsWeb) {
-    await FirebaseNotifications().initialize();
-
-    String? token = await FirebaseNotifications().getToken();
-    debugPrint('Token is $token');
-  }
-
-  //TODO(m-rosario): Make crash data collection opt-in.
-  final CrashHandler crashHandler = CrashHandler(!kDebugMode, true);
-  FlutterError.onError = crashHandler.handleUncaughtFlutterError;
-  PlatformDispatcher.instance.onError =
-      crashHandler.handleUncaughtPlatformError;
-  ErrorWidget.builder = crashHandler.handleBuildError;
+  firebaseService.init();
 
   await dotenv.load(fileName: "assets/.env");
   final serverUrl = dotenv.env['APP_GRAPHQL_URL'];

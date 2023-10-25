@@ -36,9 +36,4 @@ class FirebaseNotifications {
     // When the app is opened from a background state
     FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
   }
-
-  Future<String?> getToken() async {
-    final fCMToken = await _fbInstance.getToken();
-    return fCMToken;
-  }
 }
