@@ -11,13 +11,13 @@ class InboxInvitationTile extends StatelessWidget {
   final void Function() buttonOnPressed;
 
   const InboxInvitationTile({
-    Key? key,
+    super.key,
     required this.userName,
     required this.userJobTitle,
     required this.invitationStatus,
     this.avatarUrl,
     required this.buttonOnPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

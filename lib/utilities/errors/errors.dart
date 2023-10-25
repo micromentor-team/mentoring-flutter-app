@@ -12,6 +12,8 @@ abstract class AppError extends Error {
 
 class UnexpectedStateError extends AppError {
   static const int id = 1;
-  UnexpectedStateError({required String message, dynamic originalError})
-      : super(message: message, errorId: id, originalError: originalError);
+  UnexpectedStateError({
+    required super.message,
+    super.originalError,
+  }) : super(errorId: id);
 }

@@ -17,8 +17,13 @@ class AppWrapper extends StatelessWidget {
   final Widget child;
 
   int _calculateSelectedIndex(BuildContext context) {
-    final GoRouter route = GoRouter.of(context);
-    final String location = route.location;
+    final GoRouter router = GoRouter.of(context);
+    final RouteMatch lastMatch =
+        router.routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : router.routerDelegate.currentConfiguration;
+    final String location = matchList.uri.toString();
     if (location.startsWith(Routes.home.path)) {
       return 0;
     }

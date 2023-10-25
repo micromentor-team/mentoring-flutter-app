@@ -185,6 +185,9 @@ class _InboxChatListScreenState extends State<InboxChatListScreen>
       scaffoldModel.setParams(
         appBar: InboxAppBarFactory.createInboxAppBar(
           router: router,
+          currentRoute: widget.isArchivedForUser
+              ? Routes.inboxArchived.path
+              : Routes.inboxChats.path,
         ),
         drawer: InboxDrawerFactory.createInboxDrawer(),
       );

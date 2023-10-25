@@ -10,15 +10,14 @@ class ReminderBanner extends StatefulWidget {
   final String subtitleText;
   final String ctaText;
   final int profileCompletionPercentage;
+
   const ReminderBanner({
-    Key? key,
+    super.key,
     required this.titleText,
     required this.subtitleText,
     required this.ctaText,
     required this.profileCompletionPercentage,
-  }) : super(
-          key: key,
-        );
+  });
 
   Widget _buildProgressCircleColumn(context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -175,9 +174,9 @@ class _ReminderBannerState extends State<ReminderBanner> {
 class MaybeReminderBanner extends StatelessWidget {
   final AuthenticatedUser authenticatedUser;
   const MaybeReminderBanner({
-    Key? key,
+    super.key,
     required this.authenticatedUser,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

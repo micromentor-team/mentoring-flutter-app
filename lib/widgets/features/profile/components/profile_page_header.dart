@@ -17,13 +17,13 @@ class ProfilePageHeader extends StatefulWidget {
   final MessageDirection invitationDirection;
 
   const ProfilePageHeader({
-    Key? key,
+    super.key,
     required this.authenticatedUser,
     required this.userId,
     required this.userFirstName,
     this.invitationId,
     this.invitationDirection = MessageDirection.unset,
-  }) : super(key: key);
+  });
 
   @override
   State<ProfilePageHeader> createState() => _ProfilePageHeaderState();

@@ -9,7 +9,7 @@ import '../../../shared/radio_button_cards.dart';
 import '../components/sign_up_template.dart';
 
 class SignupEntrepreneurCompanyStageScreen extends StatefulWidget {
-  const SignupEntrepreneurCompanyStageScreen({Key? key}) : super(key: key);
+  const SignupEntrepreneurCompanyStageScreen({super.key});
 
   @override
   State<SignupEntrepreneurCompanyStageScreen> createState() =>

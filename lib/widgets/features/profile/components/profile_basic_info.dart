@@ -260,7 +260,7 @@ class ProfileBasicInfo extends StatelessWidget {
   final Widget popupMenu;
 
   const ProfileBasicInfo({
-    Key? key,
+    super.key,
     required this.isMyProfile,
     required this.userType,
     this.avatarUrl,
@@ -274,7 +274,7 @@ class ProfileBasicInfo extends StatelessWidget {
     this.linkedinUrl,
     required this.vacationMode,
     required this.popupMenu,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

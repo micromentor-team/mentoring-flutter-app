@@ -9,7 +9,7 @@ import '../../../shared/radio_button_cards.dart';
 import '../components/sign_up_template.dart';
 
 class SignupGroupMembershipScreen extends StatefulWidget {
-  const SignupGroupMembershipScreen({Key? key}) : super(key: key);
+  const SignupGroupMembershipScreen({super.key});
 
   @override
   State<SignupGroupMembershipScreen> createState() =>

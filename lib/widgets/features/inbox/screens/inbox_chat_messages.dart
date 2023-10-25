@@ -99,9 +99,9 @@ class ChannelChat extends StatefulWidget {
   final ChannelById channel;
 
   const ChannelChat({
-    Key? key,
+    super.key,
     required this.channel,
-  }) : super(key: key);
+  });
 
   @override
   State<ChannelChat> createState() => _ChannelChatState();
@@ -232,14 +232,14 @@ class BuildMessageBubbles extends StatelessWidget {
       onSetReplyingTo; //TODO - Temporarily disabled.
 
   const BuildMessageBubbles({
-    Key? key,
+    super.key,
     required this.channel,
     required this.authenticatedUser,
     required this.participants,
     required this.chatMessages,
     required this.listScrollController,
     required this.onSetReplyingTo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -293,12 +293,12 @@ class BuildMessageBubble extends StatelessWidget {
   final bool isSentByAuthenticatedUser;
 
   const BuildMessageBubble({
-    Key? key,
+    super.key,
     required this.message,
     required this.participants,
     required this.chatMessages,
     required this.isSentByAuthenticatedUser,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

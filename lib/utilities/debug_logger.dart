@@ -5,7 +5,7 @@ class DebugLogger {
 
   DebugLogger._private();
 
-  static void verbose(String message) => _logger.v(message);
+  static void trace(String message) => _logger.t(message);
   static void debug(String message) => _logger.d(message);
   static void info(String message) => _logger.i(message);
   static void warning(String message) => _logger.w(message);

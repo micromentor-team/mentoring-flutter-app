@@ -11,7 +11,7 @@ import '../../../../services/graphql/providers/user_provider.dart';
 import '../components/sign_up_bottom_buttons.dart';
 
 class SignupCompletedScreen extends StatefulWidget {
-  const SignupCompletedScreen({Key? key}) : super(key: key);
+  const SignupCompletedScreen({super.key});
 
   @override
   State<SignupCompletedScreen> createState() => _SignupCompletedScreenState();

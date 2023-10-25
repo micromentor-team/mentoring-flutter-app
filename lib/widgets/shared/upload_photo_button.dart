@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/constants.dart';
 
 class UploadPhotoButton extends StatelessWidget {
-  const UploadPhotoButton({Key? key}) : super(key: key);
+  const UploadPhotoButton({super.key});
 
   @override
   Widget build(BuildContext context) {

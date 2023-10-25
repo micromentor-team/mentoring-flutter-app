@@ -30,6 +30,38 @@ class UserPopupMenuButton extends StatelessWidget {
     this.channelId,
   });
 
+  Future<void> _archiveChannel(
+    GoRouter router,
+    ChannelsProvider channelsProvider,
+    InboxModel inboxModel,
+  ) async {
+    await channelsProvider.archiveChannelForAuthenticatedUser(
+      channelId: channelId!,
+    );
+    inboxModel.setChannelArchived(
+      channelId: channelId!,
+      isArchivedForMe: true,
+    );
+    await inboxModel.refreshUnseenMessages();
+    router.push(Routes.inboxChats.path);
+  }
+
+  Future<void> _unarchiveChannel(
+    GoRouter router,
+    ChannelsProvider channelsProvider,
+    InboxModel inboxModel,
+  ) async {
+    await channelsProvider.unarchiveChannelForAuthenticatedUser(
+      channelId: channelId!,
+    );
+    inboxModel.setChannelArchived(
+      channelId: channelId!,
+      isArchivedForMe: false,
+    );
+    await inboxModel.refreshUnseenMessages();
+    router.push(Routes.inboxChats.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (includeArchiveOption && includeUnarchiveOption) {
@@ -76,29 +108,13 @@ class UserPopupMenuButton extends StatelessWidget {
             child: Text(l10n.userOverflowActionReport),
           ),
       ],
-      onSelected: (value) async {
+      onSelected: (value) {
         switch (value) {
           case 0:
-            await channelsProvider.archiveChannelForAuthenticatedUser(
-              channelId: channelId!,
-            );
-            inboxModel.setChannelArchived(
-              channelId: channelId!,
-              isArchivedForMe: true,
-            );
-            await inboxModel.refreshUnseenMessages();
-            router.push(Routes.inboxChats.path);
+            _archiveChannel(router, channelsProvider, inboxModel);
             break;
           case 1:
-            await channelsProvider.unarchiveChannelForAuthenticatedUser(
-              channelId: channelId!,
-            );
-            inboxModel.setChannelArchived(
-              channelId: channelId!,
-              isArchivedForMe: false,
-            );
-            await inboxModel.refreshUnseenMessages();
-            router.push(Routes.inboxChats.path);
+            _unarchiveChannel(router, channelsProvider, inboxModel);
             break;
           case 2:
             showDialog(

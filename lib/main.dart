@@ -52,7 +52,10 @@ class MainApp extends StatelessWidget {
 
 class StartScreen extends StatefulWidget {
   final String nextRouteName;
-  const StartScreen({Key? key, required this.nextRouteName}) : super(key: key);
+  const StartScreen({
+    super.key,
+    required this.nextRouteName,
+  });
 
   @override
   State<StartScreen> createState() => _StartScreenState();
@@ -139,7 +142,7 @@ class _StartScreenState extends State<StartScreen> {
 }
 
 class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({Key? key}) : super(key: key);
+  const LoadingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

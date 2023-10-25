@@ -10,7 +10,7 @@ import '../../../shared/multi_select_chips.dart';
 import '../components/sign_up_template.dart';
 
 class SignupExpertisesScreen extends StatefulWidget {
-  const SignupExpertisesScreen({Key? key}) : super(key: key);
+  const SignupExpertisesScreen({super.key});
 
   @override
   State<SignupExpertisesScreen> createState() => _SignupExpertisesScreenState();

@@ -8,7 +8,7 @@ import 'message_reply.dart';
 
 class MessageInput extends StatefulWidget {
   const MessageInput({
-    Key? key,
+    super.key,
     required this.participants,
     required this.onSubmit,
     this.onClearReply,
@@ -16,7 +16,7 @@ class MessageInput extends StatefulWidget {
     this.replyingTo,
     this.onTapEmptyInput,
     this.autoFocus = false,
-  }) : super(key: key);
+  });
 
   final List<ChannelParticipant> participants;
   final TextEditingController? controller;
