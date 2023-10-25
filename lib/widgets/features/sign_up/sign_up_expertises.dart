@@ -10,7 +10,7 @@ import '../../../providers/content_provider.dart';
 import '../../../providers/models/user_registration_model.dart';
 
 class SignupExpertisesScreen extends StatefulWidget {
-  const SignupExpertisesScreen({Key? key}) : super(key: key);
+  const SignupExpertisesScreen({super.key});
 
   @override
   State<SignupExpertisesScreen> createState() => _SignupExpertisesScreenState();

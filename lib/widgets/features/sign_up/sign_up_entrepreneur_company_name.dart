@@ -9,7 +9,7 @@ import '../../../providers/models/user_registration_model.dart';
 import '../../shared/text_form_field_widget.dart';
 
 class SignupEntrepreneurCompanyNameScreen extends StatefulWidget {
-  const SignupEntrepreneurCompanyNameScreen({Key? key}) : super(key: key);
+  const SignupEntrepreneurCompanyNameScreen({super.key});
 
   @override
   State<SignupEntrepreneurCompanyNameScreen> createState() =>

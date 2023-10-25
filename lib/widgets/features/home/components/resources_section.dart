@@ -39,7 +39,7 @@ class ResourceImage extends StatelessWidget {
 }
 
 class ResourcesSection extends StatelessWidget {
-  const ResourcesSection({Key? key}) : super(key: key);
+  const ResourcesSection({super.key});
 
   List<Widget> _createResourceTiles(BuildContext context) {
     final ThemeData theme = Theme.of(context);
