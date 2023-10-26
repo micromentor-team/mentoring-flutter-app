@@ -4,11 +4,12 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/utilities/debug_logger.dart';
-import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
-import 'package:mm_flutter_app/utilities/errors/errors.dart';
-import 'package:mm_flutter_app/utilities/errors/exceptions.dart';
 import 'package:retry/retry.dart';
+
+import '../../widgets/shared/error_widget.dart';
+import '../debug_logger.dart';
+import 'errors.dart';
+import 'exceptions.dart';
 
 class CrashHandler {
   bool _isReleaseMode = false;

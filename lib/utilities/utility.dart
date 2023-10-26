@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/utilities/errors/error_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
+import '../constants/constants.dart';
+import '../widgets/shared/error_widget.dart';
 import '../widgets/shared/loading.dart';
 
 class AppUtility {

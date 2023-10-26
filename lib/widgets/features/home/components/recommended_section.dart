@@ -3,18 +3,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/__generated/schema/operations_user.graphql.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/utilities/utility.dart';
-import 'package:mm_flutter_app/widgets/features/home/components/recommended_user_card.dart';
 import 'package:provider/provider.dart';
 import 'package:retry/retry.dart';
 
+import '../../../../__generated/schema/operations_user.graphql.dart';
 import '../../../../__generated/schema/schema.graphql.dart';
-import '../../../../providers/base/operation_result.dart';
-import '../../../../providers/user_provider.dart';
+import '../../../../constants/constants.dart';
+import '../../../../services/graphql/providers/base/operation_result.dart';
+import '../../../../services/graphql/providers/user_provider.dart';
 import '../../../../utilities/errors/crash_handler.dart';
 import '../../../../utilities/errors/exceptions.dart';
+import '../../../../utilities/utility.dart';
+import 'recommended_user_card.dart';
 
 class RecommendedSection extends StatefulWidget {
   const RecommendedSection({

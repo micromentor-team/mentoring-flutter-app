@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/messages_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../__generated/schema/schema.graphql.dart';
+import '../../../../constants/constants.dart';
+import '../../../../services/graphql/providers/messages_provider.dart';
 import 'message_bubble.dart';
 import 'message_input.dart';
 

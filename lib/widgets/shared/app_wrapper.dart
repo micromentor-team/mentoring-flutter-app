@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/utilities/errors/errors.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/models/inbox_model.dart';
-import '../../providers/models/scaffold_model.dart';
+import '../../constants/constants.dart';
+import '../../models/inbox_model.dart';
+import '../../models/scaffold_model.dart';
+import '../../utilities/errors/errors.dart';
 import 'notification_bubble.dart';
 
 /*

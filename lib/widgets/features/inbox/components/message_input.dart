@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/providers/channels_provider.dart';
 
-import '../../../../providers/messages_provider.dart';
+import '../../../../constants/constants.dart';
+import '../../../../services/graphql/providers/channels_provider.dart';
+import '../../../../services/graphql/providers/messages_provider.dart';
 import 'message_reply.dart';
 
 class MessageInput extends StatefulWidget {

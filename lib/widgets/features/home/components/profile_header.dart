@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/models/scaffold_model.dart';
+import '../../../../constants/constants.dart';
+import '../../../../models/scaffold_model.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String? avatarUrl;

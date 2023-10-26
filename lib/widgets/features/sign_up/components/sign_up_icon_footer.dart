@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/app_constants.dart';
+import '../../../../constants/constants.dart';
 
 class SignUpIconFooter extends StatelessWidget {
   final IconData icon;

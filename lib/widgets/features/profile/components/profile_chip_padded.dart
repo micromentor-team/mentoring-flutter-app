@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/profile/components/profile_chip.dart';
+
+import '../../../../constants/constants.dart';
+import 'profile_chip.dart';
 
 class ProfileChipPadded extends ProfileChip {
   const ProfileChipPadded({

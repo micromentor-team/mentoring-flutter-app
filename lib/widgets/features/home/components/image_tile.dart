@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
+
+import '../../../../constants/constants.dart';
 
 class ImageTile extends StatelessWidget {
   final ImageProvider image;

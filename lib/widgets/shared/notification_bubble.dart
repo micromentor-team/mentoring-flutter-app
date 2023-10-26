@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/app_constants.dart';
+import '../../constants/constants.dart';
 
 class NotificationBubble extends StatelessWidget {
   final int notifications;

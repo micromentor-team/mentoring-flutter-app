@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mm_flutter_app/constants/app_constants.dart';
-import 'package:mm_flutter_app/widgets/features/profile/components/profile_chip_padded.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../constants/constants.dart';
+import 'profile_chip_padded.dart';
 
 class AboutMyBusiness extends StatelessWidget {
   final CompanyInput companyInput;
