@@ -23,7 +23,6 @@ class Variables$Query$FindChannelById {
   Map<String, dynamic> _$data;
 
   String get channelId => (_$data['channelId'] as String);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelId = channelId;
@@ -36,7 +35,6 @@ class Variables$Query$FindChannelById {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -214,7 +212,6 @@ class _CopyWithImpl$Query$FindChannelById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$FindChannelById$findChannelById<TRes> get findChannelById {
     final local$findChannelById = _instance.findChannelById;
     return CopyWith$Query$FindChannelById$findChannelById(
@@ -233,7 +230,6 @@ class _CopyWithStubImpl$Query$FindChannelById<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$FindChannelById$findChannelById<TRes> get findChannelById =>
       CopyWith$Query$FindChannelById$findChannelById.stub(_res);
 }
@@ -640,7 +636,6 @@ class _CopyWithImpl$Query$FindChannelById$findChannelById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   TRes participants(
           Iterable<Query$FindChannelById$findChannelById$participants> Function(
                   Iterable<
@@ -672,7 +667,6 @@ class _CopyWithStubImpl$Query$FindChannelById$findChannelById<TRes>
     String? $__typename,
   }) =>
       _res;
-
   participants(_fn) => _res;
 }
 
@@ -795,7 +789,6 @@ class _CopyWithImpl$Query$FindChannelById$findChannelById$participants<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$FindChannelById$findChannelById$participants$user<TRes>
       get user {
     final local$user = _instance.user;
@@ -817,7 +810,6 @@ class _CopyWithStubImpl$Query$FindChannelById$findChannelById$participants<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$FindChannelById$findChannelById$participants$user<TRes>
       get user =>
           CopyWith$Query$FindChannelById$findChannelById$participants$user.stub(
@@ -1047,10 +1039,8 @@ class Variables$Query$FindChannelsForUser {
   Map<String, dynamic> _$data;
 
   String get userId => (_$data['userId'] as String);
-
   Input$FindObjectsOptions? get options =>
       (_$data['options'] as Input$FindObjectsOptions?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$userId = userId;
@@ -1068,7 +1058,6 @@ class Variables$Query$FindChannelsForUser {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1288,7 +1277,6 @@ class _CopyWithImpl$Query$FindChannelsForUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   TRes findChannelsForUser(
           Iterable<Query$FindChannelsForUser$findChannelsForUser> Function(
                   Iterable<
@@ -1314,7 +1302,6 @@ class _CopyWithStubImpl$Query$FindChannelsForUser<TRes>
     String? $__typename,
   }) =>
       _res;
-
   findChannelsForUser(_fn) => _res;
 }
 
@@ -1796,7 +1783,6 @@ class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<TRes>
       get latestMessage {
     final local$latestMessage = _instance.latestMessage;
@@ -1837,12 +1823,10 @@ class _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage<TRes>
       get latestMessage =>
           CopyWith$Query$FindChannelsForUser$findChannelsForUser$latestMessage
               .stub(_res);
-
   participants(_fn) => _res;
 }
 
@@ -2151,7 +2135,6 @@ class _CopyWithImpl$Query$FindChannelsForUser$findChannelsForUser$participants<
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$FindChannelsForUser$findChannelsForUser$participants$user<TRes>
       get user {
     final local$user = _instance.user;
@@ -2175,7 +2158,6 @@ class _CopyWithStubImpl$Query$FindChannelsForUser$findChannelsForUser$participan
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$FindChannelsForUser$findChannelsForUser$participants$user<TRes>
       get user =>
           CopyWith$Query$FindChannelsForUser$findChannelsForUser$participants$user
@@ -2400,7 +2382,6 @@ class Variables$Mutation$ArchiveChannelForMe {
   Map<String, dynamic> _$data;
 
   String get channelId => (_$data['channelId'] as String);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelId = channelId;
@@ -2414,7 +2395,6 @@ class Variables$Mutation$ArchiveChannelForMe {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2667,7 +2647,6 @@ class Variables$Mutation$UnarchiveChannelForMe {
   Map<String, dynamic> _$data;
 
   String get channelId => (_$data['channelId'] as String);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelId = channelId;
@@ -2681,7 +2660,6 @@ class Variables$Mutation$UnarchiveChannelForMe {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2933,7 +2911,6 @@ class Variables$Subscription$ChannelChanged {
   Map<String, dynamic> _$data;
 
   String get channelId => (_$data['channelId'] as String);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelId = channelId;
@@ -2947,7 +2924,6 @@ class Variables$Subscription$ChannelChanged {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3098,7 +3074,6 @@ class _CopyWithImpl$Subscription$ChannelChanged<TRes>
               ? _instance.channelChanged
               : (channelChanged
                   as Subscription$ChannelChanged$channelChanged)));
-
   CopyWith$Subscription$ChannelChanged$channelChanged<TRes> get channelChanged {
     final local$channelChanged = _instance.channelChanged;
     return CopyWith$Subscription$ChannelChanged$channelChanged(
@@ -3113,7 +3088,6 @@ class _CopyWithStubImpl$Subscription$ChannelChanged<TRes>
   TRes _res;
 
   call({Subscription$ChannelChanged$channelChanged? channelChanged}) => _res;
-
   CopyWith$Subscription$ChannelChanged$channelChanged<TRes>
       get channelChanged =>
           CopyWith$Subscription$ChannelChanged$channelChanged.stub(_res);

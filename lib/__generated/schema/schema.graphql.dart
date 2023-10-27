@@ -121,39 +121,23 @@ class Input$FindObjectsOptions {
   Map<String, dynamic> _$data;
 
   int? get limit => (_$data['limit'] as int?);
-
   List<Input$SortItem>? get sort => (_$data['sort'] as List<Input$SortItem>?);
-
   int? get skip => (_$data['skip'] as int?);
-
   bool? get timeout => (_$data['timeout'] as bool?);
-
   bool? get tailable => (_$data['tailable'] as bool?);
-
   bool? get awaitData => (_$data['awaitData'] as bool?);
-
   int? get batchSize => (_$data['batchSize'] as int?);
-
   bool? get returnKey => (_$data['returnKey'] as bool?);
-
   int? get maxTimeMS => (_$data['maxTimeMS'] as int?);
-
   int? get maxAwaitTimeMS => (_$data['maxAwaitTimeMS'] as int?);
-
   bool? get noCursorTimeout => (_$data['noCursorTimeout'] as bool?);
-
   bool? get singleBatch => (_$data['singleBatch'] as bool?);
-
   bool? get allowPartialResults => (_$data['allowPartialResults'] as bool?);
-
   bool? get showRecordId => (_$data['showRecordId'] as bool?);
-
   Enum$IncludeFilterOption? get includeDeleted =>
       (_$data['includeDeleted'] as Enum$IncludeFilterOption?);
-
   Enum$IncludeFilterOption? get includeArchived =>
       (_$data['includeArchived'] as Enum$IncludeFilterOption?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('limit')) {
@@ -232,7 +216,6 @@ class Input$FindObjectsOptions {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -529,7 +512,6 @@ class _CopyWithImpl$Input$FindObjectsOptions<TRes>
         if (includeArchived != _undefined)
           'includeArchived': (includeArchived as Enum$IncludeFilterOption?),
       }));
-
   TRes sort(
           Iterable<Input$SortItem>? Function(
                   Iterable<CopyWith$Input$SortItem<Input$SortItem>>?)
@@ -566,7 +548,6 @@ class _CopyWithStubImpl$Input$FindObjectsOptions<TRes>
     Enum$IncludeFilterOption? includeArchived,
   }) =>
       _res;
-
   sort(_fn) => _res;
 }
 
@@ -600,10 +581,8 @@ class Input$SortItem {
   Map<String, dynamic> _$data;
 
   String? get field => (_$data['field'] as String?);
-
   Enum$SortDirection? get direction =>
       (_$data['direction'] as Enum$SortDirection?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('field')) {
@@ -623,7 +602,6 @@ class Input$SortItem {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -748,10 +726,8 @@ class Input$FindUserByIdentOptions {
   Map<String, dynamic> _$data;
 
   bool? get includeDeleted => (_$data['includeDeleted'] as bool?);
-
   List<String>? get includeGroupProfiles =>
       (_$data['includeGroupProfiles'] as List<String>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('includeDeleted')) {
@@ -771,7 +747,6 @@ class Input$FindUserByIdentOptions {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1438,176 +1413,103 @@ class Input$UserInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get firstName => (_$data['firstName'] as String?);
-
   String? get lastName => (_$data['lastName'] as String?);
-
   String? get fullName => (_$data['fullName'] as String?);
-
   String? get userHandle => (_$data['userHandle'] as String?);
-
   String? get phoneNumber => (_$data['phoneNumber'] as String?);
-
   DateTime? get phoneNumberUpdatedAt =>
       (_$data['phoneNumberUpdatedAt'] as DateTime?);
-
   bool? get isPhoneNumberVerified => (_$data['isPhoneNumberVerified'] as bool?);
-
   String? get email => (_$data['email'] as String?);
-
   DateTime? get emailUpdatedAt => (_$data['emailUpdatedAt'] as DateTime?);
-
   bool? get isEmailVerified => (_$data['isEmailVerified'] as bool?);
-
   String? get genderTextId => (_$data['genderTextId'] as String?);
-
   String? get cityOfResidence => (_$data['cityOfResidence'] as String?);
-
   String? get regionOfResidence => (_$data['regionOfResidence'] as String?);
-
   String? get countryOfResidenceTextId =>
       (_$data['countryOfResidenceTextId'] as String?);
-
   String? get postalCode => (_$data['postalCode'] as String?);
-
   String? get avatarUrl => (_$data['avatarUrl'] as String?);
-
   String? get jobTitle => (_$data['jobTitle'] as String?);
-
   List<Input$LabeledStringValueInput>? get websites =>
       (_$data['websites'] as List<Input$LabeledStringValueInput>?);
-
   Enum$AuthType? get authType => (_$data['authType'] as Enum$AuthType?);
-
   String? get currentPassword => (_$data['currentPassword'] as String?);
-
   String? get newPassword => (_$data['newPassword'] as String?);
-
   String? get preferredLanguageTextId =>
       (_$data['preferredLanguageTextId'] as String?);
-
   List<String>? get spokenLanguagesTextIds =>
       (_$data['spokenLanguagesTextIds'] as List<String>?);
-
   Enum$UiLanguage? get selectedUiLanguageTextId =>
       (_$data['selectedUiLanguageTextId'] as Enum$UiLanguage?);
-
   Enum$UiLanguage? get fallbackUiLanguageTextId =>
       (_$data['fallbackUiLanguageTextId'] as Enum$UiLanguage?);
-
   List<Enum$UserRole>? get roles => (_$data['roles'] as List<Enum$UserRole>?);
-
   List<Enum$AppFeature>? get appFeatures =>
       (_$data['appFeatures'] as List<Enum$AppFeature>?);
-
   String? get source => (_$data['source'] as String?);
-
   String? get timezone => (_$data['timezone'] as String?);
-
   Input$UserPreferencesInput? get preferences =>
       (_$data['preferences'] as Input$UserPreferencesInput?);
-
   int? get trustLevel => (_$data['trustLevel'] as int?);
-
   DateTime? get signedInAt => (_$data['signedInAt'] as DateTime?);
-
   DateTime? get signedOutAt => (_$data['signedOutAt'] as DateTime?);
-
   DateTime? get latestActivityAt => (_$data['latestActivityAt'] as DateTime?);
-
   DateTime? get inactivatedAt => (_$data['inactivatedAt'] as DateTime?);
-
   String? get inactivatedBy => (_$data['inactivatedBy'] as String?);
-
   DateTime? get termsAndConditionsAcceptedAt =>
       (_$data['termsAndConditionsAcceptedAt'] as DateTime?);
-
   List<String>? get companyIds => (_$data['companyIds'] as List<String>?);
-
   List<String>? get groupIds => (_$data['groupIds'] as List<String>?);
-
   List<String>? get parentGroupIds =>
       (_$data['parentGroupIds'] as List<String>?);
-
   List<String>? get externalGroupIds =>
       (_$data['externalGroupIds'] as List<String>?);
-
   List<Input$GroupMembershipInput>? get groupMemberships =>
       (_$data['groupMemberships'] as List<Input$GroupMembershipInput>?);
-
   List<String>? get addToGroupIds => (_$data['addToGroupIds'] as List<String>?);
-
   List<String>? get removeFromGroupIds =>
       (_$data['removeFromGroupIds'] as List<String>?);
-
   bool? get seeksHelp => (_$data['seeksHelp'] as bool?);
-
   bool? get offersHelp => (_$data['offersHelp'] as bool?);
-
   int? get birthYear => (_$data['birthYear'] as int?);
-
   String? get genderSelfDescribed => (_$data['genderSelfDescribed'] as String?);
-
   String? get ethnicity => (_$data['ethnicity'] as String?);
-
   String? get educationLevelTextId =>
       (_$data['educationLevelTextId'] as String?);
-
   String? get personalBio => (_$data['personalBio'] as String?);
-
   int? get yearsManagementExperience =>
       (_$data['yearsManagementExperience'] as int?);
-
   int? get yearsOwnershipExperience =>
       (_$data['yearsOwnershipExperience'] as int?);
-
   String? get ssoIdp => (_$data['ssoIdp'] as String?);
-
   List<String>? get pronounsTextIds =>
       (_$data['pronounsTextIds'] as List<String>?);
-
   Input$CompanyInput? get company => (_$data['company'] as Input$CompanyInput?);
-
   List<Input$BusinessExperienceInput>? get businessExperiences =>
       (_$data['businessExperiences'] as List<Input$BusinessExperienceInput>?);
-
   List<Input$AcademicExperienceInput>? get academicExperiences =>
       (_$data['academicExperiences'] as List<Input$AcademicExperienceInput>?);
-
   List<String>? get businessExperienceIds =>
       (_$data['businessExperienceIds'] as List<String>?);
-
   List<String>? get academicExperienceIds =>
       (_$data['academicExperienceIds'] as List<String>?);
-
   String? get cityOfOrigin => (_$data['cityOfOrigin'] as String?);
-
   String? get regionOfOrigin => (_$data['regionOfOrigin'] as String?);
-
   String? get countryOfOriginTextId =>
       (_$data['countryOfOriginTextId'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -1930,7 +1832,6 @@ class Input$UserInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3365,7 +3266,6 @@ class _CopyWithImpl$Input$UserInput<TRes>
         if (countryOfOriginTextId != _undefined)
           'countryOfOriginTextId': (countryOfOriginTextId as String?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -3377,7 +3277,6 @@ class _CopyWithImpl$Input$UserInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -3398,7 +3297,6 @@ class _CopyWithImpl$Input$UserInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$UserPreferencesInput<TRes> get preferences {
     final local$preferences = _instance.preferences;
     return local$preferences == null
@@ -3419,7 +3317,6 @@ class _CopyWithImpl$Input$UserInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$CompanyInput<TRes> get company {
     final local$company = _instance.company;
     return local$company == null
@@ -3439,7 +3336,6 @@ class _CopyWithImpl$Input$UserInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   TRes academicExperiences(
           Iterable<Input$AcademicExperienceInput>? Function(
                   Iterable<
@@ -3536,24 +3432,16 @@ class _CopyWithStubImpl$Input$UserInput<TRes>
     String? countryOfOriginTextId,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   websites(_fn) => _res;
-
   CopyWith$Input$UserPreferencesInput<TRes> get preferences =>
       CopyWith$Input$UserPreferencesInput.stub(_res);
-
   groupMemberships(_fn) => _res;
-
   CopyWith$Input$CompanyInput<TRes> get company =>
       CopyWith$Input$CompanyInput.stub(_res);
-
   businessExperiences(_fn) => _res;
-
   academicExperiences(_fn) => _res;
 }
 
@@ -3592,12 +3480,9 @@ class Input$ModelEventInput {
   Map<String, dynamic> _$data;
 
   DateTime? get time => (_$data['time'] as DateTime?);
-
   Enum$ModelEventType? get modelEventType =>
       (_$data['modelEventType'] as Enum$ModelEventType?);
-
   String? get message => (_$data['message'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('time')) {
@@ -3621,7 +3506,6 @@ class Input$ModelEventInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3750,7 +3634,6 @@ class Input$BaseModelMetadataInput {
   Map<String, dynamic> _$data;
 
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('updatedAt')) {
@@ -3765,7 +3648,6 @@ class Input$BaseModelMetadataInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3871,11 +3753,8 @@ class Input$LabeledStringValueInput {
   Map<String, dynamic> _$data;
 
   String? get label => (_$data['label'] as String?);
-
   String? get value => (_$data['value'] as String?);
-
   List<String>? get tags => (_$data['tags'] as List<String>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('label')) {
@@ -3898,7 +3777,6 @@ class Input$LabeledStringValueInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4123,33 +4001,20 @@ class Input$UserPreferencesInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   bool? get shareEmail => (_$data['shareEmail'] as bool?);
-
   bool? get sharePhoneNumber => (_$data['sharePhoneNumber'] as bool?);
-
   bool? get showWelcomeMessage => (_$data['showWelcomeMessage'] as bool?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -4212,7 +4077,6 @@ class Input$UserPreferencesInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4469,7 +4333,6 @@ class _CopyWithImpl$Input$UserPreferencesInput<TRes>
         if (showWelcomeMessage != _undefined)
           'showWelcomeMessage': (showWelcomeMessage as bool?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -4481,7 +4344,6 @@ class _CopyWithImpl$Input$UserPreferencesInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -4513,9 +4375,7 @@ class _CopyWithStubImpl$Input$UserPreferencesInput<TRes>
     bool? showWelcomeMessage,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -4631,36 +4491,22 @@ class Input$GroupMembershipInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get groupId => (_$data['groupId'] as String?);
-
   String? get groupIdent => (_$data['groupIdent'] as String?);
-
   String? get userId => (_$data['userId'] as String?);
-
   List<Enum$GroupMembershipRole>? get roles =>
       (_$data['roles'] as List<Enum$GroupMembershipRole>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -4728,7 +4574,6 @@ class Input$GroupMembershipInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5008,7 +4853,6 @@ class _CopyWithImpl$Input$GroupMembershipInput<TRes>
         if (roles != _undefined)
           'roles': (roles as List<Enum$GroupMembershipRole>?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -5020,7 +4864,6 @@ class _CopyWithImpl$Input$GroupMembershipInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -5053,9 +4896,7 @@ class _CopyWithStubImpl$Input$GroupMembershipInput<TRes>
     List<Enum$GroupMembershipRole>? roles,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -5224,52 +5065,30 @@ class Input$CompanyInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get name => (_$data['name'] as String?);
-
   String? get description => (_$data['description'] as String?);
-
   String? get companyTypeTextId => (_$data['companyTypeTextId'] as String?);
-
   String? get companyStageTextId => (_$data['companyStageTextId'] as String?);
-
   List<Input$LabeledStringValueInput>? get websites =>
       (_$data['websites'] as List<Input$LabeledStringValueInput>?);
-
   List<String>? get industries => (_$data['industries'] as List<String>?);
-
   bool? get isOperational => (_$data['isOperational'] as bool?);
-
   bool? get isFundraising => (_$data['isFundraising'] as bool?);
-
   int? get annualRevenue => (_$data['annualRevenue'] as int?);
-
   int? get employeeCount => (_$data['employeeCount'] as int?);
-
   DateTime? get foundedAt => (_$data['foundedAt'] as DateTime?);
-
   List<String>? get addUserIds => (_$data['addUserIds'] as List<String>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -5368,7 +5187,6 @@ class Input$CompanyInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5807,7 +5625,6 @@ class _CopyWithImpl$Input$CompanyInput<TRes>
         if (addUserIds != _undefined)
           'addUserIds': (addUserIds as List<String>?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -5819,7 +5636,6 @@ class _CopyWithImpl$Input$CompanyInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -5873,12 +5689,9 @@ class _CopyWithStubImpl$Input$CompanyInput<TRes>
     List<String>? addUserIds,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   websites(_fn) => _res;
 }
 
@@ -6017,43 +5830,25 @@ class Input$BusinessExperienceInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get businessName => (_$data['businessName'] as String?);
-
   String? get jobTitle => (_$data['jobTitle'] as String?);
-
   String? get city => (_$data['city'] as String?);
-
   String? get state => (_$data['state'] as String?);
-
   String? get country => (_$data['country'] as String?);
-
   DateTime? get startDate => (_$data['startDate'] as DateTime?);
-
   DateTime? get endDate => (_$data['endDate'] as DateTime?);
-
   String? get userId => (_$data['userId'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -6136,7 +5931,6 @@ class Input$BusinessExperienceInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -6455,7 +6249,6 @@ class _CopyWithImpl$Input$BusinessExperienceInput<TRes>
         if (endDate != _undefined) 'endDate': (endDate as DateTime?),
         if (userId != _undefined) 'userId': (userId as String?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -6467,7 +6260,6 @@ class _CopyWithImpl$Input$BusinessExperienceInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -6504,9 +6296,7 @@ class _CopyWithStubImpl$Input$BusinessExperienceInput<TRes>
     String? userId,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -6634,39 +6424,23 @@ class Input$AcademicExperienceInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get institutionName => (_$data['institutionName'] as String?);
-
   String? get degreeType => (_$data['degreeType'] as String?);
-
   String? get fieldOfStudy => (_$data['fieldOfStudy'] as String?);
-
   DateTime? get startDate => (_$data['startDate'] as DateTime?);
-
   DateTime? get endDate => (_$data['endDate'] as DateTime?);
-
   String? get userId => (_$data['userId'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -6741,7 +6515,6 @@ class Input$AcademicExperienceInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -7036,7 +6809,6 @@ class _CopyWithImpl$Input$AcademicExperienceInput<TRes>
         if (endDate != _undefined) 'endDate': (endDate as DateTime?),
         if (userId != _undefined) 'userId': (userId as String?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -7048,7 +6820,6 @@ class _CopyWithImpl$Input$AcademicExperienceInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -7083,9 +6854,7 @@ class _CopyWithStubImpl$Input$AcademicExperienceInput<TRes>
     String? userId,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -7198,33 +6967,20 @@ class Input$UserListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
-
   List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
-
   String? get searchText => (_$data['searchText'] as String?);
-
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
-
   List<String>? get textSearchFields =>
       (_$data['textSearchFields'] as List<String>?);
-
   DateTime? get createdAtFrom => (_$data['createdAtFrom'] as DateTime?);
-
   DateTime? get createdAtUntil => (_$data['createdAtUntil'] as DateTime?);
-
   DateTime? get updatedAtFrom => (_$data['updatedAtFrom'] as DateTime?);
-
   DateTime? get updatedAtUntil => (_$data['updatedAtUntil'] as DateTime?);
-
   List<Enum$UserRole>? get rolesIn =>
       (_$data['rolesIn'] as List<Enum$UserRole>?);
-
   String? get companyId => (_$data['companyId'] as String?);
-
   bool? get syncedWithMm2 => (_$data['syncedWithMm2'] as bool?);
-
   bool? get isMm2User => (_$data['isMm2User'] as bool?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ids')) {
@@ -7289,7 +7045,6 @@ class Input$UserListFilter {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -7914,96 +7669,54 @@ class Input$UserDeviceInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get userId => (_$data['userId'] as String?);
-
   String? get deviceUuid => (_$data['deviceUuid'] as String?);
-
   String? get deviceType => (_$data['deviceType'] as String?);
-
   bool? get trusted => (_$data['trusted'] as bool?);
-
   String? get phoneNumber => (_$data['phoneNumber'] as String?);
-
   DateTime? get phoneNumberUpdatedAt =>
       (_$data['phoneNumberUpdatedAt'] as DateTime?);
-
   bool? get isPhoneNumberVerified => (_$data['isPhoneNumberVerified'] as bool?);
-
   String? get brand => (_$data['brand'] as String?);
-
   String? get model => (_$data['model'] as String?);
-
   bool? get isTablet => (_$data['isTablet'] as bool?);
-
   int? get screenWidth => (_$data['screenWidth'] as int?);
-
   int? get screenHeight => (_$data['screenHeight'] as int?);
-
   String? get os => (_$data['os'] as String?);
-
   String? get osVersion => (_$data['osVersion'] as String?);
-
   String? get timezone => (_$data['timezone'] as String?);
-
   String? get ipAddress => (_$data['ipAddress'] as String?);
-
   String? get locale => (_$data['locale'] as String?);
-
   String? get countryCode => (_$data['countryCode'] as String?);
-
   String? get appVersion => (_$data['appVersion'] as String?);
-
   DateTime? get signedInAt => (_$data['signedInAt'] as DateTime?);
-
   DateTime? get signedOutAt => (_$data['signedOutAt'] as DateTime?);
-
   DateTime? get sessionStartedAt => (_$data['sessionStartedAt'] as DateTime?);
-
   DateTime? get sessionEndedAt => (_$data['sessionEndedAt'] as DateTime?);
-
   String? get authToken => (_$data['authToken'] as String?);
-
   DateTime? get authTokenCreatedAt =>
       (_$data['authTokenCreatedAt'] as DateTime?);
-
   DateTime? get authTokenExperiesAt =>
       (_$data['authTokenExperiesAt'] as DateTime?);
-
   String? get oAuthToken => (_$data['oAuthToken'] as String?);
-
   DateTime? get oAuthTokenExpiresAt =>
       (_$data['oAuthTokenExpiresAt'] as DateTime?);
-
   String? get oAuthProvider => (_$data['oAuthProvider'] as String?);
-
   String? get oAuthRefreshToken => (_$data['oAuthRefreshToken'] as String?);
-
   String? get pushNotificationToken =>
       (_$data['pushNotificationToken'] as String?);
-
   DateTime? get trustedAt => (_$data['trustedAt'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -8186,7 +7899,6 @@ class Input$UserDeviceInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -8861,7 +8573,6 @@ class _CopyWithImpl$Input$UserDeviceInput<TRes>
           'pushNotificationToken': (pushNotificationToken as String?),
         if (trustedAt != _undefined) 'trustedAt': (trustedAt as DateTime?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -8873,7 +8584,6 @@ class _CopyWithImpl$Input$UserDeviceInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -8934,9 +8644,7 @@ class _CopyWithStubImpl$Input$UserDeviceInput<TRes>
     DateTime? trustedAt,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -9023,24 +8731,15 @@ class Input$SidUserDeviceListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
-
   List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
-
   String? get searchText => (_$data['searchText'] as String?);
-
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
-
   List<String>? get textSearchFields =>
       (_$data['textSearchFields'] as List<String>?);
-
   DateTime? get createdAtFrom => (_$data['createdAtFrom'] as DateTime?);
-
   DateTime? get createdAtUntil => (_$data['createdAtUntil'] as DateTime?);
-
   DateTime? get updatedAtFrom => (_$data['updatedAtFrom'] as DateTime?);
-
   DateTime? get updatedAtUntil => (_$data['updatedAtUntil'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ids')) {
@@ -9088,7 +8787,6 @@ class Input$SidUserDeviceListFilter {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -9527,59 +9225,34 @@ class Input$ChannelInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get name => (_$data['name'] as String?);
-
   String? get topic => (_$data['topic'] as String?);
-
   String? get description => (_$data['description'] as String?);
-
   List<String>? get tags => (_$data['tags'] as List<String>?);
-
   Enum$ChannelType? get channelType =>
       (_$data['channelType'] as Enum$ChannelType?);
-
   List<Input$BgChannelStatusInput>? get statuses =>
       (_$data['statuses'] as List<Input$BgChannelStatusInput>?);
-
   List<String>? get userIds => (_$data['userIds'] as List<String>?);
-
   List<String>? get inviteUserIds => (_$data['inviteUserIds'] as List<String>?);
-
   DateTime? get pausedAt => (_$data['pausedAt'] as DateTime?);
-
   String? get pausedBy => (_$data['pausedBy'] as String?);
-
   DateTime? get archivedAt => (_$data['archivedAt'] as DateTime?);
-
   String? get archivedBy => (_$data['archivedBy'] as String?);
-
   String? get assumedMentorId => (_$data['assumedMentorId'] as String?);
-
   String? get mm2Id => (_$data['mm2Id'] as String?);
-
   DateTime? get syncedWithMm2At => (_$data['syncedWithMm2At'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -9691,7 +9364,6 @@ class Input$ChannelInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10177,7 +9849,6 @@ class _CopyWithImpl$Input$ChannelInput<TRes>
         if (syncedWithMm2At != _undefined)
           'syncedWithMm2At': (syncedWithMm2At as DateTime?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -10189,7 +9860,6 @@ class _CopyWithImpl$Input$ChannelInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -10246,12 +9916,9 @@ class _CopyWithStubImpl$Input$ChannelInput<TRes>
     DateTime? syncedWithMm2At,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   statuses(_fn) => _res;
 }
 
@@ -10285,9 +9952,7 @@ class Input$BgChannelStatusInput {
   Map<String, dynamic> _$data;
 
   String? get userId => (_$data['userId'] as String?);
-
   DateTime? get archivedAt => (_$data['archivedAt'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('userId')) {
@@ -10306,7 +9971,6 @@ class Input$BgChannelStatusInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10481,24 +10145,15 @@ class Input$ChannelListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
-
   List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
-
   String? get searchText => (_$data['searchText'] as String?);
-
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
-
   List<String>? get textSearchFields =>
       (_$data['textSearchFields'] as List<String>?);
-
   DateTime? get createdAtFrom => (_$data['createdAtFrom'] as DateTime?);
-
   DateTime? get createdAtUntil => (_$data['createdAtUntil'] as DateTime?);
-
   DateTime? get updatedAtFrom => (_$data['updatedAtFrom'] as DateTime?);
-
   DateTime? get updatedAtUntil => (_$data['updatedAtUntil'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ids')) {
@@ -10546,7 +10201,6 @@ class Input$ChannelListFilter {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10938,45 +10592,27 @@ class Input$ChannelMessageInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get channelId => (_$data['channelId'] as String?);
-
   String? get replyToMessageId => (_$data['replyToMessageId'] as String?);
-
   Enum$ChannelMessageType? get channelMessageType =>
       (_$data['channelMessageType'] as Enum$ChannelMessageType?);
-
   String? get messageText => (_$data['messageText'] as String?);
-
   List<Input$ChannelMessageStatusInput>? get statuses =>
       (_$data['statuses'] as List<Input$ChannelMessageStatusInput>?);
-
   DateTime? get editedAt => (_$data['editedAt'] as DateTime?);
-
   String? get mm2Id => (_$data['mm2Id'] as String?);
-
   DateTime? get syncedWithMm2At => (_$data['syncedWithMm2At'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -11061,7 +10697,6 @@ class Input$ChannelMessageInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -11411,7 +11046,6 @@ class _CopyWithImpl$Input$ChannelMessageInput<TRes>
         if (syncedWithMm2At != _undefined)
           'syncedWithMm2At': (syncedWithMm2At as DateTime?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -11423,7 +11057,6 @@ class _CopyWithImpl$Input$ChannelMessageInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -11473,12 +11106,9 @@ class _CopyWithStubImpl$Input$ChannelMessageInput<TRes>
     DateTime? syncedWithMm2At,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   statuses(_fn) => _res;
 }
 
@@ -11519,11 +11149,8 @@ class Input$ChannelMessageStatusInput {
   Map<String, dynamic> _$data;
 
   String? get userId => (_$data['userId'] as String?);
-
   DateTime? get receivedAt => (_$data['receivedAt'] as DateTime?);
-
   DateTime? get seenAt => (_$data['seenAt'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('userId')) {
@@ -11546,7 +11173,6 @@ class Input$ChannelMessageStatusInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -11775,37 +11401,22 @@ class Input$ChannelMessageListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
-
   List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
-
   String? get searchText => (_$data['searchText'] as String?);
-
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
-
   List<String>? get textSearchFields =>
       (_$data['textSearchFields'] as List<String>?);
-
   DateTime? get createdAtFrom => (_$data['createdAtFrom'] as DateTime?);
-
   DateTime? get createdAtUntil => (_$data['createdAtUntil'] as DateTime?);
-
   DateTime? get updatedAtFrom => (_$data['updatedAtFrom'] as DateTime?);
-
   DateTime? get updatedAtUntil => (_$data['updatedAtUntil'] as DateTime?);
-
   String? get channelId => (_$data['channelId'] as String?);
-
   String? get receiverUserId => (_$data['receiverUserId'] as String?);
-
   String? get replyToMessageId => (_$data['replyToMessageId'] as String?);
-
   List<Enum$ChannelMessageType>? get includeChannelMessageType =>
       (_$data['includeChannelMessageType'] as List<Enum$ChannelMessageType>?);
-
   bool? get received => (_$data['received'] as bool?);
-
   bool? get seen => (_$data['seen'] as bool?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ids')) {
@@ -11879,7 +11490,6 @@ class Input$ChannelMessageListFilter {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -12345,31 +11955,19 @@ class Input$GroupMembershipListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
-
   List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
-
   String? get searchText => (_$data['searchText'] as String?);
-
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
-
   List<String>? get textSearchFields =>
       (_$data['textSearchFields'] as List<String>?);
-
   DateTime? get createdAtFrom => (_$data['createdAtFrom'] as DateTime?);
-
   DateTime? get createdAtUntil => (_$data['createdAtUntil'] as DateTime?);
-
   DateTime? get updatedAtFrom => (_$data['updatedAtFrom'] as DateTime?);
-
   DateTime? get updatedAtUntil => (_$data['updatedAtUntil'] as DateTime?);
-
   String? get userId => (_$data['userId'] as String?);
-
   bool? get embedded => (_$data['embedded'] as bool?);
-
   List<Enum$GroupMembershipRole>? get roles =>
       (_$data['roles'] as List<Enum$GroupMembershipRole>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ids')) {
@@ -12430,7 +12028,6 @@ class Input$GroupMembershipListFilter {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -12887,48 +12484,28 @@ class Input$GroupInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get parentGroupId => (_$data['parentGroupId'] as String?);
-
   String? get matchingEngineId => (_$data['matchingEngineId'] as String?);
-
   String? get name => (_$data['name'] as String?);
-
   String? get shortName => (_$data['shortName'] as String?);
-
   String? get ident => (_$data['ident'] as String?);
-
   String? get slug => (_$data['slug'] as String?);
-
   String? get description => (_$data['description'] as String?);
-
   String? get planType => (_$data['planType'] as String?);
-
   bool? get embedded => (_$data['embedded'] as bool?);
-
   List<Input$AppliedGroupRuleInput>? get appliedGroupRules =>
       (_$data['appliedGroupRules'] as List<Input$AppliedGroupRuleInput>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -13020,7 +12597,6 @@ class Input$GroupInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -13393,7 +12969,6 @@ class _CopyWithImpl$Input$GroupInput<TRes>
           'appliedGroupRules':
               (appliedGroupRules as List<Input$AppliedGroupRuleInput>?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -13405,7 +12980,6 @@ class _CopyWithImpl$Input$GroupInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -13457,12 +13031,9 @@ class _CopyWithStubImpl$Input$GroupInput<TRes>
     List<Input$AppliedGroupRuleInput>? appliedGroupRules,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   appliedGroupRules(_fn) => _res;
 }
 
@@ -13582,37 +13153,23 @@ class Input$AppliedGroupRuleInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get groupRuleId => (_$data['groupRuleId'] as String?);
-
   String? get groupId => (_$data['groupId'] as String?);
-
   List<Enum$GroupRuleEventType>? get subscribedToEvents =>
       (_$data['subscribedToEvents'] as List<Enum$GroupRuleEventType>?);
-
   Input$GroupRuleBaseConfigInput? get config =>
       (_$data['config'] as Input$GroupRuleBaseConfigInput?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -13682,7 +13239,6 @@ class Input$AppliedGroupRuleInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -13968,7 +13524,6 @@ class _CopyWithImpl$Input$AppliedGroupRuleInput<TRes>
         if (config != _undefined)
           'config': (config as Input$GroupRuleBaseConfigInput?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -13980,7 +13535,6 @@ class _CopyWithImpl$Input$AppliedGroupRuleInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -14021,12 +13575,9 @@ class _CopyWithStubImpl$Input$AppliedGroupRuleInput<TRes>
     Input$GroupRuleBaseConfigInput? config,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   CopyWith$Input$GroupRuleBaseConfigInput<TRes> get config =>
       CopyWith$Input$GroupRuleBaseConfigInput.stub(_res);
 }
@@ -14051,7 +13602,6 @@ class Input$GroupRuleBaseConfigInput {
   Map<String, dynamic> _$data;
 
   String? get value => (_$data['value'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('value')) {
@@ -14066,7 +13616,6 @@ class Input$GroupRuleBaseConfigInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14229,28 +13778,17 @@ class Input$GroupListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
-
   List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
-
   String? get searchText => (_$data['searchText'] as String?);
-
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
-
   List<String>? get textSearchFields =>
       (_$data['textSearchFields'] as List<String>?);
-
   DateTime? get createdAtFrom => (_$data['createdAtFrom'] as DateTime?);
-
   DateTime? get createdAtUntil => (_$data['createdAtUntil'] as DateTime?);
-
   DateTime? get updatedAtFrom => (_$data['updatedAtFrom'] as DateTime?);
-
   DateTime? get updatedAtUntil => (_$data['updatedAtUntil'] as DateTime?);
-
   bool? get embedded => (_$data['embedded'] as bool?);
-
   bool? get syncedWithMm2 => (_$data['syncedWithMm2'] as bool?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ids')) {
@@ -14306,7 +13844,6 @@ class Input$GroupListFilter {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14750,53 +14287,32 @@ class Input$UserSearchInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get userId => (_$data['userId'] as String?);
-
   String? get matchingEngineId => (_$data['matchingEngineId'] as String?);
-
   Enum$UserSearchType? get userSearchType =>
       (_$data['userSearchType'] as Enum$UserSearchType?);
-
   String? get name => (_$data['name'] as String?);
-
   Input$UserSearchFilterInput? get filter =>
       (_$data['filter'] as Input$UserSearchFilterInput?);
-
   List<String>? get excludeUserIds =>
       (_$data['excludeUserIds'] as List<String>?);
-
   int? get maxResultCount => (_$data['maxResultCount'] as int?);
-
   Enum$UserSearchSubscriptionType? get subscription =>
       (_$data['subscription'] as Enum$UserSearchSubscriptionType?);
-
   DateTime? get expiresAt => (_$data['expiresAt'] as DateTime?);
-
   DateTime? get resultExpiresAt => (_$data['resultExpiresAt'] as DateTime?);
-
   bool? get startSearch => (_$data['startSearch'] as bool?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -14895,7 +14411,6 @@ class Input$UserSearchInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15280,7 +14795,6 @@ class _CopyWithImpl$Input$UserSearchInput<TRes>
         if (startSearch != _undefined && startSearch != null)
           'startSearch': (startSearch as bool),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -15292,7 +14806,6 @@ class _CopyWithImpl$Input$UserSearchInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -15340,12 +14853,9 @@ class _CopyWithStubImpl$Input$UserSearchInput<TRes>
     bool? startSearch,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   CopyWith$Input$UserSearchFilterInput<TRes> get filter =>
       CopyWith$Input$UserSearchFilterInput.stub(_res);
 }
@@ -15430,28 +14940,20 @@ class Input$UserSearchFilterInput {
   Map<String, dynamic> _$data;
 
   String? get searchText => (_$data['searchText'] as String?);
-
   Enum$UserSearchFieldPreference? get seeksHelp =>
       (_$data['seeksHelp'] as Enum$UserSearchFieldPreference?);
-
   Enum$UserSearchFieldPreference? get offersHelp =>
       (_$data['offersHelp'] as Enum$UserSearchFieldPreference?);
-
   List<String>? get languagesTextIds =>
       (_$data['languagesTextIds'] as List<String>?);
-
   List<String>? get expertisesTextIds =>
       (_$data['expertisesTextIds'] as List<String>?);
-
   List<String>? get industriesTextIds =>
       (_$data['industriesTextIds'] as List<String>?);
-
   List<String>? get countryTextIds =>
       (_$data['countryTextIds'] as List<String>?);
-
   List<String>? get companyStagesTextIds =>
       (_$data['companyStagesTextIds'] as List<String>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('searchText')) {
@@ -15503,7 +15005,6 @@ class Input$UserSearchFilterInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15852,24 +15353,15 @@ class Input$UserSearchListFilter {
   Map<String, dynamic> _$data;
 
   List<String>? get ids => (_$data['ids'] as List<String>?);
-
   List<String>? get excludeIds => (_$data['excludeIds'] as List<String>?);
-
   String? get searchText => (_$data['searchText'] as String?);
-
   bool? get caseSensitive => (_$data['caseSensitive'] as bool?);
-
   List<String>? get textSearchFields =>
       (_$data['textSearchFields'] as List<String>?);
-
   DateTime? get createdAtFrom => (_$data['createdAtFrom'] as DateTime?);
-
   DateTime? get createdAtUntil => (_$data['createdAtUntil'] as DateTime?);
-
   DateTime? get updatedAtFrom => (_$data['updatedAtFrom'] as DateTime?);
-
   DateTime? get updatedAtUntil => (_$data['updatedAtUntil'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ids')) {
@@ -15917,7 +15409,6 @@ class Input$UserSearchListFilter {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16209,14 +15700,10 @@ class Input$UserSignInInput {
   Map<String, dynamic> _$data;
 
   String? get ident => (_$data['ident'] as String?);
-
   Enum$UserIdentType? get identType =>
       (_$data['identType'] as Enum$UserIdentType?);
-
   String? get deviceUuid => (_$data['deviceUuid'] as String?);
-
   String? get password => (_$data['password'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('ident')) {
@@ -16244,7 +15731,6 @@ class Input$UserSignInInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16538,56 +16024,32 @@ class Input$UserSignUpInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get firstName => (_$data['firstName'] as String?);
-
   String? get lastName => (_$data['lastName'] as String?);
-
   String? get fullName => (_$data['fullName'] as String?);
-
   String? get userHandle => (_$data['userHandle'] as String?);
-
   String? get email => (_$data['email'] as String?);
-
   String? get phoneNumber => (_$data['phoneNumber'] as String?);
-
   String? get password => (_$data['password'] as String?);
-
   String? get source => (_$data['source'] as String?);
-
   String? get deviceUuid => (_$data['deviceUuid'] as String?);
-
   String? get timezone => (_$data['timezone'] as String?);
-
   String? get pushNotificationToken =>
       (_$data['pushNotificationToken'] as String?);
-
   bool? get checkAvailable => (_$data['checkAvailable'] as bool?);
-
   bool? get offersHelp => (_$data['offersHelp'] as bool?);
-
   bool? get seeksHelp => (_$data['seeksHelp'] as bool?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -16694,7 +16156,6 @@ class Input$UserSignUpInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -17103,7 +16564,6 @@ class _CopyWithImpl$Input$UserSignUpInput<TRes>
         if (offersHelp != _undefined) 'offersHelp': (offersHelp as bool?),
         if (seeksHelp != _undefined) 'seeksHelp': (seeksHelp as bool?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -17115,7 +16575,6 @@ class _CopyWithImpl$Input$UserSignUpInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -17158,9 +16617,7 @@ class _CopyWithStubImpl$Input$UserSignUpInput<TRes>
     bool? seeksHelp,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -17211,15 +16668,10 @@ class Input$UserBlockInput {
   Map<String, dynamic> _$data;
 
   String? get blockedByUserId => (_$data['blockedByUserId'] as String?);
-
   String? get userId => (_$data['userId'] as String?);
-
   String? get reasonTextId => (_$data['reasonTextId'] as String?);
-
   String? get notes => (_$data['notes'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blockedByUserId')) {
@@ -17250,7 +16702,6 @@ class Input$UserBlockInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -17549,50 +17000,30 @@ class Input$ChannelInvitationInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get channelId => (_$data['channelId'] as String?);
-
   String? get senderId => (_$data['senderId'] as String?);
-
   String? get recipientId => (_$data['recipientId'] as String?);
-
   String? get channelName => (_$data['channelName'] as String?);
-
   String? get channelTopic => (_$data['channelTopic'] as String?);
-
   String? get messageText => (_$data['messageText'] as String?);
-
   DateTime? get dismissedFromInboxBySenderAt =>
       (_$data['dismissedFromInboxBySenderAt'] as DateTime?);
-
   DateTime? get dismissedFromInboxByRecipientAt =>
       (_$data['dismissedFromInboxByRecipientAt'] as DateTime?);
-
   DateTime? get readByRecipientAt => (_$data['readByRecipientAt'] as DateTime?);
-
   Enum$ChannelInvitationStatus? get status =>
       (_$data['status'] as Enum$ChannelInvitationStatus?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -17687,7 +17118,6 @@ class Input$ChannelInvitationInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -18051,7 +17481,6 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
         if (status != _undefined)
           'status': (status as Enum$ChannelInvitationStatus?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -18063,7 +17492,6 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -18102,9 +17530,7 @@ class _CopyWithStubImpl$Input$ChannelInvitationInput<TRes>
     Enum$ChannelInvitationStatus? status,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -18152,14 +17578,10 @@ class Input$BgAddChannelMessageEventInput {
   Map<String, dynamic> _$data;
 
   String? get channelId => (_$data['channelId'] as String?);
-
   List<String>? get messageIds => (_$data['messageIds'] as List<String>?);
-
   String? get recipientId => (_$data['recipientId'] as String?);
-
   Enum$ChannelMessageEvent? get event =>
       (_$data['event'] as Enum$ChannelMessageEvent?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('channelId')) {
@@ -18189,7 +17611,6 @@ class Input$BgAddChannelMessageEventInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -18448,38 +17869,23 @@ class Input$ChannelParticipantInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get channelId => (_$data['channelId'] as String?);
-
   String? get userId => (_$data['userId'] as String?);
-
   String? get invitedBy => (_$data['invitedBy'] as String?);
-
   String? get channelName => (_$data['channelName'] as String?);
-
   Enum$ChannelParticipantRole? get role =>
       (_$data['role'] as Enum$ChannelParticipantRole?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -18551,7 +17957,6 @@ class Input$ChannelParticipantInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -18830,7 +18235,6 @@ class _CopyWithImpl$Input$ChannelParticipantInput<TRes>
         if (channelName != _undefined) 'channelName': (channelName as String?),
         if (role != _undefined) 'role': (role as Enum$ChannelParticipantRole?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -18842,7 +18246,6 @@ class _CopyWithImpl$Input$ChannelParticipantInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -18876,9 +18279,7 @@ class _CopyWithStubImpl$Input$ChannelParticipantInput<TRes>
     Enum$ChannelParticipantRole? role,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -19012,42 +18413,26 @@ class Input$ContentTagInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get objectId => (_$data['objectId'] as String?);
-
   Enum$ModelType? get modelType => (_$data['modelType'] as Enum$ModelType?);
-
   String? get contentTagTypeTextId =>
       (_$data['contentTagTypeTextId'] as String?);
-
   String? get childContentTagTypeTextId =>
       (_$data['childContentTagTypeTextId'] as String?);
-
   String? get messageText => (_$data['messageText'] as String?);
-
   DateTime? get approvedByRecipientAt =>
       (_$data['approvedByRecipientAt'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -19124,7 +18509,6 @@ class Input$ContentTagInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -19428,7 +18812,6 @@ class _CopyWithImpl$Input$ContentTagInput<TRes>
         if (approvedByRecipientAt != _undefined)
           'approvedByRecipientAt': (approvedByRecipientAt as DateTime?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -19440,7 +18823,6 @@ class _CopyWithImpl$Input$ContentTagInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -19475,9 +18857,7 @@ class _CopyWithStubImpl$Input$ContentTagInput<TRes>
     DateTime? approvedByRecipientAt,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -19644,53 +19024,32 @@ class Input$MenteesGroupMembershipInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get groupId => (_$data['groupId'] as String?);
-
   String? get groupIdent => (_$data['groupIdent'] as String?);
-
   String? get userId => (_$data['userId'] as String?);
-
   List<Enum$GroupMembershipRole>? get roles =>
       (_$data['roles'] as List<Enum$GroupMembershipRole>?);
-
   List<String>? get soughtExpertisesTextIds =>
       (_$data['soughtExpertisesTextIds'] as List<String>?);
-
   String? get industryTextId => (_$data['industryTextId'] as String?);
-
   String? get actionsTaken => (_$data['actionsTaken'] as String?);
-
   String? get currentChallenges => (_$data['currentChallenges'] as String?);
-
   String? get futureGoals => (_$data['futureGoals'] as String?);
-
   String? get motivationsForMentorship =>
       (_$data['motivationsForMentorship'] as String?);
-
   String? get reasonsForStartingBusiness =>
       (_$data['reasonsForStartingBusiness'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -19787,7 +19146,6 @@ class Input$MenteesGroupMembershipInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -20195,7 +19553,6 @@ class _CopyWithImpl$Input$MenteesGroupMembershipInput<TRes>
         if (reasonsForStartingBusiness != _undefined)
           'reasonsForStartingBusiness': (reasonsForStartingBusiness as String?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -20207,7 +19564,6 @@ class _CopyWithImpl$Input$MenteesGroupMembershipInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -20247,9 +19603,7 @@ class _CopyWithStubImpl$Input$MenteesGroupMembershipInput<TRes>
     String? reasonsForStartingBusiness,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -20411,52 +19765,32 @@ class Input$MentorsGroupMembershipInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get groupId => (_$data['groupId'] as String?);
-
   String? get groupIdent => (_$data['groupIdent'] as String?);
-
   String? get userId => (_$data['userId'] as String?);
-
   List<Enum$GroupMembershipRole>? get roles =>
       (_$data['roles'] as List<Enum$GroupMembershipRole>?);
-
   List<String>? get expertisesTextIds =>
       (_$data['expertisesTextIds'] as List<String>?);
-
   List<String>? get industriesTextIds =>
       (_$data['industriesTextIds'] as List<String>?);
-
   String? get helpICanOffer => (_$data['helpICanOffer'] as String?);
-
   String? get expectationsForMentees =>
       (_$data['expectationsForMentees'] as String?);
-
   String? get menteePreparationInstructions =>
       (_$data['menteePreparationInstructions'] as String?);
-
   int? get endorsements => (_$data['endorsements'] as int?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -20551,7 +19885,6 @@ class Input$MentorsGroupMembershipInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -20957,7 +20290,6 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
               (menteePreparationInstructions as String?),
         if (endorsements != _undefined) 'endorsements': (endorsements as int?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -20969,7 +20301,6 @@ class _CopyWithImpl$Input$MentorsGroupMembershipInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -21008,9 +20339,7 @@ class _CopyWithStubImpl$Input$MentorsGroupMembershipInput<TRes>
     int? endorsements,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -21315,95 +20644,54 @@ class Input$NotificationInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get templateId => (_$data['templateId'] as String?);
-
   String? get templateName => (_$data['templateName'] as String?);
-
   String? get toUserId => (_$data['toUserId'] as String?);
-
   String? get multiStepActionId => (_$data['multiStepActionId'] as String?);
-
   String? get initiatorId => (_$data['initiatorId'] as String?);
-
   String? get replyingToId => (_$data['replyingToId'] as String?);
-
   String? get title => (_$data['title'] as String?);
-
   String? get messageText => (_$data['messageText'] as String?);
-
   String? get shortMessageText => (_$data['shortMessageText'] as String?);
-
   String? get htmlMessage => (_$data['htmlMessage'] as String?);
-
   String? get language => (_$data['language'] as String?);
-
   String? get appLink => (_$data['appLink'] as String?);
-
   Enum$AppAction? get action0 => (_$data['action0'] as Enum$AppAction?);
-
   Enum$AppAction? get action1 => (_$data['action1'] as Enum$AppAction?);
-
   Enum$AppAction? get action2 => (_$data['action2'] as Enum$AppAction?);
-
   Enum$AppAction? get actionTaken => (_$data['actionTaken'] as Enum$AppAction?);
-
   bool? get sendEmail => (_$data['sendEmail'] as bool?);
-
   bool? get sendInAppMessage => (_$data['sendInAppMessage'] as bool?);
-
   bool? get sendPushNotification => (_$data['sendPushNotification'] as bool?);
-
   bool? get sendSms => (_$data['sendSms'] as bool?);
-
   DateTime? get emailSentAt => (_$data['emailSentAt'] as DateTime?);
-
   DateTime? get inAppMessageSentAt =>
       (_$data['inAppMessageSentAt'] as DateTime?);
-
   DateTime? get inAppMessageReceivedAt =>
       (_$data['inAppMessageReceivedAt'] as DateTime?);
-
   DateTime? get pushNotificationSentAt =>
       (_$data['pushNotificationSentAt'] as DateTime?);
-
   DateTime? get smsSentAt => (_$data['smsSentAt'] as DateTime?);
-
   String? get emailSendReport => (_$data['emailSendReport'] as String?);
-
   String? get pushNotificationSendReport =>
       (_$data['pushNotificationSendReport'] as String?);
-
   String? get smsSendReport => (_$data['smsSendReport'] as String?);
-
   int? get sentMessagesCount => (_$data['sentMessagesCount'] as int?);
-
   Input$NonMemberInfoInput? get recipientInfo =>
       (_$data['recipientInfo'] as Input$NonMemberInfoInput?);
-
   Input$NotificationInput? get context =>
       (_$data['context'] as Input$NotificationInput?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -21585,7 +20873,6 @@ class Input$NotificationInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -22252,7 +21539,6 @@ class _CopyWithImpl$Input$NotificationInput<TRes>
         if (context != _undefined)
           'context': (context as Input$NotificationInput?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -22264,7 +21550,6 @@ class _CopyWithImpl$Input$NotificationInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -22340,15 +21625,11 @@ class _CopyWithStubImpl$Input$NotificationInput<TRes>
     Input$NotificationInput? context,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   CopyWith$Input$NonMemberInfoInput<TRes> get recipientInfo =>
       CopyWith$Input$NonMemberInfoInput.stub(_res);
-
   CopyWith$Input$NotificationInput<TRes> get context =>
       CopyWith$Input$NotificationInput.stub(_res);
 }
@@ -22393,13 +21674,9 @@ class Input$NonMemberInfoInput {
   Map<String, dynamic> _$data;
 
   String? get firstName => (_$data['firstName'] as String?);
-
   String? get lastName => (_$data['lastName'] as String?);
-
   String? get email => (_$data['email'] as String?);
-
   String? get phoneNumber => (_$data['phoneNumber'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('firstName')) {
@@ -22426,7 +21703,6 @@ class Input$NonMemberInfoInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -22581,10 +21857,8 @@ class Input$SendMultiStepActionNotificationInput {
   Map<String, dynamic> _$data;
 
   String? get actionId => (_$data['actionId'] as String?);
-
   Enum$NotificationMethod? get notificationMethod =>
       (_$data['notificationMethod'] as Enum$NotificationMethod?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('actionId')) {
@@ -22606,7 +21880,6 @@ class Input$SendMultiStepActionNotificationInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -22908,64 +22181,36 @@ class Input$NotificationTemplateInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get templateId => (_$data['templateId'] as String?);
-
   Enum$NotificationTemplateName? get name =>
       (_$data['name'] as Enum$NotificationTemplateName?);
-
   String? get description => (_$data['description'] as String?);
-
   String? get titleEn => (_$data['titleEn'] as String?);
-
   String? get messageTextEn => (_$data['messageTextEn'] as String?);
-
   String? get shortMessageTextEn => (_$data['shortMessageTextEn'] as String?);
-
   String? get htmlMessageEn => (_$data['htmlMessageEn'] as String?);
-
   String? get version => (_$data['version'] as String?);
-
   String? get senderName => (_$data['senderName'] as String?);
-
   String? get senderEmail => (_$data['senderEmail'] as String?);
-
   Enum$AppAction? get action0 => (_$data['action0'] as Enum$AppAction?);
-
   Enum$AppAction? get action1 => (_$data['action1'] as Enum$AppAction?);
-
   Enum$AppAction? get action2 => (_$data['action2'] as Enum$AppAction?);
-
   bool? get sendEmail => (_$data['sendEmail'] as bool?);
-
   bool? get sendInAppMessage => (_$data['sendInAppMessage'] as bool?);
-
   bool? get sendPushNotification => (_$data['sendPushNotification'] as bool?);
-
   bool? get sendSms => (_$data['sendSms'] as bool?);
-
   bool? get isCore => (_$data['isCore'] as bool?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -23092,7 +22337,6 @@ class Input$NotificationTemplateInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -23557,7 +22801,6 @@ class _CopyWithImpl$Input$NotificationTemplateInput<TRes>
         if (sendSms != _undefined) 'sendSms': (sendSms as bool?),
         if (isCore != _undefined) 'isCore': (isCore as bool?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -23569,7 +22812,6 @@ class _CopyWithImpl$Input$NotificationTemplateInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -23616,9 +22858,7 @@ class _CopyWithStubImpl$Input$NotificationTemplateInput<TRes>
     bool? isCore,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -23770,49 +23010,30 @@ class Input$Mm2SynchronizationInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   Enum$Mm2SyncDirection? get direction =>
       (_$data['direction'] as Enum$Mm2SyncDirection?);
-
   String? get objectId => (_$data['objectId'] as String?);
-
   Enum$Mm2ModelType? get mm2ModelType =>
       (_$data['mm2ModelType'] as Enum$Mm2ModelType?);
-
   Enum$Mm2SynchronizationMode? get syncMode =>
       (_$data['syncMode'] as Enum$Mm2SynchronizationMode?);
-
   int? get limit => (_$data['limit'] as int?);
-
   bool? get autorun => (_$data['autorun'] as bool?);
-
   String? get usersSinceUpdatedAt => (_$data['usersSinceUpdatedAt'] as String?);
-
   Enum$Mm2SynchronizerLogLevel? get logLevel =>
       (_$data['logLevel'] as Enum$Mm2SynchronizerLogLevel?);
-
   DateTime? get expiresAt => (_$data['expiresAt'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -23905,7 +23126,6 @@ class Input$Mm2SynchronizationInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24248,7 +23468,6 @@ class _CopyWithImpl$Input$Mm2SynchronizationInput<TRes>
           'logLevel': (logLevel as Enum$Mm2SynchronizerLogLevel?),
         if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -24260,7 +23479,6 @@ class _CopyWithImpl$Input$Mm2SynchronizationInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -24298,9 +23516,7 @@ class _CopyWithStubImpl$Input$Mm2SynchronizationInput<TRes>
     DateTime? expiresAt,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -24339,12 +23555,9 @@ class Input$NlpConversationInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String get label => (_$data['label'] as String);
-
   List<Input$NlpLabelInput>? get labels =>
       (_$data['labels'] as List<Input$NlpLabelInput>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -24367,7 +23580,6 @@ class Input$NlpConversationInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24444,8 +23656,8 @@ abstract class CopyWith$Input$NlpConversationInput<TRes> {
     List<Input$NlpLabelInput>? labels,
   });
   TRes labels(
-      Iterable<Input$NlpLabelInput>? Function(
-              Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>?)
+      Iterable<Input$NlpLabelInput> Function(
+              Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>)
           _fn);
 }
 
@@ -24474,16 +23686,17 @@ class _CopyWithImpl$Input$NlpConversationInput<TRes>
         if (labels != _undefined && labels != null)
           'labels': (labels as List<Input$NlpLabelInput>),
       }));
-
   TRes labels(
-          Iterable<Input$NlpLabelInput>? Function(
-                  Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>?)
+          Iterable<Input$NlpLabelInput> Function(
+                  Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>)
               _fn) =>
       call(
-          labels: _fn(_instance.labels?.map((e) => CopyWith$Input$NlpLabelInput(
-                e,
-                (i) => i,
-              )))?.toList());
+          labels: _instance.labels != null
+              ? _fn(_instance.labels!.map((e) => CopyWith$Input$NlpLabelInput(
+                    e,
+                    (i) => i,
+                  ))).toList()
+              : null);
 }
 
 class _CopyWithStubImpl$Input$NlpConversationInput<TRes>
@@ -24498,7 +23711,6 @@ class _CopyWithStubImpl$Input$NlpConversationInput<TRes>
     List<Input$NlpLabelInput>? labels,
   }) =>
       _res;
-
   labels(_fn) => _res;
 }
 
@@ -24543,13 +23755,9 @@ class Input$NlpLabelInput {
   Map<String, dynamic> _$data;
 
   Enum$NlpLabelName? get name => (_$data['name'] as Enum$NlpLabelName?);
-
   int? get probability => (_$data['probability'] as int?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('name')) {
@@ -24577,7 +23785,6 @@ class Input$NlpLabelInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24735,12 +23942,9 @@ class Input$NlpMessageInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String get label => (_$data['label'] as String);
-
   List<Input$NlpLabelInput>? get labels =>
       (_$data['labels'] as List<Input$NlpLabelInput>?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -24763,7 +23967,6 @@ class Input$NlpMessageInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24839,8 +24042,8 @@ abstract class CopyWith$Input$NlpMessageInput<TRes> {
     List<Input$NlpLabelInput>? labels,
   });
   TRes labels(
-      Iterable<Input$NlpLabelInput>? Function(
-              Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>?)
+      Iterable<Input$NlpLabelInput> Function(
+              Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>)
           _fn);
 }
 
@@ -24869,16 +24072,17 @@ class _CopyWithImpl$Input$NlpMessageInput<TRes>
         if (labels != _undefined && labels != null)
           'labels': (labels as List<Input$NlpLabelInput>),
       }));
-
   TRes labels(
-          Iterable<Input$NlpLabelInput>? Function(
-                  Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>?)
+          Iterable<Input$NlpLabelInput> Function(
+                  Iterable<CopyWith$Input$NlpLabelInput<Input$NlpLabelInput>>)
               _fn) =>
       call(
-          labels: _fn(_instance.labels?.map((e) => CopyWith$Input$NlpLabelInput(
-                e,
-                (i) => i,
-              )))?.toList());
+          labels: _instance.labels != null
+              ? _fn(_instance.labels!.map((e) => CopyWith$Input$NlpLabelInput(
+                    e,
+                    (i) => i,
+                  ))).toList()
+              : null);
 }
 
 class _CopyWithStubImpl$Input$NlpMessageInput<TRes>
@@ -24893,7 +24097,6 @@ class _CopyWithStubImpl$Input$NlpMessageInput<TRes>
     List<Input$NlpLabelInput>? labels,
   }) =>
       _res;
-
   labels(_fn) => _res;
 }
 
@@ -25208,100 +24411,58 @@ class Input$SidMultiStepActionInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get userId => (_$data['userId'] as String?);
-
   String? get userIdent => (_$data['userIdent'] as String?);
-
   String? get userHandle => (_$data['userHandle'] as String?);
-
   String? get email => (_$data['email'] as String?);
-
   String? get phoneNumber => (_$data['phoneNumber'] as String?);
-
   String? get deviceUuid => (_$data['deviceUuid'] as String?);
-
   Enum$MultiStepActionType? get actionType =>
       (_$data['actionType'] as Enum$MultiStepActionType?);
-
   Enum$MultiStepActionStatus? get actionStatus =>
       (_$data['actionStatus'] as Enum$MultiStepActionStatus?);
-
   Enum$NotificationMethod? get notificationMethod =>
       (_$data['notificationMethod'] as Enum$NotificationMethod?);
-
   Enum$MultiStepActionResult? get result =>
       (_$data['result'] as Enum$MultiStepActionResult?);
-
   String? get confirmToken => (_$data['confirmToken'] as String?);
-
   int? get attemptCount => (_$data['attemptCount'] as int?);
-
   DateTime? get notificationSentAt =>
       (_$data['notificationSentAt'] as DateTime?);
-
   String? get notificationResult => (_$data['notificationResult'] as String?);
-
   String? get notificationId => (_$data['notificationId'] as String?);
-
   String? get textData => (_$data['textData'] as String?);
-
   String? get report => (_$data['report'] as String?);
-
   String? get authToken => (_$data['authToken'] as String?);
-
   bool? get emailPassed => (_$data['emailPassed'] as bool?);
-
   DateTime? get emailUpdatedAt => (_$data['emailUpdatedAt'] as DateTime?);
-
   DateTime? get emailVerifiedAt => (_$data['emailVerifiedAt'] as DateTime?);
-
   List<Input$MultiStepActionErrorInput>? get errors =>
       (_$data['errors'] as List<Input$MultiStepActionErrorInput>?);
-
   String? get password => (_$data['password'] as String?);
-
   bool? get passwordPassed => (_$data['passwordPassed'] as bool?);
-
   DateTime? get passwordResettedAt =>
       (_$data['passwordResettedAt'] as DateTime?);
-
   DateTime? get passwordUpdatedAt => (_$data['passwordUpdatedAt'] as DateTime?);
-
   bool? get phoneNumberPassed => (_$data['phoneNumberPassed'] as bool?);
-
   DateTime? get phoneNumberUpdatedAt =>
       (_$data['phoneNumberUpdatedAt'] as DateTime?);
-
   DateTime? get phoneNumberVerifiedAt =>
       (_$data['phoneNumberVerifiedAt'] as DateTime?);
-
   DateTime? get signedInAt => (_$data['signedInAt'] as DateTime?);
-
   String? get tfaBackupCodes => (_$data['tfaBackupCodes'] as String?);
-
   DateTime? get expiresAt => (_$data['expiresAt'] as DateTime?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -25491,7 +24652,6 @@ class Input$SidMultiStepActionInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -26197,7 +25357,6 @@ class _CopyWithImpl$Input$SidMultiStepActionInput<TRes>
           'tfaBackupCodes': (tfaBackupCodes as String?),
         if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -26209,7 +25368,6 @@ class _CopyWithImpl$Input$SidMultiStepActionInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -26283,12 +25441,9 @@ class _CopyWithStubImpl$Input$SidMultiStepActionInput<TRes>
     DateTime? expiresAt,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
-
   errors(_fn) => _res;
 }
 
@@ -26395,33 +25550,20 @@ class Input$MultiStepActionErrorInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
-
   String? get adminNotes => (_$data['adminNotes'] as String?);
-
   List<Input$ModelEventInput>? get events =>
       (_$data['events'] as List<Input$ModelEventInput>?);
-
   Input$BaseModelMetadataInput? get metadata =>
       (_$data['metadata'] as Input$BaseModelMetadataInput?);
-
   DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
   String? get createdBy => (_$data['createdBy'] as String?);
-
   DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
   String? get updatedBy => (_$data['updatedBy'] as String?);
-
   DateTime? get deletedAt => (_$data['deletedAt'] as DateTime?);
-
   String? get deletedBy => (_$data['deletedBy'] as String?);
-
   String? get key => (_$data['key'] as String?);
-
   String? get messageId => (_$data['messageId'] as String?);
-
   String? get message => (_$data['message'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -26484,7 +25626,6 @@ class Input$MultiStepActionErrorInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -26735,7 +25876,6 @@ class _CopyWithImpl$Input$MultiStepActionErrorInput<TRes>
         if (messageId != _undefined) 'messageId': (messageId as String?),
         if (message != _undefined) 'message': (message as String?),
       }));
-
   TRes events(
           Iterable<Input$ModelEventInput>? Function(
                   Iterable<
@@ -26747,7 +25887,6 @@ class _CopyWithImpl$Input$MultiStepActionErrorInput<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata {
     final local$metadata = _instance.metadata;
     return local$metadata == null
@@ -26779,9 +25918,7 @@ class _CopyWithStubImpl$Input$MultiStepActionErrorInput<TRes>
     String? message,
   }) =>
       _res;
-
   events(_fn) => _res;
-
   CopyWith$Input$BaseModelMetadataInput<TRes> get metadata =>
       CopyWith$Input$BaseModelMetadataInput.stub(_res);
 }
@@ -26832,15 +25969,10 @@ class Input$UserIdentInput {
   Map<String, dynamic> _$data;
 
   String? get userId => (_$data['userId'] as String?);
-
   String? get userIdent => (_$data['userIdent'] as String?);
-
   String? get userHandle => (_$data['userHandle'] as String?);
-
   String? get email => (_$data['email'] as String?);
-
   String? get phoneNumber => (_$data['phoneNumber'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('userId')) {
@@ -26871,7 +26003,6 @@ class Input$UserIdentInput {
         this,
         (i) => i,
       );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -27042,11 +26173,8 @@ class Input$VerifyMultiStepActionTokenInput {
   Map<String, dynamic> _$data;
 
   String? get actionId => (_$data['actionId'] as String?);
-
   String? get token => (_$data['token'] as String?);
-
   String? get newPassword => (_$data['newPassword'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('actionId')) {
@@ -27070,7 +26198,6 @@ class Input$VerifyMultiStepActionTokenInput {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

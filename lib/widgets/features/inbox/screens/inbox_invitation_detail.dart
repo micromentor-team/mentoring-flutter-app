@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:js_interop_unsafe';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -253,31 +250,30 @@ class _InboxInvitationDetailScreenState
                           channelInvitationId: widget.channelInvitationId,
                         );
 
-                      
                         final pref = await SharedPreferences.getInstance();
-                       String? userId = pref.getString('userId');
-   
-                        log(userId.toString());
-                        String selectedReasonText = reasons[selectedReason];
-String childContentTagTypeTextId;
+                        String? userId = pref.getString('userId');
 
-if (selectedReasonText == l10n.inviteDeclineReasonFakeProfile) {
-  childContentTagTypeTextId = "fakePerson";
-} else if (selectedReasonText == l10n.inviteDeclineReasonInappropriate) {
-  childContentTagTypeTextId = "objectionableLanguage";
-} else {
-  // Handle other reasons here if needed
-  childContentTagTypeTextId = ""; // Default value
-}
+                        String selectedReasonText = reasons[selectedReason];
+                        String childContentTagTypeTextId;
+
+                        if (selectedReasonText ==
+                            l10n.inviteDeclineReasonFakeProfile) {
+                          childContentTagTypeTextId = "fakePerson";
+                        } else if (selectedReasonText ==
+                            l10n.inviteDeclineReasonInappropriate) {
+                          childContentTagTypeTextId = "objectionableLanguage";
+                        } else {
+                          // Handle other reasons here if needed
+                          childContentTagTypeTextId = ""; // Default value
+                        }
 
                         final input = Input$ContentTagInput(
-                          objectId:
-                              senderId, // The user ID of the user that sent the invitation,
-                          contentTagTypeTextId:
-                              'concern', // see instructions in issue
+                          objectId: senderId,
+                          // The user ID of the user that sent the invitation,
+                          contentTagTypeTextId: 'concern',
+                          // see instructions in issue
                           createdBy: userId,
                           childContentTagTypeTextId: childContentTagTypeTextId,
-                         
                         );
 
                         await _userProvider.createContentTag(input: input);
@@ -287,7 +283,6 @@ if (selectedReasonText == l10n.inviteDeclineReasonFakeProfile) {
                       });
                 });
           },
-          // log(_l10n.actionDecline);
           child: Text(
             _l10n.actionDecline,
             style: theme.textTheme.labelLarge?.copyWith(
@@ -465,6 +460,7 @@ class DeclineReason extends StatefulWidget {
   final String? name;
   int selectedReason;
   final Function continueAction;
+
   DeclineReason(
       {super.key,
       required this.name,

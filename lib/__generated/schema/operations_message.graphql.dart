@@ -25,7 +25,6 @@ class Variables$Query$FindChannelLatestMessage {
   Map<String, dynamic> _$data;
 
   String get channelId => (_$data['channelId'] as String);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelId = channelId;
@@ -39,7 +38,6 @@ class Variables$Query$FindChannelLatestMessage {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -221,7 +219,6 @@ class _CopyWithImpl$Query$FindChannelLatestMessage<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$FindChannelLatestMessage$findChannelById<TRes>
       get findChannelById {
     final local$findChannelById = _instance.findChannelById;
@@ -241,7 +238,6 @@ class _CopyWithStubImpl$Query$FindChannelLatestMessage<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$FindChannelLatestMessage$findChannelById<TRes>
       get findChannelById =>
           CopyWith$Query$FindChannelLatestMessage$findChannelById.stub(_res);
@@ -450,7 +446,6 @@ class _CopyWithImpl$Query$FindChannelLatestMessage$findChannelById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<TRes>
       get latestMessage {
     final local$latestMessage = _instance.latestMessage;
@@ -470,7 +465,6 @@ class _CopyWithStubImpl$Query$FindChannelLatestMessage$findChannelById<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage<TRes>
       get latestMessage =>
           CopyWith$Query$FindChannelLatestMessage$findChannelById$latestMessage
@@ -677,7 +671,6 @@ class Variables$Query$FindChannelMessageById {
   Map<String, dynamic> _$data;
 
   String get channelMessageId => (_$data['channelMessageId'] as String);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelMessageId = channelMessageId;
@@ -691,7 +684,6 @@ class Variables$Query$FindChannelMessageById {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -875,7 +867,6 @@ class _CopyWithImpl$Query$FindChannelMessageById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
       get findChannelMessageById {
     final local$findChannelMessageById = _instance.findChannelMessageById;
@@ -895,7 +886,6 @@ class _CopyWithStubImpl$Query$FindChannelMessageById<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$FindChannelMessageById$findChannelMessageById<TRes>
       get findChannelMessageById =>
           CopyWith$Query$FindChannelMessageById$findChannelMessageById.stub(
@@ -1381,7 +1371,6 @@ class _CopyWithImpl$Query$FindChannelMessageById$findChannelMessageById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   TRes statuses(
           Iterable<Query$FindChannelMessageById$findChannelMessageById$statuses>? Function(
                   Iterable<
@@ -1421,7 +1410,6 @@ class _CopyWithStubImpl$Query$FindChannelMessageById$findChannelMessageById<
     String? $__typename,
   }) =>
       _res;
-
   statuses(_fn) => _res;
 }
 
@@ -1619,10 +1607,8 @@ class Variables$Query$FindChannelMessages {
 
   Input$ChannelMessageListFilter? get filter =>
       (_$data['filter'] as Input$ChannelMessageListFilter?);
-
   Input$FindObjectsOptions? get options =>
       (_$data['options'] as Input$FindObjectsOptions?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('filter')) {
@@ -1642,7 +1628,6 @@ class Variables$Query$FindChannelMessages {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1865,7 +1850,6 @@ class _CopyWithImpl$Query$FindChannelMessages<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   TRes findChannelMessages(
           Iterable<Query$FindChannelMessages$findChannelMessages> Function(
                   Iterable<
@@ -1891,7 +1875,6 @@ class _CopyWithStubImpl$Query$FindChannelMessages<TRes>
     String? $__typename,
   }) =>
       _res;
-
   findChannelMessages(_fn) => _res;
 }
 
@@ -2381,7 +2364,6 @@ class _CopyWithImpl$Query$FindChannelMessages$findChannelMessages<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   TRes statuses(
           Iterable<Query$FindChannelMessages$findChannelMessages$statuses>? Function(
                   Iterable<
@@ -2417,7 +2399,6 @@ class _CopyWithStubImpl$Query$FindChannelMessages$findChannelMessages<TRes>
     String? $__typename,
   }) =>
       _res;
-
   statuses(_fn) => _res;
 }
 
@@ -2686,7 +2667,6 @@ class _CopyWithImpl$Query$InboxAllUnseenMessages<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$InboxAllUnseenMessages$myInbox<TRes> get myInbox {
     final local$myInbox = _instance.myInbox;
     return CopyWith$Query$InboxAllUnseenMessages$myInbox(
@@ -2705,7 +2685,6 @@ class _CopyWithStubImpl$Query$InboxAllUnseenMessages<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$InboxAllUnseenMessages$myInbox<TRes> get myInbox =>
       CopyWith$Query$InboxAllUnseenMessages$myInbox.stub(_res);
 }
@@ -2918,7 +2897,6 @@ class _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<TRes> get channels {
     final local$channels = _instance.channels;
     return local$channels == null
@@ -2940,7 +2918,6 @@ class _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Query$InboxAllUnseenMessages$myInbox$channels<TRes> get channels =>
       CopyWith$Query$InboxAllUnseenMessages$myInbox$channels.stub(_res);
 }
@@ -3136,7 +3113,6 @@ class _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   TRes unseenMessages(
           Iterable<Query$InboxAllUnseenMessages$myInbox$channels$unseenMessages>? Function(
                   Iterable<
@@ -3149,7 +3125,6 @@ class _CopyWithImpl$Query$InboxAllUnseenMessages$myInbox$channels<TRes>
                 e,
                 (i) => i,
               )))?.toList());
-
   TRes unseenArchivedMessages(
           Iterable<Query$InboxAllUnseenMessages$myInbox$channels$unseenArchivedMessages>? Function(
                   Iterable<
@@ -3178,9 +3153,7 @@ class _CopyWithStubImpl$Query$InboxAllUnseenMessages$myInbox$channels<TRes>
     String? $__typename,
   }) =>
       _res;
-
   unseenMessages(_fn) => _res;
-
   unseenArchivedMessages(_fn) => _res;
 }
 
@@ -3491,7 +3464,6 @@ class Variables$Mutation$CreateChannelMessage {
 
   Input$ChannelMessageInput get input =>
       (_$data['input'] as Input$ChannelMessageInput);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -3505,7 +3477,6 @@ class Variables$Mutation$CreateChannelMessage {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3688,7 +3659,6 @@ class _CopyWithImpl$Mutation$CreateChannelMessage<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   CopyWith$Mutation$CreateChannelMessage$createChannelMessage<TRes>
       get createChannelMessage {
     final local$createChannelMessage = _instance.createChannelMessage;
@@ -3708,7 +3678,6 @@ class _CopyWithStubImpl$Mutation$CreateChannelMessage<TRes>
     String? $__typename,
   }) =>
       _res;
-
   CopyWith$Mutation$CreateChannelMessage$createChannelMessage<TRes>
       get createChannelMessage =>
           CopyWith$Mutation$CreateChannelMessage$createChannelMessage.stub(
@@ -4192,7 +4161,6 @@ class _CopyWithImpl$Mutation$CreateChannelMessage$createChannelMessage<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
   TRes statuses(
           Iterable<Mutation$CreateChannelMessage$createChannelMessage$statuses>? Function(
                   Iterable<
@@ -4230,7 +4198,6 @@ class _CopyWithStubImpl$Mutation$CreateChannelMessage$createChannelMessage<TRes>
     String? $__typename,
   }) =>
       _res;
-
   statuses(_fn) => _res;
 }
 
@@ -4417,9 +4384,7 @@ class Variables$Mutation$DeleteChannelMessage {
   Map<String, dynamic> _$data;
 
   bool get deletePhysically => (_$data['deletePhysically'] as bool);
-
   String get channelMessageId => (_$data['channelMessageId'] as String);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$deletePhysically = deletePhysically;
@@ -4435,7 +4400,6 @@ class Variables$Mutation$DeleteChannelMessage {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4722,7 +4686,6 @@ class Variables$Mutation$MarkChannelMessagesAsSeenByMe {
   Map<String, dynamic> _$data;
 
   String get channelId => (_$data['channelId'] as String);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelId = channelId;
@@ -4736,7 +4699,6 @@ class Variables$Mutation$MarkChannelMessagesAsSeenByMe {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5001,7 +4963,6 @@ class Variables$Mutation$UpdateChannelMessage {
 
   Input$ChannelMessageInput get input =>
       (_$data['input'] as Input$ChannelMessageInput);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -5015,7 +4976,6 @@ class Variables$Mutation$UpdateChannelMessage {
             this,
             (i) => i,
           );
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
