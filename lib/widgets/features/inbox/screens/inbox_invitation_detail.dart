@@ -1,8 +1,15 @@
+import 'dart:developer';
+import 'dart:js_interop_unsafe';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
+import 'package:mm_flutter_app/services/graphql/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../__generated/schema/operations_invitation.graphql.dart';
 import '../../../../constants/constants.dart';
@@ -37,9 +44,11 @@ class _InboxInvitationDetailScreenState
     with NavigationMixin<InboxInvitationDetailScreen> {
   late final InvitationsProvider _invitationsProvider;
   late final InboxModel _inboxModel;
+  late final UserProvider _userProvider;
   late Future<OperationResult<ChannelInvitationById>> _invitation;
   late AppLocalizations _l10n;
   bool _isMarkedAsRead = false;
+  int selectedReason = 0;
 
   @override
   void initState() {
@@ -49,6 +58,10 @@ class _InboxInvitationDetailScreenState
       listen: false,
     );
     _inboxModel = Provider.of<InboxModel>(
+      context,
+      listen: false,
+    );
+    _userProvider = Provider.of<UserProvider>(
       context,
       listen: false,
     );
@@ -208,7 +221,18 @@ class _InboxInvitationDetailScreenState
     AppLocalizations l10n,
     String senderId,
     String? senderName,
+    int selectedReason,
   ) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+
+    List<String> reasons = [
+      l10n.inviteDeclineReasonNotGoodFit,
+      l10n.inviteDeclineReasonTooBusy,
+      l10n.inviteDeclineReasonNoReason,
+      l10n.inviteDeclineReasonFakeProfile,
+      l10n.inviteDeclineReasonInappropriate
+    ];
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -223,15 +247,47 @@ class _InboxInvitationDetailScreenState
                 builder: (BuildContext context) {
                   return DeclineReason(
                       name: senderName,
+                      selectedReason: selectedReason,
                       continueAction: () async {
                         await _invitationsProvider.declineChannelInvitation(
                           channelInvitationId: widget.channelInvitationId,
                         );
+
+                      
+                        final pref = await SharedPreferences.getInstance();
+                       String? userId = pref.getString('userId');
+   
+                        log(userId.toString());
+                        String selectedReasonText = reasons[selectedReason];
+String childContentTagTypeTextId;
+
+if (selectedReasonText == l10n.inviteDeclineReasonFakeProfile) {
+  childContentTagTypeTextId = "fakePerson";
+} else if (selectedReasonText == l10n.inviteDeclineReasonInappropriate) {
+  childContentTagTypeTextId = "objectionableLanguage";
+} else {
+  // Handle other reasons here if needed
+  childContentTagTypeTextId = ""; // Default value
+}
+
+                        final input = Input$ContentTagInput(
+                          objectId:
+                              senderId, // The user ID of the user that sent the invitation,
+                          contentTagTypeTextId:
+                              'concern', // see instructions in issue
+                          createdBy: userId,
+                          childContentTagTypeTextId: childContentTagTypeTextId,
+                         
+                        );
+
+                        await _userProvider.createContentTag(input: input);
+
                         await _inboxModel.refreshPendingReceivedInvitations();
                         router.push(Routes.inboxInvitesReceived.path);
                       });
                 });
           },
+          // log(_l10n.actionDecline);
           child: Text(
             _l10n.actionDecline,
             style: theme.textTheme.labelLarge?.copyWith(
@@ -387,7 +443,9 @@ class _InboxInvitationDetailScreenState
                               theme,
                               l10n,
                               invitationResult.sender.id,
-                              invitationResult.sender.fullName)
+                              invitationResult.sender.fullName,
+                              selectedReason,
+                            )
                           : widget.invitationDirection == MessageDirection.sent
                               ? _createWithdrawButton(theme)
                               : const SizedBox(height: 0, width: 0),
@@ -405,21 +463,25 @@ class _InboxInvitationDetailScreenState
 
 class DeclineReason extends StatefulWidget {
   final String? name;
+  int selectedReason;
   final Function continueAction;
-  const DeclineReason(
-      {super.key, required this.name, required this.continueAction});
+  DeclineReason(
+      {super.key,
+      required this.name,
+      required this.continueAction,
+      required this.selectedReason});
 
   @override
   State<DeclineReason> createState() => _DeclineReasonState();
 }
 
 class _DeclineReasonState extends State<DeclineReason> {
-  int selectedReason = 0;
+  // int selectedReason = 0;
 
   @override
   void initState() {
     super.initState();
-    selectedReason = 0;
+    widget.selectedReason = 0;
   }
 
   @override
@@ -443,12 +505,13 @@ class _DeclineReasonState extends State<DeclineReason> {
         RadioListTile(
           controlAffinity: ListTileControlAffinity.trailing,
           value: i,
-          groupValue: selectedReason,
+          groupValue: widget.selectedReason,
           title: Text(reason),
-          selected: i == selectedReason,
+          selected: i == widget.selectedReason,
           onChanged: (currentUser) {
             setState(() {
-              selectedReason = i;
+              widget.selectedReason = i;
+              reason = reasons[i];
             });
           },
           activeColor: theme.colorScheme.primary,

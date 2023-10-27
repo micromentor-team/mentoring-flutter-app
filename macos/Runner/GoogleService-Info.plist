@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCCiUJ_n4TpQRqZWY1ig25SwJNLGjUGrZw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>970375826463</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.mmFlutterApp</string>
+	<key>PROJECT_ID</key>
+	<string>micromentor-b8317</string>
+	<key>STORAGE_BUCKET</key>
+	<string>micromentor-b8317.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:970375826463:ios:a01a18259af92bf9a8d92a</string>
+</dict>
+</plist>

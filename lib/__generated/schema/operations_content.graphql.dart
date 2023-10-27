@@ -428,6 +428,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCompanyStages(
           Iterable<Query$FindAllOptionsByType$findCompanyStages> Function(
                   Iterable<
@@ -440,6 +441,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findCompanyTypes(
           Iterable<Query$FindAllOptionsByType$findCompanyTypes> Function(
                   Iterable<
@@ -452,6 +454,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findCountries(
           Iterable<Query$FindAllOptionsByType$findCountries> Function(
                   Iterable<
@@ -464,6 +467,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findEducationLevels(
           Iterable<Query$FindAllOptionsByType$findEducationLevels> Function(
                   Iterable<
@@ -476,6 +480,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findExpertises(
           Iterable<Query$FindAllOptionsByType$findExpertises> Function(
                   Iterable<
@@ -488,6 +493,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findIndustries(
           Iterable<Query$FindAllOptionsByType$findIndustries> Function(
                   Iterable<
@@ -500,6 +506,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findGenders(
           Iterable<Query$FindAllOptionsByType$findGenders> Function(
                   Iterable<
@@ -512,6 +519,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findLanguages(
           Iterable<Query$FindAllOptionsByType$findLanguages> Function(
                   Iterable<
@@ -524,6 +532,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findPronouns(
           Iterable<Query$FindAllOptionsByType$findPronouns> Function(
                   Iterable<
@@ -557,14 +566,23 @@ class _CopyWithStubImpl$Query$FindAllOptionsByType<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCompanyStages(_fn) => _res;
+
   findCompanyTypes(_fn) => _res;
+
   findCountries(_fn) => _res;
+
   findEducationLevels(_fn) => _res;
+
   findExpertises(_fn) => _res;
+
   findIndustries(_fn) => _res;
+
   findGenders(_fn) => _res;
+
   findLanguages(_fn) => _res;
+
   findPronouns(_fn) => _res;
 }
 
@@ -2380,6 +2398,7 @@ class _CopyWithImpl$Query$FindCompanyStages<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCompanyStages(
           Iterable<Query$FindCompanyStages$findCompanyStages> Function(
                   Iterable<
@@ -2405,6 +2424,7 @@ class _CopyWithStubImpl$Query$FindCompanyStages<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCompanyStages(_fn) => _res;
 }
 
@@ -2730,6 +2750,7 @@ class _CopyWithImpl$Query$FindCompanyTypes<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCompanyTypes(
           Iterable<Query$FindCompanyTypes$findCompanyTypes> Function(
                   Iterable<
@@ -2755,6 +2776,7 @@ class _CopyWithStubImpl$Query$FindCompanyTypes<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCompanyTypes(_fn) => _res;
 }
 
@@ -3077,6 +3099,7 @@ class _CopyWithImpl$Query$FindCountries<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCountries(
           Iterable<Query$FindCountries$findCountries> Function(
                   Iterable<
@@ -3102,6 +3125,7 @@ class _CopyWithStubImpl$Query$FindCountries<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCountries(_fn) => _res;
 }
 
@@ -3349,6 +3373,7 @@ class Variables$Query$FindCountriesInLanguage {
   Map<String, dynamic> _$data;
 
   Enum$UiLanguage? get uiLanguage => (_$data['uiLanguage'] as Enum$UiLanguage?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('uiLanguage')) {
@@ -3365,6 +3390,7 @@ class Variables$Query$FindCountriesInLanguage {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3564,6 +3590,7 @@ class _CopyWithImpl$Query$FindCountriesInLanguage<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCountries(
           Iterable<Query$FindCountriesInLanguage$findCountries> Function(
                   Iterable<
@@ -3589,6 +3616,7 @@ class _CopyWithStubImpl$Query$FindCountriesInLanguage<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCountries(_fn) => _res;
 }
 
@@ -3957,6 +3985,7 @@ class _CopyWithImpl$Query$FindEducationLevels<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findEducationLevels(
           Iterable<Query$FindEducationLevels$findEducationLevels> Function(
                   Iterable<
@@ -3982,6 +4011,7 @@ class _CopyWithStubImpl$Query$FindEducationLevels<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findEducationLevels(_fn) => _res;
 }
 
@@ -4305,6 +4335,7 @@ class _CopyWithImpl$Query$FindExpertises<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findExpertises(
           Iterable<Query$FindExpertises$findExpertises> Function(
                   Iterable<
@@ -4330,6 +4361,7 @@ class _CopyWithStubImpl$Query$FindExpertises<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findExpertises(_fn) => _res;
 }
 
@@ -4652,6 +4684,7 @@ class _CopyWithImpl$Query$FindIndustries<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findIndustries(
           Iterable<Query$FindIndustries$findIndustries> Function(
                   Iterable<
@@ -4677,6 +4710,7 @@ class _CopyWithStubImpl$Query$FindIndustries<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findIndustries(_fn) => _res;
 }
 
@@ -4998,6 +5032,7 @@ class _CopyWithImpl$Query$FindGenders<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findGenders(
           Iterable<Query$FindGenders$findGenders> Function(
                   Iterable<
@@ -5023,6 +5058,7 @@ class _CopyWithStubImpl$Query$FindGenders<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findGenders(_fn) => _res;
 }
 
@@ -5343,6 +5379,7 @@ class _CopyWithImpl$Query$FindLanguages<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findLanguages(
           Iterable<Query$FindLanguages$findLanguages> Function(
                   Iterable<
@@ -5368,6 +5405,7 @@ class _CopyWithStubImpl$Query$FindLanguages<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findLanguages(_fn) => _res;
 }
 
@@ -5743,6 +5781,7 @@ class _CopyWithImpl$Query$FindPronouns<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findPronouns(
           Iterable<Query$FindPronouns$findPronouns> Function(
                   Iterable<
@@ -5768,6 +5807,7 @@ class _CopyWithStubImpl$Query$FindPronouns<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findPronouns(_fn) => _res;
 }
 

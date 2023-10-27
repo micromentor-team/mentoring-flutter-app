@@ -19,6 +19,10 @@ typedef CreateUserSearchResponse = Mutation$CreateUserSearch$createUserSearch;
 typedef UserSearch = Query$FindUserSearch$findUserSearchById;
 typedef UserSearchResult = Query$FindUserSearchResults$findUserSearchResults;
 
+// report
+typedef CreateContentTagResponse =  Mutation$CreateContentTag$createContentTag;
+    
+
 class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? _user;
 
@@ -76,6 +80,30 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     }
     return operationResult;
   }
+        Future<OperationResult<CreateContentTagResponse>> createContentTag({
+        required Input$ContentTagInput input,
+        bool fetchFromNetworkOnly = false,
+      }) async {
+        final QueryResult queryResult = await asyncMutation(
+          mutationOptions: MutationOptions(
+            document: documentNodeMutationCreateContentTag,
+            fetchPolicy: fetchFromNetworkOnly
+                ? FetchPolicy.networkOnly
+                : FetchPolicy.cacheFirst,
+            variables:
+                Variables$Mutation$CreateContentTag(input: input).toJson(),
+          ),
+        );
+        return OperationResult(
+          gqlQueryResult: queryResult,
+          response: queryResult.data != null
+              ? Mutation$CreateContentTag.fromJson(
+                  queryResult.data!,
+                ).createContentTag
+              : null,
+        );
+      }
+
 
   Future<OperationResult<UserSearch>> getUserSearch({
     required String userSearchId,
@@ -352,6 +380,9 @@ class UserProvider extends BaseProvider with ChangeNotifier {
       response: null,
     );
   }
+
+
+  
 
   Future<OperationResult<void>> updateCompany({
     required Input$CompanyInput input,
