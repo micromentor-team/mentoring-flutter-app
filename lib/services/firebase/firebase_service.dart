@@ -21,7 +21,7 @@ mixin FirebaseServiceOwner {
 
 // see: https://firebase.google.com/docs/cloud-messaging/flutter/receive
 class FirebaseService with ChangeNotifier {
-  late StreamSubscription<String> _tokenSubscriptionStream;
+  StreamSubscription<String>? _tokenSubscriptionStream;
   // FirebaseApp? _firebaseApp;
   String? _firebaseToken;
   String? _deviceUuid;
@@ -63,7 +63,9 @@ class FirebaseService with ChangeNotifier {
   }
 
   void shutDownService() {
-    _tokenSubscriptionStream.cancel();
+    if (_tokenSubscriptionStream != null) {
+      _tokenSubscriptionStream!.cancel();
+    }
   }
 
   // This callback is fired at each app startup and whenever a new

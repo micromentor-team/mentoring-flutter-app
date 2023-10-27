@@ -3,7 +3,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mm_flutter_app/services/firebase/firebase_service.dart';
 import 'package:provider/provider.dart';
 
 import '__generated/schema/schema.graphql.dart';
@@ -13,6 +12,7 @@ import 'models/inbox_model.dart';
 import 'models/locale_model.dart';
 import 'models/scaffold_model.dart';
 import 'models/user_registration_model.dart';
+import 'services/firebase/firebase_service.dart';
 import 'services/graphql/graphql.dart';
 import 'services/graphql/providers/base/operation_result.dart';
 import 'services/graphql/providers/channels_provider.dart';
