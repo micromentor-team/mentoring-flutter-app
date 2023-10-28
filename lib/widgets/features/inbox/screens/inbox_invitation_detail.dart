@@ -267,16 +267,13 @@ class _InboxInvitationDetailScreenState
                           childContentTagTypeTextId = ""; // Default value
                         }
 
-                        final input = Input$ContentTagInput(
-                          objectId: senderId,
-                          // The user ID of the user that sent the invitation,
-                          contentTagTypeTextId: 'concern',
-                          // see instructions in issue
+                        final reportUserInput = Input$ReportUserInput(
+                          // The user ID of the user that sent the invitation:
+                          userId: senderId,
+                          reasonTextId: Enum$ReportUserReason.inappropriate,
                           createdBy: userId,
-                          childContentTagTypeTextId: childContentTagTypeTextId,
                         );
-
-                        await _userProvider.createContentTag(input: input);
+                        await _userProvider.reportUser(input: reportUserInput);
 
                         await _inboxModel.refreshPendingReceivedInvitations();
                         router.push(Routes.inboxInvitesReceived.path);

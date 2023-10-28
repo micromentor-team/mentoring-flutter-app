@@ -5,6 +5,418 @@
 import 'package:gql/ast.dart';
 import 'schema.graphql.dart';
 
+class Variables$Mutation$ReportUser {
+  factory Variables$Mutation$ReportUser(
+          {required Input$ReportUserInput input}) =>
+      Variables$Mutation$ReportUser._({
+        r'input': input,
+      });
+
+  Variables$Mutation$ReportUser._(this._$data);
+
+  factory Variables$Mutation$ReportUser.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$ReportUserInput.fromJson((l$input as Map<String, dynamic>));
+    return Variables$Mutation$ReportUser._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$ReportUserInput get input => (_$data['input'] as Input$ReportUserInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$ReportUser<Variables$Mutation$ReportUser>
+      get copyWith => CopyWith$Variables$Mutation$ReportUser(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$ReportUser) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$ReportUser<TRes> {
+  factory CopyWith$Variables$Mutation$ReportUser(
+    Variables$Mutation$ReportUser instance,
+    TRes Function(Variables$Mutation$ReportUser) then,
+  ) = _CopyWithImpl$Variables$Mutation$ReportUser;
+
+  factory CopyWith$Variables$Mutation$ReportUser.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$ReportUser;
+
+  TRes call({Input$ReportUserInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$ReportUser<TRes>
+    implements CopyWith$Variables$Mutation$ReportUser<TRes> {
+  _CopyWithImpl$Variables$Mutation$ReportUser(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$ReportUser _instance;
+
+  final TRes Function(Variables$Mutation$ReportUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) =>
+      _then(Variables$Mutation$ReportUser._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$ReportUserInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$ReportUser<TRes>
+    implements CopyWith$Variables$Mutation$ReportUser<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$ReportUser(this._res);
+
+  TRes _res;
+
+  call({Input$ReportUserInput? input}) => _res;
+}
+
+class Mutation$ReportUser {
+  Mutation$ReportUser({
+    required this.reportUser,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$ReportUser.fromJson(Map<String, dynamic> json) {
+    final l$reportUser = json['reportUser'];
+    final l$$__typename = json['__typename'];
+    return Mutation$ReportUser(
+      reportUser: Mutation$ReportUser$reportUser.fromJson(
+          (l$reportUser as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$ReportUser$reportUser reportUser;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$reportUser = reportUser;
+    _resultData['reportUser'] = l$reportUser.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$reportUser = reportUser;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$reportUser,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$ReportUser) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$reportUser = reportUser;
+    final lOther$reportUser = other.reportUser;
+    if (l$reportUser != lOther$reportUser) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$ReportUser on Mutation$ReportUser {
+  CopyWith$Mutation$ReportUser<Mutation$ReportUser> get copyWith =>
+      CopyWith$Mutation$ReportUser(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$ReportUser<TRes> {
+  factory CopyWith$Mutation$ReportUser(
+    Mutation$ReportUser instance,
+    TRes Function(Mutation$ReportUser) then,
+  ) = _CopyWithImpl$Mutation$ReportUser;
+
+  factory CopyWith$Mutation$ReportUser.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$ReportUser;
+
+  TRes call({
+    Mutation$ReportUser$reportUser? reportUser,
+    String? $__typename,
+  });
+  CopyWith$Mutation$ReportUser$reportUser<TRes> get reportUser;
+}
+
+class _CopyWithImpl$Mutation$ReportUser<TRes>
+    implements CopyWith$Mutation$ReportUser<TRes> {
+  _CopyWithImpl$Mutation$ReportUser(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$ReportUser _instance;
+
+  final TRes Function(Mutation$ReportUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? reportUser = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$ReportUser(
+        reportUser: reportUser == _undefined || reportUser == null
+            ? _instance.reportUser
+            : (reportUser as Mutation$ReportUser$reportUser),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Mutation$ReportUser$reportUser<TRes> get reportUser {
+    final local$reportUser = _instance.reportUser;
+    return CopyWith$Mutation$ReportUser$reportUser(
+        local$reportUser, (e) => call(reportUser: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$ReportUser<TRes>
+    implements CopyWith$Mutation$ReportUser<TRes> {
+  _CopyWithStubImpl$Mutation$ReportUser(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$ReportUser$reportUser? reportUser,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Mutation$ReportUser$reportUser<TRes> get reportUser =>
+      CopyWith$Mutation$ReportUser$reportUser.stub(_res);
+}
+
+const documentNodeMutationReportUser = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'ReportUser'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ReportUserInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'reportUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Mutation$ReportUser$reportUser {
+  Mutation$ReportUser$reportUser({
+    required this.id,
+    this.$__typename = 'ContentTag',
+  });
+
+  factory Mutation$ReportUser$reportUser.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$$__typename = json['__typename'];
+    return Mutation$ReportUser$reportUser(
+      id: (l$id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$ReportUser$reportUser) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$ReportUser$reportUser
+    on Mutation$ReportUser$reportUser {
+  CopyWith$Mutation$ReportUser$reportUser<Mutation$ReportUser$reportUser>
+      get copyWith => CopyWith$Mutation$ReportUser$reportUser(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$ReportUser$reportUser<TRes> {
+  factory CopyWith$Mutation$ReportUser$reportUser(
+    Mutation$ReportUser$reportUser instance,
+    TRes Function(Mutation$ReportUser$reportUser) then,
+  ) = _CopyWithImpl$Mutation$ReportUser$reportUser;
+
+  factory CopyWith$Mutation$ReportUser$reportUser.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$ReportUser$reportUser;
+
+  TRes call({
+    String? id,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$ReportUser$reportUser<TRes>
+    implements CopyWith$Mutation$ReportUser$reportUser<TRes> {
+  _CopyWithImpl$Mutation$ReportUser$reportUser(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$ReportUser$reportUser _instance;
+
+  final TRes Function(Mutation$ReportUser$reportUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$ReportUser$reportUser(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$ReportUser$reportUser<TRes>
+    implements CopyWith$Mutation$ReportUser$reportUser<TRes> {
+  _CopyWithStubImpl$Mutation$ReportUser$reportUser(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Query$GetAuthenticatedUser {
   Query$GetAuthenticatedUser({
     required this.getAuthenticatedUser,
@@ -13343,12 +13755,19 @@ const documentNodeMutationCreateContentTag = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
             directives: [],
             selectionSet: null,
-          )
+          ),
         ]),
       ),
       FieldNode(
@@ -13363,19 +13782,29 @@ const documentNodeMutationCreateContentTag = DocumentNode(definitions: [
 ]);
 
 class Mutation$CreateContentTag$createContentTag {
-  Mutation$CreateContentTag$createContentTag({this.$__typename = 'ContentTag'});
+  Mutation$CreateContentTag$createContentTag({
+    required this.id,
+    this.$__typename = 'ContentTag',
+  });
 
   factory Mutation$CreateContentTag$createContentTag.fromJson(
       Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$$__typename = json['__typename'];
     return Mutation$CreateContentTag$createContentTag(
-        $__typename: (l$$__typename as String));
+      id: (l$id as String),
+      $__typename: (l$$__typename as String),
+    );
   }
+
+  final String id;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -13383,8 +13812,12 @@ class Mutation$CreateContentTag$createContentTag {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
   }
 
   @override
@@ -13394,6 +13827,11 @@ class Mutation$CreateContentTag$createContentTag {
     }
     if (!(other is Mutation$CreateContentTag$createContentTag) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -13424,7 +13862,10 @@ abstract class CopyWith$Mutation$CreateContentTag$createContentTag<TRes> {
   factory CopyWith$Mutation$CreateContentTag$createContentTag.stub(TRes res) =
       _CopyWithStubImpl$Mutation$CreateContentTag$createContentTag;
 
-  TRes call({String? $__typename});
+  TRes call({
+    String? id,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl$Mutation$CreateContentTag$createContentTag<TRes>
@@ -13440,11 +13881,16 @@ class _CopyWithImpl$Mutation$CreateContentTag$createContentTag<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? $__typename = _undefined}) =>
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
       _then(Mutation$CreateContentTag$createContentTag(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
 }
 
 class _CopyWithStubImpl$Mutation$CreateContentTag$createContentTag<TRes>
@@ -13453,7 +13899,11 @@ class _CopyWithStubImpl$Mutation$CreateContentTag$createContentTag<TRes>
 
   TRes _res;
 
-  call({String? $__typename}) => _res;
+  call({
+    String? id,
+    String? $__typename,
+  }) =>
+      _res;
 }
 
 class Variables$Mutation$UpdateContentTag {
@@ -13727,12 +14177,19 @@ const documentNodeMutationUpdateContentTag = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
             directives: [],
             selectionSet: null,
-          )
+          ),
         ]),
       ),
       FieldNode(
@@ -13747,20 +14204,29 @@ const documentNodeMutationUpdateContentTag = DocumentNode(definitions: [
 ]);
 
 class Mutation$UpdateContentTag$updateContentTag {
-  Mutation$UpdateContentTag$updateContentTag(
-      {this.$__typename = 'ServiceRequest'});
+  Mutation$UpdateContentTag$updateContentTag({
+    required this.id,
+    this.$__typename = 'ServiceRequest',
+  });
 
   factory Mutation$UpdateContentTag$updateContentTag.fromJson(
       Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$$__typename = json['__typename'];
     return Mutation$UpdateContentTag$updateContentTag(
-        $__typename: (l$$__typename as String));
+      id: (l$id as String),
+      $__typename: (l$$__typename as String),
+    );
   }
+
+  final String id;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -13768,8 +14234,12 @@ class Mutation$UpdateContentTag$updateContentTag {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
   }
 
   @override
@@ -13779,6 +14249,11 @@ class Mutation$UpdateContentTag$updateContentTag {
     }
     if (!(other is Mutation$UpdateContentTag$updateContentTag) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -13809,7 +14284,10 @@ abstract class CopyWith$Mutation$UpdateContentTag$updateContentTag<TRes> {
   factory CopyWith$Mutation$UpdateContentTag$updateContentTag.stub(TRes res) =
       _CopyWithStubImpl$Mutation$UpdateContentTag$updateContentTag;
 
-  TRes call({String? $__typename});
+  TRes call({
+    String? id,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl$Mutation$UpdateContentTag$updateContentTag<TRes>
@@ -13825,11 +14303,16 @@ class _CopyWithImpl$Mutation$UpdateContentTag$updateContentTag<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? $__typename = _undefined}) =>
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
       _then(Mutation$UpdateContentTag$updateContentTag(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
 }
 
 class _CopyWithStubImpl$Mutation$UpdateContentTag$updateContentTag<TRes>
@@ -13838,7 +14321,11 @@ class _CopyWithStubImpl$Mutation$UpdateContentTag$updateContentTag<TRes>
 
   TRes _res;
 
-  call({String? $__typename}) => _res;
+  call({
+    String? id,
+    String? $__typename,
+  }) =>
+      _res;
 }
 
 class Variables$Mutation$DeleteContentTag {
@@ -14154,12 +14641,19 @@ const documentNodeMutationDeleteContentTag = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
             directives: [],
             selectionSet: null,
-          )
+          ),
         ]),
       ),
       FieldNode(
@@ -14174,20 +14668,29 @@ const documentNodeMutationDeleteContentTag = DocumentNode(definitions: [
 ]);
 
 class Mutation$DeleteContentTag$deleteContentTag {
-  Mutation$DeleteContentTag$deleteContentTag(
-      {this.$__typename = 'ServiceRequest'});
+  Mutation$DeleteContentTag$deleteContentTag({
+    required this.id,
+    this.$__typename = 'ServiceRequest',
+  });
 
   factory Mutation$DeleteContentTag$deleteContentTag.fromJson(
       Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$$__typename = json['__typename'];
     return Mutation$DeleteContentTag$deleteContentTag(
-        $__typename: (l$$__typename as String));
+      id: (l$id as String),
+      $__typename: (l$$__typename as String),
+    );
   }
+
+  final String id;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -14195,8 +14698,12 @@ class Mutation$DeleteContentTag$deleteContentTag {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
+    return Object.hashAll([
+      l$id,
+      l$$__typename,
+    ]);
   }
 
   @override
@@ -14206,6 +14713,11 @@ class Mutation$DeleteContentTag$deleteContentTag {
     }
     if (!(other is Mutation$DeleteContentTag$deleteContentTag) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -14236,7 +14748,10 @@ abstract class CopyWith$Mutation$DeleteContentTag$deleteContentTag<TRes> {
   factory CopyWith$Mutation$DeleteContentTag$deleteContentTag.stub(TRes res) =
       _CopyWithStubImpl$Mutation$DeleteContentTag$deleteContentTag;
 
-  TRes call({String? $__typename});
+  TRes call({
+    String? id,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl$Mutation$DeleteContentTag$deleteContentTag<TRes>
@@ -14252,11 +14767,16 @@ class _CopyWithImpl$Mutation$DeleteContentTag$deleteContentTag<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? $__typename = _undefined}) =>
+  TRes call({
+    Object? id = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
       _then(Mutation$DeleteContentTag$deleteContentTag(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
 }
 
 class _CopyWithStubImpl$Mutation$DeleteContentTag$deleteContentTag<TRes>
@@ -14265,7 +14785,11 @@ class _CopyWithStubImpl$Mutation$DeleteContentTag$deleteContentTag<TRes>
 
   TRes _res;
 
-  call({String? $__typename}) => _res;
+  call({
+    String? id,
+    String? $__typename,
+  }) =>
+      _res;
 }
 
 class Variables$Mutation$CreateUserSearch {

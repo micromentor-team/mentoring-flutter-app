@@ -1,3 +1,6 @@
+# ----------------------------------------------------------------------------------------------------------------
+# Queries
+
 query GetAuthenticatedUser {
     getAuthenticatedUser {
         id
@@ -204,34 +207,37 @@ query FindUserQuickViewProfile($userId: String!) {
     }
 }
 
+# ----------------------------------------------------------------------------------------------------------------
+# Mutations
+
 mutation BlockUserForMe($userId: String!, $notes: String, $reasonTextId: String) {
   blockUserForMe(userId: $userId, notes: $notes, reasonTextId: $reasonTextId)
+}
+
+mutation CreateContentTag($input: ContentTagInput!) {
+    createContentTag(input: $input) {
+        id
+    }
+}
+
+mutation DeleteContentTag($deletePhysically: Boolean!, $contentTagId: String!) {
+    deleteContentTag(deletePhysically: $deletePhysically, contentTagId: $contentTagId) {
+        id
+    }
 }
 
 mutation UnblockUserForMe($userId: String!) {
   unblockUserForMe(userId: $userId)
 }
 
-mutation CreateContentTag($input: ContentTagInput!) {
-  createContentTag(input: $input) {
-      id
-  }
-}
-
-mutation UpdateContentTag($input: ContentTagInput!) {
-  updateContentTag(input: $input) {
-      id
-  }
-}
-
-mutation DeleteContentTag($deletePhysically: Boolean!, $contentTagId: String!) {
-  deleteContentTag(deletePhysically: $deletePhysically, contentTagId: $contentTagId) {
-      id
-  }
-}
-
 mutation CreateUserSearch($input: UserSearchInput!) {
     createUserSearch(input: $input) {
+        id
+    }
+}
+
+mutation ReportUser($input: ReportUserInput!) {
+    reportUser(input: $input) {
         id
     }
 }
@@ -258,6 +264,12 @@ mutation SignUpUser ($input: UserSignUpInput!) {
 
 mutation UpdateAcademicExperience($input: AcademicExperienceInput!) {
     updateAcademicExperience(input: $input) {
+        id
+    }
+}
+
+mutation UpdateContentTag($input: ContentTagInput!) {
+    updateContentTag(input: $input) {
         id
     }
 }

@@ -20,8 +20,8 @@ typedef UserSearch = Query$FindUserSearch$findUserSearchById;
 typedef UserSearchResult = Query$FindUserSearchResults$findUserSearchResults;
 
 // We creating a ContentTag to report users to moderators
-typedef CreateContentTagResponse =  Mutation$CreateContentTag$createContentTag;
-
+typedef CreateContentTagResponse = Mutation$CreateContentTag$createContentTag;
+typedef ReportUserResponse = Mutation$ReportUser$reportUser;
 
 class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? _user;
@@ -79,6 +79,29 @@ class UserProvider extends BaseProvider with ChangeNotifier {
       _resetUser();
     }
     return operationResult;
+  }
+
+  Future<OperationResult<ReportUserResponse>> reportUser({
+    required Input$ReportUserInput input,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationReportUser,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Mutation$ReportUser(input: input).toJson(),
+      ),
+    );
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Mutation$ReportUser.fromJson(
+              queryResult.data!,
+            ).reportUser
+          : null,
+    );
   }
 
   Future<OperationResult<CreateContentTagResponse>> createContentTag({
