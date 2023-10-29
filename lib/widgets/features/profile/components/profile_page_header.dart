@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/__generated/schema/schema.graphql.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/constants.dart';
@@ -63,6 +64,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
           onPressed: () async {
             await _invitationsProvider.declineChannelInvitation(
               channelInvitationId: widget.invitationId!,
+              reasonTextId: Enum$DeclineChannelInvitationReasonTextId.noReason,
             );
             await _inboxModel.refreshPendingReceivedInvitations();
           },

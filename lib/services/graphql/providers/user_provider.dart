@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../__generated/schema/operations_content_tag.graphql.dart';
 import '../../../__generated/schema/operations_user.graphql.dart';
 import '../../../__generated/schema/schema.graphql.dart';
 import '../../../utilities/utility.dart';

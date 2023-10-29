@@ -336,8 +336,9 @@ class ContentProvider extends BaseProvider {
             ).findDeclineChannelInvitationReasons
           : null,
     );
-    if (result.response != null)
+    if (result.response != null) {
       _setDeclineChannelInvitationReasonsOptions(result.response!);
+    }
     return result;
   }
 

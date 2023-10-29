@@ -233,7 +233,8 @@ class _InboxInvitationDetailScreenState
                 builder: (BuildContext context) {
                   return DeclineReason(
                       name: senderName,
-                      reportUserAction: (Enum$ReportUserReason reasonTextId) async {
+                      reportUserAction:
+                          (Enum$ReportUserReasonTextId reasonTextId) async {
                         final pref = await SharedPreferences.getInstance();
                         String? userId = pref.getString('userId');
                         final reportUserInput = Input$ReportUserInput(
@@ -247,13 +248,13 @@ class _InboxInvitationDetailScreenState
                         await _inboxModel.refreshPendingReceivedInvitations();
                         router.push(Routes.inboxInvitesReceived.path);
                       },
-                      continueAction: (Enum$DeclineChannelInvitationReasonTextId reasonTextId) async {
+                      continueAction: (Enum$DeclineChannelInvitationReasonTextId
+                          reasonTextId) async {
                         await _invitationsProvider.declineChannelInvitation(
                           channelInvitationId: widget.channelInvitationId,
                           reasonTextId: reasonTextId,
                         );
-                      }
-                  );
+                      });
                 });
           },
           child: Text(
@@ -433,7 +434,11 @@ class DeclineReason extends StatefulWidget {
   final Function continueAction;
   final Function reportUserAction;
 
-  const DeclineReason({super.key, required this.name, required this.continueAction, required this.reportUserAction});
+  const DeclineReason(
+      {super.key,
+      required this.name,
+      required this.continueAction,
+      required this.reportUserAction});
 
   @override
   State<DeclineReason> createState() => _DeclineReasonState();
@@ -441,8 +446,10 @@ class DeclineReason extends StatefulWidget {
 
 class _DeclineReasonState extends State<DeclineReason> {
   late final ContentProvider _contentProvider;
-  Enum$DeclineChannelInvitationReasonTextId _selectedDeclineReason = Enum$DeclineChannelInvitationReasonTextId.noReason;
-  Enum$ReportUserReason? _selectedReportUserReason = Enum$ReportUserReason.inappropriate;
+  Enum$DeclineChannelInvitationReasonTextId _selectedDeclineReason =
+      Enum$DeclineChannelInvitationReasonTextId.noReason;
+  final Enum$ReportUserReasonTextId _selectedReportUserReason =
+      Enum$ReportUserReasonTextId.notSet;
 
   @override
   void initState() {
@@ -471,10 +478,11 @@ class _DeclineReasonState extends State<DeclineReason> {
           title: Text(_contentProvider
                   .translateDeclineChannelInvitationReason(reason) ??
               reason),
-          selected: reason == _selectedDeclineReason,
+          selected: reason == _selectedDeclineReason.toString(),
           onChanged: (currentUser) {
             setState(() {
-              _selectedDeclineReason = reason as Enum$DeclineChannelInvitationReasonTextId;
+              _selectedDeclineReason =
+                  reason as Enum$DeclineChannelInvitationReasonTextId;
               reason = reason;
             });
           },
@@ -497,13 +505,16 @@ class _DeclineReasonState extends State<DeclineReason> {
     );
     Widget reportButton = OutlinedButton(
       onPressed: () async {
-        Enum$ReportUserReason reasonTextId = Enum$ReportUserReason.inappropriate;
-        if (_selectedReportUserReason != null) {
-          reasonTextId = _selectedReportUserReason as Enum$ReportUserReason;
-        } else if (_selectedDeclineReason == Enum$DeclineChannelInvitationReasonTextId.inappropriate) {
-          reasonTextId = Enum$ReportUserReason.inappropriate;
-        } else if (_selectedDeclineReason == Enum$DeclineChannelInvitationReasonTextId.fakeProfile) {
-          reasonTextId = Enum$ReportUserReason.fakePerson;
+        Enum$ReportUserReasonTextId reasonTextId =
+            Enum$ReportUserReasonTextId.inappropriate;
+        if (_selectedReportUserReason != Enum$ReportUserReasonTextId.notSet) {
+          reasonTextId = _selectedReportUserReason;
+        } else if (_selectedDeclineReason ==
+            Enum$DeclineChannelInvitationReasonTextId.inappropriate) {
+          reasonTextId = Enum$ReportUserReasonTextId.inappropriate;
+        } else if (_selectedDeclineReason ==
+            Enum$DeclineChannelInvitationReasonTextId.fakeProfile) {
+          reasonTextId = Enum$ReportUserReasonTextId.fakePerson;
         }
         widget.reportUserAction(reasonTextId);
         context.pop();

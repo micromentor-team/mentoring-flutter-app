@@ -17393,7 +17393,7 @@ class _CopyWithStubImpl$Input$UserBlockInput<TRes>
 class Input$ReportUserInput {
   factory Input$ReportUserInput({
     String? userId,
-    Enum$ReportUserReason? reasonTextId,
+    Enum$ReportUserReasonTextId? reasonTextId,
     String? messageText,
     String? createdBy,
   }) =>
@@ -17416,7 +17416,7 @@ class Input$ReportUserInput {
       final l$reasonTextId = data['reasonTextId'];
       result$data['reasonTextId'] = l$reasonTextId == null
           ? null
-          : fromJson$Enum$ReportUserReason((l$reasonTextId as String));
+          : fromJson$Enum$ReportUserReasonTextId((l$reasonTextId as String));
     }
     if (data.containsKey('messageText')) {
       final l$messageText = data['messageText'];
@@ -17433,8 +17433,8 @@ class Input$ReportUserInput {
 
   String? get userId => (_$data['userId'] as String?);
 
-  Enum$ReportUserReason? get reasonTextId =>
-      (_$data['reasonTextId'] as Enum$ReportUserReason?);
+  Enum$ReportUserReasonTextId? get reasonTextId =>
+      (_$data['reasonTextId'] as Enum$ReportUserReasonTextId?);
 
   String? get messageText => (_$data['messageText'] as String?);
 
@@ -17450,7 +17450,7 @@ class Input$ReportUserInput {
       final l$reasonTextId = reasonTextId;
       result$data['reasonTextId'] = l$reasonTextId == null
           ? null
-          : toJson$Enum$ReportUserReason(l$reasonTextId);
+          : toJson$Enum$ReportUserReasonTextId(l$reasonTextId);
     }
     if (_$data.containsKey('messageText')) {
       final l$messageText = messageText;
@@ -17541,7 +17541,7 @@ abstract class CopyWith$Input$ReportUserInput<TRes> {
 
   TRes call({
     String? userId,
-    Enum$ReportUserReason? reasonTextId,
+    Enum$ReportUserReasonTextId? reasonTextId,
     String? messageText,
     String? createdBy,
   });
@@ -17570,7 +17570,7 @@ class _CopyWithImpl$Input$ReportUserInput<TRes>
         ..._instance._$data,
         if (userId != _undefined) 'userId': (userId as String?),
         if (reasonTextId != _undefined)
-          'reasonTextId': (reasonTextId as Enum$ReportUserReason?),
+          'reasonTextId': (reasonTextId as Enum$ReportUserReasonTextId?),
         if (messageText != _undefined) 'messageText': (messageText as String?),
         if (createdBy != _undefined) 'createdBy': (createdBy as String?),
       }));
@@ -17584,7 +17584,7 @@ class _CopyWithStubImpl$Input$ReportUserInput<TRes>
 
   call({
     String? userId,
-    Enum$ReportUserReason? reasonTextId,
+    Enum$ReportUserReasonTextId? reasonTextId,
     String? messageText,
     String? createdBy,
   }) =>
@@ -26961,6 +26961,7 @@ enum Enum$OptionType {
   unset,
   contentTagType,
   blockUserReason,
+  reportUserReason,
   $unknown
 }
 
@@ -26994,6 +26995,8 @@ String toJson$Enum$OptionType(Enum$OptionType e) {
       return r'contentTagType';
     case Enum$OptionType.blockUserReason:
       return r'blockUserReason';
+    case Enum$OptionType.reportUserReason:
+      return r'reportUserReason';
     case Enum$OptionType.$unknown:
       return r'$unknown';
   }
@@ -27029,6 +27032,8 @@ Enum$OptionType fromJson$Enum$OptionType(String value) {
       return Enum$OptionType.contentTagType;
     case r'blockUserReason':
       return Enum$OptionType.blockUserReason;
+    case r'reportUserReason':
+      return Enum$OptionType.reportUserReason;
     default:
       return Enum$OptionType.$unknown;
   }
@@ -28229,7 +28234,8 @@ Enum$MultiStepActionResult fromJson$Enum$MultiStepActionResult(String value) {
   }
 }
 
-enum Enum$ReportUserReason {
+enum Enum$ReportUserReasonTextId {
+  notSet,
   badActor,
   fakePerson,
   harasses,
@@ -28244,61 +28250,65 @@ enum Enum$ReportUserReason {
   $unknown
 }
 
-String toJson$Enum$ReportUserReason(Enum$ReportUserReason e) {
+String toJson$Enum$ReportUserReasonTextId(Enum$ReportUserReasonTextId e) {
   switch (e) {
-    case Enum$ReportUserReason.badActor:
+    case Enum$ReportUserReasonTextId.notSet:
+      return r'notSet';
+    case Enum$ReportUserReasonTextId.badActor:
       return r'badActor';
-    case Enum$ReportUserReason.fakePerson:
+    case Enum$ReportUserReasonTextId.fakePerson:
       return r'fakePerson';
-    case Enum$ReportUserReason.harasses:
+    case Enum$ReportUserReasonTextId.harasses:
       return r'harasses';
-    case Enum$ReportUserReason.impersonator:
+    case Enum$ReportUserReasonTextId.impersonator:
       return r'impersonator';
-    case Enum$ReportUserReason.inappropriate:
+    case Enum$ReportUserReasonTextId.inappropriate:
       return r'inappropriate';
-    case Enum$ReportUserReason.objectionableLanguage:
+    case Enum$ReportUserReasonTextId.objectionableLanguage:
       return r'objectionableLanguage';
-    case Enum$ReportUserReason.promotesHate:
+    case Enum$ReportUserReasonTextId.promotesHate:
       return r'promotesHate';
-    case Enum$ReportUserReason.sharesObjectionableContent:
+    case Enum$ReportUserReasonTextId.sharesObjectionableContent:
       return r'sharesObjectionableContent';
-    case Enum$ReportUserReason.spammer:
+    case Enum$ReportUserReasonTextId.spammer:
       return r'spammer';
-    case Enum$ReportUserReason.usesObjectionableLanguage:
+    case Enum$ReportUserReasonTextId.usesObjectionableLanguage:
       return r'usesObjectionableLanguage';
-    case Enum$ReportUserReason.violatesRules:
+    case Enum$ReportUserReasonTextId.violatesRules:
       return r'violatesRules';
-    case Enum$ReportUserReason.$unknown:
+    case Enum$ReportUserReasonTextId.$unknown:
       return r'$unknown';
   }
 }
 
-Enum$ReportUserReason fromJson$Enum$ReportUserReason(String value) {
+Enum$ReportUserReasonTextId fromJson$Enum$ReportUserReasonTextId(String value) {
   switch (value) {
+    case r'notSet':
+      return Enum$ReportUserReasonTextId.notSet;
     case r'badActor':
-      return Enum$ReportUserReason.badActor;
+      return Enum$ReportUserReasonTextId.badActor;
     case r'fakePerson':
-      return Enum$ReportUserReason.fakePerson;
+      return Enum$ReportUserReasonTextId.fakePerson;
     case r'harasses':
-      return Enum$ReportUserReason.harasses;
+      return Enum$ReportUserReasonTextId.harasses;
     case r'impersonator':
-      return Enum$ReportUserReason.impersonator;
+      return Enum$ReportUserReasonTextId.impersonator;
     case r'inappropriate':
-      return Enum$ReportUserReason.inappropriate;
+      return Enum$ReportUserReasonTextId.inappropriate;
     case r'objectionableLanguage':
-      return Enum$ReportUserReason.objectionableLanguage;
+      return Enum$ReportUserReasonTextId.objectionableLanguage;
     case r'promotesHate':
-      return Enum$ReportUserReason.promotesHate;
+      return Enum$ReportUserReasonTextId.promotesHate;
     case r'sharesObjectionableContent':
-      return Enum$ReportUserReason.sharesObjectionableContent;
+      return Enum$ReportUserReasonTextId.sharesObjectionableContent;
     case r'spammer':
-      return Enum$ReportUserReason.spammer;
+      return Enum$ReportUserReasonTextId.spammer;
     case r'usesObjectionableLanguage':
-      return Enum$ReportUserReason.usesObjectionableLanguage;
+      return Enum$ReportUserReasonTextId.usesObjectionableLanguage;
     case r'violatesRules':
-      return Enum$ReportUserReason.violatesRules;
+      return Enum$ReportUserReasonTextId.violatesRules;
     default:
-      return Enum$ReportUserReason.$unknown;
+      return Enum$ReportUserReasonTextId.$unknown;
   }
 }
 
