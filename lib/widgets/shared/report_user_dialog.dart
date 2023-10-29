@@ -151,7 +151,7 @@ class _ReportUserDialogState extends State<ReportUserDialog> {
               onPressed: () => Navigator.pop(context),
             ),
             OutlinedButton(
-              child: Text(l10n.actionReport),
+              child: Text(l10n.actionReportUser),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   //TODO: Report user

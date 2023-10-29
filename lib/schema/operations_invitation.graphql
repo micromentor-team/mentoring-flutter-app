@@ -132,8 +132,8 @@ mutation CreateChannelInvitation($channelInvitationInput: ChannelInvitationInput
     }
 }
 
-mutation DeclineChannelInvitation($channelInvitationId: String!) {
-    declineChannelInvitation(channelInvitationId: $channelInvitationId)
+mutation DeclineChannelInvitation($channelInvitationId: String!, $reasonTextId: DeclineChannelInvitationReasonTextId!) {
+    declineChannelInvitation(channelInvitationId: $channelInvitationId, reasonTextId: $reasonTextId)
 }
 
 mutation DeleteChannelInvitation($deletePhysically: Boolean!, $channelInvitationId: String!) {

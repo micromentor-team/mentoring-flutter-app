@@ -8,6 +8,8 @@ import 'base/operation_result.dart';
 typedef CompanyStage = Query$FindCompanyStages$findCompanyStages;
 typedef CompanyType = Query$FindCompanyTypes$findCompanyTypes;
 typedef Country = Query$FindCountries$findCountries;
+typedef DeclineChannelInvitationReason
+    = Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons;
 typedef EducationLevel = Query$FindEducationLevels$findEducationLevels;
 typedef Expertise = Query$FindExpertises$findExpertises;
 typedef PresetGender = Query$FindGenders$findGenders;
@@ -20,6 +22,7 @@ class ContentProvider extends BaseProvider {
   List<CompanyStage>? _companyStages;
   List<CompanyType>? _companyTypes;
   List<Country>? _countries;
+  List<DeclineChannelInvitationReason>? _declineChannelInvitationReasons;
   List<EducationLevel>? _educationLevels;
   List<Expertise>? _expertises;
   List<PresetGender>? _presetGenders;
@@ -29,6 +32,8 @@ class ContentProvider extends BaseProvider {
 
   List<String> get countryIds =>
       (_countries ?? []).map((c) => c.textId).toList();
+  List<String> get declineChannelInvitationReasonsIds =>
+      (_declineChannelInvitationReasons ?? []).map((c) => c.textId).toList();
   List<String> get languageIds =>
       (_languages ?? []).map((l) => l.textId).toList();
   List<String> get expertiseIds =>
@@ -42,6 +47,11 @@ class ContentProvider extends BaseProvider {
       .where((c) => c.textId == id)
       .firstOrNull
       ?.translatedValue;
+  String? translateDeclineChannelInvitationReason(String id) =>
+      (_declineChannelInvitationReasons ?? [])
+          .where((e) => e.textId == id)
+          .firstOrNull
+          ?.translatedValue;
   String? translateLanguages(String id) => (_languages ?? [])
       .where((l) => l.textId == id)
       .firstOrNull
@@ -116,6 +126,13 @@ class ContentProvider extends BaseProvider {
   void _setCountryOptions(List<Country> countries) {
     _countries = countries;
     debugPrint('Updated content provider country values: ${toString()}');
+  }
+
+  void _setDeclineChannelInvitationReasonsOptions(
+      List<DeclineChannelInvitationReason> declineReasons) {
+    _declineChannelInvitationReasons = declineReasons;
+    debugPrint(
+        'Updated content provider education level values: ${toString()}');
   }
 
   void _setEducationLevelOptions(List<EducationLevel> educationLevels) {
@@ -300,6 +317,27 @@ class ContentProvider extends BaseProvider {
           : null,
     );
     if (result.response != null) _setCompanyStageOptions(result.response!);
+    return result;
+  }
+
+  Future<OperationResult<List<DeclineChannelInvitationReason>>>
+      findDeclineChannelInvitationReasons() async {
+    final QueryResult queryResult = await asyncQuery(
+      queryOptions: QueryOptions(
+        document: documentNodeQueryFindDeclineChannelInvitationReasons,
+        fetchPolicy: FetchPolicy.cacheFirst,
+      ),
+    );
+    final result = OperationResult(
+      gqlQueryResult: queryResult,
+      response: queryResult.data != null
+          ? Query$FindDeclineChannelInvitationReasons.fromJson(
+              queryResult.data!,
+            ).findDeclineChannelInvitationReasons
+          : null,
+    );
+    if (result.response != null)
+      _setDeclineChannelInvitationReasonsOptions(result.response!);
     return result;
   }
 

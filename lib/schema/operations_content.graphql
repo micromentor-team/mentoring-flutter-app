@@ -12,6 +12,10 @@ query FindAllOptionsByType {
         textId
         translatedValue
     }
+    findDeclineChannelInvitationReasons {
+        textId
+        translatedValue
+    }
     findEducationLevels {
         textId
         translatedValue
@@ -65,6 +69,13 @@ query FindCountries {
 query FindCountriesInLanguage($uiLanguage: UiLanguage) {
     findCountries(fallbackUiLanguage: $uiLanguage) {
         alpha2Key
+        textId
+        translatedValue
+    }
+}
+
+query FindDeclineChannelInvitationReasons {
+    findDeclineChannelInvitationReasons {
         textId
         translatedValue
     }

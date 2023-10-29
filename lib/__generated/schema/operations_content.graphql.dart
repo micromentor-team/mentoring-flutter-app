@@ -10,6 +10,7 @@ class Query$FindAllOptionsByType {
     required this.findCompanyStages,
     required this.findCompanyTypes,
     required this.findCountries,
+    required this.findDeclineChannelInvitationReasons,
     required this.findEducationLevels,
     required this.findExpertises,
     required this.findIndustries,
@@ -23,6 +24,8 @@ class Query$FindAllOptionsByType {
     final l$findCompanyStages = json['findCompanyStages'];
     final l$findCompanyTypes = json['findCompanyTypes'];
     final l$findCountries = json['findCountries'];
+    final l$findDeclineChannelInvitationReasons =
+        json['findDeclineChannelInvitationReasons'];
     final l$findEducationLevels = json['findEducationLevels'];
     final l$findExpertises = json['findExpertises'];
     final l$findIndustries = json['findIndustries'];
@@ -43,6 +46,12 @@ class Query$FindAllOptionsByType {
           .map((e) => Query$FindAllOptionsByType$findCountries.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
+      findDeclineChannelInvitationReasons:
+          (l$findDeclineChannelInvitationReasons as List<dynamic>)
+              .map((e) =>
+                  Query$FindAllOptionsByType$findDeclineChannelInvitationReasons
+                      .fromJson((e as Map<String, dynamic>)))
+              .toList(),
       findEducationLevels: (l$findEducationLevels as List<dynamic>)
           .map((e) => Query$FindAllOptionsByType$findEducationLevels.fromJson(
               (e as Map<String, dynamic>)))
@@ -77,6 +86,9 @@ class Query$FindAllOptionsByType {
 
   final List<Query$FindAllOptionsByType$findCountries> findCountries;
 
+  final List<Query$FindAllOptionsByType$findDeclineChannelInvitationReasons>
+      findDeclineChannelInvitationReasons;
+
   final List<Query$FindAllOptionsByType$findEducationLevels>
       findEducationLevels;
 
@@ -103,6 +115,10 @@ class Query$FindAllOptionsByType {
     final l$findCountries = findCountries;
     _resultData['findCountries'] =
         l$findCountries.map((e) => e.toJson()).toList();
+    final l$findDeclineChannelInvitationReasons =
+        findDeclineChannelInvitationReasons;
+    _resultData['findDeclineChannelInvitationReasons'] =
+        l$findDeclineChannelInvitationReasons.map((e) => e.toJson()).toList();
     final l$findEducationLevels = findEducationLevels;
     _resultData['findEducationLevels'] =
         l$findEducationLevels.map((e) => e.toJson()).toList();
@@ -130,6 +146,8 @@ class Query$FindAllOptionsByType {
     final l$findCompanyStages = findCompanyStages;
     final l$findCompanyTypes = findCompanyTypes;
     final l$findCountries = findCountries;
+    final l$findDeclineChannelInvitationReasons =
+        findDeclineChannelInvitationReasons;
     final l$findEducationLevels = findEducationLevels;
     final l$findExpertises = findExpertises;
     final l$findIndustries = findIndustries;
@@ -141,6 +159,7 @@ class Query$FindAllOptionsByType {
       Object.hashAll(l$findCompanyStages.map((v) => v)),
       Object.hashAll(l$findCompanyTypes.map((v) => v)),
       Object.hashAll(l$findCountries.map((v) => v)),
+      Object.hashAll(l$findDeclineChannelInvitationReasons.map((v) => v)),
       Object.hashAll(l$findEducationLevels.map((v) => v)),
       Object.hashAll(l$findExpertises.map((v) => v)),
       Object.hashAll(l$findIndustries.map((v) => v)),
@@ -193,6 +212,24 @@ class Query$FindAllOptionsByType {
       final l$findCountries$entry = l$findCountries[i];
       final lOther$findCountries$entry = lOther$findCountries[i];
       if (l$findCountries$entry != lOther$findCountries$entry) {
+        return false;
+      }
+    }
+    final l$findDeclineChannelInvitationReasons =
+        findDeclineChannelInvitationReasons;
+    final lOther$findDeclineChannelInvitationReasons =
+        other.findDeclineChannelInvitationReasons;
+    if (l$findDeclineChannelInvitationReasons.length !=
+        lOther$findDeclineChannelInvitationReasons.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findDeclineChannelInvitationReasons.length; i++) {
+      final l$findDeclineChannelInvitationReasons$entry =
+          l$findDeclineChannelInvitationReasons[i];
+      final lOther$findDeclineChannelInvitationReasons$entry =
+          lOther$findDeclineChannelInvitationReasons[i];
+      if (l$findDeclineChannelInvitationReasons$entry !=
+          lOther$findDeclineChannelInvitationReasons$entry) {
         return false;
       }
     }
@@ -299,6 +336,8 @@ abstract class CopyWith$Query$FindAllOptionsByType<TRes> {
     List<Query$FindAllOptionsByType$findCompanyStages>? findCompanyStages,
     List<Query$FindAllOptionsByType$findCompanyTypes>? findCompanyTypes,
     List<Query$FindAllOptionsByType$findCountries>? findCountries,
+    List<Query$FindAllOptionsByType$findDeclineChannelInvitationReasons>?
+        findDeclineChannelInvitationReasons,
     List<Query$FindAllOptionsByType$findEducationLevels>? findEducationLevels,
     List<Query$FindAllOptionsByType$findExpertises>? findExpertises,
     List<Query$FindAllOptionsByType$findIndustries>? findIndustries,
@@ -324,6 +363,12 @@ abstract class CopyWith$Query$FindAllOptionsByType<TRes> {
               Iterable<
                   CopyWith$Query$FindAllOptionsByType$findCountries<
                       Query$FindAllOptionsByType$findCountries>>)
+          _fn);
+  TRes findDeclineChannelInvitationReasons(
+      Iterable<Query$FindAllOptionsByType$findDeclineChannelInvitationReasons> Function(
+              Iterable<
+                  CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons<
+                      Query$FindAllOptionsByType$findDeclineChannelInvitationReasons>>)
           _fn);
   TRes findEducationLevels(
       Iterable<Query$FindAllOptionsByType$findEducationLevels> Function(
@@ -380,6 +425,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
     Object? findCompanyStages = _undefined,
     Object? findCompanyTypes = _undefined,
     Object? findCountries = _undefined,
+    Object? findDeclineChannelInvitationReasons = _undefined,
     Object? findEducationLevels = _undefined,
     Object? findExpertises = _undefined,
     Object? findIndustries = _undefined,
@@ -402,6 +448,12 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
         findCountries: findCountries == _undefined || findCountries == null
             ? _instance.findCountries
             : (findCountries as List<Query$FindAllOptionsByType$findCountries>),
+        findDeclineChannelInvitationReasons: findDeclineChannelInvitationReasons ==
+                    _undefined ||
+                findDeclineChannelInvitationReasons == null
+            ? _instance.findDeclineChannelInvitationReasons
+            : (findDeclineChannelInvitationReasons as List<
+                Query$FindAllOptionsByType$findDeclineChannelInvitationReasons>),
         findEducationLevels:
             findEducationLevels == _undefined || findEducationLevels == null
                 ? _instance.findEducationLevels
@@ -428,6 +480,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCompanyStages(
           Iterable<Query$FindAllOptionsByType$findCompanyStages> Function(
                   Iterable<
@@ -440,6 +493,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findCompanyTypes(
           Iterable<Query$FindAllOptionsByType$findCompanyTypes> Function(
                   Iterable<
@@ -452,6 +506,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findCountries(
           Iterable<Query$FindAllOptionsByType$findCountries> Function(
                   Iterable<
@@ -464,6 +519,21 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
+  TRes findDeclineChannelInvitationReasons(
+          Iterable<Query$FindAllOptionsByType$findDeclineChannelInvitationReasons> Function(
+                  Iterable<
+                      CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons<
+                          Query$FindAllOptionsByType$findDeclineChannelInvitationReasons>>)
+              _fn) =>
+      call(
+          findDeclineChannelInvitationReasons: _fn(
+              _instance.findDeclineChannelInvitationReasons.map((e) =>
+                  CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons(
+                    e,
+                    (i) => i,
+                  ))).toList());
+
   TRes findEducationLevels(
           Iterable<Query$FindAllOptionsByType$findEducationLevels> Function(
                   Iterable<
@@ -476,6 +546,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findExpertises(
           Iterable<Query$FindAllOptionsByType$findExpertises> Function(
                   Iterable<
@@ -488,6 +559,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findIndustries(
           Iterable<Query$FindAllOptionsByType$findIndustries> Function(
                   Iterable<
@@ -500,6 +572,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findGenders(
           Iterable<Query$FindAllOptionsByType$findGenders> Function(
                   Iterable<
@@ -512,6 +585,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findLanguages(
           Iterable<Query$FindAllOptionsByType$findLanguages> Function(
                   Iterable<
@@ -524,6 +598,7 @@ class _CopyWithImpl$Query$FindAllOptionsByType<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes findPronouns(
           Iterable<Query$FindAllOptionsByType$findPronouns> Function(
                   Iterable<
@@ -548,6 +623,8 @@ class _CopyWithStubImpl$Query$FindAllOptionsByType<TRes>
     List<Query$FindAllOptionsByType$findCompanyStages>? findCompanyStages,
     List<Query$FindAllOptionsByType$findCompanyTypes>? findCompanyTypes,
     List<Query$FindAllOptionsByType$findCountries>? findCountries,
+    List<Query$FindAllOptionsByType$findDeclineChannelInvitationReasons>?
+        findDeclineChannelInvitationReasons,
     List<Query$FindAllOptionsByType$findEducationLevels>? findEducationLevels,
     List<Query$FindAllOptionsByType$findExpertises>? findExpertises,
     List<Query$FindAllOptionsByType$findIndustries>? findIndustries,
@@ -557,14 +634,25 @@ class _CopyWithStubImpl$Query$FindAllOptionsByType<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCompanyStages(_fn) => _res;
+
   findCompanyTypes(_fn) => _res;
+
   findCountries(_fn) => _res;
+
+  findDeclineChannelInvitationReasons(_fn) => _res;
+
   findEducationLevels(_fn) => _res;
+
   findExpertises(_fn) => _res;
+
   findIndustries(_fn) => _res;
+
   findGenders(_fn) => _res;
+
   findLanguages(_fn) => _res;
+
   findPronouns(_fn) => _res;
 }
 
@@ -646,6 +734,35 @@ const documentNodeQueryFindAllOptionsByType = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'findDeclineChannelInvitationReasons'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
           FieldNode(
             name: NameNode(value: 'textId'),
             alias: null,
@@ -1322,6 +1439,168 @@ class _CopyWithStubImpl$Query$FindAllOptionsByType$findCountries<TRes>
 
   call({
     String? alpha2Key,
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$FindAllOptionsByType$findDeclineChannelInvitationReasons {
+  Query$FindAllOptionsByType$findDeclineChannelInvitationReasons({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'DeclineChannelInvitationReason',
+  });
+
+  factory Query$FindAllOptionsByType$findDeclineChannelInvitationReasons.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindAllOptionsByType$findDeclineChannelInvitationReasons(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindAllOptionsByType$findDeclineChannelInvitationReasons) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons
+    on Query$FindAllOptionsByType$findDeclineChannelInvitationReasons {
+  CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons<
+          Query$FindAllOptionsByType$findDeclineChannelInvitationReasons>
+      get copyWith =>
+          CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons<
+    TRes> {
+  factory CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons(
+    Query$FindAllOptionsByType$findDeclineChannelInvitationReasons instance,
+    TRes Function(
+            Query$FindAllOptionsByType$findDeclineChannelInvitationReasons)
+        then,
+  ) = _CopyWithImpl$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons;
+
+  factory CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons<
+        TRes>
+    implements
+        CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons<
+            TRes> {
+  _CopyWithImpl$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindAllOptionsByType$findDeclineChannelInvitationReasons
+      _instance;
+
+  final TRes Function(
+      Query$FindAllOptionsByType$findDeclineChannelInvitationReasons) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindAllOptionsByType$findDeclineChannelInvitationReasons(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons<
+        TRes>
+    implements
+        CopyWith$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons<
+            TRes> {
+  _CopyWithStubImpl$Query$FindAllOptionsByType$findDeclineChannelInvitationReasons(
+      this._res);
+
+  TRes _res;
+
+  call({
     String? textId,
     String? translatedValue,
     String? $__typename,
@@ -2380,6 +2659,7 @@ class _CopyWithImpl$Query$FindCompanyStages<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCompanyStages(
           Iterable<Query$FindCompanyStages$findCompanyStages> Function(
                   Iterable<
@@ -2405,6 +2685,7 @@ class _CopyWithStubImpl$Query$FindCompanyStages<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCompanyStages(_fn) => _res;
 }
 
@@ -2730,6 +3011,7 @@ class _CopyWithImpl$Query$FindCompanyTypes<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCompanyTypes(
           Iterable<Query$FindCompanyTypes$findCompanyTypes> Function(
                   Iterable<
@@ -2755,6 +3037,7 @@ class _CopyWithStubImpl$Query$FindCompanyTypes<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCompanyTypes(_fn) => _res;
 }
 
@@ -3077,6 +3360,7 @@ class _CopyWithImpl$Query$FindCountries<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCountries(
           Iterable<Query$FindCountries$findCountries> Function(
                   Iterable<
@@ -3102,6 +3386,7 @@ class _CopyWithStubImpl$Query$FindCountries<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCountries(_fn) => _res;
 }
 
@@ -3349,6 +3634,7 @@ class Variables$Query$FindCountriesInLanguage {
   Map<String, dynamic> _$data;
 
   Enum$UiLanguage? get uiLanguage => (_$data['uiLanguage'] as Enum$UiLanguage?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('uiLanguage')) {
@@ -3365,6 +3651,7 @@ class Variables$Query$FindCountriesInLanguage {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3564,6 +3851,7 @@ class _CopyWithImpl$Query$FindCountriesInLanguage<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findCountries(
           Iterable<Query$FindCountriesInLanguage$findCountries> Function(
                   Iterable<
@@ -3589,6 +3877,7 @@ class _CopyWithStubImpl$Query$FindCountriesInLanguage<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findCountries(_fn) => _res;
 }
 
@@ -3828,6 +4117,397 @@ class _CopyWithStubImpl$Query$FindCountriesInLanguage$findCountries<TRes>
       _res;
 }
 
+class Query$FindDeclineChannelInvitationReasons {
+  Query$FindDeclineChannelInvitationReasons({
+    required this.findDeclineChannelInvitationReasons,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$FindDeclineChannelInvitationReasons.fromJson(
+      Map<String, dynamic> json) {
+    final l$findDeclineChannelInvitationReasons =
+        json['findDeclineChannelInvitationReasons'];
+    final l$$__typename = json['__typename'];
+    return Query$FindDeclineChannelInvitationReasons(
+      findDeclineChannelInvitationReasons: (l$findDeclineChannelInvitationReasons
+              as List<dynamic>)
+          .map((e) =>
+              Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons
+                  .fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<
+          Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons>
+      findDeclineChannelInvitationReasons;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$findDeclineChannelInvitationReasons =
+        findDeclineChannelInvitationReasons;
+    _resultData['findDeclineChannelInvitationReasons'] =
+        l$findDeclineChannelInvitationReasons.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$findDeclineChannelInvitationReasons =
+        findDeclineChannelInvitationReasons;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$findDeclineChannelInvitationReasons.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$FindDeclineChannelInvitationReasons) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$findDeclineChannelInvitationReasons =
+        findDeclineChannelInvitationReasons;
+    final lOther$findDeclineChannelInvitationReasons =
+        other.findDeclineChannelInvitationReasons;
+    if (l$findDeclineChannelInvitationReasons.length !=
+        lOther$findDeclineChannelInvitationReasons.length) {
+      return false;
+    }
+    for (int i = 0; i < l$findDeclineChannelInvitationReasons.length; i++) {
+      final l$findDeclineChannelInvitationReasons$entry =
+          l$findDeclineChannelInvitationReasons[i];
+      final lOther$findDeclineChannelInvitationReasons$entry =
+          lOther$findDeclineChannelInvitationReasons[i];
+      if (l$findDeclineChannelInvitationReasons$entry !=
+          lOther$findDeclineChannelInvitationReasons$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindDeclineChannelInvitationReasons
+    on Query$FindDeclineChannelInvitationReasons {
+  CopyWith$Query$FindDeclineChannelInvitationReasons<
+          Query$FindDeclineChannelInvitationReasons>
+      get copyWith => CopyWith$Query$FindDeclineChannelInvitationReasons(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindDeclineChannelInvitationReasons<TRes> {
+  factory CopyWith$Query$FindDeclineChannelInvitationReasons(
+    Query$FindDeclineChannelInvitationReasons instance,
+    TRes Function(Query$FindDeclineChannelInvitationReasons) then,
+  ) = _CopyWithImpl$Query$FindDeclineChannelInvitationReasons;
+
+  factory CopyWith$Query$FindDeclineChannelInvitationReasons.stub(TRes res) =
+      _CopyWithStubImpl$Query$FindDeclineChannelInvitationReasons;
+
+  TRes call({
+    List<Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons>?
+        findDeclineChannelInvitationReasons,
+    String? $__typename,
+  });
+  TRes findDeclineChannelInvitationReasons(
+      Iterable<Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons> Function(
+              Iterable<
+                  CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons<
+                      Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$FindDeclineChannelInvitationReasons<TRes>
+    implements CopyWith$Query$FindDeclineChannelInvitationReasons<TRes> {
+  _CopyWithImpl$Query$FindDeclineChannelInvitationReasons(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindDeclineChannelInvitationReasons _instance;
+
+  final TRes Function(Query$FindDeclineChannelInvitationReasons) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? findDeclineChannelInvitationReasons = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$FindDeclineChannelInvitationReasons(
+        findDeclineChannelInvitationReasons: findDeclineChannelInvitationReasons ==
+                    _undefined ||
+                findDeclineChannelInvitationReasons == null
+            ? _instance.findDeclineChannelInvitationReasons
+            : (findDeclineChannelInvitationReasons as List<
+                Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes findDeclineChannelInvitationReasons(
+          Iterable<Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons> Function(
+                  Iterable<
+                      CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons<
+                          Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons>>)
+              _fn) =>
+      call(
+          findDeclineChannelInvitationReasons: _fn(
+              _instance.findDeclineChannelInvitationReasons.map((e) =>
+                  CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Query$FindDeclineChannelInvitationReasons<TRes>
+    implements CopyWith$Query$FindDeclineChannelInvitationReasons<TRes> {
+  _CopyWithStubImpl$Query$FindDeclineChannelInvitationReasons(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons>?
+        findDeclineChannelInvitationReasons,
+    String? $__typename,
+  }) =>
+      _res;
+
+  findDeclineChannelInvitationReasons(_fn) => _res;
+}
+
+const documentNodeQueryFindDeclineChannelInvitationReasons =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'FindDeclineChannelInvitationReasons'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'findDeclineChannelInvitationReasons'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'textId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'translatedValue'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons {
+  Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons({
+    required this.textId,
+    this.translatedValue,
+    this.$__typename = 'DeclineChannelInvitationReason',
+  });
+
+  factory Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons.fromJson(
+      Map<String, dynamic> json) {
+    final l$textId = json['textId'];
+    final l$translatedValue = json['translatedValue'];
+    final l$$__typename = json['__typename'];
+    return Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons(
+      textId: (l$textId as String),
+      translatedValue: (l$translatedValue as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String textId;
+
+  final String? translatedValue;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$textId = textId;
+    _resultData['textId'] = l$textId;
+    final l$translatedValue = translatedValue;
+    _resultData['translatedValue'] = l$translatedValue;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$textId = textId;
+    final l$translatedValue = translatedValue;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$textId,
+      l$translatedValue,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$textId = textId;
+    final lOther$textId = other.textId;
+    if (l$textId != lOther$textId) {
+      return false;
+    }
+    final l$translatedValue = translatedValue;
+    final lOther$translatedValue = other.translatedValue;
+    if (l$translatedValue != lOther$translatedValue) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons
+    on Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons {
+  CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons<
+          Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons>
+      get copyWith =>
+          CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons<
+    TRes> {
+  factory CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons(
+    Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons
+        instance,
+    TRes Function(
+            Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons)
+        then,
+  ) = _CopyWithImpl$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons;
+
+  factory CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons;
+
+  TRes call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons<
+        TRes>
+    implements
+        CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons<
+            TRes> {
+  _CopyWithImpl$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons(
+    this._instance,
+    this._then,
+  );
+
+  final Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons
+      _instance;
+
+  final TRes Function(
+          Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? textId = _undefined,
+    Object? translatedValue = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons(
+        textId: textId == _undefined || textId == null
+            ? _instance.textId
+            : (textId as String),
+        translatedValue: translatedValue == _undefined
+            ? _instance.translatedValue
+            : (translatedValue as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons<
+        TRes>
+    implements
+        CopyWith$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons<
+            TRes> {
+  _CopyWithStubImpl$Query$FindDeclineChannelInvitationReasons$findDeclineChannelInvitationReasons(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? textId,
+    String? translatedValue,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Query$FindEducationLevels {
   Query$FindEducationLevels({
     required this.findEducationLevels,
@@ -3957,6 +4637,7 @@ class _CopyWithImpl$Query$FindEducationLevels<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findEducationLevels(
           Iterable<Query$FindEducationLevels$findEducationLevels> Function(
                   Iterable<
@@ -3982,6 +4663,7 @@ class _CopyWithStubImpl$Query$FindEducationLevels<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findEducationLevels(_fn) => _res;
 }
 
@@ -4305,6 +4987,7 @@ class _CopyWithImpl$Query$FindExpertises<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findExpertises(
           Iterable<Query$FindExpertises$findExpertises> Function(
                   Iterable<
@@ -4330,6 +5013,7 @@ class _CopyWithStubImpl$Query$FindExpertises<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findExpertises(_fn) => _res;
 }
 
@@ -4652,6 +5336,7 @@ class _CopyWithImpl$Query$FindIndustries<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findIndustries(
           Iterable<Query$FindIndustries$findIndustries> Function(
                   Iterable<
@@ -4677,6 +5362,7 @@ class _CopyWithStubImpl$Query$FindIndustries<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findIndustries(_fn) => _res;
 }
 
@@ -4998,6 +5684,7 @@ class _CopyWithImpl$Query$FindGenders<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findGenders(
           Iterable<Query$FindGenders$findGenders> Function(
                   Iterable<
@@ -5023,6 +5710,7 @@ class _CopyWithStubImpl$Query$FindGenders<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findGenders(_fn) => _res;
 }
 
@@ -5343,6 +6031,7 @@ class _CopyWithImpl$Query$FindLanguages<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findLanguages(
           Iterable<Query$FindLanguages$findLanguages> Function(
                   Iterable<
@@ -5368,6 +6057,7 @@ class _CopyWithStubImpl$Query$FindLanguages<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findLanguages(_fn) => _res;
 }
 
@@ -5743,6 +6433,7 @@ class _CopyWithImpl$Query$FindPronouns<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findPronouns(
           Iterable<Query$FindPronouns$findPronouns> Function(
                   Iterable<
@@ -5768,6 +6459,7 @@ class _CopyWithStubImpl$Query$FindPronouns<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findPronouns(_fn) => _res;
 }
 

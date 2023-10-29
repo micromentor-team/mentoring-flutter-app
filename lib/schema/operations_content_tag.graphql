@@ -1,0 +1,24 @@
+# ----------------------------------------------------------------------------------------------------------------
+# Queries
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# Mutations
+
+mutation CreateContentTag($input: ContentTagInput!) {
+    createContentTag(input: $input) {
+        id
+    }
+}
+
+mutation DeleteContentTag($deletePhysically: Boolean!, $contentTagId: String!) {
+    deleteContentTag(deletePhysically: $deletePhysically, contentTagId: $contentTagId) {
+        id
+    }
+}
+
+mutation UpdateContentTag($input: ContentTagInput!) {
+    updateContentTag(input: $input) {
+        id
+    }
+}

@@ -17609,6 +17609,7 @@ class Input$ChannelInvitationInput {
     String? channelName,
     String? channelTopic,
     String? messageText,
+    String? declineReasonTextId,
     DateTime? dismissedFromInboxBySenderAt,
     DateTime? dismissedFromInboxByRecipientAt,
     DateTime? readByRecipientAt,
@@ -17631,6 +17632,8 @@ class Input$ChannelInvitationInput {
         if (channelName != null) r'channelName': channelName,
         if (channelTopic != null) r'channelTopic': channelTopic,
         if (messageText != null) r'messageText': messageText,
+        if (declineReasonTextId != null)
+          r'declineReasonTextId': declineReasonTextId,
         if (dismissedFromInboxBySenderAt != null)
           r'dismissedFromInboxBySenderAt': dismissedFromInboxBySenderAt,
         if (dismissedFromInboxByRecipientAt != null)
@@ -17716,6 +17719,10 @@ class Input$ChannelInvitationInput {
       final l$messageText = data['messageText'];
       result$data['messageText'] = (l$messageText as String?);
     }
+    if (data.containsKey('declineReasonTextId')) {
+      final l$declineReasonTextId = data['declineReasonTextId'];
+      result$data['declineReasonTextId'] = (l$declineReasonTextId as String?);
+    }
     if (data.containsKey('dismissedFromInboxBySenderAt')) {
       final l$dismissedFromInboxBySenderAt =
           data['dismissedFromInboxBySenderAt'];
@@ -17782,6 +17789,8 @@ class Input$ChannelInvitationInput {
   String? get channelTopic => (_$data['channelTopic'] as String?);
 
   String? get messageText => (_$data['messageText'] as String?);
+
+  String? get declineReasonTextId => (_$data['declineReasonTextId'] as String?);
 
   DateTime? get dismissedFromInboxBySenderAt =>
       (_$data['dismissedFromInboxBySenderAt'] as DateTime?);
@@ -17859,6 +17868,10 @@ class Input$ChannelInvitationInput {
     if (_$data.containsKey('messageText')) {
       final l$messageText = messageText;
       result$data['messageText'] = l$messageText;
+    }
+    if (_$data.containsKey('declineReasonTextId')) {
+      final l$declineReasonTextId = declineReasonTextId;
+      result$data['declineReasonTextId'] = l$declineReasonTextId;
     }
     if (_$data.containsKey('dismissedFromInboxBySenderAt')) {
       final l$dismissedFromInboxBySenderAt = dismissedFromInboxBySenderAt;
@@ -18051,6 +18064,15 @@ class Input$ChannelInvitationInput {
     if (l$messageText != lOther$messageText) {
       return false;
     }
+    final l$declineReasonTextId = declineReasonTextId;
+    final lOther$declineReasonTextId = other.declineReasonTextId;
+    if (_$data.containsKey('declineReasonTextId') !=
+        other._$data.containsKey('declineReasonTextId')) {
+      return false;
+    }
+    if (l$declineReasonTextId != lOther$declineReasonTextId) {
+      return false;
+    }
     final l$dismissedFromInboxBySenderAt = dismissedFromInboxBySenderAt;
     final lOther$dismissedFromInboxBySenderAt =
         other.dismissedFromInboxBySenderAt;
@@ -18110,6 +18132,7 @@ class Input$ChannelInvitationInput {
     final l$channelName = channelName;
     final l$channelTopic = channelTopic;
     final l$messageText = messageText;
+    final l$declineReasonTextId = declineReasonTextId;
     final l$dismissedFromInboxBySenderAt = dismissedFromInboxBySenderAt;
     final l$dismissedFromInboxByRecipientAt = dismissedFromInboxByRecipientAt;
     final l$readByRecipientAt = readByRecipientAt;
@@ -18135,6 +18158,9 @@ class Input$ChannelInvitationInput {
       _$data.containsKey('channelName') ? l$channelName : const {},
       _$data.containsKey('channelTopic') ? l$channelTopic : const {},
       _$data.containsKey('messageText') ? l$messageText : const {},
+      _$data.containsKey('declineReasonTextId')
+          ? l$declineReasonTextId
+          : const {},
       _$data.containsKey('dismissedFromInboxBySenderAt')
           ? l$dismissedFromInboxBySenderAt
           : const {},
@@ -18173,6 +18199,7 @@ abstract class CopyWith$Input$ChannelInvitationInput<TRes> {
     String? channelName,
     String? channelTopic,
     String? messageText,
+    String? declineReasonTextId,
     DateTime? dismissedFromInboxBySenderAt,
     DateTime? dismissedFromInboxByRecipientAt,
     DateTime? readByRecipientAt,
@@ -18215,6 +18242,7 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
     Object? channelName = _undefined,
     Object? channelTopic = _undefined,
     Object? messageText = _undefined,
+    Object? declineReasonTextId = _undefined,
     Object? dismissedFromInboxBySenderAt = _undefined,
     Object? dismissedFromInboxByRecipientAt = _undefined,
     Object? readByRecipientAt = _undefined,
@@ -18241,6 +18269,8 @@ class _CopyWithImpl$Input$ChannelInvitationInput<TRes>
         if (channelTopic != _undefined)
           'channelTopic': (channelTopic as String?),
         if (messageText != _undefined) 'messageText': (messageText as String?),
+        if (declineReasonTextId != _undefined)
+          'declineReasonTextId': (declineReasonTextId as String?),
         if (dismissedFromInboxBySenderAt != _undefined)
           'dismissedFromInboxBySenderAt':
               (dismissedFromInboxBySenderAt as DateTime?),
@@ -18297,6 +18327,7 @@ class _CopyWithStubImpl$Input$ChannelInvitationInput<TRes>
     String? channelName,
     String? channelTopic,
     String? messageText,
+    String? declineReasonTextId,
     DateTime? dismissedFromInboxBySenderAt,
     DateTime? dismissedFromInboxByRecipientAt,
     DateTime? readByRecipientAt,
@@ -26923,6 +26954,7 @@ enum Enum$OptionType {
   gender,
   pronoun,
   userRelationshipType,
+  declineChannelInvitationReason,
   country,
   industry,
   language,
@@ -26948,6 +26980,8 @@ String toJson$Enum$OptionType(Enum$OptionType e) {
       return r'pronoun';
     case Enum$OptionType.userRelationshipType:
       return r'userRelationshipType';
+    case Enum$OptionType.declineChannelInvitationReason:
+      return r'declineChannelInvitationReason';
     case Enum$OptionType.country:
       return r'country';
     case Enum$OptionType.industry:
@@ -26981,6 +27015,8 @@ Enum$OptionType fromJson$Enum$OptionType(String value) {
       return Enum$OptionType.pronoun;
     case r'userRelationshipType':
       return Enum$OptionType.userRelationshipType;
+    case r'declineChannelInvitationReason':
+      return Enum$OptionType.declineChannelInvitationReason;
     case r'country':
       return Enum$OptionType.country;
     case r'industry':
@@ -29268,6 +29304,51 @@ Enum$ServiceRequestSource fromJson$Enum$ServiceRequestSource(String value) {
       return Enum$ServiceRequestSource.system;
     default:
       return Enum$ServiceRequestSource.$unknown;
+  }
+}
+
+enum Enum$DeclineChannelInvitationReasonTextId {
+  notGoodFit,
+  tooBusy,
+  noReason,
+  fakeProfile,
+  inappropriate,
+  $unknown
+}
+
+String toJson$Enum$DeclineChannelInvitationReasonTextId(
+    Enum$DeclineChannelInvitationReasonTextId e) {
+  switch (e) {
+    case Enum$DeclineChannelInvitationReasonTextId.notGoodFit:
+      return r'notGoodFit';
+    case Enum$DeclineChannelInvitationReasonTextId.tooBusy:
+      return r'tooBusy';
+    case Enum$DeclineChannelInvitationReasonTextId.noReason:
+      return r'noReason';
+    case Enum$DeclineChannelInvitationReasonTextId.fakeProfile:
+      return r'fakeProfile';
+    case Enum$DeclineChannelInvitationReasonTextId.inappropriate:
+      return r'inappropriate';
+    case Enum$DeclineChannelInvitationReasonTextId.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$DeclineChannelInvitationReasonTextId
+    fromJson$Enum$DeclineChannelInvitationReasonTextId(String value) {
+  switch (value) {
+    case r'notGoodFit':
+      return Enum$DeclineChannelInvitationReasonTextId.notGoodFit;
+    case r'tooBusy':
+      return Enum$DeclineChannelInvitationReasonTextId.tooBusy;
+    case r'noReason':
+      return Enum$DeclineChannelInvitationReasonTextId.noReason;
+    case r'fakeProfile':
+      return Enum$DeclineChannelInvitationReasonTextId.fakeProfile;
+    case r'inappropriate':
+      return Enum$DeclineChannelInvitationReasonTextId.inappropriate;
+    default:
+      return Enum$DeclineChannelInvitationReasonTextId.$unknown;
   }
 }
 

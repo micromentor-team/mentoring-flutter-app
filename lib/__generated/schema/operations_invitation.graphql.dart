@@ -25,6 +25,7 @@ class Variables$Query$FindChannelInvitationById {
   Map<String, dynamic> _$data;
 
   String get channelInvitationId => (_$data['channelInvitationId'] as String);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelInvitationId = channelInvitationId;
@@ -38,6 +39,7 @@ class Variables$Query$FindChannelInvitationById {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -223,6 +225,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<TRes>
       get findChannelInvitationById {
     final local$findChannelInvitationById = _instance.findChannelInvitationById;
@@ -244,6 +247,7 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById<TRes>
       get findChannelInvitationById =>
           CopyWith$Query$FindChannelInvitationById$findChannelInvitationById
@@ -1160,6 +1164,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
       TRes> get sender {
     final local$sender = _instance.sender;
@@ -1196,11 +1201,13 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender<
           TRes>
       get sender =>
           CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender
               .stub(_res);
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient<
           TRes>
       get recipient =>
@@ -1531,6 +1538,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$se
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes companies(
           Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$companies> Function(
                   Iterable<
@@ -1543,6 +1551,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$se
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
       TRes> get countryOfResidence {
     final local$countryOfResidence = _instance.countryOfResidence;
@@ -1593,12 +1602,15 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? $__typename,
   }) =>
       _res;
+
   companies(_fn) => _res;
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence<
           TRes>
       get countryOfResidence =>
           CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$countryOfResidence
               .stub(_res);
+
   groupMemberships(_fn) => _res;
 }
 
@@ -1799,6 +1811,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$se
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies$companyStage<
       TRes> get companyStage {
     final local$companyStage = _instance.companyStage;
@@ -1840,11 +1853,13 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies$companyStage<
           TRes>
       get companyStage =>
           CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies$companyStage
               .stub(_res);
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$companies$companyType<
           TRes>
       get companyType =>
@@ -2745,6 +2760,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$se
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   TRes industries(
           Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$industries> Function(
                   Iterable<
@@ -2757,6 +2773,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$se
                 e,
                 (i) => i,
               ))).toList());
+
   TRes expertises(
           Iterable<Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MentorsGroupMembership$expertises> Function(
                   Iterable<
@@ -2791,7 +2808,9 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? groupIdent,
   }) =>
       _res;
+
   industries(_fn) => _res;
+
   expertises(_fn) => _res;
 }
 
@@ -3282,6 +3301,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$se
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership$industry<
       TRes> get industry {
     final local$industry = _instance.industry;
@@ -3325,11 +3345,13 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? groupIdent,
   }) =>
       _res;
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership$industry<
           TRes>
       get industry =>
           CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$sender$groupMemberships$$MenteesGroupMembership$industry
               .stub(_res);
+
   soughtExpertises(_fn) => _res;
 }
 
@@ -4095,6 +4117,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$re
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes companies(
           Iterable<Query$FindChannelInvitationById$findChannelInvitationById$recipient$companies> Function(
                   Iterable<
@@ -4107,6 +4130,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$re
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$countryOfResidence<
       TRes> get countryOfResidence {
     final local$countryOfResidence = _instance.countryOfResidence;
@@ -4157,12 +4181,15 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? $__typename,
   }) =>
       _res;
+
   companies(_fn) => _res;
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$countryOfResidence<
           TRes>
       get countryOfResidence =>
           CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$countryOfResidence
               .stub(_res);
+
   groupMemberships(_fn) => _res;
 }
 
@@ -4363,6 +4390,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$re
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$companies$companyStage<
       TRes> get companyStage {
     final local$companyStage = _instance.companyStage;
@@ -4404,11 +4432,13 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$companies$companyStage<
           TRes>
       get companyStage =>
           CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$companies$companyStage
               .stub(_res);
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$companies$companyType<
           TRes>
       get companyType =>
@@ -5309,6 +5339,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$re
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   TRes industries(
           Iterable<Query$FindChannelInvitationById$findChannelInvitationById$recipient$groupMemberships$$MentorsGroupMembership$industries> Function(
                   Iterable<
@@ -5321,6 +5352,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$re
                 e,
                 (i) => i,
               ))).toList());
+
   TRes expertises(
           Iterable<Query$FindChannelInvitationById$findChannelInvitationById$recipient$groupMemberships$$MentorsGroupMembership$expertises> Function(
                   Iterable<
@@ -5355,7 +5387,9 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? groupIdent,
   }) =>
       _res;
+
   industries(_fn) => _res;
+
   expertises(_fn) => _res;
 }
 
@@ -5846,6 +5880,7 @@ class _CopyWithImpl$Query$FindChannelInvitationById$findChannelInvitationById$re
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$groupMemberships$$MenteesGroupMembership$industry<
       TRes> get industry {
     final local$industry = _instance.industry;
@@ -5889,11 +5924,13 @@ class _CopyWithStubImpl$Query$FindChannelInvitationById$findChannelInvitationByI
     String? groupIdent,
   }) =>
       _res;
+
   CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$groupMemberships$$MenteesGroupMembership$industry<
           TRes>
       get industry =>
           CopyWith$Query$FindChannelInvitationById$findChannelInvitationById$recipient$groupMemberships$$MenteesGroupMembership$industry
               .stub(_res);
+
   soughtExpertises(_fn) => _res;
 }
 
@@ -6366,7 +6403,9 @@ class Variables$Query$MyReceivedChannelInvitations {
 
   Enum$ChannelInvitationDirection? get direction =>
       (_$data['direction'] as Enum$ChannelInvitationDirection?);
+
   bool? get onlyPending => (_$data['onlyPending'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('direction')) {
@@ -6388,6 +6427,7 @@ class Variables$Query$MyReceivedChannelInvitations {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -6616,6 +6656,7 @@ class _CopyWithImpl$Query$MyReceivedChannelInvitations<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes myChannelInvitations(
           Iterable<Query$MyReceivedChannelInvitations$myChannelInvitations> Function(
                   Iterable<
@@ -6642,6 +6683,7 @@ class _CopyWithStubImpl$Query$MyReceivedChannelInvitations<TRes>
     String? $__typename,
   }) =>
       _res;
+
   myChannelInvitations(_fn) => _res;
 }
 
@@ -7028,6 +7070,7 @@ class _CopyWithImpl$Query$MyReceivedChannelInvitations$myChannelInvitations<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<TRes>
       get sender {
     final local$sender = _instance.sender;
@@ -7056,6 +7099,7 @@ class _CopyWithStubImpl$Query$MyReceivedChannelInvitations$myChannelInvitations<
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender<TRes>
       get sender =>
           CopyWith$Query$MyReceivedChannelInvitations$myChannelInvitations$sender
@@ -7292,7 +7336,9 @@ class Variables$Query$MySentChannelInvitations {
 
   Enum$ChannelInvitationDirection? get direction =>
       (_$data['direction'] as Enum$ChannelInvitationDirection?);
+
   bool? get onlyPending => (_$data['onlyPending'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('direction')) {
@@ -7314,6 +7360,7 @@ class Variables$Query$MySentChannelInvitations {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -7540,6 +7587,7 @@ class _CopyWithImpl$Query$MySentChannelInvitations<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes myChannelInvitations(
           Iterable<Query$MySentChannelInvitations$myChannelInvitations> Function(
                   Iterable<
@@ -7566,6 +7614,7 @@ class _CopyWithStubImpl$Query$MySentChannelInvitations<TRes>
     String? $__typename,
   }) =>
       _res;
+
   myChannelInvitations(_fn) => _res;
 }
 
@@ -7922,6 +7971,7 @@ class _CopyWithImpl$Query$MySentChannelInvitations$myChannelInvitations<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<TRes>
       get recipient {
     final local$recipient = _instance.recipient;
@@ -7949,6 +7999,7 @@ class _CopyWithStubImpl$Query$MySentChannelInvitations$myChannelInvitations<
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient<TRes>
       get recipient =>
           CopyWith$Query$MySentChannelInvitations$myChannelInvitations$recipient
@@ -8171,6 +8222,7 @@ class Variables$Mutation$AcceptChannelInvitation {
   Map<String, dynamic> _$data;
 
   String get channelInvitationId => (_$data['channelInvitationId'] as String);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelInvitationId = channelInvitationId;
@@ -8184,6 +8236,7 @@ class Variables$Mutation$AcceptChannelInvitation {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -8439,6 +8492,7 @@ class Variables$Mutation$CreateChannelInvitation {
 
   Input$ChannelInvitationInput get channelInvitationInput =>
       (_$data['channelInvitationInput'] as Input$ChannelInvitationInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelInvitationInput = channelInvitationInput;
@@ -8452,6 +8506,7 @@ class Variables$Mutation$CreateChannelInvitation {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -8638,6 +8693,7 @@ class _CopyWithImpl$Mutation$CreateChannelInvitation<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<TRes>
       get createChannelInvitation {
     final local$createChannelInvitation = _instance.createChannelInvitation;
@@ -8658,6 +8714,7 @@ class _CopyWithStubImpl$Mutation$CreateChannelInvitation<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation<TRes>
       get createChannelInvitation =>
           CopyWith$Mutation$CreateChannelInvitation$createChannelInvitation
@@ -8858,10 +8915,13 @@ class _CopyWithStubImpl$Mutation$CreateChannelInvitation$createChannelInvitation
 }
 
 class Variables$Mutation$DeclineChannelInvitation {
-  factory Variables$Mutation$DeclineChannelInvitation(
-          {required String channelInvitationId}) =>
+  factory Variables$Mutation$DeclineChannelInvitation({
+    required String channelInvitationId,
+    required Enum$DeclineChannelInvitationReasonTextId reasonTextId,
+  }) =>
       Variables$Mutation$DeclineChannelInvitation._({
         r'channelInvitationId': channelInvitationId,
+        r'reasonTextId': reasonTextId,
       });
 
   Variables$Mutation$DeclineChannelInvitation._(this._$data);
@@ -8871,16 +8931,27 @@ class Variables$Mutation$DeclineChannelInvitation {
     final result$data = <String, dynamic>{};
     final l$channelInvitationId = data['channelInvitationId'];
     result$data['channelInvitationId'] = (l$channelInvitationId as String);
+    final l$reasonTextId = data['reasonTextId'];
+    result$data['reasonTextId'] =
+        fromJson$Enum$DeclineChannelInvitationReasonTextId(
+            (l$reasonTextId as String));
     return Variables$Mutation$DeclineChannelInvitation._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   String get channelInvitationId => (_$data['channelInvitationId'] as String);
+
+  Enum$DeclineChannelInvitationReasonTextId get reasonTextId =>
+      (_$data['reasonTextId'] as Enum$DeclineChannelInvitationReasonTextId);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelInvitationId = channelInvitationId;
     result$data['channelInvitationId'] = l$channelInvitationId;
+    final l$reasonTextId = reasonTextId;
+    result$data['reasonTextId'] =
+        toJson$Enum$DeclineChannelInvitationReasonTextId(l$reasonTextId);
     return result$data;
   }
 
@@ -8890,6 +8961,7 @@ class Variables$Mutation$DeclineChannelInvitation {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -8904,13 +8976,22 @@ class Variables$Mutation$DeclineChannelInvitation {
     if (l$channelInvitationId != lOther$channelInvitationId) {
       return false;
     }
+    final l$reasonTextId = reasonTextId;
+    final lOther$reasonTextId = other.reasonTextId;
+    if (l$reasonTextId != lOther$reasonTextId) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$channelInvitationId = channelInvitationId;
-    return Object.hashAll([l$channelInvitationId]);
+    final l$reasonTextId = reasonTextId;
+    return Object.hashAll([
+      l$channelInvitationId,
+      l$reasonTextId,
+    ]);
   }
 }
 
@@ -8923,7 +9004,10 @@ abstract class CopyWith$Variables$Mutation$DeclineChannelInvitation<TRes> {
   factory CopyWith$Variables$Mutation$DeclineChannelInvitation.stub(TRes res) =
       _CopyWithStubImpl$Variables$Mutation$DeclineChannelInvitation;
 
-  TRes call({String? channelInvitationId});
+  TRes call({
+    String? channelInvitationId,
+    Enum$DeclineChannelInvitationReasonTextId? reasonTextId,
+  });
 }
 
 class _CopyWithImpl$Variables$Mutation$DeclineChannelInvitation<TRes>
@@ -8939,11 +9023,17 @@ class _CopyWithImpl$Variables$Mutation$DeclineChannelInvitation<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? channelInvitationId = _undefined}) =>
+  TRes call({
+    Object? channelInvitationId = _undefined,
+    Object? reasonTextId = _undefined,
+  }) =>
       _then(Variables$Mutation$DeclineChannelInvitation._({
         ..._instance._$data,
         if (channelInvitationId != _undefined && channelInvitationId != null)
           'channelInvitationId': (channelInvitationId as String),
+        if (reasonTextId != _undefined && reasonTextId != null)
+          'reasonTextId':
+              (reasonTextId as Enum$DeclineChannelInvitationReasonTextId),
       }));
 }
 
@@ -8953,7 +9043,11 @@ class _CopyWithStubImpl$Variables$Mutation$DeclineChannelInvitation<TRes>
 
   TRes _res;
 
-  call({String? channelInvitationId}) => _res;
+  call({
+    String? channelInvitationId,
+    Enum$DeclineChannelInvitationReasonTextId? reasonTextId,
+  }) =>
+      _res;
 }
 
 class Mutation$DeclineChannelInvitation {
@@ -9096,7 +9190,16 @@ const documentNodeMutationDeclineChannelInvitation = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'reasonTextId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'DeclineChannelInvitationReasonTextId'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -9107,7 +9210,11 @@ const documentNodeMutationDeclineChannelInvitation = DocumentNode(definitions: [
           ArgumentNode(
             name: NameNode(value: 'channelInvitationId'),
             value: VariableNode(name: NameNode(value: 'channelInvitationId')),
-          )
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'reasonTextId'),
+            value: VariableNode(name: NameNode(value: 'reasonTextId')),
+          ),
         ],
         directives: [],
         selectionSet: null,
@@ -9148,7 +9255,9 @@ class Variables$Mutation$DeleteChannelInvitation {
   Map<String, dynamic> _$data;
 
   bool get deletePhysically => (_$data['deletePhysically'] as bool);
+
   String get channelInvitationId => (_$data['channelInvitationId'] as String);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$deletePhysically = deletePhysically;
@@ -9164,6 +9273,7 @@ class Variables$Mutation$DeleteChannelInvitation {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -9453,6 +9563,7 @@ class Variables$Mutation$MarkChannelInvitationAsSeenByMe {
 
   Input$ChannelInvitationInput get channelInvitationInput =>
       (_$data['channelInvitationInput'] as Input$ChannelInvitationInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$channelInvitationInput = channelInvitationInput;
@@ -9467,6 +9578,7 @@ class Variables$Mutation$MarkChannelInvitationAsSeenByMe {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

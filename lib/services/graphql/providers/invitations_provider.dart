@@ -140,6 +140,7 @@ class InvitationsProvider extends BaseProvider {
 
   Future<OperationResult<String>> declineChannelInvitation({
     required String channelInvitationId,
+    required Enum$DeclineChannelInvitationReasonTextId reasonTextId,
   }) async {
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
@@ -147,6 +148,7 @@ class InvitationsProvider extends BaseProvider {
         fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Mutation$DeclineChannelInvitation(
           channelInvitationId: channelInvitationId,
+          reasonTextId: reasonTextId,
         ).toJson(),
       ),
     );

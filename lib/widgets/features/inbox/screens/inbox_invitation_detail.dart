@@ -13,6 +13,7 @@ import '../../../../constants/constants.dart';
 import '../../../../models/inbox_model.dart';
 import '../../../../services/graphql/providers/base/operation_result.dart';
 import '../../../../services/graphql/providers/channels_provider.dart';
+import '../../../../services/graphql/providers/content_provider.dart';
 import '../../../../services/graphql/providers/invitations_provider.dart';
 import '../../../../utilities/navigation_mixin.dart';
 import '../../../../utilities/utility.dart';
@@ -45,7 +46,6 @@ class _InboxInvitationDetailScreenState
   late Future<OperationResult<ChannelInvitationById>> _invitation;
   late AppLocalizations _l10n;
   bool _isMarkedAsRead = false;
-  int selectedReason = 0;
 
   @override
   void initState() {
@@ -218,18 +218,7 @@ class _InboxInvitationDetailScreenState
     AppLocalizations l10n,
     String senderId,
     String? senderName,
-    int selectedReason,
   ) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-
-    List<String> reasons = [
-      l10n.inviteDeclineReasonNotGoodFit,
-      l10n.inviteDeclineReasonTooBusy,
-      l10n.inviteDeclineReasonNoReason,
-      l10n.inviteDeclineReasonFakeProfile,
-      l10n.inviteDeclineReasonInappropriate
-    ];
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -244,40 +233,27 @@ class _InboxInvitationDetailScreenState
                 builder: (BuildContext context) {
                   return DeclineReason(
                       name: senderName,
-                      selectedReason: selectedReason,
-                      continueAction: () async {
-                        await _invitationsProvider.declineChannelInvitation(
-                          channelInvitationId: widget.channelInvitationId,
-                        );
-
+                      reportUserAction: (Enum$ReportUserReason reasonTextId) async {
                         final pref = await SharedPreferences.getInstance();
                         String? userId = pref.getString('userId');
-
-                        String selectedReasonText = reasons[selectedReason];
-                        String childContentTagTypeTextId;
-
-                        if (selectedReasonText ==
-                            l10n.inviteDeclineReasonFakeProfile) {
-                          childContentTagTypeTextId = "fakePerson";
-                        } else if (selectedReasonText ==
-                            l10n.inviteDeclineReasonInappropriate) {
-                          childContentTagTypeTextId = "objectionableLanguage";
-                        } else {
-                          // Handle other reasons here if needed
-                          childContentTagTypeTextId = ""; // Default value
-                        }
-
                         final reportUserInput = Input$ReportUserInput(
                           // The user ID of the user that sent the invitation:
                           userId: senderId,
-                          reasonTextId: Enum$ReportUserReason.inappropriate,
+                          reasonTextId: reasonTextId,
                           createdBy: userId,
                         );
                         await _userProvider.reportUser(input: reportUserInput);
 
                         await _inboxModel.refreshPendingReceivedInvitations();
                         router.push(Routes.inboxInvitesReceived.path);
-                      });
+                      },
+                      continueAction: (Enum$DeclineChannelInvitationReasonTextId reasonTextId) async {
+                        await _invitationsProvider.declineChannelInvitation(
+                          channelInvitationId: widget.channelInvitationId,
+                          reasonTextId: reasonTextId,
+                        );
+                      }
+                  );
                 });
           },
           child: Text(
@@ -436,7 +412,6 @@ class _InboxInvitationDetailScreenState
                               l10n,
                               invitationResult.sender.id,
                               invitationResult.sender.fullName,
-                              selectedReason,
                             )
                           : widget.invitationDirection == MessageDirection.sent
                               ? _createWithdrawButton(theme)
@@ -455,26 +430,27 @@ class _InboxInvitationDetailScreenState
 
 class DeclineReason extends StatefulWidget {
   final String? name;
-  int selectedReason;
   final Function continueAction;
+  final Function reportUserAction;
 
-  DeclineReason(
-      {super.key,
-      required this.name,
-      required this.continueAction,
-      required this.selectedReason});
+  const DeclineReason({super.key, required this.name, required this.continueAction, required this.reportUserAction});
 
   @override
   State<DeclineReason> createState() => _DeclineReasonState();
 }
 
 class _DeclineReasonState extends State<DeclineReason> {
-  // int selectedReason = 0;
+  late final ContentProvider _contentProvider;
+  Enum$DeclineChannelInvitationReasonTextId _selectedDeclineReason = Enum$DeclineChannelInvitationReasonTextId.noReason;
+  Enum$ReportUserReason? _selectedReportUserReason = Enum$ReportUserReason.inappropriate;
 
   @override
   void initState() {
     super.initState();
-    widget.selectedReason = 0;
+    _contentProvider = Provider.of<ContentProvider>(
+      context,
+      listen: false,
+    );
   }
 
   @override
@@ -482,14 +458,7 @@ class _DeclineReasonState extends State<DeclineReason> {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     String subtitle = l10n.inviteDeclineSubtitle(widget.name ?? '');
-
-    List<String> reasons = [
-      l10n.inviteDeclineReasonNotGoodFit,
-      l10n.inviteDeclineReasonTooBusy,
-      l10n.inviteDeclineReasonNoReason,
-      l10n.inviteDeclineReasonFakeProfile,
-      l10n.inviteDeclineReasonInappropriate
-    ];
+    List<String> reasons = _contentProvider.declineChannelInvitationReasonsIds;
 
     List<Widget> reasonWidgets = [];
     for (int i = 0; i < reasons.length; i++) {
@@ -498,13 +467,15 @@ class _DeclineReasonState extends State<DeclineReason> {
         RadioListTile(
           controlAffinity: ListTileControlAffinity.trailing,
           value: i,
-          groupValue: widget.selectedReason,
-          title: Text(reason),
-          selected: i == widget.selectedReason,
+          groupValue: _selectedDeclineReason,
+          title: Text(_contentProvider
+                  .translateDeclineChannelInvitationReason(reason) ??
+              reason),
+          selected: reason == _selectedDeclineReason,
           onChanged: (currentUser) {
             setState(() {
-              widget.selectedReason = i;
-              reason = reasons[i];
+              _selectedDeclineReason = reason as Enum$DeclineChannelInvitationReasonTextId;
+              reason = reason;
             });
           },
           activeColor: theme.colorScheme.primary,
@@ -526,11 +497,31 @@ class _DeclineReasonState extends State<DeclineReason> {
     );
     Widget reportButton = OutlinedButton(
       onPressed: () async {
-        widget.continueAction();
+        Enum$ReportUserReason reasonTextId = Enum$ReportUserReason.inappropriate;
+        if (_selectedReportUserReason != null) {
+          reasonTextId = _selectedReportUserReason as Enum$ReportUserReason;
+        } else if (_selectedDeclineReason == Enum$DeclineChannelInvitationReasonTextId.inappropriate) {
+          reasonTextId = Enum$ReportUserReason.inappropriate;
+        } else if (_selectedDeclineReason == Enum$DeclineChannelInvitationReasonTextId.fakeProfile) {
+          reasonTextId = Enum$ReportUserReason.fakePerson;
+        }
+        widget.reportUserAction(reasonTextId);
         context.pop();
       },
       child: Text(
-        l10n.actionReport,
+        l10n.actionReportUser,
+        style: theme.textTheme.labelLarge?.copyWith(
+          color: theme.colorScheme.secondary,
+        ),
+      ),
+    );
+    Widget submitButton = OutlinedButton(
+      onPressed: () async {
+        widget.continueAction(_selectedDeclineReason);
+        context.pop();
+      },
+      child: Text(
+        l10n.actionSubmit,
         style: theme.textTheme.labelLarge?.copyWith(
           color: theme.colorScheme.primary,
         ),
@@ -541,6 +532,7 @@ class _DeclineReasonState extends State<DeclineReason> {
       actions: [
         cancelButton,
         reportButton,
+        submitButton,
       ],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Insets.paddingSmall),

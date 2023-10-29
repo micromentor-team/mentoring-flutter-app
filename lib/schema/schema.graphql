@@ -110,6 +110,7 @@ enum OptionType {
   gender
   pronoun
   userRelationshipType
+  declineChannelInvitationReason
   country
   industry
   language
@@ -291,6 +292,7 @@ type Query {
   findChannelMessageById(id: String!): ChannelMessage!
   findChannelMessages(options: FindObjectsOptions, match: ChannelMessageInput, filter: ChannelMessageListFilter): [ChannelMessage!]!
   findChannelParticipantById(id: String!): ChannelParticipant!
+  findDeclineChannelInvitationReasons(fallbackUiLanguage: UiLanguage): [DeclineChannelInvitationReason!]!
   findOptions(fallbackUiLanguage: UiLanguage, isParent: Boolean, parentTextId: String, optionType: OptionType!): [Option!]!
   findCountries(fallbackUiLanguage: UiLanguage): [Country!]!
   findIndustries(fallbackUiLanguage: UiLanguage): [Industry!]!
@@ -826,11 +828,13 @@ type ChannelInvitation {
   channelName: String
   channelTopic: String
   messageText: String
+  declineReasonTextId: String
   dismissedFromInboxBySenderAt: DateTimeISO
   dismissedFromInboxByRecipientAt: DateTimeISO
   readByRecipientAt: DateTimeISO
   status: ChannelInvitationStatus!
   channel: Channel!
+  declineReason: DeclineChannelInvitationReason
   recipient: User!
   sender: User!
 }
@@ -840,6 +844,35 @@ enum ChannelInvitationStatus {
   accepted
   declined
   unset
+}
+
+type DeclineChannelInvitationReason {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTimeISO
+  childOptions: [Option!]
+  parentOption: [Option!]
 }
 
 type ChannelMessage {
@@ -1491,7 +1524,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTimeISO! = "2023-10-28T18:13:52.446Z"
+  time: DateTimeISO! = "2023-10-29T18:32:56.570Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -2280,7 +2313,7 @@ type Mutation {
   findAndUpdateAllMm2Users: Boolean!
   acceptChannelInvitation(channelInvitationId: String!): String!
   createChannelInvitation(input: ChannelInvitationInput!): ChannelInvitation!
-  declineChannelInvitation(channelInvitationId: String!): String!
+  declineChannelInvitation(reasonTextId: DeclineChannelInvitationReasonTextId!, channelInvitationId: String!): String!
   deleteChannelInvitation(deletePhysically: Boolean!, channelInvitationId: String!): String!
   dismissChannelInvitationFromInbox(channelInvitationId: String!): String!
   updateChannelInvitation(input: ChannelInvitationInput!): String!
@@ -2670,10 +2703,19 @@ input ChannelInvitationInput {
   channelName: String
   channelTopic: String
   messageText: String
+  declineReasonTextId: String
   dismissedFromInboxBySenderAt: DateTimeISO
   dismissedFromInboxByRecipientAt: DateTimeISO
   readByRecipientAt: DateTimeISO
   status: ChannelInvitationStatus
+}
+
+enum DeclineChannelInvitationReasonTextId {
+  notGoodFit
+  tooBusy
+  noReason
+  fakeProfile
+  inappropriate
 }
 
 input BgAddChannelMessageEventInput {

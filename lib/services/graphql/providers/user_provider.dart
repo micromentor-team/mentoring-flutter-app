@@ -403,9 +403,6 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     );
   }
 
-
-
-
   Future<OperationResult<void>> updateCompany({
     required Input$CompanyInput input,
   }) async {
