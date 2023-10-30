@@ -131,8 +131,8 @@ export function generateWebsite() {
 }
 
 export function generateUserSearch(userSearchInput: any, users: any) {
-    const filterSeeksHelp = userSearchInput.seeksHelp == "isTrue";
-    const filterOffersHelp = userSearchInput.offersHelp == "isTrue";
+    const filterSeeksHelp = userSearchInput.filter.seeksHelp == "isTrue";
+    const filterOffersHelp = userSearchInput.filter.offersHelp == "isTrue";
     const searchResults = users.filter(
         (e: any) => (e.seeksHelp && filterSeeksHelp) || (e.offersHelp && filterOffersHelp)
     );

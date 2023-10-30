@@ -66,11 +66,11 @@ export class MockServerState {
         const message1 = generators.generateChannelMessage('👋', this.channels[0], this.loggedInUser, new Date('2023-07-26T12:34:01-00:00'), true, false, false);
         const message2 = generators.generateChannelMessage('Are you available for a quick chat next week?', this.channels[0], this.loggedInUser, new Date('2023-07-26T12:35:01-00:00'), true);
         const message3 = generators.generateChannelMessage('Hello, there!', this.channels[0], this.otherUsers[0], new Date('2023-07-27T08:23:01-00:00'), true);
-        const message4 = generators.generateChannelMessage('Sorry, I am busy...', this.channels[0], this.otherUsers[0], new Date('2023-07-27T08:23:01-00:00'), true, false, true, message2.id);
-        const message5 = generators.generateChannelMessage('Of course! Grab any open spot from my calendar.', this.channels[0], this.otherUsers[0], new Date('2023-07-27T08:23:01-00:00'), true, true, false, message2.id);
+        const message4 = generators.generateChannelMessage('Sorry, I am busy...', this.channels[0], this.otherUsers[0], new Date('2023-07-27T08:23:01-00:00'), true, false, true);
+        const message5 = generators.generateChannelMessage('Of course! Grab any open spot from my calendar.', this.channels[0], this.otherUsers[0], new Date('2023-07-27T08:23:01-00:00'), true, true, false);
         const message6 = generators.generateChannelMessage('👍', this.channels[0], this.otherUsers[0], new Date('2023-07-27T08:24:01-00:00'), true);
         const message7 = generators.generateChannelMessage('dsflkjsadlkfjlk', this.channels[0], this.loggedInUser, new Date('2023-07-28T00:56:01-00:00'), true, false, true);
-        const message8 = generators.generateChannelMessage('Thanks! I will set up some time 😊', this.channels[0], this.loggedInUser, new Date('2023-07-28T00:56:01-00:00'), true, true, false, message5.id);
+        const message8 = generators.generateChannelMessage('Thanks! I will set up some time 😊', this.channels[0], this.loggedInUser, new Date('2023-07-28T00:56:01-00:00'), true, true, false);
         const message9 = generators.generateChannelMessage('You got it.', this.channels[0], this.otherUsers[0], new Date('2023-07-28T20:00:01-00:00'), false);
         const message10 = generators.generateChannelMessage('Let me know when you schedule it.', this.channels[0], this.otherUsers[0], new Date('2023-07-28T20:01:01-00:00'), false);
         this.channels[0].latestMessage = message10;
