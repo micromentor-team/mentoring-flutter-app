@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../__generated/schema/operations_user.graphql.dart';
 import '../../../__generated/schema/schema.graphql.dart';
 import '../../../utilities/utility.dart';
+import '../../../__generated/schema/operations_user_device.graphql.dart';
 import 'base/base_provider.dart';
 import 'base/operation_result.dart';
 
@@ -187,6 +188,25 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   }
 
   // Mutations
+  Future<OperationResult<void>> endMySession({
+    required String deviceUuid,
+    String pushNotificationToken = "",
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationEndMySession,
+        fetchPolicy: FetchPolicy.noCache,
+        variables:
+            Variables$Mutation$EndMySession(deviceUuid: deviceUuid).toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
   Future<OperationResult<CreateUserSearchResponse>> createUserSearch({
     required Input$UserSearchInput searchInput,
     bool fetchFromNetworkOnly = false,
@@ -317,6 +337,27 @@ class UserProvider extends BaseProvider with ChangeNotifier {
     return result;
   }
 
+  Future<OperationResult<void>> startMySession({
+    required String deviceUuid,
+    String pushNotificationToken = "",
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationStartMySession,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$StartMySession(
+                deviceUuid: deviceUuid,
+                pushNotificationToken: pushNotificationToken)
+            .toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
   Future<OperationResult<void>> updateAcademicExperience({
     required Input$AcademicExperienceInput input,
   }) async {
@@ -414,6 +455,23 @@ class UserProvider extends BaseProvider with ChangeNotifier {
         document: documentNodeMutationUpdateUser,
         fetchPolicy: FetchPolicy.noCache,
         variables: Variables$Mutation$UpdateUser(input: input).toJson(),
+      ),
+    );
+    notifyListeners();
+    return OperationResult(
+      gqlQueryResult: queryResult,
+      response: null,
+    );
+  }
+
+  Future<OperationResult<void>> updateUserDevice({
+    required Input$UserDeviceInput input,
+  }) async {
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationUpdateUserDevice,
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables$Mutation$UpdateUserDevice(input: input).toJson(),
       ),
     );
     notifyListeners();
