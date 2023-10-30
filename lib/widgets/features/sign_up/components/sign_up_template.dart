@@ -60,52 +60,39 @@ class SignUpTemplate extends StatelessWidget {
               top: 0,
               right: 0,
               bottom: navigationBarHeight,
-              child: ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return LinearGradient(
-                    begin: const Alignment(0, -0.92),
-                    end: const Alignment(0, -0.87),
-                    colors: [
-                      theme.colorScheme.surface,
-                      Colors.transparent,
-                    ],
-                  ).createShader(bounds);
-                },
-                blendMode: BlendMode.dstOut,
-                child: SingleChildScrollView(
-                  clipBehavior: Clip.none,
-                  child: Padding(
-                    padding: const EdgeInsets.all(Insets.paddingExtraLarge),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: Insets.paddingLarge),
-                        LinearProgressIndicator(
-                          value: _signUpProgressToDouble(progress),
+              child: SingleChildScrollView(
+                clipBehavior: Clip.none,
+                child: Padding(
+                  padding: const EdgeInsets.all(Insets.paddingExtraLarge),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: Insets.paddingLarge),
+                      LinearProgressIndicator(
+                        value: _signUpProgressToDouble(progress),
+                      ),
+                      const SizedBox(height: Insets.paddingMedium),
+                      Text(
+                        title,
+                        softWrap: true,
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          color: theme.colorScheme.primary,
                         ),
-                        const SizedBox(height: Insets.paddingMedium),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: Insets.paddingLarge),
+                      if (subtitle != null) ...[
                         Text(
-                          title,
-                          softWrap: true,
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            color: theme.colorScheme.primary,
+                          subtitle!,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.colorScheme.secondary,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: Insets.paddingLarge),
-                        if (subtitle != null) ...[
-                          Text(
-                            subtitle!,
-                            style: theme.textTheme.bodyLarge?.copyWith(
-                              color: theme.colorScheme.secondary,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: Insets.paddingMedium),
-                        ],
-                        body,
+                        const SizedBox(height: Insets.paddingMedium),
                       ],
-                    ),
+                      body,
+                    ],
                   ),
                 ),
               ),
