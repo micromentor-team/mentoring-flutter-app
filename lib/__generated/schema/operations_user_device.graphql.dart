@@ -26,6 +26,7 @@ class Variables$Mutation$UpdateUserDevice {
   Map<String, dynamic> _$data;
 
   Input$UserDeviceInput get input => (_$data['input'] as Input$UserDeviceInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -39,6 +40,7 @@ class Variables$Mutation$UpdateUserDevice {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

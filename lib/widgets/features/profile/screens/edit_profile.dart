@@ -141,7 +141,7 @@ class EditProfileContent extends StatelessWidget {
               .toList(),
         ),
         const Divider(),
-        if (userData.offersHelp) ...[
+        if (userData.offersHelp == true) ...[
           EditProfileHowCanIHelp(
             userData: userData,
             expertises: maybeMentorGroupMembership?.expertises
@@ -156,7 +156,7 @@ class EditProfileContent extends StatelessWidget {
           ),
           const Divider(),
         ],
-        if (userData.seeksHelp && company != null) ...[
+        if (userData.seeksHelp == true && company != null) ...[
           EditProfileAboutMyBusiness(
             userData: userData,
             companyInput: CompanyInput(

@@ -93,11 +93,11 @@ class ExploreCardFiltersModel extends ChangeNotifier {
             _selectedStages.isEmpty ? null : _selectedStages.toList(),
         offersHelp: _selectedUserType == UserType.mentor
             ? Enum$UserSearchFieldPreference.isTrue
-            : Enum$UserSearchFieldPreference.isFalse,
+            : Enum$UserSearchFieldPreference.any,
         searchText: selectedKeyword,
         seeksHelp: _selectedUserType == UserType.entrepreneur
             ? Enum$UserSearchFieldPreference.isTrue
-            : Enum$UserSearchFieldPreference.isFalse,
+            : Enum$UserSearchFieldPreference.any,
       ),
       maxResultCount: maxResultsCount,
     );

@@ -110,12 +110,14 @@ enum OptionType {
   gender
   pronoun
   userRelationshipType
+  declineChannelInvitationReason
   country
   industry
   language
   unset
   contentTagType
   blockUserReason
+  reportUserReason
 }
 
 enum UiLanguage {
@@ -205,10 +207,13 @@ type MenteesGroupMembership implements IGroupMembership {
   industry: Industry
   soughtExpertises: [Expertise!]!
 
-  """Must match expertise ids or textIds."""
+  """Must match expertise textIds."""
   soughtExpertisesTextIds: [String!]
 
-  """Must match industry ids or textIds."""
+  """Must match expertise textIds."""
+  additionalSoughtExpertisesTextIds: [String!]
+
+  """Must match industry textIds."""
   industryTextId: String
 
   """From MM2, not used in MM3 (yet)"""
@@ -245,15 +250,19 @@ type MentorsGroupMembership implements IGroupMembership {
   industry: Industry
   soughtExpertises: [Expertise!]!
 
-  """Must match expertise ids or textIds."""
+  """Must match expertise textIds."""
   expertisesTextIds: [String!]
 
-  """Must match industry ids or textIds."""
+  """Must match expertise textIds."""
+  additionalExpertisesTextIds: [String!]
+
+  """Must match industry textIds."""
   industriesTextIds: [String!]
   helpICanOffer: String
   expectationsForMentees: String
   menteePreparationInstructions: String
   endorsements: Int
+  reasonsForMentoring: String
 }
 
 type Query {
@@ -284,6 +293,7 @@ type Query {
   findChannelMessageById(id: String!): ChannelMessage!
   findChannelMessages(options: FindObjectsOptions, match: ChannelMessageInput, filter: ChannelMessageListFilter): [ChannelMessage!]!
   findChannelParticipantById(id: String!): ChannelParticipant!
+  findDeclineChannelInvitationReasons(fallbackUiLanguage: UiLanguage): [DeclineChannelInvitationReason!]!
   findOptions(fallbackUiLanguage: UiLanguage, isParent: Boolean, parentTextId: String, optionType: OptionType!): [Option!]!
   findCountries(fallbackUiLanguage: UiLanguage): [Country!]!
   findIndustries(fallbackUiLanguage: UiLanguage): [Industry!]!
@@ -299,7 +309,6 @@ type Query {
   findUserSearches(options: FindObjectsOptions, match: UserSearchInput, filter: UserSearchListFilter): [UserSearch!]!
   findUserSearchResults(options: FindObjectsOptions, runIndex: Int, userSearchId: String!): [UserWithScore!]!
   myUserSearches: [UserSearch!]!
-  getMm2Integration: Mm2Integration!
   findNlpConversation(conversationId: String!): NlpConversation!
   findMyActiveMultiStepAction: [SidMultiStepAction!]!
   getMultiStepActionProgress(
@@ -367,8 +376,8 @@ type User {
   parentGroupIds: [ID!]!
   externalGroupIds: [ID!]!
   groupMemberships: [IGroupMembership!]!
-  seeksHelp: Boolean!
-  offersHelp: Boolean!
+  seeksHelp: Boolean
+  offersHelp: Boolean
   birthYear: Int
   genderSelfDescribed: String
   ethnicity: String
@@ -820,11 +829,13 @@ type ChannelInvitation {
   channelName: String
   channelTopic: String
   messageText: String
+  declineReasonTextId: String
   dismissedFromInboxBySenderAt: DateTimeISO
   dismissedFromInboxByRecipientAt: DateTimeISO
   readByRecipientAt: DateTimeISO
   status: ChannelInvitationStatus!
   channel: Channel!
+  declineReason: DeclineChannelInvitationReason
   recipient: User!
   sender: User!
 }
@@ -834,6 +845,35 @@ enum ChannelInvitationStatus {
   accepted
   declined
   unset
+}
+
+type DeclineChannelInvitationReason {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  textId: String!
+  parentTextId: String
+  isParent: Boolean
+  optionType: OptionType!
+  value: String!
+  translatedValue: String
+  language: UiLanguage
+
+  """This attribute is only used by the MM2 synchronizer."""
+  mm2Id: String
+  mm2Value: String
+
+  """This attribute is only used by the MM2 synchronizer."""
+  syncedWithMm2At: DateTimeISO
+  childOptions: [Option!]
+  parentOption: [Option!]
 }
 
 type ChannelMessage {
@@ -1048,7 +1088,7 @@ type EndorsementWithTypes {
   updatedBy: ID
   deletedAt: DateTimeISO
   deletedBy: ID
-  objectId: String!
+  objectId: ID!
   modelType: ModelType!
   contentTagTypeTextId: String!
   childContentTagTypeTextId: String
@@ -1485,7 +1525,7 @@ input UserInput {
 }
 
 input ModelEventInput {
-  time: DateTimeISO! = "2023-10-23T20:22:09.216Z"
+  time: DateTimeISO! = "2023-10-31T06:32:51.571Z"
   modelEventType: ModelEventType! = info
   message: String! = ""
 }
@@ -1980,8 +2020,8 @@ type UserWithScore {
   parentGroupIds: [ID!]!
   externalGroupIds: [ID!]!
   groupMemberships: [IGroupMembership!]!
-  seeksHelp: Boolean!
-  offersHelp: Boolean!
+  seeksHelp: Boolean
+  offersHelp: Boolean
   birthYear: Int
   genderSelfDescribed: String
   ethnicity: String
@@ -2033,20 +2073,6 @@ type UserWithScore {
 
   """The score value that the matching engine assigned to this user."""
   score: Float
-}
-
-type Mm2Integration {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTimeISO!
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  fullSyncAt: DateTimeISO
 }
 
 type NlpConversation {
@@ -2269,6 +2295,7 @@ type Mutation {
   blockUserForMe(notes: String, reasonTextId: String, userId: String!): String!
   deleteUser(deletePhysically: Boolean!, userId: String!): String!
   endMySession(deviceUuid: String!): String!
+  reportUser(input: ReportUserInput!): ContentTag!
   startMySession(pushNotificationToken: String, deviceUuid: String!): String!
   unblockUser(userId: String!, blockedByUserId: String!): String!
   unblockUserForMe(userId: String!): String!
@@ -2287,7 +2314,7 @@ type Mutation {
   findAndUpdateAllMm2Users: Boolean!
   acceptChannelInvitation(channelInvitationId: String!): String!
   createChannelInvitation(input: ChannelInvitationInput!): ChannelInvitation!
-  declineChannelInvitation(channelInvitationId: String!): String!
+  declineChannelInvitation(reasonTextId: DeclineChannelInvitationReasonTextId!, channelInvitationId: String!): String!
   deleteChannelInvitation(deletePhysically: Boolean!, channelInvitationId: String!): String!
   dismissChannelInvitationFromInbox(channelInvitationId: String!): String!
   updateChannelInvitation(input: ChannelInvitationInput!): String!
@@ -2330,16 +2357,6 @@ type Mutation {
   createNotificationTemplate(notificationTemplateInput: NotificationTemplateInput!): NotificationTemplate!
   deleteNotificationTemplate(deletePhysically: Boolean!, notificationTemplateId: String!): String!
   updateNotificationTemplate(notificationTemplateInput: NotificationTemplateInput!): String!
-  clearAllSyncInfo(includeMm3: Boolean!, includeMm2: Boolean!): String!
-
-  """
-  Deletes all data that was imported from MM2. This field is only available in non-production environments.
-  """
-  deleteAllMm2DataInMm3: String!
-  createMm2Synchronization(input: Mm2SynchronizationInput!): Mm2Synchronization!
-  deleteMm2Synchronization(mm2SynchronizationId: String!): Mm2Synchronization!
-  findMm2SynchronizationById(mm2SynchronizationId: String!): Mm2Synchronization!
-  runMm2Synchronization(runAgain: Boolean, id: String!): Mm2Synchronization!
 
   """Label a platform conversation for the NLP learning process."""
   updateNlpConversation(input: NlpConversationInput!): String!
@@ -2404,6 +2421,49 @@ input UserBlockInput {
   reasonTextId: String! = ""
   notes: String! = ""
   adminNotes: String! = ""
+}
+
+type ContentTag {
+  id: ID!
+  adminNotes: String
+  events: [ModelEvent!]
+  metadata: BaseModelMetadata
+  createdAt: DateTimeISO!
+  createdBy: ID
+  updatedAt: DateTimeISO
+  updatedBy: ID
+  deletedAt: DateTimeISO
+  deletedBy: ID
+  objectId: ID!
+  modelType: ModelType!
+  contentTagTypeTextId: String!
+  childContentTagTypeTextId: String
+  messageText: String
+  approvedByRecipientAt: DateTimeISO
+  childContentTagType: ContentTagType
+  contentTagType: ContentTagType
+}
+
+input ReportUserInput {
+  userId: ID
+  reasonTextId: ReportUserReasonTextId
+  messageText: String
+  createdBy: ID
+}
+
+enum ReportUserReasonTextId {
+  notSet
+  badActor
+  fakePerson
+  harasses
+  impersonator
+  inappropriate
+  objectionableLanguage
+  promotesHate
+  sharesObjectionableContent
+  spammer
+  usesObjectionableLanguage
+  violatesRules
 }
 
 type ServiceRequest {
@@ -2533,6 +2593,7 @@ enum ServiceRequestType {
   graphQlMutationCreateUserRelationship
   graphQlMutationDeleteUser
   graphQlMutationEndMySession
+  graphQlMutationReportUser
   graphQlMutationSignInUser
   graphQlMutationSignMeOut
   graphQlMutationSignUpUser
@@ -2644,10 +2705,19 @@ input ChannelInvitationInput {
   channelName: String
   channelTopic: String
   messageText: String
+  declineReasonTextId: String
   dismissedFromInboxBySenderAt: DateTimeISO
   dismissedFromInboxByRecipientAt: DateTimeISO
   readByRecipientAt: DateTimeISO
   status: ChannelInvitationStatus
+}
+
+enum DeclineChannelInvitationReasonTextId {
+  notGoodFit
+  tooBusy
+  noReason
+  fakeProfile
+  inappropriate
 }
 
 input BgAddChannelMessageEventInput {
@@ -2681,27 +2751,6 @@ input ChannelParticipantInput {
   role: ChannelParticipantRole
 }
 
-type ContentTag {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTimeISO!
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  objectId: String!
-  modelType: ModelType!
-  contentTagTypeTextId: String!
-  childContentTagTypeTextId: String
-  messageText: String
-  approvedByRecipientAt: DateTimeISO
-  childContentTagType: ContentTagType
-  contentTagType: ContentTagType
-}
-
 input ContentTagInput {
   id: ID
   adminNotes: String
@@ -2713,7 +2762,7 @@ input ContentTagInput {
   updatedBy: ID
   deletedAt: DateTimeISO
   deletedBy: ID
-  objectId: String
+  objectId: ID
   modelType: ModelType = ContentTag
   contentTagTypeTextId: String
   childContentTagTypeTextId: String
@@ -2737,10 +2786,13 @@ input MenteesGroupMembershipInput {
   userId: ID
   roles: [GroupMembershipRole!]
 
-  """Must match expertise ids or textIds."""
+  """Must match expertise textIds."""
   soughtExpertisesTextIds: [String!]! = []
 
-  """Must match industry id or textId."""
+  """Must match expertise textIds."""
+  additionalSoughtExpertisesTextIds: [String!]! = []
+
+  """Must match industry textId."""
   industryTextId: String
   actionsTaken: String
 
@@ -2771,15 +2823,19 @@ input MentorsGroupMembershipInput {
   userId: ID
   roles: [GroupMembershipRole!]
 
-  """Must match expertise ids or textIds."""
+  """Must match expertise textIds."""
   expertisesTextIds: [String!]! = []
 
-  """Must match industry ids or textIds."""
+  """Must match expertise textIds."""
+  additionalExpertisesTextIds: [String!]! = []
+
+  """Must match industry textIds."""
   industriesTextIds: [String!]! = []
   helpICanOffer: String
   expectationsForMentees: String
   menteePreparationInstructions: String
   endorsements: Int
+  reasonsForMentoring: String
 }
 
 input NotificationInput {
@@ -2903,155 +2959,6 @@ input NotificationTemplateInput {
   sendPushNotification: Boolean
   sendSms: Boolean
   isCore: Boolean
-}
-
-type Mm2Synchronization {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTimeISO!
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  direction: Mm2SyncDirection!
-
-  """If synchronizing a single object, set this to its ID."""
-  objectId: String
-
-  """If synchronizing a single object, set this to its model type."""
-  mm2ModelType: Mm2ModelType
-  syncMode: Mm2SynchronizationMode!
-
-  """Set to true to run the synchronization right after creation."""
-  autorun: Boolean!
-
-  """
-  Will be updated with number of synchronized objects throughout the run.
-  """
-  progress: Int!
-  totalItemCount: Int!
-
-  """Number of objects to synchronize."""
-  limit: Int
-  result: Mm2SynchronizationResult!
-
-  """
-  Set to `info` or `error` to save Mm2SynchronizationResultItem objects to Mm2Synchronization.result. Using info on a large amount of items may expand the size of the MongoDB document beyond its limit, so only use it for local debugging. `none` disables saving any items to the synchronization object. Default: `error`
-  """
-  logLevel: Mm2SynchronizerLogLevel
-
-  """Will only include objects with a newer then specified updatedAt date."""
-  usersSinceUpdatedAt: String
-  previousSyncAt: DateTimeISO
-  startedAt: DateTimeISO
-  finishedAt: DateTimeISO
-
-  """
-  Time this object will be deleted from the DB. Default = 10 days after creation.
-  """
-  expiresAt: DateTimeISO
-}
-
-enum Mm2SyncDirection {
-  mm2ToMm3
-  mm3ToMm2
-}
-
-enum Mm2ModelType {
-  Community
-  Organization
-  Conversation
-  Message
-  User
-  MenteeExpertise
-  MenteeWebsite
-  MentorExpertise
-  Profile
-  SpokenLanguage
-}
-
-enum Mm2SynchronizationMode {
-  full
-  incremental
-  updated
-}
-
-type Mm2SynchronizationResult {
-  items: [Mm2SynchronizationResultItem!]!
-  createdCount: Int!
-  deletedCount: Int!
-  updatedCount: Int!
-  skippedCount: Int!
-  errorCount: Int!
-  error: String
-}
-
-type Mm2SynchronizationResultItem {
-  id: ID!
-  adminNotes: String
-  events: [ModelEvent!]
-  metadata: BaseModelMetadata
-  createdAt: DateTimeISO!
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  synchronizationId: ID!
-  modelType: ModelType
-  mm2ModelType: Mm2ModelType
-  objectId: String!
-  mm2ObjectId: String!
-  name: String
-  operation: SyncActionTaken!
-  error: String
-}
-
-enum SyncActionTaken {
-  created
-  updated
-  deleted
-  skipped
-  unset
-}
-
-enum Mm2SynchronizerLogLevel {
-  none
-  info
-  error
-}
-
-input Mm2SynchronizationInput {
-  id: ID
-  adminNotes: String
-  events: [ModelEventInput!]
-  metadata: BaseModelMetadataInput
-  createdAt: DateTimeISO
-  createdBy: ID
-  updatedAt: DateTimeISO
-  updatedBy: ID
-  deletedAt: DateTimeISO
-  deletedBy: ID
-  direction: Mm2SyncDirection! = mm2ToMm3
-  objectId: String
-  mm2ModelType: Mm2ModelType
-  syncMode: Mm2SynchronizationMode! = full
-  limit: Int
-  autorun: Boolean! = true
-  usersSinceUpdatedAt: String
-
-  """
-  Set to `info` or `error` to save Mm2SynchronizationResultItem objects to Mm2Synchronization.result. Using info on a large amount of items may expand the size of the MongoDB document beyond its limit, so only use it for local debugging. `none` disables saving any items to the synchronization object. Default: `error`
-  """
-  logLevel: Mm2SynchronizerLogLevel
-
-  """
-  Time this object will be deleted from the DB. Default = 10 days after creation.
-  """
-  expiresAt: DateTimeISO
 }
 
 input NlpConversationInput {

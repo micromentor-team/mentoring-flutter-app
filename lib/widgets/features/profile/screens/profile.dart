@@ -216,7 +216,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
           ProfileBasicInfo(
             isMyProfile: widget.isMyProfile,
             userType:
-                userData.offersHelp ? UserType.mentor : UserType.entrepreneur,
+                userData.offersHelp == true ? UserType.mentor : UserType.entrepreneur,
             fullName: userData.fullName!,
             avatarUrl: userData.avatarUrl,
             pronouns: userData.pronounsDisplay,
@@ -245,7 +245,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
             countryFrom: userData.countryOfOrigin?.translatedValue,
             languages: languages.toList(growable: false),
           ),
-          if (userData.seeksHelp && company != null) ...[
+          if (userData.seeksHelp == true && company != null) ...[
             const Divider(),
             AboutMyBusiness(
               companyInput: CompanyInput(
@@ -269,7 +269,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
               ),
             ),
           ],
-          if (userData.offersHelp) ...[
+          if (userData.offersHelp == true) ...[
             const Divider(),
             HowCanIHelpSection(
                 expertises: maybeMentorGroupMembership?.expertises

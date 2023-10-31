@@ -90,13 +90,13 @@ class _InviteToConnectScreenState extends State<InviteToConnectScreen>
           onReady: () {
             final UserQuickViewProfile user = snapshot.data!.response!;
             final UserType userType =
-                user.offersHelp ? UserType.mentor : UserType.entrepreneur;
+                user.offersHelp == true ? UserType.mentor : UserType.entrepreneur;
             final String location = [
               user.cityOfResidence,
               user.countryOfResidence?.translatedValue,
             ].nonNulls.join(_l10n.listSeparator);
             final List<ExpertiseChip> expertises;
-            if (user.offersHelp) {
+            if (user.offersHelp == true) {
               expertises = user.groupMemberships
                   .firstWhere((e) => e.groupIdent == GroupIdent.mentors.name)
                   .maybeWhen(

@@ -36,7 +36,7 @@ class _RecommendedSectionState extends State<RecommendedSection> {
     super.initState();
     _userProvider = Provider.of<UserProvider>(context, listen: false);
     _authenticatedUser = _userProvider.user!;
-    _isEntrepreneur = _authenticatedUser.seeksHelp;
+    _isEntrepreneur = _authenticatedUser.seeksHelp == true;
   }
 
   @override
@@ -245,8 +245,8 @@ class RecommendedUsersScroll extends StatelessWidget {
           fullName: e.fullName!,
           jobTitle: e.jobTitle,
           company: e.companies.firstOrNull?.name,
-          userType: e.seeksHelp ? UserType.entrepreneur : UserType.mentor,
-          expertises: e.seeksHelp
+          userType: e.seeksHelp == true ? UserType.entrepreneur : UserType.mentor,
+          expertises: e.seeksHelp == true
               ? maybeMenteeGroupMembership?.soughtExpertises
                       .map((e) => e.translatedValue!)
                       .toList() ??

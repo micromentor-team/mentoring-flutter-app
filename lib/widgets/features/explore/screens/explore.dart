@@ -149,9 +149,9 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
             info: ProfileQuickViewInfo(
               userId: user.id,
               userType:
-                  user.offersHelp ? UserType.mentor : UserType.entrepreneur,
+                  user.offersHelp == true ? UserType.mentor : UserType.entrepreneur,
               avatarUrl: user.avatarUrl,
-              fullName: user.fullName!,
+              fullName: user.fullName ?? '${user.firstName} ${user.lastName}',
               location: _location(user.cityOfResidence, user.regionOfResidence,
                   user.countryOfResidence?.translatedValue),
               company: user.companies.firstOrNull?.name,
@@ -192,7 +192,7 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
     ThemeData theme,
     AppLocalizations l10n,
   ) {
-    final bool isEntrepreneur = _userProvider.user!.seeksHelp;
+    final bool isEntrepreneur = _userProvider.user!.seeksHelp == true;
     _showTips = false;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -325,7 +325,7 @@ class _ExploreScreenState extends State<ExploreScreen>
             child: ListView(
               children: [
                 ExploreFilter(
-                  userType: _userProvider.user!.seeksHelp
+                  userType: _userProvider.user!.seeksHelp == true
                       ? UserType.mentor
                       : UserType.entrepreneur,
                 ),
@@ -334,7 +334,7 @@ class _ExploreScreenState extends State<ExploreScreen>
                     if (filters.selectedUserType == null) {
                       // Set the default user type to be the opposite type
                       filters.setAdvancedFilters(
-                        selectedUserType: _userProvider.user!.seeksHelp
+                        selectedUserType: _userProvider.user!.seeksHelp == true
                             ? UserType.mentor
                             : UserType.entrepreneur,
                       );

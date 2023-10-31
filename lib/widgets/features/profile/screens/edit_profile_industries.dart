@@ -39,7 +39,7 @@ class _EditIndustriesScreenState extends State<EditIndustriesScreen>
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
     _userProvider = Provider.of<UserProvider>(context, listen: false);
-    _isEntrepreneur = _userProvider.user!.seeksHelp;
+    _isEntrepreneur = _userProvider.user!.seeksHelp == true;
     _industryChips = _contentProvider.industryOptions!
         .map(
           (e) => SelectChip(

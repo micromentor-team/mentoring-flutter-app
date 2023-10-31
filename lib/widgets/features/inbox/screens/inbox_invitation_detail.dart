@@ -65,19 +65,19 @@ class _InboxInvitationDetailScreenState
   }
 
   Widget _createSenderCard(ChannelInvitationById invitation) {
-    final maybeMentorsGroupMembership = invitation.sender.offersHelp
+    final maybeMentorsGroupMembership = invitation.sender.offersHelp == true
         ? invitation.sender.groupMemberships
             .where((element) => element.groupIdent == GroupIdent.mentors.name)
             .firstOrNull
             ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null)
         : null;
-    final maybeMenteesGroupMembership = invitation.sender.seeksHelp
+    final maybeMenteesGroupMembership = invitation.sender.seeksHelp == true
         ? invitation.sender.groupMemberships
             .where((element) => element.groupIdent == GroupIdent.mentees.name)
             .firstOrNull
             ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null)
         : null;
-    final List<ExpertiseChip> skills = invitation.sender.offersHelp
+    final List<ExpertiseChip> skills = invitation.sender.offersHelp == true
         ? maybeMentorsGroupMembership?.expertises
                 .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
@@ -89,7 +89,7 @@ class _InboxInvitationDetailScreenState
     return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
         userId: invitation.sender.id,
-        userType: invitation.sender.offersHelp
+        userType: invitation.sender.offersHelp == true
             ? UserType.mentor
             : UserType.entrepreneur,
         avatarUrl: invitation.sender.avatarUrl,
@@ -98,7 +98,7 @@ class _InboxInvitationDetailScreenState
             _l10n.defaultValueLocation,
         company: invitation.sender.companies.firstOrNull?.name,
         companyRole: invitation.sender.jobTitle,
-        endorsements: invitation.sender.offersHelp
+        endorsements: invitation.sender.offersHelp == true
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
         expertises: skills,
@@ -107,19 +107,19 @@ class _InboxInvitationDetailScreenState
   }
 
   Widget _createRecipientCard(ChannelInvitationById invitation) {
-    final maybeMentorsGroupMembership = invitation.recipient.offersHelp
+    final maybeMentorsGroupMembership = invitation.recipient.offersHelp == true
         ? invitation.recipient.groupMemberships
             .where((element) => element.groupIdent == GroupIdent.mentors.name)
             .firstOrNull
             ?.maybeWhen(mentorsGroupMembership: (g) => g, orElse: () => null)
         : null;
-    final maybeMenteesGroupMembership = invitation.recipient.seeksHelp
+    final maybeMenteesGroupMembership = invitation.recipient.seeksHelp == true
         ? invitation.recipient.groupMemberships
             .where((element) => element.groupIdent == GroupIdent.mentees.name)
             .firstOrNull
             ?.maybeWhen(menteesGroupMembership: (g) => g, orElse: () => null)
         : null;
-    final List<ExpertiseChip> skills = invitation.recipient.offersHelp
+    final List<ExpertiseChip> skills = invitation.recipient.offersHelp == true
         ? maybeMentorsGroupMembership?.expertises
                 .map((e) => ExpertiseChip(expertise: e.translatedValue!))
                 .toList() ??
@@ -131,7 +131,7 @@ class _InboxInvitationDetailScreenState
     return createProfileCardFromInfo(
       info: ProfileQuickViewInfo(
         userId: invitation.recipient.id,
-        userType: invitation.recipient.offersHelp
+        userType: invitation.recipient.offersHelp == true
             ? UserType.mentor
             : UserType.entrepreneur,
         avatarUrl: invitation.recipient.avatarUrl,
@@ -140,7 +140,7 @@ class _InboxInvitationDetailScreenState
             _l10n.defaultValueLocation,
         company: invitation.recipient.companies.firstOrNull?.name,
         companyRole: invitation.recipient.jobTitle,
-        endorsements: invitation.recipient.offersHelp
+        endorsements: invitation.recipient.offersHelp == true
             ? maybeMentorsGroupMembership?.endorsements ?? 0
             : 0,
         expertises: skills,

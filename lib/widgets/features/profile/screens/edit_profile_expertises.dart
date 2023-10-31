@@ -41,7 +41,7 @@ class _EditExpertisesScreenState extends State<EditExpertisesScreen>
     super.initState();
     _contentProvider = Provider.of<ContentProvider>(context, listen: false);
     _userProvider = Provider.of<UserProvider>(context, listen: false);
-    _isEntrepreneur = _userProvider.user!.seeksHelp;
+    _isEntrepreneur = _userProvider.user!.seeksHelp == true;
     _expertiseChips = _contentProvider.expertiseOptions!
         .map(
           (e) => SelectChip(
