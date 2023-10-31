@@ -18,7 +18,7 @@ class SignupReasonScreen extends StatefulWidget {
 class _SignupReasonScreenState extends State<SignupReasonScreen> {
   late final UserRegistrationModel _registrationModel;
   late final bool _isEntrepreneur;
-  String? _text;
+  late final TextEditingController _reasonController;
 
   @override
   void initState() {
@@ -29,6 +29,17 @@ class _SignupReasonScreenState extends State<SignupReasonScreen> {
     );
     _isEntrepreneur =
         _registrationModel.updateUserInput.userType == UserType.entrepreneur;
+    _reasonController = TextEditingController(
+      text: _isEntrepreneur
+          ? _registrationModel.updateUserInput.menteeReasonForStartingBusiness
+          : _registrationModel.updateUserInput.mentorReasonForMentoring,
+    );
+  }
+
+  @override
+  void dispose() {
+    _reasonController.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,19 +60,17 @@ class _SignupReasonScreenState extends State<SignupReasonScreen> {
             : l10n.signupReasonMentorInputHint,
         maxLength: 1000,
         maxLines: 6,
-        onChanged: (value) {
-          setState(() {
-            _text = value;
-          });
-        },
+        textController: _reasonController,
+        onChanged: (_) => setState(() {}),
       ),
-      isNextEnabled: _text?.isNotEmpty ?? false,
+      isNextEnabled: _reasonController.text.isNotEmpty,
       onNextPressed: () {
         if (_isEntrepreneur) {
           _registrationModel.updateUserInput.menteeReasonForStartingBusiness =
-              _text;
+              _reasonController.text;
         } else {
-          _registrationModel.updateUserInput.mentorReasonForMentoring = _text;
+          _registrationModel.updateUserInput.mentorReasonForMentoring =
+              _reasonController.text;
         }
         context.push(Routes.signupCompleted.path);
       },

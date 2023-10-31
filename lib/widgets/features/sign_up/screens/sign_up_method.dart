@@ -2,14 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mm_flutter_app/models/user_registration_model.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../shared/social_sign_in_button.dart';
 import '../components/sign_up_template.dart';
 
-class SignupMethodScreen extends StatelessWidget {
+class SignupMethodScreen extends StatefulWidget {
   const SignupMethodScreen({super.key});
+
+  @override
+  State<SignupMethodScreen> createState() => _SignupMethodScreenState();
+}
+
+class _SignupMethodScreenState extends State<SignupMethodScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<UserRegistrationModel>(
+      context,
+      listen: false,
+    ).clear();
+  }
 
   @override
   Widget build(BuildContext context) {

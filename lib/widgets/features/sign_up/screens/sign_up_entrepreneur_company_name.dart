@@ -19,7 +19,7 @@ class SignupEntrepreneurCompanyNameScreen extends StatefulWidget {
 class _SignupEntrepreneurCompanyNameScreenState
     extends State<SignupEntrepreneurCompanyNameScreen> {
   late final UserRegistrationModel _registrationModel;
-  String? _businessName;
+  late final TextEditingController _businessNameController;
 
   @override
   void initState() {
@@ -28,6 +28,15 @@ class _SignupEntrepreneurCompanyNameScreenState
       context,
       listen: false,
     );
+    _businessNameController = TextEditingController(
+      text: _registrationModel.updateUserInput.companyName,
+    );
+  }
+
+  @override
+  void dispose() {
+    _businessNameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,16 +52,14 @@ class _SignupEntrepreneurCompanyNameScreenState
           label: l10n.signupBusinessNameInputLabel,
           maxLength: 50,
           hint: l10n.signupBusinessNameInputHint,
-          onChanged: (value) {
-            setState(() {
-              _businessName = value;
-            });
-          },
+          textController: _businessNameController,
+          onChanged: (_) => setState(() {}),
         ),
       ),
-      isNextEnabled: _businessName?.isNotEmpty ?? false,
+      isNextEnabled: _businessNameController.text.isNotEmpty,
       onNextPressed: () {
-        _registrationModel.updateUserInput.companyName = _businessName;
+        _registrationModel.updateUserInput.companyName =
+            _businessNameController.text;
         context.push(Routes.signupReason.path);
       },
     );

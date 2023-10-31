@@ -20,12 +20,12 @@ class SignupCredentialsScreen extends StatefulWidget {
 class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late final UserRegistrationModel _registrationModel;
-  String? _firstName;
-  String? _lastName;
-  String? _email;
-  String? _password;
-  String? _confirmPassword;
-  bool _enableUpdatesAndNews = false;
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _lastNameController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  late final TextEditingController _confirmPasswordController;
+  late bool _enableUpdatesAndNews;
 
   @override
   void initState() {
@@ -34,7 +34,33 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
       context,
       listen: false,
     );
-    _registrationModel.clear();
+    _firstNameController = TextEditingController(
+      text: _registrationModel.updateUserInput.firstName,
+    );
+    _lastNameController = TextEditingController(
+      text: _registrationModel.updateUserInput.lastName,
+    );
+    _emailController = TextEditingController(
+      text: _registrationModel.signUpUserInput.email,
+    );
+    _passwordController = TextEditingController(
+      text: _registrationModel.signUpUserInput.password,
+    );
+    _confirmPasswordController = TextEditingController(
+      text: _registrationModel.signUpUserInput.password,
+    );
+    _enableUpdatesAndNews =
+        _registrationModel.userPreferencesInput.enableUpdatesAndNews ?? false;
+  }
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -55,11 +81,8 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
                   child: TextFormFieldWidget(
                     label: l10n.signupCredentialsNameFirstInputLabel,
                     hint: l10n.signupCredentialsNameFirstInputHint,
-                    onChanged: (value) {
-                      setState(() {
-                        _firstName = value;
-                      });
-                    },
+                    textController: _firstNameController,
+                    onChanged: (_) => setState(() {}),
                   ),
                 ),
                 const SizedBox(width: Insets.paddingMedium),
@@ -67,11 +90,8 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
                   child: TextFormFieldWidget(
                     label: l10n.signupCredentialsNameLastInputLabel,
                     hint: l10n.signupCredentialsNameLastInputHint,
-                    onChanged: (value) {
-                      setState(() {
-                        _lastName = value;
-                      });
-                    },
+                    textController: _lastNameController,
+                    onChanged: (_) => setState(() {}),
                   ),
                 ),
               ],
@@ -80,11 +100,8 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
             TextFormFieldWidget(
               label: l10n.signupCredentialsEmailInputLabel,
               hint: l10n.signupCredentialsEmailInputHint,
-              onChanged: (value) {
-                setState(() {
-                  _email = value;
-                });
-              },
+              textController: _emailController,
+              onChanged: (_) => setState(() {}),
               validator: (value) {
                 bool validEmail = EmailValidator.validate(value!);
                 if (validEmail != true) {
@@ -100,32 +117,26 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
                 if (val == null) {
                   return 'Empty';
                 }
-                if (val != _confirmPassword) {
+                if (val != _confirmPasswordController.text) {
                   return 'Not Match';
                 }
                 return null;
               },
               label: l10n.signupCredentialsPasswordInputLabel,
-              onChanged: (value) {
-                setState(() {
-                  _password = value;
-                });
-              },
+              textController: _passwordController,
+              onChanged: (_) => setState(() {}),
             ),
             const SizedBox(height: Insets.paddingMedium),
             TextFormFieldWidget(
               isPassword: true,
               label: l10n.signupCredentialsPasswordConfirmInputLabel,
-              onChanged: (value) {
-                setState(() {
-                  _confirmPassword = value;
-                });
-              },
+              textController: _confirmPasswordController,
+              onChanged: (_) => setState(() {}),
               validator: (val) {
                 if (val == null) {
                   return 'Empty';
                 }
-                if (val != _password) {
+                if (val != _passwordController.text) {
                   return 'Not Match';
                 }
                 return null;
@@ -149,19 +160,20 @@ class _SignupCredentialsScreenState extends State<SignupCredentialsScreen> {
           ],
         ),
       ),
-      isNextEnabled: (_firstName?.isNotEmpty ?? false) &&
-          (_lastName?.isNotEmpty ?? false) &&
-          (_email?.isNotEmpty ?? false) &&
-          (_password?.isNotEmpty ?? false) &&
-          (_confirmPassword?.isNotEmpty ?? false),
+      isNextEnabled: _firstNameController.text.isNotEmpty &&
+          _lastNameController.text.isNotEmpty &&
+          _emailController.text.isNotEmpty &&
+          _passwordController.text.isNotEmpty &&
+          _confirmPasswordController.text.isNotEmpty,
       onNextPressed: () async {
         if (!_formKey.currentState!.validate()) {
           return;
         }
-        _registrationModel.signUpUserInput.email = _email;
-        _registrationModel.signUpUserInput.password = _password;
-        _registrationModel.updateUserInput.firstName = _firstName;
-        _registrationModel.updateUserInput.lastName = _lastName;
+        _registrationModel.signUpUserInput.email = _emailController.text;
+        _registrationModel.signUpUserInput.password = _passwordController.text;
+        _registrationModel.updateUserInput.firstName =
+            _firstNameController.text;
+        _registrationModel.updateUserInput.lastName = _lastNameController.text;
         _registrationModel.userPreferencesInput.enableUpdatesAndNews =
             _enableUpdatesAndNews;
         router.push(Routes.signupPhone.path);

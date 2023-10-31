@@ -21,6 +21,7 @@ class _SignupLanguageScreenState extends State<SignupLanguageScreen> {
   final _preferredLanguagesController = TextfieldTagsController();
   late final ContentProvider _contentProvider;
   late final UserRegistrationModel _registrationModel;
+  final Set<String> _initialSelection = {};
   bool _selectedPreferredLanguage = false;
 
   @override
@@ -31,6 +32,14 @@ class _SignupLanguageScreenState extends State<SignupLanguageScreen> {
       context,
       listen: false,
     );
+    if (_registrationModel.updateUserInput.preferredLanguageTextId != null) {
+      _initialSelection.add(_contentProvider.languageOptions!
+          .firstWhere((e) =>
+              e.textId ==
+              _registrationModel.updateUserInput.preferredLanguageTextId!)
+          .translatedValue!);
+      _selectedPreferredLanguage = true;
+    }
     _preferredLanguagesController.addListener(() {
       setState(() {
         _selectedPreferredLanguage = _preferredLanguagesController.hasTags;
@@ -60,6 +69,7 @@ class _SignupLanguageScreenState extends State<SignupLanguageScreen> {
             label: l10n.signupLanguageInputLabel,
             hint: l10n.signupLanguageInputHint,
             controller: _preferredLanguagesController,
+            selectedOptions: _initialSelection,
             options: _contentProvider.languageOptions!
                 .map((e) => e.translatedValue!)
                 .toList(),
