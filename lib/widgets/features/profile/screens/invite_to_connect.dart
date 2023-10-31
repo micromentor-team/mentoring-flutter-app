@@ -89,8 +89,9 @@ class _InviteToConnectScreenState extends State<InviteToConnectScreen>
           snapshot: snapshot,
           onReady: () {
             final UserQuickViewProfile user = snapshot.data!.response!;
-            final UserType userType =
-                user.offersHelp == true ? UserType.mentor : UserType.entrepreneur;
+            final UserType userType = user.offersHelp == true
+                ? UserType.mentor
+                : UserType.entrepreneur;
             final String location = [
               user.cityOfResidence,
               user.countryOfResidence?.translatedValue,

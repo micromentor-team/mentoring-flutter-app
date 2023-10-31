@@ -215,8 +215,9 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
           ),
           ProfileBasicInfo(
             isMyProfile: widget.isMyProfile,
-            userType:
-                userData.offersHelp == true ? UserType.mentor : UserType.entrepreneur,
+            userType: userData.offersHelp == true
+                ? UserType.mentor
+                : UserType.entrepreneur,
             fullName: userData.fullName!,
             avatarUrl: userData.avatarUrl,
             pronouns: userData.pronounsDisplay,

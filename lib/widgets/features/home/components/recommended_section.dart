@@ -245,7 +245,8 @@ class RecommendedUsersScroll extends StatelessWidget {
           fullName: e.fullName!,
           jobTitle: e.jobTitle,
           company: e.companies.firstOrNull?.name,
-          userType: e.seeksHelp == true ? UserType.entrepreneur : UserType.mentor,
+          userType:
+              e.seeksHelp == true ? UserType.entrepreneur : UserType.mentor,
           expertises: e.seeksHelp == true
               ? maybeMenteeGroupMembership?.soughtExpertises
                       .map((e) => e.translatedValue!)

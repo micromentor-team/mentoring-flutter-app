@@ -148,8 +148,9 @@ class _ExploreCardScrollState extends State<ExploreCardScroll> {
           (user) => createProfileCardFromInfo(
             info: ProfileQuickViewInfo(
               userId: user.id,
-              userType:
-                  user.offersHelp == true ? UserType.mentor : UserType.entrepreneur,
+              userType: user.offersHelp == true
+                  ? UserType.mentor
+                  : UserType.entrepreneur,
               avatarUrl: user.avatarUrl,
               fullName: user.fullName ?? '${user.firstName} ${user.lastName}',
               location: _location(user.cityOfResidence, user.regionOfResidence,
