@@ -50,71 +50,76 @@ class _RadioButtonCardsState extends State<RadioButtonCards> {
       }
 
       cardWidgets.add(
-        Container(
-          decoration: BoxDecoration(
-            color: startingColor,
-            borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(Insets.paddingSmall),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Radio<int>(
-                    value: i,
-                    groupValue: _character,
-                    onChanged: (int? value) {
-                      setState(() {
-                        _character = value!;
-                        if (widget.onSelectedCardChanged != null) {
-                          widget.onSelectedCardChanged!(_character);
-                        }
-                      });
-                    },
+        InkWell(
+          onTap: () => setState(() => _character = i),
+          child: Container(
+            decoration: BoxDecoration(
+              color: startingColor,
+              borderRadius: BorderRadius.circular(Radii.roundedRectRadiusSmall),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(Insets.paddingSmall),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Radio<int>(
+                      value: i,
+                      groupValue: _character,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _character = value!;
+                          if (widget.onSelectedCardChanged != null) {
+                            widget.onSelectedCardChanged!(_character);
+                          }
+                        });
+                      },
+                    ),
                   ),
-                ),
-                if (widget.imageAssetName[i] != null)
-                  SizedBox(
-                    width: 64,
-                    height: 104,
-                    child: widget.imageAssetName[i],
-                  ),
-                if (widget.imageAssetName[i] != null) const SizedBox(width: 16),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: Insets.paddingSmall,
-                            bottom: Insets.paddingSmall),
-                        child: Row(
-                          children: [
-                            //the code snippet below checks if the titleIcon is null, and if it is not null, presents it
-                            if (widget.titleIcon[i] != null)
-                              widget.titleIcon[i]!,
-                            if (widget.titleIcon[i] != null)
-                              const SizedBox(
-                                width: Insets.paddingExtraSmall,
+                  if (widget.imageAssetName[i] != null)
+                    SizedBox(
+                      width: 64,
+                      height: 104,
+                      child: widget.imageAssetName[i],
+                    ),
+                  if (widget.imageAssetName[i] != null)
+                    const SizedBox(width: 16),
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: Insets.paddingSmall,
+                          ),
+                          child: Row(
+                            children: [
+                              //the code snippet below checks if the titleIcon is null, and if it is not null, presents it
+                              if (widget.titleIcon[i] != null)
+                                widget.titleIcon[i]!,
+                              if (widget.titleIcon[i] != null)
+                                const SizedBox(
+                                  width: Insets.paddingExtraSmall,
+                                ),
+                              Text(
+                                widget.title[i],
+                                style: theme.textTheme.titleMedium,
                               ),
-                            Text(
-                              widget.title[i],
-                              style: theme.textTheme.titleMedium,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        widget.subtitle[i],
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                        Text(
+                          widget.subtitle[i],
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
