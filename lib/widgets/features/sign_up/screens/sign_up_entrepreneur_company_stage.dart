@@ -19,7 +19,13 @@ class SignupEntrepreneurCompanyStageScreen extends StatefulWidget {
 class _SignupEntrepreneurCompanyStageScreenState
     extends State<SignupEntrepreneurCompanyStageScreen> {
   late final UserRegistrationModel _registrationModel;
-  int _selectedStageIndex = 0;
+  final List<String> _companyStages = [
+    CompanyStageTextId.idea.name,
+    CompanyStageTextId.operational.name,
+    CompanyStageTextId.earning.name,
+    CompanyStageTextId.profitable.name,
+  ];
+  late int _selectedStageIndex;
 
   @override
   void initState() {
@@ -28,6 +34,12 @@ class _SignupEntrepreneurCompanyStageScreenState
       context,
       listen: false,
     );
+    _selectedStageIndex =
+        _registrationModel.updateUserInput.companyStageTextId != null
+            ? _companyStages.indexOf(
+                _registrationModel.updateUserInput.companyStageTextId!,
+              )
+            : 0;
   }
 
   @override
@@ -60,31 +72,13 @@ class _SignupEntrepreneurCompanyStageScreenState
             ],
             imageAssetName: const [null, null, null, null],
             onSelectedCardChanged: (index) => _selectedStageIndex = index,
+            initialSelection: _selectedStageIndex,
           ),
         ],
       ),
       onNextPressed: () {
-        switch (_selectedStageIndex) {
-          case 0:
-            _registrationModel.updateUserInput.companyStageTextId =
-                CompanyStageTextId.idea.name;
-            break;
-          case 1:
-            _registrationModel.updateUserInput.companyStageTextId =
-                CompanyStageTextId.operational.name;
-            break;
-          case 2:
-            _registrationModel.updateUserInput.companyStageTextId =
-                CompanyStageTextId.earning.name;
-            break;
-          case 3:
-            _registrationModel.updateUserInput.companyStageTextId =
-                CompanyStageTextId.profitable.name;
-            break;
-          default:
-            _registrationModel.updateUserInput.companyStageTextId = null;
-            break;
-        }
+        _registrationModel.updateUserInput.companyStageTextId =
+            _companyStages[_selectedStageIndex];
         context.push(Routes.signupEntrepreneurCompanyName.path);
       },
     );

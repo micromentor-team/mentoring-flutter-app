@@ -21,7 +21,7 @@ class SignupPhoneScreen extends StatefulWidget {
 class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
   final _formKey = GlobalKey<FormState>();
   late final UserRegistrationModel _registrationModel;
-  String? _phoneNumber;
+  late final TextEditingController _phoneNumberController;
   String? _selectedCountryCode = _countryCode[0];
 
   @override
@@ -31,6 +31,16 @@ class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
       context,
       listen: false,
     );
+    _phoneNumberController = TextEditingController(
+      text: _registrationModel.updateUserInput.phoneNumber,
+    );
+    //TODO: Implement Country code dropdown and initialize here
+  }
+
+  @override
+  void dispose() {
+    _phoneNumberController.dispose();
+    super.dispose();
   }
 
   @override
@@ -96,21 +106,19 @@ class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
                 ],
                 label: l10n.signupPhoneInputLabel,
                 hint: l10n.signupPhoneInputHint,
-                onChanged: (value) {
-                  setState(() {
-                    _phoneNumber = value;
-                  });
-                },
+                textController: _phoneNumberController,
+                onChanged: (_) => setState(() {}),
               ),
             ),
           ],
         ),
       ),
-      isNextEnabled: _phoneNumber?.isNotEmpty ?? false,
+      isNextEnabled: _phoneNumberController.text.isNotEmpty,
       onNextPressed: () {
         if (_formKey.currentState!.validate()) {
           _registrationModel.updateUserInput.phoneNumber =
-              '$_selectedCountryCode $_phoneNumber';
+              _phoneNumberController.value.text;
+          //TODO: Add country code
           context.push(Routes.signupGender.path);
         }
       },

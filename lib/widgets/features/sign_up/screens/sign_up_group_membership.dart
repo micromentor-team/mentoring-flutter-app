@@ -19,7 +19,11 @@ class SignupGroupMembershipScreen extends StatefulWidget {
 class _SignupGroupMembershipScreenState
     extends State<SignupGroupMembershipScreen> {
   late final UserRegistrationModel _registrationModel;
-  int? selectedNumber = 0;
+  final List<UserType> _groupMemberships = [
+    UserType.entrepreneur,
+    UserType.mentor,
+  ];
+  late int _selectedIndex;
 
   @override
   void initState() {
@@ -28,6 +32,10 @@ class _SignupGroupMembershipScreenState
       context,
       listen: false,
     );
+    _selectedIndex = _registrationModel.updateUserInput.userType != null
+        ? _groupMemberships
+            .indexOf(_registrationModel.updateUserInput.userType!)
+        : 0;
   }
 
   @override
@@ -53,17 +61,18 @@ class _SignupGroupMembershipScreenState
               Image(image: AssetImage(Assets.mentorIcon))
             ],
             titleIcon: const [null, null],
+            initialSelection: _selectedIndex,
             onSelectedCardChanged: (value) =>
-                setState(() => selectedNumber = value),
+                setState(() => _selectedIndex = value),
           ),
         ],
       ),
       onNextPressed: () {
-        if (selectedNumber == 0) {
-          _registrationModel.updateUserInput.userType = UserType.entrepreneur;
+        _registrationModel.updateUserInput.userType =
+            _groupMemberships[_selectedIndex];
+        if (_groupMemberships[_selectedIndex] == UserType.entrepreneur) {
           _registrationModel.updateUserInput.clearMentorFields();
         } else {
-          _registrationModel.updateUserInput.userType = UserType.mentor;
           _registrationModel.updateUserInput.clearEntrepreneurFields();
         }
         context.push(Routes.signupExpertises.path);

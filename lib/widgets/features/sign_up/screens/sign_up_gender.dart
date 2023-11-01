@@ -30,6 +30,14 @@ class _SignupGenderScreenState extends State<SignupGenderScreen> {
       context,
       listen: false,
     );
+    if (_registrationModel.updateUserInput.genderTextId != null) {
+      final selectedGender = _contentProvider.presetGenderOptions
+          ?.where((e) =>
+              e.textId == _registrationModel.updateUserInput.genderTextId)
+          .firstOrNull;
+      _genderValue = selectedGender?.translatedValue;
+      _genderTextId = selectedGender?.textId;
+    }
   }
 
   Widget _createGenderOption(ThemeData theme, String value, String textId) {

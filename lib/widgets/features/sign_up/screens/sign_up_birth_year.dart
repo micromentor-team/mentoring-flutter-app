@@ -19,7 +19,7 @@ class SignupBirthYearScreen extends StatefulWidget {
 class _SignupBirthYearScreenState extends State<SignupBirthYearScreen> {
   final _formKey = GlobalKey<FormState>();
   late final UserRegistrationModel _registrationModel;
-  String? _year;
+  late final TextEditingController _yearController;
 
   @override
   void initState() {
@@ -28,6 +28,15 @@ class _SignupBirthYearScreenState extends State<SignupBirthYearScreen> {
       context,
       listen: false,
     );
+    _yearController = TextEditingController(
+      text: _registrationModel.updateUserInput.birthYear?.toString(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _yearController.dispose();
+    super.dispose();
   }
 
   @override
@@ -53,19 +62,18 @@ class _SignupBirthYearScreenState extends State<SignupBirthYearScreen> {
                 icon: const Icon(Icons.today),
                 onPressed: () {},
               ),
-              onChanged: (value) {
-                setState(() {
-                  _year = value;
-                });
-              },
+              textController: _yearController,
+              onChanged: (_) => setState(() {}),
             ),
           ],
         ),
       ),
-      isNextEnabled: _year?.isNotEmpty ?? false,
+      isNextEnabled: _yearController.text.isNotEmpty,
       onNextPressed: () {
         if (_formKey.currentState!.validate()) {
-          _registrationModel.updateUserInput.birthYear = int.parse(_year!);
+          _registrationModel.updateUserInput.birthYear = int.parse(
+            _yearController.text,
+          );
           context.push(Routes.signupLocation.path);
         }
       },

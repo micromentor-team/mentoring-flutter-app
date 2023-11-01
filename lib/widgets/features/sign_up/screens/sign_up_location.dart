@@ -17,7 +17,7 @@ class SignupLocationScreen extends StatefulWidget {
 
 class _SignupLocationScreenState extends State<SignupLocationScreen> {
   late final UserRegistrationModel _registrationModel;
-  String? _location;
+  late final TextEditingController _locationController;
 
   @override
   void initState() {
@@ -26,6 +26,16 @@ class _SignupLocationScreenState extends State<SignupLocationScreen> {
       context,
       listen: false,
     );
+    // TODO - also set region and country
+    _locationController = TextEditingController(
+      text: _registrationModel.updateUserInput.cityOfResidence,
+    );
+  }
+
+  @override
+  void dispose() {
+    _locationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -41,15 +51,15 @@ class _SignupLocationScreenState extends State<SignupLocationScreen> {
           prefixIcon: const Icon(Icons.search),
           label: l10n.signupLocationInputLabel,
           hint: l10n.signupLocationInputHint,
-          onChanged: (value) => setState(() {
-            _location = value;
-          }),
+          textController: _locationController,
+          onChanged: (_) => setState(() {}),
         ),
       ),
-      isNextEnabled: _location?.isNotEmpty ?? false,
+      isNextEnabled: _locationController.text.isNotEmpty,
       onNextPressed: () {
         // TODO - also set region and country
-        _registrationModel.updateUserInput.cityOfResidence = _location;
+        _registrationModel.updateUserInput.cityOfResidence =
+            _locationController.text;
         context.push(Routes.signupLanguage.path);
       },
     );

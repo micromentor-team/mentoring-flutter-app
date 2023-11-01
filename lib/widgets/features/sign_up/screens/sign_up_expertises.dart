@@ -23,7 +23,8 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
   late final bool _isEntrepreneur;
   final int maxSelections = 3;
 
-  List<SelectChip> _selectedChips = [];
+  late List<SelectChip> _selectedChips;
+  late final List<SelectChip> _initialSelection;
 
   @override
   void initState() {
@@ -44,6 +45,25 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
         )
         .toList();
     _expertiseChips.sort((a, b) => a.chipName.compareTo(b.chipName));
+    // Initialize with pre-selected values
+    if (_isEntrepreneur) {
+      _initialSelection = _registrationModel
+              .updateUserInput.menteeSoughtExpertisesTextIds
+              ?.map((e) =>
+                  _expertiseChips.where((c) => c.textId == e).firstOrNull)
+              .nonNulls
+              .toList() ??
+          [];
+    } else {
+      _initialSelection = _registrationModel
+              .updateUserInput.mentorExpertisesTextIds
+              ?.map((e) =>
+                  _expertiseChips.where((c) => c.textId == e).firstOrNull)
+              .nonNulls
+              .toList() ??
+          [];
+    }
+    _selectedChips = _initialSelection;
   }
 
   @override
@@ -60,6 +80,7 @@ class _SignupExpertisesScreenState extends State<SignupExpertisesScreen> {
       body: CreateMultiSelectChips(
         chips: _expertiseChips,
         maxSelection: maxSelections,
+        initialSelection: _initialSelection,
         onSelectedChipsChanged: (chips) =>
             setState(() => _selectedChips = chips),
       ),

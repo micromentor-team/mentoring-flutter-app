@@ -142,7 +142,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupCredentialsScreen(),
             );
           },
@@ -153,7 +153,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupGroupMembershipScreen(),
             );
           },
@@ -164,7 +164,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupEntrepreneurCompanyStageScreen(),
             );
           },
@@ -175,7 +175,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupExpertisesScreen(),
             );
           },
@@ -186,7 +186,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupEntrepreneurCompanyNameScreen(),
             );
           },
@@ -197,7 +197,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupReasonScreen(),
             );
           },
@@ -208,7 +208,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupCompletedScreen(),
             );
           },
@@ -219,7 +219,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupMentorRoleScreen(),
             );
           },
@@ -230,7 +230,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupPhoneScreen(),
             );
           },
@@ -241,7 +241,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupBirthYearScreen(),
             );
           },
@@ -252,7 +252,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupGenderScreen(),
             );
           },
@@ -263,7 +263,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupLocationScreen(),
             );
           },
@@ -274,7 +274,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return MaterialPage(
               key: state.pageKey,
-              maintainState: false,
+              maintainState: true,
               child: const SignupLanguageScreen(),
             );
           },

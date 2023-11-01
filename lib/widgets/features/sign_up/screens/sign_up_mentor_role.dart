@@ -17,8 +17,8 @@ class SignupMentorRoleScreen extends StatefulWidget {
 
 class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
   late final UserRegistrationModel _registrationModel;
-  String? _jobTitle;
-  String? _companyName;
+  late final TextEditingController _jobTitleController;
+  late final TextEditingController _companyNameController;
 
   @override
   void initState() {
@@ -27,6 +27,19 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
       context,
       listen: false,
     );
+    _jobTitleController = TextEditingController(
+      text: _registrationModel.updateUserInput.experienceJobTitle,
+    );
+    _companyNameController = TextEditingController(
+      text: _registrationModel.updateUserInput.experienceBusinessName,
+    );
+  }
+
+  @override
+  void dispose() {
+    _jobTitleController.dispose();
+    _companyNameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,11 +56,8 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
             child: TextFormFieldWidget(
               label: l10n.signupRoleJobTitleInputLabel,
               hint: l10n.signupRoleJobTitleInputHint,
-              onChanged: (value) {
-                setState(() {
-                  _jobTitle = value;
-                });
-              },
+              textController: _jobTitleController,
+              onChanged: (_) => setState(() {}),
             ),
           ),
           const SizedBox(
@@ -57,21 +67,19 @@ class _SignupMentorRoleScreenState extends State<SignupMentorRoleScreen> {
             child: TextFormFieldWidget(
               label: l10n.signupRoleCompanyInputLabel,
               hint: l10n.signupRoleCompanyInputHint,
-              onChanged: (value) {
-                setState(() {
-                  _companyName = value;
-                });
-              },
+              textController: _companyNameController,
+              onChanged: (_) => setState(() {}),
             ),
           ),
         ],
       ),
-      isNextEnabled: (_jobTitle?.isNotEmpty ?? false) &&
-          (_companyName?.isNotEmpty ?? false),
+      isNextEnabled: _jobTitleController.text.isNotEmpty &&
+          _companyNameController.text.isNotEmpty,
       onNextPressed: () {
-        _registrationModel.updateUserInput.experienceJobTitle = _jobTitle;
+        _registrationModel.updateUserInput.experienceJobTitle =
+            _jobTitleController.text;
         _registrationModel.updateUserInput.experienceBusinessName =
-            _companyName;
+            _companyNameController.text;
         context.push(Routes.signupReason.path);
       },
     );
