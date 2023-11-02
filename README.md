@@ -28,12 +28,10 @@ run the app locally in a developer environment, specify those two variables in
     APP_SUBSCRIPTION_URL="ws://localhost:4000/mmdata/api/graphql"
 
 This project comes with a Node.js Express based mock backend, `mm-mock-server`.
-It was built by the Google Fellows during the 6-month google.org Fellowship
-project that took place in collaboration with MicroMentor in 2023, ending
-October 31. The mock server is the easiest to get this app running, but it
-doesn't support features that were added by MicroMentor after the Fellowship
-project. Use the git tag \<todo: add the tag here with url\> to check out a
-version of the app that is still fully compatible with the mock server.
+The mock server is the easiest to get this app running, but it doesn't support
+features that were added by MicroMentor after the Google Fellowship project. Use
+the git tag \<todo: add the tag here with url\> to check out a version of the
+app that is still fully compatible with the mock server.
 
 If you work for MicroMentor and you want to run a local copy of the MicroMentor
 backend, request access to [mmdata](https://github.com/micromentor-team/mmdata).
