@@ -36,13 +36,13 @@ app that is still fully compatible with the mock server.
 If you work for MicroMentor and you want to run a local copy of the MicroMentor
 backend, request access to [mmdata](https://github.com/micromentor-team/mmdata).
 
-Otherwise, as a co-worker for the URL to a shared development backend.
+Otherwise, ask a co-worker for the URL to a shared development backend.
 
 ### Install the Flutter development environment and tools
 
 This assumes you are using a Mac computer. You can also use a Linux or Windows
-computer, but most of the developers on this project use MacBooks that allowed
-us to run the App in an iOS simulator.
+computer, but most of the developers on this project use MacOS computers that
+allowed us to run the App in an iOS simulator.
 
 1.  Install Xcode and command-line tools in the Apple App Store
 
