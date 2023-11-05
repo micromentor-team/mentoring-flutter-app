@@ -262,4 +262,5 @@ mutation UpdateMentorsGroupMembership($input: MentorsGroupMembershipInput!) {
 
 mutation UpdateUser ($input: UserInput!) {
     updateUser(input: $input)
+id
 }
