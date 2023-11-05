@@ -18,6 +18,7 @@ typedef UserQuickViewProfile = Query$FindUserQuickViewProfile$findUserById;
 typedef CreateUserSearchResponse = Mutation$CreateUserSearch$createUserSearch;
 typedef UserSearch = Query$FindUserSearch$findUserSearchById;
 typedef UserSearchResult = Query$FindUserSearchResults$findUserSearchResults;
+typedef BlockUser = Mutation$BlockUser;
 
 class UserProvider extends BaseProvider with ChangeNotifier {
   AuthenticatedUser? _user;
@@ -187,6 +188,41 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   }
 
   // Mutations
+Future<OperationResult<BlockUser>> blockUser({
+  required String userId,
+  bool fetchFromNetworkOnly = false,
+}) async {
+  // Get the ID of the authenticated user
+  final blockedByUserId = _user?.id;
+    final QueryResult queryResult = await asyncMutation(
+      mutationOptions: MutationOptions(
+        document: documentNodeMutationBlockUser,
+        fetchPolicy: fetchFromNetworkOnly
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheFirst,
+        variables: Variables$Mutation$BlockUser(
+          input: Input$UserBlockInput(
+            userId: userId,
+            blockedByUserId: blockedByUserId,
+          ),
+        ).toJson(),
+      ),
+    );
+
+    if (queryResult.data != null) {
+      final blockUser = Mutation$BlockUser.fromJson(queryResult.data!);
+      return OperationResult(
+        gqlQueryResult: queryResult,
+        response: blockUser,
+      );
+    } else {
+      // Handling the case where queryResult.data is null
+      return OperationResult(gqlQueryResult: queryResult, response: null);
+    }
+  
+}
+
+
   Future<OperationResult<CreateUserSearchResponse>> createUserSearch({
     required Input$UserSearchInput searchInput,
     bool fetchFromNetworkOnly = false,

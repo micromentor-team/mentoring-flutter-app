@@ -263,7 +263,7 @@ class _ProfileScreenScrollState extends State<ProfileScreenScroll> {
                 imageUrls: [
                   "https://st2.depositphotos.com/1326558/7163/i/600/depositphotos_71632883-stock-photo-mexican-tacos-with-meat-vegetables.jpg",
                   "https://st3.depositphotos.com/13349494/32631/i/600/depositphotos_326317470-stock-photo-cropped-view-man-adding-minced.jpg",
-                ], //TODO
+                ],
                 motivation:
                     maybeMenteeGroupMembership?.reasonsForStartingBusiness,
               ),

@@ -263,3 +263,10 @@ mutation UpdateMentorsGroupMembership($input: MentorsGroupMembershipInput!) {
 mutation UpdateUser ($input: UserInput!) {
     updateUser(input: $input)
 }
+
+mutation BlockUser($input: UserBlockInput!) {
+  blockUser(input: $input){
+    id
+  }
+  
+}

@@ -121,6 +121,7 @@ class _CopyWithImpl$Query$GetAuthenticatedUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
       get getAuthenticatedUser {
     final local$getAuthenticatedUser = _instance.getAuthenticatedUser;
@@ -140,6 +141,7 @@ class _CopyWithStubImpl$Query$GetAuthenticatedUser<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
       get getAuthenticatedUser =>
           CopyWith$Query$GetAuthenticatedUser$getAuthenticatedUser.stub(_res);
@@ -601,6 +603,7 @@ class _CopyWithImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes groupMemberships(
           Iterable<Query$GetAuthenticatedUser$getAuthenticatedUser$groupMemberships> Function(
                   Iterable<
@@ -637,6 +640,7 @@ class _CopyWithStubImpl$Query$GetAuthenticatedUser$getAuthenticatedUser<TRes>
     String? $__typename,
   }) =>
       _res;
+
   groupMemberships(_fn) => _res;
 }
 
@@ -1399,6 +1403,7 @@ class Variables$Query$FindUserSearch {
   Map<String, dynamic> _$data;
 
   String get userSearchId => (_$data['userSearchId'] as String);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$userSearchId = userSearchId;
@@ -1411,6 +1416,7 @@ class Variables$Query$FindUserSearch {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1588,6 +1594,7 @@ class _CopyWithImpl$Query$FindUserSearch<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindUserSearch$findUserSearchById<TRes>
       get findUserSearchById {
     final local$findUserSearchById = _instance.findUserSearchById;
@@ -1607,6 +1614,7 @@ class _CopyWithStubImpl$Query$FindUserSearch<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindUserSearch$findUserSearchById<TRes>
       get findUserSearchById =>
           CopyWith$Query$FindUserSearch$findUserSearchById.stub(_res);
@@ -1823,6 +1831,7 @@ class _CopyWithImpl$Query$FindUserSearch$findUserSearchById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes runInfos(
           Iterable<Query$FindUserSearch$findUserSearchById$runInfos>? Function(
                   Iterable<
@@ -1848,6 +1857,7 @@ class _CopyWithStubImpl$Query$FindUserSearch$findUserSearchById<TRes>
     String? $__typename,
   }) =>
       _res;
+
   runInfos(_fn) => _res;
 }
 
@@ -2031,8 +2041,10 @@ class Variables$Query$FindUserSearchResults {
   Map<String, dynamic> _$data;
 
   String get userSearchId => (_$data['userSearchId'] as String);
+
   Input$FindObjectsOptions? get options =>
       (_$data['options'] as Input$FindObjectsOptions?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$userSearchId = userSearchId;
@@ -2050,6 +2062,7 @@ class Variables$Query$FindUserSearchResults {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2273,6 +2286,7 @@ class _CopyWithImpl$Query$FindUserSearchResults<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes findUserSearchResults(
           Iterable<Query$FindUserSearchResults$findUserSearchResults> Function(
                   Iterable<
@@ -2299,6 +2313,7 @@ class _CopyWithStubImpl$Query$FindUserSearchResults<TRes>
     String? $__typename,
   }) =>
       _res;
+
   findUserSearchResults(_fn) => _res;
 }
 
@@ -3023,6 +3038,7 @@ class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
       TRes> get countryOfResidence {
     final local$countryOfResidence = _instance.countryOfResidence;
@@ -3045,6 +3061,7 @@ class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes companies(
           Iterable<Query$FindUserSearchResults$findUserSearchResults$companies> Function(
                   Iterable<
@@ -3089,12 +3106,15 @@ class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence<
           TRes>
       get countryOfResidence =>
           CopyWith$Query$FindUserSearchResults$findUserSearchResults$countryOfResidence
               .stub(_res);
+
   groupMemberships(_fn) => _res;
+
   companies(_fn) => _res;
 }
 
@@ -3658,6 +3678,7 @@ class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMembe
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   TRes expertises(
           Iterable<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MentorsGroupMembership$expertises> Function(
                   Iterable<
@@ -3690,6 +3711,7 @@ class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupM
     String? groupIdent,
   }) =>
       _res;
+
   expertises(_fn) => _res;
 }
 
@@ -4008,6 +4030,7 @@ class _CopyWithImpl$Query$FindUserSearchResults$findUserSearchResults$groupMembe
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   TRes soughtExpertises(
           Iterable<Query$FindUserSearchResults$findUserSearchResults$groupMemberships$$MenteesGroupMembership$soughtExpertises> Function(
                   Iterable<
@@ -4039,6 +4062,7 @@ class _CopyWithStubImpl$Query$FindUserSearchResults$findUserSearchResults$groupM
     String? groupIdent,
   }) =>
       _res;
+
   soughtExpertises(_fn) => _res;
 }
 
@@ -4493,6 +4517,7 @@ class Variables$Query$FindUserDetailedProfile {
   Map<String, dynamic> _$data;
 
   String get userId => (_$data['userId'] as String);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$userId = userId;
@@ -4506,6 +4531,7 @@ class Variables$Query$FindUserDetailedProfile {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4684,6 +4710,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindUserDetailedProfile$findUserById<TRes> get findUserById {
     final local$findUserById = _instance.findUserById;
     return CopyWith$Query$FindUserDetailedProfile$findUserById(
@@ -4702,6 +4729,7 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindUserDetailedProfile$findUserById<TRes> get findUserById =>
       CopyWith$Query$FindUserDetailedProfile$findUserById.stub(_res);
 }
@@ -6247,6 +6275,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes websites(
           Iterable<Query$FindUserDetailedProfile$findUserById$websites>? Function(
                   Iterable<
@@ -6259,6 +6288,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<TRes>
       get preferredLanguage {
     final local$preferredLanguage = _instance.preferredLanguage;
@@ -6278,6 +6308,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes groupMemberships(
           Iterable<Query$FindUserDetailedProfile$findUserById$groupMemberships> Function(
                   Iterable<
@@ -6290,6 +6321,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes companies(
           Iterable<Query$FindUserDetailedProfile$findUserById$companies> Function(
                   Iterable<
@@ -6302,6 +6334,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes pronouns(
           Iterable<Query$FindUserDetailedProfile$findUserById$pronouns> Function(
                   Iterable<
@@ -6314,6 +6347,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes businessExperiences(
           Iterable<Query$FindUserDetailedProfile$findUserById$businessExperiences>? Function(
                   Iterable<
@@ -6326,6 +6360,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   TRes academicExperiences(
           Iterable<Query$FindUserDetailedProfile$findUserById$academicExperiences>? Function(
                   Iterable<
@@ -6338,6 +6373,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$countryOfResidence<TRes>
       get countryOfResidence {
     final local$countryOfResidence = _instance.countryOfResidence;
@@ -6402,21 +6438,31 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById<TRes>
     String? $__typename,
   }) =>
       _res;
+
   websites(_fn) => _res;
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage<TRes>
       get preferredLanguage =>
           CopyWith$Query$FindUserDetailedProfile$findUserById$preferredLanguage
               .stub(_res);
+
   spokenLanguages(_fn) => _res;
+
   groupMemberships(_fn) => _res;
+
   companies(_fn) => _res;
+
   pronouns(_fn) => _res;
+
   businessExperiences(_fn) => _res;
+
   academicExperiences(_fn) => _res;
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$countryOfResidence<TRes>
       get countryOfResidence =>
           CopyWith$Query$FindUserDetailedProfile$findUserById$countryOfResidence
               .stub(_res);
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$countryOfOrigin<TRes>
       get countryOfOrigin =>
           CopyWith$Query$FindUserDetailedProfile$findUserById$countryOfOrigin
@@ -7402,6 +7448,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$groupMemberships$
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   TRes expertises(
           Iterable<Query$FindUserDetailedProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises> Function(
                   Iterable<
@@ -7414,6 +7461,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$groupMemberships$
                 e,
                 (i) => i,
               ))).toList());
+
   TRes industries(
           Iterable<Query$FindUserDetailedProfile$findUserById$groupMemberships$$MentorsGroupMembership$industries> Function(
                   Iterable<
@@ -7450,7 +7498,9 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$groupMembersh
     String? groupIdent,
   }) =>
       _res;
+
   expertises(_fn) => _res;
+
   industries(_fn) => _res;
 }
 
@@ -8016,6 +8066,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$groupMemberships$
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   TRes soughtExpertises(
           Iterable<Query$FindUserDetailedProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises> Function(
                   Iterable<
@@ -8028,6 +8079,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$groupMemberships$
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$groupMemberships$$MenteesGroupMembership$industry<
       TRes> get industry {
     final local$industry = _instance.industry;
@@ -8060,7 +8112,9 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$groupMembersh
     String? groupIdent,
   }) =>
       _res;
+
   soughtExpertises(_fn) => _res;
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$groupMemberships$$MenteesGroupMembership$industry<
           TRes>
       get industry =>
@@ -8785,6 +8839,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$companies<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes websites(
           Iterable<Query$FindUserDetailedProfile$findUserById$companies$websites>? Function(
                   Iterable<
@@ -8797,6 +8852,7 @@ class _CopyWithImpl$Query$FindUserDetailedProfile$findUserById$companies<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$companies$companyStage<
       TRes> get companyStage {
     final local$companyStage = _instance.companyStage;
@@ -8828,7 +8884,9 @@ class _CopyWithStubImpl$Query$FindUserDetailedProfile$findUserById$companies<
     String? $__typename,
   }) =>
       _res;
+
   websites(_fn) => _res;
+
   CopyWith$Query$FindUserDetailedProfile$findUserById$companies$companyStage<
           TRes>
       get companyStage =>
@@ -10164,6 +10222,7 @@ class Variables$Query$FindUserQuickViewProfile {
   Map<String, dynamic> _$data;
 
   String get userId => (_$data['userId'] as String);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$userId = userId;
@@ -10177,6 +10236,7 @@ class Variables$Query$FindUserQuickViewProfile {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10355,6 +10415,7 @@ class _CopyWithImpl$Query$FindUserQuickViewProfile<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindUserQuickViewProfile$findUserById<TRes> get findUserById {
     final local$findUserById = _instance.findUserById;
     return CopyWith$Query$FindUserQuickViewProfile$findUserById(
@@ -10373,6 +10434,7 @@ class _CopyWithStubImpl$Query$FindUserQuickViewProfile<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindUserQuickViewProfile$findUserById<TRes> get findUserById =>
       CopyWith$Query$FindUserQuickViewProfile$findUserById.stub(_res);
 }
@@ -10971,6 +11033,7 @@ class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<TRes>
       get countryOfResidence {
     final local$countryOfResidence = _instance.countryOfResidence;
@@ -10993,6 +11056,7 @@ class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes groupMemberships(
           Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships> Function(
                   Iterable<
@@ -11030,11 +11094,14 @@ class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence<TRes>
       get countryOfResidence =>
           CopyWith$Query$FindUserQuickViewProfile$findUserById$countryOfResidence
               .stub(_res);
+
   companies(_fn) => _res;
+
   groupMemberships(_fn) => _res;
 }
 
@@ -11710,6 +11777,7 @@ class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   TRes soughtExpertises(
           Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MenteesGroupMembership$soughtExpertises> Function(
                   Iterable<
@@ -11741,6 +11809,7 @@ class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMembers
     String? groupIdent,
   }) =>
       _res;
+
   soughtExpertises(_fn) => _res;
 }
 
@@ -12056,6 +12125,7 @@ class _CopyWithImpl$Query$FindUserQuickViewProfile$findUserById$groupMemberships
             ? _instance.groupIdent
             : (groupIdent as String),
       ));
+
   TRes expertises(
           Iterable<Query$FindUserQuickViewProfile$findUserById$groupMemberships$$MentorsGroupMembership$expertises> Function(
                   Iterable<
@@ -12087,6 +12157,7 @@ class _CopyWithStubImpl$Query$FindUserQuickViewProfile$findUserById$groupMembers
     String? groupIdent,
   }) =>
       _res;
+
   expertises(_fn) => _res;
 }
 
@@ -12402,6 +12473,7 @@ class Variables$Mutation$CreateUserSearch {
   Map<String, dynamic> _$data;
 
   Input$UserSearchInput get input => (_$data['input'] as Input$UserSearchInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -12415,6 +12487,7 @@ class Variables$Mutation$CreateUserSearch {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -12595,6 +12668,7 @@ class _CopyWithImpl$Mutation$CreateUserSearch<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$CreateUserSearch$createUserSearch<TRes>
       get createUserSearch {
     final local$createUserSearch = _instance.createUserSearch;
@@ -12614,6 +12688,7 @@ class _CopyWithStubImpl$Mutation$CreateUserSearch<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$CreateUserSearch$createUserSearch<TRes>
       get createUserSearch =>
           CopyWith$Mutation$CreateUserSearch$createUserSearch.stub(_res);
@@ -12819,6 +12894,7 @@ class Variables$Mutation$SignInUser {
   Map<String, dynamic> _$data;
 
   Input$UserSignInInput get input => (_$data['input'] as Input$UserSignInInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -12831,6 +12907,7 @@ class Variables$Mutation$SignInUser {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -13007,6 +13084,7 @@ class _CopyWithImpl$Mutation$SignInUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$SignInUser$signInUser<TRes> get signInUser {
     final local$signInUser = _instance.signInUser;
     return CopyWith$Mutation$SignInUser$signInUser(
@@ -13025,6 +13103,7 @@ class _CopyWithStubImpl$Mutation$SignInUser<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$SignInUser$signInUser<TRes> get signInUser =>
       CopyWith$Mutation$SignInUser$signInUser.stub(_res);
 }
@@ -13431,6 +13510,7 @@ class Variables$Mutation$SignUpUser {
   Map<String, dynamic> _$data;
 
   Input$UserSignUpInput get input => (_$data['input'] as Input$UserSignUpInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -13443,6 +13523,7 @@ class Variables$Mutation$SignUpUser {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -13619,6 +13700,7 @@ class _CopyWithImpl$Mutation$SignUpUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$SignUpUser$signUpUser<TRes> get signUpUser {
     final local$signUpUser = _instance.signUpUser;
     return CopyWith$Mutation$SignUpUser$signUpUser(
@@ -13637,6 +13719,7 @@ class _CopyWithStubImpl$Mutation$SignUpUser<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$SignUpUser$signUpUser<TRes> get signUpUser =>
       CopyWith$Mutation$SignUpUser$signUpUser.stub(_res);
 }
@@ -13897,6 +13980,7 @@ class Variables$Mutation$UpdateAcademicExperience {
 
   Input$AcademicExperienceInput get input =>
       (_$data['input'] as Input$AcademicExperienceInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -13910,6 +13994,7 @@ class Variables$Mutation$UpdateAcademicExperience {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14096,6 +14181,7 @@ class _CopyWithImpl$Mutation$UpdateAcademicExperience<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$UpdateAcademicExperience$updateAcademicExperience<TRes>
       get updateAcademicExperience {
     final local$updateAcademicExperience = _instance.updateAcademicExperience;
@@ -14117,6 +14203,7 @@ class _CopyWithStubImpl$Mutation$UpdateAcademicExperience<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$UpdateAcademicExperience$updateAcademicExperience<TRes>
       get updateAcademicExperience =>
           CopyWith$Mutation$UpdateAcademicExperience$updateAcademicExperience
@@ -14338,6 +14425,7 @@ class Variables$Mutation$UpdateBusinessExperience {
 
   Input$BusinessExperienceInput get input =>
       (_$data['input'] as Input$BusinessExperienceInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -14351,6 +14439,7 @@ class Variables$Mutation$UpdateBusinessExperience {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14537,6 +14626,7 @@ class _CopyWithImpl$Mutation$UpdateBusinessExperience<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$UpdateBusinessExperience$updateBusinessExperience<TRes>
       get updateBusinessExperience {
     final local$updateBusinessExperience = _instance.updateBusinessExperience;
@@ -14558,6 +14648,7 @@ class _CopyWithStubImpl$Mutation$UpdateBusinessExperience<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$UpdateBusinessExperience$updateBusinessExperience<TRes>
       get updateBusinessExperience =>
           CopyWith$Mutation$UpdateBusinessExperience$updateBusinessExperience
@@ -14777,6 +14868,7 @@ class Variables$Mutation$UpdateCompany {
   Map<String, dynamic> _$data;
 
   Input$CompanyInput get input => (_$data['input'] as Input$CompanyInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -14789,6 +14881,7 @@ class Variables$Mutation$UpdateCompany {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14966,6 +15059,7 @@ class _CopyWithImpl$Mutation$UpdateCompany<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$UpdateCompany$updateCompany<TRes> get updateCompany {
     final local$updateCompany = _instance.updateCompany;
     return CopyWith$Mutation$UpdateCompany$updateCompany(
@@ -14984,6 +15078,7 @@ class _CopyWithStubImpl$Mutation$UpdateCompany<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$UpdateCompany$updateCompany<TRes> get updateCompany =>
       CopyWith$Mutation$UpdateCompany$updateCompany.stub(_res);
 }
@@ -15190,6 +15285,7 @@ class Variables$Mutation$UpdateMenteesGroupMembership {
 
   Input$MenteesGroupMembershipInput get input =>
       (_$data['input'] as Input$MenteesGroupMembershipInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -15203,6 +15299,7 @@ class Variables$Mutation$UpdateMenteesGroupMembership {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15394,6 +15491,7 @@ class _CopyWithImpl$Mutation$UpdateMenteesGroupMembership<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
       TRes> get updateMenteesGroupMembership {
     final local$updateMenteesGroupMembership =
@@ -15416,6 +15514,7 @@ class _CopyWithStubImpl$Mutation$UpdateMenteesGroupMembership<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$UpdateMenteesGroupMembership$updateMenteesGroupMembership<
           TRes>
       get updateMenteesGroupMembership =>
@@ -15641,6 +15740,7 @@ class Variables$Mutation$UpdateMentorsGroupMembership {
 
   Input$MentorsGroupMembershipInput get input =>
       (_$data['input'] as Input$MentorsGroupMembershipInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -15654,6 +15754,7 @@ class Variables$Mutation$UpdateMentorsGroupMembership {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15845,6 +15946,7 @@ class _CopyWithImpl$Mutation$UpdateMentorsGroupMembership<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
       TRes> get updateMentorsGroupMembership {
     final local$updateMentorsGroupMembership =
@@ -15867,6 +15969,7 @@ class _CopyWithStubImpl$Mutation$UpdateMentorsGroupMembership<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$UpdateMentorsGroupMembership$updateMentorsGroupMembership<
           TRes>
       get updateMentorsGroupMembership =>
@@ -16089,6 +16192,7 @@ class Variables$Mutation$UpdateUser {
   Map<String, dynamic> _$data;
 
   Input$UserInput get input => (_$data['input'] as Input$UserInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$input = input;
@@ -16101,6 +16205,7 @@ class Variables$Mutation$UpdateUser {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16309,6 +16414,268 @@ const documentNodeMutationUpdateUser = DocumentNode(definitions: [
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
         name: NameNode(value: 'updateUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class Variables$Mutation$BlockUser {
+  factory Variables$Mutation$BlockUser({required Input$UserBlockInput input}) =>
+      Variables$Mutation$BlockUser._({
+        r'input': input,
+      });
+
+  Variables$Mutation$BlockUser._(this._$data);
+
+  factory Variables$Mutation$BlockUser.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$UserBlockInput.fromJson((l$input as Map<String, dynamic>));
+    return Variables$Mutation$BlockUser._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$UserBlockInput get input => (_$data['input'] as Input$UserBlockInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$BlockUser<Variables$Mutation$BlockUser>
+      get copyWith => CopyWith$Variables$Mutation$BlockUser(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$BlockUser) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$BlockUser<TRes> {
+  factory CopyWith$Variables$Mutation$BlockUser(
+    Variables$Mutation$BlockUser instance,
+    TRes Function(Variables$Mutation$BlockUser) then,
+  ) = _CopyWithImpl$Variables$Mutation$BlockUser;
+
+  factory CopyWith$Variables$Mutation$BlockUser.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$BlockUser;
+
+  TRes call({Input$UserBlockInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$BlockUser<TRes>
+    implements CopyWith$Variables$Mutation$BlockUser<TRes> {
+  _CopyWithImpl$Variables$Mutation$BlockUser(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$BlockUser _instance;
+
+  final TRes Function(Variables$Mutation$BlockUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) =>
+      _then(Variables$Mutation$BlockUser._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$UserBlockInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$BlockUser<TRes>
+    implements CopyWith$Variables$Mutation$BlockUser<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$BlockUser(this._res);
+
+  TRes _res;
+
+  call({Input$UserBlockInput? input}) => _res;
+}
+
+class Mutation$BlockUser {
+  Mutation$BlockUser({
+    required this.blockUser,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$BlockUser.fromJson(Map<String, dynamic> json) {
+    final l$blockUser = json['blockUser'];
+    final l$$__typename = json['__typename'];
+    return Mutation$BlockUser(
+      blockUser: (l$blockUser as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String blockUser;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$blockUser = blockUser;
+    _resultData['blockUser'] = l$blockUser;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$blockUser = blockUser;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$blockUser,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$BlockUser) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blockUser = blockUser;
+    final lOther$blockUser = other.blockUser;
+    if (l$blockUser != lOther$blockUser) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$BlockUser on Mutation$BlockUser {
+  CopyWith$Mutation$BlockUser<Mutation$BlockUser> get copyWith =>
+      CopyWith$Mutation$BlockUser(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$BlockUser<TRes> {
+  factory CopyWith$Mutation$BlockUser(
+    Mutation$BlockUser instance,
+    TRes Function(Mutation$BlockUser) then,
+  ) = _CopyWithImpl$Mutation$BlockUser;
+
+  factory CopyWith$Mutation$BlockUser.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$BlockUser;
+
+  TRes call({
+    String? blockUser,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$BlockUser<TRes>
+    implements CopyWith$Mutation$BlockUser<TRes> {
+  _CopyWithImpl$Mutation$BlockUser(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$BlockUser _instance;
+
+  final TRes Function(Mutation$BlockUser) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? blockUser = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$BlockUser(
+        blockUser: blockUser == _undefined || blockUser == null
+            ? _instance.blockUser
+            : (blockUser as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$BlockUser<TRes>
+    implements CopyWith$Mutation$BlockUser<TRes> {
+  _CopyWithStubImpl$Mutation$BlockUser(this._res);
+
+  TRes _res;
+
+  call({
+    String? blockUser,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeMutationBlockUser = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'BlockUser'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'UserBlockInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'blockUser'),
         alias: null,
         arguments: [
           ArgumentNode(

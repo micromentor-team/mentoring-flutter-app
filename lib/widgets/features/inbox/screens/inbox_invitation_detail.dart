@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../__generated/schema/operations_invitation.graphql.dart';
 import '../../../../constants/constants.dart';
 import '../../../../models/inbox_model.dart';
@@ -320,6 +319,7 @@ class _InboxInvitationDetailScreenState
     if (!pageRoute.isCurrent) return const SizedBox.shrink();
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+
     return FutureBuilder(
       future: _invitation,
       builder: (context, snapshot) {
@@ -338,6 +338,7 @@ class _InboxInvitationDetailScreenState
                   userId: invitationResult.sender.id,
                   userFullName: invitationResult.sender.fullName!,
                 );
+
                 if (!_isMarkedAsRead &&
                     invitationResult.readByRecipientAt == null) {
                   _markReceivedInvitationAsRead();

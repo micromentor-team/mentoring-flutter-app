@@ -59,6 +59,10 @@ node_modules/
 /android/app/google-services.json
 /ios/Runner/GoogleService-Info.plist
 *firebase_service_account.json
+lib/firebase_options.dart
+macos/Runner/GoogleService-Info.plist
+macos/firebase_app_id_file.json
+
 
 *service_account.json
 *upload-keystore.jks
