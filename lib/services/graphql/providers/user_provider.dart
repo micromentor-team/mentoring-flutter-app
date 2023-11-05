@@ -188,12 +188,12 @@ class UserProvider extends BaseProvider with ChangeNotifier {
   }
 
   // Mutations
-Future<OperationResult<BlockUser>> blockUser({
-  required String userId,
-  bool fetchFromNetworkOnly = false,
-}) async {
-  // Get the ID of the authenticated user
-  final blockedByUserId = _user?.id;
+  Future<OperationResult<BlockUser>> blockUser({
+    required String userId,
+    bool fetchFromNetworkOnly = false,
+  }) async {
+    // Get the ID of the authenticated user
+    final blockedByUserId = _user?.id;
     final QueryResult queryResult = await asyncMutation(
       mutationOptions: MutationOptions(
         document: documentNodeMutationBlockUser,
@@ -219,10 +219,8 @@ Future<OperationResult<BlockUser>> blockUser({
       // Handling the case where queryResult.data is null
       return OperationResult(gqlQueryResult: queryResult, response: null);
     }
+  }
   
-}
-
-
   Future<OperationResult<CreateUserSearchResponse>> createUserSearch({
     required Input$UserSearchInput searchInput,
     bool fetchFromNetworkOnly = false,
