@@ -2,14 +2,14 @@
 
 This Flutter based application was started as part of a 6-month Google.org
 Fellowship project in collaboration with
-[MicroMentor](https://www.micromentor.org). The Fellowship project started
-April 1st, 2023 and ended October 31st. The final commit from the Google
-Fellows is tagged with 
+[MicroMentor](https://www.micromentor.org). The Fellowship project started April
+1st, 2023 and ended October 31st. The final commit from the Google Fellows is
+tagged with
 [final-fellowship-commit](https://github.com/micromentor-team/mentoring-flutter-app/releases/tag/final-fellowship-commit).
 
-After the Fellowship project, MicroMentor further worked on app. This
-happens in another, private git repository. MicroMentor will periodically
-update this repository.
+After the Fellowship project, MicroMentor further worked on app. This happens in
+another, private git repository. MicroMentor will periodically update this
+repository.
 
 ## Getting Started
 
@@ -34,12 +34,12 @@ run the app locally in a developer environment, specify those two variables in
     APP_SUBSCRIPTION_URL="ws://localhost:4000/mmdata/api/graphql"
 
 This project comes with a Node.js Express based mock backend, `mm-mock-server`.
-The mock server is the easiest to get this app running. However, MicroMentor
-is not using, or updating, `mm-mock-server` and commits to the app after the 
-Fellowship Project may break the integration with `mm-mock-server`. If you
-run into issues with the app connecting to the `mm-mock-server` and you want
-to run the app in its state at the end of the Fellowship Project (where the
-app and the mock backend were fully compatible), use the git tag
+The mock server is the easiest to get this app running. However, MicroMentor is
+not using, or updating, `mm-mock-server` and commits to the app after the
+Fellowship Project may break the integration with `mm-mock-server`. If you run
+into issues with the app connecting to the `mm-mock-server` and you want to run
+the app in its state at the end of the Fellowship Project (where the app and the
+mock backend were fully compatible), use the git tag
 [final-fellowship-commit](https://github.com/micromentor-team/mentoring-flutter-app/releases/tag/final-fellowship-commit).
 
 ### Install the Flutter development environment and tools
