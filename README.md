@@ -1,15 +1,21 @@
 # Open Source Mentoring Flutter App
 
-This Flutter based application was developed as part of a 6-month Google.org
+This Flutter based application was started as part of a 6-month Google.org
 Fellowship project in collaboration with
-[MicroMentor](https://www.micromentor.org). The project started April 1st, 2023
-and ended October 31st.
+[MicroMentor](https://www.micromentor.org). The Fellowship project started
+April 1st, 2023 and ended October 31st. The final commit from the Google
+Fellows is tagged with 
+[final-fellowship-commit](https://github.com/micromentor-team/mentoring-flutter-app/releases/tag/final-fellowship-commit).
+
+After the Fellowship project, MicroMentor further worked on app. This
+happens in another, private git repository. MicroMentor will periodically
+update this repository.
 
 ## Getting Started
 
 ### Backend (Server)
 
-This app needs a backend that provides it with the business data. The
+The app needs a backend that provides it with the business data. The
 communication between app and backend uses [GraphQL](https://graphql.org/)
 through an HTTP(S) connection. The basic principle of this is simple: The app
 sends POST requests in the form of JSON text and receives the response from the
@@ -28,15 +34,13 @@ run the app locally in a developer environment, specify those two variables in
     APP_SUBSCRIPTION_URL="ws://localhost:4000/mmdata/api/graphql"
 
 This project comes with a Node.js Express based mock backend, `mm-mock-server`.
-The mock server is the easiest to get this app running, but it doesn't support
-features that were added by MicroMentor after the Google Fellowship project. Use
-the git tag \<todo: add the tag here with url\> to check out a version of the
-app that is still fully compatible with the mock server.
-
-If you work for MicroMentor and you want to run a local copy of the MicroMentor
-backend, request access to [mmdata](https://github.com/micromentor-team/mmdata).
-
-Otherwise, ask a co-worker for the URL to a shared development backend.
+The mock server is the easiest to get this app running. However, MicroMentor
+is not using, or updating, `mm-mock-server` and commits to the app after the 
+Fellowship Project may break the integration with `mm-mock-server`. If you
+run into issues with the app connecting to the `mm-mock-server` and you want
+to run the app in its state at the end of the Fellowship Project (where the
+app and the mock backend were fully compatible), use the git tag
+[final-fellowship-commit](https://github.com/micromentor-team/mentoring-flutter-app/releases/tag/final-fellowship-commit).
 
 ### Install the Flutter development environment and tools
 
@@ -140,6 +144,21 @@ Link contents of `.git-hooks` directory to `.git/hooks`:
 In Android Studio, select a target platform (Chrome web browser, Android
 Simulator, etc.) and then click on the `Run main.dart` button to build and the
 run the app on that platform. Shortcut : `Control + R` (macOS).
+
+### Run Widgetbook
+
+In Android Studio, select `Edit Configurations` in the Run menu. Copy
+configurations of main.dart and edit name as `widgetbook`. Edit
+`Dart entrypoint` to the path of your Widgetbook's main.dart. For e.g.
+`mm_flutter_app/widgetbook/main.dart` at the place of
+`mm_flutter_app/lib/main.dart`.
+
+Or to run from terminal, execute `flutter run -t widgetbook/main.dart`.
+
+### Run Tests
+
+In Android Studio, Open the test.dart file. Select the Run menu. Click the Run
+'tests in counter_test.dart' option.
 
 ### GraphQL Codegen
 
