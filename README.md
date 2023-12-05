@@ -1,22 +1,57 @@
-# MicroMentor Flutter App
+# Open Source Mentoring Flutter App
 
-This is MicroMentor's main Flutter application.
+This Flutter based application was started as part of a 6-month Google.org
+Fellowship project in collaboration with
+[MicroMentor](https://www.micromentor.org). The Fellowship project started April
+1st, 2023 and ended October 31st. The final commit from the Google Fellows is
+tagged with
+[final-fellowship-commit](https://github.com/micromentor-team/mentoring-flutter-app/releases/tag/final-fellowship-commit).
+
+After the Fellowship project, MicroMentor further worked on app. This happens in
+another, private git repository. MicroMentor will periodically update this
+repository.
 
 ## Getting Started
 
-### Set up the local backend
+### Backend (Server)
 
-To set up a local backend you need access to
-`https://github.com/micromentor-team/mmdata`. Follow the ["Getting Started"
-instructions](https://github.com/micromentor-team/mmdata/blob/main/docs/getting-started.md).
+The app needs a backend that provides it with the business data. The
+communication between app and backend uses [GraphQL](https://graphql.org/)
+through an HTTP(S) connection. The basic principle of this is simple: The app
+sends POST requests in the form of JSON text and receives the response from the
+backend, again as JSON text. To configure this, a single URL - that of the
+backend's GraphQL API root URL - is needed. There is one more component to the
+communication: subscriptions that are based on HTTP websocket connections.
+Subscriptions allow the backend to notify the app of events, again using GraphQL
+to format those event messages.
+
+The app won't be functional without having been connected to a backend using the
+two environment variables `APP_GRAPHQL_URL` and `APP_SUBSCRIPTION_URL`. If you
+run the app locally in a developer environment, specify those two variables in
+`assets/.env`:
+
+    APP_GRAPHQL_URL="http://localhost:4000/mmdata/api/graphql"
+    APP_SUBSCRIPTION_URL="ws://localhost:4000/mmdata/api/graphql"
+
+This project comes with a Node.js Express based mock backend, `mm-mock-server`.
+The mock server is the easiest to get this app running. However, MicroMentor is
+not using, or updating, `mm-mock-server` and commits to the app after the
+Fellowship Project may break the integration with `mm-mock-server`. If you run
+into issues with the app connecting to the `mm-mock-server` and you want to run
+the app in its state at the end of the Fellowship Project (where the app and the
+mock backend were fully compatible), use the git tag
+[final-fellowship-commit](https://github.com/micromentor-team/mentoring-flutter-app/releases/tag/final-fellowship-commit).
 
 ### Install the Flutter development environment and tools
 
+This assumes you are using a Mac computer. You can also use a Linux or Windows
+computer, but most of the developers on this project use MacOS computers that
+allowed us to run the App in an iOS simulator.
+
 1.  Install Xcode and command-line tools in the Apple App Store
 
-2.  Install Rosetta 2:
-
-    softwareupdate --install-rosetta
+2.  If you are using a MacOS computer with an Apple Silicon CPU, you may have to
+    install Rosetta 2: `softwareupdate --install-rosetta`.
 
 3.  [Install the Flutter SDK](https://docs.flutter.dev/get-started/install)
 
@@ -25,7 +60,7 @@ instructions](https://github.com/micromentor-team/mmdata/blob/main/docs/getting-
 
 Note: Running the app in an iOS simulator requires macOS
 
-### Clone mm-flutter-app
+### Clone mentoring-flutter-app
 
 The sources to the Flutter app are located at:
 <https://github.com/micromentor-team/mm-flutter-app>
@@ -43,19 +78,9 @@ Or run this in the terminal:
 
 #### Set up the environment
 
-Create the file `/assets/.env`. If you are connecting to a local backend, add
-these lines to the file:
-
-    APP_GRAPHQL_URL="http://localhost:3000/mmdata/api/graphql"
-    APP_SUBSCRIPTION_URL="ws://localhost:3000/mmdata/api/graphql"
-
-But if you want to connect to a backend in the cloud please ask a co-worker for
-a valid `.env`.
-
-You may want to connect to the live backend:
-
-    APP_GRAPHQL_URL="https://mm3-api.micromentor.org/mmdata/api/graphql"
-    APP_SUBSCRIPTION_URL="wss://mm3-api.micromentor.org/mmdata/api/graphql"
+If you followed the instructions of the "Backend (Server) paragraph, you already
+have an environment file at `/assets/.env`. Otherwise, ask a co-worker for a
+valid `.env` file.
 
 #### Connect Firebase account
 
@@ -64,10 +89,14 @@ account with the following services enabled:
 
 - Crashlytics
 - Analytics
+- Google Cloud Messaging
+
+If you haven't been given access to an existing Firebase account by a co-worker,
+you can create a free Firebase account and use that.
 
 The Android and iOS projects already contain the necessary configuration for
 using Firebase, but the files that contain the API key are not included in the
-repository (added to gitignore). The following procedure allows you to log into
+repository (added to .gitignore). The following procedure allows you to log into
 your Firebase account and regenerate these files in your environment:
 
 1.  Install [Firebase
@@ -115,6 +144,21 @@ Link contents of `.git-hooks` directory to `.git/hooks`:
 In Android Studio, select a target platform (Chrome web browser, Android
 Simulator, etc.) and then click on the `Run main.dart` button to build and the
 run the app on that platform. Shortcut : `Control + R` (macOS).
+
+### Run Widgetbook
+
+In Android Studio, select `Edit Configurations` in the Run menu. Copy
+configurations of main.dart and edit name as `widgetbook`. Edit
+`Dart entrypoint` to the path of your Widgetbook's main.dart. For e.g.
+`mm_flutter_app/widgetbook/main.dart` at the place of
+`mm_flutter_app/lib/main.dart`.
+
+Or to run from terminal, execute `flutter run -t widgetbook/main.dart`.
+
+### Run Tests
+
+In Android Studio, Open the test.dart file. Select the Run menu. Click the Run
+'tests in counter_test.dart' option.
 
 ### GraphQL Codegen
 
